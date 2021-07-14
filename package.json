@@ -1,0 +1,49 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production",
+        "prettier": "prettier --write --no-bracket-spacing --single-quote --jsx-bracket-same-line --print-width 80 resources/js/Pages/HomePage.js'"
+    },
+    "devDependencies": {
+        "@babel/preset-react": "^7.14.5",
+        "@tailwindcss/ui": "^0.7.2",
+        "autoprefixer": "^10.2.6",
+        "axios": "^0.21",
+        "browser-sync": "^2.27.4",
+        "browser-sync-webpack-plugin": "^2.3.0",
+        "laravel-mix": "^6.0.25",
+        "lodash": "^4.17.19",
+        "postcss": "^8.3.5",
+        "postcss-import": "^12.0",
+        "postcss-nested": "^4.2",
+        "sass-loader": "^12.1.0",
+        "tailwindcss": "^2.2.4",
+        "vue-template-compiler": "^2.6.11",
+        "webpack": "^5.42.1"
+    },
+    "dependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@inertiajs/inertia": "^0.9.2",
+        "@inertiajs/inertia-react": "^0.6.2",
+        "@inertiajs/progress": "^0.2.5",
+        "@tailwindcss/aspect-ratio": "^0.2.1",
+        "@tailwindcss/forms": "^0.3.3",
+        "@tailwindcss/ui": "^0.7.2",
+        "autoprefixer": "^10.3.1",
+        "postcss-import": "^14.0.2",
+        "postcss-nested": "^5.0.5",
+        "prettier": "^2.3.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "swiper": "^6.7.5",
+        "tailwindcss": "^2.2.4",
+        "tailwindcss-dir": "^4.0.0",
+        "webpack": "^5.44.0"
+    }
+}
