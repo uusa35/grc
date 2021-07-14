@@ -28,8 +28,8 @@ class AreaFactory extends Factory
         return [
             'name_ar' => $fakerAr->name,
             'name_en' => $this->faker->name,
-            'slug_ar' => $fakerAr->name,
-            'slug_en' => $this->faker->name,
+            'name_ar' => $fakerAr->name,
+            'name_en' => $this->faker->name,
             'country_id' => Country::all()->random()->id,
             'longitude' => $this->faker->longitude,
             'latitude' => $this->faker->latitude,

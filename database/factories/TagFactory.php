@@ -1,16 +1,35 @@
 <?php
 
-use App\Models\Product;
-use App\Models\Tag;
-use App\Models\User;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(Tag::class, function (Faker $faker) {
-    return [
-        'name' => $faker->word,
-        'slug_ar' => $faker->word,
-        'slug_en' => $faker->word,
-        'order' => $faker->numberBetween(1, 59),
-        'image' => app()->isLocal() ? 'commercial-0'.$faker->numberBetween(1, 3).'.jpeg' : $faker->numberBetween(43, 49) . '.jpeg', // 800 x 225
-    ];
-});
+use App\Models\Tag;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+
+class TagFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Tag::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'name' => $this->faker->word,
+            'name_ar' => $this->faker->word,
+            'name_en' => $this->faker->word,
+            'order' => $this->faker->numberBetween(1, 59),
+            'image' => 'sample.png'
+        ];
+    }
+}

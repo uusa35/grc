@@ -2,28 +2,31 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Tag extends PrimaryModel
 {
-    protected $localeStrings = ['slug'];
+    use HasFactory;
+    protected $localeStrings = ['name'];
     protected $guarded = [''];
-
-    public function products()
-    {
-        return $this->morphedByMany(Product::class, 'taggable');
-    }
 
     public function services()
     {
         return $this->morphedByMany(Service::class, 'taggable');
     }
 
-    public function classifieds()
+    public function books()
     {
-        return $this->morphedByMany(Classified::class, 'taggable');
+        return $this->morphedByMany(Book::class, 'taggable');
     }
 
-    public function categories()
+    public function courses()
     {
-        return $this->morphedByMany(Category::class, 'taggable');
+        return $this->morphedByMany(Course::class, 'taggable');
+    }
+
+    public function products()
+    {
+        return $this->morphedByMany(Product::class, 'taggable');
     }
 }

@@ -1,20 +1,40 @@
 <?php
 
-use App\Models\Comment;
-use App\Models\Job;
-use App\Models\User;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(Comment::class, function (Faker $faker) {
-    return [
-        'title' => $faker->name,
-        'content' => $faker->name,
-        'path' => '01.pdf',
-        'commentable_id' => User::all()->random()->id,
-        'commentable_type' => $faker->randomElement(['App\Models\User', 'App\Models\Product', 'App\Models\Service']),
-        'active' => $faker->boolean(true),
-        'viewed' => $faker->boolean,
-        'likes' => $faker->numberBetween(1, 99),
-        'user_id' => User::all()->random()->id
-    ];
-});
+use App\Models\Comment;
+use App\Models\Model;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+
+class CommentFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Comment::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'title' => $this->faker->name,
+            'content' => $this->faker->name,
+            'path' => '01.pdf',
+            'commentable_id' => User::all()->random()->id,
+            'commentable_type' => $this->faker->randomElement(['App\Models\User', 'App\Models\Product', 'App\Models\Service']),
+            'active' => $this->faker->boolean(true),
+            'viewed' => $this->faker->boolean,
+            'likes' => $this->faker->numberBetween(1, 99),
+            'user_id' => User::all()->random()->id
+        ];
+    }
+}

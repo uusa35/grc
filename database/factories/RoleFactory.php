@@ -1,26 +1,47 @@
 <?php
 
-use App\Models\Role;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(Role::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'slug_ar' => $faker->sentence,
-        'slug_en' => $faker->sentence,
-        'caption_ar' => $faker->sentence,
-        'caption_en' => $faker->sentence,
-        'is_admin' => $faker->boolean(false),
-        'is_super' => $faker->boolean(false),
-        'is_client' => $faker->boolean(false),
-        'is_designer' => $faker->boolean(false),
-        'is_company' => $faker->boolean(false),
-        'is_celebrity' => $faker->boolean(false),
-        'is_visible' => $faker->boolean(false),
-        'is_driver' => $faker->boolean(false),
-        'active' => $faker->boolean(true),
-        'color' => $faker->colorName,
-        'order' => $faker->numberBetween(1, 10),
-        'image' => 'square.png',,
-    ];
-});
+use App\Models\Role;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+
+class RoleFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Role::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'name' => $this->faker->name,
+            'name_ar' => $this->faker->sentence,
+            'name_en' => $this->faker->sentence,
+            'caption_ar' => $this->faker->sentence,
+            'caption_en' => $this->faker->sentence,
+            'is_admin' => $this->faker->boolean(false),
+            'is_super' => $this->faker->boolean(false),
+            'is_client' => $this->faker->boolean(false),
+            'is_designer' => $this->faker->boolean(false),
+            'is_company' => $this->faker->boolean(false),
+            'is_celebrity' => $this->faker->boolean(false),
+            'is_visible' => $this->faker->boolean(false),
+            'is_driver' => $this->faker->boolean(false),
+            'active' => $this->faker->boolean(true),
+            'color' => $this->faker->colorName,
+            'order' => $this->faker->numberBetween(1, 10),
+            'image' => 'square.png',
+        ];
+    }
+}

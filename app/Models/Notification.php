@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Notification extends PrimaryModel
 {
-    use ModelHelpers;
+    use HasFactory,ModelHelpers;
     protected $guarded = [''];
 
     // Product / Service / User

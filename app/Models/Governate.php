@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Governate extends PrimaryModel
 {
-    protected $localeStrings = ['slug'];
+    protected $localeStrings = ['name'];
     protected $guarded = [''];
 
     public function country() {
@@ -17,7 +19,7 @@ class Governate extends PrimaryModel
 
 //    public function getAreaNameAttribute() {
 //        return $this->appends['areaName'] = [
-//            $this->name => $this->areas()->get()->pluck('slug')
+//            $this->name => $this->areas()->get()->pluck('name')
 //        ];
 //    }
 

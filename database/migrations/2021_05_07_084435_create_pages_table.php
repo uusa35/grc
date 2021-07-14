@@ -15,18 +15,19 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('title_ar')->nullable();
-            $table->string('title_en')->nullable();
+            $table->string('name_ar')->nullable();
+            $table->string('name_en')->nullable();
             $table->string('caption_ar')->nullable();
             $table->string('caption_en')->nullable();
-            $table->longText('content_ar')->nullable();
-            $table->longText('content_en')->nullable();
+            $table->longText('description_ar')->nullable();
+            $table->longText('description_en')->nullable();
             $table->string('image')->nullable();
             $table->string('order')->nullable();
             $table->boolean('on_footer')->default(0);
             $table->boolean('on_header')->default(0);
-            $table->boolean('full_width')->default(0);
-            $table->boolean('home_page')->default(0);
+            $table->boolean('is_url')->default(0);
+            $table->string('url')->default(0);
+            $table->boolean('show_comments')->default(0);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

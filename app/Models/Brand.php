@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Brand extends PrimaryModel
 {
-    use ModelHelpers;
-    protected $localeStrings = ['slug'];
+    use HasFactory,ModelHelpers;
+    protected $localeStrings = ['name'];
     protected $guarded = [''];
     protected $casts = [
         'on_home' => 'boolean',

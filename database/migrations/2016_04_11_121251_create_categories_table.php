@@ -14,17 +14,18 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id')->unsigned()->default(0)->index();
+
             $table->string('name_ar');
             $table->string('name_en');
-            $table->string('caption_ar')->nullable();
-            $table->string('caption_en')->nullable();
+            $table->mediumText('caption_ar')->nullable();
+            $table->mediumText('caption_en')->nullable();
             $table->mediumText('description_en')->nullable();
             $table->mediumText('description_ar')->nullable();
 
             $table->boolean('limited')->default(0);
             $table->boolean('on_home')->default(0);
             $table->boolean('on_new')->default(0);
+            $table->boolean('is_parent')->default(0);
             $table->boolean('is_featured')->default(0);
             $table->boolean('is_service')->default(0);
             $table->boolean('is_product')->default(0);
@@ -42,6 +43,7 @@ class CreateCategoriesTable extends Migration
             $table->string('path')->nullable();
             $table->boolean('active')->default(1);
 
+            $table->integer('parent_id')->nullable()->unsigned()->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -1,13 +1,34 @@
 <?php
 
-use App\Models\Size;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(Size::class, function (Faker $faker) {
-    return [
-        'name_en' => $faker->unique()->randomElement(['small', 'x-small', 'xx-small', 'large', 'x-large', 'xx-large', 'xxx-large', 'medium', 'none']),
-        'name_ar' => function ($array) {
-            return $array['name_en'];
-        }
-    ];
-});
+use App\Models\Size;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+
+class SizeFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Size::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'name_en' => $this->faker->unique()->randomElement(['small', 'x-small', 'xx-small', 'large', 'x-large', 'xx-large', 'xxx-large', 'medium', 'none']),
+            'name_ar' => function ($array) {
+                return $array['name_en'];
+            }
+        ];
+    }
+}

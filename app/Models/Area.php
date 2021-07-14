@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Area extends PrimaryModel
 {
-    use ModelHelpers;
+    use HasFactory,ModelHelpers;
     protected $guarded = [''];
-    protected $localeStrings = ['slug'];
+    protected $localeStrings = ['name'];
 
     public function country()
     {

@@ -9,15 +9,15 @@ use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
     return [
-        'title_ar' => $faker->name,
-        'title_en' => $faker->name,
-        'slug_ar' => $faker->sentence,
-        'slug_en' => $faker->name,
+        'name_ar' => $faker->name,
+        'name_en' => $faker->name,
+        'name_ar' => $faker->sentence,
+        'name_en' => $faker->name,
         'caption_ar' => $faker->sentence,
         'caption_en' => $faker->name,
         'image' => 'square.png',
-        'content_ar' => $faker->paragraph,
-        'content_en' => $faker->paragraph,
+        'description_ar' => $faker->paragraph,
+        'description_en' => $faker->paragraph,
         'order' => $faker->numberBetween(1, 10),
         'active' => $faker->boolean,
         'user_id' => User::active()->get()->random()->id,

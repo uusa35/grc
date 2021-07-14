@@ -3,9 +3,11 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Privilege extends PrimaryModel
 {
-    protected $localeStrings = ['slug'];
+    protected $localeStrings = ['name'];
     protected $guarded = [''];
     public function roles()
     {

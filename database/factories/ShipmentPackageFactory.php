@@ -1,21 +1,41 @@
 <?php
 
-use App\Models\Area;
+namespace Database\Factories;
+
 use App\Models\Country;
 use App\Models\ShipmentPackage;
-use App\Models\User;
-use Faker\Generator as Faker;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(ShipmentPackage::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'slug_ar' => $faker->name,
-        'slug_en' => $faker->name,
-        'charge' => $faker->randomFloat(1, 0, 9),
-        'active' => $faker->boolean(true),
-        'is_available' => $faker->boolean(true),
-        'notes_ar' => $faker->paragraph,
-        'notes_en' => $faker->paragraph,
-        'image' => 'square.png',,
-    ];
-});
+
+class ShipmentPackageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ShipmentPackage::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'name' => $this->faker->name,
+            'name_ar' => $this->faker->name,
+            'name_en' => $this->faker->name,
+            'charge' => $this->faker->randomFloat(1, 0, 9),
+            'active' => $this->faker->boolean(true),
+            'is_available' => $this->faker->boolean(true),
+            'notes_ar' => $this->faker->paragraph,
+            'notes_en' => $this->faker->paragraph,
+            'image' => 'square.png',
+            'country_id' => Country::all()->random()->id,
+        ];
+    }
+}

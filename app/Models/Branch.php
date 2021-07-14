@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Branch extends PrimaryModel
 {
+    use HasFactory;
     protected $guarded = [''];
     protected $localeStrings = ['name','address'];
 

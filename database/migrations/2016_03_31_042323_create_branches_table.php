@@ -28,7 +28,6 @@ class CreateBranchesTable extends Migration
 
             $table->foreignId('area_id')->nullable()->constrained();
             // did not use , just made in case company may have branches related to other countries.
-            $table->foreignId('country_id')->references('id')->on('countries');
             $table->foreignId('user_id')->references('id')->on('users');
 
             $table->timestamps();

@@ -37,7 +37,7 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title_ar' => 'required|min:300'
+            'name_ar' => 'required|min:300'
         ]);
 
         $section = Section::create($request->request->all());

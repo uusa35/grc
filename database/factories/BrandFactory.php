@@ -1,19 +1,38 @@
 <?php
 
+namespace Database\Factories;
+
 use App\Models\Brand;
-use App\Models\Country;
-use App\Models\User;
-use Faker\Generator as Faker;
-$fakerAr = \Faker\Factory::create('ar_JO');
-$factory->define(Brand::class, function (Faker $faker)  use($fakerAr) {
-    return [
-        'name' => $faker->word,
-        'slug_ar' => $faker->realText(30),
-        'slug_en' => $faker->word,
-        'image' => 'logo-0' . $faker->numberBetween(1, 8) . '.png',
-        'on_home' => $faker->boolean,
-        'order' => $faker->numberBetween(1,10),
-        'active' => $faker->boolean(true),
-    ];
-});
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+
+class BrandFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Brand::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'name' => $this->faker->word,
+            'name_ar' => $fakerAr->name,
+            'name_en' => $this->faker->word,
+            'image' => 'logo-0' . $this->faker->numberBetween(1, 8) . '.png',
+            'on_home' => $this->faker->boolean,
+            'order' => $this->faker->numberBetween(1, 10),
+            'active' => $this->faker->boolean(true),
+        ];
+    }
+}
 

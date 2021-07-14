@@ -7,11 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends PrimaryModel
 {
-    use HasFactory;
+    use HasFactory, ModelHelpers;
 
     protected $guarded = [''];
     public $localeStrings = ['title', 'content'];
-//        public $attributes = ['imageLargeLink','imageThumbLink'];
     protected $appends = ['imageLargeLink', 'imageThumbLink'];
 
     public function sectionable()

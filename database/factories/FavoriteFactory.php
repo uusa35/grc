@@ -1,29 +1,38 @@
 <?php
 
-use App\Models\Classified;
+namespace Database\Factories;
+
+use App\Models\Country;
 use App\Models\Favorite;
+use App\Models\Model;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
 
-$factory->define(Favorite::class, function (Faker $faker) {
-    return [
-        'user_id' => User::all()->random()->id,
-        'product_id' => Product::doesntHave('favorites')->get()->random()->id,
-        'service_id' => Service::doesntHave('favorites')->get()->random()->id,
-        'classified_id' => Classified::doesntHave('favorites')->get()->random()->id,
-    ];
-});
+class FavoriteFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Favorite::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'user_id' => User::all()->random()->id,
+            'product_id' => Product::doesntHave('favorites')->get()->random()->id,
+            'service_id' => Service::doesntHave('favorites')->get()->random()->id,
+        ];
+    }
+}
 

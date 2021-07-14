@@ -16,8 +16,8 @@ class CreateShipmentPackagesTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('image')->nullable();
-            $table->string('slug_ar')->nullable();
-            $table->string('slug_en')->nullable();
+            $table->string('name_ar')->nullable();
+            $table->string('name_en')->nullable();
             $table->decimal('charge')->unsigned();
             $table->boolean('active')->default(1);
             $table->boolean('is_available')->default(1);

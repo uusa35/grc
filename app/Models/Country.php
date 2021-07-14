@@ -3,10 +3,12 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Country extends PrimaryModel
 {
     use ModelHelpers;
-    protected $localeStrings = ['slug','currency_symbol'];
+    protected $localeStrings = ['name','currency_symbol'];
     protected $guarded = [''];
     protected $casts = [
         'is_local' => 'boolean',
@@ -59,7 +61,7 @@ class Country extends PrimaryModel
 
     public function shipment_packages()
     {
-        return $this->belongsToMany(ShipmentPackage::class);
+        return $this->hasMany(ShipmentPackage::class);
     }
 
     public function addresses() {

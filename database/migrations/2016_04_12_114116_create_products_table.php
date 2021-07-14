@@ -56,7 +56,6 @@ class CreateProductsTable extends Migration
             $table->string('qr')->nullable();
             $table->integer('views')->unsigned()->default(1);
             $table->boolean('direct_purchase')->default(0);
-            $table->boolean('tailor_measurement_service')->default(0);
             $table->boolean('show_size_chart')->default(0);
             $table->string('barcode')->nullable();
             $table->integer('order')->nullable();
@@ -64,10 +63,11 @@ class CreateProductsTable extends Migration
 
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('brand_id')->references('id')->on('brands');
-            $table->foreignId('color_id')->references('id')->on('colors');
-            $table->foreignId('size_id')->references('id')->on('sizes');
-            $table->foreignId('shipment_package_id')->references('id')->on('shipment_packages');
-
+            $table->foreignId('color_id')->nullable()->constrained();
+            $table->foreignId('size_id')->nullable()->constrained();
+            $table->boolean('free')->default(1);
+            $table->boolean('download')->default(0);
+            $table->boolean('embedded')->default(0);
 
             $table->timestamps();
             $table->softDeletes();

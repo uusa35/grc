@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Commercial extends PrimaryModel
 {
-    use ModelHelpers;
+    use HasFactory, ModelHelpers;
+
     protected $guarded = [''];
     protected $localeStrings = ['name', 'caption'];
     protected $casts = [
@@ -15,7 +18,7 @@ class Commercial extends PrimaryModel
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'categoryables');
     }
 
     public function scopeDouble($q)

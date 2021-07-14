@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Services\Traits\LocaleTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Role extends PrimaryModel
 {
-    use LocaleTrait;
+    use HasFactory, LocaleTrait;
     protected $guarded = [''];
-    protected $localeStrings = ['slug','caption'];
+    protected $localeStrings = ['name','caption'];
     protected $casts = [
         'is_designer' => 'boolean',
         'is_client' => 'boolean',

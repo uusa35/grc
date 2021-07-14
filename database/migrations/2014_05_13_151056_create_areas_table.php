@@ -15,8 +15,8 @@ class CreateAreasTable extends Migration
         Schema::create('areas', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullalbe();
-            $table->string('slug_ar')->nullalbe();
-            $table->string('slug_en')->nullalbe();
+            $table->string('name_ar')->nullalbe();
+            $table->string('name_en')->nullalbe();
             $table->boolean('active')->default(1);
             $table->string('order')->nullable();
             $table->string('longitude')->nullable();

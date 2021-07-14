@@ -8,8 +8,8 @@ use Faker\Generator as Faker;
 $factory->define(Survey::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'slug_ar' => $faker->sentence,
-        'slug_en' => $faker->sentence,
+        'name_ar' => $faker->sentence,
+        'name_en' => $faker->sentence,
         'description_ar' => $faker->paragraph,
         'description_en' => $faker->paragraph,
         'is_home' => $faker->boolean,

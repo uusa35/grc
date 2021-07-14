@@ -1,29 +1,43 @@
 <?php
 
-use App\Models\Slide;
-use App\Models\User;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$fakerAr = \Faker\Factory::create('ar_JO');
-$factory->define(Slide::class, function (Faker $faker) use ($fakerAr) {
-    return [
-        'image' => env('APP_MODE') . '-slides-' . $faker->numberBetween(43, 49) . '.jpeg',
-        'title_en' => $faker->name,
-        'title_ar' => $faker->name,
-        'caption_en' => $faker->name,
-        'caption_ar' => $faker->name,
-        'active' => $faker->boolean,
-        'on_home' => $faker->boolean,
-        'is_video' => $faker->boolean,
-        'is_intro' => $faker->boolean,
-        'url' => function ($array) use ($faker) {
-            if ($array['is_video']) {
-                return 'https://www.youtube.com/embed/KTkClkW0MZw';
-            }
-            return $faker->url;
-        },
-        'order' => $faker->numberBetween(1, 10),
-        'slidable_type' => $faker->randomElement(['App\Models\User', 'App\Models\Category', 'App\Models\Product', 'App\Models\Service']),
-        'slidable_id' => $faker->numberBetween(1, 99)
-    ];
-});
+use App\Models\Slide;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class SlideFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Slide::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'image' => 'slide.png',
+            'name_en' => $this->faker->name,
+            'name_ar' => $fakerAr->name,
+            'caption_en' => $this->faker->name,
+            'caption_ar' => $fakerAr->name,
+            'description_en' => $this->faker->name,
+            'description_ar' => $fakerAr->name,
+            'active' => $this->faker->boolean,
+            'on_home' => $this->faker->boolean,
+            'is_video' => $this->faker->boolean,
+            'is_intro' => $this->faker->boolean,
+            'url' => $this->faker->url,
+            'order' => $this->faker->numberBetween(1, 10),
+            'slidable_type' => $this->faker->randomElement(['App\Models\User', 'App\Models\Category', 'App\Models\Product', 'App\Models\Service','App\Models\Course']),
+            'slidable_id' => $this->faker->numberBetween(1, 99)
+        ];
+    }
+}

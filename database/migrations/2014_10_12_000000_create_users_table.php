@@ -16,12 +16,18 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->mediumText('slug_ar')->nullable();
-            $table->mediumText('slug_en')->nullable();
+            $table->mediumText('name_ar')->nullable();
+            $table->mediumText('name_en')->nullable();
+            $table->mediumText('caption_ar')->nullable();
+            $table->mediumText('caption_en')->nullable();
             $table->mediumText('description_ar')->nullable();
             $table->mediumText('description_en')->nullable();
             $table->mediumText('service_ar')->nullable();
             $table->mediumText('service_en')->nullable();
+            $table->mediumText('policy_ar')->nullable();
+            $table->mediumText('policy_en')->nullable();
+            $table->mediumText('cancellation_ar')->nullable();
+            $table->mediumText('cancellation_en')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -39,10 +45,7 @@ class CreateUsersTable extends Migration
             $table->string('floor')->nullable();
             $table->string('apartment')->nullable();
             $table->string('country_name')->nullable();
-            $table->mediumText('policy_ar')->nullable();
-            $table->mediumText('policy_en')->nullable();
-            $table->mediumText('cancellation_ar')->nullable();
-            $table->mediumText('cancellation_en')->nullable();
+
             $table->string('keywords')->nullable();
             $table->string('qr')->nullable();
 
@@ -81,8 +84,6 @@ class CreateUsersTable extends Migration
             $table->boolean('is_available')->default(0);
             $table->boolean('is_online')->default(0);
             $table->boolean('access_dashboard')->default(1);
-            $table->string('address_2')->nullable();
-            $table->string('address_3')->nullable();
             $table->boolean('is_male')->default(0);
             $table->boolean('mobile_verified')->default(0);
             $table->text('mobile_code')->nullable();

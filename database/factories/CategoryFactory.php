@@ -25,13 +25,13 @@ class CategoryFactory extends Factory
     {
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
-            'name_ar' => $fakerAr->name,
+            'name_ar' => $fakerAr->firstName,
             'name_en' => $this->faker->name,
             'caption_ar' => $fakerAr->name,
-            'caption_en' => $this->faker->name,
+            'caption_en' => $this->faker->paragraph,
             'order' => $this->faker->numberBetween(1, 99),
             'description_en' => $this->faker->paragraph(1),
-            'description_ar' => $this->faker->paragraph(1),
+            'description_ar' => $fakerAr->streetAddress,
             'image_square' => 'square.png',
             'image_rectangle' => 'rectangle.png',
             'path' => '01.pdf',

@@ -3,8 +3,11 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Color extends PrimaryModel
 {
+    use HasFactory;
     protected $localeStrings = ['name'];
     protected $guarded = [''];
 

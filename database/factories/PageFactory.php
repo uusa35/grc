@@ -1,23 +1,43 @@
 <?php
 
-use App\Models\Page;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$fakerAr = \Faker\Factory::create('ar_JO');
-$factory->define(Page::class, function (Faker $faker) use ($fakerAr) {
-    return [
-        'title_ar' => $faker->name,
-        'title_en' => $faker->name,
-        'slug_ar' => $faker->sentence,
-        'slug_en' => $faker->name,
-        'image' => 'square.png',
-        'content_ar' => $faker->paragraph,
-        'content_en' => $faker->paragraph,
-        'url' => $faker->url,
-        'order' => $faker->numberBetween(1, 10),
-        'active' => $faker->boolean,
-        'on_footer' => $faker->boolean,
-        'on_menu_desktop' => $faker->boolean,
-        'on_menu_mobile' => $faker->boolean,
-    ];
-});
+use App\Models\Page;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+
+class PageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Page::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'name_ar' => $fakerAr->name,
+            'name_en' => $this->faker->name,
+            'caption_ar' => $fakerAr->name,
+            'caption_en' => $this->faker->name,
+            'image' => 'square.png',
+            'description_ar' => $fakerAr->paragraph,
+            'description_en' => $this->faker->paragraph,
+            'is_url' => $this->faker->boolean,
+            'url' => $this->faker->url,
+            'order' => $this->faker->numberBetween(1, 10),
+            'active' => $this->faker->boolean,
+            'on_footer' => $this->faker->boolean,
+            'on_header' => $this->faker->boolean,
+        ];
+    }
+}

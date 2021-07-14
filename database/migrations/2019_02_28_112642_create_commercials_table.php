@@ -36,7 +36,7 @@ class CreateCommercialsTable extends Migration
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             $table->dateTime('end_sale')->nullable();
-            $table->foreignId('users')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

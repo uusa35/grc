@@ -8,8 +8,8 @@ import {map} from 'lodash';
 const PageIndexScreen = ({elements}) => {
     const {errors} = usePage().props;
     const {data, setData, post, progress} = useForm({
-        title_ar: '',
-        title_en: '',
+        name_ar: '',
+        name_en: '',
         template_id: 1,
         sectionable_id: 1,
         sectionable_type: "App\\Models\\Page",
@@ -36,11 +36,11 @@ const PageIndexScreen = ({elements}) => {
                       encType="multipart/form-data"
                 >
                     <input className="border-2 border-black" type="text"
-                           onChange={e => setData('title_ar', e.target.value)}/>
-                    {errors.title_ar && <div>{errors.title_ar}</div>}
+                           onChange={e => setData('name_ar', e.target.value)}/>
+                    {errors.name_ar && <div>{errors.name_ar}</div>}
                     <input className="border-2 border-black" type="text"
-                           onChange={e => setData('title_en', e.target.value)}/>
-                    {errors.title_en && <div>{errors.title_en}</div>}
+                           onChange={e => setData('name_en', e.target.value)}/>
+                    {errors.name_en && <div>{errors.name_en}</div>}
                     <input type="file" name="image" onChange={e => setData('image', e.target.files[0])}/>
                     {/*<input type="file" name="images" multiple  onChange={e => setData('images',e.target.files)} />*/}
                     {progress && (
@@ -60,10 +60,10 @@ const PageIndexScreen = ({elements}) => {
                                     {
                                         map(p.sections, (s =>
                                                 <div className="border-2 border-pink-400 space-y-4 divide-y divide-green-300 p-10 m-5" key={s.id}>
-                                                    <img className="w-10 h-10 bg-contain" src={s.imageThumbLink} alt={s.title_ar}/>
+                                                    <img className="w-10 h-10 bg-contain" src={s.imageThumbLink} alt={s.name_ar}/>
                                                     <h1>Section Id : {s.id}</h1>
-                                                    <h1>Section Title Arabic : {s.title_ar}</h1>
-                                                    <h1>Section Title English : {s.title_en}</h1>
+                                                    <h1>Section Title Arabic : {s.name_ar}</h1>
+                                                    <h1>Section Title English : {s.name_en}</h1>
                                                 </div>
                                         ))
                                     }

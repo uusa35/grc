@@ -3,9 +3,11 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Setting extends PrimaryModel
 {
-    use ModelHelpers;
+    use HasFactory,ModelHelpers;
     protected $localeStrings = ['address', 'country', 'company', 'description', 'shipment_notes', 'policy', 'terms'];
     protected $guarded = [''];
     protected $casts = [

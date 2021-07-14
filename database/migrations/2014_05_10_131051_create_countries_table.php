@@ -15,8 +15,8 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('slug_ar')->nullable();
-            $table->string('slug_en')->nullable();
+            $table->string('name_ar')->nullable();
+            $table->string('name_en')->nullable();
             $table->string('calling_code')->nullable();
             $table->string('country_code')->nullable();
             $table->string('image')->nullable();
@@ -28,6 +28,7 @@ class CreateCountriesTable extends Migration
             $table->boolean('is_local')->default(0);
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
+            $table->decimal('minimum_shipment_charge', 6, 2)->unsigned()->default(1);
             $table->decimal('fixed_shipment_charge', 6, 2)->unsigned()->default(1);
             $table->string('block')->nullable();
             $table->string('street')->nullable();

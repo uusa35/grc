@@ -2,19 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class ShipmentPackage extends PrimaryModel
 {
+    use HasFactory;
     protected $guarded = [''];
-    protected $localeStrings = ['slug', 'notes'];
+    protected $localeStrings = ['name', 'notes'];
 
     public function products()
     {
         return $this->hasMany(Product::class);
     }
 
-    public function countries()
+    public function country()
     {
-        return $this->belongsToMany(Country::class);
+        return $this->belongsTo(Country::class);
     }
 
 

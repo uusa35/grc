@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Services\Traits\LocaleTrait;
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, ModelHelpers, UserHelpers, SoftDeletes, LocaleTrait, HasEvents;
+    use HasFactory, Notifiable, ModelHelpers, UserHelpers, SoftDeletes, LocaleTrait, HasEvents;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [''];
-    protected $localeStrings = ['slug', 'description', 'service', 'policy'];
+    protected $localeStrings = ['name', 'description', 'service', 'policy'];
     protected $dates = ['created_at', 'deleted_at', 'start_subscription', 'end_subscription'];
     protected $casts = [
         'on_home' => 'boolean',
@@ -62,9 +63,24 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function areas()
+    {
+        return $this->belongsTo(Area::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function governate()
+    {
+        return $this->belongsTo(Governate::class);
+    }
+
     public function coupons()
     {
-        return $this->belongsTo(Coupon::class);
+        return $this->hasMany(Coupon::class);
     }
 
     public function product_favorites()
@@ -75,11 +91,6 @@ class User extends Authenticatable
     public function service_favorites()
     {
         return $this->belongsToMany(Service::class, 'favorites');
-    }
-
-    public function classified_favorites()
-    {
-        return $this->belongsToMany(Classified::class, 'favorites');
     }
 
     public function fans()
@@ -113,15 +124,9 @@ class User extends Authenticatable
         return $this->morphMany(Notification::class, 'notificationable');
     }
 
-    // only own tags
     public function tags()
     {
-        return $this->hasMany(Tag::class);
-    }
-
-    public function collections()
-    {
-        return $this->hasMany(Collection::class);
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function ratings()
@@ -131,23 +136,9 @@ class User extends Authenticatable
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->morphToMany(Category::class, 'categoryable');
     }
 
-    public function areas()
-    {
-        return $this->belongsToMany(Area::class);
-    }
-
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
-
-    public function governate()
-    {
-        return $this->belongsTo(Governate::class);
-    }
 
     public function productGroup()
     {

@@ -39,7 +39,7 @@ trait CartTrait
                     'timing_id' => $request->timing_id,
                     'notes' => $request->notes,
                     'element' => $service,
-                    'company' => $service->user->slug,
+                    'company' => $service->user->name,
                     'timing' => Timing::whereId($request->timing_id)->first()
                 ]
             );
@@ -110,7 +110,7 @@ trait CartTrait
                     'color_id' => $request->color_id,
                     'color' => Color::whereId($request->color_id)->first(),
                     'size' => Size::whereId($request->size_id)->first(),
-                    'company' => $product->user->slug,
+                    'company' => $product->user->name,
                     'element' => $product
                 ]
             );

@@ -1,0 +1,45 @@
+[
+   {
+      "name_ar": "الجهراء",
+      "name_en": "Jahra",
+      "order": "6",
+      "active": "1",
+      "country_id": "1"
+   },
+   {
+      "name_ar" : "ألاحمدي",
+      "name_en" : "Ahmadi",
+      "order" : "6",
+      "active" : "1",
+      "country_id" : "1"
+   },
+   {
+      "name_ar" : "مبارك الكبير",
+      "name_en" : "Mubarak Al Kabir",
+      "order" : "4",
+      "active" : "1",
+      "country_id" : "1"
+   },
+   {
+      "name_ar" : "حولي",
+      "name_en" : "Hawally",
+      "order" : "2",
+      "active" : "1",
+      "country_id" : "1"
+   },
+
+   {
+      "name_ar" : "الفروانية",
+      "name_en" : "Farwaniya",
+      "order" : "3",
+      "active" : "1",
+      "country_id" : "1"
+   },
+   {
+      "name_ar" : "مدينة الكويت",
+      "name_en" : "Kuwait City",
+      "order" : "1",
+      "active" : "1",
+      "country_id" : "1"
+   }
+]

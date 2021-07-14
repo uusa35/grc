@@ -1,18 +1,37 @@
 <?php
 
-use App\Models\Collection;
+namespace Database\Factories;
+
 use App\Models\Fan;
+use App\Models\Model;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Fan::class, function (Faker $faker) {
-    return [
-        'user_id' => User::designers()->get()->random()->id,
-        'fan_id' => User::clients()->get()->random()->id,
-        'product_id' => Product::all()->random()->id,
-        'service_id' => Service::all()->random()->id,
-        'collection_id' => Collection::all()->random()->id,
-    ];
-});
+
+class FanFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Fan::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'user_id' => User::designers()->get()->random()->id,
+            'fan_id' => User::clients()->get()->random()->id,
+            'product_id' => Product::all()->random()->id,
+            'service_id' => Service::all()->random()->id,
+        ];
+    }
+}

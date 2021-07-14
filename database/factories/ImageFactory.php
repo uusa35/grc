@@ -1,20 +1,44 @@
 <?php
 
-use App\Models\Image;
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$fakerAr = \Faker\Factory::create('ar_JO');
-$factory->define(Image::class, function (Faker $faker) use ($fakerAr) {
-    return [
-        'imagable_id' => $faker->numberBetween(1, 60),
-        'imagable_type' => $faker->randomElement(['App\Models\User', 'App\Models\Category', 'App\Models\Product', 'App\Models\Service']),
-        'image' => 'square.png',
-        'caption_en' => $faker->word,
-        'caption_ar' => $fakerAr->realText(50),
-        'keywords' => $faker->sentence,
-        'name_ar' => $faker->sentence,
-        'name_en' => $faker->realText(20),
-        'notes' => $faker->sentence,
-        'order' => $faker->numberBetween(1, 10),
-    ];
-});
+use App\Models\Country;
+use App\Models\Image;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+
+class ImageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Image::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'imagable_id' => $this->faker->numberBetween(1, 60),
+            'imagable_type' => $this->faker->randomElement([
+                'App\Models\User', 'App\Models\Category',
+                'App\Models\Product',
+                'App\Models\Service', 'App\Models\Book']),
+            'image' => 'square.png',
+            'caption_en' => $this->faker->word,
+            'caption_ar' => $fakerAr->name,
+            'keywords' => $this->faker->sentence,
+            'name_ar' => $this->faker->sentence,
+            'name_en' => $this->faker->realText(20),
+            'notes' => $this->faker->sentence,
+            'order' => $this->faker->numberBetween(1, 10),
+        ];
+    }
+}

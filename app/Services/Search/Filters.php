@@ -40,11 +40,11 @@ class Filters extends QueryFilters
 //            ->orWhere('notes_en', 'like', "%{$search}%");
     }
 
-    public function slug($search)
+    public function name($search)
     {
         return $this->builder
-            ->where('slug_ar', 'like', "%{$search}%")
-            ->orWhere('slug_en', 'like', "%{$search}%")
+            ->where('name_ar', 'like', "%{$search}%")
+            ->orWhere('name_en', 'like', "%{$search}%")
             ->orWhere('description_ar', 'like', "%{$search}%")
             ->orWhere('description_en', 'like', "%{$search}%");
 //            ->orWhere('notes_ar', 'like', "%{$search}%")

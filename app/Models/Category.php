@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Services\Search\QueryFilters;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends PrimaryModel
 {
-    use SoftDeletes, ModelHelpers;
+    use HasFactory, SoftDeletes, ModelHelpers;
     protected $guarded = [''];
     public $localeStrings = ['name', 'caption', 'description'];
     protected $casts = [
@@ -49,43 +50,29 @@ class Category extends PrimaryModel
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'category_product');
-    }
-
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'category_service', 'category_id', 'service_id');
+        return $this->morphedByMany(Service::class, 'categoryable');
     }
 
-    public function users()
+    public function books()
     {
-        return $this->belongsToMany(User::class);
+        return $this->morphedByMany(Book::class, 'categoryable');
     }
 
-    public function classifieds()
+    public function courses()
     {
-        return $this->hasMany(Classified::class);
+        return $this->morphedByMany(Course::class, 'categoryable');
     }
 
-    public function moreClassifieds() {
-        return $this->belongsToMany(Classified::class);
-    }
-
-    public function categoryGroups()
+    public function products()
     {
-        return $this->belongsToMany(CategoryGroup::class, 'category_category_groups');
-    }
-
-    public function properties()
-    {
-        return $this->hasManyThrough(CategoryGroup::class, Property::class);
+        return $this->morphedByMany(Product::class, 'categoryable');
     }
 
     public function commercials()
     {
-        return $this->belongsToMany(Commercial::class);
+        return $this->morphedByMany(Commercial::class, 'categoryable');
     }
 
     /**

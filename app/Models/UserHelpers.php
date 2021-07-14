@@ -156,7 +156,7 @@ trait UserHelpers
 
     public function getCountryNameAttribute()
     {
-        return $this->country->slug;
+        return $this->country->name;
     }
 
     public function getFullMobileAttribute()

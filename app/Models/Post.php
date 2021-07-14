@@ -7,7 +7,7 @@ class Post extends PrimaryModel
 {
     use ModelHelpers;
     protected $guarded = [''];
-    protected $localeStrings = ['title', 'slug', 'content'];
+    protected $localeStrings = ['title', 'name', 'content'];
 
     public function images()
     {

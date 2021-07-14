@@ -18,10 +18,10 @@ class CreateBooksTable extends Migration
             $table->string('sku')->nullable();
             $table->string('name_ar');
             $table->string('name_en');
+            $table->string('caption_ar')->nullable();
+            $table->string('caption_en')->nullable();
             $table->text('description_en')->nullable();
             $table->text('description_ar')->nullable();
-            $table->text('caption_ar')->nullable();
-            $table->text('caption_en')->nullable();
             $table->text('notes_ar')->nullable();
             $table->text('notes_en')->nullable();
             $table->boolean('on_new')->default(0);
@@ -36,7 +36,6 @@ class CreateBooksTable extends Migration
             $table->decimal('weight', 4, 2)->unsigned();
             $table->decimal('sale_price', 6, 2)->unsigned()->nullable();
             $table->string('size_chart_image')->nullable();
-
             $table->string('keywords')->nullable();
             $table->string('image')->nullable();
             $table->string('video_url_one')->nullable();
@@ -61,9 +60,12 @@ class CreateBooksTable extends Migration
             $table->boolean('show_size_chart')->default(0);
             $table->string('barcode')->nullable();
             $table->integer('order')->nullable();
-            $table->boolean('download')->default(0);
+
 
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->boolean('free')->default(1);
+            $table->boolean('download')->default(0);
+            $table->longText('embedded')->nullable();
             $table->timestamps();
         });
     }

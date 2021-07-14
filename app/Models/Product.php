@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasEvents;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Product extends PrimaryModel
 {
-    use ProductHelpers, SellingModelHelpers, ModelHelpers, SoftDeletes, HasEvents, LogsActivity;
+    use HasFactory, ProductHelpers, SellingModelHelpers, ModelHelpers, SoftDeletes, HasEvents;
     protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
     protected $appends = ['UId'];
@@ -80,7 +81,7 @@ class Product extends PrimaryModel
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'category_product');
+        return $this->morphToMany(Category::class, 'categoryable');
     }
 
     public function favorites()
@@ -108,7 +109,6 @@ class Product extends PrimaryModel
         return $this->morphMany(Notification::class, 'notificationable');
     }
 
-    // ManyToMay Morph
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
@@ -117,12 +117,6 @@ class Product extends PrimaryModel
     public function videos()
     {
         return $this->morphToMany(Video::class, 'videoable');
-    }
-
-    // ManyToMay Morph
-    public function collections()
-    {
-        return $this->morphToMany(Collection::class, 'collectionable');
     }
 
     public function userGroup()

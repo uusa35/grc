@@ -30,7 +30,7 @@ class CreateVideosTable extends Migration
             $table->string('youtube_video_id')->nullable();
             $table->boolean('on_home')->default(0);
 
-            $table->morphs('videoable');
+
             $table->timestamps();
             $table->softDeletes();
         });

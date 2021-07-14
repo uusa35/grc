@@ -38,7 +38,7 @@ class Service extends PrimaryModel
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'category_service');
+        return $this->morphToMany(Category::class, 'categoryable');
     }
 
     public function images()

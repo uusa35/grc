@@ -1,14 +1,35 @@
 <?php
 
+namespace Database\Factories;
 
+use App\Models\Country;
 use App\Models\Faq;
-use Faker\Generator as Faker;
+use App\Models\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Faq::class, function (Faker $faker) {
-    return [
-        'title_ar' => $faker->name,
-        'title_en' => $faker->name,
-        'content_ar' => $faker->paragraph,
-        'content_en' => $faker->paragraph,
-    ];
-});
+
+class FaqFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Faq::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'name_ar' => $this->faker->name,
+            'name_en' => $fakerAr->name,
+            'description_ar' => $this->faker->paragraph,
+            'description_en' => $fakerAr->name,
+        ];
+    }
+}
