@@ -23,12 +23,12 @@ class CreatePagesTable extends Migration
             $table->longText('description_en')->nullable();
             $table->string('image')->nullable();
             $table->string('order')->nullable();
-            $table->boolean('on_footer')->default(0);
-            $table->boolean('on_header')->default(0);
-            $table->boolean('is_url')->default(0);
-            $table->string('url')->default(0);
-            $table->boolean('show_comments')->default(0);
-            $table->boolean('active')->default(1);
+            $table->boolean('on_footer')->default(false);
+            $table->boolean('on_header')->default(false);
+            $table->boolean('is_url')->default(false);
+            $table->string('url')->default(false);
+            $table->boolean('show_comments')->default(false);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

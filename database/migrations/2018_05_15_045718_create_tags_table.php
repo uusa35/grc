@@ -19,7 +19,7 @@ class CreateTagsTable extends Migration
             $table->string('name_en')->nullable();
             $table->string('order')->nullable();
             $table->string('image')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
 
             $table->timestamps();
         });

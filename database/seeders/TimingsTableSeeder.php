@@ -149,6 +149,6 @@ class TimingsTableSeeder extends Seeder
 //                'end' => Carbon::parse($t[2])->toTimeString(),
 //            ]);
 //        }
-        factory(Timing::class, app()->environment('production') ? 2 : 120)->create();
+        Timing::factory(app()->isLocal() ? 10 : 5)->create();
     }
 }

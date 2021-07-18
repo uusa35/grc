@@ -29,7 +29,7 @@ class CreateOrderMetasTable extends Migration
 
             $table->date('service_date')->nullable();
             $table->time('service_time')->nullable();
-            $table->boolean('wrap_as_gift')->default(0);
+            $table->boolean('wrap_as_gift')->default(false);
 
             $table->foreignId('order_id')->references('id')->on('orders');
             $table->foreignId('product_id')->nullable()->constrained();

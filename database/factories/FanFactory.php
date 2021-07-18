@@ -28,8 +28,8 @@ class FanFactory extends Factory
     {
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
-            'user_id' => User::designers()->get()->random()->id,
-            'fan_id' => User::clients()->get()->random()->id,
+            'user_id' => User::all()->random()->id,
+            'fan_id' => User::all()->random()->id,
             'product_id' => Product::all()->random()->id,
             'service_id' => Service::all()->random()->id,
         ];

@@ -19,15 +19,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [''];
-    protected $localeStrings = ['name', 'description', 'service', 'policy'];
+    protected $localeStrings = ['name', 'description', 'service', 'policy','address','caption'];
     protected $dates = ['created_at', 'deleted_at', 'start_subscription', 'end_subscription'];
-    protected $casts = [
-        'on_home' => 'boolean',
-        'active' => 'boolean',
-        'access_dashboard' => 'boolean',
-        'CustomeDelivery' => 'boolean',
-        'custome_delivery' => 'boolean'
-    ];
+    protected $appends = ['imageThumb','imageLarge','address','name','description'];
 
     /**
      * The attributes that should be hidden for arrays.

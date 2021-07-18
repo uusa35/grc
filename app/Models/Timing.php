@@ -5,9 +5,11 @@ namespace App\Models;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Carbon\CarbonPeriod;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Timing extends PrimaryModel
 {
+    use HasFactory;
     protected $dates = ['created_at', 'updated_at'];
     protected $localeStrings = ['notes', 'day_name'];
     protected $appends = ['start_time', 'end_time'];

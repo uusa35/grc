@@ -14,14 +14,14 @@ class CreateCouponsTable extends Migration
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
-            $table->integer('value')->unsigned()->default(0);
-            $table->boolean('is_percentage')->default(0);
-            $table->boolean('active')->default(0);
-            $table->boolean('consumed')->default(0);
+            $table->integer('value')->unsigned()->default(false);
+            $table->boolean('is_percentage')->default(false);
+            $table->boolean('active')->default(false);
+            $table->boolean('consumed')->default(false);
             $table->string('code');
             // price after sale
             $table->integer('minimum_charge')->nullable();
-            $table->boolean('is_permanent')->default(0);
+            $table->boolean('is_permanent')->default(false);
             $table->foreignId('user_id')->nullable()->constrained();
 
             $table->timestamp('due_date')->nullable();

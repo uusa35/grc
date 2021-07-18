@@ -27,6 +27,7 @@ class Filters extends QueryFilters
         $this->category = $category;
     }
 
+
     public function search($search)
     {
         return $this->builder

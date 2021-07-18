@@ -25,7 +25,7 @@ class CoursesTableSeeder extends Seeder
             $p->categories()->saveMany(Category::all()->random(2));
             $p->tags()->saveMany(Tag::all()->random(2));
             $p->videos()->saveMany(Video::all()->random(2));
-            $p->images()->saveMany(Image::f, 3)->create());
+            $p->images()->saveMany(Image::factory( 3)->create());
         });
     }
 }

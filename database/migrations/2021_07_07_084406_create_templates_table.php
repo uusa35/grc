@@ -17,9 +17,9 @@ class CreateTemplatesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->boolean('header')->default(0);
-            $table->boolean('section')->default(1);
-            $table->boolean('active')->default(1);
+            $table->boolean('header')->default(false);
+            $table->boolean('section')->default(true);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

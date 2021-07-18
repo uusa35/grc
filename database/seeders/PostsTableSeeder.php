@@ -1,6 +1,9 @@
 <?php
 namespace Database\Seeders;
+use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Post;
+use App\Models\Slide;
 use Illuminate\Database\Seeder;
 
 class PostsTableSeeder extends Seeder
@@ -12,9 +15,10 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Post::class, app()->environment('production') ? 2 : 30)->create()->each(function ($p) {
-            $p->comments()->create();
-            $p->images()->create();
+        Post::factory(app()->isLocal() ? 10 : 2)->create()->each(function ($p) {
+            $p->comments()->saveMany(Comment::factory(5)->create());
+            $p->images()->saveMany(Image::factory(5)->create());
+            $p->slides()->saveMany(Slide::factory(3)->create());
         });
     }
 }

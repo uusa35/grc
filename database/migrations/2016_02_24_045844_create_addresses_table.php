@@ -24,7 +24,7 @@ class CreateAddressesTable extends Migration
             $table->string('apartment')->nullable();
             $table->string('country_name')->nullable();
             $table->string('area')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
 
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('area_id')->nullable()->constrained();

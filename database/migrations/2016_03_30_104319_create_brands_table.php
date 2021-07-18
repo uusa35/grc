@@ -22,9 +22,9 @@ class CreateBrandsTable extends Migration
             $table->text('description_en')->nullable();
             $table->text('description_ar')->nullable();
             $table->string('image')->nullable();
-            $table->string('on_home')->default(0);
+            $table->string('on_home')->default(false);
             $table->integer('order')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

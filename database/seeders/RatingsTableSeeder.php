@@ -16,7 +16,7 @@ class RatingsTableSeeder extends Seeder
     {
         $companies = User::companies()->get();
         foreach ($companies as $company) {
-            factory(Rating::class, 5)->create(['member_id' => $company->id]);
+            Rating::factory(5)->create(['member_id' => $company->id]);
         }
     }
 }

@@ -32,7 +32,7 @@ class CategoryFactory extends Factory
             'order' => $this->faker->numberBetween(1, 99),
             'description_en' => $this->faker->paragraph(1),
             'description_ar' => $fakerAr->streetAddress,
-            'image_square' => 'square.png',
+            'image' => 'square.png',
             'image_rectangle' => 'rectangle.png',
             'path' => '01.pdf',
             'limited' => $this->faker->numberBetween(0, 1),

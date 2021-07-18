@@ -8,20 +8,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends PrimaryModel
 {
-    use HasFactory, SoftDeletes, ModelHelpers;
+    use HasFactory, SoftDeletes;
     protected $guarded = [''];
     public $localeStrings = ['name', 'caption', 'description'];
-    protected $casts = [
-        'is_classified' => 'boolean',
-        'is_real_estate' => 'boolean',
-        'on_home' => 'boolean',
-        'on_new' => 'boolean',
-        'is_featured' => 'boolean',
-        'is_service' => 'boolean',
-        'is_product' => 'boolean',
-        'is_commercial' => 'boolean',
-        'is_user' => 'boolean',
-    ];
+//    protected $casts = [
+//        'is_classified' => 'boolean',
+//        'is_real_estate' => 'boolean',
+//        'on_home' => 'boolean',
+//        'on_new' => 'boolean',
+//        'is_featured' => 'boolean',
+//        'is_service' => 'boolean',
+//        'is_product' => 'boolean',
+//        'is_commercial' => 'boolean',
+//        'is_user' => 'boolean',
+//    ];
 
     /**
      * * ParentCategory

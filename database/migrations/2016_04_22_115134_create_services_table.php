@@ -23,15 +23,15 @@ class CreateServicesTable extends Migration
             $table->mediumText('description_ar')->nullable();
             $table->mediumText('notes_ar')->nullable();
             $table->mediumText('notes_en')->nullable();
-            $table->boolean('on_sale')->default(0);
-            $table->boolean('exclusive')->default(0);
-            $table->boolean('on_home')->default(0);
-            $table->boolean('on_new')->default(0);
-            $table->integer('duration')->default(1);
+            $table->boolean('on_sale')->default(false);
+            $table->boolean('exclusive')->default(false);
+            $table->boolean('on_home')->default(false);
+            $table->boolean('on_new')->default(false);
+            $table->integer('duration')->default(true);
             $table->integer('setup_time')->nullable();
             $table->integer('delivery_time')->nullable();
             $table->integer('individuals')->unsigned()->nullable();
-            $table->decimal('delivery_charge', 6, 2)->unsigned()->default(0);
+            $table->decimal('delivery_charge', 6, 2)->unsigned()->default(false);
             $table->decimal('price', 6, 2)->unsigned();
             $table->decimal('sale_price', 6, 2)->unsigned()->nullable();
 
@@ -45,19 +45,19 @@ class CreateServicesTable extends Migration
 
             $table->dateTime('start_sale')->nullable();
             $table->dateTime('end_sale')->nullable();
-            $table->boolean('active')->default(1);
-            $table->boolean('is_available')->default(1);
-            $table->boolean('is_hot_deal')->default(0);
-            $table->boolean('multi_booking')->default(0);
-            $table->integer('booking_limit')->default(0);
+            $table->boolean('active')->default(true);
+            $table->boolean('is_available')->default(true);
+            $table->boolean('is_hot_deal')->default(false);
+            $table->boolean('multi_booking')->default(false);
+            $table->integer('booking_limit')->default(false);
 
             $table->foreignId('user_id')->references('id')->on('users');
 
-            $table->integer('views')->unsigned()->default(1);
-            $table->boolean('has_addons')->default(0);
-            $table->boolean('has_only_items')->default(0);
-            $table->boolean('force_original_price')->default(1);
-            $table->boolean('is_package')->default(0);
+            $table->integer('views')->unsigned()->default(true);
+            $table->boolean('has_addons')->default(false);
+            $table->boolean('has_only_items')->default(false);
+            $table->boolean('force_original_price')->default(true);
+            $table->boolean('is_package')->default(false);
 
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();

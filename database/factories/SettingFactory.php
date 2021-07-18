@@ -25,8 +25,10 @@ class SettingFactory extends Factory
     {
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
-            'company_ar' => $fakerAr->name,
-            'company_en' => $this->faker->name,
+            'name_ar' => $fakerAr->name,
+            'name_en' => $this->faker->name,
+            'caption_ar' => $fakerAr->name,
+            'caption_en' => $this->faker->name,
             'address_ar' => $fakerAr->address,
             'address_en' => $this->faker->name,
             'description_ar' => $fakerAr->name,
@@ -45,10 +47,10 @@ class SettingFactory extends Factory
             'twitter' => $this->faker->url,
             'snapchat' => $this->faker->url,
             'facebook' => $this->faker->url,
-            'logo' => 'sample.png',
-            'menu_bg' => 'sample.png',
-            'main_bg' => 'sample.png',
-            'gift_image' => 'sample.png',
+            'image' => 'square.png',
+            'menu_bg' => 'square.png',
+            'main_bg' => 'square.png',
+            'gift_image' => 'square.png',
             'shipment_prices' => 'sample.png',
             'size_chart' => $this->faker->numberBetween(1, 42) . '.jpeg',
             'cash_on_delivery' => $this->faker->boolean(),

@@ -1,12 +1,16 @@
 <?php
 
-use App\Http\Controllers\Frontend\PageController;
-use App\Http\Controllers\Frontend\SectionController;
-use App\Models\Page;
-use App\Models\Section;
-use App\Models\Setting;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,26 +22,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return inertia('HomePage');
-});
-Auth::routes();
-Route::get('/home', function () {
-    return inertia('HomePage');
-});
-//Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/hello', function () {
-    return inertia('HelloPage');
-});
 
-Route::get('/contactus', function () {
-    return inertia('ContactusPage', ['settings' => Setting::first()]);
-});
-
-Route::get('/page/{id}', function ($id) {
-    return inertia('PageShowScreen', ['elements' => Page::whereId($id)->with('sections')->first()]);
-});
-
+Route::get('/', [HomeController::class, 'index'])->name('frontend');
+Route::get('/home', [HomeController::class, 'index'])->name('frontend.home');
+Route::get('contactus', [ContactusController::class, 'index']);
+Route::get('/backend', [DashboardController::class, 'index'])->name('backend.home');
+Route::resource('dashboard', DashboardController::class);
+Route::resource('product', ProductController::class);
+Route::resource('service', ServiceController::class);
+Route::resource('book', BookController::class);
 Route::resource('section', SectionController::class);
 Route::resource('page', PageController::class);
+
+// General Routes
+Auth::routes();
+Route::get('/lang/{locale}/{component}', [HomeController::class, 'changeLang']);
 

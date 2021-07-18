@@ -7,6 +7,7 @@ use App\Models\Area;
 use App\Models\Country;
 use App\Models\Governate;
 use App\Models\Model;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 

@@ -27,7 +27,7 @@ class CreatePostsTable extends Migration
             $table->string('video_url')->nullable();
             $table->string('youtube_video_id')->nullable();
             $table->string('views')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
 
             $table->foreignId('user_id')->references('id')->on('users');
 

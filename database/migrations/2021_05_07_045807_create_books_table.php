@@ -24,14 +24,14 @@ class CreateBooksTable extends Migration
             $table->text('description_ar')->nullable();
             $table->text('notes_ar')->nullable();
             $table->text('notes_en')->nullable();
-            $table->boolean('on_new')->default(0);
-            $table->boolean('home_delivery_availability')->default(0);
-            $table->boolean('shipment_availability')->default(0);
+            $table->boolean('on_new')->default(false);
+            $table->boolean('home_delivery_availability')->default(false);
+            $table->boolean('shipment_availability')->default(false);
             $table->string('delivery_time')->nullable();
-            $table->boolean('exclusive')->default(0);
-            $table->boolean('on_sale')->default(0);
-            $table->boolean('on_home')->default(0);
-            $table->boolean('is_available')->default(0);
+            $table->boolean('exclusive')->default(false);
+            $table->boolean('on_sale')->default(false);
+            $table->boolean('on_home')->default(false);
+            $table->boolean('is_available')->default(false);
             $table->decimal('price', 6, 2)->unsigned();
             $table->decimal('weight', 4, 2)->unsigned();
             $table->decimal('sale_price', 6, 2)->unsigned()->nullable();
@@ -46,25 +46,25 @@ class CreateBooksTable extends Migration
 
             $table->dateTime('start_sale')->nullable();
             $table->dateTime('end_sale')->nullable();
-            $table->boolean('active')->default(1);
-            $table->boolean('check_stock')->default(1);
-            $table->boolean('is_hot_deal')->default(0);
-            $table->boolean('has_attributes')->default(0);
-            $table->boolean('show_attribute')->default(0);
-            $table->boolean('wrap_as_gift')->default(0);
+            $table->boolean('active')->default(true);
+            $table->boolean('check_stock')->default(true);
+            $table->boolean('is_hot_deal')->default(false);
+            $table->boolean('has_attributes')->default(false);
+            $table->boolean('show_attribute')->default(false);
+            $table->boolean('wrap_as_gift')->default(false);
 
             $table->integer('qty')->unsigned()->nullable();
             $table->string('qr')->nullable();
-            $table->integer('views')->unsigned()->default(1);
-            $table->boolean('direct_purchase')->default(0);
-            $table->boolean('show_size_chart')->default(0);
+            $table->integer('views')->unsigned()->default(true);
+            $table->boolean('direct_purchase')->default(false);
+            $table->boolean('show_size_chart')->default(false);
             $table->string('barcode')->nullable();
             $table->integer('order')->nullable();
 
 
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->boolean('free')->default(1);
-            $table->boolean('download')->default(0);
+            $table->boolean('free')->default(true);
+            $table->boolean('download')->default(false);
             $table->longText('embedded')->nullable();
             $table->timestamps();
         });

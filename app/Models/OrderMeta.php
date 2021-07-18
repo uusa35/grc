@@ -3,10 +3,12 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
 
 class OrderMeta extends PrimaryModel
 {
+    use HasFactory;
     protected $guarded = [''];
 
     public function order()

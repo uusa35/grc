@@ -97,10 +97,10 @@ trait SellingModelHelpers
         return round($this->sale_price * $currentCurrency->exchange_rate,2);
     }
 
-    public function getUIdAttribute()
-    {
-        return str_singular($this->getTable()) . $this->id;
-    }
+//    public function getUIdAttribute()
+//    {
+//        return str_singular($this->getTable()) . $this->id;
+//    }
 
     public function scopeHasProductAttributes($q)
     {

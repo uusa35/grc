@@ -12,6 +12,6 @@ class CouponsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Coupon::class, app()->environment('production') ? 2 : 10)->create();
+        Coupon::factory(app()->isLocal() ? 10 : 2)->create();
     }
 }

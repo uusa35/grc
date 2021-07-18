@@ -24,6 +24,7 @@ abstract class QueryFilters
 
     public function filters()
     {
+//        dd($this->request->all());
         $removeNull = array_filter($this->request->except('_token','page'), function ($value) {
             if (!is_null($value)) {
                 return $value;
@@ -39,7 +40,8 @@ abstract class QueryFilters
             abort(505, trans('message.search_not_correct'));
         }
 
-        foreach ($this->filters() as $key => $value) {
+        foreach ($this->request->all() as $key => $value) {
+
             call_user_func_array([$this, $key], array_filter([$value]));
         }
 

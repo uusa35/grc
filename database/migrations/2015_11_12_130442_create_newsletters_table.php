@@ -16,7 +16,7 @@ class CreateNewslettersTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->string('active')->default(1);
+            $table->string('active')->default(true);
             $table->timestamps();
         });
     }

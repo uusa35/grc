@@ -16,7 +16,7 @@ class CreateSizesTable extends Migration
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

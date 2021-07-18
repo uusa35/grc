@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->string('title')->nullable();
             $table->string('content')->nullable();
             $table->string('path')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->boolean('viewed')->nullable();
             $table->integer('likes')->nullable();
 

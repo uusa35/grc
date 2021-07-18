@@ -16,11 +16,11 @@ class CreatePrivilegeRolePivotTable extends Migration
             $table->foreignId('privilege_id')->references('id')->on('privileges');
             $table->foreignId('role_id')->references('id')->on('roles');
 
-            $table->boolean('index')->default(0);
-            $table->boolean('view')->default(0);
-            $table->boolean('create')->default(0);
-            $table->boolean('update')->default(0);
-            $table->boolean('delete')->default(0);
+            $table->boolean('index')->default(false);
+            $table->boolean('view')->default(false);
+            $table->boolean('create')->default(false);
+            $table->boolean('update')->default(false);
+            $table->boolean('delete')->default(false);
             $table->primary(['privilege_id', 'role_id']);
         });
     }

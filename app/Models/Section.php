@@ -10,8 +10,8 @@ class Section extends PrimaryModel
     use HasFactory, ModelHelpers;
 
     protected $guarded = [''];
-    public $localeStrings = ['title', 'content'];
-    protected $appends = ['imageLargeLink', 'imageThumbLink'];
+    public $localeStrings = ['name', 'caption','description'];
+    protected $appends = ['imageLarge', 'imageThumb'];
 
     public function sectionable()
     {

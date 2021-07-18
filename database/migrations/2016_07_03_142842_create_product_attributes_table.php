@@ -17,7 +17,7 @@ class CreateProductAttributesTable extends Migration
             $table->foreignId('product_id')->nullable()->constrained();
             $table->foreignId('size_id')->nullable()->constrained();
             $table->foreignId('color_id')->nullable()->constrained();
-            $table->integer('qty')->unsigned()->default(0);
+            $table->integer('qty')->unsigned()->default(false);
             $table->text('notes_ar')->nullable();
             $table->text('notes_en')->nullable();
             $table->decimal('price', 6, 2)->unsigned();

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Faq;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
 //         });
 
 
+        $this->call(TranslationsTableSeeder::class);
         $this->call(CountriesTableSeeder::class);
         $this->call(GovernatesTableSeeder::class);
         $this->call(AreasTableSeeder::class);
@@ -52,7 +54,6 @@ class DatabaseSeeder extends Seeder
         $this->call(NewslettersTableSeeder::class);
         $this->call(NotificationsTableSeeder::class);
         $this->call(BrandsTableSeeder::class);
-
         $this->call(UsersTableSeeder::class);
         $this->call(ShippmentPackgesTableSeeder::class);
         $this->call(CommercialsTableSeeder::class);
@@ -72,5 +73,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FansTableSeeder::class);
         $this->call(PostsTableSeeder::class);
         $this->call(AddressesTableSeeder::class);
+        Faq::factory(10)->create();
     }
 }

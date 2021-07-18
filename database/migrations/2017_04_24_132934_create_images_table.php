@@ -22,7 +22,7 @@ class CreateImagesTable extends Migration
             $table->string('caption_en')->nullable();
             $table->string('notes')->nullable();
             $table->smallInteger('order')->unsigned()->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->morphs('imagable');
             $table->timestamps();
             $table->softDeletes();

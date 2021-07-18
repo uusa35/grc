@@ -144,7 +144,7 @@ class UserFilters extends QueryFilters
 
     public function on_home()
     {
-        return $this->builder->where('on_home', true);
+        return $this->builder->where('on_home', request()->on_home);
     }
 
     public function min()

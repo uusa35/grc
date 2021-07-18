@@ -10,6 +10,7 @@ class Currency extends PrimaryModel
     use HasFactory;
     protected $guarded = [''];
     protected $localeStrings = ['currency_symbol', 'name'];
+    protected $appends = ['imageLarge', 'imageThumb'];
 
     public function country()
     {

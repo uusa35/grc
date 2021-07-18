@@ -60,18 +60,18 @@ trait ModelHelpers
         return $filters->apply($q);
     }
 
-    public function getImageLargeLinkAttribute()
+    public function getImageLargeAttribute()
     {
 
         return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('large') . $this->image : asset(env('LARGE') . $this->image);
     }
 
-    public function getImageMediumLinkAttribute()
+    public function getImageMediumAttribute()
     {
         return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('medium') . $this->image : asset(env('MEDIUM') . $this->image);
     }
 
-    public function getImageThumbLinkAttribute()
+    public function getImageThumbAttribute()
     {
         return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('thumbnail') . $this->image : asset(env('THUMBNAIL') . $this->image);
     }
@@ -99,6 +99,22 @@ trait ModelHelpers
     public function getPathLinkAttribute()
     {
         return asset(env('FILES') . $this->path);
+    }
+
+    public function getNameAttribute() {
+        return $this->name;
+    }
+
+    public function getCaptionAttribute() {
+        return $this->caption;
+    }
+
+    public function getDescriptionAttribute() {
+        return $this->description;
+    }
+
+    public function getAddressAttribute() {
+        return $this->address;
     }
 
 }

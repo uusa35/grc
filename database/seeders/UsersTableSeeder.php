@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
     {
         User::factory(app()->isLocal() ? 10 : 5)->create()->each(function ($u) {
             if ($u->id === 1) {
-                $u->update(['role_id' => 1]);
+                $u->update(['role_id' => 1,'email' => 'admin@admin.com']);
             }
             $u->categories()->saveMany(Category::all()->random(2));
             $u->slides()->saveMany(Slide::factory(2)->create());

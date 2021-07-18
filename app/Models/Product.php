@@ -9,30 +9,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Product extends PrimaryModel
 {
-    use HasFactory, ProductHelpers, SellingModelHelpers, ModelHelpers, SoftDeletes, HasEvents;
+    use HasFactory, ProductHelpers, SellingModelHelpers, SoftDeletes, HasEvents, ModelHelpers;
     protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
-    protected $appends = ['UId'];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
-    protected $casts = [
-        'on_sale' => 'boolean',
-        'on_home' => 'boolean',
-        'active' => 'boolean',
-        'home_delivery_availability' => 'boolean',
-        'is_available' => 'boolean',
-        'has_attributes' => 'boolean',
-        'show_attribute' => 'boolean',
-        'is_hot_deal' => 'boolean',
-        'exclusive' => 'boolean',
-        'on_new' => 'boolean',
-        'direct_purchase' => 'boolean',
-        'tailor_measurement_service' => 'boolean',
-        'weight' => 'float',
-        'price' => 'float',
-        'wrap_as_gift' => 'boolean',
-        'direct_purchase' => 'boolean',
-        'show_size_chart' => 'boolean'
-    ];
+    protected $appends = ['imageThumb','imageLarge','name','description'];
 
     public function user()
     {

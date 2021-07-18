@@ -14,8 +14,10 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('company_ar')->nullable();
-            $table->string('company_en')->nullable();
+            $table->string('name_ar')->nullable();
+            $table->string('name_en')->nullable();
+            $table->string('caption_ar')->nullable();
+            $table->string('caption_en')->nullable();
             $table->string('address_ar')->nullable();
             $table->string('address_en')->nullable();
             $table->mediumText('description_ar')->nullable();
@@ -34,7 +36,7 @@ class CreateSettingsTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('snapchat')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('image')->nullable();
             $table->string('menu_bg')->nullable();
             $table->string('main_bg')->nullable();
             $table->string('shipment_notes_ar')->nullable();
@@ -77,23 +79,23 @@ class CreateSettingsTable extends Migration
             $table->string('footer_theme_color')->nullable();
             $table->string('footer_bg_theme_color')->nullable();
 
-            $table->boolean('apply_global_shipment')->default(0);
-            $table->boolean('show_commercials')->default(0);
-            $table->boolean('splash_on')->default(0);
+            $table->boolean('apply_global_shipment')->default(false);
+            $table->boolean('show_commercials')->default(false);
+            $table->boolean('splash_on')->default(false);
             $table->longText('code')->nullable();
 
 
             $table->string('app_logo')->nullable();
             $table->string('theme')->nullable();
-            $table->boolean('cash_on_delivery')->default(0);
+            $table->boolean('cash_on_delivery')->default(false);
             $table->string('gift_image')->nullable();
             $table->decimal('gift_fee', 4, 2)->unsigned()->nullable();
-            $table->boolean('shipment_fixed_rate')->default(1);
+            $table->boolean('shipment_fixed_rate')->default(true);
             $table->decimal('shipment_fuel_percentage', 4, 2)->unsigned()->default(0.01);
             $table->string('payment_method')->default('tap');
-            $table->boolean('multi_cart_merchant')->default(1);
-            $table->boolean('pickup_from_branch')->default(0);
-            $table->boolean('global_custome_delivery')->default(0);
+            $table->boolean('multi_cart_merchant')->default(true);
+            $table->boolean('pickup_from_branch')->default(false);
+            $table->boolean('global_custome_delivery')->default(false);
             $table->string('android_version')->nullable();
             $table->string('apple_version')->nullable();
             $table->timestamps();

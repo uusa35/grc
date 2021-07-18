@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('status')->nullable()->default('pending');
-            $table->boolean('paid')->default(0);
+            $table->boolean('paid')->default(false);
             $table->decimal('price', 6, 2)->unsigned();
             $table->decimal('shipment_fees', 6, 2)->unsigned()->nullable(); //
             $table->decimal('discount', 6, 2)->unsigned()->nullable(); //
@@ -34,7 +34,7 @@ class CreateOrdersTable extends Migration
             $table->string('day')->nullable();
             $table->time('time')->nullable();
             $table->dateTime('booked_at')->nullable();
-            $table->boolean('receive_on_branch')->default(0);
+            $table->boolean('receive_on_branch')->default(false);
             $table->string('shipment_reference')->nullable();
 
             $table->string('block')->nullable();
@@ -42,7 +42,7 @@ class CreateOrdersTable extends Migration
             $table->string('building')->nullable();
             $table->string('floor')->nullable();
             $table->string('apartment')->nullable();
-            $table->boolean('cash_on_delivery')->default(0);
+            $table->boolean('cash_on_delivery')->default(false);
 
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('branch_id')->nullable()->constrained();

@@ -7,36 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Setting extends PrimaryModel
 {
-    use HasFactory,ModelHelpers;
-    protected $localeStrings = ['address', 'country', 'company', 'description', 'shipment_notes', 'policy', 'terms'];
+    use HasFactory;
+    protected $localeStrings = ['name','address', 'country', 'description', 'shipment_notes', 'policy', 'terms'];
     protected $guarded = [''];
-    protected $casts = [
-        'show_commercials' => 'boolean',
-        'splash_on' => 'boolean',
-        'cash_on_delivery' => 'boolean',
-        'multi_cart_merchant' => 'boolean',
-        'pickup_from_branch' => 'boolean',
-        'shipment_fixed_rate' => 'boolean'
-    ];
-
-    public function getLogoLargeAttribute()
-    {
-        return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('large') . $this->logo : asset(env('LARGE') . $this->logo);
-    }
-
-    public function getLogoThumbAttribute()
-    {
-        return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('thumbnail') . $this->logo : asset(env('THUMBNAIL') . $this->logo);
-    }
-
-    public function getLogoAppThumbAttribute()
-    {
-        return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('thumbnail') . $this->app_logo : asset(env('THUMBNAIL') . $this->app_logo);
-    }
+    protected $appends = ['name','country','address','description','sizeChartImage','imageThumb'];
 
     public function getSizeChartImageAttribute()
     {
-        return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('large') . $this->size_chart : asset(env('LARGE') . $this->size_chart);
+        return asset(env('LARGE') . $this->size_chart);
     }
 
     public function images()
@@ -47,5 +25,13 @@ class Setting extends PrimaryModel
     public function getFullWhatsappAttribute()
     {
         return '965'.numToEn($this->whatsapp);
+    }
+
+    public function getCountryAttribute() {
+        return $this->country;
+    }
+
+    public function getAddressAttribute() {
+        return $this->address;
     }
 }

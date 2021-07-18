@@ -18,7 +18,7 @@ class CreateGovernatesTable extends Migration
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->integer('order')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->string('code')->nullable();
             $table->foreignId('country_id')->references('id')->on('countries');
             $table->timestamps();

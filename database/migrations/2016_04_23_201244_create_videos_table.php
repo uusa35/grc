@@ -24,11 +24,11 @@ class CreateVideosTable extends Migration
             $table->text('notes_en')->nullable();
             $table->string('image')->nullable();
             $table->string('path')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->integer('order')->nullable();
             $table->string('url')->nullable();
             $table->string('youtube_video_id')->nullable();
-            $table->boolean('on_home')->default(0);
+            $table->boolean('on_home')->default(false);
 
 
             $table->timestamps();

@@ -20,18 +20,19 @@ class CreateRolesTable extends Migration
             $table->string('name_en')->nullable();
             $table->string('caption_ar')->nullable();
             $table->string('caption_en')->nullable();
-            $table->boolean('is_admin')->default(0);
-            $table->boolean('is_super')->default(0);
-            $table->boolean('is_client')->default(0);
-            $table->boolean('is_company')->default(0);
-            $table->boolean('is_designer')->default(0);
-            $table->boolean('is_celebrity')->default(0);
-            $table->boolean('is_visible')->default(0);
-            $table->boolean('active')->default(1);
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_super')->default(false);
+            $table->boolean('is_client')->default(false);
+            $table->boolean('is_company')->default(false);
+            $table->boolean('is_designer')->default(false);
+            $table->boolean('is_celebrity')->default(false);
+            $table->boolean('is_author')->default(false);
+            $table->boolean('is_visible')->default(false);
+            $table->boolean('active')->default(true);
             $table->integer('order')->nullable();
             $table->string('color')->nullable();
             $table->string('image')->nullable();
-            $table->boolean('is_driver')->default(0);
+            $table->boolean('is_driver')->default(false);
             $table->timestamps();
         });
     }

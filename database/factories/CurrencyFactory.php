@@ -37,7 +37,7 @@ class CurrencyFactory extends Factory
             },
             'active' => $this->faker->boolean(true),
             'exchange_rate' => $this->faker->numberBetween(1, 8),
-            'active' => $this->faker->boolean(true),
+            'order' => $this->faker->randomDigit,
         ];
     }
 }

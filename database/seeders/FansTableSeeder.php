@@ -12,6 +12,6 @@ class FansTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Fan::class, env('production') ? 5 : 300 )->create();
+        Fan::factory(app()->isLocal() ? 10 : 3 )->create();
     }
 }

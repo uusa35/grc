@@ -19,7 +19,7 @@ class PageController extends Controller
     public function index()
     {
         $elements = Page::with('sections')->paginate(5);
-        return response()->json(['elements' => PageResource::collection($elements)], 200);
+        return response()->json(PageResource::collection($elements), 200);
     }
 
     /**

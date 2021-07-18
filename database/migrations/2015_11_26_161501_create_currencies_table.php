@@ -20,7 +20,9 @@ class CreateCurrenciesTable extends Migration
             $table->string('currency_symbol_ar', 25);
             $table->string('currency_symbol_en', 25);
             $table->float('exchange_rate', 6, 2)->unsigned();
-            $table->boolean('active')->default(1);
+            $table->string('order')->nullable();
+            $table->string('image')->nullable();
+            $table->boolean('active')->default(true);
 
             $table->foreignId('country_id')->references('id')->on('countries');
             $table->rememberToken();

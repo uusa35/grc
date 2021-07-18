@@ -17,7 +17,7 @@ class CreateAreasTable extends Migration
             $table->string('name')->nullalbe();
             $table->string('name_ar')->nullalbe();
             $table->string('name_en')->nullalbe();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->string('order')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();

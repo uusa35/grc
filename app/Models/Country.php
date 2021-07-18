@@ -10,6 +10,7 @@ class Country extends PrimaryModel
     use ModelHelpers;
     protected $localeStrings = ['name','currency_symbol'];
     protected $guarded = [''];
+    protected $appends = ['imageLarge', 'imageThumb'];
     protected $casts = [
         'is_local' => 'boolean',
         'active' => 'boolean'

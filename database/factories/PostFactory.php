@@ -1,29 +1,45 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Model;
 use App\Models\Post;
+use App\Models\Model;
 use App\Models\User;
-use Faker\Generator as Faker;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Post::class, function (Faker $faker) {
-    return [
-        'name_ar' => $faker->name,
-        'name_en' => $faker->name,
-        'name_ar' => $faker->sentence,
-        'name_en' => $faker->name,
-        'caption_ar' => $faker->sentence,
-        'caption_en' => $faker->name,
-        'image' => 'square.png',
-        'description_ar' => $faker->paragraph,
-        'description_en' => $faker->paragraph,
-        'order' => $faker->numberBetween(1, 10),
-        'active' => $faker->boolean,
-        'user_id' => User::active()->get()->random()->id,
-        'video_url' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
-        'video_id' => 'KTkClkW0MZw',
-        'keywords' => $faker->sentence,
-        'views' => $faker->randomNumber(),
-    ];
-});
+
+class PostFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Post::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $fakerAr = \Faker\Factory::create('ar_JO');
+        return [
+            'name_ar' => $fakerAr->name,
+            'name_en' => $this->faker->name,
+            'caption_ar' => $fakerAr->name,
+            'caption_en' => $this->faker->name,
+            'image' => 'square.png',
+            'description_ar' => $this->faker->paragraph,
+            'description_en' => $fakerAr->name,
+            'order' => $this->faker->numberBetween(1, 10),
+            'active' => $this->faker->boolean,
+            'user_id' => User::active()->get()->random()->id,
+            'video_url' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
+            'youtube_video_id' => 'KTkClkW0MZw',
+            'keywords' => $this->faker->sentence,
+            'views' => $this->faker->randomNumber(),
+        ];
+    }
+}

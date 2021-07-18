@@ -17,12 +17,12 @@ class CreateTimingsTable extends Migration
             $table->string('day')->nullable();
             $table->string('day_name_ar')->nullable();
             $table->string('day_name_en')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->time('start');
             $table->time('end')->nullable();
-            $table->boolean('is_off')->default(0);
-            $table->boolean('allow_multi_select')->default(0);
-            $table->boolean('is_available')->default(1);
+            $table->boolean('is_off')->default(false);
+            $table->boolean('allow_multi_select')->default(false);
+            $table->boolean('is_available')->default(true);
             $table->string('today')->nullable();
             $table->string('type')->nullable();
             $table->string('notes_ar')->nullable();

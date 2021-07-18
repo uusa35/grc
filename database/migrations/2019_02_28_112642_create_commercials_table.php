@@ -22,10 +22,10 @@ class CreateCommercialsTable extends Migration
             $table->string('url')->nullable();
             $table->string('path')->nullable();
             $table->integer('order')->nullable();
-            $table->boolean('on_home')->default(0);
-            $table->boolean('is_double')->default(0);
-            $table->boolean('is_triple')->default(0);
-            $table->boolean('active')->default(0);
+            $table->boolean('on_home')->default(false);
+            $table->boolean('is_double')->default(false);
+            $table->boolean('is_triple')->default(false);
+            $table->boolean('active')->default(false);
             $table->string('website')->nullable();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();

@@ -2,10 +2,17 @@
 
 namespace Database\Factories;
 
+use App\Models\Area;
 use App\Models\Book;
 use App\Models\Country;
+use App\Models\Order;
 use App\Models\OrderMeta;
 use App\Models\Model;
+use App\Models\Product;
+use App\Models\ProductAttribute;
+use App\Models\Service;
+use App\Models\Timing;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -55,7 +62,7 @@ class OrderMetaFactory extends Factory
             'service_date' => $this->faker->date(),
             'service_time' => $this->faker->time(),
             'timing_id' => Timing::workingDays()->get()->random()->id,
-            'destination_id' => Country::all()->random()->id,
+            'country_id' => Country::all()->random()->id,
             'book_id' => Book::all()->random()->id,
             'merchant_id' => User::all()->random()->id,
         ];

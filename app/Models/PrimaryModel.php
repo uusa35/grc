@@ -15,4 +15,5 @@ class PrimaryModel extends Model
 {
     use LocaleTrait, ModelHelpers, ImageHelpers;
     protected $localeStrings = [];
+    protected $appends = ['imageLarge', 'imageThumb'];
 }

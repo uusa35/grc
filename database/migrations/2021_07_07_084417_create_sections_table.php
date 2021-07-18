@@ -28,7 +28,7 @@ class CreateSectionsTable extends Migration
             $table->string('url_two_name')->nullable();
             $table->longText('video_url')->nullable();
             $table->integer('order')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->foreignId('template_id')->references('id')->on('templates');
             $table->morphs('sectionable');
             $table->timestamps();

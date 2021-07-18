@@ -9,6 +9,7 @@ class Image extends PrimaryModel
     use HasFactory;
     protected $guarded = [''];
     protected $localeStrings = ['caption','name'];
+    protected $appends = ['imageThumb', 'imageLarge'];
 
     public function imagable()
     {

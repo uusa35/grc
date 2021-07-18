@@ -1,5 +1,7 @@
 <?php
+
 namespace Database\Seeders;
+
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderMeta;
@@ -18,8 +20,8 @@ class OrdersTableSeeder extends Seeder
         - order_meta
         - coupon
         */
-        factory(Order::class, app()->environment('production') ? 2 : 20)->create()->each(function ($o) {
-            $o->order_metas()->saveMany(factory(OrderMeta::class, 2)->create());
+        Order::factory(app()->isLocal() ? 20 : 2)->create()->each(function ($o) {
+            $o->order_metas()->saveMany(OrderMeta::factory(2)->create());
         });
     }
 }

@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Service extends PrimaryModel
 {
-    use SoftDeletes, SellingModelHelpers, ServiceHelpers;
+    use HasFactory, SoftDeletes, SellingModelHelpers, ServiceHelpers;
     protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
     protected $appends = ['UId'];

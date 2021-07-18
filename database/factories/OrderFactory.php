@@ -2,9 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Branch;
 use App\Models\Country;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Model;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 

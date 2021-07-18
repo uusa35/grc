@@ -22,7 +22,7 @@ class CreateBranchesTable extends Migration
             $table->string('description_en')->nullable();
             $table->string('mobile')->nullable();
             $table->string('phone')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(true);
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
 

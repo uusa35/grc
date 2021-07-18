@@ -61,7 +61,7 @@ class CreateUsersTable extends Migration
             $table->string('android')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
-            $table->integer('balance')->default(0)->nullable();
+            $table->integer('balance')->default(false)->nullable();
             $table->string('player_id')->nullable();
             $table->string('video_url_one')->nullable();
             $table->string('video_url_two')->nullable();
@@ -69,8 +69,8 @@ class CreateUsersTable extends Migration
             $table->string('video_url_four')->nullable();
             $table->string('video_url_five')->nullable();
 
-            $table->boolean('on_home')->default(0);
-            $table->boolean('active')->default(1);
+            $table->boolean('on_home')->default(false);
+            $table->boolean('active')->default(true);
 
             $table->foreignId('role_id')->references('id')->on('roles');
             $table->foreignId('country_id')->references('id')->on('countries');
@@ -79,20 +79,20 @@ class CreateUsersTable extends Migration
 
             $table->string('merchant_id')->nullable();
             $table->string('api_token')->nullable();
-            $table->integer('views')->unsigned()->default(1);
+            $table->integer('views')->unsigned()->default(true);
 
-            $table->boolean('is_available')->default(0);
-            $table->boolean('is_online')->default(0);
-            $table->boolean('access_dashboard')->default(1);
-            $table->boolean('is_male')->default(0);
-            $table->boolean('mobile_verified')->default(0);
+            $table->boolean('is_available')->default(false);
+            $table->boolean('is_online')->default(false);
+            $table->boolean('access_dashboard')->default(true);
+            $table->boolean('is_male')->default(false);
+            $table->boolean('mobile_verified')->default(false);
             $table->text('mobile_code')->nullable();
-            $table->decimal('fixed_amount_subscription', 6, 2)->unsigned()->default(0);
-            $table->decimal('percentage_subscription', 6, 2)->unsigned()->default(0);
+            $table->decimal('fixed_amount_subscription', 6, 2)->unsigned()->default(false);
+            $table->decimal('percentage_subscription', 6, 2)->unsigned()->default(false);
             $table->dateTime('start_subscription')->nullable();
             $table->dateTime('end_subscription')->nullable();
             $table->longText('code')->nullable();
-            $table->boolean('custome_delivery')->default(0);
+            $table->boolean('custome_delivery')->default(false);
             $table->decimal('custome_delivery_fees', 4, 2)->unsigned()->default(0.00);
 
             $table->rememberToken();
