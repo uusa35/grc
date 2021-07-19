@@ -18,9 +18,10 @@ function classNames(...classes) {
 }
 const navigation = [
     {name: 'Home', href: '/backend', icon: HomeIcon, current: true},
-    {name: 'Products', href: '/product', icon: ViewListIcon, current: false},
-    {name: 'Books', href: '/book', icon: ClockIcon, current: false},
-    {name: 'Service', href: '/service', icon: ClockIcon, current: false},
+    {name: 'Products', href: '/search/product', icon: ViewListIcon, current: false},
+    {name: 'Books', href: '/search/book', icon: ClockIcon, current: false},
+    {name: 'Service', href: '/search/service', icon: ClockIcon, current: false},
+    {name: 'User', href: '/search/user', icon: ClockIcon, current: false},
 ]
 
 const SideBar = () => {
@@ -79,15 +80,15 @@ const SideBar = () => {
                             <div className="flex-shrink-0 flex items-center px-4">
                                 <img
                                     className="h-8 w-auto"
-                                    src="https://tailwindui.com/img/logos/workflow-logo-purple-500-mark-gray-700-text.svg"
-                                    alt="Workflow"
+                                    src={settings.imageThumb}
+                                    alt={settings.name}
                                 />
                             </div>
                             <div className="mt-5 flex-1 h-0 overflow-y-auto">
                                 <nav className="px-2">
                                     <div className="space-y-1">
                                         {navigation.map((item) => (
-                                            <a
+                                            <InertiaLink
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
@@ -106,7 +107,7 @@ const SideBar = () => {
                                                     aria-hidden="true"
                                                 />
                                                 {item.name}
-                                            </a>
+                                            </InertiaLink>
                                         ))}
                                     </div>
                                     <div className="mt-8">

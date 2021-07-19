@@ -51,6 +51,13 @@ trait UserHelpers
         });
     }
 
+    public function scopeAuthors($q)
+    {
+        return $q->whereHas('role', function ($q) {
+            return $q->where('is_author', true);
+        });
+    }
+
     public function scopeCompaniesHasServices($q)
     {
         return $q->companies()->whereHas('services', function ($q) {
@@ -109,7 +116,7 @@ trait UserHelpers
 
     public function scopeHasProducts($q)
     {
-        if(env('ESCRAP')) {
+        if (env('ESCRAP')) {
             return $q;
         }
         return $q->whereHas('products', function ($q) {
@@ -161,12 +168,12 @@ trait UserHelpers
 
     public function getFullMobileAttribute()
     {
-        return $this->mobile ? $this->country->calling_code.$this->mobile : null;
+        return $this->mobile ? $this->country->calling_code . $this->mobile : null;
     }
 
     public function getFullWhatsappAttribute()
     {
-        return numToEn($this->whatsapp ? $this->country->calling_code.$this->whatsapp : null);
+        return numToEn($this->whatsapp ? $this->country->calling_code . $this->whatsapp : null);
     }
 
     public function getRatingAttribute()
@@ -186,8 +193,9 @@ trait UserHelpers
         return $this->fans->count();
     }
 
-    public function getStatisticsAttribute() {
-        $orders =  Order::where(['paid' => true])->whereDate('created_at' ,'>=', Carbon::now()->firstOfMonth())
+    public function getStatisticsAttribute()
+    {
+        $orders = Order::where(['paid' => true])->whereDate('created_at', '>=', Carbon::now()->firstOfMonth())
             ->with('order_metas.product.product_attributes', 'order_metas.product.user', 'order_metas.product_attribute.size', 'order_metas.product_attribute.color', 'order_metas.service')
             ->whereHas('order_metas.product', function ($q) {
                 return $q->where('user_id', $this->id);
@@ -201,7 +209,8 @@ trait UserHelpers
         ];
     }
 
-    public function getCustomeDeliveryUserAttribute() {
+    public function getCustomeDeliveryUserAttribute()
+    {
         $settings = Setting::first();
         return $this->custome_delivery && $settings->global_custome_delivery && !$settings->multi_cart_merchant;
     }

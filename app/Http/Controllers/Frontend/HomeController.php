@@ -13,13 +13,14 @@ class HomeController extends Controller
         return inertia('FrontendHomePage', compact('slides'));
     }
 
-    public function changeLang($locale, $component)
+    public function changeLang($locale)
     {
         if (!in_array($locale, ['en', 'ar'])) {
             abort(400);
         }
         app()->setLocale($locale);
-        var_dump(app()->getLocale());
-        return inertia(".$component.");
+        session()->put('locale', $locale);
+//        return inertia(".$component.");
+        return redirect()->to(request()->url);
     }
 }

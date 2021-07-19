@@ -985,4 +985,6 @@ return array (
   'image_url' => 'رابط لتعديل الصور',
   'governates' => 'محافظات',
   'governate_added' => 'اضف محافظة',
+    'ar' => 'Arabic',
+    'en' => 'الإنجليزية'
 );

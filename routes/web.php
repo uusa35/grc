@@ -9,6 +9,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,8 +34,12 @@ Route::resource('service', ServiceController::class);
 Route::resource('book', BookController::class);
 Route::resource('section', SectionController::class);
 Route::resource('page', PageController::class);
+Route::resource('user', UserController::class);
+Route::get('search/product', [ProductController::class,'search']);
+Route::get('search/service', [ServiceController::class,'search']);
+Route::get('search/user', [UserController::class,'search']);
 
 // General Routes
 Auth::routes();
-Route::get('/lang/{locale}/{component}', [HomeController::class, 'changeLang']);
+Route::get('/lang/{locale}', [HomeController::class, 'changeLang']);
 

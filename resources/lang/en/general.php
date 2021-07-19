@@ -943,4 +943,6 @@ return array (
   'video_url_three' => 'Video 3',
   'user_updated' => 'User updated',
   'barcode' => 'Barcode',
+    'ar' => 'العربية',
+    'en' => 'English'
 );

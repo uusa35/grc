@@ -1,6 +1,9 @@
 import {Menu, Transition} from "@headlessui/react";
 import {ChevronRightIcon, DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment} from "react";
+import {Fragment, useContext} from "react";
+import GlobalContext from "../../context/GlobalContext";
+import {BackendContext} from "../../context/BackendContext";
+import {InertiaLink, Link} from "@inertiajs/inertia-react";
 
 
 function classNames(...classes) {
@@ -48,6 +51,14 @@ const projects = [
 const pinnedProjects = projects.filter((project) => project.pinned)
 
 const BackendHeader = () => {
+    const { locale , component , url, otherLang , translations  } = useContext(GlobalContext);
+    const { trans } = useContext(BackendContext)
+    console.log('locale', locale);
+    console.log('com', component);
+    console.log('url', url);
+    console.log('otherLang', otherLang);
+    console.log('trans', translations['ar']['aboutus']);
+    console.log('result of trans', trans(otherLang))
     return (
         <>
             {/* Page title & actions */}
@@ -57,12 +68,20 @@ const BackendHeader = () => {
                     <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">Home</h1>
                 </div>
                 <div className="mt-4 flex sm:mt-0 sm:ml-4">
-                    <button
+                    <a
+                        href={`/lang/${otherLang}?url=${url}`}
                         type="button"
                         className="order-1 ml-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-0 sm:ml-0"
                     >
-                        Share
-                    </button>
+                        {trans(otherLang)}
+                    </a>
+                    <a
+                        href={`/lang/${locale}?url=${url}`}
+                        type="button"
+                        className="order-1 ml-3 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-0 sm:ml-0"
+                    >
+                        {trans(locale)}
+                    </a>
                     <button
                         type="button"
                         className="order-0 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:order-1 sm:ml-3"

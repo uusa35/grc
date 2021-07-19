@@ -3,3 +3,127 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+
+
+@font-face {
+    font-family: 'Tajawal-Light';
+    src: url('../../public/fonts/Tajawal-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tajawal-Medium';
+    src: url('../../public/fonts/Tajawal-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'DroidArabicKufi';
+    src: url('../../public/fonts/DroidArabicKufi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AR-Almarai-Font';
+    src: url('../../public/fonts/AR-Almarai-Font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bein-ar-black_0';
+    src: url('../../public/fonts/bein-ar-black_0.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bein-ar-normal_0';
+    src: url('../../public/fonts/bein-ar-normal_0.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AR-BBC-Regular';
+    src: url('../../public/fonts/AR-BBC-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DroidArabicKufi-bold';
+    src: url('../../public/fonts/DroidArabicKufi-bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cairo';
+    src: url('../../public/fonts/cairo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Ar-Ith';
+    src: url('../../public/fonts/Ar-Ith.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AlMohanad';
+    src: url('../../public/fonts/AlMohanad.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-cairo {
+    font-family: 'cairo', 'sans-serif';
+}
+
+.font-ith {
+    font-family: 'Ar-Ith', 'sans-serif';
+}
+
+.font-mohanad {
+    font-family: 'AlMohanad', 'sans-serif';
+}
+
+.font-almarai {
+    font-family: 'AR-Almarai-Font', 'sans-serif';
+}
+
+.font-bein-bold {
+    font-family: 'bein-ar-black_0', 'sans-serif';
+}
+
+.font-bein {
+    font-family: 'bein-ar-normal_0', 'sans-serif';
+}
+
+.font-bbc {
+    font-family: 'AR-BBC-Regular', 'sans-serif';
+}
+
+.font-tajwal-light {
+    font-family: 'Tajawal-Medium', 'sans-serif';
+}
+
+.font-tajwal-medium {
+    font-family: 'Tajawal-Medium', 'sans-serif';
+}
+
+.font-droid {
+    font-family: 'DroidArabicKufi', 'sans-serif';
+}
+
+.font-droid-bold {
+    font-family: 'DroidArabicKufi-bold', 'sans-serif';
+}

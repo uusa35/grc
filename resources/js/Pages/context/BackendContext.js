@@ -1,13 +1,20 @@
-import {createContext, useState} from 'react';
+import {createContext, useContext, useEffect, useState} from 'react';
 import SideBar from "../components/partials/SideBar";
+import GlobalContext from "./GlobalContext";
 
 const BackendContext = createContext({});
 
 
-const BackendContextProvider = ({dir, children}) => {
+const BackendContextProvider = ({children}) => {
+    const {locale, translations } = useContext(GlobalContext);
     const [isLoading, setIsLoading] = useState(true);
-    const [isRTL, setIsRtl] = useState(true);
+    const [isRTL, setIsRtl] = useState(false);
     const [sideBarOpen, setSideBarOpen] = useState(false);
+
+    useEffect(() => {
+        setIsRtl(locale === 'ar' ? true : false);
+    }, [locale]);
+
     const context = {
         isLoading,
         sideBarOpen,
@@ -20,10 +27,12 @@ const BackendContextProvider = ({dir, children}) => {
         toggleSideBar: () => setSideBarOpen(!sideBarOpen),
         enableRtl: () => setIsRtl(true),
         disableRtl: () => setIsRtl(false),
+        trans : (name) =>  translations[locale][name],
+        dir: locale === 'ar' ? 'rtl' : 'ltr'
     };
     return (
         <BackendContext.Provider value={context}>
-                {children}
+            {children}
         </BackendContext.Provider>
     );
 };

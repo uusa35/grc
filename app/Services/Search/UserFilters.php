@@ -246,16 +246,6 @@ class UserFilters extends QueryFilters
         return $this->builder->whereIn('id', $productIds);
     }
 
-    public function collection_id()
-    {
-        if (request()->has('collection_id')) {
-            $element = Collection::whereId(request('collection_id'))->with('products')->first();
-            $productIds = $element->products->pluck('id');
-            return $this->builder->whereIn('id', $productIds);
-        }
-    }
-
-
     public function is_designer()
     {
         return $this->builder->whereHas('role', function ($q) {
@@ -267,6 +257,14 @@ class UserFilters extends QueryFilters
     {
         return $this->builder->whereHas('role', function ($q) {
             return $q->where('is_company', request()->is_company);
+        });
+    }
+
+
+    public function is_author()
+    {
+        return $this->builder->whereHas('role', function ($q) {
+            return $q->where('is_author', request()->is_author);
         });
     }
 

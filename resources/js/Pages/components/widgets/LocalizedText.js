@@ -1,10 +1,25 @@
-import { map, filter  } from 'lodash';
-const LocalizedText = ({ locale , text , trans }) => {
-    console.log('trans', trans);
-    console.log(filter(trans.ar, t => t === 'home'))
+import React, {useContext} from 'react';
+import {truncate} from 'lodash';
+import GlobalContext from "../../context/GlobalContext";
+
+const LocalizedText = ({
+                           ar,
+                           en,
+                           capitalize = false,
+                           textClasses = '',
+                           length = 18,
+                           separator = true,
+                       }) => {
+    const {locale} = useContext(GlobalContext);
+
     return (
-        <span></span>
+        <span className={`${capitalize ? 'capitalize' : ''} ${textClasses}`}>
+      {truncate(locale === 'ar' ? ar : en, {
+          length,
+          omission: separator ? '..' : '',
+      })}
+    </span>
     );
-}
+};
 
 export default LocalizedText;
