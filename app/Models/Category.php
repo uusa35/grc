@@ -101,18 +101,6 @@ class Category extends PrimaryModel
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    /**
-     * @param $query
-     * @param QueryFilter $filters
-     * @return \Illuminate\Database\Eloquent\Builder
-     * Usage : Category Page - Filtering all products according to parameters
-     * Description : chaining filters within the Query String
-     */
-    public function scopeFilters($query, QueryFilters $filters)
-    {
-        return $filters->apply($query);
-    }
-
     public function scopeOnlyParent($q)
     {
         return $q->where('parent_id', 0);

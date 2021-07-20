@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
+use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -13,9 +15,19 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $elements = Service::orderby('id','desc')->paginate(SELF::TAKE_LEAST);
+        return inertia('ServiceIndex', compact('elements'));
     }
 
+    public function search(ProductFilters $filters)
+    {
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+        $elements = Service::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
+        return inertia('ServiceIndex', compact('elements'));
+    }
     /**
      * Show the form for creating a new resource.
      *

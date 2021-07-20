@@ -7,6 +7,7 @@
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body dir="{{ session()->get('locale') === 'ar' ? 'rtl' : 'ltr'}}">
+<div id="locale" style="display: none">{{ app()->getLocale() }}</div>
 @inertia
 </body>
 </html>

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Services\Search\QueryFilters;
 use Carbon\Carbon;
 
 /**

@@ -83,7 +83,7 @@ trait ModelHelpers
 
     public function getCurrentImageAttribute($colName = 'image', $sizeType = 'thumbnail')
     {
-        return $this->{$colName}  ? ($this->checkStorageSpaces() ? $this->getStorageSpacesUrl($sizeType, $colName) . $this->{$colName} : asset(env(strtoupper($sizeType)) . $this->{$colName})) : '';
+        return $this->{$colName} ? ($this->checkStorageSpaces() ? $this->getStorageSpacesUrl($sizeType, $colName) . $this->{$colName} : asset(env(strtoupper($sizeType)) . $this->{$colName})) : '';
     }
 
     public function checkStorageSpaces()
@@ -101,20 +101,29 @@ trait ModelHelpers
         return asset(env('FILES') . $this->path);
     }
 
-    public function getNameAttribute() {
+    public function getNameAttribute()
+    {
         return $this->name;
     }
 
-    public function getCaptionAttribute() {
+    public function getCaptionAttribute()
+    {
         return $this->caption;
     }
 
-    public function getDescriptionAttribute() {
+    public function getDescriptionAttribute()
+    {
         return $this->description;
     }
 
-    public function getAddressAttribute() {
+    public function getAddressAttribute()
+    {
         return $this->address;
+    }
+
+    public function getTypeAttribute()
+    {
+        return strtolower(class_basename($this));
     }
 
 }

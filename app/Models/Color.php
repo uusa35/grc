@@ -9,6 +9,7 @@ class Color extends PrimaryModel
 {
     use HasFactory;
     protected $localeStrings = ['name'];
+    protected $appends = ['name'];
     protected $guarded = [''];
 
 

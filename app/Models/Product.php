@@ -9,18 +9,19 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Product extends PrimaryModel
 {
-    use HasFactory, ProductHelpers, SellingModelHelpers, SoftDeletes, HasEvents, ModelHelpers;
+    use HasFactory, ProductHelpers, SellingModelHelpers, SoftDeletes, HasEvents;
+
     protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
-    protected $appends = ['imageThumb','imageLarge','name','description'];
+    protected $appends = ['imageThumb', 'imageLarge', 'name', 'description','type'];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function product_attributes()
+    public function attributes()
     {
         // prodct A
         // has Small / Red / 3
@@ -37,16 +38,6 @@ class Product extends PrimaryModel
     public function shipment_package()
     {
         return $this->belongsTo(ShipmentPackage::class);
-    }
-
-    public function colors()
-    {
-        return $this->belongsToMany(Color::class, 'product_attributes', 'product_id', 'color_id');
-    }
-
-    public function sizes()
-    {
-        return $this->belongsToMany(Size::class, 'product_attributes', 'product_id', 'size_id');
     }
 
     // in case product does not have Attribute --> it has only one size or one color

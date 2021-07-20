@@ -630,7 +630,8 @@ return array (
   'new_day' => 'إضافه يوم',
   'edit_settings' => 'تعديل خصائص البرنامج',
   'product_attributes_index' => 'قائمة خصائص المنتج',
-  'active_products' => 'منتجات فعالة',
+  'active_products' => 'منتجات مفعلة',
+    'non_active_products' => 'منتجات غير مفعلة',
   'countries_control' => 'التحكم بالدول',
   'new_group' => 'إنشاء مجموعة جديدة',
   'new_property' => 'إنشاء خاصية جديدة',
@@ -986,5 +987,15 @@ return array (
   'governates' => 'محافظات',
   'governate_added' => 'اضف محافظة',
     'ar' => 'Arabic',
-    'en' => 'الإنجليزية'
+    'en' => 'الإنجليزية',
+    'products' => "المنتجات",
+    'books' => "الكتب",
+    'users' => "المستخدمين",
+    'services' => "الخدمات",
+    'commands' => 'أوامر',
+    "edit_attributes" => "تعديل الخصائص",
+    "activate_or_deactivate" => "إعادة / الغاء التفعيل",
+    "main_page" => "الرئيسية",
+    "control_of" => "التحكم بـ",
+    "create" => "إنشاء"
 );

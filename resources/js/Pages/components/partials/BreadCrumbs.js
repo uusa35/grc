@@ -11,7 +11,7 @@ const pages = [
 export default function BreadCrumbs() {
     const { settings } = useContext(GlobalContext);
     return (
-        <nav className="flex ltr:pl-10 rtl:pr-10  mb-5 p-5 w-auto bg-gray-100" aria-label="Breadcrumb">
+        <nav className="flex ltr:pl-10 rtl:pr-10  bg-white mx-3 rounded-md shadow-sm p-5 w-auto bg-gray-100" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-4">
                 <li>
                     <div>

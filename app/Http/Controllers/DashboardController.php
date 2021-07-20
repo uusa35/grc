@@ -17,7 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
         $settings = Setting::first();
-        return inertia('BackendHomePage',['settings' => $settings]);
+        return inertia('HomePage',['settings' => $settings]);
     }
 
     /**

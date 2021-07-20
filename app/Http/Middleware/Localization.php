@@ -14,10 +14,29 @@ class Localization
      * @param \Closure $next
      * @return mixed
      */
+
+    const SESSION_KEY = 'locale';
+    const LOCALES = ['en', 'ar'];
+
     public function handle($request, Closure $next)
     {
-        session()->has('locale') ? app()->setLocale(session()->get('locale')) : app()->getLocale();
-        Carbon::setLocale(session()->get('locale'));
+        /** @var Session $session */
+        $session = $request->getSession();
+
+        if (!$session->has(self::SESSION_KEY)) {
+            $session->put(self::SESSION_KEY, $request->getPreferredLanguage(self::LOCALES));
+        }
+
+        if ($request->has(self::SESSION_KEY)) {
+            $lang = $request->get(self::SESSION_KEY);
+            if (in_array($lang, self::LOCALES)) {
+                $session->put(self::SESSION_KEY, $lang);
+            }
+        }
+        app()->setLocale($session->get(self::SESSION_KEY));
+        Carbon::setLocale($session->get(self::SESSION_KEY));
+//        var_dump(app()->getLocale());
+        unset($request['locale']);
         return $next($request);
     }
 }

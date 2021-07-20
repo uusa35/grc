@@ -64,7 +64,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $element = Product::whereId($id)->with('user','images','categories')->first();
+        $element = Product::whereId($id)->with('attributes.color','attributes.size','color','size','user','images')->first();
         return response()->json(new ProductResource($element), 200);
     }
 

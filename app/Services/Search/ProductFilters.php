@@ -32,9 +32,11 @@ class ProductFilters extends QueryFilters
         return $this->builder
             ->where('name_ar', 'like', "%{$search}%")
             ->orWhere('name_en', 'like', "%{$search}%")
+            ->orWhere('caption_ar', 'like', "%{$search}%")
+            ->orWhere('caption_en', 'like', "%{$search}%")
             ->orWhere('description_ar', 'like', "%{$search}%")
             ->orWhere('description_en', 'like', "%{$search}%")
-            ->orWhere('email', 'like', "%{$search}%");
+            ->orWhere('sku', 'like', "%{$search}%");
 //            ->orWhere('notes_ar', 'like', "%{$search}%")
 //            ->orWhere('notes_en', 'like', "%{$search}%");
     }
@@ -90,9 +92,9 @@ class ProductFilters extends QueryFilters
         return $this->builder->where('free', request()->free);
     }
 
-    public function downlaod()
+    public function page()
     {
-        return $this->builder->where('downlaod', request()->downlaod);
+        return $this->builder;
     }
 
 

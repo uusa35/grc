@@ -5,18 +5,20 @@ import {InertiaProgress} from '@inertiajs/progress'
 import GlobalContext from "./Pages/context/GlobalContext";
 import {BackendContextProvider} from "./Pages/context/BackendContext";
 import moment from 'moment';
+import NProgress from 'nprogress'
+import { Inertia } from '@inertiajs/inertia'
 
-InertiaProgress.init()
+
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {translations, auth, guest, locale, settings, otherLang} = props.initialPage.props;
+        const {translations, auth, guest, settings} = props.initialPage.props;
+        const  locale = document.getElementById('locale').innerHTML;
         const {component, url} = props.initialPage;
         moment.locale(locale);
-        console.log('the locale form laravel', locale)
         return render(
-            <GlobalContext.Provider value={{translations, auth, guest, locale, settings, otherLang, url, component}}>
+            <GlobalContext.Provider value={{translations, auth, guest, locale, settings, url, component}}>
                 <BackendContextProvider>
                     <App {...props} />
                 </BackendContextProvider>

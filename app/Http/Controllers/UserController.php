@@ -19,7 +19,6 @@ class UserController extends Controller
         //
     }
 
-
     public function search(UserFilters $filters)
     {
         $validator = validator(request()->all(), ['search' => 'nullable']);

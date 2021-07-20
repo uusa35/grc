@@ -8,6 +8,7 @@ class Size extends PrimaryModel
 {
     use HasFactory;
     protected $localeStrings = ['name'];
+    protected $appends = ['name'];
     protected $guarded = [''];
 
     public function product_attribute()

@@ -29,11 +29,7 @@ class CategoryController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = Category::active()->filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
-        if (!$elements->isEmpty()) {
-            return response()->json(CategoryResource::collection($elements), 200);
-        } else {
-            return response()->json(['message' => trans('general.no_elements')], 400);
-        }
+        return inertia('CategoryIndex', compact('elements'));
     }
     /**
      * Show the form for creating a new resource.

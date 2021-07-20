@@ -36,11 +36,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale(app()->getLocale());
         Schema::defaultStringLength(191);
-
         Inertia::share([
-            'locale' => session()->has('locale') ? session()->get('locale') : app()->getLocale(),
-            'otherLang' => session()->get('locale') === 'ar' ? 'en' : 'ar',
-            'dir' => session()->get('locale') === 'ar' ? 'rtl' : 'ltr',
             'translations' => [
                 "en" => Lang::get('general', [], 'en'),
                 "ar" => Lang::get('general', [], 'ar'),

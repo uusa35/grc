@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\User;
+use App\Services\Search\CategoryFilters;
+use App\Services\Search\Filters;
+use App\Services\Search\QueryFilters;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -15,10 +18,19 @@ class BookController extends Controller
      */
     public function index()
     {
-        $elements = Book::paginate(SELF::TAKE_LEAST);
+        $elements = Book::orderby('id','desc')->paginate(SELF::TAKE_LEAST);
         return inertia('BookIndex', compact('elements'));
     }
 
+    public function search(Filters $filters)
+    {
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+        $elements = Book::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
+        return inertia('BookIndex', compact('elements'));
+    }
     /**
      * Show the form for creating a new resource.
      *

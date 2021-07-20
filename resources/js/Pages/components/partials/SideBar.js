@@ -17,16 +17,18 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 const navigation = [
-    {name: 'Home', href: '/backend', icon: HomeIcon, current: true},
-    {name: 'Products', href: '/search/product', icon: ViewListIcon, current: false},
-    {name: 'Books', href: '/search/book', icon: ClockIcon, current: false},
-    {name: 'Service', href: '/search/service', icon: ClockIcon, current: false},
-    {name: 'User', href: '/search/user', icon: ClockIcon, current: false},
+    {name: 'home', href: '/backend', icon: HomeIcon, current: true},
+    {name: 'products', href: '/backend/search/product', icon: ViewListIcon, current: false},
+    {name: 'books', href: '/backend/search/book', icon: ClockIcon, current: false},
+    {name: 'services', href: '/backend/search/service', icon: ClockIcon, current: false},
+    {name: 'users', href: '/backend/search/user', icon: ClockIcon, current: false},
+    {name: 'categories', href: '/backend/search/category', icon: ClockIcon, current: false},
 ]
 
 const SideBar = () => {
-    const { sideBarOpen , toggleSideBar } = useContext(BackendContext);
+    const { sideBarOpen , toggleSideBar , trans } = useContext(BackendContext);
     const { settings } = useContext(GlobalContext);
+    console.log(trans('products'));
     return (
         <>
             <Transition.Root show={sideBarOpen} as={Fragment}>
@@ -106,7 +108,7 @@ const SideBar = () => {
                                                     )}
                                                     aria-hidden="true"
                                                 />
-                                                {item.name}
+                                                {trans('products')} <h1>test</h1>
                                             </InertiaLink>
                                         ))}
                                     </div>
@@ -115,7 +117,7 @@ const SideBar = () => {
                                             className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"
                                             id="teams-headline"
                                         >
-                                            Teams
+                                            Teamsssss
                                         </h3>
                                         <div className="mt-1 space-y-1" role="group" aria-labelledby="teams-headline">
                                             {teams.map((team) => (
@@ -321,11 +323,11 @@ const SideBar = () => {
                                         <item.icon
                                             className={classNames(
                                                 item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                                'mr-3 flex-shrink-0 h-6 w-6'
+                                                'mx-3 flex-shrink-0 h-6 w-6'
                                             )}
                                             aria-hidden="true"
                                         />
-                                        {item.name}
+                                        {trans(item.name)}
                                     </a>
                                 ))}
                             </div>

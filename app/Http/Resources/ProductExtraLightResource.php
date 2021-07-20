@@ -22,6 +22,8 @@ class ProductExtraLightResource extends JsonResource
             'name' => ucfirst($this->name),
             'name_ar' => ucfirst($this->name_ar),
             'name_en' => ucfirst($this->name_en),
+            'caption_ar' => ucfirst($this->name_ar),
+            'caption_en' => ucfirst($this->name_en),
             'on_new' => $this->on_new,
             'exclusive' => $this->exclusive,
             'isOnSale' => $this->isOnSale,
@@ -29,6 +31,7 @@ class ProductExtraLightResource extends JsonResource
             'imageThumb' => $this->imageThumb,
             'isReallyHot' => $this->isReallyHot,
             'hasStock' => $this->hasStock,
+            'type' => $this->type
         ];
     }
 }

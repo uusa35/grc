@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index()
     {
         $slides = Slide::active()->onHome()->get();
-        return inertia('FrontendHomePage', compact('slides'));
+        return inertia('HomePage', compact('slides'));
     }
 
     public function changeLang($locale)

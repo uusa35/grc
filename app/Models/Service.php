@@ -11,7 +11,7 @@ class Service extends PrimaryModel
     use HasFactory, SoftDeletes, SellingModelHelpers, ServiceHelpers;
     protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
-    protected $appends = ['UId'];
+    protected $appends = ['name','description'];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $casts = [
         'on_sale' => 'boolean',

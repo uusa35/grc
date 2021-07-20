@@ -11,6 +11,8 @@ class ProductAttribute extends PrimaryModel
     use HasFactory,SoftDeletes;
     protected $guarded = [''];
     protected $localeStrings = ['notes'];
+    protected $with = ['color','size'];
+
     public function product()
     {
         return $this->belongsTo(Product::class);

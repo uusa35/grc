@@ -630,6 +630,7 @@ return array (
   'newsletters' => 'Newsletter',
   'all_products' => 'All products',
   'active_products' => 'Active Products',
+  'non_active_products' => 'Non Active Products',
   'new_product' => 'New product',
   'service_timings' => 'Service Timings',
   'attributes' => 'Properties',
@@ -944,5 +945,15 @@ return array (
   'user_updated' => 'User updated',
   'barcode' => 'Barcode',
     'ar' => 'العربية',
-    'en' => 'English'
+    'en' => 'English',
+    'products' => "products",
+    'books' => "books",
+    'users' => "users",
+    'services' => "services",
+    'commands' => 'commands',
+    "edit_attributes" => "edit attributes",
+    "activate_or_deactivate" => "Activate / Deactivate",
+    "main_page" => "Main Page",
+    "control_of" => "Control",
+    "create" => "create"
 );
