@@ -10,7 +10,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Product extends PrimaryModel
 {
     use HasFactory, ProductHelpers, SellingModelHelpers, SoftDeletes, HasEvents;
-    protected $localeStrings = ['name', 'description', 'notes'];
+    public $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $appends = ['imageThumb', 'imageLarge', 'name', 'description','type'];

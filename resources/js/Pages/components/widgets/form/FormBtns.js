@@ -1,8 +1,12 @@
 import {useContext} from "react";
 import {BackendContext} from "../../../context/BackendContext";
+import {Link} from "@inertiajs/inertia-react";
+import GlobalContext from "../../../context/GlobalContext";
 
 const FormBtns = () => {
-    const { trans , theme} = useContext(BackendContext)
+    const { trans , theme, currentModule } = useContext(BackendContext)
+    const { previousUrl } = useContext(GlobalContext);
+    console.log('pre', previousUrl);
     return (
         <div className="py-3">
             <div className="flex justify-end">
@@ -12,12 +16,12 @@ const FormBtns = () => {
                 >
                     {trans('submit')}
                 </button>
-                <button
-                    type="button"
+                <Link
+                    href={`/backend/back/${currentModule}`}
                     className={`bg-red-600 py-2 px-4 border border-red-300 rounded-md shadow-sm text-sm font-medium text-${theme}-50 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                 >
                     {trans('cancel')}
-                </button>
+                </Link>
             </div>
         </div>
     );

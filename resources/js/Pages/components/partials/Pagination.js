@@ -5,11 +5,11 @@ import {BackendContext} from "../../context/BackendContext";
 import GlobalContext from "../../context/GlobalContext";
 import {InertiaLink} from "@inertiajs/inertia-react";
 import {Link} from '@inertiajs/inertia-react'
-import { forEach , range } from 'lodash';
+import {forEach, range} from 'lodash';
 
-export default function Pagination({firstPage, lastPage, currentPage, type}) {
+export default function Pagination({firstPage, lastPage, currentPage}) {
     const [search, setSearch] = useState('');
-    const {trans, classNames, theme} = useContext(BackendContext)
+    const {trans, classNames, theme, currentModule} = useContext(BackendContext)
 
     return (
         <nav className="border-b border-gray-100 bg-transparent pb-4 flex items-center justify-between sm:px-0">
@@ -34,15 +34,14 @@ export default function Pagination({firstPage, lastPage, currentPage, type}) {
                     />
                 </div>
                 <Link
-                    href={search > 2 ? `/backend/${type}/search?search=${search}` : '#'}
-                    type="button"
+                    href={search.length > 2 ? `/backend/${currentModule}/search?search=${search}` : '#'}
+                    disabled={search.length <= 2}
                     className={`order-0 inline-flex items-center px-5 h-8.5 mt-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
                 >
                     {trans("search")}
                 </Link>
                 <Link
-                    href={`/backend/${type}/search`}
-                    type="button"
+                    href={`/backend/${currentModule}/search`}
                     className={`order-0 inline-flex items-center px-5 h-8.5 mt-1 border border-transparent shadow-sm text-xs text-center md:text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
                 >
                     {trans("reset")}
@@ -51,10 +50,10 @@ export default function Pagination({firstPage, lastPage, currentPage, type}) {
             <div className="flex">
                 <div className="hidden md:-mt-px md:flex">
                     {
-                        range(1,lastPage).map(p =>
+                        range(1, lastPage).map(p =>
                             <Link
                                 key={p}
-                                href={`/backend/${type}/search?page=${p}`}
+                                href={`/backend/${currentModule}/search?page=${p}`}
                                 className={classNames(currentPage === p ? `border-${theme}-700 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-700 hover:border-${theme}-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium`)}
                             >
                                 {p}

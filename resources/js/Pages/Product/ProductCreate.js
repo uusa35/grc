@@ -2,16 +2,17 @@ import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useMemo, useState} from "react";
 import {BackendContext} from "./../context/BackendContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, map, forEach} from 'lodash';
+import {filter, map, forEach, isArray} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
 import axios from "axios";
+import {Inertia} from '@inertiajs/inertia'
 
 export default function ProductCreate({users, sizes, colors, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab} = useContext(BackendContext)
+    const {classNames, trans, theme, currentFormTab, currentModule } = useContext(BackendContext)
     const {data, setData, post, progress} = useForm({
         'sku': '',
         'name_ar': '',
@@ -67,6 +68,13 @@ export default function ProductCreate({users, sizes, colors, categories}) {
     });
     const {errors} = usePage().props;
 
+    const handleChange = (e) => {
+        setData(values => ({
+            ...values,
+            [e.target.id]: e.target.value,
+        }))
+    }
+
     const submit = (e) => {
         e.preventDefault()
         let formData = new FormData();
@@ -75,6 +83,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
         }
         formData.append(`model`, 'product');
         post('/backend/product');
+        // uploading images module separately due to some errors occurred in setData by inertia
         setTimeout(() => {
             return axios.post(`/api/images/upload`, formData).then(r => r.data).catch(e => console.log('eee', e));
         }, 1000);
@@ -96,14 +105,14 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                     onSubmit={submit}
                     method="post"
                     encType="multipart/form-data"
-                    className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full px-10 space-y-3 divide-y divide-gray-200`)}>
+                    className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full px-10 space-y-3`)}>
 
                     <div className="space-y-4 divide-y 900">
 
                         <div className={`pt-4`}>
-                            <h3 className="text-lg leading-6 font-medium text-gray-900">{trans('create')} {trans('product')}</h3>
+                            <h3 className="text-lg leading-6 font-medium text-gray-900">{trans('create')} {trans(currentModule)}</h3>
                             <p className="mt-1 text-sm text-gray-500">
-                                {trans('product_create_message')}
+                                {trans('create')} {trans(currentModule)}
                             </p>
                         </div>
 
@@ -114,7 +123,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        onChange={e => setData('name_ar', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         type="text"
                                         name="name_ar"
@@ -136,7 +145,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        onChange={e => setData('name_en', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         type="text"
                                         name="name_en"
@@ -158,7 +167,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        onChange={e => setData('price', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         type="number"
                                         step="any"
@@ -182,7 +191,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1 ">
                                     <input
-                                        onChange={e => setData('sale_price', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         type="number"
                                         step="any"
@@ -205,7 +214,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        onChange={e => setData('qty', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         type="number"
                                         step="any"
@@ -228,7 +237,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        onChange={e => setData('sku', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         type="text"
                                         name="sku"
@@ -250,7 +259,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        onChange={e => setData('weight', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         type="number"
                                         step="any"
@@ -273,7 +282,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <select
-                                        onChange={e => setData('user_id', e.target.value)}
+                                        onChange={handleChange}
                                         id="user_id"
                                         name="user_id"
                                         value={data.user_id}
@@ -299,7 +308,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <select
-                                        onChange={e => setData('size_id', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         id="size_id"
                                         name="size_id"
@@ -329,7 +338,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </label>
                                 <div className="mt-1">
                                     <select
-                                        onChange={e => setData('color_id', e.target.value)}
+                                        onChange={handleChange}
                                         required
                                         id="color_id"
                                         name="color_id"
@@ -408,8 +417,10 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         <div className="flex flex-row flex-wrap">
                                             {
                                                 categories.map(c => (
-                                                    <div className={`flex flex-col flex-1 space-y-4 mt-4 flex-wrap border-r border-b border-${theme}-200 p-2`}>
-                                                        <div className="relative flex items-start" key={c.id}>
+                                                    <div
+                                                        className={`flex flex-col flex-1 space-y-4 mt-4 flex-wrap border-r border-b border-${theme}-200 p-2`}
+                                                        key={c.id}>
+                                                        <div className="relative flex items-start">
                                                             <div className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                 <input
                                                                     onChange={e => handleSelectedCategories(e.target.checked ? selectedCategories.concat(e.target.value) : filter(selectedCategories, c => c !== e.target.value))}
@@ -421,7 +432,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                                     className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                                                 />
                                                             </div>
-                                                            <div className="ml-3 text-sm">
+                                                            <div className="ltr:ml-3 text-sm">
                                                                 <label htmlFor="categories"
                                                                        className={`font-extrabold text-${theme}-900 border-b border-${theme}-400`}>
                                                                     {c.name}
@@ -430,9 +441,8 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                         </div>
                                                         {
                                                             c.children.map(sub => (
-                                                                <>
-                                                                    <div className="relative flex items-start mx-5"
-                                                                         key={sub.id}>
+                                                                <div key={sub.id}>
+                                                                    <div className="relative flex items-start mx-5">
                                                                         <div
                                                                             className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                             <input
@@ -445,7 +455,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                                                             />
                                                                         </div>
-                                                                        <div className="ml-3 text-sm">
+                                                                        <div className="ltr:ml-3 text-sm">
                                                                             <label htmlFor="categories"
                                                                                    className={`text-xs font-extrabold text-${theme}-600`}>
                                                                                 {sub.name}
@@ -469,7 +479,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                                                         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                                                                     />
                                                                                 </div>
-                                                                                <div className="ml-3 text-sm">
+                                                                                <div className="ltr:ml-3 text-sm">
                                                                                     <label htmlFor="categories"
                                                                                            className={`text-xs font-extrabold text-${theme}-600`}>
                                                                                         {child.name}
@@ -478,7 +488,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                                             </div>
                                                                         ))
                                                                     }
-                                                                </>
+                                                                </div>
                                                             ))
 
                                                         }
@@ -488,7 +498,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         </div>
                                     </fieldset>
                                 </div>
-                                <ToolTipWidget message={trans('product_more_images_instruction')}/>
+                                <ToolTipWidget message={trans('product_categories_instruction')}/>
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
                                 </p>
@@ -496,23 +506,19 @@ export default function ProductCreate({users, sizes, colors, categories}) {
 
 
                         </div>
-                        <FormBtns/>
                     </div>
 
-                    <div className="space-y-4 divide-y divide-gray-200">
+                    <div className="space-y-4">
 
                         <div className={`pt-4`}>
-                            <h3 className="text-lg leading-6 font-medium text-gray-900">{trans('create')} {trans('product')}</h3>
-                            <p className="mt-1 text-sm text-gray-500">
-                                {trans('product_create_message')}
-                            </p>
+                            <h3 className="text-lg leading-6 font-medium text-gray-900">{trans('more_details')}</h3>
                         </div>
 
                         <div className="flex flex-1 flex-col justify-start items-center w-full">
                             <div
-                                className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-${theme}-100`}>
+                                className={`grid grid-cols-2 md:grid-cols-4 md:gap-x-5 w-full`}>
                                 {/* active */}
-                                <fieldset className="mt-1 flex-1">
+                                <fieldset className="mt-1 col-span-1">
                                     <div>
                                         <legend
                                             className={`text-base font-medium text-${theme}-900`}>{trans('active')}</legend>
@@ -520,7 +526,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
                                             <input
-                                                onChange={e => setData('active', e.target.value)}
+                                                onChange={handleChange}
                                                 id="active"
                                                 name="active"
                                                 type="radio"
@@ -536,7 +542,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         </div>
                                         <div className="flex items-center">
                                             <input
-                                                onChange={e => setData('active', e.target.value)}
+                                                onChange={handleChange}
                                                 id="active"
                                                 name="active"
                                                 type="radio"
@@ -558,7 +564,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     </div>
                                 </fieldset>
                                 {/* on home*/}
-                                <fieldset className="mt-1 flex-1">
+                                <fieldset className="mt-1 col-span-1">
                                     <div>
                                         <legend
                                             className={`text-base font-medium text-${theme}-900`}>{trans('on_home')}</legend>
@@ -566,7 +572,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
                                             <input
-                                                onChange={e => setData('on_home', e.target.value)}
+                                                onChange={handleChange}
                                                 id="on_home"
                                                 name="on_home"
                                                 defaultValue={data.on_home}
@@ -581,7 +587,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         </div>
                                         <div className="flex items-center">
                                             <input
-                                                onChange={e => setData('on_home', e.target.value)}
+                                                onChange={handleChange}
                                                 id="on_home"
                                                 name="on_home"
                                                 type="radio"
@@ -603,13 +609,52 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         </p>
                                     </div>
                                 </fieldset>
-                            </div>
-
-
-                            <div
-                                className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-${theme}-100`}>
+                                {/* on sale*/}
+                                <fieldset className="mt-1 has-tooltip col-span-1">
+                                    <div>
+                                        <legend
+                                            className={`text-base font-medium text-${theme}-900`}>{trans('on_sale')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="on_sale"
+                                                name="on_sale"
+                                                type="radio"
+                                                value={1}
+                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                            />
+                                            <label htmlFor="push-everything"
+                                                   className="ml-3 block text-sm font-medium text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="on_sale"
+                                                name="on_sale"
+                                                type="radio"
+                                                value={0}
+                                                checked
+                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                            />
+                                            <label htmlFor="on_sale"
+                                                   className="ml-3 block text-sm font-medium text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget message={trans('product_sale_price_instruction')}/>
+                                    <div>
+                                        <p className={`mt-2 text-xs text-${theme}-500`}>
+                                            {errors.on_sale && <div className={`text-red-600`}>{errors.on_sale}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
                                 {/* has_attributes */}
-                                <fieldset className="mt-1 has-tooltip flex-1">
+                                <fieldset className="mt-1 has-tooltip col-span-1">
                                     <div>
                                         <legend
                                             className={`text-base font-medium text-${theme}-900`}>{trans('has_attributes')}</legend>
@@ -617,7 +662,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
                                             <input
-                                                onChange={e => setData('has_attributes', e.target.value)}
+                                                onChange={handleChange}
                                                 id="has_attributes"
                                                 name="has_attributes"
                                                 type="radio"
@@ -631,7 +676,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         </div>
                                         <div className="flex items-center">
                                             <input
-                                                onChange={e => setData('has_attributes', e.target.value)}
+                                                onChange={handleChange}
                                                 id="has_attributes"
                                                 name="has_attributes"
                                                 type="radio"
@@ -653,50 +698,12 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         </p>
                                     </div>
                                 </fieldset>
-                                {/* on sale*/}
-                                <fieldset className="mt-1 has-tooltip flex-1">
-                                    <div>
-                                        <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('on_sale')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={e => setData('on_sale', e.target.value)}
-                                                id="on_sale"
-                                                name="on_sale"
-                                                type="radio"
-                                                value={1}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block text-sm font-medium text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={e => setData('on_sale', e.target.value)}
-                                                id="on_sale"
-                                                name="on_sale"
-                                                type="radio"
-                                                value={0}
-                                                checked
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                            />
-                                            <label htmlFor="on_sale"
-                                                   className="ml-3 block text-sm font-medium text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <ToolTipWidget message={trans('product_sale_price_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2 text-xs text-${theme}-500`}>
-                                            {errors.on_sale && <div className={`text-red-600`}>{errors.on_sale}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
+                            </div>
+
+
+                            <div
+                                className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-${theme}-100`}>
+
                             </div>
                         </div>
 
@@ -706,378 +713,26 @@ export default function ProductCreate({users, sizes, colors, categories}) {
 
                 <div
                     className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-3/4 p-5 space-y-8 divide-y divide-gray-200`)}>
-                    <form
-                        className={classNames(currentFormTab.id !== 1 ? '' : '', ``)}>
-                        <div className="space-y-8 divide-y divide-gray-200">
-                            <div>
-                                <div>
-                                    <h3 className="text-lg leading-6 font-medium text-gray-900">Profile</h3>
-                                    <p className="mt-1 text-sm text-gray-500">
-                                        This information will be displayed publicly so be careful what you share.
-                                    </p>
-                                </div>
-
-                                <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                                    <div className="sm:col-span-4">
-                                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                                            Username
-                                        </label>
-                                        <div className="mt-1 flex rounded-md shadow-sm">
-                <span
-                    className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
-                  workcation.com/
-                </span>
-                                            <input
-                                                type="text"
-                                                name="username"
-                                                id="username"
-                                                autoComplete="username"
-                                                className="flex-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-6">
-                                        <label htmlFor="about" className="block text-sm font-medium text-gray-700">
-                                            About
-                                        </label>
-                                        <div className="mt-1">
-                <textarea
-                    id="about"
-                    name="about"
-                    rows={3}
-                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                    defaultValue={''}
-                />
-                                        </div>
-                                        <p className="mt-2 text-sm text-gray-500">Write a few sentences about
-                                            yourself.</p>
-                                    </div>
-
-                                    <div className="sm:col-span-6">
-                                        <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
-                                            Photo
-                                        </label>
-                                        <div className="mt-1 flex items-center">
-                <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                  <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                        d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
-                  </svg>
-                </span>
-                                            <button
-                                                type="button"
-                                                className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                            >
-                                                Change
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-6">
-                                        <label htmlFor="cover-photo"
-                                               className="block text-sm font-medium text-gray-700">
-                                            Cover photo
-                                        </label>
-                                        <div
-                                            className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                            <div className="space-y-1 text-center">
-                                                <svg
-                                                    className="mx-auto h-12 w-12 text-gray-400"
-                                                    stroke="currentColor"
-                                                    fill="none"
-                                                    viewBox="0 0 48 48"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path
-                                                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                        strokeWidth={2}
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                    />
-                                                </svg>
-                                                <div className="flex text-sm text-gray-600">
-                                                    <label
-                                                        htmlFor="file-upload"
-                                                        className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                                                    >
-                                                        <span>Upload a file</span>
-                                                        <input id="file-upload" name="file-upload" type="file"
-                                                               className="sr-only"/>
-                                                    </label>
-                                                    <p className="pl-1">or drag and drop</p>
-                                                </div>
-                                                <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div
+                        className={`bg-${theme}-50 border-l-4 border-${theme}-800 p-4 sm:w-full lg:w-3/4 m-auto my-2 shadow-lg rounded-md m-10`}>
+                        <div className="flex items-center">
+                            <div className="flex-shrink-0">
+                                <svg className={`h-9 w-9 m-3 text-${theme}-400" xmlns="http://www.w3.org/2000/svg`}
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor" aria-hidden="true">
+                                    <path fillRule="evenodd"
+                                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                          clipRule="evenodd"/>
+                                </svg>
                             </div>
-
-                            <div className="pt-8">
-                                <div>
-                                    <h3 className="text-lg leading-6 font-medium text-gray-900">Personal
-                                        Information</h3>
-                                    <p className="mt-1 text-sm text-gray-500">Use a permanent address where you can
-                                        receive mail.</p>
-                                </div>
-                                <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                                    <div className="sm:col-span-3">
-                                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                                            First name
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="first-name"
-                                                id="first-name"
-                                                autoComplete="given-name"
-                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-3">
-                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                                            Last name
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="last-name"
-                                                id="last-name"
-                                                autoComplete="family-name"
-                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-4">
-                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                            Email address
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                id="email"
-                                                name="email"
-                                                type="email"
-                                                autoComplete="email"
-                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-3">
-                                        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                                            Country / Region
-                                        </label>
-                                        <div className="mt-1">
-                                            <select
-                                                id="country"
-                                                name="country"
-                                                autoComplete="country"
-                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            >
-                                                <option>United States</option>
-                                                <option>Canada</option>
-                                                <option>Mexico</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-6">
-                                        <label htmlFor="street-address"
-                                               className="block text-sm font-medium text-gray-700">
-                                            Street address
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="street-address"
-                                                id="street-address"
-                                                autoComplete="street-address"
-                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                                            City
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="city"
-                                                id="city"
-                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <label htmlFor="state" className="block text-sm font-medium text-gray-700">
-                                            State / Province
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="state"
-                                                id="state"
-                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <label htmlFor="zip" className="block text-sm font-medium text-gray-700">
-                                            ZIP / Postal
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="zip"
-                                                id="zip"
-                                                autoComplete="postal-code"
-                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="pt-8">
-                                <div>
-                                    <h3 className="text-lg leading-6 font-medium text-gray-900">Notifications</h3>
-                                    <p className="mt-1 text-sm text-gray-500">
-                                        We'll always let you know about important changes, but you pick what else you
-                                        want to hear about.
-                                    </p>
-                                </div>
-                                <div className="mt-6">
-                                    <fieldset>
-                                        <legend className="text-base font-medium text-gray-900">By Email</legend>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="relative flex items-start">
-                                                <div className="flex items-center h-5">
-                                                    <input
-                                                        id="comments"
-                                                        name="comments"
-                                                        type="checkbox"
-                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                                    />
-                                                </div>
-                                                <div className="ml-3 text-sm">
-                                                    <label htmlFor="comments" className="font-medium text-gray-700">
-                                                        Comments
-                                                    </label>
-                                                    <p className="text-gray-500">Get notified when someones posts a
-                                                        comment on a posting.</p>
-                                                </div>
-                                            </div>
-                                            <div className="relative flex items-start">
-                                                <div className="flex items-center h-5">
-                                                    <input
-                                                        id="candidates"
-                                                        name="candidates"
-                                                        type="checkbox"
-                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                                    />
-                                                </div>
-                                                <div className="ml-3 text-sm">
-                                                    <label htmlFor="candidates" className="font-medium text-gray-700">
-                                                        Candidates
-                                                    </label>
-                                                    <p className="text-gray-500">Get notified when a candidate applies
-                                                        for a job.</p>
-                                                </div>
-                                            </div>
-                                            <div className="relative flex items-start">
-                                                <div className="flex items-center h-5">
-                                                    <input
-                                                        id="offers"
-                                                        name="offers"
-                                                        type="checkbox"
-                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                                                    />
-                                                </div>
-                                                <div className="ml-3 text-sm">
-                                                    <label htmlFor="offers" className="font-medium text-gray-700">
-                                                        Offers
-                                                    </label>
-                                                    <p className="text-gray-500">Get notified when a candidate accepts
-                                                        or rejects an offer.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset className="mt-6">
-                                        <div>
-                                            <legend className="text-base font-medium text-gray-900">Push Notifications
-                                            </legend>
-                                            <p className="text-sm text-gray-500">These are delivered via SMS to your
-                                                mobile phone.</p>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    id="push-everything"
-                                                    name="push-notifications"
-                                                    type="radio"
-                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                                                />
-                                                <label htmlFor="push-everything"
-                                                       className="ml-3 block text-sm font-medium text-gray-700">
-                                                    Everything
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    id="push-email"
-                                                    name="push-notifications"
-                                                    type="radio"
-                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                                                />
-                                                <label htmlFor="push-email"
-                                                       className="ml-3 block text-sm font-medium text-gray-700">
-                                                    Same as email
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    id="push-nothing"
-                                                    name="push-notifications"
-                                                    type="radio"
-                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                                                />
-                                                <label htmlFor="push-nothing"
-                                                       className="ml-3 block text-sm font-medium text-gray-700">
-                                                    No push notifications
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
+                            <div className="ml-3">
+                                <h3 className="mb-3 font-extrabold text-lgn">{trans('alert')}</h3>
+                                <p className={`text-sm text-${theme}-700`}>
+                                    {trans('basic_information_must_be_entered')}
+                                </p>
                             </div>
                         </div>
-
-                        <div className="pt-5">
-                            <div className="flex justify-end">
-                                <button
-                                    type="button"
-                                    className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="submit"
-                                    className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                >
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </FormTabsContainer>
         </BackendContainer>

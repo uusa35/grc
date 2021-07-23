@@ -13,6 +13,6 @@ class AddressesTableSeeder extends Seeder
      */
     public function run()
     {
-        Address::factory(10)->create();
+        Address::factory(app()->isLocal() ? 2 : 2)->create();
     }
 }

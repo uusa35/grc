@@ -1011,5 +1011,9 @@ return array (
     "product_create_message" => "إنشاء منتج جديد",
     "product_has_attributes_instruction" => "في حالة وجود اكثر من خاصية للمنتج يجب تفعيلها (مثال اكثر من قياس / لون)",
     "size_or_capacity" => "القياس / المقاس / السعة اللترية",
-    "add_new_element" => "أضف عنصر جديد"
+    "add_new_element" => "أضف عنصر جديد",
+    "product_categories_instruction" => "يجب اختيار تصنيف واحد فقط على الأقل",
+    "basic_information_must_be_entered" => "يجب إضافة المعلومات الأساسية أولاً",
+    "alert" => "تنبيه",
+    "all_elements" => "جميع العناصر"
 );

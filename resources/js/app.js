@@ -13,9 +13,10 @@ import { Inertia } from '@inertiajs/inertia'
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {translations, auth, guest, settings} = props.initialPage.props;
+        const {translations, guest, settings, auth, authenticatedUser} = props.initialPage.props;
         const  locale = document.getElementById('locale').innerHTML;
         const {component, url} = props.initialPage;
+        console.log('user', authenticatedUser);
         return render(
             <GlobalContext.Provider value={{translations, auth, guest, locale, settings, url, component}}>
                 <BackendContextProvider>

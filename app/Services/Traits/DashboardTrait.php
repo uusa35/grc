@@ -159,4 +159,9 @@ trait DashboardTrait
             return response()->json(['message' => $e->getMessage()], 400);
         }
     }
+
+    public function goBack(Request $request) {
+
+        return request()->module ? redirect()->route('backend.'.$request->module.'.search') : redirect()->route('backend.home');
+    }
 }

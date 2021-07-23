@@ -36,6 +36,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::get('book/search', [BookController::class, 'search'])->name('book.search');
     Route::get('category/search', [CategoryController::class, 'search'])->name('category.search');
     Route::get('{module}/toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
+    Route::get('back/{module}', [DashboardController::class, 'goBack'])->name('back');
     Route::resource('dashboard', DashboardController::class);
     Route::resource('product', ProductController::class);
     Route::resource('service', ServiceController::class);

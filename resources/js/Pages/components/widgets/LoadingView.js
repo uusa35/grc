@@ -11,7 +11,7 @@ const LoadingView = () => {
         <div className="flex h-screen min-w-full flex-1 justify-center items-center">
             <img
                 className="h-20 w-20 mb-96 object-contain"
-                src="../../images/loading.gif" alt={"loading.."}/>
+                src="../../../images/loading.gif" alt={"loading.."}/>
         </div>
     );
 }

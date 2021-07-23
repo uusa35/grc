@@ -35,8 +35,11 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size', 'user', 'images')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST);
+//        dd(request()->getQueryString());
+        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size', 'user')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST);
+//        dd($elements);
         return inertia('Product/ProductIndex', compact('elements'));
+        return redirect()->to('backend/product/search?'.request()->getQueryString(), compact('elements'));
     }
 
     /**
@@ -97,7 +100,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $element = Product::whereId($id)->with('product_attributes', 'color', 'size', 'user', 'images', 'user')->first();
-        return inertia('ProductShow', compact('element'));
+        return inertia('Product/ProductShow', compact('element'));
     }
 
     /**
@@ -108,8 +111,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $element = Product::whereId($id)->with('product_attributes', 'color', 'size', 'user', 'images', 'user')->first();
-        return inertia('ProductEdit', compact('element'));
+        $element = Product::whereId($id)->with('product_attributes', 'color', 'size', 'user', 'images', 'user','categories')->first();
+        return inertia('Product/ProductEdit', compact('element'));
     }
 
     /**

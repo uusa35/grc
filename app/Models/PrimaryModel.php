@@ -14,6 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 class PrimaryModel extends Model
 {
     use LocaleTrait, ModelHelpers, ImageHelpers;
-    protected $localeStrings = [];
+    protected $localeStrings = ['name','caption','description'];
     protected $appends = ['imageLarge', 'imageThumb'];
 }

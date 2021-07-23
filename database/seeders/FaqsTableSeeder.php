@@ -1,4 +1,5 @@
 <?php
+namespace Database\Seeders;
 
 use App\Models\Faq;
 use Illuminate\Database\Seeder;
@@ -12,6 +13,6 @@ class FaqsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Faq::class,app()->environment('production') ? 2  : 10)->create();
+        Faq::factory()->create(app()->isLocal() ? 5 : 1);
     }
 }

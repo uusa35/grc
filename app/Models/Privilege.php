@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Privilege extends PrimaryModel
 {
+    use HasFactory;
     protected $localeStrings = ['name'];
     protected $guarded = [''];
     public function roles()

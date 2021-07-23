@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Inertia\Middleware;
@@ -41,9 +42,10 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             // Synchronously
             'appName' => config('app.name'),
+            'authenticatedUser' => $request->user() ? User::whereId($request->user()->id)->with('role.privileges')->first() : null,
             // Lazily
             'auth' => fn () => $request->user()
-                ? $request->user()->only('id', 'name', 'email')
+                ? $request->user()
                 : null,
             'translations' => [
                 "en" => Lang::get('general', [], 'en'),
