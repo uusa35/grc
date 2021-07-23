@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\PageController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\SlideController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,4 +47,5 @@ Route::resource('user', UserController::class)->only('index','show');
 Route::get('search/user', [UserController::class,'search']);
 Route::get('search/product', [ProductController::class,'search']);
 Route::get('search/category', [CategoryController::class,'search']);
+Route::post('images/upload',[DashboardController::class,'uploadImages']);
 

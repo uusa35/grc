@@ -33,9 +33,7 @@ class Localization
                 $session->put(self::SESSION_KEY, $lang);
             }
         }
-        app()->setLocale($session->get(self::SESSION_KEY));
         Carbon::setLocale($session->get(self::SESSION_KEY));
-//        var_dump(app()->getLocale());
         unset($request['locale']);
         return $next($request);
     }

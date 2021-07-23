@@ -19,7 +19,7 @@ class BookController extends Controller
     public function index()
     {
         $elements = Book::orderby('id','desc')->paginate(SELF::TAKE_LEAST);
-        return inertia('BookIndex', compact('elements'));
+        return inertia('Book/BookIndex', compact('elements'));
     }
 
     public function search(Filters $filters)
@@ -29,7 +29,7 @@ class BookController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = Book::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
-        return inertia('BookIndex', compact('elements'));
+        return inertia('Book/BookIndex', compact('elements'));
     }
     /**
      * Show the form for creating a new resource.
@@ -39,7 +39,7 @@ class BookController extends Controller
     public function create()
     {
         $users = User::active()->authoers()->get();
-        return inertia('BookCreate', compact('users'));
+        return inertia('Book/BookCreate', compact('users'));
     }
 
     /**

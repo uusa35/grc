@@ -16,7 +16,6 @@ createInertiaApp({
         const {translations, auth, guest, settings} = props.initialPage.props;
         const  locale = document.getElementById('locale').innerHTML;
         const {component, url} = props.initialPage;
-        moment.locale(locale);
         return render(
             <GlobalContext.Provider value={{translations, auth, guest, locale, settings, url, component}}>
                 <BackendContextProvider>

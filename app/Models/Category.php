@@ -11,6 +11,7 @@ class Category extends PrimaryModel
     use HasFactory, SoftDeletes;
     protected $guarded = [''];
     public $localeStrings = ['name', 'caption', 'description'];
+    public $appends = ['name', 'caption', 'description'];
 //    protected $casts = [
 //        'is_classified' => 'boolean',
 //        'is_real_estate' => 'boolean',
@@ -103,7 +104,7 @@ class Category extends PrimaryModel
 
     public function scopeOnlyParent($q)
     {
-        return $q->where('parent_id', 0);
+        return $q->where('is_parent', 1);
     }
 
     public function scopeOnlyChildren($q)

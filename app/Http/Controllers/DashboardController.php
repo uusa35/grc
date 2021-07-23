@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use App\Models\Setting;
+use App\Services\Traits\DashboardTrait;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    use DashboardTrait;
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,7 @@ class DashboardController extends Controller
     public function index()
     {
         $settings = Setting::first();
-        return inertia('HomePage',['settings' => $settings]);
+        return inertia('BackendHomePage',['settings' => $settings]);
     }
 
     /**
@@ -85,4 +87,5 @@ class DashboardController extends Controller
     {
         //
     }
+
 }

@@ -4,7 +4,6 @@ import GlobalContext from "../../context/GlobalContext";
 
 const Nav = (props) => {
     const { otherLang , component } = useContext(GlobalContext);
-    console.log('props', props);
 
     useEffect(() => {
 

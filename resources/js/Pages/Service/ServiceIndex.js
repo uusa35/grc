@@ -1,4 +1,4 @@
-import BackendContainer from "./components/containers/BackendContainer";
+import BackendContainer from "./../components/containers/BackendContainer";
 
 const ServiceIndex = () => {
     return (

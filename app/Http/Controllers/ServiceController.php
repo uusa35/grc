@@ -16,7 +16,7 @@ class ServiceController extends Controller
     public function index()
     {
         $elements = Service::orderby('id','desc')->paginate(SELF::TAKE_LEAST);
-        return inertia('ServiceIndex', compact('elements'));
+        return inertia('Service/ServiceIndex', compact('elements'));
     }
 
     public function search(ProductFilters $filters)
@@ -26,7 +26,7 @@ class ServiceController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = Service::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
-        return inertia('ServiceIndex', compact('elements'));
+        return inertia('Service/ServiceIndex', compact('elements'));
     }
     /**
      * Show the form for creating a new resource.

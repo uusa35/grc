@@ -34,6 +34,8 @@ class ProductFactory extends Factory
             'active' => $this->faker->boolean(true),
             'name_ar' => 'تيشيرت' . $this->faker->numberBetween(1, 999),
             'name_en' => 'T-shirt' . $this->faker->numberBetween(1, 999),
+            'caption_ar' => 'تيشيرت' . $this->faker->numberBetween(1, 999),
+            'caption_en' => 'T-shirt' . $this->faker->numberBetween(1, 999),
             'weight' => $this->faker->randomDigit,
             'home_delivery_availability' => $this->faker->boolean,
             'shipment_availability' => $this->faker->boolean,

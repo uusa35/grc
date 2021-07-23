@@ -24,6 +24,7 @@ import {
     UsersIcon,
     XIcon,
 } from '@heroicons/react/outline'
+import GlobalContext from "./context/GlobalContext";
 
 const user = {
     name: 'Chelsea Hagon',
@@ -185,17 +186,19 @@ const projects = [
 ]
 const pinnedProjects = projects.filter((project) => project.pinned)
 
-export default function HomePage({settings, locale}) {
-    const {sideBarOpen, toggleSideBar} = useContext(BackendContext);
+export default function BackendHomePage({settings, locale}) {
+    const {sideBarOpen, toggleSideBar } = useContext(BackendContext);
+    const { auth } = useContext(GlobalContext);
+
     return (
         <BackendContainer>
-            <main className="-pb-8">
-                <div className="w-full px-2 sm:px-6 lg:px-2">
+            <main className="sm:my-3">
+                <div className="w-full">
                     <h1 className="sr-only">Profile</h1>
                     {/* Main 3 column grid */}
                     <div className="grid grid-cols-1 gap-1  items-start lg:grid-cols-3 lg:gap-3">
                         {/* Left column */}
-                        <div className="grid grid-cols-1 gap-6 lg:col-span-2">
+                        <div className="grid grid-cols-1 gap-6 lg:col-span-2 ">
                             {/* Welcome panel */}
                             <section aria-labelledby="profile-overview-title">
                                 <div className="rounded-lg bg-white overflow-hidden shadow">

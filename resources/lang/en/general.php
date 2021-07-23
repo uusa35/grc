@@ -955,5 +955,12 @@ return array (
     "activate_or_deactivate" => "Activate / Deactivate",
     "main_page" => "Main Page",
     "control_of" => "Control",
-    "create" => "create"
+    "create" => "create",
+    "no_elements" => "No Items",
+    "warning" => "warning",
+    "success" => "success",
+    "error" => "error",
+    "info" => "info",
+    "basic_information" => "Primary Information (Required)",
+    "additional_information" => "Additional Information",
 );

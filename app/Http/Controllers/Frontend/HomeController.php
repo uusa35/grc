@@ -9,8 +9,12 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $slides = Slide::active()->onHome()->get();
-        return inertia('HomePage', compact('slides'));
+//        return inertia('HomePage', compact('slides'));
+        if (auth()->guest()) {
+            return view('auth.login');
+        }
+        return redirect()->route('backend.home')->with('success', trans('process_success'));
+
     }
 
     public function changeLang($locale)
@@ -20,7 +24,6 @@ class HomeController extends Controller
         }
         app()->setLocale($locale);
         session()->put('locale', $locale);
-//        return inertia(".$component.");
-        return redirect()->to(request()->url);
+        return redirect()->to(url()->previous());
     }
 }

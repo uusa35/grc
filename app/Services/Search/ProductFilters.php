@@ -82,6 +82,11 @@ class ProductFilters extends QueryFilters
         return $this->builder->where('is_available', request()->is_available);
     }
 
+    public function active()
+    {
+        return $this->builder->where('active', request()->active);
+    }
+
     public function on_sale()
     {
         return $this->builder->where('on_sale', request()->on_sale);
@@ -93,6 +98,11 @@ class ProductFilters extends QueryFilters
     }
 
     public function page()
+    {
+        return $this->builder;
+    }
+
+    public function locale()
     {
         return $this->builder;
     }

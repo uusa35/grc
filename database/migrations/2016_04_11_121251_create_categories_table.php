@@ -43,7 +43,7 @@ class CreateCategoriesTable extends Migration
             $table->string('path')->nullable();
             $table->boolean('active')->default(true);
 
-            $table->integer('parent_id')->nullable()->unsigned()->default(false);
+            $table->integer('parent_id')->nullable()->unsigned()->default(false)->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

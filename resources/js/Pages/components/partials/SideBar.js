@@ -1,10 +1,10 @@
-import {InertiaLink} from "@inertiajs/inertia-react";
 import {Dialog, Menu, Transition} from "@headlessui/react";
 import {SearchIcon, SelectorIcon} from "@heroicons/react/solid";
 import {Fragment, useContext} from "react";
-import {ClockIcon, HomeIcon, ViewListIcon, XIcon} from "@heroicons/react/outline";
+import {ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon} from "@heroicons/react/outline";
 import {BackendContext} from "../../context/BackendContext";
 import GlobalContext from "../../context/GlobalContext";
+import { Link } from '@inertiajs/inertia-react'
 
 const teams = [
     {name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500'},
@@ -16,21 +16,22 @@ const teams = [
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
+
 const navigation = [
-    {name: 'home', href: '/backend', icon: HomeIcon, current: true},
-    {name: 'products', href: '/backend/search/product', icon: ViewListIcon, current: false},
-    {name: 'books', href: '/backend/search/book', icon: ClockIcon, current: false},
-    {name: 'services', href: '/backend/search/service', icon: ClockIcon, current: false},
-    {name: 'users', href: '/backend/search/user', icon: ClockIcon, current: false},
-    {name: 'categories', href: '/backend/search/category', icon: ClockIcon, current: false},
+    {name: 'home', href: '/backend', icon: HomeIcon, module : 'home'},
+    {name: 'products', href: '/backend/product/search', icon: ViewListIcon, module : 'product'},
+    {name: 'books', href: '/backend/book/search', icon: ClockIcon, module : 'book'},
+    {name: 'services', href: '/backend/service/search', icon: ClockIcon, module : 'service'},
+    {name: 'users', href: '/backend/user/search', icon: ClockIcon, module : 'user'},
+    {name: 'categories', href: '/backend/category/search', icon: ClockIcon, module : 'category'},
 ]
 
 const SideBar = () => {
-    const { sideBarOpen , toggleSideBar , trans } = useContext(BackendContext);
-    const { settings } = useContext(GlobalContext);
-    console.log(trans('products'));
+    const {sideBarOpen, toggleSideBar, trans, currentModule, classNames } = useContext(BackendContext);
+    const {settings} = useContext(GlobalContext);
     return (
         <>
+
             <Transition.Root show={sideBarOpen} as={Fragment}>
                 <Dialog
                     as="div"
@@ -59,83 +60,154 @@ const SideBar = () => {
                         leaveFrom="translate-x-0"
                         leaveTo="-translate-x-full"
                     >
-                        <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-in-out duration-300"
-                                enterFrom="opacity-0"
-                                enterTo="opacity-100"
-                                leave="ease-in-out duration-300"
-                                leaveFrom="opacity-100"
-                                leaveTo="opacity-0"
+                        <div className="absolute top-10 left-10 bg-pink-400 z-10 flex-shrink-0 flex h-16 border-b border-gray-200 lg:hidden">
+                            <button
+                                className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
+                                onClick={() => toggleSideBar(true)}
                             >
-                                <div className="absolute top-0 right-0 -mr-12 pt-2">
-                                    <button
-                                        className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                                        onClick={() => toggleSideBar(!sideBarOpen)}
-                                    >
-                                        <span className="sr-only">Close sidebar</span>
-                                        <XIcon className="h-6 w-6 text-white" aria-hidden="true"/>
-                                    </button>
-                                </div>
-                            </Transition.Child>
-                            <div className="flex-shrink-0 flex items-center px-4">
-                                <img
-                                    className="h-8 w-auto"
-                                    src={settings.imageThumb}
-                                    alt={settings.name}
-                                />
-                            </div>
-                            <div className="mt-5 flex-1 h-0 overflow-y-auto">
-                                <nav className="px-2">
-                                    <div className="space-y-1">
-                                        {navigation.map((item) => (
-                                            <InertiaLink
-                                                key={item.name}
-                                                href={item.href}
-                                                className={classNames(
-                                                    item.current
-                                                        ? 'bg-gray-100 text-gray-900'
-                                                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                                    'group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md'
-                                                )}
-                                                aria-current={item.current ? 'page' : undefined}
-                                            >
-                                                <item.icon
-                                                    className={classNames(
-                                                        item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                                        'mr-3 flex-shrink-0 h-6 w-6'
-                                                    )}
-                                                    aria-hidden="true"
-                                                />
-                                                {trans('products')} <h1>test</h1>
-                                            </InertiaLink>
-                                        ))}
-                                    </div>
-                                    <div className="mt-8">
-                                        <h3
-                                            className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                                            id="teams-headline"
-                                        >
-                                            Teamsssss
-                                        </h3>
-                                        <div className="mt-1 space-y-1" role="group" aria-labelledby="teams-headline">
-                                            {teams.map((team) => (
-                                                <a
-                                                    key={team.name}
-                                                    href={team.href}
-                                                    className="group flex items-center px-3 py-2 text-base leading-5 font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-                                                >
-                          <span
-                              className={classNames(team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full')}
-                              aria-hidden="true"
-                          />
-                                                    <span className="truncate">{team.name}</span>
-                                                </a>
-                                            ))}
+                                <span className="sr-only">Open sidebar</span>
+                                <MenuAlt1Icon className="h-6 w-6" aria-hidden="true"/>
+                            </button>
+                            <div className="flex-1 flex justify-between px-4 sm:px-6 lg:px-8">
+                                <div className="flex-1 flex">
+                                    <form className="w-full flex md:ml-0" action="#" method="GET">
+                                        <label htmlFor="search-field" className="sr-only">
+                                            Search
+                                        </label>
+                                        <div className="relative w-full text-gray-400 focus-within:text-gray-600">
+                                            <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                                                <SearchIcon className="h-5 w-5" aria-hidden="true"/>
+                                            </div>
+                                            <input
+                                                id="search-field"
+                                                name="search-field"
+                                                className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400 sm:text-sm"
+                                                placeholder="Search"
+                                                type="search"
+                                            />
                                         </div>
-                                    </div>
-                                </nav>
+                                    </form>
+                                </div>
+                                <div className="flex items-center">
+                                    {/* Profile dropdown */}
+                                    <Menu as="div" className="ml-3 relative">
+                                        {({open}) => (
+                                            <>
+                                                <div>
+                                                    <Menu.Button
+                                                        className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                                        <span className="sr-only">Open user menu</span>
+                                                        <img
+                                                            className="h-8 w-8 rounded-full"
+                                                            src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                            alt=""
+                                                        />
+                                                    </Menu.Button>
+                                                </div>
+                                                <Transition
+                                                    show={open}
+                                                    as={Fragment}
+                                                    enter="transition ease-out duration-100"
+                                                    enterFrom="transform opacity-0 scale-95"
+                                                    enterTo="transform opacity-100 scale-100"
+                                                    leave="transition ease-in duration-75"
+                                                    leaveFrom="transform opacity-100 scale-100"
+                                                    leaveTo="transform opacity-0 scale-95"
+                                                >
+                                                    <Menu.Items
+                                                        static
+                                                        className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
+                                                    >
+                                                        <div className="py-1">
+                                                            <Menu.Item>
+                                                                {({active}) => (
+                                                                    <a
+                                                                        href="#"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block px-4 py-2 text-sm'
+                                                                        )}
+                                                                    >
+                                                                        View profile
+                                                                    </a>
+                                                                )}
+                                                            </Menu.Item>
+                                                            <Menu.Item>
+                                                                {({active}) => (
+                                                                    <a
+                                                                        href="#"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block px-4 py-2 text-sm'
+                                                                        )}
+                                                                    >
+                                                                        Settings
+                                                                    </a>
+                                                                )}
+                                                            </Menu.Item>
+                                                            <Menu.Item>
+                                                                {({active}) => (
+                                                                    <a
+                                                                        href="#"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block px-4 py-2 text-sm'
+                                                                        )}
+                                                                    >
+                                                                        Notifications
+                                                                    </a>
+                                                                )}
+                                                            </Menu.Item>
+                                                        </div>
+                                                        <div className="py-1">
+                                                            <Menu.Item>
+                                                                {({active}) => (
+                                                                    <a
+                                                                        href="#"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block px-4 py-2 text-sm'
+                                                                        )}
+                                                                    >
+                                                                        Get desktop app
+                                                                    </a>
+                                                                )}
+                                                            </Menu.Item>
+                                                            <Menu.Item>
+                                                                {({active}) => (
+                                                                    <a
+                                                                        href="#"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block px-4 py-2 text-sm'
+                                                                        )}
+                                                                    >
+                                                                        Support
+                                                                    </a>
+                                                                )}
+                                                            </Menu.Item>
+                                                        </div>
+                                                        <div className="py-1">
+                                                            <Menu.Item>
+                                                                {({active}) => (
+                                                                    <a
+                                                                        href="#"
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'block px-4 py-2 text-sm'
+                                                                        )}
+                                                                    >
+                                                                        Logout
+                                                                    </a>
+                                                                )}
+                                                            </Menu.Item>
+                                                        </div>
+                                                    </Menu.Items>
+                                                </Transition>
+                                            </>
+                                        )}
+                                    </Menu>
+                                </div>
                             </div>
                         </div>
                     </Transition.Child>
@@ -147,13 +219,13 @@ const SideBar = () => {
             <div className="hidden lg:flex lg:flex-shrink-0">
                 <div className="flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-gray-100">
                     <div className="flex items-center flex-shrink-0 px-6">
-                        <InertiaLink href="/">
+                        <Link href="/" className="items-center border-2">
                             <img
-                                className="h-8 w-auto border-2 border-black"
+                                className="h-16 w-auto self-center"
                                 src={settings.imageThumb}
                                 alt={settings.name_en}
                             />
-                        </InertiaLink>
+                        </Link>
                     </div>
                     {/* Sidebar component, swap this element with another sidebar if you like */}
                     <div className="h-0 flex-1 flex flex-col overflow-y-auto">
@@ -164,23 +236,23 @@ const SideBar = () => {
                                     <div>
                                         <Menu.Button
                                             className="group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500">
-                      <span className="flex w-full justify-between items-center">
-                        <span className="flex min-w-0 items-center justify-between space-x-3">
-                          <img
-                              className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                              src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                              alt=""
-                          />
-                          <span className="flex-1 flex flex-col min-w-0">
-                            <span className="text-gray-900 text-sm font-medium truncate">Jessy Schwarz</span>
-                            <span className="text-gray-500 text-sm truncate">@jessyschwarz</span>
-                          </span>
-                        </span>
-                        <SelectorIcon
-                            className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                            aria-hidden="true"
-                        />
-                      </span>
+                                          <span className="flex w-full justify-between items-center">
+                                            <span className="flex min-w-0 items-center justify-between space-x-3">
+                                              <img
+                                                  className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
+                                                  src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
+                                                  alt=""
+                                              />
+                                              <span className="flex-1 flex flex-col min-w-0">
+                                                <span className="text-gray-900 text-sm font-medium truncate">Jessy Schwarz</span>
+                                                <span className="text-gray-500 text-sm truncate">@jessyschwarz</span>
+                                              </span>
+                                            </span>
+                                            <SelectorIcon
+                                                className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                                aria-hidden="true"
+                                            />
+                                          </span>
                                         </Menu.Button>
                                     </div>
                                     <Transition
@@ -269,15 +341,15 @@ const SideBar = () => {
                                             <div className="py-1">
                                                 <Menu.Item>
                                                     {({active}) => (
-                                                        <a
-                                                            href="#"
+                                                        <button
+                                                            onClick={(e) => {e.preventDefault();document.getElementById('logout-form').submit()}}
                                                             className={classNames(
                                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                 'block px-4 py-2 text-sm'
                                                             )}
                                                         >
                                                             Logout
-                                                        </a>
+                                                        </button>
                                                     )}
                                                 </Menu.Item>
                                             </div>
@@ -311,11 +383,11 @@ const SideBar = () => {
                         <nav className="px-3 mt-6">
                             <div className="space-y-1">
                                 {navigation.map((item) => (
-                                    <a
+                                    <Link
                                         key={item.name}
                                         href={item.href}
                                         className={classNames(
-                                            item.current ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                                            item.module === currentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                                             'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                                         )}
                                         aria-current={item.current ? 'page' : undefined}
@@ -328,7 +400,7 @@ const SideBar = () => {
                                             aria-hidden="true"
                                         />
                                         {trans(item.name)}
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
                             <div className="mt-8">

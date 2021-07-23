@@ -15,10 +15,10 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        Post::factory(app()->isLocal() ? 10 : 2)->create()->each(function ($p) {
-            $p->comments()->saveMany(Comment::factory(5)->create());
-            $p->images()->saveMany(Image::factory(5)->create());
-            $p->slides()->saveMany(Slide::factory(3)->create());
+        Post::factory(app()->isLocal() ? 5 : 2)->create()->each(function ($p) {
+            $p->comments()->saveMany(Comment::factory(2)->create());
+            $p->images()->saveMany(Image::factory(2)->create());
+            $p->slides()->saveMany(Slide::factory(2)->create());
         });
     }
 }

@@ -9,8 +9,8 @@ class Color extends PrimaryModel
 {
     use HasFactory;
     protected $localeStrings = ['name'];
-    protected $appends = ['name'];
     protected $guarded = [''];
+    protected $appends = ['name'];
 
 
     public function product_attribute()

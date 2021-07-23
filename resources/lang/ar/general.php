@@ -997,5 +997,19 @@ return array (
     "activate_or_deactivate" => "إعادة / الغاء التفعيل",
     "main_page" => "الرئيسية",
     "control_of" => "التحكم بـ",
-    "create" => "إنشاء"
+    "create" => "إنشاء",
+    "no_elements" => "لا يوجد عناصر",
+    "warning" => "تحذير",
+    "success" => "نجاح",
+    "error" => "خطأ",
+    "info" => "معلومة",
+    "basic_information" => "معلومات أساسية (مطلوبة)",
+    "additional_information" => "معلومات إضافية",
+    "product_qty_instruction" => "يتم تفعيل كمية هذا الحقل فقط إن لم يكن للعنصر خصائص (لا يوجد قياسات أو الوان مختلفة للمنتج) ",
+    "product_sale_price_instruction" => "يتم تفعيل سعر الخصم فقط في حالة تفعيل حقل (تفعيل الخصم بالإضافة إلى وضع مدى الوقت بداية الخصم وتاريخ انتهاء الخصم)",
+    "product_more_images_instruction" => "يجب إضافة صورة واحدة فقط على الاقل",
+    "product_create_message" => "إنشاء منتج جديد",
+    "product_has_attributes_instruction" => "في حالة وجود اكثر من خاصية للمنتج يجب تفعيلها (مثال اكثر من قياس / لون)",
+    "size_or_capacity" => "القياس / المقاس / السعة اللترية",
+    "add_new_element" => "أضف عنصر جديد"
 );

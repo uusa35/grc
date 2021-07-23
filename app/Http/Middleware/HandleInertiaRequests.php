@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -37,7 +39,17 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            //
+            // Synchronously
+            'appName' => config('app.name'),
+            // Lazily
+            'auth' => fn () => $request->user()
+                ? $request->user()->only('id', 'name', 'email')
+                : null,
+            'translations' => [
+                "en" => Lang::get('general', [], 'en'),
+                "ar" => Lang::get('general', [], 'ar'),
+            ],
+            'settings' => Setting::first(),
         ]);
     }
 }

@@ -7,7 +7,10 @@
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body dir="{{ session()->get('locale') === 'ar' ? 'rtl' : 'ltr'}}">
-<div id="locale" style="display: none">{{ app()->getLocale() }}</div>
+<div id="locale" style="display: none">{{ session()->get('locale') }}</div>
+<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
 @inertia
 </body>
 </html>

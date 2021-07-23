@@ -23,15 +23,23 @@ trait DashboardTrait
         session()->put('locale', request('locale'));
         return redirect()->back();
     }
+
     public function toggleActivate(Request $request)
     {
-        $className = 'App\Models\\' . ($request->has('strictMode') && $request->strictMode ? $request->model : title_case($request->model));
+        $validate = validator($request->all(), [
+            'model' => 'string|required',
+            'id' => 'integer|required'
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate->errors()->first());
+        }
+        $className = 'App\Models\\' . ucfirst($request->model);
         $element = new $className();
-        $element = $element->withoutGlobalScopes()->whereId($request->id)->first();
+        $element = $element->whereId($request->id)->first();
         $element->update([
             'active' => !$element->active
         ]);
-        return redirect()->back()->with('success', 'Process Success');
+        return redirect()->back()->with('success', trans('general.process_sucess'));
     }
 
     public function toggleFeatured(Request $request)
@@ -130,5 +138,25 @@ trait DashboardTrait
                 'type' => 'pdf'
             ]
         );
+    }
+
+    public function uploadImages(Request $request)
+    {
+        try {
+            $validate = validator($request->all(), [
+                'images' => 'array|required',
+                'model' => 'string|required',
+            ]);
+            if ($validate->fails()) {
+                return response()->json(['message' => $validate->errors()->first()]);
+            }
+            $className = 'App\Models\\' . ucfirst($request->model);
+            $element = new $className();
+            $element = $element->latest()->first();
+            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], true) : null;;
+            return response()->json(['message' => trans('general.process_success')], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
     }
 }

@@ -10,18 +10,20 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Product extends PrimaryModel
 {
     use HasFactory, ProductHelpers, SellingModelHelpers, SoftDeletes, HasEvents;
-
     protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $appends = ['imageThumb', 'imageLarge', 'name', 'description','type'];
+    protected $casts = [
+        'price' => 'float'
+    ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function attributes()
+    public function product_attributes()
     {
         // prodct A
         // has Small / Red / 3

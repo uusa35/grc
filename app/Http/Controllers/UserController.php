@@ -26,7 +26,7 @@ class UserController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = User::filters($filters)->active()->notAdmins()->orderBy('id', 'desc')->paginate(self::TAKE_MID);
-        return inertia('UserIndex', compact('elements'));
+        return inertia('User/UserIndex', compact('elements'));
     }
 
     /**
@@ -58,7 +58,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $element = User::whereId($id)->with('role.privileges')->first();
+        dd($element);
+        return inertia('User/UserShow', compact('element'));
     }
 
     /**
@@ -69,7 +71,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $element = User::whereId($id)->with('role.privileges')->first();
+        return inertia('User/UserShow', compact('element'));
     }
 
     /**

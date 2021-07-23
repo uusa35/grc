@@ -237,7 +237,7 @@ trait ImageHelpers
                 return null;
             }
         } catch (\Exception $e) {
-            abort(404, 'save Error : ' . $e->getMessage());
+            abort(403, 'save Error : ' . $e->getMessage());
         }
     }
 
@@ -260,42 +260,47 @@ trait ImageHelpers
 
     public function saveImageForGallery($image, $dimensions, $ratio, $sizes, $model)
     {
-        $imagePath = $image->store('public/uploads/images');
-        $imagePath = str_replace('public/uploads/images/', '', $imagePath);
-        $img = Image::make(public_path('storage/uploads/images/' . $imagePath));
-        foreach ($sizes as $key => $value) {
-            if ($value === 'large') {
-                if ($ratio) {
-                    $img->resize($dimensions[0], null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                } else {
-                    $img->resize($dimensions[0], $dimensions[1]);
-                }
-                $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'));
-            } elseif ($value === 'medium') {
-                if ($ratio) {
-                    $img->resize($dimensions[0] / 2, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                } else {
-                    $img->resize($dimensions[0] / 2, $dimensions[0] / 2);
-                }
-                $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'));
-            } elseif ($value === 'thumbnail') {
-                if ($ratio) {
-                    $img->resize($dimensions[0] / 3, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                } else {
-                    $img->resize($dimensions[0] / 3, $dimensions[0] / 3);
-                }
+        try {
+            $imagePath = $image->store('public/uploads/images');
+            $imagePath = str_replace('public/uploads/images/', '', $imagePath);
+            $img = Image::make(public_path('storage/uploads/images/' . $imagePath));
+            foreach ($sizes as $key => $value) {
+                if ($value === 'large') {
+                    if ($ratio) {
+                        $img->resize($dimensions[0], null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    } else {
+                        $img->resize($dimensions[0], $dimensions[1]);
+                    }
+                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'));
+                } elseif ($value === 'medium') {
+                    if ($ratio) {
+                        $img->resize($dimensions[0] / 2, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    } else {
+                        $img->resize($dimensions[0] / 2, $dimensions[0] / 2);
+                    }
+                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'));
+                } elseif ($value === 'thumbnail') {
+                    if ($ratio) {
+                        $img->resize($dimensions[0] / 3, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    } else {
+                        $img->resize($dimensions[0] / 3, $dimensions[0] / 3);
+                    }
 //                $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
-                $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'));
+                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'));
+                }
             }
+            Storage::delete(public_path('storage/uploads/images/' . $imagePath));
+            return $imagePath;
+        } catch(\Exception $e)
+        {
+            return $e;
         }
-        Storage::delete(public_path('storage/uploads/images/' . $imagePath));
-        return $imagePath;
     }
 
 
