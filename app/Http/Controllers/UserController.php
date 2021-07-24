@@ -10,6 +10,16 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(User::class);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,6 +31,7 @@ class UserController extends Controller
 
     public function search(UserFilters $filters)
     {
+        $this->authorize('search', 'user');
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);

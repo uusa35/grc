@@ -1,11 +1,11 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 
-const SettingIndex = () => {
+const OrderIndex = () => {
     return (
         <BackendContainer>
-            <h1 className={`text-lg font-extrabold`}>Setting Index</h1>
+            <h1>OrderIndex Index</h1>
         </BackendContainer>
     )
 }
 
-export default SettingIndex
+export default OrderIndex

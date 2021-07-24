@@ -16,18 +16,9 @@ const BackendContextProvider = ({children}) => {
         { id : 0, name: 'basic_information'},
         { id: 1 , name: 'additional_information'},
     ]);
-
-    const [modules,setModules] = useState([
-        { id : 0, name: 'product', },
-        { id: 1 , name: 'service'},
-        { id: 1 , name: 'book'},
-        { id: 1 , name: 'service'},
-        { id: 1 , name: 'category'},
-        { id: 1 , name: 'country'},
-        { id: 1 , name: 'governate'},
-        { id: 1 , name: 'address'},
-    ]);
+    const [modules,setModules] = useState([]);
     const [currentFormTab,setCurrentFormTab] = useState(first(formTabs));
+    console.log('the auth from BackendContext', auth);
 
     useEffect(() => {
         Inertia.on('start', (event) => {
@@ -35,6 +26,8 @@ const BackendContextProvider = ({children}) => {
             setCurrentRoute(split(event.detail.visit.url,'.test')[1]);
             setSysMessage([]);
         })
+        const filteredModules = map(auth.role.privileges, p => { return { name : p.name , index : p.pivot.index , main_menu : p.main_menu} });
+        setModules(filteredModules);
     }, []);
 
     useMemo(() => {
@@ -43,8 +36,6 @@ const BackendContextProvider = ({children}) => {
         const url = filter(secondSplit, p => p.length > 1);
         setCurrentModule(url[0] ? url[0] : 'home');
     }, [currentRoute])
-
-    console.log('currentModule', currentModule);
 
     const context = {
         isLoading,
@@ -66,7 +57,8 @@ const BackendContextProvider = ({children}) => {
         isRTL,
         currentRoute,
         currentModule,
-        theme : settings.theme
+        theme : settings.theme,
+        modules
     };
 
     return (

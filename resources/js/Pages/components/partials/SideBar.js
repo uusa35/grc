@@ -1,10 +1,12 @@
 import {Dialog, Menu, Transition} from "@headlessui/react";
 import {SearchIcon, SelectorIcon} from "@heroicons/react/solid";
-import {Fragment, useContext} from "react";
+import {Fragment, useContext, useMemo, useState} from "react";
 import {ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon} from "@heroicons/react/outline";
 import {BackendContext} from "../../context/BackendContext";
 import GlobalContext from "../../context/GlobalContext";
-import { Link } from '@inertiajs/inertia-react'
+import {Link} from '@inertiajs/inertia-react'
+import pluralize from 'pluralize';
+import {filter, map, first} from 'lodash';
 
 const teams = [
     {name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500'},
@@ -18,17 +20,18 @@ function classNames(...classes) {
 }
 
 const navigation = [
-    {name: 'home', href: '/backend', icon: HomeIcon, module : 'home'},
-    {name: 'products', href: '/backend/product/search', icon: ViewListIcon, module : 'product'},
-    {name: 'books', href: '/backend/book/search', icon: ClockIcon, module : 'book'},
-    {name: 'services', href: '/backend/service/search', icon: ClockIcon, module : 'service'},
-    {name: 'users', href: '/backend/user/search', icon: ClockIcon, module : 'user'},
-    {name: 'categories', href: '/backend/category/search', icon: ClockIcon, module : 'category'},
+    {name: 'home', href: '/backend', icon: HomeIcon},
+    {name: 'product', href: '/backend/product/search', icon: ViewListIcon},
+    {name: 'book', href: '/backend/book/search', icon: ClockIcon},
+    {name: 'service', href: '/backend/service/search', icon: ClockIcon},
+    {name: 'user', href: '/backend/user/search', icon: ClockIcon},
+    {name: 'category', href: '/backend/category/search', icon: ClockIcon},
 ]
 
 const SideBar = () => {
-    const {sideBarOpen, toggleSideBar, trans, currentModule, classNames } = useContext(BackendContext);
-    const {settings} = useContext(GlobalContext);
+    const {sideBarOpen, toggleSideBar, trans, currentModule, classNames, modules } = useContext(BackendContext);
+    const {settings, auth } = useContext(GlobalContext);
+
     return (
         <>
 
@@ -60,7 +63,8 @@ const SideBar = () => {
                         leaveFrom="translate-x-0"
                         leaveTo="-translate-x-full"
                     >
-                        <div className="absolute top-10 left-10 bg-pink-400 z-10 flex-shrink-0 flex h-16 border-b border-gray-200 lg:hidden">
+                        <div
+                            className="absolute top-10 left-10 bg-pink-400 z-10 flex-shrink-0 flex h-16 border-b border-gray-200 lg:hidden">
                             <button
                                 className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
                                 onClick={() => toggleSideBar(true)}
@@ -75,7 +79,8 @@ const SideBar = () => {
                                             Search
                                         </label>
                                         <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                                            <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                                            <div
+                                                className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
                                                 <SearchIcon className="h-5 w-5" aria-hidden="true"/>
                                             </div>
                                             <input
@@ -218,10 +223,10 @@ const SideBar = () => {
             </Transition.Root>
             <div className="hidden lg:flex lg:flex-shrink-0">
                 <div className="flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-gray-100">
-                    <div className="flex items-center flex-shrink-0 px-6">
-                        <Link href="/" className="items-center border-2">
+                    <div className="flex justify-center items-center flex-shrink-0 px-6">
+                        <Link href="/" className="">
                             <img
-                                className="h-16 w-auto self-center"
+                                className="h-16 w-auto m-auto "
                                 src={settings.imageThumb}
                                 alt={settings.name_en}
                             />
@@ -239,13 +244,13 @@ const SideBar = () => {
                                           <span className="flex w-full justify-between items-center">
                                             <span className="flex min-w-0 items-center justify-between space-x-3">
                                               <img
-                                                  className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                                                  src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
+                                                  className="w-10 h-10 ltr:mr-2 rtl:ml-2 bg-gray-300 rounded-full flex-shrink-0"
+                                                  src={auth.imageThumb}
                                                   alt=""
                                               />
                                               <span className="flex-1 flex flex-col min-w-0">
-                                                <span className="text-gray-900 text-sm font-medium truncate">Jessy Schwarz</span>
-                                                <span className="text-gray-500 text-sm truncate">@jessyschwarz</span>
+                                                <span className="text-gray-900 text-sm font-medium truncate">{auth.name}</span>
+                                                <span className="text-gray-500 ltr:text-left rtl:text-right text-sm truncate">{auth.role.name}</span>
                                               </span>
                                             </span>
                                             <SelectorIcon
@@ -342,7 +347,10 @@ const SideBar = () => {
                                                 <Menu.Item>
                                                     {({active}) => (
                                                         <button
-                                                            onClick={(e) => {e.preventDefault();document.getElementById('logout-form').submit()}}
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
+                                                                document.getElementById('logout-form').submit()
+                                                            }}
                                                             className={classNames(
                                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                 'block px-4 py-2 text-sm'
@@ -382,25 +390,28 @@ const SideBar = () => {
                         {/* Navigation */}
                         <nav className="px-3 mt-6">
                             <div className="space-y-1">
-                                {navigation.map((item) => (
-                                    <Link
-                                        key={item.name}
-                                        href={item.href}
-                                        className={classNames(
-                                            item.module === currentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
-                                            'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-                                        )}
-                                        aria-current={item.current ? 'page' : undefined}
-                                    >
-                                        <item.icon
-                                            className={classNames(
-                                                item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                                                'mx-3 flex-shrink-0 h-6 w-6'
-                                            )}
-                                            aria-hidden="true"
-                                        />
-                                        {trans(item.name)}
-                                    </Link>
+                                {map(modules, item => (
+                                    <>
+                                        {
+                                            item.main_menu && item.index ?
+                                                <Link
+                                                    key={item.name}
+                                                    href={`/backend/${item.name}${item.main_menu ? '/search' : null}`}
+                                                    className={classNames(
+                                                        item.name === currentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                                                        'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                                                    )}
+                                                    aria-current={'page'}
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 rtl:ml-2 ltr:mr-2" fill="none"
+                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                                    </svg>
+                                                    {trans(pluralize(item.name))}
+                                                </Link> : null
+                                        }
+                                    </>
                                 ))}
                             </div>
                             <div className="mt-8">
@@ -416,10 +427,10 @@ const SideBar = () => {
                                             href={team.href}
                                             className="group flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50"
                                         >
-                      <span
-                          className={classNames(team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full')}
-                          aria-hidden="true"
-                      />
+                                              <span
+                                                  className={classNames(team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full')}
+                                                  aria-hidden="true"
+                                              />
                                             <span className="truncate">{team.name}</span>
                                         </a>
                                     ))}

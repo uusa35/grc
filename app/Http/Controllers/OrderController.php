@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Category;
-use App\Models\User;
-use App\Services\Search\CategoryFilters;
+use App\Models\Order;
 use App\Services\Search\Filters;
-use App\Services\Search\QueryFilters;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class OrderController extends Controller
 {
 
     /**
@@ -20,8 +16,9 @@ class BookController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(Book::class);
+        $this->authorizeResource(Order::class);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,18 +26,18 @@ class BookController extends Controller
      */
     public function index()
     {
-        $elements = Book::orderby('id','desc')->paginate(SELF::TAKE_LEAST);
-        return inertia('Book/BookIndex', compact('elements'));
+        return inertia('Order/OrderIndex');
     }
 
     public function search(Filters $filters)
     {
+        $this->authorize('search', 'order');
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Book::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
-        return inertia('Book/BookIndex', compact('elements'));
+        $elements = Order::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
+        return inertia('Order/OrderIndex', compact('elements'));
     }
     /**
      * Show the form for creating a new resource.
@@ -49,8 +46,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        $users = User::active()->authoers()->get();
-        return inertia('Book/BookCreate', compact('users'));
+        //
     }
 
     /**
@@ -67,10 +63,10 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
         //
     }
@@ -78,10 +74,10 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Order $order)
     {
         //
     }
@@ -90,10 +86,10 @@ class BookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -101,10 +97,10 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
         //
     }

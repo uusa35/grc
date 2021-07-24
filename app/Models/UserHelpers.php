@@ -214,4 +214,9 @@ trait UserHelpers
         $settings = Setting::first();
         return $this->custome_delivery && $settings->global_custome_delivery && !$settings->multi_cart_merchant;
     }
+
+    public function getAddressAttribute()
+    {
+        return $this->address;
+    }
 }

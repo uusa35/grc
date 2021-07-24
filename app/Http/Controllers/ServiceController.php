@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Service::class);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,6 +30,7 @@ class ServiceController extends Controller
 
     public function search(ProductFilters $filters)
     {
+        $this->authorize('search', 'service');
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);

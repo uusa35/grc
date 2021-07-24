@@ -2,19 +2,25 @@
 
 namespace App\Providers;
 
+use App\Models\Color;
+use App\Models\Page;
+use App\Models\Privilege;
+use App\Models\Product;
+use App\Models\Role;
+use App\Models\Setting;
+use App\Models\User;
 use App\Policies\AddonPolicy;
 use App\Policies\AreaPolicy;
+use App\Policies\BookPolicy;
 use App\Policies\BranchPolicy;
 use App\Policies\BrandPolicy;
-use App\Policies\CategoryGroupPolicy;
 use App\Policies\CategoryPolicy;
-use App\Policies\ClassifiedPolicy;
-use App\Policies\CollectionPolicy;
 use App\Policies\ColorPolicy;
 use App\Policies\CommentPolicy;
 use App\Policies\CommercialPolicy;
 use App\Policies\CountryPolicy;
 use App\Policies\CouponPolicy;
+use App\Policies\CoursePolicy;
 use App\Policies\CurrencyPolicy;
 use App\Policies\DayPolicy;
 use App\Policies\DevicePolicy;
@@ -52,6 +58,26 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Product::class => ProductPolicy::class,
+        Service::class => ServicePolicy::class,
+        Category::class => CategoryPolicy::class,
+        User::class => UserPolicy::class,
+        Order::class => OrderPolicy::class,
+        Setting::class => SettingPolicy::class,
+        Book::class => BookPolicy::class,
+        Course::class => CoursePolicy::class,
+        Size::class => SizePolicy::class,
+        Color::class => ColorPolicy::class,
+        Role::class => RolePolicy::class,
+        Tag::class => TagPolicy::class,
+        Post::class => PostPolicy::class,
+        Privilege::class => PrivilegePolicy::class,
+        Country::class => CountryPolicy::class,
+        Area::class => AreaPolicy::class,
+        Slide::class => SlidePolicy::class,
+        Video::class => VideoPolicy::class,
+        Page::class => PagePolicy::class,
+        Comment::class => CommentPolicy::class,
     ];
 
     /**
@@ -62,44 +88,6 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        Gate::resource('user', UserPolicy::class);
-        Gate::resource('product', ProductPolicy::class);
-        Gate::resource('service', ServicePolicy::class);
-        Gate::resource('country', CountryPolicy::class);
-        Gate::resource('currency', CurrencyPolicy::class);
-        Gate::resource('area', AreaPolicy::class);
-        Gate::resource('governate', GovernatePolicy::class);
-        Gate::resource('role', RolePolicy::class);
-        Gate::resource('privilege', PrivilegePolicy::class);
-        Gate::resource('category', CategoryPolicy::class);
-        Gate::resource('slide', SlidePolicy::class);
-        Gate::resource('video', VideoPolicy::class);
-        Gate::resource('tag', TagPolicy::class);
-        Gate::resource('size', SizePolicy::class);
-        Gate::resource('color', ColorPolicy::class);
-        Gate::resource('collection', CollectionPolicy::class);
-        Gate::resource('timing', TimingPolicy::class);
-        Gate::resource('day', DayPolicy::class);
-        Gate::resource('order', OrderPolicy::class);
-        Gate::resource('image', ImagePolicy::class);
-        Gate::resource('brand', BrandPolicy::class);
-        Gate::resource('branch', BranchPolicy::class);
-        Gate::resource('coupon', CouponPolicy::class);
-        Gate::resource('page', PagePolicy::class);
-        Gate::resource('post', PostPolicy::class);
-        Gate::resource('term', TermPolicy::class);
-        Gate::resource('policy', PolicyPolicy::class);
-        Gate::resource('notification', NotificationPolicy::class);
-        Gate::resource('shipment', ShipmentPackagePolicy::class);
-        Gate::resource('setting', SettingPolicy::class);
-        Gate::resource('commercial', CommercialPolicy::class);
-        Gate::resource('device', DevicePolicy::class);
-        Gate::resource('classified', ClassifiedPolicy::class);
-        Gate::resource('property', PropertyPolicy::class);
-        Gate::resource('group', CategoryGroupPolicy::class);
-        Gate::resource('addon', AddonPolicy::class);
-        Gate::resource('item', ItemPolicy::class);
-        Gate::resource('comment', CommentPolicy::class);
 
         Gate::define('superOne', function () {
             return auth()->user()->isSuper && auth()->id() === 1;
@@ -134,6 +122,10 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->role->privileges->where('name', $index)->first()->pivot->index;
             }
             return false;
+        });
+
+        Gate::define('search', function ($user, $index) {
+            return $user->role->privileges->where('name', $index)->first() && $user->role->privileges->where('name', $index)->first()->pivot->index;
         });
     }
 }

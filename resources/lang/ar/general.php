@@ -1015,5 +1015,6 @@ return array (
     "product_categories_instruction" => "يجب اختيار تصنيف واحد فقط على الأقل",
     "basic_information_must_be_entered" => "يجب إضافة المعلومات الأساسية أولاً",
     "alert" => "تنبيه",
-    "all_elements" => "جميع العناصر"
+    "all_elements" => "جميع العناصر",
+    "courses" => "الدورات"
 );

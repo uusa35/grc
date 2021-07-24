@@ -19,6 +19,7 @@ class CreatePrivilegesTable extends Migration
             $table->string('name_en')->nullable();
             $table->string('description_ar')->nullable();
             $table->string('description_en')->nullable();
+            $table->boolean('main_menu')->default(1);
             $table->timestamps();
         });
     }

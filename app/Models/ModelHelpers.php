@@ -116,11 +116,6 @@ trait ModelHelpers
         return $this->description;
     }
 
-    public function getAddressAttribute()
-    {
-        return $this->address;
-    }
-
     public function getTypeAttribute()
     {
         return strtolower(class_basename($this));

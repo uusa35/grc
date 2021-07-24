@@ -50,7 +50,7 @@ export default function Pagination({firstPage, lastPage, currentPage}) {
             <div className="flex">
                 <div className="hidden md:-mt-px md:flex">
                     {
-                        range(1, lastPage).map(p =>
+                        range(1, (lastPage + 1)).map(p =>
                             <Link
                                 key={p}
                                 href={`/backend/${currentModule}/search?page=${p}`}

@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Category;
-use App\Models\User;
-use App\Services\Search\CategoryFilters;
-use App\Services\Search\Filters;
-use App\Services\Search\QueryFilters;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
-class BookController extends Controller
+class SettingController extends Controller
 {
 
     /**
@@ -18,10 +13,11 @@ class BookController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->authorizeResource(Book::class);
-    }
+//    public function __construct()
+//    {
+//        $this->authorizeResource(Setting::class);
+//    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,19 +25,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        $elements = Book::orderby('id','desc')->paginate(SELF::TAKE_LEAST);
-        return inertia('Book/BookIndex', compact('elements'));
+        return inertia('Setting/SettingIndex');
     }
 
-    public function search(Filters $filters)
-    {
-        $validator = validator(request()->all(), ['search' => 'nullable']);
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()], 400);
-        }
-        $elements = Book::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
-        return inertia('Book/BookIndex', compact('elements'));
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -49,8 +35,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        $users = User::active()->authoers()->get();
-        return inertia('Book/BookCreate', compact('users'));
+        //
     }
 
     /**

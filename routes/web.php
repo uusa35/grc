@@ -2,14 +2,18 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
+use App\Models\Course;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +39,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::get('user/search', [UserController::class, 'search'])->name('user.search');
     Route::get('book/search', [BookController::class, 'search'])->name('book.search');
     Route::get('category/search', [CategoryController::class, 'search'])->name('category.search');
+    Route::get('order/search', [OrderController::class, 'search'])->name('order.search');
+    Route::get('course/search', [CourseController::class, 'search'])->name('course.search');
     Route::get('{module}/toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
     Route::get('back/{module}', [DashboardController::class, 'goBack'])->name('back');
     Route::resource('dashboard', DashboardController::class);
@@ -44,6 +50,10 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::resource('section', SectionController::class);
     Route::resource('page', PageController::class);
     Route::resource('user', UserController::class);
+    Route::resource('setting', SettingController::class);
+    Route::resource('category', CategoryController::class);
+    Route::resource('order', OrderController::class);
+    Route::resource('course', Course::class);
 });
 // General Routes
 Auth::routes();

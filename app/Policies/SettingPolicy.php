@@ -2,31 +2,43 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SettingPolicy
 {
     use HandlesAuthorization;
 
+
     /**
-     * Determine whether the user can view the setting.
+     * Determine whether the user can view the category.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Setting  $setting
+     * @param \App\Models\User $user
      * @return mixed
      */
-    public function view(User $user, Setting $setting)
+    public function viewAny(User $user)
     {
-        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->isSuper;
+        return $user->role->privileges->where('name', self::MODAL)->first() ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->index : false;
     }
 
     /**
-     * Determine whether the user can create settings.
+     * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @return mixed
+     * @param  \App\Models\Setting  $setting
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function view(User $user, Setting $setting)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user)
     {
@@ -34,11 +46,11 @@ class SettingPolicy
     }
 
     /**
-     * Determine whether the user can update the setting.
+     * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Setting  $setting
-     * @return mixed
+     * @param  \App\Models\Setting  $setting
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, Setting $setting)
     {
@@ -46,11 +58,11 @@ class SettingPolicy
     }
 
     /**
-     * Determine whether the user can delete the setting.
+     * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Setting  $setting
-     * @return mixed
+     * @param  \App\Models\Setting  $setting
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, Setting $setting)
     {
@@ -58,11 +70,11 @@ class SettingPolicy
     }
 
     /**
-     * Determine whether the user can restore the setting.
+     * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Setting  $setting
-     * @return mixed
+     * @param  \App\Models\Setting  $setting
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function restore(User $user, Setting $setting)
     {
@@ -70,11 +82,11 @@ class SettingPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the setting.
+     * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Setting  $setting
-     * @return mixed
+     * @param  \App\Models\Setting  $setting
+     * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDelete(User $user, Setting $setting)
     {

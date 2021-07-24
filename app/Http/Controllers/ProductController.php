@@ -3,21 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStore;
-use App\Http\Resources\ProductExtraLightResource;
-use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\User;
 use App\Services\Search\ProductFilters;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use phpDocumentor\Reflection\Types\Integer;
 
 class ProductController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,15 +36,15 @@ class ProductController extends Controller
 
     public function search(ProductFilters $filters)
     {
+        $this->authorize('search', 'product');
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-//        dd(request()->getQueryString());
-        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size', 'user')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST);
-//        dd($elements);
+        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size', 'user')->orderBy('id', 'desc')->whereHas('user', function ($q) {
+            return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
+        })->paginate(Self::TAKE_LEAST);
         return inertia('Product/ProductIndex', compact('elements'));
-        return redirect()->to('backend/product/search?'.request()->getQueryString(), compact('elements'));
     }
 
     /**
@@ -66,9 +71,9 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductStore $request)
+    public function store(Request $request)
     {
-//        dd($request->images);
+        //        dd($request->images);
 //        $end_sale = $request->has('end_sale') ? Carbon::parse(str_replace('-', '', $request->end_sale))->toDateTimeString() : null;
 //        $start_sale = $request->has('start_sale') ? Carbon::parse(str_replace('-', '', $request->start_sale))->toDateTimeString() : null;
         $element = Product::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'start_sale', 'end_sale', 'videos']));
@@ -94,24 +99,24 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $element = Product::whereId($id)->with('product_attributes', 'color', 'size', 'user', 'images', 'user')->first();
+        $element = $product->with('product_attributes', 'color', 'size', 'user', 'images', 'user')->first();
         return inertia('Product/ProductShow', compact('element'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $element = Product::whereId($id)->with('product_attributes', 'color', 'size', 'user', 'images', 'user','categories')->first();
+        $element = $product->with('product_attributes', 'color', 'size', 'user', 'images', 'user', 'categories')->first();
         return inertia('Product/ProductEdit', compact('element'));
     }
 
@@ -119,10 +124,10 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
         //
     }
@@ -130,10 +135,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
         //
     }

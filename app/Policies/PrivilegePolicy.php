@@ -11,6 +11,18 @@ class PrivilegePolicy
     use HandlesAuthorization;
     const MODAL = 'privilege';
 
+
+    /**
+     * Determine whether the user can view the category.
+     *
+     * @param \App\Models\User $user
+     * @return mixed
+     */
+    public function viewAny(User $user)
+    {
+        return $user->role->privileges->where('name', self::MODAL)->first() ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->index : false;
+    }
+
     /**
      * Determine whether the user can view the privilege.
      *

@@ -121,42 +121,10 @@ class Filters extends QueryFilters
         });
     }
 
-    public function color_id()
-    {
-        if ($this->builder->has('product_attributes')) {
-            return $this->builder->whereHas('product_attributes', function ($q) {
-                return $q->where('color_id', request()->color_id);
-            });
-        }
-    }
-
-    public function size_id()
-    {
-        if ($this->builder->has('product_attributes')) {
-            return $this->builder->whereHas('product_attributes', function ($q) {
-                return $q->where('size_id', request()->size_id);
-            });
-        }
-    }
-
-    public function on_sale()
-    {
-        return $this->builder->where('on_sale', true)->whereDate('end_sale', '>', Carbon::now());
-    }
 
     public function hot_deal()
     {
         return $this->builder->where('is_hot_deal', true)->whereDate('end_sale', '>', Carbon::now());
-    }
-
-    public function on_home()
-    {
-        return $this->builder->where('on_home', true);
-    }
-
-    public function on_new()
-    {
-        return $this->builder->where('on_new', true);
     }
 
     public function min()
@@ -170,136 +138,43 @@ class Filters extends QueryFilters
         return $this->builder;
     }
 
-    public function brand_id()
+    public function on_home()
     {
-        return $this->builder->where(['brand_id' => request('brand_id')]);
+        return $this->builder->where('on_home', request()->on_home);
     }
 
-    public function sort()
+    public function on_new()
     {
-        switch (request('sort')) {
-            case 'name' :
-                return $this->builder->orderBy('name_' . app()->getLocale(), 'asc');
-            default :
-                return $this->builder->orderBy('price', request('sort'));
-        }
+        return $this->builder->where('on_new', request()->on_new);
     }
 
-    public function area_id()
+    public function is_hot_deal()
     {
-        // List of users that servie area_id
-        return $this->builder->whereHas('areas', function ($q) {
-            return $q->where(['area_id' => request('area_id')]);
-        });
+        return $this->builder->where('is_hot_deal', request()->is_hot_deal);
     }
 
-    public function day_selected()
+    public function exclusive()
     {
-        if ($this->builder->has('timings')) {
-            return $this->builder->whereHas('timings', function ($q) {
-                return $q->where(['day_no' => request('day_selected')]);
-            });
-        }
-
+        return $this->builder->where('is_hot_deal', request()->exclusive);
     }
 
-    public function date_range() {
-//        return $this->builder->whereDate('start_date', '>=', Carbon::today())->whereDate('end_date','>=', Carbon::parse(request('date_range')));
-        return $this->builder->whereDate('end_date','>=', Carbon::parse(request('date_range')));
-    }
-
-    public function exact_date() {
-        return $this->builder->whereDate('start_date','>=', Carbon::parse(request('exact_date')));
-    }
-
-    public function timing_value()
+    public function is_available()
     {
-        return $this->builder->whereHas('timings', function ($q) {
-            return $q->whereDate('start', '>=', Carbon::parse(request('timing_id'))->format('h:i a'));
-        });
+        return $this->builder->where('is_available', request()->is_available);
     }
 
-    public function timing_id()
+    public function active()
     {
-        if ($this->builder->has('timings')) {
-            return $this->builder->whereHas('timings', function ($q) {
-                return $q->whereId(request()->timing_id);
-            });
-        }
+        return $this->builder->where('active', request()->active);
     }
 
-    public function day_selected_format()
+    public function on_sale()
     {
-        return $this->builder;
+        return $this->builder->where('on_sale', request()->on_sale);
     }
 
-    public function country_id()
+    public function free()
     {
-        if(env('EXPO')) {
-            return $this->builder->whereHas('user', function ($q) {
-                return $q->where(['country_id' => request('country_id')]);
-            });
-        }
-        return $this->builder;
-    }
-
-    public function save()
-    {
-        if (request()->has('save') && request()->save) {
-            session()->put('day_selected_format', request()->day_selected_format);
-            session()->put('day_selected', request()->day_selected);
-            session()->put('area_id', request()->area_id);
-        }
-        return $this->builder;
-    }
-
-    public function designer_id()
-    {
-        $productIds = User::whereId(request('designer_id'))->first()->collections()->with(['products' => function ($q) {
-            return $q->active()->hasStock()->hasImage();
-        }])->get()->pluck('products')->flatten()->unique('id')->pluck('id')->toArray();
-        return $this->builder->whereIn('id', $productIds);
-    }
-
-    public function collection_id()
-    {
-        if (request()->has('collection_id')) {
-            $element = Collection::whereId(request('collection_id'))->with('products')->first();
-            $productIds = $element->products->pluck('id');
-            return $this->builder->whereIn('id', $productIds);
-        }
-    }
-
-
-    public function is_designer()
-    {
-        return $this->builder->whereHas('role', function ($q) {
-            return $q->where('is_designer', request()->is_designer);
-        });
-    }
-
-    public function is_company()
-    {
-        return $this->builder->whereHas('role', function ($q) {
-            return $q->where('is_company', request()->is_company);
-        });
-    }
-
-    public function is_celebrity()
-    {
-        return $this->builder->whereHas('role', function ($q) {
-            return $q->where('is_celebrity', request()->is_celebrity);
-        });
-    }
-
-
-    public function props()
-    {
-        foreach (request()->props as $key => $prop) {
-            $prop = json_decode($prop, true);
-            return $builder = $this->builder->whereHas('items', function ($q) use ($prop) {
-                return $q->where(['property_id' => $prop['property_id'], 'category_group_id' => $prop['category_group_id'], 'value' => $prop['value']]);
-            });
-        }
+        return $this->builder->where('free', request()->free);
     }
 }

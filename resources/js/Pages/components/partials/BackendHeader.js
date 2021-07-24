@@ -15,12 +15,14 @@ import {
     TrashIcon,
     UserAddIcon,
 } from '@heroicons/react/solid'
+import { map } from 'lodash';
+import plurlaize from 'pluralize'
 
 
 const BackendHeader = () => {
     const {settings} = useContext(GlobalContext);
-    const {trans, otherLang, classNames, isRTL, toggleSideBar, theme, auth } = useContext(BackendContext)
-    console.log('the auth', auth);
+    const {trans, otherLang, classNames, isRTL, toggleSideBar, theme , modules } = useContext(BackendContext);
+
     return (
         <>
             {/* Page title & actions */}
@@ -55,127 +57,33 @@ const BackendHeader = () => {
                                         static
                                         className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
                                     >
-                                        <div className="py-1">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                            'group flex items-center px-4 py-2 text-sm'
-                                                        )}
-                                                    >
-                                                        <PencilAltIcon
-                                                            className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                                            aria-hidden="true"
-                                                        />
-                                                        {trans('books')}
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                            'group flex items-center px-4 py-2 text-sm'
-                                                        )}
-                                                    >
-                                                        <DuplicateIcon
-                                                            className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                                            aria-hidden="true"
-                                                        />
-                                                        Duplicate
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                        </div>
-                                        <div className="py-1">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                            'group flex items-center px-4 py-2 text-sm'
-                                                        )}
-                                                    >
-                                                        <ArchiveIcon
-                                                            className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                                            aria-hidden="true"
-                                                        />
-                                                        Archive
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                            'group flex items-center px-4 py-2 text-sm'
-                                                        )}
-                                                    >
-                                                        <ArrowCircleRightIcon
-                                                            className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                                            aria-hidden="true"
-                                                        />
-                                                        Move
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                        </div>
-                                        <div className="py-1">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                            'group flex items-center px-4 py-2 text-sm'
-                                                        )}
-                                                    >
-                                                        <UserAddIcon
-                                                            className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                                            aria-hidden="true"
-                                                        />
-                                                        Share
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                            'group flex items-center px-4 py-2 text-sm'
-                                                        )}
-                                                    >
-                                                        <HeartIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                                                        Add to favorites
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                        </div>
-                                        <div className="py-1">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                            'group flex items-center px-4 py-2 text-sm'
-                                                        )}
-                                                    >
-                                                        <TrashIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                                                        Delete
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                        </div>
+                                        {
+                                            map(modules, m => (
+                                                <>
+                                                    {
+                                                        m.index && !m.main_menu && <div className="py-1">
+                                                            <Menu.Item>
+                                                                {({ active }) => (
+                                                                    <Link
+                                                                        key={m.name}
+                                                                        href={`/backend/${m.name}`}
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            'group flex items-center px-1 py-2 text-sm'
+                                                                        )}
+                                                                    >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-3 rtl:ml-3 ltr:mr-3 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                                                            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                                                                        </svg>
+                                                                        {trans('list')} {trans(plurlaize(m.name))}
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+                                                        </div>
+                                                    }
+                                                </>
+                                            ))
+                                        }
                                     </Menu.Items>
                                 </Transition>
                             </>
@@ -208,7 +116,7 @@ const BackendHeader = () => {
                                         <div className="py-1">
                                             <Menu.Item>
                                                 {({ active }) => (
-                                                    <a
+                                                    <Link
                                                         href="#"
                                                         className={classNames(
                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
@@ -220,7 +128,7 @@ const BackendHeader = () => {
                                                             aria-hidden="true"
                                                         />
                                                         Edit
-                                                    </a>
+                                                    </Link>
                                                 )}
                                             </Menu.Item>
                                             <Menu.Item>
