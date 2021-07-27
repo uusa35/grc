@@ -146,13 +146,18 @@ trait DashboardTrait
             $validate = validator($request->all(), [
                 'images' => 'array|required',
                 'model' => 'string|required',
+                'id' => 'integer'
             ]);
             if ($validate->fails()) {
                 return response()->json(['message' => $validate->errors()->first()]);
             }
             $className = 'App\Models\\' . ucfirst($request->model);
             $element = new $className();
-            $element = $element->latest()->first();
+            if (request()->id) {
+                $element = $element->latest()->first();
+            } else {
+                $element = $element->whereId(requset()->id)->with('images')->first();
+            }
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], true) : null;;
             return response()->json(['message' => trans('general.process_success')], 200);
         } catch (\Exception $e) {
@@ -160,8 +165,9 @@ trait DashboardTrait
         }
     }
 
-    public function goBack(Request $request) {
+    public function goBack(Request $request)
+    {
 
-        return request()->module ? redirect()->route('backend.'.$request->module.'.search') : redirect()->route('backend.home');
+        return request()->module ? redirect()->route('backend.' . $request->module . '.search') : redirect()->route('backend.home');
     }
 }

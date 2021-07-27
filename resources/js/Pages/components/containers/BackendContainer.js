@@ -10,6 +10,7 @@ import { Inertia } from '@inertiajs/inertia'
 import LoadingView from "../widgets/LoadingView";
 import SystemMessage from "../partials/SystemMessage";
 import { isEmpty } from 'lodash';
+import ConfirmationModal from "../partials/ConfirmationModal";
 
 
 const BackendContainer = ({children, showPagination}) => {
@@ -28,6 +29,7 @@ const BackendContainer = ({children, showPagination}) => {
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold">
             <SideBar/>
+            <ConfirmationModal />
             <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-gray-100">
                 <BackendHeader/>
                 <div className="min-h-screen">
@@ -35,15 +37,15 @@ const BackendContainer = ({children, showPagination}) => {
                         <BreadCrumbs/>
                         <SystemMessage />
                         <div className="mx-3">
-                            {
-                                isLoading ? <LoadingView/> : children
-                            }
+                            {/*{*/}
+                            {/*    isLoading ? <LoadingView/> : children*/}
+                            {/*}*/}
+                            {children}
                         </div>
                     </div>
                 </div>
                 <Footer/>
             </main>
-
         </div>
     );
 }

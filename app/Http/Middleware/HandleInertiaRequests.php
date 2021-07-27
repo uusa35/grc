@@ -43,15 +43,18 @@ class HandleInertiaRequests extends Middleware
             // Synchronously
             'appName' => config('app.name'),
             // Lazily
-            'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with('role.privileges')->first() : null,
-//            'auth' => fn () => $request->user()
-//                ? $request->user()
-//                : null,
+            'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
+                return $q->with(['privileges' => function ($q) {
+                    return $q->orderBy('order','asc');
+                }]);
+            }])->first() : null,
             'translations' => [
                 "en" => Lang::get('general', [], 'en'),
                 "ar" => Lang::get('general', [], 'ar'),
             ],
             'settings' => Setting::first(),
+            'success' => session()->has('success') ? session()->get('success') : null,
+            'error' => session()->has('error') ? session()->get('error') : null,
         ]);
     }
 }

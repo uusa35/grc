@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Models\Slide;
 use App\Services\Search\Filters;
-use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class SlideController extends Controller
 {
 
     /**
@@ -18,9 +16,8 @@ class CourseController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(Course::class);
+        $this->authorizeResource(Slide::class);
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,23 +26,19 @@ class CourseController extends Controller
     public function index()
     {
         $elements = Slide::paginate(SELF::TAKE_LEAST);
-        return inertia('Course/CourseIndex', compact('elements'));
+        return inertia('Slide/SlideIndex', compact('elements'));
     }
 
     public function search(Filters $filters)
     {
-        $this->authorize('search', 'course');
+        $this->authorize('search', 'slide');
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Course::filters($filters)->with('user')->orderBy('id', 'desc')->whereHas('user', function ($q) {
-            return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
-        })->paginate(Self::TAKE_LEAST);
-        return inertia('Course/CourseIndex', compact('elements'));
-        return redirect()->to('backend/course/search?' . request()->getQueryString(), compact('elements'));
+        $elements = Slide::filters($filters)->with('slidable')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST);
+        return inertia('Slide/SlideIndex', compact('elements'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -60,7 +53,7 @@ class CourseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -71,10 +64,10 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Course $course
+     * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show(Slide $slide)
     {
         //
     }
@@ -82,10 +75,10 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Course $course
+     * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit(Slide $slide)
     {
         //
     }
@@ -93,11 +86,11 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Course $course
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, Slide $slide)
     {
         //
     }
@@ -105,10 +98,10 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Course $course
+     * @param  \App\Models\Slide  $slide
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Slide $slide)
     {
         //
     }

@@ -50,7 +50,14 @@ class PrivilegesTableSeeder extends Seeder
             'course' => true
         ];
         foreach ($privileges as $k => $v) {
-            Privilege::factory(1)->create(['name' => $k, 'name_en' => $k, 'name_ar' => $k, 'main_menu' => $v]);
+            Privilege::factory(1)->create([
+                'name' => $k,
+                'name_en' => $k,
+                'name_ar' => $k,
+                'main_menu' => $v,
+                'description_ar' => $k,
+                'description_en' => $k,
+            ]);
         }
     }
 }

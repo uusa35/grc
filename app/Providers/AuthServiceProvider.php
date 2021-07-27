@@ -8,6 +8,7 @@ use App\Models\Privilege;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\Setting;
+use App\Models\Slide;
 use App\Models\User;
 use App\Policies\AddonPolicy;
 use App\Policies\AreaPolicy;

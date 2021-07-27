@@ -47,7 +47,7 @@ class ProductStore extends FormRequest
             'brand_id' => 'nullable|exists:brands,id',
             'image' => "image|required",
             'qr' => "image|nullable",
-            'images' => 'array',
+            'images' => 'array|nullable',
             'categories' => 'required|array|min:1',
             'price' => 'required|numeric|min:0.5|max:999',
             'qty' => ['numeric', 'min:1', 'max:999', 'regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','nullable'],

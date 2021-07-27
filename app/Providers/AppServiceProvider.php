@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use App\Observers\ProductObserver;
 use App\Observers\UserObserver;
 use Carbon\Carbon;
@@ -17,7 +18,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 
     /**

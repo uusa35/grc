@@ -2,7 +2,7 @@ import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useMemo, useState} from "react";
 import {BackendContext} from "./../context/BackendContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, map, forEach, isArray} from 'lodash';
+import {filter, map, forEach, isArray, uniq} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
@@ -89,9 +89,10 @@ export default function ProductCreate({users, sizes, colors, categories}) {
         }, 1000);
     }
 
-    const handleSelectedCategories = (categories) => {
-        setSelectedCategories(categories);
-        setData('categories', categories);
+    const handleSelectedCategories = (checked,value) => {
+        const filtered = uniq(checked ? selectedCategories.concat(value) : filter(selectedCategories, c => c != value))
+        setSelectedCategories(filtered);
+        setData('categories', filtered);
     }
 
     const handleImages = (imagesGroup) => {
@@ -360,7 +361,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </p>
                             </div>
 
-                            <div className="sm:col-span-2">
+                            <div className="sm:col-span-3">
                                 <label htmlFor="main_image"
                                        className={`block text-sm font-medium text-${theme}-700`}>
                                     {trans('main_image')}
@@ -373,7 +374,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         name="image"
                                         id="main_image"
                                         autoComplete="main_image"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
@@ -382,7 +383,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </p>
                             </div>
 
-                            <div className="sm:col-span-2 has-tooltip">
+                            <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="more_images"
                                        className={`block text-sm font-medium text-${theme}-700`}>
                                     {trans('more_images')}
@@ -397,7 +398,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         name="images"
                                         id="more_images"
                                         autoComplete="more_images"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_more_images_instruction')}/>
@@ -423,7 +424,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                         <div className="relative flex items-start">
                                                             <div className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                 <input
-                                                                    onChange={e => handleSelectedCategories(e.target.checked ? selectedCategories.concat(e.target.value) : filter(selectedCategories, c => c !== e.target.value))}
+                                                                    onChange={e => handleSelectedCategories(e.target.checked, e.target.value)}
                                                                     id="categories"
                                                                     aria-describedby="categories-description"
                                                                     name="categories"
@@ -446,7 +447,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                                         <div
                                                                             className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                             <input
-                                                                                onChange={e => handleSelectedCategories(e.target.checked ? selectedCategories.concat(e.target.value) : filter(selectedCategories, c => c !== e.target.value))}
+                                                                                onChange={e => handleSelectedCategories(e.target.checked, e.target.value)}
                                                                                 id="categories"
                                                                                 aria-describedby="categories-description"
                                                                                 name="categories"
@@ -470,7 +471,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                                                 <div
                                                                                     className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                                     <input
-                                                                                        onChange={e => handleSelectedCategories(e.target.checked ? selectedCategories.concat(e.target.value) : filter(selectedCategories, c => c !== e.target.value))}
+                                                                                        onChange={e => handleSelectedCategories(e.target.checked, e.target.value)}
                                                                                         id="categories"
                                                                                         aria-describedby="categories-description"
                                                                                         name="categories"
@@ -509,11 +510,9 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                     </div>
 
                     <div className="space-y-4">
-
                         <div className={`pt-4`}>
                             <h3 className="text-lg leading-6 font-medium text-gray-900">{trans('more_details')}</h3>
                         </div>
-
                         <div className="flex flex-1 flex-col justify-start items-center w-full">
                             <div
                                 className={`grid grid-cols-2 md:grid-cols-4 md:gap-x-5 w-full`}>
@@ -530,9 +529,8 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                 id="active"
                                                 name="active"
                                                 type="radio"
-                                                defaultValue={data.active}
+                                                defaultChecked={data.active}
                                                 value={1}
-                                                checked
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="active"
@@ -546,7 +544,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                 id="active"
                                                 name="active"
                                                 type="radio"
-                                                defaultValue={data.active}
+                                                defaultChecked={!data.active}
                                                 value={0}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
@@ -575,7 +573,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                 onChange={handleChange}
                                                 id="on_home"
                                                 name="on_home"
-                                                defaultValue={data.on_home}
+                                                defaultChecked={data.on_home}
                                                 type="radio"
                                                 value={1}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
@@ -591,7 +589,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                 id="on_home"
                                                 name="on_home"
                                                 type="radio"
-                                                defaultValue={data.on_home}
+                                                defaultChecked={!data.on_home}
                                                 value={0}
                                                 checked
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
@@ -623,6 +621,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                 name="on_sale"
                                                 type="radio"
                                                 value={1}
+                                                defaultChecked={data.on_sale}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
@@ -637,7 +636,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                 name="on_sale"
                                                 type="radio"
                                                 value={0}
-                                                checked
+                                                defaultChecked={!data.on_sale}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="on_sale"
@@ -667,6 +666,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                 name="has_attributes"
                                                 type="radio"
                                                 value={1}
+                                                defaultChecked={data.has_attributes}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="has_attributes"
@@ -681,7 +681,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                                 name="has_attributes"
                                                 type="radio"
                                                 value={0}
-                                                checked
+                                                defaultChecked={!data.has_attributes}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="has_attributes"
@@ -713,6 +713,30 @@ export default function ProductCreate({users, sizes, colors, categories}) {
 
                 <div
                     className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-3/4 p-5 space-y-8 divide-y divide-gray-200`)}>
+                    <div
+                        className={`bg-${theme}-50 border-l-4 border-${theme}-800 p-4 sm:w-full lg:w-3/4 m-auto my-2 shadow-lg rounded-md m-10`}>
+                        <div className="flex items-center">
+                            <div className="flex-shrink-0">
+                                <svg className={`h-9 w-9 m-3 text-${theme}-400" xmlns="http://www.w3.org/2000/svg`}
+                                     viewBox="0 0 20 20"
+                                     fill="currentColor" aria-hidden="true">
+                                    <path fillRule="evenodd"
+                                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                          clipRule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div className="ml-3">
+                                <h3 className="mb-3 font-extrabold text-lgn">{trans('alert')}</h3>
+                                <p className={`text-sm text-${theme}-700`}>
+                                    {trans('basic_information_must_be_entered')}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `w-3/4 p-5 space-y-8 divide-y divide-gray-200`)}>
                     <div
                         className={`bg-${theme}-50 border-l-4 border-${theme}-800 p-4 sm:w-full lg:w-3/4 m-auto my-2 shadow-lg rounded-md m-10`}>
                         <div className="flex items-center">

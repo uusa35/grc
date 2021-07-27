@@ -1016,5 +1016,13 @@ return array (
     "basic_information_must_be_entered" => "يجب إضافة المعلومات الأساسية أولاً",
     "alert" => "تنبيه",
     "all_elements" => "جميع العناصر",
-    "courses" => "الدورات"
+    "courses" => "الدورات",
+    "modules" => "عناصر",
+    "all_modules_message" => "قائمة بجميع عناصر الموقع",
+    "addresses" => "العناوين",
+    "gallaries" => "معارض الصور",
+    "sections" => "أقسام الصفحات",
+    "process_success" => "عملية ناجحة",
+    "process_failure" => "عملية غير ناجحة",
+    "modal_confirmation" => "تأكيد الأمر"
 );

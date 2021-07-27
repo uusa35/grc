@@ -2,6 +2,7 @@ import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
 import {Inertia} from '@inertiajs/inertia'
 import {split, first, filter, map} from 'lodash';
+import {usePage} from "@inertiajs/inertia-react";
 
 const BackendContext = createContext({});
 const BackendContextProvider = ({children}) => {
@@ -15,18 +16,22 @@ const BackendContextProvider = ({children}) => {
     const [formTabs,setFormTabs] = useState([
         { id : 0, name: 'basic_information'},
         { id: 1 , name: 'additional_information'},
+        { id: 2 , name: 'more_images'},
     ]);
     const [modules,setModules] = useState([]);
     const [currentFormTab,setCurrentFormTab] = useState(first(formTabs));
-    console.log('the auth from BackendContext', auth);
+    const [showConfirmationModal,setShowConfirmationModal] = useState(false);
+    const [confirmationModalMessage,setConfirmationModalMessage] = useState({});
+    const [confirmationModalResponse, setConfirmationModalResponse] = useState(false);
+    const [modelAction,setModelAction] = useState({});
 
     useEffect(() => {
         Inertia.on('start', (event) => {
-            console.log(`Starting a visit to ${event.detail.visit.url}`)
+            // console.log(`Starting a visit to ${event.detail.visit.url}`)
             setCurrentRoute(split(event.detail.visit.url,'.test')[1]);
             setSysMessage([]);
         })
-        const filteredModules = map(auth.role.privileges, p => { return { name : p.name , index : p.pivot.index , main_menu : p.main_menu} });
+        const filteredModules = map(auth.role.privileges, p => { return { name : p.name , index : p.pivot.index , main_menu : p.main_menu, description : p.description, imageThumb : p.imageThumb} });
         setModules(filteredModules);
     }, []);
 
@@ -58,7 +63,15 @@ const BackendContextProvider = ({children}) => {
         currentRoute,
         currentModule,
         theme : settings.theme,
-        modules
+        modules,
+        showConfirmationModal,
+        setShowConfirmationModal,
+            setConfirmationModalMessage,
+        confirmationModalMessage,
+        confirmationModalResponse,
+        setConfirmationModalResponse,
+        modelAction,
+        setModelAction
     };
 
     return (

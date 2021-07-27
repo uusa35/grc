@@ -1,51 +1,52 @@
 import {useContext, useEffect, useMemo, useState} from "react";
 import {BackendContext} from "../../context/BackendContext";
 import {Inertia} from "@inertiajs/inertia";
-import { isArray ,isEmpty , map, first } from 'lodash';
-import { usePage } from '@inertiajs/inertia-react'
+import {isArray, isEmpty, map, first, split} from 'lodash';
+import {usePage} from '@inertiajs/inertia-react'
+import GlobalContext from "../../context/GlobalContext";
 
 const SystemMessage = () => {
-    const { sysMessage , trans ,  setSystemMessage, theme } = useContext(BackendContext);
-    const [messageType, setMessageType] = useState(sysMessage ? sysMessage.type : 'info');
+    const {sysMessage, trans, setSystemMessage, theme} = useContext(BackendContext);
     const [alertColor, setAlertColor] = useState(theme);
 
     useMemo(() => {
-        switch(messageType) {
-            case 'success':
-                setAlertColor('green');
-            case 'error':
-                setAlertColor('red');
-            case 'warning':
-                setAlertColor('blue');
+        switch (sysMessage?.type) {
+            case sysMessage.type === 'success':
+                return setAlertColor('green');
+            case sysMessage.type === 'error':
+                return setAlertColor('red');
+            case sysMessage.type === 'warning':
+                return setAlertColor('yellow');
         }
-    },[messageType])
-    const { errors } = usePage().props
+    }, [sysMessage.type])
 
+    const {errors} = usePage().props
     useEffect(() => {
-        if(!isEmpty(errors)) {
-                setSystemMessage({
-                    message : errors[0],
-                    type : 'error'
-                })
+        if (!isEmpty(errors)) {
+            setSystemMessage({
+                message: errors[0],
+                type: 'error'
+            })
         }
-    },[errors])
+    }, [errors])
 
-    // Inertia.on('error', (errors) => {
-    //     console.log('errors from inertia',errors);
-    //     setSystemMessage(setSystemMessage({
-    //         message : first(errors.detail.errors),
-    //         type : 'error'
-    //     }))
-    // })
+    Inertia.on('success', (event) => {
+        console.log(`ON SUCCESS ===> Successfully made a visit to`, event.detail.page.props)
+        const {success, error, errors} = event.detail.page.props;
+        console.log('success', success);
+        success && !isEmpty(success) ? setSystemMessage({message: success, type: 'success'}) : null;
+        errors && !isEmpty(errors) ? setSystemMessage({message: first(errors), type: 'error'}) : null;
+        error && !isEmpty(error) ? setSystemMessage({message: first(error), type: 'error'}) : null;
+    })
 
     return (
         <>
-            { sysMessage.message && <div className="flex justify-center items-center w-full">
+            {sysMessage.message && <div className="flex justify-center items-center w-full">
                 <div
                     className={`bg-${theme}-50 border-l-4 border-${theme}-800 p-4 sm:w-full lg:w-3/4 m-auto my-2 shadow-lg rounded-md m-10`}>
                     <div className="flex items-center">
                         <div className="flex-shrink-0">
-                            <svg className={`h-9 w-9 m-3 text-${alertColor}-400" xmlns="http://www.w3.org/2000/svg`}
+                            <svg className={`h-9 w-9 m-3 text-${alertColor}-600" xmlns="http://www.w3.org/2000/svg`}
                                  viewBox="0 0 20 20"
                                  fill="currentColor" aria-hidden="true">
                                 <path fillRule="evenodd"
@@ -54,8 +55,8 @@ const SystemMessage = () => {
                             </svg>
                         </div>
                         <div className="ml-3">
-                            <h3 className="mb-3 font-extrabold text-lgn">{ trans(sysMessage.type) }</h3>
-                            <p className={`text-sm text-${theme}-700`}>
+                            <h3 className="mb-3 font-extrabold text-lgn">{trans(sysMessage.type)}</h3>
+                            <p className={`text-sm text-${alertColor}-700`}>
                                 {
                                     sysMessage && isArray(sysMessage.message) ? (
                                         <ul>
@@ -69,7 +70,6 @@ const SystemMessage = () => {
                     </div>
                 </div>
             </div>}
-
         </>
     );
 }

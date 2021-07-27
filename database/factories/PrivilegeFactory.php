@@ -26,10 +26,12 @@ class PrivilegeFactory extends Factory
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
             'name' => $this->faker->name,
-            'name_ar' => $this->faker->name,
+            'name_ar' => $fakerAr->name,
             'name_en' => $this->faker->name,
+            'image' => 'square.png',
             'description_ar' => $this->faker->name,
             'description_en' => $this->faker->name,
+            'order' => $this->faker->numberBetween(1, 99),
         ];
     }
 }

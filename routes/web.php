@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SlideController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CourseController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
-use App\Models\Course;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +41,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::get('category/search', [CategoryController::class, 'search'])->name('category.search');
     Route::get('order/search', [OrderController::class, 'search'])->name('order.search');
     Route::get('course/search', [CourseController::class, 'search'])->name('course.search');
+    Route::get('slide/search', [SlideController::class, 'search'])->name('slide.search');
     Route::get('{module}/toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
     Route::get('back/{module}', [DashboardController::class, 'goBack'])->name('back');
     Route::resource('dashboard', DashboardController::class);
@@ -53,7 +54,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::resource('setting', SettingController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('order', OrderController::class);
-    Route::resource('course', Course::class);
+    Route::resource('course', CourseController::class);
+    Route::resource('slide', SlideController::class);
 });
 // General Routes
 Auth::routes();

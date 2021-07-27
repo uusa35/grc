@@ -13,13 +13,19 @@ import {BackendContext} from "./../context/BackendContext";
 import {map, sortBy, orderBy,isEmpty} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import Pagination from "./../components/partials/Pagination";
+import {Inertia} from "@inertiajs/inertia";
 
 
 const ProductIndex = ({elements, settings}) => {
-    const {trans, classNames, isRTL, currentModule , setSystemMessage} = useContext(BackendContext);
-    const [currentData, setCurrentData] = useState(elements.data);
+    const {trans, classNames, isRTL, currentModule , setSystemMessage, setShowConfirmationModal, setModelAction} = useContext(BackendContext);
+    const [currentData, setCurrentData] = useState();
     const [sortDesc, setSortDesc] = useState(true)
     const [colName, setColName] = useState('id');
+
+
+    useEffect(() => {
+        setCurrentData(elements.data);
+    },[elements.data])
 
     useMemo(() => {
         if (sortDesc) {
@@ -56,7 +62,7 @@ const ProductIndex = ({elements, settings}) => {
                     {
                         elements.data.map(element => (
                             <li key={element.id}>
-                                <a href="#"
+                                <div
                                    className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6">
                                     <span className="flex items-center truncate space-x-3">
                                       <span
@@ -64,10 +70,10 @@ const ProductIndex = ({elements, settings}) => {
                                           aria-hidden="true"
                                       />
                                       <span className="font-medium truncate text-sm leading-6">
-                                        {element.name} <span className="truncate font-normal text-gray-500"></span>
+                                          {trans('id')}: {element.id} <span className="mx-5 truncate font-normal text-gray-500">{element.name}</span>
                                       </span>
                                     </span>
-                                    <Link href={`backend/product/${element.id}`}>
+                                    <Link href={`/backend/${currentModule}/${element.id}/edit`}>
                                         <svg
                                             className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -78,7 +84,7 @@ const ProductIndex = ({elements, settings}) => {
                                                   d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                         </svg>
                                     </Link>
-                                </a>
+                                </div>
                             </li>
                         ))
                     }
@@ -199,12 +205,12 @@ const ProductIndex = ({elements, settings}) => {
                                 </thead>
                                 <tbody>
                                 {
-                                    currentData.map(element =>
+                                    currentData && currentData.map(element =>
                                         <tr className={'bg-white border-b border-gray-100'} key={element.id}>
                                             <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
                                             <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <img className="w-20 h-auto object-contain rounded-md shadow-inner"
-                                                     src={element.imageThumb} alt="{element.name}"/>
+                                                    <img className="w-20 h-20  object-contain rounded-md shadow-inner"
+                                                                                  src={element.imageThumb} alt={element.name}/>
                                             </td>
                                             <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">{element.sku}</td>
                                             <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -249,9 +255,12 @@ const ProductIndex = ({elements, settings}) => {
                                                                                         href={`/backend/${currentModule}/${element.id}/edit`}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                                            'block px-4 py-2 text-sm ltr:text-left rtl:text-right'
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 text-sm ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                                                        </svg>
                                                                                         {trans('edit')}
                                                                                     </Link>
                                                                                 )}
@@ -264,24 +273,54 @@ const ProductIndex = ({elements, settings}) => {
                                                                                         href="#"
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                                            'block px-4 py-2 text-sm'
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 text-sm ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mx-2" viewBox="0 0 20 20" fill="currentColor">
+                                                                                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                                                            <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                                                                                        </svg>
                                                                                         {trans('edit_attributes')}
                                                                                     </Link>
                                                                                 )}
                                                                             </Menu.Item>
+                                                                        </div>
+                                                                        <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
                                                                                         href={`/backend/product/toggle/activate?id=${element.id}&model=${currentModule}`}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                                            'block px-4 py-2 text-sm'
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 text-sm ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z" />
+                                                                                        </svg>
                                                                                         {trans("activate_or_deactivate")}
                                                                                     </Link>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                        </div>
+                                                                        <div className="py-1">
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <button
+                                                                                        onClick={() => {
+                                                                                            setShowConfirmationModal(true)
+                                                                                            setModelAction({ type : 'delete', model : 'product', id : element.id})
+                                                                                        }}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 text-sm ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                                        </svg>
+                                                                                        {trans("delete")}
+                                                                                    </button>
                                                                                 )}
                                                                             </Menu.Item>
                                                                         </div>

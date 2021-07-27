@@ -9,7 +9,7 @@ import {
     TrashIcon,
     UserAddIcon,
 } from '@heroicons/react/solid'
-import {InertiaLink} from "@inertiajs/inertia-react";
+import {InertiaLink, Link} from "@inertiajs/inertia-react";
 import {BackendContext} from "./context/BackendContext";
 import BackendContainer from "./components/containers/BackendContainer";
 import SideBar from "./components/partials/SideBar";
@@ -25,7 +25,8 @@ import {
     XIcon,
 } from '@heroicons/react/outline'
 import GlobalContext from "./context/GlobalContext";
-
+import { map } from 'lodash';
+import pluralize from 'pluralize';
 const user = {
     name: 'Chelsea Hagon',
     email: 'chelseahagon@example.com',
@@ -33,18 +34,6 @@ const user = {
     imageUrl:
         'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
-const navigation = [
-    {name: 'Home', href: '#', current: true},
-    {name: 'Profile', href: '#', current: false},
-    {name: 'Resources', href: '#', current: false},
-    {name: 'Company Directory', href: '#', current: false},
-    {name: 'Openings', href: '#', current: false},
-]
-const userNavigation = [
-    {name: 'Your Profile', href: '#'},
-    {name: 'Settings', href: '#'},
-    {name: 'Sign out', href: '#'},
-]
 const stats = [
     {label: 'Vacation days left', value: 12},
     {label: 'Sick days left', value: 4},
@@ -186,14 +175,45 @@ const projects = [
 ]
 const pinnedProjects = projects.filter((project) => project.pinned)
 
-export default function BackendHomePage({settings, locale}) {
-    const {sideBarOpen, toggleSideBar } = useContext(BackendContext);
+export default function BackendHomePage() {
+    const {sideBarOpen, toggleSideBar ,modules, trans, theme } = useContext(BackendContext);
     const { auth } = useContext(GlobalContext);
 
+    console.log(modules);
     return (
         <BackendContainer>
             <main className="sm:my-3">
                 <div className="w-full">
+                    <div className={`bg-white shadow-md rounded-md p-4 mb-4`}>
+                        <h2 className={`text-lg font-medium text-${theme}-900`}>{trans('modules')}</h2>
+                        <p className="mt-1 text-sm text-gray-500">
+                            {trans('all_modules_message')}
+                        </p>
+                        <ul role="list" className="py-2 grid grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-4 ">
+                            {modules.map((m) => (
+                                <li key={m.name} className={`flow-root rounded-md px-2  bg-white`}>
+                                    <div className={`relative -m-2 p-2 flex items-center space-x-4 rounded-xl hover:bg-${theme}-100 focus-within:ring-2 focus-within:ring-${theme}-500`}>
+                                        <div
+                                            className={classNames(
+                                                'flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-lg'
+                                            )}
+                                        >
+                                            <img className={`rtl:ml-3 ltr:mr-3 rounded-md w-14 h-auto`} src={m.imageThumb} alt={m.name}/>
+                                        </div>
+                                        <div>
+                                            <h3 className={`text-sm font-medium text-${theme}-900`}>
+                                                <Link href={m.main_menu ? `/backend/${m.name}/search` : `/backend/${m.name}`} className="focus:outline-none">
+                                                    <span className="absolute inset-0" aria-hidden="true" />
+                                                    {trans(pluralize(m.name))}
+                                                </Link>
+                                            </h3>
+                                            <p className={`mt-1 text-sm text-${theme}-500`}>{m.description}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                     <h1 className="sr-only">Profile</h1>
                     {/* Main 3 column grid */}
                     <div className="grid grid-cols-1 gap-1  items-start lg:grid-cols-3 lg:gap-3">

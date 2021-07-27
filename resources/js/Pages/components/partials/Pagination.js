@@ -48,7 +48,7 @@ export default function Pagination({firstPage, lastPage, currentPage}) {
                 </Link>
             </div>
             <div className="flex">
-                <div className="hidden md:-mt-px md:flex">
+                <div className="md:-mt-px md:flex">
                     {
                         range(1, (lastPage + 1)).map(p =>
                             <Link

@@ -4,9 +4,9 @@ import {BackendContext} from "../../context/BackendContext";
 const LoadingView = () => {
     const { disableLoading } = useContext(BackendContext);
 
-    useMemo(() => {
-        setTimeout(() => disableLoading(), 250);
-    },[])
+    // useMemo(() => {
+    //     setTimeout(() => disableLoading(), 250);
+    // },[])
     return (
         <div className="flex h-screen min-w-full flex-1 justify-center items-center">
             <img

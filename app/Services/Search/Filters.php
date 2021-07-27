@@ -37,8 +37,6 @@ class Filters extends QueryFilters
             ->orWhere('name_en', 'like', "%{$search}%")
             ->orWhere('description_ar', 'like', "%{$search}%")
             ->orWhere('description_en', 'like', "%{$search}%");
-//            ->orWhere('notes_ar', 'like', "%{$search}%")
-//            ->orWhere('notes_en', 'like', "%{$search}%");
     }
 
     public function name($search)
@@ -48,54 +46,8 @@ class Filters extends QueryFilters
             ->orWhere('name_en', 'like', "%{$search}%")
             ->orWhere('description_ar', 'like', "%{$search}%")
             ->orWhere('description_en', 'like', "%{$search}%");
-//            ->orWhere('notes_ar', 'like', "%{$search}%")
-//            ->orWhere('notes_en', 'like', "%{$search}%");
     }
 
-
-
-    public function product_category_id()
-    {
-        if(request()->has('user_id')) {
-            return $this->builder->whereHas('categories', function ($q) {
-                return $q->where('id', request()->product_category_id);
-            })->where('user_id', request()->user_id);
-        } else {
-            return $this->builder->whereHas('categories', function ($q) {
-                return $q->where('id', request()->product_category_id);
-            });
-        }
-    }
-
-    public function service_category_id()
-    {
-        return $this->builder->whereHas('categories', function ($q) {
-            return $q->where('id', request()->service_category_id);
-        });
-    }
-
-    public function classified_category_id()
-    {
-        $category = $this->category->whereId(request()->classified_category_id)->with('children')->first();
-        if ($category->children->isEmpty()) {
-            return $this->builder->where('category_id', request()->classified_category_id);
-        } else {
-            $ids = $category->children->pluck('id')->merge($category->id)->toArray();
-            return $this->builder->whereIn('category_id', $ids);
-        }
-//        return $this->builder->whereHas('categories', function ($q) {
-//            return $q->where('category_id',request()->classified_category_id);
-//        })->orWhere('category_id', request()->classified_category_id);
-        return $this->builder->where('category_id', request()->classified_category_id);
-    }
-
-    public function user_category_id()
-    {
-//        return $this->builder->where('category_id', request()->user_category_id);
-        return $this->builder->whereHas('categories', function ($q) {
-            return $q->whereIn('category_id', is_array(request()->user_category_id) ? request()->user_category_id : [request()->user_category_id]);
-        });
-    }
 
     public function categories()
     {
@@ -176,5 +128,25 @@ class Filters extends QueryFilters
     public function free()
     {
         return $this->builder->where('free', request()->free);
+    }
+
+    public function slideable_id()
+    {
+        return $this->builder->where('slideable_id', request()->slideable_id);
+    }
+
+    public function slideable_type()
+    {
+        return $this->builder->where('slideable_type', request()->slideable_type);
+    }
+
+    public function taggable_id()
+    {
+        return $this->builder->where('taggable_id', request()->taggable_id);
+    }
+
+    public function taggable_type()
+    {
+        return $this->builder->where('taggable_type', request()->taggable_type);
     }
 }

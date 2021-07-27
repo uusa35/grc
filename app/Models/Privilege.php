@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Privilege extends PrimaryModel
 {
     use HasFactory;
-    protected $localeStrings = ['name'];
     protected $guarded = [''];
+    protected $appends = [ 'imageThumb','description','name'];
+
     public function roles()
     {
         return $this->belongsToMany(Role::class)->withPivot('index','view', 'create', 'update', 'delete');

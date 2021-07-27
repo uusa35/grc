@@ -6,7 +6,6 @@ import GlobalContext from "../../../context/GlobalContext";
 const FormBtns = () => {
     const { trans , theme, currentModule } = useContext(BackendContext)
     const { previousUrl } = useContext(GlobalContext);
-    console.log('pre', previousUrl);
     return (
         <div className="py-3">
             <div className="flex justify-end">
