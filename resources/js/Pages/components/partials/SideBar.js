@@ -4,9 +4,11 @@ import {Fragment, useContext, useMemo, useState} from "react";
 import {ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon} from "@heroicons/react/outline";
 import {BackendContext} from "../../context/BackendContext";
 import GlobalContext from "../../context/GlobalContext";
-import {Link} from '@inertiajs/inertia-react'
+import {InertiaLink, Link} from '@inertiajs/inertia-react'
 import pluralize from 'pluralize';
 import {filter, map, first} from 'lodash';
+import route from 'ziggy-js';
+
 
 const teams = [
     {name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500'},
@@ -29,8 +31,8 @@ const navigation = [
 ]
 
 const SideBar = () => {
-    const {sideBarOpen, toggleSideBar, trans, currentModule, classNames, modules } = useContext(BackendContext);
-    const {settings, auth } = useContext(GlobalContext);
+    const {sideBarOpen, toggleSideBar, trans, currentModule, classNames, modules} = useContext(BackendContext);
+    const {settings, auth} = useContext(GlobalContext);
 
     return (
         <>
@@ -249,8 +251,10 @@ const SideBar = () => {
                                                   alt=""
                                               />
                                               <span className="flex-1 flex flex-col min-w-0">
-                                                <span className="text-gray-900 text-sm font-medium truncate">{auth.name}</span>
-                                                <span className="text-gray-500 ltr:text-left rtl:text-right text-sm truncate">{auth.role.name}</span>
+                                                <span
+                                                    className="text-gray-900 text-sm font-medium truncate">{auth.name}</span>
+                                                <span
+                                                    className="text-gray-500 ltr:text-left rtl:text-right text-sm truncate">{auth.role.name}</span>
                                               </span>
                                             </span>
                                             <SelectorIcon
@@ -327,7 +331,7 @@ const SideBar = () => {
                                             m.main_menu && m.index ?
                                                 <Link
                                                     key={m.name}
-                                                    href={`/backend/${m.name}${m.main_menu ? '/search' : null}`}
+                                                    href={route(`backend.${m.name}.search`)}
                                                     className={classNames(
                                                         m.name === currentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                                                         'group flex items-center py-2 text-sm font-medium rounded-md'

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
@@ -29,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //    session()->put(['locale' => ])
-Route::get('/', [HomeController::class, 'index'])->name('frontend');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('frontend.home');
 Route::get('contactus', [ContactusController::class, 'index']);
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth'], function () {
@@ -43,7 +44,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::get('course/search', [CourseController::class, 'search'])->name('course.search');
     Route::get('slide/search', [SlideController::class, 'search'])->name('slide.search');
     Route::get('{module}/toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
-    Route::get('back/{module}', [DashboardController::class, 'goBack'])->name('back');
+    Route::get('back/{module?}', [DashboardController::class, 'goBack'])->name('back');
     Route::resource('dashboard', DashboardController::class);
     Route::resource('product', ProductController::class);
     Route::resource('service', ServiceController::class);
@@ -56,6 +57,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::resource('order', OrderController::class);
     Route::resource('course', CourseController::class);
     Route::resource('slide', SlideController::class);
+    Route::resource('image', ImageController::class)->only('destroy');
 });
 // General Routes
 Auth::routes();

@@ -6,7 +6,7 @@
 
 
 .tooltip {
-    @apply invisible absolute;
+    @apply invisible relative;
 }
 
 .has-tooltip:hover .tooltip {

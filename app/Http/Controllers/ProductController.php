@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStore;
+use App\Http\Requests\ProductUpdate;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
@@ -31,7 +32,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $elements = Product::with('product_attributes', 'color', 'size')->paginate(SELF::TAKE_LEAST);
+        $elements = Product::with('product_attributes', 'color', 'size')->orderBy('id','desc')->paginate(SELF::TAKE_LEAST);
         return inertia('Product/ProductIndex', compact('elements'));
     }
 
@@ -136,24 +137,27 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdate $request, Product $product)
     {
-//        $element = Product::whereId($product->id)->first();
-        $updated = $product->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'start_sale', 'end_sale', 'videos']));
-        if ($product) {
-            $product->update([
+//        $request->files && $request->files->get('data')['image'] ? $request->files->add($request->files->get('data')['image']) : null;
+//        dd($request->all());
+        $updated = $product->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos','qr','size_chart_image']));
+        if ($updated) {
+//            dd('stop');
+//            dd($request->all());
+//            $product->update([
 //                'start_sale' => $start_sale ? $start_sale : null,
 //                'end_sale' => $end_sale ? $end_sale : null,
 //                'sale_price' => $request->sale_price ? $request->sale_price : $request->price
-            ]);
-            $product->tags()->sync($request->tags);
-            $product->videos()->sync($request->videos);
-            $product->categories()->sync($request->categories);
+//            ]);
+            $request->has('tags') ? $product->tags()->sync($request->tags) : null;
+            $request->has('videos') ? $product->videos()->sync($request->videos) : null;
+            $request->has('categories') ? $product->categories()->sync($request->categories) : null;
             $request->hasFile('image') ? $this->saveMimes($product, $request, ['image'], ['1080', '1440'], true) : null;
             $request->hasFile('qr') ? $this->saveMimes($product, $request, ['qr'], ['300', '300'], true) : null;
-            $request->has('images') ? $this->saveGallery($product, $request, 'images', ['1080', '1440'], true) : null;
+            $request->hasFile('images') ? $this->saveGallery($product, $request, 'images', ['1080', '1440'], true) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($product, $request, ['size_chart_image'], ['1080', '1440'], true) : null;
-            return redirect()->route('backend.product.edit', $product->id)->with('success', trans('general.process_success'));
+            return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.edit', $product->id)->with('error', trans('general.process_failure'));
     }

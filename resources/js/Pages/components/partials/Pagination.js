@@ -6,8 +6,9 @@ import GlobalContext from "../../context/GlobalContext";
 import {InertiaLink} from "@inertiajs/inertia-react";
 import {Link} from '@inertiajs/inertia-react'
 import {forEach, range} from 'lodash';
+import route from 'ziggy-js';
 
-export default function Pagination({firstPage, lastPage, currentPage}) {
+export default function Pagination({firstPage, lastPage, currentPage, type }) {
     const [search, setSearch] = useState('');
     const {trans, classNames, theme, currentModule} = useContext(BackendContext)
 
@@ -34,14 +35,14 @@ export default function Pagination({firstPage, lastPage, currentPage}) {
                     />
                 </div>
                 <Link
-                    href={search.length > 2 ? `/backend/${currentModule}/search?search=${search}` : '#'}
+                    href={search.length > 2 ? route(`backend.${currentModule}.search`, { search }) : '#'}
                     disabled={search.length <= 2}
                     className={`order-0 inline-flex items-center px-5 h-8.5 mt-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
                 >
                     {trans("search")}
                 </Link>
                 <Link
-                    href={`/backend/${currentModule}/search`}
+                    href={route(`backend.${currentModule}.search`)}
                     className={`order-0 inline-flex items-center px-5 h-8.5 mt-1 border border-transparent shadow-sm text-xs text-center md:text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
                 >
                     {trans("reset")}
@@ -50,13 +51,13 @@ export default function Pagination({firstPage, lastPage, currentPage}) {
             <div className="flex">
                 <div className="md:-mt-px md:flex">
                     {
-                        range(1, (lastPage + 1)).map(p =>
+                        range(1, (lastPage + 1)).map(page =>
                             <Link
-                                key={p}
-                                href={`/backend/${currentModule}/search?page=${p}`}
-                                className={classNames(currentPage === p ? `border-${theme}-700 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-700 hover:border-${theme}-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium`)}
+                                key={page}
+                                href={route(`backend.${currentModule}.search`, { page })}
+                                className={classNames(currentPage === page ? `border-${theme}-700 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-700 hover:border-${theme}-300 border-t-2 pt-4 px-4 inline-flex items-center text-sm font-medium`)}
                             >
-                                {p}
+                                {page}
                             </Link>
                         )
                     }

@@ -15,7 +15,8 @@ class Product extends PrimaryModel
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $appends = ['imageThumb', 'imageLarge', 'name', 'description','type'];
     protected $casts = [
-        'price' => 'float'
+        'price' => 'float',
+        'sale_price' => 'float'
     ];
 
     public function user()

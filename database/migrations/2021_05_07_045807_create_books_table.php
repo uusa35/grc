@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -44,8 +45,8 @@ class CreateBooksTable extends Migration
             $table->string('video_url_four')->nullable();
             $table->string('video_url_five')->nullable();
 
-            $table->dateTime('start_sale')->nullable();
-            $table->dateTime('end_sale')->nullable();
+            $table->timestamp('start_sale')->default(Carbon::now())->nullable();
+            $table->timestamp('end_sale')->default(Carbon::now())->nullable();
             $table->boolean('active')->default(true);
             $table->boolean('check_stock')->default(true);
             $table->boolean('is_hot_deal')->default(false);

@@ -14,6 +14,7 @@ import {map, sortBy, orderBy,isEmpty} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import Pagination from "./../components/partials/Pagination";
 import {Inertia} from "@inertiajs/inertia";
+import route from 'ziggy-js';
 
 
 const ProductIndex = ({elements, settings}) => {
@@ -50,7 +51,7 @@ const ProductIndex = ({elements, settings}) => {
     return (
         <BackendContainer>
             <Pagination
-                type={currentModule}
+                type={'product'}
                 currentPage={elements.current_page}
                 lastPage={elements.last_page}
             />
@@ -73,7 +74,7 @@ const ProductIndex = ({elements, settings}) => {
                                           {trans('id')}: {element.id} <span className="mx-5 truncate font-normal text-gray-500">{element.name}</span>
                                       </span>
                                     </span>
-                                    <Link href={`/backend/${currentModule}/${element.id}/edit`}>
+                                    <Link href={route('backend.product.edit', element.id)}>
                                         <svg
                                             className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

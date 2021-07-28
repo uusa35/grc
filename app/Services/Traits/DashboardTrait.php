@@ -153,10 +153,11 @@ trait DashboardTrait
             }
             $className = 'App\Models\\' . ucfirst($request->model);
             $element = new $className();
-            if (request()->id) {
-                $element = $element->latest()->first();
+            if ($request->id) {
+                $element = $element->whereId($request->id)->with('images')->first();
+
             } else {
-                $element = $element->whereId(requset()->id)->with('images')->first();
+                $element = $element->latest()->first();
             }
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], true) : null;;
             return response()->json(['message' => trans('general.process_success')], 200);
@@ -168,6 +169,6 @@ trait DashboardTrait
     public function goBack(Request $request)
     {
 
-        return request()->module ? redirect()->route('backend.' . $request->module . '.search') : redirect()->route('backend.home');
+        return request()->module ? redirect()->route('backend.' . $request->module . '.index') : redirect()->back();
     }
 }

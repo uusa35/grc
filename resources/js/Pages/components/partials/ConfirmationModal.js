@@ -6,6 +6,7 @@ import {BackendContext} from "../../context/BackendContext";
 import PropTypes from 'prop-types';
 import {useForm} from "@inertiajs/inertia-react";
 import {Inertia} from "@inertiajs/inertia";
+import route from 'ziggy-js';
 
 export default function ConfirmationModal() {
     const {
@@ -19,8 +20,9 @@ export default function ConfirmationModal() {
         modelAction,
         classNames,
         theme,
+        currentModule
     } = useContext(BackendContext);
-    const {submit, data, setData, delete: destroy, progress} = useForm({
+    const {submit, setData, delete: destroy,} = useForm({
         id: ''
     })
     const cancelButtonRef = useRef(null)
@@ -42,21 +44,16 @@ export default function ConfirmationModal() {
             setData('id', id);
             setShowConfirmationModal(!showConfirmationModal)
             setConfirmationModalResponse(!confirmationModalResponse)
-            submit(type, `/backend/${model}/${id}`)
+            submit(type, route(`backend.${model}.destroy`, id))
         }
     }
 
     useEffect(() => {
         if (modelAction.type && modelAction.model) {
-            console.log('here');
             const {id, model, type} = modelAction;
             setConfirmationModalMessage({title: `${trans(type)} ${trans(model)}`, message: trans('modal_confirmation')})
         }
     }, [modelAction])
-
-    console.log('modelAction', modelAction);
-    console.log('confirmationResponse', confirmationModalResponse)
-    console.log('showConfirmation', showConfirmationModal)
 
     return (
         <Transition.Root show={showConfirmationModal} as={Fragment}>

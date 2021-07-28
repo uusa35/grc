@@ -22,7 +22,7 @@ class PrivilegesTableSeeder extends Seeder
             'timing' => false,
             'role' => false,
             'user' => true,
-            'setting' => true,
+            'setting' => false,
             'currency' => false,
             'video' => false,
             'country' => false,
