@@ -13,7 +13,7 @@ const BackendContextProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isRTL, setIsRtl] = useState(locale === 'ar');
     const [sideBarOpen, setSideBarOpen] = useState(false);
-    const [currentRoute, setCurrentRoute] = useState('');
+    const [currentRoute, setCurrentRoute] = useState(route().current());
     const [currentModule, setCurrentModule] = useState('home');
     const [sysMessage, setSysMessage] = useState([])
     const [formTabs, setFormTabs] = useState([
@@ -30,11 +30,6 @@ const BackendContextProvider = ({children}) => {
     const [currentBreadCrumbs, setCurrentBreadCrumbs] = useState({})
 
     useEffect(() => {
-        Inertia.on('start', (event) => {
-            // console.log(`Starting a visit to ====>  ${event.detail}`)
-            setCurrentRoute(split(event.detail.visit.url, '.test')[1]);
-            setSysMessage([]);
-        })
         const filteredModules = map(auth.role.privileges, p => {
             return {
                 name: p.name,
@@ -45,14 +40,14 @@ const BackendContextProvider = ({children}) => {
             }
         });
         setModules(filteredModules);
+        Inertia.on('finish', () => {
+            const currentRoute = route().current();
+            const breadCrumbs = split(currentRoute, '.');
+            setCurrentModule(breadCrumbs[1]);
+            setCurrentBreadCrumbs(breadCrumbs);
+            setCurrentRoute(currentRoute)
+        })
     }, []);
-
-    useMemo(() => {
-        const currentRoute = route().current();
-        const breadCrumbs = split(currentRoute, '.');
-        setCurrentModule(breadCrumbs[1]);
-        setCurrentBreadCrumbs(breadCrumbs);
-    }, [route().current()])
 
     const context = {
         isLoading,

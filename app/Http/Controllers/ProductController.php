@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStore;
 use App\Http\Requests\ProductUpdate;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
@@ -32,7 +33,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $elements = Product::with('product_attributes', 'color', 'size')->orderBy('id','desc')->paginate(SELF::TAKE_LEAST);
+        $elements = Product::with('product_attributes', 'color', 'size', 'user')->orderBy('id', 'desc')->paginate(SELF::TAKE_LEAST);
         return inertia('Product/ProductIndex', compact('elements'));
     }
 
@@ -59,12 +60,13 @@ class ProductController extends Controller
         $users = User::active()->companies()->get();
         $sizes = Size::active()->get();
         $colors = Color::active()->get();
+        $brands = Brand::active()->get();
         $categories = Category::onlyParent()->onlyForProducts()->with(['children' => function ($q) {
             return $q->onlyForProducts()->with(['children' => function ($q) {
                 return $q->onlyForProducts();
             }]);
         }])->get();
-        return inertia('Product/ProductCreate', compact('users', 'sizes', 'colors', 'categories'));
+        return inertia('Product/ProductCreate', compact('users', 'sizes', 'colors', 'categories','brands'));
     }
 
     /**
@@ -75,16 +77,8 @@ class ProductController extends Controller
      */
     public function store(ProductStore $request)
     {
-        //        dd($request->images);
-//        $end_sale = $request->has('end_sale') ? Carbon::parse(str_replace('-', '', $request->end_sale))->toDateTimeString() : null;
-//        $start_sale = $request->has('start_sale') ? Carbon::parse(str_replace('-', '', $request->start_sale))->toDateTimeString() : null;
         $element = Product::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'start_sale', 'end_sale', 'videos']));
         if ($element) {
-            $element->update([
-//                'start_sale' => $start_sale ? $start_sale : null,
-//                'end_sale' => $end_sale ? $end_sale : null,
-//                'sale_price' => $request->sale_price ? $request->sale_price : $request->price
-            ]);
             $element->tags()->sync($request->tags);
             $element->videos()->sync($request->videos);
             $element->categories()->sync($request->categories);
@@ -92,7 +86,7 @@ class ProductController extends Controller
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], true) : null;
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], true) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($element, $request, ['size_chart_image'], ['1080', '1440'], true) : null;
-            return redirect()->route('backend.product.edit', $element->id)->with('success', trans('process_success'));
+            return redirect()->route('backend.product.edit', $element->id)->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.create')->with('error', trans('general.process_failure'));
     }
@@ -120,6 +114,7 @@ class ProductController extends Controller
         $users = User::active()->companies()->get();
         $sizes = Size::active()->get();
         $colors = Color::active()->get();
+        $brands = Brand::active()->get();
         $categories = Category::onlyParent()->onlyForProducts()->with(['children' => function ($q) {
             return $q->onlyForProducts()->with(['children' => function ($q) {
                 return $q->onlyForProducts();
@@ -127,7 +122,7 @@ class ProductController extends Controller
         }])->get();
         $product = $product->whereId($product->id)->with('images', 'user', 'categories')->first();
         $productCategories = $product->categories->pluck('id')->toArray();
-        return inertia('Product/ProductEdit', compact('users', 'sizes', 'colors', 'categories', 'product', 'productCategories'));
+        return inertia('Product/ProductEdit', compact('users', 'sizes', 'colors', 'categories', 'product', 'productCategories','brands'));
     }
 
     /**
@@ -139,17 +134,8 @@ class ProductController extends Controller
      */
     public function update(ProductUpdate $request, Product $product)
     {
-//        $request->files && $request->files->get('data')['image'] ? $request->files->add($request->files->get('data')['image']) : null;
-//        dd($request->all());
-        $updated = $product->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos','qr','size_chart_image']));
+        $updated = $product->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos', 'qr', 'size_chart_image']));
         if ($updated) {
-//            dd('stop');
-//            dd($request->all());
-//            $product->update([
-//                'start_sale' => $start_sale ? $start_sale : null,
-//                'end_sale' => $end_sale ? $end_sale : null,
-//                'sale_price' => $request->sale_price ? $request->sale_price : $request->price
-//            ]);
             $request->has('tags') ? $product->tags()->sync($request->tags) : null;
             $request->has('videos') ? $product->videos()->sync($request->videos) : null;
             $request->has('categories') ? $product->categories()->sync($request->categories) : null;

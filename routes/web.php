@@ -35,6 +35,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('frontend.home');
 Route::get('contactus', [ContactusController::class, 'index']);
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
+    Route::get('/home', [DashboardController::class, 'index'])->name('home.index');
     Route::get('product/search', [ProductController::class, 'search'])->name('product.search');
     Route::get('service/search', [ServiceController::class, 'search'])->name('service.search');
     Route::get('user/search', [UserController::class, 'search'])->name('user.search');

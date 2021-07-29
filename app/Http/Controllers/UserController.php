@@ -26,7 +26,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $elements = User::orderBy('id','desc')->paginate(SELF::TAKE_LEAST);
+        return inertia('User/UserIndex', compact('elements'));
     }
 
     public function search(UserFilters $filters)
@@ -36,7 +37,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = User::filters($filters)->active()->notAdmins()->orderBy('id', 'desc')->paginate(self::TAKE_MID);
+        $elements = User::filters($filters)->active()->notAdmins()->orderBy('id', 'desc')->paginate(self::TAKE_LEAST);
         return inertia('User/UserIndex', compact('elements'));
     }
 
@@ -67,10 +68,9 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User  $user)
     {
-        $element = User::whereId($id)->with('role.privileges')->first();
-        dd($element);
+        $element = $user->with('role.privileges')->first();
         return inertia('User/UserShow', compact('element'));
     }
 
@@ -80,9 +80,9 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User  $user)
     {
-        $element = User::whereId($id)->with('role.privileges')->first();
+        $element = $user->whereId($user->id)->with('categories','images')->first();
         return inertia('User/UserShow', compact('element'));
     }
 

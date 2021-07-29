@@ -15,6 +15,7 @@ import {Link} from "@inertiajs/inertia-react";
 import Pagination from "./../components/partials/Pagination";
 import {Inertia} from "@inertiajs/inertia";
 import route from 'ziggy-js';
+import LocalizedText from "../components/widgets/LocalizedText";
 
 
 const ProductIndex = ({elements, settings}) => {
@@ -194,12 +195,17 @@ const ProductIndex = ({elements, settings}) => {
                                             </svg>}
                                         {trans('price')}
                                     </th>
-
                                     <th
                                         scope="col"
                                         className=" px-3 py-3 rtl:text-right ltr:text-left"
                                     >
                                         {trans('attributes')}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className=" px-3 py-3 rtl:text-right ltr:text-left"
+                                    >
+                                        {trans('owner_author')}
                                     </th>
 
                                 </tr>
@@ -344,6 +350,15 @@ const ProductIndex = ({elements, settings}) => {
                                                             <li key={element.name}>{element.color.name} - {element.size.name}</li>
                                                     }
                                                 </ul>
+                                            </td>
+                                            <td className="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {
+                                                    element.user && <Link
+                                                        href={route('backend.user.edit', element.user.id)}
+                                                    >
+                                                        <LocalizedText length={10} en={element.user.name} ar={element.user.name}/>
+                                                    </Link>
+                                                }
                                             </td>
                                         </tr>
                                     )

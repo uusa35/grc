@@ -708,7 +708,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
 
                     </div>
-                    <FormBtns/>
+                    <FormBtns type={'product'}/>
                 </form>
 
                 <div

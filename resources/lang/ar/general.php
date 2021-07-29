@@ -1038,5 +1038,6 @@ return array (
     "searches" => "البحث",
     "start_sale" => " بداية الخصم",
     "end_sale" => "نهاية الخصم",
-    "current_date" => "التاريخ الحالي"
+    "current_date" => "التاريخ الحالي",
+    "owner_author" => "المالك"
 );

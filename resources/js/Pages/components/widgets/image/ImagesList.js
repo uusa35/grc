@@ -9,7 +9,7 @@ export default function ImagesList({images}) {
         <>
 
             { !isEmpty(images) && images ? <ul role="list"
-                 className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+                 className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                 {images.map((img) => (
                     <li key={img.id} className="relative">
                         <div

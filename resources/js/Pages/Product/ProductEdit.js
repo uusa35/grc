@@ -13,7 +13,7 @@ import route from 'ziggy-js';
 import moment from 'moment';
 
 
-export default function ProductEdit({users, sizes, colors, categories, product, productCategories}) {
+export default function ProductEdit({users, sizes, colors, categories, product, productCategories, brands }) {
     const [selectedCategories, setSelectedCategories] = useState(productCategories);
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, theme, currentFormTab, currentModule, getImageThumb} = useContext(BackendContext)
@@ -127,9 +127,6 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
 
     }
 
-    console.log('moment', product.start_sale)
-    console.log('moment', moment(product.start_sale).format('DD/MM/Y hh:mm a'))
-
     return (
         <BackendContainer>
             <FormTabsContainer>
@@ -137,10 +134,11 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                     onSubmit={submit}
                     method="put"
                     encType="multipart/form-data"
+                    className={' sm:w-full'}
                 >
                     <input type="hidden" name="_method" value="put"/>
                     <div
-                        className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full px-10 space-y-3`)}>
+                        className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
                         <div className={`pt-4`}>
                             <h3 className={`text-lg leading-6 font-medium text-${theme}-900`}>{trans('create')} {trans(currentModule)}</h3>
                             <p className="mt-1 text-sm text-gray-500">
@@ -746,12 +744,12 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                             </div>
 
                         </div>
-                        <FormBtns/>
+                        <FormBtns type={'product'}/>
                     </div>
 
 
                     <div
-                        className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full px-10 space-y-4`)}>
+                        className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
 
                         <div className={`pt-4`}>
                             <h3 className={`text-lg leading-6 font-medium text-${theme}-900`}>{trans('create')} {trans(currentModule)}</h3>
@@ -1028,6 +1026,33 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     <span className={`text-extrabold text-sm text-black`}>{trans('current_date')} : {moment(product.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                     {errors.end_sale && <div className={`text-red-600`}>{errors.end_sale}</div>}
+                                </p>
+                            </div>
+                            {/* brand_id */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="brand_id" className="block text-sm font-medium text-gray-700">
+                                    {trans('brand')}
+                                </label>
+                                <div className="mt-1">
+                                    <select
+                                        onChange={handleChange}
+                                        id="brand_id"
+                                        name="brand_id"
+                                        value={data.brand_id}
+                                        autoComplete="brand_id"
+                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                    >
+                                        {
+                                            brands.map(u => (
+                                                <option key={u.id} value={u.id}
+                                                >{u.name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <ToolTipWidget message={trans('product_user_instruction')}/>
+                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                    {errors.brand_id && <div className={`text-red-600`}>{errors.brand_id}</div>}
                                 </p>
                             </div>
                             {/* size chart*/}
@@ -1474,16 +1499,59 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                         </div>
 
 
-                        <FormBtns/>
+                        <FormBtns type={'product'}/>
                     </div>
 
-                </form>
+
 
                 <div
-                    className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `w-full p-5 space-y-8 divide-y divide-gray-200`)}>
+                    className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col px-20 sm:px-10 space-y-4`)}>
 
+                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start pt-10">
+                        <div className="mt-1 sm:mt-0 sm:col-span-full">
+                            <div className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div className="space-y-1 text-center">
+                                    <svg
+                                        className="mx-auto h-12 w-12 text-gray-400"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        viewBox="0 0 48 48"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                            strokeWidth={2}
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                    <div className="flex text-sm text-gray-600">
+                                        <label
+                                            htmlFor="file-upload"
+                                            className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                        >
+                                        </label>
+                                        <p className="pl-1">
+                                            <input
+                                                onChange={e => handleImages(e.target.files)}
+                                                type="file"
+                                                multiple
+                                                name="images"
+                                                id="more_images"
+                                                autoComplete="more_images"
+                                                className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                            />
+                                        </p>
+                                    </div>
+                                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <FormBtns type={'product'}/>
                     <ImagesList images={product.images} id={product.id} type={'product'}/>
                 </div>
+                </form>
 
             </FormTabsContainer>
 

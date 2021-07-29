@@ -1,6 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import {HomeIcon} from '@heroicons/react/solid'
-import {useContext} from "react";
+import {useContext, Fragment} from "react";
 import GlobalContext from "../../context/GlobalContext";
 import {BackendContext} from "../../context/BackendContext";
 import {Link} from "@inertiajs/inertia-react";
@@ -18,7 +18,7 @@ export default function BreadCrumbs() {
                     <div className="flex items-center">
                         {
                             currentBreadCrumbs && map(currentBreadCrumbs, (b, i) =>
-                                <>
+                                <Fragment key={i}>
                                     { i === 0 ? <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/> :
                                         <svg
                                             className={`mx-2 flex-shrink-0 h-5 w-5 text-${theme}-300`}
@@ -37,7 +37,7 @@ export default function BreadCrumbs() {
                                     >
                                         {trans(pluralize(b))}
                                     </Link>
-                                </>
+                                </Fragment>
                             )
                         }
                     </div>

@@ -15,8 +15,7 @@ import ConfirmationModal from "../partials/ConfirmationModal";
 
 const BackendContainer = ({children, showPagination}) => {
     const {enableLoading, disableLoading, isLoading, toggleSideBar, sysMessage} = useContext(BackendContext);
-    Inertia.on('start', () => enableLoading())
-    Inertia.on('finish', () => disableLoading())
+
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold">
 
@@ -30,9 +29,7 @@ const BackendContainer = ({children, showPagination}) => {
                         <BreadCrumbs/>
                         <div className="mx-3">
                             <SystemMessage/>
-                            {
-                                isLoading ? <LoadingView/> : children
-                            }
+                            {children}
                         </div>
                     </div>
                 </div>
@@ -44,3 +41,8 @@ const BackendContainer = ({children, showPagination}) => {
 
 
 export default BackendContainer;
+
+
+{/*{*/}
+{/*    isLoading ? <LoadingView/> : children*/}
+{/*}*/}

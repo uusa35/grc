@@ -226,7 +226,7 @@ const SideBar = () => {
             <div className="hidden lg:flex lg:flex-shrink-0">
                 <div className="flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-gray-100">
                     <div className="flex justify-center items-center flex-shrink-0 px-6">
-                        <Link href="/" className="">
+                        <Link href={route(`backend.home`)} className="">
                             <img
                                 className="h-16 w-auto m-auto "
                                 src={settings.imageThumb}

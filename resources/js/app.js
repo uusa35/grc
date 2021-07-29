@@ -15,6 +15,7 @@ createInertiaApp({
     setup({el, App, props}) {
         const {translations, guest, settings, auth} = props.initialPage.props;
         const  locale = document.getElementById('locale').innerHTML;
+        moment.locale(locale);
         const {component, url} = props.initialPage;
         return render(
             <GlobalContext.Provider value={{translations, auth, guest, locale, settings, url, component}}>

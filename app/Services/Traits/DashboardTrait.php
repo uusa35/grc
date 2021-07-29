@@ -168,7 +168,6 @@ trait DashboardTrait
 
     public function goBack(Request $request)
     {
-
-        return request()->module ? redirect()->route('backend.' . $request->module . '.index') : redirect()->back();
+        return request()->has('module') ? redirect()->route('backend.' . $request->module . '.index') : redirect()->back();
     }
 }
