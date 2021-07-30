@@ -17,7 +17,7 @@ class PrivilegesTableSeeder extends Seeder
         $privileges = [
             'category' => false,
             'product' => true,
-            'slide' => true,
+            'slide' => false,
             'service' => true,
             'timing' => false,
             'role' => false,

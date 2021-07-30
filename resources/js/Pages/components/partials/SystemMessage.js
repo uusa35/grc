@@ -21,15 +21,16 @@ const SystemMessage = () => {
         }
     }, [sysMessage])
 
-    // const {errors} = usePage().props
-    // useEffect(() => {
-    //     if (!isEmpty(errors)) {
-    //         setSystemMessage({
-    //             message: errors[0],
-    //             type: 'error'
-    //         })
-    //     }
-    // }, [errors])
+    const {errors} = usePage().props
+    console.log('errors', errors);
+    useEffect(() => {
+        if (!isEmpty(errors)) {
+            setSystemMessage({
+                message: errors[0],
+                type: 'error'
+            })
+        }
+    }, [errors])
 
 
 

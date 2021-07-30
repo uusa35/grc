@@ -130,14 +130,14 @@ class Filters extends QueryFilters
         return $this->builder->where('free', request()->free);
     }
 
-    public function slideable_id()
+    public function slidable_id()
     {
-        return $this->builder->where('slideable_id', request()->slideable_id);
+        return $this->builder->where('slidable_id', request()->slidable_id);
     }
 
-    public function slideable_type()
+    public function slidable_type()
     {
-        return $this->builder->where('slideable_type', request()->slideable_type);
+        return $this->builder->where('slidable_type', 'App\Models\\' . ucfirst(request()->slidable_type));
     }
 
     public function taggable_id()
@@ -147,6 +147,6 @@ class Filters extends QueryFilters
 
     public function taggable_type()
     {
-        return $this->builder->where('taggable_type', request()->taggable_type);
+        return $this->builder->where('taggable_type', 'App\Models\\' . ucfirst(request()->taggable_type));
     }
 }

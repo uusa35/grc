@@ -26,6 +26,7 @@ trait DashboardTrait
 
     public function toggleActivate(Request $request)
     {
+//        dd($request->all());
         $validate = validator($request->all(), [
             'model' => 'string|required',
             'id' => 'integer|required'

@@ -5,7 +5,7 @@ import GlobalContext from "../../context/GlobalContext";
 import {BackendContext} from "../../context/BackendContext";
 import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
-import {map} from 'lodash';
+import {isEmpty, map} from 'lodash';
 import route from 'ziggy-js'
 
 export default function BreadCrumbs() {
@@ -17,7 +17,7 @@ export default function BreadCrumbs() {
                 <li>
                     <div className="flex items-center">
                         {
-                            currentBreadCrumbs && map(currentBreadCrumbs, (b, i) =>
+                            !isEmpty(currentBreadCrumbs) ?  map(currentBreadCrumbs, (b, i) =>
                                 <Fragment key={i}>
                                     { i === 0 ? <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/> :
                                         <svg
@@ -38,7 +38,12 @@ export default function BreadCrumbs() {
                                         {trans(pluralize(b))}
                                     </Link>
                                 </Fragment>
-                            )
+                            ) : <Link
+                                className="flex flex- flex-row text-sm font-medium text-gray-500 hover:text-gray-700"
+                                href={route('home')}>
+                                <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>
+                                {trans('home')}
+                            </Link>
                         }
                     </div>
                 </li>

@@ -36,7 +36,7 @@ class OrderController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Order::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
+        $elements = Order::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN)->appends(request()->except(['page','_token']));
         return inertia('Order/OrderIndex', compact('elements'));
     }
     /**

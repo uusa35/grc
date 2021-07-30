@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $elements = User::orderBy('id','desc')->paginate(SELF::TAKE_LEAST);
+        $elements = User::orderBy('id','desc')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('User/UserIndex', compact('elements'));
     }
 
@@ -37,7 +37,7 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = User::filters($filters)->active()->notAdmins()->orderBy('id', 'desc')->paginate(self::TAKE_LEAST);
+        $elements = User::filters($filters)->active()->notAdmins()->orderBy('id', 'desc')->paginate(self::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('User/UserIndex', compact('elements'));
     }
 

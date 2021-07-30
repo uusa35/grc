@@ -18,6 +18,7 @@ class SlideController extends Controller
     {
         $this->authorizeResource(Slide::class);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,18 +26,32 @@ class SlideController extends Controller
      */
     public function index()
     {
-        $elements = Slide::paginate(SELF::TAKE_LEAST);
+        $validate = validator(request()->all(), [
+            'slidable_id' => 'required|integer',
+            'slidable_type' => 'required|string'
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate->errors()->first());
+        }
+        $className = 'App\Models\\' . ucfirst(request()->slidable_type);
+        $element = new $className();
+        $element = $element->whereId(request()->slidable_id)->first();
+        $elements = $element->slides()->orderBy('id', 'desc')->paginate(SELF::TAKE_LEAST);
         return inertia('Slide/SlideIndex', compact('elements'));
     }
 
     public function search(Filters $filters)
     {
         $this->authorize('search', 'slide');
-        $validator = validator(request()->all(), ['search' => 'nullable']);
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()], 400);
-        }
-        $elements = Slide::filters($filters)->with('slidable')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST);
+        $elements = Slide::filters($filters)->with(['slidable' => function ($q) {
+            if (request()->slidable_type !== 'user' && !auth()->user()->isAdminOrAbove) {
+                return $q->whereHas('user', function ($q) {
+                    return $q->where('id', auth()->id());
+                });
+            } else {
+                return $q;
+            }
+        }])->orderBy('id', 'desc')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('Slide/SlideIndex', compact('elements'));
     }
 
@@ -47,13 +62,13 @@ class SlideController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Slide/SlideCreate');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -64,7 +79,7 @@ class SlideController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Slide  $slide
+     * @param \App\Models\Slide $slide
      * @return \Illuminate\Http\Response
      */
     public function show(Slide $slide)
@@ -75,7 +90,7 @@ class SlideController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Slide  $slide
+     * @param \App\Models\Slide $slide
      * @return \Illuminate\Http\Response
      */
     public function edit(Slide $slide)
@@ -86,8 +101,8 @@ class SlideController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Slide  $slide
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Slide $slide
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Slide $slide)
@@ -98,7 +113,7 @@ class SlideController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Slide  $slide
+     * @param \App\Models\Slide $slide
      * @return \Illuminate\Http\Response
      */
     public function destroy(Slide $slide)

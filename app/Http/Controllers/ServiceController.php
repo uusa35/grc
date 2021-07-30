@@ -24,7 +24,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $elements = Service::orderby('id','desc')->paginate(SELF::TAKE_LEAST);
+        $elements = Service::orderby('id','desc')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('Service/ServiceIndex', compact('elements'));
     }
 
@@ -35,7 +35,7 @@ class ServiceController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Service::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
+        $elements = Service::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN)->appends(request()->except(['page','_token']));
         return inertia('Service/ServiceIndex', compact('elements'));
     }
     /**

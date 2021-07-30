@@ -28,7 +28,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $elements = Slide::paginate(SELF::TAKE_LEAST);
+        $elements = Slide::paginate(SELF::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('Course/CourseIndex', compact('elements'));
     }
 
@@ -41,7 +41,7 @@ class CourseController extends Controller
         }
         $elements = Course::filters($filters)->with('user')->orderBy('id', 'desc')->whereHas('user', function ($q) {
             return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
-        })->paginate(Self::TAKE_LEAST);
+        })->paginate(Self::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('Course/CourseIndex', compact('elements'));
         return redirect()->to('backend/course/search?' . request()->getQueryString(), compact('elements'));
     }

@@ -2,7 +2,7 @@ import BackendContainer from "./../components/containers/BackendContainer";
 
 const ServiceIndex = () => {
     return (
-        <BackendContainer>
+        <BackendContainer type={'service'}>
             <h1>Service Index</h1>
         </BackendContainer>
     )

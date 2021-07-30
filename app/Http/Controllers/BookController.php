@@ -29,7 +29,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $elements = Book::orderby('id','desc')->paginate(SELF::TAKE_LEAST);
+        $elements = Book::orderby('id','desc')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('Book/BookIndex', compact('elements'));
     }
 
@@ -39,7 +39,7 @@ class BookController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Book::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
+        $elements = Book::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN)->appends(request()->except(['page','_token']));
         return inertia('Book/BookIndex', compact('elements'));
     }
     /**

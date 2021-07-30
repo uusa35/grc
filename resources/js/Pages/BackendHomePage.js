@@ -179,7 +179,6 @@ export default function BackendHomePage() {
     const {sideBarOpen, toggleSideBar ,modules, trans, theme } = useContext(BackendContext);
     const { auth } = useContext(GlobalContext);
 
-    console.log(modules);
     return (
         <BackendContainer>
             <main className="sm:my-3">

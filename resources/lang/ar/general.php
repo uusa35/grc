@@ -1039,5 +1039,9 @@ return array (
     "start_sale" => " بداية الخصم",
     "end_sale" => "نهاية الخصم",
     "current_date" => "التاريخ الحالي",
-    "owner_author" => "المالك"
+    "owner_author" => "المالك",
+    "next" => "التالي",
+    "previous" => "السابق",
+    "slide" => "سلايد",
+    "add_edit_attributes" => "إنشاء / تعديل خصائص المنتج",
 );

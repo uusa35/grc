@@ -65,7 +65,7 @@ const BackendHeader = () => {
                                 >
                                     <Menu.Items
                                         static
-                                        className="grid grid-cols-1 md:grid-cols-3 w-max z-50 origin-top-right absolute -right-60 mt-2 py-5 border-2 border-gray-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                                        className="grid grid-cols-1 md:grid-cols-3 w-max z-50 origin-top-right absolute  md:-right-60 mt-2 py-5 border-2 border-gray-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
                                     >
                                         {
                                             map(modules, m => (

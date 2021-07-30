@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProductAttributeController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
@@ -44,10 +45,9 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::get('order/search', [OrderController::class, 'search'])->name('order.search');
     Route::get('course/search', [CourseController::class, 'search'])->name('course.search');
     Route::get('slide/search', [SlideController::class, 'search'])->name('slide.search');
-    Route::get('{module}/toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
+    Route::get('toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
     Route::get('back/{module?}', [DashboardController::class, 'goBack'])->name('back');
     Route::resource('dashboard', DashboardController::class);
-    Route::resource('product', ProductController::class);
     Route::resource('service', ServiceController::class);
     Route::resource('book', BookController::class);
     Route::resource('section', SectionController::class);
@@ -59,6 +59,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::resource('course', CourseController::class);
     Route::resource('slide', SlideController::class);
     Route::resource('image', ImageController::class)->only('destroy');
+    Route::resource('product/attribute', ProductAttributeController::class);
+    Route::resource('product', ProductController::class);
 });
 // General Routes
 Auth::routes();

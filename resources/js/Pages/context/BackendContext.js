@@ -16,6 +16,8 @@ const BackendContextProvider = ({children}) => {
     const [currentRoute, setCurrentRoute] = useState(route().current());
     const [currentModule, setCurrentModule] = useState('home');
     const [sysMessage, setSysMessage] = useState([])
+    const [isAdminOrAbove,setIsAdminOrAbove] = useState(false);
+    const [isSuper,setIsSuper] = useState(false);
     const [formTabs, setFormTabs] = useState([
         {id: 0, name: 'basic_information'},
         {id: 1, name: 'additional_information'},
@@ -47,6 +49,8 @@ const BackendContextProvider = ({children}) => {
             setCurrentBreadCrumbs(breadCrumbs);
             setCurrentRoute(currentRoute)
         })
+        setIsAdminOrAbove(auth.role.is_admin || auth.role.is_super);
+        setIsSuper(auth.role.is_super);
     }, []);
 
     const context = {
@@ -80,7 +84,9 @@ const BackendContextProvider = ({children}) => {
         setConfirmationModalResponse,
         modelAction,
         setModelAction,
-        getImageThumb: (img) => `${route('home')}/storage/uploads/images/thumbnail/${img}`
+        getImageThumb: (img) => `${route('home')}/storage/uploads/images/thumbnail/${img}`,
+        isAdminOrAbove,
+        isSuper
     };
 
     return (

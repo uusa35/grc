@@ -33,7 +33,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $elements = Product::with('product_attributes', 'color', 'size', 'user')->orderBy('id', 'desc')->paginate(SELF::TAKE_LEAST);
+        $elements = Product::with('product_attributes', 'color', 'size', 'user')->whereHas('user', function ($q) {
+            return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
+        })->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('Product/ProductIndex', compact('elements'));
     }
 
@@ -42,11 +44,11 @@ class ProductController extends Controller
         $this->authorize('search', 'product');
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()], 400);
+            return inertia('Product/ProductIndex', $validator->errors()->all());
         }
-        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size', 'user')->orderBy('id', 'desc')->whereHas('user', function ($q) {
+        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size', 'user')->whereHas('user', function ($q) {
             return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
-        })->paginate(Self::TAKE_LEAST);
+        })->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page','_token']));
         return inertia('Product/ProductIndex', compact('elements'));
     }
 
