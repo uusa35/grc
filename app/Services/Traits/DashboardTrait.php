@@ -160,7 +160,7 @@ trait DashboardTrait
             } else {
                 $element = $element->latest()->first();
             }
-            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], true) : null;;
+            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;;
             return response()->json(['message' => trans('general.process_success')], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);

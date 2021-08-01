@@ -22,7 +22,7 @@ export default function ConfirmationModal() {
         theme,
         currentModule
     } = useContext(BackendContext);
-    const {submit, setData, delete: destroy,} = useForm({
+    const {data, submit, setData, delete: destroy,} = useForm({
         id: ''
     })
     const cancelButtonRef = useRef(null)
@@ -33,18 +33,27 @@ export default function ConfirmationModal() {
     }
 
     const handleConfirm = () => {
+        console.log('iddddd ==> ',modelAction.id);
         setShowConfirmationModal(false)
         setConfirmationModalResponse(true)
-        return handleDeleteFormSubmit();
+        if (modelAction.type === 'destroy' && modelAction.id) {
+            return handleDeleteFormSubmit();
+        } else {
+            console.log('do another thing');
+        }
     }
 
     const handleDeleteFormSubmit = () => {
-        if (modelAction && modelAction.type === 'delete') {
-            const {id, model, type} = modelAction;
+        if (modelAction.id && modelAction.type === 'destroy') {
+            console.log('submit the form');
+            const {id , model, type} = modelAction;
+            console.log('the iddddd ===> from handle submit delete', id);
             setData('id', id);
             setShowConfirmationModal(!showConfirmationModal)
             setConfirmationModalResponse(!confirmationModalResponse)
-            submit(type, route(`backend.${model}.destroy`, id))
+            return destroy( route(`backend.${model}.update`, id ));
+            // return submit('delete', route(`backend.${model}.${type}`, { id }));
+
         }
     }
 
@@ -53,7 +62,7 @@ export default function ConfirmationModal() {
             const {id, model, type} = modelAction;
             setConfirmationModalMessage({title: `${trans(type)} ${trans(model)}`, message: trans('modal_confirmation')})
         }
-    }, [modelAction])
+    }, [modelAction.id])
 
     return (
         <Transition.Root show={showConfirmationModal} as={Fragment}>
@@ -123,15 +132,18 @@ export default function ConfirmationModal() {
                                 </button>
                                 <button
                                     type="button"
-                                    className={classNames(modelAction.type === 'delete' ? 'bg-red-800' : `bg-${theme}-600`, `w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-${theme}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500 sm:col-start-2 sm:text-sm`)}
-                                    onClick={() => handleConfirm()}
+                                    className={classNames(modelAction.type === 'destroy' ? 'bg-red-800' : `bg-${theme}-600`, `w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-${theme}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500 sm:col-start-2 sm:text-sm`)}
+                                    onClick={() => handleConfirm(modelAction.id)}
                                 >
                                     {trans('confirm')}
                                 </button>
                             </div>
                             {
-                                modelAction.type === 'delete' && modelAction.id && <form method="post"
-                                                                                         action={`/backend/${modelAction.model}/${modelAction.id}`}>
+                                modelAction.type === 'destroy' && modelAction.id &&
+                                <form method="post"
+                                    // action={`/backend/${modelAction.model}/${modelAction.id}`}
+                                      action={route(`backend.${modelAction.model}.${modelAction.type}`, modelAction.id)}
+                                >
                                     <input type="hidden" name="_method" value="delete"/>
                                     <button type="submit" className="btn btn-del hidden"></button>
                                 </form>

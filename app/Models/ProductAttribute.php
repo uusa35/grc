@@ -3,12 +3,13 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProductAttribute extends PrimaryModel
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory,SoftDeletes, HasEvents;
     protected $guarded = [''];
     protected $localeStrings = ['notes'];
     protected $with = ['color','size'];

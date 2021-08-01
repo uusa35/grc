@@ -40,6 +40,7 @@
         "@tailwindcss/aspect-ratio": "^0.2.1",
         "@tailwindcss/forms": "^0.3.3",
         "@tailwindcss/ui": "^0.7.2",
+        "@tailwindui/react": "^0.1.1",
         "autoprefixer": "^10.3.1",
         "moment": "^2.29.1",
         "node-sass": "^6.0.1",

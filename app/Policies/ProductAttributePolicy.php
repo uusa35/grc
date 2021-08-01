@@ -2,14 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProductPolicy
+class ProductAttributePolicy
 {
     use HandlesAuthorization;
-    const MODAL = 'product';
+    const MODAL = 'product_attribute';
 
     /**
      * Determine whether the user can view the category.
@@ -26,15 +26,14 @@ class ProductPolicy
      * Determine whether the user can view the product.
      *
      * @param  \App\Models\User $user
-     * @param  \App\Models\Product $product
+     * @param  \App\Models\ProductAttribute $productAttribute
      * @return mixed
      */
-    public function view(User $user, Product $product)
+    public function view(User $user, ProductAttribute $productAttribute)
     {
-        dd('stop');
-        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $product->user_id;
+        dd('view');
+        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $productAttribute->product->user_id;
     }
-
 
     /**
      * Determine whether the user can create products.
@@ -51,34 +50,34 @@ class ProductPolicy
      * Determine whether the user can update the product.
      *
      * @param  \App\Models\User $user
-     * @param  \App\Models\Product $product
+     * @param  \App\Models\ProductAttribute $productAttribute
      * @return mixed
      */
-    public function update(User $user, Product $product)
+    public function update(User $user, ProductAttribute $productAttribute)
     {
-        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $product->user_id;
+        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $productAttribute->product->user_id;
     }
 
     /**
      * Determine whether the user can delete the product.
      *
      * @param  \App\Models\User $user
-     * @param  \App\Models\Product $product
+     * @param  \App\Models\ProductAttribute $productAttribute
      * @return mixed
      */
-    public function delete(User $user, Product $product)
+    public function delete(User $user, ProductAttribute $productAttribute)
     {
-        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $product->user_id;
+        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $productAttribute->product->user_id;
     }
 
     /**
      * Determine whether the user can restore the product.
      *
      * @param  \App\Models\User $user
-     * @param  \App\Models\Product $product
+     * @param  \App\Models\ProductAttribute $productAttribute
      * @return mixed
      */
-    public function restore(User $user, Product $product)
+    public function restore(User $user, ProductAttribute $productAttribute)
     {
         //
     }
@@ -87,11 +86,11 @@ class ProductPolicy
      * Determine whether the user can permanently delete the product.
      *
      * @param  \App\Models\User $user
-     * @param  \App\Models\Product $product
+     * @param  \App\Models\ProductAttribute $productAttribute
      * @return mixed
      */
-    public function forceDelete(User $user, Product $product)
+    public function forceDelete(User $user, ProductAttribute $productAttribute)
     {
-        //
+        dd('force delete');
     }
 }

@@ -86,12 +86,6 @@ class Service extends PrimaryModel
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    // ManyToMany Morph
-    public function collections()
-    {
-        return $this->morphToMany(Collection::class, 'collectionable');
-    }
-
     /**
      * MorphRelation
      * MorphOne = many hasONe relation
@@ -102,16 +96,9 @@ class Service extends PrimaryModel
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function order_meta()
+    public function ordermetas()
     {
-        return $this->hasMany(OrderMeta::class);
+        return $this->morphMany(OrderMeta::class, 'ordermetable');
     }
 
-    public function addons() {
-        return $this->belongsToMany(Addon::class,'addon_service');
-    }
-
-    public function items() {
-        return $this->belongsToMany(Item::class,'item_service');
-    }
 }

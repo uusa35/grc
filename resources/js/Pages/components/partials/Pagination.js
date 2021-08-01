@@ -6,16 +6,18 @@ import {Link} from '@inertiajs/inertia-react'
 import route from 'ziggy-js';
 import {map} from 'lodash';
 
-export default function Pagination({type, total, links }) {
+export default function Pagination({type, total, links, showSearch}) {
     const [search, setSearch] = useState('');
-    const {trans, classNames, theme, currentModule} = useContext(BackendContext)
+    const {trans, classNames, theme, currentModule,} = useContext(BackendContext)
     return (
-        <nav className="grid grid-cols-1 sm:grid-cols-2 flex justify-between items-center border-b border-gray-100 bg-transparent pb-4 sm:px-0">
-            { total > 0 && <div className="col-span-full h-auto sm:col-span-1 flex flex-1 justify-between items-center mt-5 space-x-5">
+        <nav
+            className="grid grid-cols-1 sm:grid-cols-2 flex justify-between items-center border-b border-gray-100 bg-transparent sm:px-0">
+            <div
+                className={classNames(!showSearch || total <= 0 ? `invisible` : 'visible', 'col-span-full h-auto sm:col-span-1 flex flex-1 justify-between items-center space-x-5')}>
                 <label htmlFor="search" className="sr-only">
                     {trans('search')}
                 </label>
-                <div className="mt-1 relative rounded-md shadow-sm w-1/2">
+                <div className="relative rounded-md shadow-sm w-1/2">
                     <div
                         className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
                         aria-hidden="true"
@@ -32,23 +34,23 @@ export default function Pagination({type, total, links }) {
                     />
                 </div>
                 <Link
-                    href={search.length > 2 && route().has(`backend.${currentModule}.search`) ? route(`backend.${currentModule}.search`, { search }) : '#'}
+                    href={search.length > 2 && route().has(`backend.${currentModule}.search`) ? route(`backend.${currentModule}.search`, {search}) : '#'}
                     disabled={search.length <= 2}
-                    className={`p-2 px-5 order-0 inline-flex items-center  mt-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
+                    className={`py-2 px-3 order-0 inline-flex items-center  mt-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
                 >
                     {trans("search")}
                 </Link>
                 <Link
                     href={route().has(`backend.${type}.search`) ? route(`backend.${type}.search`) : '#'}
-                    className={`p-2 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm text-xs text-center md:text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
+                    className={`py-2 px-2 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm text-xs text-center md:text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
                 >
                     {trans("reset")}
                 </Link>
-            </div>}
+            </div>
             <div className="col-span-full sm:col-span-1 flex justify-end mt-5 sm:mt-0">
                 <div className="md:-mt-px md:flex">
                     {
-                        map(links,page =>
+                        map(links, page =>
                             <Link
                                 key={page.label}
                                 href={route().has(`backend.${type}.search`) && page.url ? page.url : '#'}

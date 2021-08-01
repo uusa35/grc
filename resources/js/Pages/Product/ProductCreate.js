@@ -100,7 +100,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
     }
 
     return (
-        <BackendContainer>
+        <BackendContainer type={'product'}>
             <FormTabsContainer>
                 <form
                     onSubmit={submit}
@@ -378,6 +378,9 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
+                                <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('image_best_fit')}
+                                </p>
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
                                 </p>
@@ -389,7 +392,6 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     {trans('more_images')}
                                 </label>
                                 <div className="mt-1">
-
                                     <input
                                         onChange={e => handleImages(e.target.files)}
                                         // required
@@ -402,6 +404,9 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_more_images_instruction')}/>
+                                <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('image_best_fit')}
+                                </p>
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
                                 </p>

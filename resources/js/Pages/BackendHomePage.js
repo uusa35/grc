@@ -177,10 +177,9 @@ const pinnedProjects = projects.filter((project) => project.pinned)
 
 export default function BackendHomePage() {
     const {sideBarOpen, toggleSideBar ,modules, trans, theme } = useContext(BackendContext);
-    const { auth } = useContext(GlobalContext);
 
     return (
-        <BackendContainer>
+        <BackendContainer type={'home'}>
             <main className="sm:my-3">
                 <div className="w-full">
                     <div className={`bg-white shadow-md rounded-md p-4 mb-4`}>

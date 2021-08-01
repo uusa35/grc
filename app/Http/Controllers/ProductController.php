@@ -84,10 +84,10 @@ class ProductController extends Controller
             $element->tags()->sync($request->tags);
             $element->videos()->sync($request->videos);
             $element->categories()->sync($request->categories);
-            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
-            $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], true) : null;
-            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], true) : null;
-            $request->hasFile('size_chart_image') ? $this->saveMimes($element, $request, ['size_chart_image'], ['1080', '1440'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
+            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
+            $request->hasFile('size_chart_image') ? $this->saveMimes($element, $request, ['size_chart_image'], ['1080', '1440'], false) : null;
             return redirect()->route('backend.product.edit', $element->id)->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.create')->with('error', trans('general.process_failure'));
@@ -141,10 +141,10 @@ class ProductController extends Controller
             $request->has('tags') ? $product->tags()->sync($request->tags) : null;
             $request->has('videos') ? $product->videos()->sync($request->videos) : null;
             $request->has('categories') ? $product->categories()->sync($request->categories) : null;
-            $request->hasFile('image') ? $this->saveMimes($product, $request, ['image'], ['1080', '1440'], true) : null;
-            $request->hasFile('qr') ? $this->saveMimes($product, $request, ['qr'], ['300', '300'], true) : null;
-            $request->hasFile('images') ? $this->saveGallery($product, $request, 'images', ['1080', '1440'], true) : null;
-            $request->hasFile('size_chart_image') ? $this->saveMimes($product, $request, ['size_chart_image'], ['1080', '1440'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($product, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('qr') ? $this->saveMimes($product, $request, ['qr'], ['300', '300'], false) : null;
+            $request->hasFile('images') ? $this->saveGallery($product, $request, 'images', ['1080', '1440'], false) : null;
+            $request->hasFile('size_chart_image') ? $this->saveMimes($product, $request, ['size_chart_image'], ['1080', '1440'], false) : null;
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.edit', $product->id)->with('error', trans('general.process_failure'));

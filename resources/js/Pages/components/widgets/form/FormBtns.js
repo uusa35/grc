@@ -11,7 +11,7 @@ const FormBtns = ({ type }) => {
             <div className="flex justify-end">
                 <button
                     type="submit"
-                    className={`ml-3 inline-flex justify-center py-2 px-4 mx-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}
+                    className={`ml-3 inline-flex justify-center py-2 px-4 mx-4 shadow-sm text-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}
                 >
                     {trans('submit')}
                 </button>

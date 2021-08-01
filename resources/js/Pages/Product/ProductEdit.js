@@ -128,7 +128,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
     }
 
     return (
-        <BackendContainer>
+        <BackendContainer type={'product'}>
             <FormTabsContainer>
                 <form
                     onSubmit={submit}
@@ -389,7 +389,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </p>
                             </div>
 
-                            <div className="sm:col-span-3">
+                            <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
                                        className={`block text-sm font-medium text-${theme}-700`}>
                                     {trans('main_image')}
@@ -403,14 +403,17 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         autoComplete="main_image"
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
                                     />
-                                    <img className={`h-20 w-20 bg-cover rounded-md`} src={product.imageThumb} alt=""/>
+                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={product.imageThumb} alt=""/>
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
+                                <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('image_best_fit')}
+                                </p>
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
                                 </p>
                             </div>
-                            <div className="sm:col-span-3 has-tooltip">
+                            <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
                                        className={`block text-sm font-medium text-${theme}-700`}>
                                     {trans('more_images')}
@@ -427,11 +430,14 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     />
                                     {
                                         product.images &&
-                                        <img className={`h-20 w-20 bg-cover rounded-md`}
+                                        <img className={`h-24 w-20 bg-cover rounded-md`}
                                              src={product.images[0]?.imageThumb} alt=""/>
                                     }
                                 </div>
                                 <ToolTipWidget message={trans('product_more_images_instruction')}/>
+                                <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('image_best_fit')}
+                                </p>
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
                                 </p>
@@ -1050,7 +1056,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         }
                                     </select>
                                 </div>
-                                <ToolTipWidget message={trans('product_user_instruction')}/>
+                                <ToolTipWidget message={trans('product_brand_instruction')}/>
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     {errors.brand_id && <div className={`text-red-600`}>{errors.brand_id}</div>}
                                 </p>
@@ -1075,6 +1081,9 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                          alt=""/>
                                 </div>
                                 <ToolTipWidget message={trans('product_size_chart_image_instruction')}/>
+                                <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('image_best_fit')}
+                                </p>
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     {errors.size_chart_image &&
                                     <div className={`text-red-600`}>{errors.size_chart_image}</div>}
@@ -1100,6 +1109,9 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                          alt=""/>
                                 </div>
                                 <ToolTipWidget message={trans('product_qr_instruction')}/>
+                                <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('qr_best_fit')}
+                                </p>
                                 <p className={`mt-2 text-xs text-${theme}-500`}>
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
                                 </p>
@@ -1552,9 +1564,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                     <ImagesList images={product.images} id={product.id} type={'product'}/>
                 </div>
                 </form>
-
             </FormTabsContainer>
-
         </BackendContainer>
     )
 }

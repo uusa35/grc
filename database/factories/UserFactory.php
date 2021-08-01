@@ -57,7 +57,7 @@ class UserFactory extends Factory
             'apartment' => $this->faker->name,
             'country_name' => $this->faker->country,
             'country_id' => Country::where('is_local', true)->first()->id,
-            'role_id' => Role::all()->random()->id,
+            'role_id' => Role::notAdmins()->get()->random()->id,
             'api_token' => $this->faker->bankAccountNumber,
             'merchant_id' => $this->faker->bankAccountNumber,
             'path' => '1.pdf',

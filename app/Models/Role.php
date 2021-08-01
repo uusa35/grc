@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Role extends PrimaryModel
 {
     use HasFactory, LocaleTrait;
+
     protected $guarded = [''];
-    protected $localeStrings = ['name','caption'];
+    protected $localeStrings = ['name', 'caption'];
     protected $casts = [
         'is_designer' => 'boolean',
         'is_client' => 'boolean',
@@ -20,11 +21,16 @@ class Role extends PrimaryModel
 
     public function privileges()
     {
-        return $this->belongsToMany(Privilege::class)->withPivot('index','view', 'create','update','delete');
+        return $this->belongsToMany(Privilege::class)->withPivot('index', 'view', 'create', 'update', 'delete');
     }
 
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function scopeNotAdmins()
+    {
+        return $this->where(['is_admin' => false, 'is_super' => false]);
     }
 }

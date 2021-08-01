@@ -570,7 +570,7 @@ return array (
   'shipment_available' => 'متاح للطلب عبر الشحن',
   'on_homepage' => 'إظهار في الصفحة الرئيسية',
   'check_stock' => 'فحص كمية المنتج قبل الطلب',
-  'has_attributes' => 'إضافه خصائص للمنتج',
+  'has_attributes' => ' خصائص للمنتج',
   'show_attribute' => 'إظهار خصائص المنتج (اللون / الحجم ...) ',
   'save_product_and_add_attributes' => 'حفظ المنتج والذهاب لإضافه المزيد من الخصائص للمنتج',
   'edit_product' => 'تعديل المنتج',
@@ -1006,7 +1006,7 @@ return array (
     "basic_information" => "معلومات أساسية (مطلوبة)",
     "additional_information" => "معلومات إضافية",
     "product_qty_instruction" => "يتم تفعيل كمية هذا الحقل فقط إن لم يكن للعنصر خصائص (لا يوجد قياسات أو الوان مختلفة للمنتج) ",
-    "product_sale_price_instruction" => "يتم تفعيل سعر الخصم فقط في حالة تفعيل حقل (تفعيل الخصم بالإضافة إلى وضع مدى الوقت بداية الخصم وتاريخ انتهاء الخصم)",
+    "product_sale_price_instruction" => "يتم تفعيل سعر الخصم فقط في حالة تفعيل حقل (يوجد الخصم بالإضافة إلى وضع مدى الوقت بداية الخصم وتاريخ انتهاء الخصم)",
     "product_more_images_instruction" => "يجب إضافة صورة واحدة فقط على الاقل",
     "product_create_message" => "إنشاء منتج جديد",
     "product_has_attributes_instruction" => "في حالة وجود اكثر من خاصية للمنتج يجب تفعيلها (مثال اكثر من قياس / لون)",
@@ -1044,4 +1044,10 @@ return array (
     "previous" => "السابق",
     "slide" => "سلايد",
     "add_edit_attributes" => "إنشاء / تعديل خصائص المنتج",
+    "creates" => "إنشاء",
+    "edits" => "تعديل",
+    'image_best_fit' => 'مقاس الصورة المناسب (العرض 1080  - الطول 1440 px  )',
+    'qr_best_fit' => 'مقاس الصورة المناسب (العرض 300  - الطول 300 px  )',
+    "product_attribute" => "خاصية المنتج",
+    "destroy" => "حذف"
 );

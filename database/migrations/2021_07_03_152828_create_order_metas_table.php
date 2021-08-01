@@ -22,22 +22,26 @@ class CreateOrderMetasTable extends Migration
             $table->text('notes')->nullable();
 
             $table->integer('merchant_id')->nullable();
-            $table->string('item_type')->nullable();
-            $table->string('item_name')->nullable();
-            $table->string('product_size')->nullable();
-            $table->string('product_color')->nullable();
 
             $table->date('service_date')->nullable();
             $table->time('service_time')->nullable();
             $table->boolean('wrap_as_gift')->default(false);
 
             $table->foreignId('order_id')->references('id')->on('orders');
-            $table->foreignId('product_id')->nullable()->constrained();
-            $table->foreignId('product_attribute_id')->nullable()->constrained();
-            $table->foreignId('service_id')->nullable()->constrained();
-            $table->foreignId('book_id')->nullable()->constrained();
-            $table->foreignId('country_id')->nullable()->constrained();
+
+
+            $table->morphs('ordermetable');
+
+//            $table->foreignId('product_id')->nullable()->constrained();
+//            $table->foreignId('product_attribute_id')->nullable()->constrained();
+//            $table->foreignId('service_id')->nullable()->constrained();
+//            $table->foreignId('book_id')->nullable()->constrained();
+            // course_id
+//            $table->foreignId('timing_id')->nullable()->constrained();
+            $table->foreignId('color_id')->nullable()->constrained();
+            $table->foreignId('size_id')->nullable()->constrained();
             $table->foreignId('timing_id')->nullable()->constrained();
+            $table->foreignId('country_id')->nullable()->constrained();
 
 
             $table->timestamps();

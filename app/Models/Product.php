@@ -74,6 +74,11 @@ class Product extends PrimaryModel
         return $this->morphMany(Image::class, 'imagable');
     }
 
+    public function ordermetas()
+    {
+        return $this->morphMany(OrderMeta::class, 'ordermetable');
+    }
+
     public function slides()
     {
         return $this->morphMany(Slide::class, 'slidable');

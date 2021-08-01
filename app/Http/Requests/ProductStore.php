@@ -6,16 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProductStore extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /**Ser
      * Get the error messages for the defined validation rules.
      *

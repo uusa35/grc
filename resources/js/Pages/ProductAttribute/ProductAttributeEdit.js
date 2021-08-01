@@ -6,15 +6,15 @@ import {BackendContext} from "../context/BackendContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 
-export default function ProductAttributeCreate({colors, sizes}) {
+export default function ProductAttributeEdit({attribute, colors, sizes}) {
     const {trans, theme, currentModule} = useContext(BackendContext);
     const {params} = route();
-    const {data, setData, post, progress} = useForm({
-        'color_id': '',
-        'size_id': '',
-        'product_id': params.product_id,
-        'qty': 1,
-        'price': '',
+    const {data, setData, put, progress} = useForm({
+        'color_id': attribute.color_id,
+        'size_id': attribute.size_id,
+        'product_id': attribute.product_id,
+        'qty': attribute.qty,
+        'price': attribute.price,
     });
 
     const {errors} = usePage().props;
@@ -28,7 +28,7 @@ export default function ProductAttributeCreate({colors, sizes}) {
 
     const submit = (e) => {
         e.preventDefault()
-        post(route(`backend.attribute.store`));
+        put(route(`backend.attribute.update`, attribute.id));
     }
 
     return (
@@ -59,6 +59,7 @@ export default function ProductAttributeCreate({colors, sizes}) {
                                         id="size_id"
                                         name="size_id"
                                         autoComplete="size_id"
+                                        defaultValue={attribute.size_id}
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
                                     >
                                         {
@@ -92,6 +93,7 @@ export default function ProductAttributeCreate({colors, sizes}) {
                                         id="color_id"
                                         name="color_id"
                                         autoComplete="color_id"
+                                        defaultValue={attribute.color_id}
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
                                     >
                                         {
@@ -120,7 +122,7 @@ export default function ProductAttributeCreate({colors, sizes}) {
                                         type="number"
                                         step="any"
                                         name="qty"
-                                        defaultValue={data.qty}
+                                        defaultValue={attribute.qty}
                                         id="qty"
                                         autoComplete="qty"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
@@ -143,7 +145,7 @@ export default function ProductAttributeCreate({colors, sizes}) {
                                         type="number"
                                         step="any"
                                         name="price"
-                                        defaultValue={data.price}
+                                        defaultValue={attribute.price}
                                         id="price"
                                         autoComplete="price"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}

@@ -26,11 +26,6 @@ class OrderMeta extends PrimaryModel
         return $this->belongsTo(Service::class);
     }
 
-    public function questionnaire()
-    {
-        return $this->belongsTo(Questionnaire::class);
-    }
-
     public function timing()
     {
         return $this->belongsTo(Timing::class);
@@ -46,29 +41,22 @@ class OrderMeta extends PrimaryModel
         return $this->belongsTo(Country::class, 'destination_id');
     }
 
-    public function collection()
-    {
-        return $this->belongsTo(Collection::class);
-    }
-
     public function merchant()
     {
         return $this->belongsTo(User::class, 'merchant_id');
     }
 
-    public function getIsProductTypeAttribute()
+    public function ordermetable()
     {
-        return strtolower($this->item_type) === 'product';
+        return $this->morphTo();
     }
 
-    public function getIsServiceTypeAttribute()
-    {
-        return strtolower($this->item_type) === 'service';
+    public function color() {
+        return $this->belongsTo(Color::class);
     }
 
-    public function getIsQuestionnaireTypeAttribute()
-    {
-        return strtolower($this->item_type) === 'questionnaire';
+    public function size() {
+        return $this->belongsTo(Size::class);
     }
 
     public function scopeBestSaleCollections($q)

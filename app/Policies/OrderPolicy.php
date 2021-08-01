@@ -9,7 +9,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class OrderPolicy
 {
     use HandlesAuthorization;
-
+    const MODAL = 'order';
 
     /**
      * Determine whether the user can view the category.

@@ -47,7 +47,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::get('slide/search', [SlideController::class, 'search'])->name('slide.search');
     Route::get('toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
     Route::get('back/{module?}', [DashboardController::class, 'goBack'])->name('back');
-    Route::resource('dashboard', DashboardController::class);
+    Route::resource('dashboard', DashboardController::class)->only(['index']);
     Route::resource('service', ServiceController::class);
     Route::resource('book', BookController::class);
     Route::resource('section', SectionController::class);
@@ -59,8 +59,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::resource('course', CourseController::class);
     Route::resource('slide', SlideController::class);
     Route::resource('image', ImageController::class)->only('destroy');
-    Route::resource('product/attribute', ProductAttributeController::class);
     Route::resource('product', ProductController::class);
+    Route::resource('attribute', ProductAttributeController::class);
 });
 // General Routes
 Auth::routes();

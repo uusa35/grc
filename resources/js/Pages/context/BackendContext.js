@@ -1,10 +1,7 @@
-import {createContext, useContext, useEffect, useMemo, useState} from 'react';
+import {createContext, useContext, useEffect, useState} from 'react';
 import GlobalContext from "./GlobalContext";
-import {Inertia} from '@inertiajs/inertia'
-import {split, first, filter, map} from 'lodash';
-import {usePage} from "@inertiajs/inertia-react";
+import {split, first, map} from 'lodash';
 import route from 'ziggy-js';
-
 
 const BackendContext = createContext({});
 
@@ -16,8 +13,8 @@ const BackendContextProvider = ({children}) => {
     const [currentRoute, setCurrentRoute] = useState(route().current());
     const [currentModule, setCurrentModule] = useState('home');
     const [sysMessage, setSysMessage] = useState([])
-    const [isAdminOrAbove,setIsAdminOrAbove] = useState(false);
-    const [isSuper,setIsSuper] = useState(false);
+    const [isAdminOrAbove, setIsAdminOrAbove] = useState(false);
+    const [isSuper, setIsSuper] = useState(false);
     const [formTabs, setFormTabs] = useState([
         {id: 0, name: 'basic_information'},
         {id: 1, name: 'additional_information'},
@@ -31,27 +28,6 @@ const BackendContextProvider = ({children}) => {
     const [modelAction, setModelAction] = useState({});
     const [currentBreadCrumbs, setCurrentBreadCrumbs] = useState({})
 
-    useEffect(() => {
-        const filteredModules = map(auth.role.privileges, p => {
-            return {
-                name: p.name,
-                index: p.pivot.index,
-                main_menu: p.main_menu,
-                description: p.description,
-                imageThumb: p.imageThumb
-            }
-        });
-        setModules(filteredModules);
-        Inertia.on('finish', () => {
-            const currentRoute = route().current();
-            const breadCrumbs = split(currentRoute, '.');
-            setCurrentModule(breadCrumbs[1]);
-            setCurrentBreadCrumbs(breadCrumbs);
-            setCurrentRoute(currentRoute)
-        })
-        setIsAdminOrAbove(auth.role.is_admin || auth.role.is_super);
-        setIsSuper(auth.role.is_super);
-    }, []);
 
     const context = {
         isLoading,
@@ -86,8 +62,43 @@ const BackendContextProvider = ({children}) => {
         setModelAction,
         getImageThumb: (img) => `${route('home')}/storage/uploads/images/thumbnail/${img}`,
         isAdminOrAbove,
-        isSuper
+        isSuper,
+        setCurrentModule: (module) => setCurrentModule(module),
+        handleDeleteItem: (type, model, id) => {
+            setShowConfirmationModal(true)
+            setModelAction({
+                type,
+                model,
+                id
+            })
+        }
     };
+
+    useEffect(() => {
+        const filteredModules = map(auth.role.privileges, p => {
+            return {
+                name: p.name,
+                index: p.pivot.index,
+                main_menu: p.main_menu,
+                description: p.description,
+                imageThumb: p.imageThumb
+            }
+        });
+        setModules(filteredModules);
+        setIsAdminOrAbove(auth.role.is_admin || auth.role.is_super);
+        setIsSuper(auth.role.is_super);
+        // Inertia.remember(context,'localeState');
+    }, []);
+
+
+    console.log('current Module', currentModule);
+    useEffect(() => {
+        const currentRoute = route().current();
+        const breadCrumbs = split(currentRoute, '.');
+        // setCurrentModule(breadCrumbs[1]);
+        setCurrentBreadCrumbs(breadCrumbs);
+        setCurrentRoute(currentRoute)
+    }, [route().current()])
 
     return (
         <BackendContext.Provider value={context}>

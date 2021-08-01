@@ -6,6 +6,7 @@ use App\Models\Color;
 use App\Models\Page;
 use App\Models\Privilege;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\Role;
 use App\Models\Setting;
 use App\Models\Slide;
@@ -34,6 +35,7 @@ use App\Policies\PagePolicy;
 use App\Policies\PolicyPolicy;
 use App\Policies\PostPolicy;
 use App\Policies\PrivilegePolicy;
+use App\Policies\ProductAttributePolicy;
 use App\Policies\ProductPolicy;
 use App\Policies\PropertyPolicy;
 use App\Policies\RolePolicy;
@@ -60,6 +62,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Product::class => ProductPolicy::class,
+        ProductAttribute::class => ProductAttributePolicy::class,
         Service::class => ServicePolicy::class,
         Category::class => CategoryPolicy::class,
         User::class => UserPolicy::class,

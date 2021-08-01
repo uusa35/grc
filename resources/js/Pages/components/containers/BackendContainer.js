@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useState} from "react";
+import {Fragment, useContext, useEffect, useState} from "react";
 import SideBar from "../partials/SideBar";
 import BackendHeader from "../partials/BackendHeader";
 import Footer from "../partials/Footer";
@@ -10,8 +10,22 @@ import Pagination from "../partials/Pagination";
 import NoElements from "../widgets/NoElements";
 import PropTypes from 'prop-types';
 import TableMobileview from "../widgets/TableMobileview";
+import {BackendContext} from "../../context/BackendContext";
 
-const BackendContainer = ({children, elements = [], type = ''}) => {
+const BackendContainer = ({children, elements = [], type = 'home',
+                              showNoElements = false,
+                              showSearch  = false,
+    showMobileView = false
+}) => {
+    const { currentModule , setCurrentModule  } = useContext(BackendContext);
+
+    useEffect(() => {
+        type ? setCurrentModule(type) : null;
+    }, [])
+
+
+    console.log('currentModule', currentModule);
+
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold">
             <SideBar/>
@@ -21,26 +35,27 @@ const BackendContainer = ({children, elements = [], type = ''}) => {
                 <div className="min-h-screen">
                     <div className="align-middle inline-block min-w-full h-auto">
                         <BreadCrumbs/>
-                        <div className="mx-3">
+                        <div className="mx-3 space-y-2">
                             <SystemMessage/>
                             {
-                                !isEmpty(elements?.data) && type && <Pagination
-                                    type={type}
+                                !isEmpty(elements?.data) && elements.total > 1 && currentModule && <Pagination
+                                    type={currentModule}
                                     total={elements.total}
                                     links={elements.links}
+                                    showSearch={showSearch}
                                 />
                             }
-                            {!isEmpty(elements?.data) && <TableMobileview elements={elements} type={type}/>}
+                            {!isEmpty(elements?.data) && showMobileView && <TableMobileview elements={elements} type={currentModule}/>}
                             {children}
                             {
-                                !isEmpty(elements?.data) && type ?
+                                !isEmpty(elements?.data) && elements.total > 1 && currentModule &&
                                     <Pagination
-                                        type={type}
+                                        type={currentModule}
                                         total={elements.total}
                                         links={elements.links}
-                                    /> :
-                                    <NoElements display={!isEmpty(elements?.data) && elements.data.length === 0}/>
+                                    />
                             }
+                            { showNoElements && <NoElements display={isEmpty(elements?.data)}/>}
                         </div>
                     </div>
                 </div>
@@ -54,6 +69,6 @@ const BackendContainer = ({children, elements = [], type = ''}) => {
 export default BackendContainer;
 
 BackendContainer.propTypes = {
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string,
     elements: PropTypes.object,
 };
