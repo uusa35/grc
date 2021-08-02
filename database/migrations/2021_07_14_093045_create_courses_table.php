@@ -57,6 +57,8 @@ class CreateCoursesTable extends Migration
 
             $table->boolean('free')->default(true);
             $table->boolean('download')->default(false);
+            $table->string('file')->nullable();
+            $table->string('preview')->nullable();
             $table->boolean('embedded')->default(false);
             $table->timestamps();
         });

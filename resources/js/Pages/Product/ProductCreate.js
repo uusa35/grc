@@ -118,7 +118,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
 
                         <div className="pt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                            <div className="sm:col-span-3">
+                            <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="name_ar" className={`block text-sm font-medium text-${theme}-700`}>
                                     {trans('name_ar')}
                                 </label>
@@ -140,7 +140,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </p>
                             </div>
 
-                            <div className="sm:col-span-3">
+                            <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="name_en" className={`block text-sm font-medium text-${theme}-700`}>
                                     {trans('name_en')}
                                 </label>
@@ -162,7 +162,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 </p>
                             </div>
 
-                            <div className="sm:col-span-2">
+                            <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="price" className={`block text-sm font-medium text-${theme}-700`}>
                                     {trans('price')}
                                 </label>

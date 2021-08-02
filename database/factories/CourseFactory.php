@@ -57,7 +57,11 @@ class CourseFactory extends Factory
             'video_url_five' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'barcode' => $this->faker->isbn13,
             'views' => $this->faker->randomNumber(),
+            'file' => '01.pdf',
+            'preview' => '01.pdf',
             'order' => $this->faker->numberBetween(1, 99),
+            'free' => $this->faker->boolean,
+            'download' => $this->faker->boolean,
         ];
     }
 }

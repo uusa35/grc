@@ -11,8 +11,6 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Models\User;
 use App\Services\Search\ProductFilters;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class ProductController extends Controller
 {

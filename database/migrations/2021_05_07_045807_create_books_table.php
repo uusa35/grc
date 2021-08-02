@@ -65,6 +65,8 @@ class CreateBooksTable extends Migration
 
             $table->foreignId('user_id')->references('id')->on('users');
             $table->boolean('free')->default(true);
+            $table->string('file')->nullable();
+            $table->string('preview')->nullable();
             $table->boolean('download')->default(false);
             $table->longText('embedded')->nullable();
             $table->timestamps();

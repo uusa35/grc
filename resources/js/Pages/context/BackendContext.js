@@ -11,7 +11,8 @@ const BackendContextProvider = ({children}) => {
     const [isRTL, setIsRtl] = useState(locale === 'ar');
     const [sideBarOpen, setSideBarOpen] = useState(false);
     const [currentRoute, setCurrentRoute] = useState(route().current());
-    const [currentModule, setCurrentModule] = useState('home');
+    const [parentModule, setParentModule] = useState('');
+    const [childModule, setChildModule] = useState('');
     const [sysMessage, setSysMessage] = useState([])
     const [isAdminOrAbove, setIsAdminOrAbove] = useState(false);
     const [isSuper, setIsSuper] = useState(false);
@@ -49,7 +50,8 @@ const BackendContextProvider = ({children}) => {
         isRTL,
         currentRoute,
         currentBreadCrumbs,
-        currentModule,
+        parentModule,
+        childModule,
         theme: settings.theme,
         modules,
         showConfirmationModal,
@@ -63,7 +65,8 @@ const BackendContextProvider = ({children}) => {
         getImageThumb: (img) => `${route('home')}/storage/uploads/images/thumbnail/${img}`,
         isAdminOrAbove,
         isSuper,
-        setCurrentModule: (module) => setCurrentModule(module),
+        setParentModule: (module) => setParentModule(module),
+        setChildModule: (module) => setChildModule(module),
         handleDeleteItem: (type, model, id) => {
             setShowConfirmationModal(true)
             setModelAction({
@@ -91,11 +94,12 @@ const BackendContextProvider = ({children}) => {
     }, []);
 
 
-    console.log('current Module', currentModule);
+    console.log('parentModule', parentModule);
+    console.log('childModule', childModule);
     useEffect(() => {
         const currentRoute = route().current();
         const breadCrumbs = split(currentRoute, '.');
-        // setCurrentModule(breadCrumbs[1]);
+        setParentModule(breadCrumbs[1]);
         setCurrentBreadCrumbs(breadCrumbs);
         setCurrentRoute(currentRoute)
     }, [route().current()])

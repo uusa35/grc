@@ -19,7 +19,7 @@ return array (
   'back' => 'رجوع',
   'home' => 'الصفحة الرئيسية',
   'country' => 'الدولة',
-  'description' => 'الخبرة',
+  'description' => 'الوصف',
   'notes' => 'ملاحظات',
   'collection_order' => 'طلب تنسيق',
   'service_price' => 'سعر الخدمة',
@@ -1049,5 +1049,6 @@ return array (
     'image_best_fit' => 'مقاس الصورة المناسب (العرض 1080  - الطول 1440 px  )',
     'qr_best_fit' => 'مقاس الصورة المناسب (العرض 300  - الطول 300 px  )',
     "product_attribute" => "خاصية المنتج",
-    "destroy" => "حذف"
+    "destroy" => "حذف",
+    "accounts" => "حسابات"
 );

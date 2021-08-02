@@ -31,7 +31,7 @@ const SlideIndex = ({ elements }) => {
     }
 
     return (
-        <BackendContainer elements={elements} type={'slide'}>
+        <BackendContainer elements={elements} showNoElements={elements.data.length < 1} subModule={'slide'}>
             <div className="mt-3 sm:hidden bg-white rounded-md shadow-md mx-3 py-3">
                 <div className="px-4 sm:px-6">
                     <h2 className="text-gray-500 text-xs font-medium uppercase tracking-wide">{trans('slides')}</h2>
@@ -290,7 +290,6 @@ const SlideIndex = ({ elements }) => {
                     </div>
                 </div>
             </div>
-            <NoElements display={elements.data.length < 1}/>
         </BackendContainer>
     )
 }

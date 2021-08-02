@@ -32,12 +32,11 @@ class CreateCategoriesTable extends Migration
             $table->boolean('is_commercial')->default(false);
             $table->boolean('is_user')->default(false);
             $table->boolean('is_book')->default(false);
+            $table->boolean('is_course')->default(false);
             $table->string('image')->nullable();
             $table->string('image_rectangle')->nullable();
             $table->string('icon')->nullable();
             $table->integer('order')->nullable();
-            $table->boolean('is_classified')->default(false);
-            $table->boolean('is_real_estate')->default(false);
             $table->integer('min')->default(false)->nullable();
             $table->bigInteger('max')->default(false)->nullable();
             $table->string('path')->nullable();

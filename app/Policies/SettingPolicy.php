@@ -9,6 +9,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class SettingPolicy
 {
     use HandlesAuthorization;
+    const MODAL = 'setting';
 
 
     /**
@@ -19,7 +20,7 @@ class SettingPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role->privileges->where('name', self::MODAL)->first() ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->index : false;
+        return auth()->user()->isAdminOrAbove || false;
     }
 
     /**
@@ -54,7 +55,7 @@ class SettingPolicy
      */
     public function update(User $user, Setting $setting)
     {
-        //
+        return auth()->user()->isAdminOrAbove || false;
     }
 
     /**

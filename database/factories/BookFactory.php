@@ -67,6 +67,8 @@ class BookFactory extends Factory
             'views' => $this->faker->randomNumber(),
             'wrap_as_gift' => $this->faker->boolean(true),
             'order' => $this->faker->numberBetween(1, 99),
+            'file' => '01.pdf',
+            'preview' => '01.pdf',
             'free' => $this->faker->boolean,
             'download' => $this->faker->boolean,
         ];

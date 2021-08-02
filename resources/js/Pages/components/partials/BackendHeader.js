@@ -38,10 +38,9 @@ const BackendHeader = () => {
             <div
                 className="border-b border-gray-200 py-3 bg-white rounded-md mx-3 mt-5 sm:px-6 lg:p-4 sm:flex sm:items-center sm:justify-between">
                 <div className="flex-1 min-w-0">
-
                     <h1 className="text-lg font-medium leading-6 text-gray-900 sm:truncate">{trans('home')}</h1>
                 </div>
-                <div className="flex flex-1 items-center min-w-max mt-4 fl dex sm:mt-0 sm:ml-4">
+                <div className="flex flex-wrap items-center w-auto mt-4 fl dex sm:mt-0 sm:ml-4 gap-3">
                     <Menu as="div" className="relative ltr:text-left rtl:text-right">
                         {({open}) => (
                             <div>
@@ -269,7 +268,7 @@ const BackendHeader = () => {
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                         </svg>
-                                        {trans('settings')}
+                                        {trans('commands')}
                                         <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
                                 </div>

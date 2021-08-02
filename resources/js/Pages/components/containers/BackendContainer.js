@@ -4,7 +4,7 @@ import BackendHeader from "../partials/BackendHeader";
 import Footer from "../partials/Footer";
 import BreadCrumbs from "../partials/BreadCrumbs";
 import SystemMessage from "../partials/SystemMessage";
-import {isEmpty, map } from 'lodash';
+import {isEmpty, map} from 'lodash';
 import ConfirmationModal from "../partials/ConfirmationModal";
 import Pagination from "../partials/Pagination";
 import NoElements from "../widgets/NoElements";
@@ -12,19 +12,25 @@ import PropTypes from 'prop-types';
 import TableMobileview from "../widgets/TableMobileview";
 import {BackendContext} from "../../context/BackendContext";
 
-const BackendContainer = ({children, elements = [], type = 'home',
+const BackendContainer = ({
+                              children, elements = [],
+                              mainModule = null,
+                              subModule = null,
                               showNoElements = false,
-                              showSearch  = false,
-    showMobileView = false
-}) => {
-    const { currentModule , setCurrentModule  } = useContext(BackendContext);
+                              showSearch = false,
+                              showMobileView = true
+                          }) => {
+    const {parentModule, setParentModule, childModule, setChildModule} = useContext(BackendContext);
 
     useEffect(() => {
-        type ? setCurrentModule(type) : null;
+        mainModule ? setParentModule(mainModule) : null;
+        subModule ? setChildModule(subModule) : null;
+
     }, [])
 
-
-    console.log('currentModule', currentModule);
+    console.log('parentModule', parentModule);
+    console.log('childModule', childModule);
+    console.log('show No', showNoElements);
 
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold">
@@ -38,24 +44,26 @@ const BackendContainer = ({children, elements = [], type = 'home',
                         <div className="mx-3 space-y-2">
                             <SystemMessage/>
                             {
-                                !isEmpty(elements?.data) && elements.total > 1 && currentModule && <Pagination
-                                    type={currentModule}
+                                !isEmpty(elements?.data) && elements.total > 1 && parentModule && <Pagination
+                                    type={parentModule}
                                     total={elements.total}
                                     links={elements.links}
                                     showSearch={showSearch}
                                 />
                             }
-                            {!isEmpty(elements?.data) && showMobileView && <TableMobileview elements={elements} type={currentModule}/>}
+                            {!isEmpty(elements?.data) && showMobileView &&
+                            <TableMobileview elements={elements} tableName={childModule}/>}
                             {children}
+                            <NoElements display={showNoElements}/>
                             {
-                                !isEmpty(elements?.data) && elements.total > 1 && currentModule &&
-                                    <Pagination
-                                        type={currentModule}
-                                        total={elements.total}
-                                        links={elements.links}
-                                    />
+                                !isEmpty(elements?.data) && elements.total > 1 && parentModule &&
+                                <Pagination
+                                    type={parentModule}
+                                    total={elements.total}
+                                    links={elements.links}
+                                />
                             }
-                            { showNoElements && <NoElements display={isEmpty(elements?.data)}/>}
+
                         </div>
                     </div>
                 </div>

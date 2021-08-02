@@ -31,7 +31,6 @@ class ProductPolicy
      */
     public function view(User $user, Product $product)
     {
-        dd('stop');
         return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $product->user_id;
     }
 

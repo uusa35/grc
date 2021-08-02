@@ -3,12 +3,13 @@ import route from "ziggy-js";
 import {useContext} from "react";
 import {BackendContext} from "../../context/BackendContext";
 import pluralize from 'pluralize'
-const TableMobileview = ({ type , elements }) => {
-    const { classNames, trans  } = useContext(BackendContext);
+import LocalizedText from "./LocalizedText";
+const TableMobileview = ({ tableName, elements }) => {
+    const { classNames, trans, currentModule   } = useContext(BackendContext);
     return (
         <div className="mt-3 sm:hidden bg-white rounded-md shadow-md mx-3 py-3">
             <div className="px-4 sm:px-6">
-                <h2 className="text-gray-500 text-xs font-medium uppercase tracking-wide">{trans(pluralize(type))}</h2>
+                <h2 className="text-gray-500 text-xs font-medium uppercase tracking-wide">{trans(pluralize(tableName))}</h2>
             </div>
             <ul className="mt-3 border-t border-gray-200 divide-y divide-gray-100">
                 {
@@ -23,10 +24,12 @@ const TableMobileview = ({ type , elements }) => {
                                       />
                                       <span className="font-medium truncate text-sm leading-6">
                                           {trans('id')}: {element.id} <span
-                                          className="mx-5 truncate font-normal text-gray-500">{element.name}</span>
+                                          className="mx-5 truncate font-normal text-gray-500">
+                                          <LocalizedText ar={element.name_ar} en={element.name_en} />
+                                      </span>
                                       </span>
                                     </span>
-                                <Link href={route().has(`backend.${type}.edit`) ? route(`backend.${type}.edit`, element.id) : '#'}>
+                                <Link href={route().has(`backend.${currentModule}.edit`) ? route(`backend.${currentModule}.edit`, element.id) : '#'}>
                                     <svg
                                         className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

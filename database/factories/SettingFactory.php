@@ -52,7 +52,7 @@ class SettingFactory extends Factory
             'main_bg' => 'square.png',
             'gift_image' => 'square.png',
             'shipment_prices' => 'sample.png',
-            'size_chart' => $this->faker->numberBetween(1, 42) . '.jpeg',
+            'size_chart_image' => $this->faker->numberBetween(1, 42) . '.jpeg',
             'cash_on_delivery' => $this->faker->boolean(),
 
             'main_theme_color' => '#000000',
@@ -95,7 +95,8 @@ class SettingFactory extends Factory
             'terms_ar' => $this->faker->name,
             'terms_en' => $this->faker->name,
             'gift_fee' => 5.00,
-            'multi_cart_merchant' => $this->faker->boolean(true)
+            'multi_cart_merchant' => $this->faker->boolean(true),
+            'keywords' => $this->faker->words,
         ];
     }
 }

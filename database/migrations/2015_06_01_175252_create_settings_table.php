@@ -46,9 +46,10 @@ class CreateSettingsTable extends Migration
             $table->mediumText('terms_ar')->nullable();
             $table->mediumText('terms_en')->nullable();
             $table->string('shipment_prices')->nullable();
-            $table->string('size_chart')->nullable();
+            $table->string('size_chart_image')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
+            $table->string('keywords')->nullable();
 
 
             $table->string('main_theme_color')->nullable();

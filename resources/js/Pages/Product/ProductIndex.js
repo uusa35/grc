@@ -42,7 +42,7 @@ export default function ProductIndex({elements, settings})  {
     }
 
     return (
-        <BackendContainer elements={elements} type={'product'} showSearch={true} showNoElements={elements.data.length === 0}>
+        <BackendContainer elements={elements} module={'product'} showSearch={true} showNoElements={elements.data.length < 1} showMobileView={true}>
             <div className="flex flex-col hidden sm:block">
                 <div className=" overflow-auto">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
