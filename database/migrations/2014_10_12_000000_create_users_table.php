@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -76,6 +77,8 @@ class CreateUsersTable extends Migration
             $table->foreignId('country_id')->references('id')->on('countries');
             $table->foreignId('governate_id')->nullable()->constrained();
             $table->foreignId('area_id')->nullable()->constrained();
+            $table->timestamp('end_subscription_date')->default(Carbon::now());
+            $table->foreignId('subscription_id')->references('id')->on('subscriptions');
 
             $table->string('merchant_id')->nullable();
             $table->string('api_token')->nullable();

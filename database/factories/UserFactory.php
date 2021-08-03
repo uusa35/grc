@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Country;
 use App\Models\Model;
 use App\Models\Role;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -85,7 +86,9 @@ class UserFactory extends Factory
             'video_url_four' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_five' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'player_id' => $this->faker->bankAccountNumber,
-            'views' => $this->faker->numberBetween(10, 999)
+            'views' => $this->faker->numberBetween(10, 999),
+            'subscription_id' => Subscription::all()->random()->id,
+            'end_subscription_date' => $this->faker->dateTimeBetween('now', '1 year')
         ];
     }
 }

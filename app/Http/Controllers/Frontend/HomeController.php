@@ -9,11 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-//        return inertia('HomePage', compact('slides'));
-        if (auth()->guest()) {
-            return view('auth.login');
-        }
-        return redirect()->route('backend.home')->with('success', trans('process_success'));
+        return inertia('Frontend/HomePage');
 
     }
 

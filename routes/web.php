@@ -1,21 +1,45 @@
 <?php
 
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\ProductAttributeController;
-use App\Http\Controllers\SlideController;
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\Backend\AddressController;
+use App\Http\Controllers\Backend\AreaController;
+use App\Http\Controllers\Backend\BranchController;
+use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\ColorController;
+use App\Http\Controllers\Backend\CommercialController;
+use App\Http\Controllers\Backend\CountryController;
+use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\CurrencyController;
+use App\Http\Controllers\Backend\DayController;
+use App\Http\Controllers\Backend\DeviceController;
+use App\Http\Controllers\Backend\FaqController;
+use App\Http\Controllers\Backend\GalleryController;
+use App\Http\Controllers\Backend\ImageController;
+use App\Http\Controllers\Backend\NewsletterController;
+use App\Http\Controllers\Backend\NotificationController;
+use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\PrivilegeController;
+use App\Http\Controllers\Backend\ProductAttributeController;
+use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\ShipmentController;
+use App\Http\Controllers\Backend\SizeController;
+use App\Http\Controllers\Backend\SlideController;
+use App\Http\Controllers\Backend\BookController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\ContactusController;
+use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\PageController;
+use App\Http\Controllers\Backend\SectionController;
+use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ServiceController;
+use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\SubscriptionController;
+use App\Http\Controllers\Backend\TagController;
+use App\Http\Controllers\Backend\TimingController;
+use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\SectionController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,12 +53,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-//    session()->put(['locale' => ])
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('frontend.home');
 Route::get('contactus', [ContactusController::class, 'index']);
-Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth'], function () {
+Route::get('/lang/{locale}', [HomeController::class, 'changeLang']);
+Auth::routes();
+Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth', 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/home', [DashboardController::class, 'index'])->name('home.index');
     Route::get('product/search', [ProductController::class, 'search'])->name('product.search');
@@ -46,24 +70,50 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth']
     Route::get('course/search', [CourseController::class, 'search'])->name('course.search');
     Route::get('slide/search', [SlideController::class, 'search'])->name('slide.search');
     Route::get('toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
-    Route::get('back/{module?}', [DashboardController::class, 'goBack'])->name('back');
     Route::resource('dashboard', DashboardController::class)->only(['index']);
     Route::resource('service', ServiceController::class);
+    Route::resource('timing', TimingController::class);
+    Route::resource('day', DayController::class);
     Route::resource('book', BookController::class);
     Route::resource('section', SectionController::class);
     Route::resource('page', PageController::class);
     Route::resource('user', UserController::class);
-    Route::resource('setting', SettingController::class);
-    Route::resource('category', CategoryController::class);
     Route::resource('order', OrderController::class);
     Route::resource('course', CourseController::class);
     Route::resource('slide', SlideController::class);
     Route::resource('image', ImageController::class)->only('destroy');
     Route::resource('product', ProductController::class);
+    Route::resource('coupon', CouponController::class);
     Route::resource('attribute', ProductAttributeController::class);
+    Route::resource('commercial', CommercialController::class);
+    Route::resource('branch', BranchController::class);
+    Route::resource('address', AddressController::class);
+//  super
+    Route::group(['middleware' => 'super'], function () {
+        Route::resource('role', RoleController::class);
+        Route::resource('privilege', PrivilegeController::class);
+    });
+// admins
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resource('color', ColorController::class);
+        Route::resource('size', SizeController::class);
+        Route::resource('country', CountryController::class);
+        Route::resource('area', AreaController::class);
+        Route::resource('currency', CurrencyController::class);
+        Route::resource('brand', BrandController::class);
+        Route::resource('tag', TagController::class);
+        Route::resource('category', CategoryController::class);
+        Route::resource('video', VideoController::class);
+        Route::resource('gallery', GalleryController::class); // images table
+        Route::resource('post', PostController::class);
+        Route::resource('newsletter', NewsletterController::class);
+        Route::resource('device', DeviceController::class);
+        Route::resource('setting', SettingController::class);
+        Route::resource('notification', NotificationController::class);
+        Route::resource('shipment', ShipmentController::class);
+        Route::resource('faq', FaqController::class);
+        Route::resource('subscription', SubscriptionController::class);
+    });
 });
-// General Routes
-Auth::routes();
-Route::get('/lang/{locale}', [HomeController::class, 'changeLang']);
 
 

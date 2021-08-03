@@ -37,6 +37,7 @@ class CreateSettingsTable extends Migration
             $table->string('whatsapp')->nullable();
             $table->string('snapchat')->nullable();
             $table->string('image')->nullable();
+            $table->string('qr')->nullable();
             $table->string('menu_bg')->nullable();
             $table->string('main_bg')->nullable();
             $table->string('shipment_notes_ar')->nullable();
@@ -49,7 +50,7 @@ class CreateSettingsTable extends Migration
             $table->string('size_chart_image')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
-            $table->string('keywords')->nullable();
+            $table->mediumText('keywords')->nullable();
 
 
             $table->string('main_theme_color')->nullable();

@@ -19,9 +19,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [''];
-    protected $localeStrings = ['name', 'description', 'service', 'policy','address','caption'];
-    protected $dates = ['created_at', 'deleted_at', 'start_subscription', 'end_subscription'];
-    protected $appends = ['imageThumb','imageLarge','address','name','description'];
+    protected $localeStrings = ['name', 'description', 'service', 'policy', 'address', 'caption'];
+    protected $dates = ['created_at', 'deleted_at',  'end_subscription_date'];
+    protected $appends = ['imageThumb', 'imageLarge', 'address', 'name', 'description'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -174,11 +174,18 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function addresses() {
+    public function addresses()
+    {
         return $this->hasMany(Address::class);
     }
 
-    public function localArea() {
-        return $this->belongsTo(Area::class,'area_id');
+    public function localArea()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
+
+    public function subscription()
+    {
+        return $this->belongsTo(Subscription::class);
     }
 }

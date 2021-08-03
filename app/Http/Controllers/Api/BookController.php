@@ -18,8 +18,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $elements = Book::active()->onHome()->orderby('order','desc')->get();
-        return response()->json(BookResource::collection($elements), 200);
+
     }
 
     /**
@@ -29,7 +28,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

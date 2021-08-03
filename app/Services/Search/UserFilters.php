@@ -147,6 +147,11 @@ class UserFilters extends QueryFilters
         return $this->builder->where('on_home', request()->on_home);
     }
 
+    public function active()
+    {
+        return $this->builder->where('active', request()->active);
+    }
+
     public function min()
     {
         return $this->builder->where('price', '>=' ,(double)request()->min);

@@ -2,8 +2,8 @@ import React from 'react'
 import {render} from 'react-dom'
 import {createInertiaApp} from '@inertiajs/inertia-react'
 import {InertiaProgress} from '@inertiajs/progress'
-import GlobalContext from "./Pages/context/GlobalContext";
-import {BackendContextProvider} from "./Pages/context/BackendContext";
+import GlobalContext from "./Pages/Backend/context/GlobalContext";
+import {BackendContextProvider} from "./Pages/Backend/context/BackendContext";
 import moment from 'moment';
 import NProgress from 'nprogress'
 import { Inertia } from '@inertiajs/inertia'

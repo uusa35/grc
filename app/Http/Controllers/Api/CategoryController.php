@@ -29,7 +29,7 @@ class CategoryController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = Category::active()->filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
-        return inertia('CategoryIndex', compact('elements'));
+        return inertia('Backend/CategoryIndex', compact('elements'));
     }
     /**
      * Show the form for creating a new resource.

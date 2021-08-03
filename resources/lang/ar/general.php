@@ -1026,7 +1026,7 @@ return array (
     "process_failure" => "عملية غير ناجحة",
     "modal_confirmation" => "تأكيد الأمر",
     "tag" => "تاج",
-    "product_description_instruction" => "وصف المنتج أو أية ملاحظات خاصة",
+    "product_description_instruction" => "الوصف أو أية ملاحظات خاصة",
     "product_notes_instruction" => "ملاحظات إضافية يمكن إظهرها عند طلب المنتج",
     "product_check_stock_message" => "احيانا يكون المنتج غير خاضع للكميات (منتج تحت الطلب) يمكن الغاء هذه الخاصية في حالة عدم خضوع المنتج لنظام المخزون",
     "product_is_available_message" => "الغاء هذه الخاصية يتيح مشاهدة المنتج بالموقع أو التطبيق ولكن بدون القدرة على اضافته لعربة التسوق",
@@ -1050,5 +1050,11 @@ return array (
     'qr_best_fit' => 'مقاس الصورة المناسب (العرض 300  - الطول 300 px  )',
     "product_attribute" => "خاصية المنتج",
     "destroy" => "حذف",
-    "accounts" => "حسابات"
+    "accounts" => "حسابات",
+    "shipment_prices"=> "جدول اسعار الشحن",
+    "size_chart_image" => "جدول المقاسات",
+    "setting" => "خصائص",
+    "shipment_notes_ar" => "ملاحظات الشحن بالعربية",
+    "shipment_notes_en" => "ملاحظات الشحن بالإنجليزية",
+    "setting_shipment_notes" => "ملاحظات تظهر عند صفحة الطلب (في حالةوجود عملية شحن للخارج)"
 );

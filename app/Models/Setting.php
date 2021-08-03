@@ -10,12 +10,7 @@ class Setting extends PrimaryModel
     use HasFactory;
     protected $localeStrings = ['name','caption','address', 'country', 'description', 'shipment_notes', 'policy', 'terms'];
     protected $guarded = [''];
-    protected $appends = ['name','caption','country','address','description','sizeChartImage','imageThumb'];
-
-    public function getSizeChartImageAttribute()
-    {
-        return asset(env('LARGE') . $this->size_chart);
-    }
+    protected $appends = ['name','caption','country','address','description','imageThumb'];
 
     public function images()
     {

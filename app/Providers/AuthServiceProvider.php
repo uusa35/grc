@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Book;
 use App\Models\Color;
 use App\Models\Page;
 use App\Models\Privilege;
@@ -72,10 +73,8 @@ class AuthServiceProvider extends ServiceProvider
         Course::class => CoursePolicy::class,
         Size::class => SizePolicy::class,
         Color::class => ColorPolicy::class,
-        Role::class => RolePolicy::class,
         Tag::class => TagPolicy::class,
         Post::class => PostPolicy::class,
-        Privilege::class => PrivilegePolicy::class,
         Country::class => CountryPolicy::class,
         Area::class => AreaPolicy::class,
         Slide::class => SlidePolicy::class,
@@ -119,6 +118,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('isDesigner', function () {
             return auth()->user()->role->is_designer;
+        });
+
+        Gate::define('dashboard', function () {
+            return auth()->user()->access_dashboard;
         });
 
         Gate::define('index', function ($user, $index) {

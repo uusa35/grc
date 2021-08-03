@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use App\Services\Traits\LocaleTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends PrimaryModel
 {
     use HasFactory;
+    public $localeStrings = ['name', 'description', 'notes'];
+    protected $guarded = [''];
+    protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
+    protected $appends = ['imageThumb', 'imageLarge', 'name', 'description','type'];
 
     public function user() {
         return $this->belongsTo(User::class);

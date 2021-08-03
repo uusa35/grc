@@ -79,6 +79,11 @@ class Filters extends QueryFilters
         return $this->builder->where('is_hot_deal', true)->whereDate('end_sale', '>', Carbon::now());
     }
 
+    public function free()
+    {
+        return $this->builder->where('free', request()->free);
+    }
+
     public function min()
     {
         return $this->builder->where('price', '>=' ,(double)request()->min);
@@ -123,11 +128,6 @@ class Filters extends QueryFilters
     public function on_sale()
     {
         return $this->builder->where('on_sale', request()->on_sale);
-    }
-
-    public function free()
-    {
-        return $this->builder->where('free', request()->free);
     }
 
     public function slidable_id()
