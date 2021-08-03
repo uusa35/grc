@@ -42,7 +42,6 @@ class BookFactory extends Factory
             'sale_price' => function ($array) {
                 return $array['price'] - rand(1, 5);
             },
-            'size_chart_image' => 'sample.png',
             'description_en' => $this->faker->paragraph,
             'description_ar' => $this->faker->paragraph,
             'notes_ar' => $this->faker->paragraph,
@@ -55,8 +54,6 @@ class BookFactory extends Factory
             'check_stock' => $this->faker->boolean(true),
             'is_hot_deal' => $this->faker->boolean(true),
             'user_id' => User::active()->get()->random()->id,
-            'has_attributes' => $this->faker->boolean(true),
-            'show_attribute' => $this->faker->boolean(true),
             'video_url_one' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_two' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_three' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
