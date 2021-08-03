@@ -70,9 +70,6 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
     const {props} = usePage();
     const {errors} = props;
 
-    console.log('errors', errors);
-    console.log('book', book)
-
     const handleChange = (e) => {
         setData(values => ({
             ...values,

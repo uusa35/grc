@@ -73,9 +73,6 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
     const {props} = usePage();
     const {errors} = props;
 
-    console.log('errors', errors);
-    console.log('product', product)
-
     const handleChange = (e) => {
         setData(values => ({
             ...values,

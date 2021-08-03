@@ -12,8 +12,6 @@ export default function ProductAttributeIndex({elements, colors, sizes}) {
     const { settings } = useContext(GlobalContext);
     const {params} = route();
 
-    console.log('elements', elements);
-
     return (
         <BackendContainer elements={elements} subModule={'attribute'} showNoElements={elements.data.length < 1}
                           showMobileView={true}>

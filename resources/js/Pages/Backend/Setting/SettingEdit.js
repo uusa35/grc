@@ -17,7 +17,7 @@ import {element} from "prop-types";
 export default function SettingEdit({setting, themes}) {
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, theme, currentFormTab, parentModule, getImageThumb} = useContext(BackendContext)
-    console.log('parentModule', parentModule);
+
     const {data, setData, put, post, progress, reset} = useForm({
         name_ar: setting.name_ar,
         name_en: setting.name_en,
@@ -94,9 +94,6 @@ export default function SettingEdit({setting, themes}) {
     });
     const {props} = usePage();
     const {errors} = props;
-
-    console.log('errors', errors);
-    console.log('setting', setting)
 
     const handleChange = (e) => {
         setData(values => ({

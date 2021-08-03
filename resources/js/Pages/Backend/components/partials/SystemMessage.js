@@ -23,7 +23,7 @@ const SystemMessage = () => {
     }, [sysMessage])
 
     const {errors} = usePage().props
-    console.log('errors', errors);
+
     useEffect(() => {
         if (!isEmpty(errors)) {
             setSystemMessage({

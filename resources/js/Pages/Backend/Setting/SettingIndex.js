@@ -9,7 +9,7 @@ import route from 'ziggy-js'
 
 export default function SettingIndex({ setting }) {
     const { trans } = useContext(BackendContext);
-    console.log('element', setting)
+
     return (
         <BackendContainer>
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">

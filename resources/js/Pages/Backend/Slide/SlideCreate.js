@@ -3,7 +3,6 @@ import route from 'ziggy-js';
 
 const SlideCreate = () => {
     const { params } = route();
-    console.log('the params', params);
     return (
         <BackendContainer>
             <h1>Slide Create</h1>

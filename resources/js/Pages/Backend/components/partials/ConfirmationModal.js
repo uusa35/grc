@@ -45,9 +45,7 @@ export default function ConfirmationModal() {
 
     const handleDeleteFormSubmit = () => {
         if (modelAction.id && modelAction.type === 'destroy') {
-            console.log('submit the form');
             const {id , model, type} = modelAction;
-            console.log('the iddddd ===> from handle submit delete', id);
             setData('id', id);
             setShowConfirmationModal(!showConfirmationModal)
             setConfirmationModalResponse(!confirmationModalResponse)
