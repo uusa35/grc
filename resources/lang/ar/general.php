@@ -1070,5 +1070,7 @@ return array (
     "download" => "تحميل",
     "embedded" => "كود",
     "book_embedded_notes_instruction" => "كود الكتاب هو الفريم الذي سيتم تطبيقه لمشاهدة صفحات الكتاب",
-    "all_information_required" => "جميع المعلومات بهذا القسم مطلوبة ويجب إدخالها"
+    "all_information_required" => "جميع المعلومات بهذا القسم مطلوبة ويجب إدخالها",
+    "select_image" => "اختر الصورة",
+    "upload_up_to_one_mb" => "يمكن تحميل جميع أنواع الصور JPG - JPEG - PNG بحد اقصى ١ ميجا للصورة "
 );

@@ -403,7 +403,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         autoComplete="main_image"
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
-                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={product.imageThumb} alt=""/>
+                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={product.imageThumb} alt={product.name}/>
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
@@ -1076,9 +1076,9 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         autoComplete="size_chart_image"
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
-                                    <img className={`h-20 w-20 bg-cover rounded-md`}
-                                         src={getImageThumb(product.size_chart_image)}
-                                         alt=""/>
+                                    {product.size_chart_image && <img className={`h-20 w-20 bg-cover rounded-md`}
+                                                                      src={getImageThumb(product.size_chart_image)}
+                                                                      alt=""/>}
                                 </div>
                                 <ToolTipWidget message={trans('product_size_chart_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
@@ -1105,8 +1105,8 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         autoComplete="qr"
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
-                                    <img className={`h-20 w-20 bg-cover rounded-md`} src={getImageThumb(product.qr)}
-                                         alt=""/>
+                                    {product.qr && <img className={`h-20 w-20 bg-cover rounded-md`} src={getImageThumb(product.qr)}
+                                                        alt=""/>}
                                 </div>
                                 <ToolTipWidget message={trans('product_qr_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
@@ -1555,7 +1555,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                             />
                                         </p>
                                     </div>
-                                    <p className=" text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                    <p className=" text-gray-500">{trans('upload_up_to_one_mb')}</p>
                                 </div>
                             </div>
                         </div>

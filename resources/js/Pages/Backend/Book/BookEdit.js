@@ -1436,7 +1436,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 />
                                             </p>
                                         </div>
-                                        <p className=" text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                        <p className=" text-gray-500">{trans('upload_up_to_one_mb')}</p>
                                     </div>
                                 </div>
                             </div>
