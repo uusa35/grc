@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductStore extends FormRequest
+class BookStore extends FormRequest
 {
     /**Ser
      * Get the error messages for the defined validation rules.
@@ -31,7 +31,6 @@ class ProductStore extends FormRequest
             'sku' => 'required|min:2',
             'name_ar' => 'required:min:3|max:200',
             'name_en' => 'required|min:3|max:200',
-            'has_attributes' => 'required|boolean',
             'user_id' => 'required|exists:users,id',
             'shipment_package_id' => 'nullable|exists:shipment_packages,id',
             'brand_id' => 'nullable|exists:brands,id',
@@ -51,7 +50,6 @@ class ProductStore extends FormRequest
             'description_ar' => 'min:3|nullable',
             'notes_ar' => 'min:3|nullable',
             'notes_en' => 'min:3|nullable',
-            'size_chart_image' => 'nullable|image',
 //            'start_sale' => 'date|nullable',
 //            'end_sale' => 'required',
 //            'active' => 'required|boolean',
@@ -63,9 +61,10 @@ class ProductStore extends FormRequest
             'video_url_three' => 'nullable|url',
             'video_url_four' => 'nullable|url',
             'video_url_five' => 'nullable|url',
-            'color_id' => 'nullable|exists:colors,id|required_unless:has_attributes,1',
-            'size_id' => 'nullable|exists:sizes,id|required_unless:has_attributes,1',
-            'home_delivery_availability' => 'nullable|boolean'
+            'home_delivery_availability' => 'nullable|boolean',
+            'free' => 'boolean',
+            'download' => 'boolean',
+            "embedded" => "required|min:250"
         ];
     }
 }

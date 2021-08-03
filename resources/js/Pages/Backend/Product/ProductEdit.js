@@ -13,10 +13,10 @@ import route from 'ziggy-js';
 import moment from 'moment';
 
 
-export default function ProductEdit({users, sizes, colors, categories, product, productCategories, brands }) {
-    const [selectedCategories, setSelectedCategories] = useState(productCategories);
+export default function ProductEdit({users, sizes, colors, categories, product, elementCategories, brands }) {
+    const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, currentModule, getImageThumb} = useContext(BackendContext)
+    const {classNames, trans, theme, currentFormTab, parentModule, getImageThumb} = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': product.sku,
         'name_ar': product.name_ar,
@@ -67,7 +67,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
         'size_id': product.size_id,
         'embedded': '',
         'slides': '',
-        'categories': productCategories,
+        'categories': elementCategories,
         'product_attributes': ''
     });
     const {props} = usePage();
@@ -140,9 +140,9 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('create')} {trans(currentModule)}</h3>
-                            <p className="mt-1  text-gray-500">
-                                {trans('create')} {trans(currentModule)}
+                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('create')} {trans(parentModule)}</h3>
+                            <p className="mt-1  text-red-500">
+                                {trans('all_information_required')}
                             </p>
                         </div>
                         <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
@@ -434,7 +434,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                              src={product.images[0]?.imageThumb} alt=""/>
                                     }
                                 </div>
-                                <ToolTipWidget message={trans('product_more_images_instruction')}/>
+                                <ToolTipWidget message={trans('more_images_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
@@ -465,7 +465,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                                                     aria-describedby="categories-description"
                                                                     name="categories"
                                                                     value={c.id}
-                                                                    defaultChecked={first(filter(productCategories, s => s == c.id))}
+                                                                    defaultChecked={first(filter(elementCategories, s => s == c.id))}
                                                                     type="checkbox"
                                                                     className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                                                 />
@@ -489,7 +489,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                                                                 aria-describedby="categories-description"
                                                                                 name="categories"
                                                                                 value={sub.id}
-                                                                                defaultChecked={first(filter(productCategories, s => s == sub.id))}
+                                                                                defaultChecked={first(filter(elementCategories, s => s == sub.id))}
                                                                                 type="checkbox"
                                                                                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                                                             />
@@ -514,7 +514,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                                                                         aria-describedby="categories-description"
                                                                                         name="categories"
                                                                                         value={child.id}
-                                                                                        defaultChecked={first(filter(productCategories, s => s == child.id))}
+                                                                                        defaultChecked={first(filter(elementCategories, s => s == child.id))}
                                                                                         type="checkbox"
                                                                                         className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                                                                                     />
@@ -758,9 +758,9 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
 
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('create')} {trans(currentModule)}</h3>
+                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('create')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-gray-500">
-                                {trans('create')} {trans(currentModule)}
+                                {trans('create')} {trans(parentModule)}
                             </p>
                         </div>
                         {/* description */}

@@ -69,7 +69,6 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth',
     Route::get('order/search', [OrderController::class, 'search'])->name('order.search');
     Route::get('course/search', [CourseController::class, 'search'])->name('course.search');
     Route::get('slide/search', [SlideController::class, 'search'])->name('slide.search');
-    Route::get('toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
     Route::resource('dashboard', DashboardController::class)->only(['index']);
     Route::resource('service', ServiceController::class);
     Route::resource('timing', TimingController::class);
@@ -95,6 +94,9 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth',
     });
 // admins
     Route::group(['middleware' => 'admin'], function () {
+        Route::get('toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
+        Route::get('trashed', [DashboardController::class, 'trashed'])->name('trashed');
+        Route::get('restore', [DashboardController::class, 'restore'])->name('restore');
         Route::resource('color', ColorController::class);
         Route::resource('size', SizeController::class);
         Route::resource('country', CountryController::class);

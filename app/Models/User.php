@@ -12,7 +12,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, ModelHelpers, UserHelpers, SoftDeletes, LocaleTrait, HasEvents;
-
     /**
      * The attributes that are mass assignable.
      *

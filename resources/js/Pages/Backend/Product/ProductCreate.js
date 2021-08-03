@@ -2,19 +2,18 @@ import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useMemo, useState} from "react";
 import {BackendContext} from "./../context/BackendContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, map, forEach, isArray, uniq} from 'lodash';
+import {filter, map, forEach, isArray, uniq, random } from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
 import axios from "axios";
-import {Inertia} from '@inertiajs/inertia'
 
 export default function ProductCreate({users, sizes, colors, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, currentModule } = useContext(BackendContext)
+    const {classNames, trans, theme, currentFormTab, parentModule } = useContext(BackendContext)
     const {data, setData, post, progress} = useForm({
-        'sku': '',
+        'sku': random(1111,9999),
         'name_ar': '',
         'name_en': '',
         'caption_ar': '',
@@ -32,7 +31,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
         'on_home': 0,
         'is_available': 1,
         'price': '',
-        'weight': '',
+        'weight': 0.25,
         'sale_price': '',
         'size_chart_image': '',
         'keywords': '',
@@ -44,13 +43,13 @@ export default function ProductCreate({users, sizes, colors, categories}) {
         'video_url_five': '',
         'start_sale': '',
         'end_sale': '',
-        'active': 0,
-        'check_stock': 0,
+        'active': 1,
+        'check_stock': 1,
         'is_hot_deal': 0,
         'has_attributes': 0,
         'show_attribute': 0,
         'wrap_as_gift': 0,
-        'qty': '',
+        'qty': 1,
         'qr': '',
         'direct_purchase': 0,
         'show_size_chart': 0,
@@ -61,7 +60,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
         'brands': '',
         'color_id': '',
         'size_id': '',
-        'embedded': 0,
+        'embedded': '',
         'slides': '',
         'categories': '',
         'product_attributes': ''
@@ -107,13 +106,11 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                     method="post"
                     encType="multipart/form-data"
                     className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full px-10 space-y-3`)}>
-
                     <div className="space-y-4 divide-y 900">
-
                         <div className={`pt-4`}>
-                            <h3 className="leading-6 font-medium text-gray-900">{trans('create')} {trans(currentModule)}</h3>
-                            <p className="mt-1  text-gray-500">
-                                {trans('create')} {trans(currentModule)}
+                            <h3 className="leading-6 font-medium text-gray-900">{trans('create')} {trans(parentModule)}</h3>
+                            <p className="mt-1  text-red-500">
+                                {trans('all_information_required')}
                             </p>
                         </div>
 
@@ -394,7 +391,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                 <div className="mt-1">
                                     <input
                                         onChange={e => handleImages(e.target.files)}
-                                        // required
+                                        required
                                         type="file"
                                         multiple
                                         name="images"
@@ -403,7 +400,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_more_images_instruction')}/>
+                                <ToolTipWidget message={trans('more_images_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>

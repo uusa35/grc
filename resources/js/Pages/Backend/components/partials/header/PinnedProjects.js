@@ -11,7 +11,7 @@ export default function PinnedProjects() {
     return (
         <div className="bg-white my-3 mx-3 rounded-md shadow-sm py-3 sm:px-6 lg:px-5 ">
             {/*<h2 className="text-xs font-medium uppercase tracking-wide">{trans('modules')}</h2>*/}
-            <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 sm:grid-cols-2 xl:grid-cols-6 my-1">
+            <ul className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 sm:gap-6  my-1">
 
                 <li className="relative col-span-1 flex  rounded-md">
                     <div
@@ -26,7 +26,9 @@ export default function PinnedProjects() {
                                   className={`text-${theme}-900 font-medium hover:text-${theme}-600`}>
                                 {trans('control_of')} {trans('products')}
                             </Link>
-                            <p className="text-gray-500">{trans('control_ur_products')}</p>
+                            <p className="text-gray-500">
+
+                            </p>
                         </div>
                         <Menu as="div" className="flex-shrink-0 pr-2">
                             {({open}) => (
@@ -93,6 +95,21 @@ export default function PinnedProjects() {
                                                     )}
                                                 </Menu.Item>
                                             </div>
+                                            <div className="py-1">
+                                                <Menu.Item>
+                                                    {({active}) => (
+                                                        <Link
+                                                            href={route('backend.trashed', { model : 'product'})}
+                                                            className={classNames(
+                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                'block px-4 py-2 '
+                                                            )}
+                                                        >
+                                                            {trans('trashed')} {trans('products')}
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                            </div>
                                         </Menu.Items>
                                     </Transition>
                                 </>
@@ -116,7 +133,8 @@ export default function PinnedProjects() {
                                   className={`text-${theme}-900 font-medium hover:text-${theme}-600`}>
                                 {trans('control_of')} {trans('users')}
                             </Link>
-                            <p className="text-gray-500">{trans('control_ur_products')}</p>
+                            <p className="text-gray-500">
+                                </p>
                         </div>
                         <Menu as="div" className="flex-shrink-0 pr-2">
                             {({open}) => (
@@ -138,7 +156,7 @@ export default function PinnedProjects() {
                                     >
                                         <Menu.Items
                                             static
-                                            className={classNames(isRTL ? 'right-50' : 'right-50', " mx-10 origin-top-right absolute top-3 w-48 mt-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none")}
+                                            className={classNames(isRTL ? 'right-50' : 'right-50', " z-50 mx-10 origin-top-right absolute top-3 w-48 mt-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none")}
                                         >
                                             <div className="py-1">
                                                 <Menu.Item>
@@ -223,7 +241,7 @@ export default function PinnedProjects() {
                                   className={`text-${theme}-900 font-medium hover:text-${theme}-600`}>
                                 {trans('control_of')} {trans('books')}
                             </Link>
-                            <p className="text-gray-500">{trans('control_ur_books')}</p>
+                            <p className="text-gray-500"></p>
                         </div>
                         <Menu as="div" className="flex-shrink-0 pr-2">
                             {({open}) => (
@@ -245,7 +263,7 @@ export default function PinnedProjects() {
                                     >
                                         <Menu.Items
                                             static
-                                            className={classNames(isRTL ? 'right-50' : 'right-50', " mx-10 origin-top-right absolute top-3 w-48 mt-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none")}
+                                            className={classNames(isRTL ? 'right-50' : 'right-50', " z-50 mx-10 origin-top-right absolute top-3 w-48 mt-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none")}
                                         >
                                             <div className="py-1">
                                                 <Menu.Item>
@@ -289,9 +307,6 @@ export default function PinnedProjects() {
                                                         </Link>
                                                     )}
                                                 </Menu.Item>
-
-
-
                                             </div>
                                         </Menu.Items>
                                     </Transition>

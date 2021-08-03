@@ -127,6 +127,11 @@ class Category extends PrimaryModel
         return $q->where('is_product', true);
     }
 
+    public function scopeOnlyForBooks($q)
+    {
+        return $q->where('is_book', true);
+    }
+
     public function scopeOnlyForCommercials($q)
     {
         return $q->where('is_product', true);

@@ -3,7 +3,7 @@ import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
 import {Fragment, useContext, useEffect, useMemo, useState} from "react";
 import {BackendContext} from "./../context/BackendContext";
-import {orderBy, isEmpty, isArray, map } from 'lodash';
+import {orderBy, isEmpty, isArray, map} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import LocalizedText from "../components/widgets/LocalizedText";
@@ -24,7 +24,7 @@ export default function UserIndex({elements}) {
     const [currentData, setCurrentData] = useState();
 
     useMemo(() => {
-            setCurrentData(elements.data);
+        setCurrentData(elements.data);
     }, [])
 
     useMemo(() => {

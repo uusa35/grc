@@ -11,6 +11,7 @@
 //use App\Http\Controllers\Api\SlideController;
 //use App\Http\Controllers\Api\UserController;
 //use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Backend\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,5 +48,4 @@ Route::group(['middleware' => 'auth:api'], function () {
 //Route::get('search/user', [UserController::class,'search']);
 //Route::get('search/product', [ProductController::class,'search']);
 //Route::get('search/category', [CategoryController::class,'search']);
-//Route::post('images/upload',[DashboardController::class,'uploadImages']);
-//
+Route::post('images/upload',[DashboardController::class,'uploadImages']);

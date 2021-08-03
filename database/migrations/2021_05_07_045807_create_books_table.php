@@ -33,10 +33,9 @@ class CreateBooksTable extends Migration
             $table->boolean('on_sale')->default(false);
             $table->boolean('on_home')->default(false);
             $table->boolean('is_available')->default(false);
-            $table->decimal('price', 6, 2)->unsigned();
             $table->decimal('weight', 4, 2)->unsigned();
+            $table->decimal('price', 6, 2)->unsigned();
             $table->decimal('sale_price', 6, 2)->unsigned()->nullable();
-            $table->string('size_chart_image')->nullable();
             $table->string('keywords')->nullable();
             $table->string('image')->nullable();
             $table->string('video_url_one')->nullable();
@@ -50,15 +49,12 @@ class CreateBooksTable extends Migration
             $table->boolean('active')->default(true);
             $table->boolean('check_stock')->default(true);
             $table->boolean('is_hot_deal')->default(false);
-            $table->boolean('has_attributes')->default(false);
-            $table->boolean('show_attribute')->default(false);
             $table->boolean('wrap_as_gift')->default(false);
 
             $table->integer('qty')->unsigned()->nullable();
             $table->string('qr')->nullable();
             $table->integer('views')->unsigned()->default(true);
             $table->boolean('direct_purchase')->default(false);
-            $table->boolean('show_size_chart')->default(false);
             $table->string('barcode')->nullable();
             $table->integer('order')->nullable();
 
@@ -69,6 +65,7 @@ class CreateBooksTable extends Migration
             $table->string('preview')->nullable();
             $table->boolean('download')->default(false);
             $table->longText('embedded')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

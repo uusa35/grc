@@ -9,7 +9,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class ProductAttributePolicy
 {
     use HandlesAuthorization;
-    const MODAL = 'product_attribute';
+    const MODAL = 'attribute';
 
     /**
      * Determine whether the user can view the category.
@@ -31,7 +31,6 @@ class ProductAttributePolicy
      */
     public function view(User $user, ProductAttribute $productAttribute)
     {
-        dd('view');
         return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $productAttribute->product->user_id;
     }
 

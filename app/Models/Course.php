@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends PrimaryModel
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];

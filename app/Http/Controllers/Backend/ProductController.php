@@ -122,8 +122,8 @@ class ProductController extends Controller
             }]);
         }])->get();
         $product = $product->whereId($product->id)->with('images', 'user', 'categories')->first();
-        $productCategories = $product->categories->pluck('id')->toArray();
-        return inertia('Backend/Product/ProductEdit', compact('users', 'sizes', 'colors', 'categories', 'product', 'productCategories','brands'));
+        $elementCategories = $product->categories->pluck('id')->toArray();
+        return inertia('Backend/Product/ProductEdit', compact('users', 'sizes', 'colors', 'categories', 'product', 'elementCategories','brands'));
     }
 
     /**
@@ -157,11 +157,17 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->product_attributes()->delete();
-        $product->images()->delete();
-        $product->slides()->delete();
-        $product->categories()->delete();
-        $product->delete();
-        return redirect()->back();
+        try {
+            $product->product_attributes()->delete();
+            $product->images()->delete();
+            $product->slides()->delete();
+            $product->favorites()->delete();
+            $product->categories()->delete();
+            $product->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
+
 }

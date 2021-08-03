@@ -28,6 +28,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('months')->default(1);
             $table->decimal('price', 6, 2)->unsigned();
             $table->decimal('sale_price', 6, 2)->unsigned();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

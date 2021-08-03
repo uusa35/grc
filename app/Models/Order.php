@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Order extends PrimaryModel
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $guarded = [''];
     protected $casts = [
         'shipment_fees' => 'float',

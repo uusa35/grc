@@ -171,4 +171,37 @@ trait DashboardTrait
     {
         return request()->has('module') ? redirect()->route('backend.' . $request->module . '.index') : redirect()->back();
     }
+
+    public function trashed(Request $request)
+    {
+        $validate = validator($request->all(), [
+            'model' => 'string|required',
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate->errors()->first());
+        }
+        $model = request()->model;
+        $className = 'App\Models\\' . ucfirst($request->model);
+        $element = new $className();
+        $elements = $element->onlyTrashed()->paginate(SELF::TAKE_LEAST);
+        return inertia('Backend/Trashed/TrashedIndex', compact('elements', 'model'));
+    }
+
+    public function restore(Request $request)
+    {
+        $validate = validator($request->all(), [
+            'model' => 'string|required',
+            'id' => 'integer|required'
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate->errors()->first());
+        }
+        $className = 'App\Models\\' . ucfirst($request->model);
+        $element = new $className();
+        $element = $element->withTrashed()->whereId($request->id)->first();
+        if ($element->trashed()) {
+            $element->restore();
+        }
+        return redirect()->back()->with('success', trans('general.progress_success'));
+    }
 }

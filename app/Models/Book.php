@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Services\Traits\LocaleTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends PrimaryModel
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     public $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];

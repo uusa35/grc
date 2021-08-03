@@ -60,6 +60,7 @@ class CreateCoursesTable extends Migration
             $table->string('file')->nullable();
             $table->string('preview')->nullable();
             $table->boolean('embedded')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
