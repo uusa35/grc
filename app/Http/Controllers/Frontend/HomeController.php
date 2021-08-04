@@ -20,6 +20,6 @@ class HomeController extends Controller
         }
         app()->setLocale($locale);
         session()->put('locale', $locale);
-        return redirect()->to(url()->previous());
+        return redirect()->back()->with('success','lang changed');
     }
 }

@@ -31,7 +31,9 @@ const BackendHeader = () => {
         toggleSideBar,
         theme,
         modules,
-        currentModule
+        parentModule,
+        locale,
+        setLocale
     } = useContext(BackendContext);
 
     return (
@@ -79,7 +81,7 @@ const BackendHeader = () => {
                                                                         key={m.name}
                                                                         href={route(`backend.${m.name}.index`)}
                                                                         className={classNames(
-                                                                            m.name === currentModule ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            m.name === parent ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                             'group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
                                                                         )}
                                                                     >
@@ -312,8 +314,11 @@ const BackendHeader = () => {
                                         <div className="py-1">
                                             <Menu.Item>
                                                 {({active}) => (
-                                                    <a
-                                                        href={`?locale=${otherLang}`}
+                                                    <Link
+                                                        onClick={() => {
+                                                            setLocale(otherLang)
+                                                        }}
+                                                        href={route(`change.lang`, { locale : otherLang})}
                                                         className={classNames(
                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                             'group flex items-center px-4 py-2 '
@@ -326,7 +331,7 @@ const BackendHeader = () => {
                                                                   d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
                                                         </svg>
                                                         {trans(otherLang)}
-                                                    </a>
+                                                    </Link>
                                                 )}
                                             </Menu.Item>
                                         </div>

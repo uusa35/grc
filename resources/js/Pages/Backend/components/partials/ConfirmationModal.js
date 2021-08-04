@@ -17,12 +17,11 @@ export default function ConfirmationModal() {
         setConfirmationModalMessage,
         setConfirmationModalResponse,
         confirmationModalResponse,
-        modelAction,
+        modalAction,
         classNames,
         theme,
-        currentModule
     } = useContext(BackendContext);
-    const {data, submit, setData, delete: destroy,} = useForm({
+    const {data, submit, setData, delete: destroy} = useForm({
         id: ''
     })
     const cancelButtonRef = useRef(null)
@@ -33,34 +32,31 @@ export default function ConfirmationModal() {
     }
 
     const handleConfirm = () => {
-        console.log('iddddd ==> ',modelAction.id);
         setShowConfirmationModal(false)
         setConfirmationModalResponse(true)
-        if (modelAction.type === 'destroy' && modelAction.id) {
+        if (modalAction.type === 'destroy' && modalAction.id) {
             return handleDeleteFormSubmit();
         } else {
-            console.log('do another thing');
+            // console.log('do another thing');
         }
     }
 
     const handleDeleteFormSubmit = () => {
-        if (modelAction.id && modelAction.type === 'destroy') {
-            const {id , model, type} = modelAction;
-            setData('id', id);
-            setShowConfirmationModal(!showConfirmationModal)
-            setConfirmationModalResponse(!confirmationModalResponse)
-            return destroy( route(`backend.${model}.update`, id ));
-            // return submit('delete', route(`backend.${model}.${type}`, { id }));
-
-        }
+        const {id, model, type} = modalAction;
+        setData('id', id);
+        setShowConfirmationModal(!showConfirmationModal)
+        setConfirmationModalResponse(!confirmationModalResponse)
+        console.log('model', modalAction)
+        // Inertia.delete(route(`backend.${model}.${type}`, id))
+        return destroy(route(`backend.${model}.${type}`, id));
     }
 
     useEffect(() => {
-        if (modelAction.type && modelAction.model) {
-            const {id, model, type} = modelAction;
+        if (modalAction.type && modalAction.model) {
+            const {id, model, type} = modalAction;
             setConfirmationModalMessage({title: `${trans(type)} ${trans(model)}`, message: trans('modal_confirmation')})
         }
-    }, [modelAction.id])
+    }, [modalAction.id])
 
     return (
         <Transition.Root show={showConfirmationModal} as={Fragment}>
@@ -130,17 +126,17 @@ export default function ConfirmationModal() {
                                 </button>
                                 <button
                                     type="button"
-                                    className={classNames(modelAction.type === 'destroy' ? 'bg-red-800' : `bg-${theme}-600`, `w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-${theme}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500 sm:col-start-2 sm:text-sm`)}
-                                    onClick={() => handleConfirm(modelAction.id)}
+                                    className={classNames(modalAction.type === 'destroy' ? 'bg-red-800' : `bg-${theme}-600`, `w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-${theme}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500 sm:col-start-2 sm:text-sm`)}
+                                    onClick={() => handleConfirm(modalAction.id)}
                                 >
                                     {trans('confirm')}
                                 </button>
                             </div>
                             {
-                                modelAction.type === 'destroy' && modelAction.id &&
+                                modalAction.type === 'destroy' && modalAction.id &&
                                 <form method="post"
-                                    // action={`/backend/${modelAction.model}/${modelAction.id}`}
-                                      action={route(`backend.${modelAction.model}.${modelAction.type}`, modelAction.id)}
+                                    // action={`/backend/${modalAction.model}/${modalAction.id}`}
+                                      action={route(`backend.${modalAction.model}.${modalAction.type}`, modalAction.id)}
                                 >
                                     <input type="hidden" name="_method" value="delete"/>
                                     <button type="submit" className="btn btn-del hidden"></button>

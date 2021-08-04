@@ -14,15 +14,14 @@ createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
         const {translations, guest, settings, auth} = props.initialPage.props;
-        const  locale = document.getElementById('locale').innerHTML;
-        moment.locale(locale);
         const {component, url} = props.initialPage;
         return render(
-            <GlobalContext.Provider value={{translations, auth, guest, locale, settings, url, component}}>
+            <GlobalContext.Provider value={{translations, auth, guest, settings, url, component}}>
                 <BackendContextProvider>
                     <App {...props} />
                 </BackendContextProvider>
             </GlobalContext.Provider>
             , el)
     },
+    title: title => `${title} - E-Commerce`,
 });

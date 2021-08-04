@@ -19,6 +19,7 @@ trait DashboardTrait
 {
     public function changeLanguage()
     {
+        dd(request()->locale);
         app()->setLocale(request('locale'));
         session()->put('locale', request('locale'));
         return redirect()->back();
@@ -40,7 +41,7 @@ trait DashboardTrait
         $element->update([
             'active' => !$element->active
         ]);
-        return redirect()->back()->with('success', trans('general.process_sucess'));
+        return redirect()->back()->with('success', 'process_success');
     }
 
     public function toggleFeatured(Request $request)
@@ -97,13 +98,18 @@ trait DashboardTrait
     }
 
 
-    public function clearImage(Request $request)
+    public function clearElement(Request $request)
     {
+        $request->validate([
+            'model' => 'required|string',
+            'id' => 'required|integer',
+            'colName' => 'required|string'
+        ]);
         $className = '\App\Models\\' . Str::title($request->model);
         $element = new $className();
         $element = $element->withoutGlobalScopes()->whereId($request->id)->first();
         $element->update([
-            $request->has('colName') ? $request->colName : 'image' => ''
+            $request->colName => ''
         ]);
         return redirect()->back()->with('success', 'Image Cleared!');
     }
@@ -204,4 +210,5 @@ trait DashboardTrait
         }
         return redirect()->back()->with('success', trans('general.progress_success'));
     }
+
 }

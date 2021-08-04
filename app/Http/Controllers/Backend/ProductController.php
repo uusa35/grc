@@ -142,7 +142,6 @@ class ProductController extends Controller
             $request->has('categories') ? $product->categories()->sync($request->categories) : null;
             $request->hasFile('image') ? $this->saveMimes($product, $request, ['image'], ['1080', '1440'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($product, $request, ['qr'], ['300', '300'], false) : null;
-            $request->hasFile('images') ? $this->saveGallery($product, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($product, $request, ['size_chart_image'], ['1080', '1440'], false) : null;
             return redirect()->back()->with('success', trans('general.process_success'));
         }
@@ -161,11 +160,14 @@ class ProductController extends Controller
             $product->product_attributes()->delete();
             $product->images()->delete();
             $product->slides()->delete();
+            $product->tags()->detach([],true);
             $product->favorites()->delete();
-            $product->categories()->delete();
+            $product->categories()->detach([], true);
+            $product->comments()->delete();
             $product->delete();
             return redirect()->back();
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage());
         }
     }

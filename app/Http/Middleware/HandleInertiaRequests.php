@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             // Synchronously
-            'appName' => config('app.name'),
+//            'appName' => config('app.name'),
             // Lazily
             'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
                 return $q->with(['privileges' => function ($q) {
@@ -52,7 +52,7 @@ class HandleInertiaRequests extends Middleware
                 "en" => Lang::get('general', [], 'en'),
                 "ar" => Lang::get('general', [], 'ar'),
             ],
-            'settings' => Setting::first(),
+            'settings' => fn () => Setting::first(),
             'success' => session()->has('success') ? session()->get('success') : null,
             'error' => session()->has('error') ? session()->get('error') : null,
         ]);

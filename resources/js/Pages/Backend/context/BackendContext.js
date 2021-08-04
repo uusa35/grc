@@ -3,13 +3,13 @@ import GlobalContext from "./GlobalContext";
 import {split, first, map} from 'lodash';
 import route from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
+import LoadingView from "../components/widgets/LoadingView";
 
 const BackendContext = createContext({});
 
 const BackendContextProvider = ({children}) => {
-    const {locale, translations, settings, auth} = useContext(GlobalContext);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isRTL, setIsRtl] = useState(locale === 'ar');
+    const {translations, settings, auth} = useContext(GlobalContext);
+    const [isLoading, setIsLoading] = useState(true);
     const [sideBarOpen, setSideBarOpen] = useState(false);
     const [currentRoute, setCurrentRoute] = useState(route().current());
     const [parentModule, setParentModule] = useState('');
@@ -27,10 +27,11 @@ const BackendContextProvider = ({children}) => {
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [confirmationModalMessage, setConfirmationModalMessage] = useState({});
     const [confirmationModalResponse, setConfirmationModalResponse] = useState(false);
-    const [modelAction, setModelAction] = useState({});
+    const [modalAction, setModalAction] = useState({});
     const [currentBreadCrumbs, setCurrentBreadCrumbs] = useState({})
     const [sortDesc, setSortDesc] = useState(true)
     const [colName, setColName] = useState('id');
+    const[locale,setLocale] = useState(document.getElementById('locale').innerHTML);
 
 
     const handleSort = (colName) => {
@@ -38,6 +39,8 @@ const BackendContextProvider = ({children}) => {
         setSortDesc(!sortDesc)
     }
     const context = {
+        locale,
+        setLocale,
         isLoading,
         sideBarOpen,
         sortDesc,
@@ -45,11 +48,8 @@ const BackendContextProvider = ({children}) => {
         colName,
         setColName,
         handleSort : (colName) => handleSort(colName),
-        disableLoading: () => setIsLoading(true),
-        enableLoading: () => setIsLoading(true),
+        toggleIsLoading: (loading) => setIsLoading(loading),
         toggleSideBar: () => setSideBarOpen(!sideBarOpen),
-        enableRtl: () => setIsRtl(true),
-        disableRtl: () => setIsRtl(false),
         trans: (name) => translations[locale][name],
         classNames: (...classes) => classes.filter(Boolean).join(' '),
         setSystemMessage: (message) => setSysMessage(message),
@@ -59,9 +59,10 @@ const BackendContextProvider = ({children}) => {
         sysMessage,
         otherLang: locale === 'ar' ? 'en' : 'ar',
         dir: locale === 'ar' ? 'rtl' : 'ltr',
-        isRTL,
         currentRoute,
         currentBreadCrumbs,
+        setCurrentBreadCrumbs,
+        setCurrentRoute,
         parentModule,
         childModule,
         theme: settings.theme,
@@ -72,16 +73,17 @@ const BackendContextProvider = ({children}) => {
         confirmationModalMessage,
         confirmationModalResponse,
         setConfirmationModalResponse,
-        modelAction,
-        setModelAction,
-        getImageThumb: (img) => `${route('home')}/storage/uploads/images/thumbnail/${img}`,
+        modalAction,
+        setModalAction,
+        getImageThumb: (element) => `${route('home')}/storage/uploads/images/thumbnail/${element}`,
+        getFileUrl: (element) => `${route('home')}/storage/uploads/files/${element}`,
         isAdminOrAbove,
         isSuper,
         setParentModule: (module) => setParentModule(module),
         setChildModule: (module) => setChildModule(module),
         handleDeleteItem: (type, model, id) => {
             setShowConfirmationModal(true)
-            setModelAction({
+            setModalAction({
                 type,
                 model,
                 id
@@ -103,23 +105,8 @@ const BackendContextProvider = ({children}) => {
             setModules(filteredModules);
             setIsAdminOrAbove(auth.role.is_admin || auth.role.is_super);
             setIsSuper(auth.role.is_super);
-            console.log('doing the module')
         }
-    }, [auth.id]);
-
-    useEffect(() => {
-        Inertia.on('start', (e) => {
-            setIsLoading(true)
-        })
-        Inertia.on('finish', (e) => {
-            const currentRoute = route().current();
-            const breadCrumbs = split(currentRoute, '.');
-            setParentModule(breadCrumbs[1]);
-            setCurrentBreadCrumbs(breadCrumbs);
-            setCurrentRoute(currentRoute)
-            setIsLoading(false)
-        })
-    }, [])
+    }, [auth?.id]);
 
     return (
         <BackendContext.Provider value={context}>

@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {truncate} from 'lodash';
 import GlobalContext from "../../context/GlobalContext";
+import {BackendContext} from "../../context/BackendContext";
 
 const LocalizedText = ({
                            ar,
@@ -10,7 +11,7 @@ const LocalizedText = ({
                            length = 18,
                            separator = true,
                        }) => {
-    const {locale} = useContext(GlobalContext);
+    const {locale} = useContext(BackendContext);
 
     return (
         <span className={`${capitalize ? 'capitalize' : ''} ${textClasses}`}>

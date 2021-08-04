@@ -7,6 +7,7 @@ import {orderBy, isEmpty} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import LocalizedText from "../components/widgets/LocalizedText";
+import ActiveDot from "../components/widgets/ActiveDot";
 
 
 export default function BookIndex({elements}) {
@@ -163,7 +164,10 @@ export default function BookIndex({elements}) {
                                                      src={element.imageThumb} alt={element.name}/>
                                             </td>
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
-                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.name}</td>
+                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500 flex flex-row items-center">
+                                                <ActiveDot active={element.active} />
+                                                {element.name}
+                                            </td>
                                             <td className=" px-6 py-4 whitespace-nowrap text-right font-medium">
                                                 <div key={element.name}
                                                      className="relative flex justify-center items-center rounded-full shadow-md w-12 h-12">

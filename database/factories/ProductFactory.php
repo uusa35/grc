@@ -50,14 +50,14 @@ class ProductFactory extends Factory
             'sale_price' => function ($array) {
                 return $array['price'] - rand(1, 5);
             },
-            'size_chart_image' => 'sample.png',
+            'size_chart_image' => 'square.png',
             'description_en' => $this->faker->paragraph,
             'description_ar' => $this->faker->paragraph,
             'notes_ar' => $this->faker->paragraph,
             'notes_en' => $this->faker->paragraph,
             'keywords' => $this->faker->sentence,
             'image' => 'square.png',
-            'qr' => 'sample.png',
+            'qr' => 'square.png',
             'start_sale' => $this->faker->dateTime('now'),
             'end_sale' => $this->faker->dateTimeBetween('now', '1 year'),
             'check_stock' => $this->faker->boolean(true),

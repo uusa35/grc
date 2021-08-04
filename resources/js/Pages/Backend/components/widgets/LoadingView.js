@@ -3,13 +3,13 @@ import {BackendContext} from "../../context/BackendContext";
 import {Inertia} from "@inertiajs/inertia";
 
 const LoadingView = () => {
-    const { disableLoading, isLoading } = useContext(BackendContext);
+    const { toggleIsLoading , isLoading } = useContext(BackendContext);
 
-    // useMemo(() => {
-    //     if(isLoading) {
-    //         setTimeout(() => disableLoading(), 250)
-    //     }
-    // })
+    useMemo(() => {
+        if(isLoading) {
+            setTimeout(() => toggleIsLoading(false), 3000)
+        }
+    },[])
 
     return (
         <div className="flex h-screen min-w-full flex-1 justify-center items-center">

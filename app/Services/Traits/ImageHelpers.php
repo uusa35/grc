@@ -368,11 +368,11 @@ trait ImageHelpers
         }
     }
 
-    public function savePath(Request $request, $element)
+    public function savePath($element,Request $request,$colName = 'path')
     {
         try {
-            if ($request->hasFile('path')) {
-                $path = $request->file('path')->store('public/uploads/files');
+            if ($request->hasFile($colName)) {
+                $path = $request->file($colName)->store('public/uploads/files');
                 $path = str_replace('public/uploads/files/', '', $path);
                 if (env('FILESYSTEM_CLOUD') === 'do') {
                     try {
@@ -383,7 +383,7 @@ trait ImageHelpers
                         return $e->getMessage();
                     }
                 }
-                $element->update(['path' => $path]);
+                $element->update([$colName => $path]);
             }
         } catch (\Exception $e) {
             return $e->getMessage();

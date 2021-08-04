@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookStore;
+use App\Http\Requests\BookUpdate;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
@@ -29,7 +31,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $elements = Book::onHome()->orderby('id', 'desc')->paginate(SELF::TAKE_LEAST)->appends(request()->except('page', '_token'));
+        $elements = Book::onHome()->orderby('id', 'desc')->with('user')->paginate(SELF::TAKE_LEAST)->appends(request()->except('page', '_token'));
         return inertia('Backend/Book/BookIndex', compact('elements'));
     }
 
@@ -68,7 +70,7 @@ class BookController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookStore $request)
     {
         $element = Book::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'start_sale', 'end_sale', 'videos']));
         if ($element) {
@@ -77,7 +79,8 @@ class BookController extends Controller
             $element->categories()->sync($request->categories);
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
-            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
+//            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
+            $request->hasFile('file') ? $this->savePath($element,$request,'file') : null;
             return redirect()->route('backend.book.edit', $element->id)->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.book.create')->with('error', trans('general.process_failure'));
@@ -120,9 +123,20 @@ class BookController extends Controller
      * @param \App\Models\Book $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(BookUpdate $request, Book $book)
     {
-        //
+        $updated = $book->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos', 'qr', 'size_chart_image']));
+        if ($updated) {
+            $request->has('tags') ? $book->tags()->sync($request->tags) : null;
+            $request->has('videos') ? $book->videos()->sync($request->videos) : null;
+            $request->has('categories') ? $book->categories()->sync($request->categories) : null;
+            $request->hasFile('image') ? $this->saveMimes($book, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('qr') ? $this->saveMimes($book, $request, ['qr'], ['300', '300'], false) : null;
+            $request->hasFile('path') ? $this->savePath($request, $book) : null;
+//            $request->hasFile('images') ? $this->saveGallery($book, $request, 'images', ['1080', '1440'], false) : null;
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->route('backend.book.edit', $book->id)->with('error', 'process_failure');
     }
 
     /**
@@ -133,6 +147,17 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        try {
+            $book->images()->delete();
+            $book->slides()->delete();
+            $book->tags()->delete();
+            $book->comments()->delete();
+            $book->favorites()->delete();
+            $book->categories()->delete();
+            $book->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 }

@@ -11,12 +11,21 @@ import {Inertia} from '@inertiajs/inertia'
 import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
+import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
 
 
-export default function BookEdit({users, sizes, colors, categories, book, elementCategories, brands }) {
+export default function BookEdit({users, sizes, colors, categories, book, elementCategories, brands}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, parentModule, getImageThumb} = useContext(BackendContext)
+    const {
+        classNames,
+        trans,
+        theme,
+        currentFormTab,
+        parentModule,
+        getImageThumb,
+        getFileUrl
+    } = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': book.sku,
         'name_ar': book.name_ar,
@@ -61,15 +70,16 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
         'order': book.order,
         'user_id': book.user_id,
         'categories': elementCategories,
-        'download' : book.download,
-        'free' : book.free,
-        'file' : book.file,
-        'preview' : book.preview,
+        'download': book.download,
+        'free': book.free,
+        'file': book.file,
+        'preview': book.preview,
         'embedded': book.embedded,
     });
     const {props} = usePage();
     const {errors} = props;
 
+    console.log('data', data)
     const handleChange = (e) => {
         setData(values => ({
             ...values,
@@ -88,7 +98,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
             forceFormData: true,
         })
         // uploading images module separately due to some errors occurred in setData by inertia
-        if(currentImages.length > 0) {
+        if (currentImages.length > 0) {
             setTimeout(() => {
                 let formData = new FormData();
                 const images = [];
@@ -133,7 +143,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('create')} {trans(parentModule)}</h3>
+                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-red-500">
                                 {trans('all_information_required')}
                             </p>
@@ -324,61 +334,6 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                     {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
                                 </p>
                             </div>
-
-                            <div className="sm:col-span-3 has-tooltip mt-5">
-                                <label htmlFor="main_image"
-                                       className={`block  font-medium text-${theme}-700`}>
-                                    {trans('main_image')}
-                                </label>
-                                <div className="mt-1 flex flex-row flex-1 items-center">
-                                    <input
-                                        onChange={e => setData('image', e.target.files[0])}
-                                        type="file"
-                                        name="image"
-                                        id="main_image"
-                                        autoComplete="main_image"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                    />
-                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={book.imageThumb} alt=""/>
-                                </div>
-                                <ToolTipWidget message={trans('book_main_image_instruction')}/>
-                                <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('image_best_fit')}
-                                </p>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
-                                </p>
-                            </div>
-                            {/* more images */}
-                            <div className="sm:col-span-3 has-tooltip mt-3">
-                                <label htmlFor="more_images"
-                                       className={`block  font-medium text-${theme}-700`}>
-                                    {trans('more_images')}
-                                </label>
-                                <div className="mt-1 flex flex-row flex-1 items-center">
-                                    <input
-                                        onChange={e => handleImages(e.target.files)}
-                                        type="file"
-                                        multiple
-                                        name="images"
-                                        id="more_images"
-                                        autoComplete="more_images"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                    />
-                                    {
-                                        book.images &&
-                                        <img className={`h-24 w-20 bg-cover rounded-md`}
-                                             src={book.images[0]?.imageThumb} alt=""/>
-                                    }
-                                </div>
-                                <ToolTipWidget message={trans('more_images_instruction')}/>
-                                <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('image_best_fit')}
-                                </p>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
-                                </p>
-                            </div>
                             {/* cateogiries */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"
@@ -439,7 +394,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                                         </div>
                                                                     </div>
                                                                     {
-                                                                        map(sub.children , child => (
+                                                                        map(sub.children, child => (
                                                                             <div
                                                                                 className="relative flex items-start mx-10"
                                                                                 key={child.id}>
@@ -481,7 +436,108 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 </p>
                             </div>
 
-
+                            {/* image*/}
+                            <div className="sm:col-span-3 has-tooltip mt-5">
+                                <label htmlFor="main_image"
+                                       className={`block  font-medium text-${theme}-700`}>
+                                    {trans('main_image')}
+                                </label>
+                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
+                                    <input
+                                        onChange={e => setData('image', e.target.files[0])}
+                                        type="file"
+                                        name="image"
+                                        id="main_image"
+                                        autoComplete="main_image"
+                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                    />
+                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={book.imageThumb} alt=""/>
+                                </div>
+                                <ToolTipWidget message={trans('book_main_image_instruction')}/>
+                                <p className={` text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('image_best_fit')}
+                                </p>
+                                <p className={`mt-2  text-${theme}-500`}>
+                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                </p>
+                            </div>
+                            {/* more images */}
+                            <div className="sm:col-span-3 has-tooltip mt-3">
+                                <label htmlFor="more_images"
+                                       className={`block  font-medium text-${theme}-700`}>
+                                    {trans('more_images')}
+                                </label>
+                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
+                                    <input
+                                        onChange={e => handleImages(e.target.files)}
+                                        type="file"
+                                        multiple
+                                        name="images"
+                                        id="more_images"
+                                        autoComplete="more_images"
+                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                    />
+                                    {
+                                        book.images &&
+                                        <img className={`h-24 w-20 bg-cover rounded-md`}
+                                             src={book.images[0]?.imageThumb} alt=""/>
+                                    }
+                                </div>
+                                <ToolTipWidget message={trans('more_images_instruction')}/>
+                                <p className={` text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('image_best_fit')}
+                                </p>
+                                <p className={`mt-2  text-${theme}-500`}>
+                                    {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
+                                </p>
+                            </div>
+                            {/* file pdf */}
+                            <div className="sm:col-span-3">
+                                <label htmlFor="main_image"
+                                       className={`block  flex flex-row justify-between items-center font-medium text-${theme}-700`}>
+                                    {trans('pdf_file')}
+                                </label>
+                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
+                                    <input
+                                        onChange={e => setData('file', e.target.files[0])}
+                                        // required
+                                        type="file"
+                                        name="file"
+                                        id="file"
+                                        autoComplete="pdf_file"
+                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
+                                    />
+                                    {book.file && <a
+                                        className={`p-2 ring-2 ring-gray-300 bg-gray-100 rounded-md shadow-md text-center w-1/2`}
+                                        target="_blank" href={getFileUrl(book.file)}>{trans('file_url')}</a>}
+                                </div>
+                                <ToolTipWidget message={trans('file_instruction')}/>
+                                <p className={`mt-2  text-${theme}-500`}>
+                                    {errors.file && <div className={`text-red-600`}>{errors.file}</div>}
+                                </p>
+                            </div>
+                            {/* embedded*/}
+                            <div className="sm:col-span-full has-tooltip">
+                                <label htmlFor="embedded" className={`block  font-medium text-${theme}-700`}>
+                                    {trans('embedded')} {trans('book')}
+                                </label>
+                                <div className="mt-1 flex flex-row justify-between items-center gap-x-2">
+                                         <textarea
+                                             onChange={handleChange}
+                                             id="embedded"
+                                             name="embedded"
+                                             required
+                                             rows={12}
+                                             className={`flex-1 shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block  border-${theme}-300 rounded-md`}
+                                             defaultValue={data.embedded}
+                                         />
+                                    <EmbeddedHtml html={book.embedded}/>
+                                </div>
+                                <ToolTipWidget message={trans('book_embedded_notes_instruction')}/>
+                                <p className={`mt-2  text-${theme}-500`}>
+                                    {errors.embedded && <div className={`text-red-600`}>{errors.embedded}</div>}
+                                </p>
+                            </div>
                         </div>
 
 
@@ -724,26 +780,20 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                         </div>
                                     </fieldset>
                                 </div>
-
-
                                 <div
                                     className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-${theme}-100`}>
-
                                 </div>
                             </div>
-
                         </div>
                         <FormBtns type={'book'}/>
                     </div>
-
-
                     <div
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
-
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('create')} {trans(parentModule)}</h3>
+                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-gray-500">
-                                {trans('create')} {trans(parentModule)}
+                                {trans('edit')} {trans(parentModule)}
+
                             </p>
                         </div>
                         {/* description */}
@@ -989,7 +1039,8 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 </div>
                                 <ToolTipWidget message={trans('book_end_sale_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
-                                    <span className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
+                                    <span
+                                        className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                     {errors.start_sale && <div className={`text-red-600`}>{errors.start_sale}</div>}
                                 </p>
                             </div>
@@ -1013,7 +1064,8 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 </div>
                                 <ToolTipWidget message={trans('book_start_sale_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
-                                    <span className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
+                                    <span
+                                        className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                     {errors.end_sale && <div className={`text-red-600`}>{errors.end_sale}</div>}
                                 </p>
                             </div>
@@ -1024,7 +1076,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                        className={`block  font-medium text-${theme}-700`}>
                                     {trans('qr')}
                                 </label>
-                                <div className="mt-1 flex flex-row flex-1 items-center">
+                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
                                     <input
                                         onChange={e => setData('qr', e.target.files[0])}
                                         type="file"
@@ -1033,8 +1085,32 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                         autoComplete="qr"
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
-                                    <img className={`h-20 w-20 bg-cover rounded-md`} src={getImageThumb(book.qr)}
-                                         alt=""/>
+                                    {book.qr && <div
+                                        className="relative h-28 w-28">
+                                        <img
+                                            className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
+                                            src={getImageThumb(book.qr)}
+                                            alt=""/>
+                                        <Link
+                                            href={route(`backend.element.clear`, {
+                                                id: book.id,
+                                                'model': parentModule,
+                                                colName: 'qr'
+                                            })}
+                                            type="button"
+                                            className="absolute inset-2  focus:outline-none">
+                                            {/*<span className="sr-only">View details for {img.title}</span>*/}
+                                            <span
+                                                className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                        d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </div>}
                                 </div>
                                 <ToolTipWidget message={trans('book_qr_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
@@ -1045,8 +1121,6 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 </p>
                             </div>
                         </div>
-
-
                         {/* more booleans */}
                         <div className={`pt-4`}>
                             <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('more_details')}</h3>
@@ -1393,13 +1467,13 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                     </div>
 
 
-
                     <div
                         className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col px-20 sm:px-10 space-y-4`)}>
 
                         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start pt-10">
                             <div className="mt-1 sm:mt-0 sm:col-span-full">
-                                <div className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div
+                                    className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                     <div className="space-y-1 text-center">
                                         <svg
                                             className="mx-auto h-12 w-12 text-gray-400"

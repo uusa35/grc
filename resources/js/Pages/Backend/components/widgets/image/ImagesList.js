@@ -19,7 +19,7 @@ export default function ImagesList({images}) {
                             <button
                                 onClick={() => {
                                     setShowConfirmationModal(true)
-                                    setModelAction({ type : 'delete', model : 'image', id : img.id})
+                                    setModelAction({ type : 'destroy', model : 'image', id : img.id})
                                 }}
                                 type="button"
                                 className="absolute inset-0 focus:outline-none">

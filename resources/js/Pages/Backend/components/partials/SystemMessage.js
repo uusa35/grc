@@ -22,25 +22,23 @@ const SystemMessage = () => {
         }
     }, [sysMessage])
 
-    const {errors} = usePage().props
-
-    useEffect(() => {
-        if (!isEmpty(errors)) {
-            setSystemMessage({
-                message: errors[0],
-                type: 'error'
-            })
-        }
-    }, [errors])
+    // const {errors} = usePage().props
+    // useEffect(() => {
+    //     if (!isEmpty(errors)) {
+    //         setSystemMessage({
+    //             message: errors[0],
+    //             type: 'error'
+    //         })
+    //     }
+    // }, [errors])
 
 
 
 
     useMemo(() => {
         Inertia.on('success', (event) => {
-            // console.log(`ON success ===> Successfully made a visit to`, event.detail.page.props)
             const {success, error, errors} = event.detail.page.props;
-            success && !isEmpty(success) ? setSystemMessage({message: success, type: 'success'}) : null;
+            success && !isEmpty(success) ? setSystemMessage({message: trans(success), type: 'success'}) : null;
             errors && !isEmpty(errors) ? setSystemMessage({message: first(errors), type: 'error'}) : null;
             error && !isEmpty(error) ? setSystemMessage({message: first(error), type: 'error'}) : null;
             setTimeout(() => {

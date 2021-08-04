@@ -9,7 +9,7 @@ import {isEmpty, map} from 'lodash';
 import route from 'ziggy-js'
 
 export default function BreadCrumbs() {
-    const {theme, parentModule, childModule, trans, currentBreadCrumbs, isRTL } = useContext(BackendContext);
+    const {theme, parentModule, childModule, trans, currentBreadCrumbs, locale } = useContext(BackendContext);
 
     return (
         <div
@@ -61,7 +61,7 @@ export default function BreadCrumbs() {
                       onClick={() => window.history.back()}
                 >
                     <h1>{trans('back')}</h1>
-                    {isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {locale === 'ar' ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

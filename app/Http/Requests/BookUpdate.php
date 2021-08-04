@@ -4,19 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductUpdate extends FormRequest
+class BookUpdate extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 
-    /**
+    /**Ser
      * Get the error messages for the defined validation rules.
      *
      * @return array
@@ -25,7 +16,7 @@ class ProductUpdate extends FormRequest
     {
         return [
             'image.dimensions' => trans('message.best_fit', ['width' => '1080 px', 'height' => '1440 px']),
-            'qr.dimensions' => trans('message.best_fit', ['width' => '300 px', 'height' => '300 px']),
+            'qr.dimensions' => trans('message.best_fit', ['width' => '300 px', 'height' => '300px']),
             'size_chart.dimensions' => trans('message.best_fit', ['width' => '1080 px', 'height' => '1440 px']),
         ];
     }
@@ -38,23 +29,21 @@ class ProductUpdate extends FormRequest
     public function rules()
     {
         return [
-            'sku' => 'min:2',
-            'name_ar' => 'min:3|max:200',
-            'name_en' => 'min:3|max:200',
-            'has_attributes' => 'boolean',
-            'user_id' => 'exists:users,id',
+            'sku' => 'required|min:2',
+            'name_ar' => 'required:min:3|max:200',
+            'name_en' => 'required|min:3|max:200',
+            'user_id' => 'required|exists:users,id',
             'shipment_package_id' => 'nullable|exists:shipment_packages,id',
             'brand_id' => 'nullable|exists:brands,id',
 //            'image' => "nullable",
-//            'images' => "nullable",
-            'qr' => "nullable",
-            'categories' => 'array',
-            'price' => 'numeric|min:0.5|max:999',
-            'qty' => ['numeric', 'min:1', 'max:999', 'regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/'],
-            'weight' => ['between:0.1,10'],
-            'order' => ['numeric','min:1','max:9999','regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/', 'nullable'],
+//            'qr' => "image|nullable",
+//            'images' => 'array|nullable',
+            'categories' => 'required|array|min:1',
+            'price' => 'required|numeric|min:0.5|max:999',
+            'qty' => ['numeric', 'min:1', 'max:999', 'regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','nullable'],
+            'weight' => ['required','between:0.1,10'],
+            'order' => ['numeric','min:1','max:9999','regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','nullable'],
             'on_sale' => 'boolean',
-            'on_sale_on_homepage' => 'boolean',
             'on_homepage' => 'boolean',
             'sale_price' => 'numeric|nullable|min:0.5|max:999',
             'size_chart_image' => 'image|nullable',
@@ -62,18 +51,21 @@ class ProductUpdate extends FormRequest
             'description_ar' => 'min:3|nullable',
             'notes_ar' => 'min:3|nullable',
             'notes_en' => 'min:3|nullable',
-            'size_chart_image' => 'nullable',
 //            'start_sale' => 'date|nullable',
-//            'end_sale' =>
-            'active' => 'boolean',
+//            'end_sale' => 'required',
+//            'active' => 'required|boolean',
             'tags' => 'array',
             'videos' => 'array',
             'video_url' => 'nullable|url',
             'video_url_one' => 'nullable|url',
             'video_url_two' => 'nullable|url',
-            'color_id' => 'nullable|exists:colors,id|required_if:has_attributes,0',
-            'size_id' => 'nullable|exists:sizes,id|required_if:has_attributes,0',
-            'home_delivery_availability' => 'nullable|boolean'
+            'video_url_three' => 'nullable|url',
+            'video_url_four' => 'nullable|url',
+            'video_url_five' => 'nullable|url',
+            'home_delivery_availability' => 'nullable|boolean',
+            'free' => 'boolean',
+            'download' => 'boolean',
+            "embedded" => "required|min:100"
         ];
     }
 }

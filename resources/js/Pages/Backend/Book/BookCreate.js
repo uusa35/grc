@@ -1,16 +1,14 @@
 import BackendContainer from "./../components/containers/BackendContainer";
-import {useContext, useMemo, useState} from "react";
+import {useContext, useState} from "react";
 import {BackendContext} from "./../context/BackendContext";
-import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, map, forEach, isArray, uniq, random} from 'lodash';
+import {useForm, usePage} from "@inertiajs/inertia-react";
+import {filter, uniq, random} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
 import axios from "axios";
-import {Inertia} from '@inertiajs/inertia'
-import route from 'ziggy-js'
 
-export default function BookCreate({users, sizes, colors, categories}) {
+export default function BookCreate({users, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, theme, currentFormTab, parentModule} = useContext(BackendContext)
@@ -304,7 +302,7 @@ export default function BookCreate({users, sizes, colors, categories}) {
                                        className={`block  font-medium text-${theme}-700`}>
                                     {trans('main_image')}
                                 </label>
-                                <div className="mt-1 ">
+                                <div className="mt-1 flex flex-row flex-1 items-center h-32">ore
                                     <input
                                         onChange={e => setData('image', e.target.files[0])}
                                         // required
@@ -329,7 +327,7 @@ export default function BookCreate({users, sizes, colors, categories}) {
                                        className={`block  font-medium text-${theme}-700`}>
                                     {trans('more_images')}
                                 </label>
-                                <div className="mt-1">
+                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
                                     <input
                                         onChange={e => handleImages(e.target.files)}
                                         // required
@@ -347,6 +345,31 @@ export default function BookCreate({users, sizes, colors, categories}) {
                                 </p>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
+                                </p>
+                            </div>
+                            {/* file pdf */}
+                            <div className="sm:col-span-3">
+                                <label htmlFor="main_image"
+                                       className={`block  font-medium text-${theme}-700`}>
+                                    {trans('pdf_file')}
+                                </label>
+                                <div className="mt-1 flex flex-row flex-1 items-center">
+                                    <input
+                                        onChange={e => setData('file', e.target.files[0])}
+                                        // required
+                                        type="file"
+                                        name="file"
+                                        id="file"
+                                        autoComplete="pdf_file"
+                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('file_instruction')}/>
+                                <p className={` text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('file_instruction')}
+                                </p>
+                                <p className={`mt-2  text-${theme}-500`}>
+                                    {errors.file && <div className={`text-red-600`}>{errors.file}</div>}
                                 </p>
                             </div>
                             {/*categories*/}

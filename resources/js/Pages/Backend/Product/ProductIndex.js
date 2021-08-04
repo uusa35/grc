@@ -7,6 +7,8 @@ import {orderBy, isEmpty} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import LocalizedText from "../components/widgets/LocalizedText";
+import {Inertia} from "@inertiajs/inertia";
+import ActiveDot from "../components/widgets/ActiveDot";
 
 
 export default function ProductIndex({elements}) {
@@ -165,9 +167,7 @@ export default function ProductIndex({elements}) {
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
-                                                    <div
-                                                        className={classNames(element.active ? 'bg-green-600' : 'bg-gray-600', 'flex-shrink-0 w-2.5 h-2.5 rtl:ml-3 ltr:mr-3 rounded-full')}
-                                                        aria-hidden="true"></div>
+                                                    <ActiveDot active={element.active} />
                                                     {element.name}
                                                 </div>
                                                 <div

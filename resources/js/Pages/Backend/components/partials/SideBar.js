@@ -8,6 +8,7 @@ import {InertiaLink, Link} from '@inertiajs/inertia-react'
 import pluralize from 'pluralize';
 import {filter, map, first} from 'lodash';
 import route from 'ziggy-js';
+import LocalizedText from "../widgets/LocalizedText";
 
 
 const teams = [
@@ -31,7 +32,7 @@ const navigation = [
 ]
 
 const SideBar = () => {
-    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules, enableLoading } = useContext(BackendContext);
+    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules } = useContext(BackendContext);
     const {settings, auth} = useContext(GlobalContext);
 
     return (
@@ -252,7 +253,9 @@ const SideBar = () => {
                                               />
                                               <span className="flex-1 flex flex-col min-w-0">
                                                 <span
-                                                    className="text-gray-900 truncate">{auth.name}</span>
+                                                    className="text-gray-900 truncate">
+                                                    <LocalizedText ar={auth.name_ar} en={auth.name_en} />
+                                                </span>
                                                 <span
                                                     className="text-gray-500 ltr:text-left rtl:text-right text-sm truncate">{auth.role.name}</span>
                                               </span>
@@ -352,7 +355,6 @@ const SideBar = () => {
                                                 <Link
                                                     key={m.name}
                                                     href={route(`backend.${m.name}.search`)}
-                                                    // onClick={() => enableLoading()}
                                                     className={classNames(
                                                         m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
                                                         'group flex items-center py-2 rounded-md'
