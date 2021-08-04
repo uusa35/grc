@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from 'react';
+import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
 import {split, first, map} from 'lodash';
 import route from 'ziggy-js';
@@ -8,7 +8,7 @@ const BackendContext = createContext({});
 
 const BackendContextProvider = ({children}) => {
     const {locale, translations, settings, auth} = useContext(GlobalContext);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [isRTL, setIsRtl] = useState(locale === 'ar');
     const [sideBarOpen, setSideBarOpen] = useState(false);
     const [currentRoute, setCurrentRoute] = useState(route().current());
@@ -45,7 +45,7 @@ const BackendContextProvider = ({children}) => {
         colName,
         setColName,
         handleSort : (colName) => handleSort(colName),
-        disableLoading: () => setIsLoading(false),
+        disableLoading: () => setIsLoading(true),
         enableLoading: () => setIsLoading(true),
         toggleSideBar: () => setSideBarOpen(!sideBarOpen),
         enableRtl: () => setIsRtl(true),
@@ -103,17 +103,23 @@ const BackendContextProvider = ({children}) => {
             setModules(filteredModules);
             setIsAdminOrAbove(auth.role.is_admin || auth.role.is_super);
             setIsSuper(auth.role.is_super);
+            console.log('doing the module')
         }
-    }, []);
-
+    }, [auth.id]);
 
     useEffect(() => {
-        const currentRoute = route().current();
-        const breadCrumbs = split(currentRoute, '.');
-        setParentModule(breadCrumbs[1]);
-        setCurrentBreadCrumbs(breadCrumbs);
-        setCurrentRoute(currentRoute)
-    }, [route().current()])
+        Inertia.on('start', (e) => {
+            setIsLoading(true)
+        })
+        Inertia.on('finish', (e) => {
+            const currentRoute = route().current();
+            const breadCrumbs = split(currentRoute, '.');
+            setParentModule(breadCrumbs[1]);
+            setCurrentBreadCrumbs(breadCrumbs);
+            setCurrentRoute(currentRoute)
+            setIsLoading(false)
+        })
+    }, [])
 
     return (
         <BackendContext.Provider value={context}>

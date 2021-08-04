@@ -27,11 +27,8 @@ const BackendContainer = ({
     useEffect(() => {
         mainModule ? setParentModule(mainModule) : null;
         subModule ? setChildModule(subModule) : null;
-
     }, [])
 
-    // Inertia.on('before', () => enableLoading())
-    // Inertia.on('finish', () => setTimeout(() => disableLoading(), 350))
 
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg">
@@ -54,8 +51,8 @@ const BackendContainer = ({
                             }
                             {!isEmpty(elements?.data) && showMobileView &&
                             <TableMobileview elements={elements} tableName={childModule}/>}
-                            {/*{ isLoading ? <LoadingView /> : children }*/}
-                            {children}
+                            { isLoading ? <LoadingView /> : children }
+                            {/*{children}*/}
                             <NoElements display={showNoElements}/>
                             {
                                 !isEmpty(elements?.data) && elements.total > 1 && parentModule &&
