@@ -14,25 +14,13 @@ class CreateTimingsTable extends Migration
     {
         Schema::create('timings', function (Blueprint $table) {
             $table->id();
-            $table->string('day')->nullable();
-            $table->string('day_name_ar')->nullable();
-            $table->string('day_name_en')->nullable();
-            $table->boolean('active')->default(true);
+            $table->date('date');
             $table->time('start');
-            $table->time('end')->nullable();
-            $table->boolean('is_off')->default(false);
+            $table->time('end');
             $table->boolean('allow_multi_select')->default(false);
-            $table->boolean('is_available')->default(true);
-            $table->string('today')->nullable();
-            $table->string('type')->nullable();
             $table->string('notes_ar')->nullable();
             $table->string('notes_en')->nullable();
             $table->integer('order')->nullable();
-
-            $table->smallInteger('week_start')->default(6)->nullable();
-            $table->smallInteger('day_no')->nullable();
-
-            $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('service_id')->references('id')->on('services');
             $table->foreignId('day_id')->references('id')->on('days');
 

@@ -53,7 +53,7 @@ class UserUpdate extends FormRequest
             'cancellation_ar' => 'nullable|max:1000',
             'cancellation_en' => 'nullable|max:1000',
             'keywords' => 'nullable|max:500',
-            'path' => 'nullable|mimes:pdf',
+            'file' => 'nullable|mimes:pdf',
             'website' => 'nullable|url',
             'facebook' => 'nullable|url',
             'instagram' => 'nullable|url',

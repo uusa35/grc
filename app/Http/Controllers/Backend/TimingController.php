@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class TimingController extends Controller
 {
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Timing::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,19 @@ class TimingController extends Controller
      */
     public function index()
     {
-        //
+        $elements = Timing::orderby('id', 'desc')->with('service')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page', '_token']));
+        return inertia('Backend/Timing/TimingIndex', compact('elements'));
+    }
+
+    public function search(ProductFilters $filters)
+    {
+        $this->authorize('search', 'service');
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+        $elements = Timing::filters($filters)->with('user')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page', '_token']));
+        return inertia('Backend/Timing/TimingIndex', compact('elements'));
     }
 
     /**

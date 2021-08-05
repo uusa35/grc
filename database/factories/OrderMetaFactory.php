@@ -37,26 +37,14 @@ class OrderMetaFactory extends Factory
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
             'order_id' => Order::all()->random()->id,
-//            'service_id' => Service::all()->random()->id,
-//            'product_id' => Product::all()->random()->id,
-//            'item_type' => 'product',
-//            'book_id' => Book::all()->random()->id,
             'qty' => $this->faker->numberBetween(1, 3),
             'price' => $this->faker->numberBetween(10,99),
             'shipment_cost' => $this->faker->numberBetween(1, 3),
-//            'product_size' => function ($array) {
-//                $productAttribute = ProductAttribute::whereId($array['product_attribute_id'])->first();
-//                return $productAttribute ? $productAttribute->size()->first()->name : Size::all()->random()->name;
-//            },
-//            'product_color' => function ($array) {
-//                $productAttribute = ProductAttribute::whereId($array['product_attribute_id'])->first();
-//                return $productAttribute ? $productAttribute->color()->first()->name : Color::all()->random()->name;
-//            },
-            'service_date' => $this->faker->date(),
-            'service_time' => $this->faker->time(),
+            'wrap_as_gift' => $this->faker->boolean,
+            'product_attribute_id' => ProductAttribute::all()->random()->id,
             'color_id' => Color::all()->random()->id,
             'size_id' => Size::all()->random()->id,
-            'timing_id' => Timing::workingDays()->get()->random()->id,
+            'timing_id' => Timing::all()->random()->id,
             'country_id' => Country::all()->random()->id,
             'merchant_id' => User::all()->random()->id,
 

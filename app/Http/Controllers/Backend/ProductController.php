@@ -58,7 +58,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $users = User::active()->companies()->get();
+        $users = User::active()->hasMerchantBehaviour()->with('role')->get();
         $sizes = Size::active()->get();
         $colors = Color::active()->get();
         $brands = Brand::active()->get();
@@ -87,6 +87,7 @@ class ProductController extends Controller
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($element, $request, ['size_chart_image'], ['1080', '1440'], false) : null;
+            $request->hasFile('file') ? $this->savePath($element,$request,'file') : null;
             return redirect()->route('backend.product.edit', $element->id)->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.create')->with('error', trans('general.process_failure'));
@@ -112,7 +113,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $users = User::active()->companies()->get();
+        $users = User::active()->hasMerchantBehaviour()->with('role')->get();
         $sizes = Size::active()->get();
         $colors = Color::active()->get();
         $brands = Brand::active()->get();
@@ -143,6 +144,7 @@ class ProductController extends Controller
             $request->hasFile('image') ? $this->saveMimes($product, $request, ['image'], ['1080', '1440'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($product, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($product, $request, ['size_chart_image'], ['1080', '1440'], false) : null;
+            $request->hasFile('file') ? $this->savePath($product,$request,'file') : null;
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.edit', $product->id)->with('error', trans('general.process_failure'));

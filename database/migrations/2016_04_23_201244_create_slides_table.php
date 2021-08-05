@@ -25,7 +25,7 @@ class CreateSlidesTable extends Migration
             $table->boolean('active')->default(true);
             $table->integer('order')->nullable();
             $table->string('image')->nullable();
-            $table->string('path')->nullable();
+            $table->string('file')->nullable();
             $table->string('url')->nullable();
             $table->boolean('on_home')->default(false);
             $table->boolean('is_video')->default(false);

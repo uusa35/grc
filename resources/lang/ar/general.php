@@ -231,7 +231,7 @@ return array (
   'branches' => 'فروعنا',
   'slug_ar' => 'الاسم الظاهر بالعربية',
   'slug_en' => 'الاسم الظاهر بالانجليزية',
-  'active' => 'تفعيل',
+  'active' => 'مفعل',
   'image' => 'صورة',
   'toggle_active' => 'تفعيل / الغاء',
   'new_brand' => 'إنشاء ماركة جديدة',
@@ -493,7 +493,8 @@ return array (
   'policy_en' => 'سياسة الشركة بالانجليزية',
   'cancellation_ar' => 'سياسة الاسترجاع بالعربية',
   'cancellation_en' => 'سياسة الاسترجاع بالانجليزية',
-  'path' => 'الملف',
+  'file' => 'الملف',
+  'fileh' => 'الملف',
   'website' => 'الموقع',
   'instagram' => 'انستجرام',
   'youtube' => 'يوتيوب',
@@ -1075,5 +1076,6 @@ return array (
     "upload_up_to_one_mb" => "يمكن تحميل جميع أنواع الصور JPG - JPEG - PNG بحد اقصى ١ ميجا للصورة ",
     "file_url" => "رابط الملف",
     "pdf_file" => "ملف البي دي اف",
-    "file_instruction" => "رفع ملف البي دي اف"
+    "file_instruction" => "رفع ملف البي دي اف",
+    "order_appearance" => "ترتيب الظهور"
 );

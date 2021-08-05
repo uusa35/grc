@@ -1,22 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Backend;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class ServiceUpdate extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
+    /**Ser
      * Get the error messages for the defined validation rules.
      *
      * @return array
@@ -25,6 +15,8 @@ class ServiceUpdate extends FormRequest
     {
         return [
             'image.dimensions' => trans('message.best_fit', ['width' => '1080 px', 'height' => '1440 px']),
+            'qr.dimensions' => trans('message.best_fit', ['width' => '300 px', 'height' => '300px']),
+            'size_chart.dimensions' => trans('message.best_fit', ['width' => '1080 px', 'height' => '1440 px']),
         ];
     }
 
@@ -36,31 +28,35 @@ class ServiceUpdate extends FormRequest
     public function rules()
     {
         return [
-            'sku' => 'nullable|min:2',
+            'sku' => 'required|min:2',
             'name_ar' => 'required:min:3|max:200',
             'name_en' => 'required|min:3|max:200',
             'user_id' => 'required|exists:users,id',
-            'image' => 'image|nullable|dimensions:width=1080,height=1440|max:300',
-            'categories' => 'required|array',
+            'image' => "nullable",
+            'qr' => "image|nullable",
+            'images' => 'array|nullable',
+            'categories' => 'required|array|min:1',
             'price' => 'required|numeric|min:0.5|max:999',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'range' => 'nullable',
+            'order' => ['numeric','min:1','max:9999','regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','nullable'],
             'on_sale' => 'boolean',
-            'on_sale_on_homepage' => 'boolean',
             'on_homepage' => 'boolean',
             'sale_price' => 'numeric|nullable|min:0.5|max:999',
-            'size_chart_image' => 'image|nullable',
             'description_en' => 'min:3|nullable',
             'description_ar' => 'min:3|nullable',
             'notes_ar' => 'min:3|nullable',
             'notes_en' => 'min:3|nullable',
-            'active' => 'required|boolean',
+//            'start_sale' => 'date|nullable',
+//            'end_sale' => 'required',
+//            'active' => 'required|boolean',
             'tags' => 'array',
             'videos' => 'array',
             'video_url' => 'nullable|url',
             'video_url_one' => 'nullable|url',
             'video_url_two' => 'nullable|url',
+            'video_url_three' => 'nullable|url',
+            'video_url_four' => 'nullable|url',
+            'video_url_five' => 'nullable|url',
+            'home_delivery_availability' => 'nullable|boolean',
         ];
     }
 }

@@ -1,7 +1,7 @@
 import {useContext, useEffect, useMemo, useState} from "react";
 import {BackendContext} from "../../context/BackendContext";
 import {Inertia} from "@inertiajs/inertia";
-import {isArray, isEmpty, map, first, split} from 'lodash';
+import {isArray, isEmpty, map, first, split, isObject} from 'lodash';
 import {usePage} from '@inertiajs/inertia-react'
 import GlobalContext from "../../context/GlobalContext";
 import { Transition } from '@tailwindui/react'
@@ -22,15 +22,16 @@ const SystemMessage = () => {
         }
     }, [sysMessage])
 
-    // const {errors} = usePage().props
-    // useEffect(() => {
-    //     if (!isEmpty(errors)) {
-    //         setSystemMessage({
-    //             message: errors[0],
-    //             type: 'error'
-    //         })
-    //     }
-    // }, [errors])
+    const {errors} = usePage().props
+    useEffect(() => {
+        if (!isEmpty(errors)) {
+            setSystemMessage({
+                message: isObject(errors) ? first(map(errors, e => e)) : errors[0],
+                type: 'error'
+            })
+        }
+    }, [errors])
+
 
 
 

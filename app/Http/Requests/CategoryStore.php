@@ -44,7 +44,7 @@ class CategoryStore extends FormRequest
             'description_en' => 'min:3|nullable',
             'description_ar' => 'min:3|nullable',
             'image' => "image|mimes:jpeg,png,jpg,gif|required|dimensions:width=1000,height=1000|max:".env('MAX_IMAGE_SIZE').'"',
-            'path' => 'nullable|mimes:pdf|max:10000',
+            'file' => 'nullable|mimes:pdf|max:10000',
             'limited' => 'boolean|nullable',
             'order' => 'integer|nullable',
             'is_home' => 'boolean|nullable',

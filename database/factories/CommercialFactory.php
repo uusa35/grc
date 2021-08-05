@@ -34,7 +34,7 @@ class CommercialFactory extends Factory
             'caption_en' => $this->faker->name,
             'image' => app()->isLocal() ? 'commercial-0' . $this->faker->numberBetween(1, 3) . '.jpeg' : $this->faker->numberBetween(43, 49) . '.jpeg', // 800 x 225
             'url' => $this->faker->url,
-            'path' => '1.pdf',
+            'file' => '1.pdf',
             'order' => $this->faker->numberBetween(1, 99),
             'active' => $this->faker->boolean(true),
             'on_home' => $this->faker->boolean(true),

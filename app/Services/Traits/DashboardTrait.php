@@ -140,7 +140,7 @@ trait DashboardTrait
             ),
             '',
             [
-                'path' => asset('storage/uploads/files/' . $element->path),
+                'file' => asset('storage/uploads/files/' . $element->path),
                 'title' => $element->name,
                 'type' => 'pdf'
             ]

@@ -368,7 +368,7 @@ trait ImageHelpers
         }
     }
 
-    public function savePath($element,Request $request,$colName = 'path')
+    public function savePath($element,Request $request,$colName = 'file')
     {
         try {
             if ($request->hasFile($colName)) {

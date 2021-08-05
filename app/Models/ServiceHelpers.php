@@ -20,11 +20,4 @@ trait ServiceHelpers
         });
 
     }
-
-    public function scopeHasValidTimings($q)
-    {
-            return $q->whereHas('timings', function ($q) {
-                return $q->active()->workingDays();
-            },'>',0)->where('end_date' ,'>=' , Carbon::today());
-    }
 }

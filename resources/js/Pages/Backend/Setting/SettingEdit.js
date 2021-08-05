@@ -12,6 +12,7 @@ import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
 import {element} from "prop-types";
+import GlobalContext from "../context/GlobalContext";
 
 
 export default function SettingEdit({setting, themes}) {

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class OrderMeta extends PrimaryModel
 {
     use HasFactory;
+
     protected $guarded = [''];
 
     public function order()
@@ -16,14 +17,9 @@ class OrderMeta extends PrimaryModel
         return $this->belongsTo(Order::class);
     }
 
-    public function product()
+    public function ordermetable()
     {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function service()
-    {
-        return $this->belongsTo(Service::class);
+        return $this->morphTo();
     }
 
     public function timing()
@@ -33,7 +29,7 @@ class OrderMeta extends PrimaryModel
 
     public function product_attribute()
     {
-        return $this->belongsTo(ProductAttribute::class);
+        return $this->belongsTo(ProductAttribute::class, 'product_attribute_id');
     }
 
     public function country()
@@ -46,48 +42,13 @@ class OrderMeta extends PrimaryModel
         return $this->belongsTo(User::class, 'merchant_id');
     }
 
-    public function ordermetable()
+    public function color()
     {
-        return $this->morphTo();
-    }
-
-    public function color() {
         return $this->belongsTo(Color::class);
     }
 
-    public function size() {
-        return $this->belongsTo(Size::class);
-    }
-
-    public function scopeBestSaleCollections($q)
+    public function size()
     {
-//        return $q->whereHas('collection' ,function ($q) {
-//            return $q->active()->with(['user' => function ($q) {
-//                return $q->active()->onHome()->whereHas('products' ,function ($q) {
-//                    return $q->active();
-//                });
-//            }]);
-//        },'>',0)
-//            ->select(DB::raw('COUNT(*) as occurrences, collection_id'))
-//            ->groupBy('collection_id')
-//            ->orderBy('occurrences', 'DESC')
-//            ->take(15)
-//            ->get()
-//            ->pluck('collection')->unique()->filter();
-        return $q->with(['collection' => function ($q) {
-            return $q->active()->whereHas('user', function ($q) {
-                return $q->active();
-            })->with(['user' => function ($q) {
-                return $q->active()->with(['products' => function ($q) {
-                    return $q->active()->available()->hasImage()->hasStock()->hasAtLeastOneCategory();
-                }]);
-            }]);
-        }])
-            ->select(DB::raw('COUNT(*) as occurrences, collection_id'))
-            ->groupBy('collection_id')
-            ->orderBy('occurrences', 'DESC')
-            ->take(15)
-            ->get()
-            ->pluck('collection')->unique()->filter();
+        return $this->belongsTo(Size::class);
     }
 }

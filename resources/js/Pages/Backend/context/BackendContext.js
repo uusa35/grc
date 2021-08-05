@@ -31,7 +31,7 @@ const BackendContextProvider = ({children}) => {
     const [currentBreadCrumbs, setCurrentBreadCrumbs] = useState({})
     const [sortDesc, setSortDesc] = useState(true)
     const [colName, setColName] = useState('id');
-    const[locale,setLocale] = useState(document.getElementById('locale').innerHTML);
+    const [locale, setLocale] = useState(document.getElementById('locale').innerHTML);
 
 
     const handleSort = (colName) => {
@@ -47,7 +47,7 @@ const BackendContextProvider = ({children}) => {
         setSortDesc,
         colName,
         setColName,
-        handleSort : (colName) => handleSort(colName),
+        handleSort: (colName) => handleSort(colName),
         toggleIsLoading: (loading) => setIsLoading(loading),
         toggleSideBar: () => setSideBarOpen(!sideBarOpen),
         trans: (name) => translations[locale][name],
@@ -92,7 +92,7 @@ const BackendContextProvider = ({children}) => {
     };
 
     useEffect(() => {
-        if(auth) {
+        if (auth) {
             const filteredModules = map(auth.role.privileges, p => {
                 return {
                     name: p.name,
@@ -107,6 +107,10 @@ const BackendContextProvider = ({children}) => {
             setIsSuper(auth.role.is_super);
         }
     }, [auth?.id]);
+
+    useMemo(() => {
+        document.getElementById('locale').innerHTML = locale;
+    }, [locale])
 
     return (
         <BackendContext.Provider value={context}>

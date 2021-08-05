@@ -48,11 +48,11 @@ class ServiceFactory extends Factory
             'sale_price' => function ($array) {
                 return $array['price'] - rand(1, 5);
             },
-            'description_en' => $this->faker->paragraph,
-            'description_ar' => $fakerAr->realText(),
-            'notes_ar' => $this->faker->paragraph,
-            'notes_en' => $this->faker->paragraph,
-            'keywords' => $this->faker->sentence,
+            'description_en' => $this->faker->name,
+            'description_ar' => $fakerAr->name,
+            'notes_ar' => $fakerAr->name,
+            'notes_en' => $this->faker->name,
+            'keywords' => $this->faker->name,
             'image' => 'square.png',
             'video_url_one' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_two' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
@@ -74,6 +74,7 @@ class ServiceFactory extends Factory
             'has_only_items' => $this->faker->boolean(),
             'force_original_price' => $this->faker->boolean(),
             'is_package' => $this->faker->boolean(),
+            'order' => $this->faker->numberBetween(1, 99),
         ];
     }
 }

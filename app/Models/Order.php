@@ -89,11 +89,6 @@ class Order extends PrimaryModel
         return $q->where('paid', true);
     }
 
-//    public function sendNotification()
-//    {
-//        $this->notify(new OrderPaid($this)); //Pass the model data to the OneSignal Notificator
-//    }
-
     public function routeNotificationForOneSignal()
     {
         /*

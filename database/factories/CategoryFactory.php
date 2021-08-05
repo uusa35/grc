@@ -34,7 +34,7 @@ class CategoryFactory extends Factory
             'description_ar' => $fakerAr->streetAddress,
             'image' => 'square.png',
             'image_rectangle' => 'rectangle.png',
-            'path' => '01.pdf',
+            'file' => '01.pdf',
             'limited' => $this->faker->numberBetween(0, 1),
             'parent_id' => Category::where('parent_id', 0)->pluck('id')->shuffle()->first(),
             'on_home' => $this->faker->boolean(true),

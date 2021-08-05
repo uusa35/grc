@@ -20,7 +20,7 @@ class CreateCommercialsTable extends Migration
             $table->string('caption_en')->nullable();
             $table->string('image')->nullable();
             $table->string('url')->nullable();
-            $table->string('path')->nullable();
+            $table->string('file')->nullable();
             $table->integer('order')->nullable();
             $table->boolean('on_home')->default(false);
             $table->boolean('is_double')->default(false);

@@ -14,7 +14,7 @@ import moment from 'moment';
 import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
 
 
-export default function ServiceEdit({users, sizes, colors, categories, book, elementCategories, brands}) {
+export default function ServiceEdit({users, categories, service, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
     const {
@@ -24,62 +24,56 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
         currentFormTab,
         parentModule,
         getImageThumb,
-        getFileUrl
+        getFileUrl,
+        isAdminOrAbove
     } = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
-        'sku': book.sku,
-        'name_ar': book.name_ar,
-        'name_en': book.name_en,
-        'caption_ar': book.caption_ar,
-        'caption_en': book.caption_en,
-        'description_en': book.description_en,
-        'description_ar': book.description_ar,
-        'notes_ar': book.notes_ar,
-        'notes_en': book.notes_en,
-        'home_delivery_availability': book.home_delivery_availability,
-        'shipment_availability': book.shipment_availability,
-        'delivery_time': book.delivery_time,
-        'exclusive': book.exclusive,
-        'on_new': book.on_new,
-        'on_sale': book.on_sale,
-        'on_home': book.on_home,
-        'is_available': book.is_available,
-        'price': book.price,
-        'weight': book.weight,
-        'sale_price': book.sale_price,
-        'keywords': book.keywords,
-        'image': book.image,
-        'images': book.images,
-        'video_url_one': book.video_url_one,
-        'video_url_two': book.video_url_two,
-        'video_url_three': book.video_url_three,
-        'video_url_four': book.video_url_four,
-        'video_url_five': book.video_url_five,
-        'start_sale': book.start_sale,
-        'end_sale': book.end_sale,
-        'active': book.active,
-        'check_stock': book.check_stock,
-        'is_hot_deal': book.is_hot_deal,
-        'show_attribute': book.show_attribute,
-        'wrap_as_gift': book.wrap_as_gift,
-        'qty': book.qty,
-        'qr': book.qr,
-        'direct_purchase': book.direct_purchase,
-        'show_size_chart': book.show_size_chart,
-        'barcode': book.barcode,
-        'order': book.order,
-        'user_id': book.user_id,
+        'sku': service.sku,
+        'name_ar': service.name_ar,
+        'name_en': service.name_en,
+        'caption_ar': service.caption_ar,
+        'caption_en': service.caption_en,
+        'description_en': service.description_en,
+        'description_ar': service.description_ar,
+        'notes_ar': service.notes_ar,
+        'notes_en': service.notes_en,
+        'home_delivery_availability': service.home_delivery_availability,
+        'shipment_availability': service.shipment_availability,
+        'delivery_time': service.delivery_time,
+        'exclusive': service.exclusive,
+        'on_new': service.on_new,
+        'on_sale': service.on_sale,
+        'on_home': service.on_home,
+        'is_available': service.is_available,
+        'price': service.price,
+        'sale_price': service.sale_price,
+        'keywords': service.keywords,
+        'image': service.image,
+        'images': service.images,
+        'video_url_one': service.video_url_one,
+        'video_url_two': service.video_url_two,
+        'video_url_three': service.video_url_three,
+        'video_url_four': service.video_url_four,
+        'video_url_five': service.video_url_five,
+        'start_sale': service.start_sale,
+        'end_sale': service.end_sale,
+        'active': service.active,
+        'check_stock': service.check_stock,
+        'is_hot_deal': service.is_hot_deal,
+        'show_attribute': service.show_attribute,
+        'wrap_as_gift': service.wrap_as_gift,
+        'qr': service.qr,
+        'direct_purchase': service.direct_purchase,
+        'barcode': service.barcode,
+        'order': service.order,
+        'user_id': service.user_id,
         'categories': elementCategories,
-        'download': book.download,
-        'free': book.free,
-        'file': book.file,
-        'preview': book.preview,
-        'embedded': book.embedded,
     });
     const {props} = usePage();
     const {errors} = props;
 
-    console.log('data', data)
+
+
     const handleChange = (e) => {
         setData(values => ({
             ...values,
@@ -89,7 +83,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
 
     const submit = (e) => {
         e.preventDefault()
-        Inertia.post(route(`backend.book.update`, book.id), {
+        Inertia.post(route(`backend.service.update`, service.id), {
             _method: 'put',
             ...data,
             image: data.image,
@@ -106,14 +100,14 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                     formData.append(`images[${i}]`, currentImages[i]);
                     images[`images[${i}]`] = currentImages[i];
                 }
-                formData.append(`model`, 'book');
-                formData.append(`id`, book.id);
-                formData.append(`order`, book.id);
+                formData.append(`model`, 'service');
+                formData.append(`id`, service.id);
+                formData.append(`order`, service.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});
-                    Inertia.reload({only: ['book']});
+                    Inertia.reload({only: ['service']});
                 });
             }, 1000);
         }
@@ -131,7 +125,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
     }
 
     return (
-        <BackendContainer type={'book'}>
+        <BackendContainer type={'service'}>
             <FormTabsContainer>
                 <form
                     onSubmit={submit}
@@ -159,13 +153,13 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         required
                                         type="text"
                                         name="name_ar"
-                                        defaultValue={book.name_ar}
+                                        defaultValue={service.name_ar}
                                         id="name_ar"
                                         autoComplete="name_ar"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('service_price_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
@@ -181,13 +175,13 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         required
                                         type="text"
                                         name="name_en"
-                                        defaultValue={book.name_en}
+                                        defaultValue={service.name_en}
                                         id="name_en"
                                         autoComplete="name_en"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('service_price_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
@@ -204,13 +198,13 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="number"
                                         step="any"
                                         name="price"
-                                        defaultValue={book.price}
+                                        defaultValue={service.price}
                                         id="price"
                                         autoComplete="price"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('service_price_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
                                 </p>
@@ -228,41 +222,19 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="number"
                                         step="any"
                                         name="sale_price"
-                                        defaultValue={book.sale_price}
+                                        defaultValue={service.sale_price}
                                         id="sale_price"
                                         autoComplete="sale_price"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_sale_price_instruction')}/>
+                                <ToolTipWidget message={trans('service_sale_price_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
                                 </p>
                             </div>
 
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="qty" className={`block  font-medium text-${theme}-700`}>
-                                    {trans('qty')} {trans('available')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        required
-                                        type="number"
-                                        step="any"
-                                        name="qty"
-                                        defaultValue={book.qty}
-                                        id="qty"
-                                        autoComplete="qty"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('book_qty_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
-                                </p>
-                            </div>
-
+                            {/* sku*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="sku" className={`block  font-medium text-${theme}-700`}>
                                     {trans('sku')}
@@ -273,40 +245,18 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         required
                                         type="text"
                                         name="sku"
-                                        defaultValue={book.sku}
+                                        defaultValue={service.sku}
                                         id="sku"
                                         autoComplete="sku"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_sku_instruction')}/>
+                                <ToolTipWidget message={trans('service_sku_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
                                 </p>
                             </div>
 
-                            <div className="sm:col-span-2">
-                                <label htmlFor="weight" className={`block  font-medium text-${theme}-700`}>
-                                    {trans('weight')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        required
-                                        type="number"
-                                        step="any"
-                                        name="weight"
-                                        defaultValue={book.weight}
-                                        id="weight"
-                                        autoComplete="weight"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('book_weight_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.weight && <div className={`text-red-600`}>{errors.weight}</div>}
-                                </p>
-                            </div>
                             {/* user_id */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="user_id" className="block  font-medium text-gray-700">
@@ -329,7 +279,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         }
                                     </select>
                                 </div>
-                                <ToolTipWidget message={trans('book_user_instruction')}/>
+                                <ToolTipWidget message={trans('service_user_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
                                 </p>
@@ -430,7 +380,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         </div>
                                     </fieldset>
                                 </div>
-                                <ToolTipWidget message={trans('book_categories_instruction')}/>
+                                <ToolTipWidget message={trans('service_categories_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
                                 </p>
@@ -451,9 +401,9 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         autoComplete="main_image"
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
-                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={book.imageThumb} alt=""/>
+                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={service.imageThumb} alt=""/>
                                 </div>
-                                <ToolTipWidget message={trans('book_main_image_instruction')}/>
+                                <ToolTipWidget message={trans('service_main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
@@ -478,9 +428,9 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                     {
-                                        book.images &&
+                                        service.images &&
                                         <img className={`h-24 w-20 bg-cover rounded-md`}
-                                             src={book.images[0]?.imageThumb} alt=""/>
+                                             src={service.images[0]?.imageThumb} alt=""/>
                                     }
                                 </div>
                                 <ToolTipWidget message={trans('more_images_instruction')}/>
@@ -489,53 +439,6 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                 </p>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
-                                </p>
-                            </div>
-                            {/* file pdf */}
-                            <div className="sm:col-span-3">
-                                <label htmlFor="main_image"
-                                       className={`block  flex flex-row justify-between items-center font-medium text-${theme}-700`}>
-                                    {trans('pdf_file')}
-                                </label>
-                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
-                                    <input
-                                        onChange={e => setData('file', e.target.files[0])}
-                                        // required
-                                        type="file"
-                                        name="file"
-                                        id="file"
-                                        autoComplete="pdf_file"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
-                                    />
-                                    {book.file && <a
-                                        className={`p-2 ring-2 ring-gray-300 bg-gray-100 rounded-md shadow-md text-center w-1/2`}
-                                        target="_blank" href={getFileUrl(book.file)}>{trans('file_url')}</a>}
-                                </div>
-                                <ToolTipWidget message={trans('file_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.file && <div className={`text-red-600`}>{errors.file}</div>}
-                                </p>
-                            </div>
-                            {/* embedded*/}
-                            <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="embedded" className={`block  font-medium text-${theme}-700`}>
-                                    {trans('embedded')} {trans('book')}
-                                </label>
-                                <div className="mt-1 flex flex-row justify-between items-center gap-x-2">
-                                         <textarea
-                                             onChange={handleChange}
-                                             id="embedded"
-                                             name="embedded"
-                                             required
-                                             rows={12}
-                                             className={`flex-1 shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block  border-${theme}-300 rounded-md`}
-                                             defaultValue={data.embedded}
-                                         />
-                                    <EmbeddedHtml html={book.embedded}/>
-                                </div>
-                                <ToolTipWidget message={trans('book_embedded_notes_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.embedded && <div className={`text-red-600`}>{errors.embedded}</div>}
                                 </p>
                             </div>
                         </div>
@@ -564,7 +467,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                     name="active"
                                                     type="radio"
                                                     value={1}
-                                                    defaultChecked={book.active}
+                                                    defaultChecked={service.active}
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="active"
@@ -579,7 +482,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                     name="active"
                                                     type="radio"
                                                     value={0}
-                                                    defaultChecked={!book.active}
+                                                    defaultChecked={!service.active}
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="active"
@@ -609,7 +512,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                     name="on_home"
                                                     type="radio"
                                                     value={1}
-                                                    defaultChecked={book.on_sale}
+                                                    defaultChecked={service.on_sale}
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="push-everything"
@@ -624,7 +527,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                     name="on_home"
                                                     type="radio"
                                                     value={0}
-                                                    defaultChecked={!book.on_home}
+                                                    defaultChecked={!service.on_home}
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="on_home"
@@ -655,7 +558,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                     name="on_sale"
                                                     type="radio"
                                                     value={1}
-                                                    defaultChecked={book.on_sale}
+                                                    defaultChecked={service.on_sale}
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="push-everything"
@@ -670,7 +573,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                     name="on_sale"
                                                     type="radio"
                                                     value={0}
-                                                    defaultChecked={!book.on_sale}
+                                                    defaultChecked={!service.on_sale}
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="on_sale"
@@ -679,103 +582,11 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 </label>
                                             </div>
                                         </div>
-                                        <ToolTipWidget message={trans('book_sale_price_instruction')}/>
+                                        <ToolTipWidget message={trans('service_sale_price_instruction')}/>
                                         <div>
                                             <p className={`mt-2  text-${theme}-500`}>
                                                 {errors.on_sale &&
                                                 <div className={`text-red-600`}>{errors.on_sale}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
-                                    {/* download */}
-                                    <fieldset className="mt-1 has-tooltip col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('download')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="download"
-                                                    name="download"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={book.download}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                                />
-                                                <label htmlFor="download"
-                                                       className="ml-3 block  font-medium text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="download"
-                                                    name="download"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!book.download}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                                />
-                                                <label htmlFor="download"
-                                                       className="ml-3 block  font-medium text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget message={trans('book_download_instruction')}/>
-                                        <div>
-                                            <p className={`mt-2  text-${theme}-500`}>
-                                                {errors.download &&
-                                                <div className={`text-red-600`}>{errors.download}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
-                                    {/* free */}
-                                    <fieldset className="mt-1 has-tooltip col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('free')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="free"
-                                                    name="free"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={book.free}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                                />
-                                                <label htmlFor="free"
-                                                       className="ml-3 block  font-medium text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="free"
-                                                    name="free"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!book.free}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                                />
-                                                <label htmlFor="free"
-                                                       className="ml-3 block  font-medium text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget message={trans('book_free_instruction')}/>
-                                        <div>
-                                            <p className={`mt-2  text-${theme}-500`}>
-                                                {errors.free &&
-                                                <div className={`text-red-600`}>{errors.free}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -785,7 +596,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                 </div>
                             </div>
                         </div>
-                        <FormBtns type={'book'}/>
+                        <FormBtns type={'service'}/>
                     </div>
                     <div
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
@@ -810,10 +621,10 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                              name="description_ar"
                                              rows={4}
                                              className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                             defaultValue={book.description_ar}
+                                             defaultValue={service.description_ar}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_description_instruction')}/>
+                                <ToolTipWidget message={trans('service_description_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.description_ar &&
                                     <div className={`text-red-600`}>{errors.description_ar}</div>}
@@ -831,10 +642,10 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                              name="description_en"
                                              rows={4}
                                              className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                             defaultValue={book.description_en}
+                                             defaultValue={service.description_en}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_description_instruction')}/>
+                                <ToolTipWidget message={trans('service_description_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.description_en &&
                                     <div className={`text-red-600`}>{errors.description_en}</div>}
@@ -852,10 +663,10 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                              name="notes_ar"
                                              rows={4}
                                              className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                             defaultValue={book.notes_ar}
+                                             defaultValue={service.notes_ar}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_notes_instruction')}/>
+                                <ToolTipWidget message={trans('service_notes_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
                                 </p>
@@ -871,10 +682,10 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                              name="notes_en"
                                              rows={4}
                                              className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                             defaultValue={book.notes_en}
+                                             defaultValue={service.notes_en}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_notes_instruction')}/>
+                                <ToolTipWidget message={trans('service_notes_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
                                 </p>
@@ -891,13 +702,13 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="text"
                                         step="any"
                                         name="caption_ar"
-                                        defaultValue={book.caption_ar}
+                                        defaultValue={service.caption_ar}
                                         id="caption_ar"
                                         autoComplete="caption_ar"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <ToolTipWidget message={trans('service_caption_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
                                 </p>
@@ -913,13 +724,13 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="text"
                                         step="any"
                                         name="caption_en"
-                                        defaultValue={book.caption_en}
+                                        defaultValue={service.caption_en}
                                         id="caption_en"
                                         autoComplete="caption_en"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <ToolTipWidget message={trans('service_caption_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
                                 </p>
@@ -936,13 +747,13 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="text"
                                         step="any"
                                         name="keywords"
-                                        defaultValue={book.keywords}
+                                        defaultValue={service.keywords}
                                         id="keywords"
                                         autoComplete="keywords"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <ToolTipWidget message={trans('service_caption_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
                                 </p>
@@ -960,15 +771,39 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="number"
                                         step="any"
                                         name="delivery_time"
-                                        defaultValue={book.delivery_time}
+                                        defaultValue={service.delivery_time}
                                         id="delivery_time"
                                         autoComplete="delivery_time"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_delivery_time_instruction')}/>
+                                <ToolTipWidget message={trans('service_delivery_time_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.delivery_time && <div className={`text-red-600`}>{errors.keywords}</div>}
+                                </p>
+                            </div>
+                            {/* order*/}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="order"
+                                       className={`block   text-${theme}-700`}>
+                                    {trans('order_appearance')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        max={999}
+                                        onChange={handleChange}
+                                        type="number"
+                                        step="any"
+                                        name="order"
+                                        defaultValue={service.order}
+                                        id="order"
+                                        autoComplete="order"
+                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('order_instruction')}/>
+                                <p className={`mt-2  text-${theme}-500`}>
+                                    {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2">
@@ -982,13 +817,13 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="url"
                                         step="any"
                                         name="video_url_one"
-                                        defaultValue={book.video_url_one}
+                                        defaultValue={service.video_url_one}
                                         id="video_url_one"
                                         autoComplete="video_url_one"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_video_url_one_instruction')}/>
+                                <ToolTipWidget message={trans('service_video_url_one_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.video_url_one &&
                                     <div className={`text-red-600`}>{errors.video_url_one}</div>}
@@ -1005,13 +840,13 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="url"
                                         step="any"
                                         name="video_url_two"
-                                        defaultValue={book.video_url_two}
+                                        defaultValue={service.video_url_two}
                                         id="video_url_two"
                                         autoComplete="video_url_two"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_video_url_two_instruction')}/>
+                                <ToolTipWidget message={trans('service_video_url_two_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.video_url_two &&
                                     <div className={`text-red-600`}>{errors.video_url_two}</div>}
@@ -1037,10 +872,10 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_end_sale_instruction')}/>
+                                <ToolTipWidget message={trans('service_end_sale_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     <span
-                                        className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
+                                        className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(service.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                     {errors.start_sale && <div className={`text-red-600`}>{errors.start_sale}</div>}
                                 </p>
                             </div>
@@ -1056,16 +891,16 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         type="datetime-local"
                                         step="any"
                                         name="end_sale"
-                                        defaultValue={book.end_sale}
+                                        defaultValue={service.end_sale}
                                         id="end_sale"
                                         autoComplete="end_sale"
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_start_sale_instruction')}/>
+                                <ToolTipWidget message={trans('service_start_sale_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     <span
-                                        className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
+                                        className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(service.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                     {errors.end_sale && <div className={`text-red-600`}>{errors.end_sale}</div>}
                                 </p>
                             </div>
@@ -1085,15 +920,15 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         autoComplete="qr"
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
                                     />
-                                    {book.qr && <div
+                                    {service.qr && <div
                                         className="relative h-28 w-28">
                                         <img
                                             className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
-                                            src={getImageThumb(book.qr)}
+                                            src={getImageThumb(service.qr)}
                                             alt=""/>
                                         <Link
                                             href={route(`backend.element.clear`, {
-                                                id: book.id,
+                                                id: service.id,
                                                 'model': parentModule,
                                                 colName: 'qr'
                                             })}
@@ -1112,7 +947,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                         </Link>
                                     </div>}
                                 </div>
-                                <ToolTipWidget message={trans('book_qr_instruction')}/>
+                                <ToolTipWidget message={trans('service_qr_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('qr_best_fit')}
                                 </p>
@@ -1143,7 +978,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="check_stock"
                                                 type="radio"
                                                 value={1}
-                                                defaultChecked={book.check_stock}
+                                                defaultChecked={service.check_stock}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="check_stock"
@@ -1158,7 +993,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="check_stock"
                                                 type="radio"
                                                 value={0}
-                                                defaultChecked={!book.check_stock}
+                                                defaultChecked={!service.check_stock}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="check_stock"
@@ -1167,7 +1002,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_check_stock_message')}/>
+                                    <ToolTipWidget message={trans('service_check_stock_message')}/>
                                     <div>
                                         <p className={`mt-2  text-${theme}-500`}>
                                             {errors.check_stock &&
@@ -1189,7 +1024,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="is_available"
                                                 type="radio"
                                                 value={1}
-                                                defaultChecked={book.on_sale}
+                                                defaultChecked={service.on_sale}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
@@ -1204,7 +1039,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="is_available"
                                                 type="radio"
                                                 value={0}
-                                                defaultChecked={!book.is_available}
+                                                defaultChecked={!service.is_available}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="is_available"
@@ -1213,7 +1048,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_is_available_message')}/>
+                                    <ToolTipWidget message={trans('service_is_available_message')}/>
                                     <div>
                                         <p className={`mt-2  text-${theme}-500`}>
                                             {errors.is_available &&
@@ -1235,7 +1070,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="wrap_as_gift"
                                                 type="radio"
                                                 value={1}
-                                                defaultChecked={book.wrap_as_gift}
+                                                defaultChecked={service.wrap_as_gift}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="wrap_as_gift"
@@ -1250,7 +1085,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="wrap_as_gift"
                                                 type="radio"
                                                 value={0}
-                                                defaultChecked={!book.wrap_as_gift}
+                                                defaultChecked={!service.wrap_as_gift}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="wrap_as_gift"
@@ -1259,7 +1094,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_wrap_as_gift_instruction')}/>
+                                    <ToolTipWidget message={trans('service_wrap_as_gift_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-${theme}-500`}>
                                             {errors.wrap_as_gift &&
@@ -1282,7 +1117,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="direct_purchase"
                                                 type="radio"
                                                 value={1}
-                                                defaultChecked={book.direct_purchase}
+                                                defaultChecked={service.direct_purchase}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="direct_purchase"
@@ -1297,7 +1132,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="direct_purchase"
                                                 type="radio"
                                                 value={0}
-                                                defaultChecked={!book.direct_purchase}
+                                                defaultChecked={!service.direct_purchase}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="direct_purchase"
@@ -1306,7 +1141,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_direct_purchase_instruction')}/>
+                                    <ToolTipWidget message={trans('service_direct_purchase_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-${theme}-500`}>
                                             {errors.direct_purchase &&
@@ -1329,7 +1164,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="exclusive"
                                                 type="radio"
                                                 value={1}
-                                                defaultChecked={book.exclusive}
+                                                defaultChecked={service.exclusive}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
@@ -1344,7 +1179,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="exclusive"
                                                 type="radio"
                                                 value={0}
-                                                defaultChecked={!book.exclusive}
+                                                defaultChecked={!service.exclusive}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="exclusive"
@@ -1353,7 +1188,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_exclusive_instruction')}/>
+                                    <ToolTipWidget message={trans('service_exclusive_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-${theme}-500`}>
                                             {errors.exclusive &&
@@ -1375,7 +1210,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="on_new"
                                                 type="radio"
                                                 value={1}
-                                                defaultChecked={book.on_new}
+                                                defaultChecked={service.on_new}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
@@ -1390,7 +1225,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="on_new"
                                                 type="radio"
                                                 value={0}
-                                                defaultChecked={!book.on_new}
+                                                defaultChecked={!service.on_new}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="on_new"
@@ -1399,7 +1234,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_on_new_instruction')}/>
+                                    <ToolTipWidget message={trans('service_on_new_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-${theme}-500`}>
                                             {errors.on_new && <div className={`text-red-600`}>{errors.on_new}</div>}
@@ -1421,7 +1256,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="is_hot_deal"
                                                 type="radio"
                                                 value={1}
-                                                defaultChecked={book.is_hot_deal}
+                                                defaultChecked={service.is_hot_deal}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
@@ -1436,7 +1271,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                                 name="is_hot_deal"
                                                 type="radio"
                                                 value={0}
-                                                defaultChecked={!book.is_hot_deal}
+                                                defaultChecked={!service.is_hot_deal}
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="is_hot_deal"
@@ -1445,7 +1280,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_is_hot_deal_instruction')}/>
+                                    <ToolTipWidget message={trans('service_is_hot_deal_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-${theme}-500`}>
                                             {errors.is_hot_deal &&
@@ -1463,7 +1298,7 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                         </div>
 
 
-                        <FormBtns type={'book'}/>
+                        <FormBtns type={'service'}/>
                     </div>
 
 
@@ -1512,8 +1347,8 @@ export default function ServiceEdit({users, sizes, colors, categories, book, ele
                                 </div>
                             </div>
                         </div>
-                        <FormBtns type={'book'}/>
-                        <ImagesList images={book.images} id={book.id} type={'book'}/>
+                        <FormBtns type={'service'}/>
+                        <ImagesList images={service.images} id={service.id} type={'service'}/>
                     </div>
                 </form>
             </FormTabsContainer>

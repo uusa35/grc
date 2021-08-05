@@ -24,7 +24,8 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
         currentFormTab,
         parentModule,
         getImageThumb,
-        getFileUrl
+        getFileUrl,
+        isAdminOrAbove
     } = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': book.sku,
@@ -143,14 +144,14 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
+                            <h3 className={` leading-6  text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-red-500">
                                 {trans('all_information_required')}
                             </p>
                         </div>
                         <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
                             <div className="sm:col-span-3">
-                                <label htmlFor="name_ar" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="name_ar" className={`block   text-${theme}-700`}>
                                     {trans('name_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -172,7 +173,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
 
                             <div className="sm:col-span-3">
-                                <label htmlFor="name_en" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="name_en" className={`block   text-${theme}-700`}>
                                     {trans('name_en')}
                                 </label>
                                 <div className="mt-1">
@@ -194,7 +195,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
 
                             <div className="sm:col-span-2">
-                                <label htmlFor="price" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="price" className={`block   text-${theme}-700`}>
                                     {trans('price')}
                                 </label>
                                 <div className="mt-1">
@@ -218,7 +219,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
 
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="sale_price"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('sale_price')}
                                 </label>
                                 <div className="mt-1 ">
@@ -241,7 +242,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
 
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="qty" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="qty" className={`block   text-${theme}-700`}>
                                     {trans('qty')} {trans('available')}
                                 </label>
                                 <div className="mt-1">
@@ -264,7 +265,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
 
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="sku" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="sku" className={`block   text-${theme}-700`}>
                                     {trans('sku')}
                                 </label>
                                 <div className="mt-1">
@@ -286,7 +287,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
 
                             <div className="sm:col-span-2">
-                                <label htmlFor="weight" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="weight" className={`block   text-${theme}-700`}>
                                     {trans('weight')}
                                 </label>
                                 <div className="mt-1">
@@ -309,35 +310,37 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
                             {/* user_id */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="user_id" className="block  font-medium text-gray-700">
-                                    {trans('owner')}
-                                </label>
-                                <div className="mt-1">
-                                    <select
-                                        onChange={handleChange}
-                                        id="user_id"
-                                        name="user_id"
-                                        value={data.user_id}
-                                        autoComplete="user_id"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                    >
-                                        {
-                                            map(users, u => (
-                                                <option key={u.id} value={u.id}
-                                                >{u.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <ToolTipWidget message={trans('book_user_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
-                                </p>
+                                {isAdminOrAbove && <>
+                                    <label htmlFor="user_id" className="block   text-gray-700">
+                                        {trans('owner')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <select
+                                            onChange={handleChange}
+                                            id="user_id"
+                                            name="user_id"
+                                            value={data.user_id}
+                                            autoComplete="user_id"
+                                            className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        >
+                                            {
+                                                users.map(u => (
+                                                    <option key={u.id} value={u.id}
+                                                    >{u.name}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                    <ToolTipWidget message={trans('user_instruction')}/>
+                                    <p className={`mt-2  text-${theme}-500`}>
+                                        {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
+                                    </p>
+                                </>}
                             </div>
                             {/* cateogiries */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('categories')}
                                 </label>
                                 <div>
@@ -439,7 +442,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/* image*/}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -464,7 +467,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/* more images */}
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('more_images')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -494,7 +497,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/* file pdf */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="main_image"
-                                       className={`block  flex flex-row justify-between items-center font-medium text-${theme}-700`}>
+                                       className={`block  flex flex-row justify-between items-center  text-${theme}-700`}>
                                     {trans('pdf_file')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -518,7 +521,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
                             {/* embedded*/}
                             <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="embedded" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="embedded" className={`block   text-${theme}-700`}>
                                     {trans('embedded')} {trans('book')}
                                 </label>
                                 <div className="mt-1 flex flex-row justify-between items-center gap-x-2">
@@ -531,7 +534,9 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                              className={`flex-1 shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block  border-${theme}-300 rounded-md`}
                                              defaultValue={data.embedded}
                                          />
-                                    <EmbeddedHtml html={book.embedded}/>
+                                    <div className={`flex-1 h-80 overflow-hidden flex-wrap`}>
+                                        <EmbeddedHtml html={book.embedded}/>
+                                    </div>
                                 </div>
                                 <ToolTipWidget message={trans('book_embedded_notes_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
@@ -544,7 +549,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                         <div className="space-y-4">
 
                             <div className={`pt-4`}>
-                                <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('more_details')}</h3>
+                                <h3 className={` leading-6  text-${theme}-900`}>{trans('more_details')}</h3>
                             </div>
 
                             <div className="flex flex-1 flex-col justify-start items-center w-full">
@@ -554,7 +559,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                     <fieldset className="mt-1 col-span-1">
                                         <div>
                                             <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('active')}</legend>
+                                                className={`text-base  text-${theme}-900`}>{trans('active')}</legend>
                                         </div>
                                         <div className="mt-4 space-y-4">
                                             <div className="flex items-center">
@@ -568,7 +573,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="active"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('yes')}
                                                 </label>
                                             </div>
@@ -583,7 +588,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="active"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('no')}
                                                 </label>
                                             </div>
@@ -599,7 +604,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                     <fieldset className="mt-1 col-span-1">
                                         <div>
                                             <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('on_home')}</legend>
+                                                className={`text-base  text-${theme}-900`}>{trans('on_home')}</legend>
                                         </div>
                                         <div className="mt-4 space-y-4">
                                             <div className="flex items-center">
@@ -613,7 +618,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="push-everything"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('yes')}
                                                 </label>
                                             </div>
@@ -628,7 +633,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="on_home"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('no')}
                                                 </label>
                                             </div>
@@ -645,7 +650,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                     <fieldset className="mt-1 has-tooltip col-span-1">
                                         <div>
                                             <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('on_sale')}</legend>
+                                                className={`text-base  text-${theme}-900`}>{trans('on_sale')}</legend>
                                         </div>
                                         <div className="mt-4 space-y-4">
                                             <div className="flex items-center">
@@ -659,7 +664,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="push-everything"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('yes')}
                                                 </label>
                                             </div>
@@ -674,7 +679,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="on_sale"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('no')}
                                                 </label>
                                             </div>
@@ -691,7 +696,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                     <fieldset className="mt-1 has-tooltip col-span-1">
                                         <div>
                                             <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('download')}</legend>
+                                                className={`text-base  text-${theme}-900`}>{trans('download')}</legend>
                                         </div>
                                         <div className="mt-4 space-y-4">
                                             <div className="flex items-center">
@@ -705,7 +710,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="download"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('yes')}
                                                 </label>
                                             </div>
@@ -720,7 +725,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="download"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('no')}
                                                 </label>
                                             </div>
@@ -737,7 +742,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                     <fieldset className="mt-1 has-tooltip col-span-1">
                                         <div>
                                             <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('free')}</legend>
+                                                className={`text-base  text-${theme}-900`}>{trans('free')}</legend>
                                         </div>
                                         <div className="mt-4 space-y-4">
                                             <div className="flex items-center">
@@ -751,7 +756,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="free"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('yes')}
                                                 </label>
                                             </div>
@@ -766,7 +771,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                     className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                                 />
                                                 <label htmlFor="free"
-                                                       className="ml-3 block  font-medium text-gray-700">
+                                                       className="ml-3 block   text-gray-700">
                                                     {trans('no')}
                                                 </label>
                                             </div>
@@ -790,7 +795,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                     <div
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
+                            <h3 className={` leading-6  text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-gray-500">
                                 {trans('edit')} {trans(parentModule)}
 
@@ -800,7 +805,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                         <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('description_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -821,7 +826,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_en"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('description_en')}
                                 </label>
                                 <div className="mt-1">
@@ -842,7 +847,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
                             {/* notes */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_ar" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="notes_ar" className={`block   text-${theme}-700`}>
                                     {trans('notes_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -861,7 +866,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_en" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="notes_en" className={`block   text-${theme}-700`}>
                                     {trans('notes_en')}
                                 </label>
                                 <div className="mt-1">
@@ -882,7 +887,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/* caption */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_ar"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('caption_ar')}
                                 </label>
                                 <div className="mt-1 ">
@@ -904,7 +909,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_en"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('caption_en')}
                                 </label>
                                 <div className="mt-1 ">
@@ -927,7 +932,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/* keywords */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="keywords"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('keywords')}
                                 </label>
                                 <div className="mt-1">
@@ -950,7 +955,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/* delivery time*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="delivery_time"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('delivery_time')}
                                 </label>
                                 <div className="mt-1">
@@ -968,12 +973,36 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 </div>
                                 <ToolTipWidget message={trans('book_delivery_time_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.delivery_time && <div className={`text-red-600`}>{errors.keywords}</div>}
+                                    {errors.delivery_time && <div className={`text-red-600`}>{errors.delivery_time}</div>}
+                                </p>
+                            </div>
+                            {/* order*/}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="order"
+                                       className={`block   text-${theme}-700`}>
+                                    {trans('order_appearance')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        max={999}
+                                        onChange={handleChange}
+                                        type="number"
+                                        step="any"
+                                        name="order"
+                                        defaultValue={book.order}
+                                        id="order"
+                                        autoComplete="order"
+                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('order_instruction')}/>
+                                <p className={`mt-2  text-${theme}-500`}>
+                                    {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_one"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('video_url_one')}
                                 </label>
                                 <div className="mt-1">
@@ -996,7 +1025,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             </div>
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_two"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('video_url_two')}
                                 </label>
                                 <div className="mt-1">
@@ -1020,7 +1049,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/* start sale */}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="start_sale"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('start_sale')}
                                 </label>
                                 <div className="mt-1">
@@ -1047,7 +1076,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/* end sale*/}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="end_sale"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('end_sale')}
                                 </label>
                                 <div className="mt-1">
@@ -1073,7 +1102,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block   text-${theme}-700`}>
                                     {trans('qr')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -1123,7 +1152,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                         </div>
                         {/* more booleans */}
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('more_details')}</h3>
+                            <h3 className={` leading-6  text-${theme}-900`}>{trans('more_details')}</h3>
                         </div>
 
                         <div className="flex flex-1 flex-col justify-start items-center w-full">
@@ -1133,7 +1162,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('check_stock')}</legend>
+                                            className={`text-base  text-${theme}-900`}>{trans('check_stock')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1147,7 +1176,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="check_stock"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -1162,7 +1191,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="check_stock"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -1179,7 +1208,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('is_available')}</legend>
+                                            className={`text-base  text-${theme}-900`}>{trans('is_available')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1193,7 +1222,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -1208,7 +1237,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="is_available"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -1225,7 +1254,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('wrap_as_gift')}</legend>
+                                            className={`text-base  text-${theme}-900`}>{trans('wrap_as_gift')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1239,7 +1268,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="wrap_as_gift"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -1254,7 +1283,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="wrap_as_gift"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -1272,7 +1301,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('direct_purchase')}</legend>
+                                            className={`text-base  text-${theme}-900`}>{trans('direct_purchase')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1286,7 +1315,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="direct_purchase"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -1301,7 +1330,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="direct_purchase"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -1319,7 +1348,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('tag')} {trans('exclusive')}</legend>
+                                            className={`text-base  text-${theme}-900`}>{trans('tag')} {trans('exclusive')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1333,7 +1362,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -1348,7 +1377,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="exclusive"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -1365,7 +1394,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}> {trans('tag')} {trans('on_new')}</legend>
+                                            className={`text-base  text-${theme}-900`}> {trans('tag')} {trans('on_new')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1379,7 +1408,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -1394,7 +1423,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="on_new"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -1411,7 +1440,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}> {trans('is_hot_deal')}</legend>
+                                            className={`text-base  text-${theme}-900`}> {trans('is_hot_deal')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1425,7 +1454,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="push-everything"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -1440,7 +1469,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                                 className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
                                             />
                                             <label htmlFor="is_hot_deal"
-                                                   className="ml-3 block  font-medium text-gray-700">
+                                                   className="ml-3 block   text-gray-700">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -1492,7 +1521,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                         <div className="flex  text-gray-600">
                                             <label
                                                 htmlFor="file-upload"
-                                                className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                className="relative cursor-pointer bg-white rounded-md  text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                             >
                                             </label>
                                             <p className="pl-1">

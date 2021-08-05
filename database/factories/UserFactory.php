@@ -61,7 +61,7 @@ class UserFactory extends Factory
             'role_id' => Role::notAdmins()->get()->random()->id,
             'api_token' => $this->faker->bankAccountNumber,
             'merchant_id' => $this->faker->bankAccountNumber,
-            'path' => '1.pdf',
+            'file' => '1.pdf',
             'website' => $this->faker->url,
             'facebook' => $this->faker->url,
             'instagram' => $this->faker->url,

@@ -43,6 +43,7 @@ class CreateServicesTable extends Migration
             $table->string('video_url_three')->nullable();
             $table->string('video_url_four')->nullable();
             $table->string('video_url_five')->nullable();
+            $table->integer('order')->nullable();
 
             $table->timestamp('start_sale')->default(Carbon::now())->nullable();
             $table->timestamp('end_sale')->default(Carbon::now())->nullable();
@@ -50,6 +51,7 @@ class CreateServicesTable extends Migration
             $table->boolean('is_available')->default(true);
             $table->boolean('is_hot_deal')->default(false);
             $table->boolean('multi_booking')->default(false);
+            $table->boolean('direct_purchase')->default(false);
             $table->integer('booking_limit')->default(false);
 
             $table->foreignId('user_id')->references('id')->on('users');
@@ -63,6 +65,7 @@ class CreateServicesTable extends Migration
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->integer('range')->nullable();
+            $table->string('file')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

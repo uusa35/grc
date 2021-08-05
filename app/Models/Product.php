@@ -35,7 +35,7 @@ class Product extends PrimaryModel
 
     public function order_meta()
     {
-        return $this->hasMany(OrderMeta::class);
+        return $this->morphMany(OrderMeta::class, 'ordermetable');
     }
 
     public function shipment_package()

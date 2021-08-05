@@ -11,7 +11,7 @@ import axios from "axios";
 export default function BookCreate({users, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, parentModule} = useContext(BackendContext)
+    const {classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, auth  } = useContext(BackendContext)
     const {data, setData, post, progress} = useForm({
         'sku': random(1111,9999),
         'name_ar': '',
@@ -51,7 +51,7 @@ export default function BookCreate({users, categories}) {
         'direct_purchase': 0,
         'barcode': '',
         'order': 1,
-        'user_id': '',
+        'user_id': auth?.id,
         'categories': '',
         'download': 1,
         'free': 1,
@@ -271,30 +271,37 @@ export default function BookCreate({users, categories}) {
                             </div>
                             {/* user_id */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="user_id" className="block  font-medium text-gray-700">
-                                    {trans('owner')}
-                                </label>
-                                <div className="mt-1">
-                                    <select
-                                        onChange={handleChange}
-                                        id="user_id"
-                                        name="user_id"
-                                        value={data.user_id}
-                                        autoComplete="user_id"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
-                                    >
-                                        {
-                                            users.map(u => (
-                                                <option key={u.id} value={u.id}
-                                                >{u.name}</option>
-                                            ))
-                                        }
-                                    </select>
+                                {/* user_id */}
+                                <div className="sm:col-span-2">
+                                    {
+                                        isAdminOrAbove && <>
+                                            <label htmlFor="user_id" className="block  font-medium text-gray-700">
+                                                {trans('owner')}
+                                            </label>
+                                            <div className="mt-1">
+                                                <select
+                                                    onChange={handleChange}
+                                                    id="user_id"
+                                                    name="user_id"
+                                                    value={data.user_id}
+                                                    autoComplete="user_id"
+                                                    className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
+                                                >
+                                                    {
+                                                        users.map(u => (
+                                                            <option key={u.id} value={u.id}
+                                                            >{u.name}</option>
+                                                        ))
+                                                    }
+                                                </select>
+                                            </div>
+                                            <ToolTipWidget message={trans('user_instruction')}/>
+                                            <p className={`mt-2  text-${theme}-500`}>
+                                                {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
+                                            </p>
+                                        </>
+                                    }
                                 </div>
-                                <ToolTipWidget message={trans('book_user_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
-                                </p>
                             </div>
                             {/* image */}
                             <div className="sm:col-span-3">

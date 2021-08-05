@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 
 export default function ImagesList({images}) {
     const { theme , trans } = useContext(BackendContext);
-    const { setModelAction, setShowConfirmationModal } = useContext(BackendContext);
+    const { setModalAction, setShowConfirmationModal } = useContext(BackendContext);
     return (
         <>
 
@@ -19,7 +19,7 @@ export default function ImagesList({images}) {
                             <button
                                 onClick={() => {
                                     setShowConfirmationModal(true)
-                                    setModelAction({ type : 'destroy', model : 'image', id : img.id})
+                                    setModalAction({ type : 'destroy', model : 'image', id : img.id})
                                 }}
                                 type="button"
                                 className="absolute inset-0 focus:outline-none">

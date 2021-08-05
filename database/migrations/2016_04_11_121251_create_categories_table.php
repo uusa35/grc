@@ -39,7 +39,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('order')->nullable();
             $table->integer('min')->default(false)->nullable();
             $table->bigInteger('max')->default(false)->nullable();
-            $table->string('path')->nullable();
+            $table->string('file')->nullable();
             $table->boolean('active')->default(true);
 
             $table->integer('parent_id')->nullable()->unsigned()->default(false)->default(0);

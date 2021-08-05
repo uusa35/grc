@@ -67,6 +67,7 @@ class CreateProductsTable extends Migration
             $table->foreignId('color_id')->nullable()->constrained();
             $table->foreignId('size_id')->nullable()->constrained();
             $table->longText('embedded')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

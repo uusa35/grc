@@ -23,7 +23,7 @@ class CreateVideosTable extends Migration
             $table->text('notes_ar')->nullable();
             $table->text('notes_en')->nullable();
             $table->string('image')->nullable();
-            $table->string('path')->nullable();
+            $table->string('file')->nullable();
             $table->boolean('active')->default(true);
             $table->integer('order')->nullable();
             $table->string('url')->nullable();

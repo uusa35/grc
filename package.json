@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "prettier": "prettier --write --no-bracket-spacing --single-quote --jsx-bracket-same-line --print-width 80 resources/js/Pages/HomePage.js'"
+        "prettier": "prettier --write --no-bracket-spacing --single-quote --jsx-bracket-same-line --print-width 80 resources/js/Pages/*/*'"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.14.5",

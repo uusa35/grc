@@ -28,7 +28,7 @@ class CommentFactory extends Factory
         return [
             'title' => $this->faker->name,
             'content' => $this->faker->name,
-            'path' => '01.pdf',
+            'file' => '01.pdf',
             'commentable_id' => User::all()->random()->id,
             'commentable_type' => $this->faker->randomElement(['App\Models\User', 'App\Models\Product', 'App\Models\Service']),
             'active' => $this->faker->boolean(true),

@@ -11,7 +11,7 @@ import axios from "axios";
 export default function ServiceCreate({users, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, parentModule} = useContext(BackendContext)
+    const {classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, auth  } = useContext(BackendContext)
     const {data, setData, post, progress} = useForm({
         'sku': random(1111,9999),
         'name_ar': '',
@@ -51,13 +51,8 @@ export default function ServiceCreate({users, categories}) {
         'direct_purchase': 0,
         'barcode': '',
         'order': 1,
-        'user_id': '',
+        'user_id': auth?.id,
         'categories': '',
-        'download': 1,
-        'free': 1,
-        'file': '',
-        'preview': '',
-        'embedded': '',
     });
     const {errors} = usePage().props;
 
@@ -68,14 +63,15 @@ export default function ServiceCreate({users, categories}) {
         }))
     }
 
+
     const submit = (e) => {
         e.preventDefault()
         let formData = new FormData();
         for (let i = 0; i < currentImages.length; i++) {
             formData.append(`images[${i}]`, currentImages[i]);
         }
-        formData.append(`model`, 'book');
-        post('/backend/book');
+        formData.append(`model`, 'service');
+        post('/backend/service');
         // uploading images module separately due to some errors occurred in setData by inertia
         setTimeout(() => {
             return axios.post(`/api/images/upload`, formData).then(r => r.data).catch(e => console.log('eee', e));
@@ -127,7 +123,7 @@ export default function ServiceCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('service_price_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
@@ -149,7 +145,7 @@ export default function ServiceCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('service_price_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
@@ -172,7 +168,7 @@ export default function ServiceCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('service_price_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
                                 </p>
@@ -196,7 +192,7 @@ export default function ServiceCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_sale_price_instruction')}/>
+                                <ToolTipWidget message={trans('service_sale_price_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
                                 </p>
@@ -219,7 +215,7 @@ export default function ServiceCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_qty_instruction')}/>
+                                <ToolTipWidget message={trans('service_qty_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
                                 </p>
@@ -241,60 +237,41 @@ export default function ServiceCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_sku_instruction')}/>
+                                <ToolTipWidget message={trans('service_sku_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
                                 </p>
                             </div>
-
-                            <div className="sm:col-span-2">
-                                <label htmlFor="weight" className={`block  font-medium text-${theme}-700`}>
-                                    {trans('weight')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        required
-                                        type="number"
-                                        step="any"
-                                        name="weight"
-                                        defaultValue={data.weight}
-                                        id="weight"
-                                        autoComplete="weight"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('book_weight_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.weight && <div className={`text-red-600`}>{errors.weight}</div>}
-                                </p>
-                            </div>
                             {/* user_id */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="user_id" className="block  font-medium text-gray-700">
-                                    {trans('owner')}
-                                </label>
-                                <div className="mt-1">
-                                    <select
-                                        onChange={handleChange}
-                                        id="user_id"
-                                        name="user_id"
-                                        value={data.user_id}
-                                        autoComplete="user_id"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
-                                    >
-                                        {
-                                            users.map(u => (
-                                                <option key={u.id} value={u.id}
-                                                >{u.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <ToolTipWidget message={trans('book_user_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
-                                </p>
+                                {
+                                    isAdminOrAbove && <>
+                                        <label htmlFor="user_id" className="block  font-medium text-gray-700">
+                                            {trans('owner')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="user_id"
+                                                name="user_id"
+                                                value={data.user_id}
+                                                autoComplete="user_id"
+                                                className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
+                                            >
+                                                {
+                                                    users.map(u => (
+                                                        <option key={u.id} value={u.id}
+                                                        >{u.name}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+                                        <ToolTipWidget message={trans('user_instruction')}/>
+                                        <p className={`mt-2  text-${theme}-500`}>
+                                            {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
+                                        </p>
+                                    </>
+                                }
                             </div>
                             {/* image */}
                             <div className="sm:col-span-3">
@@ -313,7 +290,7 @@ export default function ServiceCreate({users, categories}) {
                                         className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_main_image_instruction')}/>
+                                <ToolTipWidget message={trans('service_main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
@@ -345,31 +322,6 @@ export default function ServiceCreate({users, categories}) {
                                 </p>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
-                                </p>
-                            </div>
-                            {/* file pdf */}
-                            <div className="sm:col-span-3">
-                                <label htmlFor="main_image"
-                                       className={`block  font-medium text-${theme}-700`}>
-                                    {trans('pdf_file')}
-                                </label>
-                                <div className="mt-1 flex flex-row flex-1 items-center">
-                                    <input
-                                        onChange={e => setData('file', e.target.files[0])}
-                                        // required
-                                        type="file"
-                                        name="file"
-                                        id="file"
-                                        autoComplete="pdf_file"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm: border-${theme}-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('file_instruction')}/>
-                                <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('file_instruction')}
-                                </p>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.file && <div className={`text-red-600`}>{errors.file}</div>}
                                 </p>
                             </div>
                             {/*categories*/}
@@ -465,33 +417,11 @@ export default function ServiceCreate({users, categories}) {
                                         </div>
                                     </fieldset>
                                 </div>
-                                <ToolTipWidget message={trans('book_categories_instruction')}/>
+                                <ToolTipWidget message={trans('service_categories_instruction')}/>
                                 <p className={`mt-2  text-${theme}-500`}>
                                     {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
                                 </p>
                             </div>
-                            {/* embedded*/}
-                            <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="embedded" className={`block  font-medium text-${theme}-700`}>
-                                    {trans('embedded')} {trans('book')}
-                                </label>
-                                <div className="mt-1">
-                                         <textarea
-                                             onChange={handleChange}
-                                             id="embedded"
-                                             name="embedded"
-                                             required
-                                             rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
-                                             defaultValue={data.embedded}
-                                         />
-                                </div>
-                                <ToolTipWidget message={trans('book_embedded_notes_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
-                                    {errors.embedded && <div className={`text-red-600`}>{errors.embedded}</div>}
-                                </p>
-                            </div>
-
                         </div>
                     </div>
                     {/*more details*/}
@@ -631,102 +561,10 @@ export default function ServiceCreate({users, categories}) {
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_sale_price_instruction')}/>
+                                    <ToolTipWidget message={trans('service_sale_price_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-${theme}-500`}>
                                             {errors.on_sale && <div className={`text-red-600`}>{errors.on_sale}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
-                                {/* free */}
-                                <fieldset className="mt-1 has-tooltip col-span-1">
-                                    <div>
-                                        <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('free')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="free"
-                                                name="free"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={data.free}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                            />
-                                            <label htmlFor="free"
-                                                   className="ml-3 block  font-medium text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="free"
-                                                name="free"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!data.free}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                            />
-                                            <label htmlFor="free"
-                                                   className="ml-3 block  font-medium text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <ToolTipWidget message={trans('book_free_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
-                                            {errors.free &&
-                                            <div className={`text-red-600`}>{errors.free}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
-                                {/* download */}
-                                <fieldset className="mt-1 has-tooltip col-span-1">
-                                    <div>
-                                        <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('download')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="download"
-                                                name="download"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={data.download}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                            />
-                                            <label htmlFor="download"
-                                                   className="ml-3 block  font-medium text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="download"
-                                                name="download"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!data.download}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
-                                            />
-                                            <label htmlFor="download"
-                                                   className="ml-3 block  font-medium text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <ToolTipWidget message={trans('book_download_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
-                                            {errors.download &&
-                                            <div className={`text-red-600`}>{errors.download}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -740,7 +578,7 @@ export default function ServiceCreate({users, categories}) {
                         </div>
 
                     </div>
-                    <FormBtns type={'book'}/>
+                    <FormBtns type={'service'}/>
                 </form>
 
                 <div

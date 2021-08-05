@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceStore;
+use App\Http\Requests\ServiceUpdate;
 use App\Models\Category;
 use App\Models\Service;
 use App\Models\User;
@@ -12,13 +14,23 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Service::class);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $elements = Service::orderby('id','desc')->with('user')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page','_token']));
+        $elements = Service::orderby('id', 'desc')->with('user')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page', '_token']));
         return inertia('Backend/Service/ServiceIndex', compact('elements'));
     }
 
@@ -29,7 +41,7 @@ class ServiceController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Service::filters($filters)->with('user')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page','_token']));
+        $elements = Service::filters($filters)->with('user')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page', '_token']));
         return inertia('Backend/Service/ServiceIndex', compact('elements'));
     }
 
@@ -40,7 +52,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $users = User::active()->authors()->get();
+        $users = User::active()->hasMerchantBehaviour()->with('role')->get();
         $categories = Category::onlyParent()->onlyForBooks()->with(['children' => function ($q) {
             return $q->onlyForBooks()->with(['children' => function ($q) {
                 return $q->onlyForBooks();
@@ -52,10 +64,10 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceStore $request)
     {
         $element = Service::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'start_sale', 'end_sale', 'videos']));
         if ($element) {
@@ -64,8 +76,7 @@ class ServiceController extends Controller
             $element->categories()->sync($request->categories);
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
-//            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
-            $request->hasFile('file') ? $this->savePath($element,$request,'file') : null;
+            $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             return redirect()->route('backend.service.edit', $element->id)->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.service.create')->with('error', trans('general.process_failure'));
@@ -74,7 +85,7 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param \App\Models\Service $service
      * @return \Illuminate\Http\Response
      */
     public function show(Service $service)
@@ -85,12 +96,12 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param \App\Models\Service $service
      * @return \Illuminate\Http\Response
      */
     public function edit(Service $service)
     {
-        $users = User::active()->authors()->get();
+        $users = User::active()->hasMerchantBehaviour()->with('role')->get();
         $categories = Category::onlyParent()->onlyForProducts()->with(['children' => function ($q) {
             return $q->onlyForBooks()->with(['children' => function ($q) {
                 return $q->onlyForBooks();
@@ -98,36 +109,39 @@ class ServiceController extends Controller
         }])->get();
         $service = $service->whereId($service->id)->with('images', 'user', 'categories')->first();
         $elementCategories = $service->categories->pluck('id')->toArray();
-        return inertia('Backend/Book/BookEdit', compact('service', 'users', 'categories', 'elementCategories'));
+        return inertia('Backend/Service/ServiceEdit', compact('service', 'users', 'categories', 'elementCategories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Service  $service
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Service $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(ServiceUpdate $request, Service $service)
     {
-        $updated = $service->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos', 'qr', 'size_chart_image']));
-        if ($updated) {
-            $request->has('tags') ? $service->tags()->sync($request->tags) : null;
-            $request->has('videos') ? $service->videos()->sync($request->videos) : null;
-            $request->has('categories') ? $service->categories()->sync($request->categories) : null;
-            $request->hasFile('image') ? $this->saveMimes($service, $request, ['image'], ['1080', '1440'], false) : null;
-            $request->hasFile('qr') ? $this->saveMimes($service, $request, ['qr'], ['300', '300'], false) : null;
-            $request->hasFile('path') ? $this->savePath($request, $service) : null;
-//            $request->hasFile('images') ? $this->saveGallery($service, $request, 'images', ['1080', '1440'], false) : null;
-            return redirect()->back()->with('success', trans('general.process_success'));
+        try {
+            $updated = $service->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos', 'qr', 'file']));
+            if ($updated) {
+                $request->has('tags') ? $service->tags()->sync($request->tags) : null;
+                $request->has('videos') ? $service->videos()->sync($request->videos) : null;
+                $request->has('categories') ? $service->categories()->sync($request->categories) : null;
+                $request->hasFile('image') ? $this->saveMimes($service, $request, ['image'], ['1080', '1440'], false) : null;
+                $request->hasFile('qr') ? $this->saveMimes($service, $request, ['qr'], ['300', '300'], false) : null;
+                $request->hasFile('file') ? $this->savePath($service, $request, 'file') : null;
+                return redirect()->back()->with('success', 'process_success');
+            }
+            return redirect()->route('backend.service.edit', $service->id)->with('error', 'process_failure');
+        } catch (\Exception $e) {
+            return redirect()->route('backend.service.edit', $service->id)->with('error', $e->getMessage());
         }
-        return redirect()->route('backend.service.edit', $service->id)->with('error', 'process_failure');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service  $service
+     * @param \App\Models\Service $service
      * @return \Illuminate\Http\Response
      */
     public function destroy(Service $service)

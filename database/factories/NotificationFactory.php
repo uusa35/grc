@@ -29,7 +29,7 @@ class NotificationFactory extends Factory
             'title' => $this->faker->name,
             'description' => $this->faker->name,
             'type' => class_basename(Product::class),
-            'path' => '01.pdf',
+            'file' => '01.pdf',
             'url' => $this->faker->imageUrl(),
             'image' => 'sample.png',
             'notificationable_id' => $this->faker->numberBetween(1, 50),

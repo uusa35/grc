@@ -51,6 +51,17 @@ trait UserHelpers
         });
     }
 
+    public function scopeHasMerchantBehaviour($q)
+    {
+        return $q->whereHas('role', function ($q) {
+            return $q->where([
+                'is_client' => false,
+                'is_admin' => false,
+                'is_super' => false,
+            ]);
+        });
+    }
+
     public function scopeAuthors($q)
     {
         return $q->whereHas('role', function ($q) {

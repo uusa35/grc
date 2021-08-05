@@ -50,7 +50,7 @@ class CreateUsersTable extends Migration
             $table->string('keywords')->nullable();
             $table->string('qr')->nullable();
 
-            $table->string('path')->nullable();
+            $table->string('file')->nullable();
             $table->string('website')->nullable();
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();

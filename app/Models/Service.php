@@ -11,7 +11,7 @@ class Service extends PrimaryModel
     use HasFactory, SoftDeletes, SellingModelHelpers, ServiceHelpers;
     protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
-    protected $appends = ['name','description'];
+    protected $appends = ['name','description','imageThumb'];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $casts = [
         'on_sale' => 'boolean',
@@ -20,7 +20,6 @@ class Service extends PrimaryModel
         'is_available' => 'boolean',
         'exclusive' => 'boolean',
         'is_hot_deal' => 'boolean',
-        'enable_global_timings' => 'boolean',
         'has_only_items' => 'boolean',
         'is_package' => 'boolean',
         'has_addons' => 'boolean'
@@ -33,8 +32,7 @@ class Service extends PrimaryModel
 
     public function timings()
     {
-        return $this->belongsToMany(Timing::class,'service_timing');
-//        return $this->hasMany(Timing::class);
+        return $this->hasMany(Timing::class);
     }
 
     public function categories()
@@ -68,11 +66,6 @@ class Service extends PrimaryModel
         return $this->morphToMany(Video::class, 'videoable');
     }
 
-
-    public function areas()
-    {
-        return $this->belongsToMany(Area::class, 'area_service');
-    }
 
     // Many Morph
     public function notifications()
