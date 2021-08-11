@@ -4,11 +4,11 @@ import {Inertia} from "@inertiajs/inertia";
 import {isArray, isEmpty, map, first, split, isObject} from 'lodash';
 import {usePage} from '@inertiajs/inertia-react'
 import GlobalContext from "../../context/GlobalContext";
-import { Transition } from '@tailwindui/react'
+import {Transition} from '@tailwindui/react'
 
 
 const SystemMessage = () => {
-    const {sysMessage, trans, setSystemMessage, theme, classNames } = useContext(BackendContext);
+    const {sysMessage, trans, setSystemMessage, theme, classNames} = useContext(BackendContext);
     const [alertColor, setAlertColor] = useState(theme);
 
     useMemo(() => {
@@ -22,34 +22,14 @@ const SystemMessage = () => {
         }
     }, [sysMessage])
 
-    const {errors} = usePage().props
+    const {errors, success, error} = usePage().props
+
     useEffect(() => {
-        if (!isEmpty(errors)) {
-            setSystemMessage({
-                message: isObject(errors) ? first(map(errors, e => e)) : errors[0],
-                type: 'error'
-            })
-        }
-    }, [errors])
-
-
-
-
-
-    useMemo(() => {
-        Inertia.on('success', (event) => {
-            const {success, error, errors} = event.detail.page.props;
-            success && !isEmpty(success) ? setSystemMessage({message: trans(success), type: 'success'}) : null;
-            errors && !isEmpty(errors) ? setSystemMessage({message: first(errors), type: 'error'}) : null;
-            error && !isEmpty(error) ? setSystemMessage({message: first(error), type: 'error'}) : null;
-            setTimeout(() => {
-                return setSystemMessage({ message : '', type : ''})
-            },5000)
-        })
-
-    },[])
-
-    // console.log('aertColor', alertColor);
+        success && !isEmpty(success) ? setSystemMessage({message: success, type: 'success'}) : null;
+        errors && !isEmpty(errors) ? setSystemMessage({message: first(errors), type: 'error'}) : null;
+        error && !isEmpty(error) ? setSystemMessage({message: error, type: 'error'}) : null;
+        setTimeout(() => setSystemMessage({message: '', type: ''}), 3000)
+    }, [success, errors, error])
 
     return (
         <transition
@@ -61,10 +41,11 @@ const SystemMessage = () => {
             leave-to-class="opacity-0"
         >
             <div v-show="isShowing">
-                <div className={classNames(!isEmpty(sysMessage.message) ? 'transform translate-x-40 scale-140': '',`absolute top-10 left-0 w-1/2 transform transition-transform ease-in-out duration-1000 delay-200 font-extrabold`)}>
+                <div
+                    className={classNames(!isEmpty(sysMessage.message) ? 'transform translate-x-40 scale-140' : '', `absolute top-10 left-0 w-1/2 transform transition-transform ease-in-out duration-1000 delay-200 font-extrabold`)}>
                     {sysMessage.message && <div className="flex justify-center items-center w-full">
                         <div
-                            className={`bg-${theme}-50 border-l-4 border-${theme}-800 p-4 sm:w-full lg:w-3/4 m-auto my-2 shadow-lg rounded-md m-10`}>
+                            className={`bg-gray-50 border-l-4 border-gray-800 p-4 sm:w-full lg:w-3/4 m-auto my-2 shadow-lg rounded-md m-10`}>
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
                                     <svg className={`h-9 w-9 m-3" xmlns="http://www.w3.org/2000/svg`}

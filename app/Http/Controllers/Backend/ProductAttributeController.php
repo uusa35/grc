@@ -138,6 +138,6 @@ class ProductAttributeController extends Controller
         if ($attribute->delete()) {
             return redirect()->route('backend.attribute.index', ['product_id' => $productId]);
         }
-        return redirect()->back()->withErrors(trans('general.process_failure'));
+        return redirect()->back()->withErrors('process_failure');
     }
 }

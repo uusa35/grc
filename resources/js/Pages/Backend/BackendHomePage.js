@@ -27,6 +27,8 @@ import {
 import GlobalContext from "./context/GlobalContext";
 import { map } from 'lodash';
 import pluralize from 'pluralize';
+import {useSelector} from "react-redux";
+import LocalizedText from "./components/widgets/LocalizedText";
 const user = {
     name: 'Chelsea Hagon',
     email: 'chelseahagon@example.com',
@@ -176,36 +178,37 @@ const projects = [
 const pinnedProjects = projects.filter((project) => project.pinned)
 
 export default function BackendHomePage() {
-    const {sideBarOpen, toggleSideBar ,modules, trans, theme } = useContext(BackendContext);
+    const {sideBarOpen, toggleSideBar ,modules, trans, theme, auth , getLocalized,
+        getImageThumb, } = useContext(BackendContext);
 
     return (
         <BackendContainer type={'home'}>
             <main className="sm:my-3">
                 <div className="w-full">
                     <div className={`bg-white shadow-md rounded-md p-4 mb-4`}>
-                        <h2 className={`text-lg font-medium text-${theme}-900`}>{trans('modules')}</h2>
+                        <h2 className={`text-lg font-medium text-gray-900`}>{trans('modules')}</h2>
                         <p className="mt-1 text-sm text-gray-500">
                             {trans('all_modules_message')}
                         </p>
                         <ul role="list" className="py-2 grid grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-4 ">
                             {modules.map((m) => (
                                 <li key={m.name} className={`flow-root rounded-md px-2  bg-white`}>
-                                    <div className={`relative -m-2 p-2 flex items-center space-x-4 rounded-xl hover:bg-${theme}-100 focus-within:ring-2 focus-within:ring-${theme}-500`}>
+                                    <div className={`relative -m-2 p-2 flex items-center space-x-4 rounded-xl hover:bg-gray-100 focus-within:ring-2 focus-within:ring-gray-500`}>
                                         <div
                                             className={classNames(
                                                 'flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-lg'
                                             )}
                                         >
-                                            <img className={`rtl:ml-3 ltr:mr-3 rounded-md w-14 h-auto`} src={m.imageThumb} alt={m.name}/>
+                                            <img className={`rtl:ml-3 ltr:mr-3 rounded-md w-14 h-auto`} src={getImageThumb(m.image)} alt={m.name}/>
                                         </div>
                                         <div>
-                                            <h3 className={`text-sm font-medium text-${theme}-900`}>
+                                            <h3 className={`text-sm font-medium text-gray-900`}>
                                                 <Link href={m.main_menu ? `/backend/${m.name}/search` : `/backend/${m.name}`} className="focus:outline-none">
                                                     <span className="absolute inset-0" aria-hidden="true" />
                                                     {trans(pluralize(m.name))}
                                                 </Link>
                                             </h3>
-                                            <p className={`mt-1 text-sm text-${theme}-500`}>{m.description}</p>
+                                            <p className={`mt-1 text-sm text-gray-500`}>{m.description}</p>
                                         </div>
                                     </div>
                                 </li>
@@ -227,13 +230,13 @@ export default function BackendHomePage() {
                                         <div className="sm:flex sm:items-center sm:justify-between">
                                             <div className="sm:flex sm:space-x-5">
                                                 <div className="flex-shrink-0">
-                                                    <img className="mx-auto h-20 w-20 rounded-full" src={user.imageUrl}
+                                                    <img className="mx-auto h-20 w-20 rounded-full" src={getImageThumb(user.image)}
                                                          alt=""/>
                                                 </div>
                                                 <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
                                                     <p className="text-sm font-medium text-gray-600">Welcome back,</p>
-                                                    <p className="text-xl font-bold text-gray-900 sm:text-2xl">{user.name}</p>
-                                                    <p className="text-sm font-medium text-gray-600">{user.role}</p>
+                                                    <p className="text-xl font-bold text-gray-900 sm:text-2xl">{user[getLocalized('name')]}</p>
+                                                    <p className="text-sm font-medium text-gray-600">{user.role[getLocalized('name')]}</p>
                                                 </div>
                                             </div>
                                             <div className="mt-5 flex justify-center sm:mt-0">

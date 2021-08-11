@@ -12,16 +12,10 @@ class Timing extends PrimaryModel
     use HasFactory;
     protected $dates = ['created_at', 'updated_at'];
     protected $localeStrings = ['notes'];
-//    protected $with = ['day'];
     protected $guarded = [''];
     protected $casts = [
         'allow_multi_select' => 'boolean'
     ];
-
-    public function days()
-    {
-        return $this->belongsTo(Day::class);
-    }
 
     // timing can be attached to only one service if enable_global_service is false
     public function service()

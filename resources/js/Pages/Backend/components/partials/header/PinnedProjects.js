@@ -14,15 +14,15 @@ export default function PinnedProjects() {
             <ul className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4 sm:gap-6  my-1">
                 <li className="relative col-span-1 flex  rounded-md">
                     <div
-                        className={classNames(locale === 'ar' ? 'rounded-r-md' : 'rounded-l-md', `bg-${theme}-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
+                        className={classNames(locale === 'ar' ? 'rounded-r-md' : 'rounded-l-md', `bg-gray-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
                     >
                         {trans('products')}
                     </div>
                     <div
-                        className={classNames(locale === 'ar' ? 'rounded-l-md' : 'rounded-r-md', `flex flex-row items-center justify-between border-2 border-${theme}-50 shadow-md rounded-s-2 truncate`)}>
+                        className={classNames(locale === 'ar' ? 'rounded-l-md' : 'rounded-r-md', `flex flex-row items-center justify-between border-2 border-gray-50 shadow-md rounded-s-2 truncate`)}>
                         <div className="flex-1 px-4 py-2  truncate">
                             <Link href="#"
-                                  className={`text-${theme}-900 font-medium hover:text-${theme}-600`}>
+                                  className={`text-gray-900 font-medium hover:text-gray-600`}>
                                 {trans('control_of')} {trans('products')}
                             </Link>
                             <p className="text-gray-500">
@@ -33,7 +33,7 @@ export default function PinnedProjects() {
                             {({open}) => (
                                 <>
                                     <Menu.Button
-                                        className={`w-8 h-8 bg-white inline-flex items-center justify-center text-${theme}-400 rounded-full hover:text-${theme}-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}>
+                                        className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}>
                                         <span className="sr-only">Open options</span>
                                         <DotsVerticalIcon className="w-5 h-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -121,15 +121,15 @@ export default function PinnedProjects() {
                 {/*     users */}
                 <li className="relative col-span-1 flex  rounded-md">
                     <div
-                        className={classNames(locale === 'ar' ? 'rounded-r-md' : 'rounded-l-md', `bg-${theme}-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
+                        className={classNames(locale === 'ar' ? 'rounded-r-md' : 'rounded-l-md', `bg-gray-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
                     >
                         {trans('users')}
                     </div>
                     <div
-                        className={classNames(locale === 'ar' ? 'rounded-l-md' : 'rounded-r-md', `flex flex-row items-center justify-between border-2 border-${theme}-50 shadow-md rounded-s-2 truncate`)}>
+                        className={classNames(locale === 'ar' ? 'rounded-l-md' : 'rounded-r-md', `flex flex-row items-center justify-between border-2 border-gray-50 shadow-md rounded-s-2 truncate`)}>
                         <div className="flex-1 px-4 py-2  truncate">
                             <Link href="#"
-                                  className={`text-${theme}-900 font-medium hover:text-${theme}-600`}>
+                                  className={`text-gray-900 font-medium hover:text-gray-600`}>
                                 {trans('control_of')} {trans('users')}
                             </Link>
                             <p className="text-gray-500">
@@ -139,7 +139,7 @@ export default function PinnedProjects() {
                             {({open}) => (
                                 <>
                                     <Menu.Button
-                                        className={`w-8 h-8 bg-white inline-flex items-center justify-center text-${theme}-400 rounded-full hover:text-${theme}-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}>
+                                        className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}>
                                         <span className="sr-only">Open options</span>
                                         <DotsVerticalIcon className="w-5 h-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -229,15 +229,15 @@ export default function PinnedProjects() {
                 {/*     books */}
                 <li className="relative col-span-1 flex  rounded-md">
                     <div
-                        className={classNames(locale === 'ar' ? 'rounded-r-md' : 'rounded-l-md', `bg-${theme}-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
+                        className={classNames(locale === 'ar' ? 'rounded-r-md' : 'rounded-l-md', `bg-gray-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
                     >
                         {trans('books')}
                     </div>
                     <div
-                        className={classNames(locale === 'ar' ? 'rounded-l-md' : 'rounded-r-md', `flex flex-row items-center justify-between border-2 border-${theme}-50 shadow-md rounded-s-2 truncate`)}>
+                        className={classNames(locale === 'ar' ? 'rounded-l-md' : 'rounded-r-md', `flex flex-row items-center justify-between border-2 border-gray-50 shadow-md rounded-s-2 truncate`)}>
                         <div className="flex-1 px-4 py-2  truncate">
                             <Link href="#"
-                                  className={`text-${theme}-900 font-medium hover:text-${theme}-600`}>
+                                  className={`text-gray-900 font-medium hover:text-gray-600`}>
                                 {trans('control_of')} {trans('books')}
                             </Link>
                             <p className="text-gray-500"></p>
@@ -246,7 +246,7 @@ export default function PinnedProjects() {
                             {({open}) => (
                                 <>
                                     <Menu.Button
-                                        className={`w-8 h-8 bg-white inline-flex items-center justify-center text-${theme}-400 rounded-full hover:text-${theme}-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}>
+                                        className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}>
                                         <span className="sr-only">Open options</span>
                                         <DotsVerticalIcon className="w-5 h-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -318,15 +318,15 @@ export default function PinnedProjects() {
                 {/*     services */}
                 <li className="relative col-span-1 flex  rounded-md">
                     <div
-                        className={classNames(locale === 'ar' ? 'rounded-r-md' : 'rounded-l-md', `bg-${theme}-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
+                        className={classNames(locale === 'ar' ? 'rounded-r-md' : 'rounded-l-md', `bg-gray-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
                     >
                         {trans('services')}
                     </div>
                     <div
-                        className={classNames(locale === 'ar' ? 'rounded-l-md' : 'rounded-r-md', `flex flex-row items-center justify-between border-2 border-${theme}-50 shadow-md rounded-s-2 truncate`)}>
+                        className={classNames(locale === 'ar' ? 'rounded-l-md' : 'rounded-r-md', `flex flex-row items-center justify-between border-2 border-gray-50 shadow-md rounded-s-2 truncate`)}>
                         <div className="flex-1 px-4 py-2  truncate">
                             <Link href="#"
-                                  className={`text-${theme}-900 font-medium hover:text-${theme}-600`}>
+                                  className={`text-gray-900 font-medium hover:text-gray-600`}>
                                 {trans('control_of')} {trans('services')}
                             </Link>
                             <p className="text-gray-500"></p>
@@ -335,7 +335,7 @@ export default function PinnedProjects() {
                             {({open}) => (
                                 <>
                                     <Menu.Button
-                                        className={`w-8 h-8 bg-white inline-flex items-center justify-center text-${theme}-400 rounded-full hover:text-${theme}-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}>
+                                        className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}>
                                         <span className="sr-only">Open options</span>
                                         <DotsVerticalIcon className="w-5 h-5" aria-hidden="true"/>
                                     </Menu.Button>

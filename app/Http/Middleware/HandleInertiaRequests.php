@@ -40,21 +40,14 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            // Synchronously
-//            'appName' => config('app.name'),
-            // Lazily
             'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
                 return $q->with(['privileges' => function ($q) {
-                    return $q->orderBy('order', 'asc');
+                    return $q->orderBy('order', 'asc')->select('name_ar','name_en','index','main_menu','image');
                 }]);
             }])->first() : null,
-            'translations' => [
-                "en" => Lang::get('general', [], 'en'),
-                "ar" => Lang::get('general', [], 'ar'),
-            ],
             'settings' => fn () => Setting::first(),
-            'success' => session()->has('success') ? session()->get('success') : null,
-            'error' => session()->has('error') ? session()->get('error') : null,
+            'success' => fn () => $request->session()->get('success'),
+            'error' => fn () => $request->session()->get('error')
         ]);
     }
 }

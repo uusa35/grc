@@ -46,7 +46,6 @@ export default function ConfirmationModal() {
         setData('id', id);
         setShowConfirmationModal(!showConfirmationModal)
         setConfirmationModalResponse(!confirmationModalResponse)
-        console.log('model', modalAction)
         // Inertia.delete(route(`backend.${model}.${type}`, id))
         return destroy(route(`backend.${model}.${type}`, id));
     }
@@ -78,7 +77,7 @@ export default function ConfirmationModal() {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Dialog.Overlay className={`fixed inset-0 bg-${theme}-500 bg-opacity-75 transition-opacity`}/>
+                        <Dialog.Overlay className={`fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity`}/>
                     </Transition.Child>
                     {/* This element is to trick the browser into centering the modal contents. */}
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
@@ -97,7 +96,7 @@ export default function ConfirmationModal() {
                             className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
                             <div>
                                 <div
-                                    className={`mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-${theme}-100`}>
+                                    className={`mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-gray-100`}>
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none"
                                          viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -105,11 +104,11 @@ export default function ConfirmationModal() {
                                     </svg>
                                 </div>
                                 <div className="mt-3 text-center sm:mt-5">
-                                    <Dialog.Title as="h3" className={`text-lg leading-6 font-medium text-${theme}-900`}>
+                                    <Dialog.Title as="h3" className={`text-lg leading-6 font-medium text-gray-900`}>
                                         {confirmationModalMessage.title}
                                     </Dialog.Title>
                                     <div className="mt-2">
-                                        <p className={`text-sm text-${theme}-500`}>
+                                        <p className={`text-sm text-gray-500`}>
                                             {confirmationModalMessage.message}
                                         </p>
                                     </div>
@@ -118,7 +117,7 @@ export default function ConfirmationModal() {
                             <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                                 <button
                                     type="button"
-                                    className={`mt-3 w-full inline-flex justify-center rounded-md border border-${theme}-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-${theme}-700 hover:bg-${theme}-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500 sm:mt-0 sm:col-start-1 sm:text-sm`}
+                                    className={`mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:col-start-1 sm:text-sm`}
                                     onClick={() => handleCancel()}
                                     ref={cancelButtonRef}
                                 >
@@ -126,7 +125,7 @@ export default function ConfirmationModal() {
                                 </button>
                                 <button
                                     type="button"
-                                    className={classNames(modalAction.type === 'destroy' ? 'bg-red-800' : `bg-${theme}-600`, `w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-${theme}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500 sm:col-start-2 sm:text-sm`)}
+                                    className={classNames(modalAction.type === 'destroy' ? 'bg-red-800' : `bg-gray-600`, `w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:col-start-2 sm:text-sm`)}
                                     onClick={() => handleConfirm(modalAction.id)}
                                 >
                                     {trans('confirm')}

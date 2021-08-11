@@ -155,14 +155,14 @@ export default function SettingEdit({setting, themes}) {
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
                         <div className={`pt-4`}>
-                            <h3 className={`text-lg leading-6 font-medium text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
+                            <h3 className={`text-lg leading-6 font-medium text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1 text-sm text-gray-500">
                                 {trans('edit')} {trans(parentModule)}
                             </p>
                         </div>
                         <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
                             <div className="sm:col-span-3">
-                                <label htmlFor="name_ar" className={`block text-sm font-medium text-${theme}-700`}>
+                                <label htmlFor="name_ar" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('name_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -174,17 +174,17 @@ export default function SettingEdit({setting, themes}) {
                                         defaultValue={setting.name_ar}
                                         id="name_ar"
                                         autoComplete="name_ar"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
 
                             <div className="sm:col-span-3">
-                                <label htmlFor="name_en" className={`block text-sm font-medium text-${theme}-700`}>
+                                <label htmlFor="name_en" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('name_en')}
                                 </label>
                                 <div className="mt-1">
@@ -196,17 +196,17 @@ export default function SettingEdit({setting, themes}) {
                                         defaultValue={setting.name_en}
                                         id="name_en"
                                         autoComplete="name_en"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
                             </div>
 
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="whatsapp" className={`block text-sm font-medium text-${theme}-700`}>
+                                <label htmlFor="whatsapp" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('whatsapp')}
                                 </label>
                                 <div className="mt-1">
@@ -217,17 +217,17 @@ export default function SettingEdit({setting, themes}) {
                                         defaultValue={setting.whatsapp}
                                         id="whatsapp"
                                         autoComplete="whatsapp"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_whatsapp_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.whatsapp && <div className={`text-red-600`}>{errors.whatsapp}</div>}
                                 </p>
                             </div>
 
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="mobile" className={`block text-sm font-medium text-${theme}-700`}>
+                                <label htmlFor="mobile" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('mobile')}
                                 </label>
                                 <div className="mt-1">
@@ -238,17 +238,17 @@ export default function SettingEdit({setting, themes}) {
                                         defaultValue={setting.mobile}
                                         id="mobile"
                                         autoComplete="mobile"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_mobile_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.mobile && <div className={`text-red-600`}>{errors.mobile}</div>}
                                 </p>
                             </div>
 
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="email" className={`block text-sm font-medium text-${theme}-700`}>
+                                <label htmlFor="email" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('email')}
                                 </label>
                                 <div className="mt-1">
@@ -259,18 +259,18 @@ export default function SettingEdit({setting, themes}) {
                                         defaultValue={setting.email}
                                         id="email"
                                         autoComplete="email"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_email_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.email && <div className={`text-red-600`}>{errors.email}</div>}
                                 </p>
                             </div>
 
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center">
@@ -280,7 +280,7 @@ export default function SettingEdit({setting, themes}) {
                                         name="image"
                                         id="main_image"
                                         autoComplete="main_image"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                     <img className={`h-24 w-20 bg-cover rounded-md`} src={setting.imageThumb} alt=""/>
                                 </div>
@@ -288,13 +288,13 @@ export default function SettingEdit({setting, themes}) {
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('more_images')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center">
@@ -305,7 +305,7 @@ export default function SettingEdit({setting, themes}) {
                                         name="images"
                                         id="more_images"
                                         autoComplete="more_images"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                     {
                                         setting.images &&
@@ -317,7 +317,7 @@ export default function SettingEdit({setting, themes}) {
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
                                 </p>
                             </div>
@@ -334,7 +334,7 @@ export default function SettingEdit({setting, themes}) {
                                         name="theme"
                                         defaultValue={data.theme}
                                         autoComplete="theme"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     >
                                         {
                                             themes.map(u => (
@@ -345,7 +345,7 @@ export default function SettingEdit({setting, themes}) {
                                     </select>
                                 </div>
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.theme && <div className={`text-red-600`}>{errors.theme}</div>}
                                 </p>
                             </div>
@@ -359,7 +359,7 @@ export default function SettingEdit({setting, themes}) {
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
 
                         <div className={`pt-4`}>
-                            <h3 className={`text-lg leading-6 font-medium text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
+                            <h3 className={`text-lg leading-6 font-medium text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1 text-sm text-gray-500">
                                 {trans('edit')} {trans(parentModule)}
                             </p>
@@ -368,7 +368,7 @@ export default function SettingEdit({setting, themes}) {
                         <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('description_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -377,19 +377,19 @@ export default function SettingEdit({setting, themes}) {
                                              id="description_ar"
                                              name="description_ar"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                              defaultValue={setting.description_ar}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('product_description_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.description_ar &&
                                     <div className={`text-red-600`}>{errors.description_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_en"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('description_en')}
                                 </label>
                                 <div className="mt-1">
@@ -398,12 +398,12 @@ export default function SettingEdit({setting, themes}) {
                                              id="description_en"
                                              name="description_en"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                              defaultValue={setting.description_en}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('product_description_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.description_en &&
                                     <div className={`text-red-600`}>{errors.description_en}</div>}
                                 </p>
@@ -412,7 +412,7 @@ export default function SettingEdit({setting, themes}) {
                             {/* policy */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="policy_ar"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('policy_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -421,19 +421,19 @@ export default function SettingEdit({setting, themes}) {
                                              id="policy_ar"
                                              name="policy_ar"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                              defaultValue={setting.policy_ar}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('policy_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.policy_ar &&
                                     <div className={`text-red-600`}>{errors.policy_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="policy_en"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('policy_en')}
                                 </label>
                                 <div className="mt-1">
@@ -442,12 +442,12 @@ export default function SettingEdit({setting, themes}) {
                                              id="policy_en"
                                              name="policy_en"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                              defaultValue={setting.policy_en}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('policy_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.policy_en &&
                                     <div className={`text-red-600`}>{errors.policy_en}</div>}
                                 </p>
@@ -456,7 +456,7 @@ export default function SettingEdit({setting, themes}) {
                             {/* terms */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="terms_ar"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('terms_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -465,19 +465,19 @@ export default function SettingEdit({setting, themes}) {
                                              id="terms_ar"
                                              name="terms_ar"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                              defaultValue={setting.terms_ar}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('terms_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.terms_ar &&
                                     <div className={`text-red-600`}>{errors.terms_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="terms_en"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('terms_en')}
                                 </label>
                                 <div className="mt-1">
@@ -486,12 +486,12 @@ export default function SettingEdit({setting, themes}) {
                                              id="terms_en"
                                              name="terms_en"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                              defaultValue={setting.terms_en}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('terms_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.terms_en &&
                                     <div className={`text-red-600`}>{errors.terms_en}</div>}
                                 </p>
@@ -499,7 +499,7 @@ export default function SettingEdit({setting, themes}) {
 
                             {/* notes */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_ar" className={`block text-sm font-medium text-${theme}-700`}>
+                                <label htmlFor="notes_ar" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('shipment_notes_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -508,19 +508,19 @@ export default function SettingEdit({setting, themes}) {
                                              id="shipment_notes_ar"
                                              name="shipment_notes_ar"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                              defaultValue={setting.shipment_notes_ar}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('setting_shipment_notes')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.shipment_notes_ar &&
                                     <div className={`text-red-600`}>{errors.shipment_notes_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="shipment_notes_en"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('shipment_notes_en')}
                                 </label>
                                 <div className="mt-1">
@@ -529,12 +529,12 @@ export default function SettingEdit({setting, themes}) {
                                              id="shipment_notes_en"
                                              name="shipment_notes_en"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                              defaultValue={setting.shipment_notes_en}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('setting_shipment_notes')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.shipment_notes_en &&
                                     <div className={`text-red-600`}>{errors.shipment_notes_en}</div>}
                                 </p>
@@ -542,7 +542,7 @@ export default function SettingEdit({setting, themes}) {
                             {/* caption */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_ar"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('caption_ar')}
                                 </label>
                                 <div className="mt-1 ">
@@ -554,17 +554,17 @@ export default function SettingEdit({setting, themes}) {
                                         defaultValue={setting.caption_ar}
                                         id="caption_ar"
                                         autoComplete="caption_ar"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_en"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('caption_en')}
                                 </label>
                                 <div className="mt-1 ">
@@ -576,18 +576,18 @@ export default function SettingEdit({setting, themes}) {
                                         defaultValue={setting.caption_en}
                                         id="caption_en"
                                         autoComplete="caption_en"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
                             {/* keywords */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="keywords"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('keywords')}
                                 </label>
                                 <div className="mt-1">
@@ -599,18 +599,18 @@ export default function SettingEdit({setting, themes}) {
                                         defaultValue={setting.keywords}
                                         id="keywords"
                                         autoComplete="keywords"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
                                 </p>
                             </div>
                             {/* size chart*/}
                             <div className="sm:col-span-3">
                                 <label htmlFor="size_chart_image"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('size_chart_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center">
@@ -620,7 +620,7 @@ export default function SettingEdit({setting, themes}) {
                                         name="size_chart_image"
                                         id="size_chart_image"
                                         autoComplete="size_chart_image"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                     <img className={`h-20 w-20 bg-cover rounded-md`}
                                          src={getImageThumb(setting.size_chart_image)}
@@ -630,7 +630,7 @@ export default function SettingEdit({setting, themes}) {
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.size_chart_image &&
                                     <div className={`text-red-600`}>{errors.size_chart_image}</div>}
                                 </p>
@@ -639,7 +639,7 @@ export default function SettingEdit({setting, themes}) {
                             {/*    app_logo */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="app_logo"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('app_logo')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center">
@@ -649,7 +649,7 @@ export default function SettingEdit({setting, themes}) {
                                         name="app_logo"
                                         id="app_logo"
                                         autoComplete="app_logo"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                     <img className={`h-20 w-20 bg-cover rounded-md`}
                                          src={getImageThumb(setting.app_logo)}
@@ -659,7 +659,7 @@ export default function SettingEdit({setting, themes}) {
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('app_logo_best_fit')}
                                 </p>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.app_logo && <div className={`text-red-600`}>{errors.app_logo}</div>}
                                 </p>
                             </div>
@@ -667,7 +667,7 @@ export default function SettingEdit({setting, themes}) {
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('qr')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center">
@@ -677,7 +677,7 @@ export default function SettingEdit({setting, themes}) {
                                         name="qr"
                                         id="qr"
                                         autoComplete="qr"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                     <img className={`h-20 w-20 bg-cover rounded-md`} src={getImageThumb(setting.qr)}
                                          alt=""/>
@@ -686,7 +686,7 @@ export default function SettingEdit({setting, themes}) {
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('qr_best_fit')}
                                 </p>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
                                 </p>
                             </div>
@@ -694,7 +694,7 @@ export default function SettingEdit({setting, themes}) {
                             {/*    shipment prices image */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="shipment_prices"
-                                       className={`block text-sm font-medium text-${theme}-700`}>
+                                       className={`block text-sm font-medium text-gray-700`}>
                                     {trans('shipment_prices')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center">
@@ -704,7 +704,7 @@ export default function SettingEdit({setting, themes}) {
                                         name="shipment_prices"
                                         id="shipment_prices"
                                         autoComplete="shipment_prices"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                     <img className={`h-20 w-20 bg-cover rounded-md`}
                                          src={getImageThumb(setting.shipment_prices)}
@@ -714,7 +714,7 @@ export default function SettingEdit({setting, themes}) {
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('shipment_prices_best_fit')}
                                 </p>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.shipment_prices &&
                                     <div className={`text-red-600`}>{errors.shipment_prices}</div>}
                                 </p>
@@ -762,7 +762,7 @@ export default function SettingEdit({setting, themes}) {
                                                     name="images"
                                                     id="more_images"
                                                     autoComplete="more_images"
-                                                    className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                                    className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                                 />
                                             </p>
                                         </div>

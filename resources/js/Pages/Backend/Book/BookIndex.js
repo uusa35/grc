@@ -20,6 +20,8 @@ export default function BookIndex({elements}) {
         colName,
         sortDesc,
         handleSort,
+        getLocalized,
+        getImageThumb
     } = useContext(BackendContext);
     const [currentData, setCurrentData] = useState();
 
@@ -42,10 +44,10 @@ export default function BookIndex({elements}) {
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-${theme}-600` : 'bg-blue-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
+                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead
-                                    className={classNames(true ? `bg-${theme}-300` : '', "text-black font-extrabold uppercase")}>
+                                    className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold uppercase")}>
                                 <tr>
                                     <th
                                         scope="col"
@@ -66,12 +68,12 @@ export default function BookIndex({elements}) {
                                             </svg>}
                                         {trans('id')}
                                     </th>
-                                    <th
-                                        scope="col"
-                                        className=" px-3 py-3 rtl:text-right ltr:text-left"
-                                    >
-                                        {trans('main_image')}
-                                    </th>
+                                    {/*<th*/}
+                                    {/*    scope="col"*/}
+                                    {/*    className=" px-3 py-3 rtl:text-right ltr:text-left"*/}
+                                    {/*>*/}
+                                    {/*    {trans('main_image')}*/}
+                                    {/*</th>*/}
                                     <th
                                         scope="col"
                                         className="py-3 rtl:text-right ltr:text-left"
@@ -159,23 +161,32 @@ export default function BookIndex({elements}) {
                                     currentData && currentData.map(element =>
                                         <tr className={'bg-white border-b border-gray-100'} key={element.id}>
                                             <td className="px-3 py-4 whitespace-nowrap font-medium text-gray-900">{element.id}</td>
-                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">
-                                                <img className="w-14 h-14  object-contain rounded-md shadow-inner"
-                                                     src={element.imageThumb} alt={element.name}/>
-                                            </td>
+                                            {/*<td className="px-3 py-4 whitespace-nowrap text-gray-500">*/}
+                                            {/*    <img className="w-14 h-14  object-contain rounded-md shadow-inner"*/}
+                                            {/*         src={getImageThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
+                                            {/*</td>*/}
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
-                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500 flex flex-row items-center">
-                                                <ActiveDot active={element.active} />
-                                                {element.name}
+                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">
+                                                <div className="flex items-center space-x-3 lg:pl-2">
+                                                    <ActiveDot active={element.active} />
+                                                    {element[getLocalized('name')]}
+                                                </div>
+                                                <div
+                                                    className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
+                                                    <span
+                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale  ? 'green' : 'red'}-100 text-gray-800`}>
+                                                            {trans('on_sale')}
+                                                          </span>
+                                                </div>
                                             </td>
                                             <td className=" px-6 py-4 whitespace-nowrap text-right font-medium">
-                                                <div key={element.name}
+                                                <div key={element[getLocalized('name')]}
                                                      className="relative flex justify-center items-center rounded-full shadow-md w-12 h-12">
                                                     <Menu as="div" className="abflex-shrink-0 z-60">
                                                         {({open}) => (
                                                             <>
                                                                 <Menu.Button
-                                                                    className={`w-8 h-8 bg-white inline-flex items-center justify-center text-${theme}-400 rounded-full hover:text-${theme}-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}>
+                                                                    className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}>
                                                                             <span
                                                                                 className="sr-only">Open options</span>
                                                                     <DotsVerticalIcon className="w-5 h-5"
@@ -289,8 +300,7 @@ export default function BookIndex({elements}) {
                                                     element.user && <Link
                                                         href={route('backend.user.edit', element.user.id)}
                                                     >
-                                                        <LocalizedText length={10} en={element.user.name}
-                                                                       ar={element.user.name}/>
+                                                        {element.user[getLocalized('name')]}
                                                     </Link>
                                                 }
                                             </td>

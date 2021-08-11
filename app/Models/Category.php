@@ -10,8 +10,8 @@ class Category extends PrimaryModel
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [''];
-    public $localeStrings = ['name', 'caption', 'description'];
-    public $appends = ['name', 'caption', 'description'];
+//    public $localeStrings = ['name', 'caption', 'description'];
+//    public $appends = ['name', 'caption', 'description'];
 //    protected $casts = [
 //        'is_classified' => 'boolean',
 //        'is_real_estate' => 'boolean',

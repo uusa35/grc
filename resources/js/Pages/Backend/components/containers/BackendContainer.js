@@ -32,6 +32,7 @@ const BackendContainer = ({
         currentBreadCrumbs,
         setCurrentRoute,
         locale,
+        getImageThumb
     } = useContext(BackendContext);
     const {settings} = useContext(GlobalContext);
 
@@ -42,12 +43,13 @@ const BackendContainer = ({
 
     useEffect(() => {
         Inertia.on('before', (e) => {
+            // toggleIsLoading(true);
         })
         Inertia.on('start', (e) => {
-            toggleIsLoading(true);
+            // toggleIsLoading(true);
         })
         Inertia.on('finish', (e) => {
-            toggleIsLoading(false);
+            // setTimeout(() => toggleIsLoading(false), 2000);
         });
         Inertia.on('navigate', (e) => {
             const currentRoute = route().current();
@@ -55,18 +57,16 @@ const BackendContainer = ({
             setParentModule(breadCrumbs[1]);
             setCurrentBreadCrumbs(breadCrumbs);
             setCurrentRoute(currentRoute)
-            toggleIsLoading(true);
+            // toggleIsLoading(true);
         })
     }, [])
 
-    console.log('isLoading', isLoading);
-
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-            <Head title={`${pluralize(capitalize(parentModule))} :: ${settings?.name}`}>
-                <meta head-key="description" name="description" content={settings.description}/>
-                <link rel="icon" type="image/svg+xml" href={settings.imageThumb}/>
-            </Head>
+            {/*<Head title={`${pluralize(capitalize(parentModule))} :: ${settings?.name_en}`}>*/}
+            {/*    <meta head-key="description" name="description" content={settings.description_en}/>*/}
+            {/*    <link rel="icon" type="image/svg+xml" href={getImageThumb(settings.image)}/>*/}
+            {/*</Head>*/}
             <SideBar/>
             <ConfirmationModal/>
             <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-gray-100">
@@ -86,8 +86,8 @@ const BackendContainer = ({
                             }
                             {!isEmpty(elements?.data) && showMobileView &&
                             <TableMobileview elements={elements} tableName={childModule}/>}
-                            {isLoading ? <LoadingView/> : children}
-                            {/*{children}*/}
+                            {/*{isLoading ? <LoadingView/> : children}*/}
+                            {children}
                             <NoElements display={showNoElements}/>
                             {
                                 !isEmpty(elements?.data) && elements.total > 1 && parentModule &&

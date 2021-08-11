@@ -11,16 +11,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, ModelHelpers, UserHelpers, SoftDeletes, LocaleTrait, HasEvents;
+    use HasFactory, Notifiable, ModelHelpers, UserHelpers, SoftDeletes, HasEvents;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $guarded = [''];
-    protected $localeStrings = ['name', 'description', 'service', 'policy', 'address', 'caption'];
+//    protected $localeStrings = ['name', 'description', 'service', 'policy', 'address', 'caption'];
     protected $dates = ['created_at', 'deleted_at',  'end_subscription_date'];
-    protected $appends = ['imageThumb', 'imageLarge', 'address', 'name', 'description'];
+//    protected $appends = ['address', 'name', 'description'];
 
     /**
      * The attributes that should be hidden for arrays.

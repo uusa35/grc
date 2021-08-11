@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Setting extends PrimaryModel
 {
     use HasFactory;
-    protected $localeStrings = ['name','caption','address', 'country', 'description', 'shipment_notes', 'policy', 'terms'];
+//    protected $localeStrings = ['name','caption','address', 'country', 'description', 'shipment_notes', 'policy', 'terms'];
     protected $guarded = [''];
-    protected $appends = ['name','caption','country','address','description','imageThumb'];
+//    protected $appends = ['name','caption','country','address','description','imageThumb'];
 
     public function images()
     {

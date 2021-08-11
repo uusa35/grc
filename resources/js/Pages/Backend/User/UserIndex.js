@@ -20,6 +20,8 @@ export default function UserIndex({elements}) {
         colName,
         sortDesc,
         handleSort,
+        getImageThumb,
+        getLocalized
     } = useContext(BackendContext);
     const [currentData, setCurrentData] = useState();
 
@@ -42,15 +44,15 @@ export default function UserIndex({elements}) {
                 <div className=" overflow-visible">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-${theme}-600` : 'bg-blue-600', "shadow border-b border-gray-200 sm:rounded-lg")}>
+                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b border-gray-200 sm:rounded-lg")}>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead
-                                    className={classNames(true ? `bg-${theme}-300` : '', "text-black font-extrabold  uppercase")}>
+                                    className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold  uppercase")}>
                                 <tr>
                                     <th
                                         scope="col"
                                         className="px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left   uppercase tracking-wider tracking-wider"
-                                        onClick={() => handleSort('id')} x
+                                        onClick={() => handleSort('id')}
                                     >
                                         {sortDesc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
@@ -66,30 +68,32 @@ export default function UserIndex({elements}) {
                                             </svg>}
                                         {trans('id')}
                                     </th>
+                                    {/*<th*/}
+                                    {/*    scope="col"*/}
+                                    {/*    className=" px-3 py-3 rtl:text-right ltr:text-left"*/}
+                                    {/*>*/}
+                                    {/*    {trans('main_image')}*/}
+                                    {/*</th>*/}
                                     <th
                                         scope="col"
-                                        className=" px-3 py-3 rtl:text-right ltr:text-left"
-                                    >
-                                        {trans('main_image')}
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className=" px-3 py-3 flex flex-1 flex-row justify-start items-center rtl:text-right ltr:text-left"
+                                        className=" px-3 py-3  rtl:text-right ltr:text-left"
                                         onClick={() => handleSort('name')}
                                     >
-                                        {sortDesc ?
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
-                                                      d="M5 15l7-7 7 7"/>
-                                            </svg>
-                                            :
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
-                                                      d="M19 9l-7 7-7-7"/>
-                                            </svg>}
-                                        {trans('name')}
+                                        <div className="flex flex-row justify-start items-center">
+                                            {sortDesc ?
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
+                                                          d="M5 15l7-7 7 7"/>
+                                                </svg>
+                                                :
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
+                                                          d="M19 9l-7 7-7-7"/>
+                                                </svg>}
+                                            {trans('name')}
+                                        </div>
                                     </th>
                                     <th
                                         scope="col"
@@ -110,33 +114,33 @@ export default function UserIndex({elements}) {
                                     isArray(currentData) && map(currentData, element =>
                                         <tr className={'bg-white border-b border-gray-100'} key={element.id}>
                                             <td className="px-3 py-4 whitespace-nowrap  font-medium text-gray-900">{element.id}</td>
-                                            <td className="px-3 py-4 whitespace-nowrap  text-gray-500">
-                                                <img className="w-14 h-14  object-contain rounded-md shadow-inner"
-                                                     src={element.imageThumb} alt={element.name}/>
-                                            </td>
+                                            {/*<td className="px-3 py-4 whitespace-nowrap  text-gray-500">*/}
+                                            {/*    <img className="w-14 h-14  object-contain rounded-md shadow-inner"*/}
+                                            {/*         src={getImageThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
+                                            {/*</td>*/}
                                             <td className="px-3 py-4 whitespace-nowrap  text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
                                                     <div
                                                         className={classNames(element.active ? 'bg-green-600' : 'bg-gray-600', 'flex-shrink-0 w-2.5 h-2.5 rtl:ml-3 ltr:mr-3 rounded-full')}
                                                         aria-hidden="true"></div>
-                                                    {element.name}
+                                                    {element[getLocalized('name')]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
                                                         <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${theme}-100 text-${theme}-800`}>
-                                                            {element.role.name}
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-100 text-gray-800`}>
+                                                            {element.role[getLocalized('name')]}
                                                           </span>
                                                 </div>
                                             </td>
                                             <td className=" px-6 py-4 whitespace-nowrap text-right  font-medium">
-                                                <div key={element.name}
+                                                <div key={element[getLocalized('name')]}
                                                      className="relative flex justify-center items-center rounded-full shadow-md w-12 h-12">
                                                     <Menu as="div" className="abflex-shrink-0 z-60">
                                                         {({open}) => (
                                                             <>
                                                                 <Menu.Button
-                                                                    className={`w-8 h-8 bg-white inline-flex items-center justify-center text-${theme}-400 rounded-full hover:text-${theme}-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}>
+                                                                    className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}>
                                                                             <span
                                                                                 className="sr-only">Open options</span>
                                                                     <DotsVerticalIcon className="w-5 h-5"

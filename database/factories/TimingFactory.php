@@ -29,13 +29,12 @@ class TimingFactory extends Factory
     {
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
-            'date' => $this->faker->date(),
-            'start' => $this->faker->randomElement(['10:00', '15:00', '20:00']),
-            'end' => $this->faker->randomElement(['12:00', '17:00', '22:00']),
+            'date' => $this->faker->date('Y-m-d', '30 years'),
+            'start' => $this->faker->time('H:i', 'now'),
+            'end' => $this->faker->time('H:i', 'now'),
             'allow_multi_select' => $this->faker->boolean,
             'notes_ar' => $this->faker->name,
             'notes_en' => $fakerAr->name,
-            'day_id' => Day::all()->random()->id,
             'service_id' => Service::all()->random()->id,
             'order' => $this->faker->randomNumber()
         ];

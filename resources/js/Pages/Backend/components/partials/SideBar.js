@@ -32,7 +32,7 @@ const navigation = [
 ]
 
 const SideBar = () => {
-    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules } = useContext(BackendContext);
+    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules , getImageThumb } = useContext(BackendContext);
     const {settings, auth} = useContext(GlobalContext);
 
     return (
@@ -361,7 +361,7 @@ const SideBar = () => {
                                                     )}
                                                     aria-current={'page'}
                                                 >
-                                                    <img className={`w-6 h-6 mx-2 rounded-full`} src={m.imageThumb}/>
+                                                    <img className={`w-6 h-6 mx-2 rounded-full`} src={getImageThumb(m.image)}/>
                                                     {trans(pluralize(m.name))}
                                                 </Link> : null
                                         }

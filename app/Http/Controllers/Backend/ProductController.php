@@ -32,9 +32,26 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $elements = Product::with('product_attributes', 'color', 'size', 'user')->whereHas('user', function ($q) {
-            return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
-        })->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page','_token']));
+        $elements = Product::with('product_attributes', 'color', 'size')
+            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id', 'name')])
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)
+            ->withQueryString()->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+                'created_at' => $element->created_at,
+                'price' => $element->price,
+                'active' => $element->active,
+                'image' => $element->image,
+                'sku' => $element->sku,
+                'has_attributes' => $element->has_attributes,
+                'on_sale' => $element->on_sale,
+                'user' => $element->user->only('id', 'name_ar', 'name_en'),
+                'color' => $element->color->only('name_ar', 'name_en'),
+                'size' => $element->size->only('name_ar', 'name_en'),
+                'product_attributes' => $element->product_attributes->only('id', 'color_id', 'size_id', 'color.name', 'size.name'),
+            ]);
         return inertia('Backend/Product/ProductIndex', compact('elements'));
     }
 
@@ -45,9 +62,26 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return inertia('Backend/Product/ProductIndex', $validator->errors()->all());
         }
-        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size', 'user')->whereHas('user', function ($q) {
-            return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
-        })->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page','_token']));
+        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size')
+            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)
+            ->withQueryString()->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+                'created_at' => $element->created_at,
+                'price' => $element->price,
+                'active' => $element->active,
+                'image' => $element->image,
+                'sku' => $element->sku,
+                'has_attributes' => $element->has_attributes,
+                'on_sale' => $element->on_sale,
+                'user' => $element->user->only('id', 'name_ar', 'name_en'),
+                'color' => $element->color->only('name_ar', 'name_en'),
+                'size' => $element->size->only('name_ar', 'name_en'),
+                'product_attributes' => $element->product_attributes->only('id', 'color_id', 'size_id', 'color.name', 'size.name'),
+            ]);
         return inertia('Backend/Product/ProductIndex', compact('elements'));
     }
 
@@ -58,16 +92,15 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $users = User::active()->hasMerchantBehaviour()->with('role')->get();
+        $users = User::active()->hasMerchantBehaviour()->with('role')->select('id', 'name_ar', 'name_en');
         $sizes = Size::active()->get();
         $colors = Color::active()->get();
         $brands = Brand::active()->get();
-        $categories = Category::onlyParent()->onlyForProducts()->with(['children' => function ($q) {
-            return $q->onlyForProducts()->with(['children' => function ($q) {
-                return $q->onlyForProducts();
-            }]);
-        }])->get();
-        return inertia('Backend/Product/ProductCreate', compact('users', 'sizes', 'colors', 'categories','brands'));
+        $categories = Category::onlyParent()->onlyForProducts()
+            ->with(['children' => fn($q) => $q->onlyForProducts()
+                ->with(['children' => fn($q) => $q->onlyForProducts()])
+            ])->get();
+        return inertia('Backend/Product/ProductCreate', compact('users', 'sizes', 'colors', 'categories', 'brands'));
     }
 
     /**
@@ -87,7 +120,7 @@ class ProductController extends Controller
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($element, $request, ['size_chart_image'], ['1080', '1440'], false) : null;
-            $request->hasFile('file') ? $this->savePath($element,$request,'file') : null;
+            $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             return redirect()->route('backend.product.edit', $element->id)->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.create')->with('error', trans('general.process_failure'));
@@ -124,7 +157,7 @@ class ProductController extends Controller
         }])->get();
         $product = $product->whereId($product->id)->with('images', 'user', 'categories')->first();
         $elementCategories = $product->categories->pluck('id')->toArray();
-        return inertia('Backend/Product/ProductEdit', compact('users', 'sizes', 'colors', 'categories', 'product', 'elementCategories','brands'));
+        return inertia('Backend/Product/ProductEdit', compact('users', 'sizes', 'colors', 'categories', 'product', 'elementCategories', 'brands'));
     }
 
     /**
@@ -144,7 +177,7 @@ class ProductController extends Controller
             $request->hasFile('image') ? $this->saveMimes($product, $request, ['image'], ['1080', '1440'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($product, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($product, $request, ['size_chart_image'], ['1080', '1440'], false) : null;
-            $request->hasFile('file') ? $this->savePath($product,$request,'file') : null;
+            $request->hasFile('file') ? $this->savePath($product, $request, 'file') : null;
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.edit', $product->id)->with('error', trans('general.process_failure'));
@@ -162,7 +195,7 @@ class ProductController extends Controller
             $product->product_attributes()->delete();
             $product->images()->delete();
             $product->slides()->delete();
-            $product->tags()->detach([],true);
+            $product->tags()->detach([], true);
             $product->favorites()->delete();
             $product->categories()->detach([], true);
             $product->comments()->delete();

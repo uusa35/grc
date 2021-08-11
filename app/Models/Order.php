@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Order extends PrimaryModel
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Notifiable;
     protected $guarded = [''];
     protected $casts = [
         'shipment_fees' => 'float',
@@ -18,7 +18,6 @@ class Order extends PrimaryModel
         'receive_on_branch' => 'boolean',
         'multi_cart_merchant' => 'boolean'
     ];
-    use SoftDeletes, Notifiable;
 
     /**
      * Order OrderMeta
@@ -77,11 +76,6 @@ class Order extends PrimaryModel
     public function Questionnaire()
     {
         return $this->belongsTo(Questionnaire::class);
-    }
-
-    public function getIsQuestionnaireAttribute()
-    {
-        return is_null($this->questionnaire_id);
     }
 
     public function scopePaid($q)

@@ -40,10 +40,10 @@ export default function ImagesList({images}) {
                 ))}
             </ul>
                 : <div
-                    className={`bg-${theme}-50 border-l-4 border-${theme}-800 p-4 sm:w-full lg:w-3/4 m-auto my-2 shadow-lg rounded-md m-10`}>
+                    className={`bg-gray-50 border-l-4 border-gray-800 p-4 sm:w-full lg:w-3/4 m-auto my-2 shadow-lg rounded-md m-10`}>
                     <div className="flex items-center">
                         <div className="flex-shrink-0">
-                            <svg className={`h-9 w-9 m-3 text-${theme}-400" xmlns="http://www.w3.org/2000/svg`}
+                            <svg className={`h-9 w-9 m-3 text-gray-400" xmlns="http://www.w3.org/2000/svg`}
                                  viewBox="0 0 20 20"
                                  fill="currentColor" aria-hidden="true">
                                 <path fillRule="evenodd"
@@ -53,7 +53,7 @@ export default function ImagesList({images}) {
                         </div>
                         <div className="ml-3">
                             <h3 className="mb-3 font-extrabold text-lgn">{trans('alert')}</h3>
-                            <p className={`text-sm text-${theme}-700`}>
+                            <p className={`text-sm text-gray-700`}>
                                 {trans('no_elements')}
                             </p>
                         </div>

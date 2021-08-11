@@ -9,7 +9,7 @@ class Privilege extends PrimaryModel
 {
     use HasFactory;
     protected $guarded = [''];
-    protected $appends = [ 'imageThumb','description','name'];
+//    protected $appends = [ 'imageThumb','description','name'];
 
     public function roles()
     {

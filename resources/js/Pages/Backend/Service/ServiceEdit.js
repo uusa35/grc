@@ -23,9 +23,10 @@ export default function ServiceEdit({users, categories, service, elementCategori
         theme,
         currentFormTab,
         parentModule,
-        getImageThumb,
         getFileUrl,
-        isAdminOrAbove
+        isAdminOrAbove,
+        getLocalized,
+        getImageThumb,
     } = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': service.sku,
@@ -137,14 +138,14 @@ export default function ServiceEdit({users, categories, service, elementCategori
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
+                            <h3 className={` leading-6 font-medium text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-red-500">
                                 {trans('all_information_required')}
                             </p>
                         </div>
                         <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
                             <div className="sm:col-span-3">
-                                <label htmlFor="name_ar" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="name_ar" className={`block  font-medium text-gray-700`}>
                                     {trans('name_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -156,17 +157,17 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.name_ar}
                                         id="name_ar"
                                         autoComplete="name_ar"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_price_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
 
                             <div className="sm:col-span-3">
-                                <label htmlFor="name_en" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="name_en" className={`block  font-medium text-gray-700`}>
                                     {trans('name_en')}
                                 </label>
                                 <div className="mt-1">
@@ -178,17 +179,17 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.name_en}
                                         id="name_en"
                                         autoComplete="name_en"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_price_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
                             </div>
 
                             <div className="sm:col-span-2">
-                                <label htmlFor="price" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="price" className={`block  font-medium text-gray-700`}>
                                     {trans('price')}
                                 </label>
                                 <div className="mt-1">
@@ -201,18 +202,18 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.price}
                                         id="price"
                                         autoComplete="price"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_price_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
                                 </p>
                             </div>
 
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="sale_price"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('sale_price')}
                                 </label>
                                 <div className="mt-1 ">
@@ -225,18 +226,18 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.sale_price}
                                         id="sale_price"
                                         autoComplete="sale_price"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_sale_price_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
                                 </p>
                             </div>
 
                             {/* sku*/}
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="sku" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="sku" className={`block  font-medium text-gray-700`}>
                                     {trans('sku')}
                                 </label>
                                 <div className="mt-1">
@@ -248,11 +249,11 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.sku}
                                         id="sku"
                                         autoComplete="sku"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_sku_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
                                 </p>
                             </div>
@@ -269,25 +270,25 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         name="user_id"
                                         value={data.user_id}
                                         autoComplete="user_id"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
                                         {
                                             map(users, u => (
                                                 <option key={u.id} value={u.id}
-                                                >{u.name}</option>
+                                                >{u[getLocalized('name')]}</option>
                                             ))
                                         }
                                     </select>
                                 </div>
                                 <ToolTipWidget message={trans('service_user_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
                                 </p>
                             </div>
                             {/* cateogiries */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('categories')}
                                 </label>
                                 <div>
@@ -297,7 +298,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                             {
                                                 map(categories, c => (
                                                     <div
-                                                        className={`flex flex-col flex-1 space-y-4 mt-4 flex-wrap border-r border-b border-${theme}-200 p-2`}
+                                                        className={`flex flex-col flex-1 space-y-4 mt-4 flex-wrap border-r border-b border-gray-200 p-2`}
                                                         key={c.id}>
                                                         <div className="relative flex items-start">
                                                             <div className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
@@ -314,8 +315,8 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                             </div>
                                                             <div className="ltr:ml-3 ">
                                                                 <label htmlFor="categories"
-                                                                       className={`font-extrabold text-${theme}-900 border-b border-${theme}-400`}>
-                                                                    {c.name}
+                                                                       className={`font-extrabold text-gray-900 border-b border-gray-400`}>
+                                                                    {c[getLocalized('name')]}
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -338,8 +339,8 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                                         </div>
                                                                         <div className="ltr:ml-3 ">
                                                                             <label htmlFor="categories"
-                                                                                   className={` font-extrabold text-${theme}-600`}>
-                                                                                {sub.name}
+                                                                                   className={` font-extrabold text-gray-600`}>
+                                                                                {sub[getLocalized('name')]}
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -363,8 +364,8 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                                                 </div>
                                                                                 <div className="ltr:ml-3 ">
                                                                                     <label htmlFor="categories"
-                                                                                           className={` font-extrabold text-${theme}-600`}>
-                                                                                        {child.name}
+                                                                                           className={` font-extrabold text-gray-600`}>
+                                                                                        {child[getLocalized('name')]}
                                                                                     </label>
                                                                                 </div>
                                                                             </div>
@@ -381,7 +382,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </fieldset>
                                 </div>
                                 <ToolTipWidget message={trans('service_categories_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
                                 </p>
                             </div>
@@ -389,7 +390,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             {/* image*/}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -399,7 +400,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         name="image"
                                         id="main_image"
                                         autoComplete="main_image"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                     <img className={`h-24 w-20 bg-cover rounded-md`} src={service.imageThumb} alt=""/>
                                 </div>
@@ -407,14 +408,14 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
                                 </p>
                             </div>
                             {/* more images */}
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('more_images')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -425,7 +426,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         name="images"
                                         id="more_images"
                                         autoComplete="more_images"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                     {
                                         service.images &&
@@ -437,7 +438,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
                                 </p>
                             </div>
@@ -447,7 +448,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                         <div className="space-y-4">
 
                             <div className={`pt-4`}>
-                                <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('more_details')}</h3>
+                                <h3 className={` leading-6 font-medium text-gray-900`}>{trans('more_details')}</h3>
                             </div>
 
                             <div className="flex flex-1 flex-col justify-start items-center w-full">
@@ -457,7 +458,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     <fieldset className="mt-1 col-span-1">
                                         <div>
                                             <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('active')}</legend>
+                                                className={`text-base font-medium text-gray-900`}>{trans('active')}</legend>
                                         </div>
                                         <div className="mt-4 space-y-4">
                                             <div className="flex items-center">
@@ -468,7 +469,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                     type="radio"
                                                     value={1}
                                                     defaultChecked={service.active}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="active"
                                                        className="ml-3 block  font-medium text-gray-700">
@@ -483,7 +484,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                     type="radio"
                                                     value={0}
                                                     defaultChecked={!service.active}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="active"
                                                        className="ml-3 block  font-medium text-gray-700">
@@ -493,7 +494,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         </div>
                                         <ToolTipWidget/>
                                         <div>
-                                            <p className={`mt-2  text-${theme}-500`}>
+                                            <p className={`mt-2  text-gray-500`}>
                                                 {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
                                             </p>
                                         </div>
@@ -502,7 +503,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     <fieldset className="mt-1 col-span-1">
                                         <div>
                                             <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('on_home')}</legend>
+                                                className={`text-base font-medium text-gray-900`}>{trans('on_home')}</legend>
                                         </div>
                                         <div className="mt-4 space-y-4">
                                             <div className="flex items-center">
@@ -513,7 +514,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                     type="radio"
                                                     value={1}
                                                     defaultChecked={service.on_sale}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="push-everything"
                                                        className="ml-3 block  font-medium text-gray-700">
@@ -528,7 +529,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                     type="radio"
                                                     value={0}
                                                     defaultChecked={!service.on_home}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="on_home"
                                                        className="ml-3 block  font-medium text-gray-700">
@@ -538,7 +539,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         </div>
                                         <ToolTipWidget/>
                                         <div>
-                                            <p className={`mt-2  text-${theme}-500`}>
+                                            <p className={`mt-2  text-gray-500`}>
                                                 {errors.on_home &&
                                                 <div className={`text-red-600`}>{errors.on_home}</div>}
                                             </p>
@@ -548,7 +549,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     <fieldset className="mt-1 has-tooltip col-span-1">
                                         <div>
                                             <legend
-                                                className={`text-base font-medium text-${theme}-900`}>{trans('on_sale')}</legend>
+                                                className={`text-base font-medium text-gray-900`}>{trans('on_sale')}</legend>
                                         </div>
                                         <div className="mt-4 space-y-4">
                                             <div className="flex items-center">
@@ -559,7 +560,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                     type="radio"
                                                     value={1}
                                                     defaultChecked={service.on_sale}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="push-everything"
                                                        className="ml-3 block  font-medium text-gray-700">
@@ -574,7 +575,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                     type="radio"
                                                     value={0}
                                                     defaultChecked={!service.on_sale}
-                                                    className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="on_sale"
                                                        className="ml-3 block  font-medium text-gray-700">
@@ -584,7 +585,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         </div>
                                         <ToolTipWidget message={trans('service_sale_price_instruction')}/>
                                         <div>
-                                            <p className={`mt-2  text-${theme}-500`}>
+                                            <p className={`mt-2  text-gray-500`}>
                                                 {errors.on_sale &&
                                                 <div className={`text-red-600`}>{errors.on_sale}</div>}
                                             </p>
@@ -592,7 +593,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </fieldset>
                                 </div>
                                 <div
-                                    className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-${theme}-100`}>
+                                    className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-gray-100`}>
                                 </div>
                             </div>
                         </div>
@@ -601,7 +602,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                     <div
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('edit')} {trans(parentModule)}</h3>
+                            <h3 className={` leading-6 font-medium text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-gray-500">
                                 {trans('edit')} {trans(parentModule)}
 
@@ -611,7 +612,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                         <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('description_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -620,19 +621,19 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                              id="description_ar"
                                              name="description_ar"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={service.description_ar}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('service_description_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.description_ar &&
                                     <div className={`text-red-600`}>{errors.description_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_en"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('description_en')}
                                 </label>
                                 <div className="mt-1">
@@ -641,19 +642,19 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                              id="description_en"
                                              name="description_en"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={service.description_en}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('service_description_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.description_en &&
                                     <div className={`text-red-600`}>{errors.description_en}</div>}
                                 </p>
                             </div>
                             {/* notes */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_ar" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="notes_ar" className={`block  font-medium text-gray-700`}>
                                     {trans('notes_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -662,17 +663,17 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                              id="notes_ar"
                                              name="notes_ar"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={service.notes_ar}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('service_notes_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_en" className={`block  font-medium text-${theme}-700`}>
+                                <label htmlFor="notes_en" className={`block  font-medium text-gray-700`}>
                                     {trans('notes_en')}
                                 </label>
                                 <div className="mt-1">
@@ -681,19 +682,19 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                              id="notes_en"
                                              name="notes_en"
                                              rows={4}
-                                             className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={service.notes_en}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('service_notes_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
                                 </p>
                             </div>
                             {/* caption */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_ar"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('caption_ar')}
                                 </label>
                                 <div className="mt-1 ">
@@ -705,17 +706,17 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.caption_ar}
                                         id="caption_ar"
                                         autoComplete="caption_ar"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_caption_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_en"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('caption_en')}
                                 </label>
                                 <div className="mt-1 ">
@@ -727,18 +728,18 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.caption_en}
                                         id="caption_en"
                                         autoComplete="caption_en"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_caption_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
                             {/* keywords */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="keywords"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('keywords')}
                                 </label>
                                 <div className="mt-1">
@@ -750,18 +751,18 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.keywords}
                                         id="keywords"
                                         autoComplete="keywords"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_caption_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
                                 </p>
                             </div>
                             {/* delivery time*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="delivery_time"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('delivery_time')}
                                 </label>
                                 <div className="mt-1">
@@ -774,18 +775,18 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.delivery_time}
                                         id="delivery_time"
                                         autoComplete="delivery_time"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_delivery_time_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.delivery_time && <div className={`text-red-600`}>{errors.keywords}</div>}
                                 </p>
                             </div>
                             {/* order*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="order"
-                                       className={`block   text-${theme}-700`}>
+                                       className={`block   text-gray-700`}>
                                     {trans('order_appearance')}
                                 </label>
                                 <div className="mt-1">
@@ -798,17 +799,17 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.order}
                                         id="order"
                                         autoComplete="order"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('order_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_one"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('video_url_one')}
                                 </label>
                                 <div className="mt-1">
@@ -820,18 +821,18 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.video_url_one}
                                         id="video_url_one"
                                         autoComplete="video_url_one"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_video_url_one_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.video_url_one &&
                                     <div className={`text-red-600`}>{errors.video_url_one}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_two"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('video_url_two')}
                                 </label>
                                 <div className="mt-1">
@@ -843,11 +844,11 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.video_url_two}
                                         id="video_url_two"
                                         autoComplete="video_url_two"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_video_url_two_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.video_url_two &&
                                     <div className={`text-red-600`}>{errors.video_url_two}</div>}
                                 </p>
@@ -855,7 +856,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             {/* start sale */}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="start_sale"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('start_sale')}
                                 </label>
                                 <div className="mt-1">
@@ -869,11 +870,11 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         // min={moment().format()}
                                         // max={moment().format()}
                                         autoComplete="start_sale"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_end_sale_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(service.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                     {errors.start_sale && <div className={`text-red-600`}>{errors.start_sale}</div>}
@@ -882,7 +883,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             {/* end sale*/}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="end_sale"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('end_sale')}
                                 </label>
                                 <div className="mt-1">
@@ -894,11 +895,11 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         defaultValue={service.end_sale}
                                         id="end_sale"
                                         autoComplete="end_sale"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('service_start_sale_instruction')}/>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(service.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                     {errors.end_sale && <div className={`text-red-600`}>{errors.end_sale}</div>}
@@ -908,7 +909,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"
-                                       className={`block  font-medium text-${theme}-700`}>
+                                       className={`block  font-medium text-gray-700`}>
                                     {trans('qr')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -918,7 +919,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         name="qr"
                                         id="qr"
                                         autoComplete="qr"
-                                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                     {service.qr && <div
                                         className="relative h-28 w-28">
@@ -951,14 +952,14 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('qr_best_fit')}
                                 </p>
-                                <p className={`mt-2  text-${theme}-500`}>
+                                <p className={`mt-2  text-gray-500`}>
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
                                 </p>
                             </div>
                         </div>
                         {/* more booleans */}
                         <div className={`pt-4`}>
-                            <h3 className={` leading-6 font-medium text-${theme}-900`}>{trans('more_details')}</h3>
+                            <h3 className={` leading-6 font-medium text-gray-900`}>{trans('more_details')}</h3>
                         </div>
 
                         <div className="flex flex-1 flex-col justify-start items-center w-full">
@@ -968,7 +969,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('check_stock')}</legend>
+                                            className={`text-base font-medium text-gray-900`}>{trans('check_stock')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -979,7 +980,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={1}
                                                 defaultChecked={service.check_stock}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="check_stock"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -994,7 +995,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={0}
                                                 defaultChecked={!service.check_stock}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="check_stock"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1004,7 +1005,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </div>
                                     <ToolTipWidget message={trans('service_check_stock_message')}/>
                                     <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
+                                        <p className={`mt-2  text-gray-500`}>
                                             {errors.check_stock &&
                                             <div className={`text-red-600`}>{errors.check_stock}</div>}
                                         </p>
@@ -1014,7 +1015,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('is_available')}</legend>
+                                            className={`text-base font-medium text-gray-900`}>{trans('is_available')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1025,7 +1026,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={1}
                                                 defaultChecked={service.on_sale}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="push-everything"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1040,7 +1041,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={0}
                                                 defaultChecked={!service.is_available}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="is_available"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1050,7 +1051,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </div>
                                     <ToolTipWidget message={trans('service_is_available_message')}/>
                                     <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
+                                        <p className={`mt-2  text-gray-500`}>
                                             {errors.is_available &&
                                             <div className={`text-red-600`}>{errors.is_available}</div>}
                                         </p>
@@ -1060,7 +1061,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('wrap_as_gift')}</legend>
+                                            className={`text-base font-medium text-gray-900`}>{trans('wrap_as_gift')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1071,7 +1072,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={1}
                                                 defaultChecked={service.wrap_as_gift}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="wrap_as_gift"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1086,7 +1087,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={0}
                                                 defaultChecked={!service.wrap_as_gift}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="wrap_as_gift"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1096,7 +1097,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </div>
                                     <ToolTipWidget message={trans('service_wrap_as_gift_instruction')}/>
                                     <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
+                                        <p className={`mt-2  text-gray-500`}>
                                             {errors.wrap_as_gift &&
                                             <div className={`text-red-600`}>{errors.wrap_as_gift}</div>}
                                         </p>
@@ -1107,7 +1108,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('direct_purchase')}</legend>
+                                            className={`text-base font-medium text-gray-900`}>{trans('direct_purchase')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1118,7 +1119,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={1}
                                                 defaultChecked={service.direct_purchase}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="direct_purchase"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1133,7 +1134,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={0}
                                                 defaultChecked={!service.direct_purchase}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="direct_purchase"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1143,7 +1144,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </div>
                                     <ToolTipWidget message={trans('service_direct_purchase_instruction')}/>
                                     <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
+                                        <p className={`mt-2  text-gray-500`}>
                                             {errors.direct_purchase &&
                                             <div className={`text-red-600`}>{errors.direct_purchase}</div>}
                                         </p>
@@ -1154,7 +1155,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}>{trans('tag')} {trans('exclusive')}</legend>
+                                            className={`text-base font-medium text-gray-900`}>{trans('tag')} {trans('exclusive')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1165,7 +1166,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={1}
                                                 defaultChecked={service.exclusive}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="push-everything"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1180,7 +1181,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={0}
                                                 defaultChecked={!service.exclusive}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="exclusive"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1190,7 +1191,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </div>
                                     <ToolTipWidget message={trans('service_exclusive_instruction')}/>
                                     <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
+                                        <p className={`mt-2  text-gray-500`}>
                                             {errors.exclusive &&
                                             <div className={`text-red-600`}>{errors.exclusive}</div>}
                                         </p>
@@ -1200,7 +1201,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}> {trans('tag')} {trans('on_new')}</legend>
+                                            className={`text-base font-medium text-gray-900`}> {trans('tag')} {trans('on_new')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1211,7 +1212,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={1}
                                                 defaultChecked={service.on_new}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="push-everything"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1226,7 +1227,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={0}
                                                 defaultChecked={!service.on_new}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="on_new"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1236,7 +1237,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </div>
                                     <ToolTipWidget message={trans('service_on_new_instruction')}/>
                                     <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
+                                        <p className={`mt-2  text-gray-500`}>
                                             {errors.on_new && <div className={`text-red-600`}>{errors.on_new}</div>}
                                         </p>
                                     </div>
@@ -1246,7 +1247,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
                                         <legend
-                                            className={`text-base font-medium text-${theme}-900`}> {trans('is_hot_deal')}</legend>
+                                            className={`text-base font-medium text-gray-900`}> {trans('is_hot_deal')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
@@ -1257,7 +1258,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={1}
                                                 defaultChecked={service.is_hot_deal}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="push-everything"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1272,7 +1273,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                 type="radio"
                                                 value={0}
                                                 defaultChecked={!service.is_hot_deal}
-                                                className={`mx-5 focus:ring-${theme}-500 h-4 w-4 text-${theme}-600 border-${theme}-300`}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="is_hot_deal"
                                                    className="ml-3 block  font-medium text-gray-700">
@@ -1282,7 +1283,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     </div>
                                     <ToolTipWidget message={trans('service_is_hot_deal_instruction')}/>
                                     <div>
-                                        <p className={`mt-2  text-${theme}-500`}>
+                                        <p className={`mt-2  text-gray-500`}>
                                             {errors.is_hot_deal &&
                                             <div className={`text-red-600`}>{errors.is_hot_deal}</div>}
                                         </p>
@@ -1292,7 +1293,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
 
 
                             <div
-                                className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-${theme}-100`}>
+                                className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-gray-100`}>
 
                             </div>
                         </div>
@@ -1338,7 +1339,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                     name="images"
                                                     id="more_images"
                                                     autoComplete="more_images"
-                                                    className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full border-${theme}-300 rounded-md`}
+                                                    className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                                 />
                                             </p>
                                         </div>

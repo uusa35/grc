@@ -5,11 +5,11 @@ import {Inertia} from "@inertiajs/inertia";
 const LoadingView = () => {
     const { toggleIsLoading , isLoading } = useContext(BackendContext);
 
-    useMemo(() => {
-        if(isLoading) {
-            setTimeout(() => toggleIsLoading(false), 3000)
-        }
-    },[])
+    // useMemo(() => {
+    //     if(isLoading) {
+    //         setTimeout(() => toggleIsLoading(false), 2000)
+    //     }
+    // },[])
 
     return (
         <div className="flex h-screen min-w-full flex-1 justify-center items-center">

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Role extends PrimaryModel
 {
-    use HasFactory, LocaleTrait;
+    use HasFactory;
 
     protected $guarded = [''];
-    protected $localeStrings = ['name', 'caption'];
+//    protected $localeStrings = ['name', 'caption'];
+//    protected $appends = ['name'];
     protected $casts = [
         'is_designer' => 'boolean',
         'is_client' => 'boolean',

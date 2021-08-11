@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Color extends PrimaryModel
 {
     use HasFactory;
-    protected $localeStrings = ['name'];
+//    protected $localeStrings = ['name'];
     protected $guarded = [''];
-    protected $appends = ['name'];
+//    protected $appends = ['name'];
 
 
     public function product_attribute()

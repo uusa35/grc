@@ -29,20 +29,20 @@ export default function Pagination({type, total, links, showSearch}) {
                         type="text"
                         name="search"
                         id="search"
-                        className={`focus:ring-${theme}-500 focus:border-${theme}-500 block w-full pl-9 border-${theme}-300 rounded-md`}
+                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full pl-9 border-gray-300 rounded-md`}
                         placeholder={trans('search')}
                     />
                 </div>
                 <Link
                     href={search.length > 2 && route().has(`backend.${parentModule}.search`) ? route(`backend.${parentModule}.search`, {search}) : '#'}
                     disabled={search.length <= 2}
-                    className={`py-2 px-3 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
+                    className={`py-2 px-3 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 sm:order-1 sm:ml-3`}
                 >
                     {trans("search")}
                 </Link>
                 <Link
                     href={route().has(`backend.${type}.search`) ? route(`backend.${type}.search`) : '#'}
-                    className={`py-2 px-2 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm text-center md font-medium rounded-md text-white bg-${theme}-600 hover:bg-${theme}-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-${theme}-500 sm:order-1 sm:ml-3`}
+                    className={`py-2 px-2 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm text-center md font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 sm:order-1 sm:ml-3`}
                 >
                     {trans("reset")}
                 </Link>
@@ -54,7 +54,7 @@ export default function Pagination({type, total, links, showSearch}) {
                             <Link
                                 key={page.label}
                                 href={route().has(`backend.${type}.search`) && page.url ? page.url : '#'}
-                                className={classNames(page.active ? `border-${theme}-700 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-700 hover:border-${theme}-300 border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
+                                className={classNames(page.active ? `border-gray-700 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
                             >
                                 {page.label}
                             </Link>

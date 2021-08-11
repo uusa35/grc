@@ -30,7 +30,19 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $elements = Service::orderby('id', 'desc')->with('user')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page', '_token']));
+        $elements = Service::orderby('id', 'desc')->with('user')->paginate(SELF::TAKE_LEAST)
+            ->withQueryString()->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+                'created_at' => $element->created_at,
+                'price' => $element->price,
+                'active' => $element->active,
+                'image' => $element->image,
+                'sku' => $element->sku,
+                'on_sale' => $element->on_sale,
+                'user' => $element->user->only('id', 'name_ar', 'name_en'),
+            ]);
         return inertia('Backend/Service/ServiceIndex', compact('elements'));
     }
 
@@ -41,7 +53,19 @@ class ServiceController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Service::filters($filters)->with('user')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page', '_token']));
+        $elements = Service::filters($filters)->with('user')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)
+            ->withQueryString()->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+                'created_at' => $element->created_at,
+                'price' => $element->price,
+                'active' => $element->active,
+                'image' => $element->image,
+                'sku' => $element->sku,
+                'on_sale' => $element->on_sale,
+                'user' => $element->user->only('id', 'name_ar', 'name_en'),
+            ]);
         return inertia('Backend/Service/ServiceIndex', compact('elements'));
     }
 

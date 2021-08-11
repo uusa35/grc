@@ -7,8 +7,7 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 
 export default function ProductAttributeEdit({attribute, colors, sizes}) {
-    const {trans, theme, currentModule} = useContext(BackendContext);
-    const {params} = route();
+    const {trans, theme} = useContext(BackendContext);
     const {data, setData, put, progress} = useForm({
         'color_id': attribute.color_id,
         'size_id': attribute.size_id,
@@ -60,7 +59,7 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                                         name="size_id"
                                         autoComplete="size_id"
                                         defaultValue={attribute.size_id}
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     >
                                         {
                                             sizes.map(u => (
@@ -72,7 +71,7 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                                     </select>
                                 </div>
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {trans('size_or_capacity')}
                                     {errors.size_id &&
                                     <div className={`text-red-600`}>{errors.size_id}</div>}
@@ -94,7 +93,7 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                                         name="color_id"
                                         autoComplete="color_id"
                                         defaultValue={attribute.color_id}
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     >
                                         {
                                             colors.map(u => (
@@ -105,14 +104,14 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                                     </select>
                                 </div>
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.color_id &&
                                     <div className={`text-red-600`}>{errors.color_id}</div>}
                                 </p>
                             </div>
                             {/* qty */}
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="qty" className={`block text-sm font-medium text-${theme}-700`}>
+                                <label htmlFor="qty" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('qty')} {trans('available')}
                                 </label>
                                 <div className="mt-1">
@@ -125,17 +124,17 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                                         defaultValue={attribute.qty}
                                         id="qty"
                                         autoComplete="qty"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_qty_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
                                 </p>
                             </div>
                             {/* price */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="price" className={`block text-sm font-medium text-${theme}-700`}>
+                                <label htmlFor="price" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('price')}
                                 </label>
                                 <div className="mt-1">
@@ -148,11 +147,11 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                                         defaultValue={attribute.price}
                                         id="price"
                                         autoComplete="price"
-                                        className={`shadow-sm focus:ring-${theme}-500 focus:border-${theme}-500 block w-full sm:text-sm border-${theme}-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
-                                <p className={`mt-2 text-xs text-${theme}-500`}>
+                                <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
                                 </p>
                             </div>

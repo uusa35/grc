@@ -10,8 +10,9 @@ class Course extends PrimaryModel
 {
     use HasFactory, SoftDeletes;
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
-    protected $localeStrings = ['name', 'description', 'notes'];
+//    protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

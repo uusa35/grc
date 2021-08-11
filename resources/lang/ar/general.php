@@ -1077,5 +1077,6 @@ return array (
     "file_url" => "رابط الملف",
     "pdf_file" => "ملف البي دي اف",
     "file_instruction" => "رفع ملف البي دي اف",
-    "order_appearance" => "ترتيب الظهور"
+    "order_appearance" => "ترتيب الظهور",
+    "end_time" => "وقت الانتهاء"
 );

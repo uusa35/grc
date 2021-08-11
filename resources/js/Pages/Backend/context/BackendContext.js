@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
-import {split, first, map} from 'lodash';
+import {split, first, map, isEmpty} from 'lodash';
 import route from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import LoadingView from "../components/widgets/LoadingView";
@@ -75,6 +75,7 @@ const BackendContextProvider = ({children}) => {
         setConfirmationModalResponse,
         modalAction,
         setModalAction,
+        getLocalized: (element) => locale === 'ar' ? `${element}_ar` : `${element}_en`,
         getImageThumb: (element) => `${route('home')}/storage/uploads/images/thumbnail/${element}`,
         getFileUrl: (element) => `${route('home')}/storage/uploads/files/${element}`,
         isAdminOrAbove,
@@ -92,14 +93,13 @@ const BackendContextProvider = ({children}) => {
     };
 
     useEffect(() => {
-        if (auth) {
+        if (auth && isEmpty(modules)) {
             const filteredModules = map(auth.role.privileges, p => {
                 return {
-                    name: p.name,
+                    name: p.name_en,
                     index: p.pivot.index,
                     main_menu: p.main_menu,
-                    description: p.description,
-                    imageThumb: p.imageThumb
+                    image: p.image
                 }
             });
             setModules(filteredModules);

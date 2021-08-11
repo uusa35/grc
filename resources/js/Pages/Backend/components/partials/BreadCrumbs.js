@@ -16,7 +16,7 @@ export default function BreadCrumbs() {
             className="flex flex-1 flex-row justify-between items-center bg-white  mx-3 rounded-md shadow-sm p-5 w-auto">
             <div className="flex flex-1 flex-row">
                 <nav
-                    className={`flex ltr:pl-10 rtl:pr-10  bg-${theme}-100" aria-label="Breadcrumb`}>
+                    className={`flex ltr:pl-10 rtl:pr-10  bg-gray-100" aria-label="Breadcrumb`}>
                     <ol className="flex items-center space-x-4">
                         <li>
                             <div className="flex items-center">
@@ -26,7 +26,7 @@ export default function BreadCrumbs() {
                                             {i === 0 ?
                                                 <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/> :
                                                 <svg
-                                                    className={`mx-2 flex-shrink-0 h-5 w-5 text-${theme}-300`}
+                                                    className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     fill="currentColor"
                                                     viewBox="0 0 20 20"

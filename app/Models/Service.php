@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Service extends PrimaryModel
 {
     use HasFactory, SoftDeletes, SellingModelHelpers, ServiceHelpers;
-    protected $localeStrings = ['name', 'description', 'notes'];
+//    protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
-    protected $appends = ['name','description','imageThumb'];
+//    protected $appends = ['name','description','imageThumb'];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $casts = [
         'on_sale' => 'boolean',

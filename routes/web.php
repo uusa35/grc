@@ -72,7 +72,6 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth',
     Route::resource('dashboard', DashboardController::class)->only(['index']);
     Route::resource('service', ServiceController::class);
     Route::resource('timing', TimingController::class);
-    Route::resource('day', DayController::class);
     Route::resource('book', BookController::class);
     Route::resource('section', SectionController::class);
     Route::resource('page', PageController::class);

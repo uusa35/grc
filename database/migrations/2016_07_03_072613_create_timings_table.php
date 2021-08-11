@@ -22,7 +22,6 @@ class CreateTimingsTable extends Migration
             $table->string('notes_en')->nullable();
             $table->integer('order')->nullable();
             $table->foreignId('service_id')->references('id')->on('services');
-            $table->foreignId('day_id')->references('id')->on('days');
 
             $table->timestamps();
         });

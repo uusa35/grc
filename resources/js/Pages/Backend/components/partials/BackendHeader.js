@@ -34,6 +34,8 @@ const BackendHeader = () => {
         parentModule,
         locale,
         setLocale,
+        getLocalized,
+        getImageThumb,
     } = useContext(BackendContext);
 
     return (
@@ -41,15 +43,15 @@ const BackendHeader = () => {
             {/* all elements */}
             <div
                 className="border-b border-gray-200 py-3 bg-white rounded-md mx-3 my-3 sm:px-6 lg:p-4 sm:flex sm:flex-row sm:items-center sm:justify-between">
-                <h1 className="w-60 leading-6 text-gray-900 sm:truncate">{settings.name}</h1>
-                <div className="flex items-center justify-center w-full grid grid-cols-1 sm:grid-cols-3 gap-y-4 sm:gap-y-0 gap-x-2">
+                <h1 className="w-60 leading-6 text-gray-900 sm:truncate">{settings[getLocalized('name')]}</h1>
+                <div className="flex items-center justify-center w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 sm:gap-y-0 gap-x-2">
                     {/* all elements */}
                     <Menu as="div" className="col-auto relative ltr:text-left rtl:text-right">
                         {({open}) => (
                             <div>
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
-                                        className={`inline-flex justify-center w-full rounded-md border border-${theme}-300 shadow-sm px-4 py-2 bg-${theme}-600  font-medium text-${theme}-50 hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-100 focus:ring-${theme}-500`}>
+                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
                                         {trans('list')} {trans('all_elements')}
                                         <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -85,7 +87,7 @@ const BackendHeader = () => {
                                                                         )}
                                                                     >
                                                                         <img className={`w-5 h-auto mx-2 rounded-sm`}
-                                                                             src={m.imageThumb} alt=""/>
+                                                                             src={getImageThumb(m.image)} alt=""/>
                                                                         {trans('list')} {trans(plurlaize(m.name))}
                                                                     </Link>
                                                                 )}
@@ -107,7 +109,7 @@ const BackendHeader = () => {
                             <div>
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
-                                        className={`inline-flex justify-center w-full rounded-md border border-${theme}-300 shadow-sm px-4 py-2 bg-${theme}-600  font-medium text-${theme}-50 hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-100 focus:ring-${theme}-500`}>
+                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
                                         {trans('list')} {trans('all_elements')}
                                         <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -143,7 +145,7 @@ const BackendHeader = () => {
                                                                         )}
                                                                     >
                                                                         <img className={`w-5 h-auto mx-2 rounded-sm`}
-                                                                             src={m.imageThumb} alt=""/>
+                                                                             src={getImageThumb(m.image)} alt=""/>
                                                                         {trans('create')} {trans(m.name)}
                                                                     </Link>
                                                                 )}
@@ -166,7 +168,7 @@ const BackendHeader = () => {
                             <>
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
-                                        className={`inline-flex justify-center w-full rounded-md border border-${theme}-300 shadow-sm px-4 py-2 bg-${theme}-600  font-medium text-${theme}-50 hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-100 focus:ring-${theme}-500`}>
+                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-auto w-3 rtl:ml-2 ltr:mr-2"
                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -191,7 +193,7 @@ const BackendHeader = () => {
                                 >
                                     <Menu.Items
                                         static
-                                        className="origin-top-right absolute -right-16 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                                        className="origin-top-right absolute -right-8 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
                                     >
                                         <div className="py-1">
                                             <Menu.Item>

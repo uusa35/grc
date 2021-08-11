@@ -174,7 +174,7 @@ trait UserHelpers
 
     public function getCountryNameAttribute()
     {
-        return $this->country->name;
+//        return $this->country->name;
     }
 
     public function getFullMobileAttribute()
@@ -224,10 +224,5 @@ trait UserHelpers
     {
         $settings = Setting::first();
         return $this->custome_delivery && $settings->global_custome_delivery && !$settings->multi_cart_merchant;
-    }
-
-    public function getAddressAttribute()
-    {
-        return $this->address;
     }
 }

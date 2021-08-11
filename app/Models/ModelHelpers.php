@@ -101,21 +101,6 @@ trait ModelHelpers
         return asset(env('FILES') . $this->path);
     }
 
-    public function getNameAttribute()
-    {
-        return $this->name;
-    }
-
-    public function getCaptionAttribute()
-    {
-        return $this->caption;
-    }
-
-    public function getDescriptionAttribute()
-    {
-        return $this->description;
-    }
-
     public function getTypeAttribute()
     {
         return strtolower(class_basename($this));

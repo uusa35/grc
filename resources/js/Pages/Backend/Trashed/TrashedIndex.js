@@ -41,10 +41,10 @@ export default function TrashedIndex({elements, model }) {
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-${theme}-600` : 'bg-blue-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
+                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead
-                                    className={classNames(true ? `bg-${theme}-300` : '', "text-black font-extrabold uppercase")}>
+                                    className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold uppercase")}>
                                 <tr>
                                     <th
                                         scope="col"
@@ -115,7 +115,7 @@ export default function TrashedIndex({elements, model }) {
                                                         {({open}) => (
                                                             <>
                                                                 <Menu.Button
-                                                                    className={`w-8 h-8 bg-white inline-flex items-center justify-center text-${theme}-400 rounded-full hover:text-${theme}-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${theme}-500`}>
+                                                                    className={`w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}>
                                                                             <span
                                                                                 className="sr-only">Open options</span>
                                                                     <DotsVerticalIcon className="w-5 h-5"

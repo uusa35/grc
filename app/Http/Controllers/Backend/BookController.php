@@ -31,7 +31,21 @@ class BookController extends Controller
      */
     public function index()
     {
-        $elements = Book::onHome()->orderby('id', 'desc')->with('user')->paginate(SELF::TAKE_LEAST)->appends(request()->except('page', '_token'));
+        $elements = Book::onHome()->orderby('id', 'desc')
+            ->with('user')
+            ->paginate(SELF::TAKE_LEAST)
+            ->withQueryString()->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+                'created_at' => $element->created_at,
+                'price' => $element->price,
+                'active' => $element->active,
+                'image' => $element->image,
+                'sku' => $element->sku,
+                'on_sale' => $element->on_sale,
+                'user' => $element->user->only('id', 'name_ar', 'name_en'),
+            ]);
         return inertia('Backend/Book/BookIndex', compact('elements'));
     }
 
@@ -42,9 +56,22 @@ class BookController extends Controller
         if ($validator->fails()) {
             return inertia('Backend/Book/BookIndex', $validator->errors()->all());
         }
-        $elements = Book::filters($filters)->with('user')->whereHas('user', function ($q) {
-            return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
-        })->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page', '_token']));
+        $elements = Book::filters($filters)
+            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with('user')
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)
+            ->withQueryString()->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+                'created_at' => $element->created_at,
+                'price' => $element->price,
+                'active' => $element->active,
+                'image' => $element->image,
+                'sku' => $element->sku,
+                'on_sale' => $element->on_sale,
+                'user' => $element->user->only('id', 'name_ar', 'name_en'),
+            ]);
         return inertia('Backend/Book/BookIndex', compact('elements'));
     }
 
@@ -79,7 +106,7 @@ class BookController extends Controller
             $element->categories()->sync($request->categories);
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
-            $request->hasFile('file') ? $this->savePath($element,$request,'file') : null;
+            $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             return redirect()->route('backend.book.edit', $element->id)->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.book.create')->with('error', trans('general.process_failure'));
@@ -131,7 +158,7 @@ class BookController extends Controller
             $request->has('categories') ? $book->categories()->sync($request->categories) : null;
             $request->hasFile('image') ? $this->saveMimes($book, $request, ['image'], ['1080', '1440'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($book, $request, ['qr'], ['300', '300'], false) : null;
-            $request->hasFile('file') ? $this->savePath($book,$request,'file') : null;
+            $request->hasFile('file') ? $this->savePath($book, $request, 'file') : null;
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.book.edit', $book->id)->with('error', 'process_failure');
