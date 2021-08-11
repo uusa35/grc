@@ -43,7 +43,6 @@ class PrivilegesTableSeeder extends Seeder
             'commercial' => false,
             'shipment' => false,
             'notification' => false,
-            'day' => false,
             'device' => false,
             'book' => true,
             'address' => false,

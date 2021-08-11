@@ -27,16 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $elements = User::notAdmins()->with('role')->orderBy('id', 'desc')->paginate(SELF::TAKE_LEAST)
-            ->withQueryString()->through(fn($element) => [
-                'id' => $element->id,
-                'name_ar' => $element->name_ar,
-                'name_en' => $element->name_en,
-                'created_at' => $element->created_at,
-                'active' => $element->active,
-                'role' => $element->role->only('name')
-            ]);
-        return inertia('Backend/User/UserIndex', compact('elements'));
+        return redirect()->route('backend.user.search');
     }
 
     public function search(UserFilters $filters)
@@ -46,14 +37,14 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = User::filters($filters)->notAdmins()->with('role')->paginate(self::TAKE_LEAST)
+        $elements = User::filters($filters)->notAdmins()->with('role')->paginate(Self::TAKE_LESS)
             ->withQueryString()->through(fn($element) => [
                 'id' => $element->id,
                 'name_ar' => $element->name_ar,
                 'name_en' => $element->name_en,
                 'created_at' => $element->created_at,
                 'active' => $element->active,
-                'role' => $element->role->only('name')
+                'role' => $element->role->only('name_ar','name_en')
             ]);
         return inertia('Backend/User/UserIndex', compact('elements'));
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Color;
+use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\Size;
 use Illuminate\Http\Request;
@@ -29,7 +30,21 @@ class ProductAttributeController extends Controller
     {
         request()->validate(
             ['product_id' => 'required|integer|exists:products,id']);
-        $elements = ProductAttribute::where(['product_id' => request()->product_id])->with('color', 'size', 'product')->orderBy('id','desc')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page', '_token']));
+        $elements = ProductAttribute::where(['product_id' => request()->product_id])
+            ->with('color', 'size', 'product')->orderBy('id','desc')
+            ->paginate(Self::TAKE_LESS)
+            ->withQueryString()
+            ->through(fn($element) => [
+                'id' => $element->id,
+                'product_id' => $element->product_id,
+                'color_id' => $element->color_id,
+                'size_id' => $element->size_id,
+                'price' => $element->price,
+                'qty' => $element->qty,
+                'color' => $element->color->only('id','name_ar','name_en'),
+                'size' => $element->color->only('id','name_ar','name_en'),
+                'product' => $element->product->only('id','price')
+            ]);
         return inertia('Backend/ProductAttribute/ProductAttributeIndex', compact('elements'));
     }
 
@@ -45,17 +60,11 @@ class ProductAttributeController extends Controller
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors()->first());
         }
-        $colors = Color::active()->get();
-        $sizes = Size::active()->get();
-//        if (auth()->user()->isAdminOrAbove) {
-        $elements = ProductAttribute::whereId(request()->product_id)->with('color', 'size')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page', '_token']));
-//        } else {
-//            $elements = ProductAttribute::whereId(['product_id' => request()->product_id, 'user_id' => auth()->id()])->with('color','size')->paginate(SELF::TAKE_LEAST);
-//        }
-//        if ($elements) {
-        return inertia('Backend/ProductAttribute/ProductAttributeCreate', compact('elements', 'colors', 'sizes'));
-//        }
-//        return redirect()->route('backend.product.search')->withErrors(trans('general.no_elements'));
+        $sizes = Size::active()->select('id','name_ar', 'name_en')->get();
+        $colors = Color::active()->select('id','name_ar', 'name_en')->get();
+        $element = Product::whereId(request()->product_id)
+            ->select('id','price')->first();
+        return inertia('Backend/ProductAttribute/ProductAttributeCreate', compact( 'element','colors', 'sizes'));
     }
 
     /**
@@ -105,8 +114,8 @@ class ProductAttributeController extends Controller
      */
     public function edit(ProductAttribute $attribute)
     {
-        $colors = Color::active()->get();
-        $sizes = Size::active()->get();
+        $sizes = Size::active()->select('id','name_ar', 'name_en')->get();
+        $colors = Color::active()->select('id','name_ar', 'name_en')->get();
         return inertia('Backend/ProductAttribute/ProductAttributeEdit', compact('attribute','colors','sizes'));
     }
 

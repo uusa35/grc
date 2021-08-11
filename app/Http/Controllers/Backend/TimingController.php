@@ -28,7 +28,7 @@ class TimingController extends Controller
     {
         request()->validate(
             ['service_id' => 'required|integer|exists:services,id']);
-        $elements = Timing::where(['service_id' => request()->service_id])->with('service')->orderBy('id', 'desc')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page', '_token']));
+        $elements = Timing::where(['service_id' => request()->service_id])->with('service')->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)->appends(request()->except(['page', '_token']));
         return inertia('Backend/Timing/TimingIndex', compact('elements'));
     }
 
@@ -39,7 +39,7 @@ class TimingController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Timing::filters($filters)->with('service')->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)->appends(request()->except(['page', '_token']));
+        $elements = Timing::filters($filters)->with('service')->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)->appends(request()->except(['page', '_token']));
         return inertia('Backend/Timing/TimingIndex', compact('elements'));
     }
 

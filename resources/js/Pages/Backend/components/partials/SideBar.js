@@ -361,7 +361,15 @@ const SideBar = () => {
                                                     )}
                                                     aria-current={'page'}
                                                 >
-                                                    <img className={`w-6 h-6 mx-2 rounded-full`} src={getImageThumb(m.image)}/>
+                                                    {
+                                                        m.name === parentModule ?
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 mx-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+                                                            </svg> :
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                                                            </svg>
+                                                    }
                                                     {trans(pluralize(m.name))}
                                                 </Link> : null
                                         }

@@ -189,7 +189,7 @@ trait DashboardTrait
         $model = request()->model;
         $className = 'App\Models\\' . ucfirst($request->model);
         $element = new $className();
-        $elements = $element->onlyTrashed()->paginate(SELF::TAKE_LEAST);
+        $elements = $element->onlyTrashed()->paginate(Self::TAKE_LESS);
         return inertia('Backend/Trashed/TrashedIndex', compact('elements', 'model'));
     }
 

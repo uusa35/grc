@@ -3,7 +3,7 @@ import {BackendContext} from "../../../context/BackendContext";
 import { isEmpty } from 'lodash';
 
 export default function ImagesList({images}) {
-    const { theme , trans } = useContext(BackendContext);
+    const { theme , trans, getImageThumb } = useContext(BackendContext);
     const { setModalAction, setShowConfirmationModal } = useContext(BackendContext);
     return (
         <>
@@ -14,7 +14,7 @@ export default function ImagesList({images}) {
                     <li key={img.id} className="relative">
                         <div
                             className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
-                            <img src={img.imageThumb} alt=""
+                            <img src={getImageThumb(img.image)} alt=""
                                  className="object-cover pointer-events-none group-hover:opacity-75"/>
                             <button
                                 onClick={() => {

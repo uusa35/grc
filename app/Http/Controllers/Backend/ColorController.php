@@ -25,7 +25,7 @@ class ColorController extends Controller
      */
     public function index()
     {
-        $elements = Color::paginate(Self::TAKE_LEAST)->appends(request()->except('page', '_token'));
+        $elements = Color::paginate(Self::TAKE_LESS)->appends(request()->except('page', '_token'));
         return inertia('Backend/Color/ColorIndex', compact('elements'));
     }
 

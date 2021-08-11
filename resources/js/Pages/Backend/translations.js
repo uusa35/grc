@@ -1066,7 +1066,8 @@ const ar = {
     "pdf_file" : "ملف البي دي اف",
     "file_instruction" : "رفع ملف البي دي اف",
     "order_appearance" : "ترتيب الظهور",
-    "end_time" : "وقت الانتهاء"
+    "end_time" : "وقت الانتهاء",
+    "piece" : "قطعة"
 }
 
 const en  = {

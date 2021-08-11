@@ -15,7 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $elements = Role::paginate(SELF::TAKE_LEAST);
+        $elements = Role::paginate(Self::TAKE_LESS);
         return inertia('Backend/Role/RoleIndex', compact('elements'));
     }
 

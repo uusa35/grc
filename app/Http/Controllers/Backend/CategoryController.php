@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = Category::paginate(SELF::TAKE_LEAST);
+        $elements = Category::paginate(Self::TAKE_LESS);
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 

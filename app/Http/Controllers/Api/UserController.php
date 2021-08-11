@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $elements = User::active()->paginate(SELF::TAKE_LEAST);
+        $elements = User::active()->paginate(Self::TAKE_LESS);
         return response()->json(UserExtraLightResource::collection($elements), 200);
     }
 

@@ -7,7 +7,7 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 
 export default function ProductAttributeEdit({attribute, colors, sizes}) {
-    const {trans, theme} = useContext(BackendContext);
+    const {trans, getLocalized} = useContext(BackendContext);
     const {data, setData, put, progress} = useForm({
         'color_id': attribute.color_id,
         'size_id': attribute.size_id,
@@ -65,7 +65,7 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                                             sizes.map(u => (
                                                 <option key={u.id}
                                                         value={u.id}
-                                                >{u.name}</option>
+                                                >{u[getLocalized('name')]}</option>
                                             ))
                                         }
                                     </select>
@@ -98,7 +98,7 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                                         {
                                             colors.map(u => (
                                                 <option key={u.id} value={u.id}
-                                                >{u.name}</option>
+                                                >{u[getLocalized('name')]}</option>
                                             ))
                                         }
                                     </select>

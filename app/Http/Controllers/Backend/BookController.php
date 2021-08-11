@@ -31,22 +31,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $elements = Book::onHome()->orderby('id', 'desc')
-            ->with('user')
-            ->paginate(SELF::TAKE_LEAST)
-            ->withQueryString()->through(fn($element) => [
-                'id' => $element->id,
-                'name_ar' => $element->name_ar,
-                'name_en' => $element->name_en,
-                'created_at' => $element->created_at,
-                'price' => $element->price,
-                'active' => $element->active,
-                'image' => $element->image,
-                'sku' => $element->sku,
-                'on_sale' => $element->on_sale,
-                'user' => $element->user->only('id', 'name_ar', 'name_en'),
-            ]);
-        return inertia('Backend/Book/BookIndex', compact('elements'));
+        return redirect()->route('backend.book.search');
     }
 
     public function search(ProductFilters $filters)
@@ -59,7 +44,7 @@ class BookController extends Controller
         $elements = Book::filters($filters)
             ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
             ->with('user')
-            ->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString()->through(fn($element) => [
                 'id' => $element->id,
                 'name_ar' => $element->name_ar,

@@ -185,7 +185,7 @@ export default function ProductIndex({elements}) {
                                                 </div>
                                             </td>
                                             <td className=" px-6 py-4 whitespace-nowrap text-right font-medium">
-                                                <div key={element.name}
+                                                <div key={element[getLocalized('name')]}
                                                      className="relative flex justify-center items-center rounded-full shadow-md w-12 h-12">
                                                     <Menu as="div" className="abflex-shrink-0 z-60">
                                                         {({open}) => (

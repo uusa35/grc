@@ -19,6 +19,8 @@ export default function TrashedIndex({elements, model }) {
         colName,
         sortDesc,
         handleSort,
+        getLocalized,
+        getImageThumb
     } = useContext(BackendContext);
     const [currentData, setCurrentData] = useState();
 
@@ -105,11 +107,11 @@ export default function TrashedIndex({elements, model }) {
                                             <td className="px-3 py-4 whitespace-nowrap font-medium text-gray-900">{element.id}</td>
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">
                                                 <img className="w-14 h-14  object-contain rounded-md shadow-inner"
-                                                     src={element.imageThumb} alt={element.name}/>
+                                                     src={getImageThumb(element.image)} alt={element[getLocalized('name')]}/>
                                             </td>
-                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.name}</td>
+                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element[getLocalized('name')]}</td>
                                             <td className=" px-6 py-4 whitespace-nowrap text-right font-medium">
-                                                <div key={element.name}
+                                                <div key={element[getLocalized('name')]}
                                                      className="relative flex justify-center items-center rounded-full shadow-md w-12 h-12">
                                                     <Menu as="div" className="abflex-shrink-0 z-60">
                                                         {({open}) => (

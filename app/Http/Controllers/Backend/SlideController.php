@@ -37,7 +37,7 @@ class SlideController extends Controller
         $className = 'App\Models\\' . ucfirst(request()->slidable_type);
         $element = new $className();
         $element = $element->whereId(request()->slidable_id)->first();
-        $elements = $element->slides()->orderBy('id', 'desc')->paginate(SELF::TAKE_LEAST);
+        $elements = $element->slides()->orderBy('id', 'desc')->paginate(Self::TAKE_LESS);
         return inertia('Backend/Slide/SlideIndex', compact('elements'));
     }
 
@@ -52,7 +52,7 @@ class SlideController extends Controller
             } else {
                 return $q;
             }
-        }])->orderBy('id', 'desc')->paginate(SELF::TAKE_LEAST)->appends(request()->except(['page','_token']));
+        }])->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)->appends(request()->except(['page','_token']));
         return inertia('Backend/Slide/SlideIndex', compact('elements'));
     }
 

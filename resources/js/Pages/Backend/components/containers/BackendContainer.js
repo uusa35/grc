@@ -90,14 +90,13 @@ const BackendContainer = ({
                             {children}
                             <NoElements display={showNoElements}/>
                             {
-                                !isEmpty(elements?.data) && elements.total > 1 && parentModule &&
-                                <Pagination
+                                !isEmpty(elements?.data) && elements.total > 0 && parentModule && <Pagination
                                     type={parentModule}
                                     total={elements.total}
                                     links={elements.links}
+                                    showSearch={showSearch}
                                 />
                             }
-
                         </div>
                     </div>
                 </div>

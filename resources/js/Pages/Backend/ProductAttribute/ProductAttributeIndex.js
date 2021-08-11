@@ -8,7 +8,7 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import GlobalContext from "../context/GlobalContext";
 
 export default function ProductAttributeIndex({elements, colors, sizes}) {
-    const {trans, theme, handleDeleteItem, classNames} = useContext(BackendContext);
+    const {trans, theme, handleDeleteItem, classNames, getLocalized } = useContext(BackendContext);
     const { settings } = useContext(GlobalContext);
     const {params} = route();
 
@@ -82,9 +82,9 @@ export default function ProductAttributeIndex({elements, colors, sizes}) {
                                 {map(elements.data, a => (
                                     <tr key={a.id}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{a.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.color.name}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.size.name}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.qty}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.color[getLocalized('name')]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.size[getLocalized('name')]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.qty}  {trans('piece')}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.price} {trans('kd')}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">

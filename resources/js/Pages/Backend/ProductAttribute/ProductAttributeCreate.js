@@ -6,8 +6,8 @@ import {BackendContext} from "../context/BackendContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 
-export default function ProductAttributeCreate({colors, sizes}) {
-    const {trans, theme, currentModule} = useContext(BackendContext);
+export default function ProductAttributeCreate({colors, sizes, element }) {
+    const {trans, getLocalized } = useContext(BackendContext);
     const {params} = route();
     const {data, setData, post, progress} = useForm({
         'color_id': '',
@@ -65,7 +65,7 @@ export default function ProductAttributeCreate({colors, sizes}) {
                                             sizes.map(u => (
                                                 <option key={u.id}
                                                         value={u.id}
-                                                >{u.name}</option>
+                                                >{u[getLocalized('name')]}</option>
                                             ))
                                         }
                                     </select>
@@ -97,7 +97,7 @@ export default function ProductAttributeCreate({colors, sizes}) {
                                         {
                                             colors.map(u => (
                                                 <option key={u.id} value={u.id}
-                                                >{u.name}</option>
+                                                >{u[getLocalized('name')]}</option>
                                             ))
                                         }
                                     </select>
@@ -143,7 +143,7 @@ export default function ProductAttributeCreate({colors, sizes}) {
                                         type="number"
                                         step="any"
                                         name="price"
-                                        defaultValue={data.price}
+                                        defaultValue={element.price}
                                         id="price"
                                         autoComplete="price"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
