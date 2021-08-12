@@ -5,8 +5,9 @@ import {Link} from "@inertiajs/inertia-react";
 import {BackendContext} from "../../context/BackendContext";
 
 const Footer = () => {
-    const {theme} = useContext(BackendContext);
-    const {settings} = useContext(GlobalContext);
+    const {getImageThumb , getLocalized} = useContext(BackendContext);
+    const {settings } = useContext(GlobalContext);
+
     return (
         <footer
             className={`text-gray-600`}>
@@ -14,14 +15,14 @@ const Footer = () => {
                 <div className={`container py-6 flex items-center sm:flex-row flex-row justify-between`}>
                     <Link href="#"
                           className={`flex  flex-1 title-font font-medium items-center md:justify-start justify-center text-gray-900`}>
-                        <img className="w-10 h-10 rounded-full shadow-md" src={settings.imageThumb}
+                        <img className="w-10 h-10 rtl:ml-5 ltr:mr-5 rounded-full shadow-md" src={getImageThumb(settings.image)}
                              alt={settings.title}/>
-                        <span className="ml-3 text-xl">{settings.title}</span>
+                        <span className="ml-3 text-xl">{settings[getLocalized()]}</span>
                         <div className={`text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4`}>
-                            © {moment().format('Y')} {settings.caption} — <Link
+                            © {moment().format('Y')} {settings[getLocalized('caption')]} — <Link
                             href={settings.twitter}
                         >
-                            {settings.name}
+                            {settings[getLocalized()]}
                         </Link>
                         </div>
                     </Link>

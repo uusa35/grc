@@ -28,7 +28,12 @@ class TimingController extends Controller
     {
         request()->validate(
             ['service_id' => 'required|integer|exists:services,id']);
-        $elements = Timing::where(['service_id' => request()->service_id])->with('service')->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)->appends(request()->except(['page', '_token']));
+        $elements = Timing::where(['service_id' => request()->service_id])
+            ->whereHas('service', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with(['service' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
+            ->orderBy('id', 'desc')
+            ->paginate(Self::TAKE_LESS)
+            ->withQueryString();
         return inertia('Backend/Timing/TimingIndex', compact('elements'));
     }
 
@@ -39,7 +44,21 @@ class TimingController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Timing::filters($filters)->with('service')->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)->appends(request()->except(['page', '_token']));
+        $elements = Timing::filters($filters)
+            ->whereHas('service', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with(['service' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
+            ->orderBy('id', 'desc')
+            ->withQueryString()->through(fn($element) => [
+                'id' => $element->id,
+                'date' => $element->date,
+                'start' => $element->start,
+                'end' => $element->end,
+                'allow_multi_select' => $element->allow_multi_select,
+                'notes_ar' => $element->notes_ar,
+                'notes_en' => $element->notes_en,
+                'order' => $element->order,
+                'service' => $element->service->only('id', 'name_ar', 'name_en'),
+            ]);
         return inertia('Backend/Timing/TimingIndex', compact('elements'));
     }
 
@@ -64,7 +83,6 @@ class TimingController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
         $request->validate([
             'service_id' => 'required|exists:services,id',
             'date' => 'required|date_format:Y-m-d',
@@ -74,7 +92,7 @@ class TimingController extends Controller
             'notes_en' => 'max:1000'
         ]);
         Timing::create($request->request->all());
-        return redirect()->route('backend.timing.index', ['service_id' => $request->service_id])->with('success', 'progress_success');
+        return redirect()->route('backend.timing.index', ['service_id' => $request->service_id])->with('success', trans('general.process_success'));
     }
 
     /**
@@ -109,17 +127,16 @@ class TimingController extends Controller
     public function update(Request $request, Timing $timing)
     {
         $request->validate([
-            'service_id' => 'required|exists:services,id',
-            'date' => 'required|date',
-            'start' => 'required|time',
-            'end' => 'required|time',
+            'date' => 'required|date_format:Y-m-d',
+            'start' => 'required|date_format:H:i',
+            'end' => 'required|date_format:H:i|after:start',
             'notes_ar' => 'max:1000',
             'notes_en' => 'max:1000'
         ]);
         if ($timing->update($request->all())) {
-            return redirect()->route('backend.timing.index', ['service_id' => $timing->service_id])->with('success', __('general.progress_success'));
+            return redirect()->route('backend.timing.index', ['service_id' => $timing->service_id])->with('success', trans('general.process_success'));
         }
-        return redirect()->back()->withErrors('progress_failure');
+        return redirect()->back()->withErrors(trans('general.progress_failure'));
     }
 
     /**

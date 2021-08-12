@@ -44,7 +44,7 @@ class Book extends PrimaryModel
         return $this->morphMany(Image::class, 'imagable');
     }
 
-    public function ordermetas()
+    public function order_metas()
     {
         return $this->morphMany(OrderMeta::class, 'ordermetable');
     }

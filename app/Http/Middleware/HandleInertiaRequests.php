@@ -42,12 +42,12 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
                 return $q->with(['privileges' => function ($q) {
-                    return $q->orderBy('order', 'asc')->select('name_ar','name_en','index','main_menu','image');
-                }]);
-            }])->first() : null,
-            'settings' => fn () => Setting::first(),
-            'success' => fn () => $request->session()->get('success'),
-            'error' => fn () => $request->session()->get('error')
+                    return $q->orderBy('order', 'asc')->select('name_ar', 'name_en', 'index', 'main_menu', 'image');
+                }])->select('id','name','name_en','name_ar','is_super','is_admin','is_visible','is_client','is_company','is_author');
+            }])->first()->only('name_ar','name_en','image','role') : null,
+            'settings' => fn() => Setting::select('name_ar', 'name_en', 'image', 'twitter', 'facebook', 'instagram', 'caption_ar', 'caption_en')->first(),
+            'success' => fn() => $request->session()->get('success'),
+            'error' => fn() => $request->session()->get('error')
         ]);
     }
 }

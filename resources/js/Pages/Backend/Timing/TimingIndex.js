@@ -9,7 +9,7 @@ import GlobalContext from "../context/GlobalContext";
 import moment from 'moment';
 
 export default function ProductAttributeIndex({elements}) {
-    const {trans, theme, handleDeleteItem, classNames} = useContext(BackendContext);
+    const {trans, theme, handleDeleteItem, classNames, getLocalized } = useContext(BackendContext);
     const { settings } = useContext(GlobalContext);
     const {params} = route();
 
@@ -20,10 +20,10 @@ export default function ProductAttributeIndex({elements}) {
                 <div className=" overflow-auto">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-${settings.theme}-600` : 'bg-blue-600', "shadow border-b border-gray-200 sm:rounded-lg")}>
+                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b border-gray-200 sm:rounded-lg")}>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead
-                                    className={classNames(true ? `bg-${settings.theme}-300` : '', "text-black font-extrabold text-sm uppercase")}>
+                                    className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold text-sm uppercase")}>
                                 <tr>
                                     <th
                                         scope="col"
@@ -86,7 +86,7 @@ export default function ProductAttributeIndex({elements}) {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{moment(a.date).format('L')}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.start}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.end}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.service.name}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.service[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.timing.edit`, a.id)}

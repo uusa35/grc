@@ -93,7 +93,7 @@ trait ImageHelpers
                                                 $constraint->aspectRatio();
                                             });
                                         } else {
-                                            $img->resize($dimensions[0] / 2, $dimensions[0] / 2);
+                                            $img->resize($dimensions[0] / 2, $dimensions[1] / 2);
                                         }
                                         $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
                                     } elseif ($value === 'thumbnail') {
@@ -102,7 +102,7 @@ trait ImageHelpers
                                                 $constraint->aspectRatio();
                                             });
                                         } else {
-                                            $img->resize($dimensions[0] / 3, $dimensions[0] / 3);
+                                            $img->resize($dimensions[0] / 3, $dimensions[1] / 3);
                                         }
                                         $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
                                     }

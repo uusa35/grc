@@ -14,7 +14,7 @@ import moment from 'moment';
 import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
 
 
-export default function BookEdit({users, sizes, colors, categories, book, elementCategories, brands}) {
+export default function BookEdit({users, categories, book, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
     const {
@@ -454,7 +454,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
-                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={book.imageThumb} alt=""/>
+                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={getImageThumb(book.image)} alt=""/>
                                 </div>
                                 <ToolTipWidget message={trans('book_main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
@@ -483,7 +483,7 @@ export default function BookEdit({users, sizes, colors, categories, book, elemen
                                     {
                                         book.images &&
                                         <img className={`h-24 w-20 bg-cover rounded-md`}
-                                             src={book.images[0]?.imageThumb} alt=""/>
+                                             src={getImageThumb(book.images[0]?.image)} alt=""/>
                                     }
                                 </div>
                                 <ToolTipWidget message={trans('more_images_instruction')}/>

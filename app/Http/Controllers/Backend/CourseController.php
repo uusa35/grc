@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseStore;
+use App\Http\Requests\CourseUpdate;
 use App\Models\Course;
-use App\Models\Slide;
-use App\Services\Search\Filters;
+use App\Models\Category;
+use App\Models\User;
 use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
 
@@ -29,24 +31,34 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $elements = Slide::paginate(Self::TAKE_LESS)->appends(request()->except(['page','_token']));
-        return inertia('Backend/Course/CourseIndex', compact('elements'));
+        return redirect()->route('backend.course.search');
     }
 
-    public function search(Filters $filters)
+    public function search(ProductFilters $filters)
     {
         $this->authorize('search', 'course');
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()], 400);
+            return inertia('Backend/Course/CourseIndex', $validator->errors()->all());
         }
-        $elements = Course::filters($filters)->with('user')->orderBy('id', 'desc')->whereHas('user', function ($q) {
-            return auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id());
-        })->paginate(Self::TAKE_LESS)->appends(request()->except(['page','_token']));
+        $elements = Course::filters($filters)
+            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with('user')
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
+            ->withQueryString()->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+                'created_at' => $element->created_at,
+                'price' => $element->price,
+                'active' => $element->active,
+                'image' => $element->image,
+                'sku' => $element->sku,
+                'on_sale' => $element->on_sale,
+                'user' => $element->user->only('id', 'name_ar', 'name_en'),
+            ]);
         return inertia('Backend/Course/CourseIndex', compact('elements'));
-        return redirect()->to('backend/course/search?' . request()->getQueryString(), compact('elements'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -55,7 +67,13 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::active()->authors()->get();
+        $categories = Category::onlyParent()->onlyForCourses()->with(['children' => function ($q) {
+            return $q->onlyForCourses()->with(['children' => function ($q) {
+                return $q->onlyForCourses();
+            }]);
+        }])->get();
+        return inertia('Backend/Course/CourseCreate', compact('users', 'categories'));
     }
 
     /**
@@ -64,9 +82,19 @@ class CourseController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CourseStore $request)
     {
-        //
+        $element = Course::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags']));
+        if ($element) {
+            $element->tags()->sync($request->tags);
+            $element->videos()->sync($request->videos);
+            $element->categories()->sync($request->categories);
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
+            $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
+            return redirect()->route('backend.course.edit', $element->id)->with('success', trans('general.process_success'));
+        }
+        return redirect()->route('backend.course.create')->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -88,7 +116,15 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        $users = User::active()->authors()->get();
+        $categories = Category::onlyParent()->onlyForProducts()->with(['children' => function ($q) {
+            return $q->onlyForCourses()->with(['children' => function ($q) {
+                return $q->onlyForCourses();
+            }]);
+        }])->get();
+        $course = $course->whereId($course->id)->with('images', 'user', 'categories')->first();
+        $elementCategories = $course->categories->pluck('id')->toArray();
+        return inertia('Backend/Course/CourseEdit', compact('course', 'users', 'categories', 'elementCategories'));
     }
 
     /**
@@ -98,9 +134,19 @@ class CourseController extends Controller
      * @param \App\Models\Course $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(CourseUpdate $request, Course $course)
     {
-        //
+        $updated = $course->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos', 'qr', 'size_chart_image']));
+        if ($updated) {
+            $request->has('tags') ? $course->tags()->sync($request->tags) : null;
+            $request->has('videos') ? $course->videos()->sync($request->videos) : null;
+            $request->has('categories') ? $course->categories()->sync($request->categories) : null;
+            $request->hasFile('image') ? $this->saveMimes($course, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('qr') ? $this->saveMimes($course, $request, ['qr'], ['300', '300'], false) : null;
+            $request->hasFile('file') ? $this->savePath($course, $request, 'file') : null;
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->route('backend.course.edit', $course->id)->with('error', 'process_failure');
     }
 
     /**
@@ -111,6 +157,17 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        try {
+            $course->images()->delete();
+            $course->slides()->delete();
+            $course->tags()->delete();
+            $course->comments()->delete();
+            $course->favorites()->delete();
+            $course->categories()->delete();
+            $course->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 }

@@ -72,6 +72,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => AdminAccessOnly::class,
         'super' => SuperAccessOnly::class,
-        'dashboard' => DashBoardAccessOnly::class,
+        'dashboard' => DashBoardAccessOnly::class
     ];
 }

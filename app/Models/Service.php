@@ -89,7 +89,7 @@ class Service extends PrimaryModel
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function ordermetas()
+    public function order_metas()
     {
         return $this->morphMany(OrderMeta::class, 'ordermetable');
     }

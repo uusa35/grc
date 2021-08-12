@@ -17,7 +17,7 @@ import GlobalContext from "../context/GlobalContext";
 
 export default function SettingEdit({setting, themes}) {
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, parentModule, getImageThumb} = useContext(BackendContext)
+    const {classNames, trans, theme, currentFormTab, parentModule, getImageThumb, getLocalized } = useContext(BackendContext)
 
     const {data, setData, put, post, progress, reset} = useForm({
         name_ar: setting.name_ar,
@@ -282,7 +282,7 @@ export default function SettingEdit({setting, themes}) {
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
-                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={setting.imageThumb} alt=""/>
+                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={getImageThumb(setting.image)} alt=""/>
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
@@ -310,7 +310,7 @@ export default function SettingEdit({setting, themes}) {
                                     {
                                         setting.images &&
                                         <img className={`h-24 w-20 bg-cover rounded-md`}
-                                             src={setting.images[0]?.imageThumb} alt=""/>
+                                             src={getImageThumb(setting.images[0]?.image)} alt=""/>
                                     }
                                 </div>
                                 <ToolTipWidget message={trans('product_more_images_instruction')}/>

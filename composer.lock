@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12e98f0f6e653ccdb409922b0fe07594",
+    "content-hash": "44e7971188f2a3310470aafd970e0334",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3396,6 +3396,50 @@
                 }
             ],
             "time": "2021-08-11T01:06:55+00:00"
+        },
+        {
+            "name": "reinink/remember-query-strings",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reinink/remember-query-strings.git",
+                "reference": "91c7723a4545ba96d0474581563b30cd262f56e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reinink/remember-query-strings/zipball/91c7723a4545ba96d0474581563b30cd262f56e2",
+                "reference": "91c7723a4545ba96d0474581563b30cd262f56e2",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Reinink\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "homepage": "https://reinink.ca"
+                }
+            ],
+            "description": "Laravel middleware that automatically remembers and restores query strings.",
+            "homepage": "https://github.com/reinink/remember-query-strings",
+            "keywords": [
+                "laravel",
+                "middleware",
+                "query-strings"
+            ],
+            "support": {
+                "issues": "https://github.com/reinink/remember-query-strings/issues",
+                "source": "https://github.com/reinink/remember-query-strings/tree/master"
+            },
+            "time": "2019-04-02T17:35:40+00:00"
         },
         {
             "name": "spatie/laravel-activitylog",

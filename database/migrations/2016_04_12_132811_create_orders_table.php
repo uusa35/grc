@@ -22,21 +22,19 @@ class CreateOrdersTable extends Migration
             $table->decimal('discount', 6, 2)->unsigned()->nullable(); //
             $table->decimal('net_price', 6, 2)->unsigned(); // used if coupon code exists
             $table->string('email')->nullable();
-            $table->string('address')->nullable();
-            $table->string('area')->nullable();
-            $table->string('country')->nullable();
             $table->string('mobile')->nullable();
             $table->string('phone')->nullable();
             $table->mediumText('notes')->nullable();
             $table->string('reference_id')->nullable()->deafult(0);
             $table->string('payment_method')->nullable();
 
-            $table->string('day')->nullable();
-            $table->time('time')->nullable();
-            $table->dateTime('booked_at')->nullable();
+
             $table->boolean('receive_on_branch')->default(false);
             $table->string('shipment_reference')->nullable();
 
+            $table->string('address')->nullable();
+            $table->string('area')->nullable();
+            $table->string('country')->nullable();
             $table->string('block')->nullable();
             $table->string('street')->nullable();
             $table->string('building')->nullable();

@@ -84,7 +84,7 @@ class BookController extends Controller
      */
     public function store(BookStore $request)
     {
-        $element = Book::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'start_sale', 'end_sale', 'videos']));
+        $element = Book::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags']));
         if ($element) {
             $element->tags()->sync($request->tags);
             $element->videos()->sync($request->videos);

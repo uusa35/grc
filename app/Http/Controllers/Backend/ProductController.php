@@ -72,14 +72,14 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $users = User::active()->hasMerchantBehaviour()->select('id','name_ar', 'name_en')->get();
-        $sizes = Size::active()->select('id','name_ar', 'name_en')->get();
-        $colors = Color::active()->select('id','name_ar', 'name_en')->get();
-        $brands = Brand::active()->select('id','name_ar', 'name_en')->get();
+        $users = User::active()->hasMerchantBehaviour()->select('id', 'name_ar', 'name_en')->get();
+        $sizes = Size::active()->select('id', 'name_ar', 'name_en')->get();
+        $colors = Color::active()->select('id', 'name_ar', 'name_en')->get();
+        $brands = Brand::active()->select('id', 'name_ar', 'name_en')->get();
         $categories = Category::onlyParent()->onlyForProducts()
             ->with(['children' => fn($q) => $q->onlyForProducts()
                 ->with(['children' => fn($q) => $q->onlyForProducts()])
-            ])->select('id','name_ar', 'name_en')->get();
+            ])->select('id', 'name_ar', 'name_en')->get();
         return inertia('Backend/Product/ProductCreate', compact('users', 'sizes', 'colors', 'categories', 'brands'));
     }
 
@@ -126,14 +126,14 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $users = User::active()->hasMerchantBehaviour()->select('id','name_ar', 'name_en')->get();
-        $sizes = Size::active()->select('id','name_ar', 'name_en')->get();
-        $colors = Color::active()->select('id','name_ar', 'name_en')->get();
-        $brands = Brand::active()->select('id','name_ar', 'name_en')->get();
+        $users = User::active()->hasMerchantBehaviour()->select('id', 'name_ar', 'name_en')->get();
+        $sizes = Size::active()->select('id', 'name_ar', 'name_en')->get();
+        $colors = Color::active()->select('id', 'name_ar', 'name_en')->get();
+        $brands = Brand::active()->select('id', 'name_ar', 'name_en')->get();
         $categories = Category::onlyParent()->onlyForProducts()
             ->with(['children' => fn($q) => $q->onlyForProducts()
                 ->with(['children' => fn($q) => $q->onlyForProducts()])
-            ])->select('id','name_ar', 'name_en')->get();
+            ])->select('id', 'name_ar', 'name_en')->get();
         $product = $product->whereId($product->id)->with('images', 'user', 'categories')->first();
         $elementCategories = $product->categories->pluck('id')->toArray();
         return inertia('Backend/Product/ProductEdit', compact('users', 'sizes', 'colors', 'categories', 'product', 'elementCategories', 'brands'));

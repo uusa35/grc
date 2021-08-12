@@ -22,11 +22,12 @@ const SystemMessage = () => {
         }
     }, [sysMessage])
 
-    const {errors, success, error} = usePage().props
+    const { errors, error, success} = usePage().props;
+    console.log('error here ===>', );
 
     useEffect(() => {
         success && !isEmpty(success) ? setSystemMessage({message: success, type: 'success'}) : null;
-        errors && !isEmpty(errors) ? setSystemMessage({message: first(errors), type: 'error'}) : null;
+        errors && !isEmpty(errors) ? setSystemMessage({message: first(map(errors, e => e)), type: 'error'}) : null;
         error && !isEmpty(error) ? setSystemMessage({message: error, type: 'error'}) : null;
         setTimeout(() => setSystemMessage({message: '', type: ''}), 3000)
     }, [success, errors, error])

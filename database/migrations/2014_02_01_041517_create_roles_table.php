@@ -28,11 +28,11 @@ class CreateRolesTable extends Migration
             $table->boolean('is_celebrity')->default(false);
             $table->boolean('is_author')->default(false);
             $table->boolean('is_visible')->default(false);
+            $table->boolean('is_driver')->default(false);
             $table->boolean('active')->default(true);
             $table->integer('order')->nullable();
             $table->string('color')->nullable();
             $table->string('image')->nullable();
-            $table->boolean('is_driver')->default(false);
             $table->timestamps();
         });
     }

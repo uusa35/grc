@@ -8,7 +8,7 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 
 export default function SettingIndex({ setting }) {
-    const { trans } = useContext(BackendContext);
+    const { trans, getImageThumb , getLocalized  } = useContext(BackendContext);
 
     return (
         <BackendContainer>
@@ -33,12 +33,12 @@ export default function SettingIndex({ setting }) {
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <img
                                 className={`w-20 h-auto rounded-md shadow-md`}
-                                src={setting.imageThumb} alt={setting.name}/>
+                                src={getImageThumb(setting.image)} alt={setting[getLocalized()]}/>
                         </dd>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">{trans('name')}</dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{setting.name}</dd>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{setting[getLocalized()]}</dd>
                     </div>
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">{trans('email')}</dt>
@@ -50,12 +50,12 @@ export default function SettingIndex({ setting }) {
                     </div>
                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">{trans('country')}</dt>
-                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{setting.country}</dd>
+                        <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{setting[getLocalized('country')]}</dd>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt className="text-sm font-medium text-gray-500">{trans('description')}</dt>
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                            {setting.description}
+                            {setting[getLocalized('description')]}
                         </dd>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -104,10 +104,10 @@ export default function SettingIndex({ setting }) {
             </div>
         </div>
             <ul role="list" className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-                {setting.images.map((file) => (
-                    <li key={file.id} className="relative">
+                {setting.images.map((img) => (
+                    <li key={img.id} className="relative">
                         <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-gray-500 overflow-hidden">
-                            <img src={file.imageThumb} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
+                            <img src={getImageThumb(img.image)} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
                             <button type="button" className="absolute inset-0 focus:outline-none">
                                 {/*<span className="sr-only">View details for {file.title}</span>*/}
                             </button>

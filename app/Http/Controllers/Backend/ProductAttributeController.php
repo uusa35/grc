@@ -21,6 +21,7 @@ class ProductAttributeController extends Controller
     {
         $this->authorizeResource(ProductAttribute::class, 'attribute');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,10 +29,9 @@ class ProductAttributeController extends Controller
      */
     public function index()
     {
-        request()->validate(
-            ['product_id' => 'required|integer|exists:products,id']);
+        request()->validate(['product_id' => 'required|integer|exists:products,id']);
         $elements = ProductAttribute::where(['product_id' => request()->product_id])
-            ->with('color', 'size', 'product')->orderBy('id','desc')
+            ->with('color', 'size', 'product')->orderBy('id', 'desc')
             ->paginate(Self::TAKE_LESS)
             ->withQueryString()
             ->through(fn($element) => [
@@ -41,9 +41,9 @@ class ProductAttributeController extends Controller
                 'size_id' => $element->size_id,
                 'price' => $element->price,
                 'qty' => $element->qty,
-                'color' => $element->color->only('id','name_ar','name_en'),
-                'size' => $element->color->only('id','name_ar','name_en'),
-                'product' => $element->product->only('id','price')
+                'color' => $element->color->only('id', 'name_ar', 'name_en'),
+                'size' => $element->color->only('id', 'name_ar', 'name_en'),
+                'product' => $element->product->only('id', 'price')
             ]);
         return inertia('Backend/ProductAttribute/ProductAttributeIndex', compact('elements'));
     }
@@ -55,22 +55,17 @@ class ProductAttributeController extends Controller
      */
     public function create()
     {
-        $validate = validator(request()->all(),
-            ['product_id' => 'required|integer|exists:products,id']);
-        if ($validate->fails()) {
-            return redirect()->back()->withErrors($validate->errors()->first());
-        }
-        $sizes = Size::active()->select('id','name_ar', 'name_en')->get();
-        $colors = Color::active()->select('id','name_ar', 'name_en')->get();
-        $element = Product::whereId(request()->product_id)
-            ->select('id','price')->first();
-        return inertia('Backend/ProductAttribute/ProductAttributeCreate', compact( 'element','colors', 'sizes'));
+        request()->validate(['product_id' => 'required|integer|exists:products,id']);
+        $sizes = Size::active()->select('id', 'name_ar', 'name_en')->get();
+        $colors = Color::active()->select('id', 'name_ar', 'name_en')->get();
+        $element = Product::whereId(request()->product_id)->select('id', 'price')->first();
+        return inertia('Backend/ProductAttribute/ProductAttributeCreate', compact('element', 'colors', 'sizes'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -90,7 +85,7 @@ class ProductAttributeController extends Controller
         if (!is_null($productAttribute) && $productAttribute->id) {
             return redirect()->back()->withErrors(trans('general.progress_failure'));
         } else {
-            $element = ProductAttribute::create($request->request->all());
+            ProductAttribute::create($request->request->all());
             return redirect()->route('backend.attribute.index', ['product_id' => $request->product_id])->with('success', trans('general.progress_success'));
         }
     }
@@ -98,7 +93,7 @@ class ProductAttributeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProductAttribute  $attribute
+     * @param \App\Models\ProductAttribute $attribute
      * @return \Illuminate\Http\Response
      */
     public function show(ProductAttribute $attribute)
@@ -109,36 +104,42 @@ class ProductAttributeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductAttribute  $attribute
+     * @param \App\Models\ProductAttribute $attribute
      * @return \Illuminate\Http\Response
      */
     public function edit(ProductAttribute $attribute)
     {
-        $sizes = Size::active()->select('id','name_ar', 'name_en')->get();
-        $colors = Color::active()->select('id','name_ar', 'name_en')->get();
-        return inertia('Backend/ProductAttribute/ProductAttributeEdit', compact('attribute','colors','sizes'));
+        $sizes = Size::active()->select('id', 'name_ar', 'name_en')->get();
+        $colors = Color::active()->select('id', 'name_ar', 'name_en')->get();
+        return inertia('Backend/ProductAttribute/ProductAttributeEdit', compact('attribute', 'colors', 'sizes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductAttribute  $attribute
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\ProductAttribute $attribute
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ProductAttribute $attribute)
     {
-        if($attribute->update($request->all())) {
-            return redirect()->route('backend.attribute.index', ['product_id' => $attribute->product_id])->with('success', __('general.progress_success'));
+        request()->validate([
+            'color_id' => 'required|exists:colors,id',
+            'size_id' => 'required|exists:sizes,id',
+            'qty' => 'required|integer|min:1',
+            'price' => 'required|min:0.5|max:999',
+        ]);
+        if ($attribute->update($request->all())) {
+            return redirect()->route('backend.attribute.index', ['product_id' => $attribute->product_id])->with('success', trans('general.process_success'));
         }
-        return redirect()->back()->withErrors(__('general.progress_failure'));
+        return redirect()->back()->with('error', trans('general.progress_failure'));
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProductAttribute  $attribute
+     * @param \App\Models\ProductAttribute $attribute
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProductAttribute $attribute)

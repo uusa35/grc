@@ -1,18 +1,18 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import {Fragment} from 'react'
+import {Popover, Transition} from '@headlessui/react'
+import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 
 const navigation = [
-    { name: 'Product', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
+    {name: 'Product', href: '#'},
+    {name: 'Features', href: '#'},
+    {name: 'Marketplace', href: '#'},
+    {name: 'Company', href: '#'},
 ]
 
-export default function HomePage({ auth }) {
+export default function HomePage({auth}) {
     return (
         <div className="relative bg-gray-50 overflow-hidden">
             <div className="hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full" aria-hidden="true">
@@ -33,10 +33,10 @@ export default function HomePage({ auth }) {
                                 height={20}
                                 patternUnits="userSpaceOnUse"
                             >
-                                <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
+                                <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor"/>
                             </pattern>
                         </defs>
-                        <rect width={404} height={784} fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
+                        <rect width={404} height={784} fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)"/>
                     </svg>
                     <svg
                         className="absolute left-full transform -translate-y-3/4 -translate-x-1/4 md:-translate-y-1/2 lg:-translate-x-1/2"
@@ -54,17 +54,17 @@ export default function HomePage({ auth }) {
                                 height={20}
                                 patternUnits="userSpaceOnUse"
                             >
-                                <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor" />
+                                <rect x={0} y={0} width={4} height={4} className="text-gray-200" fill="currentColor"/>
                             </pattern>
                         </defs>
-                        <rect width={404} height={784} fill="url(#5d0dd344-b041-4d26-bec4-8d33ea57ec9b)" />
+                        <rect width={404} height={784} fill="url(#5d0dd344-b041-4d26-bec4-8d33ea57ec9b)"/>
                     </svg>
                 </div>
             </div>
 
             <div className="relative pt-6 pb-16 sm:pb-24">
                 <Popover>
-                    {({ open }) => (
+                    {({open}) => (
                         <>
                             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                                 <nav
@@ -82,36 +82,50 @@ export default function HomePage({ auth }) {
                                                 />
                                             </a>
                                             <div className="-mr-2 flex items-center md:hidden">
-                                                <Popover.Button className="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                                <Popover.Button
+                                                    className="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                                     <span className="sr-only">Open main menu</span>
-                                                    <MenuIcon className="h-6 w-6" aria-hidden="true" />
+                                                    <MenuIcon className="h-6 w-6" aria-hidden="true"/>
                                                 </Popover.Button>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="hidden md:flex md:space-x-10">
                                         {navigation.map((item) => (
-                                            <a key={item.name} href={item.href} className="font-medium text-gray-500 hover:text-gray-900">
+                                            <a key={item.name} href={item.href}
+                                               className="font-medium text-gray-500 hover:text-gray-900">
                                                 {item.name}
                                             </a>
                                         ))}
                                     </div>
-                                    <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
+                                    <div
+                                        className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
                     <span className="inline-flex rounded-md shadow">
                         {
                             !auth ? <a
-                                href={route('login')}
-                                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
-                            >
-                                Log in
-                            </a>
-                            :
-                                <Link
-                                    href={route(`backend.home`)}
+                                    href={route('login')}
                                     className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
                                 >
-                                    Backend
-                                </Link>
+                                    Log in
+                                </a>
+                                :
+                                <>
+                                    <Link
+                                        href={route(`backend.home`)}
+                                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
+                                    >
+                                        Backend
+                                    </Link>
+                                    <button
+                                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            document.getElementById('logout-form').submit()
+                                        }}
+                                    >
+                                        Logout
+                                    </button>
+                                </>
                         }
                     </span>
                                     </div>
@@ -133,7 +147,8 @@ export default function HomePage({ auth }) {
                                     static
                                     className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
                                 >
-                                    <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+                                    <div
+                                        className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                                         <div className="px-5 pt-4 flex items-center justify-between">
                                             <div>
                                                 <img
@@ -143,9 +158,10 @@ export default function HomePage({ auth }) {
                                                 />
                                             </div>
                                             <div className="-mr-2">
-                                                <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                                <Popover.Button
+                                                    className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                                     <span className="sr-only">Close menu</span>
-                                                    <XIcon className="h-6 w-6" aria-hidden="true" />
+                                                    <XIcon className="h-6 w-6" aria-hidden="true"/>
                                                 </Popover.Button>
                                             </div>
                                         </div>
@@ -180,7 +196,8 @@ export default function HomePage({ auth }) {
                             <span className="block text-indigo-600 xl:inline">online business</span>
                         </h1>
                         <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
+                            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                            Elit sunt amet
                             fugiat veniam occaecat fugiat aliqua.
                         </p>
                         <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">

@@ -8,7 +8,7 @@ import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
 import axios from "axios";
 
-export default function BookCreate({users, categories}) {
+export default function CourseCreate({users, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, auth, getLocalized, getImateThumb  } = useContext(BackendContext)
@@ -74,8 +74,8 @@ export default function BookCreate({users, categories}) {
         for (let i = 0; i < currentImages.length; i++) {
             formData.append(`images[${i}]`, currentImages[i]);
         }
-        formData.append(`model`, 'book');
-        post('/backend/book');
+        formData.append(`model`, 'course');
+        post('/backend/course');
         // uploading images module separately due to some errors occurred in setData by inertia
         setTimeout(() => {
             return axios.post(`/api/images/upload`, formData).then(r => r.data).catch(e => console.log('eee', e));
@@ -127,7 +127,7 @@ export default function BookCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
@@ -149,7 +149,7 @@ export default function BookCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
@@ -172,7 +172,7 @@ export default function BookCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
                                 </p>
@@ -196,7 +196,7 @@ export default function BookCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_sale_price_instruction')}/>
+                                <ToolTipWidget message={trans('course_sale_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
                                 </p>
@@ -219,7 +219,7 @@ export default function BookCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_qty_instruction')}/>
+                                <ToolTipWidget message={trans('course_qty_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
                                 </p>
@@ -241,7 +241,7 @@ export default function BookCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_sku_instruction')}/>
+                                <ToolTipWidget message={trans('course_sku_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
                                 </p>
@@ -264,7 +264,7 @@ export default function BookCreate({users, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_weight_instruction')}/>
+                                <ToolTipWidget message={trans('course_weight_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.weight && <div className={`text-red-600`}>{errors.weight}</div>}
                                 </p>
@@ -320,7 +320,7 @@ export default function BookCreate({users, categories}) {
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_main_image_instruction')}/>
+                                <ToolTipWidget message={trans('course_main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
@@ -472,7 +472,7 @@ export default function BookCreate({users, categories}) {
                                         </div>
                                     </fieldset>
                                 </div>
-                                <ToolTipWidget message={trans('book_categories_instruction')}/>
+                                <ToolTipWidget message={trans('course_categories_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
                                 </p>
@@ -480,7 +480,7 @@ export default function BookCreate({users, categories}) {
                             {/* embedded*/}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="embedded" className={`block  font-medium text-gray-700`}>
-                                    {trans('embedded')} {trans('book')}
+                                    {trans('embedded')} {trans('course')}
                                 </label>
                                 <div className="mt-1">
                                          <textarea
@@ -493,7 +493,7 @@ export default function BookCreate({users, categories}) {
                                              defaultValue={data.embedded}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_embedded_notes_instruction')}/>
+                                <ToolTipWidget message={trans('course_embedded_notes_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.embedded && <div className={`text-red-600`}>{errors.embedded}</div>}
                                 </p>
@@ -638,7 +638,7 @@ export default function BookCreate({users, categories}) {
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_sale_price_instruction')}/>
+                                    <ToolTipWidget message={trans('course_sale_price_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.on_sale && <div className={`text-red-600`}>{errors.on_sale}</div>}
@@ -683,7 +683,7 @@ export default function BookCreate({users, categories}) {
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_free_instruction')}/>
+                                    <ToolTipWidget message={trans('course_free_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.free &&
@@ -729,7 +729,7 @@ export default function BookCreate({users, categories}) {
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_download_instruction')}/>
+                                    <ToolTipWidget message={trans('course_download_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.download &&
@@ -747,7 +747,7 @@ export default function BookCreate({users, categories}) {
                         </div>
 
                     </div>
-                    <FormBtns type={'book'}/>
+                    <FormBtns type={'course'}/>
                 </form>
 
                 <div

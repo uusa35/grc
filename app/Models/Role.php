@@ -18,6 +18,7 @@ class Role extends PrimaryModel
         'is_company' => 'boolean',
         'is_super' => 'boolean',
         'is_admin' => 'boolean',
+        'is_author' => 'boolean',
     ];
 
     public function privileges()

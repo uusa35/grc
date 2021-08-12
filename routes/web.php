@@ -80,7 +80,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth',
     Route::resource('course', CourseController::class);
     Route::resource('slide', SlideController::class);
     Route::resource('image', ImageController::class)->only('destroy');
-    Route::get('clear/element', [DashboardController::class,'clearElement'])->name('element.clear');
+    Route::get('clear/element', [DashboardController::class, 'clearElement'])->name('element.clear');
     Route::resource('product', ProductController::class);
     Route::resource('coupon', CouponController::class);
     Route::resource('attribute', ProductAttributeController::class);

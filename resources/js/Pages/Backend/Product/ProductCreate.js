@@ -116,6 +116,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
 
                         <div className="pt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            {/* NAME AR*/}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="name_ar" className={`block  font-medium text-gray-700`}>
                                     {trans('name_ar')}
@@ -132,12 +133,12 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <ToolTipWidget message={trans('name_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
-
+                            {/* NAME EN */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="name_en" className={`block  font-medium text-gray-700`}>
                                     {trans('name_en')}
@@ -154,12 +155,12 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <ToolTipWidget message={trans('name_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
                             </div>
-
+                            {/*PRICE*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="price" className={`block  font-medium text-gray-700`}>
                                     {trans('price')}
@@ -177,7 +178,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <ToolTipWidget message={trans('price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
                                 </p>
@@ -201,7 +202,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_sale_price_instruction')}/>
+                                <ToolTipWidget message={trans('sale_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
                                 </p>
@@ -224,7 +225,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_qty_instruction')}/>
+                                <ToolTipWidget message={trans('qty_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
                                 </p>
@@ -246,7 +247,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_sku_instruction')}/>
+                                <ToolTipWidget message={trans('sku_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
                                 </p>
@@ -269,7 +270,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_weight_instruction')}/>
+                                <ToolTipWidget message={trans('weight_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.weight && <div className={`text-red-600`}>{errors.weight}</div>}
                                 </p>
@@ -328,7 +329,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         }
                                     </select>
                                 </div>
-                                <ToolTipWidget message={trans('product_user_instruction')}/>
+                                <ToolTipWidget message={trans('user_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {trans('size_or_capacity')}
                                     {errors.size_id && <div className={`text-red-600`}>{errors.size_id}</div>}
@@ -357,7 +358,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         }
                                     </select>
                                 </div>
-                                <ToolTipWidget message={trans('product_user_instruction')}/>
+                                <ToolTipWidget message={trans('color_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.color_id && <div className={`text-red-600`}>{errors.color_id}</div>}
                                 </p>
@@ -379,7 +380,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_main_image_instruction')}/>
+                                <ToolTipWidget message={trans('main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
@@ -505,7 +506,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                         </div>
                                     </fieldset>
                                 </div>
-                                <ToolTipWidget message={trans('product_categories_instruction')}/>
+                                <ToolTipWidget message={trans('categories_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
                                 </p>
@@ -651,7 +652,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('product_sale_price_instruction')}/>
+                                    <ToolTipWidget message={trans('sale_price_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.on_sale && <div className={`text-red-600`}>{errors.on_sale}</div>}
@@ -696,7 +697,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('product_has_attributes_instruction')}/>
+                                    <ToolTipWidget message={trans('has_attributes_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.has_attributes &&

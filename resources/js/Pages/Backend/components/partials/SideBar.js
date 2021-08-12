@@ -288,7 +288,7 @@ const SideBar = () => {
                                                             href={route('backend.setting.index')}
                                                             className={classNames(
                                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-${settings.theme}-200`
+                                                                `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
                                                             )}
                                                         >
                                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

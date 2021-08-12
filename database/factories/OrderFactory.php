@@ -48,13 +48,6 @@ class OrderFactory extends Factory
             'country' => Country::all()->random()->name,
             'area' => $this->faker->country,
             'coupon_id' => Coupon::all()->random()->id,
-            'booked_at' => Carbon::now()->addDays($this->faker->numberBetween(1, 9)),
-            'day' => function ($array) {
-                return Carbon::parse($array['booked_at'])->format('l');
-            },
-            'time' => function ($array) {
-                return Carbon::parse(($array['booked_at']))->format('h:i:s');
-            },
             'notes' => $this->faker->paragraph,
             'paid' => $this->faker->boolean(true),
             'shipment_reference' => $this->faker->bankAccountNumber,

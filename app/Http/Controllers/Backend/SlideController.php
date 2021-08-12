@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
+use App\Models\Category;
+use App\Models\Course;
+use App\Models\Product;
+use App\Models\Service;
 use App\Models\Slide;
+use App\Models\User;
 use App\Services\Search\Filters;
 use Illuminate\Http\Request;
 
@@ -27,23 +33,19 @@ class SlideController extends Controller
      */
     public function index()
     {
-        $validate = validator(request()->all(), [
-            'slidable_id' => 'required|integer',
-            'slidable_type' => 'required|string'
+        return redirect()->route('backend.slide.search', [
+            'slidable_id' => request()->slidable_id,
+            'slidable_type' => request()->slidable_type,
         ]);
-        if ($validate->fails()) {
-            return redirect()->back()->withErrors($validate->errors()->first());
-        }
-        $className = 'App\Models\\' . ucfirst(request()->slidable_type);
-        $element = new $className();
-        $element = $element->whereId(request()->slidable_id)->first();
-        $elements = $element->slides()->orderBy('id', 'desc')->paginate(Self::TAKE_LESS);
-        return inertia('Backend/Slide/SlideIndex', compact('elements'));
     }
 
     public function search(Filters $filters)
     {
         $this->authorize('search', 'slide');
+        request()->validate([
+            'slidable_id' => 'required|integer',
+            'slidable_type' => 'required|string'
+        ]);
         $elements = Slide::filters($filters)->with(['slidable' => function ($q) {
             if (request()->slidable_type !== 'user' && !auth()->user()->isAdminOrAbove) {
                 return $q->whereHas('user', function ($q) {
@@ -52,7 +54,19 @@ class SlideController extends Controller
             } else {
                 return $q;
             }
-        }])->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)->appends(request()->except(['page','_token']));
+        }])->orderBy('id', 'desc')
+            ->paginate(Self::TAKE_LESS)
+            ->withQueryString()
+            ->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+                'image' => $element->image,
+                'active' => $element->active,
+                'slidable_type' => class_basename($element->slidable),
+                'slidable_id' => $element->slidable_id,
+                'slidable' => $element->slidable->only('id', 'name_ar', 'name_en')
+            ]);
         return inertia('Backend/Slide/SlideIndex', compact('elements'));
     }
 
@@ -63,7 +77,18 @@ class SlideController extends Controller
      */
     public function create()
     {
-        return inertia('Backend/Slide/SlideCreate');
+        request()->validate([
+            'slidable_id' => 'required|integer',
+            'slidable_type' => 'required|string'
+        ]);
+        $types = ['category', 'book', 'product', 'course', 'service', 'user'];
+        $products = Product::active()->select('id', 'name_ar', 'name_en')->get();
+        $services = Service::active()->select('id', 'name_ar', 'name_en')->get();
+        $courses = Course::active()->select('id', 'name_ar', 'name_en')->get();
+        $categories = Category::active()->onlyParent()->select('id', 'name_ar', 'name_en')->get();
+        $books = Book::active()->select('id', 'name_ar', 'name_en')->get();
+        $users = User::active()->authors()->select('id', 'name_ar', 'name_en')->get();
+        return inertia('Backend/Slide/SlideCreate', compact('types', 'products', 'services', 'categories', 'courses', 'books', 'users'));
     }
 
     /**
@@ -74,7 +99,26 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'slidable_id' => 'required|integer',
+            'slidable_type' => 'required|string',
+            'image' => "image"
+        ]);
+        $type = $request->slidable_type;
+        $request->request->add(['slidable_type' => 'App\Models\\' . ucfirst($request->slidable_type)]);
+        $element = Slide::create($request->except('image', '_token'));
+        if ($element) {
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1900', '750'], false) : null;
+            $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
+            return redirect()->route('backend.slide.index', [
+                'slidable_type' => $type,
+                'slidable_id' => $element->slidable_id
+            ])->with('success', trans('general.process_success'));
+        }
+        return redirect()->route('backend.slide.index', [
+            'slidable_type' => $type,
+            'slidable_id' => $request->slidable_id,
+        ])->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -96,7 +140,14 @@ class SlideController extends Controller
      */
     public function edit(Slide $slide)
     {
-        //
+        $types = ['category', 'book', 'product', 'course', 'service', 'user'];
+        $products = Product::active()->select('id', 'name_ar', 'name_en')->get();
+        $services = Service::active()->select('id', 'name_ar', 'name_en')->get();
+        $courses = Course::active()->select('id', 'name_ar', 'name_en')->get();
+        $categories = Category::active()->onlyParent()->select('id', 'name_ar', 'name_en')->get();
+        $books = Book::active()->select('id', 'name_ar', 'name_en')->get();
+        $users = User::active()->authors()->select('id', 'name_ar', 'name_en')->get();
+        return inertia('Backend/Slide/SlideEdit', compact('slide', 'types', 'products', 'services', 'categories', 'courses', 'books', 'users'));
     }
 
     /**
@@ -108,7 +159,22 @@ class SlideController extends Controller
      */
     public function update(Request $request, Slide $slide)
     {
-        //
+        request()->validate([
+            'slidable_id' => 'required|integer',
+            'slidable_type' => 'required|string',
+        ]);
+        if ($slide->update($request->except('image'))) {
+            $request->hasFile('image') ? $this->saveMimes($slide, $request, ['image'], ['1900', '750'], false) : null;
+            $request->hasFile('file') ? $this->savePath($slide, $request, 'file') : null;
+            return redirect()->route('backend.slide.index', [
+                'slidable_type' => $slide->type,
+                'slidable_id' => $slide->slidable_id
+            ])->with('success', trans('general.process_success'));
+        }
+        return redirect()->route('backend.slide.index', [
+            'slidable_type' => $slide->type,
+            'slidable_id' => $slide->slidable_id,
+        ])->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -119,6 +185,9 @@ class SlideController extends Controller
      */
     public function destroy(Slide $slide)
     {
-        //
+        if ($slide->delete()) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }

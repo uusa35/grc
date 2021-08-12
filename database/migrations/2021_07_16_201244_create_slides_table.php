@@ -35,6 +35,8 @@ class CreateSlidesTable extends Migration
             $table->foreignId('category_id')->nullable()->constrained();
             $table->foreignId('product_id')->nullable()->constrained();
             $table->foreignId('service_id')->nullable()->constrained();
+            $table->foreignId('book_id')->nullable()->constrained();
+            $table->foreignId('course_id')->nullable()->constrained();
             $table->foreignId('user_id')->nullable()->constrained();
 
             $table->morphs('slidable');

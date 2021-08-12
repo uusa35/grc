@@ -19,10 +19,10 @@ export default function ProductAttributeIndex({elements, colors, sizes}) {
                 <div className=" overflow-auto">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-${settings.theme}-600` : 'bg-blue-600', "shadow border-b border-gray-200 sm:rounded-lg")}>
+                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b border-gray-200 sm:rounded-lg")}>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead
-                                    className={classNames(true ? `bg-${settings.theme}-300` : '', "text-black font-extrabold text-sm uppercase")}>
+                                    className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold text-sm uppercase")}>
                                 <tr>
                                     <th
                                         scope="col"

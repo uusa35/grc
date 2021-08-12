@@ -5,36 +5,37 @@ import {useContext, useMemo} from "react";
 import {BackendContext} from "../context/BackendContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
+import moment from "moment";
 import {map} from "lodash";
 
-export default function SlideCreate({types, products, services, categories, courses, books, users}) {
+export default function SlideEdit({slide , types, products, services, categories, courses, books, users}) {
     const {trans, getLocalized, parentModule, isAdminOrAbove, classNames} = useContext(BackendContext);
     const {params} = route();
-    const {data, setData, post, progress} = useForm({
-        name_ar: '',
-        name_en: '',
-        caption_ar: '',
-        caption_en: '',
-        description_en: '',
-        description_ar: '',
-        notes_ar: '',
-        notes_en: '',
-        active: 1,
-        order: '',
-        image: '',
-        file: '',
-        url: '',
-        on_home: 0,
-        is_video: 0,
-        is_intro: 0,
-        type: '',
-        category_id: '',
-        service_id: '',
-        book_id: '',
-        course_id: '',
-        user_id: '',
-        slidable_type: params.slidable_type,
-        slidable_id: params.slidable_id,
+    const {data, setData, put, progress} = useForm({
+        name_ar: slide.name_ar,
+        name_en: slide.name_en,
+        caption_ar: slide.caption_ar,
+        caption_en: slide.caption_en,
+        description_en: slide.description_en,
+        description_ar: slide.description_ar,
+        notes_ar: slide.notes_ar,
+        notes_en: slide.notes_en,
+        active: slide.active,
+        order: slide.order,
+        image: slide.image,
+        file: slide.file,
+        url: slide.url,
+        on_home: slide.on_home,
+        is_video: slide.is_video,
+        is_intro: slide.is_intro,
+        type: slide.type,
+        category_id: slide.category_id,
+        service_id: slide.service_id,
+        book_id: slide.book_id,
+        course_id: slide.course_id,
+        user_id: slide.user_id,
+        slidable_type: slide.slidable_type,
+        slidable_id: slide.slidable_id,
     });
 
     const {errors} = usePage().props;
@@ -46,9 +47,10 @@ export default function SlideCreate({types, products, services, categories, cour
         }))
     }
 
+    console.log('slide', slide);
     const submit = (e) => {
         e.preventDefault()
-        post(route(`backend.slide.store`));
+        put(route(`backend.slide.update`, slide.id));
     }
 
     useMemo(() => {

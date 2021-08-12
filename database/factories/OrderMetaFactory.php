@@ -15,6 +15,7 @@ use App\Models\Service;
 use App\Models\Size;
 use App\Models\Timing;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -41,14 +42,20 @@ class OrderMetaFactory extends Factory
             'price' => $this->faker->numberBetween(10,99),
             'shipment_cost' => $this->faker->numberBetween(1, 3),
             'wrap_as_gift' => $this->faker->boolean,
-            'product_attribute_id' => ProductAttribute::all()->random()->id,
-            'color_id' => Color::all()->random()->id,
-            'size_id' => Size::all()->random()->id,
-            'timing_id' => Timing::all()->random()->id,
-            'country_id' => Country::all()->random()->id,
-            'merchant_id' => User::all()->random()->id,
+            'color' => Color::all()->random()->name_en,
+            'size' => Size::all()->random()->name_en,
+//            'product_attribute_id' => ProductAttribute::all()->random()->id,
+//            'color_id' => Color::all()->random()->id,
+//            'size_id' => Size::all()->random()->id,
+//            'timing_id' => Timing::all()->random()->id,
+//            'country_id' => Country::all()->random()->id,
+//            'merchant_id' => User::all()->random()->id,
+            'booked_at' => Carbon::now()->addDays($this->faker->numberBetween(1, 9)),
+            'time' => function ($array) {
+                return Carbon::parse(($array['booked_at']))->format('h:i:s');
+            },
 
-            'ordermetable_type' => $this->faker->randomElement(['App\Models\Product', 'App\Models\Book', 'App\Models\Course', 'App\Models\Service']),
+            'ordermetable_type' => $this->faker->randomElement([Product::class, Book::class, Course::class, Service::class]),
             'ordermetable_id' => $this->faker->numberBetween(1, 99)
         ];
     }

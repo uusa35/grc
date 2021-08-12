@@ -11,7 +11,7 @@ export default function TimingCreate() {
     const {trans, theme} = useContext(BackendContext);
     const { params } = route();
     const {data, setData, post, progress} = useForm({
-        'date': '',
+        'date': moment().format('Y-M-D'),
         'start': '',
         'end': '',
         'notes_ar': '',
@@ -111,7 +111,8 @@ export default function TimingCreate() {
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        min="11:00" max="20:00"
+                                        min="11:00"
+                                        max={moment(`${data.date} ${data.start}`).add(2,'hours').format('HH:mm')}
                                         type="time"
                                         step="any"
                                         name="end"

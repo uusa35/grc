@@ -63,7 +63,7 @@ class Course extends PrimaryModel
         return $this->hasMany(Rating::class);
     }
 
-    public function ordermetas()
+    public function order_metas()
     {
         return $this->morphMany(OrderMeta::class, 'ordermetable');
     }
