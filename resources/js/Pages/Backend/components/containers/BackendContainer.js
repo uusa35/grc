@@ -32,7 +32,9 @@ const BackendContainer = ({
         currentBreadCrumbs,
         setCurrentRoute,
         locale,
-        getImageThumb
+        getImageThumb,
+        getLocalized,
+        trans
     } = useContext(BackendContext);
     const {settings} = useContext(GlobalContext);
 
@@ -63,10 +65,10 @@ const BackendContainer = ({
 
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-            {/*<Head title={`${pluralize(capitalize(parentModule))} :: ${settings?.name_en}`}>*/}
-            {/*    <meta head-key="description" name="description" content={settings.description_en}/>*/}
-            {/*    <link rel="icon" type="image/svg+xml" href={getImageThumb(settings.image)}/>*/}
-            {/*</Head>*/}
+            <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>
+                <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
+                <link rel="icon" type="image/svg+xml" href={getImageThumb(settings.image)}/>
+            </Head>
             <SideBar/>
             <ConfirmationModal/>
             <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-gray-100">

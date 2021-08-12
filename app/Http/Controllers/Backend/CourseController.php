@@ -117,7 +117,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $users = User::active()->authors()->get();
-        $categories = Category::onlyParent()->onlyForProducts()->with(['children' => function ($q) {
+        $categories = Category::onlyParent()->onlyForCourses()->with(['children' => function ($q) {
             return $q->onlyForCourses()->with(['children' => function ($q) {
                 return $q->onlyForCourses();
             }]);

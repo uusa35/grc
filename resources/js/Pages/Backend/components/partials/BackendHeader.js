@@ -110,7 +110,7 @@ const BackendHeader = () => {
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
                                         className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
-                                        {trans('list')} {trans('all_elements')}
+                                        {trans('create')} {trans('element')}
                                         <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
                                 </div>

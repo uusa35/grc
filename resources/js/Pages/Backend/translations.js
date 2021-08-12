@@ -1077,7 +1077,11 @@ const ar = {
     "course" : "دورة",
     "is_video" : "اعتبار العنصر فيديو",
     "slide_url_instruction" : "رابط للسلايدر (سيتم التعامل مع السلايد كفيديو ويمكن وضع رابط من اليوتيوب فقط)",
-    "order_instruction" : "ترتيب ظهور العنصر"
+    "order_instruction" : "ترتيب ظهور العنصر",
+    "element" : "عنصر",
+    "other" : "أخرى",
+    "elements" : "عناصر",
+    "other_elements" : "عناصر أخرى"
 }
 
 const en  = {

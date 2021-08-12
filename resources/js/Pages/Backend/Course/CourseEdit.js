@@ -47,7 +47,6 @@ export default function CourseEdit({users, categories, course, elementCategories
         'on_home': course.on_home,
         'is_available': course.is_available,
         'price': course.price,
-        'weight': course.weight,
         'sale_price': course.sale_price,
         'keywords': course.keywords,
         'image': course.image,
@@ -60,11 +59,9 @@ export default function CourseEdit({users, categories, course, elementCategories
         'start_sale': course.start_sale,
         'end_sale': course.end_sale,
         'active': course.active,
-        'check_stock': course.check_stock,
         'is_hot_deal': course.is_hot_deal,
         'show_attribute': course.show_attribute,
         'wrap_as_gift': course.wrap_as_gift,
-        'qty': course.qty,
         'qr': course.qr,
         'direct_purchase': course.direct_purchase,
         'show_size_chart': course.show_size_chart,
@@ -241,28 +238,6 @@ export default function CourseEdit({users, categories, course, elementCategories
                                 </p>
                             </div>
 
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="qty" className={`block   text-gray-700`}>
-                                    {trans('qty')} {trans('available')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        required
-                                        type="number"
-                                        step="any"
-                                        name="qty"
-                                        defaultValue={course.qty}
-                                        id="qty"
-                                        autoComplete="qty"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('book_qty_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
-                                </p>
-                            </div>
 
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="sku" className={`block   text-gray-700`}>
@@ -283,29 +258,6 @@ export default function CourseEdit({users, categories, course, elementCategories
                                 <ToolTipWidget message={trans('book_sku_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
-                                </p>
-                            </div>
-
-                            <div className="sm:col-span-2">
-                                <label htmlFor="weight" className={`block   text-gray-700`}>
-                                    {trans('weight')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        required
-                                        type="number"
-                                        step="any"
-                                        name="weight"
-                                        defaultValue={course.weight}
-                                        id="weight"
-                                        autoComplete="weight"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('book_weight_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.weight && <div className={`text-red-600`}>{errors.weight}</div>}
                                 </p>
                             </div>
                             {/* user_id */}
@@ -690,52 +642,6 @@ export default function CourseEdit({users, categories, course, elementCategories
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.on_sale &&
                                                 <div className={`text-red-600`}>{errors.on_sale}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
-                                    {/* download */}
-                                    <fieldset className="mt-1 has-tooltip col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base  text-gray-900`}>{trans('download')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="download"
-                                                    name="download"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={course.download}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="download"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="download"
-                                                    name="download"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!course.download}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="download"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget message={trans('book_download_instruction')}/>
-                                        <div>
-                                            <p className={`mt-2  text-gray-500`}>
-                                                {errors.download &&
-                                                <div className={`text-red-600`}>{errors.download}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -1160,52 +1066,6 @@ export default function CourseEdit({users, categories, course, elementCategories
                         <div className="flex flex-1 flex-col justify-start items-center w-full">
                             <div
                                 className={`grid grid-cols-2 md:grid-cols-4 sm:gap-x-5 sm:gap-y-5 w-full`}>
-                                {/* check stock */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('check_stock')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="check_stock"
-                                                name="check_stock"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={course.check_stock}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="check_stock"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="check_stock"
-                                                name="check_stock"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!course.check_stock}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="check_stock"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <ToolTipWidget message={trans('book_check_stock_message')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.check_stock &&
-                                            <div className={`text-red-600`}>{errors.check_stock}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
                                 {/* is available */}
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>

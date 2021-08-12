@@ -132,6 +132,11 @@ class Category extends PrimaryModel
         return $q->where('is_book', true);
     }
 
+    public function scopeOnlyForCourses($q)
+    {
+        return $q->where('is_course', true);
+    }
+
     public function scopeOnlyForCommercials($q)
     {
         return $q->where('is_product', true);
@@ -140,11 +145,6 @@ class Category extends PrimaryModel
     public function scopeOnlyForUsers($q)
     {
         return $q->where('is_user', true);
-    }
-
-    public function scopeOnlyForClassifieds($q)
-    {
-        return $q->where('is_classified', true);
     }
 
     public function scopeCategoryGroupsWithProperties($q)

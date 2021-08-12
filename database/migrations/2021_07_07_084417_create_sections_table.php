@@ -19,14 +19,14 @@ class CreateSectionsTable extends Migration
             $table->string('name_en')->nullable();
             $table->string('caption_ar')->nullable();
             $table->string('caption_en')->nullable();
-            $table->longText('description_ar')->nullable();
-            $table->longText('description_en')->nullable();
-            $table->longText('image')->nullable();
+            $table->mediumText('description_ar')->nullable();
+            $table->mediumText('description_en')->nullable();
+            $table->mediumText('image')->nullable();
             $table->string('url_one')->nullable();
             $table->string('url_two')->nullable();
             $table->string('url_one_name')->nullable();
             $table->string('url_two_name')->nullable();
-            $table->longText('video_url')->nullable();
+            $table->string('video_url')->nullable();
             $table->integer('order')->nullable();
             $table->boolean('active')->default(true);
             $table->foreignId('template_id')->references('id')->on('templates');

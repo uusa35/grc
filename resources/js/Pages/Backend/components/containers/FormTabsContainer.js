@@ -5,8 +5,8 @@ import {first, filter} from "lodash";
 const FormTabsContainer = ({children}) => {
     const {classNames, trans, theme, currentFormTab, setCurrentFormTab, formTabs} = useContext(BackendContext)
     return (
-        <div className="flex flex-1 flex-col justify-start min-h-screen items-center bg-white rounded-md shadow-md">
-            <div className={`w-full px-10 pt-3`}>
+        <div className="flex flex-1 flex-col justify-start min-h-screen items-center bg-transparent">
+            <div className={`w-full pt-3`}>
                 <div className="sm:hidden">
                     <label htmlFor="tabs" className="sr-only">
                         {trans('select')}
