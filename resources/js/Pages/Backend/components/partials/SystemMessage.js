@@ -23,7 +23,6 @@ const SystemMessage = () => {
     }, [sysMessage])
 
     const { errors, error, success} = usePage().props;
-    console.log('error here ===>', );
 
     useEffect(() => {
         success && !isEmpty(success) ? setSystemMessage({message: success, type: 'success'}) : null;

@@ -1,9 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {Fragment} from 'react'
+import {Fragment, useContext} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
-import {Link} from "@inertiajs/inertia-react";
+import {Head, Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
+import {capitalize} from "lodash";
+import pluralize from "pluralize";
+import {BackendContext} from "../Backend/context/BackendContext";
+import MetaElement from "../Backend/components/partials/MetaElement";
 
 const navigation = [
     {name: 'Product', href: '#'},
@@ -12,9 +16,17 @@ const navigation = [
     {name: 'Company', href: '#'},
 ]
 
-export default function HomePage({auth}) {
+export default function HomePage({auth, settings }) {
+    const { trans , parentModule , getImageThumb , getLocalized } = useContext(BackendContext);
+
     return (
         <div className="relative bg-gray-50 overflow-hidden">
+            <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>
+                <meta head-key="title" name="title" content={settings[getLocalized()]}/>
+                <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
+                <link rel="icon" type="image/svg+xml" href={getImageThumb(settings.image)}/>
+                <MetaElement metas={settings} />
+            </Head>
             <div className="hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full" aria-hidden="true">
                 <div className="relative h-full max-w-7xl mx-auto">
                     <svg
