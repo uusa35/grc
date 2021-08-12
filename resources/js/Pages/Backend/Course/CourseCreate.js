@@ -243,6 +243,7 @@ export default function CourseCreate({users, categories}) {
                                                 autoComplete="user_id"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
+                                                <option value="">{trans('choose')} {trans('owner')}</option>
                                                 {
                                                     users.map(u => (
                                                         <option key={u.id} value={u.id}

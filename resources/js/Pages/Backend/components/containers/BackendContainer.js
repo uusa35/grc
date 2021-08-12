@@ -51,7 +51,8 @@ const BackendContainer = ({
             // toggleIsLoading(true);
         })
         Inertia.on('finish', (e) => {
-            // setTimeout(() => toggleIsLoading(false), 2000);
+            // setTimeout(() => toggleIsLoading(false), 250);
+            // toggleIsLoading(false)
         });
         Inertia.on('navigate', (e) => {
             const currentRoute = route().current();
@@ -59,7 +60,7 @@ const BackendContainer = ({
             setParentModule(breadCrumbs[1]);
             setCurrentBreadCrumbs(breadCrumbs);
             setCurrentRoute(currentRoute)
-            // toggleIsLoading(true);
+            toggleIsLoading(true);
         })
     }, [])
 
@@ -71,39 +72,42 @@ const BackendContainer = ({
             </Head>
             <SideBar/>
             <ConfirmationModal/>
-            <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-gray-100">
-                <BackendHeader/>
-                <div className="min-h-screen">
-                    <div className="align-middle inline-block min-w-full h-auto">
-                        <BreadCrumbs/>
-                        <div className="mx-3 space-y-2">
-                            <SystemMessage/>
-                            {
-                                !isEmpty(elements?.data) && elements.total > 0 && parentModule && <Pagination
-                                    type={parentModule}
-                                    total={elements.total}
-                                    links={elements.links}
-                                    showSearch={showSearch}
-                                />
-                            }
-                            {!isEmpty(elements?.data) && showMobileView &&
-                            <TableMobileview elements={elements} tableName={childModule}/>}
-                            {/*{isLoading ? <LoadingView/> : children}*/}
-                            {children}
-                            <NoElements display={showNoElements}/>
-                            {
-                                !isEmpty(elements?.data) && elements.total > 0 && parentModule && <Pagination
-                                    type={parentModule}
-                                    total={elements.total}
-                                    links={elements.links}
-                                    showSearch={showSearch}
-                                />
-                            }
+            {isLoading && <LoadingView />}
+
+                <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-gray-100">
+                    <BackendHeader/>
+                    <div className="min-h-screen">
+                        <div className="align-middle inline-block min-w-full h-auto">
+                            <BreadCrumbs/>
+                            <div className="mx-3 space-y-2">
+                                <SystemMessage/>
+                                {
+                                    !isEmpty(elements?.data) && elements.total > 0 && parentModule && <Pagination
+                                        type={parentModule}
+                                        total={elements.total}
+                                        links={elements.links}
+                                        showSearch={showSearch}
+                                    />
+                                }
+                                {!isEmpty(elements?.data) && showMobileView &&
+                                <TableMobileview elements={elements} tableName={childModule}/>}
+                                {/*{isLoading ? <LoadingView/> : children}*/}
+                                {children}
+                                <NoElements display={showNoElements}/>
+                                {
+                                    !isEmpty(elements?.data) && elements.total > 0 && parentModule && <Pagination
+                                        type={parentModule}
+                                        total={elements.total}
+                                        links={elements.links}
+                                        showSearch={showSearch}
+                                    />
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-                <Footer/>
-            </main>
+                    <Footer/>
+                </main>
+
         </div>
     );
 }

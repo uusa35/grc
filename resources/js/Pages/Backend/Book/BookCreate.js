@@ -291,10 +291,11 @@ export default function BookCreate({users, categories}) {
                                                 autoComplete="user_id"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
+                                                <option value="">{trans('choose')} {trans('owner')}</option>
                                                 {
                                                     users.map(u => (
                                                         <option key={u.id} value={u.id}
-                                                        >{u[getLocalized('name')]}</option>
+                                                        >{u[getLocalized()]}</option>
                                                     ))
                                                 }
                                             </select>
@@ -392,7 +393,6 @@ export default function BookCreate({users, categories}) {
                                     {trans('categories')}
                                 </label>
                                 <div>
-
                                     <fieldset className="space-y-5">
                                         <div className="flex flex-row flex-wrap">
                                             {
@@ -415,7 +415,7 @@ export default function BookCreate({users, categories}) {
                                                             <div className="ltr:ml-3 ">
                                                                 <label htmlFor="categories"
                                                                        className={`font-extrabold text-gray-900 border-b border-gray-400`}>
-                                                                    {c[getLocalized('name')]}
+                                                                    {c[getLocalized()]}
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -438,7 +438,7 @@ export default function BookCreate({users, categories}) {
                                                                         <div className="ltr:ml-3 ">
                                                                             <label htmlFor="categories"
                                                                                    className={` font-extrabold text-gray-600`}>
-                                                                                {sub[getLocalized('name')]}
+                                                                                {sub[getLocalized()]}
                                                                             </label>
                                                                         </div>
                                                                     </div>
@@ -462,7 +462,7 @@ export default function BookCreate({users, categories}) {
                                                                                 <div className="ltr:ml-3 ">
                                                                                     <label htmlFor="categories"
                                                                                            className={` font-extrabold text-gray-600`}>
-                                                                                        {child[getLocalized('name')]}
+                                                                                        {child[getLocalized()]}
                                                                                     </label>
                                                                                 </div>
                                                                             </div>
@@ -562,7 +562,6 @@ export default function BookCreate({users, categories}) {
                                     <div className="flex items-center">
                                         <input
                                             onChange={handleChange}
-                                            id="on_home"
                                             name="on_home"
                                             defaultChecked={data.on_home}
                                             type="radio"
@@ -577,12 +576,10 @@ export default function BookCreate({users, categories}) {
                                     <div className="flex items-center">
                                         <input
                                             onChange={handleChange}
-                                            id="on_home"
                                             name="on_home"
                                             type="radio"
                                             defaultChecked={!data.on_home}
                                             value={0}
-                                            checked
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_home"
@@ -609,7 +606,6 @@ export default function BookCreate({users, categories}) {
                                     <div className="flex items-center">
                                         <input
                                             onChange={handleChange}
-                                            id="on_sale"
                                             name="on_sale"
                                             type="radio"
                                             value={1}
@@ -624,7 +620,6 @@ export default function BookCreate({users, categories}) {
                                     <div className="flex items-center">
                                         <input
                                             onChange={handleChange}
-                                            id="on_sale"
                                             name="on_sale"
                                             type="radio"
                                             value={0}

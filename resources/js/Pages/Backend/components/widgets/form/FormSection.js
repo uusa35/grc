@@ -2,7 +2,7 @@
 
 export default function FormSection({children, title , message = ''}) {
     return (
-        <div className="space-y-4 divide-y 900 bg-white p-10 my-3 rounded-md shadow-md">
+        <div className="space-y-4 divide-y 900 bg-white p-10 rounded-md shadow-md">
             <div className={`pt-4`}>
                 <h5 className="leading-6 text-xl text-gray-900">{title}</h5>
                 <p className="mt-1  text-red-500">

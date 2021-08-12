@@ -1494,8 +1494,6 @@ export default function BookEdit({users, categories, book, elementCategories}) {
 
                         <FormBtns type={'book'}/>
                     </div>
-
-
                     <div
                         className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col px-20 sm:px-10 space-y-4`)}>
 

@@ -245,7 +245,7 @@ export default function ProductIndex({elements}) {
                                                                                         })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
+                                                                                            'hidden flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
                                                                                         <svg
@@ -273,7 +273,7 @@ export default function ProductIndex({elements}) {
                                                                                         })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
+                                                                                            'hidden flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
                                                                                         <svg

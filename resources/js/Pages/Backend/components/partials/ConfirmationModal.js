@@ -62,7 +62,7 @@ export default function ConfirmationModal() {
             <Dialog
                 as="div"
                 static
-                className="fixed z-10 inset-0 overflow-y-auto font-bein"
+                className="fixed z-10 inset-0 overflow-y-auto"
                 initialFocus={cancelButtonRef}
                 open={showConfirmationModal}
                 onClose={() => setConfirmationModalMessage({title: '', content: ''})}

@@ -11,13 +11,16 @@ import {Inertia} from '@inertiajs/inertia'
 import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
+import FormSection from "../components/widgets/form/FormSection";
 
 
 export default function ProductEdit({users, sizes, colors, categories, product, elementCategories, brands}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, getLocalized,
-        getImageThumb, } = useContext(BackendContext)
+    const {
+        classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, getLocalized,
+        getImageThumb,
+    } = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': product.sku,
         'name_ar': product.name_ar,
@@ -136,14 +139,11 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                 >
                     <input type="hidden" name="_method" value="put"/>
                     <div
-                        className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
-                        <div className={`pt-4`}>
-                            <h3 className={` leading-6  text-gray-900`}>{trans('create')} {trans(parentModule)}</h3>
-                            <p className="mt-1  text-red-500">
-                                {trans('all_information_required')}
-                            </p>
-                        </div>
-                        <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
+                        className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  space-y-4 `)}>
+                        <FormSection title={`${trans('create')} ${trans(parentModule)}`}
+                                     message={trans('all_information_required')}
+                        >
+                            {/* name ar */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="name_ar" className={`block   text-gray-700`}>
                                     {trans('name_ar')}
@@ -160,12 +160,12 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <ToolTipWidget message={trans('name_ar_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
-
+                            {/* name en */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="name_en" className={`block   text-gray-700`}>
                                     {trans('name_en')}
@@ -182,12 +182,12 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <ToolTipWidget message={trans('name_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
                             </div>
-
+                            {/* price */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="price" className={`block   text-gray-700`}>
                                     {trans('price')}
@@ -205,12 +205,12 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <ToolTipWidget message={trans('price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
                                 </p>
                             </div>
-
+                            {/* sale price */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="sale_price"
                                        className={`block   text-gray-700`}>
@@ -234,7 +234,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
                                 </p>
                             </div>
-
+                            {/* qty */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="qty" className={`block   text-gray-700`}>
                                     {trans('qty')} {trans('available')}
@@ -257,7 +257,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
                                 </p>
                             </div>
-
+                            {/* sku */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="sku" className={`block   text-gray-700`}>
                                     {trans('sku')}
@@ -274,12 +274,12 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_sku_instruction')}/>
+                                <ToolTipWidget message={trans('sku_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
                                 </p>
                             </div>
-
+                            {/* weight */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="weight" className={`block   text-gray-700`}>
                                     {trans('weight')}
@@ -297,7 +297,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('product_weight_instruction')}/>
+                                <ToolTipWidget message={trans('weight_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.weight && <div className={`text-red-600`}>{errors.weight}</div>}
                                 </p>
@@ -389,6 +389,8 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {errors.color_id && <div className={`text-red-600`}>{errors.color_id}</div>}
                                 </p>
                             </div>
+                        </FormSection>
+                        <FormSection title={`${trans('other_elements')}`}>
                             {/* image */}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
@@ -404,7 +406,8 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
-                                    {product.image && <img className={`h-24 w-20 bg-cover rounded-md`} src={getImageThumb(product.image)}
+                                    {product.image && <img className={`h-24 w-20 bg-cover rounded-md`}
+                                                           src={getImageThumb(product.image)}
                                                            alt={product[getLocalized('name')]}/>}
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
@@ -455,7 +458,8 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                                         className={`flex flex-col flex-1 space-y-4 mt-4 flex-wrap border-r border-b border-gray-200 p-2`}
                                                         key={c.id}>
                                                         <div className="relative flex items-start">
-                                                            <div className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
+                                                            <div
+                                                                className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                 <input
                                                                     onChange={e => handleSelectedCategories(e.target.checked, e.target.value)}
                                                                     id="categories"
@@ -540,234 +544,204 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
                                 </p>
                             </div>
-
-
-                        </div>
-
-
-                        <div className="space-y-4">
-
-                            <div className={`pt-4`}>
-                                <h3 className={` leading-6  text-gray-900`}>{trans('more_details')}</h3>
-                            </div>
-
-                            <div className="flex flex-1 flex-col justify-start items-center w-full">
-                                <div
-                                    className={`grid grid-cols-2 md:grid-cols-4 md:gap-x-5 w-full`}>
-                                    {/* active */}
-                                    <fieldset className="mt-1 col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base  text-gray-900`}>{trans('active')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="active"
-                                                    name="active"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={product.active}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="active"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="active"
-                                                    name="active"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!product.active}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="active"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget/>
-                                        <div>
-                                            <p className={`mt-2  text-gray-500`}>
-                                                {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
-                                    {/* on home*/}
-                                    <fieldset className="mt-1 col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="on_home"
-                                                    name="on_home"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={product.on_sale}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="push-everything"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="on_home"
-                                                    name="on_home"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!product.on_home}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="on_home"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget/>
-                                        <div>
-                                            <p className={`mt-2  text-gray-500`}>
-                                                {errors.on_home &&
-                                                <div className={`text-red-600`}>{errors.on_home}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
-                                    {/* on sale*/}
-                                    <fieldset className="mt-1 has-tooltip col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base  text-gray-900`}>{trans('on_sale')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="on_sale"
-                                                    name="on_sale"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={product.on_sale}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="push-everything"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="on_sale"
-                                                    name="on_sale"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!product.on_sale}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="on_sale"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget message={trans('product_sale_price_instruction')}/>
-                                        <div>
-                                            <p className={`mt-2  text-gray-500`}>
-                                                {errors.on_sale &&
-                                                <div className={`text-red-600`}>{errors.on_sale}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
-                                    {/* has_attributes */}
-                                    <fieldset className="mt-1 has-tooltip col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base  text-gray-900`}>{trans('has_attributes')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="has_attributes"
-                                                    name="has_attributes"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={product.has_attributes}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="has_attributes"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="has_attributes"
-                                                    name="has_attributes"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!product.has_attributes}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="has_attributes"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget message={trans('product_has_attributes_instruction')}/>
-                                        <div>
-                                            <p className={`mt-2  text-gray-500`}>
-                                                {errors.has_attributes &&
-                                                <div className={`text-red-600`}>{errors.has_attributes}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
+                        </FormSection>
+                        {/*more details booleans */}
+                        <FormSection title={trans('more_details')}>
+                            <fieldset className="mt-1 col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('active')}</legend>
                                 </div>
-
-
-                                <div
-                                    className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-gray-100`}>
-
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="active"
+                                            name="active"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.active}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="active"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="active"
+                                            name="active"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.active}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="active"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-
-                        </div>
+                                <ToolTipWidget/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* on home*/}
+                            <fieldset className="mt-1 col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_home"
+                                            name="on_home"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.on_sale}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_home"
+                                            name="on_home"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.on_home}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="on_home"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
+                                </div>
+                                <ToolTipWidget/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.on_home &&
+                                        <div className={`text-red-600`}>{errors.on_home}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* on sale*/}
+                            <fieldset className="mt-1 has-tooltip col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('on_sale')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_sale"
+                                            name="on_sale"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.on_sale}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_sale"
+                                            name="on_sale"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.on_sale}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="on_sale"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
+                                </div>
+                                <ToolTipWidget message={trans('product_sale_price_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.on_sale &&
+                                        <div className={`text-red-600`}>{errors.on_sale}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* has_attributes */}
+                            <fieldset className="mt-1 has-tooltip col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('has_attributes')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="has_attributes"
+                                            name="has_attributes"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.has_attributes}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="has_attributes"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="has_attributes"
+                                            name="has_attributes"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.has_attributes}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="has_attributes"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
+                                </div>
+                                <ToolTipWidget message={trans('product_has_attributes_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.has_attributes &&
+                                        <div className={`text-red-600`}>{errors.has_attributes}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                        </FormSection>
                         <FormBtns type={'product'}/>
                     </div>
-
-
                     <div
-                        className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
-
-                        <div className={`pt-4`}>
-                            <h3 className={` leading-6  text-gray-900`}>{trans('create')} {trans(parentModule)}</h3>
-                            <p className="mt-1  text-gray-500">
-                                {trans('create')} {trans(parentModule)}
-                            </p>
-                        </div>
-                        {/* description ar & en*/}
-                        <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
-                            <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="description_ar"
-                                       className={`block   text-gray-700`}>
-                                    {trans('description_ar')}
-                                </label>
-                                <div className="mt-1">
+                        className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full space-y-4 `)}>
+                            <FormSection>
+                                {/* description ar */}
+                                <div className="sm:col-span-3 has-tooltip">
+                                    <label htmlFor="description_ar"
+                                           className={`block   text-gray-700`}>
+                                        {trans('description_ar')}
+                                    </label>
+                                    <div className="mt-1">
                                          <textarea
                                              onChange={handleChange}
                                              id="description_ar"
@@ -776,19 +750,20 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={product.description_ar}
                                          />
+                                    </div>
+                                    <ToolTipWidget message={trans('description_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.description_ar &&
+                                        <div className={`text-red-600`}>{errors.description_ar}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('description_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.description_ar &&
-                                    <div className={`text-red-600`}>{errors.description_ar}</div>}
-                                </p>
-                            </div>
-                            <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="description_en"
-                                       className={`block   text-gray-700`}>
-                                    {trans('description_en')}
-                                </label>
-                                <div className="mt-1">
+                                {/* description en */}
+                                <div className="sm:col-span-3 has-tooltip">
+                                    <label htmlFor="description_en"
+                                           className={`block   text-gray-700`}>
+                                        {trans('description_en')}
+                                    </label>
+                                    <div className="mt-1">
                                          <textarea
                                              onChange={handleChange}
                                              id="description_en"
@@ -797,19 +772,19 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={product.description_en}
                                          />
+                                    </div>
+                                    <ToolTipWidget message={trans('description_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.description_en &&
+                                        <div className={`text-red-600`}>{errors.description_en}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('description_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.description_en &&
-                                    <div className={`text-red-600`}>{errors.description_en}</div>}
-                                </p>
-                            </div>
-                            {/* notes */}
-                            <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_ar" className={`block   text-gray-700`}>
-                                    {trans('notes_ar')}
-                                </label>
-                                <div className="mt-1">
+                                {/* notes ar*/}
+                                <div className="sm:col-span-3 has-tooltip">
+                                    <label htmlFor="notes_ar" className={`block   text-gray-700`}>
+                                        {trans('notes_ar')}
+                                    </label>
+                                    <div className="mt-1">
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_ar"
@@ -818,17 +793,18 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={product.notes_ar}
                                          />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_notes_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_notes_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
-                                </p>
-                            </div>
-                            <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_en" className={`block   text-gray-700`}>
-                                    {trans('notes_en')}
-                                </label>
-                                <div className="mt-1">
+                                {/* notes en */}
+                                <div className="sm:col-span-3 has-tooltip">
+                                    <label htmlFor="notes_en" className={`block   text-gray-700`}>
+                                        {trans('notes_en')}
+                                    </label>
+                                    <div className="mt-1">
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_en"
@@ -837,252 +813,258 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={product.notes_en}
                                          />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_notes_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_notes_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
-                                </p>
-                            </div>
-                            {/* caption */}
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="caption_ar"
-                                       className={`block   text-gray-700`}>
-                                    {trans('caption_ar')}
-                                </label>
-                                <div className="mt-1 ">
-                                    <input
-                                        onChange={handleChange}
-                                        type="text"
-                                        step="any"
-                                        name="caption_ar"
-                                        defaultValue={product.caption_ar}
-                                        id="caption_ar"
-                                        autoComplete="caption_ar"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
+                                {/* caption  ar*/}
+                                <div className="sm:col-span-2 has-tooltip">
+                                    <label htmlFor="caption_ar"
+                                           className={`block   text-gray-700`}>
+                                        {trans('caption_ar')}
+                                    </label>
+                                    <div className="mt-1 ">
+                                        <input
+                                            onChange={handleChange}
+                                            type="text"
+                                            step="any"
+                                            name="caption_ar"
+                                            defaultValue={product.caption_ar}
+                                            id="caption_ar"
+                                            autoComplete="caption_ar"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
-                                </p>
-                            </div>
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="caption_en"
-                                       className={`block   text-gray-700`}>
-                                    {trans('caption_en')}
-                                </label>
-                                <div className="mt-1 ">
-                                    <input
-                                        onChange={handleChange}
-                                        type="text"
-                                        step="any"
-                                        name="caption_en"
-                                        defaultValue={product.caption_en}
-                                        id="caption_en"
-                                        autoComplete="caption_en"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
+                                {/* caption en */}
+                                <div className="sm:col-span-2 has-tooltip">
+                                    <label htmlFor="caption_en"
+                                           className={`block   text-gray-700`}>
+                                        {trans('caption_en')}
+                                    </label>
+                                    <div className="mt-1 ">
+                                        <input
+                                            onChange={handleChange}
+                                            type="text"
+                                            step="any"
+                                            name="caption_en"
+                                            defaultValue={product.caption_en}
+                                            id="caption_en"
+                                            autoComplete="caption_en"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
-                                </p>
-                            </div>
-                            {/* keywords */}
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="keywords"
-                                       className={`block   text-gray-700`}>
-                                    {trans('keywords')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        type="text"
-                                        step="any"
-                                        name="keywords"
-                                        defaultValue={product.keywords}
-                                        id="keywords"
-                                        autoComplete="keywords"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
+                                {/* keywords */}
+                                <div className="sm:col-span-2 has-tooltip">
+                                    <label htmlFor="keywords"
+                                           className={`block   text-gray-700`}>
+                                        {trans('keywords')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <input
+                                            onChange={handleChange}
+                                            type="text"
+                                            step="any"
+                                            name="keywords"
+                                            defaultValue={product.keywords}
+                                            id="keywords"
+                                            autoComplete="keywords"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
-                                </p>
-                            </div>
-                            {/* delivery time*/}
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="delivery_time"
-                                       className={`block   text-gray-700`}>
-                                    {trans('delivery_time')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        max={99}
-                                        onChange={handleChange}
-                                        type="number"
-                                        step="any"
-                                        name="delivery_time"
-                                        defaultValue={product.delivery_time}
-                                        id="delivery_time"
-                                        autoComplete="delivery_time"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
+                                {/* delivery time*/}
+                                <div className="sm:col-span-2 has-tooltip">
+                                    <label htmlFor="delivery_time"
+                                           className={`block   text-gray-700`}>
+                                        {trans('delivery_time')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <input
+                                            max={99}
+                                            onChange={handleChange}
+                                            type="number"
+                                            step="any"
+                                            name="delivery_time"
+                                            defaultValue={product.delivery_time}
+                                            id="delivery_time"
+                                            autoComplete="delivery_time"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_delivery_time_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.delivery_time &&
+                                        <div className={`text-red-600`}>{errors.keywords}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_delivery_time_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.delivery_time && <div className={`text-red-600`}>{errors.keywords}</div>}
-                                </p>
-                            </div>
-                            {/* order*/}
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="order"
-                                       className={`block   text-gray-700`}>
-                                    {trans('order_appearance')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        max={999}
-                                        onChange={handleChange}
-                                        type="number"
-                                        step="any"
-                                        name="order"
-                                        defaultValue={product.order}
-                                        id="order"
-                                        autoComplete="order"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
+                                {/* order*/}
+                                <div className="sm:col-span-2 has-tooltip">
+                                    <label htmlFor="order"
+                                           className={`block   text-gray-700`}>
+                                        {trans('order_appearance')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <input
+                                            max={999}
+                                            onChange={handleChange}
+                                            type="number"
+                                            step="any"
+                                            name="order"
+                                            defaultValue={product.order}
+                                            id="order"
+                                            autoComplete="order"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('order_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('order_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
-                                </p>
-                            </div>
-                            <div className="sm:col-span-2">
-                                <label htmlFor="video_url_one"
-                                       className={`block   text-gray-700`}>
-                                    {trans('video_url_one')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        type="url"
-                                        step="any"
-                                        name="video_url_one"
-                                        defaultValue={product.video_url_one}
-                                        id="video_url_one"
-                                        autoComplete="video_url_one"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
+                                {/* video one */}
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="video_url_one"
+                                           className={`block   text-gray-700`}>
+                                        {trans('video_url_one')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <input
+                                            onChange={handleChange}
+                                            type="url"
+                                            step="any"
+                                            name="video_url_one"
+                                            defaultValue={product.video_url_one}
+                                            id="video_url_one"
+                                            autoComplete="video_url_one"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_video_url_one_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.video_url_one &&
+                                        <div className={`text-red-600`}>{errors.video_url_one}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_video_url_one_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.video_url_one &&
-                                    <div className={`text-red-600`}>{errors.video_url_one}</div>}
-                                </p>
-                            </div>
-                            <div className="sm:col-span-2">
-                                <label htmlFor="video_url_two"
-                                       className={`block   text-gray-700`}>
-                                    {trans('video_url_two')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        type="url"
-                                        step="any"
-                                        name="video_url_two"
-                                        defaultValue={product.video_url_two}
-                                        id="video_url_two"
-                                        autoComplete="video_url_two"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
+                                {/* video two*/}
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="video_url_two"
+                                           className={`block   text-gray-700`}>
+                                        {trans('video_url_two')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <input
+                                            onChange={handleChange}
+                                            type="url"
+                                            step="any"
+                                            name="video_url_two"
+                                            defaultValue={product.video_url_two}
+                                            id="video_url_two"
+                                            autoComplete="video_url_two"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_video_url_two_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.video_url_two &&
+                                        <div className={`text-red-600`}>{errors.video_url_two}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_video_url_two_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.video_url_two &&
-                                    <div className={`text-red-600`}>{errors.video_url_two}</div>}
-                                </p>
-                            </div>
-                            {/* start sale */}
-                            <div className="sm:col-span-2 has-tooltip mb-5">
-                                <label htmlFor="start_sale"
-                                       className={`block   text-gray-700`}>
-                                    {trans('start_sale')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        // onChange={e => console.log(e.target.value)}
-                                        type="datetime-local"
-                                        step="any"
-                                        name="start_sale"
-                                        id="start_sale"
-                                        defaultValue={product.start_sale}
-                                        autoComplete="start_sale"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('product_end_sale_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                {/* start sale */}
+                                <div className="sm:col-span-2 has-tooltip mb-5">
+                                    <label htmlFor="start_sale"
+                                           className={`block   text-gray-700`}>
+                                        {trans('start_sale')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <input
+                                            onChange={handleChange}
+                                            // onChange={e => console.log(e.target.value)}
+                                            type="datetime-local"
+                                            step="any"
+                                            name="start_sale"
+                                            id="start_sale"
+                                            defaultValue={product.start_sale}
+                                            autoComplete="start_sale"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_end_sale_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(product.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                    {errors.start_sale && <div className={`text-red-600`}>{errors.start_sale}</div>}
-                                </p>
-                            </div>
-                            {/* end sale*/}
-                            <div className="sm:col-span-2 has-tooltip mb-5">
-                                <label htmlFor="end_sale"
-                                       className={`block   text-gray-700`}>
-                                    {trans('end_sale')}
-                                </label>
-                                <div className="mt-1">
-                                    <input
-                                        onChange={handleChange}
-                                        type="datetime-local"
-                                        step="any"
-                                        name="end_sale"
-                                        defaultValue={product.end_sale}
-                                        id="end_sale"
-                                        autoComplete="end_sale"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    />
+                                        {errors.start_sale && <div className={`text-red-600`}>{errors.start_sale}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_start_sale_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                {/* end sale*/}
+                                <div className="sm:col-span-2 has-tooltip mb-5">
+                                    <label htmlFor="end_sale"
+                                           className={`block   text-gray-700`}>
+                                        {trans('end_sale')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <input
+                                            onChange={handleChange}
+                                            type="datetime-local"
+                                            step="any"
+                                            name="end_sale"
+                                            defaultValue={product.end_sale}
+                                            id="end_sale"
+                                            autoComplete="end_sale"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_start_sale_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(product.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                    {errors.end_sale && <div className={`text-red-600`}>{errors.end_sale}</div>}
-                                </p>
-                            </div>
-                            {/* brand_id */}
-                            <div className="sm:col-span-2">
-                                <label htmlFor="brand_id" className="block   text-gray-700">
-                                    {trans('brand')}
-                                </label>
-                                <div className="mt-1">
-                                    <select
-                                        onChange={handleChange}
-                                        id="brand_id"
-                                        name="brand_id"
-                                        value={data.brand_id}
-                                        autoComplete="brand_id"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                    >
-                                        {
-                                            brands.map(u => (
-                                                <option key={u.id} value={u.id}
-                                                >{u[getLocalized('name')]}</option>
-                                            ))
-                                        }
-                                    </select>
+                                        {errors.end_sale && <div className={`text-red-600`}>{errors.end_sale}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_brand_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
-                                    {errors.brand_id && <div className={`text-red-600`}>{errors.brand_id}</div>}
-                                </p>
-                            </div>
+                                {/* brand_id */}
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="brand_id" className="block   text-gray-700">
+                                        {trans('brand')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <select
+                                            onChange={handleChange}
+                                            id="brand_id"
+                                            name="brand_id"
+                                            value={data.brand_id}
+                                            autoComplete="brand_id"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        >
+                                            {
+                                                brands.map(u => (
+                                                    <option key={u.id} value={u.id}
+                                                    >{u[getLocalized('name')]}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                    <ToolTipWidget message={trans('product_brand_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.brand_id && <div className={`text-red-600`}>{errors.brand_id}</div>}
+                                    </p>
+                                </div>
+                            </FormSection>
+                        <FormSection>
                             {/* size chart*/}
                             <div className="sm:col-span-3">
                                 <label htmlFor="size_chart"
@@ -1184,444 +1166,423 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
                                 </p>
                             </div>
-                        </div>
+                        </FormSection>
                         {/* more booleans */}
-                        <div className={`pt-4`}>
-                            <h3 className={` leading-6  text-gray-900`}>{trans('more_details')}</h3>
-                        </div>
-
-                        <div className="flex flex-1 flex-col justify-start items-center w-full">
-                            <div
-                                className={`grid grid-cols-2 md:grid-cols-4 sm:gap-x-5 sm:gap-y-5 w-full`}>
-                                {/* check stock */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('check_stock')}</legend>
+                        <FormSection>
+                            {/* check stock */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('check_stock')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="check_stock"
+                                            name="check_stock"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.check_stock}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="check_stock"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="check_stock"
-                                                name="check_stock"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={product.check_stock}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="check_stock"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="check_stock"
-                                                name="check_stock"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!product.check_stock}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="check_stock"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="check_stock"
+                                            name="check_stock"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.check_stock}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="check_stock"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('product_check_stock_message')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.check_stock &&
-                                            <div className={`text-red-600`}>{errors.check_stock}</div>}
-                                        </p>
+                                </div>
+                                <ToolTipWidget message={trans('product_check_stock_message')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.check_stock &&
+                                        <div className={`text-red-600`}>{errors.check_stock}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* is available */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('is_available')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="is_available"
+                                            name="is_available"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.on_sale}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                </fieldset>
-                                {/* is available */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('is_available')}</legend>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="is_available"
+                                            name="is_available"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.is_available}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="is_available"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="is_available"
-                                                name="is_available"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={product.on_sale}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="is_available"
-                                                name="is_available"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!product.is_available}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="is_available"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
+                                </div>
+                                <ToolTipWidget message={trans('product_is_available_message')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.is_available &&
+                                        <div className={`text-red-600`}>{errors.is_available}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* wrap as gift */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('wrap_as_gift')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="wrap_as_gift"
+                                            name="wrap_as_gift"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.wrap_as_gift}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="wrap_as_gift"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('product_is_available_message')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.is_available &&
-                                            <div className={`text-red-600`}>{errors.is_available}</div>}
-                                        </p>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="wrap_as_gift"
+                                            name="wrap_as_gift"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.wrap_as_gift}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="wrap_as_gift"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                </fieldset>
-                                {/* wrap as gift */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('wrap_as_gift')}</legend>
+                                </div>
+                                <ToolTipWidget message={trans('product_wrap_as_gift_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.wrap_as_gift &&
+                                        <div className={`text-red-600`}>{errors.wrap_as_gift}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* show size chart */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('show_size_chart')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="show_size_chart"
+                                            name="show_size_chart"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.show_size_chart}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="show_size_chart"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="wrap_as_gift"
-                                                name="wrap_as_gift"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={product.wrap_as_gift}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="wrap_as_gift"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="wrap_as_gift"
-                                                name="wrap_as_gift"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!product.wrap_as_gift}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="wrap_as_gift"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="show_size_chart"
+                                            name="show_size_chart"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.show_size_chart}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="show_size_chart"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('product_wrap_as_gift_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.wrap_as_gift &&
-                                            <div className={`text-red-600`}>{errors.wrap_as_gift}</div>}
-                                        </p>
+                                </div>
+                                <ToolTipWidget message={trans('product_show_size_chart_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.show_size_chart &&
+                                        <div className={`text-red-600`}>{errors.show_size_chart}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* direct purchase*/}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('direct_purchase')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="direct_purchase"
+                                            name="direct_purchase"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.direct_purchase}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="direct_purchase"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                </fieldset>
-
-                                {/* show size chart */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('show_size_chart')}</legend>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="direct_purchase"
+                                            name="direct_purchase"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.direct_purchase}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="direct_purchase"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="show_size_chart"
-                                                name="show_size_chart"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={product.show_size_chart}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="show_size_chart"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="show_size_chart"
-                                                name="show_size_chart"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!product.show_size_chart}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="show_size_chart"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
+                                </div>
+                                <ToolTipWidget message={trans('product_direct_purchase_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.direct_purchase &&
+                                        <div className={`text-red-600`}>{errors.direct_purchase}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* exclusive */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('tag')} {trans('exclusive')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="exclusive"
+                                            name="exclusive"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.exclusive}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('product_show_size_chart_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.show_size_chart &&
-                                            <div className={`text-red-600`}>{errors.show_size_chart}</div>}
-                                        </p>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="exclusive"
+                                            name="exclusive"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.exclusive}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="exclusive"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                </fieldset>
-
-
-                                {/* direct purchase*/}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('direct_purchase')}</legend>
+                                </div>
+                                <ToolTipWidget message={trans('product_exclusive_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.exclusive &&
+                                        <div className={`text-red-600`}>{errors.exclusive}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* on new */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}> {trans('tag')} {trans('on_new')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_new"
+                                            name="on_new"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.on_new}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="direct_purchase"
-                                                name="direct_purchase"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={product.direct_purchase}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="direct_purchase"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="direct_purchase"
-                                                name="direct_purchase"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!product.direct_purchase}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="direct_purchase"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_new"
+                                            name="on_new"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.on_new}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="on_new"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('product_direct_purchase_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.direct_purchase &&
-                                            <div className={`text-red-600`}>{errors.direct_purchase}</div>}
-                                        </p>
+                                </div>
+                                <ToolTipWidget message={trans('product_on_new_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.on_new && <div className={`text-red-600`}>{errors.on_new}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* is_hot_deal */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}> {trans('is_hot_deal')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="is_hot_deal"
+                                            name="is_hot_deal"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.is_hot_deal}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                </fieldset>
-
-                                {/* exclusive */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('tag')} {trans('exclusive')}</legend>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="is_hot_deal"
+                                            name="is_hot_deal"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.is_hot_deal}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="is_hot_deal"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="exclusive"
-                                                name="exclusive"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={product.exclusive}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="exclusive"
-                                                name="exclusive"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!product.exclusive}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="exclusive"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <ToolTipWidget message={trans('product_exclusive_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.exclusive &&
-                                            <div className={`text-red-600`}>{errors.exclusive}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
-                                {/* on new */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}> {trans('tag')} {trans('on_new')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="on_new"
-                                                name="on_new"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={product.on_new}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="on_new"
-                                                name="on_new"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!product.on_new}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="on_new"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <ToolTipWidget message={trans('product_on_new_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.on_new && <div className={`text-red-600`}>{errors.on_new}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
-
-                                {/* is_hot_deal */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}> {trans('is_hot_deal')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="is_hot_deal"
-                                                name="is_hot_deal"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={product.is_hot_deal}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="is_hot_deal"
-                                                name="is_hot_deal"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!product.is_hot_deal}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="is_hot_deal"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <ToolTipWidget message={trans('product_is_hot_deal_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.is_hot_deal &&
-                                            <div className={`text-red-600`}>{errors.is_hot_deal}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
-                            </div>
-
-
-                            <div
-                                className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-gray-100`}>
-
-                            </div>
-                        </div>
-
-
+                                </div>
+                                <ToolTipWidget message={trans('product_is_hot_deal_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.is_hot_deal &&
+                                        <div className={`text-red-600`}>{errors.is_hot_deal}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                        </FormSection>
                         <FormBtns type={'product'}/>
                     </div>
-
-
+                    {/* more Images Widget*/}
                     <div
-                        className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col px-20 sm:px-10 space-y-4`)}>
+                        className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col pb-20 sm:px-10 space-y-4 bg-white rounded-md`)}>
 
                         <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start pt-10">
                             <div className="mt-1 sm:mt-0 sm:col-span-full">
-                                <div
-                                    className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                                    <div className="space-y-1 text-center">
-                                        <svg
-                                            className="mx-auto h-12 w-12 text-gray-400"
-                                            stroke="currentColor"
-                                            fill="none"
-                                            viewBox="0 0 48 48"
-                                            aria-hidden="true"
-                                        >
-                                            <path
-                                                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                strokeWidth={2}
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-                                        <div className="flex  text-gray-600">
-                                            <label
-                                                htmlFor="file-upload"
-                                                className="relative cursor-pointer bg-white rounded-md  text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                    <div
+                                        className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                        <div className="space-y-1 text-center">
+                                            <svg
+                                                className="mx-auto h-12 w-12 text-gray-400"
+                                                stroke="currentColor"
+                                                fill="none"
+                                                viewBox="0 0 48 48"
+                                                aria-hidden="true"
                                             >
-                                            </label>
-                                            <p className="pl-1">
-                                                <input
-                                                    onChange={e => handleImages(e.target.files)}
-                                                    type="file"
-                                                    multiple
-                                                    name="images"
-                                                    id="more_images"
-                                                    autoComplete="more_images"
-                                                    className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                                <path
+                                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                    strokeWidth={2}
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
                                                 />
-                                            </p>
+                                            </svg>
+                                            <div className="flex  text-gray-600">
+                                                <label
+                                                    htmlFor="file-upload"
+                                                    className="relative cursor-pointer bg-white rounded-md  text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                >
+                                                </label>
+                                                <p className="pl-1">
+                                                    <input
+                                                        onChange={e => handleImages(e.target.files)}
+                                                        type="file"
+                                                        multiple
+                                                        name="images"
+                                                        id="more_images"
+                                                        autoComplete="more_images"
+                                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                                    />
+                                                </p>
+                                            </div>
+                                            <p className=" text-gray-500">{trans('upload_up_to_one_mb')}</p>
                                         </div>
-                                        <p className=" text-gray-500">{trans('upload_up_to_one_mb')}</p>
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <FormBtns type={'product'}/>

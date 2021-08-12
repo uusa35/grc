@@ -1081,7 +1081,8 @@ const ar = {
     "element" : "عنصر",
     "other" : "أخرى",
     "elements" : "عناصر",
-    "other_elements" : "عناصر أخرى"
+    "other_elements" : "عناصر أخرى",
+    "choose" : "اختر"
 }
 
 const en  = {

@@ -37,9 +37,9 @@ const FormTabsContainer = ({children}) => {
                                     // href="#"
                                     className={classNames(
                                         tab.id === currentFormTab.id
-                                            ? 'border-green-900 text-green-900'
+                                            ? 'border-green-900 text-green-900 bg-white'
                                             : 'border-transparent  text-gray-500 hover:text-gray-700 hover:border-gray-200',
-                                        'whitespace-nowrap flex py-4 px-1 border-b-2 font-medium flex items-center justify-center '
+                                        'whitespace-nowrap flex p-4 rounded-t border-b-2 font-medium flex items-center justify-center '
                                     )}
                                     aria-current={tab.name ? 'page' : undefined}
                                 >

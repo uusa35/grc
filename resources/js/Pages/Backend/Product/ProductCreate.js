@@ -290,6 +290,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             autoComplete="user_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                         >
+                                            <option value="">{trans('choose')} {trans('owner')}</option>
                                             {
                                                 map(users, u => (
                                                     <option key={u.id} value={u.id}
@@ -320,6 +321,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     autoComplete="size_id"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                 >
+                                    <option value="">{trans('choose')} {trans('size')}</option>
                                     {
                                         map(sizes, u => (
                                             <option key={u.id}
@@ -350,6 +352,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     autoComplete="color_id"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                 >
+                                    <option value="">{trans('choose')} {trans('color')}</option>
                                     {
                                         map(colors, u => (
                                             <option key={u.id} value={u.id}
