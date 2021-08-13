@@ -19,5 +19,8 @@ createInertiaApp({
             </GlobalContext.Provider>
             , el)
     },
+    // metadata : {
+    //     description : title => `${title} - Usama`,
+    // },
     title: title => `${title} - E-Commerce`,
 });

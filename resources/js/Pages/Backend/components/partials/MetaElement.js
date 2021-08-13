@@ -1,12 +1,18 @@
 import {Head, Link} from "@inertiajs/inertia-react";
 import React, {useContext} from 'react';
 import GlobalContext from "../../context/GlobalContext";
+import {capitalize} from "lodash";
+import pluralize from "pluralize";
 
 const MetaElement = ({metas}) => {
-    const {locale, getLocalized} = useContext(GlobalContext);
+    const {locale, getLocalized, getImageThumb , trans , parentModule } = useContext(GlobalContext);
 
     return (
-        <>
+        <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${metas[getLocalized()]}`}>
+            <meta head-key="title" name="title" content={metas[getLocalized()]}/>
+            <meta head-key="description" name="description" content={metas[getLocalized('description')]}/>
+            <link href={getImageThumb(metas.logo)} rel="shortcut icon" type="image/png"/>
+            <link rel="icon" type="image/svg+xml" href={getImageThumb(metas.image)}/>
             <meta
                 http-equiv="Content-type"
                 charSet="utf-8"
@@ -16,7 +22,7 @@ const MetaElement = ({metas}) => {
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <title>{metas[getLocalized()]}</title>
             <meta name="title" content={metas[getLocalized()]}/>
-            <link href={metas.logo} rel="shortcut icon" type="image/png"/>
+            <link href={getImageThumb(metas.image)} rel="shortcut icon" type="image/png"/>
             <meta name={metas[getLocalized()]} content="E-commerce"/>
             <meta
                 key="theme-color"
@@ -29,7 +35,7 @@ const MetaElement = ({metas}) => {
             <meta key="mobile" name="mobile" content={metas.mobile}/>
             <meta key="whatsapp" name="whatsapp" content={metas.whatsapp}/>
             <meta key="phone" name="phone" content={metas.phone}/>
-            <meta key="logo" name="logo" content={metas.logo}/>
+            <meta key="logo" name="logo" content={getImageThumb(metas.image)}/>
             <meta key="email" name="email" content={metas.email}/>
             <meta key="address" name="address" content={metas.address}/>
             <meta key="name" name="name" content={metas[getLocalized()]}/>
@@ -37,11 +43,11 @@ const MetaElement = ({metas}) => {
             <meta
                 name="description"
                 key="description"
-                content={`${metas.description}`}
+                content={`${metas[getLocalized('description')]}`}
             />
             <meta itemProp="name" content={metas[getLocalized()]}/>
-            <meta itemProp="description" content={`${metas.description}`}/>
-            <meta itemProp="image" content={metas.logo}/>
+            <meta itemProp="description" content={`${metas[getLocalized('description')]}`}/>
+            <meta itemProp="image" content={getImageThumb(metas.image)}/>
             <meta property="og:type" content="website" key="ogtype"/>
             <meta
                 property="og:site_name"
@@ -51,17 +57,17 @@ const MetaElement = ({metas}) => {
             <meta property="og:url" content={metas.apple} key="ogurl"/>
             <meta
                 property="og:title"
-                content={`${metas.description}`}
+                content={`${metas[getLocalized('description')]}`}
                 key="ogtitle"
             />
             <meta
                 property="og:title"
-                content={`${metas.description}`}
+                content={`${metas[getLocalized('description')]}`}
                 key="ogtitle"
             />
             <meta property="og:description" content={metas[getLocalized()]} key="ogdesc"/>
-            <meta property="og:image" content={metas.logo} key="ogimage"/>
-        </>
+            <meta property="og:image" content={getImageThumb(metas.image)} key="ogimage"/>
+        </Head>
     );
 };
 

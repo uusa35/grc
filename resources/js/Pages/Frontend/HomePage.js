@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {Fragment, useContext} from 'react'
+import React, {Fragment, useContext} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import {Head, Link} from "@inertiajs/inertia-react";
@@ -21,11 +21,66 @@ export default function HomePage({auth, settings }) {
 
     return (
         <div className="relative bg-gray-50 overflow-hidden">
+            {/*<MetaElement settings={settings}/>*/}
             <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>
                 <meta head-key="title" name="title" content={settings[getLocalized()]}/>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
+                <link href={getImageThumb(settings.logo)} rel="shortcut icon" type="image/png"/>
                 <link rel="icon" type="image/svg+xml" href={getImageThumb(settings.image)}/>
-                <MetaElement metas={settings} />
+                <meta
+                    http-equiv="Content-type"
+                    charSet="utf-8"
+                    content="text/html; charset=utf-8"
+                />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>{settings[getLocalized()]}</title>
+                <meta name="title" content={settings[getLocalized()]}/>
+                <link href={getImageThumb(settings.image)} rel="shortcut icon" type="image/png"/>
+                <meta name={settings[getLocalized()]} content="E-commerce"/>
+                <meta
+                    key="theme-color"
+                    name="theme-color"
+                    content={settings.theme}
+                />
+                <meta key="keywords" name="keywords" content={settings[getLocalized()]}/>
+                <meta key="author" name="author" content={settings[getLocalized()]}/>
+                <meta key="country" name="country" content={settings.country}/>
+                <meta key="mobile" name="mobile" content={settings.mobile}/>
+                <meta key="whatsapp" name="whatsapp" content={settings.whatsapp}/>
+                <meta key="phone" name="phone" content={settings.phone}/>
+                <meta key="logo" name="logo" content={getImageThumb(settings.image)}/>
+                <meta key="email" name="email" content={settings.email}/>
+                <meta key="address" name="address" content={settings.address}/>
+                <meta key="name" name="name" content={settings[getLocalized()]}/>
+                <meta key="lang" name="lang" content={locale}/>
+                <meta
+                    name="description"
+                    key="description"
+                    content={`${settings[getLocalized('description')]}`}
+                />
+                <meta itemProp="name" content={settings[getLocalized()]}/>
+                <meta itemProp="description" content={`${settings[getLocalized('description')]}`}/>
+                <meta itemProp="image" content={getImageThumb(settings.image)}/>
+                <meta property="og:type" content="website" key="ogtype"/>
+                <meta
+                    property="og:site_name"
+                    content={`${settings[getLocalized()]}`}
+                    key="ogsitename"
+                />
+                <meta property="og:url" content={settings.apple} key="ogurl"/>
+                <meta
+                    property="og:title"
+                    content={`${settings[getLocalized('description')]}`}
+                    key="ogtitle"
+                />
+                <meta
+                    property="og:title"
+                    content={`${settings[getLocalized('description')]}`}
+                    key="ogtitle"
+                />
+                <meta property="og:description" content={settings[getLocalized()]} key="ogdesc"/>
+                <meta property="og:image" content={getImageThumb(settings.image)} key="ogimage"/>
             </Head>
             <div className="hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full" aria-hidden="true">
                 <div className="relative h-full max-w-7xl mx-auto">
