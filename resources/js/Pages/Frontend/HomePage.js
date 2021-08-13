@@ -17,8 +17,9 @@ const navigation = [
 ]
 
 export default function HomePage({auth, settings }) {
-    const { trans , parentModule , getImageThumb , getLocalized } = useContext(BackendContext);
+    const { trans , parentModule , getImageThumb , getLocalized , locale } = useContext(BackendContext);
 
+    console.log('count', settings);
     return (
         <div className="relative bg-gray-50 overflow-hidden">
             {/*<MetaElement settings={settings}/>*/}
@@ -45,13 +46,13 @@ export default function HomePage({auth, settings }) {
                 />
                 <meta key="keywords" name="keywords" content={settings[getLocalized()]}/>
                 <meta key="author" name="author" content={settings[getLocalized()]}/>
-                <meta key="country" name="country" content={settings.country}/>
+                <meta key="country" name="country" content={settings[getLocalized('country')]}/>
                 <meta key="mobile" name="mobile" content={settings.mobile}/>
                 <meta key="whatsapp" name="whatsapp" content={settings.whatsapp}/>
                 <meta key="phone" name="phone" content={settings.phone}/>
                 <meta key="logo" name="logo" content={getImageThumb(settings.image)}/>
                 <meta key="email" name="email" content={settings.email}/>
-                <meta key="address" name="address" content={settings.address}/>
+                <meta key="address" name="address" content={settings[getLocalized('address')]}/>
                 <meta key="name" name="name" content={settings[getLocalized()]}/>
                 <meta key="lang" name="lang" content={locale}/>
                 <meta
