@@ -19,8 +19,16 @@ createInertiaApp({
             </GlobalContext.Provider>
             , el)
     },
-    // metadata : {
-    //     description : title => `${title} - Usama`,
-    // },
+    metaInfo() {
+        return {
+            title: "Default App Title",
+            meta: [
+                { charset: "utf-8" },
+                { name: "description", content: "this is description" },
+                { name: "keywords", content: "this,is,key,words,data" },
+                { name: "viewport", content: "width=device-width, initial-scale=1" },
+            ]
+        };
+    },
     title: title => `${title} - E-Commerce`,
 });

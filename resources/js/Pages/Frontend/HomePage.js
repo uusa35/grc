@@ -22,7 +22,7 @@ export default function HomePage({auth, settings }) {
     return (
         <div className="relative bg-gray-50 overflow-hidden">
             <Head>
-                <title>Inertia Head Demo</title>
+                {/*<title>Inertia Head Demo</title>*/}
                 <meta type="description" content="Inertia Head Demo." />
                 <meta name="twitter:title" content="Inertia Head Demo" />
                 <meta name="twitter:site" content="@ninjaparade" />
