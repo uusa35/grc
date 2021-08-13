@@ -3,11 +3,11 @@ import React, {Fragment, useContext} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import {MenuIcon, XIcon} from '@heroicons/react/outline'
 import {Head, Link} from "@inertiajs/inertia-react";
-import route from 'ziggy-js';
 import {capitalize} from "lodash";
 import pluralize from "pluralize";
 import {BackendContext} from "../Backend/context/BackendContext";
 import MetaElement from "../Backend/components/partials/MetaElement";
+import route from 'ziggy-js';
 
 const navigation = [
     {name: 'Product', href: '#'},
@@ -25,6 +25,7 @@ export default function HomePage({auth, settings }) {
                 <meta head-key="title" name="title" content={settings[getLocalized()]}/>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
                 <link href={getImageThumb(settings.logo)} rel="shortcut icon" type="image/png"/>
+                <link rel="canonical"  href={route('home')}/>
                 <link rel="icon" type="image/svg+xml" href={getImageThumb(settings.image)}/>
                 <meta
                     http-equiv="Content-type"
