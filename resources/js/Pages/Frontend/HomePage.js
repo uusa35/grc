@@ -17,13 +17,11 @@ const navigation = [
 ]
 
 export default function HomePage({auth, settings }) {
-    const { trans , parentModule , getImageThumb , getLocalized , locale } = useContext(BackendContext);
+    const { trans , parentModule , getImageThumb , getLocalized , locale  } = useContext(BackendContext);
 
-    console.log('count', settings);
     return (
         <div className="relative bg-gray-50 overflow-hidden">
-            {/*<MetaElement settings={settings}/>*/}
-            <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>
+            <Head title={capitalize(settings[getLocalized()])}>
                 <meta head-key="title" name="title" content={settings[getLocalized()]}/>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
                 <link href={getImageThumb(settings.logo)} rel="shortcut icon" type="image/png"/>
