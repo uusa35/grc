@@ -364,8 +364,9 @@ export default function SettingEdit({setting, themes}) {
                                 {trans('edit')} {trans(parentModule)}
                             </p>
                         </div>
-                        {/* description */}
+                        {/* more information */}
                         <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
+                            {/* description_ar */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -387,6 +388,7 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.description_ar}</div>}
                                 </p>
                             </div>
+                            {/* description en */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_en"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -408,8 +410,7 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.description_en}</div>}
                                 </p>
                             </div>
-
-                            {/* policy */}
+                            {/* policy_ar */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="policy_ar"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -431,6 +432,7 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.policy_ar}</div>}
                                 </p>
                             </div>
+                            {/* policy_en */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="policy_en"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -452,8 +454,7 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.policy_en}</div>}
                                 </p>
                             </div>
-
-                            {/* terms */}
+                            {/* terms_ar */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="terms_ar"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -475,6 +476,7 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.terms_ar}</div>}
                                 </p>
                             </div>
+                            {/* terms_en*/}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="terms_en"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -496,8 +498,7 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.terms_en}</div>}
                                 </p>
                             </div>
-
-                            {/* notes */}
+                            {/* shipment notes_ar */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="notes_ar" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('shipment_notes_ar')}
@@ -518,6 +519,7 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.shipment_notes_ar}</div>}
                                 </p>
                             </div>
+                            {/* shipment notes_en*/}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="shipment_notes_en"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -539,7 +541,7 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.shipment_notes_en}</div>}
                                 </p>
                             </div>
-                            {/* caption */}
+                            {/* caption _ar*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_ar"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -562,6 +564,7 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
                                 </p>
                             </div>
+                            {/* caption_en */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_en"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -582,6 +585,98 @@ export default function SettingEdit({setting, themes}) {
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
+                                </p>
+                            </div>
+                            {/* apple */}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="apple"
+                                       className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('apple')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="apple"
+                                        defaultValue={setting.apple}
+                                        id="apple"
+                                        autoComplete="apple"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.apple && <div className={`text-red-600`}>{errors.apple}</div>}
+                                </p>
+                            </div>
+                            {/* android  */}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="android"
+                                       className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('android')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="android"
+                                        defaultValue={setting.android}
+                                        id="android"
+                                        autoComplete="android"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.android && <div className={`text-red-600`}>{errors.android}</div>}
+                                </p>
+                            </div>
+                            {/* logintude */}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="longitude"
+                                       className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('longitude')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="longitude"
+                                        defaultValue={setting.longitude}
+                                        id="longitude"
+                                        autoComplete="longitude"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.longitude && <div className={`text-red-600`}>{errors.longitude}</div>}
+                                </p>
+                            </div>
+                            {/* latitude */}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="latitude"
+                                       className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('latitude')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="latitude"
+                                        defaultValue={setting.latitude}
+                                        id="latitude"
+                                        autoComplete="latitude"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.latitude && <div className={`text-red-600`}>{errors.latitude}</div>}
                                 </p>
                             </div>
                             {/* keywords */}

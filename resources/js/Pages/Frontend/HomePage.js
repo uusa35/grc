@@ -72,15 +72,10 @@ export default function HomePage({auth, settings }) {
                 <meta property="og:url" content={settings.apple} key="ogurl"/>
                 <meta
                     property="og:title"
-                    content={`${settings[getLocalized('description')]}`}
+                    content={`${settings[getLocalized()]}`}
                     key="ogtitle"
                 />
-                <meta
-                    property="og:title"
-                    content={`${settings[getLocalized('description')]}`}
-                    key="ogtitle"
-                />
-                <meta property="og:description" content={settings[getLocalized()]} key="ogdesc"/>
+                <meta property="og:description" content={settings[getLocalized('description')]} key="ogdesc"/>
                 <meta property="og:image" content={getImageThumb(settings.image)} key="ogimage"/>
             </Head>
             <div className="hidden sm:block sm:absolute sm:inset-y-0 sm:h-full sm:w-full" aria-hidden="true">
