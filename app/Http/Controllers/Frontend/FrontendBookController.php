@@ -22,7 +22,7 @@ class FrontendBookController extends Controller
         }
         $elements = Book::filters($filters)
             ->with('user')
-            ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)
             ->withQueryString()->through(fn($element) => [
                 'id' => $element->id,
                 'name_ar' => $element->name_ar,

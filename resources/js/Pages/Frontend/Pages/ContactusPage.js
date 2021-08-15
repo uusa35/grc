@@ -136,13 +136,12 @@ export default function ContactusPage() {
     const { trans , getThumb , getLocalized } = useContext(AppContext);
     return (
         <FrontendContainer>
-            <div className={"my-10"}>
                 {/* Contact section */}
                 <section className="relative" aria-labelledby="contact-heading">
                     <div className="absolute w-full h-1/2 bg-warm-gray-50" aria-hidden="true" />
 
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="relative shadow-xl">
+                        <div className="relative">
                             <div className="grid grid-cols-1 lg:grid-cols-3">
                                 {/* Contact information */}
                                 <div className="relative overflow-hidden py-10 px-6 bg-gradient-to-b from-teal-500 to-teal-600 sm:px-10 xl:p-12">
@@ -318,7 +317,6 @@ export default function ContactusPage() {
                         </div>
                     </div>
                 </section>
-            </div>
 
         </FrontendContainer>
     )

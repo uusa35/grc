@@ -35,7 +35,7 @@ const MainSlider = ({elements}) => {
           {elements.map((s) => (
             <SwiperSlide key={s.id}>
               <img
-                  style={{ maxHeight : 900, width : '100%'}}
+                  style={{ maxHeight : 700, width : '100%'}}
                   // className="w-full h-auto object-contain"
                 src={getLarge(s.image)}
               />

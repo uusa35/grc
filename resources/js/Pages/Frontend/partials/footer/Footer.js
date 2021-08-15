@@ -105,8 +105,9 @@ const pages = [
 ];
 
 export default function Footer() {
-    const {guest, getLocalized, getThumb, trans} = useContext(AppContext)
-    const {settings} = useContext(GlobalContext);
+    const {guest, getLocalized, getThumb, trans } = useContext(AppContext)
+    const {auth, settings} = useContext(GlobalContext);
+
     return (
         <footer className="bg-gray-50" aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">
@@ -159,15 +160,24 @@ export default function Footer() {
                     <div className="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
                         <div className="md:grid md:grid-cols-2 md:gap-8">
                             <div>
-                                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Solutions</h3>
+                                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">{trans('pages')}</h3>
                                 <ul className="mt-4 space-y-4">
-                                    {pages.map((item) => (
-                                        <li key={item.name}>
-                                            <Link href={item.url} className="text-base text-gray-500 hover:text-gray-900">
-                                                {item.name}
+                                    {
+                                        guest ?
+                                            <li>
+                                                <Link href={route('login')} className="text-base text-gray-500 hover:text-gray-900">
+                                                    {trans('login')}
+                                                </Link>
+                                            </li>
+                                             : <Link href={route('frontend.user.edit', auth.id)}>
+                                                {trans('my_account')}
                                             </Link>
-                                        </li>
-                                    ))}
+                                    }
+                                    <li>
+                                        <Link href={route('frontend.contactus')} className="text-base text-gray-500 hover:text-gray-900">
+                                            {trans('contactus')}
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                             <div className="mt-12 md:mt-0">

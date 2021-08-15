@@ -49,7 +49,7 @@ export default function ElementSlider({
             navigation={showNavigation}
             pagination={showNavigation}
             cssMode={true}
-            className="mySwiper"
+            className="mySwiper min-h-full"
             slidesPerGroup={slidesPerView}
             spaceBetween={5}
             slidesPerView={slidesPerView}

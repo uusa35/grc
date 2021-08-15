@@ -15,7 +15,7 @@ class HomeController extends Controller
         $slides  = Slide::active()->onHome()->get();
         $homeCategories = Category::active()->onlyParent()->onlyForBooks()->get();
         $newOnHomeBooks = Book::active()->onHome()->onNew()->get();
-        $onHomeParticipantAuthors = User::active()->OnHome()->authors()->get();
+        $onHomeParticipantAuthors = User::active()->OnHome()->get();
         return inertia('Frontend/HomePage', compact('slides', 'homeCategories','newOnHomeBooks','onHomeParticipantAuthors'));
 
     }

@@ -32,8 +32,8 @@ class ServiceFactory extends Factory
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
             'sku' => $this->faker->postcode,
-            'name_ar' => $fakerAr->name,
-            'name_en' => $this->faker->name,
+            'name_ar' => 'استشارة وخدمة ' .$fakerAr->name,
+            'name_en' => 'Service '.$this->faker->name,
             'caption_ar' => $fakerAr->name,
             'caption_en' => $this->faker->name,
             'on_sale' => $this->faker->boolean(true),
@@ -53,7 +53,7 @@ class ServiceFactory extends Factory
             'notes_ar' => $fakerAr->name,
             'notes_en' => $this->faker->name,
             'keywords' => $this->faker->name,
-            'image' => 'square.png',
+            'image' => 'product.png',
             'video_url_one' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_two' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_three' => 'https://www.youtube.com/embed/GhyKqj_P2E4',

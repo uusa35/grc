@@ -32,9 +32,9 @@ class ProductFactory extends Factory
         return [
             'sku' => $this->faker->postcode,
             'active' => $this->faker->boolean(true),
-            'name_ar' => 'تيشيرت' . $this->faker->numberBetween(1, 999),
+            'name_ar' => 'تيشيرت ' . $this->faker->numberBetween(1, 999),
             'name_en' => 'T-shirt' . $this->faker->numberBetween(1, 999),
-            'caption_ar' => 'تيشيرت' . $this->faker->numberBetween(1, 999),
+            'caption_ar' => ' تيشيرت' . $this->faker->numberBetween(1, 999),
             'caption_en' => 'T-shirt' . $this->faker->numberBetween(1, 999),
             'weight' => $this->faker->randomDigit,
             'home_delivery_availability' => $this->faker->boolean,
@@ -50,13 +50,13 @@ class ProductFactory extends Factory
             'sale_price' => function ($array) {
                 return $array['price'] - rand(1, 5);
             },
-            'size_chart_image' => 'square.png',
+            'size_chart_image' => 'product.png',
             'description_en' => $this->faker->paragraph,
             'description_ar' => $this->faker->paragraph,
             'notes_ar' => $this->faker->paragraph,
             'notes_en' => $this->faker->paragraph,
             'keywords' => $this->faker->sentence,
-            'image' => 'square.png',
+            'image' => 'product.png',
             'qr' => 'square.png',
             'start_sale' => $this->faker->dateTime('now'),
             'end_sale' => $this->faker->dateTimeBetween('now', '1 year'),

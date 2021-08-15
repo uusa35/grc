@@ -20,14 +20,13 @@ class FrontendUserController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = User::filters($filters)->notAdmins()->with('role')->paginate(Self::TAKE_LESS)
+        $elements = User::filters($filters)->notAdmins()->authors()->paginate(Self::TAKE_LESS)
             ->withQueryString()->through(fn($element) => [
                 'id' => $element->id,
                 'name_ar' => $element->name_ar,
                 'name_en' => $element->name_en,
                 'created_at' => $element->created_at,
                 'active' => $element->active,
-                'role' => $element->role->only('name_ar','name_en')
             ]);
         return inertia('Frontend/User/FrontendUserIndex', compact('elements'));
     }
@@ -73,7 +72,8 @@ class FrontendUserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $element = User::whereId($user->id)->with('role','subscription')->first();
+        return inertia('Frontend/User/FrontendUserEdit', compact('element'));
     }
 
     /**

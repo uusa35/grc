@@ -25,8 +25,8 @@ class CourseFactory extends Factory
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
             'sku' => $this->faker->postcode,
-            'name_ar' => $fakerAr->name,
-            'name_en' => $this->faker->name,
+            'name_ar' => 'دورة اونلاين ' . $fakerAr->name,
+            'name_en' => 'Course '.$this->faker->name,
             'caption_ar' => $fakerAr->name,
             'caption_en' => $this->faker->name,
             'on_new' => $this->faker->boolean(true),
@@ -44,7 +44,7 @@ class CourseFactory extends Factory
             'notes_ar' => $this->faker->paragraph,
             'notes_en' => $this->faker->paragraph,
             'keywords' => $this->faker->sentence,
-            'image' => 'square.png',
+            'image' => 'product.png',
             'qr' => 'sample.png',
             'start_sale' => $this->faker->dateTime('now'),
             'end_sale' => $this->faker->dateTimeBetween('now', '1 year'),

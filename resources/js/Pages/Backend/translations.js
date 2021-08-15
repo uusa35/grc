@@ -1086,11 +1086,25 @@ const ar = {
     "backend" : "لوحة التحكم",
     "new_chosen_books" : "كتب جديدة مختارة",
     "participant_authors" : "المؤلفين المشاركين",
+    "profile" : "الصفحة الشخصية"
 }
 
 const en  = {
     language  : 'language',
-    user : 'user'
+    user : 'user',
+    'ar' : 'العربية',
+    'en' : 'English',
+    'products' : "products",
+    'books' : "books",
+    'users' : "users",
+    'services' : "services",
+    "courses" : "courses",
+    'contactus' : "contact us",
+    "backend" : "Control Panel",
+    "submit" : "submit",
+    "back" : "back",
+    "home" : "home",
+    "pages" : "pages"
 }
 
 export const translations = {ar , en }

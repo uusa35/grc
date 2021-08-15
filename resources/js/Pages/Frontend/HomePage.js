@@ -17,7 +17,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, onHome
     const {trans, parentModule, getLarge, getLocalized, locale, getThumb, isRTL} = useContext(AppContext);
 
     return (
-        <FrontendContainer mainSlides={slides}>
+        <FrontendContainer mainSlides={slides} showBreadCrumbs={false}>
             <div className="bg-white space-y-14 max-w-2xl px-4 sm:py-14 sm:px-6 lg:max-w-7xl lg:px-8">
                 <ElementSlider
                     showNavigation={false}
@@ -36,7 +36,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, onHome
                 <ElementSlider
                     elements={onHomeParticipantAuthors}
                     showNavigation={false}
-                    slidesPerView={4}
+                    slidesPerView={5}
                     title={trans('participant_authors')}
                     type={'user'}
                 />

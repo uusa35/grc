@@ -12,6 +12,9 @@ import {translations} from "../../Backend/translations";
 import Footer from "../partials/footer/Footer";
 import LoadingView from "../../Backend/components/widgets/LoadingView";
 import MainSlider from "./widgets/slider/MainSlider";
+import BreadCrumbs from "../../Backend/components/partials/BreadCrumbs";
+import FrontendBreadCrumbs from "./FrontendBreadCrumbs";
+import Pagination from "../../Backend/components/partials/Pagination";
 
 const FrontendContainer = ({
                                children, elements = [],
@@ -20,7 +23,8 @@ const FrontendContainer = ({
                                showNoElements = false,
                                showSearch = false,
                                showMobileView = false,
-    mainSlides = []
+                               mainSlides = [],
+                               showBreadCrumbs = true
                            }) => {
     const {
         parentModule, setParentModule, childModule, setChildModule, isLoading, toggleIsLoading,
@@ -125,12 +129,12 @@ const FrontendContainer = ({
                 <MainNav/>
                 <div className="min-h-screen">
                     {mainSlides && <MainSlider elements={mainSlides}/>}
-                    <div className="w-3/5 m-auto shadow-xl">
-
+                    <div className="w-4/5 m-auto shadow-xl">
+                        {showBreadCrumbs && <FrontendBreadCrumbs/>}
                         {children}
                     </div>
                 </div>
-                <Footer />
+                <Footer/>
             </main>
         </div>
     );

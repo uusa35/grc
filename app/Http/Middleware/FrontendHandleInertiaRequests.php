@@ -43,7 +43,7 @@ class FrontendHandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
                 $q->select('id', 'name', 'name_en', 'name_ar', 'is_super', 'is_admin', 'is_visible', 'is_client', 'is_company', 'is_author');
-            }])->first()->only('name_ar', 'name_en', 'image', 'role') : null,
+            }])->first()->only('id','name_ar', 'name_en', 'image', 'role') : null,
             'settings' => fn() => Setting::select('name_ar', 'name_en', 'image', 'twitter',
                 'facebook', 'instagram', 'caption_ar', 'caption_en', 'description_ar', 'description_en',
                 'address_ar', 'address_en', 'mobile', 'country_ar', 'country_en',
