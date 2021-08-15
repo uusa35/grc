@@ -1083,7 +1083,9 @@ const ar = {
     "elements" : "عناصر",
     "other_elements" : "عناصر أخرى",
     "choose" : "اختر",
-    "backend" : "لوحة التحكم"
+    "backend" : "لوحة التحكم",
+    "new_chosen_books" : "كتب جديدة مختارة",
+    "participant_authors" : "المؤلفين المشاركين",
 }
 
 const en  = {

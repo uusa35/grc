@@ -1,8 +1,8 @@
 import {useContext, Fragment} from "react";
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 
 const NoElements = ({ display = false }) => {
-    const { trans } = useContext(BackendContext);
+    const { trans } = useContext(AppContext);
     return (
         <Fragment>
             {display && <div className="w-full p-8 bg-white rounded-md shadow-md">{trans('no_elements')}</div>}

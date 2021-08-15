@@ -2,13 +2,13 @@ import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
 import {useForm, usePage} from "@inertiajs/inertia-react";
 import {useContext} from "react";
-import {BackendContext} from "../context/BackendContext";
+import {AppContext} from "../../context/AppContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 import moment from "moment";
 
 export default function TimingCreate() {
-    const {trans, theme} = useContext(BackendContext);
+    const {trans, theme} = useContext(AppContext);
     const { params } = route();
     const {data, setData, post, progress} = useForm({
         'date': moment().format('Y-M-D'),

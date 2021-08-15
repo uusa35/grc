@@ -10,13 +10,14 @@ import Pagination from "../partials/Pagination";
 import NoElements from "../widgets/NoElements";
 import PropTypes from 'prop-types';
 import TableMobileview from "../widgets/TableMobileview";
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext, AppContextProvider} from "../../../context/AppContext";
 import LoadingView from "../widgets/LoadingView";
 import {Inertia} from "@inertiajs/inertia";
 import {Head} from '@inertiajs/inertia-react'
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "../../../context/GlobalContext";
 import pluralize from 'pluralize';
 import route from "ziggy-js";
+import {translations} from "../../translations";
 
 const BackendContainer = ({
                               children, elements = [],
@@ -35,7 +36,7 @@ const BackendContainer = ({
         getThumb,
         getLocalized,
         trans
-    } = useContext(BackendContext);
+    } = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
 
     useEffect(() => {

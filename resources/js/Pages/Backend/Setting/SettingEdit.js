@@ -1,6 +1,6 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useEffect, useMemo, useState} from "react";
-import {BackendContext} from "./../context/BackendContext";
+import {AppContext} from "./../../context/AppContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {filter, map, forEach, isArray, first, remove, uniq} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
@@ -12,12 +12,12 @@ import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
 import {element} from "prop-types";
-import GlobalContext from "../context/GlobalContext";
+import GlobalContext from "../../context/GlobalContext";
 
 
 export default function SettingEdit({setting, themes}) {
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, parentModule, getThumb, getLocalized } = useContext(BackendContext)
+    const {classNames, trans, theme, currentFormTab, parentModule, getThumb, getLocalized } = useContext(AppContext)
 
     const {data, setData, put, post, progress, reset} = useForm({
         name_ar: setting.name_ar,

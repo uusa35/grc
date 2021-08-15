@@ -5,14 +5,13 @@ import {Inertia} from "@inertiajs/inertia";
 import {Head} from '@inertiajs/inertia-react'
 import route from "ziggy-js";
 import MainNav from "../partials/header/MainNav";
-import BreadCrumbs from "../../Backend/components/partials/BreadCrumbs";
-import SystemMessage from "../../Backend/components/partials/SystemMessage";
-import {BackendContext} from "../../Backend/context/BackendContext";
-import Pagination from "../../Backend/components/partials/Pagination";
-import NoElements from "../../Backend/components/widgets/NoElements";
-import LoadingView from "../../Backend/components/widgets/LoadingView";
+import {AppContext} from "../../context/AppContext";
 import ConfirmationModal from "../../Backend/components/partials/ConfirmationModal";
-import GlobalContext from "../../Backend/context/GlobalContext";
+import GlobalContext from "../../context/GlobalContext";
+import {translations} from "../../Backend/translations";
+import Footer from "../partials/footer/Footer";
+import LoadingView from "../../Backend/components/widgets/LoadingView";
+import MainSlider from "./widgets/slider/MainSlider";
 
 const FrontendContainer = ({
                                children, elements = [],
@@ -20,7 +19,8 @@ const FrontendContainer = ({
                                subModule = null,
                                showNoElements = false,
                                showSearch = false,
-                               showMobileView = false
+                               showMobileView = false,
+    mainSlides = []
                            }) => {
     const {
         parentModule, setParentModule, childModule, setChildModule, isLoading, toggleIsLoading,
@@ -31,7 +31,7 @@ const FrontendContainer = ({
         getThumb,
         getLocalized,
         trans,
-    } = useContext(BackendContext);
+    } = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
 
     useEffect(() => {
@@ -67,7 +67,7 @@ const FrontendContainer = ({
                 <meta head-key="title" name="title" content={settings[getLocalized()]}/>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
                 <link href={getThumb(settings.logo)} rel="shortcut icon" type="image/png"/>
-                <link rel="canonical" href={route('home')}/>
+                <link rel="canonical" href={route('frontend.home')}/>
                 <link rel="icon" type="image/svg+xml" href={getThumb(settings.image)}/>
                 <meta
                     http-equiv="Content-type"
@@ -121,13 +121,17 @@ const FrontendContainer = ({
             </Head>
             <ConfirmationModal/>
             {/*{isLoading && <LoadingView/>}*/}
-            <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-gray-100">
+            <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-white ">
                 <MainNav/>
                 <div className="min-h-screen">
-                    {children}
-                </div>
-            </main>
+                    {mainSlides && <MainSlider elements={mainSlides}/>}
+                    <div className="w-3/5 m-auto shadow-xl">
 
+                        {children}
+                    </div>
+                </div>
+                <Footer />
+            </main>
         </div>
     );
 }

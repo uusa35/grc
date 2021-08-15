@@ -16,7 +16,6 @@ class FrontendCategoryController extends Controller
      */
     public function index(CategoryFilters $filters)
     {
-        $this->authorize('search', 'category');
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);

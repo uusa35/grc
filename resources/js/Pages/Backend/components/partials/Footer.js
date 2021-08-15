@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "../../../context/GlobalContext";
 import moment from "moment";
 import {Link} from "@inertiajs/inertia-react";
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 
 const Footer = () => {
-    const {getThumb , getLocalized} = useContext(BackendContext);
+    const {getThumb , getLocalized} = useContext(AppContext);
     const {settings } = useContext(GlobalContext);
 
     return (

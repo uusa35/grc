@@ -1,6 +1,6 @@
 import {InertiaLink} from "@inertiajs/inertia-react";
 import {useContext, useEffect} from "react";
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "../../../context/GlobalContext";
 
 const Nav = (props) => {
     const { otherLang , component } = useContext(GlobalContext);

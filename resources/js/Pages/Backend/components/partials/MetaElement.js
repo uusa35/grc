@@ -1,6 +1,6 @@
 import {Head, Link} from "@inertiajs/inertia-react";
 import React, {useContext} from 'react';
-import GlobalContext from "../../context/GlobalContext";
+import GlobalContext from "../../../context/GlobalContext";
 import {capitalize} from "lodash";
 import pluralize from "pluralize";
 

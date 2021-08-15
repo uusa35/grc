@@ -2,7 +2,7 @@ import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
 import {Fragment, useContext, useEffect, useMemo, useState} from "react";
-import {BackendContext} from "./../context/BackendContext";
+import {AppContext} from "./../../context/AppContext";
 import {orderBy, isEmpty} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
@@ -22,7 +22,7 @@ export default function CourseIndex({elements}) {
         handleSort,
         getLocalized,
         getThumb
-    } = useContext(BackendContext);
+    } = useContext(AppContext);
     const [currentData, setCurrentData] = useState();
 
     useMemo(() => {

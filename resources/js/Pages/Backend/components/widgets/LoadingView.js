@@ -1,8 +1,8 @@
 import {Fragment, useContext, useEffect, useMemo} from "react";
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 
 const LoadingView = () => {
-    const {toggleIsLoading, isLoading} = useContext(BackendContext);
+    const {toggleIsLoading, isLoading} = useContext(AppContext);
 
     useEffect(() => {
         if (isLoading) {

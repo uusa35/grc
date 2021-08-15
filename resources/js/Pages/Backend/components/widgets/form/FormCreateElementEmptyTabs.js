@@ -1,9 +1,9 @@
 import FormSection from "./FormSection";
 import {useContext} from "react";
-import {BackendContext} from "../../../context/BackendContext";
+import {AppContext} from "../../../../context/AppContext";
 
 export default function FormCreateElementEmptyTabs() {
-    const {currentFormTab, classNames, trans } = useContext(BackendContext)
+    const {currentFormTab, classNames, trans } = useContext(AppContext)
     return (
         <>
             <div

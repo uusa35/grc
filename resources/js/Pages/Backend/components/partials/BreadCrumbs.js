@@ -1,15 +1,14 @@
 /* This example requires Tailwind CSS v2.0+ */
 import {HomeIcon} from '@heroicons/react/solid'
 import {useContext, Fragment} from "react";
-import GlobalContext from "../../context/GlobalContext";
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
 import {isEmpty, map} from 'lodash';
 import route from 'ziggy-js'
 
 export default function BreadCrumbs() {
-    const {theme, parentModule, childModule, trans, currentBreadCrumbs, locale } = useContext(BackendContext);
+    const {theme, parentModule, childModule, trans, currentBreadCrumbs, locale } = useContext(AppContext);
 
     return (
         <div
@@ -45,7 +44,7 @@ export default function BreadCrumbs() {
                                         </Fragment>
                                     ) : <Link
                                         className="flex flex- flex-row  font-medium text-gray-500 hover:text-gray-700"
-                                        href={route('home')}>
+                                        href={route('backend.home')}>
                                         <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>
                                         {trans('home')}
                                     </Link>

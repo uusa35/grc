@@ -1,9 +1,9 @@
 import {useContext, useState} from "react";
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 import {first, filter} from "lodash";
 
 const FormTabsContainer = ({children}) => {
-    const {classNames, trans, theme, currentFormTab, setCurrentFormTab, formTabs} = useContext(BackendContext)
+    const {classNames, trans, theme, currentFormTab, setCurrentFormTab, formTabs} = useContext(AppContext)
     return (
         <div className="flex flex-1 flex-col justify-start min-h-screen items-center bg-transparent">
             <div className={`w-full pt-3`}>

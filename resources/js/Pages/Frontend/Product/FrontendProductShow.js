@@ -18,7 +18,7 @@ import {useContext, useState} from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { RadioGroup } from '@headlessui/react'
 import FrontendContainer from "../components/FrontendContainer";
-import {BackendContext} from "../../Backend/context/BackendContext";
+import {AppContext} from "../../context/AppContext";
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -76,7 +76,7 @@ const reviews = { href: '#', average: 4, totalCount: 117 }
 
 
 export default function FrontendProductShow({ element }) {
-    const { getLocalized , getThumb , classNames , trans }  = useContext(BackendContext)
+    const { getLocalized , getThumb , classNames , trans }  = useContext(AppContext)
     const [selectedColor, setSelectedColor] = useState(element.product_attributes[0].color)
     const [selectedSize, setSelectedSize] = useState(element.product_attributes[0].size)
 

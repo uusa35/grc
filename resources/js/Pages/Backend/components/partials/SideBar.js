@@ -2,8 +2,8 @@ import {Dialog, Menu, Transition} from "@headlessui/react";
 import {SearchIcon, SelectorIcon} from "@heroicons/react/solid";
 import {Fragment, useContext, useMemo, useState} from "react";
 import {ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon} from "@heroicons/react/outline";
-import {BackendContext} from "../../context/BackendContext";
-import GlobalContext from "../../context/GlobalContext";
+import {AppContext} from "../../../context/AppContext";
+import GlobalContext from "../../../context/GlobalContext";
 import {InertiaLink, Link} from '@inertiajs/inertia-react'
 import pluralize from 'pluralize';
 import {filter, map, first} from 'lodash';
@@ -32,7 +32,7 @@ const navigation = [
 ]
 
 const SideBar = () => {
-    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules , getThumb, getLocalized } = useContext(BackendContext);
+    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules , getThumb, getLocalized } = useContext(AppContext);
     const {settings, auth} = useContext(GlobalContext);
 
     return (

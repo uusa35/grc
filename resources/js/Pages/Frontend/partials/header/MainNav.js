@@ -1,25 +1,12 @@
-/*
-  This example requires Tailwind CSS v2.0+
 
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 import {Fragment, useContext, useState} from 'react'
 import { Dialog, Popover, Tab, Transition, Disclosure, Menu, } from '@headlessui/react'
 import { MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import {Link} from "@inertiajs/inertia-react";
-import {BackendContext} from "../../../Backend/context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
+import { map } from 'lodash';
+import GlobalContext from "../../../context/GlobalContext";
 const navigation = {
     categories: [
         {
@@ -138,8 +125,11 @@ const navigation = {
         },
     ],
     pages: [
-        { name: 'home', href: route('home') },
+        { name: 'home', href: route('frontend.home') },
+        { name: 'books', href: route('frontend.book.index') },
         { name: 'products', href: route('frontend.product.index') },
+        { name: 'services', href: route('frontend.service.index') },
+        { name: 'courses', href: route('frontend.course.index') },
         { name: 'categories', href: route('frontend.category.index') },
         { name: 'contactus', href: route('frontend.contactus') },
     ],
@@ -147,7 +137,11 @@ const navigation = {
 
 
 export default function MainNav() {
-    const { classNames , getThumb , getLocalized , isAdminOrAbove, trans , auth    } = useContext(BackendContext);
+    const { classNames , getThumb , getLocalized , trans ,
+        setCurrency , currency ,  isAdminOrAbove , guest ,
+        baseUrl,
+        otherLang, setLocale     } = useContext(AppContext);
+    const { settings, currencies } = useContext(GlobalContext);
     const [open, setOpen] = useState(false)
 
     return (
@@ -183,7 +177,7 @@ export default function MainNav() {
                             <div className="px-4 pt-5 pb-2 flex">
                                 <button
                                     type="button"
-                                    className="-m-2 p-2 rounded-md inline-flex items-center justify-center text-gray-400"
+                                    className="-m-2 p-2 rounded-md inline-flex items-center justify-center"
                                     onClick={() => setOpen(false)}
                                 >
                                     <span className="sr-only">Close menu</span>
@@ -274,17 +268,13 @@ export default function MainNav() {
                 </Dialog>
             </Transition.Root>
 
-            <header className="relative bg-white">
-                <p className="bg-indigo-600 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-                    Get free delivery on orders over $100
-                </p>
-
+            <header className="relative bg-black text-white py-3">
                 <nav aria-label="Top" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="border-b border-gray-200">
-                        <div className="h-16 flex items-center">
+
+                        <div className="h-12 flex items-center">
                             <button
                                 type="button"
-                                className="bg-white p-2 rounded-md text-gray-400 lg:hidden"
+                                className="p-2 rounded-md lg:hidden"
                                 onClick={() => setOpen(true)}
                             >
                                 <span className="sr-only">Open menu</span>
@@ -292,31 +282,29 @@ export default function MainNav() {
                             </button>
 
                             {/* Logo */}
-                            <div className="ml-4 flex lg:ml-0">
-                                <a href="#">
-                                    <span className="sr-only">Workflow</span>
+                            <div className="flex lg:ml-0 rtl:ml-5 ltr:mr-5">
+                                <Link href={route('frontend.home')}>
+                                    <span className="sr-only">{settings[getLocalized()]}</span>
                                     <img
-                                        className="h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                                        alt=""
+                                        className="w-12 h-auto"
+                                        src={getThumb(settings.image)}
+                                        alt={settings[getLocalized()]}
                                     />
-                                </a>
-                            </div>
-
-                            {/* pages */}
-                            <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                                {navigation.pages.map((page) => (
-                                    <div key={page.name} className="flow-root">
-                                        <a href={page.href} className="-m-2 p-2 block font-medium text-gray-900">
-                                            {page.name}
-                                        </a>
-                                    </div>
-                                ))}
+                                </Link>
                             </div>
 
                             {/* Categories with sub */}
                             <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                                <div className="h-full flex space-x-8">
+                                <div className="h-full flex gap-x-5">
+                                    {navigation.pages.map((page) => (
+                                        <Link
+                                            key={page.name}
+                                            href={page.href}
+                                            className="flex sm:min-w-max  text-center items-center text-sm font-medium  hover:text-gray-300"
+                                        >
+                                            {trans(page.name)}
+                                        </Link>
+                                    ))}
                                     {navigation.categories.map((category) => (
                                         <Popover key={category.name} className="flex">
                                             {({ open }) => (
@@ -326,7 +314,7 @@ export default function MainNav() {
                                                             className={classNames(
                                                                 open
                                                                     ? 'border-indigo-600 text-indigo-600'
-                                                                    : 'border-transparent text-gray-700 hover:text-gray-800',
+                                                                    : 'border-transparent  hover:text-gray-300',
                                                                 'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                                                             )}
                                                         >
@@ -383,7 +371,7 @@ export default function MainNav() {
                                                                                     >
                                                                                         {section.items.map((item) => (
                                                                                             <li key={item.name} className="flex">
-                                                                                                <a href={item.href} className="hover:text-gray-800">
+                                                                                                <a href={item.href} className="hover:text-gray-300">
                                                                                                     {item.name}
                                                                                                 </a>
                                                                                             </li>
@@ -402,97 +390,101 @@ export default function MainNav() {
                                         </Popover>
                                     ))}
 
-                                    {navigation.pages.map((page) => (
-                                        <Link
-                                            key={page.name}
-                                            href={page.href}
-                                            className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                                        >
-                                            {page.name}
-                                        </Link>
-                                    ))}
                                 </div>
                             </Popover.Group>
 
+                            {/* Search */}
+                            <div className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end invisible xl:visible">
+                                <div className="max-w-lg w-full lg:max-w-xs">
+                                    <label htmlFor="search" className="sr-only">
+                                        {trans('search')}
+                                    </label>
+                                    <div className="relative">
+                                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <SearchIcon className="h-5 w-5" aria-hidden="true" />
+                                        </div>
+                                        <input
+                                            id="search"
+                                            name="search"
+                                            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-2xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            placeholder={trans('search')}
+                                            type="search"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className="ml-auto flex items-center">
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                                    <a href={route('login')} className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                                        {trans('login')}
-                                    </a>
-                                    <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                                    {
-                                     isAdminOrAbove && <Link href={route('backend.home')} className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                                         {trans('backend')}
-                                     </Link>
-                                    }
+                                    <Link
+                                        onClick={() => {
+                                            setLocale(otherLang)
+                                        }}
+                                        href={route('frontend.change.lang', { locale : otherLang})}
+                                          className="flex flex-row items-center text-sm font-medium mx-3 hover:text-gray-300">
+                                        <img
+                                        className="w-5 h-5 rounded-full  mx-2"
+                                            src={`${baseUrl}images/flags/${otherLang}.png`} alt={otherLang}/>
+                                        {otherLang}
+                                    </Link>
                                 </div>
 
-                                {/* auth dropdown */}
-                                <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
-                                    <div>
-                                        <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            <span className="sr-only">Open user menu</span>
-                                            <img
-                                                className="h-8 w-8 rounded-full"
-                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                alt=""
-                                            />
-                                        </Menu.Button>
-                                    </div>
-                                    <Transition
-                                        as={Fragment}
-                                        enter="transition ease-out duration-100"
-                                        enterFrom="transform opacity-0 scale-95"
-                                        enterTo="transform opacity-100 scale-100"
-                                        leave="transition ease-in duration-75"
-                                        leaveFrom="transform opacity-100 scale-100"
-                                        leaveTo="transform opacity-0 scale-95"
-                                    >
-                                        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Your Profile
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Settings
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Sign out
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                        </Menu.Items>
-                                    </Transition>
-                                </Menu>
 
                                 {/* currency dropdown */}
                                 <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
                                     <div>
-                                        <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <Menu.Button className="rounded-full flex items-center gap-x-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                             <span className="sr-only">Open user menu</span>
                                             <img
                                                 className="h-8 w-8 rounded-full"
-                                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                alt=""
+                                                src={getThumb(currency.image)}
+                                                alt={currency[getLocalized()]}
                                             />
+                                            {currency[getLocalized()]}
+                                        </Menu.Button>
+                                    </div>
+                                    <Transition
+                                        as={Fragment}
+                                        enter="transition ease-out duration-100"
+                                        enterFrom="transform opacity-0 scale-95"
+                                        enterTo="transform opacity-100 scale-100"
+                                        leave="transition ease-in duration-75"
+                                        leaveFrom="transform opacity-100 scale-100"
+                                        leaveTo="transform opacity-0 scale-95"
+                                    >
+                                        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg py-1 bg-black ring-1 ring-black ring-opacity-5 focus:outline-none">
+
+                                            {
+                                                map(currencies,element => (
+                                                    <Menu.Item key={element[getLocalized()]}>
+                                                        {({ active }) => (
+                                                            <button
+                                                                onClick={() => setCurrency(element)}
+                                                                className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2 text-sm text-white')}
+                                                            >
+                                                                <img
+                                                                    className="h-8 w-8 rounded-full"
+                                                                    src={getThumb(element.image)}
+                                                                    alt={element[getLocalized()]}
+                                                                />
+                                                                {element[getLocalized()]}
+                                                            </button>
+                                                        )}
+                                                    </Menu.Item>
+                                                ))
+                                            }
+                                        </Menu.Items>
+                                    </Transition>
+                                </Menu>
+
+                                {/* auth dropdown */}
+                                <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
+                                    <div>
+                                        <Menu.Button className="rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            <span className="sr-only">Open user menu</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
                                         </Menu.Button>
                                     </div>
                                     <Transition
@@ -505,75 +497,63 @@ export default function MainNav() {
                                         leaveTo="transform opacity-0 scale-95"
                                     >
                                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Your Profile
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Settings
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Sign out
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
+                                            {
+                                                isAdminOrAbove && <Menu.Item>
+                                                    {({ active }) => (
+                                                        <Link
+                                                            href={route('backend.home')}
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm ')}
+                                                        >
+                                                            {trans('backend')}
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                            }
+                                            {
+                                                guest ?
+                                                    <Menu.Item>
+                                                        {({ active }) => (
+                                                            <a
+                                                                href={route('login')}
+                                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm ')}
+                                                            >
+                                                                {trans('login')}
+                                                            </a>
+                                                        )}
+                                                    </Menu.Item>
+                                                      : <Menu.Item>
+                                                    {({ active }) => (
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.preventDefault();
+                                                                document.getElementById('logout-form').submit()
+                                                            }}
+                                                            className={classNames(
+                                                                active ? 'bg-gray-100 text-gray-900' : '',
+                                                                'group flex items-center px-4 py-2 '
+                                                            )}
+                                                        >{trans('logout')}</button>
+                                                    )}
+                                                </Menu.Item>
+                                            }
                                         </Menu.Items>
                                     </Transition>
                                 </Menu>
 
-                                {/* Search */}
-                                <div className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
-                                    <div className="max-w-lg w-full lg:max-w-xs">
-                                        <label htmlFor="search" className="sr-only">
-                                            {trans('search')}
-                                        </label>
-                                        <div className="relative">
-                                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                <SearchIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                                            </div>
-                                            <input
-                                                id="search"
-                                                name="search"
-                                                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                                placeholder="Search"
-                                                type="search"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
                                 {/* Cart */}
                                 <div className="ml-4 flow-root lg:ml-6">
-                                    <a href="#" className="group -m-2 p-2 flex items-center">
+                                    <Link href="#" className="group -m-2 p-2 flex items-center">
                                         <ShoppingBagIcon
-                                            className="flex-shink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                            className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
                                             aria-hidden="true"
                                         />
-                                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                                        <span className="ml-2 text-sm font-medium  group-hover:text-gray-300">0</span>
                                         <span className="sr-only">items in cart, view bag</span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                 </nav>
             </header>
         </div>

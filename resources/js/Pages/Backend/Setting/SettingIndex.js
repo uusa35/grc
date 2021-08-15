@@ -2,13 +2,13 @@
 import { PaperClipIcon } from '@heroicons/react/solid'
 import BackendContainer from "../components/containers/BackendContainer";
 import {useContext} from "react";
-import {BackendContext} from "../context/BackendContext";
-import GlobalContext from "../context/GlobalContext";
+import {AppContext} from "../../context/AppContext";
+import GlobalContext from "../../context/GlobalContext";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 
 export default function SettingIndex({ setting }) {
-    const { trans, getThumb , getLocalized  } = useContext(BackendContext);
+    const { trans, getThumb , getLocalized  } = useContext(AppContext);
 
     return (
         <BackendContainer>

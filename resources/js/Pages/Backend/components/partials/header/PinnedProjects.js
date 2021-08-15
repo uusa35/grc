@@ -3,11 +3,10 @@ import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
 import {Fragment, useContext} from "react";
 import route from "ziggy-js";
-import {BackendContext} from "../../../context/BackendContext";
-import { map } from 'lodash';
+import {AppContext} from "../../../../context/AppContext";
 
 export default function PinnedProjects() {
-    const { classNames , locale , trans , theme , modules  } = useContext(BackendContext);
+    const { classNames , locale , trans , theme , modules  } = useContext(AppContext);
     return (
         <div className="bg-white my-3 mx-3 rounded-md shadow-sm py-3 sm:px-6 lg:px-5 ">
             {/*<h2 className="text-xs font-medium uppercase tracking-wide">{trans('modules')}</h2>*/}

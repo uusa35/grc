@@ -1,11 +1,10 @@
 import {useContext} from "react";
-import {BackendContext} from "../../../context/BackendContext";
+import {AppContext} from "../../../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
-import GlobalContext from "../../../context/GlobalContext";
 import route from 'ziggy-js';
 
 const FormBtns = ({ type }) => {
-    const { trans , theme } = useContext(BackendContext)
+    const { trans , theme } = useContext(AppContext)
     return (
         <div className="py-3">
             <div className="flex justify-end">

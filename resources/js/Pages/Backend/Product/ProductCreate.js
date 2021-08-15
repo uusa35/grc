@@ -1,6 +1,6 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useMemo, useState} from "react";
-import {BackendContext} from "./../context/BackendContext";
+import {AppContext} from "./../../context/AppContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {filter, map, forEach, isArray, uniq, random} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
@@ -16,7 +16,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
     const {
         classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, auth, getLocalized,
         getThumb
-    } = useContext(BackendContext)
+    } = useContext(AppContext)
     const {data, setData, post, progress} = useForm({
         'sku': random(1111, 9999),
         'name_ar': '',

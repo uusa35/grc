@@ -2,7 +2,7 @@
 import {Fragment, useContext, useEffect, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {CheckIcon} from '@heroicons/react/outline'
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 import PropTypes from 'prop-types';
 import {useForm} from "@inertiajs/inertia-react";
 import {Inertia} from "@inertiajs/inertia";
@@ -20,7 +20,7 @@ export default function ConfirmationModal() {
         modalAction,
         classNames,
         theme,
-    } = useContext(BackendContext);
+    } = useContext(AppContext);
     const {data, submit, setData, delete: destroy} = useForm({
         id: ''
     })

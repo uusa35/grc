@@ -2,12 +2,12 @@ import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
 import {useForm, usePage} from "@inertiajs/inertia-react";
 import {useContext} from "react";
-import {BackendContext} from "../context/BackendContext";
+import {AppContext} from "../../context/AppContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 
 export default function ProductAttributeEdit({attribute, colors, sizes}) {
-    const {trans, getLocalized} = useContext(BackendContext);
+    const {trans, getLocalized} = useContext(AppContext);
     const {data, setData, put, progress} = useForm({
         'color_id': attribute.color_id,
         'size_id': attribute.size_id,

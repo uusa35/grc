@@ -1,14 +1,11 @@
 import {useContext, useEffect, useMemo, useState} from "react";
-import {BackendContext} from "../../context/BackendContext";
-import {Inertia} from "@inertiajs/inertia";
+import {AppContext} from "../../../context/AppContext";
 import {isArray, isEmpty, map, first, split, isObject} from 'lodash';
 import {usePage} from '@inertiajs/inertia-react'
-import GlobalContext from "../../context/GlobalContext";
-import {Transition} from '@tailwindui/react'
 
 
 const SystemMessage = () => {
-    const {sysMessage, trans, setSystemMessage, theme, classNames} = useContext(BackendContext);
+    const {sysMessage, trans, setSystemMessage, theme, classNames} = useContext(AppContext);
     const [alertColor, setAlertColor] = useState(theme);
 
     useMemo(() => {

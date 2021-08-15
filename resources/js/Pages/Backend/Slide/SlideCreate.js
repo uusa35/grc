@@ -2,13 +2,13 @@ import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {useContext, useMemo} from "react";
-import {BackendContext} from "../context/BackendContext";
+import {AppContext} from "../../context/AppContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 import {map} from "lodash";
 
 export default function SlideCreate({types, products, services, categories, courses, books, users}) {
-    const {trans, getLocalized, parentModule, isAdminOrAbove, classNames} = useContext(BackendContext);
+    const {trans, getLocalized, parentModule, isAdminOrAbove, classNames} = useContext(AppContext);
     const {params} = route();
     const {data, setData, post, progress} = useForm({
         name_ar: '',

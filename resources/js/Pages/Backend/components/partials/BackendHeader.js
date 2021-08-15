@@ -1,8 +1,8 @@
 import {Menu, Transition} from "@headlessui/react";
 import {ChevronRightIcon, DotsVerticalIcon} from "@heroicons/react/solid";
 import {Fragment, useContext} from "react";
-import GlobalContext from "../../context/GlobalContext";
-import {BackendContext} from "../../context/BackendContext";
+import GlobalContext from "../../../context/GlobalContext";
+import {AppContext} from "../../../context/AppContext";
 import {InertiaLink, Link} from "@inertiajs/inertia-react";
 import {ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon} from '@heroicons/react/outline'
 import route from 'ziggy-js'
@@ -36,7 +36,7 @@ const BackendHeader = () => {
         setLocale,
         getLocalized,
         getThumb,
-    } = useContext(BackendContext);
+    } = useContext(AppContext);
 
     return (
         <div className={``}>
@@ -220,7 +220,7 @@ const BackendHeader = () => {
                                                         onClick={() => {
                                                             setLocale(otherLang)
                                                         }}
-                                                        href={route(`change.lang`, { locale : otherLang})}
+                                                        href={route(`backend.change.lang`, { locale : otherLang})}
                                                         className={classNames(
                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                             'group flex items-center px-4 py-2 '

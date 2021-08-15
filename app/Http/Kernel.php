@@ -3,7 +3,9 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminAccessOnly;
+use App\Http\Middleware\BackendHandleInertiaRequests;
 use App\Http\Middleware\DashBoardAccessOnly;
+use App\Http\Middleware\FrontendHandleInertiaRequests;
 use App\Http\Middleware\Localization;
 use App\Http\Middleware\SuperAccessOnly;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -41,7 +43,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\HandleInertiaRequests::class,
+//            \App\Http\Middleware\HandleInertiaRequests::class,
             Localization::class
         ],
 
@@ -72,6 +74,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => AdminAccessOnly::class,
         'super' => SuperAccessOnly::class,
-        'dashboard' => DashBoardAccessOnly::class
+        'dashboard' => DashBoardAccessOnly::class,
+        'frontendInertiaHandler' => FrontendHandleInertiaRequests::class,
+        'backendInertiaHandler' => BackendHandleInertiaRequests::class
     ];
 }

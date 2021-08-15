@@ -21,7 +21,6 @@ class FrontendProductController extends Controller
             return inertia('Backend/Product/ProductIndex', $validator->errors()->all());
         }
         $elements = Product::filters($filters)->with('product_attributes', 'color', 'size')
-            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
             ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString()->through(fn($element) => [

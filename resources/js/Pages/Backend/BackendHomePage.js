@@ -1,19 +1,7 @@
 import {Fragment, useState, useContext} from 'react'
-import {
-    ChevronRightIcon,
-    DotsVerticalIcon,
-    DuplicateIcon,
-    PencilAltIcon,
-    SearchIcon,
-    SelectorIcon,
-    TrashIcon,
-    UserAddIcon,
-} from '@heroicons/react/solid'
 import {InertiaLink, Link} from "@inertiajs/inertia-react";
-import {BackendContext} from "./context/BackendContext";
+import { AppContext } from './../context/AppContext';
 import BackendContainer from "./components/containers/BackendContainer";
-import SideBar from "./components/partials/SideBar";
-import {Menu, Popover, Transition} from '@headlessui/react'
 import {
     AcademicCapIcon,
     BadgeCheckIcon,
@@ -24,11 +12,9 @@ import {
     UsersIcon,
     XIcon,
 } from '@heroicons/react/outline'
-import GlobalContext from "./context/GlobalContext";
-import { map } from 'lodash';
 import pluralize from 'pluralize';
-import {useSelector} from "react-redux";
-import LocalizedText from "./components/widgets/LocalizedText";
+import GlobalContext from "../context/GlobalContext";
+
 const user = {
     name: 'Chelsea Hagon',
     email: 'chelseahagon@example.com',
@@ -175,11 +161,13 @@ const projects = [
         bgColorClass: 'bg-pink-600',
     },
 ]
-const pinnedProjects = projects.filter((project) => project.pinned)
 
 export default function BackendHomePage() {
     const {sideBarOpen, toggleSideBar ,modules, trans, theme, auth , getLocalized,
-        getThumb, } = useContext(BackendContext);
+        getThumb, } = useContext(AppContext);
+    const { currencies } = useContext(GlobalContext);
+
+    console.log('currencies from BackendHome', currencies);
 
     return (
         <BackendContainer type={'home'}>

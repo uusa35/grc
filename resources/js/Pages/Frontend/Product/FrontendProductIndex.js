@@ -1,11 +1,12 @@
 import FrontendContainer from "../components/FrontendContainer";
 import {useContext} from "react";
-import {BackendContext} from "../../Backend/context/BackendContext";
+import {AppContext} from "../../context/AppContext";
 import route from 'ziggy-js';
 import {Link} from "@inertiajs/inertia-react";
+import {getConvertedFinalPrice} from "../../helpers";
 
 export default function FrontendProductIndex({ elements }) {
-    const { getThumb , trans , getLocalized } = useContext(BackendContext);
+    const { getThumb , trans , getLocalized, currency  } = useContext(AppContext);
     return (
         <FrontendContainer>
                 <div className="bg-white max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -21,7 +22,7 @@ export default function FrontendProductIndex({ elements }) {
                                     />
                                 </div>
                                 <h3 className="mt-4 text-sm text-gray-700">{element[getLocalized()]}</h3>
-                                <p className="mt-1 text-lg font-medium text-gray-900">{element.price}</p>
+                                <p className="mt-1 text-lg font-medium text-gray-900">{getConvertedFinalPrice(element.price, currency.exchange_rate)} {currency[getLocalized()]}</p>
                             </Link>
                         ))}
                     </div>

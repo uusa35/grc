@@ -1,6 +1,6 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useState} from "react";
-import {BackendContext} from "./../context/BackendContext";
+import {AppContext} from "./../../context/AppContext";
 import {useForm, usePage} from "@inertiajs/inertia-react";
 import {filter, uniq, random} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
@@ -23,7 +23,7 @@ export default function CourseCreate({users, categories}) {
         auth,
         getLocalized,
         getImateThumb
-    } = useContext(BackendContext)
+    } = useContext(AppContext)
     const {data, setData, post, progress} = useForm({
         'sku': random(1111, 9999),
         'name_ar': '',

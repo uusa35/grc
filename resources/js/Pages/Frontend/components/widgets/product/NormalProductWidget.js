@@ -1,0 +1,23 @@
+import route from "ziggy-js";
+import {Link} from "@inertiajs/inertia-react";
+import {useContext} from "react";
+import { AppContextProvider} from "../../../../context/AppContext";
+import {getConvertedFinalPrice} from "../../../../helpers";
+
+export default function NormalProductWidget ({ element }) {
+    const { getThumb , getLocalized , trans } = useContext(AppContextProvider)
+
+    return (
+        <Link key={element.id} href={route('frontend.product.show', element.id)} className="group">
+            <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                <img
+                    src={getThumb(element.image)}
+                    alt={element[getLocalized()]}
+                    className="w-full h-full object-center object-cover group-hover:opacity-75"
+                />
+            </div>
+            <h3 className="mt-4 text-sm text-gray-700">{element[getLocalized()]}</h3>
+            <p className="mt-1 text-lg font-medium text-gray-900">{getConvertedFinalPrice(element.price, currency.exchange_rate)} {currency[getLocalized()]}</p>
+        </Link>
+    );
+}

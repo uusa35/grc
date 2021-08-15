@@ -1,11 +1,11 @@
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {useContext} from "react";
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 import pluralize from 'pluralize'
 import LocalizedText from "./LocalizedText";
 const TableMobileview = ({ tableName, elements }) => {
-    const { classNames, trans, currentModule   } = useContext(BackendContext);
+    const { classNames, trans, currentModule   } = useContext(AppContext);
     return (
         <div className="mt-3 sm:hidden bg-white rounded-md shadow-md mx-3 py-3">
             <div className="px-4 sm:px-6">

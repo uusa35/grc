@@ -1,6 +1,6 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useEffect, useMemo, useState} from "react";
-import {BackendContext} from "./../context/BackendContext";
+import {AppContext} from "./../../context/AppContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {filter, map, forEach, isArray, first, remove, uniq} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
@@ -20,7 +20,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
     const {
         classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, getLocalized,
         getThumb,
-    } = useContext(BackendContext)
+    } = useContext(AppContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': product.sku,
         'name_ar': product.name_ar,

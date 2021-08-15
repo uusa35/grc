@@ -1,10 +1,10 @@
 import {useContext} from "react";
-import {BackendContext} from "../../../context/BackendContext";
+import {AppContext} from "../../../../context/AppContext";
 import { isEmpty } from 'lodash';
 
 export default function ImagesList({images}) {
-    const { theme , trans, getThumb } = useContext(BackendContext);
-    const { setModalAction, setShowConfirmationModal } = useContext(BackendContext);
+    const { theme , trans, getThumb } = useContext(AppContext);
+    const { setModalAction, setShowConfirmationModal } = useContext(AppContext);
     return (
         <>
 

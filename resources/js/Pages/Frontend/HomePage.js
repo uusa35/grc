@@ -1,18 +1,10 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React, {Fragment, useContext} from 'react'
-import {Popover, Transition} from '@headlessui/react'
-import {MenuIcon, XIcon} from '@heroicons/react/outline'
-import {Head, Link} from "@inertiajs/inertia-react";
-import {capitalize, isEmpty} from "lodash";
-import pluralize from "pluralize";
-import {BackendContext} from "../Backend/context/BackendContext";
-import MetaElement from "../Backend/components/partials/MetaElement";
-import route from 'ziggy-js';
-import SwiperCore, {Navigation, Pagination, Scrollbar, A11y} from 'swiper';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import MainSlider from "../Backend/components/widgets/slider/MainSlider";
-import MainNav from "./partials/header/MainNav";
+import {AppContext} from "../context/AppContext";
+import MainSlider from "../Frontend/components/widgets/slider/MainSlider";
 import FrontendContainer from "./components/FrontendContainer";
+import Ziggy from 'ziggy-js';
+import ElementSlider from "./components/widgets/slider/ElementSlider";
 
 const navigation = [
     {name: 'Product', href: '#'},
@@ -21,14 +13,34 @@ const navigation = [
     {name: 'Company', href: '#'},
 ]
 
-export default function HomePage({auth, settings, slides}) {
-    const {trans, parentModule, getLarge, getLocalized, locale, getThumb, isRTL} = useContext(BackendContext);
+export default function HomePage({slides, homeCategories, newOnHomeBooks, onHomeParticipantAuthors }) {
+    const {trans, parentModule, getLarge, getLocalized, locale, getThumb, isRTL} = useContext(AppContext);
 
-    console.log('elements', slides);
     return (
-        <FrontendContainer>
-            <MainSlider elements={slides}/>
-            <h1>Categories swiper</h1>
+        <FrontendContainer mainSlides={slides}>
+            <div className="bg-white space-y-14 max-w-2xl px-4 sm:py-14 sm:px-6 lg:max-w-7xl lg:px-8">
+                <ElementSlider
+                    showNavigation={false}
+                    elements={homeCategories}
+                    slidesPerView={4}
+                    title={trans('categories')}
+                    type={'category'}
+                />
+                <ElementSlider
+                    elements={newOnHomeBooks}
+                    showNavigation={false}
+                    slidesPerView={4}
+                    title={trans('new_chosen_books')}
+                    type={'book'}
+                />
+                <ElementSlider
+                    elements={onHomeParticipantAuthors}
+                    showNavigation={false}
+                    slidesPerView={4}
+                    title={trans('participant_authors')}
+                    type={'user'}
+                />
+            </div>
         </FrontendContainer>
     )
 }

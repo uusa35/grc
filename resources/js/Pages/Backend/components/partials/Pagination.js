@@ -1,14 +1,14 @@
 /* This example requires Tailwind CSS v2.0+ */
 import {ArrowNarrowLeftIcon, ArrowNarrowRightIcon, SearchIcon} from '@heroicons/react/solid'
 import {useContext, useState} from "react";
-import {BackendContext} from "../../context/BackendContext";
+import {AppContext} from "../../../context/AppContext";
 import {Link} from '@inertiajs/inertia-react'
 import route from 'ziggy-js';
 import {map} from 'lodash';
 
 export default function Pagination({type, total, links, showSearch = false}) {
     const [search, setSearch] = useState('');
-    const {trans, classNames, theme, parentModule } = useContext(BackendContext)
+    const {trans, classNames, theme, parentModule } = useContext(AppContext)
     return (
         <nav
             className="grid grid-cols-1 sm:grid-cols-2 flex justify-between items-center border-b border-gray-100 bg-transparent sm:px-0">

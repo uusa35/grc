@@ -1,9 +1,9 @@
 import FrontendContainer from "../components/FrontendContainer";
 import {useContext} from "react";
-import {BackendContext} from "../../Backend/context/BackendContext";
+import {AppContext} from "../../context/AppContext";
 
 export default function FrontendCategoryIndex({elements}) {
-    const { getThumb , trans , getLocalized } = useContext(BackendContext);
+    const { getThumb , trans , getLocalized } = useContext(AppContext);
     return (
         <FrontendContainer>
             <div className="bg-white max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
