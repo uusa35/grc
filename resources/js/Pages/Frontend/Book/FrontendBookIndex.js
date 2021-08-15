@@ -12,7 +12,6 @@ export default function FrontendBookIndex({elements}) {
     const {getThumb, trans, getLocalized, currency} = useContext(AppContext);
     return (
         <FrontendContainer mainModule={'book'}>
-
             <Pagination
                 type={'book'}
                 total={elements.total}

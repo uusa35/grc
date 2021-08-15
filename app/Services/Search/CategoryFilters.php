@@ -100,4 +100,9 @@ class CategoryFilters extends QueryFilters
         return $this->builder->where('price', '<=', (double)request()->max);
     }
 
+    public function page()
+    {
+        return $this->builder;
+    }
+
 }
