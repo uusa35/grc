@@ -179,7 +179,7 @@ const pinnedProjects = projects.filter((project) => project.pinned)
 
 export default function BackendHomePage() {
     const {sideBarOpen, toggleSideBar ,modules, trans, theme, auth , getLocalized,
-        getImageThumb, } = useContext(BackendContext);
+        getThumb, } = useContext(BackendContext);
 
     return (
         <BackendContainer type={'home'}>
@@ -199,7 +199,7 @@ export default function BackendHomePage() {
                                                 'flex-shrink-0 flex items-center justify-center h-16 w-16 rounded-lg'
                                             )}
                                         >
-                                            <img className={`rtl:ml-3 ltr:mr-3 rounded-md w-14 h-auto`} src={getImageThumb(m.image)} alt={m.name}/>
+                                            <img className={`rtl:ml-3 ltr:mr-3 rounded-md w-14 h-auto`} src={getThumb(m.image)} alt={m.name}/>
                                         </div>
                                         <div>
                                             <h3 className={`text-sm font-medium text-gray-900`}>
@@ -230,7 +230,7 @@ export default function BackendHomePage() {
                                         <div className="sm:flex sm:items-center sm:justify-between">
                                             <div className="sm:flex sm:space-x-5">
                                                 <div className="flex-shrink-0">
-                                                    <img className="mx-auto h-20 w-20 rounded-full" src={getImageThumb(user.image)}
+                                                    <img className="mx-auto h-20 w-20 rounded-full" src={getThumb(user.image)}
                                                          alt=""/>
                                                 </div>
                                                 <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">

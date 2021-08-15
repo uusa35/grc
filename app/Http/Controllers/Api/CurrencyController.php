@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CountryResource;
-use App\Http\Resources\CurrencyResource;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 
@@ -17,8 +15,8 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        $elements = Currency::active()->with('country')->orderBy('order','desc')->get();
-        return response()->json(CurrencyResource::collection($elements),200);
+        $elements = Currency::active()->with('country')->get();
+        return response()->json($elements, 200);
     }
 
     /**
@@ -45,22 +43,21 @@ class CurrencyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Currency $currency)
     {
-        $element = Currency::whereId($id)->first();
-        return response()->json(new CountryResource($element),200);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Currency $currency)
     {
         //
     }
@@ -69,10 +66,10 @@ class CurrencyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Currency $currency)
     {
         //
     }
@@ -80,10 +77,10 @@ class CurrencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Currency  $currency
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Currency $currency)
     {
         //
     }

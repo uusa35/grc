@@ -20,7 +20,7 @@ export default function UserIndex({elements}) {
         colName,
         sortDesc,
         handleSort,
-        getImageThumb,
+        getThumb,
         getLocalized
     } = useContext(BackendContext);
     const [currentData, setCurrentData] = useState();
@@ -116,7 +116,7 @@ export default function UserIndex({elements}) {
                                             <td className="px-3 py-4 whitespace-nowrap  font-medium text-gray-900">{element.id}</td>
                                             {/*<td className="px-3 py-4 whitespace-nowrap  text-gray-500">*/}
                                             {/*    <img className="w-14 h-14  object-contain rounded-md shadow-inner"*/}
-                                            {/*         src={getImageThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
+                                            {/*         src={getThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
                                             {/*</td>*/}
                                             <td className="px-3 py-4 whitespace-nowrap  text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">

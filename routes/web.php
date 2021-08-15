@@ -39,6 +39,8 @@ use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\TimingController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VideoController;
+use App\Http\Controllers\Frontend\FrontendCategoryController;
+use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,10 +56,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('frontend.home');
-Route::get('contactus', [ContactusController::class, 'index']);
 Route::get('/lang/{locale}', [HomeController::class, 'changeLang'])->name('change.lang');
 Auth::routes();
+Route::group(['as' => 'frontend.'], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::resource('product',FrontendProductController::class)->only(['index','show']);
+    Route::resource('category',FrontendCategoryController::class);
+    Route::get('contactus', [ContactusController::class, 'index'])->name('contactus');
+});
+
+
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth', 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/home', [DashboardController::class, 'index'])->name('home.index');
@@ -117,5 +125,3 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => 'auth',
         Route::resource('subscription', SubscriptionController::class);
     });
 });
-
-

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CountryResource;
 use App\Models\Country;
 use Illuminate\Http\Request;
 
@@ -16,8 +15,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $elements = Country::active()->orderBy('order','desc')->get();
-        return response()->json(CountryResource::collection($elements),200);
+        $elements = Country::active()->with('currency')->get();
+        return response()->json($elements, 200);
     }
 
     /**
@@ -44,22 +43,21 @@ class CountryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Country $country)
     {
-        $element = Country::whereId($id)->first();
-        return response()->json(new CountryResource($element),200);
+        return response()->json($country,200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Country $country)
     {
         //
     }
@@ -68,10 +66,10 @@ class CountryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Country $country)
     {
         //
     }
@@ -79,10 +77,10 @@ class CountryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Country $country)
     {
         //
     }

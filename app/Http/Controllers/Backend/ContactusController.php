@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 class ContactusController extends Controller
 {
     public function index() {
-        return inertia('Backend/FrontendContactusPage');
+        return inertia('Frontend/Pages/ContactusPage');
     }
 }

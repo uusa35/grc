@@ -32,7 +32,7 @@ const navigation = [
 ]
 
 const SideBar = () => {
-    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules , getImageThumb, getLocalized } = useContext(BackendContext);
+    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules , getThumb, getLocalized } = useContext(BackendContext);
     const {settings, auth} = useContext(GlobalContext);
 
     return (
@@ -230,7 +230,7 @@ const SideBar = () => {
                         <Link href={route(`backend.home`)} className="">
                             <img
                                 className="h-16 w-auto m-auto "
-                                src={getImageThumb(settings.image)}
+                                src={getThumb(settings.image)}
                                 alt={settings[getLocalized]}
                             />
                         </Link>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Services\Search\CategoryFilters;
 use App\Services\Search\Filters;
@@ -18,19 +17,18 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = Category::active()->onHome()->orderby('order','desc')->get();
-        return response()->json(CategoryResource::collection($elements), 200);
+        $elements = Category::active()->onlyParent()->with('children.children')->get();
+        return response()->json($elements,200);
     }
 
     public function search(CategoryFilters $filters)
     {
-        $validator = validator(request()->all(), ['search' => 'nullable']);
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->first()], 400);
-        }
-        $elements = Category::active()->filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
-        return inertia('Backend/CategoryIndex', compact('elements'));
+        $elements = Category::active()->filters($filters)->orderBy('id', 'desc')
+            ->paginate(Self::TAKE_LESS)
+            ->withQueryString();
+        return response()->json($elements, 200);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,21 +53,21 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return response()->json($category, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
         //
     }
@@ -78,10 +76,10 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -89,10 +87,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
         //
     }

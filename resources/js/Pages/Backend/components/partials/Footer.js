@@ -5,7 +5,7 @@ import {Link} from "@inertiajs/inertia-react";
 import {BackendContext} from "../../context/BackendContext";
 
 const Footer = () => {
-    const {getImageThumb , getLocalized} = useContext(BackendContext);
+    const {getThumb , getLocalized} = useContext(BackendContext);
     const {settings } = useContext(GlobalContext);
 
     return (
@@ -15,7 +15,7 @@ const Footer = () => {
                 <div className={`container py-6 flex items-center sm:flex-row flex-row justify-between`}>
                     <Link href="#"
                           className={`flex  flex-1 title-font font-medium items-center md:justify-start justify-center text-gray-900`}>
-                        <img className="w-10 h-10 rtl:ml-5 ltr:mr-5 rounded-full shadow-md" src={getImageThumb(settings.image)}
+                        <img className="w-10 h-10 rtl:ml-5 ltr:mr-5 rounded-full shadow-md" src={getThumb(settings.image)}
                              alt={settings.title}/>
                         <span className="ml-3 text-xl">{settings[getLocalized()]}</span>
                         <div className={`text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4`}>

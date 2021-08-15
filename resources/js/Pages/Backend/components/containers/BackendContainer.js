@@ -32,7 +32,7 @@ const BackendContainer = ({
         currentBreadCrumbs,
         setCurrentRoute,
         locale,
-        getImageThumb,
+        getThumb,
         getLocalized,
         trans
     } = useContext(BackendContext);
@@ -45,10 +45,10 @@ const BackendContainer = ({
 
     useEffect(() => {
         Inertia.on('before', (e) => {
-            // toggleIsLoading(true);
+            toggleIsLoading(true);
         })
         Inertia.on('start', (e) => {
-            // toggleIsLoading(true);
+            toggleIsLoading(true);
         })
         Inertia.on('finish', (e) => {
             // setTimeout(() => toggleIsLoading(false), 250);
@@ -60,7 +60,7 @@ const BackendContainer = ({
             setParentModule(breadCrumbs[1]);
             setCurrentBreadCrumbs(breadCrumbs);
             setCurrentRoute(currentRoute)
-            toggleIsLoading(true);
+            // toggleIsLoading(true);
         })
     }, [])
 
@@ -68,7 +68,7 @@ const BackendContainer = ({
         <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
-                <link rel="icon" type="image/svg+xml" href={getImageThumb(settings.image)}/>
+                <link rel="icon" type="image/svg+xml" href={getThumb(settings.image)}/>
             </Head>
             <SideBar/>
             <ConfirmationModal/>

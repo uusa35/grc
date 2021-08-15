@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Slide;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return inertia('Frontend/HomePage');
+        $slides  = Slide::active()->onHome()->get();
+//        $homeCategories = Category::active()->onlyParent()->with('children.children')->get();
+//        dd($homeCategories);
+        return inertia('Frontend/HomePage', compact('slides'));
 
     }
 

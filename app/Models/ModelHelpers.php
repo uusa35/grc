@@ -71,7 +71,7 @@ trait ModelHelpers
         return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('medium') . $this->image : asset(env('MEDIUM') . $this->image);
     }
 
-    public function getImageThumbAttribute()
+    public function getThumbAttribute()
     {
         return $this->checkStorageSpaces() ? $this->getStorageSpacesUrl('thumbnail') . $this->image : asset(env('THUMBNAIL') . $this->image);
     }

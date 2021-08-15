@@ -14,7 +14,7 @@ export default function ServiceCreate({users, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove,
-        getImageThumb,
+        getThumb,
         getLocalized,
         auth
     } = useContext(BackendContext)

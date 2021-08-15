@@ -29,7 +29,6 @@ export default function Pagination({type, total, links, showSearch = false}) {
                             onChange={(e) => setSearch(e.target.value)}
                             type="text"
                             name="search"
-                            id="search"
                             className={`focus:ring-gray-500 focus:border-gray-500 block w-80 pl-9 border-gray-300 rounded-md`}
                             placeholder={trans('search')}
                         />

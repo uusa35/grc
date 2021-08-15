@@ -19,7 +19,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
     const [currentImages, setCurrentImages] = useState([]);
     const {
         classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, getLocalized,
-        getImageThumb,
+        getThumb,
     } = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': product.sku,
@@ -407,7 +407,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                     {product.image && <img className={`h-24 w-20 bg-cover rounded-md`}
-                                                           src={getImageThumb(product.image)}
+                                                           src={getThumb(product.image)}
                                                            alt={product[getLocalized('name')]}/>}
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
@@ -1084,7 +1084,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         className="relative h-28 w-28">
                                         <img
                                             className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
-                                            src={getImageThumb(product.size_chart_image)}
+                                            src={getThumb(product.size_chart_image)}
                                             alt=""/>
                                         <Link
                                             href={route(`backend.element.clear`, {
@@ -1135,7 +1135,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         className="relative h-28 w-28">
                                         <img
                                             className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
-                                            src={getImageThumb(product.qr)}
+                                            src={getThumb(product.qr)}
                                             alt=""/>
                                         <Link
                                             href={route(`backend.element.clear`, {

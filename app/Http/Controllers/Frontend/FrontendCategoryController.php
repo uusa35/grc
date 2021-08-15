@@ -1,22 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Faq;
+use App\Models\Category;
+use App\Services\Search\CategoryFilters;
 use Illuminate\Http\Request;
 
-class FaqController extends Controller
+class FrontendCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CategoryFilters $filters)
     {
-        $elements = Faq::active()->get();
-        return response()->json($elements, 200);
+        $this->authorize('search', 'category');
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+        $elements = Category::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
+        return inertia('Frontend/Category/FrontendCategoryIndex', compact('elements'));
     }
 
     /**
@@ -43,10 +49,10 @@ class FaqController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Faq  $faq
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Faq $faq)
+    public function show(Category $category)
     {
         //
     }
@@ -54,10 +60,10 @@ class FaqController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Faq  $faq
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Faq $faq)
+    public function edit(Category $category)
     {
         //
     }
@@ -66,10 +72,10 @@ class FaqController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Faq  $faq
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Faq $faq)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -77,10 +83,10 @@ class FaqController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Faq  $faq
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Faq $faq)
+    public function destroy(Category $category)
     {
         //
     }

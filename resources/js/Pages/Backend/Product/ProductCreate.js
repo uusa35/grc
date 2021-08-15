@@ -15,7 +15,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
     const [currentImages, setCurrentImages] = useState([]);
     const {
         classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, auth, getLocalized,
-        getImageThumb
+        getThumb
     } = useContext(BackendContext)
     const {data, setData, post, progress} = useForm({
         'sku': random(1111, 9999),

@@ -35,7 +35,7 @@ const BackendHeader = () => {
         locale,
         setLocale,
         getLocalized,
-        getImageThumb,
+        getThumb,
     } = useContext(BackendContext);
 
     return (
@@ -87,7 +87,7 @@ const BackendHeader = () => {
                                                                         )}
                                                                     >
                                                                         <img className={`w-5 h-auto mx-2 rounded-sm`}
-                                                                             src={getImageThumb(m.image)} alt=""/>
+                                                                             src={getThumb(m.image)} alt=""/>
                                                                         {trans('list')} {trans(plurlaize(m.name))}
                                                                     </Link>
                                                                 )}
@@ -145,7 +145,7 @@ const BackendHeader = () => {
                                                                         )}
                                                                     >
                                                                         <img className={`w-5 h-auto mx-2 rounded-sm`}
-                                                                             src={getImageThumb(m.image)} alt=""/>
+                                                                             src={getThumb(m.image)} alt=""/>
                                                                         {trans('create')} {trans(m.name)}
                                                                     </Link>
                                                                 )}
@@ -169,7 +169,7 @@ const BackendHeader = () => {
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
                                         className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-auto w-3 rtl:ml-2 ltr:mr-2"
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-auto w-6  rtl:ml-2 ltr:mr-2 animate animate-spin"
                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>

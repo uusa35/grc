@@ -4,7 +4,8 @@ import {createInertiaApp} from '@inertiajs/inertia-react'
 import GlobalContext from "./Pages/Backend/context/GlobalContext";
 import {BackendContextProvider} from "./Pages/Backend/context/BackendContext";
 import {translations} from './Pages/Backend/translations';
-
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/components/pagination/pagination.min.css';
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),

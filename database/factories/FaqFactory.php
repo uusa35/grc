@@ -30,6 +30,10 @@ class FaqFactory extends Factory
             'name_en' => $fakerAr->name,
             'description_ar' => $this->faker->paragraph,
             'description_en' => $fakerAr->name,
+            'caption_ar' => $this->faker->paragraph,
+            'caption_en' => $fakerAr->name,
+            'notes_ar' => $this->faker->paragraph,
+            'notes_en' => $fakerAr->name,
             'order' => $this->faker->numberBetween(1, 99),
         ];
     }

@@ -77,7 +77,8 @@ const BackendContextProvider = ({children}) => {
         dir: locale === 'ar' ? 'rtl' : 'ltr',
         isRTL : locale === 'ar' ,
         getLocalized: (element = 'name') => locale === 'ar' ? `${element}_ar` : `${element}_en`,
-        getImageThumb: (element) => `${route('home')}/storage/uploads/images/thumbnail/${element}`,
+        getThumb: (element) => `${route('home')}/storage/uploads/images/thumbnail/${element}`,
+        getLarge: (element) => `${route('home')}/storage/uploads/images/thumbnail/${element}`,
         getFileUrl: (element) => `${route('home')}/storage/uploads/files/${element}`,
         isAdminOrAbove,
         isSuper,
@@ -112,6 +113,7 @@ const BackendContextProvider = ({children}) => {
     useMemo(() => {
         document.getElementById('locale').innerHTML = locale;
     }, [locale])
+
 
     return (
         <BackendContext.Provider value={context}>

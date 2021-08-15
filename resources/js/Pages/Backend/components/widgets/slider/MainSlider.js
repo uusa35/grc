@@ -7,13 +7,16 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
+import {useContext} from "react";
+import {BackendContext} from "../../../context/BackendContext";
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
 const MainSlider = ({elements}) => {
+    const { getLarge } = useContext(BackendContext)
   return (
-    <div className="w-full">
+    <div className="w-full h-auto">
       {!isEmpty(elements) && (
         <Swiper
             navigation
@@ -30,7 +33,7 @@ const MainSlider = ({elements}) => {
             <SwiperSlide key={s.id}>
               <img
                   className="w-full h-auto object-cover"
-                src={s.imageLarge || s.imageThumb}
+                src={getLarge(s.image)}
               />
             </SwiperSlide>
           ))}

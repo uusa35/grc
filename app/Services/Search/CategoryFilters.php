@@ -74,6 +74,11 @@ class CategoryFilters extends QueryFilters
         return $this->builder->where('is_user', request()->is_user);
     }
 
+    public function type()
+    {
+        return $this->builder->where(request()->type, true);
+    }
+
     public function is_book()
     {
         return $this->builder->where('is_book', request()->is_book);

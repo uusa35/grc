@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Currency;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,14 +44,15 @@ class HandleInertiaRequests extends Middleware
             'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
                 return $q->with(['privileges' => function ($q) {
                     return $q->orderBy('order', 'asc')->select('name_ar', 'name_en', 'index', 'main_menu', 'image');
-                }])->select('id','name','name_en','name_ar','is_super','is_admin','is_visible','is_client','is_company','is_author');
-            }])->first()->only('name_ar','name_en','image','role') : null,
+                }])->select('id', 'name', 'name_en', 'name_ar', 'is_super', 'is_admin', 'is_visible', 'is_client', 'is_company', 'is_author');
+            }])->first()->only('name_ar', 'name_en', 'image', 'role') : null,
             'settings' => fn() => Setting::select('name_ar', 'name_en', 'image', 'twitter',
-                'facebook', 'instagram', 'caption_ar', 'caption_en','description_ar','description_en', 'address_ar','address_en',
-                'mobile', 'country_ar', 'country_en','whatsapp', 'apple','android', 'email',
+                'facebook', 'instagram', 'caption_ar', 'caption_en', 'description_ar', 'description_en', 'address_ar', 'address_en',
+                'mobile', 'country_ar', 'country_en', 'whatsapp', 'apple', 'android', 'email',
                 'theme')->first(),
             'success' => fn() => $request->session()->get('success'),
-            'error' => fn() => $request->session()->get('error')
+            'error' => fn() => $request->session()->get('error'),
+            'currencies' => fn() => Currency::active()->get()->only('id', 'name_ar', 'name_en', 'image')
         ]);
     }
 }

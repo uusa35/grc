@@ -26,7 +26,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
         getFileUrl,
         isAdminOrAbove,
         getLocalized,
-        getImageThumb,
+        getThumb,
     } = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': service.sku,
@@ -925,7 +925,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         className="relative h-28 w-28">
                                         <img
                                             className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
-                                            src={getImageThumb(service.qr)}
+                                            src={getThumb(service.qr)}
                                             alt=""/>
                                         <Link
                                             href={route(`backend.element.clear`, {

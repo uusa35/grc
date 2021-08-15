@@ -26,7 +26,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
         getFileUrl,
         isAdminOrAbove,
         getLocalized,
-        getImageThumb
+        getThumb
     } = useContext(BackendContext)
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': book.sku,
@@ -454,7 +454,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
-                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={getImageThumb(book.image)} alt=""/>
+                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={getThumb(book.image)} alt=""/>
                                 </div>
                                 <ToolTipWidget message={trans('book_main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
@@ -483,7 +483,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     {
                                         book.images &&
                                         <img className={`h-24 w-20 bg-cover rounded-md`}
-                                             src={getImageThumb(book.images[0]?.image)} alt=""/>
+                                             src={getThumb(book.images[0]?.image)} alt=""/>
                                     }
                                 </div>
                                 <ToolTipWidget message={trans('more_images_instruction')}/>
@@ -1118,7 +1118,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                         className="relative h-28 w-28">
                                         <img
                                             className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
-                                            src={getImageThumb(book.qr)}
+                                            src={getThumb(book.qr)}
                                             alt=""/>
                                         <Link
                                             href={route(`backend.element.clear`, {

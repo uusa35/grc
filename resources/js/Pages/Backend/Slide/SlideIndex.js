@@ -8,7 +8,7 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import GlobalContext from "../context/GlobalContext";
 
 export default function SlideIndex({elements}) {
-    const {trans, theme, handleDeleteItem, classNames, getLocalized, getImageThumb } = useContext(BackendContext);
+    const {trans, theme, handleDeleteItem, classNames, getLocalized, getThumb } = useContext(BackendContext);
     const {params} = route();
 
     return (
@@ -78,7 +78,7 @@ export default function SlideIndex({elements}) {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <img
                                             className="w-20 h-auto"
-                                            src={getImageThumb(a.image)} alt=""/></td>
+                                            src={getThumb(a.image)} alt=""/></td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.slidable_type}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.slidable[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">

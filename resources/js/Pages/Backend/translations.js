@@ -1082,7 +1082,8 @@ const ar = {
     "other" : "أخرى",
     "elements" : "عناصر",
     "other_elements" : "عناصر أخرى",
-    "choose" : "اختر"
+    "choose" : "اختر",
+    "backend" : "لوحة التحكم"
 }
 
 const en  = {

@@ -8,7 +8,7 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 
 export default function SettingIndex({ setting }) {
-    const { trans, getImageThumb , getLocalized  } = useContext(BackendContext);
+    const { trans, getThumb , getLocalized  } = useContext(BackendContext);
 
     return (
         <BackendContainer>
@@ -33,7 +33,7 @@ export default function SettingIndex({ setting }) {
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                             <img
                                 className={`w-20 h-auto rounded-md shadow-md`}
-                                src={getImageThumb(setting.image)} alt={setting[getLocalized()]}/>
+                                src={getThumb(setting.image)} alt={setting[getLocalized()]}/>
                         </dd>
                     </div>
                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -107,7 +107,7 @@ export default function SettingIndex({ setting }) {
                 {setting.images.map((img) => (
                     <li key={img.id} className="relative">
                         <div className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-gray-500 overflow-hidden">
-                            <img src={getImageThumb(img.image)} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
+                            <img src={getThumb(img.image)} alt="" className="object-cover pointer-events-none group-hover:opacity-75" />
                             <button type="button" className="absolute inset-0 focus:outline-none">
                                 {/*<span className="sr-only">View details for {file.title}</span>*/}
                             </button>
