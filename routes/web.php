@@ -65,6 +65,7 @@ Auth::routes();
 Route::group(['as' => 'frontend.','middleware' => ['frontendInertiaHandler']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('index');
+    Route::get('/home', [HomeController::class, 'index'])->name('home.index');
     Route::get('/lang/{locale}', [HomeController::class, 'changeLang'])->name('change.lang');
     Route::resource('product',FrontendProductController::class)->only(['index','show']);
     Route::resource('book',FrontendBookController::class)->only(['index','show']);
