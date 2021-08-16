@@ -4,6 +4,7 @@ import {split, first, map, isEmpty, isNull} from 'lodash';
 import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
+import {isLocal} from "../helpers";
 
 const AppContext = createContext({});
 
@@ -122,26 +123,26 @@ const AppContextProvider = ({children}) => {
 
     useEffect(() => {
         // Inertia.on('start', (e) => {
-            __DEV__ && console.log('here =====>')
+            isLocal() && console.log('here =====>')
             setIsLoading(true);
         // })
     },[route().current()])
 
     useEffect(() => {
         Inertia.on('before', (e) => {
-            __DEV__ && console.log('before ==>')
+            isLocal() && console.log('before ==>')
             // setIsLoading(true);
         })
         Inertia.on('start', (e) => {
-            __DEV__ && console.log('start ==>')
+            isLocal() && console.log('start ==>')
             // setIsLoading(true);
         })
         Inertia.on('finish', (e) => {
-            __DEV__ && console.log('finish ==>')
+            isLocal() && console.log('finish ==>')
             // setIsLoading(false)
         });
         Inertia.on('navigate', (e) => {
-            __DEV__ && console.log('navigate ==>')
+            isLocal() && console.log('navigate ==>')
             const currentRoute = route().current();
             const breadCrumbs = split(currentRoute, '.');
             setParentModule(breadCrumbs[1]);
@@ -151,7 +152,7 @@ const AppContextProvider = ({children}) => {
         })
     }, [])
 
-    __DEV__ && console.log('parentModule', parentModule);
+    isLocal() && console.log('parentModule', parentModule);
 
 
     return (

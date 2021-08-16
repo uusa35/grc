@@ -114,10 +114,4 @@ export function adjustColor(color, amount) {
   );
 }
 
-export const isLocal = () => {
-  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    return true;
-  } else {
-    return false;
-  }
-};
+export const isLocal = () => !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
