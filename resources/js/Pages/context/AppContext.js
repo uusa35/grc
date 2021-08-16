@@ -122,26 +122,26 @@ const AppContextProvider = ({children}) => {
 
     useEffect(() => {
         // Inertia.on('start', (e) => {
-            console.log('here =====>')
+            __DEV__ && console.log('here =====>')
             setIsLoading(true);
         // })
     },[route().current()])
 
     useEffect(() => {
         Inertia.on('before', (e) => {
-            console.log('before ==>')
+            __DEV__ && console.log('before ==>')
             // setIsLoading(true);
         })
         Inertia.on('start', (e) => {
-            console.log('start ==>')
+            __DEV__ && console.log('start ==>')
             // setIsLoading(true);
         })
         Inertia.on('finish', (e) => {
-            console.log('finish ==>')
+            __DEV__ && console.log('finish ==>')
             // setIsLoading(false)
         });
         Inertia.on('navigate', (e) => {
-            console.log('navigate ==>')
+            __DEV__ && console.log('navigate ==>')
             const currentRoute = route().current();
             const breadCrumbs = split(currentRoute, '.');
             setParentModule(breadCrumbs[1]);
@@ -151,10 +151,7 @@ const AppContextProvider = ({children}) => {
         })
     }, [])
 
-
-
-
-    console.log('parentModule', parentModule);
+    __DEV__ && console.log('parentModule', parentModule);
 
 
     return (

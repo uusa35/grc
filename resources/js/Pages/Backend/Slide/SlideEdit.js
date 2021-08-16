@@ -47,7 +47,6 @@ export default function SlideEdit({slide , types, products, services, categories
         }))
     }
 
-    console.log('slide', slide);
     const submit = (e) => {
         e.preventDefault()
         put(route(`backend.slide.update`, slide.id));
@@ -62,8 +61,6 @@ export default function SlideEdit({slide , types, products, services, categories
         setData('product_id', '')
     }, [data.type])
 
-
-    console.log('parentModule', parentModule)
     return (
         <BackendContainer mainModule={params.slidable_type} subModule={'slide'}>
             <div className="flex flex-col bg-white shadow-md rounded-md">

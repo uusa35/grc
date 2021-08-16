@@ -20,8 +20,6 @@ export default function TimingEdit({ timing }) {
 
     const {errors} = usePage().props;
 
-    console.log('error', errors);
-
     const handleChange = (e) => {
         setData(values => ({
             ...values,

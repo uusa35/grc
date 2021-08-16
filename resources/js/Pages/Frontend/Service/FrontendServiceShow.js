@@ -80,7 +80,6 @@ export default function FrontendServiceShow({ element }) {
     // const [selectedColor, setSelectedColor] = useState(element.product_attributes[0].color)
     // const [selectedSize, setSelectedSize] = useState(element.product_attributes[0].size)
 
-    console.log('product', element);
     return (
         <FrontendContainer>
             <div className="pt-6">

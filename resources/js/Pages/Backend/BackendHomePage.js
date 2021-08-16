@@ -167,7 +167,6 @@ export default function BackendHomePage() {
         getThumb, } = useContext(AppContext);
     const { currencies } = useContext(GlobalContext);
 
-    console.log('currencies from BackendHome', currencies);
 
     return (
         <BackendContainer type={'home'}>

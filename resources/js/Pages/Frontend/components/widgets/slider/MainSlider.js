@@ -31,7 +31,7 @@ const MainSlider = ({elements}) => {
                     spaceBetween={0}
                     slidesPerView={1}
                     onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
+                    // onSwiper={(swiper) => console.log(swiper)}
                 >
                     {elements.map((element) => (
                         <SwiperSlide key={element.id} className="relative">
