@@ -1,5 +1,5 @@
-import React, {Fragment, useContext, useEffect, useState} from "react";
-import {isEmpty, capitalize, split} from 'lodash';
+import React, {useContext, useEffect} from "react";
+import {capitalize, split} from 'lodash';
 import PropTypes from 'prop-types';
 import {Inertia} from "@inertiajs/inertia";
 import {Head} from '@inertiajs/inertia-react'
@@ -8,13 +8,10 @@ import MainNav from "../partials/header/MainNav";
 import {AppContext} from "../../context/AppContext";
 import ConfirmationModal from "../../Backend/components/partials/ConfirmationModal";
 import GlobalContext from "../../context/GlobalContext";
-import {translations} from "../../Backend/translations";
 import Footer from "../partials/footer/Footer";
 import LoadingView from "../../Backend/components/widgets/LoadingView";
 import MainSlider from "./widgets/slider/MainSlider";
-import BreadCrumbs from "../../Backend/components/partials/BreadCrumbs";
 import FrontendBreadCrumbs from "./FrontendBreadCrumbs";
-import Pagination from "../../Backend/components/partials/Pagination";
 
 const FrontendContainer = ({
                                children, elements = [],
@@ -42,27 +39,6 @@ const FrontendContainer = ({
         mainModule ? setParentModule(mainModule) : null;
         subModule ? setChildModule(subModule) : null;
     }, [parentModule, subModule])
-
-    useEffect(() => {
-        Inertia.on('before', (e) => {
-            toggleIsLoading(true);
-        })
-        Inertia.on('start', (e) => {
-            toggleIsLoading(true);
-        })
-        Inertia.on('finish', (e) => {
-            // setTimeout(() => toggleIsLoading(false), 250);
-            // toggleIsLoading(false)
-        });
-        Inertia.on('navigate', (e) => {
-            const currentRoute = route().current();
-            const breadCrumbs = split(currentRoute, '.');
-            setParentModule(breadCrumbs[1]);
-            setCurrentBreadCrumbs(breadCrumbs);
-            setCurrentRoute(currentRoute)
-            // toggleIsLoading(true);
-        })
-    }, [])
 
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg"
@@ -125,11 +101,11 @@ const FrontendContainer = ({
             </Head>
             <ConfirmationModal/>
             {/*{isLoading && <LoadingView/>}*/}
-            <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-white ">
+            <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-white font-bein font-extrabold ">
                 <MainNav/>
                 <div className="min-h-screen">
                     {mainSlides && <MainSlider elements={mainSlides}/>}
-                    <div className="w-4/5 m-auto shadow-xl">
+                    <div className="w-4/5 m-auto shadow-xl min-h-screen">
                         {showBreadCrumbs && <FrontendBreadCrumbs/>}
                         {children}
                     </div>

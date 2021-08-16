@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $slides  = Slide::active()->onHome()->get();
+        $slides  = Slide::active()->onHome()->get(['type','slidable_id','slidable_type','name_ar','name_en','caption_ar','caption_en','description_ar','description_en','url','image']);
         $homeCategories = Category::active()->onlyParent()->onlyForBooks()->get();
         $newOnHomeBooks = Book::active()->onHome()->onNew()->get();
         $onHomeParticipantAuthors = User::active()->OnHome()->get();

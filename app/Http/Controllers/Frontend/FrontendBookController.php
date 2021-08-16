@@ -29,10 +29,14 @@ class FrontendBookController extends Controller
                 'name_en' => $element->name_en,
                 'created_at' => $element->created_at,
                 'price' => $element->price,
+                'sale_price' => $element->sale_price,
                 'active' => $element->active,
                 'image' => $element->image,
                 'sku' => $element->sku,
                 'on_sale' => $element->on_sale,
+                'on_new' => $element->on_new,
+                'isOnSale' => $element->isOnSale,
+                'exclusive' => $element->exclusive,
                 'user' => $element->user->only('id', 'name_ar', 'name_en'),
             ]);
         return inertia('Frontend/Book/FrontendBookIndex', compact('elements'));

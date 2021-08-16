@@ -2,6 +2,8 @@ import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
 import {split, first, map, isEmpty, isNull} from 'lodash';
 import Ziggy from 'ziggy-js';
+import {Inertia} from "@inertiajs/inertia";
+import route from "ziggy-js";
 
 const AppContext = createContext({});
 
@@ -97,6 +99,7 @@ const AppContextProvider = ({children}) => {
         }
     };
 
+
     useEffect(() => {
         if (auth && isEmpty(modules)) {
             const filteredModules = map(auth.role.privileges, p => {
@@ -116,6 +119,42 @@ const AppContextProvider = ({children}) => {
     useMemo(() => {
         document.getElementById('locale').innerHTML = locale;
     }, [locale])
+
+    useEffect(() => {
+        // Inertia.on('start', (e) => {
+            console.log('here =====>')
+            setIsLoading(true);
+        // })
+    },[route().current()])
+
+    useEffect(() => {
+        Inertia.on('before', (e) => {
+            console.log('before ==>')
+            // setIsLoading(true);
+        })
+        Inertia.on('start', (e) => {
+            console.log('start ==>')
+            // setIsLoading(true);
+        })
+        Inertia.on('finish', (e) => {
+            console.log('finish ==>')
+            // setIsLoading(false)
+        });
+        Inertia.on('navigate', (e) => {
+            console.log('navigate ==>')
+            const currentRoute = route().current();
+            const breadCrumbs = split(currentRoute, '.');
+            setParentModule(breadCrumbs[1]);
+            setCurrentBreadCrumbs(breadCrumbs);
+            setCurrentRoute(currentRoute)
+            // setIsLoading(true)
+        })
+    }, [])
+
+
+
+
+    console.log('parentModule', parentModule);
 
 
     return (

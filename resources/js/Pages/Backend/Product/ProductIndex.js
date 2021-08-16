@@ -53,7 +53,7 @@ export default function ProductIndex({elements}) {
                                     <th
                                         scope="col"
                                         className="px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left   uppercase tracking-wider tracking-wider"
-                                        onClick={() => handleSort('id')} x
+                                        onClick={() => handleSort('id')}
                                     >
                                         {sortDesc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"

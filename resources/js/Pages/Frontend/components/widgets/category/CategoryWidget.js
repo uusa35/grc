@@ -7,11 +7,9 @@ import {capitalize, truncate} from "lodash";
 const CategoryWidget = ({element, type = 'product'}) => {
     const {getLocalized, getThumb} = useContext(AppContext)
 
-    console.log('element', element);
-
     return (
         <div key={element[getLocalized()]} className="group relative">
-            <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+            <div className="w-full h-auto bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75">
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}

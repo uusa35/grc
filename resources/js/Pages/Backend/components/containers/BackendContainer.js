@@ -44,27 +44,6 @@ const BackendContainer = ({
         subModule ? setChildModule(subModule) : null;
     }, [parentModule, subModule])
 
-    useEffect(() => {
-        Inertia.on('before', (e) => {
-            toggleIsLoading(true);
-        })
-        Inertia.on('start', (e) => {
-            toggleIsLoading(true);
-        })
-        Inertia.on('finish', (e) => {
-            // setTimeout(() => toggleIsLoading(false), 250);
-            // toggleIsLoading(false)
-        });
-        Inertia.on('navigate', (e) => {
-            const currentRoute = route().current();
-            const breadCrumbs = split(currentRoute, '.');
-            setParentModule(breadCrumbs[1]);
-            setCurrentBreadCrumbs(breadCrumbs);
-            setCurrentRoute(currentRoute)
-            // toggleIsLoading(true);
-        })
-    }, [])
-
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>

@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends PrimaryModel
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, SellingModelHelpers;
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
-//    protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
 
     public function user()

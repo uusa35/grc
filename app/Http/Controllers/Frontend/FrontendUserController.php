@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class FrontendUserController extends Controller
      */
     public function index(UserFilters  $filters)
     {
+//        dd(Category::active()->onlyParent()->with('children.children')->first());
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
@@ -26,6 +28,7 @@ class FrontendUserController extends Controller
                 'name_ar' => $element->name_ar,
                 'name_en' => $element->name_en,
                 'created_at' => $element->created_at,
+                'image' => $element->image,
                 'active' => $element->active,
             ]);
         return inertia('Frontend/User/FrontendUserIndex', compact('elements'));
@@ -61,7 +64,7 @@ class FrontendUserController extends Controller
     public function show(User $user)
     {
         $element = User::whereId($user->id)->with('role','books')->first();
-        return inertia('Frontend/FrontendUserIndex', compact('element'));
+        return inertia('Frontend/User/FrontendUserShow', compact('element'));
     }
 
     /**

@@ -1,14 +1,16 @@
 // import Swiper core and required modules
 import SwiperCore, {Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import {isEmpty} from 'lodash';
+import {isEmpty, capitalize} from 'lodash';
+import pluralize from 'pluralize'
 import CategoryWidget from './../category/CategoryWidget';
 import NormalProductWidget from './../product/NormalProductWidget';
 import NormalUserWidget from '../user/NormalUserWidget';
 import {useContext} from "react";
 import { AppContext } from './../../../../context/AppContext'
 import NormalBookWidget from "../book/NormalBookWidget";
-
+import {Link} from "@inertiajs/inertia-react";
+import route from 'ziggy-js'
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 export default function ElementSlider({
@@ -18,7 +20,7 @@ export default function ElementSlider({
   title = type,
     showNavigation = false,
 }) {
-  const { trans} = useContext(AppContext)
+  const { isRTL } = useContext(AppContext)
 
   const handleComponent = (s) => {
     switch (type) {
@@ -36,20 +38,27 @@ export default function ElementSlider({
   };
 
   return (
-    <div className={'w-full h-auto'}>
+    <div className="max-w-full">
       {!isEmpty(elements) && (
         <>
-          <div
-            className={
-              'capitalize rtl:text-right ltr:text-left pb-6 text-xl'
-            }>
-            {title}
-          </div>
+            <Link
+                href={route(`frontend.${type}.index`)}
+                className="w-full flex flex-1 h-auto mb-5 justify-between items-center capitalize rtl:text-right ltr:text-left text-xl font-bein font-extrabold"
+            >
+              <span>{pluralize(title)}</span>
+              {
+                isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              }
+            </Link>
           <Swiper
             navigation={showNavigation}
             pagination={showNavigation}
             cssMode={true}
-            className="mySwiper min-h-full"
+            className="mySwiper"
             slidesPerGroup={slidesPerView}
             spaceBetween={5}
             slidesPerView={slidesPerView}

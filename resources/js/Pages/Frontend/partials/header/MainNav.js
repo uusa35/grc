@@ -6,6 +6,8 @@ import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
 import {map, capitalize} from 'lodash';
 import GlobalContext from "../../../context/GlobalContext";
+import {FaFacebook, FaInstagram, FaTwitch, FaTwitter, FaWhatsapp} from "react-icons/fa";
+import {getWhatsappLink} from "../../../helpers";
 
 const navigation = {
     categories: [
@@ -124,16 +126,17 @@ const navigation = {
             ],
         },
     ],
-    pages: [
-        {name: 'home', href: route('frontend.home')},
-        {name: 'books', href: route('frontend.book.index')},
-        {name: 'products', href: route('frontend.product.index')},
-        {name: 'services', href: route('frontend.service.index')},
-        {name: 'courses', href: route('frontend.course.index')},
-        {name: 'categories', href: route('frontend.category.index')},
-        {name: 'contactus', href: route('frontend.contactus')},
-    ],
 }
+
+const pages = [
+    {name: 'home', url: route('frontend.home')},
+    {name: 'authors', url: route('frontend.user.index')},
+    {name: 'books', url: route('frontend.book.index')},
+    {name: 'products', url: route('frontend.product.index')},
+    {name: 'services', url: route('frontend.service.index')},
+    {name: 'courses', url: route('frontend.course.index')},
+    {name: 'categories', url: route('frontend.category.index')},
+];
 
 
 export default function MainNav() {
@@ -143,14 +146,46 @@ export default function MainNav() {
         baseUrl,
         otherLang, setLocale
     } = useContext(AppContext);
-    const {settings, currencies, auth } = useContext(GlobalContext);
+    const {settings, currencies, auth} = useContext(GlobalContext);
     const [open, setOpen] = useState(false)
 
     return (
-        <div className="bg-white">
-            <p className="bg-gray-600 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-                Get free delivery on orders over $100
-            </p>
+        <div className="bg-white font-bein font-extrabold rtl:text-right ltr:text-left">
+            <div className="bg-gray-700 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8">
+                <div className="flex  flex-row gap-x-5">
+                    <a target="_blank" href={settings.instagram}>
+                    <FaInstagram size={22} className={'text-gray-400'}/>
+                    </a>
+                    <a target="_blank" href={settings.facebook}>
+                        <FaFacebook size={22} className={'text-gray-400'}/>
+                    </a>
+                    <a target="_blank" href={settings.twitter}>
+                        <FaTwitter size={22} className={'text-gray-400'}/>
+                    </a>
+                    <a target="_blank" href={getWhatsappLink(settings.whatsapp,settings[getLocalized()])}>
+                        <FaWhatsapp size={22} className={'text-gray-400'}/>
+                    </a>
+                </div>
+                <div className="flex flex-row gap-x-5  divide-x divide-gray-400">
+                    <Link
+                        href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50">
+                        {capitalize(trans('contactus'))}
+                    </Link>
+                    <Link
+                        href={route('login')} className="-m-2 p-2 block text-gray-50">
+                        {capitalize(trans('login'))}
+                    </Link>
+                    <Link
+                        href={route('register')} className="-m-2 p-2 block text-gray-50">
+                        {capitalize(trans('register'))}
+                    </Link>
+                    <Link
+                        onClick={() => setLocale(otherLang)}
+                        href={route('frontend.change.lang', { locale : otherLang})} className="-m-2 p-2 block text-gray-50">
+                        {capitalize(trans(otherLang))}
+                    </Link>
+                </div>
+            </div>
             {/* Mobile menu */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setOpen}>
@@ -188,6 +223,50 @@ export default function MainNav() {
                                 </button>
                             </div>
 
+                            <div className="border-t border-gray-200 py-6 px-4 space-y-6 font-bein font-extrabold">
+                                {map(pages, p => (
+                                    <div className="flow-root" key={p.name}>
+                                        <Link
+                                            href={p.url} className="-m-2 p-2 block text-gray-900">
+                                            {capitalize(trans(p.name))}
+                                        </Link>
+                                    </div>
+                                ))}
+                                {
+                                    guest ? <>
+                                        <div className="flow-root">
+                                            <Link href={route('login')} className="-m-2 p-2 block text-gray-900">
+                                                {capitalize(trans('login'))}
+                                            </Link>
+                                        </div>
+                                        <div className="flow-root">
+                                            <Link href={route('register')} className="-m-2 p-2 block text-gray-900">
+                                                {capitalize(trans('register'))}
+                                            </Link>
+                                        </div>
+                                    </> : <div className="flow-root">
+                                        <Link href={route('frontend.user.edit', auth.id)}
+                                              className="-m-2 p-2 block text-gray-900">
+                                            {capitalize(trans('my_account'))}
+                                        </Link>
+                                    </div>
+                                }
+
+                                <div className="flow-root">
+                                    <Link
+                                        onClick={() => {
+                                            setLocale(otherLang)
+                                        }}
+                                        href={route('frontend.change.lang', {locale: otherLang})}
+                                        className="flex flex-row justify-start -m-2 p-2 block text-gray-900">
+                                        <img
+                                            className="w-5 h-5 rounded-full  mx-2"
+                                            src={`${baseUrl}images/flags/${otherLang}.png`} alt={otherLang}/>
+                                        {otherLang}
+                                    </Link>
+                                </div>
+                            </div>
+
                             {/* Links */}
                             <Tab.Group as="div" className="mt-2">
                                 <div className="border-b border-gray-200">
@@ -212,14 +291,14 @@ export default function MainNav() {
                                         <Tab.Panel key={category.name} className="pt-10 pb-8 px-4 space-y-10">
                                             <div className="grid grid-cols-2 gap-x-4">
                                                 {category.featured.map((item) => (
-                                                    <div key={item.name} className="group relative text-sm">
+                                                    <div key={item.name} className="group relative ">
                                                         <div
                                                             className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                                                             <img src={item.imageSrc} alt={item.imageAlt}
                                                                  className="object-center object-cover"/>
                                                         </div>
                                                         <a href={item.href}
-                                                           className="mt-6 block font-medium text-gray-900">
+                                                           className="mt-6 block text-gray-900">
                                                             <span className="absolute z-10 inset-0" aria-hidden="true"/>
                                                             {item.name}
                                                         </a>
@@ -232,7 +311,7 @@ export default function MainNav() {
                                             {category.sections.map((section) => (
                                                 <div key={section.name}>
                                                     <p id={`${category.id}-${section.id}-heading-mobile`}
-                                                       className="font-medium text-gray-900">
+                                                       className="text-gray-900">
                                                         {section.name}
                                                     </p>
                                                     <ul
@@ -256,29 +335,13 @@ export default function MainNav() {
                                 </Tab.Panels>
                             </Tab.Group>
 
-
-                            <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                                <div className="flow-root">
-                                    <a href="#" className="-m-2 p-2 block font-medium text-gray-900">
-                                        Sign in
-                                    </a>
-                                </div>
-                                <div className="flow-root">
-                                    <a href="#" className="-m-2 p-2 block font-medium text-gray-900">
-                                        Create account
-                                    </a>
-                                </div>
-                            </div>
-
-
                         </div>
                     </Transition.Child>
                 </Dialog>
             </Transition.Root>
 
-            <header className="relative bg-black text-white py-3">
-                <nav aria-label="Top" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
+            <header className="relative bg-black text-white py-3 max-w-full">
+                <nav aria-label="Top" className="w-auto lg:w-4/5  xl:m-auto">
                     <div className="h-12 flex items-center">
                         <button
                             type="button"
@@ -292,9 +355,9 @@ export default function MainNav() {
                         {/* Logo */}
                         <div className="flex lg:ml-0 rtl:ml-5 ltr:mr-5">
                             <Link href={route('frontend.home')}>
-                                <span className="sr-only">{settings[getLocalized()]}</span>
+                                {/*<span className="sr-only">{settings[getLocalized()]}</span>*/}
                                 <img
-                                    className="w-12 h-auto"
+                                    className="w-16 h-auto"
                                     src={getThumb(settings.image)}
                                     alt={settings[getLocalized()]}
                                 />
@@ -304,11 +367,11 @@ export default function MainNav() {
                         {/* Categories with sub */}
                         <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                             <div className="h-full flex gap-x-5">
-                                {navigation.pages.map((page) => (
+                                {pages.map((page) => (
                                     <Link
                                         key={page.name}
-                                        href={page.href}
-                                        className="flex sm:min-w-max  text-center items-center text-sm font-medium  hover:text-gray-300"
+                                        href={page.url}
+                                        className="flex sm:min-w-max  text-center items-center   hover:text-gray-300"
                                     >
                                         {capitalize(trans(page.name))}
                                     </Link>
@@ -323,7 +386,7 @@ export default function MainNav() {
                                                             open
                                                                 ? 'border-indigo-600 text-indigo-600'
                                                                 : 'border-transparent  hover:text-gray-300',
-                                                            'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
+                                                            'relative z-10 flex items-center transition-colors ease-out duration-200  border-b-2 -mb-px pt-px'
                                                         )}
                                                     >
                                                         {category.name}
@@ -340,7 +403,7 @@ export default function MainNav() {
                                                     leaveTo="opacity-0"
                                                 >
                                                     <Popover.Panel
-                                                        className="absolute top-full inset-x-0 text-sm text-gray-500 z-50">
+                                                        className="absolute top-full inset-x-0  text-gray-500 z-50">
                                                         {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                                                         <div className="absolute inset-0 top-1/2 bg-white shadow"
                                                              aria-hidden="true"/>
@@ -353,7 +416,7 @@ export default function MainNav() {
                                                                         className="col-start-2 grid grid-cols-2 gap-x-8">
                                                                         {category.featured.map((item) => (
                                                                             <div key={item.name}
-                                                                                 className="group relative text-base sm:text-sm">
+                                                                                 className="group relative text-base sm:">
                                                                                 <div
                                                                                     className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                                                                                     <img
@@ -363,7 +426,7 @@ export default function MainNav() {
                                                                                     />
                                                                                 </div>
                                                                                 <a href={item.href}
-                                                                                   className="mt-6 block font-medium text-gray-900">
+                                                                                   className="mt-6 block text-gray-900">
                                                                                     <span
                                                                                         className="absolute z-10 inset-0"
                                                                                         aria-hidden="true"/>
@@ -376,11 +439,11 @@ export default function MainNav() {
                                                                         ))}
                                                                     </div>
                                                                     <div
-                                                                        className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 text-sm">
+                                                                        className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 ">
                                                                         {category.sections.map((section) => (
                                                                             <div key={section.name}>
                                                                                 <p id={`${section.name}-heading`}
-                                                                                   className="font-medium text-gray-900">
+                                                                                   className="text-gray-900">
                                                                                     {section.name}
                                                                                 </p>
                                                                                 <ul
@@ -416,7 +479,7 @@ export default function MainNav() {
 
                         {/* Search */}
                         <div
-                            className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end invisible xl:visible">
+                            className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end invisible 2xl:visible">
                             <div className="max-w-lg w-full lg:max-w-xs">
                                 <label htmlFor="search" className="sr-only">
                                     {trans('search')}
@@ -429,7 +492,7 @@ export default function MainNav() {
                                     <input
                                         id="search"
                                         name="search"
-                                        className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-2xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-2xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:"
                                         placeholder={trans('search')}
                                         type="search"
                                     />
@@ -438,17 +501,17 @@ export default function MainNav() {
                         </div>
 
                         <div className="ml-auto flex items-center">
-                            <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                            <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-6 ltr:mr-6">
                                 <Link
                                     onClick={() => {
                                         setLocale(otherLang)
                                     }}
                                     href={route('frontend.change.lang', {locale: otherLang})}
-                                    className="flex flex-row items-center text-sm font-medium mx-3 hover:text-gray-300">
+                                    className="flex flex-row items-center hover:text-gray-300">
                                     <img
-                                        className="w-5 h-5 rounded-full  mx-2"
+                                        className="w-5 h-5 rounded-full"
                                         src={`${baseUrl}images/flags/${otherLang}.png`} alt={otherLang}/>
-                                    {otherLang}
+                                    <span className="rtl:pr-3 ltr:pl-3">{otherLang}</span>
                                 </Link>
                             </div>
 
@@ -457,10 +520,10 @@ export default function MainNav() {
                             <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
-                                        className="rounded-full flex items-center gap-x-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        className="rounded-full flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         <span className="sr-only">Open user menu</span>
                                         <img
-                                            className="h-8 w-8 rounded-full"
+                                            className="h-5 w-5 rounded-full"
                                             src={getThumb(currency.image)}
                                             alt={currency[getLocalized()]}
                                         />
@@ -477,7 +540,7 @@ export default function MainNav() {
                                     leaveTo="transform opacity-0 scale-95"
                                 >
                                     <Menu.Items
-                                        className="origin-top-right absolute right-0 mt-2 w-48 shadow-lg py-1 bg-black ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        className="origin-top-right absolute rtl:-mr-20 ltr:-ml-20 mt-2 w-48 shadow-lg py-1 bg-black ring-1 ring-black ring-opacity-5 focus:outline-none">
 
                                         {
                                             map(currencies, element => (
@@ -485,7 +548,7 @@ export default function MainNav() {
                                                     {({active}) => (
                                                         <button
                                                             onClick={() => setCurrency(element)}
-                                                            className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2 text-sm text-white')}
+                                                            className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
                                                         >
                                                             <img
                                                                 className="h-8 w-8 rounded-full"
@@ -506,7 +569,7 @@ export default function MainNav() {
                             <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
-                                        className="rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         <span className="sr-only">Open user menu</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">
@@ -525,13 +588,13 @@ export default function MainNav() {
                                     leaveTo="transform opacity-0 scale-95"
                                 >
                                     <Menu.Items
-                                        className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        className="origin-top-right absolute rtl:-mr-40 ltr:-ml-40 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         {
                                             isAdminOrAbove && <Menu.Item>
                                                 {({active}) => (
                                                     <a
                                                         href={route('backend.home')}
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 ')}
+                                                        className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
                                                     >
                                                         {trans('backend')}
                                                     </a>
@@ -544,7 +607,7 @@ export default function MainNav() {
                                                     {({active}) => (
                                                         <a
                                                             href={route('login')}
-                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 ')}
+                                                            className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
                                                         >
                                                             {trans('login')}
                                                         </a>
@@ -555,7 +618,7 @@ export default function MainNav() {
                                                     <Menu.Item>
                                                         {({active}) => (
                                                             <Link
-                                                            className="'group flex items-center px-4 py-2"
+                                                                className="'group flex items-center px-4 py-2"
                                                                 href={route('frontend.user.edit', auth.id)}>
                                                                 {trans('my_account')}
                                                             </Link>
@@ -569,7 +632,7 @@ export default function MainNav() {
                                                                     document.getElementById('logout-form').submit()
                                                                 }}
                                                                 className={classNames(
-                                                                    active ? 'bg-gray-100 text-gray-900' : '',
+                                                                    active ? 'bg-gray-800 text-gray-50' : '',
                                                                     'group flex items-center px-4 py-2  '
                                                                 )}
                                                             >{trans('logout')}</button>
@@ -588,7 +651,7 @@ export default function MainNav() {
                                         className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
                                         aria-hidden="true"
                                     />
-                                    <span className="ml-2 text-sm font-medium  group-hover:text-gray-300">0</span>
+                                    <span className="ml-2   group-hover:text-gray-300">0</span>
                                     <span className="sr-only">items in cart, view bag</span>
                                 </Link>
                             </div>

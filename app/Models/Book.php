@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends PrimaryModel
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, SellingModelHelpers;
 //    public $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];

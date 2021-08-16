@@ -29,10 +29,14 @@ class FrontendCourseController extends Controller
                 'name_en' => $element->name_en,
                 'created_at' => $element->created_at,
                 'price' => $element->price,
+                'sale_price' => $element->sale_price,
                 'active' => $element->active,
                 'image' => $element->image,
                 'sku' => $element->sku,
                 'on_sale' => $element->on_sale,
+                'on_new' => $element->on_new,
+                'exclusive' => $element->exclusive,
+                'isOnSale' => $element->isOnSale,
                 'user' => $element->user->only('id', 'name_ar', 'name_en'),
             ]);
         return inertia('Frontend/Course/FrontendCourseIndex', compact('elements'));

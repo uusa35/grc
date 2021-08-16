@@ -784,7 +784,7 @@ const ar = {
     'deal' : 'صفقة/اتفاق',
     'back_to' : 'الرجوع إلى',
     'in_stock' : 'متاح',
-    'sort' : 'التصنيف',
+    'sort' : 'ترتيب',
     'alphabetic' : 'أبجدي',
     'lowest_to_highest' : 'الأقل سعرا',
     'highest_to_lowest' : 'الأعلى سعرا',
@@ -1086,25 +1086,40 @@ const ar = {
     "backend" : "لوحة التحكم",
     "new_chosen_books" : "كتب جديدة مختارة",
     "participant_authors" : "المؤلفين المشاركين",
-    "profile" : "الصفحة الشخصية"
+    "profile" : "الصفحة الشخصية",
+    "authors" : "المؤلفين",
+    "advanced_search" : "بحث متقدم",
+    "write_protection_code" : "يرجى كتابة كود الحماية ",
+    "content" : "المحتوى",
+    "max_1000_characters" : "الحد الأقصى ١٠٠٠ حرف",
+    "optional" : "اختياري",
+    "first_name" : "الاسم الاول",
+    "last_name" : "الاسم الاخير",
+    "for_any_inquires_contact_us" : "لأية استفسارات أو مشاكل فنية يرجى التواصل معنا",
+    "contact_information" : "معلومات التواصل",
+    "clear_search" : "الغاء البحث",
+    "alphabetical_a_to_z" : "ترتيب ابجدي",
+    "new_to_old" : "ترتيب الأحدث / الأقدم"
 }
 
 const en  = {
     language  : 'language',
     user : 'user',
-    'ar' : 'العربية',
+    'ar' : 'Arabic',
     'en' : 'English',
     'products' : "products",
     'books' : "books",
     'users' : "users",
-    'services' : "services",
+    'services' : "Consultancies",
     "courses" : "courses",
     'contactus' : "contact us",
     "backend" : "Control Panel",
     "submit" : "submit",
     "back" : "back",
     "home" : "home",
-    "pages" : "pages"
+    "pages" : "pages",
+    "login" : "login",
+    "register" : "register"
 }
 
 export const translations = {ar , en }

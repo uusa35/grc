@@ -22,6 +22,12 @@ module.exports = {
                 'hippie-blue': {
                     '900': '#304b52'
                 },
+                'red': {
+                    '900': '#d7161f'
+                },
+                'green': {
+                    '900': '#078231'
+                },
             }
         },
         colors: {
@@ -60,6 +66,7 @@ module.exports = {
             animation: ['hover', 'group-hover']
         },
         float: ['responsive', 'direction'],
+        position: ['responsive', 'direction'],
         margin: ['responsive', 'direction'],
         padding: ['responsive', 'direction'],
         textAlign: ['responsive', 'direction'],

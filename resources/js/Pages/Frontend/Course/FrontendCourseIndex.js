@@ -24,13 +24,13 @@ export default function FrontendCourseIndex({elements}) {
                     {elements.data.map((element) => (
                         <NormalCourseWidget element={element}/>
                     ))}
-                    <Pagination
-                        type={'course'}
-                        total={elements.total}
-                        links={elements.links}
-                        showSearch={false}
-                    />
                 </div>
+                <Pagination
+                    type={'course'}
+                    total={elements.total}
+                    links={elements.links}
+                    showSearch={false}
+                />
             </div>
         </FrontendContainer>
     );

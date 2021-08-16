@@ -8,9 +8,8 @@ import {isEmpty, map, capitalize} from 'lodash';
 import route from 'ziggy-js'
 
 export default function FrontendBreadCrumbs() {
-    const {theme, parentModule, childModule, trans, currentBreadCrumbs, locale } = useContext(AppContext);
+    const {parentModule, childModule, trans, locale } = useContext(AppContext);
 
-    console.log('parentModule', parentModule);
     return (
         <div
             className="flex flex-1 flex-row justify-between items-center bg-white  mx-3 rounded-md shadow-sm p-5 w-auto">
@@ -22,7 +21,7 @@ export default function FrontendBreadCrumbs() {
                             <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>
                             <Link
                                 href={route('frontend.home')}>
-                                {trans('home')}
+                                {capitalize(trans('home'))}
                             </Link>
                         </li>
                         {parentModule && route().has(`frontend.${parentModule}.index`) &&
@@ -38,7 +37,7 @@ export default function FrontendBreadCrumbs() {
                             </svg>
                             <Link
                                 href={route(`frontend.${parentModule}.index`)}>
-                                {trans(pluralize(parentModule))}
+                                {capitalize(trans(pluralize(parentModule)))}
                             </Link>
                         </li>
                         }
@@ -67,7 +66,7 @@ export default function FrontendBreadCrumbs() {
                       className={'flex flex-row justify-between items-center w-20'}
                       onClick={() => window.history.back()}
                 >
-                    <h1>{trans('back')}</h1>
+                    <h1>{capitalize(trans('back'))}</h1>
                     {locale === 'ar' ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

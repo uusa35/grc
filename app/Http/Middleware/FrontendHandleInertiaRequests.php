@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Setting;
 use App\Models\User;
@@ -43,7 +44,7 @@ class FrontendHandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
                 $q->select('id', 'name', 'name_en', 'name_ar', 'is_super', 'is_admin', 'is_visible', 'is_client', 'is_company', 'is_author');
-            }])->first()->only('id','name_ar', 'name_en', 'image', 'role') : null,
+            }])->first()->only('id', 'name_ar', 'name_en', 'image', 'role') : null,
             'settings' => fn() => Setting::select('name_ar', 'name_en', 'image', 'twitter',
                 'facebook', 'instagram', 'caption_ar', 'caption_en', 'description_ar', 'description_en',
                 'address_ar', 'address_en', 'mobile', 'country_ar', 'country_en',
@@ -51,7 +52,16 @@ class FrontendHandleInertiaRequests extends Middleware
                 'theme')->first(),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
-            'currencies' => fn() => Currency::active()->get()
+            'currencies' => fn() => Currency::active()->get(),
+            'cart' => fn() => session()->get('cart'),
+            'categories' => fn() => Category::select('id','name_ar','name_en','image')->active()->onlyParent()
+                ->with(['children' => function ($q) {
+                    $q->active()->orderBy('order','asc')->with(['children' => function ($q) {
+                        $q->active()->orderBy('order','asc');
+                    }]);
+                }])
+                ->orderBy('order', 'asc')
+                ->get(),
         ]);
     }
 }

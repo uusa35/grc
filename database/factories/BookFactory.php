@@ -28,6 +28,8 @@ class BookFactory extends Factory
             'active' => $this->faker->boolean(true),
             'name_ar' => 'كتاب ' . $fakerAr->name,
             'name_en' => 'Book' . $this->faker->numberBetween(1, 999),
+            'caption_ar' => 'كتاب ' . $fakerAr->name,
+            'caption_en' => 'Book' . $this->faker->numberBetween(1, 999),
             'weight' => $this->faker->randomDigit,
             'home_delivery_availability' => $this->faker->boolean,
             'shipment_availability' => $this->faker->boolean,
@@ -42,10 +44,10 @@ class BookFactory extends Factory
             'sale_price' => function ($array) {
                 return $array['price'] - rand(1, 5);
             },
-            'description_en' => $this->faker->paragraph,
-            'description_ar' => $this->faker->paragraph,
-            'notes_ar' => $this->faker->paragraph,
-            'notes_en' => $this->faker->paragraph,
+            'description_en' => 'Book' . $this->faker->paragraph,
+            'description_ar' => 'كتاب ' .$this->faker->paragraph,
+            'notes_ar' => 'كتاب ' .$this->faker->paragraph,
+            'notes_en' => 'Book' . $this->faker->paragraph,
             'keywords' => $this->faker->sentence,
             'image' => 'product.png',
             'qr' => 'sample.png',

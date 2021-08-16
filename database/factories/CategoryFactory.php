@@ -25,8 +25,8 @@ class CategoryFactory extends Factory
     {
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
-            'name_ar' => $fakerAr->firstName,
-            'name_en' => $this->faker->name,
+            'name_ar' => 'تصنيف ' .$fakerAr->firstName,
+            'name_en' => 'category ' .$this->faker->firstName,
             'caption_ar' => $fakerAr->name,
             'caption_en' => $this->faker->paragraph,
             'order' => $this->faker->numberBetween(1, 99),
