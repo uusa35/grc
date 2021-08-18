@@ -275,32 +275,6 @@ const relatedProducts = [
     },
     // More products...
 ]
-const footerNavigation = {
-    products: [
-        {name: 'Bags', href: '#'},
-        {name: 'Tees', href: '#'},
-        {name: 'Objects', href: '#'},
-        {name: 'Home Goods', href: '#'},
-        {name: 'Accessories', href: '#'},
-    ],
-    company: [
-        {name: 'Who we are', href: '#'},
-        {name: 'Sustainability', href: '#'},
-        {name: 'Press', href: '#'},
-        {name: 'Careers', href: '#'},
-        {name: 'Terms & Conditions', href: '#'},
-        {name: 'Privacy', href: '#'},
-    ],
-    customerService: [
-        {name: 'Contact', href: '#'},
-        {name: 'Shipping', href: '#'},
-        {name: 'Returns', href: '#'},
-        {name: 'Warranty', href: '#'},
-        {name: 'Secure Payments', href: '#'},
-        {name: 'FAQ', href: '#'},
-        {name: 'Find a store', href: '#'},
-    ],
-}
 
 export default function FrontendBookShow({element}) {
     const {currency, getThumb, getLocalized, trans, classNames} = useContext(AppContext)
@@ -531,14 +505,6 @@ export default function FrontendBookShow({element}) {
                                         />
                                         <p className="relative text-lg font-semibold text-white">{product.price}</p>
                                     </div>
-                                </div>
-                                <div className="mt-6">
-                                    <a
-                                        href={product.href}
-                                        className="relative flex bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
-                                    >
-                                        Add to bag<span className="sr-only">, {product.name}</span>
-                                    </a>
                                 </div>
                             </div>
                         ))}

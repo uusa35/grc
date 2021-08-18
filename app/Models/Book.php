@@ -26,7 +26,7 @@ class Book extends PrimaryModel
 
     public function favorites()
     {
-        return $this->belongsToMany(User::class, 'favorites');
+        return $this->morphMany(Favorite::class, 'favoritable');
     }
 
     public function tags()

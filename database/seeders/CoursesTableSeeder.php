@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Favorite;
 use App\Models\Image;
 use App\Models\Slide;
 use App\Models\Tag;
@@ -26,6 +27,7 @@ class CoursesTableSeeder extends Seeder
             $p->tags()->saveMany(Tag::all()->random(2));
             $p->videos()->saveMany(Video::all()->random(2));
             $p->images()->saveMany(Image::factory( 3)->create());
+            $p->favorites()->saveMany(Favorite::factory( 2)->create());
         });
     }
 }

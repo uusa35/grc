@@ -4,6 +4,7 @@ use App\Models\Area;
 use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Comment;
+use App\Models\Favorite;
 use App\Models\Image;
 use App\Models\Notification;
 use App\Models\Post;
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
             $u->slides()->saveMany(Slide::factory(2)->create());
             $u->images()->saveMany(Image::factory(2)->create());
             $u->comments()->saveMany(Comment::factory( 2)->create());
+            $u->favorites()->saveMany(Favorite::factory( 2)->create());
             $u->notificationAlerts()->saveMany(Notification::factory(2)->create());
         });
     }

@@ -4,7 +4,7 @@ import {AppContext} from "../../../../context/AppContext";
 import route from 'ziggy-js';
 import {capitalize, truncate} from "lodash";
 
-const CategoryWidget = ({element, type = 'product'}) => {
+const CategoryWidget = ({element, type = 'book'}) => {
     const {getLocalized, getThumb} = useContext(AppContext)
 
     return (
@@ -18,14 +18,14 @@ const CategoryWidget = ({element, type = 'product'}) => {
             </div>
             <div className="mt-4 flex justify-between">
                 <div>
-                    <h3 className="text-sm text-gray-700">
-                        <Link href={route(`frontend.${type}.index`, {product_category_id: element.id})}>
+                    <h3 className=" text-gray-700">
+                        <Link href={route(`frontend.${type}.index`, {category_id: element.id})}>
                             <span aria-hidden="true" className="absolute inset-0" />
                             {element[getLocalized()]}
                         </Link>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500 truncate overflow-ellipsis overflow-hidden">
-                        {truncate(element[getLocalized('caption')],50)}
+                    <p className="mt-1  text-gray-500 truncate overflow-ellipsis overflow-hidden truncate">
+                        {element[getLocalized('caption')]}
                     </p>
                 </div>
             </div>

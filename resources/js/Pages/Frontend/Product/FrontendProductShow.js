@@ -858,14 +858,6 @@ export default function FrontendProductShow() {
                                             <p className="relative text-lg font-semibold text-white">{product.price}</p>
                                         </div>
                                     </div>
-                                    <div className="mt-6">
-                                        <a
-                                            href={product.href}
-                                            className="relative flex bg-gray-100 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-gray-200"
-                                        >
-                                            Add to bag<span className="sr-only">, {product.name}</span>
-                                        </a>
-                                    </div>
                                 </div>
                             ))}
                         </div>

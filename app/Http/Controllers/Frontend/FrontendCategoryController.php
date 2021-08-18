@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
 use App\Services\Search\CategoryFilters;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class FrontendCategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Category::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN)->withQueryString();
+        $elements = CategoryCollection::make(Category::filters($filters)->orderBy('id', 'desc')
+            ->paginate(Self::TAKE_MIN)->withQueryString());
         return inertia('Frontend/Category/FrontendCategoryIndex', compact('elements'));
     }
 

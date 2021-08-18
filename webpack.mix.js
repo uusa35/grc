@@ -10,18 +10,19 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 mix
-  .js('resources/js/app.js', 'public/js').react()
-  .postCss('resources/css/app.css', 'public/css', [
-    // require('@tailwindcss/jit'),
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('postcss-nested'),
-    require('autoprefixer'),
-  ]).browserSync();
+    .js('resources/js/app.js', 'public/js')
+    .react()
+    .postCss('resources/css/app.css', 'public/css', [
+        // require('@tailwindcss/jit'),
+        require('postcss-import'),
+        require('tailwindcss'),
+        require('autoprefixer'),
+    ]).browserSync('ecommerce-backend.test');
 
 if (mix.inProduction()) {
-  mix
-    .version();
+    mix
+        .version();
 }

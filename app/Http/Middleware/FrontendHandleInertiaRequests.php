@@ -2,6 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\AuthExtraLightResource;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryExtraLightResource;
+use App\Http\Resources\SettingExtraLightResource;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Setting;
@@ -42,26 +46,20 @@ class FrontendHandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
-                $q->select('id', 'name', 'name_en', 'name_ar', 'is_super', 'is_admin', 'is_visible', 'is_client', 'is_company', 'is_author');
-            }])->first()->only('id', 'name_ar', 'name_en', 'image', 'role') : null,
-            'settings' => fn() => Setting::select('name_ar', 'name_en', 'image', 'twitter',
-                'facebook', 'instagram', 'caption_ar', 'caption_en', 'description_ar', 'description_en',
-                'address_ar', 'address_en', 'mobile', 'country_ar', 'country_en',
-                'whatsapp', 'apple', 'android', 'email',
-                'theme')->first(),
+            'auth' => fn() => $request->user() ? AuthExtraLightResource::make(User::whereId($request->user()->id)->with('role')->first()) : null,
+            'settings' => fn() => new SettingExtraLightResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
             'currencies' => fn() => Currency::active()->get(),
             'cart' => fn() => session()->get('cart'),
-            'categories' => fn() => Category::select('id','name_ar','name_en','image')->active()->onlyParent()
+            'categories' => fn() => CategoryCollection::make(Category::active()->onlyParent()
                 ->with(['children' => function ($q) {
-                    $q->active()->orderBy('order','asc')->with(['children' => function ($q) {
-                        $q->active()->orderBy('order','asc');
+                    $q->active()->orderBy('order', 'asc')->with(['children' => function ($q) {
+                        $q->active()->orderBy('order', 'asc');
                     }]);
                 }])
                 ->orderBy('order', 'asc')
-                ->get(),
+                ->get()),
         ]);
     }
 }

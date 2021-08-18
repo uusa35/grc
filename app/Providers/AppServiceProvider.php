@@ -6,6 +6,7 @@ use App\Models\Setting;
 use App\Observers\ProductObserver;
 use App\Observers\UserObserver;
 use Carbon\Carbon;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale(session()->get('locale'));
         Schema::defaultStringLength(191);
+        JsonResource::withoutWrapping();
 //        User::observe(UserObserver::class);
 //        Product::observe(ProductObserver::class);
     }

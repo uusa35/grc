@@ -123,6 +123,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+//    'mix_url' => env('MIX_ASSET_URL', 'ecommerce-backend.test'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

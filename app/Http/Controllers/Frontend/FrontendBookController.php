@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookCollection;
 use App\Models\Book;
+use App\Services\Search\Filters;
 use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
 
@@ -14,31 +16,16 @@ class FrontendBookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ProductFilters $filters)
+    public function index(Filters $filters)
     {
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return inertia('Frontend/Book/FrontendBookIndex', $validator->errors()->all());
         }
-        $elements = Book::filters($filters)
+        $elements = new BookCollection(Book::filters($filters)
             ->with('user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)
-            ->withQueryString()->through(fn($element) => [
-                'id' => $element->id,
-                'name_ar' => $element->name_ar,
-                'name_en' => $element->name_en,
-                'created_at' => $element->created_at,
-                'price' => $element->price,
-                'sale_price' => $element->sale_price,
-                'active' => $element->active,
-                'image' => $element->image,
-                'sku' => $element->sku,
-                'on_sale' => $element->on_sale,
-                'on_new' => $element->on_new,
-                'isOnSale' => $element->isOnSale,
-                'exclusive' => $element->exclusive,
-                'user' => $element->user->only('id', 'name_ar', 'name_en'),
-            ]);
+            ->withQueryString());
         return inertia('Frontend/Book/FrontendBookIndex', compact('elements'));
     }
 
@@ -71,7 +58,7 @@ class FrontendBookController extends Controller
      */
     public function show(Book $book)
     {
-        $element = Book::whereId($book->id)->with('user')->first();
+        $element = Book::whereId($book->id)->with('user','images')->first();
         return inertia('Frontend/Book/FrontendBookShow', compact('element'));
     }
 

@@ -12,10 +12,10 @@ export default function FrontendBreadCrumbs() {
 
     return (
         <div
-            className="flex flex-1 flex-row justify-between items-center bg-white  mx-3 rounded-md shadow-sm p-5 w-auto">
+            className="flex flex-1 flex-row justify-between items-center rounded-md shadow-sm p-5 w-auto">
             <div className="flex flex-1 flex-row">
                 <nav
-                    className={`flex ltr:pl-10 rtl:pr-10  bg-gray-100" aria-label="Breadcrumb w-full`}>
+                    className={`flex  bg-gray-100" aria-label="Breadcrumb w-full`}>
                     <ol className="flex items-center space-x-4">
                         <li className="flex flex-row justify-start items-center">
                             <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>

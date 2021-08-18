@@ -18,20 +18,22 @@ class ProductExtraLightResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name_ar' => $this->name_ar,
+            'name_en' => $this->name_en,
+            'created_at' => $this->created_at,
+            'price' => $this->price,
+            'sale_price' => $this->sale_price,
+            'active' => $this->active,
+            'image' => $this->image,
             'sku' => $this->sku,
-            'name' => ucfirst($this->name),
-            'name_ar' => ucfirst($this->name_ar),
-            'name_en' => ucfirst($this->name_en),
-            'caption_ar' => ucfirst($this->name_ar),
-            'caption_en' => ucfirst($this->name_en),
-            'on_new' => $this->on_new,
-            'exclusive' => $this->exclusive,
+            'has_attributes' => $this->has_attributes,
             'isOnSale' => $this->isOnSale,
-            'finalPrice' => $this->finalPrice,
-            'imageThumb' => $this->imageThumb,
-            'isReallyHot' => $this->isReallyHot,
-            'hasStock' => $this->hasStock,
-            'type' => $this->type
+            'exclusive' => $this->exclusive,
+            'on_new' => $this->on_new,
+            'user' => UserExtraLightResource::make($this->whenLoaded('user')),
+            'color' => ColorExtraLightResource::make($this->whenLoaded('color')),
+            'size' => SizeExtraLightResource::make($this->whenLoaded('size')),
+            'product_attributes' => ProductAttributeExtraLightResource::collection($this->whenLoaded('product_attributes'))
         ];
     }
 }

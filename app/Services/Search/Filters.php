@@ -49,10 +49,10 @@ class Filters extends QueryFilters
     }
 
 
-    public function categories()
+    public function category_id()
     {
         return $this->builder->whereHas('categories', function ($q) {
-            return $q->whereIn('category_id', request()->categories);
+            return $q->whereIn('category_id', is_array(request()->category_id) ? request()->category_id : [request()->category_id]);
         });
     }
 

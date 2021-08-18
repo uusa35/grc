@@ -61,7 +61,7 @@ class Product extends PrimaryModel
 
     public function favorites()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'product_id');
+        return $this->morphMany(Favorite::class, 'favoritable');
     }
 
     public function brand()
@@ -83,6 +83,7 @@ class Product extends PrimaryModel
     {
         return $this->morphMany(Slide::class, 'slidable');
     }
+
 
     public function notificationAlerts()
     {

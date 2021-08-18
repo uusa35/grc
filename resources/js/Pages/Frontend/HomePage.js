@@ -6,6 +6,7 @@ import FrontendContainer from "./components/FrontendContainer";
 import Ziggy from 'ziggy-js';
 import ElementSlider from "./components/widgets/slider/ElementSlider";
 import {isMobile, isTablet} from 'react-device-detect';
+import NewsLetter from "./partials/NewsLetter";
 
 const navigation = [
     {name: 'Product', href: '#'},
@@ -14,12 +15,12 @@ const navigation = [
     {name: 'Company', href: '#'},
 ]
 
-export default function HomePage({slides, homeCategories, newOnHomeBooks, onHomeParticipantAuthors }) {
+export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnHomeCourses, onHomeParticipantAuthors }) {
     const {trans, parentModule, getLarge, getLocalized, locale, getThumb, isRTL} = useContext(AppContext);
 
     return (
         <FrontendContainer mainSlides={slides} showBreadCrumbs={false}>
-            <div className="bg-white space-y-10 py-14 max-w-2xl px-4 sm:py-14 sm:px-6 lg:max-w-full lg:px-8">
+            <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:max-w-max lg:px-8">
                 <ElementSlider
                     showNavigation={false}
                     elements={homeCategories}
@@ -34,6 +35,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, onHome
                     title={trans('new_chosen_books')}
                     type={'book'}
                 />
+
                 <ElementSlider
                     elements={onHomeParticipantAuthors}
                     showNavigation={false}
@@ -41,6 +43,15 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, onHome
                     title={trans('participant_authors')}
                     type={'user'}
                 />
+
+                <ElementSlider
+                    elements={newOnHomeCourses}
+                    showNavigation={false}
+                    slidesPerView={isTablet || isMobile ? 1 : 4}
+                    title={trans('new_chosen_courses')}
+                    type={'course'}
+                />
+                <NewsLetter />
             </div>
         </FrontendContainer>
     )

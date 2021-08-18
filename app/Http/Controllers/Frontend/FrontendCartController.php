@@ -11,15 +11,16 @@ class FrontendCartController extends Controller
 
     public function __construct()
     {
-        $this->cart = collect(session()->has('cart') ? session()->get('cart') : session()->put('cart', []));
+        $this->cart = session()->has('cart') ? session()->get('cart') : collect([]);
     }
 
-    public function getItems()
+    public function index()
     {
-
+        $element = session()->get('cart');
+        return inertia('Frontend/Cart/CartIndex', compact('element'));
     }
 
-    public function addItemToCart(Request $request)
+    public function addItem(Request $request)
     {
         request()->validate([
             'cart_id' => 'integer|required',
@@ -29,6 +30,18 @@ class FrontendCartController extends Controller
             'qty' => "integer|required",
             'element' => 'required'
         ]);
-        $this->cart->add(request()->request->all());
+        session()->push('cart', collect($request->request->all()));
+        dd(session()->get('cart'));
     }
+
+    public function removeItem(Request $request)
+    {
+        request()->validate([
+            'cart_id' => 'integer|required',
+            'type' => 'string|required',
+        ]);
+        $this->cart->pull(request()->request->all());
+        dd($this->cart);
+    }
+
 }

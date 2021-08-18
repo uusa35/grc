@@ -1,29 +1,39 @@
 import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
-import { AppContext } from "../../../../context/AppContext";
-import {getConvertedFinalPrice} from "../../../../helpers";
+import {AppContext} from "../../../../context/AppContext";
+import ElementPrice from "../ElementPrice";
+import ElementTags from "../ElementTags";
 
-export default function NormalServiceWidget ({ element }) {
-    const { getLocalized, getThumb , currency  } = useContext(AppContext);
+export default function NormalServiceWidget({element}) {
+    const {getLocalized, getThumb} = useContext(AppContext);
     return (
-        <div key={element.id} className="group relative">
-            <div className="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-75 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
-                <img
-                    src={getThumb(element.image)}
-                    alt={element[getLocalized()]}
-                    className="w-full h-full object-center object-cover"
-                />
-            </div>
-            <h3 className="mt-4 text-base font-semibold text-gray-900">
-                <Link href={route('frontend.service.show', element.id)}>
-                    <span className="absolute inset-0" />
-                    {element[getLocalized()]}
+        <div className="group relative">
+            <div
+                className="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
+                <Link
+                    className="h-auto w-auto z-30"
+                    href={route('frontend.service.show', element.id) + `?slug=${element[getLocalized()]}`}>
+                    <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}/>
+                    <img
+                        src={getThumb(element.image)}
+                        alt={element[getLocalized()]}
+                        className="w-full h-full object-center object-cover"
+                    />
                 </Link>
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-                {getConvertedFinalPrice(element.price, currency.exchange_rate)} {currency[getLocalized()]}
-            </p>
+            </div>
+            <div className="flex flex-row flex-1 justify-between items-center my-2">
+                <h3 className="text-base font-semibold text-gray-900 truncate">
+                    <Link href={route('frontend.service.show', element.id)}>
+                        <span className=""/>
+                        {element[getLocalized()]}
+                    </Link>
+                </h3>
+                <Link href={route('frontend.user.show', element.user.id)}>
+                    <img className="w-5 lg:w-10 h-auto rounded-full shadow-sm" src={getThumb(element.user.image)} alt={element.user[getLocalized()]}/>
+                </Link>
+            </div>
+            <ElementPrice price={element.price} salePrice={element.sale_price} isOnSale={element.isOnSale}/>
         </div>
     );
 }

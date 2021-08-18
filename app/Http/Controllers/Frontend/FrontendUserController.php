@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserCollection;
 use App\Models\Category;
 use App\Models\User;
 use App\Services\Search\UserFilters;
@@ -22,15 +23,9 @@ class FrontendUserController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = User::filters($filters)->notAdmins()->authors()->paginate(Self::TAKE_LESS)
-            ->withQueryString()->through(fn($element) => [
-                'id' => $element->id,
-                'name_ar' => $element->name_ar,
-                'name_en' => $element->name_en,
-                'created_at' => $element->created_at,
-                'image' => $element->image,
-                'active' => $element->active,
-            ]);
+        $elements = new UserCollection(User::filters($filters)->notAdmins()->authors()
+            ->paginate(SELF::TAKE_LESS)
+            ->withQueryString());
         return inertia('Frontend/User/FrontendUserIndex', compact('elements'));
     }
 

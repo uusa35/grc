@@ -79,14 +79,9 @@ class User extends Authenticatable
         return $this->hasMany(Coupon::class);
     }
 
-    public function product_favorites()
+    public function favorites()
     {
-        return $this->belongsToMany(Product::class, 'favorites');
-    }
-
-    public function service_favorites()
-    {
-        return $this->belongsToMany(Service::class, 'favorites');
+        return $this->morphMany(Favorite::class, 'favoritable');
     }
 
     public function fans()

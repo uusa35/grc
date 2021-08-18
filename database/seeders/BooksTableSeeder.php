@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\Image;
 use App\Models\Notification;
 use App\Models\Product;
@@ -28,6 +29,7 @@ class BooksTableSeeder extends Seeder
             $p->tags()->saveMany(Tag::all()->random(2));
             $p->videos()->saveMany(Video::all()->random(2));
             $p->images()->saveMany(Image::factory( 3)->create());
+            $p->favorites()->saveMany(Favorite::factory( 2)->create());
         });
     }
 }

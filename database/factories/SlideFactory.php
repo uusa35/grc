@@ -36,7 +36,7 @@ class SlideFactory extends Factory
             'is_intro' => $this->faker->boolean,
             'url' => $this->faker->url,
             'order' => $this->faker->numberBetween(1, 10),
-            'slidable_type' => $this->faker->randomElement(['App\Models\User', 'App\Models\Category', 'App\Models\Product', 'App\Models\Service','App\Models\Course']),
+            'slidable_type' => $this->faker->randomElement(['App\Models\User', 'App\Models\Category', 'App\Models\Product', 'App\Models\Service','App\Models\Course','App\Models\Book']),
             'slidable_id' => $this->faker->numberBetween(1, 99)
         ];
     }

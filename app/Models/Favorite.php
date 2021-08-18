@@ -9,14 +9,9 @@ class Favorite extends PrimaryModel
     use HasFactory, ModelHelpers;
     protected $guarded = [''];
 
-    public function product()
+    public function favoritable()
     {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function service()
-    {
-        return $this->belongsTo(Service::class);
+        return $this->morphTo();
     }
 
     public function user()

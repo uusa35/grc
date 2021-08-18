@@ -40,6 +40,7 @@ use App\Http\Controllers\Backend\TimingController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Frontend\FrontendBookController;
+use App\Http\Controllers\Frontend\FrontendCartController;
 use App\Http\Controllers\Frontend\FrontendCategoryController;
 use App\Http\Controllers\Frontend\FrontendCourseController;
 use App\Http\Controllers\Frontend\FrontendFaqController;
@@ -75,6 +76,9 @@ Route::group(['as' => 'frontend.','middleware' => ['frontendInertiaHandler']], f
     Route::resource('user',FrontendUserController::class)->except('destroy');
     Route::resource('faq',FrontendFaqController::class)->only('index');
     Route::get('contactus', [ContactusController::class, 'index'])->name('contactus');
+    Route::get('cart', [FrontendCartController::class, 'index'])->name('cart.index');
+    Route::get('cart/add', [FrontendCartController::class, 'addItem'])->name('cart.add');
+    Route::get('cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
 });
 
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'dashboard','backendInertiaHandler']], function () {

@@ -8,6 +8,7 @@ import {map, capitalize} from 'lodash';
 import GlobalContext from "../../../context/GlobalContext";
 import {FaFacebook, FaInstagram, FaTwitch, FaTwitter, FaWhatsapp} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
+import SearchField from "../SearchField";
 
 const navigation = {
     categories: [
@@ -132,7 +133,7 @@ const pages = [
     {name: 'home', url: route('frontend.home')},
     {name: 'authors', url: route('frontend.user.index')},
     {name: 'books', url: route('frontend.book.index')},
-    {name: 'products', url: route('frontend.product.index')},
+    // {name: 'products', url: route('frontend.product.index')},
     {name: 'services', url: route('frontend.service.index')},
     {name: 'courses', url: route('frontend.course.index')},
     {name: 'categories', url: route('frontend.category.index')},
@@ -151,10 +152,11 @@ export default function MainNav() {
 
     return (
         <div className="bg-white font-bein font-extrabold rtl:text-right ltr:text-left">
+            {/* Top Nav*/}
             <div className="bg-gray-700 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8">
-                <div className="flex  flex-row gap-x-5">
+                <div className="flex  flex-row  justify-center items-center gap-x-5">
                     <a target="_blank" href={settings.instagram}>
-                    <FaInstagram size={22} className={'text-gray-400'}/>
+                        <FaInstagram size={22} className={'text-gray-400'}/>
                     </a>
                     <a target="_blank" href={settings.facebook}>
                         <FaFacebook size={22} className={'text-gray-400'}/>
@@ -162,26 +164,32 @@ export default function MainNav() {
                     <a target="_blank" href={settings.twitter}>
                         <FaTwitter size={22} className={'text-gray-400'}/>
                     </a>
-                    <a target="_blank" href={getWhatsappLink(settings.whatsapp,settings[getLocalized()])}>
+                    <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
                         <FaWhatsapp size={22} className={'text-gray-400'}/>
                     </a>
                 </div>
-                <div className="flex flex-row gap-x-5  divide-x divide-gray-400">
+                <div className="flex flex-row justify-center items-center gap-x-5  divide-x divide-gray-400">
                     <Link
-                        href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50">
+                        href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
                         {capitalize(trans('contactus'))}
                     </Link>
+                    {
+                        guest ? <>
+                            <Link
+                                href={route('login')} className="-m-2 p-2 block text-gray-50">
+                                {capitalize(trans('login'))}
+                            </Link>
+                            <Link
+                                href={route('register')} className="-m-2 p-2 block text-gray-50 sr-only">
+                                {capitalize(trans('register'))}
+                            </Link>
+                        </> : null
+                    }
                     <Link
-                        href={route('login')} className="-m-2 p-2 block text-gray-50">
-                        {capitalize(trans('login'))}
-                    </Link>
-                    <Link
-                        href={route('register')} className="-m-2 p-2 block text-gray-50">
-                        {capitalize(trans('register'))}
-                    </Link>
-                    <Link
+                        title={capitalize(trans(otherLang))}
                         onClick={() => setLocale(otherLang)}
-                        href={route('frontend.change.lang', { locale : otherLang})} className="-m-2 p-2 block text-gray-50">
+                        href={route('frontend.change.lang', {locale: otherLang})}
+                        className="-m-2 p-2 block text-gray-50">
                         {capitalize(trans(otherLang))}
                     </Link>
                 </div>
@@ -478,30 +486,11 @@ export default function MainNav() {
                         </Popover.Group>
 
                         {/* Search */}
-                        <div
-                            className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end invisible 2xl:visible">
-                            <div className="max-w-lg w-full lg:max-w-xs">
-                                <label htmlFor="search" className="sr-only">
-                                    {trans('search')}
-                                </label>
-                                <div className="relative">
-                                    <div
-                                        className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <SearchIcon className="h-5 w-5" aria-hidden="true"/>
-                                    </div>
-                                    <input
-                                        id="search"
-                                        name="search"
-                                        className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-2xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:"
-                                        placeholder={trans('search')}
-                                        type="search"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
+                        <SearchField />
+                        {/* change lang */}
                         <div className="ml-auto flex items-center">
-                            <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-6 ltr:mr-6">
+                            <div
+                                className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-6 ltr:mr-6">
                                 <Link
                                     onClick={() => {
                                         setLocale(otherLang)
@@ -527,7 +516,7 @@ export default function MainNav() {
                                             src={getThumb(currency.image)}
                                             alt={currency[getLocalized()]}
                                         />
-                                        {currency[getLocalized()]}
+                                        {currency[getLocalized('currency_symbol')]}
                                     </Menu.Button>
                                 </div>
                                 <Transition
@@ -646,7 +635,7 @@ export default function MainNav() {
 
                             {/* Cart */}
                             <div className="ml-4 flow-root lg:ml-6">
-                                <Link href="#" className="group -m-2 p-2 flex items-center">
+                                <Link href={route('frontend.cart.index')} className="group -m-2 p-2 flex items-center">
                                     <ShoppingBagIcon
                                         className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
                                         aria-hidden="true"

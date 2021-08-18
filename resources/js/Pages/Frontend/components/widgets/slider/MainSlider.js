@@ -9,9 +9,8 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
-import GlobalContext from "../../../../context/GlobalContext";
+import {isMobile} from "react-device-detect";
 
-// install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
 const MainSlider = ({elements}) => {
@@ -34,10 +33,10 @@ const MainSlider = ({elements}) => {
                     // onSwiper={(swiper) => console.log(swiper)}
                 >
                     {elements.map((element) => (
-                        <SwiperSlide key={element.id} className="relative">
+                        <SwiperSlide key={element.name_en} className="relative">
                             {(element.name_ar || element.name_en) &&
                             <div
-                                className="absolute bottom-20 flex flex-col w-1/2 mx-10 p-8 shadow-lg rounded-lg bg-gray-200 opacity-80 gap-y-4 flex-1  justify-center items-start">
+                                className="absolute bottom-20 invisible lg:visible flex flex-col w-1/2 mx-10 p-8 shadow-lg rounded-lg bg-gray-200 opacity-80 gap-y-4 flex-1  justify-center items-start">
                                 <div className="text-lg text-gray-800">
                                     {element[getLocalized()]}
                                 </div>

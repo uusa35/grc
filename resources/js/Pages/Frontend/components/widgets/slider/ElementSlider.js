@@ -11,6 +11,7 @@ import { AppContext } from './../../../../context/AppContext'
 import NormalBookWidget from "../book/NormalBookWidget";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
+import NormalCourseWidget from "../course/NormalCourseWidget";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 export default function ElementSlider({
@@ -25,11 +26,13 @@ export default function ElementSlider({
   const handleComponent = (s) => {
     switch (type) {
       case 'category':
-        return <CategoryWidget element={s} type={'product'} />;
+        return <CategoryWidget element={s} type={'book'} />;
       case 'product':
         return <NormalProductWidget element={s} />;
         case 'book':
             return <NormalBookWidget element={s} />;
+        case 'course':
+            return <NormalCourseWidget element={s} />;
       case 'user':
         return <NormalUserWidget element={s} />;
       default:
@@ -38,7 +41,7 @@ export default function ElementSlider({
   };
 
   return (
-    <div className="max-w-full">
+    <div className="w-full">
       {!isEmpty(elements) && (
         <>
             <Link
@@ -62,7 +65,7 @@ export default function ElementSlider({
             slidesPerGroup={slidesPerView}
             spaceBetween={5}
             slidesPerView={slidesPerView}
-            // onSlideChange={() => console.log('slide change')}x
+            // onSlideChange={() => console.log('slide change')}
             // onSwiper={(swiper) => console.log(swiper)}
           >
             {elements.map((s, i) => (

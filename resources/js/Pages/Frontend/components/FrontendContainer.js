@@ -25,24 +25,21 @@ const FrontendContainer = ({
                            }) => {
     const {
         parentModule, setParentModule, childModule, setChildModule, isLoading, toggleIsLoading,
-        setCurrentBreadCrumbs,
-        currentBreadCrumbs,
-        setCurrentRoute,
         locale,
         getThumb,
         getLocalized,
-        trans,
+        isRTL
     } = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
 
     useEffect(() => {
         mainModule ? setParentModule(mainModule) : null;
-        subModule ? setChildModule(subModule) : null;
+        subModule ? setChildModule(subModule) : setChildModule('');
     }, [parentModule, subModule])
 
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg"
-             dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+             dir={isRTL ? 'rtl' : 'ltr'}>
             <Head title={capitalize(settings[getLocalized()])}>
                 <meta head-key="title" name="title" content={settings[getLocalized()]}/>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>

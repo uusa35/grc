@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\AuthExtraLightResource;
+use App\Http\Resources\SettingExtraLightResource;
 use App\Models\Currency;
 use App\Models\Setting;
 use App\Models\User;
@@ -41,13 +43,8 @@ class BackendHandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            'auth' => fn() => $request->user() ? User::whereId($request->user()->id)->with(['role' => function ($q) {
-                return $q->with(['privileges' => function ($q) {
-                    return $q->orderBy('order', 'asc')->select('name_ar', 'name_en', 'index', 'main_menu', 'image');
-                }])->select('id', 'name', 'name_en', 'name_ar', 'is_super', 'is_admin', 'is_visible', 'is_client', 'is_company', 'is_author');
-            }])->first()->only('name_ar', 'name_en', 'image', 'role') : null,
-            'settings' => fn() => Setting::select('name_ar', 'name_en', 'image', 'twitter',
-                'facebook', 'instagram', 'email', 'theme')->first(),
+            'auth' => fn() => $request->user() ? new AuthExtraLightResource(User::whereId($request->user()->id)->with('role.privileges')->first()) : null,
+            'settings' => fn() => new SettingExtraLightResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
         ]);

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ServiceCollection;
 use App\Models\Service;
+use App\Services\Search\Filters;
 use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
 
@@ -14,27 +16,16 @@ class FrontendServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ProductFilters $filters)
+    public function index(Filters $filters)
     {
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return inertia('Frontend/Service/FrontendServiceIndex', $validator->errors()->all());
         }
-        $elements = Service::filters($filters)
+        $elements = new ServiceCollection(Service::filters($filters)
             ->with('user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
-            ->withQueryString()->through(fn($element) => [
-                'id' => $element->id,
-                'name_ar' => $element->name_ar,
-                'name_en' => $element->name_en,
-                'created_at' => $element->created_at,
-                'price' => $element->price,
-                'active' => $element->active,
-                'image' => $element->image,
-                'sku' => $element->sku,
-                'on_sale' => $element->on_sale,
-                'user' => $element->user->only('id', 'name_ar', 'name_en'),
-            ]);
+            ->withQueryString());
         return inertia('Frontend/Service/FrontendServiceIndex', compact('elements'));
     }
 

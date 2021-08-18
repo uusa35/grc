@@ -24,7 +24,7 @@ class Course extends PrimaryModel
 
     public function favorites()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'product_id');
+        return $this->morphMany(Favorite::class, 'favoritable');
     }
 
     public function images()

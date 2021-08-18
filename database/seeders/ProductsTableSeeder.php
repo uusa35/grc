@@ -38,6 +38,7 @@ class ProductsTableSeeder extends Seeder
             $p->videos()->saveMany(Video::all()->random(2));
             $p->notificationAlerts()->saveMany(Notification::all()->random(2));
             $p->images()->saveMany(Image::factory(3)->create());
+            $p->favorites()->saveMany(Favorite::factory( 2)->create());
             $p->userGroup()->saveMany(User::all()->random(3));
         });
     }

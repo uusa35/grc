@@ -8,13 +8,14 @@ import Pagination from "../../Backend/components/partials/Pagination";
 import NormalProductWidget from "../components/widgets/product/NormalProductWidget";
 
 export default function FrontendProductIndex({elements}) {
-    const {getThumb, trans, getLocalized, currency} = useContext(AppContext);
+    const {trans} = useContext(AppContext);
+
     return (
         <FrontendContainer>
             <Pagination
                 type={'product'}
-                total={elements.total}
-                links={elements.links}
+                total={elements.meta.total}
+                links={elements.meta.links}
                 showSearch={false}
             />
             <div className="bg-white max-w-2xl mx-auto py-16 px-4 sm:py-14 sm:px-6 lg:max-w-7xl lg:px-8">

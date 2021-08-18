@@ -87,11 +87,10 @@ class UserFilters extends QueryFilters
         return $this->builder->where('category_id', request()->classified_category_id);
     }
 
-    public function user_category_id()
+    public function category_id()
     {
-//        return $this->builder->where('category_id', request()->user_category_id);
         return $this->builder->whereHas('categories', function ($q) {
-            return $q->whereIn('category_id', is_array(request()->user_category_id) ? request()->user_category_id : [request()->user_category_id]);
+            return $q->whereIn('category_id', is_array(request()->category_id) ? request()->category_id : [request()->category_id]);
         });
     }
 

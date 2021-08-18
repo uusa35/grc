@@ -30,8 +30,8 @@ class FavoriteFactory extends Factory
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
             'user_id' => User::all()->random()->id,
-            'product_id' => Product::doesntHave('favorites')->get()->random()->id,
-            'service_id' => Service::doesntHave('favorites')->get()->random()->id,
+            'favoritable_type' => $this->faker->randomElement(['App\Models\User', 'App\Models\Product', 'App\Models\Service','App\Models\Course','App\Models\Book']),
+            'favoritable_id' => $this->faker->numberBetween(1, 99)
         ];
     }
 }
