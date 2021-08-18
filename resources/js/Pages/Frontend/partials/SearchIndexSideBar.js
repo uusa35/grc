@@ -6,7 +6,7 @@ import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 
 export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories, mobileFiltersOpen  , type }) {
-    const { trans, getLocalized   } = useContext(AppContext)
+    const { trans, getLocalized , isRTL   } = useContext(AppContext)
     const { params } = route();
     return (
         <aside>
@@ -44,9 +44,14 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                     <Link
                                         href={route(`frontend.${type}.index`, {category_id: c.id})}
                                         className="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                                        </svg>
+                                        {
+                                            isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                </svg>
+                                                : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                </svg>
+                                        }
                                         <label htmlFor={'name'}
                                                className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600">
                                             {c[getLocalized()]}
@@ -64,9 +69,14 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                                     type="checkbox"
                                                     checked={child.id == params.category_id}
                                                 />
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                </svg>
+                                                {
+                                                    isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                        </svg>
+                                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                        </svg>
+                                                }
                                                 <label htmlFor={'name'}
                                                        className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600">
                                                     {child[getLocalized()]}
@@ -83,9 +93,14 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                                                 type="checkbox"
                                                                 checked={sub.id == params.category_id}
                                                             />
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                            </svg>
+                                                            {
+                                                                isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                                        <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                                    </svg>
+                                                                    : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                                    </svg>
+                                                            }
                                                             <label htmlFor={'name'}
                                                                    className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600">
                                                                 {sub[getLocalized()]}

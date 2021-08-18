@@ -10,11 +10,11 @@ import 'swiper/components/pagination/pagination.min.css';
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {settings, auth, currencies} = props.initialPage.props;
+        const {settings, auth, currencies, categories  } = props.initialPage.props;
         const {component, url} = props.initialPage;
 
         return render(
-            <GlobalContext.Provider value={{translations, auth, settings, url, component, currencies}}>
+            <GlobalContext.Provider value={{translations, auth, settings, url, component, currencies,categories }}>
                 <AppContextProvider>
                     <App {...props} />
                 </AppContextProvider>

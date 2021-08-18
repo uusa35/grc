@@ -22,6 +22,7 @@ export default function FrontendCourseIndex({elements, categories}) {
     const sortOptions = [
         {name: 'alphabetical_a_to_z', current: false, colName: getLocalized()},
         {name: 'new_to_old', current: false, colName: 'id'},
+        {name: 'sort_price', current: false, colName: 'price'},
     ]
 
     useMemo(() => {
@@ -50,9 +51,9 @@ export default function FrontendCourseIndex({elements, categories}) {
             <main className="max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8">
                 <div className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
                     <div className="flex flex-1 flex-col w-full sm:w-auto">
-                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">{trans('authors')}</h1>
+                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">{trans('courses')}</h1>
                         <p className="mt-4 text-base text-gray-500">
-                            {trans('list')} {trans('authors')}
+                            {trans('list')} {trans('courses')}
                         </p>
                     </div>
                     <FrontendPagination

@@ -100,13 +100,12 @@ const AppContextProvider = ({children}) => {
         }
     };
 
-
     useEffect(() => {
         if (auth && isEmpty(modules)) {
             const filteredModules = map(auth.role.privileges, p => {
                 return {
                     name: p.name_en,
-                    index: p.pivot.index,
+                    index: p.index,
                     main_menu: p.main_menu,
                     image: p.image
                 }

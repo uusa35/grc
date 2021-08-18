@@ -4,11 +4,12 @@ import {MenuIcon, SearchIcon, ShoppingBagIcon, XIcon} from '@heroicons/react/out
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
-import {map, capitalize} from 'lodash';
+import {map, capitalize, filter, take} from 'lodash';
 import GlobalContext from "../../../context/GlobalContext";
 import {FaFacebook, FaInstagram, FaTwitch, FaTwitter, FaWhatsapp} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
+import MainNavBookCategoriesList from "./MainNavBookCategoriesList";
 
 const navigation = {
     categories: [
@@ -131,12 +132,12 @@ const navigation = {
 
 const pages = [
     {name: 'home', url: route('frontend.home')},
-    {name: 'authors', url: route('frontend.user.index')},
     {name: 'books', url: route('frontend.book.index')},
+    {name: 'authors', url: route('frontend.user.index')},
     // {name: 'products', url: route('frontend.product.index')},
     {name: 'services', url: route('frontend.service.index')},
     {name: 'courses', url: route('frontend.course.index')},
-    {name: 'categories', url: route('frontend.category.index')},
+    // {name: 'categories', url: route('frontend.category.index')},
 ];
 
 
@@ -147,7 +148,7 @@ export default function MainNav() {
         baseUrl,
         otherLang, setLocale
     } = useContext(AppContext);
-    const {settings, currencies, auth} = useContext(GlobalContext);
+    const {settings, currencies, auth, categories } = useContext(GlobalContext);
     const [open, setOpen] = useState(false)
 
     return (
@@ -284,7 +285,7 @@ export default function MainNav() {
                                                 key={category.name}
                                                 className={({selected}) =>
                                                     classNames(
-                                                        selected ? 'text-indigo-600 border-indigo-600' : 'text-gray-900 border-transparent',
+                                                        selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 border-transparent',
                                                         'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
                                                     )
                                                 }
@@ -375,113 +376,37 @@ export default function MainNav() {
                         {/* Categories with sub */}
                         <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                             <div className="h-full flex gap-x-5">
-                                {pages.map((page) => (
-                                    <Link
-                                        key={page.name}
-                                        href={page.url}
-                                        className="flex sm:min-w-max  text-center items-center   hover:text-gray-300"
-                                    >
-                                        {capitalize(trans(page.name))}
-                                    </Link>
-                                ))}
-                                {navigation.categories.map((category) => (
-                                    <Popover key={category.name} className="flex">
-                                        {({open}) => (
-                                            <>
-                                                <div className="relative flex">
-                                                    <Popover.Button
-                                                        className={classNames(
-                                                            open
-                                                                ? 'border-indigo-600 text-indigo-600'
-                                                                : 'border-transparent  hover:text-gray-300',
-                                                            'relative z-10 flex items-center transition-colors ease-out duration-200  border-b-2 -mb-px pt-px'
-                                                        )}
-                                                    >
-                                                        {category.name}
-                                                    </Popover.Button>
-                                                </div>
-
-                                                <Transition
-                                                    as={Fragment}
-                                                    enter="transition ease-out duration-200"
-                                                    enterFrom="opacity-0"
-                                                    enterTo="opacity-100"
-                                                    leave="transition ease-in duration-150"
-                                                    leaveFrom="opacity-100"
-                                                    leaveTo="opacity-0"
-                                                >
-                                                    <Popover.Panel
-                                                        className="absolute top-full inset-x-0  text-gray-500 z-50">
-                                                        {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                                                        <div className="absolute inset-0 top-1/2 bg-white shadow"
-                                                             aria-hidden="true"/>
-
-                                                        <div className="relative bg-white">
-                                                            <div className="max-w-7xl mx-auto px-8">
-                                                                <div
-                                                                    className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
-                                                                    <div
-                                                                        className="col-start-2 grid grid-cols-2 gap-x-8">
-                                                                        {category.featured.map((item) => (
-                                                                            <div key={item.name}
-                                                                                 className="group relative text-base sm:">
-                                                                                <div
-                                                                                    className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                                                                    <img
-                                                                                        src={item.imageSrc}
-                                                                                        alt={item.imageAlt}
-                                                                                        className="object-center object-cover"
-                                                                                    />
-                                                                                </div>
-                                                                                <a href={item.href}
-                                                                                   className="mt-6 block text-gray-900">
-                                                                                    <span
-                                                                                        className="absolute z-10 inset-0"
-                                                                                        aria-hidden="true"/>
-                                                                                    {item.name}
-                                                                                </a>
-                                                                                <p aria-hidden="true" className="mt-1">
-                                                                                    Shop now
-                                                                                </p>
-                                                                            </div>
-                                                                        ))}
-                                                                    </div>
-                                                                    <div
-                                                                        className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 ">
-                                                                        {category.sections.map((section) => (
-                                                                            <div key={section.name}>
-                                                                                <p id={`${section.name}-heading`}
-                                                                                   className="text-gray-900">
-                                                                                    {section.name}
-                                                                                </p>
-                                                                                <ul
-                                                                                    role="list"
-                                                                                    aria-labelledby={`${section.name}-heading`}
-                                                                                    className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                                                                >
-                                                                                    {section.items.map((item) => (
-                                                                                        <li key={item.name}
-                                                                                            className="flex">
-                                                                                            <a href={item.href}
-                                                                                               className="hover:text-gray-300">
-                                                                                                {item.name}
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    ))}
-                                                                                </ul>
-                                                                            </div>
-                                                                        ))}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </Popover.Panel>
-                                                </Transition>
-                                            </>
-                                        )}
-                                    </Popover>
-                                ))}
-
+                                <Link
+                                    href={route('frontend.home')}
+                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300"
+                                >
+                                    {capitalize(trans('home'))}
+                                </Link>
+                                <Link
+                                    href={route('frontend.book.index')}
+                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300"
+                                >
+                                    {capitalize(trans('books'))}
+                                </Link>
+                                <MainNavBookCategoriesList />
+                                <Link
+                                    href={route('frontend.user.index')}
+                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300"
+                                >
+                                    {capitalize(trans('authors'))}
+                                </Link>
+                                <Link
+                                    href={route('frontend.service.index')}
+                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300"
+                                >
+                                    {capitalize(trans('services'))}
+                                </Link>
+                                <Link
+                                    href={route('frontend.course.index')}
+                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300"
+                                >
+                                    {capitalize(trans('courses'))}
+                                </Link>
                             </div>
                         </Popover.Group>
 
@@ -509,7 +434,7 @@ export default function MainNav() {
                             <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
-                                        className="rounded-full flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        className="rounded-full flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                         <span className="sr-only">Open user menu</span>
                                         <img
                                             className="h-5 w-5 rounded-full"
@@ -558,7 +483,7 @@ export default function MainNav() {
                             <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
-                                        className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                         <span className="sr-only">Open user menu</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none"
                                              viewBox="0 0 24 24" stroke="currentColor">

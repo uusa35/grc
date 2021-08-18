@@ -25,7 +25,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
                     showNavigation={false}
                     elements={homeCategories}
                     slidesPerView={isTablet || isMobile ? 2 : 4}
-                    title={trans('categories')}
+                    title={trans('featured_categories')}
                     type={'category'}
                 />
                 <ElementSlider
@@ -48,7 +48,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
                     elements={newOnHomeCourses}
                     showNavigation={false}
                     slidesPerView={isTablet || isMobile ? 1 : 4}
-                    title={trans('new_chosen_courses')}
+                    title={trans('featured_courses')}
                     type={'course'}
                 />
                 <NewsLetter />

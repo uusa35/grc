@@ -19,7 +19,9 @@ class RoleExtraLightResource extends JsonResource
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
             'image' => $this->image,
-            'privileges' => new PrivilegeLightResource($this->whenLoaded('privileges')),
+            'is_admin' => $this->is_admin,
+            'is_super' => $this->is_super,
+            'privileges' => PrivilegeLightResource::collection($this->whenLoaded('privileges')),
         ];
     }
 }

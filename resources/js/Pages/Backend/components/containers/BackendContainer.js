@@ -1,23 +1,20 @@
-import {Fragment, useContext, useEffect, useState} from "react";
+import { useContext, useEffect} from "react";
 import SideBar from "../partials/SideBar";
 import BackendHeader from "../partials/BackendHeader";
 import Footer from "../partials/Footer";
 import BreadCrumbs from "../partials/BreadCrumbs";
 import SystemMessage from "../partials/SystemMessage";
-import {isEmpty, capitalize, split} from 'lodash';
+import {isEmpty, capitalize} from 'lodash';
 import ConfirmationModal from "../partials/ConfirmationModal";
 import Pagination from "../partials/Pagination";
 import NoElements from "../widgets/NoElements";
 import PropTypes from 'prop-types';
 import TableMobileview from "../widgets/TableMobileview";
-import {AppContext, AppContextProvider} from "../../../context/AppContext";
+import {AppContext} from "../../../context/AppContext";
 import LoadingView from "../widgets/LoadingView";
-import {Inertia} from "@inertiajs/inertia";
 import {Head} from '@inertiajs/inertia-react'
 import GlobalContext from "../../../context/GlobalContext";
 import pluralize from 'pluralize';
-import route from "ziggy-js";
-import {translations} from "../../translations";
 
 const BackendContainer = ({
                               children, elements = [],
