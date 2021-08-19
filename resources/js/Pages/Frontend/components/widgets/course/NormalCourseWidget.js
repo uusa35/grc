@@ -10,7 +10,7 @@ export default function NormalCourseWidget ({ element }) {
     const { getLocalized, getThumb , currency  } = useContext(AppContext);
 
     return (
-        <div  className="group relative">
+        <div className="block relative overflow-hidden">
             <div className="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
                 <Link
                     className="h-auto w-auto z-30"

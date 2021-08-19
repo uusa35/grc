@@ -80,8 +80,9 @@ export default function FrontendServiceShow({ element }) {
     // const [selectedColor, setSelectedColor] = useState(element.product_attributes[0].color)
     // const [selectedSize, setSelectedSize] = useState(element.product_attributes[0].size)
 
+    console.log('element', element);
     return (
-        <FrontendContainer>
+        <FrontendContainer mainModule={'service'} subModule={element[getLocalized()]}>
             <div className="pt-6">
                 <nav aria-label="Breadcrumb">
                     <ol role="list" className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">

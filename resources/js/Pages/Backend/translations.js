@@ -1104,7 +1104,12 @@ const ar = {
     "book_categories" : "تصنيفات الكتب",
     "course_categories" : "تصنيفات الدورات",
     "featured_categories" : "تصنيفات مختارة",
-    "featured_courses" : "دورات مختارة"
+    "featured_courses" : "دورات مختارة",
+    "aboutus_en" : "نبذة عنا بالإنجليزية",
+    "aboutus_ar" : "نبذة عنا بالعربية",
+    "support_and_polices" : "الدعم والسياسات",
+    "download_now" : "حمل الآن",
+    "apple_store" : "متجر أبل",
 }
 
 const en  = {
@@ -1174,7 +1179,7 @@ const en  = {
     'no_items_in_cart' : 'The card is empty',
     'exclusive' : 'exclusive',
     'new' : 'new',
-    'on_sale' : 'there is a discount',
+    'on_sale' : 'on sale',
     'available' : 'available',
     'not_available' : 'not available',
     'featured' : 'featured',
@@ -2210,7 +2215,9 @@ const en  = {
     "book_categories" : "book categories",
     "course_categories" : "course categories",
     "featured_categories" : "selected categories",
-    "featured_courses" : "selected courses"
+    "featured_courses" : "selected courses",
+    "aboutus_en" : "aboutus english",
+    "aboutus_ar" : "aboutus arabic",
 }
 
 export const translations = {ar , en }

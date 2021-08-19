@@ -144,6 +144,7 @@ const AppContextProvider = ({children}) => {
             isLocal() && console.log('navigate ==>')
             const currentRoute = route().current();
             const breadCrumbs = split(currentRoute, '.');
+            console.log('befre Module', breadCrumbs[1])
             setParentModule(breadCrumbs[1]);
             setCurrentBreadCrumbs(breadCrumbs);
             setCurrentRoute(currentRoute)

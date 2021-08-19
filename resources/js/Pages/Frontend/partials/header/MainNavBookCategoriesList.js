@@ -5,6 +5,7 @@ import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {AppContext} from "../../../context/AppContext";
 import GlobalContext from "../../../context/GlobalContext";
+import {ChevronDownIcon} from "@heroicons/react/solid";
 
 export default function MainNavBookCategoriesList() {
     const { classNames , trans , getThumb , getLocalized } = useContext(AppContext)
@@ -17,12 +18,19 @@ export default function MainNavBookCategoriesList() {
                         <Popover.Button
                             className={classNames(
                                 open
-                                    ? 'border-gray-600 text-gray-600'
-                                    : 'border-transparent  hover:text-gray-300',
-                                'relative z-10 flex items-center transition-colors ease-out duration-200  border-b-2 -mb-px pt-px'
+                                    ? 'text-white'
+                                    : 'text-white',
+                                'relative z-10 flex items-center transition-colors ease-out duration-200  -mb-px pt-px'
                             )}
                         >
-                            {trans('book_categories')}
+                            <span className="capitalize">{trans('book_categories')}</span>
+                            <ChevronDownIcon
+                                className={classNames(
+                                    open ? 'text-white' : 'text-white',
+                                    'ml-2 w-5 group-hover:text-gray-100'
+                                )}
+                                aria-hidden="true"
+                            />
                         </Popover.Button>
                     </div>
 
@@ -42,7 +50,7 @@ export default function MainNavBookCategoriesList() {
                                  aria-hidden="true"/>
 
                             <div className="relative bg-white">
-                                <div className="max-w-7xl mx-auto px-8">
+                                <div className="max-w-7xl px-8">
                                     <div
                                         className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
                                         {/* categories with iamges */}

@@ -2,13 +2,12 @@ import React, {useContext} from 'react';
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../../context/AppContext";
 import route from 'ziggy-js';
-import {capitalize, truncate} from "lodash";
 
 const CategoryWidget = ({element, type = 'book'}) => {
     const {getLocalized, getThumb} = useContext(AppContext)
 
     return (
-        <div key={element[getLocalized()]} className="group relative">
+        <div className="block relative overflow-hidden">
             <div className="w-full h-auto bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75">
                 <img
                     src={getThumb(element.image)}

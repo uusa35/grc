@@ -33,9 +33,9 @@ const FrontendContainer = ({
     const {settings} = useContext(GlobalContext);
 
     useEffect(() => {
-        mainModule ? setParentModule(mainModule) : null;
+        mainModule !== parentModule ? setParentModule(mainModule) : null;
         subModule ? setChildModule(subModule) : setChildModule('');
-    }, [parentModule, subModule])
+    }, [])
 
     return (
         <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg"

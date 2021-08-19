@@ -9,5 +9,4 @@ class Faq extends PrimaryModel
 {
     use HasFactory;
     protected $guarded = [''];
-    public $localeStrings = ['title','content'];
 }

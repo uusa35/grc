@@ -2,7 +2,6 @@ import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
-import {getConvertedFinalPrice} from "../../../../helpers";
 import ElementTags from "../ElementTags";
 import ElementPrice from "../ElementPrice";
 
@@ -10,7 +9,7 @@ export default function NormalBookWidget({element}) {
     const {getLocalized, getThumb} = useContext(AppContext);
 
     return (
-        <div className="group">
+        <div className="block relative overflow-hidden">
             <div
                 className="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
                 <Link
@@ -26,7 +25,8 @@ export default function NormalBookWidget({element}) {
             </div>
             <div className="flex flex-row flex-1 justify-between items-center my-2">
                 <h3 className="text-base text-2xl lg:text-lg font-extrabold text-gray-900 truncate">
-                    <Link href={route('frontend.book.show', element.id)}>
+                    <Link
+                        href={route('frontend.book.show', element.id)}>
                         <span className=""/>
                         {element[getLocalized()]}
                     </Link>

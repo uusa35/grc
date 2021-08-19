@@ -10,27 +10,32 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
     const { params } = route();
     return (
         <aside>
-            <h2 className="sr-only">{trans('advanced_search')}</h2>
-
+            <h2 className="sr-only capitalize">{trans('advanced_search')}</h2>
             <button
                 type="button"
-                className="inline-flex items-center lg:hidden bg-gray-900 p-3 rounded-md shadow-md"
+                className="inline-flex items-center lg:hidden bg-gray-900 p-3 rounded-md shadow-md capitalize"
                 onClick={() => setMobileFiltersOpen(true)}
             >
-                <span className="text-white">{trans('advanced_search')}</span>
+                <span className="text-white capitalize">{trans('advanced_search')}</span>
                 <PlusSmIcon className="flex-shrink-0 ml-1 h-5 w-5 text-gray-400" aria-hidden="true"/>
             </button>
+            <Link
+                href={type ? route(`frontend.${type}.index`) : '#'}
+                className="inline-flex items-center lg:hidden bg-gray-900 p-3 rounded-md shadow-md capitalize"
+            >
+                {trans('clear_search')}
+            </Link>
 
             <div className="hidden lg:block">
                 <div className="divide-y divide-gray-200 space-y-3">
                     <div className="flex flex-1 justify-between items-center">
                         <div className="flex">
-                            <h3>{trans('categories')}</h3>
+                            <h3 className="capitalize">{trans('categories')}</h3>
                         </div>
                         <div className="flex">
                             <Link
                                 href={type ? route(`frontend.${type}.index`) : '#'}
-                                className="px-3 py-1 text-gray-800 rounded-md shadow-sm ring-2 ring-gray-400"
+                                className="px-3 py-1 text-gray-800 rounded-md shadow-sm ring-2 ring-gray-400 capitalize"
                             >
                                 {trans('clear_search')}
                             </Link>
@@ -53,7 +58,7 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                                 </svg>
                                         }
                                         <label htmlFor={'name'}
-                                               className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600">
+                                               className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600 capitalize">
                                             {c[getLocalized()]}
                                         </label>
                                     </Link>
@@ -78,7 +83,7 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                                         </svg>
                                                 }
                                                 <label htmlFor={'name'}
-                                                       className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600">
+                                                       className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600 capitalize">
                                                     {child[getLocalized()]}
                                                 </label>
                                             </Link>
@@ -102,7 +107,7 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                                                     </svg>
                                                             }
                                                             <label htmlFor={'name'}
-                                                                   className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600">
+                                                                   className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600 capitalize">
                                                                 {sub[getLocalized()]}
                                                             </label>
                                                         </Link>

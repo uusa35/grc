@@ -9,19 +9,19 @@ export default function ElementTags({onNew, onSale, exclusive}) {
                 className={classNames(isRTL ? `` : ``, 'absolute top-8 left-2 flex flex-col  gap-y-3 text-white text-sm')}>
                 {
                     onSale && <span
-                        className="inline-flex justify-center items-center shadow-md px-6 py-0.5 rounded-sm  bg-red-900 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm  bg-red-900 ">
                         {trans('on_sale')}
                       </span>
                 }
                 {
                     onNew && <span
-                        className="inline-flex justify-center items-center shadow-md px-6 py-0.5 rounded-sm bg-gray-800 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-gray-800 ">
                     {trans('on_new')}
                         </span>
                 }
                 {
                     exclusive && <span
-                        className="inline-flex justify-center items-center shadow-md px-6 py-0.5 rounded-sm bg-gray-600 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-gray-600 ">
                     {trans('exclusive')}
                         </span>
                 }

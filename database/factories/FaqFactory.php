@@ -13,7 +13,7 @@ class FaqFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var array
      */
     protected $model = Faq::class;
 
@@ -26,13 +26,13 @@ class FaqFactory extends Factory
     {
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
-            'name_ar' => $this->faker->name,
-            'name_en' => $fakerAr->name,
-            'description_ar' => $this->faker->paragraph,
-            'description_en' => $fakerAr->name,
-            'caption_ar' => $this->faker->paragraph,
-            'caption_en' => $fakerAr->name,
-            'notes_ar' => $this->faker->paragraph,
+            'name_en' => $this->faker->name,
+            'name_ar' => $fakerAr->name,
+            'description_en' => $this->faker->paragraph,
+            'description_ar' => $fakerAr->name,
+            'caption_ar' => $fakerAr->name,
+            'caption_en' => $this->faker->name,
+            'notes_ar' => $this->faker->name,
             'notes_en' => $fakerAr->name,
             'order' => $this->faker->numberBetween(1, 99),
         ];

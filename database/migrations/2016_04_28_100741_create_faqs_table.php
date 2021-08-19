@@ -22,7 +22,7 @@ class CreateFaqsTable extends Migration
             $table->text('description_ar')->nullable();
             $table->text('notes_ar')->nullable();
             $table->text('notes_en')->nullable();
-            $table->string('order')->nullable();
+            $table->integer('order')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

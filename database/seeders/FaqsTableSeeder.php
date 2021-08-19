@@ -13,6 +13,6 @@ class FaqsTableSeeder extends Seeder
      */
     public function run()
     {
-        Faq::factory()->create(app()->isLocal() ? 5 : 1);
+        Faq::factory(app()->isLocal() ? 5 : 2)->create();
     }
 }

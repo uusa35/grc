@@ -4,7 +4,7 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 
 const FormBtns = ({ type }) => {
-    const { trans , theme } = useContext(AppContext)
+    const { trans } = useContext(AppContext)
     return (
         <div className="py-3">
             <div className="flex justify-end">
@@ -16,7 +16,7 @@ const FormBtns = ({ type }) => {
                 </button>
                 <Link
                     href={route(`backend.${type}.index`)}
-                    className={`bg-red-600 py-2 px-10 border border-red-300 rounded-md shadow-lg font-medium text-gray-50 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                    className={`bg-red-900 py-2 px-10 border border-red-300 rounded-md shadow-lg font-medium text-gray-50 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
                 >
                     {trans('cancel')}
                 </Link>

@@ -22,6 +22,8 @@ class CreateSettingsTable extends Migration
             $table->string('address_en')->nullable();
             $table->mediumText('description_ar')->nullable();
             $table->mediumText('description_en')->nullable();
+            $table->longText('aboutus_ar')->nullable();
+            $table->longText('aboutus_en')->nullable();
             $table->string('mobile')->nullable();
             $table->string('phone')->nullable();
             $table->string('country_ar')->nullable();
@@ -42,10 +44,10 @@ class CreateSettingsTable extends Migration
             $table->string('main_bg')->nullable();
             $table->string('shipment_notes_ar')->nullable();
             $table->string('shipment_notes_en')->nullable();
-            $table->mediumText('policy_ar')->nullable();
-            $table->mediumText('policy_en')->nullable();
-            $table->mediumText('terms_ar')->nullable();
-            $table->mediumText('terms_en')->nullable();
+            $table->longText('policy_ar')->nullable();
+            $table->longText('policy_en')->nullable();
+            $table->longText('terms_ar')->nullable();
+            $table->longText('terms_en')->nullable();
             $table->string('shipment_prices')->nullable();
             $table->string('size_chart_image')->nullable();
             $table->string('longitude')->nullable();

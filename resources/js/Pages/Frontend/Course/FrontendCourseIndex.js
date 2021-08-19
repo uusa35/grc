@@ -3,7 +3,7 @@ import {Transition, Menu} from '@headlessui/react'
 import {ChevronDownIcon, FilterIcon} from '@heroicons/react/solid'
 import FrontendContainer from "../components/FrontendContainer";
 import {AiOutlineSortAscending} from "react-icons/ai";
-import {map, orderBy} from 'lodash';
+import {map, orderBy, filter } from 'lodash';
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import NoElements from "../../Backend/components/widgets/NoElements";
@@ -44,15 +44,15 @@ export default function FrontendCourseIndex({elements, categories}) {
             {/* Mobile filter dialog */}
             <SearchIndexSideBarMobile
                 type={'course'}
-                categories={categories}
+                categories={filter(categories, c => c.is_course)}
                 setMobileFiltersOpen={setMobileFiltersOpen}
                 mobileFiltersOpen={mobileFiltersOpen}
             />
             <main className="max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8">
                 <div className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
                     <div className="flex flex-1 flex-col w-full sm:w-auto">
-                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900">{trans('courses')}</h1>
-                        <p className="mt-4 text-base text-gray-500">
+                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 capitalize">{trans('courses')}</h1>
+                        <p className="mt-4 text-base text-gray-500 capitalize">
                             {trans('list')} {trans('courses')}
                         </p>
                     </div>
@@ -120,7 +120,7 @@ export default function FrontendCourseIndex({elements, categories}) {
                     {/* search SideBar */}
                     <SearchIndexSideBar
                         type={'course'}
-                        categories={categories} setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
+                        categories={filter(categories, c => c.is_course)} setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
                     {/* Product grid */}
                     <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
                         <NoElements display={elements.meta.total < 1}/>

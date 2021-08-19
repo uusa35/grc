@@ -23,11 +23,12 @@ class CreateSubscriptionsTable extends Migration
             $table->mediumText('description_en')->nullable();
             $table->mediumText('notes_ar')->nullable();
             $table->mediumText('notes_en')->nullable();
-            $table->boolean('on_sale')->default(0);
             $table->boolean('free')->default(true);
             $table->integer('months')->default(1);
+            $table->boolean('on_sale')->default(0);
             $table->decimal('price', 6, 2)->unsigned();
             $table->decimal('sale_price', 6, 2)->unsigned();
+            $table->boolean('active')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });
