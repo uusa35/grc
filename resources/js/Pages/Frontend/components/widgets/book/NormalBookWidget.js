@@ -9,9 +9,8 @@ export default function NormalBookWidget({element}) {
     const {getLocalized, getThumb} = useContext(AppContext);
 
     return (
-        <div className="block relative overflow-hidden">
-            <div
-                className="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
+        <div className="block relative overflow-hidden shadow-md mb-5 rounded-b-md">
+            <div className="w-full h-96 rounded-t-md overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
                 <Link
                     className="h-auto w-auto z-30"
                     href={route('frontend.book.show', element.id) + `?slug=${element[getLocalized()]}`}>
@@ -23,7 +22,7 @@ export default function NormalBookWidget({element}) {
                     />
                 </Link>
             </div>
-            <div className="flex flex-row flex-1 justify-between items-center my-2">
+            <div className="flex flex-row flex-1 justify-between items-center m-2">
                 <h3 className="text-base text-2xl lg:text-lg font-extrabold text-gray-900 truncate">
                     <Link
                         href={route('frontend.book.show', element.id)}>

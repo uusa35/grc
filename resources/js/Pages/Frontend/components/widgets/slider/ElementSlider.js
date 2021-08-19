@@ -63,7 +63,7 @@ export default function ElementSlider({
             cssMode={true}
             className="mySwiper"
             slidesPerGroup={slidesPerView}
-            spaceBetween={5}
+            spaceBetween={20}
             slidesPerView={slidesPerView}
             // onSlideChange={() => console.log('slide change')}
             // onSwiper={(swiper) => console.log(swiper)}

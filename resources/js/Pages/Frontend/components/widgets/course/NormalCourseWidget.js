@@ -10,8 +10,8 @@ export default function NormalCourseWidget ({ element }) {
     const { getLocalized, getThumb , currency  } = useContext(AppContext);
 
     return (
-        <div className="block relative overflow-hidden">
-            <div className="w-full h-96 rounded-lg overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
+        <div className="block relative overflow-hidden shadow-md mb-5 rounded-b-md">
+            <div className="w-full h-96 rounded-t-md overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
                 <Link
                     className="h-auto w-auto z-30"
                     href={route('frontend.course.show', element.id) + `?slug=${element[getLocalized()]}`}>
@@ -19,11 +19,11 @@ export default function NormalCourseWidget ({ element }) {
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
-                    className="w-full h-full object-center object-cover"
+                    className="w-full h-full object-center object-cover rounded-t-md"
                 />
                 </Link>
             </div>
-            <div className="flex flex-row flex-1 justify-between items-center my-2">
+            <div className="flex flex-row flex-1 justify-between items-center m-2">
                 <h3 className="text-base font-semibold text-gray-900 truncate">
                     <Link href={route('frontend.course.show', element.id)}>
                         <span className="" />

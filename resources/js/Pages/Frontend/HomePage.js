@@ -24,14 +24,14 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
                 <ElementSlider
                     showNavigation={false}
                     elements={homeCategories}
-                    slidesPerView={isTablet || isMobile ? 2 : 4}
+                    slidesPerView={isTablet || isMobile ? 2 : 6}
                     title={trans('featured_categories')}
                     type={'category'}
                 />
                 <ElementSlider
                     elements={newOnHomeBooks}
                     showNavigation={false}
-                    slidesPerView={isTablet || isMobile ? 1 : 4}
+                    slidesPerView={isTablet || isMobile ? 1 : 6}
                     title={trans('new_chosen_books')}
                     type={'book'}
                 />
@@ -39,7 +39,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
                 <ElementSlider
                     elements={onHomeParticipantAuthors}
                     showNavigation={false}
-                    slidesPerView={isTablet || isMobile ? 2 : 5}
+                    slidesPerView={isTablet || isMobile ? 2 : 6}
                     title={trans('participant_authors')}
                     type={'user'}
                 />
@@ -47,7 +47,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
                 <ElementSlider
                     elements={newOnHomeCourses}
                     showNavigation={false}
-                    slidesPerView={isTablet || isMobile ? 1 : 4}
+                    slidesPerView={isTablet || isMobile ? 1 : 6}
                     title={trans('featured_courses')}
                     type={'course'}
                 />
