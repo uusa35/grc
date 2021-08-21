@@ -4,10 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Addon;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Image;
 use App\Models\Item;
 use App\Models\Notification;
+use App\Models\Rating;
 use App\Models\Service;
 use App\Models\Slide;
 use App\Models\Tag;
@@ -32,7 +34,9 @@ class ServicesTableSeeder extends Seeder
             $p->notifications()->saveMany(Notification::all()->random(2));
             $p->slides()->saveMany(Slide::all()->random(2));
             $p->favorites()->saveMany(Favorite::factory( 2)->create());
-            $p->images()->saveMany(Image::factory(2)->create(['image' => 'food-0' . rand(1, 12) . '.jpeg']));
+            $p->images()->saveMany(Image::factory(2)->create());
+            $p->comments()->saveMany(Comment::factory( 2)->create());
+            $p->ratings()->saveMany(Rating::factory( 2)->create());
         });
     }
 }

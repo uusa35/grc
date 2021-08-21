@@ -28,10 +28,10 @@ class ImageFactory extends Factory
         return [
             'imagable_id' => $this->faker->numberBetween(1, 60),
             'imagable_type' => $this->faker->randomElement([
-                'App\Models\User', 'App\Models\Category',
+                'App\Models\User',
                 'App\Models\Product',
                 'App\Models\Service', 'App\Models\Book']),
-            'image' => 'square.png',
+            'image' => 'product.png',
             'caption_en' => $this->faker->word,
             'caption_ar' => $fakerAr->name,
             'keywords' => $this->faker->sentence,

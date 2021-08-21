@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Service extends PrimaryModel
 {
     use HasFactory, SoftDeletes, SellingModelHelpers, ServiceHelpers;
-//    protected $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
-//    protected $appends = ['name','description','imageThumb'];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $casts = [
         'on_sale' => 'boolean',
@@ -92,6 +90,11 @@ class Service extends PrimaryModel
     public function order_metas()
     {
         return $this->morphMany(OrderMeta::class, 'ordermetable');
+    }
+
+    public function ratings()
+    {
+        return $this->morphMany(Rating::class, 'ratingable');
     }
 
 }

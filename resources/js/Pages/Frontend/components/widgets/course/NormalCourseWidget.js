@@ -24,10 +24,13 @@ export default function NormalCourseWidget ({ element }) {
                 </Link>
             </div>
             <div className="flex flex-row flex-1 justify-between items-center m-2">
-                <h3 className="text-base font-semibold text-gray-900 truncate">
+                <h3 className="text-base font-semibold text-gray-900 truncate capitalize">
                     <Link href={route('frontend.course.show', element.id)}>
                         <span className="" />
                         {element[getLocalized()]}
+                        <p className="truncate capitalize text-sm hidden">
+                            {element[getLocalized('caption')]}
+                        </p>
                     </Link>
                 </h3>
                 <Link href={route('frontend.user.show', element.user.id)}>

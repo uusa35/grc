@@ -6,7 +6,7 @@ import pluralize from 'pluralize'
 import CategoryWidget from './../category/CategoryWidget';
 import NormalProductWidget from './../product/NormalProductWidget';
 import NormalUserWidget from '../user/NormalUserWidget';
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import { AppContext } from './../../../../context/AppContext'
 import NormalBookWidget from "../book/NormalBookWidget";
 import {Link} from "@inertiajs/inertia-react";
@@ -39,6 +39,8 @@ export default function ElementSlider({
         return <CategoryWidget element={s} />;
     }
   };
+
+  useEffect(() => {}, [slidesPerView])
 
   return (
     <div className="w-full">

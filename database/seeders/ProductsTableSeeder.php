@@ -3,11 +3,13 @@ namespace Database\Seeders;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Collection;
+use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Image;
 use App\Models\Notification;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\Rating;
 use App\Models\Slide;
 use App\Models\Tag;
 use App\Models\User;
@@ -39,7 +41,9 @@ class ProductsTableSeeder extends Seeder
             $p->notificationAlerts()->saveMany(Notification::all()->random(2));
             $p->images()->saveMany(Image::factory(3)->create());
             $p->favorites()->saveMany(Favorite::factory( 2)->create());
+            $p->ratings()->saveMany(Rating::factory( 2)->create());
             $p->userGroup()->saveMany(User::all()->random(3));
+            $p->comments()->saveMany(Comment::factory( 2)->create());
         });
     }
 }

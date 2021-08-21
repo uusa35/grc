@@ -511,7 +511,6 @@ export default function FrontendBookShow({element}) {
                     </div>
                 </section>
             </div>
-
         </FrontendContainer>
     )
 }

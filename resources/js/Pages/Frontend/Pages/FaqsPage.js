@@ -43,7 +43,7 @@ export default function FaqsPage({elements}) {
                             {settings[getLocalized()]}
                         </p>
                         <div
-                            className="mt-6 inline-block w-full bg-gray-400 border border-transparent rounded-sm py-3 px-8 font-medium text-white hover:bg-gray-800 sm:w-auto capitalize"
+                            className="mt-6 inline-block w-full bg-gray-400 border border-transparent rounded-sm py-3 px-8 font-medium text-white sm:w-auto capitalize"
                         >
                             {settings[getLocalized('caption')]}
                         </div>

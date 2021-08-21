@@ -18,6 +18,8 @@ class BookExtraLightResource extends JsonResource
             'id' => $this->id,
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
+            'caption_ar' => $this->caption_ar,
+            'caption_en' => $this->caption_en,
             'price' => $this->price,
             'sale_price' => $this->sale_price,
             'active' => $this->active,

@@ -27,7 +27,8 @@ class RatingFactory extends Factory
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
             'user_id' => User::all()->random()->id,
-            'member_id' => User::companies()->get()->shuffle()->first()->id,
+            'ratingable_type' => $this->faker->randomElement(['App\Models\User', 'App\Models\Product', 'App\Models\Service','App\Models\Course','App\Models\Book']),
+            'ratingable_id' => $this->faker->numberBetween(1, 99),
             'value' => $this->faker->randomElement([20, 40, 60, 80, 100]),
         ];
     }

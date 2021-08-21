@@ -60,7 +60,7 @@ class FrontendCourseController extends Controller
     public function show(Course $course)
     {
         $element = CourseExtraLightResource::make(Course::whereId($course->id)->with('user')->first());
-        return inertia('Frontend/Book/FrontendBookShow', compact('element'));
+        return inertia('Frontend/Course/FrontendCourseShow', compact('element'));
     }
 
     /**

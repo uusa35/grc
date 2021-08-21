@@ -48,7 +48,6 @@ export default function MainNavBookCategoriesList() {
                             {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                             <div className="absolute inset-0 top-1/2 bg-white shadow"
                                  aria-hidden="true"/>
-
                             <div className="relative bg-white">
                                 <div className="max-w-7xl px-8">
                                     <div
@@ -69,13 +68,13 @@ export default function MainNavBookCategoriesList() {
                                                         />
                                                     </div>
                                                     <Link href={route('frontend.book.index', { category_id : c.id})}
-                                                          className="mt-6 block text-gray-900">
-                                                                                    <span
-                                                                                        className="absolute z-10 inset-0"
-                                                                                        aria-hidden="true"/>
+                                                          className="mt-6 block text-gray-900 capitalize">
+                                                            <span
+                                                                className="absolute z-10 inset-0"
+                                                                aria-hidden="true"/>
                                                         {c[getLocalized()]}
                                                     </Link>
-                                                    <p aria-hidden="true" className="mt-1 truncate">
+                                                    <p aria-hidden="true" className="mt-1 truncate capitalize">
                                                         {c[getLocalized('caption')]}
                                                     </p>
                                                 </div>
@@ -88,7 +87,7 @@ export default function MainNavBookCategoriesList() {
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route('frontend.book.index', { category_id : parent.id})}
-                                                          className="text-gray-900 truncate">
+                                                          className="text-gray-900 truncate capitalize">
                                                         {parent[getLocalized()]}
                                                     </Link>
                                                     <ul
@@ -101,7 +100,7 @@ export default function MainNavBookCategoriesList() {
                                                                 <li key={child.id}
                                                                     className="flex">
                                                                     <Link href={route('frontend.book.index', { category_id : child.id})}
-                                                                          className="hover:text-gray-300 truncate">
+                                                                          className="hover:text-gray-300 truncate capitalize">
                                                                         {child[getLocalized()]}
                                                                     </Link>
                                                                 </li>

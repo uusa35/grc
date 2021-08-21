@@ -11,21 +11,26 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
     return (
         <aside>
             <h2 className="sr-only capitalize">{trans('advanced_search')}</h2>
-            <button
-                type="button"
-                className="inline-flex items-center lg:hidden bg-gray-900 p-3 rounded-md shadow-md capitalize"
-                onClick={() => setMobileFiltersOpen(true)}
-            >
-                <span className="text-white capitalize">{trans('advanced_search')}</span>
-                <PlusSmIcon className="flex-shrink-0 ml-1 h-5 w-5 text-gray-400" aria-hidden="true"/>
-            </button>
-            <Link
-                href={type ? route(`frontend.${type}.index`) : '#'}
-                className="inline-flex items-center lg:hidden bg-gray-900 p-3 rounded-md shadow-md capitalize"
-            >
-                {trans('clear_search')}
-            </Link>
-
+            <div className="flex flex-1 justify-between items-center">
+                <div className="flex">
+                    <button
+                        type="button"
+                        className="inline-flex items-center lg:hidden bg-gray-900 p-3 rounded-md shadow-md capitalize"
+                        onClick={() => setMobileFiltersOpen(true)}
+                    >
+                        <span className="text-white capitalize">{trans('advanced_search')}</span>
+                        <PlusSmIcon className="flex-shrink-0 ml-1 h-5 w-5 text-gray-400" aria-hidden="true"/>
+                    </button>
+                </div>
+                <div className="flex">
+                    <Link
+                        href={type ? route(`frontend.${type}.index`) : '#'}
+                        className="inline-flex items-center lg:hidden text-white bg-gray-900 p-3 rounded-md shadow-md capitalize"
+                    >
+                        {trans('clear_search')}
+                    </Link>
+                </div>
+            </div>
             <div className="hidden lg:block">
                 <div className="divide-y divide-gray-200 space-y-3">
                     <div className="flex flex-1 justify-between items-center">

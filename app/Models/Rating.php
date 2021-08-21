@@ -15,16 +15,8 @@ class Rating extends PrimaryModel
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function member()
+    public function ratingable()
     {
-        return $this->hasOne(User::class, 'member_id');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function product()
-    {
-        return $this->hasOne(Product::class, 'product_id');
+        return $this->morphTo();
     }
 }

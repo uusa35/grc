@@ -193,7 +193,7 @@ const BackendHeader = () => {
                                 >
                                     <Menu.Items
                                         static
-                                        className="origin-top-right absolute -right-8 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                                        className="origin-top-right absolute rtl:-mr-20 ltr:-ml-5 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
                                     >
                                         <div className="py-1">
                                             <Menu.Item>

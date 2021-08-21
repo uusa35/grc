@@ -1110,6 +1110,7 @@ const ar = {
     "support_and_polices" : "الدعم والسياسات",
     "download_now" : "حمل الآن",
     "apple_store" : "متجر أبل",
+    "equivalent" : "الموافق"
 }
 
 const en  = {

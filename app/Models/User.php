@@ -18,9 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [''];
-//    protected $localeStrings = ['name', 'description', 'service', 'policy', 'address', 'caption'];
     protected $dates = ['created_at', 'deleted_at',  'end_subscription_date'];
-//    protected $appends = ['address', 'name', 'description'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -122,7 +120,7 @@ class User extends Authenticatable
 
     public function ratings()
     {
-        return $this->belongsTo(Rating::class);
+        return $this->morphMany(Rating::class, 'ratingable');
     }
 
     public function categories()

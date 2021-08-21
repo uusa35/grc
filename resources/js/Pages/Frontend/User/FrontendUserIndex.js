@@ -62,7 +62,7 @@ export default function FrontendUserIndex({elements, categories}) {
                         showSearch={false}
                     />
                     {/* sort options */}
-                    <div className="flex w-full sm:w-auto justify-between items-center">
+                    <div className="flex w-full sm:w-auto justify-between items-center mt-10 sm:mt-0">
                         <Menu as="div" className="relative inline-block text-left">
                             <Menu.Button
                                 className="w-40 group inline-flex px-3 py-1 mt-flex flex-1 justify-between items-center gap-x-3 text-gray-800 hover:text-gray-900 ring-2 ring-gray-400 rounded-md ">
@@ -107,7 +107,7 @@ export default function FrontendUserIndex({elements, categories}) {
                         </Menu>
                         <button
                             type="button"
-                            className="p-2 mx-8 text-gray-400 hover:text-gray-500 lg:hidden"
+                            className="p-2 mx-8 text-gray-100 bg-gray-900 rounded-full p-3 shadow-md hover:text-gray-500 lg:hidden"
                             onClick={() => setMobileFiltersOpen(true)}
                         >
                             <span className="sr-only">{trans('filters')}</span>

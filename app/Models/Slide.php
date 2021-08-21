@@ -9,7 +9,6 @@ class Slide extends PrimaryModel
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [''];
-//    public $localeStrings = ['name', 'caption','description'];
 
     public function slidable()
     {

@@ -16,7 +16,7 @@ export default function NormalUserWidget ({ element }) {
                     className="z-0 w-50 h-50 rounded-full shadow-md object-center object-cover group-hover:opacity-75"
                 />
             </div>
-            <h3 className="mt-4 text-center text-gray-700 truncate">{element[getLocalized()]}</h3>
+            <h3 className="mt-4 text-center text-lg text-gray-700 truncate">{element[getLocalized()]}</h3>
         </Link>
     );
 }

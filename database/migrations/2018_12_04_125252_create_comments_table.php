@@ -17,11 +17,11 @@ class CreateCommentsTable extends Migration
             $table->string('title')->nullable();
             $table->string('content')->nullable();
             $table->string('file')->nullable();
-            $table->boolean('active')->default(true);
+            $table->boolean('active')->default(1);
             $table->boolean('viewed')->nullable();
             $table->integer('likes')->nullable();
 
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->morphs('commentable');
             $table->timestamps();
         });

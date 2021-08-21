@@ -256,14 +256,14 @@ export default function MainNav() {
                     </Link>
                     {
                         guest ? <>
-                            <Link
+                            <a
                                 href={route('login')} className="-m-2 p-2 block text-gray-50">
                                 {capitalize(trans('login'))}
-                            </Link>
-                            <Link
+                            </a>
+                            <a
                                 href={route('register')} className="-m-2 p-2 block text-gray-50 sr-only">
                                 {capitalize(trans('register'))}
-                            </Link>
+                            </a>
                         </> : null
                     }
                     <Link

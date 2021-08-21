@@ -58,8 +58,8 @@ class FrontendServiceController extends Controller
      */
     public function show(Service $service)
     {
-        $element = Service::whereId($service->id)->with('user','timings','images')->first();
-        return inertia('Frontend/Book/FrontendBookShow', compact('element'));
+        $element = Service::whereId($service->id)->with('user','timings','images','ratings')->first();
+        return inertia('Frontend/Service/FrontendServiceShow', compact('element'));
     }
 
     /**

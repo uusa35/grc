@@ -16,12 +16,10 @@ class CreateRatingsTable extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             // member is the person who is doing the Rate
-            $table->foreignId('user_id')->nullable()->constrained();
-            // the person who is receiving the rate
-            $table->integer('member_id')->nullable()->constrained();
-            $table->foreignId('product_id')->nullable()->constrained();
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->integer('value')->unsigned()->nullable();
 
+            $table->morphs('ratingable');
             $table->timestamps();
         });
     }

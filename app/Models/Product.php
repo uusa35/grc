@@ -10,10 +10,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Product extends PrimaryModel
 {
     use HasFactory, ProductHelpers, SellingModelHelpers, SoftDeletes, HasEvents;
-//    public $localeStrings = ['name', 'description', 'notes'];
     protected $guarded = [''];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
-//    protected $appends = ['name', 'description','type'];
     protected $casts = [
         'price' => 'float',
         'sale_price' => 'float'
@@ -117,6 +115,6 @@ class Product extends PrimaryModel
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class);
+        return $this->morphMany(Rating::class, 'ratingable');
     }
 }

@@ -28,6 +28,9 @@ module.exports = {
                 'green': {
                     '900': '#078231'
                 },
+                'gold': {
+                    '900': '#af9123'
+                },
             }
         },
         colors: {

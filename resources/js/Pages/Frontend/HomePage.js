@@ -1,11 +1,11 @@
 /* This example requires Tailwind CSS v2.0+ */
-import React, {Fragment, useContext} from 'react'
+import React, {Fragment, useContext, useEffect, useState} from 'react'
 import {AppContext} from "../context/AppContext";
 import MainSlider from "../Frontend/components/widgets/slider/MainSlider";
 import FrontendContainer from "./components/FrontendContainer";
 import Ziggy from 'ziggy-js';
 import ElementSlider from "./components/widgets/slider/ElementSlider";
-import {isMobile, isTablet} from 'react-device-detect';
+import {isMobile, isTablet, isDesktop} from 'react-device-detect';
 import NewsLetter from "./partials/NewsLetter";
 
 const navigation = [
@@ -16,7 +16,17 @@ const navigation = [
 ]
 
 export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnHomeCourses, onHomeParticipantAuthors }) {
-    const {trans, parentModule, getLarge, getLocalized, locale, getThumb, isRTL} = useContext(AppContext);
+    const {trans} = useContext(AppContext);
+    const[slideNumber, setSlideNumber] = useState(6)
+
+    useEffect(() => {
+        function handleResize() {
+            window.innerWidth < 1200 ? setSlideNumber(2) : setSlideNumber(6);
+        }
+        window.addEventListener("resize", handleResize);
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    }, []); // Empty array ensures that effect is only run on mount
 
     return (
         <FrontendContainer mainSlides={slides} showBreadCrumbs={false}>
@@ -24,14 +34,14 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
                 <ElementSlider
                     showNavigation={false}
                     elements={homeCategories}
-                    slidesPerView={isTablet || isMobile ? 2 : 6}
+                    slidesPerView={isTablet || isMobile ? 2 : slideNumber}
                     title={trans('featured_categories')}
                     type={'category'}
                 />
                 <ElementSlider
                     elements={newOnHomeBooks}
                     showNavigation={false}
-                    slidesPerView={isTablet || isMobile ? 1 : 6}
+                    slidesPerView={isTablet || isMobile ? 1 : slideNumber}
                     title={trans('new_chosen_books')}
                     type={'book'}
                 />
@@ -39,7 +49,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
                 <ElementSlider
                     elements={onHomeParticipantAuthors}
                     showNavigation={false}
-                    slidesPerView={isTablet || isMobile ? 2 : 6}
+                    slidesPerView={isTablet || isMobile ? 2 : slideNumber}
                     title={trans('participant_authors')}
                     type={'user'}
                 />
@@ -47,7 +57,7 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
                 <ElementSlider
                     elements={newOnHomeCourses}
                     showNavigation={false}
-                    slidesPerView={isTablet || isMobile ? 1 : 6}
+                    slidesPerView={isTablet || isMobile ? 1 : slideNumber}
                     title={trans('featured_courses')}
                     type={'course'}
                 />
