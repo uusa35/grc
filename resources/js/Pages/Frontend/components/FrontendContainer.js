@@ -13,6 +13,7 @@ import LoadingView from "../../Backend/components/widgets/LoadingView";
 import MainSlider from "./widgets/slider/MainSlider";
 import FrontendBreadCrumbs from "./FrontendBreadCrumbs";
 
+
 const FrontendContainer = ({
                                children, elements = [],
                                mainModule = null,

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ServiceCollection;
+use App\Http\Resources\ServiceExtraLightResource;
+use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use App\Services\Search\Filters;
 use App\Services\Search\ProductFilters;
@@ -56,10 +58,13 @@ class FrontendServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Service $service, Filters $filters)
     {
-        $element = Service::whereId($service->id)->with('user','timings','images','ratings')->first();
-        return inertia('Frontend/Service/FrontendServiceShow', compact('element'));
+        $element = ServiceResource::make($service->load('user','timings','images','ratings','categories'));
+        request()->request->add(['category_id' => $element->categories->pluck('id')->flatten()->unique()->toArray()]);
+        $relatedElements = new ServiceCollection(Service::filters($filters)
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_FOUR));
+        return inertia('Frontend/Service/FrontendServiceShow', compact('element','relatedElements'));
     }
 
     /**

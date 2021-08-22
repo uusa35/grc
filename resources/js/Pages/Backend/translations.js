@@ -1110,7 +1110,11 @@ const ar = {
     "support_and_polices" : "الدعم والسياسات",
     "download_now" : "حمل الآن",
     "apple_store" : "متجر أبل",
-    "equivalent" : "الموافق"
+    "equivalent" : "الموافق",
+    "kwt_timing_zone" : "جميع التوقيتات طبقا لتوقيت الكويت",
+    "related" :  "متعلقة",
+    "related_items" : "عناصر متعلقة",
+    "u_have_to_register_first" : "يجب عليك التسجيل أولا"
 }
 
 const en  = {
@@ -2219,6 +2223,7 @@ const en  = {
     "featured_courses" : "selected courses",
     "aboutus_en" : "aboutus english",
     "aboutus_ar" : "aboutus arabic",
+    "u_have_to_register_first" : "you must login first"
 }
 
 export const translations = {ar , en }

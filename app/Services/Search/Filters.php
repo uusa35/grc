@@ -149,4 +149,8 @@ class Filters extends QueryFilters
     {
         return $this->builder->where('taggable_type', 'App\Models\\' . ucfirst(request()->taggable_type));
     }
+
+    public function slug () {
+        return $this->builder;
+    }
 }

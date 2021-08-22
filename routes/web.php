@@ -46,6 +46,7 @@ use App\Http\Controllers\Frontend\FrontendCourseController;
 use App\Http\Controllers\Frontend\FrontendFaqController;
 use App\Http\Controllers\Frontend\FrontendPageController;
 use App\Http\Controllers\Frontend\FrontendProductController;
+use App\Http\Controllers\Frontend\FrontendRatingController;
 use App\Http\Controllers\Frontend\FrontendServiceController;
 use App\Http\Controllers\Frontend\FrontendUserController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -64,18 +65,18 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::group(['as' => 'frontend.','middleware' => ['frontendInertiaHandler']], function () {
+Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('index');
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
     Route::get('/lang/{locale}', [HomeController::class, 'changeLang'])->name('change.lang');
-    Route::resource('product',FrontendProductController::class)->only(['index','show']);
-    Route::resource('book',FrontendBookController::class)->only(['index','show']);
-    Route::resource('service',FrontendServiceController::class)->only(['index','show']);
-    Route::resource('course',FrontendCourseController::class)->only(['index','show']);
-    Route::resource('category',FrontendCategoryController::class);
-    Route::resource('user',FrontendUserController::class)->except('destroy');
-    Route::resource('faq',FrontendFaqController::class)->only('index');
+    Route::resource('product', FrontendProductController::class)->only(['index', 'show']);
+    Route::resource('book', FrontendBookController::class)->only(['index', 'show']);
+    Route::resource('service', FrontendServiceController::class)->only(['index', 'show']);
+    Route::resource('course', FrontendCourseController::class)->only(['index', 'show']);
+    Route::resource('category', FrontendCategoryController::class);
+    Route::resource('user', FrontendUserController::class)->except('destroy');
+    Route::resource('faq', FrontendFaqController::class)->only('index');
     Route::get('contactus', [FrontendPageController::class, 'getContactus'])->name('contactus');
     Route::get('aboutus', [FrontendPageController::class, 'getAboutus'])->name('aboutus');
     Route::get('polices', [FrontendPageController::class, 'getPolicies'])->name('polices');
@@ -85,9 +86,12 @@ Route::group(['as' => 'frontend.','middleware' => ['frontendInertiaHandler']], f
     Route::get('cart', [FrontendCartController::class, 'index'])->name('cart.index');
     Route::get('cart/add', [FrontendCartController::class, 'addItem'])->name('cart.add');
     Route::get('cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
+    Route::group(['middleware' => 'super'], function () {
+        Route::resource('rating', FrontendRatingController::class)->only('store');
+    });
 });
 
-Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'dashboard','backendInertiaHandler']], function () {
+Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'dashboard', 'backendInertiaHandler']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/home', [DashboardController::class, 'index'])->name('home.index');
     Route::get('/lang/{locale}', [HomeController::class, 'changeLang'])->name('change.lang');

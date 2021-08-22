@@ -57,7 +57,7 @@ class FrontendProductController extends Controller
      */
     public function show(Product $product)
     {
-        $element = Product::whereId($product->id)->with('images','product_attributes.color','product_attributes.size','color','size','categories')->first();
+        $element = $product->load('images','product_attributes.color','product_attributes.size','color','size','categories');
         return inertia('Frontend/Product/FrontendProductShow', compact('element'));
     }
 

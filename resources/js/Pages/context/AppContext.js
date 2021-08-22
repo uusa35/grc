@@ -5,6 +5,11 @@ import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 import {isLocal} from "../helpers";
+import moment from "moment";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {toast} from 'react-toastify';
+import {IoCloseOutline} from "react-icons/all";
 
 const AppContext = createContext({});
 
@@ -34,7 +39,19 @@ const AppContextProvider = ({children}) => {
     const [colName, setColName] = useState('id');
     const [locale, setLocale] = useState(document.getElementById('locale').innerHTML);
     const [currency,setCurrency] = useState(currencies ? first(currencies) : {})
-
+    const options = {
+        // onOpen: props => console.log(props.foo),
+        // onClose: props => console.log(props.foo),
+        autoClose: 6000,
+        closeButton: IoCloseOutline,
+        type: toast.TYPE.INFO,
+        hideProgressBar: false,
+        position: locale == 'ar' ? toast.POSITION.TOP_RIGHT : toast.POSITION.TOP_RIGHT,
+        pauseOnHover: true,
+        progress: 0.2,
+        closeOnClick: true,
+        draggable: true,
+    };
 
     const handleSort = (colName) => {
         setColName(colName)
@@ -118,6 +135,7 @@ const AppContextProvider = ({children}) => {
 
     useMemo(() => {
         document.getElementById('locale').innerHTML = locale;
+        moment.locale(locale);
     }, [locale])
 
     useEffect(() => {
@@ -150,6 +168,7 @@ const AppContextProvider = ({children}) => {
             setCurrentRoute(currentRoute)
             // setIsLoading(true)
         })
+        toast.configure(options)
     }, [])
 
     isLocal() && console.log('parentModule', parentModule);
@@ -158,6 +177,7 @@ const AppContextProvider = ({children}) => {
     return (
         <AppContext.Provider value={context}>
             {children}
+            <ToastContainer/>
         </AppContext.Provider>
     );
 };

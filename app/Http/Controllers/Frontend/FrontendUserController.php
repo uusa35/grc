@@ -58,7 +58,7 @@ class FrontendUserController extends Controller
      */
     public function show(User $user)
     {
-        $element = User::whereId($user->id)->with('role','books')->first();
+        $element = $user->load('role','books');
         return inertia('Frontend/User/FrontendUserShow', compact('element'));
     }
 
