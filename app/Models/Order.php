@@ -63,11 +63,6 @@ class Order extends PrimaryModel
         return $this->order_metas->sum('price');
     }
 
-    public function branch()
-    {
-        return $this->belongsTo(Branch::class);
-    }
-
     public function coupon()
     {
         return $this->belongsTo(Coupon::class);

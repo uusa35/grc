@@ -4,9 +4,9 @@ import {AppContext} from "../../../context/AppContext";
 export default function ElementTags({onNew, onSale, exclusive}) {
     const {isRTL, classNames, trans} = useContext(AppContext)
     return (
-        <div className="relative opacity-80">
+        <div className="relative opacity-80 z-40">
             <div
-                className={classNames(isRTL ? `` : ``, 'absolute top-8 left-2 flex flex-col  gap-y-3 text-white text-sm')}>
+                className={classNames(isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col  gap-y-3 text-white text-sm')}>
                 {
                     onSale && <span
                         className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm  bg-red-900 ">

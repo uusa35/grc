@@ -4,20 +4,22 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FavoriteExtraLightResource extends JsonResource
+class OrderExtraLightResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
     {
         return [
             'id' => $this->id,
-            'favoritable_id' => $this->favoritable_id,
-            'favoritable_type' => $this->favoritable_type
+            'reference_id' => $this->reference_id,
+            'status' => $this->status,
+            'net_price' => $this->net_price,
+            'created_at' => $this->created_at
         ];
     }
 }

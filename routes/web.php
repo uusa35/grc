@@ -44,6 +44,7 @@ use App\Http\Controllers\Frontend\FrontendCartController;
 use App\Http\Controllers\Frontend\FrontendCategoryController;
 use App\Http\Controllers\Frontend\FrontendCourseController;
 use App\Http\Controllers\Frontend\FrontendFaqController;
+use App\Http\Controllers\Frontend\FrontendFavoriteController;
 use App\Http\Controllers\Frontend\FrontendPageController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\FrontendRatingController;
@@ -86,8 +87,9 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('cart', [FrontendCartController::class, 'index'])->name('cart.index');
     Route::get('cart/add', [FrontendCartController::class, 'addItem'])->name('cart.add');
     Route::get('cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
-    Route::group(['middleware' => 'super'], function () {
+    Route::group(['middleware' => 'auth'], function () {
         Route::resource('rating', FrontendRatingController::class)->only('store');
+        Route::resource('favorite', FrontendFavoriteController::class)->only('store');
     });
 });
 

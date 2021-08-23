@@ -57,7 +57,7 @@ export default function FaqsPage({elements}) {
                 >
                     <div className="max-w-2xl mx-auto lg:max-w-none">
                         <div
-                            className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full font-bein font-extrabold">
+                            className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full">
                             <dl className="mt-6 space-y-6 divide-y divide-gray-200">
                                 {map(elements, element => (
                                     <Disclosure as="div" key={element.id} className="pt-6">

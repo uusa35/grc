@@ -43,7 +43,6 @@ class OrderFactory extends Factory
             'mobile' => $this->faker->bankAccountNumber,
             'phone' => $this->faker->bankAccountNumber,
             'reference_id' => $this->faker->bankAccountNumber,
-            'branch_id' => Branch::all()->random()->id,
             'payment_method' => $this->faker->randomElement(['cash', 'visa', 'mastercard']),
             'country' => Country::all()->random()->name,
             'area' => $this->faker->country,

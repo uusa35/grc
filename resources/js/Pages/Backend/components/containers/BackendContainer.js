@@ -42,7 +42,7 @@ const BackendContainer = ({
     }, [parentModule, subModule])
 
     return (
-        <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+        <div className="h-full flex overflow-hidden text-sm md:text-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
             <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
                 <link rel="icon" type="image/svg+xml" href={getThumb(settings.image)}/>

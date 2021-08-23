@@ -15,11 +15,11 @@ export default function FrontendBreadCrumbs() {
             className="flex flex-1 flex-row justify-between items-center rounded-md shadow-sm p-5 w-auto">
             <nav
                 className="flex flex-1" aria-label="Breadcrumb">
-                <ol className="flex flex-row items-center space-x-4 max-w-0">
-                    <li className="flex flex-row justify-start items-center">
+                <ol className="flex flex-1 flex-row items-center space-x-4 max-w-0 sm:max-w-max">
+                    <li className="flex flex-1 flex-row justify-start items-center">
                         <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>
                         <Link
-                            className="capitalize"
+                            className="capitalize flex-1"
                             href={route('frontend.home')}>
                             {trans('home')}
                         </Link>

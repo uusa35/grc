@@ -15,7 +15,7 @@ import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
 import {map, capitalize, filter, take} from 'lodash';
 import GlobalContext from "../../../context/GlobalContext";
-import {FaFacebook, FaInstagram, FaTwitch, FaTwitter, FaWhatsapp} from "react-icons/fa";
+import {FaFacebook, FaInstagram, FaTwitch, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
 import MainNavBookCategoriesList from "./MainNavBookCategoriesList";
@@ -140,76 +140,6 @@ const navigation = {
     ],
 }
 
-const header = {
-    solutions: [
-        {
-            name: 'Analytics',
-            description: 'Get a better understanding of where your traffic is coming from.',
-            href: '#',
-            icon: ChartBarIcon,
-        },
-        {
-            name: 'Engagement',
-            description: 'Speak directly to your customers in a more meaningful way.',
-            href: '#',
-            icon: CursorClickIcon,
-        },
-        {
-            name: 'Security',
-            description: "Your customers' data will be safe and secure.",
-            href: '#',
-            icon: ShieldCheckIcon,
-        },
-        {
-            name: 'Integrations',
-            description: "Connect with third-party tools that you're already using.",
-            href: '#',
-            icon: ViewGridIcon,
-        },
-        {
-            name: 'Automations',
-            description: 'Build strategic funnels that will drive your customers to convert',
-            href: '#',
-            icon: RefreshIcon,
-        },
-    ],
-    callsToAction: [
-        {name: 'Watch Demo', href: '#', icon: PlayIcon},
-        {name: 'Contact Sales', href: '#', icon: PhoneIcon},
-    ],
-    resources: [
-        {
-            name: 'Help Center',
-            description: 'Get all of your questions answered in our forums or contact support.',
-            href: '#',
-            icon: SupportIcon,
-        },
-        {
-            name: 'Guides',
-            description: 'Learn how to maximize our platform to get the most out of it.',
-            href: '#',
-            icon: BookmarkAltIcon,
-        },
-        {
-            name: 'Events',
-            description: 'See what meet-ups and other events we might be planning near you.',
-            href: '#',
-            icon: CalendarIcon,
-        },
-        {
-            name: 'Security',
-            description: 'Understand how we take your privacy seriously.',
-            href: '#',
-            icon: ShieldCheckIcon,
-        },
-    ],
-    recentPosts: [
-        {name: 'Boost your conversion rate', href: '#'},
-        {name: 'How to use search engine optimization to drive traffic to your site', href: '#'},
-        {name: 'Improve your customer experience', href: '#'},
-    ],
-}
-
 const pages = [
     {name: 'home', url: route('frontend.home')},
     {name: 'books', url: route('frontend.book.index')},
@@ -232,22 +162,35 @@ export default function MainNav() {
     const [open, setOpen] = useState(false)
 
     return (
-        <div className="bg-white font-bein font-extrabold rtl:text-right ltr:text-left">
+        <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}
             <div className="bg-gray-700 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8">
                 <div className="flex  flex-row  justify-center items-center gap-x-5">
-                    <a target="_blank" href={settings.instagram}>
-                        <FaInstagram size={22} className={'text-gray-400'}/>
-                    </a>
-                    <a target="_blank" href={settings.facebook}>
-                        <FaFacebook size={22} className={'text-gray-400'}/>
-                    </a>
-                    <a target="_blank" href={settings.twitter}>
-                        <FaTwitter size={22} className={'text-gray-400'}/>
-                    </a>
-                    <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
-                        <FaWhatsapp size={22} className={'text-gray-400'}/>
-                    </a>
+                    {
+                        settings.instagram && <a target="_blank" href={settings.instagram}>
+                            <FaInstagram size={22} className={'text-gray-400'}/>
+                        </a>
+                    }
+                    {
+                        settings.facebook && <a target="_blank" href={settings.facebook}>
+                            <FaFacebook size={22} className={'text-gray-400'}/>
+                        </a>
+                    }
+                    {
+                        settings.twitter && <a target="_blank" href={settings.twitter}>
+                            <FaTwitter size={22} className={'text-gray-400'}/>
+                        </a>
+                    }
+                    {
+                        settings.youtube && <a target="_blank" href={settings.youtube}>
+                            <FaYoutube size={22} className={'text-gray-400'}/>
+                        </a>
+                    }
+                    {
+                        settings.whatsapp && <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
+                            <FaWhatsapp size={22} className={'text-gray-400'}/>
+                        </a>
+                    }
                 </div>
                 <div className="flex flex-row justify-center items-center gap-x-5  divide-x divide-gray-400">
                     <Link
@@ -312,7 +255,7 @@ export default function MainNav() {
                                 </button>
                             </div>
 
-                            <div className="border-t border-gray-200 py-6 px-4 space-y-6 font-bein font-extrabold">
+                            <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                                 {map(pages, p => (
                                     <div className="flow-root" key={p.name}>
                                         <Link

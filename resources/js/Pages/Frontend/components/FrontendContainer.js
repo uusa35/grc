@@ -29,7 +29,8 @@ const FrontendContainer = ({
         locale,
         getThumb,
         getLocalized,
-        isRTL
+        isRTL,
+        classNames
     } = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
 
@@ -39,7 +40,7 @@ const FrontendContainer = ({
     }, [])
 
     return (
-        <div className="h-full flex overflow-hidden font-bein font-extrabold text-sm md:text-lg"
+        <div className="h-full flex overflow-hidden text-sm md:text-lg"
              dir={isRTL ? 'rtl' : 'ltr'}>
             <Head title={capitalize(settings[getLocalized()])}>
                 <meta head-key="title" name="title" content={settings[getLocalized()]}/>
@@ -99,11 +100,11 @@ const FrontendContainer = ({
             </Head>
             <ConfirmationModal/>
             {/*{isLoading && <LoadingView/>}*/}
-            <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-white font-bein font-extrabold ">
+            <main className={classNames(isRTL ? 'font-bein' : 'font-tajwal-medium' , "flex-1 relative z-0 focus:outline-none max-w-full bg-white font-extrabold capitalize")}>
                 <MainNav/>
                 <div className="min-h-screen">
                     {mainSlides && <MainSlider elements={mainSlides}/>}
-                    <div className="w-4/5 m-auto shadow-xl min-h-screen">
+                    <div className="w-4/5 sm:w-4/5 lg:3/5 m-auto shadow-xl min-h-screen">
                         {showBreadCrumbs && <FrontendBreadCrumbs/>}
                         {children}
                     </div>

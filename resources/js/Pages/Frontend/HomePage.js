@@ -15,13 +15,13 @@ const navigation = [
     {name: 'Company', href: '#'},
 ]
 
-export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnHomeCourses, onHomeParticipantAuthors }) {
+export default function HomePage({slides, homeBookCategories, newOnHomeBooks, newOnHomeCourses, onHomeParticipantAuthors }) {
     const {trans} = useContext(AppContext);
     const[slideNumber, setSlideNumber] = useState(6)
 
     useEffect(() => {
         function handleResize() {
-            window.innerWidth < 1200 ? setSlideNumber(2) : setSlideNumber(6);
+            window.innerWidth < 1200 ? setSlideNumber(2) : setSlideNumber(5);
         }
         window.addEventListener("resize", handleResize);
         handleResize();
@@ -33,9 +33,9 @@ export default function HomePage({slides, homeCategories, newOnHomeBooks, newOnH
             <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:max-w-max lg:px-8">
                 <ElementSlider
                     showNavigation={false}
-                    elements={homeCategories}
+                    elements={homeBookCategories}
                     slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-                    title={trans('featured_categories')}
+                    title={trans('home_featured_categories')}
                     type={'category'}
                 />
                 <ElementSlider

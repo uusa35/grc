@@ -48,6 +48,10 @@ class Service extends PrimaryModel
         return $this->morphMany(Favorite::class, 'favoritable');
     }
 
+    public function favoritesList() {
+        return $this->hasMany(Favorite::class, 'user_id');
+    }
+
     public function fans()
     {
         return $this->belongsToMany(User::class, 'fans', 'service_id', 'fan_id');

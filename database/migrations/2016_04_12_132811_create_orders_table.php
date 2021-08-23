@@ -40,12 +40,11 @@ class CreateOrdersTable extends Migration
             $table->string('building')->nullable();
             $table->string('floor')->nullable();
             $table->string('apartment')->nullable();
+            $table->string('branch')->nullable();
             $table->boolean('cash_on_delivery')->default(false);
 
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('branch_id')->nullable()->constrained();
             $table->foreignId('coupon_id')->nullable()->constrained();
-            $table->foreignId('address_id')->nullable()->constrained();
             $table->foreignId('country_id')->nullable()->constrained();
             $table->foreignId('area_id')->nullable()->constrained();
             $table->timestamps();

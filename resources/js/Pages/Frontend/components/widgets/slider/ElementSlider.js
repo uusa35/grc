@@ -48,7 +48,7 @@ export default function ElementSlider({
         <>
             <Link
                 href={route(`frontend.${type}.index`)}
-                className="w-full flex flex-1 h-auto mb-5 justify-between items-center capitalize rtl:text-right ltr:text-left text-xl font-bein font-extrabold"
+                className="w-full flex flex-1 h-auto mb-5 justify-between items-center capitalize rtl:text-right ltr:text-left text-xl "
             >
               <span>{pluralize(title)}</span>
               {

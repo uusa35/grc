@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {FaWhatsapp, FaTwitter, FaFacebook, FaInstagram, FaPhone} from 'react-icons/fa';
+import {FaWhatsapp, FaTwitter, FaFacebook, FaInstagram, FaPhone, FaYoutube} from 'react-icons/fa';
 import moment from 'moment'
 import {AppContext} from "../../../context/AppContext";
 import GlobalContext from "../../../context/GlobalContext";
@@ -48,6 +48,13 @@ export default function Footer() {
                                className="text-gray-600 hover:text-gray-500 capitalize">
                                 <span className="sr-only">{trans('twitter')}</span>
                                 <FaTwitter size={25} className={'text-gray-600'}/>
+                            </a>
+                            }
+                            {settings.youtube &&
+                            <a target="_blank" href={settings.youtube}
+                               className="text-gray-600 hover:text-gray-500 capitalize">
+                                <span className="sr-only">{trans('youtube')}</span>
+                                <FaYoutube size={25} className={'text-gray-600'}/>
                             </a>
                             }
                             {settings.whatsapp &&

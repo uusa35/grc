@@ -9,7 +9,7 @@ import moment from "moment";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from 'react-toastify';
-import {IoCloseOutline} from "react-icons/all";
+import {GrClose, IoCloseOutline} from "react-icons/all";
 
 const AppContext = createContext({});
 
@@ -162,7 +162,7 @@ const AppContextProvider = ({children}) => {
             isLocal() && console.log('navigate ==>')
             const currentRoute = route().current();
             const breadCrumbs = split(currentRoute, '.');
-            console.log('befre Module', breadCrumbs[1])
+            isLocal() && console.log('befre Module', breadCrumbs[1])
             setParentModule(breadCrumbs[1]);
             setCurrentBreadCrumbs(breadCrumbs);
             setCurrentRoute(currentRoute)
@@ -173,11 +173,13 @@ const AppContextProvider = ({children}) => {
 
     isLocal() && console.log('parentModule', parentModule);
 
-
     return (
         <AppContext.Provider value={context}>
             {children}
-            <ToastContainer/>
+            <ToastContainer
+                rtl={locale === 'ar'}
+                closeButton={<GrClose color={'white'}/>}
+                className={locale === 'ar' ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full'} bodyClassName={locale === 'ar' ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full text-left'}/>
         </AppContext.Provider>
     );
 };

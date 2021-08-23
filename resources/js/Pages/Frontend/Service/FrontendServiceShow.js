@@ -17,25 +17,24 @@ import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery';
-import { calculateRating } from "../../helpers";
+import {calculateRating} from "../../helpers";
 import ElementRating from "../components/widgets/ElementRating";
+import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
+import { isMobile } from "react-device-detect";
 
 
 export default function FrontendServiceShow({element, relatedElements }) {
-    const {currency, getThumb, getLarge, getLocalized, trans, classNames, locale} = useContext(AppContext)
-    const [open, setOpen] = useState(false)
+    const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState('');
     const [currentImages, setCurrentImages] = useState([]);
 
-
     useMemo(() => {
-         const images = [{ thumbnail : getThumb(element.image), original : getLarge(element.image)}]
+        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
         map(element.images, img => {
-            images.push({ thumbnail:  getThumb(img.image), original:  getLarge(img.image)})
+            images.push({thumbnail: getThumb(img.image), original: getLarge(img.image)})
         })
         setCurrentImages(images);
-    },[element])
-
+    }, [element])
 
     return (
         <FrontendContainer mainModule={'service'} subModule={element[getLocalized()]}>
@@ -43,29 +42,54 @@ export default function FrontendServiceShow({element, relatedElements }) {
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
                     {/* Image gallery */}
-                    <ImageGallery
-                        showBullets={true}
-                        showNav={false}
-                        items={currentImages} />
+                    <div className="relative">
+                        <ElementTags exclusive={element.exclusive} onSale={element.isOnSale} onNew={element.on_new}/>
+                        <ImageGallery
+                            showBullets={true}
+                            showNav={false}
+                            originalAlt={element[getLocalized()]}
+                            originalTitle={element[getLocalized()]}
+                            thumbnailLabel={element[getLocalized()]}
+                            thumbnailTitle={element[getLocalized()]}
+                            showThumbnails={true}
+                            thumbnailPosition={isMobile ? 'bottom' : 'right'}
+                            items={currentImages}/>
+                    </div>
                     {/* Product info */}
                     <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
                         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
                         <div className="mt-3">
-                            <h2 className="sr-only">Product information</h2>
+                            <h2 className="sr-only">{trans('information')}</h2>
                             <ElementPrice price={element.price} salePrice={element.sale_price}
                                           isOnSale={element.isOnSale} large={true}/>
                         </div>
                         {/* Reviews */}
                         <ElementRating ratings={element.ratings} id={element.id} type={'service'}/>
-
-                        {
-                            element[getLocalized()] && <div className="mt-6">
-                                <h3 className="sr-only">{trans('caption')}</h3>
-                                <div
-                                    className="text-base text-gray-700 space-y-6"
-                                >{element[getLocalized('caption')]}</div>
+                        <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
+                            <div className="flex flex-1">
+                                {
+                                    element[getLocalized('caption')] && <div className="mt-6">
+                                        <h3 className="sr-only">{trans('caption')}</h3>
+                                        <div
+                                            className="text-base text-gray-700 space-y-6"
+                                        >{element[getLocalized('caption')]}</div>
+                                    </div>
+                                }
                             </div>
-                        }
+                            <div className="flex">
+                                {
+                                    element.sku && <div className="mt-6">
+                                        <h3 className="sr-only">{trans('sku')}</h3>
+                                        <div
+                                            className="text-base text-gray-700 space-y-6"
+                                        >
+                                            {trans('reference_id')} :
+                                            {element.sku}
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
 
                         <div className="mt-6">
                             {/* service timings */}
@@ -73,8 +97,10 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                 <div>
                                     <Menu.Button
                                         className="flex flex-1 justify-between items-center w-full capitalize rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                        {selectedTiming ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
-                                        <ChevronDownIcon className="mx-10 ml-2 h-5 w-5" aria-hidden="true"/>
+                                        <div>
+                                            {selectedTiming ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
+                                        </div>
+                                        <ChevronDownIcon className="h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
                                 </div>
                                 <Transition
@@ -99,10 +125,14 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                                                 'block px-4 py-2 text-sm hover:bg-gray-100'
                                                             )}
                                                         >
-                                                            <div className="flex flex-1 flex-col xl:flex-row justify-start items-center text-sm sm:text-lg">
-                                                                <div className="flex flex-1 flex-col justify-start xl:flex-row xl:w-1/3 items-center">
-                                                                    <span className="flex">{`${moment(t.date).format('dddd')} ${trans('equivalent')}`}</span>
-                                                                    <span className="flex flex-1 justify-start sm:px-2 flex-row">{`${moment(t.date).format('L')}`}</span>
+                                                            <div
+                                                                className="flex flex-1 flex-col xl:flex-row justify-start items-center text-sm sm:text-lg">
+                                                                <div
+                                                                    className="flex flex-1 flex-col justify-start xl:flex-row xl:w-1/3 items-center">
+                                                                    <span
+                                                                        className="flex">{`${moment(t.date).format('dddd')} ${trans('equivalent')}`}</span>
+                                                                    <span
+                                                                        className="flex flex-1 justify-start sm:px-2 flex-row">{`${moment(t.date).format('L')}`}</span>
                                                                 </div>
                                                                 <div
                                                                     className="flex flex-col xl:flex-row justify-between items-center">
@@ -123,21 +153,14 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                 </Transition>
                             </Menu>
 
-                            <div className="flex flex-row justify-between items-center">
+                            <div className="flex flex-row justify-between items-center gap-x-5">
                                 <button
                                     disabled={!selectedTiming}
-                                    className={classNames(`flex max-w-xs flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                    className={classNames(`flexflex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                 >
                                     {trans('add_to_cart')}
                                 </button>
-                                <button
-                                    type="button"
-                                    className="flex ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                                >
-                                    <HeartIcon fill="white" className="h-6 w-6 flex-shrink-0 text-red-900"
-                                               aria-hidden="true"/>
-                                    <span className="sr-only">Add to favorites</span>
-                                </button>
+                                <ElementFavoriteBtn id={element.id} type={'service'}/>
                             </div>
                         </div>
 
@@ -148,7 +171,7 @@ export default function FrontendServiceShow({element, relatedElements }) {
 
                             <div className="border-t divide-y divide-gray-200 ">
                                 {/* description */}
-                                <Disclosure as="div" key={element[getLocalized()]} defaultOpen={true}>
+                                <Disclosure as="div"  defaultOpen={true}>
                                     {({open}) => (
                                         <>
                                             <Disclosure.Button
@@ -156,7 +179,7 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                                           <span
                                                               className={classNames(
                                                                   open ? 'text-gray-600' : 'text-gray-900',
-                                                                  'capitalize'
+                                                                  'capitalize font-extrabold'
                                                               )}
                                                           >
                                                             {trans('description')}
@@ -221,6 +244,52 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                         </>
                                     )}
                                 </Disclosure>
+
+                                {/* company  */}
+                                <Disclosure as="div" key={element[getLocalized()]} defaultOpen={false}>
+                                    {({open}) => (
+                                        <>
+                                            <Disclosure.Button
+                                                className="group relative w-full py-6 flex justify-between items-center text-left">
+                                                          <span
+                                                              className={classNames(
+                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  'capitalize'
+                                                              )}
+                                                          >
+                                                            {trans('owner')}
+                                                          </span>
+                                                <span className="ml-6 flex items-center">
+                                                        {open ? (
+                                                            <MinusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        ) : (
+                                                            <PlusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        )}
+                                                      </span>
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                <div className="flex flex-1 justify-start items-start">
+                                                    <div>
+                                                        <img
+                                                            className="w-40 h-auto rounded-sm shadow-md"
+                                                            src={getThumb(element.user.image)} alt={element.user[getLocalized()]}/>
+                                                    </div>
+                                                    <div className="rtl:mr-5 ltr:ml-5">
+                                                        <h4>{element.user[getLocalized()]}</h4>
+                                                        <h6>{element.user[getLocalized('caption')]}</h6>
+                                                        <p>{element.user[getLocalized('description')]}</p>
+                                                    </div>
+                                                </div>
+                                            </Disclosure.Panel>
+                                        </>
+                                    )}
+                                </Disclosure>
                             </div>
                         </section>
 
@@ -249,8 +318,10 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                 <div
                                     className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                     <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                         </svg>
                                     </div>
                                     <span
@@ -262,8 +333,10 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                     <div
                                         className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                      d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                                             </svg>
                                         </div>
                                         <span
@@ -275,7 +348,7 @@ export default function FrontendServiceShow({element, relatedElements }) {
                         </section>
                     </div>
                 </div>
-
+                {/* related items */}
                 {
                     relatedElements.meta.total > 0 && <RelatedItems elements={relatedElements.data} type={'service'}/>
                 }

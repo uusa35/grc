@@ -19,11 +19,11 @@ class HomeController extends Controller
     public function index()
     {
         $slides = SlideExtraLightResource::collection(Slide::active()->onHome()->limit(SELF::TAKE_LESS)->get());
-        $homeCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->onlyParent()->onlyForBooks()->get());
+        $homeBookCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->onlyParent()->onlyForBooks()->get());
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->get());
         $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->get());
-        return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors','newOnHomeCourses'));
+        return inertia('Frontend/HomePage', compact('slides', 'homeBookCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors','newOnHomeCourses'));
 
     }
 

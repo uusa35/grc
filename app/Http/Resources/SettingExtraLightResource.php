@@ -34,6 +34,7 @@ class SettingExtraLightResource extends JsonResource
             'whatsapp' => $this->whatsapp,
             'apple' => $this->apple,
             'android' => $this->android,
+            'youtube' => $this->youtube,
             'email' => $this->email,
             'theme' => $this->theme
         ];

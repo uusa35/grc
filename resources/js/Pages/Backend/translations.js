@@ -1104,6 +1104,7 @@ const ar = {
     "book_categories" : "تصنيفات الكتب",
     "course_categories" : "تصنيفات الدورات",
     "featured_categories" : "تصنيفات مختارة",
+    "home_featured_categories" : "تصنيفات كتب مميزة",
     "featured_courses" : "دورات مختارة",
     "aboutus_en" : "نبذة عنا بالإنجليزية",
     "aboutus_ar" : "نبذة عنا بالعربية",
@@ -2220,10 +2221,12 @@ const en  = {
     "book_categories" : "book categories",
     "course_categories" : "course categories",
     "featured_categories" : "selected categories",
+    "home_featured_categories" : "selected book categories",
     "featured_courses" : "selected courses",
     "aboutus_en" : "aboutus english",
     "aboutus_ar" : "aboutus arabic",
-    "u_have_to_register_first" : "you must login first"
+    "u_have_to_register_first" : "you must login first",
+    "equivalent" : "equivalent"
 }
 
 export const translations = {ar , en }

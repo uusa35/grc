@@ -31,6 +31,7 @@ class ServiceResource extends JsonResource
             'on_new' => $this->on_new,
             'isOnSale' => $this->isOnSale,
             'exclusive' => $this->exclusive,
+            'user' => UserLightResource::make($this->whenLoaded('user')),
             'images' => ImageExtraLightResource::collection($this->whenLoaded('images')),
             'timings' => TimingExtraLightResource::collection($this->whenLoaded('timings')),
             'ratings' => RatingExtraLightResource::collection($this->whenLoaded('ratings')),

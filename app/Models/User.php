@@ -82,6 +82,10 @@ class User extends Authenticatable
         return $this->morphMany(Favorite::class, 'favoritable');
     }
 
+    public function favoritesList() {
+        return $this->hasMany(Favorite::class, 'user_id');
+    }
+
     public function fans()
     {
         return $this->belongsToMany(User::class, 'fans', 'fan_id');

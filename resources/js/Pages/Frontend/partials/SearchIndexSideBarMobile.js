@@ -35,7 +35,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                     leaveTo="translate-x-full"
                 >
                     <div
-                        className="font-bein ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto">
+                        className="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto">
                         <div className="px-4 flex items-center justify-between">
                             <h2 className="text-lg font-medium text-gray-900">{trans('advanced_search')}</h2>
                             <button

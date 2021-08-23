@@ -24,6 +24,8 @@ class AuthExtraLightResource extends JsonResource
             'is_company' => $this->is_company,
             'is_author' => $this->is_author,
             'role' => RoleExtraLightResource::make($this->whenLoaded('role')),
+            'favoritesList' => FavoriteExtraLightResource::collection($this->whenLoaded('favoritesList')),
+            'orders' => OrderExtraLightResource::collection($this->whenLoaded('orders')),
         ];
     }
 }

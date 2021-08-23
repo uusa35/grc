@@ -6,7 +6,7 @@ import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 
 export default function TermsPage({ element }) {
     const { trans , getThumb , getLocalized } = useContext(AppContext)
-    console.log('element', element);
+
     return (
         <FrontendContainer>
         <div className="bg-white relative overflow-hidden">
@@ -52,7 +52,7 @@ export default function TermsPage({ element }) {
                 className="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:py-32 lg:px-8"
             >
                 <div className="max-w-2xl mx-auto lg:max-w-none">
-                    <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full font-bein font-extrabold">
+                    <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full">
                         <EmbeddedHtml html={element[getLocalized('terms')]} />
                     </div>
                 </div>
