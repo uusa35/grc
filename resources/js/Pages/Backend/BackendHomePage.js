@@ -14,6 +14,7 @@ import {
 } from '@heroicons/react/outline'
 import pluralize from 'pluralize';
 import GlobalContext from "../context/GlobalContext";
+import {isEmpty} from "lodash";
 
 const user = {
     name: 'Chelsea Hagon',
@@ -119,14 +120,9 @@ const announcements = [
     },
 ]
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
 
 export default function BackendHomePage() {
-    const {sideBarOpen, toggleSideBar ,modules, trans, theme, auth , getLocalized,
-        getThumb, } = useContext(AppContext);
-    const { currencies } = useContext(GlobalContext);
+    const {modules, trans , getLocalized, getThumb, classNames } = useContext(AppContext);
 
     return (
         <BackendContainer type={'home'}>
@@ -138,7 +134,7 @@ export default function BackendHomePage() {
                             {trans('all_modules_message')}
                         </p>
                         <ul role="list" className="py-2 grid grid-cols-1 gap-6 sm:grid-cols-3 md:grid-cols-4 ">
-                            {modules.map((m) => (
+                            {!isEmpty(modules) && modules.map((m) => (
                                 <li key={m.name} className={`flow-root rounded-md px-2  bg-white`}>
                                     <div className={`relative -m-2 p-2 flex items-center space-x-4 rounded-xl hover:bg-gray-100 focus-within:ring-2 focus-within:ring-gray-500`}>
                                         <div

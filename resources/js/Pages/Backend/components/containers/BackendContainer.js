@@ -25,16 +25,13 @@ const BackendContainer = ({
                               showMobileView = false
                           }) => {
     const {
-        parentModule, setParentModule, childModule, setChildModule, isLoading, toggleIsLoading,
-        setCurrentBreadCrumbs,
-        currentBreadCrumbs,
-        setCurrentRoute,
+        parentModule, setParentModule, childModule, setChildModule, isLoading,
         locale,
         getThumb,
         getLocalized,
-        trans
+        trans,
+        settings
     } = useContext(AppContext);
-    const {settings} = useContext(GlobalContext);
 
     useEffect(() => {
         mainModule ? setParentModule(mainModule) : null;
@@ -43,10 +40,10 @@ const BackendContainer = ({
 
     return (
         <div className="h-full flex overflow-hidden text-sm md:text-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-            <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>
-                <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
-                <link rel="icon" type="image/svg+xml" href={getThumb(settings.image)}/>
-            </Head>
+            {/*<Head title={`${cXapitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>*/}
+            {/*    <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>*/}
+            {/*    <link rel="icon" type="image/svg+xml" href={getThumb(settings.image)}/>*/}
+            {/*</Head>*/}
             <SideBar/>
             <ConfirmationModal/>
             {isLoading && <LoadingView />}

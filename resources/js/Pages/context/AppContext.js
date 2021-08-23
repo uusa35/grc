@@ -10,36 +10,38 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from 'react-toastify';
 import {GrClose, IoCloseOutline} from "react-icons/all";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const AppContext = createContext({});
 
 const AppContextProvider = ({children}) => {
-    const {translations, settings, auth, currencies } = useContext(GlobalContext);
-    const [isLoading, setIsLoading] = useState(true);
-    const [sideBarOpen, setSideBarOpen] = useState(false);
-    const [currentRoute, setCurrentRoute] = useState(route().current());
-    const [parentModule, setParentModule] = useState('');
-    const [childModule, setChildModule] = useState('');
-    const [sysMessage, setSysMessage] = useState([])
+    const { auth , currencies , translations , settings } = useContext(GlobalContext);
+    const [isLoading, setIsLoading] = useLocalStorage('isLoading',true);
+    const [sideBarOpen, setSideBarOpen] = useLocalStorage('sideBarOpen',false);
+    const [currentRoute, setCurrentRoute] = useLocalStorage('currentRoute',route().current());
+    const [parentModule, setParentModule] = useLocalStorage('parentModule','');
+    const [childModule, setChildModule] = useLocalStorage('childModule','');
+    const [sysMessage, setSysMessage] = useLocalStorage('sysMessage',[])
     const [isAdminOrAbove, setIsAdminOrAbove] = useState(false);
     const [isSuper, setIsSuper] = useState(false);
-    const [formTabs, setFormTabs] = useState([
+    const [formTabs, setFormTabs] = useLocalStorage('formTabs',[
         {id: 0, name: 'basic_information'},
         {id: 1, name: 'additional_information'},
         {id: 2, name: 'more_images'},
     ]);
     const [modules, setModules] = useState([]);
-    const [currentFormTab, setCurrentFormTab] = useState(first(formTabs));
-    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-    const [confirmationModalMessage, setConfirmationModalMessage] = useState({});
-    const [confirmationModalResponse, setConfirmationModalResponse] = useState(false);
-    const [modalAction, setModalAction] = useState({});
-    const [currentBreadCrumbs, setCurrentBreadCrumbs] = useState({})
-    const [sortDesc, setSortDesc] = useState(true)
-    const [colName, setColName] = useState('id');
-    const [locale, setLocale] = useState(document.getElementById('locale').innerHTML);
-    const [currency,setCurrency] = useState(currencies ? first(currencies) : {})
-    const [cart,setCart] = useState([]);
+    const [currentFormTab, setCurrentFormTab] = useLocalStorage('currentFormTab',first(formTabs));
+    const [showConfirmationModal, setShowConfirmationModal] = useLocalStorage('showConfirmationModal',false);
+    const [confirmationModalMessage, setConfirmationModalMessage] = useLocalStorage('confirmationModalMessage',{});
+    const [confirmationModalResponse, setConfirmationModalResponse] = useLocalStorage('confirmationModalResponse',false);
+    const [modalAction, setModalAction] = useLocalStorage('modalAction',{});
+    const [currentBreadCrumbs, setCurrentBreadCrumbs] = useLocalStorage('currentBreadCrumbs',{})
+    const [sortDesc, setSortDesc] = useLocalStorage('sortDesc',true)
+    const [colName, setColName] = useLocalStorage('colName','id');
+    const [locale, setLocale] = useLocalStorage('locale',document.getElementById('locale').innerHTML);
+    const [currency,setCurrency] = useLocalStorage('currency',currencies ? first(currencies) : {})
+    const [cart,setCart] = useLocalStorage('cart',[]);
+    const [guest, setGuest] = useState(true)
     const options = {
         // onOpen: props => console.log(props.foo),
         // onClose: props => console.log(props.foo),
@@ -59,6 +61,10 @@ const AppContextProvider = ({children}) => {
         setSortDesc(!sortDesc)
     }
     const context = {
+        auth,
+        translations,
+        settings,
+        currencies,
         locale,
         setLocale,
         isLoading,
@@ -79,7 +85,7 @@ const AppContextProvider = ({children}) => {
         addToCart : (item) => setCart(cart.push(item)),
         removeFromCart : (cartId) => setCart(filter(cart, c => c.cart_id !== cartId)),
         currency,
-        guest : isNull(auth),
+        guest,
         formTabs,
         currentFormTab,
         sysMessage,
@@ -132,10 +138,16 @@ const AppContextProvider = ({children}) => {
                 }
             });
             setModules(filteredModules);
-            setIsAdminOrAbove(auth.role.is_admin || auth.role.is_super);
-            setIsSuper(auth.role.is_super);
+            setIsAdminOrAbove(auth?.role.is_admin || auth?.role.is_super);
+            setIsSuper(auth?.role.is_super);
+            setGuest(false);
+        } else {
+            setIsSuper(false);
+            setIsAdminOrAbove(false);
+            setGuest(true);
+            setModules([])
         }
-    }, [auth?.id]);
+    }, [auth?.role, auth?.role.privileges]);
 
     useMemo(() => {
         document.getElementById('locale').innerHTML = locale;
@@ -143,24 +155,19 @@ const AppContextProvider = ({children}) => {
     }, [locale])
 
     useEffect(() => {
-        // Inertia.on('start', (e) => {
-            isLocal() && console.log('here =====>')
+            isLocal() && console.log('useEffect starts here =====>')
             setIsLoading(true);
-        // })
     },[route().current()])
 
     useEffect(() => {
         Inertia.on('before', (e) => {
             isLocal() && console.log('before ==>')
-            // setIsLoading(true);
         })
         Inertia.on('start', (e) => {
             isLocal() && console.log('start ==>')
-            // setIsLoading(true);
         })
         Inertia.on('finish', (e) => {
             isLocal() && console.log('finish ==>')
-            // setIsLoading(false)
         });
         Inertia.on('navigate', (e) => {
             isLocal() && console.log('navigate ==>')
@@ -170,7 +177,6 @@ const AppContextProvider = ({children}) => {
             setParentModule(breadCrumbs[1]);
             setCurrentBreadCrumbs(breadCrumbs);
             setCurrentRoute(currentRoute)
-            // setIsLoading(true)
         })
         toast.configure(options)
     }, [])
