@@ -1115,7 +1115,8 @@ const ar = {
     "kwt_timing_zone" : "جميع التوقيتات طبقا لتوقيت الكويت",
     "related" :  "متعلقة",
     "related_items" : "عناصر متعلقة",
-    "u_have_to_register_first" : "يجب عليك التسجيل أولا"
+    "u_have_to_register_first" : "يجب عليك التسجيل أولا",
+    "please_choose_timing" : "يرجى اختيار توقيت الخدمة اولاً"
 }
 
 const en  = {
@@ -2226,7 +2227,8 @@ const en  = {
     "aboutus_en" : "aboutus english",
     "aboutus_ar" : "aboutus arabic",
     "u_have_to_register_first" : "you must login first",
-    "equivalent" : "equivalent"
+    "equivalent" : "equivalent",
+    "please_choose_timing" : "please choose service timing before you add the item to cart."
 }
 
 export const translations = {ar , en }

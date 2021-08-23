@@ -11,7 +11,7 @@ class FrontendCartController extends Controller
 
     public function __construct()
     {
-        $this->cart = session()->has('cart') ? session()->get('cart') : collect([]);
+//        !session()->has('cart') ? session('cart', []) : null;
     }
 
     public function index()
@@ -22,16 +22,19 @@ class FrontendCartController extends Controller
 
     public function addItem(Request $request)
     {
+//        dd($request->all());
         request()->validate([
-            'cart_id' => 'integer|required',
             'type' => 'string|required',
+            'cart_id' => 'integer|required',
             'element_id' => "integer|required",
-            'element_attribute_id' => "integer",
+            'timing_id' => "integer|exists:timings,id",
             'qty' => "integer|required",
-            'element' => 'required'
+            'price' => "numeric|required",
+            'direct_purchase' => 'required|boolean',
+            'element_attribute_id' => "integer",
         ]);
-        session()->push('cart', collect($request->request->all()));
-        dd(session()->get('cart'));
+        session()->push('cart[1]',rand(11,9999));
+        dd(collect(session()->get('cart[1]')));
     }
 
     public function removeItem(Request $request)
@@ -40,8 +43,8 @@ class FrontendCartController extends Controller
             'cart_id' => 'integer|required',
             'type' => 'string|required',
         ]);
-        $this->cart->pull(request()->request->all());
-        dd($this->cart);
+        session()->pull('cart', request()->request->all());
+        dd(session()->get('cart'));
     }
 
 }

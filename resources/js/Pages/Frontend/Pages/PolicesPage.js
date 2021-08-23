@@ -12,7 +12,7 @@ export default function PolicesPage({ element }) {
         <div className="bg-white relative overflow-hidden">
             {/* Decorative background image and gradient */}
             <div aria-hidden="true" className="absolute inset-0">
-                <div className="absolute inset-0  overflow-hidden">
+                <div className="absolute inset-0  overflow-hidden rounded-lg border-2 border-gray-400">
                     <img
                         src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg"
                         alt=""

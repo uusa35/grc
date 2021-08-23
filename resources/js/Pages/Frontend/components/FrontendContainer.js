@@ -104,7 +104,7 @@ const FrontendContainer = ({
                 <MainNav/>
                 <div className="min-h-screen">
                     {mainSlides && <MainSlider elements={mainSlides}/>}
-                    <div className="w-4/5 sm:w-4/5 lg:3/5 m-auto shadow-xl min-h-screen">
+                    <div className="w-4/5 sm:w-4/5 lg:3/5 2xl:w-3/5 m-auto shadow-xl min-h-screen">
                         {showBreadCrumbs && <FrontendBreadCrumbs/>}
                         {children}
                     </div>

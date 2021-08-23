@@ -10,7 +10,7 @@ import {
 import {StarIcon} from '@heroicons/react/solid'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, sumBy, isEmpty, first} from 'lodash';
+import {map, sumBy, isEmpty, first, capitalize, random, isNull} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
@@ -20,13 +20,26 @@ import ImageGallery from 'react-image-gallery';
 import {calculateRating} from "../../helpers";
 import ElementRating from "../components/widgets/ElementRating";
 import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
-import { isMobile } from "react-device-detect";
+import {isMobile} from "react-device-detect";
+import route from 'ziggy-js'
+import {toast} from "react-toastify";
+import {useForm} from "@inertiajs/inertia-react";
 
 
-export default function FrontendServiceShow({element, relatedElements }) {
-    const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
-    const [selectedTiming, setSelectedTiming] = useState('');
+export default function FrontendServiceShow({element, relatedElements}) {
+    const {getThumb, getLarge, getLocalized, trans, classNames, addToCart, cart  } = useContext(AppContext)
+    const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
+    const {data, setData, post, progress} = useForm({
+        'type': 'service',
+        'cart_id' : null,
+        'element_id': element.id,
+        'timing_id' : null,
+        'qty': 1,
+        'price': element.isOnSale ? element.sale_price : element.price,
+        'direct_purchase' : element.direct_purchase,
+
+    });
 
     useMemo(() => {
         const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
@@ -35,6 +48,32 @@ export default function FrontendServiceShow({element, relatedElements }) {
         })
         setCurrentImages(images);
     }, [element])
+
+    const handleClick = (t) => {
+        setSelectedTiming(t)
+        // setData({ ...data, timing_id: t.id , cart_id: element.id +''+ t.id })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log('data', data.timing_id);
+        // if(isNull(data.timing_id)) {
+        //     toast.error(capitalize(trans('please_choose_timing')))
+        // } else {
+        //     post(route('frontend.cart.add'))
+        // }
+        addToCart({
+            cart_id : element.id +''+selectedTiming.id,
+            type: 'service',
+            element_id : element.id,
+            timing_id : selectedTiming.id,
+            qty : 1,
+            price: element.isOnSale ? element.sale_price : element.price,
+            direct_purchase : element.direct_purchase,
+        })
+    }
+
+    console.log('the cart', cart);
 
     return (
         <FrontendContainer mainModule={'service'} subModule={element[getLocalized()]}>
@@ -90,7 +129,6 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                 }
                             </div>
                         </div>
-
                         <div className="mt-6">
                             {/* service timings */}
                             <Menu as="div" className="relative inline-block text-left mb-5 w-full">
@@ -98,7 +136,7 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                     <Menu.Button
                                         className="flex flex-1 justify-between items-center w-full capitalize rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
                                         <div>
-                                            {selectedTiming ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
+                                            {!isEmpty(selectedTiming) ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
                                         </div>
                                         <ChevronDownIcon className="h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -119,9 +157,9 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                                 map(element.timings, t =>
                                                     <Menu.Item key={t.id}>
                                                         <div
-                                                            onClick={() => setSelectedTiming(t)}
+                                                            onClick={() => handleClick(t)}
                                                             className={classNames(
-                                                                t.id === selectedTiming.id ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                 'block px-4 py-2 text-sm hover:bg-gray-100'
                                                             )}
                                                         >
@@ -152,26 +190,25 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                     </Menu.Items>
                                 </Transition>
                             </Menu>
-
                             <div className="flex flex-row justify-between items-center gap-x-5">
-                                <button
-                                    disabled={!selectedTiming}
-                                    className={classNames(`flexflex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
-                                >
-                                    {trans('add_to_cart')}
-                                </button>
+                                <form onSubmit={handleSubmit} className="w-full">
+                                    <button
+                                        type="submit"
+                                        className={classNames(`flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                    >
+                                        {trans('add_to_cart')}
+                                    </button>
+                                </form>
                                 <ElementFavoriteBtn id={element.id} type={'service'}/>
                             </div>
                         </div>
-
                         <section aria-labelledby="details-heading" className="my-12">
                             <h2 id="details-heading" className="sr-only">
                                 Additional details
                             </h2>
-
                             <div className="border-t divide-y divide-gray-200 ">
                                 {/* description */}
-                                <Disclosure as="div"  defaultOpen={true}>
+                                <Disclosure as="div" defaultOpen={true}>
                                     {({open}) => (
                                         <>
                                             <Disclosure.Button
@@ -209,7 +246,7 @@ export default function FrontendServiceShow({element, relatedElements }) {
 
 
                                 {/* notes */}
-                                <Disclosure as="div" key={element[getLocalized()]} defaultOpen={false}>
+                                <Disclosure as="div" defaultOpen={false}>
                                     {({open}) => (
                                         <>
                                             <Disclosure.Button
@@ -246,7 +283,7 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                 </Disclosure>
 
                                 {/* company  */}
-                                <Disclosure as="div" key={element[getLocalized()]} defaultOpen={false}>
+                                <Disclosure as="div"  defaultOpen={false}>
                                     {({open}) => (
                                         <>
                                             <Disclosure.Button
@@ -278,7 +315,8 @@ export default function FrontendServiceShow({element, relatedElements }) {
                                                     <div>
                                                         <img
                                                             className="w-40 h-auto rounded-sm shadow-md"
-                                                            src={getThumb(element.user.image)} alt={element.user[getLocalized()]}/>
+                                                            src={getThumb(element.user.image)}
+                                                            alt={element.user[getLocalized()]}/>
                                                     </div>
                                                     <div className="rtl:mr-5 ltr:ml-5">
                                                         <h4>{element.user[getLocalized()]}</h4>

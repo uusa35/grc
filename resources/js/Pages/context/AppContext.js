@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
-import {split, first, map, isEmpty, isNull} from 'lodash';
+import {split, first, map, isEmpty, isNull, filter } from 'lodash';
 import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
@@ -39,6 +39,7 @@ const AppContextProvider = ({children}) => {
     const [colName, setColName] = useState('id');
     const [locale, setLocale] = useState(document.getElementById('locale').innerHTML);
     const [currency,setCurrency] = useState(currencies ? first(currencies) : {})
+    const [cart,setCart] = useState([]);
     const options = {
         // onOpen: props => console.log(props.foo),
         // onClose: props => console.log(props.foo),
@@ -74,6 +75,9 @@ const AppContextProvider = ({children}) => {
         setSystemMessage: (message) => setSysMessage(message),
         setCurrentFormTab: (tab) => setCurrentFormTab(tab),
         setCurrency : (currency) => setCurrency(currency),
+        cart,
+        addToCart : (item) => setCart(cart.push(item)),
+        removeFromCart : (cartId) => setCart(filter(cart, c => c.cart_id !== cartId)),
         currency,
         guest : isNull(auth),
         formTabs,
