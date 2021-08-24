@@ -6,9 +6,11 @@ import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
 import {isEmpty, map, capitalize} from 'lodash';
 import route from 'ziggy-js'
+import {useSelector} from "react-redux";
 
 export default function FrontendBreadCrumbs() {
-    const {parentModule, childModule, trans, locale} = useContext(AppContext);
+    const {parentModule, childModule, trans} = useContext(AppContext);
+    const { isRTL } = useSelector(state => state.locale);
 
     return (
         <div
@@ -69,7 +71,7 @@ export default function FrontendBreadCrumbs() {
                       onClick={() => window.history.back()}
                 >
                     <h1>{trans('back')}</h1>
-                    {locale === 'ar' ?
+                    {isRTL ?
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>

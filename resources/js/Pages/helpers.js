@@ -6,6 +6,7 @@ import _ from 'lodash';
 import geolib, {getDistance} from 'geolib';
 import validate from 'validate.js';
 import storage from 'redux-persist/lib/storage';
+import Ziggy from "ziggy-js";
 
 export const convertNumberToEnglish = (n) => {
   return n.replace(

@@ -6,10 +6,11 @@ import GlobalContext from "../../../context/GlobalContext";
 import route from 'ziggy-js';
 import {Link} from "@inertiajs/inertia-react";
 import {getWhatsappLink} from "../../../helpers";
+import {useSelector} from "react-redux";
 
 export default function Footer() {
-    const {guest, getLocalized, getThumb, trans} = useContext(AppContext)
-    const {auth, settings} = useContext(GlobalContext);
+    const { getLocalized, getThumb, trans} = useContext(AppContext)
+    const { guest , auth , settings } = useSelector(state => state)
 
     return (
         <footer className="bg-gray-50" aria-labelledby="footer-heading">

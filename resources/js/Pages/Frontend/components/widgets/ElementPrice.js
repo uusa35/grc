@@ -1,9 +1,11 @@
 import {useContext} from "react";
 import {AppContext} from "../../../context/AppContext";
 import {getConvertedFinalPrice} from "../../../helpers";
+import {useSelector} from "react-redux";
 
 export default function ElementPrice({price, salePrice, isOnSale, large = false}) {
-    const {currency, classNames, getLocalized} = useContext(AppContext)
+    const {classNames, getLocalized} = useContext(AppContext)
+    const { currency } = useSelector(state => state);
     return (
         <div className="flex flex-row flex-1 justify-between items-start m-2">
             <p className={classNames(isOnSale ? 'line-through' : '', `mt-1  text-gray-500 ${large ? 'text-lg sm:text-3xl' : 'text-sm smm:text-lg'}`)}>

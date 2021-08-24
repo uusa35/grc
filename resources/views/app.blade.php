@@ -48,7 +48,7 @@
     <meta itemProp="longitude" content="{{ $settings->longitude }}"/>
 </head>
 <body>
-<div id="locale" style="display: none">{{ session()->get('locale') }}</div>
+<div id="lang" style="display: none">{{ session()->get('lang') }}</div>
 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
     @csrf
 </form>

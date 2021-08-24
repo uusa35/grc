@@ -12,6 +12,7 @@ import NormalBookWidget from "../book/NormalBookWidget";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 import NormalCourseWidget from "../course/NormalCourseWidget";
+import {useSelector} from "react-redux";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 export default function ElementSlider({
@@ -21,7 +22,7 @@ export default function ElementSlider({
   title = type,
     showNavigation = false,
 }) {
-  const { isRTL } = useContext(AppContext)
+  const { isRTL } = useSelector(state => state.locale)
 
   const handleComponent = (s) => {
     switch (type) {

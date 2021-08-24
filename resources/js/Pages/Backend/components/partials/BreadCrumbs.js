@@ -6,9 +6,12 @@ import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
 import {isEmpty, map} from 'lodash';
 import route from 'ziggy-js'
+import {useSelector} from "react-redux";
 
 export default function BreadCrumbs() {
-    const {theme, parentModule, childModule, trans, currentBreadCrumbs, locale } = useContext(AppContext);
+    const {parentModule, trans, currentBreadCrumbs } = useContext(AppContext);
+    const { locale } = useSelector(state => state);
+
 
     return (
         <div
@@ -60,7 +63,7 @@ export default function BreadCrumbs() {
                       onClick={() => window.history.back()}
                 >
                     <h1>{trans('back')}</h1>
-                    {locale === 'ar' ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    {locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

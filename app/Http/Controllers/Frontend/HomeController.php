@@ -27,13 +27,13 @@ class HomeController extends Controller
 
     }
 
-    public function changeLang($locale)
+    public function changeLang($lang)
     {
-        if (!in_array($locale, ['en', 'ar'])) {
+        if (!in_array($lang, ['en', 'ar'])) {
             abort(400);
         }
-        app()->setLocale($locale);
-        session()->put('locale', $locale);
+        app()->setLocale($lang);
+        session()->put('lang', $lang);
         return redirect()->back()->with('success', 'lang changed');
     }
 }

@@ -26,8 +26,8 @@ import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
 
 
-export default function FrontendServiceShow({element, relatedElements}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, addToCart, cart  } = useContext(AppContext)
+export default function FrontendServiceShow({element, relatedElements, auth }) {
+    const {getThumb, getLarge, getLocalized, trans, classNames } = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
     const {data, setData, post, progress} = useForm({
@@ -62,18 +62,16 @@ export default function FrontendServiceShow({element, relatedElements}) {
         // } else {
         //     post(route('frontend.cart.add'))
         // }
-        addToCart({
-            cart_id : element.id +''+selectedTiming.id,
-            type: 'service',
-            element_id : element.id,
-            timing_id : selectedTiming.id,
-            qty : 1,
-            price: element.isOnSale ? element.sale_price : element.price,
-            direct_purchase : element.direct_purchase,
-        })
+        // addToCart({
+        //     cart_id : element.id +''+selectedTiming.id,
+        //     type: 'service',
+        //     element_id : element.id,
+        //     timing_id : selectedTiming.id,
+        //     qty : 1,
+        //     price: element.isOnSale ? element.sale_price : element.price,
+        //     direct_purchase : element.direct_purchase,
+        // })
     }
-
-    console.log('the cart', cart);
 
     return (
         <FrontendContainer mainModule={'service'} subModule={element[getLocalized()]}>

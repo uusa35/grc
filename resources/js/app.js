@@ -3,21 +3,28 @@ import {render} from 'react-dom'
 import {createInertiaApp} from '@inertiajs/inertia-react'
 import GlobalContext from "./Pages/context/GlobalContext";
 import {AppContextProvider} from "./Pages/context/AppContext";
-import {translations} from './Pages/Backend/translations';
+
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/components/pagination/pagination.min.css';
-import useLocalStorage from "./Pages/hooks/useLocalStorage";
+import {Provider} from 'react-redux'
+import {PersistGate} from 'redux-persist/integration/react'
+import {store, persistor} from './Pages/redux/store';
+import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {settings, auth, currencies, categories  } = props.initialPage.props;
-        const {component, url} = props.initialPage;
+        const {settings, auth, currencies, categories} = props.initialPage.props;
         return render(
-            <GlobalContext.Provider value={{translations, auth, settings, currencies,categories}}>
-                <AppContextProvider>
-                    <App {...props} />
-                </AppContextProvider>
+            <GlobalContext.Provider value={{auth, settings, currencies, categories}}>
+                    <Provider store={store}>
+                        <PersistGate loading={<LoadingView />} persistor={persistor}>
+                            <AppContextProvider>
+                            <App {...props} />
+                            </AppContextProvider>
+                        </PersistGate>
+                    </Provider>
+
             </GlobalContext.Provider>
             , el)
     },

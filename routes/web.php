@@ -70,7 +70,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('index');
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
-    Route::get('/lang/{locale}', [HomeController::class, 'changeLang'])->name('change.lang');
+    Route::get('/lang/{lang}', [HomeController::class, 'changeLang'])->name('change.lang');
     Route::resource('product', FrontendProductController::class)->only(['index', 'show']);
     Route::resource('book', FrontendBookController::class)->only(['index', 'show']);
     Route::resource('service', FrontendServiceController::class)->only(['index', 'show']);
@@ -96,7 +96,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
 Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'dashboard', 'backendInertiaHandler']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/home', [DashboardController::class, 'index'])->name('home.index');
-    Route::get('/lang/{locale}', [HomeController::class, 'changeLang'])->name('change.lang');
+    Route::get('/lang/{lang}', [HomeController::class, 'changeLang'])->name('change.lang');
     Route::get('product/search', [ProductController::class, 'search'])->name('product.search');
     Route::get('service/search', [ServiceController::class, 'search'])->name('service.search');
     Route::get('user/search', [UserController::class, 'search'])->name('user.search');

@@ -20,6 +20,8 @@ import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
 import MainNavBookCategoriesList from "./MainNavBookCategoriesList";
 import {ChevronDownIcon} from "@heroicons/react/solid";
+import {useDispatch, useSelector} from "react-redux";
+import {changeLang, setCurrency} from "../../../redux/actions";
 
 const navigation = {
     categories: [
@@ -154,12 +156,13 @@ const pages = [
 export default function MainNav() {
     const {
         classNames, getThumb, getLocalized, trans,
-        setCurrency, currency, isAdminOrAbove, guest,
         baseUrl,
-        otherLang, setLocale
     } = useContext(AppContext);
-    const {settings, currencies, auth, categories} = useContext(GlobalContext);
+    const { categories} = useContext(GlobalContext);
+    const {isAdminOrAbove , guest , locale , lang, currency , currencies , auth , settings  } = useSelector(state => state);
+    const state = useSelector(state => state);
     const [open, setOpen] = useState(false)
+    const dispatch = useDispatch();
 
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
@@ -210,11 +213,11 @@ export default function MainNav() {
                         </> : null
                     }
                     <Link
-                        title={capitalize(trans(otherLang))}
-                        onClick={() => setLocale(otherLang)}
-                        href={route('frontend.change.lang', {locale: otherLang})}
+                        title={capitalize(trans(locale.otherLang))}
+                        onClick={() => dispatch(changeLang('en'))}
+                        href={route('frontend.change.lang', {lang : locale.otherLang})}
                         className="-m-2 p-2 block text-gray-50">
-                        {capitalize(trans(otherLang))}
+                        {capitalize(trans(locale.otherLang))}
                     </Link>
                 </div>
             </div>
@@ -287,14 +290,14 @@ export default function MainNav() {
                                 <div className="flow-root">
                                     <Link
                                         onClick={() => {
-                                            setLocale(otherLang)
+                                            dispatch(changeLang(locale.otherLang))
                                         }}
-                                        href={route('frontend.change.lang', {locale: otherLang})}
+                                        href={route('frontend.change.lang', {lang : locale.otherLang})}
                                         className="flex flex-row justify-start -m-2 p-2 block text-gray-900 capitalize">
                                         <img
                                             className="w-5 h-5 rounded-full  mx-2"
-                                            src={`${baseUrl}images/flags/${otherLang}.png`} alt={otherLang}/>
-                                        {otherLang}
+                                            src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}/>
+                                        {locale.otherLang}
                                     </Link>
                                 </div>
                             </div>
@@ -548,14 +551,14 @@ export default function MainNav() {
                                 className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-6 ltr:mr-6">
                                 <Link
                                     onClick={() => {
-                                        setLocale(otherLang)
+                                        dispatch(changeLang(locale.otherLang))
                                     }}
-                                    href={route('frontend.change.lang', {locale: otherLang})}
+                                    href={route('frontend.change.lang', {lang : locale.otherLang})}
                                     className="flex flex-row items-center hover:text-gray-300">
                                     <img
                                         className="w-5 h-5 rounded-full"
-                                        src={`${baseUrl}images/flags/${otherLang}.png`} alt={otherLang}/>
-                                    <span className="rtl:pr-3 ltr:pl-3">{otherLang}</span>
+                                        src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}/>
+                                    <span className="rtl:pr-3 ltr:pl-3">{locale.otherLang}</span>
                                 </Link>
                             </div>
 
@@ -591,7 +594,7 @@ export default function MainNav() {
                                                 <Menu.Item key={element[getLocalized()]}>
                                                     {({active}) => (
                                                         <button
-                                                            onClick={() => setCurrency(element)}
+                                                            onClick={() => dispatch(setCurrency(element))}
                                                             className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
                                                         >
                                                             <img
