@@ -85,8 +85,6 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('faqs', [FrontendPageController::class, 'getFaqs'])->name('faqs');
     Route::get('subscriptions', [FrontendPageController::class, 'getSubscriptions'])->name('subscriptions');
     Route::get('cart', [FrontendCartController::class, 'index'])->name('cart.index');
-    Route::post('cart/add', [FrontendCartController::class, 'addItem'])->name('cart.add');
-    Route::post('cart/remove', [FrontendCartController::class, 'removeItem'])->name('cart.remove');
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('rating', FrontendRatingController::class)->only('store');
         Route::resource('favorite', FrontendFavoriteController::class)->only('store');

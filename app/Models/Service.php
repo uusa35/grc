@@ -20,7 +20,9 @@ class Service extends PrimaryModel
         'is_hot_deal' => 'boolean',
         'has_only_items' => 'boolean',
         'is_package' => 'boolean',
-        'has_addons' => 'boolean'
+        'has_addons' => 'boolean',
+        'price' => 'float',
+        'sale_price' => 'float'
     ];
 
     public function user()

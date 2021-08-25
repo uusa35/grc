@@ -14,7 +14,6 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->string('calling_code')->nullable();
@@ -30,12 +29,6 @@ class CreateCountriesTable extends Migration
             $table->string('latitude')->nullable();
             $table->decimal('minimum_shipment_charge', 6, 2)->unsigned()->default(true);
             $table->decimal('fixed_shipment_charge', 6, 2)->unsigned()->default(true);
-            $table->string('block')->nullable();
-            $table->string('street')->nullable();
-            $table->string('building')->nullable();
-            $table->string('floor')->nullable();
-            $table->string('apartment')->nullable();
-
             $table->timestamps();
         });
     }

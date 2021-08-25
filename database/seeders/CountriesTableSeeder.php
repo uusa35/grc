@@ -20,7 +20,6 @@ class CountriesTableSeeder extends Seeder
         foreach ($countries as $country) {
             Country::create(
                 [
-                    'name' => $country->name,
                     'name_ar' => $country->name_ar,
                     'name_en' => $country->name_en,
                     'calling_code' => $country->calling_code,

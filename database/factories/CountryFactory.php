@@ -5,8 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Country::class, function (Faker $faker) {
     return [
-        'name' => $faker->country,
-        'name_ar' => $faker->name,
+        'name_ar' => $faker->country,
         'name_en' => $faker->name,
         'country_code' => $faker->countryISOAlpha3,
         'image' => 'square.png',

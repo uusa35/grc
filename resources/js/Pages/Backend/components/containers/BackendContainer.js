@@ -12,9 +12,7 @@ import PropTypes from 'prop-types';
 import TableMobileview from "../widgets/TableMobileview";
 import {AppContext} from "../../../context/AppContext";
 import LoadingView from "../widgets/LoadingView";
-import {Head} from '@inertiajs/inertia-react'
-import GlobalContext from "../../../context/GlobalContext";
-import pluralize from 'pluralize';
+import {useSelector} from "react-redux";
 
 const BackendContainer = ({
                               children, elements = [],
@@ -26,12 +24,8 @@ const BackendContainer = ({
                           }) => {
     const {
         parentModule, setParentModule, childModule, setChildModule, isLoading,
-        locale,
-        getThumb,
-        getLocalized,
-        trans,
-        settings
     } = useContext(AppContext);
+    const { dir } = useSelector(state => state.locale);
 
     useEffect(() => {
         mainModule ? setParentModule(mainModule) : null;
@@ -39,7 +33,7 @@ const BackendContainer = ({
     }, [parentModule, subModule])
 
     return (
-        <div className="h-full flex overflow-hidden text-sm md:text-lg" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+        <div className="h-full flex overflow-hidden text-sm md:text-lg" dir={dir}>
             {/*<Head title={`${cXapitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>*/}
             {/*    <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>*/}
             {/*    <link rel="icon" type="image/svg+xml" href={getThumb(settings.image)}/>*/}

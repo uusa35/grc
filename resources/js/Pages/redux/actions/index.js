@@ -40,7 +40,7 @@ export const setSettings = payload => ({
     payload,
 });
 
-export const setAuth = payload => ({
-    type: actions.SET_AUTH,
+export const setModules = payload => ({
+    type: actions.SET_MODULES,
     payload,
 });

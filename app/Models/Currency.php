@@ -9,7 +9,9 @@ class Currency extends PrimaryModel
 {
     use HasFactory;
     protected $guarded = [''];
-    protected $localeStrings = ['currency_symbol', 'name'];
+    protected $casts = [
+        'exchange_rate' => 'float'
+    ];
 
     public function country()
     {

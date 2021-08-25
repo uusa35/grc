@@ -1,27 +1,22 @@
 import {Fragment, useContext, useState} from 'react'
 import {Dialog, Popover, Tab, Transition, Disclosure, Menu,} from '@headlessui/react'
 import {
-    BookmarkAltIcon, CalendarIcon,
-    ChartBarIcon,
-    CursorClickIcon,
-    MenuIcon, PhoneIcon, PlayIcon, RefreshIcon,
-    SearchIcon,
-    ShieldCheckIcon,
-    ShoppingBagIcon, SupportIcon, ViewGridIcon,
+    MenuIcon,
+    ShoppingBagIcon,
     XIcon
 } from '@heroicons/react/outline'
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
-import {map, capitalize, filter, take} from 'lodash';
-import GlobalContext from "../../../context/GlobalContext";
-import {FaFacebook, FaInstagram, FaTwitch, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
+import {map, capitalize} from 'lodash';
+import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
 import MainNavBookCategoriesList from "./MainNavBookCategoriesList";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 import {useDispatch, useSelector} from "react-redux";
 import {changeLang, setCurrency} from "../../../redux/actions";
+import GlobalContext from "../../../context/GlobalContext";
 
 const navigation = {
     categories: [
@@ -152,15 +147,15 @@ const pages = [
     // {name: 'categories', url: route('frontend.category.index')},
 ];
 
-
 export default function MainNav() {
     const {
         classNames, getThumb, getLocalized, trans,
         baseUrl,
+        isAdminOrAbove,
+        guest,
     } = useContext(AppContext);
-    const { categories} = useContext(GlobalContext);
-    const {isAdminOrAbove , guest , locale , lang, currency , currencies , auth , settings  } = useSelector(state => state);
-    const state = useSelector(state => state);
+    const {auth} = useContext(GlobalContext);
+    const {locale, currency, currencies, settings, cart} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
 
@@ -190,7 +185,8 @@ export default function MainNav() {
                         </a>
                     }
                     {
-                        settings.whatsapp && <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
+                        settings.whatsapp &&
+                        <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
                             <FaWhatsapp size={22} className={'text-gray-400'}/>
                         </a>
                     }
@@ -215,7 +211,7 @@ export default function MainNav() {
                     <Link
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang('en'))}
-                        href={route('frontend.change.lang', {lang : locale.otherLang})}
+                        href={route('frontend.change.lang', {lang: locale.otherLang})}
                         className="-m-2 p-2 block text-gray-50">
                         {capitalize(trans(locale.otherLang))}
                     </Link>
@@ -270,12 +266,14 @@ export default function MainNav() {
                                 {
                                     guest ? <>
                                         <div className="flow-root">
-                                            <Link href={route('login')} className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            <Link href={route('login')}
+                                                  className="-m-2 p-2 block text-gray-900 capitalize ">
                                                 {capitalize(trans('login'))}
                                             </Link>
                                         </div>
                                         <div className="flow-root">
-                                            <Link href={route('register')} className="-m-2 p-2 block text-gray-900 capitalize">
+                                            <Link href={route('register')}
+                                                  className="-m-2 p-2 block text-gray-900 capitalize">
                                                 {capitalize(trans('register'))}
                                             </Link>
                                         </div>
@@ -292,11 +290,12 @@ export default function MainNav() {
                                         onClick={() => {
                                             dispatch(changeLang(locale.otherLang))
                                         }}
-                                        href={route('frontend.change.lang', {lang : locale.otherLang})}
+                                        href={route('frontend.change.lang', {lang: locale.otherLang})}
                                         className="flex flex-row justify-start -m-2 p-2 block text-gray-900 capitalize">
                                         <img
                                             className="w-5 h-5 rounded-full  mx-2"
-                                            src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}/>
+                                            src={`${baseUrl}images/flags/${locale.otherLang}.png`}
+                                            alt={locale.otherLang}/>
                                         {locale.otherLang}
                                     </Link>
                                 </div>
@@ -472,26 +471,35 @@ export default function MainNav() {
                                                         className="z-80 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                                         <div
                                                             className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                                                                <Link
-                                                                    href={route('frontend.contactus')}
-                                                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
-                                                                >
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-                                                                    </svg>
-                                                                    <div className="ltr:ml-5 rtl:mr-5">
-                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('contactus')}</p>
-                                                                    </div>
-                                                                </Link>
+                                                            <Link
+                                                                href={route('frontend.contactus')}
+                                                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 text-gray-800" fill="none"
+                                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                                          strokeWidth={2}
+                                                                          d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                                                                </svg>
+                                                                <div className="ltr:ml-5 rtl:mr-5">
+                                                                    <p className="text-base font-medium text-gray-900 capitalize">{trans('contactus')}</p>
+                                                                </div>
+                                                            </Link>
 
                                                             <Link
                                                                 href={route('frontend.aboutus')}
                                                                 className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
                                                             >
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                                                                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 text-gray-800" fill="none"
+                                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                                                    <path
+                                                                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                                          strokeWidth={2}
+                                                                          d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
                                                                 </svg>
                                                                 <div className="ltr:ml-5 rtl:mr-5">
                                                                     <p className="text-base font-medium text-gray-900 capitalize">{trans('aboutus')}</p>
@@ -502,8 +510,12 @@ export default function MainNav() {
                                                                 href={route('frontend.polices')}
                                                                 className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
                                                             >
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 text-gray-800" fill="none"
+                                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                                          strokeWidth={2}
+                                                                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                                                                 </svg>
                                                                 <div className="ltr:ml-5 rtl:mr-5">
                                                                     <p className="text-base font-medium text-gray-900 capitalize">{trans('polices')}</p>
@@ -514,8 +526,12 @@ export default function MainNav() {
                                                                 href={route('frontend.terms')}
                                                                 className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
                                                             >
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 text-gray-800" fill="none"
+                                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                                          strokeWidth={2}
+                                                                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
                                                                 </svg>
                                                                 <div className="ltr:ml-5 rtl:mr-5">
                                                                     <p className="text-base font-medium text-gray-900 capitalize">{trans('terms')}</p>
@@ -526,8 +542,12 @@ export default function MainNav() {
                                                                 href={route('frontend.faqs')}
                                                                 className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
                                                             >
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 text-gray-800" fill="none"
+                                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                                          strokeWidth={2}
+                                                                          d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                                 </svg>
                                                                 <div className="ltr:ml-5 rtl:mr-5">
                                                                     <p className="text-base font-medium text-gray-900 capitalize">{trans('faqs')}</p>
@@ -553,7 +573,7 @@ export default function MainNav() {
                                     onClick={() => {
                                         dispatch(changeLang(locale.otherLang))
                                     }}
-                                    href={route('frontend.change.lang', {lang : locale.otherLang})}
+                                    href={route('frontend.change.lang', {lang: locale.otherLang})}
                                     className="flex flex-row items-center hover:text-gray-300">
                                     <img
                                         className="w-5 h-5 rounded-full"
@@ -698,7 +718,10 @@ export default function MainNav() {
                                         className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
                                         aria-hidden="true"
                                     />
-                                    <span className="ml-2   group-hover:text-gray-300">0</span>
+                                    <span
+                                        className="inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300">
+                                            {cart.totalItems}
+                                          </span>
                                     <span className="sr-only">items in cart, view bag</span>
                                 </Link>
                             </div>

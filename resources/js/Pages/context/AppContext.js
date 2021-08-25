@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
-import {split, first, map, isEmpty, isNull, filter } from 'lodash';
+import {split, first, map, isEmpty, isNull, filter} from 'lodash';
 import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
@@ -12,16 +12,17 @@ import {toast} from 'react-toastify';
 import {GrClose, IoCloseOutline} from "react-icons/all";
 import {useSelector, useDispatch} from "react-redux";
 import {translations} from './../../Pages/Backend/translations';
-import {setAuth, setCurrencies, setSettings, startBootStrapped} from "../redux/actions";
+import {setAuth, setCurrencies, setModules, setSettings, startBootStrapped} from "../redux/actions";
 import LoadingView from "../Backend/components/widgets/LoadingView";
+import {usePage} from "@inertiajs/inertia-react";
 
 const AppContext = createContext({});
 
-const AppContextProvider = ({ children }) => {
-    const { lang , locale , bootStrapped } = useSelector(state => state);
+const AppContextProvider = ({children}) => {
+    const {lang, locale, bootStrapped} = useSelector(state => state);
     const localSettings = useSelector(state => state.settings);
     const localCurrencies = useSelector(state => state.currencies);
-    const { auth , settings , currencies  } = useContext(GlobalContext);
+    const {auth, settings, currencies} = useContext(GlobalContext);
     const dispatch = useDispatch();
 
     // const [isLoading, setIsLoading] = useLocalStorage('isLoading',true);
@@ -69,64 +70,66 @@ const AppContextProvider = ({ children }) => {
     //     setSortDesc(!sortDesc)
     // }
     const context = {
-    //     locale,
-    //     setLocale,
-    //     isLoading,
-    //     sideBarOpen,
-    //     sortDesc,
-    //     setSortDesc,
-    //     colName,
-    //     setColName,
-    //     handleSort: (colName) => handleSort(colName),
-    //     toggleIsLoading: (loading) => setIsLoading(loading),
-    //     toggleSideBar: () => setSideBarOpen(!sideBarOpen),
+        //     locale,
+        //     setLocale,
+        //     isLoading,
+        //     sideBarOpen,
+        //     sortDesc,
+        //     setSortDesc,
+        //     colName,
+        //     setColName,
+        //     handleSort: (colName) => handleSort(colName),
+        //     toggleIsLoading: (loading) => setIsLoading(loading),
+        //     toggleSideBar: () => setSideBarOpen(!sideBarOpen),
         trans: (name) => translations[lang][name],
         classNames: (...classes) => classes.filter(Boolean).join(' '),
-    //     setSystemMessage: (message) => setSysMessage(message),
-    //     setCurrentFormTab: (tab) => setCurrentFormTab(tab),
-    //     setCurrency : (currency) => setCurrency(currency),
-    //     cart,
-    //     currency,
-    //     guest,
-    //     formTabs,
-    //     currentFormTab,
-    //     sysMessage,
-    //     currentRoute,
-    //     currentBreadCrumbs,
-    //     setCurrentBreadCrumbs,
-    //     setCurrentRoute,
-    //     parentModule,
-    //     childModule,
-    //     theme: settings.theme,
-    //     modules,
-    //     showConfirmationModal,
-    //     setShowConfirmationModal,
-    //     setConfirmationModalMessage,
-    //     confirmationModalMessage,
-    //     confirmationModalResponse,
-    //     setConfirmationModalResponse,
-    //     modalAction,
-    //     setModalAction,
-    //     otherLang: locale === 'ar' ? 'en' : 'ar',
-    //     dir: locale === 'ar' ? 'rtl' : 'ltr',
-    //     isRTL : locale === 'ar' ,
-        getLocalized: (element = 'name') => locale === 'ar' ? `${element}_ar` : `${element}_en`,
+        //     setSystemMessage: (message) => setSysMessage(message),
+        //     setCurrentFormTab: (tab) => setCurrentFormTab(tab),
+        //     setCurrency : (currency) => setCurrency(currency),
+        //     cart,
+        //     currency,
+        //     guest,
+        //     formTabs,
+        //     currentFormTab,
+        //     sysMessage,
+        //     currentRoute,
+        //     currentBreadCrumbs,
+        //     setCurrentBreadCrumbs,
+        //     setCurrentRoute,
+        //     parentModule,
+        //     childModule,
+        //     theme: settings.theme,
+        //     modules,
+        //     showConfirmationModal,
+        //     setShowConfirmationModal,
+        //     setConfirmationModalMessage,
+        //     confirmationModalMessage,
+        //     confirmationModalResponse,
+        //     setConfirmationModalResponse,
+        //     modalAction,
+        //     setModalAction,
+        //     otherLang: locale === 'ar' ? 'en' : 'ar',
+        //     dir: locale === 'ar' ? 'rtl' : 'ltr',
+        //     isRTL : locale === 'ar' ,
+        getLocalized: (element = 'name') => lang === 'ar' ? `${element}_ar` : `${element}_en`,
         getThumb: (element) => `${Ziggy().t.url}/storage/uploads/images/thumbnail/${element}`,
         getLarge: (element) => `${Ziggy().t.url}/storage/uploads/images/thumbnail/${element}`,
         getFileUrl: (element) => `${Ziggy().t.url}/storage/uploads/files/${element}`,
-        baseUrl : `${Ziggy().t.url}/`,
-        isAdminOrAbove : auth && (auth.role?.is_admin || auth.role?.is_super),
-        isSuper : auth && auth.role?.is_super,
-    //     setParentModule: (module) => setParentModule(module),
-    //     setChildModule: (module) => setChildModule(module),
-    //     handleDeleteItem: (type, model, id) => {
-    //         setShowConfirmationModal(true)
-    //         setModalAction({
-    //             type,
-    //             model,
-    //             id
-    //         })
-    //     }
+        baseUrl: `${Ziggy().t.url}/`,
+        isAdminOrAbove: !isEmpty(auth) && (auth.role?.is_admin || auth.role?.is_super),
+        isSuper: !isEmpty(auth) && auth.role?.is_super,
+        isAuthor: !isEmpty(auth) && auth.role?.is_author,
+        guest: isEmpty(auth),
+        //     setParentModule: (module) => setParentModule(module),
+        //     setChildModule: (module) => setChildModule(module),
+        //     handleDeleteItem: (type, model, id) => {
+        //         setShowConfirmationModal(true)
+        //         setModalAction({
+        //             type,
+        //             model,
+        //             id
+        //         })
+        //     }
     };
 
     // useEffect(() => {
@@ -157,9 +160,9 @@ const AppContextProvider = ({ children }) => {
     }, [lang])
 
     useEffect(() => {
-            isLocal() && console.log('useEffect starts here =====>')
-            // setIsLoading(true);
-    },[route().current()])
+        isLocal() && console.log('useEffect starts here =====>')
+        // setIsLoading(true);
+    }, [route().current()])
 
     useEffect(() => {
         Inertia.on('before', (e) => {
@@ -186,30 +189,38 @@ const AppContextProvider = ({ children }) => {
     // isLocal() && console.log('parentModule', parentModule);
 
     // useMemo(() => {
-        // if(bootStrapped && navigator.onLine) {
-            // dispatch(startBootStrapped())
-        // }
+    // if(bootStrapped && navigator.onLine) {
+    // dispatch(startBootStrapped())
+    // }
     // },[]);
 
     useMemo(() => {
-        isEmpty(localSettings) ? dispatch(setSettings(settings)) : null;
-        isEmpty(localCurrencies) ? dispatch(setCurrencies(currencies)) : null;
-        isEmpty(auth) ? dispatch(setAuth(auth)) : null;
-    },[])
-
-    useEffect(() => {
-        dispatch(setAuth(auth));
-    }, [auth, auth.favoritesList])
-
-
+        if(!bootStrapped && navigator.onLine) {
+            dispatch(startBootStrapped({settings, currencies}))
+        }
+        // dispatch(setSettings(settings));
+        // dispatch(setCurrencies(currencies));
+        if (!isEmpty(auth && auth.role?.privileges)) {
+            const filteredModules = map(auth.role.privileges, p => {
+                return {
+                    name: p.name_en,
+                    index: p.index,
+                    main_menu: p.main_menu,
+                    image: p.image
+                }
+            });
+            dispatch(setModules(filteredModules));
+        }
+    }, [])
 
     return (
         <AppContext.Provider value={context}>
-            {navigator.onLine ? children : <LoadingView />}
+            {navigator.onLine ? children : <LoadingView/>}
             <ToastContainer
                 rtl={locale.isRTL}
                 closeButton={<GrClose color={'white'}/>}
-                className={locale.isRTL ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full'} bodyClassName={locale === 'ar' ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full text-left'}/>
+                className={locale.isRTL ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full'}
+                bodyClassName={locale.isRTL ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full text-left'}/>
         </AppContext.Provider>
     );
 };

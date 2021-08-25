@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Http\Resources\AuthExtraLightResource;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryExtraLightResource;
+use App\Http\Resources\CurrencyExtraLightResource;
 use App\Http\Resources\SettingExtraLightResource;
 use App\Models\Category;
 use App\Models\Currency;
@@ -50,7 +51,7 @@ class FrontendHandleInertiaRequests extends Middleware
             'settings' => fn() => new SettingExtraLightResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
-            'currencies' => fn() => Currency::active()->get(),
+            'currencies' => fn() => CurrencyExtraLightResource::collection(Currency::active()->with('country')->get()),
             'cart' => fn() => session()->get('cart'),
             'categories' => fn() => CategoryCollection::make(Category::active()->onlyParent()
                 ->with(['children' => function ($q) {

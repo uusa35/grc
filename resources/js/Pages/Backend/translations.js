@@ -680,8 +680,9 @@ const ar = {
     'continue' : 'استمرار',
     'delivery_within_4_days' : 'التوصيل خلال 4 أيام',
     'product_name' : 'أسم المنتج',
-    'subtotal' : 'المجموع الكلي',
+    'subtotal' : 'الإجمالي',
     'grand_total' : 'المجموع الكلي',
+    'net_total' : 'المجموع الكلي',
     'recommendations' : 'مقترحات',
     'contactus' : 'اتصل بنا',
     'subscribe_to_our_news_letter' : 'النشرة البريدية اشتراك',
@@ -1116,7 +1117,9 @@ const ar = {
     "related" :  "متعلقة",
     "related_items" : "عناصر متعلقة",
     "u_have_to_register_first" : "يجب عليك التسجيل أولا",
-    "please_choose_timing" : "يرجى اختيار توقيت الخدمة اولاً"
+    "please_choose_timing" : "يرجى اختيار توقيت الخدمة اولاً",
+    "item_added_successfully" : "تم إضافة العنصر إلى عربة التسوق بنجاح",
+    "item_removed_successfully" : "تم حذف العنصر من عربة التسوق بنجاح"
 }
 
 const en  = {
@@ -1134,7 +1137,7 @@ const en  = {
     'name' : 'name',
     'shipment_fees' : 'shipment fees',
     'discount' : 'discount',
-    'total' : 'total',
+    'total' : 'subtotal',
     'back' : 'back',
     'home' : 'home',
     'country' : 'country',
@@ -1409,6 +1412,7 @@ const en  = {
     'view_survey' : 'show survey',
     'create_survey' : 'Create a new survey',
     'net_price' : 'net price',
+    'net_total' : 'net total',
     'description_ar' : 'description in Arabic',
     'description_en' : 'Description in English',
     'questions_list' : 'questions list',
@@ -1798,7 +1802,7 @@ const en  = {
     'continue' : 'continue',
     'delivery_within_4_days' : 'delivery within 4 days',
     'product_name' : 'product name',
-    'subtotal' : 'total total',
+    'subtotal' : 'subtotal',
     'grand_total' : 'grand total',
     'recommendations' : 'recommendations',
     'contactus' : 'contact us',
@@ -2228,7 +2232,10 @@ const en  = {
     "aboutus_ar" : "aboutus arabic",
     "u_have_to_register_first" : "you must login first",
     "equivalent" : "equivalent",
-    "please_choose_timing" : "please choose service timing before you add the item to cart."
+    "please_choose_timing" : "please choose service timing before you add the item to cart.",
+    "order_summary" : "order summary",
+    "item_added_successfully" : "item added to shopping cart successfully.",
+    "item_removed_successfully" : "item removed from shopping cart successfully."
 }
 
 export const translations = {ar , en }

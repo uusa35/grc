@@ -24,20 +24,24 @@ import {isMobile} from "react-device-detect";
 import route from 'ziggy-js'
 import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
 
 
-export default function FrontendServiceShow({element, relatedElements, auth }) {
-    const {getThumb, getLarge, getLocalized, trans, classNames } = useContext(AppContext)
+export default function FrontendServiceShow({element, relatedElements, auth}) {
+    const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
+    const {cart} = useSelector(state => state);
+    const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'service',
-        'cart_id' : null,
+        'cart_id': null,
         'element_id': element.id,
-        'timing_id' : null,
+        'timing_id': null,
         'qty': 1,
         'price': element.isOnSale ? element.sale_price : element.price,
-        'direct_purchase' : element.direct_purchase,
+        'direct_purchase': element.direct_purchase,
 
     });
 
@@ -49,29 +53,36 @@ export default function FrontendServiceShow({element, relatedElements, auth }) {
         setCurrentImages(images);
     }, [element])
 
-    const handleClick = (t) => {
-        setSelectedTiming(t)
-        // setData({ ...data, timing_id: t.id , cart_id: element.id +''+ t.id })
-    }
+    useMemo(() => {
+        !isEmpty(selectedTiming) ? setData('timing_id', selectedTiming.id) : null;
+    }, [selectedTiming])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log('data', data.timing_id);
-        // if(isNull(data.timing_id)) {
-        //     toast.error(capitalize(trans('please_choose_timing')))
-        // } else {
-        //     post(route('frontend.cart.add'))
-        // }
-        // addToCart({
-        //     cart_id : element.id +''+selectedTiming.id,
-        //     type: 'service',
-        //     element_id : element.id,
-        //     timing_id : selectedTiming.id,
-        //     qty : 1,
-        //     price: element.isOnSale ? element.sale_price : element.price,
-        //     direct_purchase : element.direct_purchase,
-        // })
+        if (isNull(data.timing_id)) {
+            toast.error(capitalize(trans('please_choose_timing')))
+        }
+        // dispatch(clearCart());
+        dispatch(addToCart({
+            cart_id: element.id + '' + selectedTiming.id,
+            type: 'service',
+            element_id: element.id,
+            timing_id: selectedTiming.id,
+            qty: 1,
+            price: element.isOnSale ? element.sale_price : element.price,
+            direct_purchase: element.direct_purchase,
+            shipmentFees: 0,
+            image: element.image,
+            name_ar: element.name_ar,
+            name_en: element.name_en,
+            description_ar: element.description_ar,
+            description_en: element.description_en,
+            timing : selectedTiming
+        }))
+        // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
+
+    console.log('the cart', cart.items);
 
     return (
         <FrontendContainer mainModule={'service'} subModule={element[getLocalized()]}>
@@ -155,7 +166,7 @@ export default function FrontendServiceShow({element, relatedElements, auth }) {
                                                 map(element.timings, t =>
                                                     <Menu.Item key={t.id}>
                                                         <div
-                                                            onClick={() => handleClick(t)}
+                                                            onClick={() => setSelectedTiming(t)}
                                                             className={classNames(
                                                                 t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                 'block px-4 py-2 text-sm hover:bg-gray-100'
@@ -197,7 +208,8 @@ export default function FrontendServiceShow({element, relatedElements, auth }) {
                                         {trans('add_to_cart')}
                                     </button>
                                 </form>
-                                <ElementFavoriteBtn id={element.id} type={'service'}/>
+                                <ElementFavoriteBtn id={element.id} type={'service'}
+                                                    favoritesList={auth?.favoritesList}/>
                             </div>
                         </div>
                         <section aria-labelledby="details-heading" className="my-12">
@@ -281,7 +293,7 @@ export default function FrontendServiceShow({element, relatedElements, auth }) {
                                 </Disclosure>
 
                                 {/* company  */}
-                                <Disclosure as="div"  defaultOpen={false}>
+                                <Disclosure as="div" defaultOpen={false}>
                                     {({open}) => (
                                         <>
                                             <Disclosure.Button

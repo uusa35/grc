@@ -7,10 +7,14 @@ import route from 'ziggy-js';
 import {Link} from "@inertiajs/inertia-react";
 import {getWhatsappLink} from "../../../helpers";
 import {useSelector} from "react-redux";
+import {isEmpty} from "lodash";
 
 export default function Footer() {
-    const { getLocalized, getThumb, trans} = useContext(AppContext)
-    const { guest , auth , settings } = useSelector(state => state)
+    const { getLocalized, getThumb, trans, guest  } = useContext(AppContext)
+    const { auth } = useContext(GlobalContext);
+    const { settings } = useSelector(state => state)
+
+
 
     return (
         <footer className="bg-gray-50" aria-labelledby="footer-heading">
@@ -90,7 +94,6 @@ export default function Footer() {
                                     </>
                                     : <Link href={route('frontend.user.edit', auth.id)}
                                             className="text-base text-gray-500 capitalize hover:text-gray-900">
-                                        >
                                         {trans('my_account')}
                                     </Link>
                             }

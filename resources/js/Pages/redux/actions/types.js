@@ -1,6 +1,8 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const CLEAR_CART = 'CLEAR_CART';
+export const SET_DISCOUNT = 'SET_DISCOUNT';
+export const SET_SHIPMENT_FEES = 'SET_SHIPMENT_FEES';
 export const CHANGE_LANG = 'CHANGE_LANG';
 export const SET_LOCALE = 'SET_LOCALE';
 export const SET_LANG = 'SET_LANG';

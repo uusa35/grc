@@ -57,7 +57,7 @@ const MainSlider = ({elements}) => {
 
                                 <img
                                     style={{maxHeight: 700, width: '100%'}}
-                                    // className="w-full h-auto object-contain "
+                                    className="w-full object-cover "
                                     src={getLarge(element.image)}
                                 />
 
