@@ -9,9 +9,8 @@ import route from 'ziggy-js'
 import {useSelector} from "react-redux";
 
 export default function BreadCrumbs() {
-    const {parentModule, trans, currentBreadCrumbs } = useContext(AppContext);
-    const { locale } = useSelector(state => state);
-
+    const {trans} = useContext(AppContext);
+    const {locale, breadCrumbs} = useSelector(state => state);
 
     return (
         <div
@@ -22,36 +21,62 @@ export default function BreadCrumbs() {
                     <ol className="flex items-center space-x-4">
                         <li>
                             <div className="flex items-center">
+                                {/*<Link*/}
+                                {/*    className="flex flex- flex-row  font-medium text-gray-500 hover:text-gray-700"*/}
+                                {/*    href={route('backend.home')}>*/}
+                                {/*    <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>*/}
+                                {/*    {trans('home')}*/}
+                                {/*</Link>*/}
                                 {
-                                    !isEmpty(currentBreadCrumbs) ? map(currentBreadCrumbs, (b, i) =>
-                                        <Fragment key={i}>
+                                    map(breadCrumbs, (b, i) =>
+                                        <Fragment key={b}>
                                             {i === 0 ?
-                                                <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/> :
-                                                <svg
-                                                    className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 20 20"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
-                                                </svg>
+                                                <>
+                                                    <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2"
+                                                              aria-hidden="true"/>
+                                                    <Link
+                                                        href={route().has(`backend.${b === 'backend' ? 'home' : b }`) ? route(`backend.${b === 'backend' ? 'home' : b}`) : '#'}
+                                                        className=" font-medium text-gray-500 hover:text-gray-700"
+                                                        aria-current={'page'}
+                                                    >
+                                                        {trans(pluralize(b))}
+                                                    </Link>
+                                                    <svg
+                                                        className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="currentColor"
+                                                        viewBox="0 0 20 20"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+                                                    </svg>
+                                                </>
+                                                :
+                                                <>
+                                                    {
+                                                        route().has(`backend.${b}.index`) && <>
+                                                            <Link
+                                                                href={route(`backend.${b}.index`)}
+                                                                className=" font-medium text-gray-500 hover:text-gray-700"
+                                                                aria-current={'page'}
+                                                            >
+                                                                {trans(pluralize(b))}
+                                                            </Link>
+                                                            <svg
+                                                                className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="currentColor"
+                                                                viewBox="0 0 20 20"
+                                                                aria-hidden="true"
+                                                            >
+                                                                <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+                                                            </svg>
+                                                        </>
+                                                    }
+                                                </>
                                             }
-                                            <Link
-                                                href={route().has(`backend.${parentModule}.index`) ? route(`backend.${parentModule}.index`) : '#'}
-                                                className=" font-medium text-gray-500 hover:text-gray-700"
-                                                aria-current={'page'}
-                                            >
-                                                {trans(pluralize(b))}
-                                            </Link>
                                         </Fragment>
-                                    ) : <Link
-                                        className="flex flex- flex-row  font-medium text-gray-500 hover:text-gray-700"
-                                        href={route('backend.home')}>
-                                        <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>
-                                        {trans('home')}
-                                    </Link>
-                                }
+                                    )}
                             </div>
                         </li>
                     </ol>
@@ -63,11 +88,15 @@ export default function BreadCrumbs() {
                       onClick={() => window.history.back()}
                 >
                     <h1>{trans('back')}</h1>
-                    {locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>}
+                    {locale.isRTL ?
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
+                        </svg> :
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                             stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                        </svg>}
                 </Link>
             </div>
         </div>

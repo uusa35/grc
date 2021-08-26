@@ -1,10 +1,13 @@
 import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import { isEmpty } from 'lodash';
+import {useDispatch, useSelector} from "react-redux";
+import {showModal} from "../../../../redux/actions";
 
 export default function ImagesList({images}) {
-    const { theme , trans, getThumb } = useContext(AppContext);
-    const { setModalAction, setShowConfirmationModal } = useContext(AppContext);
+    const { trans, getThumb } = useContext(AppContext);
+    const dispatch = useDispatch()
+
     return (
         <>
 
@@ -18,8 +21,13 @@ export default function ImagesList({images}) {
                                  className="object-cover pointer-events-none group-hover:opacity-75"/>
                             <button
                                 onClick={() => {
-                                    setShowConfirmationModal(true)
-                                    setModalAction({ type : 'destroy', model : 'image', id : img.id})
+                                    dispatch(showModal({
+                                        type : 'destroy',
+                                        model : 'image',
+                                        id : img.id,
+                                        title : `${trans('destroy')} ${trans('image')}`,
+                                        message : `${trans('confirmation')} ${trans('destroy')} ${trans('image')}`,
+                                    }))
                                 }}
                                 type="button"
                                 className="absolute inset-0 focus:outline-none">

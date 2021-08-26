@@ -2,6 +2,7 @@ import {call, put, all, takeLatest, select, delay} from 'redux-saga/effects';
 import * as cartSaga from './cartSaga';
 import * as actions from './../actions/types'
 import * as requestSaga from "./requestSaga";
+import {startToastMessageScenario} from "./requestSaga";
 
 export function* triggerAddToCart() {
     yield takeLatest(actions.ADD_TO_CART, cartSaga.startAddToCartScenario);
@@ -21,4 +22,8 @@ export function* triggerChangeLang() {
 
 export function* triggerStartBootStrapped() {
     yield takeLatest(actions.START_BOOTSTRAPPED, requestSaga.startEnableBootStrappedScenario);
+}
+
+export function* triggerStartToastMessage() {
+    yield takeLatest(actions.SET_TOAST_MESSAGE, requestSaga.startToastMessageScenario);
 }

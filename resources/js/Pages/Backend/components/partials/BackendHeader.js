@@ -19,24 +19,20 @@ import {
 import {map} from 'lodash';
 import plurlaize from 'pluralize'
 import PinnedProjects from "./header/PinnedProjects";
+import {useDispatch, useSelector} from "react-redux";
+import {changeLang} from "../../../redux/actions";
 
 
 const BackendHeader = () => {
-    const {settings} = useContext(GlobalContext);
     const {
         trans,
-        otherLang,
-        classNames,
-        isRTL,
-        toggleSideBar,
-        theme,
-        modules,
         parentModule,
-        locale,
-        setLocale,
         getLocalized,
         getThumb,
+        classNames
     } = useContext(AppContext);
+    const { modules , locale , settings  } = useSelector(state => state);
+    const dispatch = useDispatch();
 
     return (
         <div className={``}>
@@ -218,9 +214,9 @@ const BackendHeader = () => {
                                                 {({active}) => (
                                                     <Link
                                                         onClick={() => {
-                                                            setLocale(otherLang)
+                                                            dispatch(changeLang(locale.otherLang))
                                                         }}
-                                                        href={route(`backend.change.lang`, { locale : otherLang})}
+                                                        href={route(`backend.change.lang`, { lang : locale.otherLang})}
                                                         className={classNames(
                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                             'group flex items-center px-4 py-2 '
@@ -232,7 +228,7 @@ const BackendHeader = () => {
                                                                   strokeWidth={2}
                                                                   d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
                                                         </svg>
-                                                        {trans(otherLang)}
+                                                        {trans(locale.otherLang)}
                                                     </Link>
                                                 )}
                                             </Menu.Item>

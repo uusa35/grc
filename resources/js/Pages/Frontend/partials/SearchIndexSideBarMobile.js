@@ -72,7 +72,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                             <Disclosure.Panel className="pt-4 pb-2 px-4 w-full">
                                                 <div className="space-y-6 w-full divide-y divide-gray-100 flex flex-1 flex-col justify-start items-end">
                                                     <Link
-                                                        className={classNames(isRTL ? 'justify-end' :  'justify-start', 'flex flex-1 flex-row  items-center w-full')}
+                                                        className={classNames(locale.isRTL ? 'justify-end' :  'justify-start', 'flex flex-1 flex-row  items-center w-full')}
                                                         href={route(`frontend.${type}.index`, { category_id : c.id})}
                                                     >
                                                         {c[getLocalized()]}
@@ -80,7 +80,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                                     {
                                                         map(c.children, child => (
                                                             <Link
-                                                                className={classNames(isRTL ? 'justify-end' : 'justify-start', 'flex flex-1 flex-row  items-center w-full')}
+                                                                className={classNames(locale.isRTL ? 'justify-end' : 'justify-start', 'flex flex-1 flex-row  items-center w-full')}
                                                                 key={child.id}
                                                                 href={route(`frontend.${type}.index`, { category_id : child.id})}
                                                             >

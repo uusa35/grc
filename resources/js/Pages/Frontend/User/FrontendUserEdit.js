@@ -39,26 +39,27 @@ import {Link} from "@inertiajs/inertia-react";
 
 export default function FrontendUserEdit({element}) {
     const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
-    const { auth } = useContext(GlobalContext);
     const [availableToHire, setAvailableToHire] = useState(true)
     const [privateAccount, setPrivateAccount] = useState(false)
     const [allowCommenting, setAllowCommenting] = useState(true)
     const [allowMentions, setAllowMentions] = useState(true)
 
     const subNavigation = [
-        {name: 'Profile', href: route('frontend.user.edit', auth.id), icon: UserCircleIcon, current: true},
-        {name: 'Password', href: '#', icon: KeyIcon, current: false},
-        {name: 'Notifications', href: '#', icon: BellIcon, current: false},
-        {name: 'Billing', href: '#', icon: CreditCardIcon, current: false},
-        {name: 'Integrations', href: '#', icon: ViewGridAddIcon, current: false},
+        {name: 'personal_information', href: route('frontend.user.edit', element.id), icon: UserCircleIcon, current: true},
+        {name: 'change_password', href: '#', icon: KeyIcon, current: false},
+        {name: 'my_books_list', href: '#', icon: BellIcon, current: false},
+        {name: 'my_courses_list', href: '#', icon: BellIcon, current: false},
+        {name: 'my_subscription', href: '#', icon: CreditCardIcon, current: false},
+        {name: 'orders_list', href: '#', icon: ViewGridAddIcon, current: false},
+        {name: 'favorites_list', href: '#', icon: ViewGridAddIcon, current: false},
     ]
 
     return (
         <FrontendContainer mainModule={'home'}>
-            <main className="relative mt-20">
+            <main className="relative mt-5">
                 <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                     <div className="bg-white overflow-hidden">
-                        <div className=" lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+                        <div className=" lg:grid lg:grid-cols-12">
                             <aside className="py-6 lg:col-span-3">
                                 <nav className="space-y-1">
                                     {subNavigation.map((item) => (
@@ -82,13 +83,13 @@ export default function FrontendUserEdit({element}) {
                                                 )}
                                                 aria-hidden="true"
                                             />
-                                            <span className="truncate">{item.name}</span>
+                                            <span className="truncate">{trans(item.name)}</span>
                                         </Link>
                                     ))}
                                 </nav>
                             </aside>
 
-                            <form className="divide-y divide-gray-100 lg:col-span-9" action="#" method="POST">
+                            <form className=" lg:col-span-9" action="#" method="POST">
                                 {/* Profile section */}
                                 <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                     <div>

@@ -70,6 +70,7 @@ class FrontendUserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
         $element = User::whereId($user->id)->with('role','subscription')->first();
         return inertia('Frontend/User/FrontendUserEdit', compact('element'));
     }

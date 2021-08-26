@@ -15,7 +15,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = ['super', 'admin', 'designer', 'company', 'celebrity', 'client', 'driver', 'author'];
+        $roles = ['super', 'admin', 'company', 'author', 'client','designer', 'celebrity', 'driver'];
         $designerPrivileges = ['collection', 'order'];
         $companyPrivileges = ['product', 'slide', 'gallery', 'order', 'service', 'timing', 'video'];
         $adminPrivileges = ['product', 'slide', 'gallery', 'order', 'coupon', 'service', 'timing', 'setting', 'coupon', 'area', 'survey', 'question', 'result', 'questionnaire', 'answer',

@@ -12,22 +12,24 @@ import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
 import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
+import {useDispatch, useSelector} from "react-redux";
+import {showToastMessage} from "../../redux/actions";
 
 
 export default function CourseEdit({users, categories, course, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
+    const { parentModule , formTabs , currentFormTab} = useSelector(state => state);
     const {
         classNames,
         trans,
         theme,
-        currentFormTab,
-        parentModule,
         getFileUrl,
         isAdminOrAbove,
         getLocalized,
         getThumb
     } = useContext(AppContext)
+    const dispatch = useDispatch();
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': course.sku,
         'name_ar': course.name_ar,
@@ -94,6 +96,7 @@ export default function CourseEdit({users, categories, course, elementCategories
             qr: data.qr,
         }, {
             forceFormData: true,
+            onSuccess : () => dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {

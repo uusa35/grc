@@ -81,6 +81,7 @@ class UserFactory extends Factory
             'balance' => $this->faker->numberBetween(5, 99),
             'on_home' => $this->faker->boolean(true),
             'is_male' => $this->faker->boolean,
+            'news_letter_on' => $this->faker->boolean,
             'video_url_one' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_two' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_three' => 'https://www.youtube.com/embed/GhyKqj_P2E4',

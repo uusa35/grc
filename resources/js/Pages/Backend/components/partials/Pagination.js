@@ -8,7 +8,7 @@ import {isEmpty, map} from 'lodash';
 
 export default function Pagination({type, total, links, showSearch = false}) {
     const [search, setSearch] = useState('');
-    const {trans, classNames, theme, parentModule } = useContext(AppContext)
+    const {trans, classNames, parentModule } = useContext(AppContext)
     return (
         <nav
             className="grid grid-cols-1 sm:grid-cols-2 flex justify-between items-center  bg-transparent sm:px-0">

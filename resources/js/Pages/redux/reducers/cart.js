@@ -1,4 +1,4 @@
-import {ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, SET_DISCOUNT, SET_SHIPMENT_FEES} from './../actions/types';
+import {ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART, SET_DISCOUNT, SET_SHIPMENT_FEES, ENABLE_DIRECT_PURCHASE_MODE} from './../actions/types';
 import {sumBy, map, filter, uniqBy, concat, isInteger} from 'lodash';
 
 const initialState = {
@@ -46,6 +46,8 @@ export default function(cart = initialState, action) {
                 shipmentFees: parseFloat(action.payload * cart.items.length),
                 totalWeight: parseFloat(sumBy(cart.items, 'weight')),
             };
+        case ENABLE_DIRECT_PURCHASE_MODE :
+            return action.payload;
         case CLEAR_CART:
             return initialState;
         default:

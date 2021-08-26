@@ -1,11 +1,16 @@
 import {useContext, useState} from "react";
 import {AppContext} from "../../../context/AppContext";
 import {first, filter} from "lodash";
+import {setCurrentFormTab} from "../../../redux/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 const FormTabsContainer = ({children}) => {
-    const {classNames, trans, theme, currentFormTab, setCurrentFormTab, formTabs} = useContext(AppContext)
+    const {classNames, trans} = useContext(AppContext)
+    const { formTabs , currentFormTab} = useSelector(state => state);
+    const dispatch = useDispatch()
+
     return (
-        <div className="flex flex-1 flex-col justify-start min-h-screen items-center bg-transparent">
+        <div className="flex flex-1 flex-col justify-start min-h-screen items-center bg-white">
             <div className={`w-full pt-3`}>
                 <div className="sm:hidden">
                     <label htmlFor="tabs" className="sr-only">
@@ -16,7 +21,7 @@ const FormTabsContainer = ({children}) => {
                         name="tabs"
                         className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
                         defaultValue={currentFormTab.name}
-                        onChange={(e) => setCurrentFormTab(first(filter(formTabs, t => t.id == e.target.value)))}
+                        onChange={(e) => dispatch(setCurrentFormTab(first(filter(formTabs, t => t.id == e.target.value))))}
                     >
                         {formTabs.map((tab) => (
                             <option key={tab.id}
@@ -33,7 +38,7 @@ const FormTabsContainer = ({children}) => {
                                 <button
                                     type="button"
                                     key={tab.id}
-                                    onClick={() => setCurrentFormTab(tab)}
+                                    onClick={() => dispatch(setCurrentFormTab(tab))}
                                     // href="#"
                                     className={classNames(
                                         tab.id === currentFormTab.id

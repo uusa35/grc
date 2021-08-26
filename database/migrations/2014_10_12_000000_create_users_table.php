@@ -96,6 +96,7 @@ class CreateUsersTable extends Migration
             $table->dateTime('end_subscription')->nullable();
             $table->longText('code')->nullable();
             $table->boolean('custome_delivery')->default(false);
+            $table->boolean('news_letter_on')->default(false);
             $table->decimal('custome_delivery_fees', 4, 2)->unsigned()->default(0.00);
 
             $table->rememberToken();

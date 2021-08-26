@@ -13,6 +13,14 @@ import {createLogger} from 'redux-logger';
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: [
+        'formTabs',
+        'confirmationModal',
+        'sideBarOpen',
+        'toastMessage',
+        'parentModule'
+    ],
+    debug: isLocal(),
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

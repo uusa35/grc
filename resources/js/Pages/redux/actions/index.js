@@ -44,3 +44,46 @@ export const setModules = payload => ({
     type: actions.SET_MODULES,
     payload,
 });
+
+export const toggleSort = payload => ({
+    type: actions.TOGGLE_SORT,
+    payload,
+});
+
+export const showModal = payload => ({
+    type: actions.SHOW_MODAL,
+    payload,
+});
+
+export const hideModal = () => ({
+    type: actions.HIDE_MODAL,
+});
+
+
+export const setParentModule = payload => ({
+    type: actions.SET_PARENT_MODULE,
+    payload,
+});
+
+export const setBreadCrumbs = payload => ({
+    type: actions.SET_BREADCRUMBS,
+    payload,
+});
+
+export const resetBreadCrumbs = () => ({
+    type: actions.RESET_BREADCRUMBS,
+});
+
+export const setCurrentFormTab = payload => ({
+    type: actions.SET_CURRENT_FORM_TAB,
+    payload,
+});
+
+export const showToastMessage = payload => ({
+    type: actions.SET_TOAST_MESSAGE,
+    payload,
+});
+
+export const hideToastMessage = () => ({
+    type: actions.CLEAR_TOAST_MESSAGE,
+});

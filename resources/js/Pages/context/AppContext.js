@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
-import {split, first, map, isEmpty, isNull, filter} from 'lodash';
+import {split, first, map, isEmpty, isNull, filter, each} from 'lodash';
 import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
@@ -11,17 +11,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import {toast} from 'react-toastify';
 import {GrClose, IoCloseOutline} from "react-icons/all";
 import {useSelector, useDispatch} from "react-redux";
-import {translations} from './../../Pages/Backend/translations';
-import {setAuth, setCurrencies, setModules, setSettings, startBootStrapped} from "../redux/actions";
+import {translations} from './../../Pages/translations';
+import {
+    hideToastMessage,
+    setBreadCrumbs,
+    setModules,
+    setParentModule,
+    startBootStrapped
+} from "../redux/actions";
 import LoadingView from "../Backend/components/widgets/LoadingView";
-import {usePage} from "@inertiajs/inertia-react";
+import ConfirmationModal from "../Backend/components/partials/ConfirmationModal";
+import {capitalize} from "lodash/string";
 
 const AppContext = createContext({});
 
 const AppContextProvider = ({children}) => {
-    const {lang, locale, bootStrapped} = useSelector(state => state);
-    const localSettings = useSelector(state => state.settings);
-    const localCurrencies = useSelector(state => state.currencies);
+    const {lang, locale, bootStrapped, confirmationModal, toastMessage } = useSelector(state => state);
     const {auth, settings, currencies} = useContext(GlobalContext);
     const dispatch = useDispatch();
 
@@ -127,7 +132,7 @@ const AppContextProvider = ({children}) => {
         //         setModalAction({
         //             type,
         //             model,
-        //             id
+        //             ide
         //         })
         //     }
     };
@@ -176,12 +181,12 @@ const AppContextProvider = ({children}) => {
         });
         Inertia.on('navigate', (e) => {
             isLocal() && console.log('navigate ==>')
-            // const currentRoute = route().current();
-            // const breadCrumbs = split(currentRoute, '.');
-            // isLocal() && console.log('befre Module', breadCrumbs[1])
-            // setParentModule(breadCrumbs[1]);
-            // setCurrentBreadCrumbs(breadCrumbs);
-            // setCurrentRoute(currentRoute)
+            const currentRoute = route().current();
+            const breadCrumbs = split(currentRoute, '.');
+            isLocal() && console.log('befre Module', breadCrumbs[1])
+            isLocal() && console.log('bread', breadCrumbs);
+            dispatch(setBreadCrumbs(breadCrumbs))
+            dispatch(setParentModule(breadCrumbs[1]));
         })
         toast.configure(options)
     }, [])
@@ -195,7 +200,7 @@ const AppContextProvider = ({children}) => {
     // },[]);
 
     useMemo(() => {
-        if(!bootStrapped && navigator.onLine) {
+        if (!bootStrapped && navigator.onLine) {
             dispatch(startBootStrapped({settings, currencies}))
         }
         // dispatch(setSettings(settings));
@@ -218,9 +223,15 @@ const AppContextProvider = ({children}) => {
             {navigator.onLine ? children : <LoadingView/>}
             <ToastContainer
                 rtl={locale.isRTL}
-                closeButton={<GrClose color={'white'}/>}
+                closeButton={() => <GrClose color={'white'}/>}
                 className={locale.isRTL ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full'}
-                bodyClassName={locale.isRTL ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full text-left'}/>
+                bodyClassName={locale.isRTL ? 'font-bein font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full text-left'}
+                closeOnClick={true}
+                pauseOnHover={true}
+                type={toast.TYPE[capitalize(toastMessage.type)]}
+                position={toast.POSITION[locale.isRTL ? 'TOP_LEFT' : 'TOP_RIGHT']}
+            />
+            {confirmationModal.display && <ConfirmationModal/>}
         </AppContext.Provider>
     );
 };

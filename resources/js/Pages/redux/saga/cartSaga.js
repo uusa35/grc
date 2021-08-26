@@ -1,14 +1,18 @@
 import {toast} from "react-toastify";
 import {capitalize} from "lodash";
-import {translations} from "../../Backend/translations";
-import {select} from 'redux-saga/effects';
+import {translations} from "../../translations";
+import {select, put} from 'redux-saga/effects';
+import { SET_TOAST_MESSAGE } from "../actions/types";
 
 export function* startAddToCartScenario(action) {
     try {
     } catch (e) {
     } finally {
         const { lang } = yield select();
-        toast.success(capitalize(translations[lang]['item_added_successfully']));
+        yield put({ type : SET_TOAST_MESSAGE, payload : {
+            message : capitalize(translations[lang]['item_added_successfully']),
+                type : 'success'
+        }});
     }
 }
 
@@ -26,7 +30,6 @@ export function* startRemoveFromCartScenario(action) {
 
 export function* startClearCartScenario(action) {
     try {
-        console.log('the clear', action);
 
     } catch (e) {
         console.log('e', e)

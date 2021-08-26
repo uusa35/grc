@@ -9,12 +9,13 @@ import breadCrumbs from './breadCrumbs'
 import lang from './lang'
 import locale from './locale'
 import isLoading from './isLoading'
-import modalMessage from './modalMessage'
+import confirmationModal from './confirmationModal'
 import toastMessage from './toastMessage'
 import sideBarOpen from './sideBarOpen'
 import sort from './sort'
 import bootStrapped from './bootStrapped'
 import settings from './settings'
+import parentModule from './parentModule'
 
 export default combineReducers({
     cart,
@@ -27,10 +28,11 @@ export default combineReducers({
     lang,
     locale,
     isLoading,
-    modalMessage,
+    confirmationModal,
     toastMessage,
     sideBarOpen,
     sort,
     bootStrapped,
-    settings
+    settings,
+    parentModule
 });

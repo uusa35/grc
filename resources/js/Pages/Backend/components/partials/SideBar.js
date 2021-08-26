@@ -9,6 +9,7 @@ import pluralize from 'pluralize';
 import {filter, map, first} from 'lodash';
 import route from 'ziggy-js';
 import LocalizedText from "../widgets/LocalizedText";
+import {useSelector} from "react-redux";
 
 
 const teams = [
@@ -17,22 +18,10 @@ const teams = [
     {name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500'},
 ]
 
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-const navigation = [
-    {name: 'home', href: '/backend', icon: HomeIcon},
-    {name: 'product', href: '/backend/product/search', icon: ViewListIcon},
-    {name: 'book', href: '/backend/book/search', icon: ClockIcon},
-    {name: 'service', href: '/backend/service/search', icon: ClockIcon},
-    {name: 'user', href: '/backend/user/search', icon: ClockIcon},
-    {name: 'category', href: '/backend/category/search', icon: ClockIcon},
-]
-
 const SideBar = () => {
-    const {sideBarOpen, toggleSideBar, trans, parentModule, classNames, modules , getThumb, getLocalized } = useContext(AppContext);
+    const {trans, parentModule , classNames , getThumb, getLocalized } = useContext(AppContext);
+    const { modules } = useSelector(state => state);
+    const[sideBarOpen, toggleSideBar] = useState(false)
     const {settings, auth} = useContext(GlobalContext);
 
     return (

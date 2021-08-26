@@ -9,34 +9,30 @@ import route from 'ziggy-js';
 import LocalizedText from "../components/widgets/LocalizedText";
 import {Inertia} from "@inertiajs/inertia";
 import ActiveDot from "../components/widgets/ActiveDot";
+import {useDispatch, useSelector} from "react-redux";
+import {toggleSort} from "../../redux/actions";
 
 
 export default function ProductIndex({elements}) {
+    const [currentData, setCurrentData] = useState();
     const {
         trans,
         classNames,
-        isRTL,
-        theme,
         handleDeleteItem,
-        colName,
-        sortDesc,
-        handleSort,
-        getThumb,
         getLocalized
     } = useContext(AppContext);
-    const [currentData, setCurrentData] = useState();
+    const { sort, locale  } = useSelector(state => state);
+    const dispatch = useDispatch();
 
     useMemo(() => {
-        setCurrentData(elements.data);
+        if (!currentData) {
+            setCurrentData(elements.data);
+        }
     }, [elements.data])
 
     useMemo(() => {
-        if (sortDesc) {
-            setCurrentData(orderBy(elements.data, [colName], ['desc']));
-        } else {
-            setCurrentData(orderBy(elements.data, [colName], ['asc']));
-        }
-    }, [sortDesc])
+        setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
+    }, [sort.desc])
 
     return (
         <BackendContainer elements={elements} showSearch={elements.total > 1} showNoElements={elements.total < 1}
@@ -53,9 +49,9 @@ export default function ProductIndex({elements}) {
                                     <th
                                         scope="col"
                                         className="px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left   uppercase tracking-wider tracking-wider"
-                                        onClick={() => handleSort('id')}
+                                        onClick={() => dispatch(toggleSort('id'))}
                                     >
-                                        {sortDesc ?
+                                        {sort.desc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
                                                  viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
@@ -78,11 +74,11 @@ export default function ProductIndex({elements}) {
                                     <th
                                         scope="col"
                                         className="py-3 rtl:text-right ltr:text-left "
-                                        onClick={() => handleSort('sku')}
+                                        onClick={() => dispatch(toggleSort('sku'))}
                                     >
                                         <div className="flex flex-row justify-start flex-1 items-center">
                                             <div>
-                                                {sortDesc ?
+                                                {sort.desc ?
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
                                                          fill="none"
                                                          viewBox="0 0 24 24" stroke="currentColor">
@@ -107,9 +103,9 @@ export default function ProductIndex({elements}) {
                                     <th
                                         scope="col"
                                         className=" px-3 py-3 flex flex-1 flex-row justify-start items-center rtl:text-right ltr:text-left"
-                                        onClick={() => handleSort('name')}
+                                        onClick={() => dispatch(toggleSort('name'))}
                                     >
-                                        {sortDesc ?
+                                        {sort.desc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
                                                  viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
@@ -134,7 +130,7 @@ export default function ProductIndex({elements}) {
                                         className=" px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left"
                                         onClick={() => handleSort('price')}
                                     >
-                                        {sortDesc ?
+                                        {sort.desc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
                                                  viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
@@ -209,7 +205,7 @@ export default function ProductIndex({elements}) {
                                                                 >
                                                                     <Menu.Items
                                                                         static
-                                                                        className={classNames(isRTL ? 'right-10' : 'left-10', "z-40 mx-3 origin-top-right absolute top-3 w-48 mt-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none")}
+                                                                        className={classNames(locale.isRTL ? 'right-10' : 'left-10', "z-40 mx-3 origin-top-right absolute top-3 w-48 mt-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none")}
                                                                     >
                                                                         <div className="py-1">
                                                                             <Menu.Item>

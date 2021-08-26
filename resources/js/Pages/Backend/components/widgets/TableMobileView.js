@@ -4,12 +4,16 @@ import {useContext} from "react";
 import {AppContext} from "../../../context/AppContext";
 import pluralize from 'pluralize'
 import LocalizedText from "./LocalizedText";
-const TableMobileview = ({ tableName, elements }) => {
-    const { classNames, trans, currentModule   } = useContext(AppContext);
+import {useSelector} from "react-redux";
+
+export default function TableMobileView ({ elements }) {
+    const { classNames, trans   } = useContext(AppContext);
+    const { parentModule } = useSelector(state => state)
+
     return (
         <div className="mt-3 sm:hidden bg-white rounded-md shadow-md mx-3 py-3">
             <div className="px-4 sm:px-6">
-                <h2 className="text-gray-500 text-xs font-medium uppercase tracking-wide">{trans(pluralize(tableName))}</h2>
+                { parentModule && <h2 className="text-gray-500 text-xs font-medium uppercase tracking-wide">{trans(pluralize(parentModule))}</h2>}
             </div>
             <ul className="mt-3 border-t border-gray-200 divide-y divide-gray-100">
                 {
@@ -29,7 +33,8 @@ const TableMobileview = ({ tableName, elements }) => {
                                       </span>
                                       </span>
                                     </span>
-                                <Link href={route().has(`backend.${currentModule}.edit`) ? route(`backend.${currentModule}.edit`, element.id) : '#'}>
+                                {parentModule && <Link
+                                    href={route().has(`backend.${parentModule}.edit`) ? route(`backend.${parentModule}.edit`, element.id) : '#'}>
                                     <svg
                                         className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -40,6 +45,7 @@ const TableMobileview = ({ tableName, elements }) => {
                                               d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                                     </svg>
                                 </Link>
+                                }
                             </div>
                         </li>
                     ))
@@ -48,5 +54,3 @@ const TableMobileview = ({ tableName, elements }) => {
         </div>
     );
 }
-
-export default TableMobileview;

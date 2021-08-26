@@ -30,14 +30,16 @@ import 'froala-editor/js/languages/ar.js';
 import 'froala-editor/js/third_party/image_tui.min.js';
 import 'froala-editor/js/third_party/embedly.min.js';
 import 'froala-editor/js/third_party/spell_checker.min.js';
+import {useSelector} from "react-redux";
 
 export default function SettingEdit({setting, themes}) {
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, theme, currentFormTab, parentModule, getThumb, getLocalized, locale } = useContext(AppContext)
+    const {classNames, trans, parentModule, getThumb, getLocalized,  } = useContext(AppContext)
+    const { lang, currentFormTab } = useSelector(state => state)
     //  text editor
     // ReactDOM.render(<FroalaEditorComponent tag='textarea'/>, document.getElementById('editor'));
     const froalaConfig = {
-        language: locale,
+        language: lang,
     }
 
     const {data, setData, put, post, progress, reset} = useForm({
@@ -138,7 +140,7 @@ export default function SettingEdit({setting, themes}) {
             gift_image: data.gift_image,
             shipment_prices: data.shipment_prices,
         }, {
-            forceFormData: true,
+            forceFormData: true
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {

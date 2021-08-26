@@ -55,6 +55,7 @@ class CourseController extends Controller
                 'image' => $element->image,
                 'sku' => $element->sku,
                 'on_sale' => $element->on_sale,
+                'active' => $element->active,
                 'user' => $element->user->only('id', 'name_ar', 'name_en'),
             ]);
         return inertia('Backend/Course/CourseIndex', compact('elements'));

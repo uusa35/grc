@@ -82,8 +82,6 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
         // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
 
-    console.log('the cart', cart.items);
-
     return (
         <FrontendContainer mainModule={'service'} subModule={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none my-10">

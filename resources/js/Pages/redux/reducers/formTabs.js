@@ -4,7 +4,7 @@ export default function(formTabs = [
     {id: 2, name: 'more_images'},
 ], action) {
     switch (action.type) {
-        case 'SET_FORM_TAB':
+        case 'SET_FORM_TABS':
             return action.payload;
         default:
             return formTabs;

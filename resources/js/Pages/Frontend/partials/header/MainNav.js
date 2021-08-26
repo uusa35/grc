@@ -210,7 +210,7 @@ export default function MainNav() {
                     }
                     <Link
                         title={capitalize(trans(locale.otherLang))}
-                        onClick={() => dispatch(changeLang('en'))}
+                        onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
                         className="-m-2 p-2 block text-gray-50">
                         {capitalize(trans(locale.otherLang))}
@@ -241,8 +241,7 @@ export default function MainNav() {
                         leaveFrom="translate-x-0"
                         leaveTo="-translate-x-full"
                     >
-                        <div
-                            className="relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto">
+                        <div className={classNames(locale.isRTL ? 'font-bein' : 'font-tajwal-medium', "relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto")}>
                             <div className="px-4 pt-5 pb-2 flex">
                                 <button
                                     type="button"
@@ -284,7 +283,6 @@ export default function MainNav() {
                                         </Link>
                                     </div>
                                 }
-
                                 <div className="flow-root">
                                     <Link
                                         onClick={() => {
@@ -700,7 +698,7 @@ export default function MainNav() {
                                                                 }}
                                                                 className={classNames(
                                                                     active ? 'bg-gray-800 text-gray-50' : '',
-                                                                    'group flex items-center px-4 py-2  '
+                                                                    'group flex w-full items-center px-4 py-2 '
                                                                 )}
                                                             >{trans('logout')}</button>
                                                         )}

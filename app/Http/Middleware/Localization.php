@@ -15,7 +15,7 @@ class Localization
      * @return mixed
      */
 
-    const SESSION_KEY = 'locale';
+    const SESSION_KEY = 'lang';
     const LOCALES = ['en', 'ar'];
 
     public function handle($request, Closure $next)

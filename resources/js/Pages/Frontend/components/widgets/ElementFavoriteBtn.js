@@ -19,6 +19,7 @@ export default function ElementFavoriteBtn({type, id, favoritesList }) {
     const submit = (e) => {
         e.preventDefault()
         if (!guest) {
+            console.log('inside ===>')
             setCurrentFavorite(!currentFavorite);
             post(route('frontend.favorite.store'), {
                 onSuccess : () => {
@@ -27,7 +28,7 @@ export default function ElementFavoriteBtn({type, id, favoritesList }) {
                 }
             });
         } else {
-            toast.error(capitalize(trans('u_have_to_register_first')))
+             toast.error(capitalize(trans('u_have_to_register_first')))
         }
     }
 

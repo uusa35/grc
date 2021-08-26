@@ -76,7 +76,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::resource('service', FrontendServiceController::class)->only(['index', 'show']);
     Route::resource('course', FrontendCourseController::class)->only(['index', 'show']);
     Route::resource('category', FrontendCategoryController::class);
-    Route::resource('user', FrontendUserController::class)->except('destroy');
+    Route::resource('user', FrontendUserController::class)->except('destroy','edit');
     Route::resource('faq', FrontendFaqController::class)->only('index');
     Route::get('contactus', [FrontendPageController::class, 'getContactus'])->name('contactus');
     Route::get('aboutus', [FrontendPageController::class, 'getAboutus'])->name('aboutus');
@@ -88,6 +88,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('rating', FrontendRatingController::class)->only('store');
         Route::resource('favorite', FrontendFavoriteController::class)->only('store');
+        Route::resource('user', FrontendUserController::class)->only('edit');
     });
 });
 

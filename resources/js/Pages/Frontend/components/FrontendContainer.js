@@ -25,7 +25,7 @@ const FrontendContainer = ({
                                mainSlides = [],
                                showBreadCrumbs = true
                            }) => {
-    const { isRTL } = useSelector(state => state.locale)
+    const { isRTL , dir } = useSelector(state => state.locale)
     const { classNames } = useContext(AppContext);
     // useEffect(() => {
     //     mainModule !== parentModule ? setParentModule(mainModule) : null;
@@ -33,8 +33,7 @@ const FrontendContainer = ({
     // }, [])
 
     return (
-        <div className="h-full flex overflow-hidden text-sm md:text-lg"
-             dir={isRTL ? 'rtl' : 'ltr'}>
+        <div className="h-full flex overflow-hidden text-sm md:text-lg" dir={dir}>
             {/*<Head title={capitalize(settings[getLocalized()])}>*/}
             {/*    <meta head-key="title" name="title" content={settings[getLocalized()]}/>*/}
             {/*    <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>*/}

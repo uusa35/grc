@@ -1,12 +1,14 @@
 import {useContext} from "react";
 import {AppContext} from "../../../context/AppContext";
+import {useSelector} from "react-redux";
 
 export default function ElementTags({onNew, onSale, exclusive}) {
-    const {isRTL, classNames, trans} = useContext(AppContext)
+    const {classNames, trans} = useContext(AppContext)
+    const { locale } = useSelector(state => state)
     return (
         <div className="relative opacity-80 z-40">
             <div
-                className={classNames(isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col  gap-y-3 text-white text-sm')}>
+                className={classNames(locale.isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col  gap-y-3 text-white text-sm')}>
                 {
                     onSale && <span
                         className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm  bg-red-900 ">
@@ -27,7 +29,7 @@ export default function ElementTags({onNew, onSale, exclusive}) {
                 }
             </div>
             <div
-                className={classNames(isRTL ? `` : ``, 'absolute bottom-8 right-6 flex flex-col  gap-y-3 text-white text-sm opacity-60 hidden')}>
+                className={classNames(locale.isRTL ? `` : ``, 'absolute bottom-8 right-6 flex flex-col  gap-y-3 text-white text-sm opacity-60 hidden')}>
                 <span
                     onClick={() => console.log('clicked')}
                 >

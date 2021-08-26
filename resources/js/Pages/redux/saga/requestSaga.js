@@ -1,24 +1,26 @@
 import {call, put, all, takeLatest, select, delay} from 'redux-saga/effects';
 import * as requestSaga from './requestSaga';
 import * as actions from './../actions/types'
-import { first } from 'lodash'
+import {first} from 'lodash'
+import {toast} from "react-toastify";
 
 export function* startEnableBootStrappedScenario(action) {
     try {
-        const { currencies , settings , auth } = action.payload;
+        const {currencies, settings, auth} = action.payload;
         yield all([
-            put({ type : actions.SET_CURRENCIES, payload : currencies}),
-            put({ type : actions.SET_CURRENCY, payload : first(currencies)}),
-            put({ type : actions.SET_SETTINGS , payload : settings }),
-            put({ type : actions.SET_AUTH , payload : auth}),
-            put({ type : actions.DISABLE_LOADING }),
-            put({ type : actions.ENABLE_BOOTSTRAPPED}),
+            put({type: actions.SET_CURRENCIES, payload: currencies}),
+            put({type: actions.SET_CURRENCY, payload: first(currencies)}),
+            put({type: actions.SET_SETTINGS, payload: settings}),
+            put({type: actions.SET_AUTH, payload: auth}),
+            put({type: actions.DISABLE_LOADING}),
+            put({type: actions.ENABLE_BOOTSTRAPPED}),
 
         ])
     } catch (e) {
         console.log('e', e)
     }
 }
+
 export function* startChangeLangScenario(action) {
     try {
         const isRTL = action.payload === 'ar'
@@ -47,5 +49,17 @@ export function* startChangeLangScenario(action) {
         console.log('e', e)
     } finally {
 
+    }
+}
+
+
+export function* startToastMessageScenario(action) {
+    try {
+        toast(action.payload.message, {type: action.payload.type})
+    } catch (e) {
+        console.log('e', e)
+    } finally {
+        yield delay(5000);
+        yield  put({type: actions.CLEAR_TOAST_MESSAGE});
     }
 }
