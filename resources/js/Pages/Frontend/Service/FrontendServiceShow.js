@@ -84,7 +84,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
 
     return (
         <FrontendContainer mainModule={'service'} subModule={element[getLocalized()]}>
-            <div className="max-w-2xl mx-auto lg:max-w-none my-10">
+            <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
                     {/* Image gallery */}
@@ -107,10 +107,11 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                         <div className="mt-3">
                             <h2 className="sr-only">{trans('information')}</h2>
                             <ElementPrice price={element.price} salePrice={element.sale_price}
+                                          showLocal={true}
                                           isOnSale={element.isOnSale} large={true}/>
                         </div>
                         {/* Reviews */}
-                        <ElementRating ratings={element.ratings} id={element.id} type={'service'}/>
+                        {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'service'}/>}
                         <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                             <div className="flex flex-1">
                                 {
@@ -136,7 +137,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                 }
                             </div>
                         </div>
-                        <div className="mt-6">
+                        {element.timings && <div className="mt-6">
                             {/* service timings */}
                             <Menu as="div" className="relative inline-block text-left mb-5 w-full">
                                 <div>
@@ -209,7 +210,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                 <ElementFavoriteBtn id={element.id} type={'service'}
                                                     favoritesList={auth?.favoritesList}/>
                             </div>
-                        </div>
+                        </div>}
                         <section aria-labelledby="details-heading" className="my-12">
                             <h2 id="details-heading" className="sr-only">
                                 Additional details
@@ -361,19 +362,21 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                         <dd className="mt-1 text-sm text-gray-500">{trans('direct_purchase')}</dd>
                                     </div> : null
                                 }
-                                <div
-                                    className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                             viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
+                                {
+                                    element.timings && <div
+                                        className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="mt-4 text-sm font-medium text-gray-900">{trans('timings')}</span>
+                                        <p className="mt-1 text-xs text-gray-500">{trans('kwt_timing_zone')}</p>
                                     </div>
-                                    <span
-                                        className="mt-4 text-sm font-medium text-gray-900">{trans('timings')}</span>
-                                    <p className="mt-1 text-xs text-gray-500">{trans('kwt_timing_zone')}</p>
-                                </div>
+                                }
                                 {
                                     element.sku &&
                                     <div
@@ -396,7 +399,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                 </div>
                 {/* related items */}
                 {
-                    relatedElements.meta.total > 0 && <RelatedItems elements={relatedElements.data} type={'service'}/>
+                    relatedElements && relatedElements.meta.total > 0 && <RelatedItems elements={relatedElements.data} type={'service'}/>
                 }
             </div>
         </FrontendContainer>

@@ -1,515 +1,405 @@
-/*
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  const colors = require('tailwindcss/colors')
-
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        colors: {
-          orange: colors.orange,
-        },
-      },
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/typography'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
-import {Fragment, useContext, useState} from 'react'
-import {Dialog, Disclosure, Popover, RadioGroup, Tab, Transition} from '@headlessui/react'
+import {Fragment, useContext, useEffect, useMemo, useState} from 'react'
+import {Dialog, Disclosure, Popover, RadioGroup, Tab, Transition, Menu} from '@headlessui/react'
 import {
     HeartIcon,
     MenuIcon,
     MinusSmIcon,
     PlusSmIcon,
-    SearchIcon,
-    ShoppingBagIcon,
-    UserIcon,
-    XIcon,
+    ChevronDownIcon
 } from '@heroicons/react/outline'
 import {StarIcon} from '@heroicons/react/solid'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
+import {map, sumBy, isEmpty, first, capitalize, random, isNull} from 'lodash';
+import ElementPrice from "../components/widgets/ElementPrice";
+import moment from "moment";
+import ElementTags from "../components/widgets/ElementTags";
+import RelatedItems from "../components/widgets/RelatedItems";
+import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
+import ImageGallery from 'react-image-gallery';
+import ElementRating from "../components/widgets/ElementRating";
+import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
+import {isMobile} from "react-device-detect";
+import route from 'ziggy-js'
+import {toast} from "react-toastify";
+import {useForm} from "@inertiajs/inertia-react";
+import {useDispatch, useSelector} from "react-redux";
+import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
 
-const navigation = {
-    categories: [
-        {
-            id: 'women',
-            name: 'Women',
-            featured: [
-                {
-                    name: 'New Arrivals',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-                    imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-                },
-                {
-                    name: 'Basic Tees',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
-                    imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-                },
-                {
-                    name: 'Accessories',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-03.jpg',
-                    imageAlt: 'Model wearing minimalist watch with black wristband and white watch face.',
-                },
-            ],
-            sections: [
-                [
-                    {
-                        id: 'shoes',
-                        name: 'Shoes & Accessories',
-                        items: [
-                            {name: 'Sneakers', href: '#'},
-                            {name: 'Boots', href: '#'},
-                            {name: 'Flats', href: '#'},
-                            {name: 'Sandals', href: '#'},
-                            {name: 'Heels', href: '#'},
-                            {name: 'Socks', href: '#'},
-                        ],
-                    },
-                    {
-                        id: 'collection',
-                        name: 'Shop Collection',
-                        items: [
-                            {name: 'Everything', href: '#'},
-                            {name: 'Core', href: '#'},
-                            {name: 'New Arrivals', href: '#'},
-                            {name: 'Sale', href: '#'},
-                            {name: 'Accessories', href: '#'},
-                        ],
-                    },
-                ],
-                [
-                    {
-                        id: 'clothing',
-                        name: 'All Clothing',
-                        items: [
-                            {name: 'Basic Tees', href: '#'},
-                            {name: 'Artwork Tees', href: '#'},
-                            {name: 'Tops', href: '#'},
-                            {name: 'Bottoms', href: '#'},
-                            {name: 'Swimwear', href: '#'},
-                            {name: 'Underwear', href: '#'},
-                        ],
-                    },
-                    {
-                        id: 'accessories',
-                        name: 'All Accessories',
-                        items: [
-                            {name: 'Watches', href: '#'},
-                            {name: 'Wallets', href: '#'},
-                            {name: 'Bags', href: '#'},
-                            {name: 'Sunglasses', href: '#'},
-                            {name: 'Hats', href: '#'},
-                            {name: 'Belts', href: '#'},
-                        ],
-                    },
-                ],
-                [
-                    {
-                        id: 'brands',
-                        name: 'Brands',
-                        items: [
-                            {name: 'Full Nelson', href: '#'},
-                            {name: 'My Way', href: '#'},
-                            {name: 'Re-Arranged', href: '#'},
-                            {name: 'Counterfeit', href: '#'},
-                            {name: 'Significant Other', href: '#'},
-                        ],
-                    },
-                ],
-            ],
-        },
-        {
-            id: 'men',
-            name: 'Men',
-            featured: [
-                {
-                    name: 'Accessories',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg',
-                    imageAlt:
-                        'Wooden shelf with gray and olive drab green baseball caps, next to wooden clothes hanger with sweaters.',
-                },
-                {
-                    name: 'New Arrivals',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-                    imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
-                },
-                {
-                    name: 'Artwork Tees',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-                    imageAlt:
-                        'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-                },
-            ],
-            sections: [
-                [
-                    {
-                        id: 'shoes',
-                        name: 'Shoes & Accessories',
-                        items: [
-                            {name: 'Sneakers', href: '#'},
-                            {name: 'Boots', href: '#'},
-                            {name: 'Sandals', href: '#'},
-                            {name: 'Socks', href: '#'},
-                        ],
-                    },
-                    {
-                        id: 'collection',
-                        name: 'Shop Collection',
-                        items: [
-                            {name: 'Everything', href: '#'},
-                            {name: 'Core', href: '#'},
-                            {name: 'New Arrivals', href: '#'},
-                            {name: 'Sale', href: '#'},
-                        ],
-                    },
-                ],
-                [
-                    {
-                        id: 'clothing',
-                        name: 'All Clothing',
-                        items: [
-                            {name: 'Basic Tees', href: '#'},
-                            {name: 'Artwork Tees', href: '#'},
-                            {name: 'Pants', href: '#'},
-                            {name: 'Hoodies', href: '#'},
-                            {name: 'Swimsuits', href: '#'},
-                        ],
-                    },
-                    {
-                        id: 'accessories',
-                        name: 'All Accessories',
-                        items: [
-                            {name: 'Watches', href: '#'},
-                            {name: 'Wallets', href: '#'},
-                            {name: 'Bags', href: '#'},
-                            {name: 'Sunglasses', href: '#'},
-                            {name: 'Hats', href: '#'},
-                            {name: 'Belts', href: '#'},
-                        ],
-                    },
-                ],
-                [
-                    {
-                        id: 'brands',
-                        name: 'Brands',
-                        items: [
-                            {name: 'Re-Arranged', href: '#'},
-                            {name: 'Counterfeit', href: '#'},
-                            {name: 'Full Nelson', href: '#'},
-                            {name: 'My Way', href: '#'},
-                        ],
-                    },
-                ],
-            ],
-        },
-    ],
-    pages: [
-        {name: 'Company', href: '#'},
-        {name: 'Stores', href: '#'},
-    ],
-}
-const product = {
-    name: 'Zip Tote Basket',
-    price: '$140',
-    rating: 4,
-    images: [
-        {
-            id: 1,
-            name: 'Angled view',
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg',
-            alt: 'Angled front view with bag zipped and handles upright.',
-        },
-        // More images...
-    ],
-    colors: [
-        {name: 'Washed Black', bgColor: 'bg-gray-700', selectedColor: 'ring-gray-700'},
-        {name: 'White', bgColor: 'bg-white', selectedColor: 'ring-gray-400'},
-        {name: 'Washed Gray', bgColor: 'bg-gray-500', selectedColor: 'ring-gray-500'},
-    ],
-    description: `
-    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertable straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable cavnas construction keeps your goods protected for all-day use.</p>
-  `,
-    details: [
-        {
-            name: 'Features',
-            items: [
-                'Multiple strap configurations',
-                'Spacious interior with top zip',
-                'Leather handle and tabs',
-                'Interior dividers',
-                'Stainless strap loops',
-                'Double stitched construction',
-                'Water-resistant',
-            ],
-        },
-        // More sections...
-    ],
-}
-const relatedProducts = [
-    {
-        id: 1,
-        name: 'Zip Tote Basket',
-        color: 'White and black',
-        href: '#',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-03-related-product-01.jpg',
-        imageAlt: 'Front of zip tote bag with white canvas, black canvas straps and handle, and black zipper pulls.',
-        price: '$140',
-    },
-    // More products...
-]
 
-export default function FrontendCourseShow({element}) {
-    const {currency, getThumb, getLocalized, trans, classNames} = useContext(AppContext)
-    const [open, setOpen] = useState(false)
-    const [selectedColor, setSelectedColor] = useState(product.colors[0])
+export default function FrontendCourseShow({element, relatedElements, auth}) {
+    const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
+    const [selectedTiming, setSelectedTiming] = useState();
+    const [currentImages, setCurrentImages] = useState([]);
+    const {cart} = useSelector(state => state);
+    const dispatch = useDispatch();
+    const {data, setData, post, progress} = useForm({
+        'type': 'course',
+        'cart_id': null,
+        'element_id': element.id,
+        'timing_id': null,
+        'qty': 1,
+        'price': element.isOnSale ? element.sale_price : element.price,
+        'direct_purchase': element.direct_purchase,
+
+    });
+
+    useMemo(() => {
+        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
+        map(element.images, img => {
+            images.push({thumbnail: getThumb(img.image), original: getLarge(img.image)})
+        })
+        setCurrentImages(images);
+    }, [element])
+
+    useMemo(() => {
+        !isEmpty(selectedTiming) ? setData('timing_id', selectedTiming.id) : null;
+    }, [selectedTiming])
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isNull(data.timing_id)) {
+            toast.error(capitalize(trans('please_choose_timing')))
+        }
+        // dispatch(clearCart());
+        dispatch(addToCart({
+            cart_id: element.id + '' + selectedTiming.id,
+            type: 'course',
+            element_id: element.id,
+            timing_id: selectedTiming.id,
+            qty: 1,
+            price: element.isOnSale ? element.sale_price : element.price,
+            direct_purchase: element.direct_purchase,
+            shipmentFees: 0,
+            image: element.image,
+            name_ar: element.name_ar,
+            name_en: element.name_en,
+            description_ar: element.description_ar,
+            description_en: element.description_en,
+            timing : selectedTiming
+        }))
+        // dispatch(removeFromCart(element.id +''+selectedTiming.id));
+    }
 
     return (
-        <FrontendContainer mainModule={'book'} subModule={element[getLocalized()]}>
-            <div className="max-w-2xl mx-auto lg:max-w-none my-10">
+        <FrontendContainer mainModule={'course'} subModule={element[getLocalized()]}>
+            <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
-                <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+                <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
                     {/* Image gallery */}
-                    <Tab.Group as="div" className="flex flex-col-reverse">
-                        {/* Image selector */}
-                        <div className="hidden mt-6 w-full max-w-2xl mx-auto sm:block lg:max-w-none">
-                            <Tab.List className="grid grid-cols-4 gap-6">
-                                {product.images.map((image) => (
-                                    <Tab
-                                        key={image.id}
-                                        className="relative h-24 bg-white rounded-md flex items-center justify-center text-sm font-medium uppercase text-gray-900 cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring focus:ring-offset-4 focus:ring-opacity-50"
-                                    >
-                                        {({selected}) => (
-                                            <>
-                                                <p className="sr-only">{image.name}</p>
-                                                <div className="absolute inset-0 rounded-md overflow-hidden">
-                                                    <img src={image.src} alt={image.alt}
-                                                         className="w-full h-full object-center object-cover"/>
-                                                </div>
-                                                <div
-                                                    className={classNames(
-                                                        selected ? 'ring-indigo-500' : 'ring-transparent',
-                                                        'absolute inset-0 rounded-md ring-2 ring-offset-2 pointer-events-none'
-                                                    )}
-                                                    aria-hidden="true"
-                                                />
-                                            </>
-                                        )}
-                                    </Tab>
-                                ))}
-                            </Tab.List>
-                        </div>
-
-                        <Tab.Panels className="w-full aspect-w-1 aspect-h-1">
-                            {product.images.map((image) => (
-                                <Tab.Panel key={image.id}>
-                                    <img
-                                        src={image.src}
-                                        alt={image.alt}
-                                        className="w-full h-full object-center object-cover sm:rounded-lg"
-                                    />
-                                </Tab.Panel>
-                            ))}
-                        </Tab.Panels>
-                    </Tab.Group>
-
+                    <div className="relative">
+                        <ElementTags exclusive={element.exclusive} onSale={element.isOnSale} onNew={element.on_new}/>
+                        <ImageGallery
+                            showBullets={true}
+                            showNav={false}
+                            originalAlt={element[getLocalized()]}
+                            originalTitle={element[getLocalized()]}
+                            thumbnailLabel={element[getLocalized()]}
+                            thumbnailTitle={element[getLocalized()]}
+                            showThumbnails={true}
+                            thumbnailPosition={isMobile ? 'bottom' : 'right'}
+                            items={currentImages}/>
+                    </div>
                     {/* Product info */}
-                    <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{product.name}</h1>
-
+                    <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
+                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
                         <div className="mt-3">
-                            <h2 className="sr-only">Product information</h2>
-                            <p className="text-3xl text-gray-900">{product.price}</p>
+                            <h2 className="sr-only">{trans('information')}</h2>
+                            <ElementPrice price={element.price} salePrice={element.sale_price}
+                                          showLocal={true}
+                                          isOnSale={element.isOnSale} large={true}/>
                         </div>
-
                         {/* Reviews */}
-                        <div className="mt-3">
-                            <h3 className="sr-only">Reviews</h3>
-                            <div className="flex items-center">
-                                <div className="flex items-center">
-                                    {[0, 1, 2, 3, 4].map((rating) => (
-                                        <StarIcon
-                                            key={rating}
-                                            className={classNames(
-                                                product.rating > rating ? 'text-indigo-500' : 'text-gray-300',
-                                                'h-5 w-5 flex-shrink-0'
-                                            )}
-                                            aria-hidden="true"
-                                        />
-                                    ))}
-                                </div>
-                                <p className="sr-only">{product.rating} out of 5 stars</p>
-                            </div>
-                        </div>
-
-                        <div className="mt-6">
-                            <h3 className="sr-only">Description</h3>
-
-                            <div
-                                className="text-base text-gray-700 space-y-6"
-                                dangerouslySetInnerHTML={{__html: product.description}}
-                            />
-                        </div>
-
-                        <form className="mt-6">
-                            {/* Colors */}
-                            <div>
-                                <h3 className="text-sm text-gray-600">Color</h3>
-
-                                <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-2">
-                                    <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
-                                    <div className="flex items-center space-x-3">
-                                        {product.colors.map((color) => (
-                                            <RadioGroup.Option
-                                                key={color.name}
-                                                value={color}
-                                                className={({active, checked}) =>
-                                                    classNames(
-                                                        color.selectedColor,
-                                                        active && checked ? 'ring ring-offset-1' : '',
-                                                        !active && checked ? 'ring-2' : '',
-                                                        '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
-                                                    )
-                                                }
-                                            >
-                                                <RadioGroup.Label as="p" className="sr-only">
-                                                    {color.name}
-                                                </RadioGroup.Label>
-                                                <span
-                                                    aria-hidden="true"
-                                                    className={classNames(
-                                                        color.bgColor,
-                                                        'h-8 w-8 border border-black border-opacity-10 rounded-full'
-                                                    )}
-                                                />
-                                            </RadioGroup.Option>
-                                        ))}
+                        {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'course'}/>}
+                        <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
+                            <div className="flex flex-1">
+                                {
+                                    element[getLocalized('caption')] && <div className="mt-6">
+                                        <h3 className="sr-only">{trans('caption')}</h3>
+                                        <div
+                                            className="text-base text-gray-700 space-y-6"
+                                        >{element[getLocalized('caption')]}</div>
                                     </div>
-                                </RadioGroup>
+                                }
                             </div>
-
-                            <div className="mt-10 flex sm:flex-col1">
-                                <button
-                                    type="submit"
-                                    className="max-w-xs flex-1 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 sm:w-full"
-                                >
-                                    Add to bag
-                                </button>
-
-                                <button
-                                    type="button"
-                                    className="ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                                >
-                                    <HeartIcon className="h-6 w-6 flex-shrink-0" aria-hidden="true"/>
-                                    <span className="sr-only">Add to favorites</span>
-                                </button>
+                            <div className="flex">
+                                {
+                                    element.sku && <div className="mt-6">
+                                        <h3 className="sr-only">{trans('sku')}</h3>
+                                        <div
+                                            className="text-base text-gray-700 space-y-6"
+                                        >
+                                            {trans('reference_id')} :
+                                            {element.sku}
+                                        </div>
+                                    </div>
+                                }
                             </div>
-                        </form>
-
-                        <section aria-labelledby="details-heading" className="mt-12">
+                        </div>
+                        {element.timings && <div className="mt-6">
+                            {/* course timings */}
+                            <Menu as="div" className="relative inline-block text-left mb-5 w-full">
+                                <div>
+                                    <Menu.Button
+                                        className="flex flex-1 justify-between items-center w-full capitalize rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
+                                        <div>
+                                            {!isEmpty(selectedTiming) ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
+                                        </div>
+                                        <ChevronDownIcon className="h-5 w-5" aria-hidden="true"/>
+                                    </Menu.Button>
+                                </div>
+                                <Transition
+                                    as={Fragment}
+                                    enter="transition ease-out duration-100"
+                                    enterFrom="transform opacity-0 scale-95"
+                                    enterTo="transform opacity-100 scale-100"
+                                    leave="transition ease-in duration-75"
+                                    leaveFrom="transform opacity-100 scale-100"
+                                    leaveTo="transform opacity-0 scale-95"
+                                >
+                                    <Menu.Items
+                                        className="z-30 origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        <div className="py-1">
+                                            {
+                                                map(element.timings, t =>
+                                                    <Menu.Item key={t.id}>
+                                                        <div
+                                                            onClick={() => setSelectedTiming(t)}
+                                                            className={classNames(
+                                                                t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                'block px-4 py-2 text-sm hover:bg-gray-100'
+                                                            )}
+                                                        >
+                                                            <div
+                                                                className="flex flex-1 flex-col xl:flex-row justify-start items-center text-sm sm:text-lg">
+                                                                <div
+                                                                    className="flex flex-1 flex-col justify-start xl:flex-row xl:w-1/3 items-center">
+                                                                    <span
+                                                                        className="flex">{`${moment(t.date).format('dddd')} ${trans('equivalent')}`}</span>
+                                                                    <span
+                                                                        className="flex flex-1 justify-start sm:px-2 flex-row">{`${moment(t.date).format('L')}`}</span>
+                                                                </div>
+                                                                <div
+                                                                    className="flex flex-col xl:flex-row justify-between items-center">
+                                                                    <div className="flex capitalize">
+                                                                        {`${trans('from')} ${moment(`${t.date} ${t.start}`).format('HH:mm A')}`}
+                                                                    </div>
+                                                                    <div className="flex ltr:ml-2 rtl:mr-2 capitalize">
+                                                                        {`${trans('to')} ${moment(`${t.date} ${t.end}`).format('HH:mm A')}`}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Menu.Item>
+                                                )
+                                            }
+                                        </div>
+                                    </Menu.Items>
+                                </Transition>
+                            </Menu>
+                            <div className="flex flex-row justify-between items-center gap-x-5">
+                                <form onSubmit={handleSubmit} className="w-full">
+                                    <button
+                                        type="submit"
+                                        className={classNames(`flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                    >
+                                        {trans('add_to_cart')}
+                                    </button>
+                                </form>
+                                <ElementFavoriteBtn id={element.id} type={'course'}
+                                                    favoritesList={auth?.favoritesList}/>
+                            </div>
+                        </div>}
+                        <section aria-labelledby="details-heading" className="my-12">
                             <h2 id="details-heading" className="sr-only">
                                 Additional details
                             </h2>
+                            <div className="border-t divide-y divide-gray-200 ">
+                                {/* description */}
+                                <Disclosure as="div" defaultOpen={true}>
+                                    {({open}) => (
+                                        <>
+                                            <Disclosure.Button
+                                                className="group relative w-full py-6 flex justify-between items-center text-left">
+                                                          <span
+                                                              className={classNames(
+                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  'capitalize font-extrabold'
+                                                              )}
+                                                          >
+                                                            {trans('description')}
+                                                          </span>
+                                                <span className="ml-6 flex items-center">
+                                                        {open ? (
+                                                            <MinusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        ) : (
+                                                            <PlusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        )}
+                                                      </span>
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                <p className="capitalize">
+                                                    {element[getLocalized('description')]}
+                                                </p>
+                                            </Disclosure.Panel>
+                                        </>
+                                    )}
+                                </Disclosure>
 
-                            <div className="border-t divide-y divide-gray-200">
-                                {product.details.map((detail) => (
-                                    <Disclosure as="div" key={detail.name}>
-                                        {({open}) => (
-                                            <>
-                                                <h3>
-                                                    <Disclosure.Button
-                                                        className="group relative w-full py-6 flex justify-between items-center text-left">
-                              <span
-                                  className={classNames(
-                                      open ? 'text-indigo-600' : 'text-gray-900',
-                                      'text-sm font-medium'
-                                  )}
-                              >
-                                {detail.name}
-                              </span>
-                                                        <span className="ml-6 flex items-center">
-                                {open ? (
-                                    <MinusSmIcon
-                                        className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
-                                        aria-hidden="true"
-                                    />
-                                ) : (
-                                    <PlusSmIcon
-                                        className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                        aria-hidden="true"
-                                    />
-                                )}
-                              </span>
-                                                    </Disclosure.Button>
-                                                </h3>
-                                                <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
-                                                    <ul role="list">
-                                                        {detail.items.map((item) => (
-                                                            <li key={item}>{item}</li>
-                                                        ))}
-                                                    </ul>
-                                                </Disclosure.Panel>
-                                            </>
-                                        )}
-                                    </Disclosure>
-                                ))}
+
+                                {/* notes */}
+                                <Disclosure as="div" defaultOpen={false}>
+                                    {({open}) => (
+                                        <>
+                                            <Disclosure.Button
+                                                className="group relative w-full py-6 flex justify-between items-center text-left">
+                                                          <span
+                                                              className={classNames(
+                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  'capitalize'
+                                                              )}
+                                                          >
+                                                            {trans('notes')}
+                                                          </span>
+                                                <span className="ml-6 flex items-center">
+                                                        {open ? (
+                                                            <MinusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        ) : (
+                                                            <PlusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        )}
+                                                      </span>
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                <p className='capitalize'>
+                                                    {element[getLocalized('notes')]}
+                                                </p>
+                                            </Disclosure.Panel>
+                                        </>
+                                    )}
+                                </Disclosure>
+
+                                {/* company  */}
+                                <Disclosure as="div" defaultOpen={false}>
+                                    {({open}) => (
+                                        <>
+                                            <Disclosure.Button
+                                                className="group relative w-full py-6 flex justify-between items-center text-left">
+                                                          <span
+                                                              className={classNames(
+                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  'capitalize'
+                                                              )}
+                                                          >
+                                                            {trans('owner')}
+                                                          </span>
+                                                <span className="ml-6 flex items-center">
+                                                        {open ? (
+                                                            <MinusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        ) : (
+                                                            <PlusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        )}
+                                                      </span>
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                <div className="flex flex-1 justify-start items-start">
+                                                    <div>
+                                                        <img
+                                                            className="w-40 h-auto rounded-sm shadow-md"
+                                                            src={getThumb(element.user.image)}
+                                                            alt={element.user[getLocalized()]}/>
+                                                    </div>
+                                                    <div className="rtl:mr-5 ltr:ml-5">
+                                                        <h4>{element.user[getLocalized()]}</h4>
+                                                        <h6>{element.user[getLocalized('caption')]}</h6>
+                                                        <p>{element.user[getLocalized('description')]}</p>
+                                                    </div>
+                                                </div>
+                                            </Disclosure.Panel>
+                                        </>
+                                    )}
+                                </Disclosure>
                             </div>
+                        </section>
+
+                        {/* Notes (direct purchase) */}
+                        <section aria-labelledby="policies-heading" className="mt-10">
+                            <h2 id="policies-heading" className="sr-only">
+                                {trans('notes')}
+                            </h2>
+
+                            <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 capitalize truncate">
+                                {
+                                    element.direct_purchase ? <div
+                                        className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="mt-4 text-sm font-medium text-gray-900">{trans('direct_purchase')}</span>
+                                        <dd className="mt-1 text-sm text-gray-500">{trans('direct_purchase')}</dd>
+                                    </div> : null
+                                }
+                                {
+                                 element.timings && <div
+                                     className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                     <div>
+                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                              viewBox="0 0 24 24" stroke="currentColor">
+                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                   d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                         </svg>
+                                     </div>
+                                     <span
+                                         className="mt-4 text-sm font-medium text-gray-900">{trans('timings')}</span>
+                                     <p className="mt-1 text-xs text-gray-500">{trans('kwt_timing_zone')}</p>
+                                 </div>
+                                }
+                                {
+                                    element.sku &&
+                                    <div
+                                        className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                      d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="mt-4 text-sm font-medium text-gray-900">{trans('reference_id')}</span>
+                                        <dd className="mt-1 text-sm text-gray-500">{element.sku}</dd>
+                                    </div>
+                                }
+                            </dl>
                         </section>
                     </div>
                 </div>
-
-                <section aria-labelledby="related-heading"
-                         className="mt-10 border-t border-gray-200 py-16 px-4 sm:px-0">
-                    <h2 id="related-heading" className="text-xl font-bold text-gray-900">
-                        Customers also bought
-                    </h2>
-
-                    <div
-                        className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-                        {relatedProducts.map((product) => (
-                            <div key={product.id}>
-                                <div className="relative">
-                                    <div className="relative w-full h-72 rounded-lg overflow-hidden">
-                                        <img
-                                            src={product.imageSrc}
-                                            alt={product.imageAlt}
-                                            className="w-full h-full object-center object-cover"
-                                        />
-                                    </div>
-                                    <div className="relative mt-4">
-                                        <h3 className="text-sm font-medium text-gray-900">{product.name}</h3>
-                                        <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                                    </div>
-                                    <div
-                                        className="absolute top-0 inset-x-0 h-72 rounded-lg p-4 flex items-end justify-end overflow-hidden">
-                                        <div
-                                            aria-hidden="true"
-                                            className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
-                                        />
-                                        <p className="relative text-lg font-semibold text-white">{product.price}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
+                {/* related items */}
+                {
+                    relatedElements && relatedElements.meta.total > 0 && <RelatedItems elements={relatedElements.data} type={'course'}/>
+                }
             </div>
         </FrontendContainer>
     )

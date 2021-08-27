@@ -1,13 +1,15 @@
 import {PlusSmIcon} from "@heroicons/react/solid";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
-import {map} from "lodash";
+import {map, range} from "lodash";
 import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
+import {useSelector} from "react-redux";
 
-export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories, mobileFiltersOpen  , type }) {
-    const { trans, getLocalized , isRTL   } = useContext(AppContext)
-    const { params } = route();
+export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mobileFiltersOpen, type, enablePrice = true}) {
+    const {trans, getLocalized, classNames } = useContext(AppContext)
+    const {locale} = useSelector(state => state);
+    const {params} = route();
     return (
         <aside>
             <h2 className="sr-only capitalize">{trans('advanced_search')}</h2>
@@ -35,7 +37,7 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                 <div className="divide-y divide-gray-200 space-y-3">
                     <div className="flex flex-1 justify-between items-center">
                         <div className="flex">
-                            <h3 className="capitalize">{trans('categories')}</h3>
+                            <h3 className="capitalize">{trans('filters')}</h3>
                         </div>
                         <div className="flex">
                             <Link
@@ -47,19 +49,70 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
 
                         </div>
                     </div>
+                    {/* price search */}
+                    {
+                        enablePrice && <>
+                            <div className="flex pt-3">
+                                <h3 className="capitalize">{trans('prices')}</h3>
+                            </div>
+                            {
+                                map(range(50, 300, 50), r =>
+                                    <div key={r} className="pt-3">
+                                        <fieldset className="space-y-3">
+                                            <div className="pt-3 space-y-3">
+                                                <Link
+                                                    href={route(`frontend.${type}.index`, { ...params , max: r, min : parseInt(r -50)})}
+                                                    className={classNames(params.max == r ? `bg-gray-50 p-3 rounded-md shadow-md`: '' , "flex items-center")}>
+                                                    {
+                                                        locale.isRTL ?
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                                 viewBox="0 0 20 20" fill="currentColor">
+                                                                <path fillRule="evenodd"
+                                                                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                                      clipRule="evenodd"/>
+                                                            </svg>
+                                                            : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                                   viewBox="0 0 20 20" fill="currentColor">
+                                                                <path fillRule="evenodd"
+                                                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                                      clipRule="evenodd"/>
+                                                            </svg>
+                                                    }
+                                                    <label htmlFor={'name'}
+                                                           className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600 capitalize">
+                                                        {`${trans("less_than")} ${r} ${trans('kd')}`}
+                                                    </label>
+                                                </Link>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                )}
+
+                        </>
+                    }
+
+                    <div className="flex pt-3">
+                        <h3 className="capitalize">{trans('categories')}</h3>
+                    </div>
                     {map(categories, c => (
                         <div key={c.id} className="pt-3">
                             <fieldset className="space-y-3">
                                 <div className="pt-3 space-y-3">
                                     <Link
-                                        href={route(`frontend.${type}.index`, {category_id: c.id})}
+                                        href={route(`frontend.${type}.index`, { ...params , category_id: c.id})}
                                         className="flex items-center">
                                         {
-                                            isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                                viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd"
+                                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                          clipRule="evenodd"/>
                                                 </svg>
-                                                : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                       viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd"
+                                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                          clipRule="evenodd"/>
                                                 </svg>
                                         }
                                         <label htmlFor={'name'}
@@ -72,7 +125,7 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                     map(c.children, child => (
                                         <div className="pt-1 space-y-3 mx-5" key={child.id}>
                                             <Link
-                                                href={route(`frontend.${type}.index`, {category_id: child.id})}
+                                                href={route(`frontend.${type}.index`, { ...params , category_id: child.id})}
                                                 className="flex items-center">
                                                 <input
                                                     readOnly
@@ -80,11 +133,18 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                                     checked={child.id == params.category_id}
                                                 />
                                                 {
-                                                    isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                    locale.isRTL ?
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                             viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fillRule="evenodd"
+                                                                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                                  clipRule="evenodd"/>
                                                         </svg>
-                                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                               viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fillRule="evenodd"
+                                                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                                  clipRule="evenodd"/>
                                                         </svg>
                                                 }
                                                 <label htmlFor={'name'}
@@ -96,7 +156,7 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                                 map(child.children, sub => (
                                                     <div className="pt-1 space-y-3 mx-2" key={sub.id}>
                                                         <Link
-                                                            href={route(`frontend.${type}.index`, {category_id: sub.id})}
+                                                            href={route(`frontend.${type}.index`, { ...params, category_id: sub.id})}
                                                             className="flex items-center">
                                                             <input
                                                                 readOnly
@@ -104,11 +164,20 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                                                                 checked={sub.id == params.category_id}
                                                             />
                                                             {
-                                                                isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                        <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                                locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                    className="h-5 w-5"
+                                                                                    viewBox="0 0 20 20"
+                                                                                    fill="currentColor">
+                                                                        <path fillRule="evenodd"
+                                                                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                                              clipRule="evenodd"/>
                                                                     </svg>
-                                                                    : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                                                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                                                    : <svg xmlns="http://www.w3.org/2000/svg"
+                                                                           className="h-5 w-5" viewBox="0 0 20 20"
+                                                                           fill="currentColor">
+                                                                        <path fillRule="evenodd"
+                                                                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                                              clipRule="evenodd"/>
                                                                     </svg>
                                                             }
                                                             <label htmlFor={'name'}
@@ -129,5 +198,6 @@ export default function SearchIndexSideBar({ setMobileFiltersOpen  , categories,
                 </div>
             </div>
         </aside>
-    );
+    )
+        ;
 }

@@ -82,6 +82,7 @@ class UserFactory extends Factory
             'on_home' => $this->faker->boolean(true),
             'is_male' => $this->faker->boolean,
             'news_letter_on' => $this->faker->boolean,
+            'access_dashboard' => $this->faker->boolean(true),
             'video_url_one' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_two' => 'https://www.youtube.com/embed/GhyKqj_P2E4',
             'video_url_three' => 'https://www.youtube.com/embed/GhyKqj_P2E4',

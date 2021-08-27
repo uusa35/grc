@@ -60,6 +60,7 @@ export default function FrontendUserIndex({elements, categories}) {
                     {/* search SideBar */}
                     <SearchIndexSideBar
                         type={'user'}
+                        enablePrice={false}
                         categories={filter(categories, c => c.is_user)}
                         setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
                     {/* Product grid */}

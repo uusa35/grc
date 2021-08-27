@@ -3,9 +3,7 @@ import SideBar from "../partials/SideBar";
 import BackendHeader from "../partials/BackendHeader";
 import Footer from "../partials/Footer";
 import BreadCrumbs from "../partials/BreadCrumbs";
-import SystemMessage from "../partials/SystemMessage";
 import {isEmpty, split} from 'lodash';
-import ConfirmationModal from "../partials/ConfirmationModal";
 import Pagination from "../partials/Pagination";
 import NoElements from "../widgets/NoElements";
 import PropTypes from 'prop-types';
@@ -13,10 +11,6 @@ import TableMobileView from "../widgets/TableMobileview";
 import {AppContext} from "../../../context/AppContext";
 import LoadingView from "../widgets/LoadingView";
 import {useDispatch, useSelector} from "react-redux";
-import {addToBreadCrumbs, setBreadCrumbs} from "../../../redux/actions";
-import route from 'ziggy-js'
-import {isLocal} from "../../../helpers";
-import parentModule from "../../../redux/reducers/parentModule";
 
 const BackendContainer = ({
                               children, elements = [],

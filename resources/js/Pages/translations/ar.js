@@ -1133,5 +1133,8 @@ export const ar = {
     "sign_up_with_our_newsletter" : "ليصلك كل جديد .. سجل معنا في القوائم البريدية",
     "u_can_subscribe_now_in_our_newslist" : "يمكنك الآن متابعة جميع العروض والكتب والدورات الجديدة من خلال اشتراكك بقوائمنا البريدية",
     "all_information_submitted_to_our_polices" : "جميع المعلومات والبيانات المسجلة لدينا تخضع لـ",
-    "register_now" : "سجل الآن"
+    "register_now" : "سجل الآن",
+    "filters" : "معايير البحث",
+    "prices" : "الأسعار",
+    "less_than" : "أقل من "
 }

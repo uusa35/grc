@@ -18,7 +18,7 @@ export default function FrontendServiceIndex({elements, categories}) {
     const {trans} = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
-    const { sort } = useSelector(state => state);
+    const {sort} = useSelector(state => state);
 
     useMemo(() => {
         if (!currentData) {
@@ -34,10 +34,10 @@ export default function FrontendServiceIndex({elements, categories}) {
         <FrontendContainer mainModule={'service'} subModule={''}>
             {/* Mobile filter dialog */}
             <SearchIndexSideBarMobile
-            type={'service'}
-            categories={filter(categories, c => c.is_service)}
-                                      setMobileFiltersOpen={setMobileFiltersOpen}
-                                      mobileFiltersOpen={mobileFiltersOpen}
+                type={'service'}
+                categories={filter(categories, c => c.is_service)}
+                setMobileFiltersOpen={setMobileFiltersOpen}
+                mobileFiltersOpen={mobileFiltersOpen}
             />
             <main className="max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8">
                 <div className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
@@ -54,7 +54,7 @@ export default function FrontendServiceIndex({elements, categories}) {
                         showSearch={false}
                     />
                     {/* sort options */}
-                    <FrontendSortIndexMenu />
+                    <FrontendSortIndexMenu/>
                 </div>
                 <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                     {/* search SideBar */}
@@ -65,7 +65,8 @@ export default function FrontendServiceIndex({elements, categories}) {
                     {/* Product grid */}
                     <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
                         <NoElements display={elements.meta.total < 1}/>
-                        <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
+                        <div
+                            className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
                             {map(currentData, element => (
                                 <NormalServiceWidget element={element} key={element.id}/>
                             ))}

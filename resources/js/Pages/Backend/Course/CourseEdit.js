@@ -2,7 +2,7 @@ import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useEffect, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, map, forEach, isArray, first, remove, uniq} from 'lodash';
+import {filter, map, forEach, isArray, first, remove, uniq, isObject} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
@@ -14,6 +14,8 @@ import moment from 'moment';
 import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
 import {useDispatch, useSelector} from "react-redux";
 import {showToastMessage} from "../../redux/actions";
+import ImageUploadModal from "../image/ImageUploadModal";
+import {isEmpty} from "lodash";
 
 
 export default function CourseEdit({users, categories, course, elementCategories}) {
@@ -79,6 +81,8 @@ export default function CourseEdit({users, categories, course, elementCategories
     });
     const {props} = usePage();
     const {errors} = props;
+    const[showModal, setShowModal] = useState(false);
+    const[currentImage, setCurrentImage] = useState('');
 
     const handleChange = (e) => {
         setData(values => ({
@@ -133,6 +137,9 @@ export default function CourseEdit({users, categories, course, elementCategories
 
     return (
         <BackendContainer type={'book'}>
+            {/*{*/}
+            {/*    currentImage && <ImageUploadModal image={currentImage}/>*/}
+            {/*}*/}
             <FormTabsContainer>
                 <form
                     onSubmit={submit}
@@ -403,6 +410,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
                                     <input
                                         onChange={e => setData('image', e.target.files[0])}
+                                        // onChange={e => setCurrentImage(e.target.files[0])}
                                         type="file"
                                         name="image"
                                         id="main_image"

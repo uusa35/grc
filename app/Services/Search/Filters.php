@@ -89,6 +89,11 @@ class Filters extends QueryFilters
         return $this->builder->where('price', '>=' ,(double)request()->min);
     }
 
+    public function max()
+    {
+        return $this->builder->where('price', '<=' ,(double)request()->max);
+    }
+
 
     public function page()
     {
