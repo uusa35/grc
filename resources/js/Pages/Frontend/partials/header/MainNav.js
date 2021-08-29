@@ -155,8 +155,8 @@ export default function MainNav() {
         isAdminOrAbove,
         guest,
     } = useContext(AppContext);
-    const {auth} = useContext(GlobalContext);
-    const {locale, currency, currencies, settings, cart} = useSelector(state => state);
+    const {auth, settings } = useContext(GlobalContext);
+    const {locale, currency, currencies, cart} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
 

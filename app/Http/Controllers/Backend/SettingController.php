@@ -90,7 +90,7 @@ class SettingController extends Controller
         ]);
         $element = $setting->update($request->except('image', 'images', 'qr', 'app_log', 'shipment_prices'));
         if ($element) {
-            $request->hasFile('image') ? $this->saveMimes($setting, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('image') ? $this->saveMimes($setting, $request, ['image'], ['1000', '1000'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($setting, $request, ['qr'], ['300', '300'], false) : null;
             $request->has('images') ? $this->saveGallery($setting, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($setting, $request, ['size_chart_image'], ['1080', '1440'], true) : null;
