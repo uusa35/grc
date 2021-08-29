@@ -27,9 +27,10 @@ import {Link, useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
+import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 
 
-export default function FrontendCourseShow({element, relatedElements, auth}) {
+export default function FrontendBookShow({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
@@ -54,13 +55,8 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
         setCurrentImages(images);
     }, [element])
 
-    useMemo(() => {
-        !isEmpty(selectedTiming) ? setData('timing_id', selectedTiming.id) : null;
-    }, [selectedTiming])
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        // dispatch(clearCart());
         dispatch(addToCart({
             cart_id: element.id,
             type: 'book',
@@ -75,7 +71,6 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
             description_ar: element.description_ar,
             description_en: element.description_en,
         }))
-        // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
 
     console.log('element', element);
@@ -86,7 +81,12 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
                     {/* Image gallery */}
                     <div className="relative">
-                        <ElementTags exclusive={element.exclusive} onSale={element.isOnSale} onNew={element.on_new}/>
+                        <ElementTags
+                            exclusive={element.exclusive}
+                            onSale={element.isOnSale}
+                            onNew={element.on_new}
+                            onNew={element.free}
+                        />
                         <ImageGallery
                             showBullets={true}
                             showNav={false}

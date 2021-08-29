@@ -25,7 +25,7 @@ class FrontendBookController extends Controller
         }
         $elements = new BookCollection(Book::filters($filters)
             ->with('user')
-            ->orderBy('id', 'desc')->paginate(Self::TAKE_LEAST)
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());
         return inertia('Frontend/Book/FrontendBookIndex', compact('elements'));
     }

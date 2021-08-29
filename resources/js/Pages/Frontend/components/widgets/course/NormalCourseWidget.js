@@ -2,12 +2,11 @@ import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import { AppContext } from "../../../../context/AppContext";
-import {getConvertedFinalPrice} from "../../../../helpers";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
 
 export default function NormalCourseWidget ({ element }) {
-    const { getLocalized, getThumb , currency  } = useContext(AppContext);
+    const { getLocalized, getThumb  } = useContext(AppContext);
 
     return (
         <div className="block relative overflow-hidden shadow-md mb-5 rounded-b-md">
@@ -15,7 +14,11 @@ export default function NormalCourseWidget ({ element }) {
                 <Link
                     className="h-auto w-auto z-30"
                     href={route('frontend.course.show', element.id) + `?slug=${element[getLocalized()]}`}>
-                    <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}/>
+                    <ElementTags onSale={element.isOnSale}
+                                 onNew={element.on_new}
+                                 exclusive={element.exclusive}
+                                 free={element.free}
+                    />
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}

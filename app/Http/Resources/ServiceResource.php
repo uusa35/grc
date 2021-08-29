@@ -29,6 +29,7 @@ class ServiceResource extends JsonResource
             'image' => $this->image,
             'sku' => $this->sku,
             'on_new' => $this->on_new,
+            'free' => $this->free,
             'isOnSale' => $this->isOnSale,
             'exclusive' => $this->exclusive,
             'direct_purchase' => $this->direct_purchase,

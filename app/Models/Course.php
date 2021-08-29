@@ -11,6 +11,18 @@ class Course extends PrimaryModel
     use HasFactory, SoftDeletes, SellingModelHelpers;
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $guarded = [''];
+    protected $casts = [
+        'free' => "boolean",
+        'exclusive' => 'boolean',
+        'on_home' => 'boolean',
+        'on_new' => 'boolean',
+        'is_available' => 'boolean',
+        'on_sale' => 'boolean',
+        'isOnSale' => 'boolean',
+        'check_stock' => 'boolean',
+        'direct_purchase' => 'boolean',
+        'download' => 'boolean'
+    ];
 
     public function user()
     {

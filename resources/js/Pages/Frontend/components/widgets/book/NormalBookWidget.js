@@ -14,7 +14,9 @@ export default function NormalBookWidget({element}) {
                 <Link
                     className="h-auto w-auto z-30"
                     href={route('frontend.book.show', element.id) + `?slug=${element[getLocalized()]}`}>
-                    <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}/>
+                    <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}
+                                 free={element.free}
+                    />
                     <img
                         src={getThumb(element.image)}
                         alt={element[getLocalized()]}

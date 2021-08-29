@@ -27,6 +27,7 @@ import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
+import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 
 
 export default function FrontendCourseShow({element, relatedElements, auth}) {
@@ -39,11 +40,9 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
         'type': 'course',
         'cart_id': null,
         'element_id': element.id,
-        'timing_id': null,
         'qty': 1,
         'price': element.isOnSale ? element.sale_price : element.price,
         'direct_purchase': element.direct_purchase,
-
     });
 
     useMemo(() => {
@@ -53,10 +52,6 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
         })
         setCurrentImages(images);
     }, [element])
-
-    useMemo(() => {
-        !isEmpty(selectedTiming) ? setData('timing_id', selectedTiming.id) : null;
-    }, [selectedTiming])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -73,8 +68,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
             name_ar: element.name_ar,
             name_en: element.name_en,
             description_ar: element.description_ar,
-            description_en: element.description_en,
-            timing: selectedTiming
+            description_en: element.description_en
         }))
         // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
@@ -83,11 +77,19 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
     return (
         <FrontendContainer childName={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
+                <div className="w-full h-auto overflow-hidden mb-10">
+                    {element.free && <EmbeddedHtml html={element.embedded}/>}
+                </div>
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
                     {/* Image gallery */}
                     <div className="relative">
-                        <ElementTags exclusive={element.exclusive} onSale={element.isOnSale} onNew={element.on_new}/>
+                        <ElementTags
+                            exclusive={element.exclusive}
+                            onSale={element.isOnSale}
+                            onNew={element.on_new}
+                            free={element.free}
+                        />
                         <ImageGallery
                             showBullets={true}
                             showNav={false}
