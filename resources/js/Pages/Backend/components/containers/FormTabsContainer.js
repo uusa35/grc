@@ -39,7 +39,6 @@ const FormTabsContainer = ({children}) => {
                                     type="button"
                                     key={tab.id}
                                     onClick={() => dispatch(setCurrentFormTab(tab))}
-                                    // href="#"
                                     className={classNames(
                                         tab.id === currentFormTab.id
                                             ? 'border-green-900 text-green-900 bg-white'

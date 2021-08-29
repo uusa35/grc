@@ -1,16 +1,28 @@
-/* This example requires Tailwind CSS v2.0+ */
 import {HomeIcon} from '@heroicons/react/solid'
-import {useContext, Fragment} from "react";
+import {useContext, useEffect} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
-import {isEmpty, map, capitalize} from 'lodash';
+import { split} from 'lodash';
 import route from 'ziggy-js'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setParentModule} from "../../redux/actions";
 
-export default function FrontendBreadCrumbs() {
-    const {parentModule, childModule, trans} = useContext(AppContext);
-    const { isRTL } = useSelector(state => state.locale);
+export default function FrontendBreadCrumbs({ childName = ''}) {
+    const {trans} = useContext(AppContext);
+    const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
+    const dispatch = useDispatch();
+
+    console.log('parentModule', parentModule);
+
+    useEffect(() => {
+      if(parentModule === 'home') {
+          const currentRoute = route().current();
+          console.log('currentRoute ====!!!!', currentRoute);
+          const breadCrumbs = split(currentRoute, '.');
+          dispatch(setParentModule(breadCrumbs[1]));
+      }
+    },[])
 
     return (
         <div
@@ -45,7 +57,7 @@ export default function FrontendBreadCrumbs() {
                     </li>
                     }
                     {
-                        childModule && <li className="flex flex-row justify-start items-center invisible sm:visible">
+                        breadCrumbs.length >= 3 && childName && <li className="flex flex-row justify-start items-center invisible sm:visible">
                             <svg
                                 className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
                                 xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +70,7 @@ export default function FrontendBreadCrumbs() {
                             <Link
                                 className="capitalize truncate "
                                 href={'#'}>
-                                {childModule}
+                                {childName}
                             </Link>
                         </li>
                     }
@@ -71,7 +83,7 @@ export default function FrontendBreadCrumbs() {
                       onClick={() => window.history.back()}
                 >
                     <h1>{trans('back')}</h1>
-                    {isRTL ?
+                    {locale.isRTL ?
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>

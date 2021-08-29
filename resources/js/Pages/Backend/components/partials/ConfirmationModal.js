@@ -8,7 +8,7 @@ import {useForm} from "@inertiajs/inertia-react";
 import {Inertia} from "@inertiajs/inertia";
 import route from 'ziggy-js';
 import {useDispatch, useSelector} from "react-redux";
-import {hideModal} from "../../../redux/actions";
+import {hideModal, showToastMessage} from "../../../redux/actions";
 
 export default function ConfirmationModal() {
     const {
@@ -38,8 +38,13 @@ export default function ConfirmationModal() {
         const {id, model, type} = confirmationModal;
         setData('id', id);
         dispatch(hideModal());
-        // Inertia.delete(route(`backend.${model}.${type}`, id))
-        return destroy(route(`backend.${model}.${type}`, id));
+        return destroy(route(`backend.${model}.${type}`, id), {
+            preserveScroll: true,
+            onSuccess : () => {
+                dispatch(showToastMessage({ message : trans('process_success'), type : 'warning'}))
+                return window.location.reload()
+            }
+        });
     }
 
     // useEffect(() => {

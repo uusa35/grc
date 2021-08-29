@@ -10,12 +10,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Book extends PrimaryModel
 {
     use HasFactory, SoftDeletes, SellingModelHelpers;
-//    public $localeStrings = ['name', 'description', 'notes'];
+
     protected $guarded = [''];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
-//    protected $appends = ['imageThumb', 'imageLarge', 'name', 'description','type'];
+    protected $casts = [
+        'free' => "boolean",
+        'exclusive' => 'boolean',
+        'on_home' => 'boolean',
+        'on_new' => 'boolean',
+        'is_available' => 'boolean',
+        'on_sale' => 'boolean',
+        'isOnSale' => 'boolean',
+        'check_stock' => 'boolean',
+        'direct_purchase' => 'boolean',
+        'download' => 'boolean'
+    ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
@@ -27,6 +39,11 @@ class Book extends PrimaryModel
     public function favorites()
     {
         return $this->morphMany(Favorite::class, 'favoritable');
+    }
+
+    public function slides()
+    {
+        return $this->morphMany(Slide::class, 'slidable');
     }
 
     public function tags()
@@ -47,5 +64,15 @@ class Book extends PrimaryModel
     public function order_metas()
     {
         return $this->morphMany(OrderMeta::class, 'ordermetable');
+    }
+
+    /**
+     * MorphRelation
+     * MorphOne = many hasONe relation
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

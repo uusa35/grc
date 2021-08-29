@@ -2,9 +2,10 @@ import {useContext} from "react";
 import {AppContext} from "../../../context/AppContext";
 import {useSelector} from "react-redux";
 
-export default function ElementTags({onNew, onSale, exclusive}) {
+export default function ElementTags({onNew = false , onSale = false , exclusive = false, free = false}) {
     const {classNames, trans} = useContext(AppContext)
     const { locale } = useSelector(state => state)
+
     return (
         <div className="relative opacity-80 z-40">
             <div
@@ -25,6 +26,12 @@ export default function ElementTags({onNew, onSale, exclusive}) {
                     exclusive && <span
                         className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-gray-600 ">
                     {trans('exclusive')}
+                        </span>
+                }
+                {
+                    free && <span
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-gray-400 ">
+                    {trans('free')}
                         </span>
                 }
             </div>

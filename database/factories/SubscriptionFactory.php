@@ -35,6 +35,7 @@ class SubscriptionFactory extends Factory
             'is_featured' => $this->faker->boolean,
             'free' => $this->faker->boolean,
             'code' => $this->faker->colorName,
+            'image' => 'square.png',
             'months' => $this->faker->numberBetween(1, 99),
             'price' => $this->faker->numberBetween(1, 99),
             'sale_price' => $this->faker->numberBetween(1, 99),

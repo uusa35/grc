@@ -1,9 +1,6 @@
-import React, {Fragment, useMemo, useState} from 'react'
-import {Transition, Menu} from '@headlessui/react'
-import {ChevronDownIcon, FilterIcon} from '@heroicons/react/solid'
+import React, {useMemo, useState} from 'react'
 import FrontendContainer from "../components/FrontendContainer";
-import {AiOutlineSortAscending} from "react-icons/ai";
-import {map, orderBy, filter } from 'lodash';
+import {map, orderBy, filter} from 'lodash';
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import NoElements from "../../Backend/components/widgets/NoElements";
@@ -11,15 +8,14 @@ import FrontendPagination from "../partials/FrontendPagination";
 import SearchIndexSideBar from "../partials/SearchIndexSideBar";
 import SearchIndexSideBarMobile from "../partials/SearchIndexSideBarMobile";
 import NormalCourseWidget from "../components/widgets/course/NormalCourseWidget";
-import {toggleSort} from "../../redux/actions";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 
 export default function FrontendCourseIndex({elements, categories}) {
     const {trans} = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
-    const { sort } = useSelector(state => state);
+    const {sort, parentModule } = useSelector(state => state);
 
     useMemo(() => {
         if (!currentData) {
@@ -34,6 +30,7 @@ export default function FrontendCourseIndex({elements, categories}) {
     return (
         <FrontendContainer mainModule={'course'} subModule={''}>
             {/* Mobile filter dialog */}
+            <title>{trans(parentModule)}</title>
             <SearchIndexSideBarMobile
                 type={'course'}
                 categories={filter(categories, c => c.is_course)}
@@ -55,17 +52,19 @@ export default function FrontendCourseIndex({elements, categories}) {
                         showSearch={false}
                     />
                     {/* sort options */}
-                    <FrontendSortIndexMenu />
+                    <FrontendSortIndexMenu/>
                 </div>
                 <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                     {/* search SideBar */}
                     <SearchIndexSideBar
                         type={'course'}
-                        categories={filter(categories, c => c.is_course)} setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
+                        categories={filter(categories, c => c.is_course)} setMobileFiltersOpen={setMobileFiltersOpen}
+                        mobileFiltersOpen={mobileFiltersOpen}/>
                     {/* Product grid */}
                     <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
                         <NoElements display={elements.meta.total < 1}/>
-                        <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
+                        <div
+                            className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
                             {map(currentData, element => (
                                 <NormalCourseWidget element={element} key={element.id}/>
                             ))}

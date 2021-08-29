@@ -8,7 +8,7 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import moment from "moment";
 import {useDispatch, useSelector} from "react-redux";
-import { toggleSort } from "../../redux/actions";
+import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
 
 
@@ -17,7 +17,6 @@ export default function UserIndex({elements}) {
     const {
         trans,
         classNames,
-        handleDeleteItem,
         getLocalized
     } = useContext(AppContext);
     const { sort, locale  } = useSelector(state => state);
@@ -270,7 +269,15 @@ export default function UserIndex({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <button
-                                                                                        onClick={() => handleDeleteItem('destroy', 'user', element.id)}
+                                                                                        onClick={() =>
+                                                                                            dispatch(showModal({
+                                                                                                type: 'destroy',
+                                                                                                model: 'user',
+                                                                                                id: element.id,
+                                                                                                title: `${trans('destroy')} ${trans('user')}`,
+                                                                                                message: `${trans('confirmation')} ${trans('destroy')} ${trans('user')}`,
+                                                                                            }))
+                                                                                        }
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                                             'flex flex-1 w-full flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right text-red-700'

@@ -12,22 +12,28 @@ import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
 import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
+import {useDispatch, useSelector} from "react-redux";
+import {showToastMessage} from "../../redux/actions";
 
 
 export default function BookEdit({users, categories, book, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
+    const { parentModule , formTabs , currentFormTab} = useSelector(state => state);
     const {
         classNames,
         trans,
         theme,
-        currentFormTab,
-        parentModule,
         getFileUrl,
         isAdminOrAbove,
         getLocalized,
         getThumb
     } = useContext(AppContext)
+    const dispatch = useDispatch();
+    const {props} = usePage();
+    const {errors} = props;
+    const[showModal, setShowModal] = useState(false);
+    const[currentImage, setCurrentImage] = useState('');
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': book.sku,
         'name_ar': book.name_ar,
@@ -78,8 +84,6 @@ export default function BookEdit({users, categories, book, elementCategories}) {
         'preview': book.preview,
         'embedded': book.embedded,
     });
-    const {props} = usePage();
-    const {errors} = props;
 
     const handleChange = (e) => {
         setData(values => ({
@@ -97,6 +101,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
             qr: data.qr,
         }, {
             forceFormData: true,
+            onSuccess : () => dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {
@@ -111,6 +116,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                 formData.append(`id`, book.id);
                 formData.append(`order`, book.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
+                    dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});

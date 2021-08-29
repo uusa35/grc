@@ -8,6 +8,10 @@ export function* triggerAddToCart() {
     yield takeLatest(actions.ADD_TO_CART, cartSaga.startAddToCartScenario);
 }
 
+export function* triggerEnableDirectPurchaseModel() {
+    yield takeLatest(actions.ENABLE_DIRECT_PURCHASE_MODE, cartSaga.startEnableDirectPurchaseModelScenario);
+}
+
 export function* triggerRemoveFromCart() {
     yield takeLatest(actions.REMOVE_FROM_CART, cartSaga.startRemoveFromCartScenario);
 }

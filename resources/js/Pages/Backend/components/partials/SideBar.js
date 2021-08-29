@@ -216,13 +216,13 @@ const SideBar = () => {
             <div className="hidden lg:flex lg:flex-shrink-0">
                 <div className="flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-gray-100">
                     <div className="flex justify-center items-center flex-shrink-0 px-6">
-                        <Link href={route(`backend.home`)} className="">
+                        <a href={route(`frontend.home`)} className="">
                             <img
                                 className="h-16 w-auto m-auto "
                                 src={getThumb(settings.image)}
                                 alt={settings[getLocalized]}
                             />
-                        </Link>
+                        </a>
                     </div>
                     {/* Sidebar component, swap this element with another sidebar if you like */}
                     <div className="h-0 flex-1 flex flex-col overflow-y-auto">

@@ -64,4 +64,4 @@ Route::get('search/course', [CourseController::class,'search']);
 Route::get('search/book', [BookController::class,'search']);
 Route::get('search/category', [CategoryController::class,'search']);
 Route::get('search/slide', [SlideController::class,'search']);
-//Route::post('images/upload',[DashboardController::class,'uploadImages']);
+Route::post('images/upload',[DashboardController::class,'uploadImages']);

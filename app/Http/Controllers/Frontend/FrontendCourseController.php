@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseCollection;
 use App\Http\Resources\CourseExtraLightResource;
+use App\Http\Resources\CourseResource;
 use App\Models\Course;
 use App\Services\Search\Filters;
 use App\Services\Search\ProductFilters;
@@ -59,7 +60,7 @@ class FrontendCourseController extends Controller
      */
     public function show(Course $course)
     {
-        $element = CourseExtraLightResource::make($course->load('user'));
+        $element = CourseResource::make($course->load('user','images'));
         return inertia('Frontend/Course/FrontendCourseShow', compact('element'));
     }
 

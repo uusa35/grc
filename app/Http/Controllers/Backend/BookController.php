@@ -160,13 +160,14 @@ class BookController extends Controller
         try {
             $book->images()->delete();
             $book->slides()->delete();
-            $book->tags()->delete();
+            $book->tags()->detach();
             $book->comments()->delete();
             $book->favorites()->delete();
-            $book->categories()->delete();
+            $book->categories()->detach();
             $book->delete();
             return redirect()->back();
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage());
         }
     }

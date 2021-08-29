@@ -44,7 +44,7 @@ export const ar = {
     'hot_deal_products' : 'أفضل العروض',
     'close' : 'إغلاق',
     'best_sale_collections' : 'افضل المجموعات التي تم اختيارها من قبل المتسوقين الشخصيين',
-    'type' : 'نوع الحساب',
+    'type' : 'نوع ',
     'facebook' : 'فيس بوك',
     'twitter' : 'تويتر',
     'whatsapp' : 'واتساب',
@@ -1136,5 +1136,11 @@ export const ar = {
     "register_now" : "سجل الآن",
     "filters" : "معايير البحث",
     "prices" : "الأسعار",
-    "less_than" : "أقل من "
+    "less_than" : "أقل من ",
+    "element_is_not_available" : "غير متاح",
+    "element_is_not_available_currently_for_order" : "هذا العنصر غير متاح للطلب حاليا ولا يمكن اضافته لعربة التسوق",
+    "service_booking" : "ما بعد طلب الخدمة",
+    "service_booking_message" : "سيتم التواصل معكم مباشرة عن طريق البريد الإلكتروني أو رقم الهاتف لتحديد كيفية الطريقة المناسبة للعميل لتقديم الخدمة",
+    "are_u_sure_u_want_to_clear_cart" : "أضافه هذا العنصر لعربة التسوق يسلتزم افارغ جميع العناصر الموجوده بالفعل .. هذا العنصر يتم شراءه بطريقة مباشرة فقط",
+    "an_element_with_direct_purchase_mode_is_one_to_add_to_cart_u_have_to_clear_cart_first" : "تم اضافة عنصر يحتوي على خاصية الشراء المباشر. يجب إفراغ عربة التسوق قبل اضافه اي عناصر لعربة التسوق"
 }

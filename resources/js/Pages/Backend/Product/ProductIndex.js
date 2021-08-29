@@ -10,7 +10,7 @@ import LocalizedText from "../components/widgets/LocalizedText";
 import {Inertia} from "@inertiajs/inertia";
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
-import {toggleSort} from "../../redux/actions";
+import {showModal, toggleSort} from "../../redux/actions";
 
 
 export default function ProductIndex({elements}) {
@@ -18,10 +18,9 @@ export default function ProductIndex({elements}) {
     const {
         trans,
         classNames,
-        handleDeleteItem,
         getLocalized
     } = useContext(AppContext);
-    const { sort, locale  } = useSelector(state => state);
+    const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -165,7 +164,7 @@ export default function ProductIndex({elements}) {
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
-                                                    <ActiveDot active={element.active} />
+                                                    <ActiveDot active={element.active}/>
                                                     {element[getLocalized('name')]}
                                                 </div>
                                                 <div
@@ -175,7 +174,7 @@ export default function ProductIndex({elements}) {
                                                             {trans('has_attributes')}
                                                           </span>
                                                     <span
-                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale  ? 'green' : 'red'}-100 text-gray-800`}>
+                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale ? 'green' : 'red'}-100 text-gray-800`}>
                                                             {trans('on_sale')}
                                                           </span>
                                                 </div>
@@ -372,7 +371,15 @@ export default function ProductIndex({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <button
-                                                                                        onClick={() => handleDeleteItem('destroy', 'product', element.id)}
+                                                                                        onClick={() =>
+                                                                                            dispatch(showModal({
+                                                                                                type: 'destroy',
+                                                                                                model: 'product',
+                                                                                                id: element.id,
+                                                                                                title: `${trans('destroy')} ${trans('product')}`,
+                                                                                                message: `${trans('confirmation')} ${trans('destroy')} ${trans('product')}`,
+                                                                                            }))
+                                                                                        }
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                                             'flex flex-1 w-full flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right text-red-700'

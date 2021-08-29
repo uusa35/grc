@@ -14,9 +14,6 @@ import moment from 'moment';
 import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
 import {useDispatch, useSelector} from "react-redux";
 import {showToastMessage} from "../../redux/actions";
-import ImageUploadModal from "../image/ImageUploadModal";
-import {isEmpty} from "lodash";
-
 
 export default function CourseEdit({users, categories, course, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
@@ -32,6 +29,8 @@ export default function CourseEdit({users, categories, course, elementCategories
         getThumb
     } = useContext(AppContext)
     const dispatch = useDispatch();
+    const {props} = usePage();
+    const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': course.sku,
         'name_ar': course.name_ar,
@@ -79,10 +78,6 @@ export default function CourseEdit({users, categories, course, elementCategories
         'preview': course.preview,
         'embedded': course.embedded,
     });
-    const {props} = usePage();
-    const {errors} = props;
-    const[showModal, setShowModal] = useState(false);
-    const[currentImage, setCurrentImage] = useState('');
 
     const handleChange = (e) => {
         setData(values => ({
@@ -115,6 +110,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                 formData.append(`id`, course.id);
                 formData.append(`order`, course.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
+                    dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});

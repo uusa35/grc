@@ -5,6 +5,11 @@ export const addToCart = payload => ({
     payload,
 });
 
+export const enableDirectPurchaseMode = payload => ({
+    type: actions.ENABLE_DIRECT_PURCHASE_MODE,
+    payload,
+});
+
 export const removeFromCart = payload => ({
     type: actions.REMOVE_FROM_CART,
     payload,

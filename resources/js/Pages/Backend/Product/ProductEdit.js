@@ -12,15 +12,26 @@ import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
 import FormSection from "../components/widgets/form/FormSection";
+import {useDispatch, useSelector} from "react-redux";
+import {showToastMessage} from "../../redux/actions";
 
 
 export default function ProductEdit({users, sizes, colors, categories, product, elementCategories, brands}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
+    const { parentModule , formTabs , currentFormTab} = useSelector(state => state);
     const {
-        classNames, trans, theme, currentFormTab, parentModule, isAdminOrAbove, getLocalized,
-        getThumb,
+        classNames,
+        trans,
+        theme,
+        getFileUrl,
+        isAdminOrAbove,
+        getLocalized,
+        getThumb
     } = useContext(AppContext)
+    const dispatch = useDispatch();
+    const {props} = usePage();
+    const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': product.sku,
         'name_ar': product.name_ar,
@@ -74,8 +85,6 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
         'categories': elementCategories,
         'product_attributes': ''
     });
-    const {props} = usePage();
-    const {errors} = props;
 
     const handleChange = (e) => {
         setData(values => ({
@@ -94,6 +103,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
             image_size_chart: data.image_size_chart,
         }, {
             forceFormData: true,
+            onSuccess : () => dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {
@@ -108,6 +118,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                 formData.append(`id`, product.id);
                 formData.append(`order`, product.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
+                    dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});

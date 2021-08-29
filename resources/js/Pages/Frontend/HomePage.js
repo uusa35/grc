@@ -1,19 +1,13 @@
-import React, {Fragment, useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {AppContext} from "../context/AppContext";
-import MainSlider from "../Frontend/components/widgets/slider/MainSlider";
 import FrontendContainer from "./components/FrontendContainer";
-import Ziggy from 'ziggy-js';
 import ElementSlider from "./components/widgets/slider/ElementSlider";
-import {isMobile, isTablet, isDesktop} from 'react-device-detect';
+import {isMobile, isTablet} from 'react-device-detect';
 import NewsLetter from "./partials/NewsLetter";
-import { useSelector, useDispatch } from 'react-redux'
-import { addToCart , removeFromCart } from "../redux/actions";
 
 export default function HomePage({slides, homeBookCategories, newOnHomeBooks, newOnHomeCourses, onHomeParticipantAuthors }) {
-    const { cart } = useSelector(state => state);
     const[slideNumber, setSlideNumber] = useState(6)
     const { trans } = useContext(AppContext)
-    const dispatch = useDispatch();
 
     useEffect(() => {
         function handleResize() {

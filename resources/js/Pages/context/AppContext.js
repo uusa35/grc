@@ -166,6 +166,16 @@ const AppContextProvider = ({children}) => {
 
     useEffect(() => {
         isLocal() && console.log('useEffect starts here =====>')
+        Inertia.on('navigate', (e) => {
+            isLocal() && console.log('navigate ==>')
+            const currentRoute = route().current();
+            console.log('currentRoute ====!!!!', currentRoute);
+            const breadCrumbs = split(currentRoute, '.');
+            isLocal() && console.log('befre Module', breadCrumbs[1])
+            isLocal() && console.log('bread', breadCrumbs);
+            dispatch(setBreadCrumbs(breadCrumbs))
+            dispatch(setParentModule(breadCrumbs[1]));
+        })
         // setIsLoading(true);
     }, [route().current()])
 
@@ -179,17 +189,13 @@ const AppContextProvider = ({children}) => {
         Inertia.on('finish', (e) => {
             isLocal() && console.log('finish ==>')
         });
-        Inertia.on('navigate', (e) => {
-            isLocal() && console.log('navigate ==>')
-            const currentRoute = route().current();
-            const breadCrumbs = split(currentRoute, '.');
-            isLocal() && console.log('befre Module', breadCrumbs[1])
-            isLocal() && console.log('bread', breadCrumbs);
-            dispatch(setBreadCrumbs(breadCrumbs))
-            dispatch(setParentModule(breadCrumbs[1]));
-        })
         toast.configure(options)
     }, [])
+
+    useEffect(() => {
+
+    })
+
 
     // isLocal() && console.log('parentModule', parentModule);
 

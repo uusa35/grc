@@ -22,8 +22,19 @@ class BookResource extends JsonResource
             'caption_en' => $this->caption_en,
             'description_ar' => $this->description_ar,
             'description_en' => $this->description_en,
+            'price' => $this->price,
+            'sale_price' => $this->sale_price,
+            'image' => $this->image,
+            'sku' => $this->sku,
+            'on_new' => $this->on_new,
+            'isOnSale' => $this->isOnSale,
+            'exclusive' => $this->exclusive,
             'free' => $this->free,
+            'download' => $this->download,
+            'embedded' => $this->embedded,
             'file' => $this->file,
+            'is_available' => $this->is_available,
+            'user' => UserExtraLightResource::make($this->whenLoaded('user')),
             'images' => ImageExtraLightResource::collection($this->whenLoaded('images'))
         ];
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookCollection;
+use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Services\Search\Filters;
 use App\Services\Search\ProductFilters;
@@ -58,7 +59,7 @@ class FrontendBookController extends Controller
      */
     public function show(Book $book)
     {
-        $element = Book::whereId($book->id)->with('user','images')->first();
+        $element = BookResource::make($book->load('user','images'));
         return inertia('Frontend/Book/FrontendBookShow', compact('element'));
     }
 

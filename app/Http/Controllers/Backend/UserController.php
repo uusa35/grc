@@ -112,8 +112,24 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        try {
+            $user->books()->delete();
+            $user->products()->delete();
+            $user->services()->delete();
+            $user->courses()->delete();
+            $user->images()->delete();
+            $user->slides()->delete();
+            $user->tags()->detach();
+            $user->comments()->delete();
+            $user->favorites()->delete();
+            $user->categories()->detach();
+            $user->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return redirect()->back()->withErrors($e->getMessage());
+        }
     }
 }

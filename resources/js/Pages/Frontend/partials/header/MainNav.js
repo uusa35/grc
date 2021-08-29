@@ -144,6 +144,7 @@ const pages = [
     // {name: 'products', url: route('frontend.product.index')},
     {name: 'services', url: route('frontend.service.index')},
     {name: 'courses', url: route('frontend.course.index')},
+    {name: 'subscriptions', url: route('frontend.subscriptions')},
     // {name: 'categories', url: route('frontend.category.index')},
 ];
 
@@ -192,6 +193,10 @@ export default function MainNav() {
                     }
                 </div>
                 <div className="flex flex-row justify-center items-center gap-x-5  divide-x divide-gray-400">
+                    <Link
+                        href={route('frontend.subscriptions')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
+                        {capitalize(trans('subscriptions'))}
+                    </Link>
                     <Link
                         href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
                         {capitalize(trans('contactus'))}
@@ -469,6 +474,21 @@ export default function MainNav() {
                                                         className="z-80 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                                         <div
                                                             className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                                            {/* subscriptioins page*/}
+                                                            <Link
+                                                                href={route('frontend.subscriptions')}
+                                                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                                                                    <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
+                                                                </svg>
+                                                                <div className="ltr:ml-5 rtl:mr-5">
+                                                                    <p className="text-base font-medium text-gray-900 capitalize">{trans('subscriptions')}</p>
+                                                                </div>
+                                                            </Link>
+
+                                                            {/* contact us page */}
                                                             <Link
                                                                 href={route('frontend.contactus')}
                                                                 className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"

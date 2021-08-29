@@ -1,36 +1,95 @@
-import {Fragment, useContext} from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import {
-    BookmarkAltIcon,
-    CalendarIcon,
-    ChartBarIcon,
-    CheckIcon,
-    CursorClickIcon,
-    MenuIcon,
-    PhoneIcon,
-    PlayIcon,
-    RefreshIcon,
-    ShieldCheckIcon,
-    SupportIcon,
-    ViewGridIcon,
-    XIcon,
-} from '@heroicons/react/outline'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import {useContext} from 'react'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
 import {useDispatch, useSelector} from "react-redux";
 import { map } from 'lodash'
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import {getConvertedFinalPrice} from "../../helpers";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import {addToCart, clearCart, enableDirectPurchaseMode} from "../../redux/actions"; // Import css
 
 export default function SubscriptionsPage({ elements }) {
     const { trans , getLocalized, getThumb , classNames } = useContext(AppContext)
-    const { settings, currency  } = useSelector(state => state);
+    const { settings, currency , cart , locale  } = useSelector(state => state);
     const dispatch = useDispatch();
 
+    const handleClick = (element) => {
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div
+                        dir={locale.dir}
+                        className={`font-bein font-extrabold my-10 bg-gray-50 border-l-4 border-gray-800 p-4 min-w-min h-auto m-auto my-2 shadow-lg rounded-md m-10`}>
+                        <div className="flex items-center text-lg">
+                            <div className="flex-shrink-0">
+                                <svg className={`h-12 w-12" xmlns="http://www.w3.org/2000/svg`}
+                                     viewBox="0 0 20 20"
+                                     fill={'gray'} aria-hidden="true">
+                                    <path fillRule="evenodd"
+                                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                          clipRule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div className="mx-5 rtl:text-right ltr:text-left">
+                                <h2 className="mb-5 font-extrabold text-lg">{trans('confirm')}</h2>
+                                <p className="text-lg mx-3 my-8">
+                                    {trans('are_u_sure_u_want_to_clear_cart')}
+                                </p>
+                                <div className="flex flex-1 flex-row justify-center items-center gap-x-5">
+                                    <button
+                                        className="p-2 bg-gray-600 text-white mx-10 rounded-md shadow-md"
+                                        onClick={onClose}>{trans('cancel')}</button>
+                                    <button
+                                        className="p-2 bg-gray-600 text-white mx-10 rounded-md shadow-md"
+                                        onClick={() => {
+                                            handleAddToCart(element)
+                                            onClose();
+                                        }}
+                                    >
+                                        {trans('confirm')}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            },
+            title: 'Confirm to submit',
+            message: 'Are you sure to do this.',
+            // buttons: [
+            //     {
+            //         label: 'Yes',
+            //         onClick: () => handleAddToCart(element)
+            //     },
+            //     {
+            //         label: 'No',
+            //         onClick: () => console.log('no')
+            //     }
+            // ],
+            overlayClassName: "bg-gray-500"
+        });
+    }
+
+    const handleAddToCart = (element) => {
+        dispatch(clearCart());
+        dispatch(enableDirectPurchaseMode({
+            cart_id: element.id,
+            type: 'subscription',
+            element_id: element.id,
+            qty: 1,
+            price: parseFloat(element.isOnSale ? element.sale_price : element.price),
+            direct_purchase: 1,
+            shipmentFees: 0,
+            image: element.image,
+            name_ar: element.name_ar,
+            name_en: element.name_en,
+            description_ar: element.caption_ar,
+            description_en: element.caption_en,
+        }))
+    }
     return (
         <FrontendContainer>
-
             <div className="bg-white relative overflow-hidden">
                 {/* Decorative background image and gradient */}
                 <div aria-hidden="true" className="absolute inset-0">
@@ -97,7 +156,7 @@ export default function SubscriptionsPage({ elements }) {
                                 </div>
 
                                 <button
-                                    // onClick={() => dispatch()}
+                                    onClick={() => handleClick(element)}
                                     style={{ background : element.code}}
                                     className="hover:opacity-60 mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium"
                                 >

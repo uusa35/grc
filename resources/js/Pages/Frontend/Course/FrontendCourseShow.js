@@ -10,13 +10,14 @@ import {
 import {StarIcon} from '@heroicons/react/solid'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, sumBy, isEmpty, first, capitalize, random, isNull} from 'lodash';
+import {map, sumBy, isEmpty, first, capitalize, random, isNull, isArray} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery';
+import {calculateRating} from "../../helpers";
 import ElementRating from "../components/widgets/ElementRating";
 import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
@@ -25,6 +26,7 @@ import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
+import AlertMessage from "../partials/AlertMessage";
 
 
 export default function FrontendCourseShow({element, relatedElements, auth}) {
@@ -58,17 +60,13 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (isNull(data.timing_id)) {
-            toast.error(capitalize(trans('please_choose_timing')))
-        }
         // dispatch(clearCart());
         dispatch(addToCart({
-            cart_id: element.id + '' + selectedTiming.id,
+            cart_id: element.id,
             type: 'course',
             element_id: element.id,
-            timing_id: selectedTiming.id,
             qty: 1,
-            price: element.isOnSale ? element.sale_price : element.price,
+            price: parseFloat(element.isOnSale ? element.sale_price : element.price),
             direct_purchase: element.direct_purchase,
             shipmentFees: 0,
             image: element.image,
@@ -76,13 +74,14 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
             name_en: element.name_en,
             description_ar: element.description_ar,
             description_en: element.description_en,
-            timing : selectedTiming
+            timing: selectedTiming
         }))
         // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
 
+    console.log('element', element);
     return (
-        <FrontendContainer mainModule={'course'} subModule={element[getLocalized()]}>
+        <FrontendContainer childName={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
@@ -136,8 +135,9 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                 }
                             </div>
                         </div>
-                        {element.timings && <div className="mt-6">
+                        <div className="mt-6">
                             {/* course timings */}
+                            {element.timings && element.is_available &&
                             <Menu as="div" className="relative inline-block text-left mb-5 w-full">
                                 <div>
                                     <Menu.Button
@@ -197,11 +197,17 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                     </Menu.Items>
                                 </Transition>
                             </Menu>
+                            }
+                            {!element.is_available && <AlertMessage
+                                title={trans('element_is_not_available')}
+                                message={trans('element_is_not_available_currently_for_order')}
+                            />}
                             <div className="flex flex-row justify-between items-center gap-x-5">
                                 <form onSubmit={handleSubmit} className="w-full">
                                     <button
+                                        disabled={!element.is_available}
                                         type="submit"
-                                        className={classNames(`flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                     >
                                         {trans('add_to_cart')}
                                     </button>
@@ -209,7 +215,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                 <ElementFavoriteBtn id={element.id} type={'course'}
                                                     favoritesList={auth?.favoritesList}/>
                             </div>
-                        </div>}
+                        </div>
                         <section aria-labelledby="details-heading" className="my-12">
                             <h2 id="details-heading" className="sr-only">
                                 Additional details
@@ -362,19 +368,19 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                     </div> : null
                                 }
                                 {
-                                 element.timings && <div
-                                     className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-                                     <div>
-                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                              viewBox="0 0 24 24" stroke="currentColor">
-                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                                   d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                         </svg>
-                                     </div>
-                                     <span
-                                         className="mt-4 text-sm font-medium text-gray-900">{trans('timings')}</span>
-                                     <p className="mt-1 text-xs text-gray-500">{trans('kwt_timing_zone')}</p>
-                                 </div>
+                                    element.timings && <div
+                                        className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </div>
+                                        <span
+                                            className="mt-4 text-sm font-medium text-gray-900">{trans('timings')}</span>
+                                        <p className="mt-1 text-xs text-gray-500">{trans('kwt_timing_zone')}</p>
+                                    </div>
                                 }
                                 {
                                     element.sku &&
@@ -398,7 +404,8 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                 </div>
                 {/* related items */}
                 {
-                    relatedElements && relatedElements.meta.total > 0 && <RelatedItems elements={relatedElements.data} type={'course'}/>
+                    relatedElements && relatedElements.meta.total > 0 &&
+                    <RelatedItems elements={relatedElements.data} type={'course'}/>
                 }
             </div>
         </FrontendContainer>

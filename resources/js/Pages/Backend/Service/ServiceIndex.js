@@ -9,6 +9,7 @@ import route from 'ziggy-js';
 import LocalizedText from "../components/widgets/LocalizedText";
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
+import {showModal} from "../../redux/actions";
 
 
 export default function ServiceIndex({elements}) {
@@ -313,7 +314,15 @@ export default function ServiceIndex({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <button
-                                                                                        onClick={() => handleDeleteItem('destroy', 'service', element.id)}
+                                                                                        onClick={() =>
+                                                                                            dispatch(showModal({
+                                                                                                type: 'destroy',
+                                                                                                model: 'service',
+                                                                                                id: element.id,
+                                                                                                title: `${trans('destroy')} ${trans('service')}`,
+                                                                                                message: `${trans('confirmation')} ${trans('destroy')} ${trans('service')}`,
+                                                                                            }))
+                                                                                        }
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                                             'flex flex-1 w-full flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right text-red-700'

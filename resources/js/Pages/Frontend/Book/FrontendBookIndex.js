@@ -1,8 +1,5 @@
-import React, {Fragment, useMemo, useState} from 'react'
-import {Transition, Menu} from '@headlessui/react'
-import {ChevronDownIcon, FilterIcon} from '@heroicons/react/solid'
+import React, {useMemo, useState} from 'react'
 import FrontendContainer from "../components/FrontendContainer";
-import {AiOutlineSortAscending} from "react-icons/ai";
 import {filter, map, orderBy} from 'lodash';
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
@@ -11,8 +8,7 @@ import FrontendPagination from "../partials/FrontendPagination";
 import SearchIndexSideBar from "../partials/SearchIndexSideBar";
 import SearchIndexSideBarMobile from "../partials/SearchIndexSideBarMobile";
 import NormalBookWidget from "../components/widgets/book/NormalBookWidget";
-import {useDispatch, useSelector} from "react-redux";
-import { toggleSort } from "../../redux/actions";
+import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 
 export default function FrontendBookIndex({elements, categories}) {

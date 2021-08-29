@@ -1,29 +1,31 @@
 import BackendContainer from "./../components/containers/BackendContainer";
-import {useContext, useState} from "react";
+import {useContext, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, uniq, random} from 'lodash';
+import {filter, uniq, random, first} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
 import axios from "axios";
 import FormSection from "../components/widgets/form/FormSection";
 import FormCreateElementEmptyTabs from "../components/widgets/form/FormCreateElementEmptyTabs";
+import {setCurrentFormTab} from "../../redux/actions";
+import GlobalContext from "../../context/GlobalContext";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function CourseCreate({users, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
+    const { auth } = useContext(GlobalContext);
+    const { parentModule , formTabs , currentFormTab} = useSelector(state => state);
     const {
         classNames,
         trans,
-        theme,
-        currentFormTab,
-        parentModule,
         isAdminOrAbove,
-        auth,
         getLocalized,
-        getImateThumb
     } = useContext(AppContext)
+    const dispatch = useDispatch();
+    const {errors} = usePage().props;
     const {data, setData, post, progress} = useForm({
         'sku': random(1111, 9999),
         'name_ar': '',
@@ -67,7 +69,10 @@ export default function CourseCreate({users, categories}) {
         'preview': '',
         'embedded': '',
     });
-    const {errors} = usePage().props;
+
+    useMemo(() => {
+        dispatch(setCurrentFormTab(first(formTabs)));
+    },[]);
 
     const handleChange = (e) => {
         setData(values => ({

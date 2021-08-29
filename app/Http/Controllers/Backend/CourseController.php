@@ -161,12 +161,12 @@ class CourseController extends Controller
         try {
             $course->images()->delete();
             $course->slides()->delete();
-            $course->tags()->delete();
+            $course->tags()->detach();
             $course->comments()->delete();
             $course->favorites()->delete();
-            $course->categories()->delete();
+            $course->categories()->detach();
             $course->delete();
-            return redirect()->back();
+            return redirect()->route('backend.course.search');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

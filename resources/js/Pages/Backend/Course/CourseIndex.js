@@ -6,7 +6,7 @@ import {AppContext} from "./../../context/AppContext";
 import {orderBy, isEmpty} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
-import { toggleSort } from "../../redux/actions";
+import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -16,10 +16,9 @@ export default function CourseIndex({elements}) {
     const {
         trans,
         classNames,
-        handleDeleteItem,
         getLocalized
     } = useContext(AppContext);
-    const { sort, locale  } = useSelector(state => state);
+    const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -163,13 +162,13 @@ export default function CourseIndex({elements}) {
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
-                                                    <ActiveDot active={element.active} />
+                                                    <ActiveDot active={element.active}/>
                                                     {element[getLocalized('name')]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
                                                     <span
-                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale  ? 'green' : 'red'}-900 text-gray-100 opacity-70`}>
+                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale ? 'green' : 'red'}-900 text-gray-100 opacity-70`}>
                                                             {trans('on_sale')}
                                                           </span>
                                                 </div>
@@ -260,7 +259,15 @@ export default function CourseIndex({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <button
-                                                                                        onClick={() => handleDeleteItem('destroy', 'course', element.id)}
+                                                                                        onClick={() =>
+                                                                                            dispatch(showModal({
+                                                                                                type: 'destroy',
+                                                                                                model: 'course',
+                                                                                                id: element.id,
+                                                                                                title: `${trans('destroy')} ${trans('course')}`,
+                                                                                                message: `${trans('confirmation')} ${trans('destroy')} ${trans('course')}`,
+                                                                                            }))
+                                                                                        }
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                                             'flex flex-1 w-full flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right text-red-700'

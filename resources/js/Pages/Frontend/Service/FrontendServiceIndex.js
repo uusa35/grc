@@ -1,8 +1,5 @@
-import React, {Fragment, useMemo, useState} from 'react'
-import {Transition, Menu} from '@headlessui/react'
-import {ChevronDownIcon, FilterIcon} from '@heroicons/react/solid'
+import React, {useMemo, useState} from 'react'
 import FrontendContainer from "../components/FrontendContainer";
-import {AiOutlineSortAscending} from "react-icons/ai";
 import {filter, map, orderBy} from 'lodash';
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";

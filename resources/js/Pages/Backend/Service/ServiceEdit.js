@@ -12,22 +12,26 @@ import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
 import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
+import {useDispatch, useSelector} from "react-redux";
+import {showToastMessage} from "../../redux/actions";
 
 
 export default function ServiceEdit({users, categories, service, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
+    const { parentModule , formTabs , currentFormTab} = useSelector(state => state);
     const {
         classNames,
         trans,
         theme,
-        currentFormTab,
-        parentModule,
         getFileUrl,
         isAdminOrAbove,
         getLocalized,
-        getThumb,
+        getThumb
     } = useContext(AppContext)
+    const dispatch = useDispatch();
+    const {props} = usePage();
+    const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': service.sku,
         'name_ar': service.name_ar,
@@ -70,10 +74,6 @@ export default function ServiceEdit({users, categories, service, elementCategori
         'user_id': service.user_id,
         'categories': elementCategories,
     });
-    const {props} = usePage();
-    const {errors} = props;
-
-
 
     const handleChange = (e) => {
         setData(values => ({
@@ -91,6 +91,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
             qr: data.qr,
         }, {
             forceFormData: true,
+            onSuccess : () => dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {
@@ -105,6 +106,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                 formData.append(`id`, service.id);
                 formData.append(`order`, service.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
+                    dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});

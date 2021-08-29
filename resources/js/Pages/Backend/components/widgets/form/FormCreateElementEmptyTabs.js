@@ -1,9 +1,11 @@
 import FormSection from "./FormSection";
 import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
+import {useSelector} from "react-redux";
 
 export default function FormCreateElementEmptyTabs() {
-    const {currentFormTab, classNames, trans } = useContext(AppContext)
+    const {classNames, trans } = useContext(AppContext)
+    const { currentFormTab } = useSelector(state => state);
     return (
         <>
             <div

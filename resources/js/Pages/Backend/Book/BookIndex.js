@@ -1,14 +1,14 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useEffect, useMemo, useState} from "react";
+import {Fragment, useContext, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isEmpty} from 'lodash';
+import {orderBy} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
-import LocalizedText from "../components/widgets/LocalizedText";
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
+import {showModal} from "../../redux/actions";
 
 
 export default function BookIndex({elements}) {
@@ -16,10 +16,9 @@ export default function BookIndex({elements}) {
     const {
         trans,
         classNames,
-        handleDeleteItem,
         getLocalized
     } = useContext(AppContext);
-    const { sort, locale  } = useSelector(state => state);
+    const { sort, locale } = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -30,7 +29,7 @@ export default function BookIndex({elements}) {
 
     useMemo(() => {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
-    }, [sort.desc])
+    }, [sort.desc]);
 
     return (
         <BackendContainer elements={elements} showSearch={elements.total > 1} showNoElements={elements.total < 1}
@@ -260,7 +259,15 @@ export default function BookIndex({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <button
-                                                                                        onClick={() => handleDeleteItem('destroy', 'book', element.id)}
+                                                                                        onClick={() =>
+                                                                                            dispatch(showModal({
+                                                                                                type: 'destroy',
+                                                                                                model: 'book',
+                                                                                                id: element.id,
+                                                                                                title: `${trans('destroy')} ${trans('book')}`,
+                                                                                                message: `${trans('confirmation')} ${trans('destroy')} ${trans('book')}`,
+                                                                                            }))
+                                                                                        }
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                                             'flex flex-1 w-full flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right text-red-700'

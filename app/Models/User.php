@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasMany(Service::class);
     }
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
     public function branches()
     {
         return $this->hasMany(Branch::class);

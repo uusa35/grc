@@ -10,7 +10,7 @@ import {
 import {StarIcon} from '@heroicons/react/solid'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, sumBy, isEmpty, first, capitalize, random, isNull} from 'lodash';
+import {map, sumBy, isEmpty, first, capitalize, random, isNull, isArray} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
@@ -26,13 +26,15 @@ import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
+import AlertMessage from "../partials/AlertMessage";
 
 
 export default function FrontendServiceShow({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
-    const {cart} = useSelector(state => state);
+    const {cart, parentModule, breadCrumbs} = useSelector(state => state);
+
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'service',
@@ -44,6 +46,9 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
         'direct_purchase': element.direct_purchase,
 
     });
+
+    console.log("parentModule", parentModule);
+    console.log("breadcrumbs", breadCrumbs);
 
     useMemo(() => {
         const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
@@ -61,29 +66,30 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
         e.preventDefault();
         if (isNull(data.timing_id)) {
             toast.error(capitalize(trans('please_choose_timing')))
+        } else {
+            // dispatch(clearCart());
+            dispatch(addToCart({
+                cart_id: element.id + '' + selectedTiming.id,
+                type: 'service',
+                element_id: element.id,
+                timing_id: selectedTiming.id,
+                qty: 1,
+                price: element.isOnSale ? element.sale_price : element.price,
+                direct_purchase: element.direct_purchase,
+                shipmentFees: 0,
+                image: element.image,
+                name_ar: element.name_ar,
+                name_en: element.name_en,
+                description_ar: element.description_ar,
+                description_en: element.description_en,
+                timing: selectedTiming
+            }))
+            // dispatch(removeFromCart(element.id +''+selectedTiming.id));
         }
-        // dispatch(clearCart());
-        dispatch(addToCart({
-            cart_id: element.id + '' + selectedTiming.id,
-            type: 'service',
-            element_id: element.id,
-            timing_id: selectedTiming.id,
-            qty: 1,
-            price: element.isOnSale ? element.sale_price : element.price,
-            direct_purchase: element.direct_purchase,
-            shipmentFees: 0,
-            image: element.image,
-            name_ar: element.name_ar,
-            name_en: element.name_en,
-            description_ar: element.description_ar,
-            description_en: element.description_en,
-            timing : selectedTiming
-        }))
-        // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
-
+    console.log('element', element);
     return (
-        <FrontendContainer mainModule={'service'} subModule={element[getLocalized()]}>
+        <FrontendContainer childName={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
@@ -137,8 +143,9 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                 }
                             </div>
                         </div>
-                        {element.timings && <div className="mt-6">
+                        <div className="mt-6">
                             {/* service timings */}
+                            {element.timings && element.is_available &&
                             <Menu as="div" className="relative inline-block text-left mb-5 w-full">
                                 <div>
                                     <Menu.Button
@@ -198,11 +205,17 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                     </Menu.Items>
                                 </Transition>
                             </Menu>
+                            }
+                            {!element.is_available && <AlertMessage
+                                title={trans('element_is_not_available')}
+                                message={trans('element_is_not_available_currently_for_order')}
+                            />}
                             <div className="flex flex-row justify-between items-center gap-x-5">
                                 <form onSubmit={handleSubmit} className="w-full">
                                     <button
+                                        disabled={!element.is_available}
                                         type="submit"
-                                        className={classNames(`flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                     >
                                         {trans('add_to_cart')}
                                     </button>
@@ -210,7 +223,11 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                 <ElementFavoriteBtn id={element.id} type={'service'}
                                                     favoritesList={auth?.favoritesList}/>
                             </div>
-                        </div>}
+                        </div>
+                        {element.is_available && <AlertMessage
+                            title={trans('service_booking')}
+                            message={trans('service_booking_message')}
+                        />}
                         <section aria-labelledby="details-heading" className="my-12">
                             <h2 id="details-heading" className="sr-only">
                                 Additional details
@@ -399,7 +416,8 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                 </div>
                 {/* related items */}
                 {
-                    relatedElements && relatedElements.meta.total > 0 && <RelatedItems elements={relatedElements.data} type={'service'}/>
+                    relatedElements && relatedElements.meta.total > 0 &&
+                    <RelatedItems elements={relatedElements.data} type={'service'}/>
                 }
             </div>
         </FrontendContainer>

@@ -21,6 +21,7 @@ class CreateSubscriptionsTable extends Migration
             $table->string('caption_en')->nullable();
             $table->mediumText('description_ar')->nullable();
             $table->mediumText('description_en')->nullable();
+            $table->string('image')->nullable();
             $table->string('notes_ar')->nullable();
             $table->string('notes_en')->nullable();
             $table->integer('months')->default(1);

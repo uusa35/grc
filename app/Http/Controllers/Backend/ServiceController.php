@@ -160,10 +160,10 @@ class ServiceController extends Controller
         try {
             $service->images()->delete();
             $service->slides()->delete();
-            $service->tags()->delete();
+            $service->tags()->detach();
             $service->comments()->delete();
             $service->favorites()->delete();
-            $service->categories()->delete();
+            $service->categories()->detach();
             $service->delete();
             return redirect()->back();
         } catch (\Exception $e) {
