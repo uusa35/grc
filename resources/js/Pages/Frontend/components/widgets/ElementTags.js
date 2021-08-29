@@ -18,19 +18,19 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
                 }
                 {
                     onNew && <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-gray-800 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-800 ">
                     {trans('on_new')}
                         </span>
                 }
                 {
                     exclusive && <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-gray-600 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-600 ">
                     {trans('exclusive')}
                         </span>
                 }
                 {
                     free && <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-gray-400 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-400 ">
                     {trans('free')}
                         </span>
                 }

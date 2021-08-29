@@ -1,4 +1,4 @@
-import {Fragment, useContext, useState} from 'react'
+import {Fragment, useContext, useMemo, useState} from 'react'
 import {Dialog, Popover, Tab, Transition, Disclosure, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
@@ -15,7 +15,7 @@ import SearchField from "../SearchField";
 import MainNavBookCategoriesList from "./MainNavBookCategoriesList";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 import {useDispatch, useSelector} from "react-redux";
-import {changeLang, setCurrency} from "../../../redux/actions";
+import {changeLang, setCurrency, setParentModule} from "../../../redux/actions";
 import GlobalContext from "../../../context/GlobalContext";
 
 const navigation = {
@@ -156,7 +156,7 @@ export default function MainNav() {
         guest,
     } = useContext(AppContext);
     const {auth, settings } = useContext(GlobalContext);
-    const {locale, currency, currencies, cart} = useSelector(state => state);
+    const {locale, currency, currencies, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
 
@@ -406,32 +406,37 @@ export default function MainNav() {
                             <div className="h-full flex gap-x-5">
                                 <Link
                                     href={route('frontend.home')}
-                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize"
+                                    onClick={() => dispatch(setParentModule('home'))}
+                                    className={classNames(parentModule == 'home' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 hover:bg-gray-900 hover:rounded-sm capitalize")}
                                 >
                                     {capitalize(trans('home'))}
                                 </Link>
                                 <Link
                                     href={route('frontend.book.index')}
-                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize"
+                                    onClick={() => dispatch(setParentModule('book'))}
+                                    className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                 >
                                     {capitalize(trans('books'))}
                                 </Link>
                                 <MainNavBookCategoriesList/>
                                 <Link
                                     href={route('frontend.user.index')}
-                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize"
+                                    onClick={() => dispatch(setParentModule('book'))}
+                                    className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                 >
                                     {capitalize(trans('authors'))}
                                 </Link>
                                 <Link
                                     href={route('frontend.service.index')}
-                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize"
+                                    onClick={() => dispatch(setParentModule('service'))}
+                                    className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                 >
                                     {capitalize(trans('services'))}
                                 </Link>
                                 <Link
                                     href={route('frontend.course.index')}
-                                    className="flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize"
+                                    onClick={() => dispatch(setParentModule('course'))}
+                                    className={classNames(parentModule == 'course' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                 >
                                     {capitalize(trans('courses'))}
                                 </Link>
@@ -443,17 +448,17 @@ export default function MainNav() {
                                         <>
                                             <Popover.Button
                                                 className={classNames(
-                                                    open
-                                                        ? 'text-white'
+                                                    parentModule == 'contactus' || parentModule == 'subscriptions' || parentModule == 'polices' || parentModule == 'terms' || parentModule == 'aboutus' || parentModule == 'faqs'
+                                                        ? 'border-b border-hippie-blue-500 pb-2'
                                                         : 'text-white',
-                                                    'mt-2.5 group rounded-md inline-flex items-center text-white font-extrabold capitalize'
+                                                    'text-white mt-2.5 group inline-flex items-center text-white font-extrabold capitalize'
                                                 )}
                                             >
                                                 <span>{trans('pages')}</span>
                                                 <ChevronDownIcon
                                                     className={classNames(
                                                         open ? 'text-white' : 'text-white',
-                                                        'ml-2 w-5 group-hover:text-gray-100'
+                                                        'rtl:mr-2 ltr:ml-2 w-5 group-hover:text-gray-100'
                                                     )}
                                                     aria-hidden="true"
                                                 />

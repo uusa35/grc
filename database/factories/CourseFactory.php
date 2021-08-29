@@ -28,7 +28,7 @@ class CourseFactory extends Factory
             'name_ar' => 'دورة اونلاين ' . $fakerAr->name,
             'name_en' => 'Course '.$this->faker->name,
             'caption_ar' => $fakerAr->name,
-            'caption_en' => $fakerAr->name,
+            'caption_en' => $this->faker->name,
             'on_new' => $this->faker->boolean(true),
             'exclusive' => $this->faker->boolean(true),
             'on_sale' => $this->faker->boolean,
