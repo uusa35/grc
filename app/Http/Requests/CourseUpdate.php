@@ -44,6 +44,7 @@ class CourseUpdate extends FormRequest
             'on_sale' => 'boolean',
             'on_homepage' => 'boolean',
             'sale_price' => 'numeric|nullable|min:0.5|max:999',
+//            'image' => "dimensions:max_width=2000,max_height=2000",
             'size_chart_image' => 'image|nullable',
             'description_en' => 'min:3|nullable',
             'description_ar' => 'min:3|nullable',

@@ -118,7 +118,7 @@ const AppContextProvider = ({children}) => {
         //     isRTL : locale === 'ar' ,
         getLocalized: (element = 'name') => lang === 'ar' ? `${element}_ar` : `${element}_en`,
         getThumb: (element) => `${Ziggy().t.url}/storage/uploads/images/thumbnail/${element}`,
-        getLarge: (element) => `${Ziggy().t.url}/storage/uploads/images/thumbnail/${element}`,
+        getLarge: (element) => `${Ziggy().t.url}/storage/uploads/images/large/${element}`,
         getFileUrl: (element) => `${Ziggy().t.url}/storage/uploads/files/${element}`,
         baseUrl: `${Ziggy().t.url}/`,
         isAdminOrAbove: !isEmpty(auth) && (auth.role?.is_admin || auth.role?.is_super),

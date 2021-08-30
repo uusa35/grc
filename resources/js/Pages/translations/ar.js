@@ -1038,6 +1038,7 @@ export const ar = {
     "creates" : "إنشاء",
     "edits" : "تعديل",
     'image_best_fit' : 'مقاس الصورة المناسب (العرض 1080  - الطول 1440 px  )',
+    'image_best_fit_vertical' : 'مقاس الصورة المناسب (العرض 1080  - الطول 1440 px  )',
     'image_best_fit_slide' : 'مقاس الصورة المناسب (العرض 1900  - الطول 750 px  )',
     'qr_best_fit' : 'مقاس الصورة المناسب (العرض 300  - الطول 300 px  )',
     "product_attribute" : "خاصية المنتج",
@@ -1142,5 +1143,6 @@ export const ar = {
     "service_booking" : "ما بعد طلب الخدمة",
     "service_booking_message" : "سيتم التواصل معكم مباشرة عن طريق البريد الإلكتروني أو رقم الهاتف لتحديد الطريقة المناسبة للعميل لتقديم الخدمة",
     "are_u_sure_u_want_to_clear_cart" : "أضافه هذا العنصر لعربة التسوق يسلتزم افارغ جميع العناصر الموجوده بالفعل .. هذا العنصر يتم شراءه بطريقة مباشرة فقط",
-    "an_element_with_direct_purchase_mode_is_one_to_add_to_cart_u_have_to_clear_cart_first" : "تم اضافة عنصر يحتوي على خاصية الشراء المباشر. يجب إفراغ عربة التسوق قبل اضافه اي عناصر لعربة التسوق"
+    "an_element_with_direct_purchase_mode_is_one_to_add_to_cart_u_have_to_clear_cart_first" : "تم اضافة عنصر يحتوي على خاصية الشراء المباشر. يجب إفراغ عربة التسوق قبل اضافه اي عناصر لعربة التسوق",
+    "course_video_url_one" : "فيديو تعريفي (توضيحي) للدورة"
 }

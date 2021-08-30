@@ -28,6 +28,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
+import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
 
 
 export default function FrontendCourseShow({element, relatedElements, auth}) {
@@ -46,12 +47,25 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
     });
 
     useMemo(() => {
-        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
+        const images = []
+        element.video_url_one ?
+        images.push({
+            thumbnail: getLarge(element.image),
+            original: getLarge(element.image),
+            embedUrl: 'https://www.youtube.com/embed/4pSzhZ76GdM?autoplay=1&showinfo=0',
+            description: 'Render custom slides (such as videos)',
+            renderItem: () => <EmbeddedIFrameVideo videoUrl={element.video_url_one}/>
+        }) : null
+        images.push({thumbnail: getLarge(element.image), original: getLarge(element.image)})
         map(element.images, img => {
-            images.push({thumbnail: getThumb(img.image), original: getLarge(img.image)})
+            images.push({thumbnail: getLarge(img.image), original: getLarge(img.image)})
         })
         setCurrentImages(images);
     }, [element])
+
+    console.log('current', currentImages);
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -77,11 +91,11 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
     return (
         <FrontendContainer childName={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
-                <div className="w-full h-auto overflow-hidden mb-10">
-                    {element.free && <EmbeddedHtml html={element.embedded}/>}
-                </div>
+                {/*<div className="w-full h-auto overflow-hidden mb-10">*/}
+                {/*    {element.free && <EmbeddedHtml html={element.embedded}/>}*/}
+                {/*</div>*/}
                 {/* Product */}
-                <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
+                <div className={classNames(element.video_url_one ? `lg:grid-cols-2`: `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto")}>
                     {/* Image gallery */}
                     <div className="relative">
                         <ElementTags
@@ -102,7 +116,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                             items={currentImages}/>
                     </div>
                     {/* Product info */}
-                    <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
+                    <div className="mx-5 mt-10 pt-10 sm:px-0 sm:mt-16 lg:mt-0">
                         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
                         <div className="mt-3">
                             <h2 className="sr-only">{trans('information')}</h2>
@@ -205,7 +219,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                 message={trans('element_is_not_available_currently_for_order')}
                             />}
                             <div className="flex flex-row justify-between items-center gap-x-5">
-                                <form onSubmit={handleSubmit} className="w-full">
+                                <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto">
                                     <button
                                         disabled={!element.is_available}
                                         type="submit"
