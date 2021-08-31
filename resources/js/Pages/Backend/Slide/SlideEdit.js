@@ -10,7 +10,7 @@ import {map} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function SlideEdit({slide , types, products, services, categories, courses, books, users}) {
-    const {trans, getLocalized, parentModule, isAdminOrAbove, classNames} = useContext(AppContext);
+    const {trans, getLocalized, getThumb, isAdminOrAbove, classNames} = useContext(AppContext);
     const {params} = route();
     const {data, setData, put, progress} = useForm({
         name_ar: slide.name_ar,
@@ -104,6 +104,9 @@ export default function SlideEdit({slide , types, products, services, categories
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
+                                    {slide.image && <img className={`h-24 w-20 bg-cover rounded-md`}
+                                                        src={getThumb(slide.image)}
+                                                        alt={slide[getLocalized()]}/>}
                                 </div>
                                 <ToolTipWidget message={trans('main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
@@ -126,7 +129,6 @@ export default function SlideEdit({slide , types, products, services, categories
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="name_ar"
                                         defaultValue={data.name_ar}
@@ -149,7 +151,6 @@ export default function SlideEdit({slide , types, products, services, categories
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="name_en"
                                         defaultValue={data.name_en}
@@ -172,7 +173,6 @@ export default function SlideEdit({slide , types, products, services, categories
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="caption_ar"
                                         defaultValue={data.caption_ar}
@@ -195,7 +195,6 @@ export default function SlideEdit({slide , types, products, services, categories
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="caption_en"
                                         defaultValue={data.caption_en}
@@ -346,7 +345,7 @@ export default function SlideEdit({slide , types, products, services, categories
 
                             {/* file pdf */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="main_image"
+                                <label htmlFor="file"
                                        className={`block  font-medium text-gray-700`}>
                                     {trans('pdf_file')}
                                 </label>
