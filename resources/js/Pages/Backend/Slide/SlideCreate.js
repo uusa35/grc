@@ -86,7 +86,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
                                     <input
                                         onChange={e => setData('image', e.target.files[0])}
-                                        // required
+                                        required
                                         type="file"
                                         name="image"
                                         id="main_image"
@@ -115,7 +115,6 @@ export default function SlideCreate({types, products, services, categories, cour
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="name_ar"
                                         defaultValue={data.name_ar}
@@ -138,7 +137,6 @@ export default function SlideCreate({types, products, services, categories, cour
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="name_en"
                                         defaultValue={data.name_en}
@@ -161,7 +159,6 @@ export default function SlideCreate({types, products, services, categories, cour
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="caption_ar"
                                         defaultValue={data.caption_ar}
@@ -184,7 +181,6 @@ export default function SlideCreate({types, products, services, categories, cour
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="caption_en"
                                         defaultValue={data.caption_en}
@@ -335,7 +331,7 @@ export default function SlideCreate({types, products, services, categories, cour
 
                             {/* file pdf */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="main_image"
+                                <label htmlFor="file"
                                        className={`block  font-medium text-gray-700`}>
                                     {trans('pdf_file')}
                                 </label>
