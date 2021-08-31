@@ -210,6 +210,7 @@ return array (
   'register_type' => 'نوع التسجيل',
   'choose_register_type' => 'اختر نوع التسجيل المطلوب',
   'register_with_google' => 'التسجيل بحساب جوجل',
+  'dont_have_account' => 'ليس لديك حساب ',
   'already_have_account' => 'لديك حساب بالفعل',
   'enter_your_email' => 'ادخل البريد الإلكتروني',
   'enter_your_password' => 'ادخل كلمة المرور',
@@ -1078,5 +1079,6 @@ return array (
     "pdf_file" => "ملف البي دي اف",
     "file_instruction" => "رفع ملف البي دي اف",
     "order_appearance" => "ترتيب الظهور",
-    "end_time" => "وقت الانتهاء"
+    "end_time" => "وقت الانتهاء",
+    "confirm_password" => "تأكيد كلمة المرور"
 );

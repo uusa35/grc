@@ -159,22 +159,12 @@ class SlideController extends Controller
      */
     public function update(Request $request, Slide $slide)
     {
-        request()->validate([
-            'slidable_id' => 'required|integer',
-            'slidable_type' => 'required|string',
-        ]);
         if ($slide->update($request->except('image'))) {
             $request->hasFile('image') ? $this->saveMimes($slide, $request, ['image'], ['1900', '750'], false) : null;
             $request->hasFile('file') ? $this->savePath($slide, $request, 'file') : null;
-            return redirect()->route('backend.slide.index', [
-                'slidable_type' => $slide->type,
-                'slidable_id' => $slide->slidable_id
-            ])->with('success', trans('general.process_success'));
+            return redirect()->back()->with('success', trans('general.process_success'));
         }
-        return redirect()->route('backend.slide.index', [
-            'slidable_type' => $slide->type,
-            'slidable_id' => $slide->slidable_id,
-        ])->with('error', trans('general.process_failure'));
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**

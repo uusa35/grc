@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
 use App\Services\Search\CategoryFilters;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = Category::paginate(Self::TAKE_LESS);
+        $elements = new CategoryCollection(Category::paginate(Self::TAKE_LESS));
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 
@@ -41,7 +42,6 @@ class CategoryController extends Controller
         $elements = Category::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -49,13 +49,13 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return 'testing';
+        return inertia('Backend/Category/CategoryCreate');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -66,10 +66,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
         //
     }
@@ -77,22 +77,22 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return inertia('Backend/Category/CategoryEdit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -100,10 +100,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
         //
     }

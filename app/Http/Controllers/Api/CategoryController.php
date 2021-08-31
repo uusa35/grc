@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
 use App\Services\Search\CategoryFilters;
 use App\Services\Search\Filters;
@@ -17,15 +18,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = Category::active()->onlyParent()->with('children.children')->get();
+        $elements = new CategoryCollection(Category::active()->onlyParent()->with('children.children')->get());
         return response()->json($elements,200);
     }
 
     public function search(CategoryFilters $filters)
     {
-        $elements = Category::active()->filters($filters)->orderBy('id', 'desc')
+        $elements = new CategoryCollection(Category::active()->filters($filters)->orderBy('id', 'desc')
             ->paginate(Self::TAKE_LESS)
-            ->withQueryString();
+            ->withQueryString());
         return response()->json($elements, 200);
     }
 

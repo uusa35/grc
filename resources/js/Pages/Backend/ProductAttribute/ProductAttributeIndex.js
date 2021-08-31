@@ -1,15 +1,12 @@
 import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
-import {isEmpty, map} from "lodash";
+import {map} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
-import ToolTipWidget from "../components/widgets/ToolTipWidget";
-import GlobalContext from "../../context/GlobalContext";
 
 export default function ProductAttributeIndex({elements, colors, sizes}) {
-    const {trans, theme, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
-    const { settings } = useContext(GlobalContext);
+    const {trans, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
     const {params} = route();
 
     return (

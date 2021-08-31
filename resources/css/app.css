@@ -36,8 +36,8 @@
 }
 
 @font-face {
-    font-family: 'AR-Almarai-Font';
-    src: url('../../public/fonts/AR-Almarai-Font.ttf') format('truetype');
+    font-family: 'Almarai-Bold';
+    src: url('../../public/fonts/Almarai-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -92,6 +92,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'ibm';
+    src: url('../../public/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-ibm {
+    font-family: 'ibm', 'sans-serif';
+}
+
 .font-cairo {
     font-family: 'cairo', 'sans-serif';
 }
@@ -105,7 +116,7 @@
 }
 
 .font-almarai {
-    font-family: 'AR-Almarai-Font', 'sans-serif';
+    font-family: 'Almarai-Bold', 'sans-serif';
 }
 
 .font-bein-bold {

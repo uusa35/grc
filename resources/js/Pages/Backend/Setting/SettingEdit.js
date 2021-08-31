@@ -850,7 +850,7 @@ export default function SettingEdit({setting, themes}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_qr_instruction')}/>
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('qr_best_fit')}
+                                    {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}

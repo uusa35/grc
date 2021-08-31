@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CurrencyCollection;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Currency::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,8 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        //
+        $elements = new CurrencyCollection(Currency::paginate(Self::TAKE_LESS));
+        return inertia('Backend/Currency/CurrencyIndex', compact('elements'));
     }
 
     /**
@@ -25,7 +36,7 @@ class CurrencyController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Backend/Currency/CurrencyCreate');
     }
 
     /**
@@ -58,7 +69,7 @@ class CurrencyController extends Controller
      */
     public function edit(Currency $currency)
     {
-        //
+        return inertia('Backend/Currency/CurrencyEdit', compact('currency'));
     }
 
     /**

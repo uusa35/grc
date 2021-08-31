@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServiceStore;
 use App\Http\Requests\ServiceUpdate;
+use App\Http\Resources\ServiceCollection;
 use App\Models\Category;
 use App\Models\Service;
 use App\Models\User;
@@ -40,19 +41,8 @@ class ServiceController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Service::filters($filters)->with('user')->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
-            ->withQueryString()->through(fn($element) => [
-                'id' => $element->id,
-                'name_ar' => $element->name_ar,
-                'name_en' => $element->name_en,
-                'created_at' => $element->created_at,
-                'price' => $element->price,
-                'active' => $element->active,
-                'image' => $element->image,
-                'sku' => $element->sku,
-                'on_sale' => $element->on_sale,
-                'user' => $element->user->only('id', 'name_ar', 'name_en'),
-            ]);
+        $elements = new ServiceCollection(Service::filters($filters)->with('user')->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
+            ->withQueryString());
         return inertia('Backend/Service/ServiceIndex', compact('elements'));
     }
 

@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PrivilegeCollection;
 use App\Models\Privilege;
 use Illuminate\Http\Request;
 
 class PrivilegeController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Privilege::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,8 @@ class PrivilegeController extends Controller
      */
     public function index()
     {
-        //
+        $elements = new PrivilegeCollection(Privilege::paginate(Self::TAKE_LESS));
+        return inertia('Backend/Privilege/PrivilegeIndex', compact('elements'));
     }
 
     /**
@@ -25,7 +36,7 @@ class PrivilegeController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Backend/Privilege/PrivilegeCreate');
     }
 
     /**
@@ -58,7 +69,9 @@ class PrivilegeController extends Controller
      */
     public function edit(Privilege $privilege)
     {
-        //
+        $privilege->load('roles');
+        $pivotElements = $privilege->roles->pluck('pivot')->toArray();
+        return inertia('Backend/Privilege/PrivilegeEdit', compact('privilege','pivotElements'));
     }
 
     /**
@@ -70,7 +83,25 @@ class PrivilegeController extends Controller
      */
     public function update(Request $request, Privilege $privilege)
     {
-        //
+        request()->validate([
+            'name' => 'required|string|max:100',
+            'name_ar' => 'required',
+            'name_en' => 'required',
+            'description_ar' => 'required',
+            'description_en' => 'required',
+            'order' => 'integer',
+            'attributes' => 'array',
+            'main_menu' => 'boolean',
+        ]);
+        if ($privilege->update($request->except('image'))) {
+            if($request->has('attributes'))
+            foreach($request->get('attributes') as $k => $v) {
+                $privilege->roles()->updateExistingPivot($v['role_id'], $v);
+            }
+            $request->hasFile('image') ? $this->saveMimes($privilege, $request, ['image'], ['300', '300'], false) : null;
+            return redirect()->route('backend.privilege.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.progress_failure'));
     }
 
     /**

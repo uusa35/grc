@@ -7,6 +7,7 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 import moment from "moment";
 import {map} from "lodash";
+import {Inertia} from "@inertiajs/inertia";
 
 export default function SlideEdit({slide , types, products, services, categories, courses, books, users}) {
     const {trans, getLocalized, parentModule, isAdminOrAbove, classNames} = useContext(AppContext);
@@ -38,6 +39,8 @@ export default function SlideEdit({slide , types, products, services, categories
         slidable_id: slide.slidable_id,
     });
 
+    console.log('slide', slide);
+
     const {errors} = usePage().props;
 
     const handleChange = (e) => {
@@ -49,7 +52,14 @@ export default function SlideEdit({slide , types, products, services, categories
 
     const submit = (e) => {
         e.preventDefault()
-        put(route(`backend.slide.update`, slide.id));
+        Inertia.post(route(`backend.slide.update`, slide.id), {
+            _method: 'put',
+            ...data,
+            image: data.image,
+        }, {
+            forceFormData: true,
+        })
+        // put(route(`backend.slide.update`, slide.id));
     }
 
     useMemo(() => {

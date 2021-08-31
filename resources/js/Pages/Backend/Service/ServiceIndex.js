@@ -9,7 +9,7 @@ import route from 'ziggy-js';
 import LocalizedText from "../components/widgets/LocalizedText";
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
-import {showModal} from "../../redux/actions";
+import {showModal, toggleSort} from "../../redux/actions";
 
 
 export default function ServiceIndex({elements}) {
@@ -20,7 +20,7 @@ export default function ServiceIndex({elements}) {
         handleDeleteItem,
         getLocalized
     } = useContext(AppContext);
-    const { sort, locale  } = useSelector(state => state);
+    const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -34,13 +34,20 @@ export default function ServiceIndex({elements}) {
     }, [sort.desc])
 
     return (
-        <BackendContainer elements={elements} showSearch={elements.total > 1} showNoElements={elements.total < 1}
-                          showMobileView={elements.total > 1}>
+        <BackendContainer
+            elements={elements}
+            showSearch={elements.meta.total > 1}
+            showNoElements={elements.meta.total < 1}
+            showMobileView={elements.meta.total > 1}
+            total={elements.meta.total}
+            links={elements.meta.links}
+            mainModule={'service'}
+        >
             <div className="flex flex-col hidden sm:block">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
+                            className={classNames(true ? `bg-gray-600` : 'bg-gray-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead
                                     className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold uppercase")}>
@@ -164,13 +171,13 @@ export default function ServiceIndex({elements}) {
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
                                             <td className="px-3 py-4 whitespace-nowrap text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
-                                                    <ActiveDot active={element.active} />
+                                                    <ActiveDot active={element.active}/>
                                                     {element[getLocalized('name')]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
                                                     <span
-                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale  ? 'green' : 'red'}-100 text-gray-800`}>
+                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale ? 'green' : 'red'}-100 text-gray-800`}>
                                                             {trans('on_sale')}
                                                           </span>
                                                 </div>

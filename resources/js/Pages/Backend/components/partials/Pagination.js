@@ -6,9 +6,9 @@ import {Link} from '@inertiajs/inertia-react'
 import route from 'ziggy-js';
 import {isEmpty, map} from 'lodash';
 
-export default function Pagination({type, total, links, showSearch = false}) {
+export default function Pagination({type, total, links, showSearch = false, mainModule }) {
     const [search, setSearch] = useState('');
-    const {trans, classNames, parentModule } = useContext(AppContext)
+    const {trans, classNames } = useContext(AppContext)
     return (
         <nav
             className="grid grid-cols-1 sm:grid-cols-2 flex justify-between items-center  bg-transparent sm:px-0">
@@ -34,7 +34,7 @@ export default function Pagination({type, total, links, showSearch = false}) {
                         />
                     </div>
                     <Link
-                        href={search.length > 2 && route().has(`backend.${parentModule}.search`) ? route(`backend.${parentModule}.search`, {search}) : '#'}
+                        href={search.length > 2 && route().has(`backend.${mainModule}.index`) ? route(`backend.${mainModule}.index`, {search}) : '#'}
                         disabled={search.length <= 2}
                         className={`py-1 px-3 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 sm:order-1 sm:ml-3`}
                     >
@@ -42,8 +42,8 @@ export default function Pagination({type, total, links, showSearch = false}) {
                     </Link>
                 </div>
                 {
-                    search.length > 2 && route().has(`backend.${parentModule}.search`) && <Link
-                        href={route().has(`backend.${type}.search`) ? route(`backend.${type}.search`) : '#'}
+                    search.length > 2 && route().has(`backend.${mainModule}.index`) && <Link
+                        href={route().has(`backend.${type}.index`) ? route(`backend.${type}.index`) : '#'}
                         className={`py-1 px-2 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm text-center md font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 sm:order-1 sm:ml-3`}
                     >
                         {trans("reset")}
@@ -57,7 +57,7 @@ export default function Pagination({type, total, links, showSearch = false}) {
                             map(links, page =>
                                 <Link
                                     key={page.label}
-                                    href={route().has(`backend.${type}.search`) && page.url ? page.url : '#'}
+                                    href={route().has(`backend.${type}.index`) && page.url ? page.url : '#'}
                                     className={classNames(page.active ? `border-gray-700 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
                                 >
                                     {page.label}

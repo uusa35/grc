@@ -14,12 +14,6 @@ class UserCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return $this->collection->map(fn($element) => [
-            'id' => $element->id,
-            'name_ar' => $element->name_ar,
-            'name_en' => $element->name_en,
-            'image' => $element->image,
-            'created_at' => $element->created_at,
-        ]);
+        return UserLightResource::collection($this->collection);
     }
 }

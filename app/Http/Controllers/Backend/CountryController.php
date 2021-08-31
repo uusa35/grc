@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CountryCollection;
 use App\Models\Country;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Country::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $elements = new CountryCollection(Country::paginate(Self::TAKE_LESS));
+        return inertia('Backend/Country/CountryIndex', compact('elements'));
     }
 
     /**
@@ -25,7 +36,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Backend/Country/CountryCreate');
     }
 
     /**
@@ -58,7 +69,7 @@ class CountryController extends Controller
      */
     public function edit(Country $country)
     {
-        //
+        return inertia('Backend/Country/CountryEdit', compact('country'));
     }
 
     /**

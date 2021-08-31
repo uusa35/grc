@@ -10,9 +10,9 @@ export default function NormalCourseWidget ({ element }) {
 
     return (
         <div className="block relative overflow-hidden shadow-md mb-5 rounded-b-md">
-            <div className="w-full h-96 rounded-t-md overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-2 sm:aspect-h-3">
+            <div className="w-full rounded-t-md overflow-hidden group-hover:opacity-80 sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                 <Link
-                    className="h-auto w-auto z-30"
+                    className="z-30"
                     href={route('frontend.course.show', element.id) + `?slug=${element[getLocalized()]}`}>
                     <ElementTags onSale={element.isOnSale}
                                  onNew={element.on_new}
@@ -22,7 +22,7 @@ export default function NormalCourseWidget ({ element }) {
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
-                    className="w-full h-full object-center object-cover rounded-t-md"
+                    className="object-cover object-bottom rounded-t-md"
                 />
                 </Link>
             </div>

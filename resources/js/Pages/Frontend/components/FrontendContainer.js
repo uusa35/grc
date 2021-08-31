@@ -24,11 +24,11 @@ const FrontendContainer = ({
                                mainSlides = [],
                                showBreadCrumbs = true
                            }) => {
-    const {locale, settings } = useSelector(state => state)
-    const {classNames, getThumb , getLocalized} = useContext(AppContext);
+    const {locale, settings} = useSelector(state => state)
+    const {classNames, getThumb, getLocalized, arFont, enFont } = useContext(AppContext);
 
     return (
-        <div className="h-full flex overflow-hidden text-sm md:text-lg" dir={locale.dir}>
+        <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-lg")} dir={locale.dir}>
             <Head title={capitalize(settings[getLocalized()])}>
                 <meta head-key="title" name="title" content={settings[getLocalized()]}/>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>
@@ -88,7 +88,7 @@ const FrontendContainer = ({
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
             <main
-                className={classNames(locale.isRTL ? 'font-bein' : 'font-tajwal-medium', "flex-1 relative z-0 focus:outline-none max-w-full bg-white font-extrabold capitalize")}>
+                className={"flex-1 relative z-0 focus:outline-none max-w-full bg-white font-extrabold capitalize"}>
                 <MainNav/>
                 <div className="min-h-screen">
                     {mainSlides && <MainSlider elements={mainSlides}/>}

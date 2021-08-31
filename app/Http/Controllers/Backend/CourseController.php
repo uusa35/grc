@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseStore;
 use App\Http\Requests\CourseUpdate;
+use App\Http\Resources\CourseCollection;
 use App\Models\Course;
 use App\Models\Category;
 use App\Models\User;
@@ -41,23 +42,11 @@ class CourseController extends Controller
         if ($validator->fails()) {
             return inertia('Backend/Course/CourseIndex', $validator->errors()->all());
         }
-        $elements = Course::filters($filters)
+        $elements = new CourseCollection(Course::filters($filters)
             ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
             ->with('user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
-            ->withQueryString()->through(fn($element) => [
-                'id' => $element->id,
-                'name_ar' => $element->name_ar,
-                'name_en' => $element->name_en,
-                'created_at' => $element->created_at,
-                'price' => $element->price,
-                'active' => $element->active,
-                'image' => $element->image,
-                'sku' => $element->sku,
-                'on_sale' => $element->on_sale,
-                'active' => $element->active,
-                'user' => $element->user->only('id', 'name_ar', 'name_en'),
-            ]);
+            ->withQueryString());
         return inertia('Backend/Course/CourseIndex', compact('elements'));
     }
 

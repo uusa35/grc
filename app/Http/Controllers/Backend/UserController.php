@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserExtraLightResource;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -37,15 +38,8 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = User::filters($filters)->notAdmins()->with('role')->paginate(Self::TAKE_LESS)
-            ->withQueryString()->through(fn($element) => [
-                'id' => $element->id,
-                'name_ar' => $element->name_ar,
-                'name_en' => $element->name_en,
-                'created_at' => $element->created_at,
-                'active' => $element->active,
-                'role' => $element->role->only('name_ar','name_en')
-            ]);
+        $elements = new UserCollection(User::filters($filters)->notAdmins()->with('role')->paginate(Self::TAKE_LESS)
+            ->withQueryString());
         return inertia('Backend/User/UserIndex', compact('elements'));
     }
 

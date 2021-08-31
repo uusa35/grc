@@ -33,14 +33,21 @@ export default function ProductIndex({elements}) {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
     }, [sort.desc])
 
+    console.log('elements', elements);
     return (
-        <BackendContainer elements={elements} showSearch={elements.total > 1} showNoElements={elements.total < 1}
-                          showMobileView={elements.total > 1}>
+        <BackendContainer elements={elements}
+                          showSearch={elements.meta.total > 1}
+                          showNoElements={elements.meta.total < 1}
+                          showMobileView={elements.meta.total > 1}
+                          total={elements.meta.total}
+                          links={elements.meta.links}
+                          mainModule={'product'}
+        >
             <div className="flex flex-col hidden sm:block">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
+                            className={classNames(true ? `bg-gray-600` : 'bg-gray-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead
                                     className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold uppercase")}>
@@ -127,7 +134,7 @@ export default function ProductIndex({elements}) {
                                     <th
                                         scope="col"
                                         className=" px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left"
-                                        onClick={() => handleSort('price')}
+                                        onClick={() => dispatch(toggleSort('price'))}
                                     >
                                         {sort.desc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"

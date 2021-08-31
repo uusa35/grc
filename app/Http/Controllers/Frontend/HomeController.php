@@ -11,6 +11,7 @@ use App\Http\Resources\UserExtraLightResource;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Setting;
 use App\Models\Slide;
 use App\Models\User;
 
@@ -18,12 +19,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $slides = SlideExtraLightResource::collection(Slide::active()->onHome()->limit(SELF::TAKE_LESS)->get());
+        $slides = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
+            return $q->active()->onHome();
+        }])->first()->slides);
         $homeBookCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->onlyParent()->onlyForBooks()->get());
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->get());
         $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->get());
-        return inertia('Frontend/HomePage', compact('slides', 'homeBookCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors','newOnHomeCourses'));
+        return inertia('Frontend/HomePage', compact('slides', 'homeBookCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses'));
 
     }
 
@@ -34,6 +37,6 @@ class HomeController extends Controller
         }
         app()->setLocale($lang);
         session()->put('lang', $lang);
-        return redirect()->back()->with('success', 'lang changed');
+        return redirect()->back();
     }
 }

@@ -6,7 +6,7 @@ import {AppContext} from "../../context/AppContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 
-export default function ProductAttributeEdit({attribute, colors, sizes}) {
+export default function({attribute, colors, sizes}) {
     const {trans, getLocalized} = useContext(AppContext);
     const {data, setData, put, progress} = useForm({
         'color_id': attribute.color_id,
@@ -46,6 +46,7 @@ export default function ProductAttributeEdit({attribute, colors, sizes}) {
                             </p>
                         </div>
                         <div className="pt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            {/* size id */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="size_id"
                                        className="block text-sm font-medium text-gray-700">

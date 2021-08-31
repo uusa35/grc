@@ -32,8 +32,13 @@ export default function CourseIndex({elements}) {
     }, [sort.desc])
 
     return (
-        <BackendContainer elements={elements} showSearch={elements.total > 1} showNoElements={elements.total < 1}
-                          showMobileView={elements.total > 1} mainModule={'course'}>
+        <BackendContainer elements={elements}
+                          showSearch={elements.meta.total > 1}
+                          showNoElements={elements.meta.total < 1}
+                          showMobileView={elements.meta.total > 1}
+                          total={elements.meta.total}
+                          links={elements.meta.links}
+                          mainModule={'course'}>
             <div className="flex flex-col hidden sm:block">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">

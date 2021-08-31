@@ -32,9 +32,17 @@ export default function UserIndex({elements}) {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
     }, [sort.desc])
 
+    console.log('currentData', currentData);
     return (
-        <BackendContainer elements={elements} showSearch={elements.total > 1} showNoElements={elements.total < 1}
-                          showMobileView={elements.total > 1}>
+        <BackendContainer
+            elements={elements}
+            showSearch={elements.meta.total > 1}
+            showNoElements={elements.meta.total < 1}
+            showMobileView={elements.meta.total > 1}
+            total={elements.meta.total}
+            links={elements.meta.links}
+            mainModule={'product'}
+        >
             <div className="flex flex-col hidden sm:block">
                 <div className=" overflow-visible">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
@@ -117,13 +125,13 @@ export default function UserIndex({elements}) {
                                             <td className="px-3 py-4 whitespace-nowrap  text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
                                                     <ActiveDot active={element.active} />
-                                                    {element[getLocalized('name')]}
+                                                    {element[getLocalized()]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
                                                         <span
                                                             className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-100 text-gray-800`}>
-                                                            {element.role[getLocalized('name')]}
+                                                            {element.role[getLocalized()]}
                                                           </span>
                                                 </div>
                                             </td>

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Country extends PrimaryModel
 {
     use ModelHelpers;
-    protected $localeStrings = ['name','currency_symbol'];
     protected $guarded = [''];
     protected $casts = [
         'is_local' => 'boolean',

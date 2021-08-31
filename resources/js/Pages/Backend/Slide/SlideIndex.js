@@ -4,12 +4,13 @@ import {isEmpty, map} from "lodash";
 import {Link, usePage} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
-import ToolTipWidget from "../components/widgets/ToolTipWidget";
-import GlobalContext from "../../context/GlobalContext";
+import {showModal} from "../../redux/actions";
+import {useDispatch} from "react-redux";
 
 export default function SlideIndex({elements}) {
-    const {trans, theme, handleDeleteItem, classNames, getLocalized, getThumb } = useContext(AppContext);
+    const {trans, theme, classNames, getLocalized, getThumb } = useContext(AppContext);
     const {params} = route();
+    const dispatch = useDispatch();
 
     return (
         <BackendContainer elements={elements} subModule={'slide'} showNoElements={elements.data.length < 1}
@@ -93,7 +94,15 @@ export default function SlideIndex({elements}) {
                                                     </svg>
                                                 </Link>
                                                 <button
-                                                    onClick={() => handleDeleteItem('destroy', 'slide', a.id)}
+                                                    onClick={() =>
+                                                        dispatch(showModal({
+                                                            type: 'destroy',
+                                                            model: 'slide',
+                                                            id: element.id,
+                                                            title: `${trans('destroy')} ${trans('slide')}`,
+                                                            message: `${trans('confirmation')} ${trans('destroy')} ${trans('product')}`,
+                                                        }))
+                                                    }
                                                     // href={route(`backend.slide.destroy`, a.id)}
                                                     className="text-indigo-600 hover:text-indigo-900 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"

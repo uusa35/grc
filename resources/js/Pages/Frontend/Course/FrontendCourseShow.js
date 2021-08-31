@@ -95,7 +95,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                 {/*    {element.free && <EmbeddedHtml html={element.embedded}/>}*/}
                 {/*</div>*/}
                 {/* Product */}
-                <div className={classNames(element.video_url_one ? `lg:grid-cols-2`: `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto")}>
+                <div className={classNames(element.video_url_one ? `lg:grid-cols-2`: `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto pb-10")}>
                     {/* Image gallery */}
                     <div className="relative">
                         <ElementTags
@@ -151,8 +151,8 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                 }
                             </div>
                         </div>
+                        {/* course timings */}
                         <div className="mt-6">
-                            {/* course timings */}
                             {element.timings && element.is_available &&
                             <Menu as="div" className="relative inline-block text-left mb-5 w-full">
                                 <div>
@@ -232,6 +232,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                                     favoritesList={auth?.favoritesList}/>
                             </div>
                         </div>
+
                         <section aria-labelledby="details-heading" className="my-12">
                             <h2 id="details-heading" className="sr-only">
                                 Additional details

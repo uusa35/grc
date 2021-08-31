@@ -103,7 +103,6 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
             image_size_chart: data.image_size_chart,
         }, {
             forceFormData: true,
-            onSuccess : () => dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {
@@ -118,7 +117,6 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                 formData.append(`id`, product.id);
                 formData.append(`order`, product.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
-                    dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});
@@ -558,6 +556,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                         </FormSection>
                         {/*more details booleans */}
                         <FormSection title={trans('more_details')}>
+                            {/* active */}
                             <fieldset className="mt-1 col-span-1">
                                 <div>
                                     <legend
@@ -1171,7 +1170,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('product_qr_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('qr_best_fit')}
+                                    {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}

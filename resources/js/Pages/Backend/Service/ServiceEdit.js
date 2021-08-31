@@ -952,7 +952,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 </div>
                                 <ToolTipWidget message={trans('service_qr_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('qr_best_fit')}
+                                    {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}

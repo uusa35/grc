@@ -22,7 +22,6 @@ export default function CourseEdit({users, categories, course, elementCategories
     const {
         classNames,
         trans,
-        theme,
         getFileUrl,
         isAdminOrAbove,
         getLocalized,
@@ -106,7 +105,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                     formData.append(`images[${i}]`, currentImages[i]);
                     images[`images[${i}]`] = currentImages[i];
                 }
-                formData.append(`model`, 'book');
+                formData.append(`model`, 'course');
                 formData.append(`id`, course.id);
                 formData.append(`order`, course.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
@@ -114,7 +113,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});
-                    Inertia.reload({only: ['book']});
+                    Inertia.reload({only: ['course']});
                 });
             }, 1000);
         }
@@ -133,7 +132,7 @@ export default function CourseEdit({users, categories, course, elementCategories
     console.log('errors', errors);
 
     return (
-        <BackendContainer type={'book'}>
+        <BackendContainer type={'course'}>
             {/*{*/}
             {/*    currentImage && <ImageUploadModal image={currentImage}/>*/}
             {/*}*/}
@@ -170,7 +169,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
@@ -192,7 +191,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
@@ -215,7 +214,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_price_instruction')}/>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
                                 </p>
@@ -239,7 +238,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_sale_price_instruction')}/>
+                                <ToolTipWidget message={trans('course_sale_price_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
                                 </p>
@@ -262,7 +261,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_sku_instruction')}/>
+                                <ToolTipWidget message={trans('course_sku_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
                                 </p>
@@ -392,7 +391,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         </div>
                                     </fieldset>
                                 </div>
-                                <ToolTipWidget message={trans('book_categories_instruction')}/>
+                                <ToolTipWidget message={trans('course_categories_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
                                 </p>
@@ -417,7 +416,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                     <img className={`h-24 w-20 bg-cover rounded-md`} src={getThumb(course.image)}
                                          alt=""/>
                                 </div>
-                                <ToolTipWidget message={trans('book_main_image_instruction')}/>
+                                <ToolTipWidget message={trans('course_main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
@@ -483,7 +482,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                             {/* embedded*/}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="embedded" className={`block   text-gray-700`}>
-                                    {trans('embedded')} {trans('book')}
+                                    {trans('embedded')} {trans('course')}
                                 </label>
                                 <div className="mt-1 flex flex-row justify-between items-center gap-x-2">
                                          <textarea
@@ -499,7 +498,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         <EmbeddedHtml html={course.embedded}/>
                                     </div>
                                 </div>
-                                <ToolTipWidget message={trans('book_embedded_notes_instruction')}/>
+                                <ToolTipWidget message={trans('course_embedded_notes_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.embedded && <div className={`text-red-600`}>{errors.embedded}</div>}
                                 </p>
@@ -645,7 +644,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                                 </label>
                                             </div>
                                         </div>
-                                        <ToolTipWidget message={trans('book_sale_price_instruction')}/>
+                                        <ToolTipWidget message={trans('course_sale_price_instruction')}/>
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.on_sale &&
@@ -691,7 +690,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                                 </label>
                                             </div>
                                         </div>
-                                        <ToolTipWidget message={trans('book_free_instruction')}/>
+                                        <ToolTipWidget message={trans('course_free_instruction')}/>
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.free &&
@@ -705,7 +704,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                 </div>
                             </div>
                         </div>
-                        <FormBtns type={'book'}/>
+                        <FormBtns type={'course'}/>
                     </div>
                     <div
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
@@ -733,7 +732,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                              defaultValue={course.description_ar}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_description_instruction')}/>
+                                <ToolTipWidget message={trans('course_description_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.description_ar &&
                                     <div className={`text-red-600`}>{errors.description_ar}</div>}
@@ -754,7 +753,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                              defaultValue={course.description_en}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_description_instruction')}/>
+                                <ToolTipWidget message={trans('course_description_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.description_en &&
                                     <div className={`text-red-600`}>{errors.description_en}</div>}
@@ -775,7 +774,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                              defaultValue={course.notes_ar}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_notes_instruction')}/>
+                                <ToolTipWidget message={trans('course_notes_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
                                 </p>
@@ -794,7 +793,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                              defaultValue={course.notes_en}
                                          />
                                 </div>
-                                <ToolTipWidget message={trans('book_notes_instruction')}/>
+                                <ToolTipWidget message={trans('course_notes_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
                                 </p>
@@ -817,7 +816,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <ToolTipWidget message={trans('course_caption_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
                                 </p>
@@ -839,7 +838,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <ToolTipWidget message={trans('course_caption_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
                                 </p>
@@ -862,7 +861,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <ToolTipWidget message={trans('course_caption_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
                                 </p>
@@ -886,7 +885,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_delivery_time_instruction')}/>
+                                <ToolTipWidget message={trans('course_delivery_time_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.delivery_time &&
                                     <div className={`text-red-600`}>{errors.delivery_time}</div>}
@@ -933,7 +932,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_video_url_one_instruction')}/>
+                                <ToolTipWidget message={trans('course_video_url_one_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.video_url_one &&
                                     <div className={`text-red-600`}>{errors.video_url_one}</div>}
@@ -956,7 +955,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_video_url_two_instruction')}/>
+                                <ToolTipWidget message={trans('course_video_url_two_instruction')}/>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.video_url_two &&
                                     <div className={`text-red-600`}>{errors.video_url_two}</div>}
@@ -982,7 +981,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_end_sale_instruction')}/>
+                                <ToolTipWidget message={trans('course_end_sale_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(course.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
@@ -1007,7 +1006,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                 </div>
-                                <ToolTipWidget message={trans('book_start_sale_instruction')}/>
+                                <ToolTipWidget message={trans('course_start_sale_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(course.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
@@ -1057,9 +1056,9 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         </Link>
                                     </div>}
                                 </div>
-                                <ToolTipWidget message={trans('book_qr_instruction')}/>
+                                <ToolTipWidget message={trans('course_qr_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('qr_best_fit')}
+                                    {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-red-900`}>
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
@@ -1112,7 +1111,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_is_available_message')}/>
+                                    <ToolTipWidget message={trans('course_is_available_message')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.is_available &&
@@ -1158,7 +1157,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_wrap_as_gift_instruction')}/>
+                                    <ToolTipWidget message={trans('course_wrap_as_gift_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.wrap_as_gift &&
@@ -1205,7 +1204,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_direct_purchase_instruction')}/>
+                                    <ToolTipWidget message={trans('course_direct_purchase_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.direct_purchase &&
@@ -1252,7 +1251,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_exclusive_instruction')}/>
+                                    <ToolTipWidget message={trans('course_exclusive_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.exclusive &&
@@ -1298,7 +1297,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_on_new_instruction')}/>
+                                    <ToolTipWidget message={trans('course_on_new_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.on_new && <div className={`text-red-600`}>{errors.on_new}</div>}
@@ -1344,7 +1343,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                             </label>
                                         </div>
                                     </div>
-                                    <ToolTipWidget message={trans('book_is_hot_deal_instruction')}/>
+                                    <ToolTipWidget message={trans('course_is_hot_deal_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.is_hot_deal &&
@@ -1362,7 +1361,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                         </div>
 
 
-                        <FormBtns type={'book'}/>
+                        <FormBtns type={'course'}/>
                     </div>
 
 
@@ -1411,8 +1410,8 @@ export default function CourseEdit({users, categories, course, elementCategories
                                 </div>
                             </div>
                         </div>
-                        <FormBtns type={'book'}/>
-                        <ImagesList images={course.images} id={course.id} type={'book'}/>
+                        <FormBtns type={'course'}/>
+                        <ImagesList images={course.images} id={course.id} type={'course'}/>
                     </div>
                 </form>
             </FormTabsContainer>

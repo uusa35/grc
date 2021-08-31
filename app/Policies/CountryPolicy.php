@@ -11,7 +11,6 @@ class CountryPolicy
     use HandlesAuthorization;
     const MODAL = 'country';
 
-
     /**
      * Determine whether the user can view the category.
      *

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
+use App\Models\Role;
+use App\Models\Subscription;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -68,6 +71,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => Role::where(['is_client' => true])->first()->id,
+            'country_id' => Country::where(['is_local' => true])->first()->id,
+            'subscription_id' => Subscription::where(['free' => true])->first()->id
         ]);
     }
 }

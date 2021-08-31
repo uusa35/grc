@@ -1035,7 +1035,7 @@ export const en  = {
     "edits": "edit",
     'image_best_fit' : 'The appropriate image size (width 1080 - height 1440 px )',
     'image_best_fit_slide' : 'The appropriate image size (width 1900 - height 750 px)',
-    'qr_best_fit' : 'The right image size (width 300 - length 300 px )',
+    'square_best_fit' : 'The right image size square (width 500 - length 500 px )',
     "product_attribute" : "Product Attribute",
     "destroy": "delete",
     "accounts": "accounts",

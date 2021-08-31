@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Address;
 use App\Models\Book;
 use App\Models\Color;
+use App\Models\Coupon;
+use App\Models\Currency;
+use App\Models\Faq;
 use App\Models\Page;
 use App\Models\Privilege;
 use App\Models\Product;
@@ -13,6 +17,7 @@ use App\Models\Setting;
 use App\Models\Slide;
 use App\Models\User;
 use App\Policies\AddonPolicy;
+use App\Policies\AddressPolicy;
 use App\Policies\AreaPolicy;
 use App\Policies\BookPolicy;
 use App\Policies\BranchPolicy;
@@ -27,6 +32,7 @@ use App\Policies\CoursePolicy;
 use App\Policies\CurrencyPolicy;
 use App\Policies\DayPolicy;
 use App\Policies\DevicePolicy;
+use App\Policies\FaqPolicy;
 use App\Policies\GovernatePolicy;
 use App\Policies\ImagePolicy;
 use App\Policies\ItemPolicy;
@@ -76,11 +82,17 @@ class AuthServiceProvider extends ServiceProvider
         Tag::class => TagPolicy::class,
         Post::class => PostPolicy::class,
         Country::class => CountryPolicy::class,
+        Currency::class => CurrencyPolicy::class,
         Area::class => AreaPolicy::class,
         Slide::class => SlidePolicy::class,
         Video::class => VideoPolicy::class,
         Page::class => PagePolicy::class,
         Comment::class => CommentPolicy::class,
+        Address::class => AddressPolicy::class,
+        Role::class => RolePolicy::class,
+        Privilege::class => PrivilegePolicy::class,
+        Coupon::class => CouponPolicy::class,
+        Faq::class => FaqPolicy::class,
     ];
 
     /**

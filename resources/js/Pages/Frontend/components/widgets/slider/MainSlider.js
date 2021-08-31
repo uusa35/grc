@@ -7,14 +7,16 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import {isMobile} from "react-device-detect";
+import {useSelector} from "react-redux";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
 const MainSlider = ({elements}) => {
-    const {getLarge, getLocalized, trans} = useContext(AppContext)
+    const {getLarge, getLocalized, classNames } = useContext(AppContext)
+    const { locale } = useSelector(state => state)
 
     return (
         <>
@@ -36,8 +38,8 @@ const MainSlider = ({elements}) => {
                         <SwiperSlide key={element.name_en} className="relative">
                             {(element.name_ar || element.name_en) &&
                             <div
-                                className="absolute bottom-20 invisible lg:visible flex flex-col w-1/2 mx-10 p-8 shadow-lg rounded-lg bg-gray-200 opacity-80 gap-y-4 flex-1  justify-center items-start">
-                                <div className="text-lg text-gray-800">
+                                className={classNames(locale.isRTL ? 'left-36' :  'right-36', "transition-shadow ease-in-out absolute bottom-10 invisible lg:visible flex flex-col w-auto m-10 p-4 px-12 shadow-sm bg-white opacity-100 gap-y-1 flex-1  justify-center items-center")}>
+                                <div className="text-lg text-gray-800 truncate">
                                     {element[getLocalized()]}
                                 </div>
                                 <div className="text-sm text-gray-800 truncate">
@@ -46,8 +48,8 @@ const MainSlider = ({elements}) => {
                                 <div className="text-sm text-gray-800 truncate">
                                     {element[getLocalized('description')]}
                                 </div>
-                                <div className="flex flex-1 w-full justify-end">
-                                    {element.url && <a className="p-2 px-6 rounded-lg shadow-md bg-gray-600 text-white"
+                                <div className="flex flex-1 w-full justify-end hidden">
+                                    {element.url && <a className="p-2 px-6 rounded-sm shadow-md bg-gray-600 text-white"
                                                        href={element.url}>
                                         {element[getLocalized()]}
                                     </a>}
@@ -56,7 +58,7 @@ const MainSlider = ({elements}) => {
                             }
 
                                 <img
-                                    style={{maxHeight: 700, width: '100%'}}
+                                    style={{maxHeight: 750, width: '100%'}}
                                     className="w-full object-cover "
                                     src={getLarge(element.image)}
                                 />

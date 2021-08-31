@@ -3,19 +3,35 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AddressCollection;
 use App\Models\Address;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
     /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Address::class);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => 'integer|exists:users,id'
+        ]);
+        $elements = Address::query();
+        $request->has('user_id') ? $elements->where(['user_id' => $request->user_id]) : $elements;
+        $elements =  new AddressCollection($elements->paginate(SELF::TAKE_LESS));
+        return inertia('Backend/Address/AddressIndex', compact('elements'));
     }
 
     /**

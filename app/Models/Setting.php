@@ -8,9 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Setting extends PrimaryModel
 {
     use HasFactory;
-//    protected $localeStrings = ['name','caption','address', 'country', 'description', 'shipment_notes', 'policy', 'terms'];
     protected $guarded = [''];
-//    protected $appends = ['name','caption','country','address','description','imageThumb'];
 
     public function images()
     {
@@ -28,5 +26,10 @@ class Setting extends PrimaryModel
 
     public function getAddressAttribute() {
         return $this->address;
+    }
+
+    public function slides()
+    {
+        return $this->morphMany(Slide::class, 'slidable');
     }
 }

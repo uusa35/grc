@@ -11,20 +11,22 @@ import TableMobileView from "../widgets/TableMobileview";
 import {AppContext} from "../../../context/AppContext";
 import LoadingView from "../widgets/LoadingView";
 import {useDispatch, useSelector} from "react-redux";
+import SystemMessage from "../partials/SystemMessage";
 
 const BackendContainer = ({
                               children, elements = [],
                               showNoElements = false,
                               showSearch = false,
                               showMobileView = false,
-                              mainModule = ''
+                              mainModule = '',
+                              total, links
                           }) => {
+    const {classNames, arFont, enFont} = useContext(AppContext);
     const {locale, isLoading} = useSelector(state => state);
-    const { classNames } = useContext(AppContext);
-    const dispatch = useDispatch();
 
     return (
-        <div className={classNames(locale.isRTL ? 'font-bein' : 'font-tajwal-medium', "h-full flex overflow-hidden text-sm md:text-lg")} dir={locale.dir}>
+        <div className={classNames(locale.isRTL ? arFont : enFont, "h-full flex overflow-hidden text-sm md:text-lg")}
+             dir={locale.dir}>
             {/*<Head title={`${cXapitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>*/}
             {/*    <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>*/}
             {/*    <link rel="icon" type="image/svg+xml" href={getThumb(settings.image)}/>*/}
@@ -35,15 +37,16 @@ const BackendContainer = ({
                 <BackendHeader/>
                 <div className="min-h-screen">
                     <div className="align-middle inline-block min-w-full h-auto">
-                        <BreadCrumbs/>
                         <div className="mx-3 space-y-2">
-                            {/*<SystemMessage/>*/}
+                            <BreadCrumbs/>
+                            <SystemMessage/>
                             {
-                                !isEmpty(elements?.data) && elements.total > 0 && mainModule &&  <Pagination
+                                !isEmpty(elements?.data) && total > 0 && mainModule && <Pagination
                                     type={mainModule}
-                                    total={elements.total}
-                                    links={elements.links}
+                                    total={total}
+                                    links={links}
                                     showSearch={showSearch}
+                                    mainModule={mainModule}
                                 />
                             }
                             {!isEmpty(elements?.data) && showMobileView &&
@@ -52,11 +55,12 @@ const BackendContainer = ({
                             {children}
                             <NoElements display={showNoElements}/>
                             {
-                                !isEmpty(elements?.data) && elements.total > 0 && mainModule && <Pagination
+                                !isEmpty(elements?.data) && total > 0 && mainModule && <Pagination
                                     type={mainModule}
-                                    total={elements.total}
-                                    links={elements.links}
+                                    total={total}
+                                    links={links}
                                     showSearch={showSearch}
+                                    mainModule={mainModule}
                                 />
                             }
                         </div>

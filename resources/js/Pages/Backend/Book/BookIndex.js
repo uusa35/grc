@@ -8,7 +8,7 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
-import {showModal} from "../../redux/actions";
+import {showModal, toggleSort} from "../../redux/actions";
 
 
 export default function BookIndex({elements}) {
@@ -32,8 +32,15 @@ export default function BookIndex({elements}) {
     }, [sort.desc]);
 
     return (
-        <BackendContainer elements={elements} showSearch={elements.total > 1} showNoElements={elements.total < 1}
-                          showMobileView={elements.total > 1}>
+        <BackendContainer
+            elements={elements}
+            showSearch={elements.meta.total > 1}
+            showNoElements={elements.meta.total < 1}
+            showMobileView={elements.meta.total > 1}
+            total={elements.meta.total}
+            links={elements.meta.links}
+            mainModule={'product'}
+        >
             <div className="flex flex-col hidden sm:block">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
@@ -46,7 +53,7 @@ export default function BookIndex({elements}) {
                                     <th
                                         scope="col"
                                         className="px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left  uppercase tracking-wider tracking-wider"
-                                        onClick={() => dispatch(toggleSort('id'))} x
+                                        onClick={() => dispatch(toggleSort('id'))}
                                     >
                                         {sort.desc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
@@ -125,7 +132,7 @@ export default function BookIndex({elements}) {
                                     <th
                                         scope="col"
                                         className=" px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left"
-                                        onClick={() => handleSort('price')}
+                                        onClick={() => dispatch(toggleSort('price'))}
                                     >
                                         {sort.desc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"

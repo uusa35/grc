@@ -20,10 +20,13 @@ export default function SettingIndex({ setting }) {
                         <p className="mt-1 max-w-2xl text-sm text-gray-500">{trans('setting_message')}</p>
                     </div>
                 </div>
-                <div className="flex">
+                <div className="flex flex-row gap-x-5">
                     <Link
                     className={`mx-5 p-3 bg-gray-600 text-white rounded-md shadow-md`}
-                        href={route('backend.setting.edit', setting.id)}>{trans('edit')}</Link>
+                        href={route('backend.setting.edit', setting.id)}>{trans('edit')} {trans('settings')}</Link>
+                    <Link
+                        className={`mx-5 p-3 bg-gray-600 text-white rounded-md shadow-md`}
+                        href={route('backend.slide.index', {'slidable_id' : 1 , 'slidable_type' : 'setting'})}>{trans('main_page_slides')}</Link>
                 </div>
             </div>
             <div className="border-t border-gray-200">

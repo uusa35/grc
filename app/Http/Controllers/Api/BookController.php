@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookCollection;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -21,9 +22,9 @@ class BookController extends Controller
 
     public function search(Filters $filters)
     {
-        $elements = Book::active()->filters($filters)->orderBy('id', 'desc')
+        $elements = new BookCollection(Book::active()->filters($filters)->orderBy('id', 'desc')
             ->paginate(Self::TAKE_LESS)
-            ->withQueryString();
+            ->withQueryString());
         return response()->json($elements, 200);
     }
 

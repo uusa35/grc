@@ -19,11 +19,12 @@ const teams = [
 ]
 
 const SideBar = () => {
-    const {trans, parentModule , classNames , getThumb, getLocalized } = useContext(AppContext);
-    const { modules } = useSelector(state => state);
+    const {trans , classNames , getThumb, getLocalized } = useContext(AppContext);
+    const { modules, parentModule } = useSelector(state => state);
     const[sideBarOpen, toggleSideBar] = useState(false)
     const {settings, auth} = useContext(GlobalContext);
 
+    console.log('parent', parentModule);
     return (
         <>
 
@@ -237,16 +238,16 @@ const SideBar = () => {
                                             <span className="flex min-w-0 items-center justify-between space-x-3">
                                               <img
                                                   className="w-10 h-10 ltr:mr-2 rtl:ml-2 bg-gray-300 rounded-full flex-shrink-0"
-                                                  src={auth.imageThumb}
+                                                  src={getThumb(auth.image)}
                                                   alt=""
                                               />
                                               <span className="flex-1 flex flex-col min-w-0">
                                                 <span
                                                     className="text-gray-900 truncate">
-                                                    <LocalizedText ar={auth.name_ar} en={auth.name_en} />
+                                                    {auth[getLocalized()]}
                                                 </span>
                                                 <span
-                                                    className="text-gray-500 ltr:text-left rtl:text-right text-sm truncate">{auth.role.name}</span>
+                                                    className="text-gray-500 ltr:text-left rtl:text-right text-sm truncate">{auth.role[getLocalized()]}</span>
                                               </span>
                                             </span>
                                             <SelectorIcon
@@ -346,7 +347,7 @@ const SideBar = () => {
                                                     href={route(`backend.${m.name}.search`)}
                                                     className={classNames(
                                                         m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
-                                                        'group flex items-center py-2 rounded-md'
+                                                        'group flex items-center py-2 rounded-md capitalize'
                                                     )}
                                                     aria-current={'page'}
                                                 >
