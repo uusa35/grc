@@ -5,13 +5,13 @@ import {useContext, useMemo} from "react";
 import {AppContext} from "../../context/AppContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
-import moment from "moment";
 import {map} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function SlideEdit({slide , types, products, services, categories, courses, books, users}) {
     const {trans, getLocalized, getThumb, isAdminOrAbove, classNames} = useContext(AppContext);
     const {params} = route();
+    const {errors} = usePage().props;
     const {data, setData, put, progress} = useForm({
         name_ar: slide.name_ar,
         name_en: slide.name_en,
@@ -38,10 +38,6 @@ export default function SlideEdit({slide , types, products, services, categories
         slidable_type: slide.slidable_type,
         slidable_id: slide.slidable_id,
     });
-
-    console.log('slide', slide);
-
-    const {errors} = usePage().props;
 
     const handleChange = (e) => {
         setData(values => ({
@@ -613,7 +609,6 @@ export default function SlideEdit({slide , types, products, services, categories
                                             <div className="flex items-center">
                                                 <input
                                                     onChange={handleChange}
-                                                    id="active"
                                                     name="active"
                                                     type="radio"
                                                     defaultChecked={data.active}
@@ -628,7 +623,6 @@ export default function SlideEdit({slide , types, products, services, categories
                                             <div className="flex items-center">
                                                 <input
                                                     onChange={handleChange}
-                                                    id="active"
                                                     name="active"
                                                     type="radio"
                                                     defaultChecked={!data.active}
@@ -659,14 +653,13 @@ export default function SlideEdit({slide , types, products, services, categories
                                                 <div className="flex items-center">
                                                     <input
                                                         onChange={handleChange}
-                                                        id="on_home"
                                                         name="on_home"
                                                         defaultChecked={data.on_home}
                                                         type="radio"
                                                         value={1}
                                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                     />
-                                                    <label htmlFor="push-everything"
+                                                    <label htmlFor="on_home"
                                                            className="ml-3 block  font-medium text-gray-700">
                                                         {trans('yes')}
                                                     </label>
@@ -674,12 +667,10 @@ export default function SlideEdit({slide , types, products, services, categories
                                                 <div className="flex items-center">
                                                     <input
                                                         onChange={handleChange}
-                                                        id="on_home"
                                                         name="on_home"
                                                         type="radio"
                                                         defaultChecked={!data.on_home}
                                                         value={0}
-                                                        checked
                                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                     />
                                                     <label htmlFor="on_home"

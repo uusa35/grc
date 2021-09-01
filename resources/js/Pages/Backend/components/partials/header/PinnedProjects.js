@@ -10,10 +10,10 @@ export default function PinnedProjects() {
     const { classNames ,  trans  } = useContext(AppContext);
     const { locale , modules } = useSelector(state => state)
     return (
-        <div className="bg-white my-3 mx-3 rounded-md shadow-sm py-3 sm:px-6 lg:px-5 ">
+        <div className="bg-white my-3 mx-3 rounded-md shadow-sm py-3 sm:px-6 lg:px-5 capitalize">
             {/*<h2 className="text-xs font-medium uppercase tracking-wide">{trans('modules')}</h2>*/}
             <ul className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-3 gap-4 sm:gap-6  my-1">
-                <li className="relative col-span-1 flex  rounded-md">
+                <li className="relative col-span-1 flex  rounded-md capitalize">
                     <div
                         className={classNames(locale.isRTL ? 'rounded-r-md' : 'rounded-l-md', `bg-gray-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
                     >

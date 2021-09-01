@@ -28,7 +28,7 @@ const FrontendContainer = ({
     const {classNames, getThumb, getLocalized, arFont, enFont } = useContext(AppContext);
 
     return (
-        <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-lg")} dir={locale.dir}>
+        <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-lg capitalize")} dir={locale.dir}>
             <Head title={capitalize(settings[getLocalized()])}>
                 <meta head-key="title" name="title" content={settings[getLocalized()]}/>
                 <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>

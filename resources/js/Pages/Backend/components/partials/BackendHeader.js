@@ -38,16 +38,16 @@ const BackendHeader = () => {
         <div className={``}>
             {/* all elements */}
             <div
-                className="border-b border-gray-200 py-3 bg-white rounded-md mx-3  sm:px-6 lg:p-4 sm:flex sm:flex-row sm:items-center sm:justify-between">
-                <h1 className="w-60 leading-6 text-gray-900 sm:truncate">{settings[getLocalized('name')]}</h1>
-                <div className="flex items-center justify-center w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 sm:gap-y-0 gap-x-2">
+                className="border-b border-gray-200 py-3 bg-white rounded-md mx-3  sm:px-6 lg:p-4 sm:flex sm:flex-row sm:items-center sm:justify-between capitalize">
+                <h1 className="w-60 leading-6 text-gray-900 sm:truncate capitalize">{settings[getLocalized('name')]}</h1>
+                <div className="flex items-center justify-center w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 sm:gap-y-0 gap-x-2 capitalize">
                     {/* all elements */}
                     <Menu as="div" className="col-auto relative ltr:text-left rtl:text-right">
                         {({open}) => (
                             <div>
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
-                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
+                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
                                         {trans('list')} {trans('all_elements')}
                                         <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -65,7 +65,7 @@ const BackendHeader = () => {
                                 >
                                     <Menu.Items
                                         static
-                                        className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-max z-50 origin-top-right absolute  md:-right-60 mt-2 py-5 border-2 border-gray-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                                        className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-max z-50 origin-top-right absolute  md:-right-60 mt-2 py-5 border-2 border-gray-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none capitalize"
                                     >
                                         {
                                             map(modules, m => (
@@ -105,7 +105,7 @@ const BackendHeader = () => {
                             <div>
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
-                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
+                                        className={`capitalize inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
                                         {trans('create')} {trans('element')}
                                         <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -157,14 +157,14 @@ const BackendHeader = () => {
                         )}
                     </Menu>
                 </div>
-                <div className="flex flex-wrap items-center w-auto mt-4 fl dex sm:mt-0 sm:ml-4 gap-3">
+                <div className="flex flex-wrap items-center w-auto mt-4 fl dex sm:mt-0 sm:ml-4 gap-3 capitalize">
                     {/* settings */}
-                    <Menu as="div" className="relative inline-block ltr:text-left rtl:text-right">
+                    <Menu as="div" className="relative inline-block ltr:text-left rtl:text-right capitalize">
                         {({open}) => (
                             <>
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
-                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
+                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-auto w-6  rtl:ml-2 ltr:mr-2 animate animate-spin"
                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -189,9 +189,9 @@ const BackendHeader = () => {
                                 >
                                     <Menu.Items
                                         static
-                                        className="origin-top-right absolute rtl:-mr-20 ltr:-ml-5 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                                        className="origin-top-right absolute rtl:-mr-20 ltr:-ml-5 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none capitalize"
                                     >
-                                        <div className="py-1">
+                                        <div className="py-1 capitalize">
                                             <Menu.Item>
                                                 {({active}) => (
                                                     <a
@@ -209,7 +209,7 @@ const BackendHeader = () => {
                                                 )}
                                             </Menu.Item>
                                         </div>
-                                        <div className="py-1">
+                                        <div className="py-1 capitalize">
                                             <Menu.Item>
                                                 {({active}) => (
                                                     <Link
@@ -233,7 +233,7 @@ const BackendHeader = () => {
                                                 )}
                                             </Menu.Item>
                                         </div>
-                                        <div className="py-1">
+                                        <div className="py-1 capitalize">
                                             <Menu.Item>
                                                 {({active}) => (
                                                     <button

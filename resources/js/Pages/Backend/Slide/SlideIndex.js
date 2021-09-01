@@ -73,18 +73,18 @@ export default function SlideIndex({elements}) {
                                 </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                {map(elements.data, a => (
-                                    <tr key={a.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{a.id}</td>
+                                {map(elements.data, element => (
+                                    <tr key={element.id}>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <img
                                             className="w-20 h-auto"
-                                            src={getThumb(a.image)} alt=""/></td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.slidable_type}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.slidable[getLocalized()]}</td>
+                                            src={getThumb(element.image)} alt=""/></td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.slidable_type}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.slidable[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
-                                                <Link href={route(`backend.slide.edit`, a.id)}
+                                                <Link href={route(`backend.slide.edit`, element.id)}
                                                       className="text-indigo-600 hover:text-indigo-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -99,11 +99,11 @@ export default function SlideIndex({elements}) {
                                                             type: 'destroy',
                                                             model: 'slide',
                                                             id: element.id,
-                                                            title: `${trans('destroy')} ${trans('slide')}`,
-                                                            message: `${trans('confirmation')} ${trans('destroy')} ${trans('product')}`,
+                                                            title: `${trans('destroy')} ${trans('slide')} ${element[getLocalized()]}`,
+                                                            message: `${trans('confirmation')} ${trans('destroy')} ${trans('slide')}`,
                                                         }))
                                                     }
-                                                    // href={route(`backend.slide.destroy`, a.id)}
+                                                    // href={route(`backend.slide.destroy`, element.id)}
                                                     className="text-indigo-600 hover:text-indigo-900 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">

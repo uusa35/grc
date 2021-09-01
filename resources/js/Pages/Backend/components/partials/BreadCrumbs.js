@@ -12,6 +12,7 @@ export default function BreadCrumbs({childName = ''}) {
     const {trans, classNames } = useContext(AppContext);
     const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
     const dispatch = useDispatch();
+    const { params } = route();
 
     useEffect(() => {
         if(parentModule === 'home') {
@@ -22,6 +23,7 @@ export default function BreadCrumbs({childName = ''}) {
     },[])
 
     console.log('parent', parentModule)
+    console.log('parms', params);
 
     return (
         <div
@@ -51,7 +53,7 @@ export default function BreadCrumbs({childName = ''}) {
                             </svg>
                             <Link
                                 className="capitalize"
-                                href={route(`backend.${parentModule}.index`)}>
+                                href={route(`backend.${parentModule}.index`,  params )}>
                                 {trans(pluralize(parentModule))}
                             </Link>
                         </li>

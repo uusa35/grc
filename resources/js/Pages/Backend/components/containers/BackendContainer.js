@@ -25,7 +25,7 @@ const BackendContainer = ({
     const {locale, isLoading} = useSelector(state => state);
 
     return (
-        <div className={classNames(locale.isRTL ? arFont : enFont, "h-full flex overflow-hidden text-sm md:text-lg")}
+        <div className={classNames(locale.isRTL ? arFont : enFont, "h-full flex overflow-hidden text-sm md:text-lg capitalize")}
              dir={locale.dir}>
             {/*<Head title={`${cXapitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>*/}
             {/*    <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>*/}
@@ -33,7 +33,7 @@ const BackendContainer = ({
             {/*</Head>*/}
             <SideBar/>
             {isLoading && <LoadingView/>}
-            <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-gray-100">
+            <main className="flex-1 relative z-0 focus:outline-none max-w-full bg-gray-100 capitalize">
                 <BackendHeader/>
                 <div className="min-h-screen">
                     <div className="align-middle inline-block min-w-full h-auto">

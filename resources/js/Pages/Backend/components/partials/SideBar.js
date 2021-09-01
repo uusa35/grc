@@ -57,7 +57,7 @@ const SideBar = () => {
                         leaveTo="-translate-x-full"
                     >
                         <div
-                            className="absolute top-10 left-10 bg-pink-400 z-10 flex-shrink-0 flex h-16 border-b border-gray-200 lg:hidden">
+                            className="absolute top-10 left-10 bg-pink-400 z-10 flex-shrink-0 flex h-16 border-b border-gray-200 lg:hidden capitalize">
                             <button
                                 className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
                                 onClick={() => toggleSideBar(true)}
@@ -291,6 +291,22 @@ const SideBar = () => {
                                                 </Menu.Item>
                                                 <Menu.Item>
                                                     {({active}) => (
+                                                        <Link
+                                                            href={route('backend.user.edit', auth.id)}
+                                                            className={classNames(
+                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
+                                                            )}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                            {trans('edit')} {trans('profile')}
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                                <Menu.Item>
+                                                    {({active}) => (
                                                         <button
                                                             onClick={(e) => {
                                                                 e.preventDefault();
@@ -366,7 +382,7 @@ const SideBar = () => {
                                     </span>
                                 ))}
                             </div>
-                            <div className="mt-8">
+                            <div className="mt-8 hidden">
                                 {/* Secondary navigation */}
                                 <h3 className="px-3  font-semibold text-gray-500 uppercase tracking-wider"
                                     id="teams-headline">
