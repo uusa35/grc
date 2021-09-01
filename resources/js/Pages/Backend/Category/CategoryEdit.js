@@ -242,7 +242,7 @@ export default function({category}) {
                                 </p>
                             </div>
                             {/* more images */}
-                            <div className="sm:col-span-3 has-tooltip mt-3">
+                            <div className="sm:col-span-3 has-tooltip mt-3 hidden">
                                 <label htmlFor="more_images"
                                        className={`block   text-gray-700`}>
                                     {trans('more_images')}

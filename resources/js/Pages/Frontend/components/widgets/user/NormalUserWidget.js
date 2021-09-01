@@ -3,6 +3,7 @@ import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext, AppContextProvider} from "../../../../context/AppContext";
 import {getConvertedFinalPrice} from "../../../../helpers";
+import {truncate} from "lodash";
 
 export default function NormalUserWidget ({ element }) {
     const { getLocalized, getThumb  } = useContext(AppContext);
@@ -16,7 +17,9 @@ export default function NormalUserWidget ({ element }) {
                     className="z-0 w-50 h-50 rounded-full shadow-md object-center object-cover group-hover:opacity-75"
                 />
             </div>
-            <h3 className="mt-4 text-center text-lg text-gray-700 truncate">{element[getLocalized()]}</h3>
+            <h3 className="mt-4 text-center text-lg text-gray-700 truncate">
+                {truncate(element[getLocalized()], { length : 25 })}
+            </h3>
         </Link>
     );
 }
