@@ -29,17 +29,17 @@ class BookUpdate extends FormRequest
     public function rules()
     {
         return [
-            'sku' => 'required|min:2',
-            'name_ar' => 'required:min:3|max:200',
-            'name_en' => 'required|min:3|max:200',
-            'user_id' => 'required|exists:users,id',
+            'sku' => 'min:2',
+            'name_ar' => 'min:3|max:200',
+            'name_en' => 'min:3|max:200',
+            'user_id' => 'exists:users,id',
             'shipment_package_id' => 'nullable|exists:shipment_packages,id',
             'brand_id' => 'nullable|exists:brands,id',
 //            'image' => "nullable",
 //            'qr' => "image|nullable",
 //            'images' => 'array|nullable',
-            'categories' => 'required|array|min:1',
-            'price' => 'required|numeric|min:0.5|max:999',
+            'categories' => 'array|min:1',
+            'price' => 'numeric|min:0.5|max:999',
             'qty' => ['numeric', 'min:1', 'max:999', 'regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','nullable'],
             'weight' => ['required','between:0.1,10'],
             'order' => ['numeric','min:1','max:9999','regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','nullable'],
@@ -53,7 +53,7 @@ class BookUpdate extends FormRequest
             'notes_en' => 'min:3|nullable',
 //            'start_sale' => 'date|nullable',
 //            'end_sale' => 'required',
-//            'active' => 'required|boolean',
+//            'active' => 'boolean',
             'tags' => 'array',
             'videos' => 'array',
             'video_url' => 'nullable|url',
@@ -65,7 +65,7 @@ class BookUpdate extends FormRequest
             'home_delivery_availability' => 'nullable|boolean',
             'free' => 'boolean',
             'download' => 'boolean',
-            "embedded" => "required|min:100"
+            "embedded" => "min:100"
         ];
     }
 }

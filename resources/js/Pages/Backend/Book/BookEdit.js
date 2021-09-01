@@ -172,7 +172,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                    {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
 
@@ -194,7 +194,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                    {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
 
@@ -217,7 +217,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
+                                    {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
                                 </p>
                             </div>
 
@@ -241,7 +241,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_sale_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
+                                    {errors.sale_price && <div className={`text-red-900`}>{errors.sale_price}</div>}
                                 </p>
                             </div>
 
@@ -264,7 +264,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_qty_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
+                                    {errors.qty && <div className={`text-red-900`}>{errors.qty}</div>}
                                 </p>
                             </div>
 
@@ -286,7 +286,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_sku_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
+                                    {errors.sku && <div className={`text-red-900`}>{errors.sku}</div>}
                                 </p>
                             </div>
 
@@ -309,7 +309,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_weight_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.weight && <div className={`text-red-600`}>{errors.weight}</div>}
+                                    {errors.weight && <div className={`text-red-900`}>{errors.weight}</div>}
                                 </p>
                             </div>
                             {/* user_id */}
@@ -337,7 +337,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     </div>
                                     <ToolTipWidget message={trans('user_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
+                                        {errors.user_id && <div className={`text-red-900`}>{errors.user_id}</div>}
                                     </p>
                                 </>}
                             </div>
@@ -439,7 +439,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_categories_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
+                                    {errors.categories && <div className={`text-red-900`}>{errors.categories}</div>}
                                 </p>
                             </div>
 
@@ -465,7 +465,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     {trans('image_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                    {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                                 </p>
                             </div>
                             {/* more images */}
@@ -495,7 +495,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     {trans('image_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
+                                    {errors.images && <div className={`text-red-900`}>{errors.images}</div>}
                                 </p>
                             </div>
                             {/* file pdf */}
@@ -520,7 +520,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('file_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.file && <div className={`text-red-600`}>{errors.file}</div>}
+                                    {errors.file && <div className={`text-red-900`}>{errors.file}</div>}
                                 </p>
                             </div>
                             {/* embedded*/}
@@ -544,7 +544,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_embedded_notes_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.embedded && <div className={`text-red-600`}>{errors.embedded}</div>}
+                                    {errors.embedded && <div className={`text-red-900`}>{errors.embedded}</div>}
                                 </p>
                             </div>
                         </div>
@@ -600,7 +600,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                         <ToolTipWidget/>
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
-                                                {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                                {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -618,7 +618,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                                     name="on_home"
                                                     type="radio"
                                                     value={1}
-                                                    defaultChecked={book.on_sale}
+                                                    defaultChecked={book.on_home}
                                                     className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="push-everything"
@@ -646,7 +646,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.on_home &&
-                                                <div className={`text-red-600`}>{errors.on_home}</div>}
+                                                <div className={`text-red-900`}>{errors.on_home}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -692,7 +692,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.on_sale &&
-                                                <div className={`text-red-600`}>{errors.on_sale}</div>}
+                                                <div className={`text-red-900`}>{errors.on_sale}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -738,7 +738,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.download &&
-                                                <div className={`text-red-600`}>{errors.download}</div>}
+                                                <div className={`text-red-900`}>{errors.download}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -784,7 +784,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.free &&
-                                                <div className={`text-red-600`}>{errors.free}</div>}
+                                                <div className={`text-red-900`}>{errors.free}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -825,7 +825,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 <ToolTipWidget message={trans('book_description_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.description_ar &&
-                                    <div className={`text-red-600`}>{errors.description_ar}</div>}
+                                    <div className={`text-red-900`}>{errors.description_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
@@ -846,7 +846,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 <ToolTipWidget message={trans('book_description_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.description_en &&
-                                    <div className={`text-red-600`}>{errors.description_en}</div>}
+                                    <div className={`text-red-900`}>{errors.description_en}</div>}
                                 </p>
                             </div>
                             {/* notes */}
@@ -866,7 +866,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_notes_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
+                                    {errors.notes_ar && <div className={`text-red-900`}>{errors.notes_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
@@ -885,7 +885,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_notes_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
+                                    {errors.notes_en && <div className={`text-red-900`}>{errors.notes_en}</div>}
                                 </p>
                             </div>
                             {/* caption */}
@@ -908,7 +908,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_caption_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
+                                    {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2 has-tooltip">
@@ -930,7 +930,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_caption_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
+                                    {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
                             {/* keywords */}
@@ -953,7 +953,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_caption_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
+                                    {errors.keywords && <div className={`text-red-900`}>{errors.keywords}</div>}
                                 </p>
                             </div>
                             {/* delivery time*/}
@@ -977,7 +977,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('book_delivery_time_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.delivery_time && <div className={`text-red-600`}>{errors.delivery_time}</div>}
+                                    {errors.delivery_time && <div className={`text-red-900`}>{errors.delivery_time}</div>}
                                 </p>
                             </div>
                             {/* order*/}
@@ -1001,7 +1001,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 </div>
                                 <ToolTipWidget message={trans('order_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                    {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2">
@@ -1024,7 +1024,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 <ToolTipWidget message={trans('book_video_url_one_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.video_url_one &&
-                                    <div className={`text-red-600`}>{errors.video_url_one}</div>}
+                                    <div className={`text-red-900`}>{errors.video_url_one}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-2">
@@ -1047,7 +1047,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 <ToolTipWidget message={trans('book_video_url_two_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.video_url_two &&
-                                    <div className={`text-red-600`}>{errors.video_url_two}</div>}
+                                    <div className={`text-red-900`}>{errors.video_url_two}</div>}
                                 </p>
                             </div>
                             {/* start sale */}
@@ -1074,7 +1074,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                    {errors.start_sale && <div className={`text-red-600`}>{errors.start_sale}</div>}
+                                    {errors.start_sale && <div className={`text-red-900`}>{errors.start_sale}</div>}
                                 </p>
                             </div>
                             {/* end sale*/}
@@ -1099,7 +1099,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                 <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                    {errors.end_sale && <div className={`text-red-600`}>{errors.end_sale}</div>}
+                                    {errors.end_sale && <div className={`text-red-900`}>{errors.end_sale}</div>}
                                 </p>
                             </div>
 
@@ -1150,7 +1150,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
+                                    {errors.qr && <div className={`text-red-900`}>{errors.qr}</div>}
                                 </p>
                             </div>
                         </div>
@@ -1204,7 +1204,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.check_stock &&
-                                            <div className={`text-red-600`}>{errors.check_stock}</div>}
+                                            <div className={`text-red-900`}>{errors.check_stock}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -1250,7 +1250,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.is_available &&
-                                            <div className={`text-red-600`}>{errors.is_available}</div>}
+                                            <div className={`text-red-900`}>{errors.is_available}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -1296,7 +1296,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.wrap_as_gift &&
-                                            <div className={`text-red-600`}>{errors.wrap_as_gift}</div>}
+                                            <div className={`text-red-900`}>{errors.wrap_as_gift}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -1343,7 +1343,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.direct_purchase &&
-                                            <div className={`text-red-600`}>{errors.direct_purchase}</div>}
+                                            <div className={`text-red-900`}>{errors.direct_purchase}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -1390,7 +1390,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.exclusive &&
-                                            <div className={`text-red-600`}>{errors.exclusive}</div>}
+                                            <div className={`text-red-900`}>{errors.exclusive}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -1435,7 +1435,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     <ToolTipWidget message={trans('book_on_new_instruction')}/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
-                                            {errors.on_new && <div className={`text-red-600`}>{errors.on_new}</div>}
+                                            {errors.on_new && <div className={`text-red-900`}>{errors.on_new}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -1482,7 +1482,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.is_hot_deal &&
-                                            <div className={`text-red-600`}>{errors.is_hot_deal}</div>}
+                                            <div className={`text-red-900`}>{errors.is_hot_deal}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
