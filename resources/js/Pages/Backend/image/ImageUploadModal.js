@@ -14,7 +14,6 @@ export default function ImageUploadModal({image, setData}) {
     //     console.log(croppedArea, croppedAreaPixels)
     // }, [])
 
-    console.log('image.src', image.src)
     return (
         <div className="flex flex-1 border-2 border-black w-full h-full">
             {/* cropper  here */}

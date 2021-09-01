@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Inertia\Middleware;
+use Tightenco\Ziggy\Ziggy;
 
 class FrontendHandleInertiaRequests extends Middleware
 {
@@ -52,7 +53,6 @@ class FrontendHandleInertiaRequests extends Middleware
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
             'currencies' => fn() => CurrencyExtraLightResource::collection(Currency::active()->with('country')->get()),
-            'cart' => fn() => session()->get('cart'),
             'categories' => fn() => CategoryCollection::make(Category::active()->onlyParent()
                 ->with(['children' => function ($q) {
                     $q->active()->orderBy('order', 'asc')->with(['children' => function ($q) {
@@ -61,6 +61,7 @@ class FrontendHandleInertiaRequests extends Middleware
                 }])
                 ->orderBy('order', 'asc')
                 ->get()),
+            'ziggy' => (new Ziggy())->toArray()
         ]);
     }
 }

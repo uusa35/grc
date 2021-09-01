@@ -19,7 +19,6 @@ export default function ElementFavoriteBtn({type, id, favoritesList }) {
     const submit = (e) => {
         e.preventDefault()
         if (!guest) {
-            console.log('inside ===>')
             setCurrentFavorite(!currentFavorite);
             post(route('frontend.favorite.store'), {
                 onSuccess : () => {

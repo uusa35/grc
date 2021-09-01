@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SubscriptionCollection;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        //
+        $elements = new SubscriptionCollection(Subscription::paginate(Self::TAKE_LESS));
+        return inertia('Backend/Subscription/SubscriptionIndex', compact('elements'));
     }
 
     /**
@@ -35,7 +37,7 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Backend/Subscription/SubscriptionCreate');
     }
 
     /**
@@ -68,7 +70,7 @@ class SubscriptionController extends Controller
      */
     public function edit(Subscription $subscription)
     {
-        //
+        return inertia('Backend/Subscription/SubscriptionEdit', compact('subscription'));
     }
 
     /**

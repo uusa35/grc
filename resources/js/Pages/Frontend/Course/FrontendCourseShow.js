@@ -63,9 +63,6 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
         setCurrentImages(images);
     }, [element])
 
-    console.log('current', currentImages);
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();

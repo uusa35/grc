@@ -3,7 +3,6 @@ import {render} from 'react-dom'
 import {createInertiaApp} from '@inertiajs/inertia-react'
 import GlobalContext from "./Pages/context/GlobalContext";
 import {AppContextProvider} from "./Pages/context/AppContext";
-
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import {Provider} from 'react-redux'

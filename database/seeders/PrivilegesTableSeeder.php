@@ -56,6 +56,7 @@ class PrivilegesTableSeeder extends Seeder
                 'name_en' => $k,
                 'name_ar' => $k,
                 'main_menu' => $v,
+                'is_sub_module' => !$v,
                 'description_ar' => $k,
                 'description_en' => $k,
             ]);

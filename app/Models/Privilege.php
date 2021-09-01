@@ -9,15 +9,13 @@ class Privilege extends PrimaryModel
 {
     use HasFactory;
     protected $guarded = [''];
-//    protected $appends = [ 'imageThumb','description','name'];
+    protected $casts = [
+        'main_menu' => 'boolean',
+        'is_sub_module' => 'boolean',
+    ];
 
     public function roles()
     {
         return $this->belongsToMany(Role::class)->withPivot('index','view', 'create', 'update', 'delete');
-    }
-
-    public function getCanSeeIndexAttribute() {
-        return $this->pivot->index;
-//        $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__}
     }
 }

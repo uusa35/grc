@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Address;
 use App\Models\Book;
+use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Coupon;
 use App\Models\Currency;
@@ -93,6 +94,7 @@ class AuthServiceProvider extends ServiceProvider
         Privilege::class => PrivilegePolicy::class,
         Coupon::class => CouponPolicy::class,
         Faq::class => FaqPolicy::class,
+        Brand::class => BrandPolicy::class,
     ];
 
     /**

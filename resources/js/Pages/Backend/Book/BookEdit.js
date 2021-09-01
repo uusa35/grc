@@ -100,8 +100,7 @@ export default function BookEdit({users, categories, book, elementCategories}) {
             image: data.image,
             qr: data.qr,
         }, {
-            forceFormData: true,
-            onSuccess : () => dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
+            forceFormData: true
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {
@@ -134,7 +133,6 @@ export default function BookEdit({users, categories, book, elementCategories}) {
 
     const handleImages = (imagesGroup) => {
         setCurrentImages(imagesGroup);
-
     }
 
     return (

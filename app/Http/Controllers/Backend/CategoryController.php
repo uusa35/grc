@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = new CategoryCollection(Category::paginate(Self::TAKE_LESS));
+        $elements = new CategoryCollection(Category::where(['is_parent' => true])->with('children.children')->paginate(2));
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 
@@ -94,7 +94,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        request()->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'caption_ar' => 'required|max:1000',
+            'caption_en' => 'required|max:1000',
+            'order' => 'integer'
+        ]);
+        if ($category->update($request->except('image','image_rectangle','file'))) {
+            $request->hasFile('image') ? $this->saveMimes($category, $request, ['image'], ['300', '300'], false) : null;
+            $request->hasFile('file') ? $this->savePath($category, $request, 'file') : null;
+            $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
+            return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.progress_failure'));
     }
 
     /**

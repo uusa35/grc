@@ -1149,5 +1149,11 @@ export const ar = {
     "an_element_with_direct_purchase_mode_is_one_to_add_to_cart_u_have_to_clear_cart_first" : "تم اضافة عنصر يحتوي على خاصية الشراء المباشر. يجب إفراغ عربة التسوق قبل اضافه اي عناصر لعربة التسوق",
     "course_video_url_one" : "فيديو تعريفي (توضيحي) للدورة",
     "main_page_slides" : "قائمة السلايدر للصفحة الرئيسية",
-    "sequance" : "ترتيب الظهور"
+    "sequance" : "ترتيب الظهور",
+    "categories_children" : "تصنيفات فرعية",
+    "main_menu" : "القائمة الرئيسية",
+    "is_sub_module" : "موديول فرعي",
+    "is_parent" : "تصنيف رئيسي",
+    "is_book" : "خاص بالكتب",
+    "is_course" : "خاص بالدورات"
 }

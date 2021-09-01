@@ -3,11 +3,22 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BrandCollection;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Brand::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +26,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $elements = new BrandCollection(Brand::paginate(Self::TAKE_LESS));
+        return inertia('Backend/Brand/BrandIndex', compact('elements'));
     }
 
     /**
@@ -25,7 +37,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Backend/Brand/BrandCreate');
     }
 
     /**
@@ -58,7 +70,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return inertia('Backend/Brand/BrandEdit', compact('brand'));
     }
 
     /**

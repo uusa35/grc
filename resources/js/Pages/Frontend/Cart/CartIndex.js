@@ -17,7 +17,6 @@ export default function CartIndex() {
     const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
     const dispatch = useDispatch()
 
-    console.log('the cart', cart);
     // console.log('the cart items', map(cart.items, item => console.log('the item', item));
     return (
         <FrontendContainer mainModule={'cart'}>

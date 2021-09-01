@@ -31,7 +31,7 @@ export default function({attribute, colors, sizes}) {
     }
 
     return (
-        <BackendContainer type={'product'}>
+        <BackendContainer mainModule={'product'}>
             <div className="flex flex-col bg-white shadow-md rounded-md">
                 <form
                     onSubmit={submit}

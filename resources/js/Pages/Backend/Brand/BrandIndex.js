@@ -6,18 +6,13 @@ import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 
 export default function({elements}) {
-    const {trans, classNames, getLocalized } = useContext(AppContext);
+    const {trans, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
     const {params} = route();
 
     return (
-        <BackendContainer
-            elements={elements}
-            showSearch={false}
-            showNoElements={elements.meta.total < 1}
-            showMobileView={elements.meta.total > 1}
-            total={elements.meta.total}
-            links={elements.meta.links}
-            mainModule={'role'}
+        <BackendContainer elements={elements} showSearch={elements.total > 1}
+                          showNoElements={elements.total < 1}
+                          showMobileView={elements.total > 1}
         >
             <div className="flex flex-col hidden sm:block">
                 <div className=" overflow-auto">
@@ -50,7 +45,7 @@ export default function({elements}) {
                                             </div>
                                             <div className="flex">
                                                 <Link
-                                                    href={route('backend.role.create', {user_id: elements.data.length > 0 ? elements.data[0]?.user_id : params.user_id})}>
+                                                    href={route('backend.brand.create', {user_id: elements.data.length > 0 ? elements.data[0]?.user_id : params.user_id})}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -71,7 +66,7 @@ export default function({elements}) {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
-                                                <Link href={route(`backend.role.edit`, element.id)}
+                                                <Link href={route(`backend.brand.edit`, element.id)}
                                                       className="text-indigo-600 hover:text-indigo-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -81,8 +76,8 @@ export default function({elements}) {
                                                     </svg>
                                                 </Link>
                                                 <button
-                                                    onClick={() => handleDeleteItem('destroy', 'role', element.id)}
-                                                    // href={route(`backend.role.destroy`, a.id)}
+                                                    onClick={() => handleDeleteItem('destroy', 'brand', element.id)}
+                                                    // href={route(`backend.brand.destroy`, a.id)}
                                                     className="text-indigo-600 hover:text-indigo-900 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -56,16 +56,9 @@ export default function({role,privileges}) {
 
     const handleSelectedElements = (checked, value) => {
         const filtered = uniq(checked ? selectedElements.concat(value) : filter(selectedElements, c => c != value))
-
         setSelectedElements(filtered);
         setData('privileges', filtered);
     }
-
-    console.log('element', role);
-    console.log('selected', selectedElements);
-    console.log('role.preiv', role.privileges);
-
-
 
     return (
         <BackendContainer>

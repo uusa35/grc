@@ -1,5 +1,4 @@
 import {call, put, all, takeLatest, select, delay} from 'redux-saga/effects';
-import * as requestSaga from './requestSaga';
 import * as actions from './../actions/types'
 import {first} from 'lodash'
 import {toast} from "react-toastify";

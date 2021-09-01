@@ -4,15 +4,25 @@ import {map} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
+import {showModal} from "../../redux/actions";
+import {useDispatch} from "react-redux";
 
 export default function({elements}) {
-    const {trans, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
+    const {trans, classNames, getLocalized} = useContext(AppContext);
     const {params} = route();
+    const dispatch = useDispatch();
+
+    console.log('elements', elements.data);
 
     return (
-        <BackendContainer elements={elements} showSearch={elements.total > 1}
-                          showNoElements={elements.total < 1}
-                          showMobileView={elements.total > 1}
+        <BackendContainer
+            elements={elements}
+            showSearch={false}
+            showNoElements={elements.meta.total < 1}
+            showMobileView={elements.meta.total > 1}
+            total={elements.meta.total}
+            links={elements.meta.links}
+            mainModule={'category'}
         >
             <div className="flex flex-col hidden sm:block">
                 <div className=" overflow-auto">
@@ -25,15 +35,21 @@ export default function({elements}) {
                                 <tr>
                                     <th
                                         scope="col"
-                                        className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                        className="px-3 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
                                     >
                                         {trans('id')}
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                        className="px-3 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
                                     >
                                         {trans('name')}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-3 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                    >
+                                        {trans('categories_children')}
                                     </th>
                                     <th
                                         scope="col"
@@ -62,12 +78,89 @@ export default function({elements}) {
                                 <tbody className="bg-white divide-y divide-gray-200">
                                 {map(elements.data, element => (
                                     <tr key={element.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
+                                        <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
+                                        <td className="px-2 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
+                                        <td className="px-2 py-4 whitespace-nowrap text-sm ">
+                                            <ol className="rtl:mr-2 ltr:ml-2 space-y-3">
+                                                {element.children.length > 0 && map(element.children, child => (
+                                                    <>
+                                                    <li className="py-2 flex flex-1 flex-row justify-between items-center border-b-2 border-gray-200" key={child.id}>
+                                                        <Link
+                                                            className="flex flex-1 justify-between items-center"
+                                                            href={route('backend.category.edit', child.id)}>
+                                                            <span>{child[getLocalized()]}</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-3"
+                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                      strokeWidth={2}
+                                                                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                            </svg>
+                                                        </Link>
+                                                        <button
+                                                            onClick={() =>
+                                                                dispatch(showModal({
+                                                                    type: 'destroy',
+                                                                    model: 'category',
+                                                                    id: child.id,
+                                                                    title: `${trans('destroy')} ${trans('category')} ${child[getLocalized()]}`,
+                                                                    message: `${trans('confirmation')} ${trans('destroy')} ${trans('category')}`,
+                                                                }))
+                                                            }
+                                                            className="text-gray-600 hover:text-gray-900 ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-3"
+                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                      strokeWidth={2}
+                                                                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                            </svg>
+                                                        </button>
+                                                    </li>
+                                                        <ol className="rtl:mr-4 ltr:ml-4 space-y-2">
+                                                            {
+                                                                child.children.length > 0 && map(child.children, sub =>
+                                                                    <li className="py-2 flex flex-1 flex-row justify-start items-center" key={sub.id}>
+                                                                        <Link
+                                                                            className="flex flex-1 flex-row justify-between items-center"
+                                                                            href={route('backend.category.edit', sub.id)}>
+                                                                            <span>{sub[getLocalized()]}</span>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-3"
+                                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                                      strokeWidth={2}
+                                                                                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                                            </svg>
+                                                                        </Link>
+                                                                        <button
+                                                                            onClick={() =>
+                                                                                dispatch(showModal({
+                                                                                    type: 'destroy',
+                                                                                    model: 'category',
+                                                                                    id: sub.id,
+                                                                                    title: `${trans('destroy')} ${trans('category')} ${sub[getLocalized()]}`,
+                                                                                    message: `${trans('confirmation')} ${trans('destroy')} ${trans('category')}`,
+                                                                                }))
+                                                                            }
+                                                                            // href={route(`backend.category.destroy`, a.id)}
+                                                                            className="text-gray-600 hover:text-gray-900 ">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-3"
+                                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                                                      strokeWidth={2}
+                                                                                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                                            </svg>
+                                                                        </button>
+                                                                    </li>
+                                                                )
+                                                            }
+                                                        </ol>
+                                                    </>
+                                                ))}
+                                            </ol>
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.category.edit`, element.id)}
-                                                      className="text-indigo-600 hover:text-indigo-900">
+                                                      className="text-gray-600 hover:text-gray-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -76,9 +169,17 @@ export default function({elements}) {
                                                     </svg>
                                                 </Link>
                                                 <button
-                                                    onClick={() => handleDeleteItem('destroy', 'category', element.id)}
+                                                    onClick={() =>
+                                                        dispatch(showModal({
+                                                            type: 'destroy',
+                                                            model: 'category',
+                                                            id: element.id,
+                                                            title: `${trans('destroy')} ${trans('category')} ${element[getLocalized()]}`,
+                                                            message: `${trans('confirmation')} ${trans('destroy')} ${trans('category')}`,
+                                                        }))
+                                                    }
                                                     // href={route(`backend.category.destroy`, a.id)}
-                                                    className="text-indigo-600 hover:text-indigo-900 ">
+                                                    className="text-gray-600 hover:text-gray-900 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"

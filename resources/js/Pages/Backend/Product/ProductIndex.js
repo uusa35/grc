@@ -383,7 +383,7 @@ export default function ProductIndex({elements}) {
                                                                                                 type: 'destroy',
                                                                                                 model: 'product',
                                                                                                 id: element.id,
-                                                                                                title: `${trans('destroy')} ${trans('product')}`,
+                                                                                                title: `${trans('destroy')} ${trans('product')} ${element[getLocalized()]}`,
                                                                                                 message: `${trans('confirmation')} ${trans('destroy')} ${trans('product')}`,
                                                                                             }))
                                                                                         }

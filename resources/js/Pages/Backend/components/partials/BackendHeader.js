@@ -71,7 +71,7 @@ const BackendHeader = () => {
                                             map(modules, m => (
                                                 <Fragment key={m.name}>
                                                     {
-                                                        m.index && <div className="py-1 col-span-1">
+                                                        m.index && !m.is_sub_module && <div className="py-1 col-span-1">
                                                             <Menu.Item>
                                                                 {({active}) => (
                                                                     <Link
@@ -129,7 +129,7 @@ const BackendHeader = () => {
                                             map(modules, m => (
                                                 <Fragment key={m.name}>
                                                     {
-                                                        m.index && <div className="py-1 col-span-1">
+                                                        m.index && !m.is_sub_module && <div className="py-1 col-span-1">
                                                             <Menu.Item>
                                                                 {({active}) => (
                                                                     <Link
@@ -137,10 +137,10 @@ const BackendHeader = () => {
                                                                         href={route(`backend.${m.name}.create`)}
                                                                         className={classNames(
                                                                             m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
-                                                                            'group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
+                                                                            'text-sm group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
                                                                         )}
                                                                     >
-                                                                        <img className={`w-5 h-auto mx-2 rounded-sm`}
+                                                                        <img className={`text-sm w-5 h-auto mx-2 rounded-sm`}
                                                                              src={getThumb(m.image)} alt=""/>
                                                                         {trans('create')} {trans(m.name)}
                                                                     </Link>

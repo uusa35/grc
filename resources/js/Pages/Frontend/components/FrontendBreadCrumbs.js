@@ -13,12 +13,9 @@ export default function FrontendBreadCrumbs({ childName = ''}) {
     const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
     const dispatch = useDispatch();
 
-    console.log('parentModule', parentModule);
-
     useEffect(() => {
       if(parentModule === 'home') {
           const currentRoute = route().current();
-          console.log('currentRoute ====!!!!', currentRoute);
           const breadCrumbs = split(currentRoute, '.');
           dispatch(setParentModule(breadCrumbs[1]));
       }

@@ -43,7 +43,11 @@ class BackendHandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            'auth' => fn() => $request->user() ? new AuthExtraLightResource(User::whereId($request->user()->id)->with('role.privileges')->first()) : null,
+            'auth' => fn() => $request->user() ? new AuthExtraLightResource(User::whereId($request->user()->id)->with(['role' => function ($q) {
+                return $q->with(['privileges' => function ($q) {
+                    return $q->orderBy('order', 'asc');
+                }]);
+            }])->first()) : null,
             'settings' => fn() => new SettingExtraLightResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),

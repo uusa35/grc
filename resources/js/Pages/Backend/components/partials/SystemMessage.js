@@ -11,8 +11,6 @@ const SystemMessage = () => {
 
     const { errors, error, success} = usePage().props;
 
-    console.log('props', usePage().props);
-
     useEffect(() => {
         success && !isEmpty(success) ? dispatch(showToastMessage({message: success, type: 'success'})) : null;
         errors && !isEmpty(errors) ? dispatch(showToastMessage({message: first(map(errors, e => e)), type: 'error'})) : null;
