@@ -86,6 +86,7 @@ export default function({category}) {
         setCurrentImages(imagesGroup);
     }
 
+    console.log('cate', category);
     return (
         <BackendContainer type={'category'}>
             <div className="flex flex-col bg-white shadow-md rounded-md">

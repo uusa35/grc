@@ -4,13 +4,13 @@ import {AppContext} from "../../../../context/AppContext";
 import route from 'ziggy-js';
 
 const CategoryWidget = ({element, type = 'book'}) => {
-    const {getLocalized, getThumb} = useContext(AppContext)
+    const {getLocalized, getMedium} = useContext(AppContext)
 
     return (
         <div className="block relative overflow-hidden">
             <div className="w-full h-auto bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75">
                 <img
-                    src={getThumb(element.image)}
+                    src={getMedium(element.image)}
                     alt={element[getLocalized()]}
                     className="w-full h-full object-center object-cover lg:w-full lg:h-full"
                 />
