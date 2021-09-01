@@ -1,15 +1,14 @@
 import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
-import {AppContext, AppContextProvider} from "../../../../context/AppContext";
-import {getConvertedFinalPrice} from "../../../../helpers";
+import {AppContext} from "../../../../context/AppContext";
 import {truncate} from "lodash";
 
 export default function NormalUserWidget ({ element }) {
     const { getLocalized, getThumb  } = useContext(AppContext);
     return (
         <Link href={route('frontend.user.show', element.id)}
-              className="block relative rounded overflow-hidden z-0 hover:opacity-80">
+              className="block relative rounded overflow-hidden z-0 hover:opacity-95">
             <div className="w-full h-70 flex items-center justify-center sm:aspect-w-1 sm:aspect-h-1">
                 <img
                     src={getThumb(element.image)}

@@ -36,7 +36,7 @@ export default function ServiceIndex({elements}) {
     return (
         <BackendContainer
             elements={elements}
-            showSearch={elements.meta.total > 1}
+            showSearch={elements.meta.total >= 1}
             showNoElements={elements.meta.total < 1}
             showMobileView={elements.meta.total > 1}
             total={elements.meta.total}

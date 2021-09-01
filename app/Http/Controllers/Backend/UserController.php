@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return redirect()->route('backend.user.search');
+        return redirect()->route('backend.user.search',request()->getQueryString());
     }
 
     public function search(UserFilters $filters)

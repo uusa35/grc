@@ -31,7 +31,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return redirect()->route('backend.service.search');
+        return redirect()->route("backend.service.search", request()->getQueryString());
     }
 
     public function search(ProductFilters $filters)

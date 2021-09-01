@@ -15,7 +15,6 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
     }
 
     public function search(Filters $filters)

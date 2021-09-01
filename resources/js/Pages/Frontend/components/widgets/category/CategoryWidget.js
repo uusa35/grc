@@ -7,7 +7,7 @@ const CategoryWidget = ({element, type = 'book'}) => {
     const {getLocalized, getMedium} = useContext(AppContext)
 
     return (
-        <div className="block relative overflow-hidden hover:opacity-80">
+        <div className="block relative overflow-hidden hover:opacity-90">
             <div className="w-full h-auto bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden">
                 <img
                     src={getMedium(element.image)}

@@ -9,7 +9,7 @@ import {truncate} from "lodash";
 export default function NormalProductWidget ({ element }) {
     const { getLocalized, getThumb  } = useContext(AppContext);
     return (
-        <div className="block relative overflow-hidden shadow-md mb-5 rounded-b-md hover:opacity-80">
+        <div className="block relative overflow-hidden shadow-md mb-5 rounded-b-md hover:opacity-95 hover:shadow-lg">
             <div className="w-full rounded-t-md overflow-hidden  sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                 <Link
                     className="z-30"

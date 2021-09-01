@@ -32,16 +32,15 @@ export default function UserIndex({elements}) {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
     }, [sort.desc])
 
-    console.log('currentData', currentData);
     return (
         <BackendContainer
             elements={elements}
-            showSearch={elements.meta.total > 1}
+            showSearch={elements.meta.total >= 1}
             showNoElements={elements.meta.total < 1}
             showMobileView={elements.meta.total > 1}
             total={elements.meta.total}
             links={elements.meta.links}
-            mainModule={'product'}
+            mainModule={'user'}
         >
             <div className="flex flex-col hidden sm:block">
                 <div className=" overflow-visible">

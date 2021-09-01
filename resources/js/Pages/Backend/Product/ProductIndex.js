@@ -6,8 +6,6 @@ import {AppContext} from "./../../context/AppContext";
 import {orderBy, isEmpty} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
-import LocalizedText from "../components/widgets/LocalizedText";
-import {Inertia} from "@inertiajs/inertia";
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
@@ -33,10 +31,9 @@ export default function ProductIndex({elements}) {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
     }, [sort.desc])
 
-    console.log('elements', elements);
     return (
         <BackendContainer elements={elements}
-                          showSearch={elements.meta.total > 1}
+                          showSearch={elements.meta.total >= 1}
                           showNoElements={elements.meta.total < 1}
                           showMobileView={elements.meta.total > 1}
                           total={elements.meta.total}

@@ -32,7 +32,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return redirect()->route('backend.course.search');
+        return redirect()->route('backend.course.search',request()->getQueryString());
     }
 
     public function search(ProductFilters $filters)

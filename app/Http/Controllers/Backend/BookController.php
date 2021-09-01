@@ -32,7 +32,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return redirect()->route('backend.book.search');
+        return redirect()->route('backend.book.search',request()->getQueryString());
     }
 
     public function search(ProductFilters $filters)

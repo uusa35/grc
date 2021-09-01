@@ -96,10 +96,6 @@ const AppContextProvider = ({children}) => {
         toast.configure(options)
     }, [])
 
-    useEffect(() => {
-
-    })
-
     useMemo(() => {
         if (!bootStrapped && navigator.onLine) {
             dispatch(startBootStrapped({settings, currencies}))

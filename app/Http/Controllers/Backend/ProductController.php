@@ -33,7 +33,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return redirect()->route('backend.product.search');
+        return redirect()->route('backend.product.search', request()->getQueryString());
     }
 
     public function search(ProductFilters $filters)
