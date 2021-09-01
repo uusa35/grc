@@ -7,16 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class UserUpdate extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -25,21 +15,21 @@ class UserUpdate extends FormRequest
     {
         $userId = last(request()->segments());
         return [
-            'name' => 'required|min:3|max:200',
-            'slug_ar' => 'required|min:3|max:200',
-            'slug_en' => 'required|min:3|max:200',
+            'name' => 'min:3|max:200',
+            'slug_ar' => 'min:3|max:200',
+            'slug_en' => 'min:3|max:200',
             'description_ar' => 'nullable|min:3',
             'description_en' => 'nullable|min:3',
             'service_ar' => '',
             'service_en' => '',
-            'email' => 'required|min:5|max:80|unique:users,email,'.$userId,
+            'email' => 'min:5|max:80|unique:users,email,'.$userId,
             'mobile' => ['nullable','regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','max:11'],
-            'phone' => 'nullable|max:8',
-            'fax' => 'nullable|max:8',
-            'whatsapp' => 'nullable|max:11',
-            'image' => 'image|dimensions:min_width=1000,height:1000',
-            'banner' => 'nullable|image|dimensions:width=1080,height=410',
-            'bg' => 'nullable|image|dimensions:width=1080,height=350',
+            'phone' => 'nullable|max:12',
+            'fax' => 'nullable|max:12',
+            'whatsapp' => 'nullable|max:12',
+//            'image' => 'image|dimensions:min_width=1000,height:1000',
+//            'banner' => 'nullable|image|dimensions:width=1080,height=410',
+//            'bg' => 'nullable|image|dimensions:width=1080,height=350',
             'address' => 'nullable|min:3',
             'area' => 'nullable|string',
             'block' => 'nullable|string',
@@ -53,7 +43,7 @@ class UserUpdate extends FormRequest
             'cancellation_ar' => 'nullable|max:1000',
             'cancellation_en' => 'nullable|max:1000',
             'keywords' => 'nullable|max:500',
-            'file' => 'nullable|mimes:pdf',
+//            'file' => 'nullable|mimes:pdf',
             'website' => 'nullable|url',
             'facebook' => 'nullable|url',
             'instagram' => 'nullable|url',
@@ -66,8 +56,8 @@ class UserUpdate extends FormRequest
             'balance' => 'nullable|numeric',
             'on_home' => 'nullable|boolean',
             'active' => 'nullable|boolean',
-            'country_id' => 'required|numeric|exists:countries,id',
-            'area_id' => 'required|numeric|exists:areas,id',
+            'country_id' => 'numeric|exists:countries,id',
+            'area_id' => 'nullable|numeric|exists:areas,id',
             'role_id' => 'sometimes|numeric|exists:roles,id',
             'merchant_id' => 'nullable|max:200|min:3|unique:users,merchant_id,'.$userId,
             'categories' => 'nullable|array'

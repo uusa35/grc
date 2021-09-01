@@ -1155,5 +1155,9 @@ export const ar = {
     "is_sub_module" : "موديول فرعي",
     "is_parent" : "تصنيف رئيسي",
     "is_book" : "خاص بالكتب",
-    "is_course" : "خاص بالدورات"
+    "is_course" : "خاص بالدورات",
+    "news_letter_on" : "اشتراك القائمة البريدية",
+    "end_subscription_date" : "تاريخ انتهاء الاشتراك ",
+    "male" : "ذكر",
+    "female" : "أنثى",
 }

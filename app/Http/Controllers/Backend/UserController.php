@@ -2,9 +2,19 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\UserUpdate;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CountryCollection;
+use App\Http\Resources\RoleCollection;
+use App\Http\Resources\RoleExtraLightResource;
+use App\Http\Resources\SubscriptionCollection;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserExtraLightResource;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Country;
+use App\Models\Role;
+use App\Models\Subscription;
 use App\Models\User;
 use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
@@ -84,8 +94,17 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $element = $user->whereId($user->id)->with('categories', 'images')->first();
-        return inertia('Backend/User/UserShow', compact('element'));
+        $user->load('categories','images','country','area','subscription');
+        $roles = new RoleCollection(Role::active()->get());
+        $categories = new CategoryCollection(Category::active()->onlyParent()->onlyForUsers()->with(['children' => function ($q) {
+            return $q->active()->onlyForUsers()->with(['children' => function ($q) {
+                return $q->active()->onlyForUsers();
+            }]);
+        }])->get());
+        $elementCategories = $user->categories->pluck('id')->toArray();
+        $countries = new CountryCollection(Country::active()->has('areas','>', 0)->with('areas')->get());
+        $subscriptions = new SubscriptionCollection(Subscription::active()->get());
+        return inertia('Backend/User/UserEdit', compact('user','roles','elementCategories', 'categories', 'countries', 'subscriptions'));
     }
 
     /**
@@ -95,9 +114,19 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdate $request, User $user)
     {
-        //
+        $updated = $user->update($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos', 'qr']));
+        if ($updated) {
+            $request->has('tags') ? $user->tags()->sync($request->tags) : null;
+            $request->has('videos') ? $user->videos()->sync($request->videos) : null;
+            $request->has('categories') ? $user->categories()->sync($request->categories) : null;
+            $request->hasFile('image') ? $this->saveMimes($user, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('qr') ? $this->saveMimes($user, $request, ['qr'], ['300', '300'], false) : null;
+            $request->hasFile('file') ? $this->savePath($user, $request, 'file') : null;
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->route('backend.user.edit', $user->id)->with('error', 'process_failure');
     }
 
     /**

@@ -62,7 +62,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function areas()
+    public function area()
     {
         return $this->belongsTo(Area::class);
     }

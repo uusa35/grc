@@ -1148,5 +1148,9 @@ export const en  = {
     "is_sub_module" : "sub module",
     "is_parent" : "main category",
     "is_book" : "for books",
-    "is_course" : "for courses"
+    "is_course" : "for courses",
+    "news_letter_on" : "newsletter subscription",
+    "end_subscription_date" : "end subscription date",
+    "male" : "male",
+    "female" : "female",
 }

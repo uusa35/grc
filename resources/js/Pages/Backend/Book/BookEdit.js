@@ -16,14 +16,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {showToastMessage} from "../../redux/actions";
 
 
-export default function BookEdit({users, categories, book, elementCategories}) {
+export default function ({users, categories, book, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
-    const { parentModule , formTabs , currentFormTab} = useSelector(state => state);
+    const { parentModule , currentFormTab} = useSelector(state => state);
     const {
         classNames,
         trans,
-        theme,
         getFileUrl,
         isAdminOrAbove,
         getLocalized,
@@ -32,8 +31,6 @@ export default function BookEdit({users, categories, book, elementCategories}) {
     const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
-    const[showModal, setShowModal] = useState(false);
-    const[currentImage, setCurrentImage] = useState('');
     const {data, setData, put, post, progress, reset} = useForm({
         'sku': book.sku,
         'name_ar': book.name_ar,
