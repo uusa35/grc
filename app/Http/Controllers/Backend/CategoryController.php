@@ -102,7 +102,7 @@ class CategoryController extends Controller
             'order' => 'integer'
         ]);
         if ($category->update($request->except('image','image_rectangle','file'))) {
-            $request->hasFile('image') ? $this->saveMimes($category, $request, ['image'], ['300', '300'], false) : null;
+            $request->hasFile('image') ? $this->saveMimes($category, $request, ['image'], ['500', '500'], false) : null;
             $request->hasFile('file') ? $this->savePath($category, $request, 'file') : null;
             $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
