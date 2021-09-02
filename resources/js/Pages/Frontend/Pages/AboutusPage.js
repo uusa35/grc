@@ -7,6 +7,7 @@ import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 export default function AboutusPage({ element }) {
     const { trans , getThumb , getLocalized } = useContext(AppContext)
 
+    console.log('element', element.aboutus_ar);
     return (
         <FrontendContainer>
         <div className="bg-white relative overflow-hidden">

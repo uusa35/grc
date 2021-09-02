@@ -11,37 +11,34 @@ import {Inertia} from '@inertiajs/inertia'
 import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import React from 'react';
-// import ReactDOM from 'react-dom';
-// Require Editor CSS files.
-import 'froala-editor/css/froala_style.min.css';
-import 'froala-editor/css/froala_editor.pkgd.min.css';
-
-import FroalaEditorComponent from 'react-froala-wysiwyg';
-// / Import all Froala Editor plugins;
-import 'froala-editor/js/plugins.pkgd.min.js';
-
-// Import a single Froala Editor plugin.
-import 'froala-editor/js/plugins/align.min.js';
-
-// Import a language file.
-import 'froala-editor/js/languages/ar.js';
-
-// Import a third-party plugin.
-import 'froala-editor/js/third_party/image_tui.min.js';
-import 'froala-editor/js/third_party/embedly.min.js';
-import 'froala-editor/js/third_party/spell_checker.min.js';
 import {useSelector} from "react-redux";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export default function SettingEdit({setting, themes}) {
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, parentModule, getThumb, getLocalized,  } = useContext(AppContext)
-    const { lang, currentFormTab } = useSelector(state => state)
-    //  text editor
-    // ReactDOM.render(<FroalaEditorComponent tag='textarea'/>, document.getElementById('editor'));
-    const froalaConfig = {
-        language: lang,
-    }
+    const { lang, currentFormTab, locale  } = useSelector(state => state)
+    let EditorConfig = {
+        toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+            ['blockquote', 'code-block'],
+            ['link'],
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            [{ 'direction': locale.dir }],                         // text direction
 
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'font': []}],
+            [{ 'align': [] }],
+            ['clean']
+        ]
+    }
     const {data, setData, put, post, progress, reset} = useForm({
         name_ar: setting.name_ar,
         name_en: setting.name_en,
@@ -175,7 +172,7 @@ export default function SettingEdit({setting, themes}) {
                     onSubmit={submit}
                     method="put"
                     encType="multipart/form-data"
-                    className={' sm:w-full'}
+                    className={' sm:w-full font-extrabold'}
                 >
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
@@ -641,136 +638,132 @@ export default function SettingEdit({setting, themes}) {
                                 </p>
                             </div>
 
-                            {/* about us en*/}
-                            <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="aboutus_en"
-                                       className={`block text-sm font-medium text-gray-700`}>
-                                    {trans('aboutus_en')}
-                                </label>
-                                <div className="mt-1">
-                                    <FroalaEditorComponent tag='textarea'
-                                                           id="aboutus_en"
-                                                           name="aboutus_en"
-                                                           model={data.aboutus_en}
-                                                           config={froalaConfig}
-                                                           onModelChange={(e) => setData('aboutus_en', e)}
-                                    />
+                            <div className="space-y-20 sm:col-span-full">
+                                {/* about us en*/}
+                                <div className="sm:col-span-full has-tooltip">
+                                    <label htmlFor="aboutus_en"
+                                           className={`block text-sm font-medium text-gray-700`}>
+                                        {trans('aboutus_en')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <ReactQuill theme="snow"
+                                                    modules={EditorConfig}
+                                                    value={data.aboutus_en}
+                                                    onChange={(e) => setData('aboutus_en', e)}
+                                                    className="h-40"
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_aboutus_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.aboutus_en &&
+                                        <div className={`text-red-600`}>{errors.aboutus_en}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_aboutus_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.aboutus_en &&
-                                    <div className={`text-red-600`}>{errors.aboutus_en}</div>}
-                                </p>
-                            </div>
-                            {/* about us ar*/}
-                            <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="aboutus_ar"
-                                       className={`block text-sm font-medium text-gray-700`}>
-                                    {trans('aboutus_ar')}
-                                </label>
-                                <div className="mt-1">
-                                    <FroalaEditorComponent tag='textarea'
-                                                           id="aboutus_ar"
-                                                           name="aboutus_ar"
-                                                           model={data.aboutus_ar}
-                                                           config={froalaConfig}
-                                                           onModelChange={(e) => setData('aboutus_ar', e)}
-                                    />
+                                {/* about us ar*/}
+                                <div className="sm:col-span-full has-tooltip">
+                                    <label htmlFor="aboutus_ar"
+                                           className={`block text-sm font-medium text-gray-700`}>
+                                        {trans('aboutus_ar')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <ReactQuill theme="snow"
+                                                    modules={EditorConfig}
+                                                    value={data.aboutus_ar}
+                                                    onChange={(e) => setData('aboutus_ar', e)}
+                                                    className="h-40"
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_aboutus_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.aboutus_ar &&
+                                        <div className={`text-red-600`}>{errors.aboutus_ar}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_aboutus_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.aboutus_ar &&
-                                    <div className={`text-red-600`}>{errors.aboutus_ar}</div>}
-                                </p>
-                            </div>
+
+                                {/* terms en*/}
+                                <div className="sm:col-span-full has-tooltip h-auto">
+                                    <label htmlFor="terms_en"
+                                           className={`block text-sm font-medium text-gray-700`}>
+                                        {trans('terms_en')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <ReactQuill theme="snow"
+                                                    modules={EditorConfig}
+                                                    value={data.terms_en}
+                                                    onChange={(e) => setData('terms_en', e)}
+                                                    className="h-40"
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_aboutus_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.terms_en &&
+                                        <div className={`text-red-600`}>{errors.terms_en}</div>}
+                                    </p>
+                                </div>
+                                {/* terms ar*/}
+                                <div className="sm:col-span-full has-tooltip">
+                                    <label htmlFor="terms_ar"
+                                           className={`block text-sm font-medium text-gray-700`}>
+                                        {trans('terms_ar')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <ReactQuill theme="snow"
+                                                    modules={EditorConfig}
+                                                    value={data.terms_ar}
+                                                    onChange={(e) => setData('terms_ar', e)}
+                                                    className="h-40"
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_aboutus_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.terms_ar &&
+                                        <div className={`text-red-600`}>{errors.terms_ar}</div>}
+                                    </p>
+                                </div>
 
 
-                            {/* terms en*/}
-                            <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="terms_en"
-                                       className={`block text-sm font-medium text-gray-700`}>
-                                    {trans('terms_en')}
-                                </label>
-                                <div className="mt-1">
-                                    <FroalaEditorComponent tag='textarea'
-                                                           id="terms_en"
-                                                           name="terms_en"
-                                                           model={data.terms_en}
-                                                           config={froalaConfig}
-                                                           onModelChange={(e) => setData('terms_en', e)}
-                                    />
+                                {/* policy en*/}
+                                <div className="sm:col-span-full has-tooltip">
+                                    <label htmlFor="terms_en"
+                                           className={`block text-sm font-medium text-gray-700`}>
+                                        {trans('policy_en')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <ReactQuill theme="snow"
+                                                    modules={EditorConfig}
+                                                    value={data.policy_en}
+                                                    onChange={(e) => setData('policy_en', e)}
+                                                    className="h-40"
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_aboutus_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.policy_en &&
+                                        <div className={`text-red-600`}>{errors.policy_en}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_aboutus_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.terms_en &&
-                                    <div className={`text-red-600`}>{errors.terms_en}</div>}
-                                </p>
-                            </div>
-                            {/* terms ar*/}
-                            <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="terms_ar"
-                                       className={`block text-sm font-medium text-gray-700`}>
-                                    {trans('terms_ar')}
-                                </label>
-                                <div className="mt-1">
-                                    <FroalaEditorComponent tag='textarea'
-                                                           id="terms_ar"
-                                                           name="terms_ar"
-                                                           model={data.terms_ar}
-                                                           config={froalaConfig}
-                                                           onModelChange={(e) => setData('terms_ar', e)}
-                                    />
+                                {/* policy ar*/}
+                                <div className="sm:col-span-full has-tooltip">
+                                    <label htmlFor="policy_ar"
+                                           className={`block text-sm font-medium text-gray-700`}>
+                                        {trans('policy_ar')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <ReactQuill theme="snow"
+                                                    modules={EditorConfig}
+                                                    value={data.policy_ar}
+                                                    onChange={(e) => setData('policy_ar', e)}
+                                                    className="h-40"
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_aboutus_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.policy_ar &&
+                                        <div className={`text-red-600`}>{errors.policy_ar}</div>}
+                                    </p>
                                 </div>
-                                <ToolTipWidget message={trans('product_aboutus_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.terms_ar &&
-                                    <div className={`text-red-600`}>{errors.terms_ar}</div>}
-                                </p>
                             </div>
 
-
-                            {/* policy en*/}
-                            <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="terms_en"
-                                       className={`block text-sm font-medium text-gray-700`}>
-                                    {trans('policy_en')}
-                                </label>
-                                <div className="mt-1">
-                                    <FroalaEditorComponent tag='textarea'
-                                                           id="policy_en"
-                                                           name="policy_en"
-                                                           model={data.policy_en}
-                                                           config={froalaConfig}
-                                                           onModelChange={(e) => setData('policy_en', e)}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('product_aboutus_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.policy_en &&
-                                    <div className={`text-red-600`}>{errors.policy_en}</div>}
-                                </p>
-                            </div>
-                            {/* policy ar*/}
-                            <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="policy_ar"
-                                       className={`block text-sm font-medium text-gray-700`}>
-                                    {trans('policy_ar')}
-                                </label>
-                                <div className="mt-1">
-                                    <FroalaEditorComponent tag='textarea'
-                                                           id="policy_ar"
-                                                           name="policy_ar"
-                                                           model={data.policy_ar}
-                                                           config={froalaConfig}
-                                                           onModelChange={(e) => setData('policy_ar', e)}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('product_aboutus_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.policy_ar &&
-                                    <div className={`text-red-600`}>{errors.policy_ar}</div>}
-                                </p>
-                            </div>
 
 
                             {/* size chart*/}

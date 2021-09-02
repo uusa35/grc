@@ -24,7 +24,7 @@ class CountriesTableSeeder extends Seeder
                     'name_en' => $country->name_en,
                     'calling_code' => $country->calling_code,
                     'country_code' => $country->country_code,
-                    'image' => 'square.png',
+                    'image' => $country->country_code.'.png',
                     'order' => $country->order,
                     'has_currency' => $country->has_currency,
                     'currency_symbol_ar' => $country->currency_symbol_ar,

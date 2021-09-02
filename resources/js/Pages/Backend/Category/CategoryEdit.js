@@ -68,15 +68,15 @@ export default function({category}) {
                     formData.append(`images[${i}]`, currentImages[i]);
                     images[`images[${i}]`] = currentImages[i];
                 }
-                formData.append(`model`, 'book');
-                formData.append(`id`, book.id);
-                formData.append(`order`, book.id);
+                formData.append(`model`, 'category');
+                formData.append(`id`, category.id);
+                formData.append(`order`, category.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
                     dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});
-                    Inertia.reload({only: ['book']});
+                    Inertia.reload({only: ['category']});
                 });
             }, 1000);
         }
@@ -97,9 +97,9 @@ export default function({category}) {
                     className={`w-full px-10 space-y-3 mb-6`}>
                     <div className="space-y-4 divide-y 900">
                         <div className={`pt-4`}>
-                            <h3 className="text-lg leading-6 font-medium text-gray-900">{trans('create')} {trans('product_category')}</h3>
+                            <h3 className="text-lg leading-6 font-medium text-gray-900">{trans('edit')} {trans('category')}</h3>
                             <p className="mt-1 text-sm text-gray-500">
-                                {trans('create')} {trans('product_category')}
+                                {trans('edit')} {trans('category')}
                             </p>
                         </div>
                         <div className="pt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">

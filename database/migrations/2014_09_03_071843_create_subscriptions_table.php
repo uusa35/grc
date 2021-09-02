@@ -32,6 +32,7 @@ class CreateSubscriptionsTable extends Migration
             $table->boolean('on_sale')->default(0);
             $table->string('code')->nullable();
             $table->boolean('active')->default(1);
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -610,10 +610,10 @@ export default function MainNav() {
                             <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
-                                        className="rounded-full flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                        className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                         <span className="sr-only">Open user menu</span>
                                         <img
-                                            className="h-5 w-5 rounded-full"
+                                            className="h-5 w-5 rounded-full object-cover"
                                             src={getThumb(currency.image)}
                                             alt={currency[getLocalized()]}
                                         />
@@ -641,7 +641,7 @@ export default function MainNav() {
                                                             className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
                                                         >
                                                             <img
-                                                                className="h-8 w-8 rounded-full"
+                                                                className="h-5 w-5 rounded-full object-cover"
                                                                 src={getThumb(element.image)}
                                                                 alt={element[getLocalized()]}
                                                             />
@@ -678,7 +678,7 @@ export default function MainNav() {
                                     leaveTo="transform opacity-0 scale-95"
                                 >
                                     <Menu.Items
-                                        className="origin-top-right absolute rtl:-mr-40 ltr:-ml-40 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        className="origin-top-right absolute rtl:-mr-48 ltr:-ml-48 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         {
                                             isAdminOrAbove && <Menu.Item>
                                                 {({active}) => (

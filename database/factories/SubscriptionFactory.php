@@ -27,8 +27,8 @@ class SubscriptionFactory extends Factory
             'name_en' => $this->faker->name,
             'caption_ar' => $fakerAr->name,
             'caption_en' => $this->faker->name,
-            'description_ar' => $fakerAr->randomHtml,
-            'description_en' => $this->faker->randomHtml,
+            'description_ar' => $fakerAr->paragraph,
+            'description_en' => $this->faker->paragraph,
             'notes_ar' => $fakerAr->name,
             'notes_en' => $this->faker->name,
             'on_sale' => $this->faker->boolean,
@@ -38,6 +38,7 @@ class SubscriptionFactory extends Factory
             'image' => 'square.png',
             'months' => $this->faker->numberBetween(1, 99),
             'price' => $this->faker->numberBetween(1, 99),
+            'order' => $this->faker->numberBetween(1, 99),
             'sale_price' => $this->faker->numberBetween(1, 99),
         ];
     }

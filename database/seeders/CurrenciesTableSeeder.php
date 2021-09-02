@@ -27,7 +27,7 @@ class CurrenciesTableSeeder extends Seeder
                     'exchange_rate' => $currency->exchange_rate,
                     'active' => $currency->active,
                     'country_id' => $currency->country_id,
-                    'image' => 'square.png',
+                    'image' => $currency->country_code.'.png',
                 ]
             );
         }

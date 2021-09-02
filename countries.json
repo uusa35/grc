@@ -4,7 +4,7 @@
       "name_ar": "الكويت",
       "name_en": "kuwait",
       "calling_code": "965",
-      "country_code": "KW",
+      "country_code": "KWT",
       "image": "rQwDnpZI77v3jYTDuKrHMdslQwVXEdl86WnKxN55.png",
       "order": "1",
       "has_currency": "1",
@@ -24,7 +24,7 @@
       "name_ar": "السعودية",
       "name_en": "Saudi Arabia",
       "calling_code": "966",
-      "country_code": "SAR",
+      "country_code": "KSA",
       "image": "11MomE3bLeYA1YIu4IoNsMMizBQ4ig9R1zn0oPGE.png",
       "order": "2",
       "has_currency": "1",
@@ -44,7 +44,7 @@
       "name_ar": "الإمارات",
       "name_en": "United Arab Emirates",
       "calling_code": "971",
-      "country_code": "AED",
+      "country_code": "UAE",
       "image": "YWtmJm6gScgbTK7I83Q0kDz5C5BEPWIhvYW8egSE.png",
       "order": "2",
       "has_currency": "1",
@@ -104,7 +104,7 @@
       "name_ar": "قطر",
       "name_en": "Qatar",
       "calling_code": "968",
-      "country_code": "QA",
+      "country_code": "QAT",
       "image": "YWtmJm6gScgbTK7I83Q0kDz5C5BEPWIhvYW8egSE.png",
       "order": "6",
       "has_currency": "1",
@@ -118,6 +118,26 @@
       "latitude": ",-16.254294",
       "created_at": "2019-07-16 09:29:14",
       "updated_at": "2019-07-18 08:16:36"
-   }
+   },
+    {
+        "name": "USA",
+        "name_ar": "الولايات المتحدة",
+        "name_en": "United States",
+        "calling_code": "1",
+        "country_code": "USA",
+        "image": "YWtmJm6gScgbTK7I83Q0kDz5C5BEPWIhvYW8egSE.png",
+        "order": "6",
+        "has_currency": "1",
+        "currency_symbol_ar": "د.أ",
+        "currency_symbol_en": "USA",
+        "active": "1",
+        "is_local": "0",
+        "minimum_shipment_charge": "5",
+        "fixed_shipment_charge": "5",
+        "longitude": "100.969916",
+        "latitude": ",-16.254294",
+        "created_at": "2019-07-16 09:29:14",
+        "updated_at": "2019-07-18 08:16:36"
+    }
 ]
 

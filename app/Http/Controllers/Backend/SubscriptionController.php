@@ -82,7 +82,26 @@ class SubscriptionController extends Controller
      */
     public function update(Request $request, Subscription $subscription)
     {
-        //
+        request()->validate([
+            'name_ar' => 'max:200',
+            'name_en' => 'max:200',
+            'caption_ar' => 'max:300',
+            'caption_en' => 'max:300',
+            'description_ar' => 'max:1000',
+            'description_en' => 'max:1000',
+            'notes_ar' => 'max:1000',
+            'notes_en' => 'max:1000',
+            'order' => 'integer',
+            'months' => 'integer|max:24|min:1',
+            'free' => 'boolean',
+            'on_sale' => 'boolean',
+            'active' => 'boolean',
+        ]);
+        if ($subscription->update($request->except('image','privileges'))) {
+            $request->hasFile('image') ? $this->saveMimes($subscription, $request, ['image'], ['300', '300'], false) : null;
+            return redirect()->route('backend.subscription.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.progress_failure'));
     }
 
     /**

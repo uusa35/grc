@@ -10,7 +10,7 @@ export default function ElementPrice({price, salePrice, isOnSale, large = false,
     const { currencies } = useContext(GlobalContext);
     const {currency} = useSelector(state => state);
     const [localCurrency,setLocalCurrency] = useState(first(filter(currencies, c => c.country.is_local)));
-    
+
     return (
         <>
             <div className="flex flex-row flex-1 justify-between items-start m-2">
