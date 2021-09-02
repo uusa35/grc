@@ -1,20 +1,10 @@
 import {Menu, Transition} from "@headlessui/react";
-import {ChevronRightIcon, DotsVerticalIcon} from "@heroicons/react/solid";
 import {Fragment, useContext} from "react";
-import GlobalContext from "../../../context/GlobalContext";
 import {AppContext} from "../../../context/AppContext";
-import {InertiaLink, Link} from "@inertiajs/inertia-react";
-import {ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon} from '@heroicons/react/outline'
+import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 import {
-    ArchiveIcon,
-    ArrowCircleRightIcon,
     ChevronDownIcon,
-    DuplicateIcon,
-    HeartIcon,
-    PencilAltIcon,
-    TrashIcon,
-    UserAddIcon,
 } from '@heroicons/react/solid'
 import {map} from 'lodash';
 import plurlaize from 'pluralize'
@@ -29,7 +19,8 @@ const BackendHeader = () => {
         parentModule,
         getLocalized,
         getThumb,
-        classNames
+        classNames,
+        isSuper
     } = useContext(AppContext);
     const { modules , locale , settings  } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -71,7 +62,7 @@ const BackendHeader = () => {
                                             map(modules, m => (
                                                 <Fragment key={m.name}>
                                                     {
-                                                        m.index && !m.is_sub_module && <div className="py-1 col-span-1">
+                                                        ((m.index && !m.is_sub_module) || isSuper) && <div className="py-1 col-span-1">
                                                             <Menu.Item>
                                                                 {({active}) => (
                                                                     <Link
