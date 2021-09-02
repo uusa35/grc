@@ -309,6 +309,7 @@ export default function FrontendProductShow() {
     return (
         <div className="bg-white">
             {/* Mobile menu */}
+
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setOpen}>
                     <Transition.Child

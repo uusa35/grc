@@ -28,6 +28,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
+import MetaElement from "../../Backend/components/partials/MetaElement";
 
 
 export default function FrontendBookShow({element, relatedElements, auth}) {
@@ -73,9 +74,11 @@ export default function FrontendBookShow({element, relatedElements, auth}) {
         }))
     }
 
-    console.log('element', element);
     return (
         <FrontendContainer childName={element[getLocalized()]}>
+            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
+                         image={element.image}
+            />
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
@@ -203,23 +206,23 @@ export default function FrontendBookShow({element, relatedElements, auth}) {
                             />}
                             <div className="flex flex-row justify-between items-center gap-x-5">
                                 {
-                                  element.free ?
-                                      <a
-                                          target="_blank"
-                                          href={getFileUrl(element.file)}
-                                          className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
-                                      >
-                                          {trans('view')}
-                                      </a>
-                                   : <form onSubmit={handleSubmit} className="w-full">
-                                      <button
-                                          disabled={!element.is_available}
-                                          type="submit"
-                                          className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
-                                      >
-                                          {trans('add_to_cart')}
-                                      </button>
-                                  </form>
+                                    element.free ?
+                                        <a
+                                            target="_blank"
+                                            href={getFileUrl(element.file)}
+                                            className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                        >
+                                            {trans('view')}
+                                        </a>
+                                        : <form onSubmit={handleSubmit} className="w-full">
+                                            <button
+                                                disabled={!element.is_available}
+                                                type="submit"
+                                                className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                            >
+                                                {trans('add_to_cart')}
+                                            </button>
+                                        </form>
                                 }
                                 <ElementFavoriteBtn id={element.id} type={'book'}
                                                     favoritesList={auth?.favoritesList}/>

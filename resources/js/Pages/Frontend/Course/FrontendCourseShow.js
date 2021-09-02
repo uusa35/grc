@@ -29,6 +29,7 @@ import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
+import MetaElement from "../../Backend/components/partials/MetaElement";
 
 
 export default function FrontendCourseShow({element, relatedElements, auth}) {
@@ -87,6 +88,9 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
     console.log('element', element);
     return (
         <FrontendContainer childName={element[getLocalized()]}>
+            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
+                         image={element.image}
+            />
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/*<div className="w-full h-auto overflow-hidden mb-10">*/}
                 {/*    {element.free && <EmbeddedHtml html={element.embedded}/>}*/}

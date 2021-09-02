@@ -27,6 +27,7 @@ import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
 import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
+import MetaElement from "../../Backend/components/partials/MetaElement";
 
 
 export default function FrontendServiceShow({element, relatedElements, auth}) {
@@ -46,9 +47,6 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
         'direct_purchase': element.direct_purchase,
 
     });
-
-    console.log("parentModule", parentModule);
-    console.log("breadcrumbs", breadCrumbs);
 
     useMemo(() => {
         const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
@@ -87,9 +85,12 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
             // dispatch(removeFromCart(element.id +''+selectedTiming.id));
         }
     }
-    console.log('element', element);
+
     return (
         <FrontendContainer childName={element[getLocalized()]}>
+            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
+                         image={element.image}
+            />
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">

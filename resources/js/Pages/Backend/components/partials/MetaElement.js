@@ -1,18 +1,26 @@
-import {Head, Link} from "@inertiajs/inertia-react";
+import {InertiaHead} from "@inertiajs/inertia-react";
 import React, {useContext} from 'react';
 import GlobalContext from "../../../context/GlobalContext";
 import {capitalize} from "lodash";
 import pluralize from "pluralize";
+import {useSelector} from "react-redux";
+import {AppContext} from "../../../context/AppContext";
 
-const MetaElement = ({metas}) => {
-    const {locale, getLocalized, getThumb , trans , parentModule } = useContext(GlobalContext);
+export default function({title = '', description = '', image = ''}) {
+    const {getLocalized, getThumb, trans} = useContext(AppContext);
+    const { settings } = useContext(GlobalContext);
+    const {parentModule, lang } = useSelector(state => state);
 
     return (
-        <Head title={`${capitalize(trans(pluralize(parentModule)))} :: ${metas[getLocalized()]}`}>
-            <meta head-key="title" name="title" content={metas[getLocalized()]}/>
-            <meta head-key="description" name="description" content={metas[getLocalized('description')]}/>
-            <link href={getThumb(metas.logo)} rel="shortcut icon" type="image/png"/>
-            <link rel="icon" type="image/svg+xml" href={getThumb(metas.image)}/>
+        <InertiaHead>
+            <title>{title ? title : `${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}</title>
+            <meta head-key="description" name="description"
+                  content={description ? description : settings[getLocalized('description')]}/>
+            <meta head-key="title" name="title" content={title ? title : settings[getLocalized()]}/>
+            <meta head-key="description" name="description"
+                  content={description ? description : settings[getLocalized('description')]}/>
+            <link href={getThumb(settings.logo)} rel="shortcut icon" type="image/png"/>
+            <link rel="icon" type="image/svg+xml" href={getThumb(image ? image : settings.image)}/>
             <meta
                 http-equiv="Content-type"
                 charSet="utf-8"
@@ -20,55 +28,52 @@ const MetaElement = ({metas}) => {
             />
             <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
-            <title>{metas[getLocalized()]}</title>
-            <meta name="title" content={metas[getLocalized()]}/>
-            <link href={getThumb(metas.image)} rel="shortcut icon" type="image/png"/>
-            <meta name={metas[getLocalized()]} content="E-commerce"/>
+            <meta name="title" content={title ? title : settings[getLocalized()]}/>
+            <link href={getThumb(image ? image : settings.image)} rel="shortcut icon" type="image/png"/>
+            <meta name={title ? title : settings[getLocalized()]} content="E-commerce"/>
             <meta
                 key="theme-color"
                 name="theme-color"
-                content={metas.main_theme_color}
+                content={settings.main_theme_color}
             />
-            <meta key="keywords" name="keywords" content={metas[getLocalized()]}/>
-            <meta key="author" name="author" content={metas[getLocalized()]}/>
-            <meta key="country" name="country" content={metas.country}/>
-            <meta key="mobile" name="mobile" content={metas.mobile}/>
-            <meta key="whatsapp" name="whatsapp" content={metas.whatsapp}/>
-            <meta key="phone" name="phone" content={metas.phone}/>
-            <meta key="logo" name="logo" content={getThumb(metas.image)}/>
-            <meta key="email" name="email" content={metas.email}/>
-            <meta key="address" name="address" content={metas.address}/>
-            <meta key="name" name="name" content={metas[getLocalized()]}/>
-            <meta key="lang" name="lang" content={locale}/>
+            <meta key="keywords" name="keywords" content={title ? title : settings[getLocalized()]}/>
+            <meta key="author" name="author" content={title ? title : settings[getLocalized()]}/>
+            <meta key="country" name="country" content={settings.country}/>
+            <meta key="mobile" name="mobile" content={settings.mobile}/>
+            <meta key="whatsapp" name="whatsapp" content={settings.whatsapp}/>
+            <meta key="phone" name="phone" content={settings.phone}/>
+            <meta key="logo" name="logo" content={getThumb(image ? image : settings.image)}/>
+            <meta key="email" name="email" content={settings.email}/>
+            <meta key="address" name="address" content={settings.address}/>
+            <meta key="name" name="name" content={title ? title : settings[getLocalized()]}/>
+            <meta key="lang" name="lang" content={lang}/>
             <meta
                 name="description"
                 key="description"
-                content={`${metas[getLocalized('description')]}`}
+                content={`${description ? description : settings[getLocalized('description')]}`}
             />
-            <meta itemProp="name" content={metas[getLocalized()]}/>
-            <meta itemProp="description" content={`${metas[getLocalized('description')]}`}/>
-            <meta itemProp="image" content={getThumb(metas.image)}/>
+            <meta itemProp="name" content={title ? title : settings[getLocalized()]}/>
+            <meta itemProp="description" content={`${description ? description : settings[getLocalized('description')]}`}/>
+            <meta itemProp="image" content={getThumb(image ? image : settings.image)}/>
             <meta property="og:type" content="website" key="ogtype"/>
             <meta
                 property="og:site_name"
-                content={`${metas[getLocalized()]}`}
+                content={`${title ? title : settings[getLocalized()]}`}
                 key="ogsitename"
             />
-            <meta property="og:url" content={metas.apple} key="ogurl"/>
+            <meta property="og:url" content={settings.apple} key="ogurl"/>
             <meta
                 property="og:title"
-                content={`${metas[getLocalized('description')]}`}
+                content={`${description ? description : settings[getLocalized('description')]}`}
                 key="ogtitle"
             />
             <meta
                 property="og:title"
-                content={`${metas[getLocalized('description')]}`}
+                content={`${description ? description : settings[getLocalized('description')]}`}
                 key="ogtitle"
             />
-            <meta property="og:description" content={metas[getLocalized()]} key="ogdesc"/>
-            <meta property="og:image" content={getThumb(metas.image)} key="ogimage"/>
-        </Head>
+            <meta property="og:description" content={title ? title : settings[getLocalized()]} key="ogdesc"/>
+            <meta property="og:image" content={getThumb(image ? image : settings.image)} key="ogimage"/>
+        </InertiaHead>
     );
-};
-
-export default MetaElement;
+}

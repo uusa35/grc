@@ -3,6 +3,7 @@ import { StarIcon } from '@heroicons/react/solid'
 import { RadioGroup } from '@headlessui/react'
 import FrontendContainer from "../components/FrontendContainer";
 import {AppContext} from "../../context/AppContext";
+import MetaElement from "../../Backend/components/partials/MetaElement";
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -66,6 +67,9 @@ export default function FrontendUserShow({ element }) {
 
     return (
         <FrontendContainer>
+            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
+                         image={element.image}
+            />
             <div className="pt-6">
                 <nav aria-label="Breadcrumb">
                     <ol role="list" className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
