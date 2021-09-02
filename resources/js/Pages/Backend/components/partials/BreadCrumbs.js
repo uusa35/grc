@@ -3,7 +3,7 @@ import {useContext, Fragment, useEffect} from "react";
 import {AppContext} from "../../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
-import {isEmpty, map, split} from 'lodash';
+import {isEmpty, map, split, keys} from 'lodash';
 import route from 'ziggy-js'
 import {useDispatch, useSelector} from "react-redux";
 import {setParentModule} from "../../../redux/actions";
@@ -21,9 +21,6 @@ export default function BreadCrumbs({childName = ''}) {
             dispatch(setParentModule(breadCrumbs[1]));
         }
     },[])
-
-    console.log('parent', parentModule)
-    console.log('parms', params);
 
     return (
         <div
@@ -53,7 +50,7 @@ export default function BreadCrumbs({childName = ''}) {
                             </svg>
                             <Link
                                 className="capitalize"
-                                href={route(`backend.${parentModule}.index`,  params )}>
+                                href={route(`backend.${parentModule}.index`,  keys(params).length >= 2 ?  params : '' )}>
                                 {trans(pluralize(parentModule))}
                             </Link>
                         </li>

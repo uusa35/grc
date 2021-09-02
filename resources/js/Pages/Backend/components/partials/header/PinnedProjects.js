@@ -18,7 +18,7 @@ export default function PinnedProjects() {
             <ul className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-3 gap-4 sm:gap-6  my-1">
                 {
                     map(activePinned, m => (
-                        <li className="relative col-span-1 flex  rounded-md capitalize">
+                        <li className="relative col-span-1 flex  rounded-md capitalize" key={m.name}>
                             <div
                                 className={classNames(locale.isRTL ? 'rounded-r-md' : 'rounded-l-md', `bg-gray-400 flex-shrink-0 flex items-center justify-center w-16 text-white  font-medium rounded-s-md`)}
                             >

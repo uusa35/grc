@@ -1,8 +1,8 @@
 import BackendContainer from "./../components/containers/BackendContainer";
-import {useContext, useEffect, useMemo, useState} from "react";
+import {useContext, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, map, forEach, isArray, first, remove, uniq} from 'lodash';
+import {filter, map, first, uniq} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
@@ -11,7 +11,6 @@ import {Inertia} from '@inertiajs/inertia'
 import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import moment from 'moment';
-import EmbeddedHtml from "../components/widgets/EmbeddedHtml";
 import {useDispatch, useSelector} from "react-redux";
 import {showToastMessage} from "../../redux/actions";
 
@@ -958,6 +957,29 @@ export default function ({user, roles, elementCategories, categories , countries
                                 <ToolTipWidget message={trans('mobile_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
+                                </p>
+                            </div>
+
+                            {/* phone*/}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="phone"
+                                       className={`block   text-gray-700`}>
+                                    {trans('phone')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        name="phone"
+                                        defaultValue={user.phone}
+                                        id="phone"
+                                        autoComplete="phone"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('phone_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.phone && <div className={`text-red-900`}>{errors.phone}</div>}
                                 </p>
                             </div>
 

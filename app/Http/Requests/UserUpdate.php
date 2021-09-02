@@ -23,7 +23,7 @@ class UserUpdate extends FormRequest
             'service_ar' => '',
             'service_en' => '',
             'email' => 'min:5|max:80|unique:users,email,'.$userId,
-            'mobile' => ['nullable','regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','max:11'],
+            'mobile' => ['nullable','regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','max:12'],
             'phone' => 'nullable|max:12',
             'fax' => 'nullable|max:12',
             'whatsapp' => 'nullable|max:12',
