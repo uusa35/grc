@@ -19,6 +19,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+//        return inertia('HomePageTest');
         $slides = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
             return $q->active()->onHome();
         }])->first()->slides);

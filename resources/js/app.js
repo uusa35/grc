@@ -9,6 +9,7 @@ import {Provider} from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react'
 import {store, persistor} from './Pages/redux/store';
 import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
+import MetaElement from "./Pages/Backend/components/partials/MetaElement";
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
@@ -16,14 +17,13 @@ createInertiaApp({
         const {settings, auth, currencies, categories} = props.initialPage.props;
         return render(
             <GlobalContext.Provider value={{auth, settings, currencies, categories}}>
-                    <Provider store={store}>
-                        <PersistGate loading={<LoadingView />} persistor={persistor}>
-                            <AppContextProvider>
+                <Provider store={store}>
+                    <PersistGate loading={<LoadingView/>} persistor={persistor}>
+                        <AppContextProvider>
                             <App {...props} />
-                            </AppContextProvider>
-                        </PersistGate>
-                    </Provider>
-
+                        </AppContextProvider>
+                    </PersistGate>
+                </Provider>
             </GlobalContext.Provider>
             , el)
     },

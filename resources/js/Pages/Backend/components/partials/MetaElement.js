@@ -6,10 +6,10 @@ import pluralize from "pluralize";
 import {useSelector} from "react-redux";
 import {AppContext} from "../../../context/AppContext";
 
-export default function({title = '', description = '', image = ''}) {
+export default function({  title = '', description = '', image = ''}) {
     const {getLocalized, getThumb, trans} = useContext(AppContext);
-    const { settings } = useContext(GlobalContext);
     const {parentModule, lang } = useSelector(state => state);
+    const { settings } = useContext(GlobalContext);
 
     return (
         <InertiaHead>
@@ -19,7 +19,7 @@ export default function({title = '', description = '', image = ''}) {
             <meta head-key="title" name="title" content={title ? title : settings[getLocalized()]}/>
             <meta head-key="description" name="description"
                   content={description ? description : settings[getLocalized('description')]}/>
-            <link href={getThumb(settings.logo)} rel="shortcut icon" type="image/png"/>
+            <link href={getThumb(settings.image)} rel="shortcut icon" type="image/png"/>
             <link rel="icon" type="image/svg+xml" href={getThumb(image ? image : settings.image)}/>
             <meta
                 http-equiv="Content-type"
