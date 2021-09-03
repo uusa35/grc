@@ -7,7 +7,7 @@ import {isEmpty, split} from 'lodash';
 import Pagination from "../partials/Pagination";
 import NoElements from "../widgets/NoElements";
 import PropTypes from 'prop-types';
-import TableMobileView from "../widgets/TableMobileview";
+// import TableMobileView from "../widgets/TableMobileview";
 import {AppContext} from "../../../context/AppContext";
 import LoadingView from "../widgets/LoadingView";
 import {useDispatch, useSelector} from "react-redux";
@@ -49,8 +49,8 @@ const BackendContainer = ({
                                     mainModule={mainModule}
                                 />
                             }
-                            {!isEmpty(elements?.data) && showMobileView &&
-                            <TableMobileView elements={elements}/>}
+                            {/*{!isEmpty(elements?.data) && showMobileView &&*/}
+                            {/*<TableMobileView elements={elements}/>}*/}
                             {/*{isLoading ? <LoadingView/> : children}*/}
                             {children}
                             <NoElements display={showNoElements}/>
