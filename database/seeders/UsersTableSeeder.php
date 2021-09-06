@@ -8,7 +8,7 @@ use App\Models\Collection;
 use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Image;
-use App\Models\Notification;
+use App\Models\Alert;
 use App\Models\Post;
 use App\Models\Rating;
 use App\Models\ShipmentPackage;
@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
             $p->comments()->saveMany(Comment::factory(2)->create());
             $p->favorites()->saveMany(Favorite::factory(2)->create());
             $p->ratings()->saveMany(Rating::factory(2)->create());
-            $p->notificationAlerts()->saveMany(Notification::factory(2)->create());
+            $p->alerts()->saveMany(Alert::factory(2)->create());
         });
     }
 }

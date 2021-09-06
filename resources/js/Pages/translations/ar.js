@@ -1160,4 +1160,9 @@ export const ar = {
     "end_subscription_date" : "تاريخ انتهاء الاشتراك ",
     "male" : "ذكر",
     "female" : "أنثى",
+    "show" : "إظهار",
+    "pending" : "غير مكتمل",
+    "failed" : "فشل",
+    "order_status" : "حالة الطلب",
+    "order_elements" : "بنود الفاتورة (الطلب)",
 }

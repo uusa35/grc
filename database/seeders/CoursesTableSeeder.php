@@ -23,7 +23,7 @@ class CoursesTableSeeder extends Seeder
      */
     public function run()
     {
-        Course::factory(app()->isLocal() ? 20 : 5)->create()->each(function ($p) {
+        Course::factory(app()->isLocal() ? 10 : 5)->create()->each(function ($p) {
             $p->slides()->saveMany(Slide::all()->random(2));
             $p->categories()->saveMany(Category::all()->random(2));
             $p->tags()->saveMany(Tag::all()->random(2));

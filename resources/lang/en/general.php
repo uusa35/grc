@@ -1033,5 +1033,6 @@ return array (
     "file_url" => "File Url",
     "pdf_file" => "PDF file",
     "file_instruction" => "Upload you PDF file / max 50MB",
-    "order_appearance" => "Order Appearance"
+    "order_appearance" => "Order Appearance",
+    "thank_you_for_ur_purchase" => "Thank you for your order. email is sent you with the novice. you can also see invoices in my account page."
 );

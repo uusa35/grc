@@ -118,3 +118,4 @@ export function adjustColor(color, amount) {
 export const isLocal = () => !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 export const calculateRating = (ratings) =>  _.round((_.sumBy(ratings, r => r.value) / (ratings.length)) / 20)
+export const getTypeFromModel = (model) =>  _.lowerCase(_.last(_.split(model, 'Models', 2)));

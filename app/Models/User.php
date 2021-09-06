@@ -117,9 +117,9 @@ class User extends Authenticatable
         return $this->morphToMany(Video::class, 'videoable');
     }
 
-    public function notificationAlerts()
+    public function alerts()
     {
-        return $this->morphMany(Notification::class, 'notificationable');
+        return $this->morphMany(Alert::class, 'alertable');
     }
 
     public function tags()

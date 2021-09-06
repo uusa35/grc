@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Order;
+use App\Models\Order;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OrderPolicy
@@ -26,12 +26,12 @@ class OrderPolicy
      * Determine whether the user can view the order.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return mixed
      */
     public function view(User $user, Order $order)
     {
-        //
+        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : $user->id === $order->user_id;
     }
 
     /**
@@ -49,7 +49,7 @@ class OrderPolicy
      * Determine whether the user can update the order.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return mixed
      */
     public function update(User $user, Order $order)
@@ -61,19 +61,19 @@ class OrderPolicy
      * Determine whether the user can delete the order.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return mixed
      */
     public function delete(User $user, Order $order)
     {
-        //
+        return $user->isAdminOrAbove;
     }
 
     /**
      * Determine whether the user can restore the order.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return mixed
      */
     public function restore(User $user, Order $order)
@@ -85,7 +85,7 @@ class OrderPolicy
      * Determine whether the user can permanently delete the order.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Order  $order
+     * @param  \App\Models\Order  $order
      * @return mixed
      */
     public function forceDelete(User $user, Order $order)

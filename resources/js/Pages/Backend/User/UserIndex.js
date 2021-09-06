@@ -12,7 +12,7 @@ import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
 
 
-export default function UserIndex({elements}) {
+export default function ({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,

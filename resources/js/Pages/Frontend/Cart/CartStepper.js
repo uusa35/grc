@@ -4,7 +4,7 @@ import {useContext, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 
-export default function CartStepper({ activeStep = 1}) {
+export default function ({ activeStep = 1}) {
     const { trans, classNames } = useContext(AppContext);
     const steps = [
         { id: 1, label : trans('page'), name: trans('cart'), href: '#', status: 'upcoming' },

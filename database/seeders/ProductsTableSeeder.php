@@ -6,7 +6,7 @@ use App\Models\Collection;
 use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Image;
-use App\Models\Notification;
+use App\Models\Alert;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\Rating;
@@ -30,7 +30,7 @@ class ProductsTableSeeder extends Seeder
         // belongs to many categories
         // has gallery with images
         // belongs to many orders !!!
-        Product::factory(app()->isLocal() ? 10 : 5)->create()->each(function ($p) {
+        Product::factory(app()->isLocal() ? 10 : 1)->create()->each(function ($p) {
             if ($p->has_attributes) {
                 $p->product_attributes()->saveMany(ProductAttribute::factory(1)->create());
             }
@@ -38,7 +38,7 @@ class ProductsTableSeeder extends Seeder
             $p->categories()->saveMany(Category::all()->random(2));
             $p->tags()->saveMany(Tag::all()->random(2));
             $p->videos()->saveMany(Video::all()->random(2));
-            $p->notificationAlerts()->saveMany(Notification::all()->random(2));
+            $p->alerts()->saveMany(Alert::all()->random(2));
             $p->images()->saveMany(Image::factory(3)->create());
             $p->favorites()->saveMany(Favorite::factory( 2)->create());
             $p->ratings()->saveMany(Rating::factory( 2)->create());

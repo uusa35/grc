@@ -20,7 +20,8 @@ const BackendHeader = () => {
         getLocalized,
         getThumb,
         classNames,
-        isSuper
+        isSuper,
+        isAdminOrAbove
     } = useContext(AppContext);
     const { modules , locale , settings  } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -252,8 +253,7 @@ const BackendHeader = () => {
                     </Menu>
                 </div>
             </div>
-            <PinnedProjects />
-
+            {isAdminOrAbove && <PinnedProjects />}
         </div>
     );
 }

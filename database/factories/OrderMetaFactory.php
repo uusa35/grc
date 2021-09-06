@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Book;
 use App\Models\Color;
 use App\Models\Country;
+use App\Models\Course;
 use App\Models\Order;
 use App\Models\OrderMeta;
 use App\Models\Model;
@@ -54,9 +55,8 @@ class OrderMetaFactory extends Factory
             'time' => function ($array) {
                 return Carbon::parse(($array['booked_at']))->format('h:i:s');
             },
-
             'ordermetable_type' => $this->faker->randomElement([Product::class, Book::class, Course::class, Service::class]),
-            'ordermetable_id' => $this->faker->numberBetween(1, 99)
+            'ordermetable_id' => $this->faker->numberBetween(1, 10)
         ];
     }
 }

@@ -45,6 +45,7 @@ use App\Http\Controllers\Frontend\FrontendCategoryController;
 use App\Http\Controllers\Frontend\FrontendCourseController;
 use App\Http\Controllers\Frontend\FrontendFaqController;
 use App\Http\Controllers\Frontend\FrontendFavoriteController;
+use App\Http\Controllers\Frontend\FrontendOrderController;
 use App\Http\Controllers\Frontend\FrontendPageController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\FrontendRatingController;
@@ -89,10 +90,15 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
         Route::resource('rating', FrontendRatingController::class)->only('store');
         Route::resource('favorite', FrontendFavoriteController::class)->only('store');
         Route::resource('user', FrontendUserController::class)->only('edit');
+        Route::resource('order', FrontendOrderController::class)->only(['index','show']);
+        // temp routes for testing only
+        Route::get('order/{id}/paid', [FrontendOrderController::class, 'makeOrderPaid'])->name('order.paid');
+        Route::get('order/{id}/failed', [FrontendOrderController::class, 'makeOrderFailed'])->name('order.failed');
+        Route::get('order/paid/{id}/event', [FrontendOrderController::class, 'makeNotify'])->name('order.notify');
     });
 });
 
-Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'dashboard', 'backendInertiaHandler']], function () {
+Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'dashboard','backendInertiaHandler']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/home', [DashboardController::class, 'index'])->name('home.index');
     Route::get('/lang/{lang}', [HomeController::class, 'changeLang'])->name('change.lang');
@@ -150,5 +156,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('shipment', ShipmentController::class);
         Route::resource('faq', FaqController::class);
         Route::resource('subscription', SubscriptionController::class);
+        // order status switch
+        Route::get('order/switch/status', [OrderController::class, 'switchStatus'])->name('order.switch');
     });
 });

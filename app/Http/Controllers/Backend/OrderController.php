@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OrderCollection;
 use App\Models\Order;
+use App\Notifications\OrderPaid;
 use App\Services\Search\Filters;
 use Illuminate\Http\Request;
 
@@ -37,9 +39,12 @@ class OrderController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Order::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN)->appends(request()->except(['page','_token']));
+        $elements = new OrderCollection(Order::filters($filters)->orderBy('id', 'desc')
+            ->paginate(Self::TAKE_MIN)
+            ->withQueryString());
         return inertia('Backend/Order/OrderIndex', compact('elements'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -53,7 +58,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -64,18 +69,19 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Order  $order
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
     {
-        //
+        $order->load('order_metas.ordermetable', 'user', 'coupon');
+        return inertia('Backend/Order/OrderShow', compact('order'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Order  $order
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -86,8 +92,8 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Order $order)
@@ -98,11 +104,33 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Order  $order
+     * @param \App\Models\Order $order
      * @return \Illuminate\Http\Response
      */
     public function destroy(Order $order)
     {
-        //
+        if ($order->order_metas()->delete() && $order->delete()) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
+
+    public function switchStatus(Request $request)
+    {
+        $request->validate([
+            'order_id' => 'required|exists:orders,id',
+            'status' => 'required|string'
+        ]);
+        try {
+            $updated = Order::whereId($request->order_id)->first()->update(['status' => $request->status]);
+            if ($updated) {
+                return redirect()->back()->with('success', trans('general.process_success'));
+            }
+            return redirect()->back()->with('error', trans('general.process_failure'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+
 }

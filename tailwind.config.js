@@ -18,6 +18,9 @@ module.exports = {
     darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {
+            screens : {
+                'print': {'raw': 'print'},
+            },
             colors: {
                 'hippie-blue': {
                     '300': '#b4d4db',

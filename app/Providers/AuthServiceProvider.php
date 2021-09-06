@@ -37,7 +37,7 @@ use App\Policies\FaqPolicy;
 use App\Policies\GovernatePolicy;
 use App\Policies\ImagePolicy;
 use App\Policies\ItemPolicy;
-use App\Policies\NotificationPolicy;
+use App\Policies\AlertPolicy;
 use App\Policies\OrderPolicy;
 use App\Policies\PagePolicy;
 use App\Policies\PolicyPolicy;

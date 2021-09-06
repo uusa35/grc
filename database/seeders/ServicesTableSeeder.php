@@ -8,7 +8,7 @@ use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Image;
 use App\Models\Item;
-use App\Models\Notification;
+use App\Models\Alert;
 use App\Models\Rating;
 use App\Models\Service;
 use App\Models\Slide;
@@ -31,7 +31,7 @@ class ServicesTableSeeder extends Seeder
             $p->timings()->saveMany(Timing::factory(2)->create());
             $p->tags()->saveMany(Tag::all()->random(2));
             $p->videos()->saveMany(Video::all()->random(2));
-            $p->notifications()->saveMany(Notification::all()->random(2));
+            $p->alerts()->saveMany(Alert::all()->random(2));
             $p->slides()->saveMany(Slide::all()->random(2));
             $p->favorites()->saveMany(Favorite::factory( 2)->create());
             $p->images()->saveMany(Image::factory(2)->create());

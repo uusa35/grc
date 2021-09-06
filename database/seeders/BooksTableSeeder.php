@@ -6,7 +6,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Favorite;
 use App\Models\Image;
-use App\Models\Notification;
+use App\Models\Alert;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\Slide;
@@ -24,7 +24,7 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-        Book::factory(app()->isLocal() ? 20 : 5)->create()->each(function ($p) {
+        Book::factory(app()->isLocal() ? 10 : 5)->create()->each(function ($p) {
             $p->categories()->saveMany(Category::all()->random(2));
             $p->tags()->saveMany(Tag::all()->random(2));
             $p->videos()->saveMany(Video::all()->random(2));

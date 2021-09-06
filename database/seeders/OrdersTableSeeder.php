@@ -20,8 +20,8 @@ class OrdersTableSeeder extends Seeder
         - order_meta
         - coupon
         */
-        Order::factory(app()->isLocal() ? 20 : 2)->create()->each(function ($o) {
-            $o->order_metas()->saveMany(OrderMeta::factory(2)->create());
+        Order::factory(app()->isLocal() ? 10 : 2)->create()->each(function ($o) {
+            $o->order_metas()->saveMany(OrderMeta::factory(4)->create());
         });
     }
 }

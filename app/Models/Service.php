@@ -72,9 +72,9 @@ class Service extends PrimaryModel
 
 
     // Many Morph
-    public function notifications()
+    public function alerts()
     {
-        return $this->morphMany(Notification::class, 'notificationable');
+        return $this->morphMany(Alert::class, 'alertable');
     }
 
     // ManyToMay Morph

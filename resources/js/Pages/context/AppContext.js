@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useMemo} from 'react';
 import GlobalContext from "./GlobalContext";
-import {split,map, isEmpty} from 'lodash';
+import {split, map, isEmpty} from 'lodash';
 import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
@@ -15,19 +15,32 @@ import {translations} from './../../Pages/translations';
 import {
     setBreadCrumbs,
     setModules,
-    setParentModule,
+    setParentModule, showToastMessage,
     startBootStrapped
 } from "../redux/actions";
 import LoadingView from "../Backend/components/widgets/LoadingView";
 import ConfirmationModal from "../Backend/components/partials/ConfirmationModal";
 import {capitalize} from "lodash/string";
+import Echo from 'laravel-echo'
+import Pusher from "pusher-js";
 
 const AppContext = createContext({});
 
 const AppContextProvider = ({children}) => {
-    const {lang, locale, bootStrapped, confirmationModal, toastMessage } = useSelector(state => state);
+    const {lang, locale, bootStrapped, confirmationModal, toastMessage} = useSelector(state => state);
     const {auth, settings, currencies} = useContext(GlobalContext);
+
     const dispatch = useDispatch();
+    const pusher = new Pusher('c7ae6371d15e9b381173');
+    const echo = window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: 'c7ae6371d15e9b381173',
+        cluster: 'mt1',
+        forceTLS: true,
+        client: pusher
+    });
+    // window.Pusher = new Pusher('c7ae6371d15e9b381173');
+
 
     const options = {
         // onOpen: props => console.log(props.foo),
@@ -43,10 +56,6 @@ const AppContextProvider = ({children}) => {
         draggable: true,
     };
 
-    // const handleSort = (colName) => {
-    //     setColName(colName)
-    //     setSortDesc(!sortDesc)
-    // }
     const context = {
         trans: (name) => translations[lang][name],
         classNames: (...classes) => classes.filter(Boolean).join(' '),
@@ -60,8 +69,8 @@ const AppContextProvider = ({children}) => {
         isSuper: !isEmpty(auth) && auth.role?.is_super,
         isAuthor: !isEmpty(auth) && auth.role?.is_author,
         guest: isEmpty(auth),
-        arFont : 'font-almarai',
-        enFont : 'font-tajwal-medium'
+        arFont: 'font-almarai',
+        enFont: 'font-tajwal-medium'
     };
 
     useMemo(() => {
@@ -96,19 +105,21 @@ const AppContextProvider = ({children}) => {
         toast.configure(options)
     }, [])
 
+    pusher.subscribe(`order.paid.${auth?.id}`).bind(`order.paid`, ({ message }) => {
+        return dispatch(showToastMessage({ message }))
+    });
+
     useMemo(() => {
         if (!bootStrapped && navigator.onLine) {
             dispatch(startBootStrapped({settings, currencies}))
         }
-        // dispatch(setSettings(settings));
-        // dispatch(setCurrencies(currencies));
         if (!isEmpty(auth && auth.role?.privileges)) {
             const filteredModules = map(auth.role.privileges, p => {
                 return {
                     name: p.name_en,
                     index: p.index,
                     main_menu: p.main_menu,
-                    is_sub_module : p.is_sub_module,
+                    is_sub_module: p.is_sub_module,
                     image: p.image
                 }
             });

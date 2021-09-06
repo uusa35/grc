@@ -31,7 +31,7 @@ class OrderFactory extends Factory
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
             'user_id' => User::all()->random()->id,
-            'status' => $this->faker->randomElement(['pending', 'success', 'failed', 'delivered']),
+            'status' => $this->faker->randomElement(['pending', 'paid', 'failed', 'delivered','completed']),
             'price' => $this->faker->numberBetween(22, 99),
             'discount' => $this->faker->numberBetween(10, 22), // discount will be updated if there is a coupon applied.
             'shipment_fees' => $this->faker->numberBetween(10, 22), // discount will be updated if there is a coupon applied.
@@ -46,6 +46,11 @@ class OrderFactory extends Factory
             'payment_method' => $this->faker->randomElement(['cash', 'visa', 'mastercard']),
             'country' => Country::all()->random()->name,
             'area' => $this->faker->country,
+            'block' => $this->faker->numberBetween(1,10),
+            'street' => $this->faker->numberBetween(1,10),
+            'building' => $this->faker->numberBetween(1,10),
+            'floor' => $this->faker->numberBetween(1,10),
+            'apartment' => $this->faker->numberBetween(1,10),
             'coupon_id' => Coupon::all()->random()->id,
             'notes' => $this->faker->paragraph,
             'paid' => $this->faker->boolean(true),
