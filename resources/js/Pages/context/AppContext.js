@@ -31,15 +31,17 @@ const AppContextProvider = ({children}) => {
     const {auth, settings, currencies} = useContext(GlobalContext);
 
     const dispatch = useDispatch();
-    const pusher = new Pusher('c7ae6371d15e9b381173');
-    const echo = window.Echo = new Echo({
-        broadcaster: 'pusher',
-        key: 'c7ae6371d15e9b381173',
-        cluster: 'mt1',
-        forceTLS: true,
-        client: pusher
-    });
-    // window.Pusher = new Pusher('c7ae6371d15e9b381173');
+    // const pusher = new Pusher('c7ae6371d15e9b381173');
+    // window.Echo = new Echo({
+    //     broadcaster: 'pusher',
+    //     key: 'c7ae6371d15e9b381173',
+    //     cluster: 'mt1',
+    //     forceTLS: true,
+    //     client: pusher
+    // });
+    // pusher.subscribe(`order.paid.${auth?.id}`).bind(`order.paid`, ({ message }) => {
+    //     return dispatch(showToastMessage({ message }))
+    // });
 
 
     const options = {
@@ -104,10 +106,6 @@ const AppContextProvider = ({children}) => {
         });
         toast.configure(options)
     }, [])
-
-    pusher.subscribe(`order.paid.${auth?.id}`).bind(`order.paid`, ({ message }) => {
-        return dispatch(showToastMessage({ message }))
-    });
 
     useMemo(() => {
         if (!bootStrapped && navigator.onLine) {
