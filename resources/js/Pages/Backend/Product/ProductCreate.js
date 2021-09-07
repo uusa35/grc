@@ -123,7 +123,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                     onSubmit={submit}
                     method="post"
                     encType="multipart/form-data"
-                    className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full space-y-3`)}>
+                    className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
                     {/* main section*/}
                     <FormSection title={`${trans('create')} ${trans(parentModule)}`}
                                  message={trans('all_information_required')}

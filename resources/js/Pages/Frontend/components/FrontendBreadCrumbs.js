@@ -79,7 +79,7 @@ export default function FrontendBreadCrumbs({ childName = ''}) {
                       className={'flex flex-1 flex-row justify-between items-center'}
                       onClick={() => window.history.back()}
                 >
-                    <h1>{trans('back')}</h1>
+                    <h1 className="hidden sm:block">{trans('back')}</h1>
                     {locale.isRTL ?
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">

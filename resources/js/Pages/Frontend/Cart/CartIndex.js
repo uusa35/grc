@@ -61,13 +61,13 @@ export default function CartIndex() {
                         <tbody>
                         {map(cart.items, (element, i) => (
                             <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                    <div className="flex flex-1 flex-row">
+                                <td className="py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    <div className="flex flex-1 flex-row items-center justify-start">
                                         {
                                             !isUndefined(element.image) && !isEmpty(element.image) && <img
                                                 src={getThumb(element.image)}
                                                 alt={element[getLocalized()]}
-                                                className="w-8 h-8 shadow-md rounded-lg object-center object-cover sm:w-16 sm:h-16"
+                                                className="w-8 h-auto shadow-md rounded-sm object-cover sm:w-16 sm:h-20"
                                             />
                                         }
                                         <div className="p-3">
@@ -76,7 +76,7 @@ export default function CartIndex() {
                                                 {element[getLocalized()]}
                                             </Link>
                                             <p className="capitalize truncate overflow-hidden">
-                                                {truncate(element[getLocalized('description')], 100)}
+                                                {trans('owner')} : {truncate(element[getLocalized('merchant_name')], 100)}
                                             </p>
                                             {
                                                 element.type === 'product' && <>
@@ -86,24 +86,15 @@ export default function CartIndex() {
                                             }
                                             {element.type === 'service' && element.timing &&
                                             <div
-                                                className="flex flex-col justify-center items-center   ">
-                                                <div className="flex">
-                                                    <h1>{trans('timing')}</h1>
-                                                </div>
+                                                className="flex flex-col justify-start">
                                                 <div
-                                                    className="flex flex-1 flex-col xl:flex-row justify-start xl:flex-row w-auto items-center">
-                                                                    <span
-                                                                        className="flex">{`${moment(element.timing.date).format('dddd')} ${trans('equivalent')}`}</span>
-                                                    <span
-                                                        className="flex flex-1 justify-start sm:px-2 flex-row">{`${moment(element.timing.date).format('L')}`}</span>
-                                                </div>
-                                                <div
-                                                    className="flex flex-col xl:flex-row justify-between items-center">
+                                                    className="flex flex-col xl:flex-row justify-between capitalize px-2 my-2">
+                                                    <h1 className="mb-2 pb-1 border-b-2 border-gray-200">{trans('timing')}</h1>
+                                                    {`${moment(element.timing.date).format('dddd')} ${trans('equivalent')}`}
+                                                    {` ${moment(element.timing.date).format('L')}`}
                                                     <div className="flex capitalize">
                                                         {`${trans('from')} ${moment(`${element.timing.date} ${element.timing.start}`).format('HH:mm A')}`}
-                                                    </div>
-                                                    <div className="flex ltr:ml-2 rtl:mr-2 capitalize">
-                                                        {`${trans('to')} ${moment(`${element.timing.date} ${element.timing.end}`).format('HH:mm A')}`}
+                                                        {` ${trans('to')} ${moment(`${element.timing.date} ${element.timing.end}`).format('HH:mm A')}`}
                                                     </div>
                                                 </div>
                                             </div>

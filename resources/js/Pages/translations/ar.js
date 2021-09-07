@@ -1165,4 +1165,5 @@ export const ar = {
     "failed" : "فشل",
     "order_status" : "حالة الطلب",
     "order_elements" : "بنود الفاتورة (الطلب)",
+    "this_cart_is_not_multi_you_can_not_buy_from_two_different_vendors" : "يمكنك اضافه عناصر اخرى من نفس الشركة او التاجر فقط"
 }

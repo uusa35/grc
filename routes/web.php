@@ -27,7 +27,6 @@ use App\Http\Controllers\Backend\BookController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\ContactusController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\SectionController;
@@ -52,6 +51,7 @@ use App\Http\Controllers\Frontend\FrontendRatingController;
 use App\Http\Controllers\Frontend\FrontendServiceController;
 use App\Http\Controllers\Frontend\FrontendUserController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\GovernateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -141,6 +141,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('color', ColorController::class);
         Route::resource('size', SizeController::class);
         Route::resource('country', CountryController::class);
+        Route::resource('governate', GovernateController::class);
         Route::resource('area', AreaController::class);
         Route::resource('currency', CurrencyController::class);
         Route::resource('brand', BrandController::class);

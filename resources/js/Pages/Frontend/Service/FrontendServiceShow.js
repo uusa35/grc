@@ -20,7 +20,7 @@ import {isMobile} from "react-device-detect";
 import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
-import {addToCart} from "../../redux/actions";
+import {addToCart, checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 
@@ -60,9 +60,8 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
         if (isNull(data.timing_id)) {
             toast.error(capitalize(trans('please_choose_timing')))
         } else {
-            // dispatch(clearCart());
-            dispatch(addToCart({
-                cart_id: element.id + '' + selectedTiming.id,
+            dispatch(checkCartBeforeAdd({
+                cart_id: element.id,
                 type: 'service',
                 element_id: element.id,
                 timing_id: selectedTiming.id,
@@ -75,9 +74,10 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                 name_en: element.name_en,
                 description_ar: element.description_ar,
                 description_en: element.description_en,
-                timing: selectedTiming
+                timing: selectedTiming,
+                merchant_name_ar : element.user.name_ar,
+                merchant_name_en : element.user.name_en
             }))
-            // dispatch(removeFromCart(element.id +''+selectedTiming.id));
         }
     }
 

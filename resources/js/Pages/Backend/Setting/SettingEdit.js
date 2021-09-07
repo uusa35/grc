@@ -14,6 +14,7 @@ import React from 'react';
 import {useSelector} from "react-redux";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import FormSection from "../components/widgets/form/FormSection";
 
 export default function SettingEdit({setting, themes}) {
     const [currentImages, setCurrentImages] = useState([]);
@@ -166,7 +167,7 @@ export default function SettingEdit({setting, themes}) {
     }
 
     return (
-        <BackendContainer showMobileView={true}>
+        <BackendContainer type={'settings'}>
             <FormTabsContainer>
                 <form
                     onSubmit={submit}
@@ -175,14 +176,10 @@ export default function SettingEdit({setting, themes}) {
                     className={' sm:w-full font-extrabold'}
                 >
                     <div
-                        className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
-                        <div className={`pt-4`}>
-                            <h3 className={`text-lg leading-6 font-medium text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
-                            <p className="mt-1 text-sm text-gray-500">
-                                {trans('edit')} {trans(parentModule)}
-                            </p>
-                        </div>
-                        <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
+                        className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
+
+                        <FormSection title={`${trans('edit')} ${trans('settings')}`}>
+                            {/* name_ar */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="name_ar" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('name_ar')}
@@ -204,7 +201,7 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
-
+                            {/* name_en */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="name_en" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('name_en')}
@@ -226,7 +223,7 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
                                 </p>
                             </div>
-
+                            {/* whatsapp */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="whatsapp" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('whatsapp')}
@@ -247,7 +244,7 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.whatsapp && <div className={`text-red-600`}>{errors.whatsapp}</div>}
                                 </p>
                             </div>
-
+                            {/* mobile */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="mobile" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('mobile')}
@@ -268,7 +265,7 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.mobile && <div className={`text-red-600`}>{errors.mobile}</div>}
                                 </p>
                             </div>
-
+                            {/* email */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="email" className={`block text-sm font-medium text-gray-700`}>
                                     {trans('email')}
@@ -289,8 +286,8 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.email && <div className={`text-red-600`}>{errors.email}</div>}
                                 </p>
                             </div>
-
-                            <div className="sm:col-span-3 has-tooltip mt-5">
+                            {/* image */}
+                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
                                        className={`block text-sm font-medium text-gray-700`}>
                                     {trans('main_image')}
@@ -314,6 +311,7 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
                                 </p>
                             </div>
+                            {/* more_images */}
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
                                        className={`block text-sm font-medium text-gray-700`}>
@@ -343,7 +341,6 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
                                 </p>
                             </div>
-
                             {/* theme */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="themes" className="block text-sm font-medium text-gray-700">
@@ -371,23 +368,63 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.theme && <div className={`text-red-600`}>{errors.theme}</div>}
                                 </p>
                             </div>
+                        </FormSection>
 
-                        </div>
+                        {/* booleans */}
+                        <FormSection title={trans('more_details')}>
+                            {/* multi_cart_merchant */}
+                            <fieldset className="mt-1 col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('multi_cart_merchant')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="multi_cart_merchant"
+                                            name="multi_cart_merchant"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={setting.multi_cart_merchant}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="multi_cart_merchant"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="multi_cart_merchant"
+                                            name="multi_cart_merchant"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!setting.multi_cart_merchant}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="multi_cart_merchant"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
+                                </div>
+                                <ToolTipWidget/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.multi_cart_merchant && <div className={`text-red-600`}>{errors.multi_cart_merchant}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+
+                        </FormSection>
                         <FormBtns type={'setting'}/>
                     </div>
 
-
                     <div
-                        className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
-
-                        <div className={`pt-4`}>
-                            <h3 className={`text-lg leading-6 font-medium text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
-                            <p className="mt-1 text-sm text-gray-500">
-                                {trans('edit')} {trans(parentModule)}
-                            </p>
-                        </div>
-                        {/* more information */}
-                        <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
+                        className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
+                        <FormSection title={trans('more_details')}>
                             {/* description_ar */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
@@ -432,7 +469,6 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.description_en}</div>}
                                 </p>
                             </div>
-
                             {/* shipment notes_ar */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="notes_ar" className={`block text-sm font-medium text-gray-700`}>
@@ -637,8 +673,9 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
                                 </p>
                             </div>
-
-                            <div className="space-y-20 sm:col-span-full">
+                        </FormSection>
+                        <FormSection title={trans('more_details')}>
+                            <div className="col-span-full space-y-16">
                                 {/* about us en*/}
                                 <div className="sm:col-span-full has-tooltip">
                                     <label htmlFor="aboutus_en"
@@ -679,7 +716,6 @@ export default function SettingEdit({setting, themes}) {
                                         <div className={`text-red-600`}>{errors.aboutus_ar}</div>}
                                     </p>
                                 </div>
-
                                 {/* terms en*/}
                                 <div className="sm:col-span-full has-tooltip h-auto">
                                     <label htmlFor="terms_en"
@@ -720,8 +756,6 @@ export default function SettingEdit({setting, themes}) {
                                         <div className={`text-red-600`}>{errors.terms_ar}</div>}
                                     </p>
                                 </div>
-
-
                                 {/* policy en*/}
                                 <div className="sm:col-span-full has-tooltip">
                                     <label htmlFor="terms_en"
@@ -763,9 +797,8 @@ export default function SettingEdit({setting, themes}) {
                                     </p>
                                 </div>
                             </div>
-
-
-
+                        </FormSection>
+                        <FormSection title={trans('more_details')}>
                             {/* size chart*/}
                             <div className="sm:col-span-3">
                                 <label htmlFor="size_chart_image"
@@ -794,7 +827,6 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.size_chart_image}</div>}
                                 </p>
                             </div>
-
                             {/*    app_logo */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="app_logo"
@@ -822,7 +854,6 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.app_logo && <div className={`text-red-600`}>{errors.app_logo}</div>}
                                 </p>
                             </div>
-
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"
@@ -849,7 +880,6 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
                                 </p>
                             </div>
-
                             {/*    shipment prices image */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="shipment_prices"
@@ -878,17 +908,15 @@ export default function SettingEdit({setting, themes}) {
                                     <div className={`text-red-600`}>{errors.shipment_prices}</div>}
                                 </p>
                             </div>
-                        </div>
-
-
+                        </FormSection>
                         <FormBtns type={'setting'}/>
                     </div>
 
 
                     <div
-                        className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col px-20 sm:px-10 space-y-4`)}>
+                        className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col w-full space-y-4`)}>
 
-                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start pt-10">
+                        <FormSection title={trans('more_images')}>
                             <div className="mt-1 sm:mt-0 sm:col-span-full">
                                 <div
                                     className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -929,7 +957,7 @@ export default function SettingEdit({setting, themes}) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </FormSection>
                         <FormBtns type={'setting'}/>
                         <ImagesList images={setting.images} id={setting.id} type={'setting'}/>
                     </div>

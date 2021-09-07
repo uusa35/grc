@@ -1,4 +1,6 @@
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const PREPARE_CART = 'PREPARE_CART';
+export const CHECK_CART_BEFORE_ADD = 'CHECK_CART_BEFORE_ADD';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const CLEAR_CART = 'CLEAR_CART';
 export const SET_DISCOUNT = 'SET_DISCOUNT';

@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AreaCollection;
 use App\Models\Area;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Area::class);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,8 @@ class AreaController extends Controller
      */
     public function index()
     {
-        //
+        $elements = new AreaCollection(Area::with('country')->paginate(Self::TAKE_LESS));
+        return inertia('Backend/Area/AreaIndex', compact('elements'));
     }
 
     /**
@@ -25,7 +36,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Backend/Area/AreaCreate');
     }
 
     /**
@@ -58,7 +69,8 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        //
+        $area->load('country');
+        return inertia('Backend/Area/AreaEdit', compact('area'));
     }
 
     /**

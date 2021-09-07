@@ -36,7 +36,9 @@ class SettingExtraLightResource extends JsonResource
             'android' => $this->android,
             'youtube' => $this->youtube,
             'email' => $this->email,
-            'theme' => $this->theme
+            'theme' => $this->theme,
+            'multi_cart_merchant' => $this->multi_cart_merchant,
+            'apply_global_shipment' => $this->apply_global_shipment
         ];
     }
 }

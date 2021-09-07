@@ -34,6 +34,7 @@ class BookResource extends JsonResource
             'embedded' => $this->embedded,
             'file' => $this->file,
             'is_available' => $this->is_available,
+            'direct_purchase' => $this->direct_purchase,
             'user' => UserExtraLightResource::make($this->whenLoaded('user')),
             'images' => ImageExtraLightResource::collection($this->whenLoaded('images'))
         ];

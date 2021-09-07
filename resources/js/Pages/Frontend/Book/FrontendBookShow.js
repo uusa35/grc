@@ -25,17 +25,19 @@ import route from 'ziggy-js'
 import {toast} from "react-toastify";
 import {Link, useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
-import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
+import {addToCart, checkCartBeforeAdd, clearCart, removeFromCart} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import GlobalContext from "../../context/GlobalContext";
 
 
 export default function FrontendBookShow({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
-    const {cart} = useSelector(state => state);
+    const { settings } = useContext(GlobalContext);
+    const {cart } = useSelector(state => state);
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'book',
@@ -58,7 +60,7 @@ export default function FrontendBookShow({element, relatedElements, auth}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addToCart({
+        dispatch(checkCartBeforeAdd({
             cart_id: element.id,
             type: 'book',
             element_id: element.id,
@@ -71,8 +73,16 @@ export default function FrontendBookShow({element, relatedElements, auth}) {
             name_en: element.name_en,
             description_ar: element.description_ar,
             description_en: element.description_en,
+            merchant_id : element.user.id,
+            merchant_name_ar : element.user.name_ar,
+            merchant_name_en : element.user.name_en
         }))
     }
+
+    console.log('the whole cart', cart);
+    console.log('the items', cart.items);
+    console.log('the merchants', cart.merchants);
+    console.log('the current multi cart', cart.multiCartMerchant)
 
     return (
         <FrontendContainer childName={element[getLocalized()]}>

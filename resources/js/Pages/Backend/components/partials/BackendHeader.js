@@ -34,62 +34,121 @@ const BackendHeader = () => {
                 <h1 className="w-60 leading-6 text-gray-900 sm:truncate capitalize">{settings[getLocalized('name')]}</h1>
                 <div className="flex items-center justify-center w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 sm:gap-y-0 gap-x-2 capitalize">
                     {/* all elements */}
-                    <Menu as="div" className="col-auto relative ltr:text-left rtl:text-right">
-                        {({open}) => (
-                            <div>
-                                <div className={`rtl:ml-2 ltr:mr-2`}>
-                                    <Menu.Button
-                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
-                                        {trans('list')} {trans('all_elements')}
-                                        <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
-                                    </Menu.Button>
-                                </div>
+                    {
+                        isSuper ?   <Menu as="div" className="col-auto relative ltr:text-left rtl:text-right">
+                            {({open}) => (
+                                <div>
+                                    <div className={`rtl:ml-2 ltr:mr-2`}>
+                                        <Menu.Button
+                                            className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
+                                            {trans('list')} {trans('all_elements')}
+                                            <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
+                                        </Menu.Button>
+                                    </div>
 
-                                <Transition
-                                    show={open}
-                                    as={Fragment}
-                                    enter="transition ease-out duration-100"
-                                    enterFrom="transform opacity-0 scale-95"
-                                    enterTo="transform opacity-100 scale-100"
-                                    leave="transition ease-in duration-75"
-                                    leaveFrom="transform opacity-100 scale-100"
-                                    leaveTo="transform opacity-0 scale-95"
-                                >
-                                    <Menu.Items
-                                        static
-                                        className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-max z-50 origin-top-right absolute  md:-right-60 mt-2 py-5 border-2 border-gray-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none capitalize"
+                                    <Transition
+                                        show={open}
+                                        as={Fragment}
+                                        enter="transition ease-out duration-100"
+                                        enterFrom="transform opacity-0 scale-95"
+                                        enterTo="transform opacity-100 scale-100"
+                                        leave="transition ease-in duration-75"
+                                        leaveFrom="transform opacity-100 scale-100"
+                                        leaveTo="transform opacity-0 scale-95"
                                     >
-                                        {
-                                            map(modules, m => (
-                                                <Fragment key={m.name}>
-                                                    {
-                                                        ((m.index && !m.is_sub_module) || isSuper) && <div className="py-1 col-span-1">
-                                                            <Menu.Item>
-                                                                {({active}) => (
-                                                                    <Link
-                                                                        key={m.name}
-                                                                        href={route(`backend.${m.name}.index`)}
-                                                                        className={classNames(
-                                                                            m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
-                                                                            'group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
+                                        <Menu.Items
+                                            static
+                                            className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-max z-50 origin-top-right absolute  md:-right-60 mt-2 py-5 border-2 border-gray-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none capitalize"
+                                        >
+                                            {
+                                                map(modules, m => (
+                                                    <Fragment key={m.name}>
+                                                        {
+                                                            m.index && (!m.is_sub_module || isSuper) && <div className="py-1 col-span-1">
+                                                                <Menu.Item>
+                                                                    {({active}) => (
+                                                                        <Link
+                                                                            key={m.name}
+                                                                            href={route(`backend.${m.name}.index`)}
+                                                                            className={classNames(
+                                                                                m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
+                                                                                'group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
+                                                                            )}
+                                                                        >
+                                                                            <img className={`w-5 h-auto mx-2 rounded-sm`}
+                                                                                 src={getThumb(m.image)} alt=""/>
+                                                                            {trans('list')} {trans(plurlaize(m.name))}
+                                                                        </Link>
+                                                                    )}
+                                                                </Menu.Item>
+                                                            </div>
+                                                        }
+                                                    </Fragment>
+                                                ))
+                                            }
+                                        </Menu.Items>
+                                    </Transition>
+                                </div>
+                            )}
+                        </Menu> :
+                            <>{isAdminOrAbove && <Menu as="div" className="col-auto relative ltr:text-left rtl:text-right">
+                                {({open}) => (
+                                    <div>
+                                        <div className={`rtl:ml-2 ltr:mr-2`}>
+                                            <Menu.Button
+                                                className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
+                                                {trans('list')} {trans('all_elements')}
+                                                <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
+                                            </Menu.Button>
+                                        </div>
+
+                                        <Transition
+                                            show={open}
+                                            as={Fragment}
+                                            enter="transition ease-out duration-100"
+                                            enterFrom="transform opacity-0 scale-95"
+                                            enterTo="transform opacity-100 scale-100"
+                                            leave="transition ease-in duration-75"
+                                            leaveFrom="transform opacity-100 scale-100"
+                                            leaveTo="transform opacity-0 scale-95"
+                                        >
+                                            <Menu.Items
+                                                static
+                                                className="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 w-max z-50 origin-top-right absolute  md:-right-60 mt-2 py-5 border-2 border-gray-200 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none capitalize"
+                                            >
+                                                {
+                                                    map(modules, m => (
+                                                        <Fragment key={m.name}>
+                                                            {
+                                                                m.index && !m.is_sub_module && <div className="py-1 col-span-1">
+                                                                    <Menu.Item>
+                                                                        {({active}) => (
+                                                                            <Link
+                                                                                key={m.name}
+                                                                                href={route(`backend.${m.name}.index`)}
+                                                                                className={classNames(
+                                                                                    m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
+                                                                                    'group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
+                                                                                )}
+                                                                            >
+                                                                                <img className={`w-5 h-auto mx-2 rounded-sm`}
+                                                                                     src={getThumb(m.image)} alt=""/>
+                                                                                {trans('list')} {trans(plurlaize(m.name))}
+                                                                            </Link>
                                                                         )}
-                                                                    >
-                                                                        <img className={`w-5 h-auto mx-2 rounded-sm`}
-                                                                             src={getThumb(m.image)} alt=""/>
-                                                                        {trans('list')} {trans(plurlaize(m.name))}
-                                                                    </Link>
-                                                                )}
-                                                            </Menu.Item>
-                                                        </div>
-                                                    }
-                                                </Fragment>
-                                            ))
-                                        }
-                                    </Menu.Items>
-                                </Transition>
-                            </div>
-                        )}
-                    </Menu>
+                                                                    </Menu.Item>
+                                                                </div>
+                                                            }
+                                                        </Fragment>
+                                                    ))
+                                                }
+                                            </Menu.Items>
+                                        </Transition>
+                                    </div>
+                                )}
+                            </Menu>}</>
+                    }
+
 
                     {/* add new element */}
                     <Menu as="div" className="col-auto relative inline-block ltr:text-left rtl:text-right">

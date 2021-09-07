@@ -13,6 +13,7 @@ import {GrClose, IoCloseOutline} from "react-icons/all";
 import {useSelector, useDispatch} from "react-redux";
 import {translations} from './../../Pages/translations';
 import {
+    prepareCart,
     setBreadCrumbs,
     setModules,
     setParentModule, showToastMessage,
@@ -27,7 +28,7 @@ import Pusher from "pusher-js";
 const AppContext = createContext({});
 
 const AppContextProvider = ({children}) => {
-    const {lang, locale, bootStrapped, confirmationModal, toastMessage} = useSelector(state => state);
+    const {lang, locale, bootStrapped, confirmationModal, toastMessage, cart } = useSelector(state => state);
     const {auth, settings, currencies} = useContext(GlobalContext);
 
     const dispatch = useDispatch();
@@ -105,6 +106,11 @@ const AppContextProvider = ({children}) => {
             isLocal() && console.log('finish ==>')
         });
         toast.configure(options)
+        dispatch(prepareCart({
+            multiCartMerchant:  settings.multi_cart_merchant ,
+            applyGlobalShipment : settings.apply_global_shipment,
+            currentShipmentCountry : auth?.country || isEmpty(cart.currentShipmentCountry) ? auth.country : cart.currentShipmentCountry
+        }))
     }, [])
 
     useMemo(() => {

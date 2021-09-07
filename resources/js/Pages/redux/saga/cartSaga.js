@@ -1,8 +1,42 @@
 import {toast} from "react-toastify";
-import {capitalize} from "lodash";
+import {capitalize, concat, filter, uniq, union} from "lodash";
 import {translations} from "../../translations";
-import {select, put} from 'redux-saga/effects';
-import {CLEAR_CART, DISABLE_DIRECT_PURCHASE_MODE, SET_TOAST_MESSAGE} from "../actions/types";
+import {select, put, all} from 'redux-saga/effects';
+import {ADD_TO_CART, CLEAR_CART, DISABLE_DIRECT_PURCHASE_MODE, SET_TOAST_MESSAGE} from "../actions/types";
+
+export function* startCheckCartBeforeAdd(action) {
+    try {
+        const { cart , lang }  = yield select();
+        const newItems = concat(filter(cart.items, item => item && item?.cart_id != action.payload.cart_id), action.payload);
+        const merchants = union([action.payload.merchant_id],cart.merchants);
+        // check if it already has item with directPurchase Model (like a subscription or a product with directPurchase)
+        if(cart.directPurchaseMode && cart.items.length === 1) {
+            throw capitalize(translations[lang]['an_element_with_direct_purchase_mode_is_one_to_add_to_cart_u_have_to_clear_cart_first']);
+        }
+        // check if not multi cart only items for single merchant
+        else if(!cart.multiCartMerchant && merchants.length > 1) {
+            throw capitalize(translations[lang]['this_cart_is_not_multi_you_can_not_buy_from_two_different_vendors']);
+        } else {
+            yield all([
+                put({ type : ADD_TO_CART , payload : { items : newItems, merchants}}),
+                 put({
+                    type: SET_TOAST_MESSAGE, payload: {
+                        message: capitalize(translations[lang]['item_added_successfully']),
+                        type: 'success'
+                    }
+                })
+            ])
+        }
+    } catch (e) {
+        console.log('the e from check cart', e);
+        yield put({
+            type: SET_TOAST_MESSAGE, payload: {
+                message: e,
+                type: 'error'
+            }
+        });
+    }
+}
 
 export function* startAddToCartScenario(action) {
     try {
@@ -13,22 +47,6 @@ export function* startAddToCartScenario(action) {
         // }
     } catch (e) {
     } finally {
-        const {lang, cart } = yield select();
-        if(cart.directPurchaseMode) {
-            yield put({
-                type: SET_TOAST_MESSAGE, payload: {
-                    message: capitalize(translations[lang]['an_element_with_direct_purchase_mode_is_one_to_add_to_cart_u_have_to_clear_cart_first']),
-                    type: 'error'
-                }
-            });
-        } else {
-            yield put({
-                type: SET_TOAST_MESSAGE, payload: {
-                    message: capitalize(translations[lang]['item_added_successfully']),
-                    type: 'success'
-                }
-            });
-        }
     }
 }
 

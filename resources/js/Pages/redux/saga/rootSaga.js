@@ -4,6 +4,7 @@ import {REHYDRATE, PURGE} from 'redux-persist/lib/constants';
 
 export default function* rootSaga() {
     yield all([
+        fork(triggers.triggerCheckCartBeforeAdd),
         fork(triggers.triggerAddToCart),
         fork(triggers.triggerEnableDirectPurchaseModel),
         fork(triggers.triggerRemoveFromCart),

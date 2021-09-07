@@ -19,7 +19,8 @@ const persistConfig = {
         'confirmationModal',
         'sideBarOpen',
         'toastMessage',
-        'parentModule'
+        'parentModule',
+        // 'cart'
     ],
     debug: isLocal(),
 }

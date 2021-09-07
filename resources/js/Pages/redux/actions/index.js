@@ -1,7 +1,18 @@
 import * as actions from './../actions/types'
+import {CHECK_CART_BEFORE_ADD} from "./../actions/types";
 
 export const addToCart = payload => ({
     type: actions.ADD_TO_CART,
+    payload,
+});
+
+export const checkCartBeforeAdd = payload => ({
+    type: actions.CHECK_CART_BEFORE_ADD,
+    payload,
+});
+
+export const prepareCart = payload => ({
+    type: actions.PREPARE_CART,
     payload,
 });
 

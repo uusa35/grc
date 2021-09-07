@@ -25,7 +25,7 @@ import route from 'ziggy-js'
 import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
-import {addToCart, clearCart, removeFromCart} from "../../redux/actions";
+import {addToCart, checkCartBeforeAdd, clearCart, removeFromCart} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
@@ -67,8 +67,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // dispatch(clearCart());
-        dispatch(addToCart({
+        dispatch(checkCartBeforeAdd({
             cart_id: element.id,
             type: 'course',
             element_id: element.id,
@@ -80,7 +79,10 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
             name_ar: element.name_ar,
             name_en: element.name_en,
             description_ar: element.description_ar,
-            description_en: element.description_en
+            description_en: element.description_en,
+            merchant_id : element.user.id,
+            merchant_name_ar : element.user.name_ar,
+            merchant_name_en : element.user.name_en
         }))
         // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }

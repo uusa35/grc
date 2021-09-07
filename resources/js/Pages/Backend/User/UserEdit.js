@@ -182,7 +182,7 @@ export default function ({user, roles, elementCategories, categories , countries
                 >
                     <input type="hidden" name="_method" value="put"/>
                     <div
-                        className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
+                        className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
                         <div className={`pt-4`}>
                             <h3 className={` leading-6  text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-red-500">
@@ -706,7 +706,7 @@ export default function ({user, roles, elementCategories, categories , countries
                         <FormBtns type={'user'}/>
                     </div>
                     <div
-                        className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full  px-10 space-y-4 `)}>
+                        className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
                         <div className={`pt-4`}>
                             <h3 className={` leading-6  text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
                             <p className="mt-1  text-gray-500">

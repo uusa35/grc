@@ -5,9 +5,9 @@ import {
     SET_DISCOUNT,
     SET_SHIPMENT_FEES,
     ENABLE_DIRECT_PURCHASE_MODE,
-    DISABLE_DIRECT_PURCHASE_MODE
+    DISABLE_DIRECT_PURCHASE_MODE, CHECK_CART_BEFORE_ADD, PREPARE_CART
 } from './../actions/types';
-import {sumBy, map, filter, uniqBy, concat, isInteger} from 'lodash';
+import {sumBy, map, filter, round} from 'lodash';
 
 const initialState = {
     total: 0,
@@ -15,45 +15,57 @@ const initialState = {
     discount: 0,
     totalWeight: 0,
     shipmentFees: 0,
-    directPurchaseMode: false,
     totalItems: 0,
-    items: []
+    directPurchaseMode: false,
+    multiCartMerchant : true,
+    applyGlobalShipment : false,
+    currentShipmentCountry : {},
+    items: [],
+    merchants : [],
 }
 export default function(cart = initialState, action) {
     switch (action.type) {
+        case PREPARE_CART :
+            return  {
+                ...cart,
+                applyGlobalShipment : action.payload.applyGlobalShipment,
+                multiCartMerchant: action.payload.multiCartMerchant,
+                currentShipmentCountry: action.payload.currentShipmentCountry
+            };
         case ADD_TO_CART: // item
-            const newItems = concat(filter(cart.items, item => item && item?.cart_id != action.payload.cart_id), action.payload);
-            return cart.directPurchaseMode ? {...cart} :
-                {
+            return {
                     ...cart,
-                    items: newItems,
-                    total: parseFloat(sumBy(newItems, 'price')),
-                    netTotal: parseFloat(sumBy(newItems, 'price') - cart.discount + cart.shipmentFees),
-                    totalItems: parseInt(sumBy(map(newItems, item => item.cart_id === action.payload.cart_id ? action.payload : item), 'qty')),
+                    items: action.payload.items,
+                    total: round(parseFloat(sumBy(action.payload.items, 'price')), 2),
+                    netTotal: round(parseFloat(sumBy(action.payload.items, 'price') - cart.discount + cart.shipmentFees), 2),
+                    totalItems: parseInt(sumBy(map(action.payload.items, item => item.cart_id === action.payload.cart_id ? action.payload : item), 'qty')),
+                    merchants : action.payload.merchants,
                 }
         case REMOVE_FROM_CART: // only cart_id
             const items = filter(cart.items, item => item.cart_id !== action.payload);
             return {
                 ...cart,
                 items: filter(items, item => item.cart_id !== action.payload),
-                total: parseFloat(sumBy(items, 'price')),
-                netTotal: parseFloat(sumBy(items, 'price') - cart.discount + cart.shipmentFees),
+                total: round(parseFloat(sumBy(items, 'price')), 2),
+                netTotal: round(parseFloat(sumBy(items, 'price') - cart.discount + cart.shipmentFees), 2),
                 totalItems: parseInt(sumBy(map(items, item => item.cart_id === action.payload.cart_id ? action.payload : item), 'qty')),
+                merchants: filter(items, i => i.merchant_id)
             };
         case SET_DISCOUNT : // only discount value
             return {
                 ...cart,
                 discount: action.payload,
-                total: parseFloat(sumBy(cart.items, 'price')),
-                netTotal: parseFloat(sumBy(cart.items, 'price') - action.payload + cart.shipmentFees),
+                total: round(parseFloat(sumBy(cart.items, 'price')), 2),
+                netTotal: round(parseFloat(sumBy(cart.items, 'price') - action.payload + cart.shipmentFees), 2),
             };
         case SET_SHIPMENT_FEES : // only shipmentFees value
             return {
                 ...cart,
-                total: parseFloat(sumBy(cart.items, 'price')),
-                netTotal: parseFloat(sumBy(cart.items, 'price') - action.payload + action.payload),
-                shipmentFees: parseFloat(action.payload * cart.items.length),
-                totalWeight: parseFloat(sumBy(cart.items, 'weight')),
+                total: round(parseFloat(sumBy(cart.items, 'price')), 2),
+                netTotal: round(parseFloat(sumBy(cart.items, 'price') - action.payload + action.payload), 2),
+                shipmentFees: round(parseFloat(action.payload.country.fixed_shipment_charge * cart.items.length), 2),
+                totalWeight: round(parseFloat(sumBy(cart.items, 'weight')), 2),
+                currentShipmentCountry: action.payload.country
             };
         case ENABLE_DIRECT_PURCHASE_MODE :
             return {
