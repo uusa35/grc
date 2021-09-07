@@ -122,6 +122,7 @@ const AppContextProvider = ({children}) => {
                 return {
                     name: p.name_en,
                     index: p.index,
+                    create: p.create,
                     main_menu: p.main_menu,
                     on_top: p.on_top,
                     hide_module: p.hide_module,
