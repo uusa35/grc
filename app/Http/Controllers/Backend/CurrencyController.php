@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CountryCollection;
 use App\Http\Resources\CurrencyCollection;
+use App\Models\Country;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 
@@ -18,6 +20,7 @@ class CurrencyController extends Controller
     {
         $this->authorizeResource(Currency::class);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +45,7 @@ class CurrencyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -53,7 +56,7 @@ class CurrencyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Currency  $currency
+     * @param \App\Models\Currency $currency
      * @return \Illuminate\Http\Response
      */
     public function show(Currency $currency)
@@ -64,30 +67,45 @@ class CurrencyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Currency  $currency
+     * @param \App\Models\Currency $currency
      * @return \Illuminate\Http\Response
      */
     public function edit(Currency $currency)
     {
-        return inertia('Backend/Currency/CurrencyEdit', compact('currency'));
+        $currency->load('country');
+        $countries = new CountryCollection(Country::active()->get());
+        return inertia('Backend/Currency/CurrencyEdit', compact('currency', 'countries'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Currency  $currency
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Currency $currency
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Currency $currency)
     {
-        //
+        $request->validate([
+            'name_ar' => 'max:200',
+            'name_en' => 'max:200',
+            'currency_symbol_ar' => 'string|max:5',
+            'currency_symbol_en' => 'string|max:5',
+            'order' => 'numeric|max:99',
+            'exchange_rate' => 'numeric|max:99',
+            'country_id' => 'integer|exists:countries,id'
+        ]);
+        if ($currency->update($request->except('image'))) {
+            $request->hasFile('image') ? $this->saveMimes($currency, $request, ['image'], ['300', '300'], false) : null;
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Currency  $currency
+     * @param \App\Models\Currency $currency
      * @return \Illuminate\Http\Response
      */
     public function destroy(Currency $currency)

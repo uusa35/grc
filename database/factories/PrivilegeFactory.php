@@ -32,7 +32,8 @@ class PrivilegeFactory extends Factory
             'description_ar' => $this->faker->name,
             'description_en' => $this->faker->name,
             'order' => $this->faker->numberBetween(1, 99),
-            'is_sub_module' => $this->faker->boolean,
+            'on_top' => $this->faker->boolean,
+            'hide_module' => $this->faker->boolean,
         ];
     }
 }

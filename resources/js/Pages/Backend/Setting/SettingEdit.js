@@ -16,30 +16,29 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import FormSection from "../components/widgets/form/FormSection";
 
-export default function SettingEdit({setting, themes}) {
+export default function SettingEdit({setting, themes, paymentMethods}) {
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, parentModule, getThumb, getLocalized,  } = useContext(AppContext)
-    const { lang, currentFormTab, locale  } = useSelector(state => state)
+    const {classNames, trans, parentModule, getThumb, getLocalized, isSuper} = useContext(AppContext)
+    const {lang, currentFormTab, locale} = useSelector(state => state)
     let EditorConfig = {
         toolbar: [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
             ['blockquote', 'code-block'],
             ['link'],
-            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-            [{ 'direction': locale.dir }],                         // text direction
-
-            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-            [{ 'font': []}],
-            [{ 'align': [] }],
+            [{'header': 1}, {'header': 2}],               // custom button values
+            [{'list': 'ordered'}, {'list': 'bullet'}],
+            [{'script': 'sub'}, {'script': 'super'}],      // superscript/subscript
+            [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
+            [{'direction': locale.dir}],                         // text direction
+            [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
+            [{'header': [1, 2, 3, 4, 5, 6, false]}],
+            [{'color': []}, {'background': []}],          // dropdown with defaults from theme
+            [{'font': []}],
+            [{'align': []}],
             ['clean']
         ]
     }
+
     const {data, setData, put, post, progress, reset} = useForm({
         name_ar: setting.name_ar,
         name_en: setting.name_en,
@@ -177,7 +176,6 @@ export default function SettingEdit({setting, themes}) {
                 >
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
-
                         <FormSection title={`${trans('edit')} ${trans('settings')}`}>
                             {/* name_ar */}
                             <div className="sm:col-span-3">
@@ -286,8 +284,71 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.email && <div className={`text-red-600`}>{errors.email}</div>}
                                 </p>
                             </div>
+
+                            {/* payment_methods */}
+                            {
+                                isSuper &&
+                                <div className="sm:col-span-2">
+                                    <label htmlFor="payment_methodss"
+                                           className="block text-sm font-medium text-gray-700">
+                                        {trans('payment_methods')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <select
+                                            onChange={handleChange}
+                                            id="payment_method"
+                                            name="payment_method"
+                                            defaultValue={data.payment_method}
+                                            autoComplete="payment_method"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                        >
+                                            {
+                                                paymentMethods.map(u => (
+                                                    <option key={u} value={u}
+                                                            selected={u === setting.payment_method}
+                                                    >{u}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                    <ToolTipWidget message={trans('product_user_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.theme && <div className={`text-red-600`}>{errors.theme}</div>}
+                                    </p>
+                                </div>
+                            }
+                            {/* theme */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="themes" className="block text-sm font-medium text-gray-700">
+                                    {trans('theme')}
+                                </label>
+                                <div className="mt-1">
+                                    <select
+                                        onChange={handleChange}
+                                        id="theme"
+                                        name="theme"
+                                        defaultValue={data.theme}
+                                        autoComplete="theme"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    >
+                                        {
+                                            themes.map(u => (
+                                                <option key={u} value={u}
+                                                >{u}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <ToolTipWidget message={trans('product_user_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.theme && <div className={`text-red-600`}>{errors.theme}</div>}
+                                </p>
+                            </div>
+                        </FormSection>
+
+                        <FormSection title={trans('more_details')}>
                             {/* image */}
-                             <div className="sm:col-span-3 has-tooltip mt-5">
+                            <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
                                        className={`block text-sm font-medium text-gray-700`}>
                                     {trans('main_image')}
@@ -301,11 +362,12 @@ export default function SettingEdit({setting, themes}) {
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
-                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={getThumb(setting.image)} alt=""/>
+                                    <img className={`h-24 w-20 bg-cover rounded-md`} src={getThumb(setting.image)}
+                                         alt=""/>
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('image_best_fit')}
+                                    {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
@@ -335,37 +397,10 @@ export default function SettingEdit({setting, themes}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_more_images_instruction')}/>
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('image_best_fit')}
+                                    {trans('rectangle_best_fit')}
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
-                                </p>
-                            </div>
-                            {/* theme */}
-                            <div className="sm:col-span-2">
-                                <label htmlFor="themes" className="block text-sm font-medium text-gray-700">
-                                    {trans('theme')}
-                                </label>
-                                <div className="mt-1">
-                                    <select
-                                        onChange={handleChange}
-                                        id="theme"
-                                        name="theme"
-                                        defaultValue={data.theme}
-                                        autoComplete="theme"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                    >
-                                        {
-                                            themes.map(u => (
-                                                <option key={u} value={u}
-                                                >{u}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </div>
-                                <ToolTipWidget message={trans('product_user_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.theme && <div className={`text-red-600`}>{errors.theme}</div>}
                                 </p>
                             </div>
                         </FormSection>
@@ -413,7 +448,8 @@ export default function SettingEdit({setting, themes}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.multi_cart_merchant && <div className={`text-red-600`}>{errors.multi_cart_merchant}</div>}
+                                        {errors.multi_cart_merchant &&
+                                        <div className={`text-red-600`}>{errors.multi_cart_merchant}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -558,52 +594,10 @@ export default function SettingEdit({setting, themes}) {
                                     {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
-                            {/* apple */}
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="apple"
-                                       className={`block text-sm font-medium text-gray-700`}>
-                                    {trans('apple')}
-                                </label>
-                                <div className="mt-1 ">
-                                    <input
-                                        onChange={handleChange}
-                                        type="text"
-                                        step="any"
-                                        name="apple"
-                                        defaultValue={setting.apple}
-                                        id="apple"
-                                        autoComplete="apple"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.apple && <div className={`text-red-600`}>{errors.apple}</div>}
-                                </p>
-                            </div>
-                            {/* android  */}
-                            <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="android"
-                                       className={`block text-sm font-medium text-gray-700`}>
-                                    {trans('android')}
-                                </label>
-                                <div className="mt-1 ">
-                                    <input
-                                        onChange={handleChange}
-                                        type="text"
-                                        step="any"
-                                        name="android"
-                                        defaultValue={setting.android}
-                                        id="android"
-                                        autoComplete="android"
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                    />
-                                </div>
-                                <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.android && <div className={`text-red-600`}>{errors.android}</div>}
-                                </p>
-                            </div>
+                        </FormSection>
+
+                        <FormSection title={trans('more_details')}>
+
                             {/* logintude */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="longitude"
@@ -671,6 +665,167 @@ export default function SettingEdit({setting, themes}) {
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
+                                </p>
+                            </div>
+
+                            {/* instagram */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="instagram" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('instagram')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="instagram"
+                                        defaultValue={setting.instagram}
+                                        id="instagram"
+                                        autoComplete="instagram"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.instagram && <div className={`text-red-600`}>{errors.instagram}</div>}
+                                </p>
+                            </div>
+
+                            {/* facebook */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="facebook" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('facebook')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="facebook"
+                                        defaultValue={setting.facebook}
+                                        id="facebook"
+                                        autoComplete="facebook"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.facebook && <div className={`text-red-600`}>{errors.facebook}</div>}
+                                </p>
+                            </div>
+
+                            {/* twitter */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="twitter" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('twitter')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="twitter"
+                                        defaultValue={setting.twitter}
+                                        id="twitter"
+                                        autoComplete="twitter"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.twitter && <div className={`text-red-600`}>{errors.twitter}</div>}
+                                </p>
+                            </div>
+
+                            {/* snapchat */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="snapchat" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('snapchat')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="snapchat"
+                                        defaultValue={setting.snapchat}
+                                        id="snapchat"
+                                        autoComplete="snapchat"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.snapchat && <div className={`text-red-600`}>{errors.snapchat}</div>}
+                                </p>
+                            </div>
+
+                            {/* youtube */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="youtube" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('youtube')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="youtube"
+                                        defaultValue={setting.youtube}
+                                        id="youtube"
+                                        autoComplete="youtube"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.youtube && <div className={`text-red-600`}>{errors.youtube}</div>}
+                                </p>
+                            </div>
+
+                            {/* android */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="android" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('android')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="android"
+                                        defaultValue={setting.android}
+                                        id="android"
+                                        autoComplete="android"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.android && <div className={`text-red-600`}>{errors.android}</div>}
+                                </p>
+                            </div>
+
+                            {/* apple */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="apple" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('apple')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="apple"
+                                        defaultValue={setting.apple}
+                                        id="apple"
+                                        autoComplete="apple"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.apple && <div className={`text-red-600`}>{errors.apple}</div>}
                                 </p>
                             </div>
                         </FormSection>

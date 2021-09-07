@@ -17,8 +17,8 @@ class RolesTableSeeder extends Seeder
     {
         $roles = ['super', 'admin', 'company', 'author', 'client','designer', 'celebrity', 'driver'];
         $designerPrivileges = ['collection', 'order'];
-        $companyPrivileges = ['product', 'slide', 'gallery', 'order', 'service', 'timing', 'video'];
-        $adminPrivileges = ['product', 'slide', 'gallery', 'order', 'coupon', 'service', 'timing', 'setting', 'coupon', 'area', 'survey', 'question', 'result', 'questionnaire', 'answer',
+        $companyPrivileges = ['product', 'slide', 'image', 'order', 'service', 'timing', 'video'];
+        $adminPrivileges = ['product', 'slide', 'image', 'order', 'coupon', 'service', 'timing', 'setting', 'coupon', 'area', 'survey', 'question', 'result', 'questionnaire', 'answer',
             'country', 'currency', 'user', 'category', 'commercial', 'page', 'size', 'color', 'faq', 'day', 'collection', 'shipment', 'tag', 'brand', 'aboutus', 'video', 'addon', 'item'];
         $privileges = Privilege::all();
         foreach ($roles as $k => $v) {

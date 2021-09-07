@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AreaCollection;
+use App\Http\Resources\GovernateCollection;
 use App\Models\Area;
+use App\Models\Governate;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -70,7 +72,8 @@ class AreaController extends Controller
     public function edit(Area $area)
     {
         $area->load('country');
-        return inertia('Backend/Area/AreaEdit', compact('area'));
+        $governates = new GovernateCollection(Governate::active()->with('country')->get());
+        return inertia('Backend/Area/AreaEdit', compact('area','governates'));
     }
 
     /**
@@ -82,7 +85,16 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        //
+        $request->validate([
+            'name_ar' => 'max:200',
+            'name_en' => 'max:200',
+            'governate_id' => 'required|exists:governates,id',
+            'order' => 'numeric|max:99'
+        ]);
+        if ($area->update($request->all())) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**

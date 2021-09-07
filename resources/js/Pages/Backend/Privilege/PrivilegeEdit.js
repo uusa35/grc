@@ -23,6 +23,8 @@ export default function({privilege, pivotElements}) {
         'description_ar': privilege.description_ar,
         'description_en': privilege.description_en,
         'main_menu': privilege.main_menu,
+        'on_top': privilege.on_top,
+        'hide_module': privilege.hide_module,
         'attributes' : pivotElements
     });
 
@@ -477,24 +479,24 @@ export default function({privilege, pivotElements}) {
                                 </div>
                             </fieldset>
 
-                            {/* main_menu */}
+                            {/* on_top  */}
                             <fieldset className="mt-1 col-span-1">
                                 <div>
                                     <legend
-                                        className={`text-base  text-gray-900`}>{trans('is_sub_module')}</legend>
+                                        className={`text-base  text-gray-900`}>{trans('on_top')}</legend>
                                 </div>
                                 <div className="mt-4 space-y-4">
                                     <div className="flex items-center">
                                         <input
                                             onChange={handleChange}
-                                            id="is_sub_module"
-                                            name="is_sub_module"
+                                            id="on_top"
+                                            name="on_top"
                                             type="radio"
                                             value={1}
-                                            defaultChecked={privilege.is_sub_module}
+                                            defaultChecked={privilege.on_top}
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
-                                        <label htmlFor="is_sub_module"
+                                        <label htmlFor="on_top"
                                                className="ml-3 block   text-gray-700">
                                             {trans('yes')}
                                         </label>
@@ -502,14 +504,14 @@ export default function({privilege, pivotElements}) {
                                     <div className="flex items-center">
                                         <input
                                             onChange={handleChange}
-                                            id="is_sub_module"
-                                            name="is_sub_module"
+                                            id="on_top"
+                                            name="on_top"
                                             type="radio"
                                             value={0}
-                                            defaultChecked={!privilege.is_sub_module}
+                                            defaultChecked={!privilege.on_top}
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
-                                        <label htmlFor="is_sub_module"
+                                        <label htmlFor="on_top"
                                                className="ml-3 block   text-gray-700">
                                             {trans('no')}
                                         </label>
@@ -518,7 +520,53 @@ export default function({privilege, pivotElements}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_sub_module && <div className={`text-red-600`}>{errors.is_sub_module}</div>}
+                                        {errors.on_top && <div className={`text-red-600`}>{errors.on_top}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+
+                            {/* hide_module  */}
+                            <fieldset className="mt-1 col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('hide_module')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="hide_module"
+                                            name="hide_module"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={privilege.hide_module}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="hide_module"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="hide_module"
+                                            name="hide_module"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!privilege.hide_module}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="hide_module"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
+                                </div>
+                                <ToolTipWidget/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.hide_module && <div className={`text-red-600`}>{errors.hide_module}</div>}
                                     </p>
                                 </div>
                             </fieldset>

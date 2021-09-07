@@ -81,7 +81,21 @@ class CountryController extends Controller
      */
     public function update(Request $request, Country $country)
     {
-        //
+        $request->validate([
+           'name_ar' => 'max:200',
+           'name_en' => 'max:200',
+           'calling_code' => 'numeric',
+           'country_code' => 'string|max:3',
+           'currency_symbol_ar' => 'string|max:5',
+           'currency_symbol_en' => 'string|max:5',
+           'fixed_shipment_charge' => 'numeric|max:99',
+           'order' => 'numeric|max:99'
+        ]);
+        if($country->update($request->except('image'))) {
+            $request->hasFile('image') ? $this->saveMimes($country, $request, ['image'], ['300', '300'], false) : null;
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**

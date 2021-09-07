@@ -1150,7 +1150,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         <Link
                                             href={route(`backend.element.clear`, {
                                                 id: product.id,
-                                                'model': parentModule,
+                                                'model': 'product',
                                                 colName: 'qr'
                                             })}
                                             type="button"

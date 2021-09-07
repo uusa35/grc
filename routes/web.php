@@ -148,6 +148,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('tag', TagController::class);
         Route::resource('category', CategoryController::class);
         Route::resource('video', VideoController::class);
+        Route::resource('image', ImageController::class);
         Route::resource('gallery', GalleryController::class); // images table
         Route::resource('post', PostController::class);
         Route::resource('newsletter', NewsletterController::class);

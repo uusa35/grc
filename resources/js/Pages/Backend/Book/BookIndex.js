@@ -271,7 +271,7 @@ export default function BookIndex({elements}) {
                                                                                                 type: 'destroy',
                                                                                                 model: 'book',
                                                                                                 id: element.id,
-                                                                                                title: `${trans('destroy')} ${trans('book')}`,
+                                                                                                title: `${trans('destroy')} ${trans('book')} ${element[getLocalized()]}`,
                                                                                                 message: `${trans('confirmation')} ${trans('destroy')} ${trans('book')}`,
                                                                                             }))
                                                                                         }

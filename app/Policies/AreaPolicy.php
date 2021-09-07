@@ -9,7 +9,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class AreaPolicy
 {
     use HandlesAuthorization;
-    const MODAL = 'country';
+    const MODAL = 'area';
 
 
     /**

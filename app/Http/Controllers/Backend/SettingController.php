@@ -72,7 +72,8 @@ class SettingController extends Controller
     {
         $setting = Setting::with('images')->first();
         $themes = explode(",", env('THEMES'));
-        return inertia('Backend/Setting/SettingEdit', compact('setting', 'themes'));
+        $paymentMethods = explode(",", env('PAYMENT_METHODS'));
+        return inertia('Backend/Setting/SettingEdit', compact('setting', 'themes', 'paymentMethods'));
     }
 
     /**

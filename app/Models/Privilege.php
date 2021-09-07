@@ -11,7 +11,8 @@ class Privilege extends PrimaryModel
     protected $guarded = [''];
     protected $casts = [
         'main_menu' => 'boolean',
-        'is_sub_module' => 'boolean',
+        'on_top' => 'boolean',
+        'hide_module' => 'boolean',
     ];
 
     public function roles()

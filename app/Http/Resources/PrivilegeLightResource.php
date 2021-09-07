@@ -20,7 +20,8 @@ class PrivilegeLightResource extends JsonResource
             'name_en' => $this->name_en,
             'index' => $this->pivot->index,
             'main_menu' => $this->main_menu,
-            'is_sub_module' => $this->is_sub_module,
+            'on_top' => $this->on_top,
+            'hide_module' => $this->hide_module,
             'image' => $this->image,
         ];
     }

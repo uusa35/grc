@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CountryCollection;
 use App\Http\Resources\GovernateCollection;
+use App\Models\Country;
 use App\Models\Governate;
 use Illuminate\Http\Request;
 
@@ -17,6 +19,7 @@ class GovernateController extends Controller
     {
         $this->authorizeResource(Governate::class);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +44,7 @@ class GovernateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,7 +55,7 @@ class GovernateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Governate  $governate
+     * @param \App\Models\Governate $governate
      * @return \Illuminate\Http\Response
      */
     public function show(Governate $governate)
@@ -63,31 +66,41 @@ class GovernateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Governate  $governate
+     * @param \App\Models\Governate $governate
      * @return \Illuminate\Http\Response
      */
     public function edit(Governate $governate)
     {
         $governate->load('country');
-        return inertia('Backend/Governate/GovernateEdit', compact('governate'));
+        $countries = new CountryCollection(Country::active()->get());
+        return inertia('Backend/Governate/GovernateEdit', compact('governate', 'countries'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Governate  $governate
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Governate $governate
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Governate $governate)
     {
-        //
+        $request->validate([
+            'name_ar' => 'max:200',
+            'name_en' => 'max:200',
+            'country_id' => 'required|exists:countries,id',
+            'order' => 'numeric|max:99'
+        ]);
+        if ($governate->update($request->all())) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Governate  $governate
+     * @param \App\Models\Governate $governate
      * @return \Illuminate\Http\Response
      */
     public function destroy(Governate $governate)

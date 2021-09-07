@@ -4,10 +4,13 @@ import {map} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
+import {showModal} from "../../redux/actions";
+import {useDispatch} from "react-redux";
 
 export default function({elements}) {
-    const {trans, handleDeleteItem, classNames, getLocalized} = useContext(AppContext);
+    const {trans, classNames, getLocalized} = useContext(AppContext);
     const {params} = route();
+    const dispatch = useDispatch();
 
     return (
         <BackendContainer elements={elements} showSearch={elements.total > 1}
@@ -83,7 +86,15 @@ export default function({elements}) {
                                                     </svg>
                                                 </Link>
                                                 <button
-                                                    onClick={() => handleDeleteItem('destroy', 'governate', element.id)}
+                                                    onClick={() =>
+                                                        dispatch(showModal({
+                                                            type: 'destroy',
+                                                            model: 'governate',
+                                                            id: element.id,
+                                                            title: `${trans('destroy')} ${trans('governate')} ${element[getLocalized()]}`,
+                                                            message: `${trans('confirmation')} ${trans('destroy')} ${trans('governate')}`,
+                                                        }))
+                                                    }
                                                     // href={route(`backend.governate.destroy`, a.id)}
                                                     className="text-indigo-600 hover:text-indigo-900 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"

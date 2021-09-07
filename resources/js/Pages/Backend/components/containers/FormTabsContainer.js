@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 const FormTabsContainer = ({children}) => {
     const {classNames, trans} = useContext(AppContext)
-    const { formTabs , currentFormTab} = useSelector(state => state);
+    const {formTabs, currentFormTab} = useSelector(state => state);
     const dispatch = useDispatch()
 
     return (
@@ -32,7 +32,7 @@ const FormTabsContainer = ({children}) => {
                     </select>
                 </div>
                 <div className="hidden sm:block">
-                    <div className="border-b border-gray-200">
+                    <div className="border-b border-gray-200 bg-white">
                         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
                             {formTabs.map((tab) => (
                                 <button
@@ -41,22 +41,15 @@ const FormTabsContainer = ({children}) => {
                                     onClick={() => dispatch(setCurrentFormTab(tab))}
                                     className={classNames(
                                         tab.id === currentFormTab.id
-                                            ? 'border-green-900 text-green-900 bg-white'
+                                            ? 'border-green-900 text-green-900 '
                                             : 'border-transparent  text-gray-500 hover:text-gray-700 hover:border-gray-200',
                                         'whitespace-nowrap flex p-4 rounded-t border-b-2 font-medium flex items-center justify-center '
                                     )}
                                     aria-current={tab.name ? 'page' : undefined}
                                 >
                                     {trans(tab.name)}
-                                    <span
-                                        className={classNames(
-                                            tab.name ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-900',
-                                            'hidden ml-3 py-0.5 px-2.5 rounded-full font-medium md:inline-block'
-                                        )}
-                                    >
-                                          </span>
                                     <div
-                                        className={classNames(currentFormTab.id === tab.id ? 'bg-green-600' : 'bg-gray-600', 'flex-shrink-0 w-2.5 h-2.5 rtl:ml-3 ltr:mr-3 rounded-full')}
+                                        className={classNames(currentFormTab.id === tab.id ? 'bg-green-900' : 'bg-gray-600', 'flex-shrink-0 w-2.5 h-2.5 mx-5 rounded-full')}
                                         aria-hidden="true"></div>
                                 </button>
                             ))}

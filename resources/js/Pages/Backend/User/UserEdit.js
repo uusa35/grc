@@ -13,6 +13,7 @@ import route from 'ziggy-js';
 import moment from 'moment';
 import {useDispatch, useSelector} from "react-redux";
 import {showToastMessage} from "../../redux/actions";
+import FormSection from "../components/widgets/form/FormSection";
 
 
 export default function ({user, roles, elementCategories, categories , countries, subscriptions  }) {
@@ -183,13 +184,7 @@ export default function ({user, roles, elementCategories, categories , countries
                     <input type="hidden" name="_method" value="put"/>
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
-                        <div className={`pt-4`}>
-                            <h3 className={` leading-6  text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
-                            <p className="mt-1  text-red-500">
-                                {trans('all_information_required')}
-                            </p>
-                        </div>
-                        <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
+                        <FormSection title={`${trans('edit')} ${trans(parentModule)}`}>
                             {/* name */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="name" className={`block   text-gray-700`}>
@@ -235,7 +230,7 @@ export default function ({user, roles, elementCategories, categories , countries
                                 </p>
                             </div>
                             {/*name en*/}
-                             <div className="sm:col-span-2">
+                            <div className="sm:col-span-2">
                                 <label htmlFor="name_en" className={`block   text-gray-700`}>
                                     {trans('name_en')}
                                 </label>
@@ -256,7 +251,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
-
                             {/* subscription_id */}
                             { isAdminOrAbove &&
                             <div className="sm:col-span-2">
@@ -287,7 +281,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                 </p>
                             </div>
                             }
-
                             {/* end_subscription_date */}
                             {
                                 isAdminOrAbove && <div className="sm:col-span-2 has-tooltip mb-5">
@@ -317,8 +310,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     </p>
                                 </div>
                             }
-
-
                             {/* role_id */}
                             <div className="sm:col-span-2">
                                 {isAdminOrAbove && <>
@@ -349,37 +340,34 @@ export default function ({user, roles, elementCategories, categories , countries
                                     </p>
                                 </>}
                             </div>
-
                             {/* country_id */}
                             <div className="sm:col-span-2">
-                                    <label htmlFor="country_id" className="block   text-gray-700">
-                                        {trans('country')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <select
-                                            onChange={handleChange}
-                                            id="country_id"
-                                            name="country_id"
-                                            value={data.country_id}
-                                            autoComplete="country_id"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        >
-                                            {
-                                                map(countries, u => (
-                                                    <option key={u.id} value={u.id}
-                                                            selected={u.id === user.country_id}
-                                                    >{u[getLocalized()]}</option>
-                                                ))
-                                            }
-                                        </select>
-                                    </div>
-                                    <ToolTipWidget message={trans('user_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
-                                    </p>
+                                <label htmlFor="country_id" className="block   text-gray-700">
+                                    {trans('country')}
+                                </label>
+                                <div className="mt-1">
+                                    <select
+                                        onChange={handleChange}
+                                        id="country_id"
+                                        name="country_id"
+                                        value={data.country_id}
+                                        autoComplete="country_id"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    >
+                                        {
+                                            map(countries, u => (
+                                                <option key={u.id} value={u.id}
+                                                        selected={u.id === user.country_id}
+                                                >{u[getLocalized()]}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <ToolTipWidget message={trans('user_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
+                                </p>
                             </div>
-
-
                             {/* area_id */}
                             {
                                 areas && <div className="sm:col-span-2">
@@ -409,7 +397,9 @@ export default function ({user, roles, elementCategories, categories , countries
                                     </p>
                                 </div>
                             }
+                        </FormSection>
 
+                        <FormSection>
                             {/* categories */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"
@@ -511,7 +501,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.categories && <div className={`text-red-900`}>{errors.categories}</div>}
                                 </p>
                             </div>
-
                             {/* image*/}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
@@ -592,129 +581,107 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.file && <div className={`text-red-900`}>{errors.file}</div>}
                                 </p>
                             </div>
+                        </FormSection>
 
-                        </div>
-
-
-                        <div className="space-y-4">
-
-                            <div className={`pt-4`}>
-                                <h3 className={` leading-6  text-gray-900`}>{trans('more_details')}</h3>
-                            </div>
-
-                            <div className="flex flex-1 flex-col justify-start items-center w-full">
-                                <div
-                                    className={`grid grid-cols-2 md:grid-cols-4 md:gap-x-5 w-full`}>
-                                    {/* active */}
-                                    <fieldset className="mt-1 col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base  text-gray-900`}>{trans('active')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="active"
-                                                    name="active"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={user.active}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="active"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="active"
-                                                    name="active"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!user.active}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="active"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget/>
-                                        <div>
-                                            <p className={`mt-2  text-gray-500`}>
-                                                {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
-                                    {/* on home*/}
-                                    <fieldset className="mt-1 col-span-1">
-                                        <div>
-                                            <legend
-                                                className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
-                                        </div>
-                                        <div className="mt-4 space-y-4">
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="on_home"
-                                                    name="on_home"
-                                                    type="radio"
-                                                    value={1}
-                                                    defaultChecked={user.on_home}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="push-everything"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('yes')}
-                                                </label>
-                                            </div>
-                                            <div className="flex items-center">
-                                                <input
-                                                    onChange={handleChange}
-                                                    id="on_home"
-                                                    name="on_home"
-                                                    type="radio"
-                                                    value={0}
-                                                    defaultChecked={!user.on_home}
-                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                                />
-                                                <label htmlFor="on_home"
-                                                       className="ml-3 block   text-gray-700">
-                                                    {trans('no')}
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <ToolTipWidget/>
-                                        <div>
-                                            <p className={`mt-2  text-gray-500`}>
-                                                {errors.on_home &&
-                                                <div className={`text-red-900`}>{errors.on_home}</div>}
-                                            </p>
-                                        </div>
-                                    </fieldset>
-
+                        <FormSection title={trans('more_details')}>
+                            {/* active */}
+                            <fieldset className="mt-1 col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('active')}</legend>
                                 </div>
-                                <div
-                                    className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-gray-100`}>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="active"
+                                            name="active"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={user.active}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="active"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="active"
+                                            name="active"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!user.active}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="active"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                                <ToolTipWidget/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* on home*/}
+                            <fieldset className="mt-1 col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_home"
+                                            name="on_home"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={user.on_home}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_home"
+                                            name="on_home"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!user.on_home}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="on_home"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
+                                </div>
+                                <ToolTipWidget/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.on_home &&
+                                        <div className={`text-red-900`}>{errors.on_home}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                        </FormSection>
                         <FormBtns type={'user'}/>
                     </div>
                     <div
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
-                        <div className={`pt-4`}>
-                            <h3 className={` leading-6  text-gray-900`}>{trans('edit')} {trans(parentModule)}</h3>
-                            <p className="mt-1  text-gray-500">
-                                {trans('edit')} {trans(parentModule)}
 
-                            </p>
-                        </div>
-                        <div className="pt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6">
+                        <FormSection>
                             {/* description */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
@@ -839,7 +806,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.policy_en && <div className={`text-red-900`}>{errors.policy_en}</div>}
                                 </p>
                             </div>
-
                             {/* caption_ar */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_ar"
@@ -886,8 +852,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
-
-
                             {/* keywords */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="keywords"
@@ -911,7 +875,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.keywords && <div className={`text-red-900`}>{errors.keywords}</div>}
                                 </p>
                             </div>
-
                             {/* order*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="order"
@@ -936,7 +899,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                                 </p>
                             </div>
-
                             {/* mobile*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="mobile"
@@ -959,7 +921,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
                                 </p>
                             </div>
-
                             {/* phone*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="phone"
@@ -982,7 +943,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.phone && <div className={`text-red-900`}>{errors.phone}</div>}
                                 </p>
                             </div>
-
                             {/* fax*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="fax"
@@ -1005,7 +965,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.fax && <div className={`text-red-900`}>{errors.fax}</div>}
                                 </p>
                             </div>
-
                             {/* whatsapp*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="whatsapp"
@@ -1028,7 +987,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.whatsapp && <div className={`text-red-900`}>{errors.whatsapp}</div>}
                                 </p>
                             </div>
-
                             {/* iphone*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="iphone"
@@ -1051,7 +1009,6 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.iphone && <div className={`text-red-900`}>{errors.iphone}</div>}
                                 </p>
                             </div>
-
                             {/* android*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="android"
@@ -1361,16 +1318,10 @@ export default function ({user, roles, elementCategories, categories , countries
                                     {errors.qr && <div className={`text-red-900`}>{errors.qr}</div>}
                                 </p>
                             </div>
-                        </div>
+                        </FormSection>
                         {/* more booleans */}
-                        <div className={`pt-4`}>
-                            <h3 className={` leading-6  text-gray-900`}>{trans('more_details')}</h3>
-                        </div>
 
-                        <div className="flex flex-1 flex-col justify-start items-center w-full">
-                            <div
-                                className={`grid grid-cols-2 md:grid-cols-4 sm:gap-x-5 sm:gap-y-5 w-full`}>
-
+                        <FormSection>
                                 {/* news_letter_on */}
                                 <fieldset className="mt-1 col-span-1 has-tooltip">
                                     <div>
@@ -1510,23 +1461,13 @@ export default function ({user, roles, elementCategories, categories , countries
                                         </p>
                                     </div>
                                 </fieldset>}
-
-                            </div>
-
-
-                            <div
-                                className={`flex flex-1 flex-row w-full justify-between py-4 border-t border-gray-100`}>
-
-                            </div>
-                        </div>
-
-
+                        </FormSection>
                         <FormBtns type={'user'}/>
                     </div>
                     <div
-                        className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col px-20 sm:px-10 space-y-4`)}>
+                        className={classNames(currentFormTab.id !== 2 ? 'hidden' : '', `flex flex-1 flex-col w-full space-y-3 bg-transparent`)}>
 
-                        <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start pt-10">
+                        <FormSection>
                             <div className="mt-1 sm:mt-0 sm:col-span-full">
                                 <div
                                     className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -1567,7 +1508,7 @@ export default function ({user, roles, elementCategories, categories , countries
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </FormSection>
                         <FormBtns type={'user'}/>
                         <ImagesList images={user.images} id={user.id} type={'user'}/>
                     </div>

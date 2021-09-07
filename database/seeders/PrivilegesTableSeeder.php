@@ -15,50 +15,227 @@ class PrivilegesTableSeeder extends Seeder
     public function run()
     {
         $privileges = [
-            'category' => false,
-            'product' => true,
-            'attribute' => false,
-            'subscription' => false,
-            'slide' => false,
-            'service' => true,
-            'timing' => false,
-            'role' => false,
-            'user' => true,
-            'setting' => false,
-            'currency' => false,
-            'video' => false,
-            'country' => false,
-            'gallery' => false,
-            'page' => false,
-            'tag' => false,
-            'brand' => false,
-            'branch' => false,
-            'area' => false,
-            'privilege' => false,
-            'order' => true,
-            'coupon' => false,
-            'size' => false,
-            'color' => false,
-            'faq' => false,
-            'commercial' => false,
-            'shipment' => false,
-            'notification' => false,
-            'device' => false,
-            'book' => true,
-            'address' => false,
-            'section' => false,
-            'post' => false,
-            'course' => true
+            [
+                'name' => 'category',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'product',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'attribute',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'subscription',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'slide',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'service',
+                "main_menu" => true,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'timing',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'role',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'user',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'setting',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'currency',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'video',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'country',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'image',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'page',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'tag',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'brand',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'branch',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'area',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'governate',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'privilege',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'order',
+                "main_menu" => true,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'coupon',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'size',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'color',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'faq',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'commercial',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'shipment',
+                "main_menu" => false,
+                "on_top" => true,
+                'hide_module' => true
+            ],
+//            [
+//                'name' => 'notification',
+//                "main_menu" => false,
+//                "on_top" => true,
+//                'hide_module' => false
+//            ],
+            [
+                'name' => 'device',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'book',
+                "main_menu" => true,
+                "on_top" => true,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'address',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => false
+            ],
+            [
+                'name' => 'section',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'post',
+                "main_menu" => false,
+                "on_top" => false,
+                'hide_module' => true
+            ],
+            [
+                'name' => 'course',
+                "main_menu" => true,
+                "on_top" => false,
+                'hide_module' => false
+            ]
         ];
-        foreach ($privileges as $k => $v) {
+        foreach ($privileges as $item) {
             Privilege::factory(1)->create([
-                'name' => $k,
-                'name_en' => $k,
-                'name_ar' => $k,
-                'main_menu' => $v,
-                'is_sub_module' => !$v,
-                'description_ar' => $k,
-                'description_en' => $k,
+                'name' => $item['name'],
+                'name_en' => $item['name'],
+                'name_ar' => $item['name'],
+                'main_menu' => $item['main_menu'],
+                'hide_module' => $item['hide_module'],
+                'on_top' => $item['on_top'],
+                'description_ar' => $item['name'],
+                'description_en' => $item['name'],
             ]);
         }
     }

@@ -123,7 +123,8 @@ const AppContextProvider = ({children}) => {
                     name: p.name_en,
                     index: p.index,
                     main_menu: p.main_menu,
-                    is_sub_module: p.is_sub_module,
+                    on_top: p.on_top,
+                    hide_module: p.hide_module,
                     image: p.image
                 }
             });

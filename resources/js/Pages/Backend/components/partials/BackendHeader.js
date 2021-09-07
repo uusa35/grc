@@ -64,7 +64,7 @@ const BackendHeader = () => {
                                                 map(modules, m => (
                                                     <Fragment key={m.name}>
                                                         {
-                                                            m.index && (!m.is_sub_module || isSuper) && <div className="py-1 col-span-1">
+                                                            m.index && m.on_top && <div className="py-1 col-span-1">
                                                                 <Menu.Item>
                                                                     {({active}) => (
                                                                         <Link
@@ -120,7 +120,7 @@ const BackendHeader = () => {
                                                     map(modules, m => (
                                                         <Fragment key={m.name}>
                                                             {
-                                                                m.index && !m.is_sub_module && <div className="py-1 col-span-1">
+                                                                m.index && m.on_top && !m.hide_module && <div className="py-1 col-span-1">
                                                                     <Menu.Item>
                                                                         {({active}) => (
                                                                             <Link
@@ -180,7 +180,7 @@ const BackendHeader = () => {
                                             map(modules, m => (
                                                 <Fragment key={m.name}>
                                                     {
-                                                        m.index && !m.is_sub_module && <div className="py-1 col-span-1">
+                                                        m.index && m.on_top && !m.hide_module && route().has(`backend.${m.name}.create`) &&  <div className="py-1 col-span-1">
                                                             <Menu.Item>
                                                                 {({active}) => (
                                                                     <Link

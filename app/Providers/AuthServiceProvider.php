@@ -9,6 +9,7 @@ use App\Models\Color;
 use App\Models\Coupon;
 use App\Models\Currency;
 use App\Models\Faq;
+use App\Models\Governate;
 use App\Models\Page;
 use App\Models\Privilege;
 use App\Models\Product;
@@ -85,6 +86,7 @@ class AuthServiceProvider extends ServiceProvider
         Country::class => CountryPolicy::class,
         Currency::class => CurrencyPolicy::class,
         Area::class => AreaPolicy::class,
+        Governate::class => GovernatePolicy::class,
         Slide::class => SlidePolicy::class,
         Video::class => VideoPolicy::class,
         Page::class => PagePolicy::class,
