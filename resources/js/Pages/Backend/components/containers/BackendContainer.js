@@ -1,16 +1,16 @@
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import SideBar from "../partials/SideBar";
 import BackendHeader from "../partials/BackendHeader";
 import Footer from "../partials/Footer";
 import BreadCrumbs from "../partials/BreadCrumbs";
-import {isEmpty, split} from 'lodash';
+import {isEmpty} from 'lodash';
 import Pagination from "../partials/Pagination";
 import NoElements from "../widgets/NoElements";
 import PropTypes from 'prop-types';
 import TableMobileView from "../widgets/TableMobileview";
 import {AppContext} from "../../../context/AppContext";
 import LoadingView from "../widgets/LoadingView";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import SystemMessage from "../partials/SystemMessage";
 
 const BackendContainer = ({
@@ -25,6 +25,7 @@ const BackendContainer = ({
     const {locale, isLoading} = useSelector(state => state);
 
     return (
+
         <div className={classNames(locale.isRTL ? arFont : enFont, "h-full flex overflow-hidden text-sm md:text-lg capitalize")}
              dir={locale.dir}>
             {/*<Head title={`${cXapitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>*/}
@@ -68,8 +69,8 @@ const BackendContainer = ({
                 </div>
                 <Footer/>
             </main>
-
         </div>
+
     );
 }
 

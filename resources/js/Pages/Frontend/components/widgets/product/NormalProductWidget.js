@@ -5,10 +5,15 @@ import { AppContext } from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
 import {truncate} from "lodash";
+import { motion } from "framer-motion"
 
 export default function NormalProductWidget ({ element }) {
     const { getLocalized, getThumb  } = useContext(AppContext);
     return (
+        <motion.div
+            initial={false}
+            whileHover={{ scale: 0.95 }}
+        >
         <div className="block relative overflow-hidden shadow-md mb-5 rounded-b-md hover:opacity-95 hover:shadow-lg">
             <div className="w-full rounded-t-md overflow-hidden  sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                 <Link
@@ -35,5 +40,6 @@ export default function NormalProductWidget ({ element }) {
             </div>
             <ElementPrice price={element.price} salePrice={element.sale_price} isOnSale={element.isOnSale}/>
         </div>
+        </motion.div>
     );
 }

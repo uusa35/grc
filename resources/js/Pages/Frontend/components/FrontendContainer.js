@@ -15,6 +15,7 @@ import FrontendBreadCrumbs from "./FrontendBreadCrumbs";
 import {useSelector} from "react-redux";
 import { InertiaHead } from '@inertiajs/inertia-react'
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import { motion } from "framer-motion"
 
 const FrontendContainer = ({
                                children, elements = [],
@@ -41,6 +42,7 @@ const FrontendContainer = ({
                         {showBreadCrumbs && <FrontendBreadCrumbs childName={childName}/>}
                         {children}
                     </div>
+
                 </div>
                 <Footer/>
             </main>

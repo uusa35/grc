@@ -1,22 +1,31 @@
-import {useContext} from "react";
+import {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../../../context/AppContext";
-import { isEmpty } from 'lodash';
+import {isEmpty, map} from 'lodash';
 import {useDispatch, useSelector} from "react-redux";
 import {showModal} from "../../../../redux/actions";
+import Gallery from "react-grid-gallery";
 
 export default function ImagesList({images}) {
-    const { trans, getThumb } = useContext(AppContext);
+    const { trans, getThumb, getLarge } = useContext(AppContext);
     const dispatch = useDispatch()
+    const [currentImages, setCurrentImages] = useState([]);
+    useMemo(() => {
+        const prepareImages = []
+        map(images, img => {
+            prepareImages.push({thumbnail: getThumb(img.image), src: getLarge(img.image)})
+        })
+        setCurrentImages(prepareImages);
+    }, [images])
 
     return (
         <>
-
+            {!isEmpty(images) && <Gallery images={currentImages}/>}
             { !isEmpty(images) && images ? <ul role="list"
-                 className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-                {images.map((img) => (
+                 className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-6 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
+                {map(images, img => (
                     <li key={img.id} className="relative">
                         <div
-                            className="group block w-full aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
+                            className="group block w-auto aspect-w-10 aspect-h-7 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden">
                             <img src={getThumb(img.image)} alt=""
                                  className="object-cover pointer-events-none group-hover:opacity-75"/>
                             <button

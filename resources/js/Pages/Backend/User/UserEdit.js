@@ -114,13 +114,10 @@ export default function ({user, roles, elementCategories, categories , countries
 
     useMemo(() => {
         // setAreas()
-        const selectedCountry =  first(filter(countries , c => c.id == data.country_id));
+        const selectedCountry =  data.country_id ? first(filter(countries , c => c.id == data.country_id)) : first(countries);
         setAreas(selectedCountry.areas)
         setData('area_id', first(areas).id)
     },[data.country_id])
-
-    console.log('data', data.area_id);
-
 
     const handleChange = (e) => {
         setData(values => ({

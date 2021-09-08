@@ -90,7 +90,7 @@ export default function({order}) {
                                 key={m.id}
                                 className="grid grid-cols-1 text-sm sm:grid-rows-1 sm:grid-cols-12 sm:gap-x-2 md:gap-x-4 lg:gap-x-4"
                             >
-                                <div className="sm:col-span-2 md:col-span-2 md:row-end-2 md:row-span-2">
+                                <div className="sm:col-span-1 md:col-span-1 md:row-end-2 md:row-span-2">
                                     <div
                                         className="aspect-w-1 aspect-h-1 print:hidden bg-gray-50 rounded-md overflow-hidden">
                                         <img src={getThumb(m.ordermetable.image)} alt={m.ordermetable[getLocalized()]}
@@ -104,10 +104,11 @@ export default function({order}) {
                                     </h3>
                                     <div className="flex flex-1 flex-row justify-between items-center">
                                         <p className="font-medium text-gray-900 mt-3">{trans('price')} {m.ordermetable.price}</p>
+                                        <p className="font-medium text-gray-900 mt-3">{trans('type')} :  {trans(getTypeFromModel(m.ordermetable_type))}</p>
                                         {m.color && <p className="text-gray-500 mt-3">{trans('color')} {m.color}</p>}
                                         {m.size && <p className="text-gray-500 mt-3">{trans('size')} {m.size}</p>}
                                         {m.booked_at &&
-                                        <p className="text-gray-500 mt-3">{trans('booking_time')} {m.booked_at}</p>}
+                                        <p className="text-gray-500 mt-3">{trans('date')} {m.booked_at}</p>}
                                         {m.time && <p className="text-gray-500 mt-3">{trans('timing')} {m.time}</p>}
                                     </div>
                                     {m.notes && <p className="text-gray-500 mt-3">{trans('notes')} {m.notes}</p>}
@@ -118,7 +119,7 @@ export default function({order}) {
                 </div>
 
                 {/* Billing */}
-                <div className="mt-2">
+                <div className="mt-5">
                     <h2 className="sr-only">Billing Summary</h2>
 
                     <div className="bg-gray-50 rounded-lg py-6 px-6 lg:px-0 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">

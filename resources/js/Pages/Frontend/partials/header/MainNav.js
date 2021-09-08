@@ -8,7 +8,7 @@ import {
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
-import {map, capitalize} from 'lodash';
+import {map, capitalize, take, filter} from 'lodash';
 import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
@@ -17,125 +17,10 @@ import {ChevronDownIcon} from "@heroicons/react/solid";
 import {useDispatch, useSelector} from "react-redux";
 import {changeLang, setCurrency, setParentModule} from "../../../redux/actions";
 import GlobalContext from "../../../context/GlobalContext";
+import {motion} from "framer-motion"
+import CartIndex from "../../Cart/CartIndex";
+import CartIndexOrderSummary from "../../Cart/CartIndexOrderSummary";
 
-const navigation = {
-    categories: [
-        {
-            id: 'women',
-            name: 'Women',
-            featured: [
-                {
-                    name: 'New Arrivals',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-                    imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-                },
-                {
-                    name: 'Basic Tees',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
-                    imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-                },
-            ],
-            sections: [
-                {
-                    id: 'clothing',
-                    name: 'Clothing',
-                    items: [
-                        {name: 'Tops', href: '#'},
-                        {name: 'Dresses', href: '#'},
-                        {name: 'Pants', href: '#'},
-                        {name: 'Denim', href: '#'},
-                        {name: 'Sweaters', href: '#'},
-                        {name: 'T-Shirts', href: '#'},
-                        {name: 'Jackets', href: '#'},
-                        {name: 'Activewear', href: '#'},
-                        {name: 'Browse All', href: '#'},
-                    ],
-                },
-                {
-                    id: 'accessories',
-                    name: 'Accessories',
-                    items: [
-                        {name: 'Watches', href: '#'},
-                        {name: 'Wallets', href: '#'},
-                        {name: 'Bags', href: '#'},
-                        {name: 'Sunglasses', href: '#'},
-                        {name: 'Hats', href: '#'},
-                        {name: 'Belts', href: '#'},
-                    ],
-                },
-                {
-                    id: 'brands',
-                    name: 'Brands',
-                    items: [
-                        {name: 'Full Nelson', href: '#'},
-                        {name: 'My Way', href: '#'},
-                        {name: 'Re-Arranged', href: '#'},
-                        {name: 'Counterfeit', href: '#'},
-                        {name: 'Significant Other', href: '#'},
-                    ],
-                },
-            ],
-        },
-        {
-            id: 'men',
-            name: 'Men',
-            featured: [
-                {
-                    name: 'New Arrivals',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
-                    imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
-                },
-                {
-                    name: 'Artwork Tees',
-                    href: '#',
-                    imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
-                    imageAlt:
-                        'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
-                },
-            ],
-            sections: [
-                {
-                    id: 'clothing',
-                    name: 'Clothing',
-                    items: [
-                        {name: 'Tops', href: '#'},
-                        {name: 'Pants', href: '#'},
-                        {name: 'Sweaters', href: '#'},
-                        {name: 'T-Shirts', href: '#'},
-                        {name: 'Jackets', href: '#'},
-                        {name: 'Activewear', href: '#'},
-                        {name: 'Browse All', href: '#'},
-                    ],
-                },
-                {
-                    id: 'accessories',
-                    name: 'Accessories',
-                    items: [
-                        {name: 'Watches', href: '#'},
-                        {name: 'Wallets', href: '#'},
-                        {name: 'Bags', href: '#'},
-                        {name: 'Sunglasses', href: '#'},
-                        {name: 'Hats', href: '#'},
-                        {name: 'Belts', href: '#'},
-                    ],
-                },
-                {
-                    id: 'brands',
-                    name: 'Brands',
-                    items: [
-                        {name: 'Re-Arranged', href: '#'},
-                        {name: 'Counterfeit', href: '#'},
-                        {name: 'Full Nelson', href: '#'},
-                        {name: 'My Way', href: '#'},
-                    ],
-                },
-            ],
-        },
-    ],
-}
 
 const pages = [
     {name: 'home', url: route('frontend.home')},
@@ -154,8 +39,9 @@ export default function MainNav() {
         baseUrl,
         isAdminOrAbove,
         guest,
+        arFont, enFont
     } = useContext(AppContext);
-    const {auth, settings, currencies } = useContext(GlobalContext);
+    const {auth, settings, currencies, categories} = useContext(GlobalContext);
     const {locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
@@ -194,12 +80,20 @@ export default function MainNav() {
                 </div>
                 <div className="flex flex-row justify-center items-center gap-x-5  divide-x divide-gray-400">
                     <Link
-                        href={route('frontend.subscriptions')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
+                        href={route('frontend.subscriptions')}
+                        className="-m-2 p-2 block text-gray-50 invisible sm:visible">
                         {capitalize(trans('subscriptions'))}
                     </Link>
                     <Link
                         href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
                         {capitalize(trans('contactus'))}
+                    </Link>
+                    <Link
+                        title={capitalize(trans(locale.otherLang))}
+                        onClick={() => dispatch(changeLang(locale.otherLang))}
+                        href={route('frontend.change.lang', {lang: locale.otherLang})}
+                        className="-m-2 p-2 block text-gray-50">
+                        {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
                         guest ? <>
@@ -213,13 +107,6 @@ export default function MainNav() {
                             </a>
                         </> : null
                     }
-                    <Link
-                        title={capitalize(trans(locale.otherLang))}
-                        onClick={() => dispatch(changeLang(locale.otherLang))}
-                        href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className="-m-2 p-2 block text-gray-50">
-                        {capitalize(trans(locale.otherLang))}
-                    </Link>
                 </div>
             </div>
             {/* Mobile menu */}
@@ -246,7 +133,9 @@ export default function MainNav() {
                         leaveFrom="translate-x-0"
                         leaveTo="-translate-x-full"
                     >
-                        <div className={"relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto"}>
+                        <div
+                            className={classNames(locale.isRTL ? arFont : enFont, "relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto")}
+                            dir={locale.dir}>
                             <div className="px-4 pt-5 pb-2 flex">
                                 <button
                                     type="button"
@@ -308,67 +197,85 @@ export default function MainNav() {
                             <Tab.Group as="div" className="mt-2">
                                 <div className="border-b border-gray-200">
                                     <Tab.List className="-mb-px flex px-4 space-x-8">
-                                        {navigation.categories.map((category) => (
-                                            <Tab
-                                                key={category.name}
-                                                className={({selected}) =>
-                                                    classNames(
-                                                        selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 capitalize border-transparent',
-                                                        'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
-                                                    )
-                                                }
-                                            >
-                                                {category.name}
-                                            </Tab>
-                                        ))}
+                                        <Tab
+                                            className={({selected}) =>
+                                                classNames(
+                                                    selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 capitalize border-transparent',
+                                                    'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
+                                                )
+                                            }
+                                        >
+                                            {trans("categories")}
+                                        </Tab>
+                                        <Tab
+                                            className={({selected}) =>
+                                                classNames(
+                                                    selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 capitalize border-transparent',
+                                                    'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
+                                                )
+                                            }
+                                        >
+                                            {trans('shopping_cart')}
+                                        </Tab>
                                     </Tab.List>
                                 </div>
                                 <Tab.Panels as={Fragment}>
-                                    {navigation.categories.map((category) => (
-                                        <Tab.Panel key={category.name} className="pt-10 pb-8 px-4 space-y-10">
-                                            <div className="grid grid-cols-2 gap-x-4">
-                                                {category.featured.map((item) => (
-                                                    <div key={item.name} className="group relative ">
-                                                        <div
-                                                            className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                                            <img src={item.imageSrc} alt={item.imageAlt}
-                                                                 className="object-center object-cover"/>
-                                                        </div>
-                                                        <a href={item.href}
-                                                           className="mt-6 block text-gray-900 capitalize">
-                                                            <span className="absolute z-10 inset-0" aria-hidden="true"/>
-                                                            {item.name}
-                                                        </a>
-                                                        <p aria-hidden="true" className="mt-1">
-                                                            Shop now
-                                                        </p>
+
+                                    <Tab.Panel
+                                        className="pt-10 pb-8 px-4 space-y-10 capitalize">
+                                        {map(filter(categories, c => c.is_book), parent => (
+                                            <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
+                                                <div key={parent[getLocalized()]} className="group relative ">
+                                                    <div
+                                                        className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
+                                                        <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
+                                                             className="object-center object-cover"/>
+                                                    </div>
+                                                    <Link href={route('frontend.book.index', {category_id: parent.id})}
+                                                          className="mt-6 block text-gray-900 capitalize">
+                                                        <span className="absolute z-10 inset-0" aria-hidden="true"/>
+                                                        {parent[getLocalized()]}
+                                                    </Link>
+                                                    <p aria-hidden="true" className="mt-1 capitalize truncate">
+                                                        {parent[getLocalized('caption')]}
+                                                    </p>
+                                                </div>
+                                                {map(filter(parent.children, c => c.is_book), sub => (
+                                                    <div key={sub[getLocalized()]} className="gap-y-5 space-y-2 my-3">
+                                                        <Link
+                                                            href={route('frontend.book.index', {category_id: sub.id})}
+                                                            className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-5 text-gray-500">
+                                                            <img src={getThumb(sub.image)} alt=""
+                                                                 className="h-10 w-10 rounded-sm mx-2"/>
+                                                            {sub[getLocalized()]}
+                                                        </Link>
+                                                        <ul
+                                                            role="list"
+                                                            aria-labelledby={`${parent.id}-${sub.id}-heading-mobile`}
+                                                            className="flex flex-col"
+                                                        >
+                                                            {map(filter(sub.children, c => c.is_book), child =>
+                                                                <li key={child[getLocalized()]} className="flow-root">
+                                                                    <Link
+                                                                        href={route('frontend.book.index', {category_id: child.id})}
+                                                                        className="-m-2 p-2 flex flex-1 flex-row items-center justify-start text-gray-500 rtl:mr-10 ltr:ml-10">
+                                                                        <img src={getThumb(child.image)} alt=""
+                                                                             className="h-10 w-10 rounded-sm mx-3"/>
+                                                                        {child[getLocalized()]}
+                                                                    </Link>
+                                                                </li>
+                                                            )}
+                                                        </ul>
                                                     </div>
                                                 ))}
                                             </div>
-                                            {category.sections.map((section) => (
-                                                <div key={section.name}>
-                                                    <p id={`${category.id}-${section.id}-heading-mobile`}
-                                                       className="text-gray-900 capitalize">
-                                                        {section.name}
-                                                    </p>
-                                                    <ul
-                                                        role="list"
-                                                        aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                                                        className="mt-6 flex flex-col space-y-6"
-                                                    >
-                                                        {section.items.map((item) => (
-                                                            <li key={item.name} className="flow-root">
-                                                                <a href={item.href}
-                                                                   className="-m-2 p-2 block text-gray-500">
-                                                                    {item.name}
-                                                                </a>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            ))}
-                                        </Tab.Panel>
-                                    ))}
+
+                                        ))}
+                                    </Tab.Panel>
+                                    <Tab.Panel
+                                        className="pt-10 pb-8 px-4 space-y-10 capitalize">
+                                        <CartIndexOrderSummary />
+                                    </Tab.Panel>
                                 </Tab.Panels>
                             </Tab.Group>
 
@@ -390,16 +297,20 @@ export default function MainNav() {
                         </button>
 
                         {/* Logo */}
-                        <div className="flex lg:ml-0 rtl:ml-5 ltr:mr-5">
-                            <Link href={route('frontend.home')}>
-                                {/*<span className="sr-only">{settings[getLocalized()]}</span>*/}
-                                <img
-                                    className="w-16 h-auto"
-                                    src={getThumb(settings.image)}
-                                    alt={settings[getLocalized()]}
-                                />
-                            </Link>
-                        </div>
+                        <motion.div
+                            whileHover={{scale: 0.9}}
+                        >
+                            <div className="flex lg:ml-0 rtl:ml-5 ltr:mr-5">
+                                <Link href={route('frontend.home')}>
+                                    {/*<span className="sr-only">{settings[getLocalized()]}</span>*/}
+                                    <img
+                                        className="w-16 h-auto"
+                                        src={getThumb(settings.image)}
+                                        alt={settings[getLocalized()]}
+                                    />
+                                </Link>
+                            </div>
+                        </motion.div>
 
                         {/* Categories with sub */}
                         <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
@@ -418,7 +329,7 @@ export default function MainNav() {
                                 >
                                     {capitalize(trans('books'))}
                                 </Link>
-                                <MainNavBookCategoriesList/>
+                                <MainNavBookCategoriesList categories={categories}/>
                                 <Link
                                     href={route('frontend.user.index')}
                                     onClick={() => dispatch(setParentModule('book'))}
@@ -484,9 +395,13 @@ export default function MainNav() {
                                                                 href={route('frontend.subscriptions')}
                                                                 className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
                                                             >
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" viewBox="0 0 20 20" fill="currentColor">
-                                                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                                                                    <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 text-gray-800"
+                                                                     viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                                                                    <path fillRule="evenodd"
+                                                                          d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                                                          clipRule="evenodd"/>
                                                                 </svg>
                                                                 <div className="ltr:ml-5 rtl:mr-5">
                                                                     <p className="text-base font-medium text-gray-900 capitalize">{trans('subscriptions')}</p>

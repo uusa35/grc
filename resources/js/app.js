@@ -20,11 +20,12 @@ createInertiaApp({
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>} persistor={persistor}>
                         <AppContextProvider>
-                            <App {...props} />
+                                <App {...props} />
                         </AppContextProvider>
                     </PersistGate>
                 </Provider>
             </GlobalContext.Provider>
+
             , el)
     },
     title: title => `${title} - E-Commerce`,

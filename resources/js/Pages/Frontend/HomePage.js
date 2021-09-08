@@ -5,6 +5,7 @@ import ElementSlider from "./components/widgets/slider/ElementSlider";
 import {isMobile, isTablet} from 'react-device-detect';
 import NewsLetter from "./partials/NewsLetter";
 import MetaElement from "../Backend/components/partials/MetaElement";
+import { motion } from "framer-motion";
 
 export default function HomePage({settings, slides, homeBookCategories, newOnHomeBooks, newOnHomeCourses, onHomeParticipantAuthors }) {
     const[slideNumber, setSlideNumber] = useState(6)

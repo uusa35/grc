@@ -3,10 +3,15 @@ import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import {truncate} from "lodash";
+import { motion } from "framer-motion"
 
 export default function NormalUserWidget ({ element }) {
     const { getLocalized, getThumb  } = useContext(AppContext);
     return (
+        <motion.div
+            initial={false}
+            whileHover={{ scale: 0.95 }}
+        >
         <Link href={route('frontend.user.show', element.id)}
               className="block relative rounded overflow-hidden z-0 hover:opacity-95">
             <div className="w-full h-70 flex items-center justify-center sm:aspect-w-1 sm:aspect-h-1">
@@ -20,5 +25,6 @@ export default function NormalUserWidget ({ element }) {
                 {truncate(element[getLocalized()], { length : 25 })}
             </h3>
         </Link>
+        </motion.div>
     );
 }

@@ -3,11 +3,22 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CouponCollection;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Coupon::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +26,8 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $elements = new CouponCollection(Coupon::paginate(Self::TAKE_LESS));
+        return inertia('Backend/Coupon/CouponIndex', compact('elements'));
     }
 
     /**
@@ -25,13 +37,13 @@ class CouponController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Backend/Coupon/CouponCreate');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +54,7 @@ class CouponController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Coupon  $coupon
+     * @param \App\Models\Coupon $coupon
      * @return \Illuminate\Http\Response
      */
     public function show(Coupon $coupon)
@@ -53,30 +65,45 @@ class CouponController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Coupon  $coupon
+     * @param \App\Models\Coupon $coupon
      * @return \Illuminate\Http\Response
      */
     public function edit(Coupon $coupon)
     {
-        //
+        return inertia('Backend/Coupon/CouponEdit', compact('country'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Coupon  $coupon
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Coupon $coupon
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Coupon $coupon)
     {
-        //
+        $request->validate([
+            'value' => 'numeric|max:99',
+            "is_percentage" => 'numeric|max:50',
+            "active" => 'boolean',
+            "consumed" => 'boolean',
+            "code" => 'max:10',
+            "minimum_charge" => 'integer|max:99',
+            "is_permanent" => 'boolean',
+            "user_id" => 'integer|exists:users,id',
+            "due_date" => 'date',
+
+        ]);
+        if ($coupon->update($request->all())) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Coupon  $coupon
+     * @param \App\Models\Coupon $coupon
      * @return \Illuminate\Http\Response
      */
     public function destroy(Coupon $coupon)

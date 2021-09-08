@@ -6,9 +6,12 @@ import {ChevronDownIcon} from "@heroicons/react/solid";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {AppContext} from "../../context/AppContext";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categories , mobileFiltersOpen, type }) {
-    const { trans, getLocalized , classNames, isRTL   } = useContext(AppContext)
+    const { trans, getLocalized , classNames  , arFont , enFont } = useContext(AppContext)
+    const { locale } = useSelector(state => state);
+    const dispatch = useDispatch();
     const { params } = route();
     return (
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -35,7 +38,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                     leaveTo="translate-x-full"
                 >
                     <div
-                        className="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto">
+                        className={classNames(locale.isRTL ? arFont : enFont,"ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto capitalize truncate")}>
                         <div className="px-4 flex items-center justify-between">
                             <h2 className="text-lg font-medium text-gray-900">{trans('advanced_search')}</h2>
                             <button
@@ -49,7 +52,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                         </div>
 
                         {/* Filters */}
-                        <form className="mt-4">
+                        <form className="mt-4 capitalize">
                             {map(categories, c =>
                                 <Disclosure as="div"
                                             key={c.id}
@@ -60,7 +63,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                                 <Disclosure.Button
                                                     className="w-full p-2 flex flex-1 items-center justify-between text-gray-400 hover:text-gray-500">
                                                     <div
-                                                        className="text-right text-gray-900">{c[getLocalized()]}</div>
+                                                        className="text-right text-gray-900 capitalize">{c[getLocalized()]}</div>
                                                     <div className="h-7">
                                                         <ChevronDownIcon
                                                             className={classNames(open ? '-rotate-180' : 'rotate-0', 'h-5 w-5 transform')}
@@ -70,9 +73,9 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                                 </Disclosure.Button>
                                             </legend>
                                             <Disclosure.Panel className="pt-4 pb-2 px-4 w-full">
-                                                <div className="space-y-6 w-full divide-y divide-gray-100 flex flex-1 flex-col justify-start items-end">
+                                                <div className="space-y-6 w-full divide-y divide-gray-100 flex flex-1 flex-col justify-start items-end capitalize" dir={locale.dir}>
                                                     <Link
-                                                        className={classNames(locale.isRTL ? 'justify-end' :  'justify-start', 'flex flex-1 flex-row  items-center w-full')}
+                                                        className={classNames(locale.isRTL ? 'justify-end' :  'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
                                                         href={route(`frontend.${type}.index`, { category_id : c.id})}
                                                     >
                                                         {c[getLocalized()]}
@@ -80,7 +83,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                                     {
                                                         map(c.children, child => (
                                                             <Link
-                                                                className={classNames(locale.isRTL ? 'justify-end' : 'justify-start', 'flex flex-1 flex-row  items-center w-full')}
+                                                                className={classNames(locale.isRTL ? 'justify-end' : 'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
                                                                 key={child.id}
                                                                 href={route(`frontend.${type}.index`, { category_id : child.id})}
                                                             >

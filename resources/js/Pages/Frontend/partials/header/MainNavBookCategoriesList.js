@@ -7,9 +7,9 @@ import {AppContext} from "../../../context/AppContext";
 import GlobalContext from "../../../context/GlobalContext";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 
-export default function MainNavBookCategoriesList() {
+export default function MainNavBookCategoriesList({ categories }) {
     const { classNames , trans , getThumb , getLocalized } = useContext(AppContext)
-    const { categories } = useContext(GlobalContext);
+
     return (
         <Popover className="flex">
             {({open}) => (

@@ -2,11 +2,16 @@ import React, {useContext} from 'react';
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../../context/AppContext";
 import route from 'ziggy-js';
+import { motion } from "framer-motion"
 
 const CategoryWidget = ({element, type = 'book'}) => {
     const {getLocalized, getMedium} = useContext(AppContext)
 
     return (
+        <motion.div
+            initial={false}
+            whileHover={{ scale: 0.9 }}
+        >
         <div className="block relative overflow-hidden hover:opacity-90">
             <div className="w-full h-auto bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden">
                 <img
@@ -29,6 +34,7 @@ const CategoryWidget = ({element, type = 'book'}) => {
                 </div>
             </div>
         </div>
+        </motion.div>
     );
 };
 
