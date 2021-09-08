@@ -13,7 +13,7 @@ export default function({  title = '', description = '', image = ''}) {
 
     return (
         <InertiaHead>
-            <title>{title ? title : `${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}</title>
+            <title>{title ? capitalize(title) : `${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}</title>
             <meta head-key="description" name="description"
                   content={description ? description : settings[getLocalized('description')]}/>
             <meta head-key="title" name="title" content={title ? title : settings[getLocalized()]}/>

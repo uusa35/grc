@@ -23,7 +23,6 @@ export default function HomePage({settings, slides, homeBookCategories, newOnHom
     return (
         <FrontendContainer mainSlides={slides} showBreadCrumbs={false}>
             <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:max-w-max lg:px-8">
-                <MetaElement settings={settings} />
                 <ElementSlider
                     showNavigation={false}
                     elements={homeBookCategories}

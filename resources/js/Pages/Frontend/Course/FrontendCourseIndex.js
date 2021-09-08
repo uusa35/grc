@@ -10,6 +10,7 @@ import SearchIndexSideBarMobile from "../partials/SearchIndexSideBarMobile";
 import NormalCourseWidget from "../components/widgets/course/NormalCourseWidget";
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
+import MetaElement from "../../Backend/components/partials/MetaElement";
 
 export default function FrontendCourseIndex({elements, categories}) {
     const {trans} = useContext(AppContext);
@@ -28,7 +29,7 @@ export default function FrontendCourseIndex({elements, categories}) {
     }, [sort.desc])
 
     return (
-        <FrontendContainer mainModule={'course'} subModule={''}>
+        <FrontendContainer>
             {/* Mobile filter dialog */}
             <title>{trans(parentModule)}</title>
             <SearchIndexSideBarMobile

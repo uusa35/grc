@@ -79,14 +79,10 @@ export default function FrontendBookShow({element, relatedElements, auth}) {
         }))
     }
 
-    console.log('the whole cart', cart);
-    console.log('the items', cart.items);
-    console.log('the merchants', cart.merchants);
-    console.log('the current multi cart', cart.multiCartMerchant)
-
     return (
-        <FrontendContainer childName={element[getLocalized()]}>
-            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
+        <FrontendContainer>
+            <MetaElement title={element[getLocalized()]}
+                         description={element[getLocalized('description')]}
                          image={element.image}
             />
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">

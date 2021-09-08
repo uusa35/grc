@@ -26,8 +26,9 @@ const FrontendContainer = ({
                                mainSlides = [],
                                showBreadCrumbs = true
                            }) => {
-    const {locale, settings} = useSelector(state => state)
+    const {locale} = useSelector(state => state)
     const {classNames, getThumb, getLocalized, arFont, enFont } = useContext(AppContext);
+    const { settings } = useContext(GlobalContext);
 
     return (
         <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-lg capitalize")} dir={locale.dir}>
@@ -36,6 +37,7 @@ const FrontendContainer = ({
             <main
                 className={"flex-1 relative z-0 focus:outline-none max-w-full bg-white font-extrabold capitalize"}>
                 <MainNav/>
+                <MetaElement settings={settings} />
                 <div className="min-h-screen">
                     {mainSlides && <MainSlider elements={mainSlides}/>}
                     <div className="w-4/5 sm:w-4/5 lg:3/5 2xl:w-3/5 m-auto shadow-xl min-h-screen">

@@ -4,9 +4,10 @@ import {AppContext} from "../../context/AppContext";
 import Pagination from "../../Backend/components/partials/Pagination";
 import CategoryWidget from "../components/widgets/category/CategoryWidget";
 import { map } from 'lodash';
+import MetaElement from "../../Backend/components/partials/MetaElement";
 
 export default function FrontendCategoryIndex({elements}) {
-    const { getThumb , trans , getLocalized } = useContext(AppContext);
+    const { trans } = useContext(AppContext);
 
     return (
         <FrontendContainer>

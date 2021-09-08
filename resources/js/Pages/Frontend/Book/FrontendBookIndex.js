@@ -10,6 +10,7 @@ import SearchIndexSideBarMobile from "../partials/SearchIndexSideBarMobile";
 import NormalBookWidget from "../components/widgets/book/NormalBookWidget";
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
+import MetaElement from "../../Backend/components/partials/MetaElement";
 
 export default function FrontendBookIndex({elements, categories}) {
     const {trans} = useContext(AppContext);
@@ -28,7 +29,7 @@ export default function FrontendBookIndex({elements, categories}) {
     }, [sort.desc])
 
     return (
-        <FrontendContainer mainModule={'book'} subModule={''}>
+        <FrontendContainer>
             {/* Mobile filter dialog */}
             <SearchIndexSideBarMobile
                 type={'book'}
