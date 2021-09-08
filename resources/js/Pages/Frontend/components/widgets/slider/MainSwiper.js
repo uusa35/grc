@@ -14,7 +14,7 @@ import {useSelector} from "react-redux";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade]);
 
-const MainSlider = ({elements}) => {
+export default function({elements}) {
     const {getLarge, getLocalized, classNames } = useContext(AppContext)
     const { locale } = useSelector(state => state)
 
@@ -70,5 +70,3 @@ const MainSlider = ({elements}) => {
         </>
     );
 };
-
-export default MainSlider;

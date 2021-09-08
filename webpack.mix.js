@@ -21,6 +21,5 @@ mix
     ]).browserSync('ecommerce-backend.test');
 
 if (mix.inProduction()) {
-    mix
-        .version()
+    mix.version()
 }

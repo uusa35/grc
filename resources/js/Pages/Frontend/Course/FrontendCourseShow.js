@@ -32,7 +32,7 @@ import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 
 
-export default function FrontendCourseShow({element, relatedElements, auth}) {
+export default function ({course, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
@@ -41,114 +41,114 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
     const {data, setData, post, progress} = useForm({
         'type': 'course',
         'cart_id': null,
-        'element_id': element.id,
+        'course_id': course.id,
         'qty': 1,
-        'price': element.isOnSale ? element.sale_price : element.price,
-        'direct_purchase': element.direct_purchase,
+        'price': course.isOnSale ? course.sale_price : course.price,
+        'direct_purchase': course.direct_purchase,
     });
 
     useMemo(() => {
         const images = []
-        element.video_url_one ?
+        course.video_url_one ?
         images.push({
-            thumbnail: getLarge(element.image),
-            original: getLarge(element.image),
+            thumbnail: getLarge(course.image),
+            original: getLarge(course.image),
             embedUrl: 'https://www.youtube.com/embed/4pSzhZ76GdM?autoplay=1&showinfo=0',
             description: 'Render custom slides (such as videos)',
-            renderItem: () => <EmbeddedIFrameVideo videoUrl={element.video_url_one}/>
+            renderItem: () => <EmbeddedIFrameVideo videoUrl={course.video_url_one}/>
         }) : null
-        images.push({thumbnail: getLarge(element.image), original: getLarge(element.image)})
-        map(element.images, img => {
+        images.push({thumbnail: getLarge(course.image), original: getLarge(course.image)})
+        map(course.images, img => {
             images.push({thumbnail: getLarge(img.image), original: getLarge(img.image)})
         })
         setCurrentImages(images);
-    }, [element])
+    }, [course])
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(checkCartBeforeAdd({
-            cart_id: element.id,
+            cart_id: course.id,
             type: 'course',
-            element_id: element.id,
+            course_id: course.id,
             qty: 1,
-            price: parseFloat(element.isOnSale ? element.sale_price : element.price),
-            direct_purchase: element.direct_purchase,
+            price: parseFloat(course.isOnSale ? course.sale_price : course.price),
+            direct_purchase: course.direct_purchase,
             shipmentFees: 0,
-            image: element.image,
-            name_ar: element.name_ar,
-            name_en: element.name_en,
-            description_ar: element.description_ar,
-            description_en: element.description_en,
-            merchant_id : element.user.id,
-            merchant_name_ar : element.user.name_ar,
-            merchant_name_en : element.user.name_en
+            image: course.image,
+            name_ar: course.name_ar,
+            name_en: course.name_en,
+            description_ar: course.description_ar,
+            description_en: course.description_en,
+            merchant_id : course.user.id,
+            merchant_name_ar : course.user.name_ar,
+            merchant_name_en : course.user.name_en
         }))
-        // dispatch(removeFromCart(element.id +''+selectedTiming.id));
+        // dispatch(removeFromCart(course.id +''+selectedTiming.id));
     }
 
-    console.log('element', element);
+    console.log('course', course);
     return (
-        <FrontendContainer childName={element[getLocalized()]}>
-            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
-                         image={element.image}
+        <FrontendContainer childName={course[getLocalized()]}>
+            <MetaElement title={course[getLocalized()]} description={course[getLocalized('description')]}
+                         image={course.image}
             />
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/*<div className="w-full h-auto overflow-hidden mb-10">*/}
-                {/*    {element.free && <EmbeddedHtml html={element.embedded}/>}*/}
+                {/*    {course.free && <EmbeddedHtml html={course.embedded}/>}*/}
                 {/*</div>*/}
                 {/* Product */}
-                <div className={classNames(element.video_url_one ? `lg:grid-cols-2`: `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto pb-10")}>
+                <div className={classNames(course.video_url_one ? `lg:grid-cols-2`: `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto pb-10")}>
                     {/* Image gallery */}
                     <div className="relative">
                         <ElementTags
-                            exclusive={element.exclusive}
-                            onSale={element.isOnSale}
-                            onNew={element.on_new}
-                            free={element.free}
+                            exclusive={course.exclusive}
+                            onSale={course.isOnSale}
+                            onNew={course.on_new}
+                            free={course.free}
                         />
                         <ImageGallery
                             showBullets={true}
                             showNav={false}
-                            originalAlt={element[getLocalized()]}
-                            originalTitle={element[getLocalized()]}
-                            thumbnailLabel={element[getLocalized()]}
-                            thumbnailTitle={element[getLocalized()]}
+                            originalAlt={course[getLocalized()]}
+                            originalTitle={course[getLocalized()]}
+                            thumbnailLabel={course[getLocalized()]}
+                            thumbnailTitle={course[getLocalized()]}
                             showThumbnails={true}
                             thumbnailPosition={isMobile ? 'bottom' : 'right'}
                             items={currentImages}/>
                     </div>
                     {/* Product info */}
                     <div className="mx-5 mt-10 pt-10 sm:px-0 sm:mt-16 lg:mt-0">
-                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{course[getLocalized()]}</h1>
                         <div className="mt-3">
                             <h2 className="sr-only">{trans('information')}</h2>
-                            <ElementPrice price={element.price} salePrice={element.sale_price}
+                            <ElementPrice price={course.price} salePrice={course.sale_price}
                                           showLocal={true}
-                                          isOnSale={element.isOnSale} large={true}/>
+                                          isOnSale={course.isOnSale} large={true}/>
                         </div>
                         {/* Reviews */}
-                        {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'course'}/>}
+                        {course.ratings && <ElementRating ratings={course.ratings} id={course.id} type={'course'}/>}
                         <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                             <div className="flex flex-1">
                                 {
-                                    element[getLocalized('caption')] && <div className="mt-6">
+                                    course[getLocalized('caption')] && <div className="mt-6">
                                         <h3 className="sr-only">{trans('caption')}</h3>
                                         <div
                                             className="text-base text-gray-700 space-y-6"
-                                        >{element[getLocalized('caption')]}</div>
+                                        >{course[getLocalized('caption')]}</div>
                                     </div>
                                 }
                             </div>
                             <div className="flex">
                                 {
-                                    element.sku && <div className="mt-6">
+                                    course.sku && <div className="mt-6">
                                         <h3 className="sr-only">{trans('sku')}</h3>
                                         <div
                                             className="text-base text-gray-700 space-y-6"
                                         >
                                             {trans('reference_id')} :
-                                            {element.sku}
+                                            {course.sku}
                                         </div>
                                     </div>
                                 }
@@ -156,7 +156,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                         </div>
                         {/* course timings */}
                         <div className="mt-6">
-                            {element.timings && element.is_available &&
+                            {course.timings && course.is_available &&
                             <Menu as="div" className="relative inline-block text-left mb-5 w-full">
                                 <div>
                                     <Menu.Button
@@ -180,7 +180,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                         className="z-30 origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <div className="py-1">
                                             {
-                                                map(element.timings, t =>
+                                                map(course.timings, t =>
                                                     <Menu.Item key={t.id}>
                                                         <div
                                                             onClick={() => setSelectedTiming(t)}
@@ -217,21 +217,21 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                 </Transition>
                             </Menu>
                             }
-                            {!element.is_available && <AlertMessage
-                                title={trans('element_is_not_available')}
-                                message={trans('element_is_not_available_currently_for_order')}
+                            {!course.is_available && <AlertMessage
+                                title={trans('course_is_not_available')}
+                                message={trans('course_is_not_available_currently_for_order')}
                             />}
                             <div className="flex flex-row justify-between items-center gap-x-5">
                                 <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto">
                                     <button
-                                        disabled={!element.is_available}
+                                        disabled={!course.is_available}
                                         type="submit"
-                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                        className={classNames(!course.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                     >
                                         {trans('add_to_cart')}
                                     </button>
                                 </form>
-                                <ElementFavoriteBtn id={element.id} type={'course'}
+                                <ElementFavoriteBtn id={course.id} type={'course'}
                                                     favoritesList={auth?.favoritesList}/>
                             </div>
                         </div>
@@ -271,7 +271,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                             </Disclosure.Button>
                                             <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
                                                 <p className="capitalize">
-                                                    {element[getLocalized('description')]}
+                                                    {course[getLocalized('description')]}
                                                 </p>
                                             </Disclosure.Panel>
                                         </>
@@ -309,7 +309,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                             </Disclosure.Button>
                                             <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
                                                 <p className='capitalize'>
-                                                    {element[getLocalized('notes')]}
+                                                    {course[getLocalized('notes')]}
                                                 </p>
                                             </Disclosure.Panel>
                                         </>
@@ -349,13 +349,13 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                                     <div>
                                                         <img
                                                             className="w-40 h-auto rounded-sm shadow-md"
-                                                            src={getThumb(element.user.image)}
-                                                            alt={element.user[getLocalized()]}/>
+                                                            src={getThumb(course.user.image)}
+                                                            alt={course.user[getLocalized()]}/>
                                                     </div>
                                                     <div className="rtl:mr-5 ltr:ml-5">
-                                                        <h4>{element.user[getLocalized()]}</h4>
-                                                        <h6>{element.user[getLocalized('caption')]}</h6>
-                                                        <p>{element.user[getLocalized('description')]}</p>
+                                                        <h4>{course.user[getLocalized()]}</h4>
+                                                        <h6>{course.user[getLocalized('caption')]}</h6>
+                                                        <p>{course.user[getLocalized('description')]}</p>
                                                     </div>
                                                 </div>
                                             </Disclosure.Panel>
@@ -373,7 +373,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
 
                             <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 capitalize truncate">
                                 {
-                                    element.direct_purchase ? <div
+                                    course.direct_purchase ? <div
                                         className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -388,7 +388,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                     </div> : null
                                 }
                                 {
-                                    element.timings && <div
+                                    course.timings && <div
                                         className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -403,7 +403,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                     </div>
                                 }
                                 {
-                                    element.sku &&
+                                    course.sku &&
                                     <div
                                         className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
@@ -415,7 +415,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                         </div>
                                         <span
                                             className="mt-4 text-sm font-medium text-gray-900">{trans('reference_id')}</span>
-                                        <dd className="mt-1 text-sm text-gray-500">{element.sku}</dd>
+                                        <dd className="mt-1 text-sm text-gray-500">{course.sku}</dd>
                                     </div>
                                 }
                             </dl>
@@ -425,7 +425,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                 {/* related items */}
                 {
                     relatedElements && relatedElements.meta.total > 0 &&
-                    <RelatedItems elements={relatedElements.data} type={'course'}/>
+                    <RelatedItems courses={relatedElements.data} type={'course'}/>
                 }
             </div>
         </FrontendContainer>

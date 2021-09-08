@@ -60,8 +60,8 @@ class FrontendCourseController extends Controller
      */
     public function show(Course $course)
     {
-        $element = CourseResource::make($course->load('user','images'));
-        return inertia('Frontend/Course/FrontendCourseShow', compact('element'));
+        $course = CourseResource::make($course->load('user','images'));
+        return inertia('Frontend/Course/FrontendCourseShow', compact('course'));
     }
 
     /**

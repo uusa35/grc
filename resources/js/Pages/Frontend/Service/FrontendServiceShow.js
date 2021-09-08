@@ -25,7 +25,7 @@ import AlertMessage from "../partials/AlertMessage";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 
 
-export default function FrontendServiceShow({element, relatedElements, auth}) {
+export default function FrontendServiceShow({service, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
@@ -35,21 +35,21 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
     const {data, setData, post, progress} = useForm({
         'type': 'service',
         'cart_id': null,
-        'element_id': element.id,
+        'service_id': service.id,
         'timing_id': null,
         'qty': 1,
-        'price': element.isOnSale ? element.sale_price : element.price,
-        'direct_purchase': element.direct_purchase,
+        'price': service.isOnSale ? service.sale_price : service.price,
+        'direct_purchase': service.direct_purchase,
 
     });
 
     useMemo(() => {
-        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
-        map(element.images, img => {
+        const images = [{thumbnail: getThumb(service.image), original: getLarge(service.image)}]
+        map(service.images, img => {
             images.push({thumbnail: getThumb(img.image), original: getLarge(img.image)})
         })
         setCurrentImages(images);
-    }, [element])
+    }, [service])
 
     useMemo(() => {
         !isEmpty(selectedTiming) ? setData('timing_id', selectedTiming.id) : null;
@@ -61,79 +61,79 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
             toast.error(capitalize(trans('please_choose_timing')))
         } else {
             dispatch(checkCartBeforeAdd({
-                cart_id: element.id,
+                cart_id: service.id,
                 type: 'service',
-                element_id: element.id,
+                service_id: service.id,
                 timing_id: selectedTiming.id,
                 qty: 1,
-                price: element.isOnSale ? element.sale_price : element.price,
-                direct_purchase: element.direct_purchase,
+                price: service.isOnSale ? service.sale_price : service.price,
+                direct_purchase: service.direct_purchase,
                 shipmentFees: 0,
-                image: element.image,
-                name_ar: element.name_ar,
-                name_en: element.name_en,
-                description_ar: element.description_ar,
-                description_en: element.description_en,
+                image: service.image,
+                name_ar: service.name_ar,
+                name_en: service.name_en,
+                description_ar: service.description_ar,
+                description_en: service.description_en,
                 timing: selectedTiming,
-                merchant_name_ar : element.user.name_ar,
-                merchant_name_en : element.user.name_en
+                merchant_name_ar : service.user.name_ar,
+                merchant_name_en : service.user.name_en
             }))
         }
     }
 
     return (
-        <FrontendContainer childName={element[getLocalized()]}>
-            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
-                         image={element.image}
+        <FrontendContainer childName={service[getLocalized()]}>
+            <MetaElement title={service[getLocalized()]} description={service[getLocalized('description')]}
+                         image={service.image}
             />
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
                     {/* Image gallery */}
                     <div className="relative">
-                        <ElementTags exclusive={element.exclusive} onSale={element.isOnSale} onNew={element.on_new}/>
+                        <ElementTags exclusive={service.exclusive} onSale={service.isOnSale} onNew={service.on_new}/>
                         <ImageGallery
                             showBullets={true}
                             showNav={false}
-                            originalAlt={element[getLocalized()]}
-                            originalTitle={element[getLocalized()]}
-                            thumbnailLabel={element[getLocalized()]}
-                            thumbnailTitle={element[getLocalized()]}
+                            originalAlt={service[getLocalized()]}
+                            originalTitle={service[getLocalized()]}
+                            thumbnailLabel={service[getLocalized()]}
+                            thumbnailTitle={service[getLocalized()]}
                             showThumbnails={true}
                             thumbnailPosition={isMobile ? 'bottom' : 'right'}
                             items={currentImages}/>
                     </div>
                     {/* Product info */}
                     <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
-                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{service[getLocalized()]}</h1>
                         <div className="mt-3">
                             <h2 className="sr-only">{trans('information')}</h2>
-                            <ElementPrice price={element.price} salePrice={element.sale_price}
+                            <ElementPrice price={service.price} salePrice={service.sale_price}
                                           showLocal={true}
-                                          isOnSale={element.isOnSale} large={true}/>
+                                          isOnSale={service.isOnSale} large={true}/>
                         </div>
                         {/* Reviews */}
-                        {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'service'}/>}
+                        {service.ratings && <ElementRating ratings={service.ratings} id={service.id} type={'service'}/>}
                         <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                             <div className="flex flex-1">
                                 {
-                                    element[getLocalized('caption')] && <div className="mt-6">
+                                    service[getLocalized('caption')] && <div className="mt-6">
                                         <h3 className="sr-only">{trans('caption')}</h3>
                                         <div
                                             className="text-base text-gray-700 space-y-6"
-                                        >{element[getLocalized('caption')]}</div>
+                                        >{service[getLocalized('caption')]}</div>
                                     </div>
                                 }
                             </div>
                             <div className="flex">
                                 {
-                                    element.sku && <div className="mt-6">
+                                    service.sku && <div className="mt-6">
                                         <h3 className="sr-only">{trans('sku')}</h3>
                                         <div
                                             className="text-base text-gray-700 space-y-6"
                                         >
                                             {trans('reference_id')} :
-                                            {element.sku}
+                                            {service.sku}
                                         </div>
                                     </div>
                                 }
@@ -141,7 +141,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                         </div>
                         <div className="mt-6">
                             {/* service timings */}
-                            {element.timings && element.is_available &&
+                            {service.timings && service.is_available &&
                             <Menu as="div" className="relative inline-block text-left mb-5 w-full">
                                 <div>
                                     <Menu.Button
@@ -165,7 +165,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                         className="z-30 origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <div className="py-1">
                                             {
-                                                map(element.timings, t =>
+                                                map(service.timings, t =>
                                                     <Menu.Item key={t.id}>
                                                         <div
                                                             onClick={() => setSelectedTiming(t)}
@@ -202,25 +202,25 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                 </Transition>
                             </Menu>
                             }
-                            {!element.is_available && <AlertMessage
-                                title={trans('element_is_not_available')}
-                                message={trans('element_is_not_available_currently_for_order')}
+                            {!service.is_available && <AlertMessage
+                                title={trans('service_is_not_available')}
+                                message={trans('service_is_not_available_currently_for_order')}
                             />}
                             <div className="flex flex-row justify-between items-center gap-x-5">
                                 <form onSubmit={handleSubmit} className="w-full">
                                     <button
-                                        disabled={!element.is_available}
+                                        disabled={!service.is_available}
                                         type="submit"
-                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                        className={classNames(!service.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                     >
                                         {trans('add_to_cart')}
                                     </button>
                                 </form>
-                                <ElementFavoriteBtn id={element.id} type={'service'}
+                                <ElementFavoriteBtn id={service.id} type={'service'}
                                                     favoritesList={auth?.favoritesList}/>
                             </div>
                         </div>
-                        {element.is_available && <AlertMessage
+                        {service.is_available && <AlertMessage
                             title={trans('service_booking')}
                             message={trans('service_booking_message')}
                         />}
@@ -259,7 +259,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                             </Disclosure.Button>
                                             <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
                                                 <p className="capitalize">
-                                                    {element[getLocalized('description')]}
+                                                    {service[getLocalized('description')]}
                                                 </p>
                                             </Disclosure.Panel>
                                         </>
@@ -297,7 +297,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                             </Disclosure.Button>
                                             <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
                                                 <p className='capitalize'>
-                                                    {element[getLocalized('notes')]}
+                                                    {service[getLocalized('notes')]}
                                                 </p>
                                             </Disclosure.Panel>
                                         </>
@@ -337,13 +337,13 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                                     <div>
                                                         <img
                                                             className="w-40 h-auto rounded-sm shadow-md"
-                                                            src={getThumb(element.user.image)}
-                                                            alt={element.user[getLocalized()]}/>
+                                                            src={getThumb(service.user.image)}
+                                                            alt={service.user[getLocalized()]}/>
                                                     </div>
                                                     <div className="rtl:mr-5 ltr:ml-5">
-                                                        <h4>{element.user[getLocalized()]}</h4>
-                                                        <h6>{element.user[getLocalized('caption')]}</h6>
-                                                        <p>{element.user[getLocalized('description')]}</p>
+                                                        <h4>{service.user[getLocalized()]}</h4>
+                                                        <h6>{service.user[getLocalized('caption')]}</h6>
+                                                        <p>{service.user[getLocalized('description')]}</p>
                                                     </div>
                                                 </div>
                                             </Disclosure.Panel>
@@ -361,7 +361,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
 
                             <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 capitalize truncate">
                                 {
-                                    element.direct_purchase ? <div
+                                    service.direct_purchase ? <div
                                         className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -376,7 +376,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                     </div> : null
                                 }
                                 {
-                                    element.timings && <div
+                                    service.timings && <div
                                         className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -391,7 +391,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                     </div>
                                 }
                                 {
-                                    element.sku &&
+                                    service.sku &&
                                     <div
                                         className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
@@ -403,7 +403,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                         </div>
                                         <span
                                             className="mt-4 text-sm font-medium text-gray-900">{trans('reference_id')}</span>
-                                        <dd className="mt-1 text-sm text-gray-500">{element.sku}</dd>
+                                        <dd className="mt-1 text-sm text-gray-500">{service.sku}</dd>
                                     </div>
                                 }
                             </dl>
@@ -413,7 +413,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                 {/* related items */}
                 {
                     relatedElements && relatedElements.meta.total > 0 &&
-                    <RelatedItems elements={relatedElements.data} type={'service'}/>
+                    <RelatedItems services={relatedElements.data} type={'service'}/>
                 }
             </div>
         </FrontendContainer>

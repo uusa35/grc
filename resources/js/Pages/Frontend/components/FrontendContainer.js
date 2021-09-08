@@ -10,12 +10,12 @@ import ConfirmationModal from "../../Backend/components/partials/ConfirmationMod
 import GlobalContext from "../../context/GlobalContext";
 import Footer from "../partials/footer/Footer";
 import LoadingView from "../../Backend/components/widgets/LoadingView";
-import MainSlider from "./widgets/slider/MainSlider";
+import MainSwiper from "./widgets/slider/MainSwiper";
 import FrontendBreadCrumbs from "./FrontendBreadCrumbs";
 import {useSelector} from "react-redux";
-import { InertiaHead } from '@inertiajs/inertia-react'
 import MetaElement from "../../Backend/components/partials/MetaElement";
 import { motion } from "framer-motion"
+import MainGallery from "./widgets/slider/MainGallery";
 
 const FrontendContainer = ({
                                children, elements = [],
@@ -39,7 +39,8 @@ const FrontendContainer = ({
                 <MainNav/>
                 <MetaElement settings={settings} />
                 <div className="min-h-screen">
-                    {mainSlides && <MainSlider elements={mainSlides}/>}
+                    {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
+                    {mainSlides && <MainGallery elements={mainSlides}/>}
                     <div className="w-4/5 sm:w-4/5 lg:3/5 2xl:w-3/5 m-auto shadow-xl min-h-screen">
                         {showBreadCrumbs && <FrontendBreadCrumbs childName={childName}/>}
                         {children}
