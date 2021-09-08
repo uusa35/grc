@@ -7,7 +7,7 @@ import route from "ziggy-js";
 import {isLocal} from "../helpers";
 import moment from "moment";
 import {ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import {toast} from 'react-toastify';
 import {GrClose, IoCloseOutline} from "react-icons/all";
 import {useSelector, useDispatch} from "react-redux";

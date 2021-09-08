@@ -3,12 +3,13 @@ import express from 'express'
 import ReactDOMServer from 'react-dom/server'
 import {App, createInertiaApp} from '@inertiajs/inertia-react'
 import {Provider} from 'react-redux'
-import {PersistGate} from 'redux-persist/integration/react'
 import {persistor, store} from "./Pages/redux/store";
-import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
 import GlobalContext from "./Pages/context/GlobalContext";
 import {AppContextProvider} from "./Pages/context/AppContext";
 import {render} from "react-dom";
+
+// import {PersistGate} from 'redux-persist/integration/react'
+// import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
 
 
 const server = express()

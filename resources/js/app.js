@@ -10,6 +10,7 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {store, persistor} from './Pages/redux/store';
 import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
 import MetaElement from "./Pages/Backend/components/partials/MetaElement";
+import 'react-toastify/dist/ReactToastify.css';
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
