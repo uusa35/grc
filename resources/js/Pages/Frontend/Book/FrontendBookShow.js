@@ -23,10 +23,9 @@ import AlertMessage from "../partials/AlertMessage";
 import GlobalContext from "../../context/GlobalContext";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
-// import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 
 
-export default function FrontendBookShow({element, relatedElements, auth}) {
+export default function ({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);

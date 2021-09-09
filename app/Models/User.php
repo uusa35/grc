@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function books()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Book::class);
     }
 
     public function orders()

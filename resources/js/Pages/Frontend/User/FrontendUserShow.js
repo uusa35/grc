@@ -1,72 +1,48 @@
-import React, {useContext, useState} from 'react'
-import {StarIcon} from '@heroicons/react/solid'
-import {RadioGroup} from '@headlessui/react'
-import FrontendContainer from "../components/FrontendContainer";
+import {Fragment, useContext, useMemo, useState} from 'react'
+import {Disclosure,Transition, Menu} from '@headlessui/react'
+import {
+    MinusSmIcon,
+    PlusSmIcon,
+    ChevronDownIcon
+} from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
-import MetaElement from "../../Backend/components/partials/MetaElement";
-import FrontendContentContainer from "../components/FrontendContentContainer";
+import FrontendContainer from "../components/FrontendContainer";
+import {map,isEmpty} from 'lodash';
+import ElementPrice from "../components/widgets/ElementPrice";
+import moment from "moment";
+import ElementTags from "../components/widgets/ElementTags";
+import RelatedItems from "../components/widgets/RelatedItems";
+import ImageGallery from 'react-image-gallery';
+import ElementRating from "../components/widgets/ElementRating";
+import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
+import {isMobile} from "react-device-detect";
+import {useForm} from "@inertiajs/inertia-react";
+import {useDispatch, useSelector} from "react-redux";
+import {checkCartBeforeAdd} from "../../redux/actions";
+import AlertMessage from "../partials/AlertMessage";
+import GlobalContext from "../../context/GlobalContext";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
-
-const product = {
-    name: 'Basic Tee 6-Pack',
-    price: '$192',
-    href: '#',
-    breadcrumbs: [
-        {id: 1, name: 'Men', href: '#'},
-        {id: 2, name: 'Clothing', href: '#'},
-    ],
-    images: [
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-            alt: 'Two each of gray, white, and black shirts laying flat.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-            alt: 'Model wearing plain black basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-            alt: 'Model wearing plain gray basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-            alt: 'Model wearing plain white basic tee.',
-        },
-    ],
-    colors: [
-        {name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400'},
-        {name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400'},
-        {name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900'},
-    ],
-    sizes: [
-        {name: 'XXS', inStock: false},
-        {name: 'XS', inStock: true},
-        {name: 'S', inStock: true},
-        {name: 'M', inStock: true},
-        {name: 'L', inStock: true},
-        {name: 'XL', inStock: true},
-        {name: '2XL', inStock: true},
-        {name: '3XL', inStock: true},
-    ],
-    description:
-        'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-    highlights: [
-        'Hand cut and sewn locally',
-        'Dyed with our propietary colors',
-        'Pre-washed & pre-shrunk',
-        'Ultra-soft 100% cotton',
-    ],
-    details:
-        'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
-const reviews = {href: '#', average: 4, totalCount: 117}
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 
-export default function({element}) {
-    const {getLocalized, getThumb, classNames, trans} = useContext(AppContext)
-    // const [selectedColor, setSelectedColor] = useState(element.product_attributes[0].color)
-    // const [selectedSize, setSelectedSize] = useState(element.product_attributes[0].size)
+export default function ({element, relatedElements, auth}) {
+    const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
+    const [selectedTiming, setSelectedTiming] = useState();
+    const [currentImages, setCurrentImages] = useState([]);
+    const { settings } = useContext(GlobalContext);
+    const {cart } = useSelector(state => state);
+    const dispatch = useDispatch();
 
+    useMemo(() => {
+        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
+        map(element.images, img => {
+            images.push({thumbnail: getThumb(img.image), original: getLarge(img.image)})
+        })
+        setCurrentImages(images);
+    }, [element])
+
+
+    console.log('element books', element.books);
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -74,147 +50,109 @@ export default function({element}) {
                             image={element.image}
             />
             <FrontendContentContainer childName={element[getLocalized()]}>
-                <div className="pt-6">
-                    <nav aria-label="Breadcrumb">
-                        <ol role="list"
-                            className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
-                            {/*{element.breadcrumbs.map((breadcrumb) => (*/}
-                            {/*    <li key={breadcrumb.id}>*/}
-                            {/*        <div className="flex items-center">*/}
-                            {/*            <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">*/}
-                            {/*                {breadcrumb.name}*/}
-                            {/*            </a>*/}
-                            {/*            <svg*/}
-                            {/*                width={16}*/}
-                            {/*                height={20}*/}
-                            {/*                viewBox="0 0 16 20"*/}
-                            {/*                fill="currentColor"*/}
-                            {/*                xmlns="http://www.w3.org/2000/svg"*/}
-                            {/*                aria-hidden="true"*/}
-                            {/*                className="w-4 h-5 text-gray-300"*/}
-                            {/*            >*/}
-                            {/*                <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />*/}
-                            {/*            </svg>*/}
-                            {/*        </div>*/}
-                            {/*    </li>*/}
-                            {/*))}*/}
-                            <li className="text-sm">
-                                <a href={element.href} aria-current="page"
-                                   className="font-medium text-gray-500 hover:text-gray-600">
-                                    {element[getLocalized()]}
-                                </a>
-                            </li>
-                        </ol>
-                    </nav>
-
-                    {/* Image gallery */}
-                    <div
-                        className="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
-                        <div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
-                            <img
-                                src={getThumb(element.image)}
-                                alt={product[getLocalized()]}
-                                className="w-full h-full object-center object-cover"
+                <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
+                    {/* Product */}
+                    <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
+                        {/* Image gallery */}
+                        <div className="relative">
+                            <ElementTags
+                                exclusive={element.exclusive}
+                                onSale={element.isOnSale}
+                                onNew={element.on_new}
+                                onNew={element.free}
                             />
+                            <ImageGallery
+                                showBullets={true}
+                                showNav={false}
+                                originalAlt={element[getLocalized()]}
+                                originalTitle={element[getLocalized()]}
+                                thumbnailLabel={element[getLocalized()]}
+                                thumbnailTitle={element[getLocalized()]}
+                                showThumbnails={true}
+                                thumbnailPosition={isMobile ? 'bottom' : 'right'}
+                                items={currentImages}/>
                         </div>
-                        <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-                            <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-                                <img
-                                    src={getThumb(element.image)}
-                                    alt={product[getLocalized()]}
-                                    className="w-full h-full object-center object-cover"
-                                />
-                            </div>
-                            <div className="aspect-w-3 aspect-h-2 rounded-lg overflow-hidden">
-                                <img
-                                    src={getThumb(element.image)}
-                                    alt={product[getLocalized()]}
-                                    className="w-full h-full object-center object-cover"
-                                />
-                            </div>
-                        </div>
-                        <div
-                            className="aspect-w-4 aspect-h-5 sm:rounded-lg sm:overflow-hidden lg:aspect-w-3 lg:aspect-h-4">
-                            <img
-                                src={getThumb(element.image)}
-                                alt={product[getLocalized()]}
-                                className="w-full h-full object-center object-cover"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Product info */}
-                    <div
-                        className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
-                        <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                            <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{element[getLocalized()]}</h1>
-                        </div>
-
-                        {/* Options */}
-                        <div className="mt-4 lg:mt-0 lg:row-span-3">
-                            <h2 className="sr-only">Product information</h2>
-                            <p className="text-3xl text-gray-900">{element.price}</p>
-
+                        {/* Product info */}
+                        <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
+                            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
                             {/* Reviews */}
-                            <div className="mt-6">
-                                <h3 className="sr-only">Reviews</h3>
-                                <div className="flex items-center">
-                                    <div className="flex items-center">
-                                        {[0, 1, 2, 3, 4].map((rating) => (
-                                            <StarIcon
-                                                key={rating}
-                                                className={classNames(
-                                                    reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                                                    'h-5 w-5 flex-shrink-0'
-                                                )}
-                                                aria-hidden="true"
-                                            />
-                                        ))}
-                                    </div>
-                                    <p className="sr-only">{reviews.average} out of 5 stars</p>
-                                    <a href={reviews.href}
-                                       className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                        {reviews.totalCount} reviews
-                                    </a>
+                            {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'user'}/>}
+                            <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
+                                <div className="flex flex-1">
+                                    {
+                                        element[getLocalized('caption')] && <div className="mt-6">
+                                            <h3 className="sr-only">{trans('caption')}</h3>
+                                            <div
+                                                className="text-base text-gray-700 space-y-6"
+                                            >{element[getLocalized('caption')]}</div>
+                                        </div>
+                                    }
+                                </div>
+                                <div className="flex">
+                                    {
+                                        element.sku && <div className="mt-6">
+                                            <h3 className="sr-only">{trans('sku')}</h3>
+                                            <div
+                                                className="text-base text-gray-700 space-y-6"
+                                            >
+                                                {trans('reference_id')} :
+                                                {element.sku}
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
-
-                        </div>
-
-                        <div
-                            className="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                            {/* Description and details */}
-                            <div>
-                                <h3 className="sr-only">Description</h3>
-
-                                <div className="space-y-6">
-                                    <p className="text-base text-gray-900">{element.description}</p>
+                            <section aria-labelledby="details-heading" className="my-12">
+                                <h2 id="details-heading" className="sr-only">
+                                    Additional details
+                                </h2>
+                                <div className="border-t divide-y divide-gray-200 ">
+                                    {/* description */}
+                                    <Disclosure as="div" defaultOpen={true}>
+                                        {({open}) => (
+                                            <>
+                                                <Disclosure.Button
+                                                    className="group relative w-full py-6 flex justify-between items-center text-left">
+                                                          <span
+                                                              className={classNames(
+                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  'capitalize font-extrabold'
+                                                              )}
+                                                          >
+                                                            {trans('description')}
+                                                          </span>
+                                                    <span className="ml-6 flex items-center">
+                                                        {open ? (
+                                                            <MinusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        ) : (
+                                                            <PlusSmIcon
+                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                                                aria-hidden="true"
+                                                            />
+                                                        )}
+                                                      </span>
+                                                </Disclosure.Button>
+                                                <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                    <p className="capitalize">
+                                                        {element[getLocalized('description')]}
+                                                    </p>
+                                                </Disclosure.Panel>
+                                            </>
+                                        )}
+                                    </Disclosure>
                                 </div>
-                            </div>
+                            </section>
 
-                            <div className="mt-10">
-                                <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
-
-                                <div className="mt-4">
-                                    {/*<ul role="list" className="pl-4 list-disc text-sm space-y-2">*/}
-                                    {/*    {element.highlights.map((highlight) => (*/}
-                                    {/*        <li key={highlight} className="text-gray-400">*/}
-                                    {/*            <span className="text-gray-600">{highlight}</span>*/}
-                                    {/*        </li>*/}
-                                    {/*    ))}*/}
-                                    {/*</ul>*/}
-                                </div>
-                            </div>
-
-                            <div className="mt-10">
-                                <h2 className="text-sm font-medium text-gray-900">Details</h2>
-
-                                <div className="mt-4 space-y-6">
-                                    <p className="text-sm text-gray-600">{element.details}</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
+                    {/* related items */}
+                    {
+                        element.books && element.books.length > 0 &&
+                        <RelatedItems elements={element.books} type={'book'}/>
+                    }
                 </div>
             </FrontendContentContainer>
         </FrontendContainer>
