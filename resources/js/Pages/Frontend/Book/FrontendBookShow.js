@@ -29,7 +29,7 @@ import MetaElement from "../../Backend/components/partials/MetaElement";
 import GlobalContext from "../../context/GlobalContext";
 
 
-export default function FrontendBookShow({book, relatedElements, auth}) {
+export default function FrontendBookShow({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
@@ -39,48 +39,48 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
     const {data, setData, post, progress} = useForm({
         'type': 'book',
         'cart_id': null,
-        'book_id': book.id,
+        'element_id': element.id,
         'timing_id': null,
         'qty': 1,
-        'price': book.isOnSale ? book.sale_price : book.price,
-        'direct_purchase': book.direct_purchase,
+        'price': element.isOnSale ? element.sale_price : element.price,
+        'direct_purchase': element.direct_purchase,
 
     });
 
     useMemo(() => {
-        const images = [{thumbnail: getThumb(book.image), original: getLarge(book.image)}]
-        map(book.images, img => {
+        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
+        map(element.images, img => {
             images.push({thumbnail: getThumb(img.image), original: getLarge(img.image)})
         })
         setCurrentImages(images);
-    }, [book])
+    }, [element])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(checkCartBeforeAdd({
-            cart_id: book.id,
+            cart_id: element.id,
             type: 'book',
-            book_id: book.id,
+            element_id: element.id,
             qty: 1,
-            price: parseFloat(book.isOnSale ? book.sale_price : book.price),
-            direct_purchase: book.direct_purchase,
+            price: parseFloat(element.isOnSale ? element.sale_price : element.price),
+            direct_purchase: element.direct_purchase,
             shipmentFees: 0,
-            image: book.image,
-            name_ar: book.name_ar,
-            name_en: book.name_en,
-            description_ar: book.description_ar,
-            description_en: book.description_en,
-            merchant_id : book.user.id,
-            merchant_name_ar : book.user.name_ar,
-            merchant_name_en : book.user.name_en
+            image: element.image,
+            name_ar: element.name_ar,
+            name_en: element.name_en,
+            description_ar: element.description_ar,
+            description_en: element.description_en,
+            merchant_id : element.user.id,
+            merchant_name_ar : element.user.name_ar,
+            merchant_name_en : element.user.name_en
         }))
     }
 
     return (
         <FrontendContainer>
-            <MetaElement title={book[getLocalized()]}
-                         description={book[getLocalized('description')]}
-                         image={book.image}
+            <MetaElement title={element[getLocalized()]}
+                         description={element[getLocalized('description')]}
+                         image={element.image}
             />
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
@@ -88,53 +88,53 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                     {/* Image gallery */}
                     <div className="relative">
                         <ElementTags
-                            exclusive={book.exclusive}
-                            onSale={book.isOnSale}
-                            onNew={book.on_new}
-                            onNew={book.free}
+                            exclusive={element.exclusive}
+                            onSale={element.isOnSale}
+                            onNew={element.on_new}
+                            onNew={element.free}
                         />
                         <ImageGallery
                             showBullets={true}
                             showNav={false}
-                            originalAlt={book[getLocalized()]}
-                            originalTitle={book[getLocalized()]}
-                            thumbnailLabel={book[getLocalized()]}
-                            thumbnailTitle={book[getLocalized()]}
+                            originalAlt={element[getLocalized()]}
+                            originalTitle={element[getLocalized()]}
+                            thumbnailLabel={element[getLocalized()]}
+                            thumbnailTitle={element[getLocalized()]}
                             showThumbnails={true}
                             thumbnailPosition={isMobile ? 'bottom' : 'right'}
                             items={currentImages}/>
                     </div>
                     {/* Product info */}
                     <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
-                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{book[getLocalized()]}</h1>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
                         <div className="mt-3">
                             <h2 className="sr-only">{trans('information')}</h2>
-                            <ElementPrice price={book.price} salePrice={book.sale_price}
+                            <ElementPrice price={element.price} salePrice={element.sale_price}
                                           showLocal={true}
-                                          isOnSale={book.isOnSale} large={true}/>
+                                          isOnSale={element.isOnSale} large={true}/>
                         </div>
                         {/* Reviews */}
-                        {book.ratings && <ElementRating ratings={book.ratings} id={book.id} type={'book'}/>}
+                        {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'book'}/>}
                         <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                             <div className="flex flex-1">
                                 {
-                                    book[getLocalized('caption')] && <div className="mt-6">
+                                    element[getLocalized('caption')] && <div className="mt-6">
                                         <h3 className="sr-only">{trans('caption')}</h3>
                                         <div
                                             className="text-base text-gray-700 space-y-6"
-                                        >{book[getLocalized('caption')]}</div>
+                                        >{element[getLocalized('caption')]}</div>
                                     </div>
                                 }
                             </div>
                             <div className="flex">
                                 {
-                                    book.sku && <div className="mt-6">
+                                    element.sku && <div className="mt-6">
                                         <h3 className="sr-only">{trans('sku')}</h3>
                                         <div
                                             className="text-base text-gray-700 space-y-6"
                                         >
                                             {trans('reference_id')} :
-                                            {book.sku}
+                                            {element.sku}
                                         </div>
                                     </div>
                                 }
@@ -142,7 +142,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                         </div>
                         <div className="mt-6">
                             {/* book timings */}
-                            {book.timings && book.is_available &&
+                            {element.timings && element.is_available &&
                             <Menu as="div" className="relative inline-block text-left mb-5 w-full">
                                 <div>
                                     <Menu.Button
@@ -166,7 +166,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                                         className="z-30 origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         <div className="py-1">
                                             {
-                                                map(book.timings, t =>
+                                                map(element.timings, t =>
                                                     <Menu.Item key={t.id}>
                                                         <div
                                                             onClick={() => setSelectedTiming(t)}
@@ -203,31 +203,31 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                                 </Transition>
                             </Menu>
                             }
-                            {!book.is_available && <AlertMessage
-                                title={trans('book_is_not_available')}
-                                message={trans('book_is_not_available_currently_for_order')}
+                            {!element.is_available && <AlertMessage
+                                title={trans('element_is_not_available')}
+                                message={trans('element_is_not_available_currently_for_order')}
                             />}
                             <div className="flex flex-row justify-between items-center gap-x-5">
                                 {
-                                    book.free ?
+                                    element.free ?
                                         <a
                                             target="_blank"
-                                            href={getFileUrl(book.file)}
-                                            className={classNames(!book.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                            href={getFileUrl(element.file)}
+                                            className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                         >
                                             {trans('view')}
                                         </a>
                                         : <form onSubmit={handleSubmit} className="w-full">
                                             <button
-                                                disabled={!book.is_available}
+                                                disabled={!element.is_available}
                                                 type="submit"
-                                                className={classNames(!book.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                             >
                                                 {trans('add_to_cart')}
                                             </button>
                                         </form>
                                 }
-                                <ElementFavoriteBtn id={book.id} type={'book'}
+                                <ElementFavoriteBtn id={element.id} type={'book'}
                                                     favoritesList={auth?.favoritesList}/>
                             </div>
                         </div>
@@ -266,7 +266,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                                             </Disclosure.Button>
                                             <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
                                                 <p className="capitalize">
-                                                    {book[getLocalized('description')]}
+                                                    {element[getLocalized('description')]}
                                                 </p>
                                             </Disclosure.Panel>
                                         </>
@@ -304,7 +304,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                                             </Disclosure.Button>
                                             <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
                                                 <p className='capitalize'>
-                                                    {book[getLocalized('notes')]}
+                                                    {element[getLocalized('notes')]}
                                                 </p>
                                             </Disclosure.Panel>
                                         </>
@@ -344,13 +344,13 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                                                     <div>
                                                         <img
                                                             className="w-40 h-auto rounded-sm shadow-md"
-                                                            src={getThumb(book.user.image)}
-                                                            alt={book.user[getLocalized()]}/>
+                                                            src={getThumb(element.user.image)}
+                                                            alt={element.user[getLocalized()]}/>
                                                     </div>
                                                     <div className="rtl:mr-5 ltr:ml-5">
-                                                        <h4>{book.user[getLocalized()]}</h4>
-                                                        <h6>{book.user[getLocalized('caption')]}</h6>
-                                                        <p>{book.user[getLocalized('description')]}</p>
+                                                        <h4>{element.user[getLocalized()]}</h4>
+                                                        <h6>{element.user[getLocalized('caption')]}</h6>
+                                                        <p>{element.user[getLocalized('description')]}</p>
                                                     </div>
                                                 </div>
                                             </Disclosure.Panel>
@@ -368,7 +368,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
 
                             <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 capitalize truncate">
                                 {
-                                    book.direct_purchase ? <div
+                                    element.direct_purchase ? <div
                                         className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -383,7 +383,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                                     </div> : null
                                 }
                                 {
-                                    book.timings && <div
+                                    element.timings && <div
                                         className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
@@ -398,7 +398,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                                     </div>
                                 }
                                 {
-                                    book.sku &&
+                                    element.sku &&
                                     <div
                                         className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
                                         <div>
@@ -410,7 +410,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                                         </div>
                                         <span
                                             className="mt-4 text-sm font-medium text-gray-900">{trans('reference_id')}</span>
-                                        <dd className="mt-1 text-sm text-gray-500">{book.sku}</dd>
+                                        <dd className="mt-1 text-sm text-gray-500">{element.sku}</dd>
                                     </div>
                                 }
                             </dl>
@@ -420,7 +420,7 @@ export default function FrontendBookShow({book, relatedElements, auth}) {
                 {/* related items */}
                 {
                     relatedElements && relatedElements.meta.total > 0 &&
-                    <RelatedItems books={relatedElements.data} type={'book'}/>
+                    <RelatedItems elements={relatedElements.data} type={'book'}/>
                 }
             </div>
         </FrontendContainer>

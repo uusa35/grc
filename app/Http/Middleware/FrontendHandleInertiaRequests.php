@@ -7,6 +7,7 @@ use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryExtraLightResource;
 use App\Http\Resources\CurrencyExtraLightResource;
 use App\Http\Resources\SettingExtraLightResource;
+use App\Http\Resources\SettingResource;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Setting;
@@ -49,7 +50,7 @@ class FrontendHandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => fn() => $request->user() ? AuthExtraLightResource::make(User::whereId($request->user()->id)->with('role','favoritesList','orders','country')->first()) : [],
-            'settings' => fn() => new SettingExtraLightResource(Setting::first()),
+            'settings' => fn() => new SettingResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
             'currencies' => fn() => CurrencyExtraLightResource::collection(Currency::active()->with('country')->get()),

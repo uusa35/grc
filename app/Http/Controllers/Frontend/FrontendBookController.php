@@ -59,8 +59,8 @@ class FrontendBookController extends Controller
      */
     public function show(Book $book)
     {
-        $book = BookResource::make($book->load('user','images'));
-        return inertia('Frontend/Book/FrontendBookShow', compact('book'));
+        $element = BookResource::make($book->load('user','images'));
+        return inertia('Frontend/Book/FrontendBookShow', compact('element'));
     }
 
     /**

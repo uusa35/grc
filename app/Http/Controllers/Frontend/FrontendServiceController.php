@@ -60,10 +60,10 @@ class FrontendServiceController extends Controller
      */
     public function show(Service $service, Filters $filters)
     {
-        $service = ServiceResource::make($service->load('user', 'timings', 'images', 'ratings', 'user'));
-        request()->request->add(['category_id' => $service->categories->pluck('id')->flatten()->unique()->toArray()]);
+        $element = ServiceResource::make($service->load('user', 'timings', 'images', 'ratings', 'user'));
+        request()->request->add(['category_id' => $element->categories->pluck('id')->flatten()->unique()->toArray()]);
         $relatedElements = new ServiceCollection(Service::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_FOUR));
-        return inertia('Frontend/Service/FrontendServiceShow', compact('service', 'relatedElements'));
+        return inertia('Frontend/Service/FrontendServiceShow', compact('element', 'relatedElements'));
     }
 
     /**
