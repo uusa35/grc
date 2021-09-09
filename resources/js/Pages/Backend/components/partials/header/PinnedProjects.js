@@ -10,7 +10,7 @@ import { filter, map} from 'lodash';
 export default function PinnedProjects() {
     const { classNames ,  trans  } = useContext(AppContext);
     const { locale , modules } = useSelector(state => state)
-    const activePinned = filter(modules, m => m.main_menu);
+    const activePinned = filter(modules, m => m.main_menu && m.create);
 
     return (
         <div className="bg-white my-3 mx-3 rounded-md shadow-sm py-3 sm:px-6 lg:px-5 capitalize">
