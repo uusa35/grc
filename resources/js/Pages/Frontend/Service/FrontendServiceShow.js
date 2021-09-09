@@ -20,9 +20,8 @@ import {isMobile} from "react-device-detect";
 import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
-import {addToCart, checkCartBeforeAdd} from "../../redux/actions";
+import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
-import MetaElement from "../../Backend/components/partials/MetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 
