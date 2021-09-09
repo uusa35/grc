@@ -11,6 +11,8 @@ import NormalCourseWidget from "../components/widgets/course/NormalCourseWidget"
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 
 export default function FrontendCourseIndex({elements, categories}) {
     const {trans} = useContext(AppContext);
@@ -30,8 +32,9 @@ export default function FrontendCourseIndex({elements, categories}) {
 
     return (
         <FrontendContainer>
+            <FrontendContentContainer>
+                <SubMetaElement title={trans('courses')}/>
             {/* Mobile filter dialog */}
-            <title>{trans(parentModule)}</title>
             <SearchIndexSideBarMobile
                 type={'course'}
                 categories={filter(categories, c => c.is_course)}
@@ -79,6 +82,8 @@ export default function FrontendCourseIndex({elements, categories}) {
                     showSearch={false}
                 />
             </main>
+
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

@@ -1,4 +1,4 @@
-import { useContext} from 'react'
+import React, { useContext} from 'react'
 import { MailIcon, PhoneIcon } from '@heroicons/react/outline'
 import FrontendContainer from "../components/FrontendContainer";
 import {AppContext} from "../../context/AppContext";
@@ -7,6 +7,8 @@ import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-i
 import {getWhatsappLink} from "../../helpers";
 import {random} from "lodash";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function ContactusPage() {
     const { trans , getThumb , getLocalized } = useContext(AppContext);
@@ -14,6 +16,8 @@ export default function ContactusPage() {
     const { settings } = useContext(GlobalContext)
     return (
         <FrontendContainer>
+            <FrontendContentContainer>
+                <SubMetaElement title={trans('contactus')}/>
             <div className="bg-white relative overflow-hidden">
                 {/* Decorative background image and gradient */}
                 <div aria-hidden="true" className="absolute inset-0">
@@ -235,6 +239,7 @@ export default function ContactusPage() {
                     </div>
                 </section>
             </div>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

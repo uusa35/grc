@@ -27,6 +27,8 @@ import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 import GlobalContext from "../../context/GlobalContext";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 
 export default function FrontendBookShow({element, relatedElements, auth}) {
@@ -78,10 +80,11 @@ export default function FrontendBookShow({element, relatedElements, auth}) {
 
     return (
         <FrontendContainer>
-            <MetaElement title={element[getLocalized()]}
+            <SubMetaElement title={element[getLocalized()]}
                          description={element[getLocalized('description')]}
                          image={element.image}
             />
+            <FrontendContentContainer childName={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
@@ -423,6 +426,7 @@ export default function FrontendBookShow({element, relatedElements, auth}) {
                     <RelatedItems elements={relatedElements.data} type={'book'}/>
                 }
             </div>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

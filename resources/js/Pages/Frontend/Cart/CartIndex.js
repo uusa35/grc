@@ -12,6 +12,8 @@ import NoElements from "../../Backend/components/widgets/NoElements";
 import {removeFromCart} from "../../redux/actions";
 import CartStepper from "./CartStepper";
 import CartIndexOrderSummary from "./CartIndexOrderSummary";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function CartIndex() {
     const {cart, currency, locale} = useSelector(state => state);
@@ -20,7 +22,8 @@ export default function CartIndex() {
 
     // console.log('the cart items', map(cart.items, item => console.log('the item', item));
     return (
-        <FrontendContainer mainModule={'cart'}>
+        <FrontendContainer>
+            <FrontendContentContainer>
             <div className="w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 ">
                 <CartStepper/>
                 <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('cart')}</h1>
@@ -99,8 +102,8 @@ export default function CartIndex() {
                         </p>
                     </div>
                 </div>
-
             </div>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

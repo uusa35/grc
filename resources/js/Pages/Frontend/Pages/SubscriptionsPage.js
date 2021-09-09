@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import React, {useContext} from 'react'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,7 +7,9 @@ import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import {getConvertedFinalPrice} from "../../helpers";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import {addToCart, clearCart, enableDirectPurchaseMode} from "../../redux/actions"; // Import css
+import {addToCart, clearCart, enableDirectPurchaseMode} from "../../redux/actions";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer"; // Import css
 
 export default function SubscriptionsPage({ elements }) {
     const { trans , getLocalized, getThumb , classNames } = useContext(AppContext)
@@ -90,6 +92,8 @@ export default function SubscriptionsPage({ elements }) {
     }
     return (
         <FrontendContainer>
+            <FrontendContentContainer>
+                <SubMetaElement title={trans('subscriptions')}/>
             <div className="bg-white relative overflow-hidden">
                 {/* Decorative background image and gradient */}
                 <div aria-hidden="true" className="absolute inset-0">
@@ -167,6 +171,7 @@ export default function SubscriptionsPage({ elements }) {
                     </div>
                 </section>
             </div>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

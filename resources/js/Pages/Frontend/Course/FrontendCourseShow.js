@@ -1,4 +1,4 @@
-import {Fragment, useContext, useEffect, useMemo, useState} from 'react'
+import React, {Fragment, useContext, useEffect, useMemo, useState} from 'react'
 import {Dialog, Disclosure, Popover, RadioGroup, Tab, Transition, Menu} from '@headlessui/react'
 import {
     HeartIcon,
@@ -30,6 +30,8 @@ import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 
 export default function FrontendCourseShow({element, relatedElements, auth}) {
@@ -87,12 +89,13 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
         // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
 
-    console.log('element', element);
     return (
-        <FrontendContainer childName={element[getLocalized()]}>
-            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
-                         image={element.image}
+        <FrontendContainer>
+            <SubMetaElement title={element[getLocalized()]}
+                            description={element[getLocalized('description')]}
+                            image={element.image}
             />
+            <FrontendContentContainer childName={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/*<div className="w-full h-auto overflow-hidden mb-10">*/}
                 {/*    {element.free && <EmbeddedHtml html={element.embedded}/>}*/}
@@ -428,6 +431,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                     <RelatedItems elements={relatedElements.data} type={'course'}/>
                 }
             </div>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

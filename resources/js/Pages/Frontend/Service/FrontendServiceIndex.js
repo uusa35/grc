@@ -11,6 +11,8 @@ import NormalServiceWidget from "../components/widgets/service/NormalServiceWidg
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function FrontendServiceIndex({elements, categories}) {
     const {trans} = useContext(AppContext);
@@ -30,7 +32,9 @@ export default function FrontendServiceIndex({elements, categories}) {
 
     return (
         <FrontendContainer>
-            {/* Mobile filter dialog */}
+            <FrontendContentContainer>
+                <SubMetaElement title={trans('services')}/>
+                {/* Mobile filter dialog */}
             <SearchIndexSideBarMobile
                 type={'service'}
                 categories={filter(categories, c => c.is_service)}
@@ -78,6 +82,7 @@ export default function FrontendServiceIndex({elements, categories}) {
                     showSearch={false}
                 />
             </main>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

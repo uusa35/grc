@@ -23,6 +23,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {addToCart, checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 
 
 export default function FrontendServiceShow({element, relatedElements, auth}) {
@@ -82,10 +84,12 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
     }
 
     return (
-        <FrontendContainer childName={element[getLocalized()]}>
-            <MetaElement title={element[getLocalized()]} description={element[getLocalized('description')]}
-                         image={element.image}
+        <FrontendContainer>
+            <SubMetaElement title={element[getLocalized()]}
+                            description={element[getLocalized('description')]}
+                            image={element.image}
             />
+            <FrontendContentContainer childName={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                 {/* Product */}
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
@@ -416,6 +420,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                     <RelatedItems elements={relatedElements.data} type={'service'}/>
                 }
             </div>
+        </FrontendContentContainer>
         </FrontendContainer>
     )
 }

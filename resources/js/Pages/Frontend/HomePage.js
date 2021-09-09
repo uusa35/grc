@@ -6,6 +6,8 @@ import {isMobile, isTablet} from 'react-device-detect';
 import NewsLetter from "./partials/NewsLetter";
 import MetaElement from "../Backend/components/partials/MetaElement";
 import { motion } from "framer-motion";
+import MainGallery from "./components/widgets/slider/MainGallery";
+import FrontendContentContainer from "./components/FrontendContentContainer";
 
 export default function HomePage({settings, slides, homeBookCategories, newOnHomeBooks, newOnHomeCourses, onHomeParticipantAuthors }) {
     const[slideNumber, setSlideNumber] = useState(6)
@@ -21,7 +23,10 @@ export default function HomePage({settings, slides, homeBookCategories, newOnHom
     }, []); // Empty array ensures that effect is only run on mount
 
     return (
-        <FrontendContainer mainSlides={slides} showBreadCrumbs={false}>
+        <FrontendContainer showBreadCrumbs={false}>
+            {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
+            {slides && <MainGallery elements={slides}/>}
+            <FrontendContentContainer showBreadCrumbs={false}>
             <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:max-w-max lg:px-8">
                 <ElementSlider
                     showNavigation={false}
@@ -55,6 +60,7 @@ export default function HomePage({settings, slides, homeBookCategories, newOnHom
                 />
                 <NewsLetter />
             </div>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

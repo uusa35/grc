@@ -21,6 +21,7 @@ export default function FrontendBreadCrumbs({ childName = ''}) {
       }
     },[])
 
+    console.log('parentModule', parentModule);
     return (
         <div
             className="flex flex-1 flex-row justify-between items-center rounded-md shadow-sm p-5 w-auto">
@@ -35,7 +36,7 @@ export default function FrontendBreadCrumbs({ childName = ''}) {
                             {trans('home')}
                         </Link>
                     </li>
-                    {parentModule && route().has(`frontend.${parentModule}.index`) &&
+                    {parentModule && route().has(`frontend.${parentModule}.index`) ?
                     <li className="flex flex-row justify-start items-center">
                         <svg
                             className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
@@ -52,6 +53,23 @@ export default function FrontendBreadCrumbs({ childName = ''}) {
                             {trans(pluralize(parentModule))}
                         </Link>
                     </li>
+                         :
+                        <li className="flex flex-row justify-start items-center">
+                            <svg
+                                className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                aria-hidden="true"
+                            >
+                                <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
+                            </svg>
+                            <Link
+                                className="capitalize"
+                                href="#">
+                                {trans(pluralize(parentModule))}
+                            </Link>
+                        </li>
                     }
                     {
                         breadCrumbs.length >= 3 && childName && <li className="flex flex-row justify-start items-center invisible sm:visible">

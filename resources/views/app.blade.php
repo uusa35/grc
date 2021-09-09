@@ -8,26 +8,28 @@
     <!DOCTYPE html>
 <html>
 <head>
-    @if(isset($page['props']['element']))
+    @if(isset($page['props']['element']) && !is_null(request()->segment(2)))
         <title>{{$page['props']['element']->{'name_'.app()->getLocale()}  }}</title>
         <meta name="description" content="{{$page['props']['element']->{'description_'.app()->getLocale()}  }}"/>
-        {{--         faceboko --}}
+        {{--         facebook --}}
         <meta itemProp="facebook" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
         <meta property="facebook:card" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
         <meta property="facebook:url" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
         <meta property="facebook:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
-        <meta property="facebook:description" content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
+        <meta property="facebook:description"
+              content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
         <meta property="facebook:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
         {{--         twitter --}}
         <meta itemProp="twitter" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
         <meta property="twitter:card" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
         <meta property="twitter:url" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
         <meta property="twitter:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
-        <meta property="twitter:description" content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
+        <meta property="twitter:description"
+              content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
         <meta property="twitter:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
 
     @else
-        <title>{{$page['props']['settings']->{'name_'.app()->getLocale()}  }}</title>
+        <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(1) ? ' :: '. trans('general.'.Str::plural(request()->segment(1))) : '' }}</title>
         <meta name="name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
         <meta name="title" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
         <meta name="description" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
@@ -48,32 +50,35 @@
         <meta property="og:site_name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
         <meta property="og:url" content="{{ env('APP_URL') }}"/>
         <meta property="og:title" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
-        <meta property="og:description" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
+        <meta property="og:description"
+              content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
         <meta property="og:image" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
         <meta property="og:mobile" content="{{$page['props']['settings']->mobile }}"/>
         <meta property="og:whatsapp" content="{{$page['props']['settings']->whatsapp }}"/>
-{{--         faceboko --}}
+        {{--         faceboko --}}
         <meta itemProp="facebook" content="{{$page['props']['settings']->facebook }}"/>
         <meta property="facebook:card" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
         <meta property="facebook:url" content="{{$page['props']['settings']->facebook }}"/>
         <meta property="facebook:title" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
-        <meta property="facebook:description" content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
+        <meta property="facebook:description"
+              content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
         <meta property="facebook:image" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
-{{--         twitter --}}
+        {{--         twitter --}}
         <meta itemProp="twitter" content="{{$page['props']['settings']->twitter }}"/>
         <meta property="twitter:card" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
         <meta property="twitter:url" content="{{$page['props']['settings']->twitter }}"/>
         <meta property="twitter:title" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
-        <meta property="twitter:description" content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
+        <meta property="twitter:description"
+              content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
         <meta property="twitter:image" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
     @endif
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('/js/app.js') }}" defer></script>
-        @foreach($ssr['head'] ?? [] as $element)
-            {!! $element !!}
-        @endforeach
+    @foreach($ssr['head'] ?? [] as $element)
+        {!! $element !!}
+    @endforeach
 </head>
 <body>
 <div id="lang" style="display: none">{{ session()->get('lang') }}</div>

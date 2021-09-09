@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\Category;
 use App\Models\User;
 use App\Services\Search\UserFilters;
@@ -58,7 +59,7 @@ class FrontendUserController extends Controller
      */
     public function show(User $user)
     {
-        $element = $user->load('role','books');
+        $element = new UserResource($user->load('role','books'));
         return inertia('Frontend/User/FrontendUserShow', compact('element'));
     }
 

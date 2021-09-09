@@ -1,13 +1,17 @@
 import FrontendContainer from "../components/FrontendContainer";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function TermsPage({ element }) {
     const { trans , getThumb , getLocalized } = useContext(AppContext)
 
     return (
         <FrontendContainer>
+            <FrontendContentContainer>
+                <SubMetaElement title={trans('terms')}/>
         <div className="bg-white relative overflow-hidden">
             {/* Decorative background image and gradient */}
             <div aria-hidden="true" className="absolute inset-0">
@@ -57,6 +61,7 @@ export default function TermsPage({ element }) {
                 </div>
             </section>
         </div>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

@@ -1,10 +1,12 @@
 import FrontendContainer from "../components/FrontendContainer";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Disclosure} from "@headlessui/react";
 import {ChevronDownIcon} from "@heroicons/react/outline";
 import GlobalContext from "../../context/GlobalContext";
 import {map} from 'lodash';
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 
 export default function FaqsPage({elements}) {
@@ -13,6 +15,8 @@ export default function FaqsPage({elements}) {
 
     return (
         <FrontendContainer>
+            <FrontendContentContainer>
+                <SubMetaElement title={trans('faqs')}/>
             <div className="bg-white relative overflow-hidden">
                 {/* Decorative background image and gradient */}
                 <div aria-hidden="true" className="absolute inset-0">
@@ -92,6 +96,7 @@ export default function FaqsPage({elements}) {
                     </div>
                 </section>
             </div>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

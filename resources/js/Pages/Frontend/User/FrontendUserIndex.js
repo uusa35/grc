@@ -14,6 +14,8 @@ import SearchIndexSideBarMobile from "../partials/SearchIndexSideBarMobile";
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function FrontendUserIndex({elements, categories}) {
     const {trans} = useContext(AppContext);
@@ -33,7 +35,9 @@ export default function FrontendUserIndex({elements, categories}) {
 
     return (
         <FrontendContainer>
-            {/* Mobile filter dialog */}
+            <FrontendContentContainer>
+                <SubMetaElement title={trans('users')}/>
+                {/* Mobile filter dialog */}
             <SearchIndexSideBarMobile
                 type={'user'}
                 categories={filter(categories, c => c.is_user)}
@@ -82,6 +86,7 @@ export default function FrontendUserIndex({elements, categories}) {
                     showSearch={false}
                 />
             </main>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

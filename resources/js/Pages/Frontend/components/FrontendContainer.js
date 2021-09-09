@@ -16,6 +16,7 @@ import {useSelector} from "react-redux";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 import { motion } from "framer-motion"
 import MainGallery from "./widgets/slider/MainGallery";
+import FrontendContentContainer from "./FrontendContentContainer";
 
 const FrontendContainer = ({
                                children, elements = [],
@@ -23,29 +24,22 @@ const FrontendContainer = ({
                                showNoElements = false,
                                showSearch = false,
                                showMobileView = false,
-                               mainSlides = [],
                                showBreadCrumbs = true
                            }) => {
     const {locale} = useSelector(state => state)
-    const {classNames, getThumb, getLocalized, arFont, enFont } = useContext(AppContext);
+    const {classNames, arFont, enFont } = useContext(AppContext);
     const { settings } = useContext(GlobalContext);
 
     return (
         <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-lg capitalize")} dir={locale.dir}>
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
+            <MetaElement />
             <main
                 className={"flex-1 relative z-0 focus:outline-none max-w-full bg-white font-extrabold capitalize"}>
                 <MainNav/>
-                <MetaElement settings={settings} />
                 <div className="min-h-screen">
-                    {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
-                    {mainSlides && <MainGallery elements={mainSlides}/>}
-                    <div className="w-4/5 sm:w-4/5 lg:3/5 2xl:w-3/5 m-auto shadow-xl min-h-screen">
-                        {showBreadCrumbs && <FrontendBreadCrumbs childName={childName}/>}
-                        {children}
-                    </div>
-
+                    {children}
                 </div>
                 <Footer/>
             </main>
