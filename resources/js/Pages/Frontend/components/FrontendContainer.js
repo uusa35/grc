@@ -1,34 +1,14 @@
-import React, {useContext, useEffect} from "react";
-import {capitalize, split} from 'lodash';
+import React, {useContext} from "react";
 import PropTypes from 'prop-types';
-import {Inertia} from "@inertiajs/inertia";
-import {Head} from '@inertiajs/inertia-react'
-import route from "ziggy-js";
 import MainNav from "../partials/header/MainNav";
 import {AppContext} from "../../context/AppContext";
-import ConfirmationModal from "../../Backend/components/partials/ConfirmationModal";
-import GlobalContext from "../../context/GlobalContext";
 import Footer from "../partials/footer/Footer";
-import LoadingView from "../../Backend/components/widgets/LoadingView";
-import MainSwiper from "./widgets/slider/MainSwiper";
-import FrontendBreadCrumbs from "./FrontendBreadCrumbs";
 import {useSelector} from "react-redux";
 import MetaElement from "../../Backend/components/partials/MetaElement";
-import { motion } from "framer-motion"
-import MainGallery from "./widgets/slider/MainGallery";
-import FrontendContentContainer from "./FrontendContentContainer";
 
-const FrontendContainer = ({
-                               children, elements = [],
-                               childName = '',
-                               showNoElements = false,
-                               showSearch = false,
-                               showMobileView = false,
-                               showBreadCrumbs = true
-                           }) => {
+const FrontendContainer = ({children}) => {
     const {locale} = useSelector(state => state)
     const {classNames, arFont, enFont } = useContext(AppContext);
-    const { settings } = useContext(GlobalContext);
 
     return (
         <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-lg capitalize")} dir={locale.dir}>

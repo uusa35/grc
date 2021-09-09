@@ -10,11 +10,10 @@ import SearchIndexSideBarMobile from "../partials/SearchIndexSideBarMobile";
 import NormalServiceWidget from "../components/widgets/service/NormalServiceWidget";
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
-import MetaElement from "../../Backend/components/partials/MetaElement";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
-export default function FrontendServiceIndex({elements, categories}) {
+export default function ({elements, categories}) {
     const {trans} = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
