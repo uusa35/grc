@@ -23,6 +23,7 @@ import AlertMessage from "../partials/AlertMessage";
 import GlobalContext from "../../context/GlobalContext";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
+import SocialIconShare from "../partials/SocialIconShare";
 
 
 export default function ({element, relatedElements, auth}) {
@@ -41,8 +42,6 @@ export default function ({element, relatedElements, auth}) {
         setCurrentImages(images);
     }, [element])
 
-
-    console.log('element books', element.books);
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -148,6 +147,7 @@ export default function ({element, relatedElements, auth}) {
 
                         </div>
                     </div>
+                    <SocialIconShare  />
                     {/* related items */}
                     {
                         element.books && element.books.length > 0 &&

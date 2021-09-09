@@ -24,6 +24,7 @@ import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import SocialIconShare from "../partials/SocialIconShare";
 
 
 export default function FrontendServiceShow({element, relatedElements, auth}) {
@@ -413,6 +414,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                         </section>
                     </div>
                 </div>
+                <SocialIconShare  />
                 {/* related items */}
                 {
                     relatedElements && relatedElements.meta.total > 0 &&

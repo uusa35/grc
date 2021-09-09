@@ -23,6 +23,9 @@ import AlertMessage from "../partials/AlertMessage";
 import GlobalContext from "../../context/GlobalContext";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
+import SocialIconShare from "../partials/SocialIconShare";
+import route from 'ziggy-js'
+
 
 
 export default function ({element, relatedElements, auth}) {
@@ -414,6 +417,7 @@ export default function ({element, relatedElements, auth}) {
                         </section>
                     </div>
                 </div>
+                <SocialIconShare  />
                 {/* related items */}
                 {
                     relatedElements && relatedElements.meta.total > 0 &&

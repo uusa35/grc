@@ -36,6 +36,7 @@ const userNavigation = [
 import route from 'ziggy-js';
 import GlobalContext from "../../context/GlobalContext";
 import {Link} from "@inertiajs/inertia-react";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function FrontendUserEdit({element}) {
     const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
@@ -55,7 +56,8 @@ export default function FrontendUserEdit({element}) {
     ]
 
     return (
-        <FrontendContainer mainModule={'home'}>
+        <FrontendContainer>
+            <FrontendContentContainer>
             <main className="relative mt-5">
                 <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                     <div className="bg-white overflow-hidden">
@@ -393,6 +395,7 @@ export default function FrontendUserEdit({element}) {
                     </div>
                 </div>
             </main>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

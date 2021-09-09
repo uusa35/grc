@@ -32,6 +32,7 @@ import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
+import SocialIconShare from "../partials/SocialIconShare";
 
 
 export default function FrontendCourseShow({element, relatedElements, auth}) {
@@ -425,6 +426,7 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                         </section>
                     </div>
                 </div>
+                <SocialIconShare  />
                 {/* related items */}
                 {
                     relatedElements && relatedElements.meta.total > 0 &&
