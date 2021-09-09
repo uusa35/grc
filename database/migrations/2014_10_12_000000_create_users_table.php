@@ -69,6 +69,7 @@ class CreateUsersTable extends Migration
             $table->string('video_url_three')->nullable();
             $table->string('video_url_four')->nullable();
             $table->string('video_url_five')->nullable();
+            $table->integer('order')->nullable();
 
             $table->boolean('on_home')->default(false);
             $table->boolean('active')->default(true);

@@ -46,6 +46,8 @@ export default function SlideEdit({slide , types, products, services, categories
         }))
     }
 
+    console.log('data active', data.active);
+
     const submit = (e) => {
         e.preventDefault()
         Inertia.post(route(`backend.slide.update`, slide.id), {
@@ -610,6 +612,7 @@ export default function SlideEdit({slide , types, products, services, categories
                                                 <input
                                                     onChange={handleChange}
                                                     name="active"
+                                                    id="active"
                                                     type="radio"
                                                     defaultChecked={data.active}
                                                     value={1}
@@ -624,6 +627,7 @@ export default function SlideEdit({slide , types, products, services, categories
                                                 <input
                                                     onChange={handleChange}
                                                     name="active"
+                                                    id="active"
                                                     type="radio"
                                                     defaultChecked={!data.active}
                                                     value={0}
@@ -654,6 +658,7 @@ export default function SlideEdit({slide , types, products, services, categories
                                                     <input
                                                         onChange={handleChange}
                                                         name="on_home"
+                                                        id="on_home"
                                                         defaultChecked={data.on_home}
                                                         type="radio"
                                                         value={1}
@@ -668,6 +673,7 @@ export default function SlideEdit({slide , types, products, services, categories
                                                     <input
                                                         onChange={handleChange}
                                                         name="on_home"
+                                                        id="on_home"
                                                         type="radio"
                                                         defaultChecked={!data.on_home}
                                                         value={0}

@@ -22,14 +22,14 @@ class CreateSlidesTable extends Migration
             $table->text('description_ar')->nullable();
             $table->text('notes_ar')->nullable();
             $table->text('notes_en')->nullable();
-            $table->boolean('active')->default(true);
+            $table->boolean('active')->default(1);
             $table->integer('order')->nullable();
             $table->string('image')->nullable();
             $table->string('file')->nullable();
             $table->string('url')->nullable();
-            $table->boolean('on_home')->default(false);
-            $table->boolean('is_video')->default(false);
-            $table->boolean('is_intro')->default(false);
+            $table->boolean('on_home')->default(0);
+            $table->boolean('is_video')->default(0);
+            $table->boolean('is_intro')->default(0);
             $table->string('type')->nullable();
             // used for Deep Linking
             $table->foreignId('category_id')->nullable()->constrained();

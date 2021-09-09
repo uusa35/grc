@@ -1167,5 +1167,7 @@ export const ar = {
     "order_elements" : "بنود الفاتورة (الطلب)",
     "this_cart_is_not_multi_you_can_not_buy_from_two_different_vendors" : "يمكنك اضافه عناصر اخرى من نفس الشركة او التاجر فقط",
     "theme" : "اللون المفضل",
-    "images" : "الصور"
+    "images" : "الصور",
+    "on_top" : "القائمة العلوية",
+    "hide_module" : "إخفاء الموديول"
 }

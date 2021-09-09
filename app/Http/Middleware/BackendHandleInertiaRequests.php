@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\AuthExtraLightResource;
 use App\Http\Resources\SettingExtraLightResource;
+use App\Http\Resources\SettingResource;
 use App\Models\Currency;
 use App\Models\Setting;
 use App\Models\User;
@@ -48,7 +49,7 @@ class BackendHandleInertiaRequests extends Middleware
                     return $q->orderBy('order', 'asc');
                 }]);
             }])->first()) : null,
-            'settings' => fn() => new SettingExtraLightResource(Setting::first()),
+            'settings' => fn() => new SettingResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
         ]);

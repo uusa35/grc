@@ -79,6 +79,7 @@ class UserFactory extends Factory
             'cancellation_en' => $this->faker->name,
             'keywords' => $this->faker->sentence,
             'balance' => $this->faker->numberBetween(5, 99),
+            'order' => $this->faker->numberBetween(1, 20),
             'on_home' => $this->faker->boolean(true),
             'is_male' => $this->faker->boolean,
             'news_letter_on' => $this->faker->boolean,
