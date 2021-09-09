@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\faqCollection;
+use App\Http\Resources\FaqCollection;
 use App\Models\Faq;
 use Illuminate\Http\Request;
 
@@ -25,7 +25,7 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $elements = new faqCollection(Faq::paginate(Self::TAKE_LESS));
+        $elements = new FaqCollection(Faq::paginate(Self::TAKE_LESS));
         return inertia('Backend/Faq/FaqIndex', compact('elements'));
     }
 
