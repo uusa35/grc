@@ -72,7 +72,8 @@ class FrontendUserController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user);
-        $element = User::whereId($user->id)->with('role','subscription')->first();
+//        $element = new UserResource($user->load('role','addresses','favoritesList.favoritable','orders.order_metas.ordermetable'));
+        $element = new UserResource($user->load('role'));
         return inertia('Frontend/User/FrontendUserEdit', compact('element'));
     }
 

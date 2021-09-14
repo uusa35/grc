@@ -25,7 +25,7 @@ export default function ElementPrice({price, salePrice, isOnSale, large = false,
                 }
             </div>
             {
-                !isEmpty(currency) && !currency.country.is_local && showLocal && <div className="flex flex-row flex-1 justify-between items-start m-2">
+                !isEmpty(currency) && !currency.country?.is_local && showLocal && <div className="flex flex-row flex-1 justify-between items-start m-2">
                     <p className={classNames(isOnSale ? 'line-through' : '', `mt-1  text-gray-500 ${large ? 'text-sm sm:text-lg' : 'text-sm smm:text-lg'}`)}>
                         {getConvertedFinalPrice(price, localCurrency.exchange_rate)} {localCurrency[getLocalized('currency_symbol')]}
                     </p>

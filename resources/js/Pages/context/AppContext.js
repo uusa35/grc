@@ -24,11 +24,12 @@ import ConfirmationModal from "../Backend/components/partials/ConfirmationModal"
 import {capitalize} from "lodash/string";
 import Echo from 'laravel-echo'
 import Pusher from "pusher-js";
+import {env} from "tailwindcss/lib/jit/lib/sharedState";
 
 const AppContext = createContext({});
 
 const AppContextProvider = ({children}) => {
-    const {lang, locale, bootStrapped, confirmationModal, toastMessage, cart } = useSelector(state => state);
+    const {lang, locale, bootStrapped, confirmationModal, toastMessage, cart} = useSelector(state => state);
     const {auth, settings, currencies} = useContext(GlobalContext);
 
     const dispatch = useDispatch();
@@ -81,6 +82,9 @@ const AppContextProvider = ({children}) => {
         moment.locale(lang);
     }, [lang])
 
+
+
+
     useEffect(() => {
         isLocal() && console.log('useEffect starts here =====>')
         Inertia.on('navigate', (e) => {
@@ -107,14 +111,14 @@ const AppContextProvider = ({children}) => {
         });
         toast.configure(options)
         dispatch(prepareCart({
-            multiCartMerchant:  settings.multi_cart_merchant ,
-            applyGlobalShipment : settings.apply_global_shipment,
-            currentShipmentCountry : auth?.country || isEmpty(cart.currentShipmentCountry) ? auth.country : cart.currentShipmentCountry
+            multiCartMerchant: settings.multi_cart_merchant,
+            applyGlobalShipment: settings.apply_global_shipment,
+            currentShipmentCountry: auth?.country || isEmpty(cart.currentShipmentCountry) ? auth.country : cart.currentShipmentCountry
         }))
     }, [])
 
     useMemo(() => {
-        if (!bootStrapped && navigator.onLine) {
+        if ((!bootStrapped && navigator.onLine) || env.NODE_ENV == 'development') {
             dispatch(startBootStrapped({settings, currencies}))
         }
         if (!isEmpty(auth && auth.role?.privileges)) {
@@ -135,7 +139,7 @@ const AppContextProvider = ({children}) => {
 
     return (
         <AppContext.Provider value={context}>
-            {navigator.onLine ? children : <LoadingView/>}
+            {navigator.onLine || env.NODE_ENV == 'development' ? children : <LoadingView/>}
             <ToastContainer
                 rtl={locale.isRTL}
                 closeButton={() => <GrClose color={'white'}/>}

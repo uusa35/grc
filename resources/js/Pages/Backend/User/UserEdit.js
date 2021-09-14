@@ -189,10 +189,10 @@ export default function ({user, roles, elementCategories, categories , countries
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        onChange={handleChange}
                                         required
                                         type="text"
                                         name="name"
+                                        onChange={handleChange}
                                         defaultValue={user.name}
                                         id="name"
                                         autoComplete="name"

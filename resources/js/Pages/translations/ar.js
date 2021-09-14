@@ -1170,5 +1170,6 @@ export const ar = {
     "images" : "الصور",
     "on_top" : "القائمة العلوية",
     "hide_module" : "إخفاء الموديول",
-    "share" : "المشاركة"
+    "share" : "المشاركة",
+    "newsletter_subscription" : "الإشتراك بالقائمة البريدية"
 }

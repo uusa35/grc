@@ -9,7 +9,7 @@
 <html>
 <head>
     @if(request()->segment(1) !== 'backend')
-        @if(isset($page['props']['element']) && !is_null(request()->segment(2)))
+        @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
             <title>{{$page['props']['element']->{'name_'.app()->getLocale()}  }}</title>
             <meta name="description" content="{{$page['props']['element']->{'description_'.app()->getLocale()}  }}"/>
             {{--         facebook --}}
