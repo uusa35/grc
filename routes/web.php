@@ -95,6 +95,11 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
         Route::get('order/{id}/paid', [FrontendOrderController::class, 'makeOrderPaid'])->name('order.paid');
         Route::get('order/{id}/failed', [FrontendOrderController::class, 'makeOrderFailed'])->name('order.failed');
         Route::get('order/paid/{id}/event', [FrontendOrderController::class, 'makeNotify'])->name('order.notify');
+        Route::get('profile/reset/password', [FrontendUserController::class,'getResetPassword'])->name('user.reset');
+        Route::post('profile/reset/password', [FrontendUserController::class,'postResetPassword'])->name('user.post.reset');
+        Route::get('profile/book', [FrontendUserController::class,'getBooks'])->name('user.book');
+        Route::get('profile/course', [FrontendUserController::class,'getCourses'])->name('user.course');
+        Route::get('profile/service', [FrontendUserController::class,'getServices'])->name('user.service');
     });
 });
 

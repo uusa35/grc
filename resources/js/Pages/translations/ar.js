@@ -1128,7 +1128,7 @@ export const ar = {
     "confirm_information" : "تأكيد المعلومات",
     "payment_process" : "عملية الدفع",
     "confirmation" : "تأكيد",
-    "change_password" : "كلمة المرور",
+    "change_password" : "تغير كلمة المرور",
     "my_books_list" : "مكتبتي",
     "my_courses_list" : "دوراتي",
     "my_subscription" : "اشتراكي",
@@ -1171,5 +1171,10 @@ export const ar = {
     "on_top" : "القائمة العلوية",
     "hide_module" : "إخفاء الموديول",
     "share" : "المشاركة",
-    "newsletter_subscription" : "الإشتراك بالقائمة البريدية"
+    "newsletter_subscription" : "الإشتراك بالقائمة البريدية",
+    "old_password" : "كلمة المرور الحالية",
+    "confirm_password" : "تأكيد كلمة المرور",
+    "my_courses" : "دوراتي",
+    "my_services" : "استشاراتي",
+    "my_books" : "مكتبتي",
 }

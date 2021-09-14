@@ -92,9 +92,9 @@ export default function({element}) {
                                                     {trans("profile_message")}
                                                 </p>
                                             </div>
-                                            <div className="mt-6 flex flex-col lg:flex-row">
+                                            <div className="flex flex-col lg:flex-row">
                                                 <div
-                                                    className="mt-6 flex-grow lg:mt-0 lg:ml-6 lg:flex-grow-0 lg:flex-shrink-0">
+                                                    className="flex-grow lg:mt-0 lg:ml-6 lg:flex-grow-0 lg:flex-shrink-0">
                                                     <p className="text-sm font-medium text-gray-700" aria-hidden="true">
                                                         {trans('personal_image')}
                                                     </p>
@@ -259,7 +259,6 @@ export default function({element}) {
                                         </div>
                                     </div>
 
-                                    {/* Privacy section */}
                                     <div className=" divide-y divide-gray-200">
                                         <div className="px-4 sm:px-6">
                                             <ul className="mt-2 divide-y divide-gray-200">

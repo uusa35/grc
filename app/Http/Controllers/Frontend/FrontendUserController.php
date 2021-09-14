@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class FrontendUserController extends Controller
 {
@@ -98,5 +99,33 @@ class FrontendUserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function getResetPassword() {
+        return inertia('Frontend/User/FrontendResetPassword');
+    }
+
+    public function postResetPassword(Request $request) {
+        $request->validate([
+            'old_password' => 'required|min:8',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+        $user = auth()->user();
+        $element = User::whereId($user->id)->first();
+        if($element->update(['password' => Hash::make($request->password)])) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+    }
+
+    public function getCourses() {
+        return inertia('Frontend/User/FrontendUserCourseIndex');
+    }
+
+    public function getServices() {
+        return inertia('Frontend/User/FrontendUserServiceIndex');
+    }
+
+    public function getBooks() {
+        return inertia('Frontend/User/FrontendUserBookIndex');
     }
 }
