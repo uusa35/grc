@@ -73,9 +73,8 @@ class FrontendUserController extends Controller
     public function edit(User $user)
     {
         $this->authorize('update', $user);
-//        $element = new UserResource($user->load('role','addresses','favoritesList.favoritable','orders.order_metas.ordermetable'));
-        $element = new UserResource($user->load('role'));
-        return inertia('Frontend/User/FrontendUserEdit', compact('element'));
+        $user = new UserResource($user->load('role'));
+        return inertia('Frontend/User/FrontendUserEdit', compact('user'));
     }
 
     /**
@@ -87,7 +86,18 @@ class FrontendUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name_ar' => 'required|min:3|max:255',
+            'name_en' => 'required|min:3|max:255',
+            'mobile' => 'required|min:6|max:12',
+            'whatsapp' => 'min:5|max:12'
+        ]);
+        $updated = $user->update($request->except(['_token', 'image']));
+        if ($updated) {
+            $request->hasFile('image') ? $this->saveMimes($user, $request, ['image'], ['500', '500'], false) : null;
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -102,7 +112,7 @@ class FrontendUserController extends Controller
     }
 
     public function getResetPassword() {
-        return inertia('Frontend/User/FrontendResetPassword');
+        return inertia('Frontend/User/Profile/FrontendResetPassword');
     }
 
     public function postResetPassword(Request $request) {
@@ -118,14 +128,22 @@ class FrontendUserController extends Controller
     }
 
     public function getCourses() {
-        return inertia('Frontend/User/FrontendUserCourseIndex');
+        return inertia('Frontend/User/Profile/FrontendUserCourseIndex');
     }
 
     public function getServices() {
-        return inertia('Frontend/User/FrontendUserServiceIndex');
+        return inertia('Frontend/User/Profile/FrontendUserServiceIndex');
     }
 
     public function getBooks() {
-        return inertia('Frontend/User/FrontendUserBookIndex');
+        return inertia('Frontend/User/Profile/FrontendUserBookIndex');
+    }
+
+    public function getFavorites() {
+        return inertia('Frontend/User/Profile/FrontendUserFavoriteIndex');
+    }
+
+    public function getSettings() {
+        return inertia('Frontend/User/Profile/FrontendUserSettingIndex');
     }
 }

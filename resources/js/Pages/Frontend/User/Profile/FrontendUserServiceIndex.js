@@ -1,25 +1,9 @@
 import {Fragment, useContext, useState} from 'react'
-import {Disclosure, Menu, Switch, Transition} from '@headlessui/react'
-import {SearchIcon} from '@heroicons/react/solid'
-import {
-    BellIcon,
-    CogIcon,
-    CreditCardIcon,
-    KeyIcon,
-    MenuIcon,
-    UserCircleIcon,
-    ViewGridAddIcon,
-    XIcon,
-} from '@heroicons/react/outline'
-import {AppContext} from "../../context/AppContext";
-import FrontendContainer from "../components/FrontendContainer";
-
-import route from 'ziggy-js';
-import GlobalContext from "../../context/GlobalContext";
-import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import FrontendContentContainer from "../components/FrontendContentContainer";
+import {AppContext} from "../../../context/AppContext";
+import FrontendContainer from "../../components/FrontendContainer";
+import GlobalContext from "../../../context/GlobalContext";
+import FrontendContentContainer from "../../components/FrontendContentContainer";
 import {useDispatch, useSelector} from "react-redux";
-import {Inertia} from "@inertiajs/inertia";
 import UserEditSideNav from "./UserEditSideNav";
 
 export default function() {
@@ -45,12 +29,12 @@ export default function() {
                                             <div>
                                                 <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('profile')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
-                                                    {trans("my_books")}
+                                                    {trans("my_services")}
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="mt-6 grid grid-cols-12 gap-3">
-                                            <h1>book INdex</h1>
+                                            <h1>service INdex</h1>
                                         </div>
                                     </div>
                                 </form>

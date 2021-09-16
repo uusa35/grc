@@ -5,6 +5,7 @@ import {AppContext} from "../../context/AppContext";
 import Footer from "../partials/footer/Footer";
 import {useSelector} from "react-redux";
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import SystemMessage from "../../Backend/components/partials/SystemMessage";
 
 const FrontendContainer = ({children}) => {
     const {locale} = useSelector(state => state)
@@ -19,6 +20,7 @@ const FrontendContainer = ({children}) => {
                 className={"flex-1 relative z-0 focus:outline-none max-w-full bg-white font-extrabold capitalize"}>
                 <MainNav/>
                 <div className="min-h-screen">
+                    <SystemMessage/>
                     {children}
                 </div>
                 <Footer/>

@@ -38,6 +38,7 @@ use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\TimingController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VideoController;
+use App\Http\Controllers\Frontend\FrontendAddressController;
 use App\Http\Controllers\Frontend\FrontendBookController;
 use App\Http\Controllers\Frontend\FrontendCartController;
 use App\Http\Controllers\Frontend\FrontendCategoryController;
@@ -100,6 +101,9 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
         Route::get('profile/book', [FrontendUserController::class,'getBooks'])->name('user.book');
         Route::get('profile/course', [FrontendUserController::class,'getCourses'])->name('user.course');
         Route::get('profile/service', [FrontendUserController::class,'getServices'])->name('user.service');
+        Route::get('profile/favorite', [FrontendUserController::class,'getFavorites'])->name('user.favorite');
+        Route::get('profile/setting', [FrontendUserController::class,'getSettings'])->name('user.setting');
+        Route::resource('profile/address', FrontendAddressController::class);
     });
 });
 

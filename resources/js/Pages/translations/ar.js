@@ -1177,4 +1177,7 @@ export const ar = {
     "my_courses" : "دوراتي",
     "my_services" : "استشاراتي",
     "my_books" : "مكتبتي",
+    "my_favorites" : "مفضلتي",
+    "my_settings" : "الإعدادات",
+    "my_addresses" : "عناويني"
 }
