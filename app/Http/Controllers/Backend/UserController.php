@@ -18,6 +18,8 @@ use App\Models\Subscription;
 use App\Models\User;
 use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Inertia\Testing\Concerns\Has;
 
 class UserController extends Controller
 {
@@ -154,5 +156,25 @@ class UserController extends Controller
             dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage());
         }
+    }
+
+    public function getResetPassword(Request $request) {
+        $request->validate([
+            'id' => 'required|integer|exists:users,id'
+        ]);
+        return inertia('Backend/User/ResetPassword');
+    }
+
+    public function postResetPassword(Request $request) {
+        $request->validate([
+            'id' => 'required|integer|exists:users,id',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        $authenticated = auth()->user()->isAdminOrAbove || auth()->id() === $request->id;
+        if($authenticated) {
+            User::whereId($request->id)->first()->update(['password' => Hash::make($request->password)]);
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }

@@ -81,16 +81,12 @@ const AppContextProvider = ({children}) => {
         document.getElementById('lang').innerHTML = lang;
         moment.locale(lang);
     }, [lang])
-
-
-
-
+    
     useEffect(() => {
         isLocal() && console.log('useEffect starts here =====>')
         Inertia.on('navigate', (e) => {
             isLocal() && console.log('navigate ==>')
             const currentRoute = route().current();
-            console.log('currentRoute ====!!!!', currentRoute);
             const breadCrumbs = split(currentRoute, '.');
             isLocal() && console.log('befre Module', breadCrumbs[1])
             isLocal() && console.log('bread', breadCrumbs);

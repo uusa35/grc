@@ -8,8 +8,6 @@ export default function() {
     const {classNames, trans, getThumb, getLarge} = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
 
-    console.log('the current route ', route().current());
-
     return (
         <aside className="py-6 lg:col-span-3">
             <nav className="space-y-1 divide-y ">

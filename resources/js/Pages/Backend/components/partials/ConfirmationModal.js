@@ -34,8 +34,6 @@ export default function ConfirmationModal() {
         }
     }
 
-    console.log('confirm', confirmationModal);
-
     const handleDeleteFormSubmit = () => {
         const {id, model, type} = confirmationModal;
         setData('id', id);

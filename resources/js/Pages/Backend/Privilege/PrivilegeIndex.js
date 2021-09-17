@@ -9,7 +9,6 @@ export default function({elements}) {
     const {trans, handleDeleteItem, classNames } = useContext(AppContext);
     const {params} = route();
 
-    console.log('elements', elements);
     return (
         <BackendContainer elements={elements}
                           showNoElements={elements.meta.total < 1}

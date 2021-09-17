@@ -24,7 +24,6 @@ const SideBar = () => {
     const[sideBarOpen, toggleSideBar] = useState(false)
     const {settings, auth} = useContext(GlobalContext);
 
-    console.log('parent', parentModule);
     return (
         <>
 

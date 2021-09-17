@@ -21,7 +21,6 @@ export default function FrontendBreadCrumbs({ childName = ''}) {
       }
     },[])
 
-    console.log('parentModule', parentModule);
     return (
         <div
             className="flex flex-1 flex-row justify-between items-center rounded-md shadow-sm p-5 w-auto">

@@ -12,7 +12,6 @@
 
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('password.update') }}">
                     @csrf
-
                     <input type="hidden" name="token" value="{{ $token }}">
 
                     <div class="flex flex-wrap">
@@ -58,8 +57,8 @@
 
                     <div class="flex flex-wrap pb-8 sm:pb-10">
                         <button type="submit"
-                        class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
-                            {{ __('Reset Password') }}
+                        class="w-full bg-gray-400 select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
+                            {{ __('general.reset_password') }}
                         </button>
                     </div>
                 </form>

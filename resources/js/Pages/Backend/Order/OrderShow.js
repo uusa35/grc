@@ -15,7 +15,6 @@ export default function({order}) {
     const {classNames, trans, getThumb, getLocalized} = useContext(AppContext);
     const {locale, settings} = useSelector(state => state);
     const componentRef = useRef();
-    console.log('order', order)
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,

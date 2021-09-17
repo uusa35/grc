@@ -101,7 +101,6 @@ export default function({subscription}) {
         setCurrentImages(imagesGroup);
     }
 
-    console.log('sub', subscription);
     return (
         <BackendContainer type={'subscription'}>
             <div className="flex flex-col bg-white shadow-md rounded-md">

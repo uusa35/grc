@@ -11,6 +11,7 @@ import plurlaize from 'pluralize'
 import PinnedProjects from "./header/PinnedProjects";
 import {useDispatch, useSelector} from "react-redux";
 import {changeLang} from "../../../redux/actions";
+import GlobalContext from "../../../context/GlobalContext";
 
 
 const BackendHeader = () => {
@@ -23,7 +24,8 @@ const BackendHeader = () => {
         isSuper,
         isAdminOrAbove
     } = useContext(AppContext);
-    const { modules , locale , settings  } = useSelector(state => state);
+    const { modules , locale , settings } = useSelector(state => state);
+    const { auth } = useContext(GlobalContext);
     const dispatch = useDispatch();
 
     return (
@@ -282,6 +284,49 @@ const BackendHeader = () => {
                                                 )}
                                             </Menu.Item>
                                         </div>}
+                                        <div className="py-1 capitalize">
+                                            <Menu.Item>
+                                                {({active}) => (
+                                                    <Link
+                                                        href={route('backend.user.edit', { id : auth.id})}
+                                                        className={classNames(
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            'group flex items-center px-4 py-2 '
+                                                        )}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             className="h-6 w-6 mx-2"
+                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round"
+                                                                  strokeLinejoin="round"
+                                                                  strokeWidth={2}
+                                                                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                        </svg>
+                                                        {trans('edit')} {trans('information')}
+                                                    </Link>
+                                                )}
+                                            </Menu.Item>
+                                        </div>
+                                        <div className="py-1 capitalize">
+                                            <Menu.Item>
+                                                {({active}) => (
+                                                    <Link
+                                                        href={route('backend.reset.password', { id : auth.id})}
+                                                        className={classNames(
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            'group flex items-center px-4 py-2 '
+                                                        )}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             className="h-6 w-6 mx-2"
+                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                                                        </svg>
+                                                        {trans('reset_password')}
+                                                    </Link>
+                                                )}
+                                            </Menu.Item>
+                                        </div>
                                         <div className="py-1 capitalize">
                                             <Menu.Item>
                                                 {({active}) => (

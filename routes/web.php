@@ -53,6 +53,7 @@ use App\Http\Controllers\Frontend\FrontendServiceController;
 use App\Http\Controllers\Frontend\FrontendUserController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\GovernateController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,6 +127,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::resource('section', SectionController::class);
     Route::resource('page', PageController::class);
     Route::resource('user', UserController::class);
+    Route::get('reset/password', [UserController::class,'getResetPassword'])->name('reset.password');
+    Route::post('reset/password', [UserController::class,'postResetPassword'])->name('post.reset.password');
     Route::resource('order', OrderController::class);
     Route::resource('course', CourseController::class);
     Route::resource('slide', SlideController::class);

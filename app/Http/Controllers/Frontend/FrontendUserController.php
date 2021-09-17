@@ -117,14 +117,14 @@ class FrontendUserController extends Controller
 
     public function postResetPassword(Request $request) {
         $request->validate([
-            'old_password' => 'required|min:8',
-            'password' => 'required|string|min:8|confirmed',
+            'old_password' => 'required|min:6',
+            'password' => 'required|string|min:6|confirmed',
         ]);
-        $user = auth()->user();
-        $element = User::whereId($user->id)->first();
-        if($element->update(['password' => Hash::make($request->password)])) {
+        $user = auth()->attempt(['email' => auth()->user()->email, 'password' => $request->old_password]);
+        if($user && auth()->user()->update(['password' => Hash::make($request->password)])) {
             return redirect()->back()->with('success', trans('general.process_success'));
         }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     public function getCourses() {

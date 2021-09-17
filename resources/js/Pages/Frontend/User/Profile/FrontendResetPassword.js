@@ -13,8 +13,7 @@ export default function() {
     const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
     const {locale} = useSelector(state => state);
-    const [availableToHire, setAvailableToHire] = useState(true)
-    const [privateAccount, setPrivateAccount] = useState(false)
+    const [viewPass, setViewPass] = useState(false)
 
     const dispatch = useDispatch();
     const {props} = usePage();
@@ -22,7 +21,7 @@ export default function() {
     const {data, setData, put, post, progress, reset} = useForm({
         'old_password': '',
         'password': '',
-        'confirm_password': ''
+        'password_confirmation': ''
     });
 
     const handleChange = (e) => {
@@ -34,9 +33,8 @@ export default function() {
 
     const submit = (e) => {
         e.preventDefault()
-        Inertia.post(route(`frontend.reset.password`), {
+        Inertia.post(route(`frontend.user.post.reset`), {
             ...data,
-            image: data.image,
         }, {
             forceFormData: true
         })
@@ -50,7 +48,12 @@ export default function() {
                         <div className="bg-white overflow-hidden">
                             <div className=" lg:grid lg:grid-cols-12">
                                 <UserEditSideNav/>
-                                <form className=" lg:col-span-9" action="#" method="POST">
+                                <form
+                                    onSubmit={submit}
+                                    method="put"
+                                    encType="multipart/form-data"
+                                    className={'lg:col-span-9 sm:w-full'}
+                                >
 
                                     <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                         <div className="flex flex-1 justify-between items-center">
@@ -62,21 +65,35 @@ export default function() {
                                             </div>
                                         </div>
                                         <div className="mt-6 grid grid-cols-12 gap-3">
-
                                             {/* old_password */}
                                             <div className="col-span-12">
-                                                <label htmlFor="old_password"
-                                                       className="block text-sm font-medium text-gray-700">
-                                                    {trans("old_password")}
-                                                </label>
+                                                <div className="flex flex-row justify-between items-center">
+                                                    <label htmlFor="old_password"
+                                                           className="block text-sm font-medium text-gray-700">
+                                                        {trans("old_password")}
+                                                    </label>
+                                                    <button
+                                                        type='button'
+                                                        className="flex items-center justify-center shadow-sm rounded-full h-10 w-10 ring-gray-50 bg-transparent hover:bg-gray-100"
+                                                        onClick={() => setViewPass(!viewPass)}
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                  strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                  strokeWidth={2}
+                                                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                        </svg>
+                                                    </button>
+                                                </div>
                                                 <input
-                                                    type="password"
+                                                    type={viewPass ? 'text' : 'password'}
                                                     name="old_password"
                                                     id="old_password"
-                                                    disabled
                                                     onChange={handleChange}
                                                     autoComplete={trans("email")}
-                                                    className="disabled mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                    className=" mt-1 block w-full border border-gray-100 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.old_password &&
@@ -91,13 +108,12 @@ export default function() {
                                                     {trans("password")}
                                                 </label>
                                                 <input
-                                                    type="password"
+                                                    type={viewPass ? 'text' : 'password'}
                                                     name="password"
                                                     id="password"
-                                                    disabled
                                                     onChange={handleChange}
                                                     autoComplete={trans("email")}
-                                                    className="disabled mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                    className=" mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.password &&
@@ -107,23 +123,22 @@ export default function() {
 
                                             {/* confirm_password */}
                                             <div className="col-span-12">
-                                                <label htmlFor="confirm_password"
+                                                <label htmlFor="password_confirmation"
                                                        className="block text-sm font-medium text-gray-700">
-                                                    {trans("confirm_password")}
+                                                    {trans("password_confirmation")}
                                                 </label>
                                                 <input
-                                                    type="password"
-                                                    name="confirm_password"
-                                                    id="confirm_password"
-                                                    disabled
+                                                    type={viewPass ? 'text' : 'password'}
+                                                    name="password_confirmation"
+                                                    id="password_confirmation"
                                                     onChange={handleChange}
-                                                    autoComplete={trans("confirm_password")}
-                                                    className="disabled mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                    autoComplete={trans("password_confirmation")}
+                                                    className=" mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
-                                                    {errors.confirm_password &&
+                                                    {errors.password_confirmation &&
                                                     <div
-                                                        className={`text-sm text-red-900`}>{errors.confirm_password}</div>}
+                                                        className={`text-sm text-red-900`}>{errors.password_confirmation}</div>}
                                                 </p>
                                             </div>
 
@@ -134,13 +149,13 @@ export default function() {
                                     <div className="mt-4 py-4 px-4 flex justify-end gap-x-5">
                                         <button
                                             type="button"
-                                            className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                            className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                         >
                                             {trans('cancel')}
                                         </button>
                                         <button
                                             type="submit"
-                                            className="ml-5 bg-gray-200 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-black hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                            className="ml-5 bg-gray-200 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                         >
                                             {trans('save')}
                                         </button>

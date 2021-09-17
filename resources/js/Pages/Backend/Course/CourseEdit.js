@@ -130,8 +130,6 @@ export default function CourseEdit({users, categories, course, elementCategories
         setCurrentImages(imagesGroup);
     }
 
-    console.log('errors', errors);
-
     return (
         <BackendContainer type={'course'}>
             {/*{*/}

@@ -17,7 +17,8 @@ export default function ({elements}) {
     const {
         trans,
         classNames,
-        getLocalized
+        getLocalized,
+        isAdminOrAbove
     } = useContext(AppContext);
     const { sort, locale  } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -186,6 +187,27 @@ export default function ({elements}) {
                                                                                     </Link>
                                                                                 )}
                                                                             </Menu.Item>
+                                                                            {
+                                                                                isAdminOrAbove && <Menu.Item>
+                                                                                    {({active}) => (
+                                                                                        <Link
+                                                                                            href={route('backend.reset.password', { id : element.id})}
+                                                                                            className={classNames(
+                                                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                                'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                            )}
+                                                                                        >
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                 className="h-6 w-6 mx-2"
+                                                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                                                                                            </svg>
+                                                                                            {trans('reset_password')}
+                                                                                        </Link>
+                                                                                    )}
+                                                                                </Menu.Item>
+                                                                            }
+
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
