@@ -1179,5 +1179,6 @@ export const ar = {
     "my_books" : "مكتبتي",
     "my_favorites" : "مفضلتي",
     "my_settings" : "الإعدادات",
-    "my_addresses" : "عناويني"
+    "my_addresses" : "عناويني",
+    "author" : "المؤلف"
 }

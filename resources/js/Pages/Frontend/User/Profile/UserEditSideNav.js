@@ -70,9 +70,9 @@ export default function() {
                     <span className="truncate">{trans('my_addresses')}</span>
                 </Link>
                 <Link
-                    href={route('frontend.user.course')}
+                    href={route('frontend.profile.courses')}
                     className={classNames(
-                        route().current() === 'frontend.user.course'
+                        route().current() === 'frontend.profile.courses'
                             ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 hover:text-gray-300'
                             : 'border-transparent text-gray-400 hover:bg-gray-50 hover:text-gray-900',
                         'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md'
@@ -87,9 +87,9 @@ export default function() {
                     <span className="truncate">{trans('my_courses')}</span>
                 </Link>
                 <Link
-                    href={route('frontend.user.service')}
+                    href={route('frontend.profile.services')}
                     className={classNames(
-                        route().current() === 'frontend.user.service'
+                        route().current() === 'frontend.profile.services'
                             ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 hover:text-gray-300'
                             : 'border-transparent text-gray-400 hover:bg-gray-50 hover:text-gray-900',
                         'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md'
@@ -106,9 +106,9 @@ export default function() {
                     <span className="truncate">{trans('my_services')}</span>
                 </Link>
                 <Link
-                    href={route('frontend.user.book')}
+                    href={route('frontend.profile.books')}
                     className={classNames(
-                        route().current() === 'frontend.user.book'
+                        route().current() === 'frontend.profile.books'
                             ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 hover:text-gray-300'
                             : 'border-transparent text-gray-400 hover:bg-gray-50 hover:text-gray-900',
                         'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md'
@@ -123,9 +123,9 @@ export default function() {
                     <span className="truncate">{trans('my_books')}</span>
                 </Link>
                 <Link
-                    href={route('frontend.user.favorite')}
+                    href={route('frontend.profile.favorites')}
                     className={classNames(
-                        route().current() === 'frontend.user.favorite'
+                        route().current() === 'frontend.profile.favorites'
                             ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 hover:text-gray-300'
                             : 'border-transparent text-gray-400 hover:bg-gray-50 hover:text-gray-900',
                         'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md'
@@ -140,9 +140,9 @@ export default function() {
                     <span className="truncate">{trans('my_favorites')}</span>
                 </Link>
                 <Link
-                    href={route('frontend.user.setting')}
+                    href={route('frontend.profile.setting')}
                     className={classNames(
-                        route().current() === 'frontend.user.setting'
+                        route().current() === 'frontend.profile.setting'
                             ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 hover:text-gray-300'
                             : 'border-transparent text-gray-400 hover:bg-gray-50 hover:text-gray-900',
                         'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md'

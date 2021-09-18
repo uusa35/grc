@@ -81,7 +81,7 @@ const AppContextProvider = ({children}) => {
         document.getElementById('lang').innerHTML = lang;
         moment.locale(lang);
     }, [lang])
-    
+
     useEffect(() => {
         isLocal() && console.log('useEffect starts here =====>')
         Inertia.on('navigate', (e) => {

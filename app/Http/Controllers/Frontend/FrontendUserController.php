@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CourseCollection;
+use App\Http\Resources\CourseResource;
+use App\Http\Resources\ServiceResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Category;
+use App\Models\Course;
+use App\Models\Order;
+use App\Models\Service;
 use App\Models\User;
 use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
@@ -112,7 +118,7 @@ class FrontendUserController extends Controller
     }
 
     public function getResetPassword() {
-        return inertia('Frontend/User/Profile/FrontendResetPassword');
+        return inertia('Frontend/User/Profile/ProfileResetPassword');
     }
 
     public function postResetPassword(Request $request) {
@@ -128,22 +134,65 @@ class FrontendUserController extends Controller
     }
 
     public function getCourses() {
-        return inertia('Frontend/User/Profile/FrontendUserCourseIndex');
+        $orders = Order::where(['user_id' => auth()->id(), 'paid' => true])->with(['order_metas' => function ($q) {
+            return $q->where('ordermetable_type', 'App\Models\Course');
+        }])->get();
+        $elements = CourseCollection::make($orders->pluck('order_metas')->flatten()->pluck('ordermetable'));
+        return inertia('Frontend/User/Profile/ProfileCourseIndex', compact('elements'));
+    }
+
+    public function getCourse(Request $request) {
+        $request->validate([
+            'reference_id' => 'required',
+            'id' => 'required|exists:courses,id'
+        ]);
+        $order = Order::where(['reference_id' => $request->reference_id, 'paid' => true])->first();
+        if($order) {
+            $element = new CourseResource(Course::whereId($request->id)->first());
+            return inertia('Frontend/User/Profile/ProfileCourseShow', compact('element'));
+        }
+        return redirect()->bakc()->with('error', trans('general.process_failure'));
     }
 
     public function getServices() {
-        return inertia('Frontend/User/Profile/FrontendUserServiceIndex');
+        return inertia('Frontend/User/Profile/ProfileServiceIndex');
+    }
+
+    public function getService(Request $request) {
+        $request->validate([
+            'reference_id' => 'required',
+            'id' => 'required|exists:services,id'
+        ]);
+        $order = Order::where(['reference_id' => $request->reference_id, 'paid' => true])->first();
+        if($order) {
+            $element = new ServiceResource(Service::whereId($request->id)->first());
+            return inertia('Frontend/User/Profile/ProfileServiceShow', compact('element'));
+        }
+        return redirect()->bakc()->with('error', trans('general.process_failure'));
     }
 
     public function getBooks() {
-        return inertia('Frontend/User/Profile/FrontendUserBookIndex');
+        return inertia('Frontend/User/Profile/ProfileBookIndex');
+    }
+
+    public function getBook(Request $request) {
+        $request->validate([
+            'reference_id' => 'required',
+            'id' => 'required|exists:services,id'
+        ]);
+        $order = Order::where(['reference_id' => $request->reference_id, 'paid' => true])->first();
+        if($order) {
+            $element = new ServiceResource(Service::whereId($request->id)->first());
+            return inertia('Frontend/User/Profile/ProfileServiceShow', compact('element'));
+        }
+        return redirect()->bakc()->with('error', trans('general.process_failure'));
     }
 
     public function getFavorites() {
-        return inertia('Frontend/User/Profile/FrontendUserFavoriteIndex');
+        return inertia('Frontend/User/Profile/ProfileFavoriteIndex');
     }
 
     public function getSettings() {
-        return inertia('Frontend/User/Profile/FrontendUserSettingIndex');
+        return inertia('Frontend/User/Profile/ProfileSettingIndex');
     }
 }

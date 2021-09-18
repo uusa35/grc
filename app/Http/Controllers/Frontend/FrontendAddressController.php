@@ -16,7 +16,7 @@ class FrontendAddressController extends Controller
     public function index()
     {
         $elements = Address::where(['user_id' => auth()->id()])->with('country','governate','area')->get();
-        return inertia('Frontend/User/Profile/FrontendUserAddressIndex', compact('elements'));
+        return inertia('Frontend/User/Profile/ProfileAddressIndex', compact('elements'));
     }
 
     /**
