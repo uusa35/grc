@@ -36,7 +36,8 @@ class CourseResource extends JsonResource
             'is_available' => $this->is_available,
             'video_url_one' => $this->video_url_one,
             'user' => UserExtraLightResource::make($this->whenLoaded('user')),
-            'images' => ImageExtraLightResource::collection($this->whenLoaded('images'))
+            'images' => ImageExtraLightResource::collection($this->whenLoaded('images')),
+            'comments' => CommentExtraLightResource::collection($this->whenLoaded('comments'))
         ];
     }
 }

@@ -30,11 +30,14 @@ class CommentFactory extends Factory
             'content' => $this->faker->name,
             'file' => '01.pdf',
             'commentable_id' => User::all()->random()->id,
+            'user_id' => User::all()->random()->id,
+            'session_id' => function ($array) {
+                return $array['user_id'].$array['commentable_id'];
+            },
             'commentable_type' => $this->faker->randomElement(['App\Models\User', 'App\Models\Product', 'App\Models\Service']),
             'active' => $this->faker->boolean(true),
             'viewed' => $this->faker->boolean,
             'likes' => $this->faker->numberBetween(1, 99),
-            'user_id' => User::all()->random()->id
         ];
     }
 }

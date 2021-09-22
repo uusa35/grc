@@ -30,13 +30,15 @@ import EmbeddedIFrameVideo from "../../partials/EmbeddedIFrameVideo";
 import SubMetaElement from "../../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../../components/FrontendContentContainer";
 import SocialIconShare from "../../partials/SocialIconShare";
+import GlobalContext from "../../../context/GlobalContext";
 
 
-export default function({element, relatedElements, auth}) {
+export default function({element}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
     const {cart} = useSelector(state => state);
+    const { auth } = useContext(GlobalContext);
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'course',
@@ -95,9 +97,9 @@ export default function({element, relatedElements, auth}) {
             />
             <FrontendContentContainer childName={element[getLocalized()]}>
             <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
-                {/*<div className="w-full h-auto overflow-hidden mb-10">*/}
-                {/*    {element.free && <EmbeddedHtml html={element.embedded}/>}*/}
-                {/*</div>*/}
+                <div className="w-full h-auto overflow-hidden mb-10">
+                    <EmbeddedHtml html={element.embedded}/>
+                </div>
                 {/* Product */}
                 <div className={classNames(element.video_url_one ? `lg:grid-cols-2`: `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto pb-10")}>
                     {/* Image gallery */}
@@ -223,15 +225,6 @@ export default function({element, relatedElements, auth}) {
                                 message={trans('element_is_not_available_currently_for_order')}
                             />}
                             <div className="flex flex-row justify-between items-center gap-x-5">
-                                <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto">
-                                    <button
-                                        disabled={!element.is_available}
-                                        type="submit"
-                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
-                                    >
-                                        {trans('add_to_cart')}
-                                    </button>
-                                </form>
                                 <ElementFavoriteBtn id={element.id} type={'course'}
                                                     favoritesList={auth?.favoritesList}/>
                             </div>
@@ -423,12 +416,6 @@ export default function({element, relatedElements, auth}) {
                         </section>
                     </div>
                 </div>
-                <SocialIconShare  />
-                {/* related items */}
-                {
-                    relatedElements && relatedElements.meta.total > 0 &&
-                    <RelatedItems elements={relatedElements.data} type={'course'}/>
-                }
             </div>
             </FrontendContentContainer>
         </FrontendContainer>

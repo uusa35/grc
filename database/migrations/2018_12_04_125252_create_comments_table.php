@@ -22,6 +22,7 @@ class CreateCommentsTable extends Migration
             $table->integer('likes')->nullable();
 
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->integer('session_id')->unsigned()->nullable(); // user_id + commentable_id
             $table->morphs('commentable');
             $table->timestamps();
         });

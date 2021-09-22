@@ -137,18 +137,26 @@ class FrontendUserController extends Controller
         $orders = Order::where(['user_id' => auth()->id(), 'paid' => true])->with(['order_metas' => function ($q) {
             return $q->where('ordermetable_type', 'App\Models\Course');
         }])->get();
-        $elements = CourseCollection::make($orders->pluck('order_metas')->flatten()->pluck('ordermetable'));
-        return inertia('Frontend/User/Profile/ProfileCourseIndex', compact('elements'));
+        $firstOrder = $orders->first();
+        $ids = array_values($orders->pluck('order_metas')->flatten()->pluck('ordermetable.id')->toArray());
+        $elements = CourseCollection::make(Course::whereIn('id', $ids)->with('images','user')->paginate(SELF::TAKE_LESS));
+        return inertia('Frontend/User/Profile/ProfileCourseIndex', compact('elements','firstOrder'));
     }
 
     public function getCourse(Request $request) {
         $request->validate([
             'reference_id' => 'required',
-            'id' => 'required|exists:courses,id'
+            'id' => 'required|exists:courses,id',
+            'session_id' => 'required|integer',
+            'order_id' => 'required|integer|exists:orders,id'
         ]);
-        $order = Order::where(['reference_id' => $request->reference_id, 'paid' => true])->first();
-        if($order) {
-            $element = new CourseResource(Course::whereId($request->id)->first());
+        $order = Order::where(['paid' => true, 'user_id' => auth()->id()])->with(['order_metas' => function ($q) {
+            return $q->where(['ordermetable_type' => 'App\Models\Course']);
+        }])->get();
+        if(in_array(request()->id,$order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
+            $element = new CourseResource(Course::whereId($request->id)->with('user')->with(['comments' => function ($q) {
+                return $q->where('session_id', request()->session_id);
+            }])->first());
             return inertia('Frontend/User/Profile/ProfileCourseShow', compact('element'));
         }
         return redirect()->bakc()->with('error', trans('general.process_failure'));
