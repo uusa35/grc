@@ -67,28 +67,6 @@ export default function({element}) {
     }, [element])
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(checkCartBeforeAdd({
-            cart_id: element.id,
-            type: 'course',
-            element_id: element.id,
-            qty: 1,
-            price: parseFloat(element.isOnSale ? element.sale_price : element.price),
-            direct_purchase: element.direct_purchase,
-            shipmentFees: 0,
-            image: element.image,
-            name_ar: element.name_ar,
-            name_en: element.name_en,
-            description_ar: element.description_ar,
-            description_en: element.description_en,
-            merchant_id : element.user.id,
-            merchant_name_ar : element.user.name_ar,
-            merchant_name_en : element.user.name_en
-        }))
-        // dispatch(removeFromCart(element.id +''+selectedTiming.id));
-    }
-
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}

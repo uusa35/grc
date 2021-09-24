@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseCollection;
 use App\Http\Resources\CourseResource;
+use App\Http\Resources\ServiceCollection;
 use App\Http\Resources\ServiceResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Models\Book;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Order;
@@ -154,7 +156,7 @@ class FrontendUserController extends Controller
             return $q->where(['ordermetable_type' => 'App\Models\Course']);
         }])->get();
         if(in_array(request()->id,$order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
-            $element = new CourseResource(Course::whereId($request->id)->with('user')->with(['comments' => function ($q) {
+            $element = new CourseResource(Course::whereId($request->id)->with('user','images')->with(['comments' => function ($q) {
                 return $q->where('session_id', request()->session_id);
             }])->first());
             return inertia('Frontend/User/Profile/ProfileCourseShow', compact('element'));
@@ -163,35 +165,59 @@ class FrontendUserController extends Controller
     }
 
     public function getServices() {
-        return inertia('Frontend/User/Profile/ProfileServiceIndex');
+        $orders = Order::where(['user_id' => auth()->id(), 'paid' => true])->with(['order_metas' => function ($q) {
+            return $q->where('ordermetable_type', 'App\Models\Service');
+        }])->get();
+        $firstOrder = $orders->first();
+        $ids = array_values($orders->pluck('order_metas')->flatten()->pluck('ordermetable.id')->toArray());
+        $elements = ServiceCollection::make(Service::whereIn('id', $ids)->with('images','user')->paginate(SELF::TAKE_LESS));
+        return inertia('Frontend/User/Profile/ProfileServiceIndex', compact('elements','firstOrder'));
     }
 
     public function getService(Request $request) {
         $request->validate([
             'reference_id' => 'required',
-            'id' => 'required|exists:services,id'
+            'id' => 'required|exists:courses,id',
+            'session_id' => 'required|integer',
+            'order_id' => 'required|integer|exists:orders,id'
         ]);
-        $order = Order::where(['reference_id' => $request->reference_id, 'paid' => true])->first();
-        if($order) {
-            $element = new ServiceResource(Service::whereId($request->id)->first());
+        $order = Order::where(['paid' => true, 'user_id' => auth()->id()])->with(['order_metas' => function ($q) {
+            return $q->where(['ordermetable_type' => 'App\Models\Service']);
+        }])->get();
+        if(in_array(request()->id,$order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
+            $element = new ServiceResource(Service::whereId($request->id)->with('user','images')->with(['comments' => function ($q) {
+                return $q->where('session_id', request()->session_id);
+            }])->first());
             return inertia('Frontend/User/Profile/ProfileServiceShow', compact('element'));
         }
         return redirect()->bakc()->with('error', trans('general.process_failure'));
     }
 
     public function getBooks() {
-        return inertia('Frontend/User/Profile/ProfileBookIndex');
+        $orders = Order::where(['user_id' => auth()->id(), 'paid' => true])->with(['order_metas' => function ($q) {
+            return $q->where('ordermetable_type', 'App\Models\Book');
+        }])->get();
+        $firstOrder = $orders->first();
+        $ids = array_values($orders->pluck('order_metas')->flatten()->pluck('ordermetable.id')->toArray());
+        $elements = ServiceCollection::make(Book::whereIn('id', $ids)->with('images','user')->paginate(SELF::TAKE_LESS));
+        return inertia('Frontend/User/Profile/ProfileBookIndex', compact('elements','firstOrder'));
     }
 
     public function getBook(Request $request) {
         $request->validate([
             'reference_id' => 'required',
-            'id' => 'required|exists:services,id'
+            'id' => 'required|exists:courses,id',
+            'session_id' => 'required|integer',
+            'order_id' => 'required|integer|exists:orders,id'
         ]);
-        $order = Order::where(['reference_id' => $request->reference_id, 'paid' => true])->first();
-        if($order) {
-            $element = new ServiceResource(Service::whereId($request->id)->first());
-            return inertia('Frontend/User/Profile/ProfileServiceShow', compact('element'));
+        $order = Order::where(['paid' => true, 'user_id' => auth()->id()])->with(['order_metas' => function ($q) {
+            return $q->where(['ordermetable_type' => 'App\Models\Book']);
+        }])->get();
+        if(in_array(request()->id,$order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
+            $element = new ServiceResource(Book::whereId($request->id)->with('user','images')->with(['comments' => function ($q) {
+                return $q->where('session_id', request()->session_id);
+            }])->first());
+            return inertia('Frontend/User/Profile/ProfileBookShow', compact('element'));
         }
         return redirect()->bakc()->with('error', trans('general.process_failure'));
     }
