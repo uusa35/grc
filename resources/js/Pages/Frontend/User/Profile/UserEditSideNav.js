@@ -58,7 +58,7 @@ export default function() {
                         route().current() === 'frontend.address.index'
                             ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 hover:text-gray-300'
                             : 'border-transparent text-gray-400 hover:bg-gray-50 hover:text-gray-900',
-                        'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md'
+                        'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md hidden'
                     )}
                     aria-current={true ? 'page' : undefined}
                 >

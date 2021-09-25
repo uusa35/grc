@@ -98,7 +98,8 @@ class FrontendUserController extends Controller
             'name_ar' => 'required|min:3|max:255',
             'name_en' => 'required|min:3|max:255',
             'mobile' => 'required|min:6|max:12',
-            'whatsapp' => 'min:5|max:12'
+            'whatsapp' => 'min:5|max:12',
+            'news_letter_on' => 'boolean'
         ]);
         $updated = $user->update($request->except(['_token', 'image']));
         if ($updated) {
@@ -227,6 +228,7 @@ class FrontendUserController extends Controller
     }
 
     public function getSettings() {
-        return inertia('Frontend/User/Profile/ProfileSettingIndex');
+        $user = new UserResource(User::whereId(auth()->id())->first());
+        return inertia('Frontend/User/Profile/ProfileSettingIndex', compact('user'));
     }
 }

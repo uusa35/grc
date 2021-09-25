@@ -14,8 +14,6 @@ export default function() {
     const [availableToHire, setAvailableToHire] = useState(true)
     const [privateAccount, setPrivateAccount] = useState(false)
 
-
-
     return (
         <FrontendContainer>
             <FrontendContentContainer>
@@ -28,9 +26,9 @@ export default function() {
                                     <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                         <div className="flex flex-1 justify-between items-center">
                                             <div>
-                                                <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('profile')}</h2>
+                                                <h2 className="text-lg leading-6 font-medium text-gra-900">{trans('profile')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
-                                                    {trans("my_courses")}
+                                                    {trans("my_favorites")}
                                                 </p>
                                             </div>
                                         </div>

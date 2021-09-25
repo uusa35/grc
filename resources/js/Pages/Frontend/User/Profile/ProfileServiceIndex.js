@@ -15,8 +15,6 @@ export default function({elements, firstOrder}) {
     const {auth} = useContext(GlobalContext);
     const {locale} = useSelector(state => state);
 
-
-    console.log('elements', elements);
     return (
         <FrontendContainer>
             <FrontendContentContainer>

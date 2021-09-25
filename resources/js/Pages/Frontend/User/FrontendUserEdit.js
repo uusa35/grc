@@ -70,7 +70,6 @@ export default function({user}) {
         Inertia.post(route(`frontend.user.update`, user.id), {
             _method: 'put',
             ...data,
-            image: data.image,
         }, {
             forceFormData: true
         })

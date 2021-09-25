@@ -1093,6 +1093,7 @@ export const ar = {
     "new_chosen_books" : "كتب جديدة مختارة",
     "participant_authors" : "المؤلفين المشاركين",
     "profile" : "الصفحة الشخصية",
+    "profiles" : "الصفحة الشخصية",
     "authors" : "المؤلفين",
     "advanced_search" : "بحث متقدم",
     "write_protection_code" : "يرجى كتابة كود الحماية ",
