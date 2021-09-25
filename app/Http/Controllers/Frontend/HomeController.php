@@ -27,7 +27,7 @@ class HomeController extends Controller
         $homeBookCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->onlyParent()->onlyForBooks()->orderby('order','asc')->get());
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
-        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->orderBy('order','asc')->get());
+        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->authors()->orderBy('order','asc')->get());
         $meta = SettingResource::make(Setting::first());
         return inertia('Frontend/HomePage', compact('slides', 'homeBookCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses'))
             ->withViewData([
