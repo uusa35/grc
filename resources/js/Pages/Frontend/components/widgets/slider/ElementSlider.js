@@ -45,7 +45,7 @@ export default function ElementSlider({
   useEffect(() => {}, [slidesPerView])
 
   return (
-    <div className="w-full">
+    <div>
       {!isEmpty(elements) && (
         <>
             <Link
