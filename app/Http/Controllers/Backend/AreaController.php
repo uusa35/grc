@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AreaCollection;
+use App\Http\Resources\CountryCollection;
+use App\Http\Resources\CountryExtraLightResource;
 use App\Http\Resources\GovernateCollection;
 use App\Models\Area;
+use App\Models\Country;
 use App\Models\Governate;
 use Illuminate\Http\Request;
 
@@ -38,7 +41,8 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return inertia('Backend/Area/AreaCreate');
+        $countries = new CountryCollection(Country::active()->has('governates','>', 0)->with('governates.areas')->get());
+        return inertia('Backend/Area/AreaCreate',compact('countries'));
     }
 
     /**
@@ -49,7 +53,17 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ar' => 'max:200',
+            'name_en' => 'max:200',
+            'country_id' => 'required|exists:countries,id',
+            'governate_id' => 'required|exists:governates,id',
+            'order' => 'numeric|max:99'
+        ]);
+        if (Area::create($request->all())) {
+            return redirect()->route('backend.area.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -71,9 +85,8 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        $area->load('country');
-        $governates = new GovernateCollection(Governate::active()->with('country')->get());
-        return inertia('Backend/Area/AreaEdit', compact('area','governates'));
+        $countries = new CountryCollection(Country::active()->has('governates','>', 0)->with('governates.areas')->get());
+        return inertia('Backend/Area/AreaEdit', compact('area','countries'));
     }
 
     /**
@@ -92,7 +105,7 @@ class AreaController extends Controller
             'order' => 'numeric|max:99'
         ]);
         if ($area->update($request->all())) {
-            return redirect()->back()->with('success', trans('general.process_success'));
+            return redirect()->route('backend.area.index')->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
@@ -105,6 +118,9 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        //
+        if($area->delete()) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }

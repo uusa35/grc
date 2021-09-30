@@ -38,7 +38,8 @@ class GovernateController extends Controller
      */
     public function create()
     {
-        return inertia('Backend/Governate/GovernateCreate');
+        $countries = new CountryCollection(Country::active()->get());
+        return inertia('Backend/Governate/GovernateCreate', compact('countries'));
     }
 
     /**
@@ -49,7 +50,16 @@ class GovernateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ar' => 'max:200',
+            'name_en' => 'max:200',
+            'country_id' => 'required|exists:countries,id',
+            'order' => 'numeric|max:99'
+        ]);
+        if (Governate::create($request->all())) {
+            return redirect()->route('backend.governate.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -92,7 +102,7 @@ class GovernateController extends Controller
             'order' => 'numeric|max:99'
         ]);
         if ($governate->update($request->all())) {
-            return redirect()->back()->with('success', trans('general.process_success'));
+            return redirect()->route('backend.governate.index')->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
@@ -105,6 +115,9 @@ class GovernateController extends Controller
      */
     public function destroy(Governate $governate)
     {
-        //
+        if($governate->areas()->delete() && $governate->delete()) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }

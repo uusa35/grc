@@ -27,7 +27,6 @@ class GovernateFactory extends Factory
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
             'country_id' => Country::all()->random()->id,
-            'name' => $this->faker->name,
             'name_ar' => $this->faker->name,
             'name_en' => $this->faker->name,
             'order' => $this->faker->numberBetween(1, 10),

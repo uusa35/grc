@@ -13,9 +13,14 @@ export default function({elements}) {
     const dispatch = useDispatch();
 
     return (
-        <BackendContainer elements={elements} showSearch={elements.total > 1}
-                          showNoElements={elements.total < 1}
-                          showMobileView={elements.total > 1}
+        <BackendContainer
+            elements={elements}
+            showSearch={elements.meta.total >= 1}
+            showNoElements={elements.meta.total < 1}
+            showMobileView={elements.meta.total > 1}
+            total={elements.meta.total}
+            links={elements.meta.links}
+            mainModule={'area'}
         >
             <div className="flex flex-col hidden sm:block">
                 <div className=" overflow-auto">

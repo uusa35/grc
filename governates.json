@@ -1,45 +1,72 @@
 [
-   {
-      "name_ar": "الجهراء",
-      "name_en": "Jahra",
-      "order": "6",
-      "active": "1",
-      "country_id": "1"
-   },
-   {
-      "name_ar" : "ألاحمدي",
-      "name_en" : "Ahmadi",
-      "order" : "6",
-      "active" : "1",
-      "country_id" : "1"
-   },
-   {
-      "name_ar" : "مبارك الكبير",
-      "name_en" : "Mubarak Al Kabir",
-      "order" : "4",
-      "active" : "1",
-      "country_id" : "1"
-   },
-   {
-      "name_ar" : "حولي",
-      "name_en" : "Hawally",
-      "order" : "2",
-      "active" : "1",
-      "country_id" : "1"
-   },
-
-   {
-      "name_ar" : "الفروانية",
-      "name_en" : "Farwaniya",
-      "order" : "3",
-      "active" : "1",
-      "country_id" : "1"
-   },
-   {
-      "name_ar" : "مدينة الكويت",
-      "name_en" : "Kuwait City",
-      "order" : "1",
-      "active" : "1",
-      "country_id" : "1"
-   }
+    {
+        "name_ar": "الجهراء",
+        "name_en": "Jahra",
+        "order": "6",
+        "active": "1",
+        "country_id": "1"
+    },
+    {
+        "name_ar": "ألاحمدي",
+        "name_en": "Ahmadi",
+        "order": "6",
+        "active": "1",
+        "country_id": "1"
+    },
+    {
+        "name_ar": "مبارك الكبير",
+        "name_en": "Mubarak Al Kabir",
+        "order": "4",
+        "active": "1",
+        "country_id": "1"
+    },
+    {
+        "name_ar": "حولي",
+        "name_en": "Hawally",
+        "order": "2",
+        "active": "1",
+        "country_id": "1"
+    },
+    {
+        "name_ar": "الفروانية",
+        "name_en": "Farwaniya",
+        "order": "3",
+        "active": "1",
+        "country_id": "1"
+    },
+    {
+        "name_ar": "مدينة الكويت",
+        "name_en": "Kuwait City",
+        "order": "1",
+        "active": "1",
+        "country_id": "1"
+    },
+    {
+        "name_ar": "مكة",
+        "name_en": "Macca",
+        "order": "1",
+        "active": "1",
+        "country_id": "2"
+    },
+    {
+        "name_ar": "الرياض",
+        "name_en": "Ryadi",
+        "order": "1",
+        "active": "1",
+        "country_id": "2"
+    },
+    {
+        "name_ar": "الشارقة",
+        "name_en": "Shariqa",
+        "order": "1",
+        "active": "1",
+        "country_id": "3"
+    },
+    {
+        "name_ar": "دبي",
+        "name_en": "Dubai",
+        "order": "1",
+        "active": "1",
+        "country_id": "3"
+    }
 ]

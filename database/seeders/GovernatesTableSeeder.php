@@ -15,7 +15,6 @@ class GovernatesTableSeeder extends Seeder
         $governates = json_decode(file_get_contents('governates.json'));
         foreach ($governates as $gov) {
             Governate::create([
-                'name' => $gov->name_en,
                 'name_ar' => $gov->name_ar,
                 'name_en' => $gov->name_en,
                 'order' => $gov->order,

@@ -127,6 +127,29 @@ export default function({governate, countries }) {
                             </p>
                         </div>
 
+                        {/* order */}
+                        <div className="sm:col-span-2">
+                            <label htmlFor="order" className={`block   text-gray-700`}>
+                                {trans('sequence')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    required
+                                    type="number"
+                                    name="order"
+                                    defaultValue={governate.order}
+                                    id="order"
+                                    autoComplete="order"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                />
+                            </div>
+                            <ToolTipWidget message={trans('order_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                            </p>
+                        </div>
+
                         {/* code */}
                         <div className="sm:col-span-2">
                             <label htmlFor="code" className={`block   text-gray-700`}>

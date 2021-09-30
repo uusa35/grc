@@ -1,7 +1,7 @@
 import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
 import {useForm, usePage} from "@inertiajs/inertia-react";
-import {useContext, useState} from "react";
+import {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
@@ -10,10 +10,12 @@ import axios from "axios";
 import {showToastMessage} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FormSection from "../components/widgets/form/FormSection";
-import {map} from "lodash";
+import {filter, first, map} from "lodash";
 
-export default function({area, governates }) {
+export default function({area, countries  }) {
     const {trans, getLocalized, getThumb, getFileUrl,} = useContext(AppContext);
+    const[selectedCountry,setSelectedCountry] = useState({});
+    const[governates,setGovernates] = useState([]);
     const {errors} = usePage().props;
     const dispatch = useDispatch();
     const {data, setData, put, progress, reset} = useForm({
@@ -35,6 +37,15 @@ export default function({area, governates }) {
             [e.target.id]: e.target.value,
         }))
     }
+
+    useMemo(() => {
+        setSelectedCountry(first(filter(countries, c => c.id == area.country_id)))
+    },[])
+
+    useMemo(() => {
+        setData('country_id', selectedCountry.id)
+        setGovernates(selectedCountry.governates);
+    },[selectedCountry])
 
     const submit = (e) => {
         e.preventDefault()
@@ -101,6 +112,35 @@ export default function({area, governates }) {
                             </p>
                         </div>
 
+                        {/* country_id */}
+                        <div className="sm:col-span-2">
+                            <label htmlFor="country_id" className="block   text-gray-700">
+                                {trans('country')}
+                            </label>
+                            <div className="mt-1">
+                                <select
+                                    onChange={(e) => setSelectedCountry(first(filter(countries, c => c.id == e.target.value)))}
+                                    id="country_id"
+                                    name="country_id"
+                                    value={data.country_id}
+                                    autoComplete="country_id"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                >
+                                    {
+                                        map(countries, u => (
+                                            <option key={u.id} value={u.id}
+                                                    selected={u.id === data.country_id}
+                                            >{u[getLocalized()]}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                            <ToolTipWidget message={trans('user_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
+                            </p>
+                        </div>
+
                         {/* governate_id */}
                         <div className="sm:col-span-2">
                             <label htmlFor="governate_id" className="block   text-gray-700">
@@ -116,9 +156,9 @@ export default function({area, governates }) {
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 >
                                     {
-                                        map(governates, u => (
+                                        map(selectedCountry.governates, u => (
                                             <option key={u.id} value={u.id}
-                                                    selected={u.id === area.governate_id}
+                                                    selected={u.id === data.governate_id}
                                             >{u[getLocalized()]}</option>
                                         ))
                                     }
@@ -127,6 +167,29 @@ export default function({area, governates }) {
                             <ToolTipWidget message={trans('user_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
                                 {errors.governate_id && <div className={`text-red-900`}>{errors.governate_id}</div>}
+                            </p>
+                        </div>
+
+                        {/* order */}
+                        <div className="sm:col-span-2">
+                            <label htmlFor="order" className={`block   text-gray-700`}>
+                                {trans('sequence')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    required
+                                    type="number"
+                                    name="order"
+                                    defaultValue={data.order}
+                                    id="order"
+                                    autoComplete="order"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                />
+                            </div>
+                            <ToolTipWidget message={trans('order_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
                             </p>
                         </div>
 

@@ -15,11 +15,13 @@ class CountryExtraLightResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
             'image' => $this->image,
             'is_local' => $this->is_local,
-            'fixed_shipment_charge' => (float) $this->fixed_shipment_charge
+            'fixed_shipment_charge' => (float) $this->fixed_shipment_charge,
+            'governates' => GovernateExtraLightResource::make($this->whenLoaded('governates')),
         ];
     }
 }
