@@ -32,7 +32,7 @@ export default function HomePage({
             {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
             {slides && <MainGallery elements={slides}/>}
             <FrontendContentContainer showBreadCrumbs={false}>
-                <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:max-w-max lg:px-8">
+                <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:px-8">
                     <ElementSlider
                         showNavigation={false}
                         elements={homeBookCategories}
