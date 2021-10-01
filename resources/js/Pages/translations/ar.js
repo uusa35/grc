@@ -1181,5 +1181,15 @@ export const ar = {
     "my_favorites" : "مفضلتي",
     "my_settings" : "الإعدادات",
     "my_addresses" : "عناويني",
-    "author" : "المؤلف"
+    "author" : "المؤلف",
+    "enable_products" : "تفعيل المنتجات",
+    "enable_courses" : "تفعيل الدورات",
+    "enable_services" : "تفعيل الخدمات",
+    "enable_books" : "تفعيل الكتب",
+    "enable_subscriptions" : "تفعيل الاشتراكات",
+    "enable_whatsapp_contact" : "تفعيل التواصل بالواتس",
+    "enable_cart" : "تفعيل عربة التسوق",
+    "enable_google_translation" : "تفعيل ترجمة الجوجل",
+    "enable_favorite" : "تفعيل المفضلة",
+    "enable_newsletter" : "تفعيل القوائم البريدية",
 }

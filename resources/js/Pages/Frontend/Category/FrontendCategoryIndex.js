@@ -5,13 +5,18 @@ import Pagination from "../../Backend/components/partials/Pagination";
 import CategoryWidget from "../components/widgets/category/CategoryWidget";
 import { map } from 'lodash';
 import MetaElement from "../../Backend/components/partials/MetaElement";
+import FrontendPagination from "../partials/FrontendPagination";
+import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
+import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function FrontendCategoryIndex({elements}) {
     const { trans } = useContext(AppContext);
 
     return (
         <FrontendContainer>
-            <Pagination
+            <FrontendContentContainer>
+                <SubMetaElement title={trans('categories')}/>
+            <FrontendPagination
                 type={'category'}
                 total={elements.meta.total}
                 links={elements.meta.links}
@@ -31,6 +36,7 @@ export default function FrontendCategoryIndex({elements}) {
                     />
                 </div>
             </div>
+                </FrontendContentContainer>
         </FrontendContainer>
     );
 }

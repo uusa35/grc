@@ -30,7 +30,7 @@ class PrivilegesTableSeeder extends Seeder
             [
                 'name' => 'attribute',
                 "main_menu" => false,
-                "on_top" => true,
+                "on_top" => false,
                 'hide_module' => false
             ],
             [
@@ -108,19 +108,19 @@ class PrivilegesTableSeeder extends Seeder
             [
                 'name' => 'tag',
                 "main_menu" => false,
-                "on_top" => true,
+                "on_top" => false,
                 'hide_module' => true
             ],
             [
                 'name' => 'brand',
                 "main_menu" => false,
-                "on_top" => true,
+                "on_top" => false,
                 'hide_module' => true
             ],
             [
                 'name' => 'branch',
                 "main_menu" => false,
-                "on_top" => true,
+                "on_top" => false,
                 'hide_module' => true
             ],
             [
@@ -150,19 +150,19 @@ class PrivilegesTableSeeder extends Seeder
             [
                 'name' => 'coupon',
                 "main_menu" => false,
-                "on_top" => true,
+                "on_top" => false,
                 'hide_module' => false
             ],
             [
                 'name' => 'size',
                 "main_menu" => false,
-                "on_top" => true,
+                "on_top" => false,
                 'hide_module' => true
             ],
             [
                 'name' => 'color',
                 "main_menu" => false,
-                "on_top" => true,
+                "on_top" => false,
                 'hide_module' => true
             ],
             [

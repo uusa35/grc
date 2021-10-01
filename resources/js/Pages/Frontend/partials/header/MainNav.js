@@ -45,7 +45,7 @@ export default function MainNav() {
     const {locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
-
+    
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}
@@ -329,29 +329,36 @@ export default function MainNav() {
                                 >
                                     {capitalize(trans('books'))}
                                 </Link>
-                                <MainNavBookCategoriesList categories={categories}/>
-                                <Link
-                                    href={route('frontend.user.index')}
-                                    onClick={() => dispatch(setParentModule('book'))}
-                                    className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                >
-                                    {capitalize(trans('authors'))}
-                                </Link>
-                                <Link
-                                    href={route('frontend.service.index')}
-                                    onClick={() => dispatch(setParentModule('service'))}
-                                    className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                >
-                                    {capitalize(trans('services'))}
-                                </Link>
-                                <Link
-                                    href={route('frontend.course.index')}
-                                    onClick={() => dispatch(setParentModule('course'))}
-                                    className={classNames(parentModule == 'course' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                >
-                                    {capitalize(trans('courses'))}
-                                </Link>
-
+                                {
+                                    settings.enable_books && <MainNavBookCategoriesList categories={categories}/>
+                                }
+                                {
+                                    settings.enable_books && <Link
+                                        href={route('frontend.user.index')}
+                                        onClick={() => dispatch(setParentModule('book'))}
+                                        className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('authors'))}
+                                    </Link>
+                                }
+                                {
+                                    settings.enable_services && <Link
+                                        href={route('frontend.service.index')}
+                                        onClick={() => dispatch(setParentModule('service'))}
+                                        className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('services'))}
+                                    </Link>
+                                }
+                                {
+                                    settings.enable_courses && <Link
+                                        href={route('frontend.course.index')}
+                                        onClick={() => dispatch(setParentModule('course'))}
+                                        className={classNames(parentModule == 'course' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('courses'))}
+                                    </Link>
+                                }
 
                                 {/*     pages */}
                                 <Popover className="relative">
@@ -391,22 +398,24 @@ export default function MainNav() {
                                                         <div
                                                             className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                                             {/* subscriptioins page*/}
-                                                            <Link
-                                                                href={route('frontend.subscriptions')}
-                                                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
-                                                            >
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                     className="h-6 w-6 text-gray-800"
-                                                                     viewBox="0 0 20 20" fill="currentColor">
-                                                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
-                                                                    <path fillRule="evenodd"
-                                                                          d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                                                                          clipRule="evenodd"/>
-                                                                </svg>
-                                                                <div className="ltr:ml-5 rtl:mr-5">
-                                                                    <p className="text-base font-medium text-gray-900 capitalize">{trans('subscriptions')}</p>
-                                                                </div>
-                                                            </Link>
+                                                            {
+                                                                settings.enable_subscriptions && <Link
+                                                                    href={route('frontend.subscriptions')}
+                                                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 text-gray-800"
+                                                                         viewBox="0 0 20 20" fill="currentColor">
+                                                                        <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                                                                        <path fillRule="evenodd"
+                                                                              d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                                                              clipRule="evenodd"/>
+                                                                    </svg>
+                                                                    <div className="ltr:ml-5 rtl:mr-5">
+                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('subscriptions')}</p>
+                                                                    </div>
+                                                                </Link>
+                                                            }
 
                                                             {/* contact us page */}
                                                             <Link
@@ -650,19 +659,21 @@ export default function MainNav() {
                             </Menu>
 
                             {/* Cart */}
-                            <div className="ml-4 flow-root lg:ml-6">
-                                <Link href={route('frontend.cart.index')} className="group -m-2 p-2 flex items-center">
-                                    <ShoppingBagIcon
-                                        className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
-                                        aria-hidden="true"
-                                    />
-                                    <span
-                                        className="inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300">
+                            {
+                                settings.enable_cart && <div className="ml-4 flow-root lg:ml-6">
+                                    <Link href={route('frontend.cart.index')} className="group -m-2 p-2 flex items-center">
+                                        <ShoppingBagIcon
+                                            className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
+                                            aria-hidden="true"
+                                        />
+                                        <span
+                                            className="inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300">
                                             {cart.totalItems}
                                           </span>
-                                    <span className="sr-only">items in cart, view bag</span>
-                                </Link>
-                            </div>
+                                        <span className="sr-only">items in cart, view bag</span>
+                                    </Link>
+                                </div>
+                            }
                         </div>
                     </div>
 

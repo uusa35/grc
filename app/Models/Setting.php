@@ -15,7 +15,17 @@ class Setting extends PrimaryModel
         'apply_global_shipment' => 'apply_global_shipment',
         'cash_on_delivery' => 'boolean',
         'apply_global_shipment' => 'boolean',
-        'show_commercials' => 'boolean'
+        'show_commercials' => 'boolean',
+        'enable_products' => 'boolean',
+        'enable_courses' => 'boolean',
+        'enable_services' => 'boolean',
+        'enable_books' => 'boolean',
+        'enable_subscriptions' => 'boolean',
+        'enable_whatsapp_contact' => 'boolean',
+        'enable_cart' => 'boolean',
+        'enable_google_translation' => 'boolean',
+        'enable_favorite' => 'boolean',
+        'enable_newsletter' => 'boolean',
     ];
 
     public function images()

@@ -12,7 +12,8 @@ export default function HomePage({
                                      homeBookCategories,
                                      newOnHomeBooks,
                                      newOnHomeCourses,
-                                     onHomeParticipantAuthors
+                                     onHomeParticipantAuthors,
+                                     settings
                                  }) {
     const [slideNumber, setSlideNumber] = useState(6)
     const {trans} = useContext(AppContext)
@@ -33,37 +34,45 @@ export default function HomePage({
             {slides && <MainGallery elements={slides}/>}
             <FrontendContentContainer showBreadCrumbs={false}>
                 <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:px-8">
-                    <ElementSlider
-                        showNavigation={false}
-                        elements={homeBookCategories}
-                        slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-                        title={trans('home_featured_categories')}
-                        type={'category'}
-                    />
-                    <ElementSlider
-                        elements={newOnHomeBooks}
-                        showNavigation={false}
-                        slidesPerView={isTablet || isMobile ? 1 : slideNumber}
-                        title={trans('new_chosen_books')}
-                        type={'book'}
-                    />
+                    {
+                        settings.enable_books && <>
+                            <ElementSlider
+                                showNavigation={false}
+                                elements={homeBookCategories}
+                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                title={trans('home_featured_categories')}
+                                type={'category'}
+                                params={{ is_book : true}}
+                            />
+                            <ElementSlider
+                                elements={newOnHomeBooks}
+                                showNavigation={false}
+                                slidesPerView={isTablet || isMobile ? 1 : slideNumber}
+                                title={trans('new_chosen_books')}
+                                type={'book'}
+                            />
+                            <ElementSlider
+                                elements={onHomeParticipantAuthors}
+                                showNavigation={false}
+                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                title={trans('participant_authors')}
+                                type={'user'}
+                            />
+                        </>
+                    }
 
-                    <ElementSlider
-                        elements={onHomeParticipantAuthors}
-                        showNavigation={false}
-                        slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-                        title={trans('participant_authors')}
-                        type={'user'}
-                    />
-
-                    <ElementSlider
-                        elements={newOnHomeCourses}
-                        showNavigation={false}
-                        slidesPerView={isTablet || isMobile ? 1 : slideNumber}
-                        title={trans('featured_courses')}
-                        type={'course'}
-                    />
-                    <NewsLetter/>
+                    {
+                        settings.enable_courses && <ElementSlider
+                            elements={newOnHomeCourses}
+                            showNavigation={false}
+                            slidesPerView={isTablet || isMobile ? 1 : slideNumber}
+                            title={trans('featured_courses')}
+                            type={'course'}
+                        />
+                    }
+                    {
+                        settings.enable_newsletter && <NewsLetter/>
+                    }
                 </div>
             </FrontendContentContainer>
         </FrontendContainer>

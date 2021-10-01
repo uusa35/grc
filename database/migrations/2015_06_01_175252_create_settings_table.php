@@ -102,6 +102,17 @@ class CreateSettingsTable extends Migration
             $table->boolean('global_custome_delivery')->default(false);
             $table->string('android_version')->nullable();
             $table->string('apple_version')->nullable();
+
+            $table->boolean('enable_products')->default(false);
+            $table->boolean('enable_courses')->default(true);
+            $table->boolean('enable_services')->default(true);
+            $table->boolean('enable_books')->default(true);
+            $table->boolean('enable_subscriptions')->default(false);
+            $table->boolean('enable_whatsapp_contact')->default(false);
+            $table->boolean('enable_cart')->default(true);
+            $table->boolean('enable_google_translation')->default(false);
+            $table->boolean('enable_favorite')->default(false);
+            $table->boolean('enable_newsletter')->default(true);
             $table->timestamps();
         });
     }

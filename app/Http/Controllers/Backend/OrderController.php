@@ -29,7 +29,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return inertia('Backend/Order/OrderIndex');
+        return redirect()->route('backend.order.search', request()->getQueryString());
     }
 
     public function search(Filters $filters)

@@ -114,6 +114,15 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         global_custome_delivery: setting.global_custome_delivery,
         android_version: setting.android_version,
         apple_version: setting.apple_version,
+        enable_products : setting.enable_products,
+        enable_courses : setting.enable_courses,
+        enable_services : setting.enable_services,
+        enable_books : setting.enable_books,
+        enable_subscriptions : setting.enable_subscriptions,
+        enable_whatsapp_contact : setting.enable_whatsapp_contact,
+        enable_cart : setting.enable_cart,
+        enable_google_translation : setting.enable_google_translation,
+        enable_favorite : setting.enable_favorite,
     });
     const {props} = usePage();
     const {errors} = props;
@@ -406,55 +415,518 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                         </FormSection>
 
                         {/* booleans */}
-                        <FormSection title={trans('more_details')}>
-                            {/* multi_cart_merchant */}
-                            <fieldset className="mt-1 col-span-1">
-                                <div>
-                                    <legend
-                                        className={`text-base  text-gray-900`}>{trans('multi_cart_merchant')}</legend>
-                                </div>
-                                <div className="mt-4 space-y-4">
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="multi_cart_merchant"
-                                            name="multi_cart_merchant"
-                                            type="radio"
-                                            value={1}
-                                            defaultChecked={setting.multi_cart_merchant}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="multi_cart_merchant"
-                                               className="ml-3 block   text-gray-700">
-                                            {trans('yes')}
-                                        </label>
+                        {
+                            isSuper && <FormSection title={trans('more_details')}>
+                                {/* multi_cart_merchant */}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('multi_cart_merchant')}</legend>
                                     </div>
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="multi_cart_merchant"
-                                            name="multi_cart_merchant"
-                                            type="radio"
-                                            value={0}
-                                            defaultChecked={!setting.multi_cart_merchant}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="multi_cart_merchant"
-                                               className="ml-3 block   text-gray-700">
-                                            {trans('no')}
-                                        </label>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="multi_cart_merchant"
+                                                name="multi_cart_merchant"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.multi_cart_merchant}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="multi_cart_merchant"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="multi_cart_merchant"
+                                                name="multi_cart_merchant"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.multi_cart_merchant}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="multi_cart_merchant"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <ToolTipWidget/>
-                                <div>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.multi_cart_merchant &&
-                                        <div className={`text-red-600`}>{errors.multi_cart_merchant}</div>}
-                                    </p>
-                                </div>
-                            </fieldset>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.multi_cart_merchant &&
+                                            <div className={`text-red-600`}>{errors.multi_cart_merchant}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
 
-                        </FormSection>
+                                {/*enable_products*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_products')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_products"
+                                                name="enable_products"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_products}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_products"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_products"
+                                                name="enable_products"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_products}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_products"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_products &&
+                                            <div className={`text-red-600`}>{errors.enable_products}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*enable_courses*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_courses')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_courses"
+                                                name="enable_courses"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_courses}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_courses"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_courses"
+                                                name="enable_courses"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_courses}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_courses"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_courses &&
+                                            <div className={`text-red-600`}>{errors.enable_courses}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*enable_services*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_services')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_services"
+                                                name="enable_services"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_services}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_services"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_services"
+                                                name="enable_services"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_services}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_services"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_services &&
+                                            <div className={`text-red-600`}>{errors.enable_services}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*enable_books*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_books')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_books"
+                                                name="enable_books"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_books}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_books"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_books"
+                                                name="enable_books"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_books}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_books"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_books &&
+                                            <div className={`text-red-600`}>{errors.enable_books}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*enable_subscriptions*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_subscriptions')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_subscriptions"
+                                                name="enable_subscriptions"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_subscriptions}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_subscriptions"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_subscriptions"
+                                                name="enable_subscriptions"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_subscriptions}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_subscriptions"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_subscriptions &&
+                                            <div className={`text-red-600`}>{errors.enable_subscriptions}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*enable_whatsapp_contact*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_whatsapp_contact')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_whatsapp_contact"
+                                                name="enable_whatsapp_contact"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_whatsapp_contact}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_whatsapp_contact"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_whatsapp_contact"
+                                                name="enable_whatsapp_contact"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_whatsapp_contact}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_whatsapp_contact"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_whatsapp_contact &&
+                                            <div className={`text-red-600`}>{errors.enable_whatsapp_contact}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*enable_cart*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_cart')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_cart"
+                                                name="enable_cart"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_cart}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_cart"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_cart"
+                                                name="enable_cart"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_cart}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_cart"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_cart &&
+                                            <div className={`text-red-600`}>{errors.enable_cart}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*enable_google_translation*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_google_translation')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_google_translation"
+                                                name="enable_google_translation"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_google_translation}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_google_translation"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_google_translation"
+                                                name="enable_google_translation"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_google_translation}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_google_translation"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_google_translation &&
+                                            <div className={`text-red-600`}>{errors.enable_google_translation}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*enable_favorite*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_favorite')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_favorite"
+                                                name="enable_favorite"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_favorite}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_favorite"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_favorite"
+                                                name="enable_favorite"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_favorite}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_favorite"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_favorite &&
+                                            <div className={`text-red-600`}>{errors.enable_favorite}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+
+                                {/*enable_newsletter*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_newsletter')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_newsletter"
+                                                name="enable_newsletter"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_newsletter}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_newsletter"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_newsletter"
+                                                name="enable_newsletter"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_newsletter}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_newsletter"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_newsletter &&
+                                            <div className={`text-red-600`}>{errors.enable_newsletter}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                            </FormSection>
+                        }
                         <FormBtns type={'setting'}/>
                     </div>
 

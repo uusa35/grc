@@ -97,12 +97,14 @@ export default function Footer() {
                                         {trans('my_account')}
                                     </Link>
                             }
-                            <li>
-                                <Link href={route('frontend.subscriptions')}
-                                      className="text-base text-gray-500 capitalize hover:text-gray-900">
-                                    {trans('subscriptions')}
-                                </Link>
-                            </li>
+                            {
+                                settings.enable_subscriptions && <li>
+                                    <Link href={route('frontend.subscriptions')}
+                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                        {trans('subscriptions')}
+                                    </Link>
+                                </li>
+                            }
                         </ul>
                     </div>
                     {/* support and plices*/}

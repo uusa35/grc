@@ -22,6 +22,7 @@ export default function ElementSlider({
   type = 'category',
   title = type,
     showNavigation = false,
+    params = ''
 }) {
   const { isRTL } = useSelector(state => state.locale)
 
@@ -49,7 +50,7 @@ export default function ElementSlider({
       {!isEmpty(elements) && (
         <>
             <Link
-                href={route(`frontend.${type}.index`)}
+                href={route(`frontend.${type}.index`, params  ? params : '')}
                 className="w-full flex flex-1 h-auto mb-5 justify-between items-center capitalize rtl:text-right ltr:text-left text-xl "
             >
               <motion.div
