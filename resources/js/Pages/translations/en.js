@@ -974,7 +974,7 @@ export const en  = {
     'governates' : 'governates',
     'governate_added' : 'add a governorate',
     'ar' : 'Arabic',
-    'en' : 'English',
+    'en' : 'الإنجليزية',
     'products' : 'products',
     'books' : 'books',
     'users' : 'users',

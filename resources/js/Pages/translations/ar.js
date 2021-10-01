@@ -981,7 +981,7 @@ export const ar = {
     'governates' : 'محافظات',
     'governate_added' : 'اضف محافظة',
     'ar' : 'Arabic',
-    'en' : 'الإنجليزية',
+    'en' : 'English',
     'products' : "المنتجات",
     'books' : "الكتب",
     'users' : "المستخدمين",
