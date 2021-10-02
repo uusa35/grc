@@ -583,7 +583,8 @@ export default function MainNav() {
                         </Popover.Group>
 
                         {/* Search */}
-                        <SearchField/>
+                        { settings.enable_books && <SearchField type={'book'}/>}
+                        {/*{ settings.enable_products && <SearchField type={'product'}/>}*/}
                         {/* change lang */}
                         <div className="ml-auto flex items-center">
                             <div
@@ -603,7 +604,7 @@ export default function MainNav() {
 
 
                             {/* currency dropdown */}
-                            <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
+                            { settings.enable_prices && <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
                                         className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
@@ -649,7 +650,7 @@ export default function MainNav() {
                                         }
                                     </Menu.Items>
                                 </Transition>
-                            </Menu>
+                            </Menu>}
 
                             {/* auth dropdown */}
                             <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">

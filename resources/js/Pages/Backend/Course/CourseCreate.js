@@ -136,7 +136,7 @@ export default function CourseCreate({users, categories}) {
                             </div>
                             <ToolTipWidget message={trans('name_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                             </p>
                         </div>
                         {/*name en*/}
@@ -158,7 +158,7 @@ export default function CourseCreate({users, categories}) {
                             </div>
                             <ToolTipWidget message={trans('name_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                             </p>
                         </div>
 
@@ -181,7 +181,7 @@ export default function CourseCreate({users, categories}) {
                             </div>
                             <ToolTipWidget message={trans('price_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
+                                {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
                             </p>
                         </div>
                         {/* sale price */}
@@ -205,7 +205,7 @@ export default function CourseCreate({users, categories}) {
                             </div>
                             <ToolTipWidget message={trans('sale_price_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
+                                {errors.sale_price && <div className={`text-red-900`}>{errors.sale_price}</div>}
                             </p>
                         </div>
                         {/*sku*/}
@@ -227,7 +227,7 @@ export default function CourseCreate({users, categories}) {
                             </div>
                             <ToolTipWidget message={trans('course_sku_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
+                                {errors.sku && <div className={`text-red-900`}>{errors.sku}</div>}
                             </p>
                         </div>
                         {/* user_id */}
@@ -260,7 +260,7 @@ export default function CourseCreate({users, categories}) {
                                         <ToolTipWidget message={trans('user_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.user_id &&
-                                            <div className={`text-red-600`}>{errors.user_id}</div>}
+                                            <div className={`text-red-900`}>{errors.user_id}</div>}
                                         </p>
                                     </>
                                 }
@@ -293,7 +293,7 @@ export default function CourseCreate({users, categories}) {
                                 {trans('image_best_fit')}
                             </p>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                             </p>
                         </div>
                         {/* images */}
@@ -319,7 +319,7 @@ export default function CourseCreate({users, categories}) {
                                 {trans('image_best_fit')}
                             </p>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
+                                {errors.images && <div className={`text-red-900`}>{errors.images}</div>}
                             </p>
                         </div>
                         {/* file pdf */}
@@ -344,7 +344,7 @@ export default function CourseCreate({users, categories}) {
                                 {trans('file_instruction')}
                             </p>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.file && <div className={`text-red-600`}>{errors.file}</div>}
+                                {errors.file && <div className={`text-red-900`}>{errors.file}</div>}
                             </p>
                         </div>
                         {/*categories*/}
@@ -442,7 +442,7 @@ export default function CourseCreate({users, categories}) {
                             </div>
                             <ToolTipWidget message={trans('course_categories_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
+                                {errors.categories && <div className={`text-red-900`}>{errors.categories}</div>}
                             </p>
                         </div>
                         {/* embedded*/}
@@ -463,7 +463,7 @@ export default function CourseCreate({users, categories}) {
                             </div>
                             <ToolTipWidget message={trans('course_embedded_notes_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.embedded && <div className={`text-red-600`}>{errors.embedded}</div>}
+                                {errors.embedded && <div className={`text-red-900`}>{errors.embedded}</div>}
                             </p>
                         </div>
                     </FormSection>
@@ -510,7 +510,7 @@ export default function CourseCreate({users, categories}) {
                             <ToolTipWidget/>
                             <div>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                    {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                 </p>
                             </div>
                         </fieldset>
@@ -557,7 +557,7 @@ export default function CourseCreate({users, categories}) {
                             <div>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.on_home &&
-                                    <div className={`text-red-600`}>{errors.on_home}</div>}
+                                    <div className={`text-red-900`}>{errors.on_home}</div>}
                                 </p>
                             </div>
                         </fieldset>
@@ -603,7 +603,7 @@ export default function CourseCreate({users, categories}) {
                             <div>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.on_sale &&
-                                    <div className={`text-red-600`}>{errors.on_sale}</div>}
+                                    <div className={`text-red-900`}>{errors.on_sale}</div>}
                                 </p>
                             </div>
                         </fieldset>
@@ -649,7 +649,7 @@ export default function CourseCreate({users, categories}) {
                             <div>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.free &&
-                                    <div className={`text-red-600`}>{errors.free}</div>}
+                                    <div className={`text-red-900`}>{errors.free}</div>}
                                 </p>
                             </div>
                         </fieldset>

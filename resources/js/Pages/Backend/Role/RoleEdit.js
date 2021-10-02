@@ -98,7 +98,7 @@ export default function({role,privileges}) {
                                 </div>
                                 <ToolTipWidget message={trans('name_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name && <div className={`text-red-600`}>{errors.name}</div>}
+                                    {errors.name && <div className={`text-red-900`}>{errors.name}</div>}
                                 </p>
                             </div>
                             {/* name ar */}
@@ -120,7 +120,7 @@ export default function({role,privileges}) {
                                 </div>
                                 <ToolTipWidget message={trans('name_ar_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                    {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
                             {/* name en */}
@@ -142,7 +142,7 @@ export default function({role,privileges}) {
                                 </div>
                                 <ToolTipWidget message={trans('name_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                    {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
 
@@ -165,7 +165,7 @@ export default function({role,privileges}) {
                                 </div>
                                 <ToolTipWidget message={trans('caption_ar_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
+                                    {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
                                 </p>
                             </div>
                             {/* caption_en */}
@@ -187,7 +187,7 @@ export default function({role,privileges}) {
                                 </div>
                                 <ToolTipWidget message={trans('caption_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
+                                    {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
 
@@ -210,7 +210,7 @@ export default function({role,privileges}) {
                                 </div>
                                 <ToolTipWidget message={trans('order_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                    {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                                 </p>
                             </div>
 
@@ -233,7 +233,7 @@ export default function({role,privileges}) {
                                 </div>
                                 <ToolTipWidget message={trans('color_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.color && <div className={`text-red-600`}>{errors.color}</div>}
+                                    {errors.color && <div className={`text-red-900`}>{errors.color}</div>}
                                 </p>
                             </div>
 
@@ -280,7 +280,7 @@ export default function({role,privileges}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_categories_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
+                                    {errors.categories && <div className={`text-red-900`}>{errors.categories}</div>}
                                 </p>
                             </div>
 
@@ -308,7 +308,7 @@ export default function({role,privileges}) {
                                     {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                    {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                                 </p>
                             </div>
                         </div>
@@ -362,7 +362,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                        {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -408,7 +408,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_super && <div className={`text-red-600`}>{errors.is_super}</div>}
+                                        {errors.is_super && <div className={`text-red-900`}>{errors.is_super}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -454,7 +454,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_admin && <div className={`text-red-600`}>{errors.is_admin}</div>}
+                                        {errors.is_admin && <div className={`text-red-900`}>{errors.is_admin}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -500,7 +500,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_company && <div className={`text-red-600`}>{errors.is_company}</div>}
+                                        {errors.is_company && <div className={`text-red-900`}>{errors.is_company}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -546,7 +546,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_author && <div className={`text-red-600`}>{errors.is_author}</div>}
+                                        {errors.is_author && <div className={`text-red-900`}>{errors.is_author}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -592,7 +592,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_designer && <div className={`text-red-600`}>{errors.is_designer}</div>}
+                                        {errors.is_designer && <div className={`text-red-900`}>{errors.is_designer}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -638,7 +638,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_celebrity && <div className={`text-red-600`}>{errors.is_celebrity}</div>}
+                                        {errors.is_celebrity && <div className={`text-red-900`}>{errors.is_celebrity}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -684,7 +684,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_visible && <div className={`text-red-600`}>{errors.is_visible}</div>}
+                                        {errors.is_visible && <div className={`text-red-900`}>{errors.is_visible}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -730,7 +730,7 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_driver && <div className={`text-red-600`}>{errors.is_driver}</div>}
+                                        {errors.is_driver && <div className={`text-red-900`}>{errors.is_driver}</div>}
                                     </p>
                                 </div>
                             </fieldset>

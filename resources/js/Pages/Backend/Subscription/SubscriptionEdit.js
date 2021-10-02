@@ -136,7 +136,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('name_ar_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                    {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
                             {/* name en */}
@@ -158,7 +158,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('name_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                    {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
 
@@ -182,7 +182,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
+                                    {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
                                 </p>
                             </div>
 
@@ -207,7 +207,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_sale_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
+                                    {errors.sale_price && <div className={`text-red-900`}>{errors.sale_price}</div>}
                                 </p>
                             </div>
 
@@ -230,7 +230,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('months_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.months && <div className={`text-red-600`}>{errors.months}</div>}
+                                    {errors.months && <div className={`text-red-900`}>{errors.months}</div>}
                                 </p>
                             </div>
 
@@ -253,7 +253,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('caption_ar_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
+                                    {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
                                 </p>
                             </div>
                             {/* caption_en */}
@@ -275,7 +275,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('caption_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
+                                    {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
 
@@ -298,7 +298,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('notes_ar_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
+                                    {errors.notes_ar && <div className={`text-red-900`}>{errors.notes_ar}</div>}
                                 </p>
                             </div>
                             {/* notes_en */}
@@ -320,7 +320,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('notes_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
+                                    {errors.notes_en && <div className={`text-red-900`}>{errors.notes_en}</div>}
                                 </p>
                             </div>
 
@@ -343,7 +343,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('code_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.code && <div className={`text-red-600`}>{errors.code}</div>}
+                                    {errors.code && <div className={`text-red-900`}>{errors.code}</div>}
                                 </p>
                             </div>
 
@@ -366,7 +366,7 @@ export default function({subscription}) {
                                 </div>
                                 <ToolTipWidget message={trans('order_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                    {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                                 </p>
                             </div>
 
@@ -392,7 +392,7 @@ export default function({subscription}) {
                                     {trans('image_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                    {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                                 </p>
                             </div>
 
@@ -416,7 +416,7 @@ export default function({subscription}) {
                                 <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.description_en &&
-                                    <div className={`text-red-600`}>{errors.description_en}</div>}
+                                    <div className={`text-red-900`}>{errors.description_en}</div>}
                                 </p>
                             </div>
 
@@ -437,7 +437,7 @@ export default function({subscription}) {
                                 <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.description_ar &&
-                                    <div className={`text-red-600`}>{errors.description_ar}</div>}
+                                    <div className={`text-red-900`}>{errors.description_ar}</div>}
                                 </p>
                             </div>
                         </div>
@@ -484,7 +484,7 @@ export default function({subscription}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                        {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -530,7 +530,7 @@ export default function({subscription}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.on_sale && <div className={`text-red-600`}>{errors.on_sale}</div>}
+                                        {errors.on_sale && <div className={`text-red-900`}>{errors.on_sale}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -576,7 +576,7 @@ export default function({subscription}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_featured && <div className={`text-red-600`}>{errors.is_featured}</div>}
+                                        {errors.is_featured && <div className={`text-red-900`}>{errors.is_featured}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -622,7 +622,7 @@ export default function({subscription}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.free && <div className={`text-red-600`}>{errors.free}</div>}
+                                        {errors.free && <div className={`text-red-900`}>{errors.free}</div>}
                                     </p>
                                 </div>
                             </fieldset>

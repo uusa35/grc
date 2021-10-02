@@ -82,6 +82,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::resource('user', FrontendUserController::class)->except('destroy','edit');
     Route::resource('faq', FrontendFaqController::class)->only('index');
     Route::get('contactus', [FrontendPageController::class, 'getContactus'])->name('contactus');
+    Route::post('contactus', [FrontendPageController::class, 'postContactus'])->name('send.contactus');
     Route::get('aboutus', [FrontendPageController::class, 'getAboutus'])->name('aboutus');
     Route::get('polices', [FrontendPageController::class, 'getPolicies'])->name('polices');
     Route::get('terms', [FrontendPageController::class, 'getTerms'])->name('terms');

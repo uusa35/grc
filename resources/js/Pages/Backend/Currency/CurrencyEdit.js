@@ -82,7 +82,7 @@ export default function({currency , countries }) {
                             </div>
                             <ToolTipWidget message={trans('name_ar_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                             </p>
                         </div>
                         {/* name en */}
@@ -104,7 +104,7 @@ export default function({currency , countries }) {
                             </div>
                             <ToolTipWidget message={trans('name_en_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                             </p>
                         </div>
                         {/* currency_symbol_ar  */}
@@ -126,7 +126,7 @@ export default function({currency , countries }) {
                             </div>
                             <ToolTipWidget message={trans('currency_symbol_ar_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.currency_symbol_ar && <div className={`text-red-600`}>{errors.currency_symbol_ar}</div>}
+                                {errors.currency_symbol_ar && <div className={`text-red-900`}>{errors.currency_symbol_ar}</div>}
                             </p>
                         </div>
                         {/* currency_symbol_en */}
@@ -148,7 +148,7 @@ export default function({currency , countries }) {
                             </div>
                             <ToolTipWidget message={trans('currency_symbol_en_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.currency_symbol_en && <div className={`text-red-600`}>{errors.currency_symbol_en}</div>}
+                                {errors.currency_symbol_en && <div className={`text-red-900`}>{errors.currency_symbol_en}</div>}
                             </p>
                         </div>
                         {/* order */}
@@ -170,7 +170,7 @@ export default function({currency , countries }) {
                             </div>
                             <ToolTipWidget message={trans('order_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                             </p>
                         </div>
 
@@ -225,7 +225,7 @@ export default function({currency , countries }) {
                                 {trans('square_best_fit')}
                             </p>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                             </p>
                         </div>
 
@@ -274,7 +274,7 @@ export default function({currency , countries }) {
                             <ToolTipWidget/>
                             <div>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                    {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                 </p>
                             </div>
                         </fieldset>
@@ -319,7 +319,7 @@ export default function({currency , countries }) {
                             <ToolTipWidget/>
                             <div>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.is_local && <div className={`text-red-600`}>{errors.is_local}</div>}
+                                    {errors.is_local && <div className={`text-red-900`}>{errors.is_local}</div>}
                                 </p>
                             </div>
                         </fieldset>

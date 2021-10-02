@@ -72,7 +72,7 @@ export default function({governate, countries }) {
                             </div>
                             <ToolTipWidget message={trans('name_ar_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                             </p>
                         </div>
                         {/* name en */}
@@ -94,7 +94,7 @@ export default function({governate, countries }) {
                             </div>
                             <ToolTipWidget message={trans('name_en_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                             </p>
                         </div>
 
@@ -146,7 +146,7 @@ export default function({governate, countries }) {
                             </div>
                             <ToolTipWidget message={trans('order_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                             </p>
                         </div>
 
@@ -169,7 +169,7 @@ export default function({governate, countries }) {
                             </div>
                             <ToolTipWidget message={trans('code_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.code && <div className={`text-red-600`}>{errors.code}</div>}
+                                {errors.code && <div className={`text-red-900`}>{errors.code}</div>}
                             </p>
                         </div>
 
@@ -218,7 +218,7 @@ export default function({governate, countries }) {
                             <ToolTipWidget/>
                             <div>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                    {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                 </p>
                             </div>
                         </fieldset>

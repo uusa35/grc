@@ -91,7 +91,7 @@ export default function({privilege, pivotElements}) {
                                 </div>
                                 <ToolTipWidget message={trans('name_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name && <div className={`text-red-600`}>{errors.name}</div>}
+                                    {errors.name && <div className={`text-red-900`}>{errors.name}</div>}
                                 </p>
                             </div>
                             {/* name ar */}
@@ -113,7 +113,7 @@ export default function({privilege, pivotElements}) {
                                 </div>
                                 <ToolTipWidget message={trans('name_ar_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                    {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
                             {/* name en */}
@@ -135,7 +135,7 @@ export default function({privilege, pivotElements}) {
                                 </div>
                                 <ToolTipWidget message={trans('name_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                    {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
 
@@ -159,7 +159,7 @@ export default function({privilege, pivotElements}) {
                                 <ToolTipWidget message={trans('description_ar')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.description_ar &&
-                                    <div className={`text-red-600`}>{errors.description_ar}</div>}
+                                    <div className={`text-red-900`}>{errors.description_ar}</div>}
                                 </p>
                             </div>
                             {/* description_en */}
@@ -182,7 +182,7 @@ export default function({privilege, pivotElements}) {
                                 <ToolTipWidget message={trans('description_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.description_en &&
-                                    <div className={`text-red-600`}>{errors.description_en}</div>}
+                                    <div className={`text-red-900`}>{errors.description_en}</div>}
                                 </p>
                             </div>
 
@@ -205,7 +205,7 @@ export default function({privilege, pivotElements}) {
                                 </div>
                                 <ToolTipWidget message={trans('order_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                    {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                                 </p>
                             </div>
 
@@ -233,7 +233,7 @@ export default function({privilege, pivotElements}) {
                                     {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                    {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                                 </p>
                             </div>
                         </div>
@@ -426,7 +426,7 @@ export default function({privilege, pivotElements}) {
                                         <ToolTipWidget message={trans('product_categories_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.attributes &&
-                                            <div className={`text-red-600`}>{errors.attributes}</div>}
+                                            <div className={`text-red-900`}>{errors.attributes}</div>}
                                         </p>
                                     </div>
 
@@ -474,7 +474,7 @@ export default function({privilege, pivotElements}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.main_menu && <div className={`text-red-600`}>{errors.main_menu}</div>}
+                                        {errors.main_menu && <div className={`text-red-900`}>{errors.main_menu}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -520,7 +520,7 @@ export default function({privilege, pivotElements}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.on_top && <div className={`text-red-600`}>{errors.on_top}</div>}
+                                        {errors.on_top && <div className={`text-red-900`}>{errors.on_top}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -566,7 +566,7 @@ export default function({privilege, pivotElements}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.hide_module && <div className={`text-red-600`}>{errors.hide_module}</div>}
+                                        {errors.hide_module && <div className={`text-red-900`}>{errors.hide_module}</div>}
                                     </p>
                                 </div>
                             </fieldset>

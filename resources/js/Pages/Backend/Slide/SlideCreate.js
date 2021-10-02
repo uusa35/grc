@@ -99,7 +99,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                     {trans('image_best_fit_slide')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                    {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                                 </p>
                             </div>
                             <div className={`sm:col-span-full pt-4`}>
@@ -125,7 +125,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 </div>
                                 <ToolTipWidget message={trans('name_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                    {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
 
@@ -147,7 +147,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 </div>
                                 <ToolTipWidget message={trans('name_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                    {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
 
@@ -169,7 +169,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 </div>
                                 <ToolTipWidget message={trans('caption_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
+                                    {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
                                 </p>
                             </div>
 
@@ -191,7 +191,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 </div>
                                 <ToolTipWidget message={trans('caption_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
+                                    {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
 
@@ -214,7 +214,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 <ToolTipWidget message={trans('description_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.description_ar &&
-                                    <div className={`text-red-600`}>{errors.description_ar}</div>}
+                                    <div className={`text-red-900`}>{errors.description_ar}</div>}
                                 </p>
                             </div>
                             {/* DESCRIPTION EN */}
@@ -236,7 +236,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 <ToolTipWidget message={trans('description_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.description_en &&
-                                    <div className={`text-red-600`}>{errors.description_en}</div>}
+                                    <div className={`text-red-900`}>{errors.description_en}</div>}
                                 </p>
                             </div>
                             {/* notes AR */}
@@ -256,7 +256,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 </div>
                                 <ToolTipWidget message={trans('notes_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
+                                    {errors.notes_ar && <div className={`text-red-900`}>{errors.notes_ar}</div>}
                                 </p>
                             </div>
                             {/* NOTES EN */}
@@ -276,7 +276,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 </div>
                                 <ToolTipWidget message={trans('notes_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
+                                    {errors.notes_en && <div className={`text-red-900`}>{errors.notes_en}</div>}
                                 </p>
                             </div>
 
@@ -301,7 +301,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 </div>
                                 <ToolTipWidget message={trans('order_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                    {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                                 </p>
                             </div>
                             {/* url */}
@@ -325,7 +325,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                 <ToolTipWidget message={trans('slide_url_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.url &&
-                                    <div className={`text-red-600`}>{errors.url}</div>}
+                                    <div className={`text-red-900`}>{errors.url}</div>}
                                 </p>
                             </div>
 
@@ -351,7 +351,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                     {trans('file_instruction')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.file && <div className={`text-red-600`}>{errors.file}</div>}
+                                    {errors.file && <div className={`text-red-900`}>{errors.file}</div>}
                                 </p>
                             </div>
                         </div>
@@ -392,7 +392,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         </div>
                                         <ToolTipWidget message={trans('user_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
-                                            {errors.type && <div className={`text-red-600`}>{errors.type}</div>}
+                                            {errors.type && <div className={`text-red-900`}>{errors.type}</div>}
                                         </p>
                                     </div>
                                     {/*USER ID*/}
@@ -420,7 +420,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         </div>
                                         <ToolTipWidget message={trans('user_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
-                                            {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
+                                            {errors.user_id && <div className={`text-red-900`}>{errors.user_id}</div>}
                                         </p>
                                     </div>
 
@@ -450,7 +450,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         <ToolTipWidget message={trans('product_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.product_id &&
-                                            <div className={`text-red-600`}>{errors.product_id}</div>}
+                                            <div className={`text-red-900`}>{errors.product_id}</div>}
                                         </p>
                                     </div>
 
@@ -480,7 +480,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         <ToolTipWidget message={trans('category_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.category_id &&
-                                            <div className={`text-red-600`}>{errors.category_id}</div>}
+                                            <div className={`text-red-900`}>{errors.category_id}</div>}
                                         </p>
                                     </div>
 
@@ -510,7 +510,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         </div>
                                         <ToolTipWidget message={trans('book_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
-                                            {errors.book_id && <div className={`text-red-600`}>{errors.book_id}</div>}
+                                            {errors.book_id && <div className={`text-red-900`}>{errors.book_id}</div>}
                                         </p>
                                     </div>
 
@@ -541,7 +541,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         <ToolTipWidget message={trans('course_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.course_id &&
-                                            <div className={`text-red-600`}>{errors.course_id}</div>}
+                                            <div className={`text-red-900`}>{errors.course_id}</div>}
                                         </p>
                                     </div>
 
@@ -572,7 +572,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         <ToolTipWidget message={trans('service_instruction')}/>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.service_id &&
-                                            <div className={`text-red-600`}>{errors.service_id}</div>}
+                                            <div className={`text-red-900`}>{errors.service_id}</div>}
                                         </p>
                                     </div>
 
@@ -630,7 +630,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         <ToolTipWidget/>
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
-                                                {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                                {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -679,7 +679,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                             <div>
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.on_home &&
-                                                    <div className={`text-red-600`}>{errors.on_home}</div>}
+                                                    <div className={`text-red-900`}>{errors.on_home}</div>}
                                                 </p>
                                             </div>
                                         </fieldset>
@@ -727,7 +727,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.is_video &&
-                                                <div className={`text-red-600`}>{errors.is_video}</div>}
+                                                <div className={`text-red-900`}>{errors.is_video}</div>}
                                             </p>
                                         </div>
                                     </fieldset>
@@ -773,7 +773,7 @@ export default function SlideCreate({types, products, services, categories, cour
                                         <div>
                                             <p className={`mt-2  text-gray-500`}>
                                                 {errors.is_intro &&
-                                                <div className={`text-red-600`}>{errors.is_intro}</div>}
+                                                <div className={`text-red-900`}>{errors.is_intro}</div>}
                                             </p>
                                         </div>
                                     </fieldset>

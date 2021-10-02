@@ -62,7 +62,6 @@ export default function HomePage({
                             />
                         </>
                     }
-
                     {
                         settings.enable_courses && <>
                             <ElementSlider

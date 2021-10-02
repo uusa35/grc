@@ -171,7 +171,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('name_ar_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                    {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
                             {/* name en */}
@@ -193,7 +193,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('name_en_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                    {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
                             {/* price */}
@@ -216,7 +216,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
+                                    {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
                                 </p>
                             </div>
                             {/* sale price */}
@@ -240,7 +240,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('product_sale_price_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.sale_price && <div className={`text-red-600`}>{errors.sale_price}</div>}
+                                    {errors.sale_price && <div className={`text-red-900`}>{errors.sale_price}</div>}
                                 </p>
                             </div>
                             {/* qty */}
@@ -263,7 +263,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('product_qty_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
+                                    {errors.qty && <div className={`text-red-900`}>{errors.qty}</div>}
                                 </p>
                             </div>
                             {/* sku */}
@@ -285,7 +285,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('sku_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.sku && <div className={`text-red-600`}>{errors.sku}</div>}
+                                    {errors.sku && <div className={`text-red-900`}>{errors.sku}</div>}
                                 </p>
                             </div>
                             {/* weight */}
@@ -308,7 +308,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('weight_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.weight && <div className={`text-red-600`}>{errors.weight}</div>}
+                                    {errors.weight && <div className={`text-red-900`}>{errors.weight}</div>}
                                 </p>
                             </div>
                             {/* user_id */}
@@ -336,7 +336,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </div>
                                     <ToolTipWidget message={trans('user_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.user_id && <div className={`text-red-600`}>{errors.user_id}</div>}
+                                        {errors.user_id && <div className={`text-red-900`}>{errors.user_id}</div>}
                                     </p>
                                 </>}
                             </div>
@@ -367,7 +367,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
                                     {trans('size_or_capacity')}
-                                    {errors.size_id && <div className={`text-red-600`}>{errors.size_id}</div>}
+                                    {errors.size_id && <div className={`text-red-900`}>{errors.size_id}</div>}
                                 </p>
                             </div>
                             {/* color_id */}
@@ -395,7 +395,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.color_id && <div className={`text-red-600`}>{errors.color_id}</div>}
+                                    {errors.color_id && <div className={`text-red-900`}>{errors.color_id}</div>}
                                 </p>
                             </div>
                         </FormSection>
@@ -424,7 +424,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {trans('image_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                    {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                                 </p>
                             </div>
                             {/* more images */}
@@ -449,7 +449,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {trans('image_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
+                                    {errors.images && <div className={`text-red-900`}>{errors.images}</div>}
                                 </p>
                             </div>
                             {/* categories */}
@@ -550,7 +550,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </div>
                                 <ToolTipWidget message={trans('product_categories_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.categories && <div className={`text-red-600`}>{errors.categories}</div>}
+                                    {errors.categories && <div className={`text-red-900`}>{errors.categories}</div>}
                                 </p>
                             </div>
                         </FormSection>
@@ -597,7 +597,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.active && <div className={`text-red-600`}>{errors.active}</div>}
+                                        {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -643,7 +643,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.on_home &&
-                                        <div className={`text-red-600`}>{errors.on_home}</div>}
+                                        <div className={`text-red-900`}>{errors.on_home}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -689,7 +689,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.on_sale &&
-                                        <div className={`text-red-600`}>{errors.on_sale}</div>}
+                                        <div className={`text-red-900`}>{errors.on_sale}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -735,7 +735,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.has_attributes &&
-                                        <div className={`text-red-600`}>{errors.has_attributes}</div>}
+                                        <div className={`text-red-900`}>{errors.has_attributes}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -764,7 +764,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     <ToolTipWidget message={trans('description_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.description_ar &&
-                                        <div className={`text-red-600`}>{errors.description_ar}</div>}
+                                        <div className={`text-red-900`}>{errors.description_ar}</div>}
                                     </p>
                                 </div>
                                 {/* description en */}
@@ -786,7 +786,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     <ToolTipWidget message={trans('description_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.description_en &&
-                                        <div className={`text-red-600`}>{errors.description_en}</div>}
+                                        <div className={`text-red-900`}>{errors.description_en}</div>}
                                     </p>
                                 </div>
                                 {/* notes ar*/}
@@ -806,7 +806,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </div>
                                     <ToolTipWidget message={trans('product_notes_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
+                                        {errors.notes_ar && <div className={`text-red-900`}>{errors.notes_ar}</div>}
                                     </p>
                                 </div>
                                 {/* notes en */}
@@ -826,7 +826,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </div>
                                     <ToolTipWidget message={trans('product_notes_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
+                                        {errors.notes_en && <div className={`text-red-900`}>{errors.notes_en}</div>}
                                     </p>
                                 </div>
                                 {/* caption  ar*/}
@@ -849,7 +849,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </div>
                                     <ToolTipWidget message={trans('product_caption_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
+                                        {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
                                     </p>
                                 </div>
                                 {/* caption en */}
@@ -872,7 +872,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </div>
                                     <ToolTipWidget message={trans('product_caption_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
+                                        {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                     </p>
                                 </div>
                                 {/* keywords */}
@@ -895,7 +895,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </div>
                                     <ToolTipWidget message={trans('product_caption_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
+                                        {errors.keywords && <div className={`text-red-900`}>{errors.keywords}</div>}
                                     </p>
                                 </div>
                                 {/* delivery time*/}
@@ -920,7 +920,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     <ToolTipWidget message={trans('product_delivery_time_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.delivery_time &&
-                                        <div className={`text-red-600`}>{errors.keywords}</div>}
+                                        <div className={`text-red-900`}>{errors.keywords}</div>}
                                     </p>
                                 </div>
                                 {/* order*/}
@@ -944,7 +944,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </div>
                                     <ToolTipWidget message={trans('order_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.order && <div className={`text-red-600`}>{errors.order}</div>}
+                                        {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                                     </p>
                                 </div>
                                 {/* video one */}
@@ -968,7 +968,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     <ToolTipWidget message={trans('product_video_url_one_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.video_url_one &&
-                                        <div className={`text-red-600`}>{errors.video_url_one}</div>}
+                                        <div className={`text-red-900`}>{errors.video_url_one}</div>}
                                     </p>
                                 </div>
                                 {/* video two*/}
@@ -992,7 +992,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     <ToolTipWidget message={trans('product_video_url_two_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.video_url_two &&
-                                        <div className={`text-red-600`}>{errors.video_url_two}</div>}
+                                        <div className={`text-red-900`}>{errors.video_url_two}</div>}
                                     </p>
                                 </div>
                                 {/* start sale */}
@@ -1018,7 +1018,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(product.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                        {errors.start_sale && <div className={`text-red-600`}>{errors.start_sale}</div>}
+                                        {errors.start_sale && <div className={`text-red-900`}>{errors.start_sale}</div>}
                                     </p>
                                 </div>
                                 {/* end sale*/}
@@ -1043,7 +1043,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(product.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                        {errors.end_sale && <div className={`text-red-600`}>{errors.end_sale}</div>}
+                                        {errors.end_sale && <div className={`text-red-900`}>{errors.end_sale}</div>}
                                     </p>
                                 </div>
                                 {/* brand_id */}
@@ -1070,7 +1070,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </div>
                                     <ToolTipWidget message={trans('product_brand_instruction')}/>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.brand_id && <div className={`text-red-600`}>{errors.brand_id}</div>}
+                                        {errors.brand_id && <div className={`text-red-900`}>{errors.brand_id}</div>}
                                     </p>
                                 </div>
                             </FormSection>
@@ -1123,7 +1123,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.size_chart_image &&
-                                    <div className={`text-red-600`}>{errors.size_chart_image}</div>}
+                                    <div className={`text-red-900`}>{errors.size_chart_image}</div>}
                                 </p>
                             </div>
                             {/*    qr */}
@@ -1173,7 +1173,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
+                                    {errors.qr && <div className={`text-red-900`}>{errors.qr}</div>}
                                 </p>
                             </div>
                         </FormSection>
@@ -1221,7 +1221,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.check_stock &&
-                                        <div className={`text-red-600`}>{errors.check_stock}</div>}
+                                        <div className={`text-red-900`}>{errors.check_stock}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -1267,7 +1267,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.is_available &&
-                                        <div className={`text-red-600`}>{errors.is_available}</div>}
+                                        <div className={`text-red-900`}>{errors.is_available}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -1313,7 +1313,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.wrap_as_gift &&
-                                        <div className={`text-red-600`}>{errors.wrap_as_gift}</div>}
+                                        <div className={`text-red-900`}>{errors.wrap_as_gift}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -1359,7 +1359,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.show_size_chart &&
-                                        <div className={`text-red-600`}>{errors.show_size_chart}</div>}
+                                        <div className={`text-red-900`}>{errors.show_size_chart}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -1405,7 +1405,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.direct_purchase &&
-                                        <div className={`text-red-600`}>{errors.direct_purchase}</div>}
+                                        <div className={`text-red-900`}>{errors.direct_purchase}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -1451,7 +1451,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.exclusive &&
-                                        <div className={`text-red-600`}>{errors.exclusive}</div>}
+                                        <div className={`text-red-900`}>{errors.exclusive}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -1496,7 +1496,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <ToolTipWidget message={trans('product_on_new_instruction')}/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.on_new && <div className={`text-red-600`}>{errors.on_new}</div>}
+                                        {errors.on_new && <div className={`text-red-900`}>{errors.on_new}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -1542,7 +1542,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
                                         {errors.is_hot_deal &&
-                                        <div className={`text-red-600`}>{errors.is_hot_deal}</div>}
+                                        <div className={`text-red-900`}>{errors.is_hot_deal}</div>}
                                     </p>
                                 </div>
                             </fieldset>

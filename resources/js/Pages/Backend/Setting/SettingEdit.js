@@ -206,7 +206,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.name_ar && <div className={`text-red-600`}>{errors.name_ar}</div>}
+                                    {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
                             {/* name_en */}
@@ -228,7 +228,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.name_en && <div className={`text-red-600`}>{errors.name_en}</div>}
+                                    {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
                             {/* whatsapp */}
@@ -249,7 +249,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_whatsapp_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.whatsapp && <div className={`text-red-600`}>{errors.whatsapp}</div>}
+                                    {errors.whatsapp && <div className={`text-red-900`}>{errors.whatsapp}</div>}
                                 </p>
                             </div>
                             {/* mobile */}
@@ -270,7 +270,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_mobile_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.mobile && <div className={`text-red-600`}>{errors.mobile}</div>}
+                                    {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
                                 </p>
                             </div>
                             {/* email */}
@@ -291,7 +291,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_email_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.email && <div className={`text-red-600`}>{errors.email}</div>}
+                                    {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
                                 </p>
                             </div>
 
@@ -323,7 +323,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     </div>
                                     <ToolTipWidget message={trans('product_user_instruction')}/>
                                     <p className={`mt-2 text-xs text-gray-500`}>
-                                        {errors.theme && <div className={`text-red-600`}>{errors.theme}</div>}
+                                        {errors.theme && <div className={`text-red-900`}>{errors.theme}</div>}
                                     </p>
                                 </div>
                             }
@@ -351,7 +351,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.theme && <div className={`text-red-600`}>{errors.theme}</div>}
+                                    {errors.theme && <div className={`text-red-900`}>{errors.theme}</div>}
                                 </p>
                             </div>
                         </FormSection>
@@ -380,7 +380,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.image && <div className={`text-red-600`}>{errors.image}</div>}
+                                    {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                                 </p>
                             </div>
                             {/* more_images */}
@@ -410,7 +410,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     {trans('rectangle_best_fit')}
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.images && <div className={`text-red-600`}>{errors.images}</div>}
+                                    {errors.images && <div className={`text-red-900`}>{errors.images}</div>}
                                 </p>
                             </div>
                         </FormSection>
@@ -460,7 +460,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.multi_cart_merchant &&
-                                            <div className={`text-red-600`}>{errors.multi_cart_merchant}</div>}
+                                            <div className={`text-red-900`}>{errors.multi_cart_merchant}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -507,7 +507,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_products &&
-                                            <div className={`text-red-600`}>{errors.enable_products}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_products}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -554,7 +554,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_prices &&
-                                            <div className={`text-red-600`}>{errors.enable_prices}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_prices}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -601,7 +601,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_courses &&
-                                            <div className={`text-red-600`}>{errors.enable_courses}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_courses}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -647,7 +647,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_services &&
-                                            <div className={`text-red-600`}>{errors.enable_services}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_services}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -693,7 +693,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_books &&
-                                            <div className={`text-red-600`}>{errors.enable_books}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_books}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -739,7 +739,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_subscriptions &&
-                                            <div className={`text-red-600`}>{errors.enable_subscriptions}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_subscriptions}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -785,7 +785,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_whatsapp_contact &&
-                                            <div className={`text-red-600`}>{errors.enable_whatsapp_contact}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_whatsapp_contact}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -831,7 +831,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_cart &&
-                                            <div className={`text-red-600`}>{errors.enable_cart}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_cart}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -877,7 +877,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_google_translation &&
-                                            <div className={`text-red-600`}>{errors.enable_google_translation}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_google_translation}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -923,7 +923,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_favorite &&
-                                            <div className={`text-red-600`}>{errors.enable_favorite}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_favorite}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -970,7 +970,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_newsletter &&
-                                            <div className={`text-red-600`}>{errors.enable_newsletter}</div>}
+                                            <div className={`text-red-900`}>{errors.enable_newsletter}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -1001,7 +1001,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <ToolTipWidget message={trans('product_description_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.description_ar &&
-                                    <div className={`text-red-600`}>{errors.description_ar}</div>}
+                                    <div className={`text-red-900`}>{errors.description_ar}</div>}
                                 </p>
                             </div>
                             {/* description en */}
@@ -1023,7 +1023,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <ToolTipWidget message={trans('product_description_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.description_en &&
-                                    <div className={`text-red-600`}>{errors.description_en}</div>}
+                                    <div className={`text-red-900`}>{errors.description_en}</div>}
                                 </p>
                             </div>
                             {/* shipment notes_ar */}
@@ -1044,7 +1044,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <ToolTipWidget message={trans('setting_shipment_notes')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.shipment_notes_ar &&
-                                    <div className={`text-red-600`}>{errors.shipment_notes_ar}</div>}
+                                    <div className={`text-red-900`}>{errors.shipment_notes_ar}</div>}
                                 </p>
                             </div>
                             {/* shipment notes_en*/}
@@ -1066,7 +1066,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <ToolTipWidget message={trans('setting_shipment_notes')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.shipment_notes_en &&
-                                    <div className={`text-red-600`}>{errors.shipment_notes_en}</div>}
+                                    <div className={`text-red-900`}>{errors.shipment_notes_en}</div>}
                                 </p>
                             </div>
                             {/* caption _ar*/}
@@ -1089,7 +1089,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.caption_ar && <div className={`text-red-600`}>{errors.caption_ar}</div>}
+                                    {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
                                 </p>
                             </div>
                             {/* caption_en */}
@@ -1112,7 +1112,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.caption_en && <div className={`text-red-600`}>{errors.caption_en}</div>}
+                                    {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
                         </FormSection>
@@ -1139,7 +1139,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.longitude && <div className={`text-red-600`}>{errors.longitude}</div>}
+                                    {errors.longitude && <div className={`text-red-900`}>{errors.longitude}</div>}
                                 </p>
                             </div>
                             {/* latitude */}
@@ -1162,7 +1162,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.latitude && <div className={`text-red-600`}>{errors.latitude}</div>}
+                                    {errors.latitude && <div className={`text-red-900`}>{errors.latitude}</div>}
                                 </p>
                             </div>
                             {/* keywords */}
@@ -1185,7 +1185,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_caption_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.keywords && <div className={`text-red-600`}>{errors.keywords}</div>}
+                                    {errors.keywords && <div className={`text-red-900`}>{errors.keywords}</div>}
                                 </p>
                             </div>
 
@@ -1208,7 +1208,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.instagram && <div className={`text-red-600`}>{errors.instagram}</div>}
+                                    {errors.instagram && <div className={`text-red-900`}>{errors.instagram}</div>}
                                 </p>
                             </div>
 
@@ -1231,7 +1231,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.facebook && <div className={`text-red-600`}>{errors.facebook}</div>}
+                                    {errors.facebook && <div className={`text-red-900`}>{errors.facebook}</div>}
                                 </p>
                             </div>
 
@@ -1254,7 +1254,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.twitter && <div className={`text-red-600`}>{errors.twitter}</div>}
+                                    {errors.twitter && <div className={`text-red-900`}>{errors.twitter}</div>}
                                 </p>
                             </div>
 
@@ -1277,7 +1277,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.snapchat && <div className={`text-red-600`}>{errors.snapchat}</div>}
+                                    {errors.snapchat && <div className={`text-red-900`}>{errors.snapchat}</div>}
                                 </p>
                             </div>
 
@@ -1300,7 +1300,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.youtube && <div className={`text-red-600`}>{errors.youtube}</div>}
+                                    {errors.youtube && <div className={`text-red-900`}>{errors.youtube}</div>}
                                 </p>
                             </div>
 
@@ -1323,7 +1323,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.android && <div className={`text-red-600`}>{errors.android}</div>}
+                                    {errors.android && <div className={`text-red-900`}>{errors.android}</div>}
                                 </p>
                             </div>
 
@@ -1346,7 +1346,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.apple && <div className={`text-red-600`}>{errors.apple}</div>}
+                                    {errors.apple && <div className={`text-red-900`}>{errors.apple}</div>}
                                 </p>
                             </div>
                         </FormSection>
@@ -1369,7 +1369,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                     <p className={`mt-2 text-xs text-gray-500`}>
                                         {errors.aboutus_en &&
-                                        <div className={`text-red-600`}>{errors.aboutus_en}</div>}
+                                        <div className={`text-red-900`}>{errors.aboutus_en}</div>}
                                     </p>
                                 </div>
                                 {/* about us ar*/}
@@ -1389,7 +1389,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                     <p className={`mt-2 text-xs text-gray-500`}>
                                         {errors.aboutus_ar &&
-                                        <div className={`text-red-600`}>{errors.aboutus_ar}</div>}
+                                        <div className={`text-red-900`}>{errors.aboutus_ar}</div>}
                                     </p>
                                 </div>
                                 {/* terms en*/}
@@ -1409,7 +1409,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                     <p className={`mt-2 text-xs text-gray-500`}>
                                         {errors.terms_en &&
-                                        <div className={`text-red-600`}>{errors.terms_en}</div>}
+                                        <div className={`text-red-900`}>{errors.terms_en}</div>}
                                     </p>
                                 </div>
                                 {/* terms ar*/}
@@ -1429,7 +1429,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                     <p className={`mt-2 text-xs text-gray-500`}>
                                         {errors.terms_ar &&
-                                        <div className={`text-red-600`}>{errors.terms_ar}</div>}
+                                        <div className={`text-red-900`}>{errors.terms_ar}</div>}
                                     </p>
                                 </div>
                                 {/* policy en*/}
@@ -1449,7 +1449,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                     <p className={`mt-2 text-xs text-gray-500`}>
                                         {errors.policy_en &&
-                                        <div className={`text-red-600`}>{errors.policy_en}</div>}
+                                        <div className={`text-red-900`}>{errors.policy_en}</div>}
                                     </p>
                                 </div>
                                 {/* policy ar*/}
@@ -1469,7 +1469,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                     <p className={`mt-2 text-xs text-gray-500`}>
                                         {errors.policy_ar &&
-                                        <div className={`text-red-600`}>{errors.policy_ar}</div>}
+                                        <div className={`text-red-900`}>{errors.policy_ar}</div>}
                                     </p>
                                 </div>
                             </div>
@@ -1500,7 +1500,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.size_chart_image &&
-                                    <div className={`text-red-600`}>{errors.size_chart_image}</div>}
+                                    <div className={`text-red-900`}>{errors.size_chart_image}</div>}
                                 </p>
                             </div>
                             {/*    app_logo */}
@@ -1527,7 +1527,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     {trans('app_logo_best_fit')}
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.app_logo && <div className={`text-red-600`}>{errors.app_logo}</div>}
+                                    {errors.app_logo && <div className={`text-red-900`}>{errors.app_logo}</div>}
                                 </p>
                             </div>
                             {/*    qr */}
@@ -1553,7 +1553,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     {trans('square_best_fit')}
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.qr && <div className={`text-red-600`}>{errors.qr}</div>}
+                                    {errors.qr && <div className={`text-red-900`}>{errors.qr}</div>}
                                 </p>
                             </div>
                             {/*    shipment prices image */}
@@ -1581,7 +1581,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </p>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.shipment_prices &&
-                                    <div className={`text-red-600`}>{errors.shipment_prices}</div>}
+                                    <div className={`text-red-900`}>{errors.shipment_prices}</div>}
                                 </p>
                             </div>
                         </FormSection>

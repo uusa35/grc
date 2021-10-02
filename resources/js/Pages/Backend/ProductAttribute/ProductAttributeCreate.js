@@ -74,9 +74,9 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {trans('size_or_capacity')}
                                     {errors.size_id &&
-                                    <div className={`text-red-600`}>{errors.size_id}</div>}
+                                    <div className={`text-red-900`}>{errors.size_id}</div>}
                                     {errors.product_id &&
-                                    <div className={`text-red-600`}>{errors.product_id}</div>}
+                                    <div className={`text-red-900`}>{errors.product_id}</div>}
                                 </p>
                             </div>
                             {/* color_id */}
@@ -105,7 +105,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
                                     {errors.color_id &&
-                                    <div className={`text-red-600`}>{errors.color_id}</div>}
+                                    <div className={`text-red-900`}>{errors.color_id}</div>}
                                 </p>
                             </div>
                             {/* qty */}
@@ -128,7 +128,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                                 </div>
                                 <ToolTipWidget message={trans('product_qty_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.qty && <div className={`text-red-600`}>{errors.qty}</div>}
+                                    {errors.qty && <div className={`text-red-900`}>{errors.qty}</div>}
                                 </p>
                             </div>
                             {/* price */}
@@ -151,7 +151,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                                 </div>
                                 <ToolTipWidget message={trans('product_price_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.price && <div className={`text-red-600`}>{errors.price}</div>}
+                                    {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
                                 </p>
                             </div>
                         </div>

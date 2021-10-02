@@ -73,7 +73,7 @@ export default function TimingEdit({ timing }) {
                                 </div>
                                 <ToolTipWidget message={trans('product_end_sale_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.date && <div className={`text-red-600`}>{errors.date}</div>}
+                                    {errors.date && <div className={`text-red-900`}>{errors.date}</div>}
                                 </p>
                             </div>
                             {/* start*/}
@@ -98,7 +98,7 @@ export default function TimingEdit({ timing }) {
                                 </div>
                                 <ToolTipWidget message={trans('product_end_sale_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.start && <div className={`text-red-600`}>{errors.start}</div>}
+                                    {errors.start && <div className={`text-red-900`}>{errors.start}</div>}
                                 </p>
                             </div>
                             {/* end*/}
@@ -123,7 +123,7 @@ export default function TimingEdit({ timing }) {
                                 </div>
                                 <ToolTipWidget message={trans('date_end_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.end && <div className={`text-red-600`}>{errors.end}</div>}
+                                    {errors.end && <div className={`text-red-900`}>{errors.end}</div>}
                                 </p>
                             </div>
 
@@ -144,7 +144,7 @@ export default function TimingEdit({ timing }) {
                                 </div>
                                 <ToolTipWidget message={trans('product_notes_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_ar && <div className={`text-red-600`}>{errors.notes_ar}</div>}
+                                    {errors.notes_ar && <div className={`text-red-900`}>{errors.notes_ar}</div>}
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
@@ -163,7 +163,7 @@ export default function TimingEdit({ timing }) {
                                 </div>
                                 <ToolTipWidget message={trans('product_notes_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.notes_en && <div className={`text-red-600`}>{errors.notes_en}</div>}
+                                    {errors.notes_en && <div className={`text-red-900`}>{errors.notes_en}</div>}
                                 </p>
                             </div>
 
