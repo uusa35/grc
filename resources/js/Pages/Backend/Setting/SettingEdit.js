@@ -115,6 +115,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         android_version: setting.android_version,
         apple_version: setting.apple_version,
         enable_products : setting.enable_products,
+        enable_prices : setting.enable_prices,
         enable_courses : setting.enable_courses,
         enable_services : setting.enable_services,
         enable_books : setting.enable_books,
@@ -510,6 +511,54 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                         </p>
                                     </div>
                                 </fieldset>
+
+                                {/*enable_prices*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_prices')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_prices"
+                                                name="enable_prices"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_prices}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_prices"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_prices"
+                                                name="enable_prices"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_prices}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_prices"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_prices &&
+                                            <div className={`text-red-600`}>{errors.enable_prices}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+
                                 {/*enable_courses*/}
                                 <fieldset className="mt-1 col-span-2">
                                     <div>

@@ -20,6 +20,7 @@ export default function ElementSlider({
   elements,
   slidesPerView = 4,
   type = 'category',
+    moduleType = '',
   title = type,
     showNavigation = false,
     params = ''
@@ -29,7 +30,7 @@ export default function ElementSlider({
   const handleComponent = (s) => {
     switch (type) {
       case 'category':
-        return <CategoryWidget element={s} type={'book'} />;
+        return <CategoryWidget element={s} type={moduleType} />;
       case 'product':
         return <NormalProductWidget element={s} />;
         case 'book':

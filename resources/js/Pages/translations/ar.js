@@ -1111,7 +1111,10 @@ export const ar = {
     "book_categories" : "تصنيفات الكتب",
     "course_categories" : "تصنيفات الدورات",
     "featured_categories" : "تصنيفات مختارة",
-    "home_featured_categories" : "تصنيفات كتب مميزة",
+    "book_home_featured_categories" : "تصنيفات كتب مميزة",
+    "course_home_featured_categories" : "تصنيفات دورات مميزة",
+    "service_home_featured_categories" : "تصنيفات استشارات مميزة",
+    "product_home_featured_categories" : "تصنيفات منتجات مميزة",
     "featured_courses" : "دورات مختارة",
     "aboutus_en" : "نبذة عنا بالإنجليزية",
     "aboutus_ar" : "نبذة عنا بالعربية",
@@ -1192,4 +1195,7 @@ export const ar = {
     "enable_google_translation" : "تفعيل ترجمة الجوجل",
     "enable_favorite" : "تفعيل المفضلة",
     "enable_newsletter" : "تفعيل القوائم البريدية",
+    "enable_prices" : "تفعيل الأسعار",
+    "contactus_through_whatsapp" : "تواصل معنا عن طريق الواتس اب",
+    "contactus_to_inquire_about_product" : "التواصل معنا بخصوص المنتج"
 }

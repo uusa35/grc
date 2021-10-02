@@ -6,7 +6,7 @@ import GlobalContext from "../../../context/GlobalContext";
 
 export default function() {
     const {classNames, trans, getThumb, getLarge} = useContext(AppContext)
-    const {auth} = useContext(GlobalContext);
+    const {auth, settings } = useContext(GlobalContext);
 
     return (
         <aside className="py-6 lg:col-span-3">
@@ -69,23 +69,26 @@ export default function() {
                     </svg>
                     <span className="truncate">{trans('my_addresses')}</span>
                 </Link>
-                <Link
-                    href={route('frontend.profile.courses')}
-                    className={classNames(
-                        route().current() === 'frontend.profile.courses'
-                            ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 hover:text-gray-300'
-                            : 'border-transparent text-gray-400 hover:bg-gray-50 hover:text-gray-900',
-                        'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md'
-                    )}
-                    aria-current={true ? 'page' : undefined}
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         className="h-6 w-6 mx-2"
-                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                    </svg>
-                    <span className="truncate">{trans('my_courses')}</span>
-                </Link>
+                {
+                    settings.enable_courses && <Link
+                        href={route('frontend.profile.courses')}
+                        className={classNames(
+                            route().current() === 'frontend.profile.courses'
+                                ? 'text-gray-900 bg-gray-100 hover:bg-gray-100 hover:text-gray-300'
+                                : 'border-transparent text-gray-400 hover:bg-gray-50 hover:text-gray-900',
+                            'group border-l-4 px-3 py-2 flex items-center text-sm font-medium rounded-md'
+                        )}
+                        aria-current={true ? 'page' : undefined}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             className="h-6 w-6 mx-2"
+                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                        <span className="truncate">{trans('my_courses')}</span>
+                    </Link>
+                }
+                { settings.enable_services &&
                 <Link
                     href={route('frontend.profile.services')}
                     className={classNames(
@@ -105,7 +108,8 @@ export default function() {
                     </svg>
                     <span className="truncate">{trans('my_services')}</span>
                 </Link>
-                <Link
+                }
+                { settings.enable_books  && <Link
                     href={route('frontend.profile.books')}
                     className={classNames(
                         route().current() === 'frontend.profile.books'
@@ -122,7 +126,8 @@ export default function() {
                     </svg>
                     <span className="truncate">{trans('my_books')}</span>
                 </Link>
-                <Link
+                }
+                { settings.enable_favorites && <Link
                     href={route('frontend.profile.favorites')}
                     className={classNames(
                         route().current() === 'frontend.profile.favorites'
@@ -139,6 +144,7 @@ export default function() {
                     </svg>
                     <span className="truncate">{trans('my_favorites')}</span>
                 </Link>
+                }
                 <Link
                     href={route('frontend.profile.setting')}
                     className={classNames(

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductExtraLightResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
@@ -57,7 +58,7 @@ class FrontendProductController extends Controller
      */
     public function show(Product $product)
     {
-        $element = $product->load('images','product_attributes.color','product_attributes.size','color','size','categories');
+        $element = ProductResource::make($product->load('images','product_attributes.color','product_attributes.size','color','size','categories','user'));
         return inertia('Frontend/Product/FrontendProductShow', compact('element'));
     }
 

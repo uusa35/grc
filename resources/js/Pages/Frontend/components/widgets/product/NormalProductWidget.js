@@ -8,7 +8,7 @@ import {truncate} from "lodash";
 import { motion } from "framer-motion"
 
 export default function NormalProductWidget ({ element }) {
-    const { getLocalized, getThumb  } = useContext(AppContext);
+    const { getLocalized, getThumb } = useContext(AppContext);
     return (
         <motion.div
             initial={false}

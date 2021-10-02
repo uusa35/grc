@@ -23,12 +23,12 @@ class HomeController extends Controller
         $slides = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
             return $q->active()->orderby('order','asc');
         }])->first()->slides);
-        $homeBookCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->onlyParent()->orderby('order','asc')->get());
+        $homeCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->onlyParent()->orderby('order','asc')->get());
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
         $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->authors()->orderBy('order','asc')->get());
         $meta = SettingResource::make(Setting::first());
-        return inertia('Frontend/HomePage', compact('slides', 'homeBookCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses'))
+        return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses'))
             ->withViewData([
             'meta' => $meta,
         ]);

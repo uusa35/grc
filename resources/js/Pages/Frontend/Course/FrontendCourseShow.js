@@ -35,7 +35,7 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
 
 
-export default function FrontendCourseShow({element, relatedElements, auth}) {
+export default function ({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
@@ -352,11 +352,11 @@ export default function FrontendCourseShow({element, relatedElements, auth}) {
                                                 <div className="flex flex-1 justify-start items-start">
                                                     <div>
                                                         <img
-                                                            className="w-40 h-auto rounded-sm shadow-md"
+                                                            className="w-20 h-auto rounded-sm shadow-md"
                                                             src={getThumb(element.user.image)}
                                                             alt={element.user[getLocalized()]}/>
                                                     </div>
-                                                    <div className="rtl:mr-5 ltr:ml-5">
+                                                    <div className="rtl:mr-5 ltr:ml-5 pt-5">
                                                         <h4>{element.user[getLocalized()]}</h4>
                                                         <h6>{element.user[getLocalized('caption')]}</h6>
                                                         <p>{element.user[getLocalized('description')]}</p>

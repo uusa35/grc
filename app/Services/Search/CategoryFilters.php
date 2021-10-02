@@ -89,6 +89,11 @@ class CategoryFilters extends QueryFilters
         return $this->builder->where('is_service', request()->is_service);
     }
 
+    public function is_course()
+    {
+        return $this->builder->where('is_course', request()->is_course);
+    }
+
 
     public function min()
     {

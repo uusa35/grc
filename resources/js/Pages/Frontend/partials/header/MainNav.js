@@ -45,7 +45,7 @@ export default function MainNav() {
     const {locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
-    
+
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}
@@ -148,14 +148,67 @@ export default function MainNav() {
                             </div>
 
                             <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                                {map(pages, p => (
-                                    <div className="flow-root" key={p.name}>
+                                <div className="flow-root">
+                                    <Link
+                                        href={route('frontend.home')}
+                                        className="-m-2 p-2 block text-gray-900 capitalize ">
+                                        {capitalize(trans('home'))}
+                                    </Link>
+                                </div>
+                                {
+                                    settings.enable_books && <div className="flow-root">
                                         <Link
-                                            href={p.url} className="-m-2 p-2 block text-gray-900 capitalize ">
-                                            {capitalize(trans(p.name))}
+                                            href={route('frontend.book.index')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('books'))}
                                         </Link>
                                     </div>
-                                ))}
+                                }
+                                {
+                                    settings.enable_books && <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.user.index')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('authors'))}
+                                        </Link>
+                                    </div>
+                                }
+                                {
+                                    settings.enable_services && <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.service.index')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('services'))}
+                                        </Link>
+                                    </div>
+                                }
+                                {
+                                    settings.enable_courses && <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.course.index')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('courses'))}
+                                        </Link>
+                                    </div>
+                                }
+                                {
+                                    settings.enable_subscriptions && <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.subscription.index')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('subscriptions'))}
+                                        </Link>
+                                    </div>
+                                }
+                                {
+                                    settings.enable_products && <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.product.index')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('products'))}
+                                        </Link>
+                                    </div>
+                                }
                                 {
                                     guest ? <>
                                         <div className="flow-root">
@@ -197,31 +250,35 @@ export default function MainNav() {
                             <Tab.Group as="div" className="mt-2">
                                 <div className="border-b border-gray-200">
                                     <Tab.List className="-mb-px flex px-4 space-x-8">
-                                        <Tab
-                                            className={({selected}) =>
-                                                classNames(
-                                                    selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 capitalize border-transparent',
-                                                    'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
-                                                )
-                                            }
-                                        >
-                                            {trans("categories")}
-                                        </Tab>
-                                        <Tab
-                                            className={({selected}) =>
-                                                classNames(
-                                                    selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 capitalize border-transparent',
-                                                    'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
-                                                )
-                                            }
-                                        >
-                                            {trans('shopping_cart')}
-                                        </Tab>
+                                        {
+                                            settings.enable_books && <Tab
+                                                className={({selected}) =>
+                                                    classNames(
+                                                        selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 capitalize border-transparent',
+                                                        'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
+                                                    )
+                                                }
+                                            >
+                                                {trans("categories")}
+                                            </Tab>
+                                        }
+                                        {
+                                            settings.enable_cart && <Tab
+                                                className={({selected}) =>
+                                                    classNames(
+                                                        selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 capitalize border-transparent',
+                                                        'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
+                                                    )
+                                                }
+                                            >
+                                                {trans('shopping_cart')}
+                                            </Tab>
+                                        }
                                     </Tab.List>
                                 </div>
                                 <Tab.Panels as={Fragment}>
 
-                                    <Tab.Panel
+                                    {settings.enable_cart && <Tab.Panel
                                         className="pt-10 pb-8 px-4 space-y-10 capitalize">
                                         {map(filter(categories, c => c.is_book), parent => (
                                             <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
@@ -271,11 +328,14 @@ export default function MainNav() {
                                             </div>
 
                                         ))}
-                                    </Tab.Panel>
-                                    <Tab.Panel
-                                        className="pt-10 pb-8 px-4 space-y-10 capitalize">
-                                        <CartIndexOrderSummary />
-                                    </Tab.Panel>
+                                    </Tab.Panel>}
+                                    {
+                                        settings.enable_books &&
+                                        <Tab.Panel
+                                            className="pt-10 pb-8 px-4 space-y-10 capitalize">
+                                            <CartIndexOrderSummary/>
+                                        </Tab.Panel>
+                                    }
                                 </Tab.Panels>
                             </Tab.Group>
 
@@ -322,20 +382,31 @@ export default function MainNav() {
                                 >
                                     {capitalize(trans('home'))}
                                 </Link>
-                                <Link
-                                    href={route('frontend.book.index')}
-                                    onClick={() => dispatch(setParentModule('book'))}
-                                    className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                >
-                                    {capitalize(trans('books'))}
-                                </Link>
+                                {
+                                    settings.enable_products && <Link
+                                        href={route('frontend.product.index')}
+                                        onClick={() => dispatch(setParentModule('product'))}
+                                        className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('products'))}
+                                    </Link>
+                                }
+                                {
+                                    settings.enable_books && <Link
+                                        href={route('frontend.book.index')}
+                                        onClick={() => dispatch(setParentModule('book'))}
+                                        className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('books'))}
+                                    </Link>
+                                }
                                 {
                                     settings.enable_books && <MainNavBookCategoriesList categories={categories}/>
                                 }
                                 {
                                     settings.enable_books && <Link
                                         href={route('frontend.user.index')}
-                                        onClick={() => dispatch(setParentModule('book'))}
+                                        onClick={() => dispatch(setParentModule('user'))}
                                         className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
                                         {capitalize(trans('authors'))}
@@ -406,7 +477,8 @@ export default function MainNav() {
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                          className="h-6 w-6 text-gray-800"
                                                                          viewBox="0 0 20 20" fill="currentColor">
-                                                                        <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                                                                        <path
+                                                                            d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
                                                                         <path fillRule="evenodd"
                                                                               d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
                                                                               clipRule="evenodd"/>
@@ -661,7 +733,8 @@ export default function MainNav() {
                             {/* Cart */}
                             {
                                 settings.enable_cart && <div className="ml-4 flow-root lg:ml-6">
-                                    <Link href={route('frontend.cart.index')} className="group -m-2 p-2 flex items-center">
+                                    <Link href={route('frontend.cart.index')}
+                                          className="group -m-2 p-2 flex items-center">
                                         <ShoppingBagIcon
                                             className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
                                             aria-hidden="true"

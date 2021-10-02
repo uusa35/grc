@@ -6,10 +6,11 @@ import {isMobile, isTablet} from 'react-device-detect';
 import NewsLetter from "./partials/NewsLetter";
 import MainGallery from "./components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./components/FrontendContentContainer";
+import { filter } from 'lodash';
 
 export default function HomePage({
                                      slides,
-                                     homeBookCategories,
+                                     homeCategories,
                                      newOnHomeBooks,
                                      newOnHomeCourses,
                                      onHomeParticipantAuthors,
@@ -38,10 +39,11 @@ export default function HomePage({
                         settings.enable_books && <>
                             <ElementSlider
                                 showNavigation={false}
-                                elements={homeBookCategories}
+                                elements={filter(homeCategories, c => c.is_book)}
                                 slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-                                title={trans('home_featured_categories')}
+                                title={trans('book_home_featured_categories')}
                                 type={'category'}
+                                moduleType={'book'}
                                 params={{ is_book : true}}
                             />
                             <ElementSlider
@@ -62,13 +64,24 @@ export default function HomePage({
                     }
 
                     {
-                        settings.enable_courses && <ElementSlider
+                        settings.enable_courses && <>
+                            <ElementSlider
+                                showNavigation={false}
+                                elements={filter(homeCategories, c => c.is_course)}
+                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                title={trans('course_home_featured_categories')}
+                                type={'category'}
+                                moduleType={'course'}
+                                params={{ is_course : true}}
+                            />
+                        <ElementSlider
                             elements={newOnHomeCourses}
                             showNavigation={false}
                             slidesPerView={isTablet || isMobile ? 1 : slideNumber}
                             title={trans('featured_courses')}
                             type={'course'}
                         />
+                        </>
                     }
                     {
                         settings.enable_newsletter && <NewsLetter/>
