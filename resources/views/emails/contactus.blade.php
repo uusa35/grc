@@ -1,7 +1,6 @@
 @component('mail::message')
 @component('mail::panel')
-# {{ trans('general.first_name') }} : {{ request()->first_name }}
-# {{ trans('general.last_name') }} : {{ request()->last_name }}
+# {{ trans('general.name') }} : {{ request()->first_name }} {{ request()->last_name }}
 # {{ trans('general.email') }} : {{ request()->email }}
 # {{ trans('general.mobile') }} : {{ request()->mobile }}
 @endcomponent

@@ -19,11 +19,10 @@ class FrontendPageController extends Controller
 
     public function postContactus(Request $request)
     {
-//        dd($request->request->all());
         $request->validate([
             'first_name' => 'required|min:3|max:200',
             'last_name' => 'required|min:3|max:200',
-//            'mobile' => 'min:10|max:15',
+            'mobile' => 'min:10|max:15',
             'subject' => 'required',
             'content' => 'required',
             'code' => 'required|confirmed'
