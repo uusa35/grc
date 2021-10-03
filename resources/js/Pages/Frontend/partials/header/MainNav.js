@@ -39,12 +39,14 @@ export default function MainNav() {
         baseUrl,
         isAdminOrAbove,
         guest,
-        arFont, enFont
+        arFont, enFont,
     } = useContext(AppContext);
     const {auth, settings, currencies, categories} = useContext(GlobalContext);
     const {locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
+
+    console.log('services', settings)
 
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
@@ -525,7 +527,24 @@ export default function MainNav() {
                                                                 </div>
                                                             </Link>
 
-                                                            <Link
+                                                            {settings[getLocalized('services')] && settings[getLocalized('services')].length > 50 ? <Link
+                                                                href={route('frontend.services')}
+                                                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 text-gray-800" fill="none"
+                                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                                                          strokeWidth={2}
+                                                                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                                                </svg>
+                                                                <div className="ltr:ml-5 rtl:mr-5">
+                                                                    <p className="text-base font-medium text-gray-900 capitalize">{trans('our_services')}</p>
+                                                                </div>
+                                                            </Link> : null
+                                                            }
+
+                                                            {settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ? <Link
                                                                 href={route('frontend.polices')}
                                                                 className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
                                                             >
@@ -539,39 +558,60 @@ export default function MainNav() {
                                                                 <div className="ltr:ml-5 rtl:mr-5">
                                                                     <p className="text-base font-medium text-gray-900 capitalize">{trans('polices')}</p>
                                                                 </div>
-                                                            </Link>
-
-                                                            <Link
-                                                                href={route('frontend.terms')}
-                                                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
-                                                            >
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                     className="h-6 w-6 text-gray-800" fill="none"
-                                                                     viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                                          strokeWidth={2}
-                                                                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-                                                                </svg>
-                                                                <div className="ltr:ml-5 rtl:mr-5">
-                                                                    <p className="text-base font-medium text-gray-900 capitalize">{trans('terms')}</p>
-                                                                </div>
-                                                            </Link>
-
-                                                            <Link
-                                                                href={route('frontend.faqs')}
-                                                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
-                                                            >
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                     className="h-6 w-6 text-gray-800" fill="none"
-                                                                     viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                                          strokeWidth={2}
-                                                                          d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                                </svg>
-                                                                <div className="ltr:ml-5 rtl:mr-5">
-                                                                    <p className="text-base font-medium text-gray-900 capitalize">{trans('faqs')}</p>
-                                                                </div>
-                                                            </Link>
+                                                            </Link> : null
+                                                            }
+                                                            {
+                                                                settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 ? <Link
+                                                                    href={route('frontend.terms')}
+                                                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 text-gray-800" fill="none"
+                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round"
+                                                                              strokeLinejoin="round"
+                                                                              strokeWidth={2}
+                                                                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                                                                    </svg>
+                                                                    <div className="ltr:ml-5 rtl:mr-5">
+                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('terms')}</p>
+                                                                    </div>
+                                                                </Link> : null
+                                                            }
+                                                            {
+                                                                settings.enable_faqs ? <Link
+                                                                    href={route('frontend.faqs')}
+                                                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 text-gray-800" fill="none"
+                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                                              strokeWidth={2}
+                                                                              d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                                    </svg>
+                                                                    <div className="ltr:ml-5 rtl:mr-5">
+                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('faqs')}</p>
+                                                                    </div>
+                                                                </Link> : null
+                                                            }
+                                                            {
+                                                                settings.enable_joinus ? <Link
+                                                                    href={route('frontend.joinus')}
+                                                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 text-gray-800" fill="none"
+                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                                              strokeWidth={2}
+                                                                              d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                                    </svg>
+                                                                    <div className="ltr:ml-5 rtl:mr-5">
+                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('joinus')}</p>
+                                                                    </div>
+                                                                </Link> : null
+                                                            }
                                                         </div>
                                                     </div>
                                                 </Popover.Panel>
@@ -583,7 +623,7 @@ export default function MainNav() {
                         </Popover.Group>
 
                         {/* Search */}
-                        { settings.enable_books && <SearchField type={'book'}/>}
+                        {settings.enable_books && <SearchField type={'book'}/>}
                         {/*{ settings.enable_products && <SearchField type={'product'}/>}*/}
                         {/* change lang */}
                         <div className="ml-auto flex items-center">
@@ -604,7 +644,7 @@ export default function MainNav() {
 
 
                             {/* currency dropdown */}
-                            { settings.enable_prices && <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
+                            {settings.enable_prices ? <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
                                         className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
@@ -650,7 +690,7 @@ export default function MainNav() {
                                         }
                                     </Menu.Items>
                                 </Transition>
-                            </Menu>}
+                            </Menu> : null}
 
                             {/* auth dropdown */}
                             <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">

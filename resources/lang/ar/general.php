@@ -496,7 +496,7 @@ return array (
   'cancellation_en' => 'سياسة الاسترجاع بالانجليزية',
   'file' => 'الملف',
   'fileh' => 'الملف',
-  'website' => 'الموقع',
+  'website' => 'الموقع الإلكتروني',
   'instagram' => 'انستجرام',
   'youtube' => 'يوتيوب',
   'iphone' => 'ايفون',
@@ -1086,4 +1086,8 @@ return array (
     "last_name" => "الاسم الاخير",
     "thanks" => "شكرا",
     "thanks_contacting_us" => "شكرا .. سيتم التواصل معكم في اقرب وقت ممكن",
+    "factory_name" => "اسم المصنع",
+    "exported_before" => "هل قمت بالتصدير من قبل",
+    "other_notes" => "ملاحظات أخرى",
+    "about_our_products" => "نبذة عن منتجاتنا"
 );

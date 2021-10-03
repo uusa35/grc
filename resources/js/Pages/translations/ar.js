@@ -490,7 +490,7 @@ export const ar = {
     'policy_en' : 'سياسة الشركة بالانجليزية',
     'cancellation_ar' : 'سياسة الاسترجاع بالعربية',
     'cancellation_en' : 'سياسة الاسترجاع بالانجليزية',
-    'website' : 'الموقع',
+    'website' : 'الموقع الإلكتروني',
     'instagram' : 'انستجرام',
     'youtube' : 'يوتيوب',
     'iphone' : 'ايفون',
@@ -1197,5 +1197,18 @@ export const ar = {
     "enable_newsletter" : "تفعيل القوائم البريدية",
     "enable_prices" : "تفعيل الأسعار",
     "contactus_through_whatsapp" : "تواصل معنا عن طريق الواتس اب",
-    "contactus_to_inquire_about_product" : "التواصل معنا بخصوص المنتج"
+    "contactus_to_inquire_about_product" : "التواصل معنا بخصوص المنتج",
+    "our_services" : "خدماتنا",
+    "services_ar" : "خدماتنا بالعربية",
+    "services_en" : "خدماتنا بالإنجليزية",
+    "enable_faqs" : "تفعيل الاسئلة المتكررة",
+    "enable_joinus" : "تفعيل انضم لنا",
+    "enable_register" : "تفعيل التسجيل",
+    "join_us" : "إنضم لنا",
+    "joinus" : "إنضم لنا",
+    "factory_name" : "اسم المصنع",
+    "exported_before" : "هل سبق لك التصدير من قبل؟",
+    "other_notes" : "ملاحظات أخرى",
+    "about_our_products" : "نبذة عن المنتجات (الخامات)",
+    "export_message" : "في حالة رغبة مصنعك للتصدير، يمكنكم التواصل معنا عن طريق ملئ الاستمارة أدناه، وسيتم التواصل معكم في اقرب فرصة ممكنة."
 }

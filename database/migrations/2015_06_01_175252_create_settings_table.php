@@ -48,6 +48,8 @@ class CreateSettingsTable extends Migration
             $table->longText('policy_en')->nullable();
             $table->longText('terms_ar')->nullable();
             $table->longText('terms_en')->nullable();
+            $table->longText('services_ar')->nullable();
+            $table->longText('services_en')->nullable();
             $table->string('shipment_prices')->nullable();
             $table->string('size_chart_image')->nullable();
             $table->string('longitude')->nullable();
@@ -114,6 +116,9 @@ class CreateSettingsTable extends Migration
             $table->boolean('enable_google_translation')->default(false);
             $table->boolean('enable_favorite')->default(false);
             $table->boolean('enable_newsletter')->default(true);
+            $table->boolean('enable_faqs')->default(true);
+            $table->boolean('enable_register')->default(true);
+            $table->boolean('enable_joinus')->default(false);
             $table->timestamps();
         });
     }

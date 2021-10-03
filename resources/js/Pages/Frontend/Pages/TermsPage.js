@@ -5,8 +5,8 @@ import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
-export default function TermsPage({ element }) {
-    const { trans , getThumb , getLocalized } = useContext(AppContext)
+export default function ({ settings }) {
+    const { trans ,getLocalized } = useContext(AppContext)
 
     return (
         <FrontendContainer>
@@ -39,12 +39,12 @@ export default function TermsPage({ element }) {
                         {trans('terms_and_conditions')}
                     </h2>
                     <p className="mt-4 max-w-xl mx-auto text-xl text-gray-600 capitalize">
-                        {element[getLocalized()]}
+                        {settings[getLocalized()]}
                     </p>
                     <div
                         className="mt-6 inline-block w-full bg-gray-400 border border-transparent rounded-sm py-3 px-8 font-medium text-white  sm:w-auto capitalize"
                     >
-                        {element[getLocalized('caption')]}
+                        {settings[getLocalized('caption')]}
                     </div>
                 </div>
             </section>
@@ -56,7 +56,7 @@ export default function TermsPage({ element }) {
             >
                 <div className="max-w-2xl mx-auto lg:max-w-none">
                     <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full">
-                        <EmbeddedHtml html={element[getLocalized('terms')]} />
+                        <EmbeddedHtml html={settings[getLocalized('terms')]} />
                     </div>
                 </div>
             </section>

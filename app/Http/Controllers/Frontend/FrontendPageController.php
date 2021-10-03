@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ContactusForm;
+use App\Mail\Joinus;
 use App\Models\Faq;
 use App\Models\Setting;
 use App\Models\Subscription;
@@ -32,22 +33,45 @@ class FrontendPageController extends Controller
         return redirect()->route('frontend.home')->with('success', trans('general.process_success'));
     }
 
+    public function getJoinus()
+    {
+        return inertia('Frontend/Pages/JoinusPage');
+    }
+
+    public function postJoinus(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:3|max:200',
+            'address' => 'min:3|max:250',
+            'exported_before' => 'required|boolean',
+//            'mobile' => 'min:10|max:15',
+            'notes' => 'min:3|max:1000',
+            'content' => 'required|max:2000',
+            'code' => 'required|confirmed'
+        ]);
+        $settings = Setting::first();
+        Mail::to($settings->email)->cc($request->email)->send(new Joinus());
+        return redirect()->route('frontend.home')->with('success', trans('general.process_success'));
+    }
+
     public function getAboutus()
     {
-        $element = Setting::first()->only('name_ar', 'name_en', 'caption_ar', 'caption_en', 'aboutus_ar', 'aboutus_en');
-        return inertia('Frontend/Pages/AboutusPage', compact('element'));
+        return inertia('Frontend/Pages/AboutusPage');
     }
 
     public function getPolicies()
     {
-        $element = Setting::first()->only('name_ar', 'name_en', 'caption_ar', 'caption_en', 'policy_ar', 'policy_en');
-        return inertia('Frontend/Pages/PolicesPage', compact('element'));
+        return inertia('Frontend/Pages/PolicesPage');
     }
 
     public function getTerms()
     {
-        $element = Setting::first()->only('name_ar', 'name_en', 'caption_ar', 'caption_en', 'terms_ar', 'terms_en');
-        return inertia('Frontend/Pages/TermsPage', compact('element'));
+        return inertia('Frontend/Pages/TermsPage');
+    }
+
+    public function getServices()
+    {
+        return inertia('Frontend/Pages/ServicesPage');
     }
 
     public function getFaqs()

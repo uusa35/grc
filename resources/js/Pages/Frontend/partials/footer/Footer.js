@@ -98,12 +98,12 @@ export default function Footer() {
                                     </Link>
                             }
                             {
-                                settings.enable_subscriptions && <li>
+                                settings.enable_subscriptions ? <li>
                                     <Link href={route('frontend.subscriptions')}
                                           className="text-base text-gray-500 capitalize hover:text-gray-900">
                                         {trans('subscriptions')}
                                     </Link>
-                                </li>
+                                </li> : null
                             }
                         </ul>
                     </div>
@@ -123,24 +123,46 @@ export default function Footer() {
                                     {trans('aboutus')}
                                 </Link>
                             </li>
-                            <li>
-                                <Link href={route('frontend.polices')}
-                                      className="text-base text-gray-500 capitalize hover:text-gray-900">
-                                    {trans('polices')}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('frontend.terms')}
-                                      className="text-base text-gray-500 capitalize hover:text-gray-900">
-                                    {trans('terms')}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href={route('frontend.faqs')}
-                                      className="text-base text-gray-500 capitalize hover:text-gray-900">
-                                    {trans('faqs')}
-                                </Link>
-                            </li>
+                            {
+                                settings[getLocalized('services')] && settings[getLocalized('services')].length > 50 ? <li>
+                                    <Link href={route('frontend.services')}
+                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                        {trans('our_services')}
+                                    </Link>
+                                </li> : null
+                            }
+                            {
+                                settings[getLocalized('polices')] && settings[getLocalized('polices')].length > 50 ? <li>
+                                    <Link href={route('frontend.polices')}
+                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                        {trans('polices')}
+                                    </Link>
+                                </li> : null
+                            }
+                            {
+                                settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 ? <li>
+                                    <Link href={route('frontend.terms')}
+                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                        {trans('terms')}
+                                    </Link>
+                                </li> : null
+                            }
+                            {
+                                settings.enable_faqs ? <li>
+                                    <Link href={route('frontend.faqs')}
+                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                        {trans('faqs')}
+                                    </Link>
+                                </li> : null
+                            }
+                            {
+                                settings.enable_joinus ? <li>
+                                    <Link href={route('frontend.joinus')}
+                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                        {trans('joinus')}
+                                    </Link>
+                                </li> : null
+                            }
                         </ul>
                     </div>
                     {/* apple and android*/}

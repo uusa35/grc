@@ -71,6 +71,8 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         shipment_notes_en: setting.shipment_notes_en,
         policy_ar: setting.policy_ar,
         policy_en: setting.policy_en,
+        services_ar: setting.services_ar,
+        services_en: setting.services_en,
         terms_ar: setting.terms_ar,
         terms_en: setting.terms_en,
         shipment_prices: setting.shipment_prices,
@@ -124,6 +126,8 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         enable_cart : setting.enable_cart,
         enable_google_translation : setting.enable_google_translation,
         enable_favorite : setting.enable_favorite,
+        enable_faqs : setting.enable_faqs,
+        enable_register : setting.enable_register,
     });
     const {props} = usePage();
     const {errors} = props;
@@ -974,6 +978,147 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                         </p>
                                     </div>
                                 </fieldset>
+
+                                {/*enable_faqs*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_faqs')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_faqs"
+                                                name="enable_faqs"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_faqs}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_faqs"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_faqs"
+                                                name="enable_faqs"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_faqs}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_faqs"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_faqs &&
+                                            <div className={`text-red-900`}>{errors.enable_faqs}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+
+                                {/*enable_register*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_register')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_register"
+                                                name="enable_register"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_register}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_register"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_register"
+                                                name="enable_register"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_register}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_register"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_register &&
+                                            <div className={`text-red-900`}>{errors.enable_register}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+
+                                {/*enable_joinus*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_joinus')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_joinus"
+                                                name="enable_joinus"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_joinus}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_joinus"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_joinus"
+                                                name="enable_joinus"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_joinus}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_joinus"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_joinus &&
+                                            <div className={`text-red-900`}>{errors.enable_joinus}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
                             </FormSection>
                         }
                         <FormBtns type={'setting'}/>
@@ -1453,23 +1598,45 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     </p>
                                 </div>
                                 {/* policy ar*/}
+
+                                {/* services_ar*/}
                                 <div className="sm:col-span-full has-tooltip">
-                                    <label htmlFor="policy_ar"
+                                    <label htmlFor="terms_en"
                                            className={`block text-sm font-medium text-gray-700`}>
-                                        {trans('policy_ar')}
+                                        {trans('services_ar')}
                                     </label>
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.policy_ar}
-                                                    onChange={(e) => setData('policy_ar', e)}
+                                                    value={data.services_ar}
+                                                    onChange={(e) => setData('services_ar', e)}
                                                     className="h-40"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_aboutus_instruction')}/>
                                     <p className={`mt-2 text-xs text-gray-500`}>
-                                        {errors.policy_ar &&
-                                        <div className={`text-red-900`}>{errors.policy_ar}</div>}
+                                        {errors.services_ar &&
+                                        <div className={`text-red-900`}>{errors.services_ar}</div>}
+                                    </p>
+                                </div>
+                                {/* services_en*/}
+                                <div className="sm:col-span-full has-tooltip">
+                                    <label htmlFor="services_en"
+                                           className={`block text-sm font-medium text-gray-700`}>
+                                        {trans('services_en')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <ReactQuill theme="snow"
+                                                    modules={EditorConfig}
+                                                    value={data.services_en}
+                                                    onChange={(e) => setData('services_en', e)}
+                                                    className="h-40"
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_aboutus_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.services_en &&
+                                        <div className={`text-red-900`}>{errors.services_en}</div>}
                                     </p>
                                 </div>
                             </div>

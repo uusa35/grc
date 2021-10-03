@@ -10,7 +10,7 @@
                     @lang('general.login')
                 </header>
 
-                <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('login') }}">
+                <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8 mb-10" method="POST" action="{{ route('login') }}">
                     @csrf
 
                     <div class="flex flex-wrap">
@@ -66,14 +66,14 @@
                             @lang('login')
                         </button>
 
-                        @if (Route::has('register'))
-                        <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
-                            @lang('general.dont_have_account')
-                            <a class="text-gray-500 hover:text-gray-700 no-underline hover:underline" href="{{ route('register') }}">
-                                @lang('general.register')
-                            </a>
-                        </p>
-                        @endif
+{{--                        @if (Route::has('register'))--}}
+{{--                        <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">--}}
+{{--                            @lang('general.dont_have_account')--}}
+{{--                            <a class="text-gray-500 hover:text-gray-700 no-underline hover:underline" href="{{ route('register') }}">--}}
+{{--                                @lang('general.register')--}}
+{{--                            </a>--}}
+{{--                        </p>--}}
+{{--                        @endif--}}
                     </div>
                 </form>
 

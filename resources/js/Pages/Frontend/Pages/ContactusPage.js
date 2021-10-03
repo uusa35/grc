@@ -14,7 +14,7 @@ import axios from "axios";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 
-export default function ContactusPage() {
+export default function () {
     const {trans, getThumb, getLocalized} = useContext(AppContext);
     const [code, setCode] = useState('');
     const {settings} = useContext(GlobalContext)
@@ -26,7 +26,7 @@ export default function ContactusPage() {
         'code' : '',
         'first_name': '',
         'last_name': '',
-        'subject': '',
+        'notes': '',
         'content': '',
         'email': '',
         'mobile': '',

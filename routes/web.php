@@ -83,9 +83,12 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::resource('faq', FrontendFaqController::class)->only('index');
     Route::get('contactus', [FrontendPageController::class, 'getContactus'])->name('contactus');
     Route::post('contactus', [FrontendPageController::class, 'postContactus'])->name('send.contactus');
+    Route::get('joinus', [FrontendPageController::class, 'getJoinus'])->name('joinus');
+    Route::post('joinus', [FrontendPageController::class, 'postJoinus'])->name('send.joinus');
     Route::get('aboutus', [FrontendPageController::class, 'getAboutus'])->name('aboutus');
     Route::get('polices', [FrontendPageController::class, 'getPolicies'])->name('polices');
     Route::get('terms', [FrontendPageController::class, 'getTerms'])->name('terms');
+    Route::get('services', [FrontendPageController::class, 'getServices'])->name('services');
     Route::get('faqs', [FrontendPageController::class, 'getFaqs'])->name('faqs');
     Route::get('subscriptions', [FrontendPageController::class, 'getSubscriptions'])->name('subscriptions');
     Route::get('cart', [FrontendCartController::class, 'index'])->name('cart.index');
