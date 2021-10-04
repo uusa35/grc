@@ -7,7 +7,7 @@ import {AppContext} from "../../../context/AppContext";
 import GlobalContext from "../../../context/GlobalContext";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 
-export default function MainNavBookCategoriesList({ categories }) {
+export default function MainNavBookCategoriesList({ categories, type = 'book' }) {
     const { classNames , trans , getThumb , getLocalized } = useContext(AppContext)
 
     return (
@@ -23,7 +23,7 @@ export default function MainNavBookCategoriesList({ categories }) {
                                 'relative z-10 flex items-center transition-colors ease-out duration-200  -mb-px pt-px'
                             )}
                         >
-                            <span className="capitalize">{trans('book_categories')}</span>
+                            <span className="capitalize">{trans(`${type}_categories`)}</span>
                             <ChevronDownIcon
                                 className={classNames(
                                     open ? 'text-white' : 'text-white',
@@ -56,7 +56,7 @@ export default function MainNavBookCategoriesList({ categories }) {
                                         <div
                                             className="col-start-2 grid grid-cols-2 gap-x-8">
                                             {/*  featured parents */}
-                                            {map(take(filter(categories, c => c.is_book && c.is_featured), 2),c => (
+                                            {map(take(filter(categories, c => c.is_book && c.is_featured && type === 'book' || c.is_product && c.is_featured && type === 'product'), 2),c => (
                                                 <div key={c[getLocalized()]}
                                                      className="group relative text-base sm:">
                                                     <div
@@ -67,7 +67,7 @@ export default function MainNavBookCategoriesList({ categories }) {
                                                             className="object-center object-cover"
                                                         />
                                                     </div>
-                                                    <Link href={route('frontend.book.index', { category_id : c.id})}
+                                                    <Link href={route(`frontend.${type}.index`, { category_id : c.id})}
                                                           className="mt-6 block text-gray-900 capitalize">
                                                             <span
                                                                 className="absolute z-10 inset-0"
@@ -83,10 +83,10 @@ export default function MainNavBookCategoriesList({ categories }) {
                                         {/* categories columns */}
                                         <div
                                             className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 ">
-                                            {map(filter(categories, c => c.is_book), parent => (
+                                            {map(filter(categories, c => c.is_book && type === 'book' || c.is_product && type === 'product'), parent => (
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
-                                                          href={route('frontend.book.index', { category_id : parent.id})}
+                                                          href={route(`frontend.${type}.index`, { category_id : parent.id})}
                                                           className="text-gray-900 truncate capitalize">
                                                         {parent[getLocalized()]}
                                                     </Link>
@@ -96,10 +96,10 @@ export default function MainNavBookCategoriesList({ categories }) {
                                                         className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                                     >
                                                         {
-                                                            map(filter(parent.children, c => c.is_book), child => (
+                                                            map(filter(parent.children, c => c.is_book && type === 'book' || c.is_product && type === 'product'), child => (
                                                                 <li key={child.id}
                                                                     className="flex">
-                                                                    <Link href={route('frontend.book.index', { category_id : child.id})}
+                                                                    <Link href={route(`frontend.${type}.index`, { category_id : child.id})}
                                                                           className="hover:text-gray-300 truncate capitalize">
                                                                         {child[getLocalized()]}
                                                                     </Link>

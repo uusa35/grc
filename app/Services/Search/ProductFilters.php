@@ -57,6 +57,13 @@ class ProductFilters extends QueryFilters
         });
     }
 
+    public function category_id()
+    {
+        return $this->builder->whereHas('categories', function ($q) {
+            return $q->where('category_id', request()->category_id);
+        });
+    }
+
     public function on_home()
     {
         return $this->builder->where('on_home', request()->on_home);

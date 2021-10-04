@@ -20,6 +20,7 @@ class CategoryExtraLightResource extends JsonResource
             'name_en' => $this->name_en,
             'image' => $this->image,
             'is_book' => $this->is_book,
+            'is_product' => $this->is_product,
             'is_course' => $this->is_course,
             'is_service' => $this->is_service,
             'is_user' => $this->is_user,

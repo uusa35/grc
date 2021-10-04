@@ -8,7 +8,7 @@ import {
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
-import {map, capitalize, take, filter} from 'lodash';
+import {map, capitalize, take, filter, isEmpty} from 'lodash';
 import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
@@ -20,6 +20,7 @@ import GlobalContext from "../../../context/GlobalContext";
 import {motion} from "framer-motion"
 import CartIndex from "../../Cart/CartIndex";
 import CartIndexOrderSummary from "../../Cart/CartIndexOrderSummary";
+import NoElements from "../../../Backend/components/widgets/NoElements";
 
 
 const pages = [
@@ -46,6 +47,7 @@ export default function MainNav() {
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
 
+    console.log('categories', categories);
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}
@@ -259,7 +261,19 @@ export default function MainNav() {
                                                     )
                                                 }
                                             >
-                                                {trans("categories")}
+                                                {trans("book_categories")}
+                                            </Tab>
+                                        }
+                                        {
+                                            settings.enable_products && <Tab
+                                                className={({selected}) =>
+                                                    classNames(
+                                                        selected ? 'text-gray-600 border-gray-600' : 'text-gray-900 capitalize border-transparent',
+                                                        'flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium'
+                                                    )
+                                                }
+                                            >
+                                                {trans("product_categories")}
                                             </Tab>
                                         }
                                         {
@@ -277,8 +291,8 @@ export default function MainNav() {
                                     </Tab.List>
                                 </div>
                                 <Tab.Panels as={Fragment}>
-
-                                    {settings.enable_cart && <Tab.Panel
+                                    {/* books categories */}
+                                    {settings.enable_books && <Tab.Panel
                                         className="pt-10 pb-8 px-4 space-y-10 capitalize">
                                         {map(filter(categories, c => c.is_book), parent => (
                                             <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
@@ -329,11 +343,65 @@ export default function MainNav() {
 
                                         ))}
                                     </Tab.Panel>}
+                                    {/* product categories */}
+                                    {settings.enable_products && <Tab.Panel
+                                        className="pt-10 pb-8 px-4 space-y-10 capitalize">
+                                        {map(filter(categories, c => c.is_product), parent => (
+                                            <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
+                                                <div key={parent[getLocalized()]} className="group relative ">
+                                                    <div
+                                                        className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
+                                                        <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
+                                                             className="object-center object-cover"/>
+                                                    </div>
+                                                    <Link href={route('frontend.book.index', {category_id: parent.id})}
+                                                          className="mt-6 block text-gray-900 capitalize">
+                                                        <span className="absolute z-10 inset-0" aria-hidden="true"/>
+                                                        {parent[getLocalized()]}
+                                                    </Link>
+                                                    <p aria-hidden="true" className="mt-1 capitalize truncate">
+                                                        {parent[getLocalized('caption')]}
+                                                    </p>
+                                                </div>
+                                                {map(filter(parent.children, c => c.is_product), sub => (
+                                                    <div key={sub[getLocalized()]} className="gap-y-5 space-y-2 my-3">
+                                                        <Link
+                                                            href={route('frontend.book.index', {category_id: sub.id})}
+                                                            className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-5 text-gray-500">
+                                                            <img src={getThumb(sub.image)} alt=""
+                                                                 className="h-10 w-10 rounded-sm mx-2"/>
+                                                            {sub[getLocalized()]}
+                                                        </Link>
+                                                        <ul
+                                                            role="list"
+                                                            aria-labelledby={`${parent.id}-${sub.id}-heading-mobile`}
+                                                            className="flex flex-col"
+                                                        >
+                                                            {map(filter(sub.children, c => c.is_product), child =>
+                                                                <li key={child[getLocalized()]} className="flow-root">
+                                                                    <Link
+                                                                        href={route('frontend.book.index', {category_id: child.id})}
+                                                                        className="-m-2 p-2 flex flex-1 flex-row items-center justify-start text-gray-500 rtl:mr-10 ltr:ml-10">
+                                                                        <img src={getThumb(child.image)} alt=""
+                                                                             className="h-10 w-10 rounded-sm mx-3"/>
+                                                                        {child[getLocalized()]}
+                                                                    </Link>
+                                                                </li>
+                                                            )}
+                                                        </ul>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                        ))}
+                                    </Tab.Panel>}
                                     {
-                                        settings.enable_books &&
+                                        settings.enable_cart &&
                                         <Tab.Panel
                                             className="pt-10 pb-8 px-4 space-y-10 capitalize">
-                                            <CartIndexOrderSummary/>
+                                            {
+                                                isEmpty(cart.items) ?  <NoElements display={isEmpty(cart.items)}/> : <CartIndexOrderSummary/>
+                                            }
                                         </Tab.Panel>
                                     }
                                 </Tab.Panels>
@@ -401,7 +469,10 @@ export default function MainNav() {
                                     </Link>
                                 }
                                 {
-                                    settings.enable_books && <MainNavBookCategoriesList categories={categories}/>
+                                    settings.enable_books && <MainNavBookCategoriesList categories={categories} type='book'/>
+                                }
+                                {
+                                    settings.enable_products && <MainNavBookCategoriesList categories={categories} type='product'/>
                                 }
                                 {
                                     settings.enable_books && <Link

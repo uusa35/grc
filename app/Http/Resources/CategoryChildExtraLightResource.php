@@ -20,6 +20,7 @@ class CategoryChildExtraLightResource extends JsonResource
             'name_en' => $this->name_en,
             'image' => $this->image,
             'is_book' => $this->is_book,
+            'is_product' => $this->is_product,
             'is_course' => $this->is_course,
             'is_featured' => $this->is_featured,
             'children' => CategoryExtraLightResource::collection($this->whenLoaded('children')),
