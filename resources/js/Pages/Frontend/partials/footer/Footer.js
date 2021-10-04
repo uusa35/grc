@@ -26,11 +26,11 @@ export default function Footer() {
 
                     <div className=" p-8">
                         <img
-                            className="h-28"
+                            className="h-28 rounded-sm shadow-md"
                             src={getThumb(settings.image)}
                             alt={settings[getLocalized()]}
                         />
-                        <p className="text-gray-500 capitalize text-base">
+                        <p className="text-gray-500 capitalize text-base mt-5">
                             {settings[getLocalized('caption')]}
                         </p>
                         <div className="flex gap-x-6 mt-5">
@@ -144,6 +144,14 @@ export default function Footer() {
                                     <Link href={route('frontend.terms')}
                                           className="text-base text-gray-500 capitalize hover:text-gray-900">
                                         {trans('terms')}
+                                    </Link>
+                                </li> : null
+                            }
+                            {
+                                settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ? <li>
+                                    <Link href={route('frontend.polices')}
+                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                        {trans('polices')}
                                     </Link>
                                 </li> : null
                             }

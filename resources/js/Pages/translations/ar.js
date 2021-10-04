@@ -1206,6 +1206,7 @@ export const ar = {
     "enable_register" : "تفعيل التسجيل",
     "join_us" : "إنضم لنا",
     "joinus" : "إنضم لنا",
+    "joinuses" : "إنضم لنا",
     "factory_name" : "اسم المصنع",
     "exported_before" : "هل سبق لك التصدير من قبل؟",
     "other_notes" : "ملاحظات أخرى",

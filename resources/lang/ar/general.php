@@ -1089,5 +1089,8 @@ return array (
     "factory_name" => "اسم المصنع",
     "exported_before" => "هل قمت بالتصدير من قبل",
     "other_notes" => "ملاحظات أخرى",
-    "about_our_products" => "نبذة عن منتجاتنا"
+    "about_our_products" => "نبذة عن منتجاتنا",
+    "joinuses" => "إنضم لنا",
+    "contactuses" => "اتصل بنا",
+    "aboutuses" => "نبذة عنا",
 );
