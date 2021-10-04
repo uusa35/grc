@@ -432,7 +432,7 @@ export default function MainNav() {
                                 }
 
                                 {/*     pages */}
-                                <Popover className="relative">
+                                <Popover className="relative flex justify-center">
                                     {({open}) => (
                                         <>
                                             <Popover.Button
@@ -440,7 +440,7 @@ export default function MainNav() {
                                                     parentModule == 'contactus' || parentModule == 'subscriptions' || parentModule == 'polices' || parentModule == 'terms' || parentModule == 'aboutus' || parentModule == 'faqs'
                                                         ? 'border-b border-hippie-blue-500 pb-2'
                                                         : 'text-white',
-                                                    'text-white mt-2.5 group inline-flex items-center text-white font-extrabold capitalize'
+                                                    'text-white group inline-flex items-center text-white font-extrabold capitalize'
                                                 )}
                                             >
                                                 <span>{trans('pages')}</span>
