@@ -258,7 +258,7 @@ export default function() {
                                                                 <div className="mt-4 space-y-4">
                                                                     <div className="flex items-center">
                                                                         <input
-                                                                            onChange={handleChange}
+                                                                            onChange={(e) => setData('exported_before', e.target.value)}
                                                                             name="exported_before"
                                                                             type="radio"
                                                                             value={1}
@@ -271,7 +271,7 @@ export default function() {
                                                                     </div>
                                                                     <div className="flex items-center">
                                                                         <input
-                                                                            onChange={handleChange}
+                                                                            onChange={(e) => setData('exported_before', e.target.value)}
                                                                             name="exported_before"
                                                                             type="radio"
                                                                             value={0}

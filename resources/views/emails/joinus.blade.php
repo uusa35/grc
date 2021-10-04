@@ -1,3 +1,4 @@
+<div dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" style="text-align:  {{ app()->getLocale() === 'ar' ? 'right' : 'left' }} !important;">
 @component('mail::message')
 @component('mail::panel')
 # {{ trans('general.factory_name') }} : {{ request()->name }}
@@ -27,3 +28,4 @@
 {{ trans('general.thanks') }},<br>
 {{ config('app.name') }}
 @endcomponent
+</div>
