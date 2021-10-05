@@ -81,11 +81,13 @@ export default function MainNav() {
                     }
                 </div>
                 <div className="flex flex-row justify-center items-center gap-x-5  divide-x divide-gray-400">
-                    <Link
-                        href={route('frontend.subscriptions')}
-                        className="-m-2 p-2 block text-gray-50 invisible sm:visible">
-                        {capitalize(trans('subscriptions'))}
-                    </Link>
+                    {
+                        settings.enable_subscriptions ? <Link
+                            href={route('frontend.subscriptions')}
+                            className="-m-2 p-2 block text-gray-50 invisible sm:visible">
+                            {capitalize(trans('subscriptions'))}
+                        </Link> : null
+                    }
                     <Link
                         href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
                         {capitalize(trans('contactus'))}

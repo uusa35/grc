@@ -5,10 +5,12 @@ import {map, range} from "lodash";
 import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {useSelector} from "react-redux";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mobileFiltersOpen, type, enablePrice = true}) {
     const {trans, getLocalized, classNames } = useContext(AppContext)
     const {locale} = useSelector(state => state);
+    const { settings } = useContext(GlobalContext);
     const {params} = route();
     return (
         <aside>
@@ -51,7 +53,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                     </div>
                     {/* price search */}
                     {
-                        enablePrice && <>
+                        enablePrice && settings.enable_prices && <>
                             <div className="flex pt-3">
                                 <h3 className="capitalize">{trans('prices')}</h3>
                             </div>
