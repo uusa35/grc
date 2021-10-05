@@ -68,11 +68,11 @@ export default function() {
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0">
                         <div className="absolute inset-0  overflow-hidden">
-                            <img
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg"
-                                alt=""
-                                className="w-full h-full object-center object-contain rounded-lg"
-                            />
+                            {/*<img*/}
+                            {/*    src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg"*/}
+                            {/*    alt=""*/}
+                            {/*    className="w-full h-full object-center object-contain rounded-lg"*/}
+                            {/*/>*/}
                         </div>
                         <div className="absolute inset-0 bg-white bg-opacity-75"/>
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-white"/>

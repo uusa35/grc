@@ -693,7 +693,7 @@ export default function MainNav() {
 
                         {/* Search */}
                         {settings.enable_books && <SearchField type={'book'}/>}
-                        {/*{ settings.enable_products && <SearchField type={'product'}/>}*/}
+                        { settings.enable_products && <SearchField type={'product'}/>}
                         {/* change lang */}
                         <div className="ml-auto flex items-center">
                             <div
