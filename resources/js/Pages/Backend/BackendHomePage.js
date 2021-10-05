@@ -178,8 +178,8 @@ export default function BackendHomePage() {
                                                 </div>
                                                 <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
                                                     <p className="text-sm font-medium text-gray-600">Welcome back,</p>
-                                                    <p className="text-xl font-bold text-gray-900 sm:text-2xl">{user[getLocalized('name')]}</p>
-                                                    <p className="text-sm font-medium text-gray-600">{user.role[getLocalized('name')]}</p>
+                                                    <p className="text-xl font-bold text-gray-900 sm:text-2xl">{user[getLocalized()]}</p>
+                                                    <p className="text-sm font-medium text-gray-600">{user.role[getLocalized()]}</p>
                                                 </div>
                                             </div>
                                             <div className="mt-5 flex justify-center sm:mt-0">

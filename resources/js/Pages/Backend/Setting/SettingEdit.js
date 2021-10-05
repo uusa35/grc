@@ -20,6 +20,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, parentModule, getThumb, getLocalized, isSuper} = useContext(AppContext)
     const {lang, currentFormTab, locale} = useSelector(state => state)
+    console.log('settings', setting);
     let EditorConfig = {
         toolbar: [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -1342,7 +1343,6 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="instagram"
                                         defaultValue={setting.instagram}
@@ -1365,7 +1365,6 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="facebook"
                                         defaultValue={setting.facebook}
@@ -1388,7 +1387,6 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="twitter"
                                         defaultValue={setting.twitter}
@@ -1411,7 +1409,6 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="snapchat"
                                         defaultValue={setting.snapchat}
@@ -1434,7 +1431,6 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="youtube"
                                         defaultValue={setting.youtube}
@@ -1457,7 +1453,6 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="android"
                                         defaultValue={setting.android}
@@ -1480,7 +1475,6 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="text"
                                         name="apple"
                                         defaultValue={setting.apple}
@@ -1579,7 +1573,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 {/* policy en*/}
                                 <div className="sm:col-span-full has-tooltip">
-                                    <label htmlFor="terms_en"
+                                    <label htmlFor="policy_en"
                                            className={`block text-sm font-medium text-gray-700`}>
                                         {trans('policy_en')}
                                     </label>
@@ -1597,7 +1591,26 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                         <div className={`text-red-900`}>{errors.policy_en}</div>}
                                     </p>
                                 </div>
-                                {/* policy ar*/}
+                                {/* policy_ar*/}
+                                <div className="sm:col-span-full has-tooltip">
+                                    <label htmlFor="policy_ar"
+                                           className={`block text-sm font-medium text-gray-700`}>
+                                        {trans('policy_ar')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <ReactQuill theme="snow"
+                                                    modules={EditorConfig}
+                                                    value={data.policy_ar}
+                                                    onChange={(e) => setData('policy_ar', e)}
+                                                    className="h-40"
+                                        />
+                                    </div>
+                                    <ToolTipWidget message={trans('product_aboutus_instruction')}/>
+                                    <p className={`mt-2 text-xs text-gray-500`}>
+                                        {errors.policy_ar &&
+                                        <div className={`text-red-900`}>{errors.policy_ar}</div>}
+                                    </p>
+                                </div>
 
                                 {/* services_ar*/}
                                 <div className="sm:col-span-full has-tooltip">

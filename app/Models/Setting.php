@@ -20,6 +20,7 @@ class Setting extends PrimaryModel
         'enable_courses' => 'boolean',
         'enable_services' => 'boolean',
         'enable_books' => 'boolean',
+        'enable_faqs' => 'boolean',
         'enable_subscriptions' => 'boolean',
         'enable_whatsapp_contact' => 'boolean',
         'enable_cart' => 'boolean',

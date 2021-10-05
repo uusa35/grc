@@ -14,6 +14,7 @@ export default function Footer() {
     const { auth } = useContext(GlobalContext);
     const { settings } = useSelector(state => state)
 
+    console.log('faqs',settings.enable_faqs)
 
 
     return (

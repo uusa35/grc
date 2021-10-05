@@ -21,6 +21,7 @@ export default function HomePage({
                                  }) {
     const [slideNumber, setSlideNumber] = useState(6)
     const {trans} = useContext(AppContext)
+    console.log('settin', settings);
 
     useEffect(() => {
         function handleResize() {
