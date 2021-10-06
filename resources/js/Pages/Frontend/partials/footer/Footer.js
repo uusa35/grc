@@ -14,9 +14,6 @@ export default function Footer() {
     const { auth } = useContext(GlobalContext);
     const { settings } = useSelector(state => state)
 
-    console.log('faqs',settings.enable_faqs)
-
-
     return (
         <footer className="bg-gray-50" aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">

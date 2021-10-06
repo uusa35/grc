@@ -42,7 +42,6 @@ export default function({countries }) {
         })
     }
 
-    console.log('countries', countries);
     return (
         <BackendContainer type={'governate'}>
             <div className="flex flex-col rounded-md bg-transparent">

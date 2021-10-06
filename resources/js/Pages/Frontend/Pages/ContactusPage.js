@@ -83,15 +83,26 @@ export default function () {
                         <div className="w-full">
                             <h2
                                 id="sale-heading"
-                                className="text-4xl mt-10 font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
+                                className="text-4xl my-5 font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
                             >
                                 {trans('contactus')}
                             </h2>
+                            {
+                                settings.latitude && settings.longitude ? <div>
+                                    <iframe
+                                        width="100%"
+                                        height="400"
+                                        frameBorder="0"
+                                        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDeAf8QTbMO_6O8JeG1tGjpvJeXHoDygwg&zoom=12&q=${settings.latitude},${settings.longitude}`}
+                                        allowFullScreen>
+                                    </iframe>
+                                </div> : null
+                            }
                         </div>
                     </section>
                     <section
                         aria-labelledby="testimonial-heading"
-                        className="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:py-32 lg:px-8"
+                        className="relative max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:py-1 lg:px-8"
                     >
                         <div className="max-w-2xl mx-auto lg:max-w-none">
                             <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full ">
