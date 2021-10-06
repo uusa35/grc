@@ -11,8 +11,7 @@ import {isEmpty} from "lodash";
 
 export default function Footer() {
     const { getLocalized, getThumb, trans, guest  } = useContext(AppContext)
-    const { auth } = useContext(GlobalContext);
-    const { settings } = useSelector(state => state)
+    const { auth, settings } = useContext(GlobalContext);
 
     return (
         <footer className="bg-gray-50" aria-labelledby="footer-heading">
