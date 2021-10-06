@@ -128,7 +128,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* email */}
-                                                    <div>
+                                                    <div className="col-span-full md:col-span-1">
                                                         <label htmlFor="email" className="block text-sm  text-gray-900">
                                                             {trans('email')}*
                                                         </label>
@@ -149,7 +149,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* mobile */}
-                                                    <div>
+                                                    <div className="col-span-full md:col-span-1">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="phone"
                                                                    className="block text-sm  text-gray-900">
@@ -198,7 +198,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* website */}
-                                                    <div>
+                                                    <div className="col-span-full md:col-span-1">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="phone"
                                                                    className="block text-sm  text-gray-900">
@@ -225,7 +225,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* code*/}
-                                                    <div className="sm:col-span-1">
+                                                    <div className="col-span-full md:col-span-1">
                                                         <label htmlFor="code"
                                                                className="block text-sm  text-gray-900">
                                                             {trans('write_protection_code')} - ({code})
@@ -248,7 +248,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* exported_before */}
-                                                    <div className="sm:col-span-full">
+                                                    <div className="col-span-full">
                                                         <div className="mt-1">
                                                             <fieldset className="mt-1 col-span-2">
                                                                 <div>
@@ -295,7 +295,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* content */}
-                                                    <div className="sm:col-span-2">
+                                                    <div className="col-span-full">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="message"
                                                                    className="block text-sm  text-gray-900">
@@ -322,7 +322,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* notes */}
-                                                    <div className="sm:col-span-2">
+                                                    <div className="col-span-full">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="notes"
                                                                    className="block text-sm  text-gray-900">
@@ -348,7 +348,7 @@ export default function() {
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <div className="sm:col-span-2 sm:flex sm:justify-end">
+                                                    <div className="col-span-full sm:flex sm:justify-end">
                                                         <button
                                                             type="submit"
                                                             className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base  bg-gray-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto"
