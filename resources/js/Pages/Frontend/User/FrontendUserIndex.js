@@ -12,12 +12,14 @@ import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
+import route from 'ziggy-js';
 
 export default function ({elements, categories}) {
     const {trans} = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
     const { sort } = useSelector(state => state);
+    const { params } = route();
 
     useMemo(() => {
         if (!currentData) {
@@ -34,12 +36,14 @@ export default function ({elements, categories}) {
             <FrontendContentContainer>
                 <SubMetaElement title={trans('users')}/>
                 {/* Mobile filter dialog */}
-            <SearchIndexSideBarMobile
-                type={'user'}
-                categories={filter(categories, c => c.is_user)}
-                                      setMobileFiltersOpen={setMobileFiltersOpen}
-                                      mobileFiltersOpen={mobileFiltersOpen}
-            />
+                {
+                    params.is_author && <SearchIndexSideBarMobile
+                        type={'user'}
+                        categories={filter(categories, c => c.is_user)}
+                        setMobileFiltersOpen={setMobileFiltersOpen}
+                        mobileFiltersOpen={mobileFiltersOpen}
+                    />
+                }
             <main className="max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8">
                 <div className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
                     <div className="flex flex-1 flex-col w-full sm:w-auto">
@@ -59,11 +63,14 @@ export default function ({elements, categories}) {
                 </div>
                 <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                     {/* search SideBar */}
-                    <SearchIndexSideBar
-                        type={'user'}
-                        enablePrice={false}
-                        categories={filter(categories, c => c.is_user)}
-                        setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
+                    {
+                        params.is_author && <SearchIndexSideBar
+                            type={'user'}
+                            enablePrice={false}
+                            categories={filter(categories, c => c.is_user)}
+                            setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
+                    }
+
                     {/* Product grid */}
                     <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
                         <NoElements display={elements.meta.total < 1}/>

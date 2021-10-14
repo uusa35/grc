@@ -76,7 +76,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                                 <div className="space-y-6 w-full divide-y divide-gray-100 flex flex-1 flex-col justify-start items-end capitalize" dir={locale.dir}>
                                                     <Link
                                                         className={classNames(locale.isRTL ? 'justify-end' :  'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
-                                                        href={route(`frontend.${type}.index`, { category_id : c.id})}
+                                                        href={route(`frontend.${type}.index`, { category_id : c.id, ...params })}
                                                     >
                                                         {c[getLocalized()]}
                                                     </Link>

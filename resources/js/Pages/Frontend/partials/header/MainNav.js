@@ -521,7 +521,7 @@ export default function MainNav() {
                                 }
                                 {
                                     settings.enable_books && <Link
-                                        href={route('frontend.user.index')}
+                                        href={route('frontend.user.index', { is_author : true })}
                                         onClick={() => dispatch(setParentModule('user'))}
                                         className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
