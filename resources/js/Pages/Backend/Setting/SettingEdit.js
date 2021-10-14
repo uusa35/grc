@@ -20,7 +20,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, parentModule, getThumb, getLocalized, isSuper} = useContext(AppContext)
     const {lang, currentFormTab, locale} = useSelector(state => state)
-    console.log('settings', setting);
+
     let EditorConfig = {
         toolbar: [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons

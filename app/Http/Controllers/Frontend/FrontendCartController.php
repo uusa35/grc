@@ -12,4 +12,16 @@ class FrontendCartController extends Controller
         return inertia('Frontend/Cart/CartIndex');
     }
 
+    public function getUserInformation() {
+        return inertia('Frontend/Cart/CartUserInformation');
+    }
+
+    public function getUserConfirmation() {
+        return inertia('Frontend/Cart/CartUserConfirmation');
+    }
+
+    public function getPaymentIndex() {
+        return inertia('Frontend/Cart/CartPaymentIndex');
+    }
+
 }

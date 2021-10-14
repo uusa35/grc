@@ -1,19 +1,21 @@
 import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
 import {useForm, usePage} from "@inertiajs/inertia-react";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 import {useDispatch, useSelector} from "react-redux";
 import {Inertia} from "@inertiajs/inertia";
-import {filter, first, uniq, map, uniqBy} from "lodash";
+import {filter, first, uniq, map, uniqBy, isEmpty} from "lodash";
 import pluralize from 'pluralize'
+import {setAuth, setModules} from "../../redux/actions";
 
-export default function({privilege, pivotElements}) {
+export default function({privilege, pivotElements, auth }) {
     const {trans, getLocalized, getThumb, classNames} = useContext(AppContext);
     const {errors} = usePage().props;
     const dispatch = useDispatch();
+    const {modules} = useSelector(state => state);
     const {data, setData, put, progress} = useForm({
         'name': privilege.name,
         'name_ar': privilege.name_ar,
@@ -25,7 +27,7 @@ export default function({privilege, pivotElements}) {
         'main_menu': privilege.main_menu,
         'on_top': privilege.on_top,
         'hide_module': privilege.hide_module,
-        'attributes' : pivotElements
+        'attributes': pivotElements
     });
 
     const handleChange = (e) => {
@@ -43,15 +45,31 @@ export default function({privilege, pivotElements}) {
             image: data.image,
         }, {
             forceFormData: true,
+            onSuccess: () => {
+                Inertia.reload({only: ['auth']});
+                if (!isEmpty(auth && auth.role?.privileges)) {
+                    const filteredModules = map(auth.role.privileges, p => {
+                        return {
+                            name: p.name_en,
+                            index: p.index,
+                            create: p.create,
+                            main_menu: p.main_menu,
+                            on_top: p.on_top,
+                            hide_module: p.hide_module,
+                            image: p.image
+                        }
+                    });
+                    dispatch(setModules(filteredModules));
+                }
+            }
         })
     }
+
 
     const handleSelectedElements = (element) => {
         const filtered = uniqBy([element, ...data.attributes], 'role_id');
         setData('attributes', filtered);
     }
-
-    console.log('data', data.attributes);
 
     return (
         <BackendContainer>
@@ -249,14 +267,16 @@ export default function({privilege, pivotElements}) {
                             {/* privileges */}
                             {
                                 map(privilege.roles, r => (
-                                    <div className="sm:col-span-full has-tooltip mt-4 border-b border-gray-300" key={r.pivot.privilage_id}>
+                                    <div className="sm:col-span-full has-tooltip mt-4 border-b border-gray-300"
+                                         key={r.pivot.privilage_id}>
                                         <label htmlFor="categories"
                                                className={`block   text-gray-700`}>
                                             {r[getLocalized()]}
                                         </label>
                                         <div>
 
-                                            <div className="flex flex-row flex-1 justify-between items-center space-x-2">
+                                            <div
+                                                className="flex flex-row flex-1 justify-between items-center space-x-2">
                                                 {/* index */}
                                                 <fieldset className="space-y-5">
                                                     <div className="flex flex-row flex-wrap">
@@ -268,8 +288,8 @@ export default function({privilege, pivotElements}) {
                                                                     className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                     <input
                                                                         onChange={e => handleSelectedElements({
-                                                                            role_id : r.id,
-                                                                            index : e.target.checked,
+                                                                            role_id: r.id,
+                                                                            index: e.target.checked,
                                                                         })}
                                                                         id="index"
                                                                         aria-describedby="privileges-description"
@@ -300,8 +320,8 @@ export default function({privilege, pivotElements}) {
                                                                     className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                     <input
                                                                         onChange={e => handleSelectedElements({
-                                                                            role_id : r.id,
-                                                                            view : e.target.checked,
+                                                                            role_id: r.id,
+                                                                            view: e.target.checked,
                                                                         })}
                                                                         id="view"
                                                                         aria-describedby="privileges-description"
@@ -322,7 +342,7 @@ export default function({privilege, pivotElements}) {
                                                         </div>
                                                     </div>
                                                 </fieldset>
-                                            {/*    create */}
+                                                {/*    create */}
                                                 <fieldset className="space-y-5">
                                                     <div className="flex flex-row flex-wrap">
                                                         <div
@@ -332,8 +352,8 @@ export default function({privilege, pivotElements}) {
                                                                     className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                     <input
                                                                         onChange={e => handleSelectedElements({
-                                                                            role_id : r.id,
-                                                                            create : e.target.checked,
+                                                                            role_id: r.id,
+                                                                            create: e.target.checked,
                                                                         })}
                                                                         id="create"
                                                                         aria-describedby="privileges-description"
@@ -354,7 +374,7 @@ export default function({privilege, pivotElements}) {
                                                         </div>
                                                     </div>
                                                 </fieldset>
-                                            {/*    update*/}
+                                                {/*    update*/}
                                                 <fieldset className="space-y-5">
                                                     <div className="flex flex-row flex-wrap">
                                                         <div
@@ -364,8 +384,8 @@ export default function({privilege, pivotElements}) {
                                                                     className="flex items-center h-5 rtl:ml-4 ltr:mr-4">
                                                                     <input
                                                                         onChange={e => handleSelectedElements({
-                                                                            role_id : r.id,
-                                                                            update : e.target.checked,
+                                                                            role_id: r.id,
+                                                                            update: e.target.checked,
                                                                         })}
                                                                         id="update"
                                                                         aria-describedby="privileges-description"
@@ -386,7 +406,7 @@ export default function({privilege, pivotElements}) {
                                                         </div>
                                                     </div>
                                                 </fieldset>
-                                            {/*    delete*/}
+                                                {/*    delete*/}
                                                 <fieldset className="space-y-5">
                                                     <div className="flex flex-row flex-wrap">
                                                         <div
@@ -397,9 +417,9 @@ export default function({privilege, pivotElements}) {
                                                                     <input
                                                                         onChange={e => handleSelectedElements({
                                                                             ...r.pivot,
-                                                                            privilege_id : privilege.id,
-                                                                            role_id : r.id,
-                                                                            delete : e.target.checked,
+                                                                            privilege_id: privilege.id,
+                                                                            role_id: r.id,
+                                                                            delete: e.target.checked,
                                                                         })}
                                                                         id="delete"
                                                                         aria-describedby="privileges-description"
@@ -566,7 +586,8 @@ export default function({privilege, pivotElements}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.hide_module && <div className={`text-red-900`}>{errors.hide_module}</div>}
+                                        {errors.hide_module &&
+                                        <div className={`text-red-900`}>{errors.hide_module}</div>}
                                     </p>
                                 </div>
                             </fieldset>

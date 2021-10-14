@@ -92,6 +92,9 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('faqs', [FrontendPageController::class, 'getFaqs'])->name('faqs');
     Route::get('subscriptions', [FrontendPageController::class, 'getSubscriptions'])->name('subscriptions');
     Route::get('cart', [FrontendCartController::class, 'index'])->name('cart.index');
+    Route::get('cart/user/information', [FrontendCartController::class, 'getUserInformation'])->name('cart.information');
+    Route::get('cart/user/confirmation', [FrontendCartController::class, 'getUserConfirmation'])->name('cart.confirmation');
+    Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.index');
     Route::group(['middleware' => 'auth'], function () {
         Route::resource('rating', FrontendRatingController::class)->only('store');
         Route::resource('favorite', FrontendFavoriteController::class)->only('store');

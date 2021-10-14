@@ -1203,5 +1203,8 @@ export const en  = {
     "exported_before" : "did you export before?",
     "other_notes" : "other notes",
     "about_our_products" : "description of our products (raw materials)",
-    "export_message" : "if you have packaging products and willing to export. please kindly fill in your information as shown below. we shall contact us you as soon as possible."
+    "export_message" : "if you have packaging products and willing to export. please kindly fill in your information as shown below. we shall contact us you as soon as possible.",
+    "joinus_title" : "factory and willing to join us",
+    "joinus_message" : " you can now join our factories' list to export your products.",
+    "featured_products" : "featured products"
 }

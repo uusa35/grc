@@ -18,7 +18,7 @@ mix
         require('postcss-import'),
         require('tailwindcss'),
         require('autoprefixer'),
-    ]).browserSync('ecommerce-backend.test');
+    ]);
 
 if (mix.inProduction()) {
     mix.version()

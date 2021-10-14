@@ -103,3 +103,8 @@ export const showToastMessage = payload => ({
 export const hideToastMessage = () => ({
     type: actions.CLEAR_TOAST_MESSAGE,
 });
+
+export const setAuth = payload => ({
+    type: actions.SET_AUTH,
+    payload,
+});

@@ -7,9 +7,10 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 import {useDispatch} from "react-redux";
 import {Inertia} from "@inertiajs/inertia";
-import {filter, first, uniq, map } from "lodash";
+import {filter, first, uniq, map} from "lodash";
+import {setAuth} from "../../redux/actions";
 
-export default function({role,privileges}) {
+export default function({role, privileges, auth}) {
     const {trans, getLocalized, getThumb, classNames} = useContext(AppContext);
     const [selectedElements, setSelectedElements] = useState(map(role.privileges, p => p.id));
     const {errors} = usePage().props;
@@ -49,6 +50,9 @@ export default function({role,privileges}) {
             _method: 'put',
             ...data,
             image: data.image,
+            onSuccess: () => {
+                Inertia.reload({only: ['auth']});
+            }
         }, {
             forceFormData: true,
         })
@@ -300,8 +304,8 @@ export default function({role,privileges}) {
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
                                     {role.image && <img className={`h-24 w-20 bg-cover rounded-md`}
-                                                           src={getThumb(role.image)}
-                                                           alt={role[getLocalized()]}/>}
+                                                        src={getThumb(role.image)}
+                                                        alt={role[getLocalized()]}/>}
                                 </div>
                                 <ToolTipWidget message={trans('product_main_image_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
@@ -592,7 +596,8 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_designer && <div className={`text-red-900`}>{errors.is_designer}</div>}
+                                        {errors.is_designer &&
+                                        <div className={`text-red-900`}>{errors.is_designer}</div>}
                                     </p>
                                 </div>
                             </fieldset>
@@ -638,7 +643,8 @@ export default function({role,privileges}) {
                                 <ToolTipWidget/>
                                 <div>
                                     <p className={`mt-2  text-gray-500`}>
-                                        {errors.is_celebrity && <div className={`text-red-900`}>{errors.is_celebrity}</div>}
+                                        {errors.is_celebrity &&
+                                        <div className={`text-red-900`}>{errors.is_celebrity}</div>}
                                     </p>
                                 </div>
                             </fieldset>

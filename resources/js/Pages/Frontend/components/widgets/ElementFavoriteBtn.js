@@ -23,7 +23,6 @@ export default function ElementFavoriteBtn({type, id, favoritesList }) {
             post(route('frontend.favorite.store'), {
                 onSuccess : () => {
                     Inertia.reload({only: ['auth']});
-                    // toast.success(capitalize(trans('process_success')))
                 }
             });
         } else {
