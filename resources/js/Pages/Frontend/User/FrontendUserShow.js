@@ -150,7 +150,7 @@ export default function ({element, relatedElements, auth}) {
                     <SocialIconShare  />
                     {/* related items */}
                     {
-                        element.books && element.books.length > 0 &&
+                        settings.enable_books && element.books && element.books.length > 0 &&
                         <RelatedItems elements={element.books} type={'book'}/>
                     }
                 </div>
