@@ -33,7 +33,7 @@ class FrontendUserController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = new UserCollection(User::filters($filters)->notAdmins()->authors()
+        $elements = new UserCollection(User::filters($filters)->notAdmins()->notClients()
             ->paginate(SELF::TAKE_LESS)
             ->withQueryString());
         return inertia('Frontend/User/FrontendUserIndex', compact('elements'));

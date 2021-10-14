@@ -232,4 +232,6 @@ return [
 
     ],
 
+    'mgt' => (bool) env('MGT', false),
+
 ];

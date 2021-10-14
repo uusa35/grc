@@ -17,6 +17,9 @@ export default function HomePage({
                                      newOnHomeCourses,
                                      newOnHomeProducts,
                                      onHomeParticipantAuthors,
+                                     onHomeClients,
+                                     onHomePartners,
+    mgt,
                                      settings
                                  }) {
     const [slideNumber, setSlideNumber] = useState(6)
@@ -39,7 +42,7 @@ export default function HomePage({
             <FrontendContentContainer showBreadCrumbs={false}>
                 <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:px-8">
                     {
-                        settings.enable_joinus ? <JoinusHomeSection /> : null
+                        settings.enable_joinus ? <JoinusHomeSection/> : null
                     }
                     {
                         settings.enable_books && <>
@@ -109,8 +112,32 @@ export default function HomePage({
                         </>
                     }
                     {
+                        mgt && <>
+                            <ElementSlider
+                                showNavigation={false}
+                                elements={onHomeClients}
+                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                title={trans('our_clients')}
+                                type={'user'}
+                                moduleType={'user'}
+                                params={{is_designer:  true}}
+                            />
+                            <ElementSlider
+                                showNavigation={false}
+                                elements={onHomePartners}
+                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                title={trans('our_partners')}
+                                type={'user'}
+                                moduleType={'user'}
+                                params={{is_celebrity:  true}}
+                            />
+
+                        </>
+                    }
+                    {
                         settings.enable_newsletter && <NewsLetter/>
                     }
+
                 </div>
             </FrontendContentContainer>
         </FrontendContainer>

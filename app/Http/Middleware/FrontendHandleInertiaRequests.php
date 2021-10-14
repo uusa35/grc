@@ -62,6 +62,7 @@ class FrontendHandleInertiaRequests extends Middleware
                 }])
                 ->orderBy('order', 'asc')
                 ->get()),
+            'mgt' => config('app.mgt'),
             'ziggy' => (new Ziggy())->toArray()
         ]);
     }

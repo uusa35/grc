@@ -24,8 +24,8 @@ class CreateRolesTable extends Migration
             $table->boolean('is_super')->default(false);
             $table->boolean('is_client')->default(false);
             $table->boolean('is_company')->default(false);
-            $table->boolean('is_designer')->default(false);
-            $table->boolean('is_celebrity')->default(false);
+            $table->boolean('is_designer')->default(false); // == clients
+            $table->boolean('is_celebrity')->default(false); // == partners
             $table->boolean('is_author')->default(false);
             $table->boolean('is_visible')->default(false);
             $table->boolean('is_driver')->default(false);

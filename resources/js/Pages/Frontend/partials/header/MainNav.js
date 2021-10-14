@@ -42,7 +42,7 @@ export default function MainNav() {
         guest,
         arFont, enFont,
     } = useContext(AppContext);
-    const {auth, settings, currencies, categories} = useContext(GlobalContext);
+    const {auth, settings, currencies, categories, mgt} = useContext(GlobalContext);
     const {locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
@@ -104,10 +104,13 @@ export default function MainNav() {
                                 href={route('login')} className="-m-2 p-2 block text-gray-50">
                                 {capitalize(trans('login'))}
                             </a>
-                            <a
-                                href={route('register')} className="-m-2 p-2 block text-gray-50 sr-only">
-                                {capitalize(trans('register'))}
-                            </a>
+                            {
+                                settings.enable_register ?
+                                    <a
+                                        href={route('register')} className="-m-2 p-2 block text-gray-50 sr-only">
+                                        {capitalize(trans('register'))}
+                                    </a> : null
+                            }
                         </> : null
                     }
                 </div>
@@ -213,6 +216,24 @@ export default function MainNav() {
                                     </div>
                                 }
                                 {
+                                    mgt && <>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.user.index', {is_designer: true})}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('our_clients'))}
+                                            </Link>
+                                        </div>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.user.index', {is_celebrity: true})}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('our_partners'))}
+                                            </Link>
+                                        </div>
+                                    </>
+                                }
+                                {
                                     guest ? <>
                                         <div className="flow-root">
                                             <Link href={route('login')}
@@ -220,12 +241,14 @@ export default function MainNav() {
                                                 {capitalize(trans('login'))}
                                             </Link>
                                         </div>
-                                        <div className="flow-root">
-                                            <Link href={route('register')}
-                                                  className="-m-2 p-2 block text-gray-900 capitalize">
-                                                {capitalize(trans('register'))}
-                                            </Link>
-                                        </div>
+                                        {
+                                            settings.enable_register ? <div className="flow-root">
+                                                <Link href={route('register')}
+                                                      className="-m-2 p-2 block text-gray-900 capitalize">
+                                                    {capitalize(trans('register'))}
+                                                </Link>
+                                            </div> : null
+                                        }
                                     </> : <div className="flow-root">
                                         <Link href={route('frontend.user.edit', auth.id)}
                                               className="-m-2 p-2 block text-gray-900 capitalize">
@@ -401,7 +424,8 @@ export default function MainNav() {
                                         <Tab.Panel
                                             className="pt-10 pb-8 px-4 space-y-10 capitalize">
                                             {
-                                                isEmpty(cart.items) ?  <NoElements display={isEmpty(cart.items)}/> : <CartIndexOrderSummary/>
+                                                isEmpty(cart.items) ? <NoElements display={isEmpty(cart.items)}/> :
+                                                    <CartIndexOrderSummary/>
                                             }
                                         </Tab.Panel>
                                     }
@@ -461,6 +485,24 @@ export default function MainNav() {
                                     </Link>
                                 }
                                 {
+                                    mgt && <>
+                                        <Link
+                                            href={route('frontend.user.index', {is_designer: true})}
+                                            // onClick={() => dispatch(setParentModule('user'))}
+                                            className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                        >
+                                            {capitalize(trans('our_clients'))}
+                                        </Link>
+                                        <Link
+                                            href={route('frontend.user.index', {is_celebrity: true})}
+                                            // onClick={() => dispatch(setParentModule('user'))}
+                                            className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                        >
+                                            {capitalize(trans('our_partners'))}
+                                        </Link>
+                                    </>
+                                }
+                                {
                                     settings.enable_books && <Link
                                         href={route('frontend.book.index')}
                                         onClick={() => dispatch(setParentModule('book'))}
@@ -470,10 +512,12 @@ export default function MainNav() {
                                     </Link>
                                 }
                                 {
-                                    settings.enable_books && <MainNavBookCategoriesList categories={categories} type='book'/>
+                                    settings.enable_books &&
+                                    <MainNavBookCategoriesList categories={categories} type='book'/>
                                 }
                                 {
-                                    settings.enable_products && <MainNavBookCategoriesList categories={categories} type='product'/>
+                                    settings.enable_products &&
+                                    <MainNavBookCategoriesList categories={categories} type='product'/>
                                 }
                                 {
                                     settings.enable_books && <Link
@@ -597,42 +641,9 @@ export default function MainNav() {
                                                                 </div>
                                                             </Link>
 
-                                                            {settings[getLocalized('services')] && settings[getLocalized('services')].length > 50 ? <Link
-                                                                href={route('frontend.services')}
-                                                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
-                                                            >
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                     className="h-6 w-6 text-gray-800" fill="none"
-                                                                     viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                                          strokeWidth={2}
-                                                                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                                                                </svg>
-                                                                <div className="ltr:ml-5 rtl:mr-5">
-                                                                    <p className="text-base font-medium text-gray-900 capitalize">{trans('our_services')}</p>
-                                                                </div>
-                                                            </Link> : null
-                                                            }
-
-                                                            {settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ? <Link
-                                                                href={route('frontend.polices')}
-                                                                className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
-                                                            >
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                     className="h-6 w-6 text-gray-800" fill="none"
-                                                                     viewBox="0 0 24 24" stroke="currentColor">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round"
-                                                                          strokeWidth={2}
-                                                                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                                                                </svg>
-                                                                <div className="ltr:ml-5 rtl:mr-5">
-                                                                    <p className="text-base font-medium text-gray-900 capitalize">{trans('polices')}</p>
-                                                                </div>
-                                                            </Link> : null
-                                                            }
-                                                            {
-                                                                settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 ? <Link
-                                                                    href={route('frontend.terms')}
+                                                            {settings[getLocalized('services')] && settings[getLocalized('services')].length > 50 ?
+                                                                <Link
+                                                                    href={route('frontend.services')}
                                                                     className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
                                                                 >
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -641,12 +652,51 @@ export default function MainNav() {
                                                                         <path strokeLinecap="round"
                                                                               strokeLinejoin="round"
                                                                               strokeWidth={2}
-                                                                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                                                                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                                                                     </svg>
                                                                     <div className="ltr:ml-5 rtl:mr-5">
-                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('terms')}</p>
+                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('our_services')}</p>
                                                                     </div>
                                                                 </Link> : null
+                                                            }
+
+                                                            {settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ?
+                                                                <Link
+                                                                    href={route('frontend.polices')}
+                                                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 text-gray-800" fill="none"
+                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round"
+                                                                              strokeLinejoin="round"
+                                                                              strokeWidth={2}
+                                                                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                                                    </svg>
+                                                                    <div className="ltr:ml-5 rtl:mr-5">
+                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('polices')}</p>
+                                                                    </div>
+                                                                </Link> : null
+                                                            }
+                                                            {
+                                                                settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 ?
+                                                                    <Link
+                                                                        href={route('frontend.terms')}
+                                                                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                    >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             className="h-6 w-6 text-gray-800"
+                                                                             fill="none"
+                                                                             viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round"
+                                                                                  strokeLinejoin="round"
+                                                                                  strokeWidth={2}
+                                                                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                                                                        </svg>
+                                                                        <div className="ltr:ml-5 rtl:mr-5">
+                                                                            <p className="text-base font-medium text-gray-900 capitalize">{trans('terms')}</p>
+                                                                        </div>
+                                                                    </Link> : null
                                                             }
                                                             {
                                                                 settings.enable_faqs ? <Link
@@ -656,7 +706,8 @@ export default function MainNav() {
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                          className="h-6 w-6 text-gray-800" fill="none"
                                                                          viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                                        <path strokeLinecap="round"
+                                                                              strokeLinejoin="round"
                                                                               strokeWidth={2}
                                                                               d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                                     </svg>
@@ -673,7 +724,8 @@ export default function MainNav() {
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                          className="h-6 w-6 text-gray-800" fill="none"
                                                                          viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                                        <path strokeLinecap="round"
+                                                                              strokeLinejoin="round"
                                                                               strokeWidth={2}
                                                                               d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                                     </svg>
@@ -694,7 +746,7 @@ export default function MainNav() {
 
                         {/* Search */}
                         {settings.enable_books && <SearchField type={'book'}/>}
-                        { settings.enable_products && <SearchField type={'product'}/>}
+                        {settings.enable_products && <SearchField type={'product'}/>}
                         {/* change lang */}
                         <div className="ml-auto flex items-center">
                             <div
