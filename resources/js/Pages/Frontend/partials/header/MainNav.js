@@ -488,15 +488,15 @@ export default function MainNav() {
                                     mgt && <>
                                         <Link
                                             href={route('frontend.user.index', {is_designer: true})}
-                                            // onClick={() => dispatch(setParentModule('user'))}
-                                            className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                            onClick={() => dispatch(setParentModule('client'))}
+                                            className={classNames(parentModule == 'client' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                         >
                                             {capitalize(trans('our_clients'))}
                                         </Link>
                                         <Link
                                             href={route('frontend.user.index', {is_celebrity: true})}
-                                            // onClick={() => dispatch(setParentModule('user'))}
-                                            className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                            onClick={() => dispatch(setParentModule('partner'))}
+                                            className={classNames(parentModule == 'partner' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                         >
                                             {capitalize(trans('our_partners'))}
                                         </Link>
