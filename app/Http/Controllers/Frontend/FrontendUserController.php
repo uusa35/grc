@@ -13,7 +13,9 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\Role;
 use App\Models\Service;
+use App\Models\Subscription;
 use App\Models\User;
 use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
@@ -26,7 +28,7 @@ class FrontendUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UserFilters  $filters)
+    public function index(UserFilters $filters)
     {
 //        dd(Category::active()->onlyParent()->with('children.children')->first());
         $validator = validator(request()->all(), ['search' => 'nullable']);
@@ -52,30 +54,49 @@ class FrontendUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'name' => 'required|min:3|max:200',
+            'email' => 'required|email|unique:users,email',
+            'mobile' => 'min:6|max:12',
+            'country_id' => 'exists:countries,id',
+            'area_id' => 'exists:areas,id',
+            'block' => 'max:20',
+            'street' => 'max:200',
+            'building' => 'max:20',
+            'apartment' => 'max:20',
+            'floor' => 'max:20',
+        ]);
+        $request->request->add(['name_ar' => $request->name, 'name_en' => $request->name, 'password' => Hash::make('secret'), 'role_id' => Role::where('is_client', true)->first()->id, 'subscription_id' => Subscription::where('free', true)->first()->id]);
+        $user = User::create($request->all());
+        if ($user) {
+            $auth = new UserResource($user);
+            auth()->login($user);
+            return redirect()->back()->with(['auth' => $auth, 'success' => trans('general.process_success')]);
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        $element = new UserResource($user->load('role','books','images','ratings'));
+        $element = new UserResource($user->load('role', 'books', 'images', 'ratings'));
         return inertia('Frontend/User/FrontendUserShow', compact('element'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -88,8 +109,8 @@ class FrontendUserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -97,7 +118,7 @@ class FrontendUserController extends Controller
         $request->validate([
             'name_ar' => 'required|min:3|max:255',
             'name_en' => 'required|min:3|max:255',
-            'mobile' => 'required|min:6|max:12',
+            'mobile' => 'min:6|max:12',
             'whatsapp' => 'min:5|max:12',
             'news_letter_on' => 'boolean'
         ]);
@@ -112,7 +133,7 @@ class FrontendUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
@@ -120,33 +141,37 @@ class FrontendUserController extends Controller
         //
     }
 
-    public function getResetPassword() {
+    public function getResetPassword()
+    {
         return inertia('Frontend/User/Profile/ProfileResetPassword');
     }
 
-    public function postResetPassword(Request $request) {
+    public function postResetPassword(Request $request)
+    {
         $request->validate([
             'old_password' => 'required|min:6',
             'password' => 'required|string|min:6|confirmed',
         ]);
         $user = auth()->attempt(['email' => auth()->user()->email, 'password' => $request->old_password]);
-        if($user && auth()->user()->update(['password' => Hash::make($request->password)])) {
+        if ($user && auth()->user()->update(['password' => Hash::make($request->password)])) {
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
-    public function getCourses() {
+    public function getCourses()
+    {
         $orders = Order::where(['user_id' => auth()->id(), 'paid' => true])->with(['order_metas' => function ($q) {
             return $q->where('ordermetable_type', 'App\Models\Course');
         }])->get();
         $firstOrder = $orders->first();
         $ids = array_values($orders->pluck('order_metas')->flatten()->pluck('ordermetable.id')->toArray());
-        $elements = CourseCollection::make(Course::whereIn('id', $ids)->with('images','user')->paginate(SELF::TAKE_LESS));
-        return inertia('Frontend/User/Profile/ProfileCourseIndex', compact('elements','firstOrder'));
+        $elements = CourseCollection::make(Course::whereIn('id', $ids)->with('images', 'user')->paginate(SELF::TAKE_LESS));
+        return inertia('Frontend/User/Profile/ProfileCourseIndex', compact('elements', 'firstOrder'));
     }
 
-    public function getCourse(Request $request) {
+    public function getCourse(Request $request)
+    {
         $request->validate([
             'reference_id' => 'required',
             'id' => 'required|exists:courses,id',
@@ -156,8 +181,8 @@ class FrontendUserController extends Controller
         $order = Order::where(['paid' => true, 'user_id' => auth()->id()])->with(['order_metas' => function ($q) {
             return $q->where(['ordermetable_type' => 'App\Models\Course']);
         }])->get();
-        if(in_array(request()->id,$order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
-            $element = new CourseResource(Course::whereId($request->id)->with('user','images')->with(['comments' => function ($q) {
+        if (in_array(request()->id, $order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
+            $element = new CourseResource(Course::whereId($request->id)->with('user', 'images')->with(['comments' => function ($q) {
                 return $q->where('session_id', request()->session_id);
             }])->first());
             return inertia('Frontend/User/Profile/ProfileCourseShow', compact('element'));
@@ -165,17 +190,19 @@ class FrontendUserController extends Controller
         return redirect()->bakc()->with('error', trans('general.process_failure'));
     }
 
-    public function getServices() {
+    public function getServices()
+    {
         $orders = Order::where(['user_id' => auth()->id(), 'paid' => true])->with(['order_metas' => function ($q) {
             return $q->where('ordermetable_type', 'App\Models\Service');
         }])->get();
         $firstOrder = $orders->first();
         $ids = array_values($orders->pluck('order_metas')->flatten()->pluck('ordermetable.id')->toArray());
-        $elements = ServiceCollection::make(Service::whereIn('id', $ids)->with('images','user')->paginate(SELF::TAKE_LESS));
-        return inertia('Frontend/User/Profile/ProfileServiceIndex', compact('elements','firstOrder'));
+        $elements = ServiceCollection::make(Service::whereIn('id', $ids)->with('images', 'user')->paginate(SELF::TAKE_LESS));
+        return inertia('Frontend/User/Profile/ProfileServiceIndex', compact('elements', 'firstOrder'));
     }
 
-    public function getService(Request $request) {
+    public function getService(Request $request)
+    {
         $request->validate([
             'reference_id' => 'required',
             'id' => 'required|exists:courses,id',
@@ -185,8 +212,8 @@ class FrontendUserController extends Controller
         $order = Order::where(['paid' => true, 'user_id' => auth()->id()])->with(['order_metas' => function ($q) {
             return $q->where(['ordermetable_type' => 'App\Models\Service']);
         }])->get();
-        if(in_array(request()->id,$order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
-            $element = new ServiceResource(Service::whereId($request->id)->with('user','images')->with(['comments' => function ($q) {
+        if (in_array(request()->id, $order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
+            $element = new ServiceResource(Service::whereId($request->id)->with('user', 'images')->with(['comments' => function ($q) {
                 return $q->where('session_id', request()->session_id);
             }])->first());
             return inertia('Frontend/User/Profile/ProfileServiceShow', compact('element'));
@@ -194,17 +221,19 @@ class FrontendUserController extends Controller
         return redirect()->bakc()->with('error', trans('general.process_failure'));
     }
 
-    public function getBooks() {
+    public function getBooks()
+    {
         $orders = Order::where(['user_id' => auth()->id(), 'paid' => true])->with(['order_metas' => function ($q) {
             return $q->where('ordermetable_type', 'App\Models\Book');
         }])->get();
         $firstOrder = $orders->first();
         $ids = array_values($orders->pluck('order_metas')->flatten()->pluck('ordermetable.id')->toArray());
-        $elements = ServiceCollection::make(Book::whereIn('id', $ids)->with('images','user')->paginate(SELF::TAKE_LESS));
-        return inertia('Frontend/User/Profile/ProfileBookIndex', compact('elements','firstOrder'));
+        $elements = ServiceCollection::make(Book::whereIn('id', $ids)->with('images', 'user')->paginate(SELF::TAKE_LESS));
+        return inertia('Frontend/User/Profile/ProfileBookIndex', compact('elements', 'firstOrder'));
     }
 
-    public function getBook(Request $request) {
+    public function getBook(Request $request)
+    {
         $request->validate([
             'reference_id' => 'required',
             'id' => 'required|exists:courses,id',
@@ -214,8 +243,8 @@ class FrontendUserController extends Controller
         $order = Order::where(['paid' => true, 'user_id' => auth()->id()])->with(['order_metas' => function ($q) {
             return $q->where(['ordermetable_type' => 'App\Models\Book']);
         }])->get();
-        if(in_array(request()->id,$order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
-            $element = new ServiceResource(Book::whereId($request->id)->with('user','images')->with(['comments' => function ($q) {
+        if (in_array(request()->id, $order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
+            $element = new ServiceResource(Book::whereId($request->id)->with('user', 'images')->with(['comments' => function ($q) {
                 return $q->where('session_id', request()->session_id);
             }])->first());
             return inertia('Frontend/User/Profile/ProfileBookShow', compact('element'));
@@ -223,11 +252,13 @@ class FrontendUserController extends Controller
         return redirect()->bakc()->with('error', trans('general.process_failure'));
     }
 
-    public function getFavorites() {
+    public function getFavorites()
+    {
         return inertia('Frontend/User/Profile/ProfileFavoriteIndex');
     }
 
-    public function getSettings() {
+    public function getSettings()
+    {
         $user = new UserResource(User::whereId(auth()->id())->first());
         return inertia('Frontend/User/Profile/ProfileSettingIndex', compact('user'));
     }

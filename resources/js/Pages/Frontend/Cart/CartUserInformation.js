@@ -328,12 +328,31 @@ export default function({countries, auth }) {
                             >
                                 {trans('previous')}
                             </Link>
-                            <button
-                                type="submit"
-                                className="bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
-                            >
-                                {trans('next')}
-                            </button>
+                            <div className="flex">
+                                <button
+                                    type="submit"
+                                    className="mx-10 bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                >
+                                    {trans('save')}
+                                </button>
+                                {
+                                    !auth ?
+                                        <button
+                                            type="button"
+                                            disabled
+                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , " border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                                        >
+                                            {trans('next')}
+                                        </button> :
+                                        <Link
+                                            href={route('frontend.cart.confirmation')}
+                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , " border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                                        >
+                                            {trans('next')}
+                                        </Link>
+                                }
+
+                            </div>
                         </div>
                     </form>
                 </div>

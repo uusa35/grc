@@ -25,11 +25,11 @@ class FrontendCartController extends Controller
     }
 
     public function getUserConfirmation() {
-        return inertia('Frontend/Cart/CartUserConfirmation');
+        $auth = auth()->id() ? new UserResource(User::whereId(request()->user()->id)->with(['role','country'])->first()) : null;
+        return inertia('Frontend/Cart/CartUserConfirmation', compact('auth'));
     }
 
     public function getPaymentIndex() {
         return inertia('Frontend/Cart/CartPaymentIndex');
     }
-
 }
