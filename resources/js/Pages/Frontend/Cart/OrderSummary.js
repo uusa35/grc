@@ -50,19 +50,19 @@ export default function () {
                     </dl>
                 </div>
             </div>
-            <div className="mt-10">
-                <button
-                    type="submit"
-                    className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+            <div className="mt-10 flex justify-end">
+                <Link
+                    href={route('frontend.cart.information')}
+                    className="bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                 >
-                    {trans('checkout')}
-                </button>
+                    {trans('next')}
+                </Link>
             </div>
 
             <div className="mt-6  text-center text-gray-500">
                 <p>
-                    <Link href={route('frontend.book.index')}
-                          className="flex flex-row gap-x-5 items-center justify-center text-indigo-600 font-medium hover:text-indigo-500">
+                    <Link href={route('frontend.home')}
+                          className="flex flex-row gap-x-5 items-center justify-center text-gray-600 font-medium hover:text-gray-500">
                         {trans('continue_shopping')}
                         {locale.isRTL ?
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20"

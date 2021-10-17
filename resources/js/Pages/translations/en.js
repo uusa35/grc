@@ -11,7 +11,7 @@ export const en  = {
     'length_color_or_time' : 'color/time/length',
     'sku' : 'identification number',
     'name' : 'name',
-    'shipment_fees' : 'shipment fees',
+    'shipment_fees' : 'Delivery (shipment) fees',
     'discount' : 'discount',
     'total' : 'subtotal',
     'back' : 'back',

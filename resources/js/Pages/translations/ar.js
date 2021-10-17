@@ -11,7 +11,7 @@ export const ar = {
     'length_color_or_time' : 'اللون/الوقت/الطول',
     'sku' : 'الرقم التعريفي',
     'name' : 'الأسم',
-    'shipment_fees' : 'مصاريف الشحن',
+    'shipment_fees' : 'مصاريف التوصيل (الشحن)',
     'discount' : 'خصم',
     'total' : 'الإجمالي',
     'back' : 'للخلف',

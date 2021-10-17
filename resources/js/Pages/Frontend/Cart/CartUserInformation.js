@@ -1,26 +1,18 @@
-/*
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import {useContext, useState} from 'react'
+import {useContext, useMemo, useState} from 'react'
 import {RadioGroup} from '@headlessui/react'
 import {CheckCircleIcon, TrashIcon} from '@heroicons/react/solid'
 import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
 import {AppContext} from "../../context/AppContext";
+import {useDispatch} from "react-redux";
+import {Link, useForm, usePage} from "@inertiajs/inertia-react";
+import {filter, first, map} from "lodash";
+import {Inertia} from "@inertiajs/inertia";
+import route from "ziggy-js";
+import axios from "axios";
+import {showToastMessage} from "../../redux/actions";
+import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 const products = [
     {
@@ -45,13 +37,65 @@ const paymentMethods = [
     {id: 'etransfer', title: 'eTransfer'},
 ]
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-export default function() {
+export default function({countries, auth }) {
     const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
     const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
+    const [areas, setAreas] = useState([])
+    const dispatch = useDispatch();
+    const {props} = usePage();
+    const {errors} = props;
+    const {data, setData, put, post, progress, reset} = useForm({
+        'name': auth ? auth.name_ar : '',
+        'name_ar': auth ? auth.name_ar : '',
+        'name_en': auth ? auth.name_ar : '',
+        'email': auth ? auth.email : '',
+        'mobile': auth ? auth.mobile : '',
+        'phone': auth ? auth.phone : '',
+        'area': auth ? auth.area : '',
+        'block': auth ? auth.block : '',
+        'street': auth ? auth.street : '',
+        'building': auth ? auth.building : '',
+        'floor': auth ? auth.floor : '',
+        'apartment': auth ? auth.apartment : '',
+        'country_name': auth ? auth.country_name : '',
+        'country_id': auth ? auth.country_id : '',
+        'area_id': auth ? auth.area_id : '',
+    });
+
+    useMemo(() => {
+        // setAreas()
+        const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
+        setAreas(selectedCountry.areas)
+        setData('area_id', first(selectedCountry.areas).id)
+    }, [data.country_id])
+
+    const handleChange = (e) => {
+        setData(values => ({
+            ...values,
+            [e.target.id]: e.target.value,
+        }))
+    }
+
+    const submit = (e) => {
+        e.preventDefault()
+        if(auth && auth.id) {
+            Inertia.post(route(`frontend.user.update`, auth.id), {
+                _method: 'put',
+                ...data,
+                image: data.image,
+            }, {
+                forceFormData: true
+            })
+        } else {
+            Inertia.post(route(`frontend.user.store`), {
+                _method: 'post',
+                ...data,
+                image: data.image,
+            }, {
+                forceFormData: true
+            })
+        }
+    }
 
     return (
         <FrontendContainer>
@@ -61,434 +105,235 @@ export default function() {
                     <CartStepper activeStep={2}/>
                     <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('information')}</h1>
 
-                    <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16 mt-5">
-                        <div>
-                            <div>
-                                <h2 className="text-lg font-medium text-gray-900">Contact information</h2>
-
-                                <div className="mt-4">
-                                    <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                                        Email address
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            type="email"
-                                            id="email-address"
-                                            name="email-address"
-                                            autoComplete="email"
-                                            className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                        />
-                                    </div>
-                                </div>
+                    <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16 gap-y-5 mt-5" onSubmit={submit}>
+                        <div className="col-span-full">
+                            <h2 className="text-lg font-medium text-gray-900">{trans('contact')} {trans('information')}</h2>
+                        </div>
+                        {/* name */}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                                {trans('name')}*
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    defaultValue={data.name_ar}
+                                    autoComplete="given-name"
+                                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.name && <div className={`text-red-900`}>{errors.name}</div>}
+                                </p>
                             </div>
-
-                            <div className="mt-10 border-t border-gray-200 pt-10">
-                                <h2 className="text-lg font-medium text-gray-900">Shipping information</h2>
-
-                                <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                                    <div>
-                                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                                            First name
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                id="first-name"
-                                                name="first-name"
-                                                autoComplete="given-name"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                                            Last name
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                id="last-name"
-                                                name="last-name"
-                                                autoComplete="family-name"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <label htmlFor="company" className="block text-sm font-medium text-gray-700">
-                                            Company
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="company"
-                                                id="company"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                                            Address
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="address"
-                                                id="address"
-                                                autoComplete="street-address"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <label htmlFor="apartment" className="block text-sm font-medium text-gray-700">
-                                            Apartment, suite, etc.
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="apartment"
-                                                id="apartment"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                                            City
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="city"
-                                                id="city"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                                            Country
-                                        </label>
-                                        <div className="mt-1">
-                                            <select
-                                                id="country"
-                                                name="country"
-                                                autoComplete="country"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            >
-                                                <option>Canada</option>
-                                                <option>Mexico</option>
-                                                <option>United States</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="province" className="block text-sm font-medium text-gray-700">
-                                            Province
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="province"
-                                                id="province"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="postal-code"
-                                               className="block text-sm font-medium text-gray-700">
-                                            Postal code
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="postal-code"
-                                                id="postal-code"
-                                                autoComplete="postal-code"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="sm:col-span-2">
-                                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                                            Phone
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="phone"
-                                                id="phone"
-                                                autoComplete="tel"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        {/*email*/}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                                {trans('email')}*
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    autoComplete="email"
+                                    required
+                                    defaultValue={data.email}
+                                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
+                                </p>
                             </div>
-
-                            <div className="mt-10 border-t border-gray-200 pt-10">
-                                <RadioGroup value={selectedDeliveryMethod} onChange={setSelectedDeliveryMethod}>
-                                    <RadioGroup.Label className="text-lg font-medium text-gray-900">Delivery
-                                        method</RadioGroup.Label>
-
-                                    <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                                        {deliveryMethods.map((deliveryMethod) => (
-                                            <RadioGroup.Option
-                                                key={deliveryMethod.id}
-                                                value={deliveryMethod}
-                                                className={({checked, active}) =>
-                                                    classNames(
-                                                        checked ? 'border-transparent' : 'border-gray-300',
-                                                        active ? 'ring-2 ring-indigo-500' : '',
-                                                        'relative bg-white border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none'
-                                                    )
-                                                }
-                                            >
-                                                {({checked, active}) => (
-                                                    <>
-                                                        <div className="flex-1 flex">
-                                                            <div className="flex flex-col">
-                                                                <RadioGroup.Label as="span"
-                                                                                  className="block text-sm font-medium text-gray-900">
-                                                                    {deliveryMethod.title}
-                                                                </RadioGroup.Label>
-                                                                <RadioGroup.Description
-                                                                    as="span"
-                                                                    className="mt-1 flex items-center text-sm text-gray-500"
-                                                                >
-                                                                    {deliveryMethod.turnaround}
-                                                                </RadioGroup.Description>
-                                                                <RadioGroup.Description as="span"
-                                                                                        className="mt-6 text-sm font-medium text-gray-900">
-                                                                    {deliveryMethod.price}
-                                                                </RadioGroup.Description>
-                                                            </div>
-                                                        </div>
-                                                        {checked ? <CheckCircleIcon className="h-5 w-5 text-indigo-600"
-                                                                                    aria-hidden="true"/> : null}
-                                                        <div
-                                                            className={classNames(
-                                                                active ? 'border' : 'border-2',
-                                                                checked ? 'border-indigo-500' : 'border-transparent',
-                                                                'absolute -inset-px rounded-lg pointer-events-none'
-                                                            )}
-                                                            aria-hidden="true"
-                                                        />
-                                                    </>
-                                                )}
-                                            </RadioGroup.Option>
-                                        ))}
-                                    </div>
-                                </RadioGroup>
+                        </div>
+                        {/*mobile*/}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">
+                                {trans('mobile')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="number"
+                                    id="mobile"
+                                    name="mobile"
+                                    defaultValue={data.mobile}
+                                    autoComplete="mobile"
+                                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
+                                </p>
                             </div>
+                        </div>
+                        <div className="col-span-full">
+                            <h2 className="text-lg font-medium text-gray-900">{trans('contact')} {trans('address')}</h2>
+                        </div>
 
-                            {/* Payment */}
-                            <div className="mt-10 border-t border-gray-200 pt-10">
-                                <h2 className="text-lg font-medium text-gray-900">Payment</h2>
-
-                                <fieldset className="mt-4">
-                                    <legend className="sr-only">Payment type</legend>
-                                    <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                                        {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
-                                            <div key={paymentMethod.id} className="flex items-center">
-                                                {paymentMethodIdx === 0 ? (
-                                                    <input
-                                                        id={paymentMethod.id}
-                                                        name="payment-type"
-                                                        type="radio"
-                                                        defaultChecked
-                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                                                    />
-                                                ) : (
-                                                    <input
-                                                        id={paymentMethod.id}
-                                                        name="payment-type"
-                                                        type="radio"
-                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                                                    />
-                                                )}
-
-                                                <label htmlFor={paymentMethod.id}
-                                                       className="ml-3 block text-sm font-medium text-gray-700">
-                                                    {paymentMethod.title}
-                                                </label>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </fieldset>
-
-                                <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
-                                    <div className="col-span-4">
-                                        <label htmlFor="card-number"
-                                               className="block text-sm font-medium text-gray-700">
-                                            Card number
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                id="card-number"
-                                                name="card-number"
-                                                autoComplete="cc-number"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="col-span-4">
-                                        <label htmlFor="name-on-card"
-                                               className="block text-sm font-medium text-gray-700">
-                                            Name on card
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                id="name-on-card"
-                                                name="name-on-card"
-                                                autoComplete="cc-name"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="col-span-3">
-                                        <label htmlFor="expiration-date"
-                                               className="block text-sm font-medium text-gray-700">
-                                            Expiration date (MM/YY)
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="expiration-date"
-                                                id="expiration-date"
-                                                autoComplete="cc-exp"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="cvc" className="block text-sm font-medium text-gray-700">
-                                            CVC
-                                        </label>
-                                        <div className="mt-1">
-                                            <input
-                                                type="text"
-                                                name="cvc"
-                                                id="cvc"
-                                                autoComplete="csc"
-                                                className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                            />
-                                        </div>
-                                    </div>
+                        {/* country_id */}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="country_id" className="block   text-gray-700">
+                                {trans('country')}
+                            </label>
+                            <div className="mt-1">
+                                <select
+                                    onChange={handleChange}
+                                    id="country_id"
+                                    name="country_id"
+                                    value={data.country_id}
+                                    autoComplete="country_id"
+                                    required
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                >
+                                    {
+                                        map(countries, u => (
+                                            <option key={u.id} value={u.id}
+                                                    selected={data.country_id && u.id === data.country_id}
+                                            >{u[getLocalized()]}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                            <ToolTipWidget message={trans('user_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
+                            </p>
+                        </div>
+                        {/* area_id */}
+                        {
+                            areas && <div className="lg:col-span-1">
+                                <label htmlFor="area_id" className="block   text-gray-700">
+                                    {trans('area')}
+                                </label>
+                                <div className="mt-1">
+                                    <select
+                                        onChange={handleChange}
+                                        id="area_id"
+                                        name="area_id"
+                                        value={data.area_id}
+                                        autoComplete="area_id"
+                                        required
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    >
+                                        {
+                                            map(areas, u => (
+                                                <option key={u.id} value={u.id}
+                                                        selected={data.area_id && u.id === data.area_id}
+                                                >{u[getLocalized()]}</option>
+                                            ))
+                                        }
+                                    </select>
                                 </div>
+                                <ToolTipWidget message={trans('user_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.area_id && <div className={`text-red-900`}>{errors.area_id}</div>}
+                                </p>
+                            </div>
+                        }
+
+                        {/* block */}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="block" className="block text-sm font-medium text-gray-700">
+                                {trans('block')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    id="block"
+                                    name="block"
+                                    defaultValue={data.block}
+                                    autoComplete="given-block"
+                                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.block && <div className={`text-red-900`}>{errors.block}</div>}
+                                </p>
                             </div>
                         </div>
 
-                        {/* Order summary */}
-                        <div className="mt-10 lg:mt-0">
-                            <h2 className="text-lg font-medium text-gray-900">Order summary</h2>
-
-                            <div className="mt-4 bg-white border border-gray-200 rounded-lg shadow-sm">
-                                <h3 className="sr-only">Items in your cart</h3>
-                                <ul role="list" className="divide-y divide-gray-200">
-                                    {products.map((product) => (
-                                        <li key={product.id} className="flex py-6 px-4 sm:px-6">
-                                            <div className="flex-shrink-0">
-                                                <img src={product.imageSrc} alt={product.imageAlt}
-                                                     className="w-20 rounded-md"/>
-                                            </div>
-
-                                            <div className="ml-6 flex-1 flex flex-col">
-                                                <div className="flex">
-                                                    <div className="min-w-0 flex-1">
-                                                        <h4 className="text-sm">
-                                                            <a href={product.href}
-                                                               className="font-medium text-gray-700 hover:text-gray-800">
-                                                                {product.title}
-                                                            </a>
-                                                        </h4>
-                                                        <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                                                        <p className="mt-1 text-sm text-gray-500">{product.size}</p>
-                                                    </div>
-
-                                                    <div className="ml-4 flex-shrink-0 flow-root">
-                                                        <button
-                                                            type="button"
-                                                            className="-m-2.5 bg-white p-2.5 flex items-center justify-center text-gray-400 hover:text-gray-500"
-                                                        >
-                                                            <span className="sr-only">Remove</span>
-                                                            <TrashIcon className="h-5 w-5" aria-hidden="true"/>
-                                                        </button>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex-1 pt-2 flex items-end justify-between">
-                                                    <p className="mt-1 text-sm font-medium text-gray-900">{product.price}</p>
-
-                                                    <div className="ml-4">
-                                                        <label htmlFor="quantity" className="sr-only">
-                                                            Quantity
-                                                        </label>
-                                                        <select
-                                                            id="quantity"
-                                                            name="quantity"
-                                                            className="rounded-md border border-gray-300 text-base font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                                        >
-                                                            <option value={1}>1</option>
-                                                            <option value={2}>2</option>
-                                                            <option value={3}>3</option>
-                                                            <option value={4}>4</option>
-                                                            <option value={5}>5</option>
-                                                            <option value={6}>6</option>
-                                                            <option value={7}>7</option>
-                                                            <option value={8}>8</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <dl className="border-t border-gray-200 py-6 px-4 space-y-6 sm:px-6">
-                                    <div className="flex items-center justify-between">
-                                        <dt className="text-sm">Subtotal</dt>
-                                        <dd className="text-sm font-medium text-gray-900">$64.00</dd>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <dt className="text-sm">Shipping</dt>
-                                        <dd className="text-sm font-medium text-gray-900">$5.00</dd>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <dt className="text-sm">Taxes</dt>
-                                        <dd className="text-sm font-medium text-gray-900">$5.52</dd>
-                                    </div>
-                                    <div className="flex items-center justify-between border-t border-gray-200 pt-6">
-                                        <dt className="text-base font-medium">Total</dt>
-                                        <dd className="text-base font-medium text-gray-900">$75.52</dd>
-                                    </div>
-                                </dl>
-
-                                <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                                    <button
-                                        type="submit"
-                                        className="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                                    >
-                                        Confirm order
-                                    </button>
-                                </div>
+                        {/* street */}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="street" className="street text-sm font-medium text-gray-700">
+                                {trans('street')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    id="street"
+                                    name="street"
+                                    defaultValue={data.street}
+                                    autoComplete="given-street"
+                                    className="street w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.street && <div className={`text-red-900`}>{errors.street}</div>}
+                                </p>
                             </div>
+                        </div>
+
+                        {/* building */}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="building" className="building text-sm font-medium text-gray-700">
+                                {trans('building')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    id="building"
+                                    name="building"
+                                    defaultValue={data.building}
+                                    autoComplete="given-building"
+                                    className="building w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.building && <div className={`text-red-900`}>{errors.building}</div>}
+                                </p>
+                            </div>
+                        </div>
+
+
+                        {/* floor */}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="floor" className="floor text-sm font-medium text-gray-700">
+                                {trans('floor')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    id="floor"
+                                    name="floor"
+                                    defaultValue={data.floor}
+                                    autoComplete="given-floor"
+                                    className="floor w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.floor && <div className={`text-red-900`}>{errors.floor}</div>}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="mt-10 col-span-full flex flex-1 justify-between w-full">
+                            <Link
+                                href={route('frontend.cart.index')}
+                                className="bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                            >
+                                {trans('previous')}
+                            </Link>
+                            <button
+                                type="submit"
+                                className="bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                            >
+                                {trans('next')}
+                            </button>
                         </div>
                     </form>
                 </div>

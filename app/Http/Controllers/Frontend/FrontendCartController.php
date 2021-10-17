@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AuthExtraLightResource;
+use App\Http\Resources\CountryCollection;
+use App\Http\Resources\UserLightResource;
+use App\Http\Resources\UserResource;
+use App\Models\Country;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontendCartController extends Controller
@@ -13,7 +19,9 @@ class FrontendCartController extends Controller
     }
 
     public function getUserInformation() {
-        return inertia('Frontend/Cart/CartUserInformation');
+        $countries = new CountryCollection(Country::active()->has('areas','>', 0)->with('areas')->get());
+        $auth = auth()->id() ? new UserResource(User::whereId(request()->user()->id)->with(['role','country'])->first()) : null;
+        return inertia('Frontend/Cart/CartUserInformation', compact('countries', 'auth'));
     }
 
     public function getUserConfirmation() {
