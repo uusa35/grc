@@ -118,14 +118,14 @@ export default function () {
                                                     alt={settings[getLocalized()]}
                                                 />
                                                 <h3 className="text-lg ">{settings[getLocalized()]}</h3>
-                                                <p className="mt-6 text-base text-teal-50 max-w-3xl">
+                                                <p className="mt-2 text-base text-teal-50 max-w-3xl">
                                                     {settings[getLocalized('caption')]}
                                                 </p>
-                                                <h3 className="text-lg ">{trans('contact_information')}</h3>
-                                                <p className="mt-6 text-base text-teal-50 max-w-3xl">
-                                                    {settings[getLocalized('address')]}
+                                                <h3 className="text-lg mt-2 pt-2 border-t border-gray-200">{trans('contact_information')}</h3>
+                                                <p className="mt-2 text-base text-teal-50 max-w-3xl">
+                                                    {settings[getLocalized('address')]} - {settings[getLocalized('country')]}
                                                 </p>
-                                                <dl className="mt-8 space-y-6">
+                                                <dl className="mt-2 space-y-6">
                                                     <dt>
                                                         <span className="sr-only">{trans('mobile')}</span>
                                                     </dt>
