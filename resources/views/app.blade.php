@@ -91,11 +91,11 @@
 {{--@if ($ssr)--}}
 {{--    {!! $ssr['body'] !!}--}}
 {{--@else--}}
-<a
-    href="{{ route('frontend.paypal.index') }}"
-    class="mt-10 bg-gray-900">
-    paypall
-</a>
+{{--<a--}}
+{{--    href="{{ route('frontend.paypal.index') }}"--}}
+{{--    class="mt-10 bg-gray-900">--}}
+{{--    paypall--}}
+{{--</a>--}}
 @routes
 @inertia
 {{--@endif--}}
