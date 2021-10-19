@@ -5,7 +5,7 @@ import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
 import {AppContext} from "../../context/AppContext";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {filter, first, map} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
@@ -16,7 +16,8 @@ import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 
 export default function({countries, auth }) {
-    const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
+    const {trans, getThumb, getLocalized, classNames } = useContext(AppContext);
+    const { locale } = useSelector(state => state);
     const [areas, setAreas] = useState([])
     const dispatch = useDispatch();
     const {props} = usePage();
@@ -301,16 +302,30 @@ export default function({countries, auth }) {
                         <div className="mt-10 col-span-full flex flex-1 justify-between w-full">
                             <Link
                                 href={route('frontend.cart.index')}
-                                className="bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                             >
-                                {trans('previous')}
+                                <div className="flex">
+                                    {locale.isRTL ?
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                             stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                                        </svg>
+                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                               stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
+                                        </svg>
+                                    }
+                                </div>
+                                <span className="flex ltr:pt-2">
+                                    {trans('previous')}
+                                </span>
                             </Link>
                             <div className="flex">
                                 <button
                                     type="submit"
-                                    className="mx-10 bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                    className="capitalize mx-10 bg-gray-400 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                                 >
-                                    {trans('save')}
+                                    {trans('save')} {trans('information')}
                                 </button>
                                 {
                                     !auth ?
@@ -323,9 +338,22 @@ export default function({countries, auth }) {
                                         </button> :
                                         <Link
                                             href={route('frontend.cart.confirmation')}
-                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , " border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                                         >
+                                            <span className="flex ltr:pt-2">
                                             {trans('next')}
+                                            </span>
+                                            <div className="flex">
+                                                {locale.isRTL ?
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                         stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
+                                                    </svg> :
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                         stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                                                    </svg>}
+                                            </div>
                                         </Link>
                                 }
 

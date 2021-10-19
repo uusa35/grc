@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Usama\Paypal\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -16,7 +17,7 @@ class PaypalController extends Controller
 {
     public function makePayment(Request $request)
     {
-        $validator = validator($request->all(), ['grossTotal' => 'required|numeric']);
+        $validator = validator($request->all(), ['netTotal' => 'required|numeric']);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first());
         }
@@ -30,12 +31,12 @@ class PaypalController extends Controller
         // Set redirect URLs
         $redirectUrls = new RedirectUrls();
         $redirectUrls->setReturnUrl(route('paypal.web.payment.result'))
-            ->setCancelUrl(route('paypal.web.payment.result'));
+            ->setCancelUrl(route('paypal.web.payment.cancel'));
 
         // Set payment amount
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal($request->grossTotal);
+            ->setTotal($request->netTotal);
 
         // Set transaction object
         $transaction = new Transaction();
@@ -52,13 +53,14 @@ class PaypalController extends Controller
         try {
             $payment->create($apiContext);
 
+//            dd($payment);
 //            return $payment;
 
 
             // Get PayPal redirect URL and redirect the customer
             $approvalUrl = $payment->getApprovalLink();
 
-            return redirect()->to($approvalUrl);
+            return redirect()->away($approvalUrl);
 
             // Redirect the customer to $approvalUrl
         } catch (PayPal\Exception\PayPalConnectionException $ex) {

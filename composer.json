@@ -36,7 +36,12 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Usama\\MyFatoorahV2\\": "packages/usama/myfatoorahv2/src/",
+            "Usama\\Upayment\\": "packages/usama/upayment/src/",
+            "Usama\\Ibooky\\": "packages/usama/ibooky/src/",
+            "Usama\\Tap\\": "packages/usama/tap/src/",
+            "Usama\\Paypal\\": "packages/usama/paypal/src/"
         }
     },
     "autoload-dev": {

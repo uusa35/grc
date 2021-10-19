@@ -116,10 +116,6 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
         Route::get('profile/favorites', [FrontendUserController::class,'getFavorites'])->name('profile.favorites');
         Route::get('profile/settings', [FrontendUserController::class,'getSettings'])->name('profile.setting');
         Route::resource('profile/address', FrontendAddressController::class);
-        // paypal payment
-        Route::get('paypal',[PaypalController::class, 'index'])->name('paypal.index');
-        Route::get('paypal/return',[PaypalController::class,'return'])->name('paypal.return');
-        Route::get('paypal/cancel',[PaypalController::class, 'cancel'])->name('paypal.cancel');
     });
 });
 

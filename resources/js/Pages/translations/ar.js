@@ -1219,6 +1219,7 @@ export const ar = {
     "our_partners" : "شركائنا",
     "choose_payment_method" : "اختر طريقة الدفع",
     "tap" : "تاب",
-    "my_fatoorah" : "ماي فاتورة",
-    "paypal" : "باي بال"
+    "myfatorah" : "ماي فاتورة",
+    "paypal" : "باي بال",
+    "go_to_payment_page" : "الذهاب لصفحة الدفع"
 }

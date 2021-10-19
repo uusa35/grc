@@ -1209,4 +1209,9 @@ export const en  = {
     "featured_products" : "featured products",
     "our_clients" : "our clients",
     "our_partners" : "our partners",
+    "choose_payment_method" : "choose payment method",
+    "tap" : "Tap",
+    "myfatorah" : "My Fatoorah",
+    "paypal" : "Paypal",
+    "go_to_payment_page" : "go to payment page"
 }

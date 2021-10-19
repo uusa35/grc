@@ -1,5 +1,10 @@
 <?php
 
+use Usama\MyFatoorahV2\MyFatoorahV2ServiceProvider;
+use Usama\Paypal\PaypalServiceProvider;
+use Usama\Tap\TapServiceProvider;
+use Usama\Upayment\UpaymentServiceProvider;
+
 return [
 
     /*
@@ -176,6 +181,10 @@ return [
          App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        PaypalServiceProvider::class,
+        MyFatoorahV2ServiceProvider::class,
+        UpaymentServiceProvider::class,
+        TapServiceProvider::class
 
     ],
 

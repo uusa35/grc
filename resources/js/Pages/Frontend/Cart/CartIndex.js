@@ -34,9 +34,22 @@ export default function () {
                 <div className="mt-10 flex justify-end">
                     <Link
                         href={!isEmpty(cart.items) ? route('frontend.cart.information') : '#'}
-                        className={classNames(isEmpty(cart.items) ? `bg-gray-300` :  `bg-gray-600`, "border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                        className={classNames(isEmpty(cart.items) ? `bg-gray-300` :  `bg-gray-600`, "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                     >
-                        {trans('next')}
+                           <span className="flex ltr:pt-2">
+                                            {trans('next')}
+                                            </span>
+                        <div className="flex">
+                            {locale.isRTL ?
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
+                                </svg> :
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                                </svg>}
+                        </div>
                     </Link>
                 </div>
 
