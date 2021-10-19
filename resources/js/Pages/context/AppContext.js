@@ -64,6 +64,7 @@ const AppContextProvider = ({children}) => {
         trans: (name) => translations[lang][name],
         classNames: (...classes) => classes.filter(Boolean).join(' '),
         getLocalized: (element = 'name') => lang === 'ar' ? `${element}_ar` : `${element}_en`,
+        getAsset: (element, type = 'png') => `${Ziggy().t.url}/images/${element}.${type}`,
         getThumb: (element) => `${Ziggy().t.url}/storage/uploads/images/thumbnail/${element}`,
         getMedium: (element) => `${Ziggy().t.url}/storage/uploads/images/medium/${element}`,
         getLarge: (element) => `${Ziggy().t.url}/storage/uploads/images/large/${element}`,

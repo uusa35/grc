@@ -9,9 +9,9 @@ export default function ({ activeStep = 1}) {
     const { trans, classNames } = useContext(AppContext);
     const steps = [
         { id: 1, label : trans('page'), name: trans('cart'), href: route('frontend.cart.index'), status: 'upcoming' },
-        { id: 2, label : trans('page'), name: trans('information'), href: route('frontend.cart.information'), status: 'current' },
-        { id: 3, label : trans('page'), name: trans('confirm_information'), href: route('frontend.cart.confirmation'), status: 'current' },
-        { id: 4, label : trans('page'), name: trans('payment_process'), href: route('frontend.cart.payment.index'), status: 'upcoming' },
+        { id: 2, label : trans('page'), name: trans('information'), href: '#', status: 'current' },
+        { id: 3, label : trans('page'), name: trans('confirm_information'), href: '#', status: 'current' },
+        { id: 4, label : trans('page'), name: trans('payment_process'), href: '#', status: 'upcoming' },
     ];
 
     return (

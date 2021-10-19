@@ -53,6 +53,7 @@ use App\Http\Controllers\Frontend\FrontendServiceController;
 use App\Http\Controllers\Frontend\FrontendUserController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\GovernateController;
+use App\Http\Controllers\PaypalController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -115,6 +116,10 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
         Route::get('profile/favorites', [FrontendUserController::class,'getFavorites'])->name('profile.favorites');
         Route::get('profile/settings', [FrontendUserController::class,'getSettings'])->name('profile.setting');
         Route::resource('profile/address', FrontendAddressController::class);
+        // paypal payment
+        Route::get('paypal',[PaypalController::class, 'index'])->name('paypal.index');
+        Route::get('paypal/return',[PaypalController::class,'return'])->name('paypal.return');
+        Route::get('paypal/cancel',[PaypalController::class, 'cancel'])->name('paypal.cancel');
     });
 });
 

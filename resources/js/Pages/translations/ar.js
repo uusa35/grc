@@ -1217,4 +1217,8 @@ export const ar = {
     "featured_products" : "منتجات مختارة",
     "our_clients" : "عملاءنا",
     "our_partners" : "شركائنا",
+    "choose_payment_method" : "اختر طريقة الدفع",
+    "tap" : "تاب",
+    "my_fatoorah" : "ماي فاتورة",
+    "paypal" : "باي بال"
 }

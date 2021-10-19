@@ -1093,4 +1093,5 @@ return array (
     "joinuses" => "إنضم لنا",
     "contactuses" => "اتصل بنا",
     "aboutuses" => "نبذة عنا",
+    "carts" => "عربة التسوق"
 );

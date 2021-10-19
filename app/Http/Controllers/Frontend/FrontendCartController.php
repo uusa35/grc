@@ -25,8 +25,9 @@ class FrontendCartController extends Controller
     }
 
     public function getUserConfirmation() {
+        $countries = new CountryCollection(Country::active()->has('areas','>', 0)->with('areas')->get());
         $auth = auth()->id() ? new UserResource(User::whereId(request()->user()->id)->with(['role','country'])->first()) : null;
-        return inertia('Frontend/Cart/CartUserConfirmation', compact('auth'));
+        return inertia('Frontend/Cart/CartUserConfirmation', compact('auth','countries'));
     }
 
     public function getPaymentIndex() {
