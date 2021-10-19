@@ -24,8 +24,8 @@ const BackendHeader = () => {
         isSuper,
         isAdminOrAbove
     } = useContext(AppContext);
-    const { modules , locale , settings } = useSelector(state => state);
-    const { auth } = useContext(GlobalContext);
+    const { modules , locale } = useSelector(state => state);
+    const { auth , settings } = useContext(GlobalContext);
     const dispatch = useDispatch();
 
     useEffect(() => {
