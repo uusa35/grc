@@ -1488,6 +1488,50 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     {errors.apple && <div className={`text-red-900`}>{errors.apple}</div>}
                                 </p>
                             </div>
+
+                            {/* country_ar */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="country_ar" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('country_ar')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        name="country_ar"
+                                        defaultValue={setting.country_ar}
+                                        id="country_ar"
+                                        autoComplete="country_ar"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.country_ar && <div className={`text-red-900`}>{errors.country_ar}</div>}
+                                </p>
+                            </div>
+
+                            {/* country_en */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="country_en" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('country_en')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        name="country_en"
+                                        defaultValue={setting.country_en}
+                                        id="country_en"
+                                        autoComplete="country_en"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_price_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.country_en && <div className={`text-red-900`}>{errors.country_en}</div>}
+                                </p>
+                            </div>
                         </FormSection>
                         <FormSection title={trans('more_details')}>
                             <div className="col-span-full space-y-16">
