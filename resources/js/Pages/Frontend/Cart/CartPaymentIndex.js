@@ -49,15 +49,15 @@ export default function() {
                         className="flex flex-col flex-1 justify-between items-start px-8 py-6 sm:p-6 lg:p-8 border-t border-gray-50">
 
                         <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('choose_payment_method')}</h1>
-                        <div className="flex w-full flex-row justify-between items-center gap-x-5 rounded-lg py-6">
+                        <div className="flex w-full flex-row flex-wrap md:flex-nowrap justify-between items-center gap-x-5 gap-y-5 rounded-lg py-6">
                             {
                                 map(paymentMethods, p => (
                                     <div
                                         onClick={() => setPaymentMethod(p)}
                                         key={p.name}
-                                        className={classNames(p.name === paymentMethod.name ? `bg-gray-100 border-gray-400 shadow-lg` : `border-gray-100 shadow-sm`, "flex flex-row lg:w-1/2 justify-start items-center p-10 border-2 rounded-lg gap-x-4")}>
+                                        className={classNames(p.name === paymentMethod.name ? `bg-gray-100 border-gray-400 shadow-lg` : `border-gray-100 shadow-sm`, "flex flex-row w-full justify-center items-center p-10 border-2 rounded-lg gap-x-4")}>
                                         <img src={getAsset(p.name)} alt="" className="w-auto h-10"/>
-                                        <span className="font-extrabold text-lg">
+                                        <span className="font-extrabold text-lg invisible sm:visible">
                                         {trans(p.name)}
                                     </span>
                                     </div>
@@ -66,10 +66,10 @@ export default function() {
                         </div>
                     </div>
 
-                    <div className="mt-10 col-span-full flex flex-1 justify-between w-full">
+                    <div className="mt-10 col-span-full flex justify-between items-center flex-wrap space-y-2 sm:space-y-0 w-full">
                         <Link
                             href={route('frontend.cart.confirmation')}
-                            className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                            className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4  text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                         >
                             <div className="flex">
                                 {locale.isRTL ?
@@ -91,10 +91,10 @@ export default function() {
                                     {trans('previous')}
                                 </span>
                         </Link>
-                        <form method="post" onSubmit={submit}>
+                        <form method="post" onSubmit={submit} className="flex">
                             <button
                                 type="submit"
-                                className="bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                className="capitalize flex flex-row w-full sm:w-auto justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                             >
                                 {trans('go_to_payment_page')}
                             </button>

@@ -299,7 +299,7 @@ export default function({countries, auth }) {
                             </div>
                         </div>
 
-                        <div className="mt-10 col-span-full flex flex-1 justify-between w-full">
+                        <div className="mt-10 col-span-full flex flex-col sm:flex-row  space-y-5 sm:space-y-0 justify-between items-center w-full">
                             <Link
                                 href={route('frontend.cart.index')}
                                 className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
@@ -320,7 +320,7 @@ export default function({countries, auth }) {
                                     {trans('previous')}
                                 </span>
                             </Link>
-                            <div className="flex">
+                            <div className="flex flex-col sm:flex-row flex-wrap space-y-5 sm:space-y-0">
                                 <button
                                     type="submit"
                                     className="capitalize mx-10 bg-gray-400 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"

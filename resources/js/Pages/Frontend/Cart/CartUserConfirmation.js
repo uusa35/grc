@@ -308,7 +308,7 @@ export default function({countries, auth}) {
                             </div>
                         </div>
 
-                        <div className="mt-10 col-span-full flex flex-1 justify-between w-full">
+                        <div className="mt-10 col-span-full flex  flex-wrap justify-between w-full">
                             <Link
                                 href={route('frontend.cart.information')}
                                 className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"

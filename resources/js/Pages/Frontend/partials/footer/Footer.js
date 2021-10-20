@@ -81,12 +81,14 @@ export default function Footer() {
                                                 {trans('login')}
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link href={route('register')}
-                                                  className="text-base text-gray-500 capitalize hover:text-gray-900">
-                                                {trans('register')} {trans('new_user')}
-                                            </Link>
-                                        </li>
+                                        {
+                                            settings.enable_register ? <li>
+                                                <Link href={route('register')}
+                                                      className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                                    {trans('register')} {trans('new_user')}
+                                                </Link>
+                                            </li> : null
+                                        }
 
                                     </>
                                     : <Link href={route('frontend.user.edit', auth.id)}
