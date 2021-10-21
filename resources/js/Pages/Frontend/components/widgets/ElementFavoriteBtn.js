@@ -7,11 +7,11 @@ import {split, last, lowerCase, filter, isEmpty, map, includes, capitalize} from
 import {toast} from "react-toastify";
 import {Inertia} from "@inertiajs/inertia";
 
-export default function ElementFavoriteBtn({type, id, favoritesList }) {
+export default function ElementFavoriteBtn({type, id, favoritesList}) {
     const {trans, guest} = useContext(AppContext)
     const [currentFavorite, setCurrentFavorite] = useState(false);
     const [favoritelist, setFavoriteList] = useState();
-    const {data, setData, post, progress, } = useForm({
+    const {data, setData, post, progress,} = useForm({
         model: type,
         'element_id': id,
     });
@@ -21,12 +21,12 @@ export default function ElementFavoriteBtn({type, id, favoritesList }) {
         if (!guest) {
             setCurrentFavorite(!currentFavorite);
             post(route('frontend.favorite.store'), {
-                onSuccess : () => {
+                onSuccess: () => {
                     Inertia.reload({only: ['auth']});
                 }
             });
         } else {
-             toast.error(capitalize(trans('u_have_to_register_first')))
+            toast.error(capitalize(trans('u_have_to_register_first')))
         }
     }
 
@@ -40,7 +40,7 @@ export default function ElementFavoriteBtn({type, id, favoritesList }) {
             setFavoriteList(ids)
             setCurrentFavorite(includes(ids, id))
         }
-    },[favoritesList, currentFavorite])
+    }, [favoritesList, currentFavorite])
 
     return (
         <form onSubmit={submit}>

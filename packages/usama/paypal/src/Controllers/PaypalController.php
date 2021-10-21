@@ -3,6 +3,7 @@
 namespace Usama\Paypal\Controllers;
 
 use App\Http\Controllers\Controller;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -52,15 +53,10 @@ class PaypalController extends Controller
         // Create payment with valid API context
         try {
             $payment->create($apiContext);
-
-//            dd($payment);
-//            return $payment;
-
-
             // Get PayPal redirect URL and redirect the customer
             $approvalUrl = $payment->getApprovalLink();
 
-            return redirect()->away($approvalUrl);
+            return response()->json($approvalUrl, 200);
 
             // Redirect the customer to $approvalUrl
         } catch (PayPal\Exception\PayPalConnectionException $ex) {

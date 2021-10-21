@@ -3,12 +3,13 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
 import OrderSummary from "./OrderSummary";
 import {useDispatch, useSelector} from "react-redux";
-import {useContext, useState} from "react";
+import {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link, useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import GlobalContext from "../../context/GlobalContext";
 import {map} from 'lodash';
+import axios from 'axios';
 import {Inertia} from "@inertiajs/inertia";
 
 
@@ -18,24 +19,27 @@ export default function() {
     const {settings} = useContext(GlobalContext);
     const paymentMethods = [
         {id: 1, name: 'paypal', paymentRoute: route('paypal.web.payment.create')},
-        {id: 2, name: 'myfatorah', paymentRoute: route('myfatoorahv2.web.payment.create')},
-        {id: 3, name: 'tap', paymentRoute: route('tap.web.payment.create')},
+        // {id: 2, name: 'myfatorah', paymentRoute: route('myfatoorahv2.web.payment.create')},
+        // {id: 3, name: 'tap', paymentRoute: route('tap.web.payment.create')},
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
+    const [currentURL, setCurrentUrl] = useState('');
     const dispatch = useDispatch()
 
     const {data, setData, put, post, progress, reset} = useForm({
         netTotal: cart.netTotal,
-        paymentMethod : paymentMethod.name
+        paymentMethod: paymentMethod.name
     })
 
-    const submit = (e) => {
-        e.preventDefault();
-        return Inertia.post(paymentMethod.paymentRoute, {
-            _method: 'post',
-            netTotal : cart.netTotal,
-        })
-    }
+    useMemo(() => {
+        if (paymentMethod.name === 'paypal') {
+            return axios.post(paymentMethod.paymentRoute, {
+                netTotal: cart.netTotal,
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e', e))
+        } else {
+            setCurrentUrl('#')
+        }
+    }, [paymentMethod])
 
     return (
         <FrontendContainer>
@@ -49,13 +53,14 @@ export default function() {
                         className="flex flex-col flex-1 justify-between items-start px-8 py-6 sm:p-6 lg:p-8 border-t border-gray-50">
 
                         <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('choose_payment_method')}</h1>
-                        <div className="flex w-full flex-row flex-wrap md:flex-nowrap justify-between items-center gap-x-5 gap-y-5 rounded-lg py-6">
+                        <div
+                            className="flex w-full flex-row flex-wrap md:flex-nowrap justify-between items-center gap-x-5 gap-y-5 rounded-lg py-6">
                             {
                                 map(paymentMethods, p => (
                                     <div
                                         onClick={() => setPaymentMethod(p)}
                                         key={p.name}
-                                        className={classNames(p.name === paymentMethod.name ? `bg-gray-100 border-gray-400 shadow-lg` : `border-gray-100 shadow-sm`, "flex flex-row w-full justify-center items-center p-10 border-2 rounded-lg gap-x-4")}>
+                                        className={classNames(p.name === paymentMethod.name ? `bg-gray-100 border-gray-400 shadow-lg` : `border-gray-100 shadow-sm`, "flex flex-row w-full max-w-md justify-center items-center p-10 border-2 rounded-lg gap-x-4")}>
                                         <img src={getAsset(p.name)} alt="" className="w-auto h-10"/>
                                         <span className="font-extrabold text-lg invisible sm:visible">
                                         {trans(p.name)}
@@ -66,7 +71,8 @@ export default function() {
                         </div>
                     </div>
 
-                    <div className="mt-10 col-span-full flex justify-between items-center flex-wrap space-y-2 sm:space-y-0 w-full">
+                    <div
+                        className="mt-10 col-span-full flex justify-between items-center flex-wrap space-y-2 sm:space-y-0 w-full">
                         <Link
                             href={route('frontend.cart.confirmation')}
                             className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4  text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
@@ -91,14 +97,14 @@ export default function() {
                                     {trans('previous')}
                                 </span>
                         </Link>
-                        <form method="post" onSubmit={submit} className="flex">
-                            <button
-                                type="submit"
+                        <div className="flex">
+                            <a
+                                href={currentURL}
                                 className="capitalize flex flex-row w-full sm:w-auto justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                             >
                                 {trans('go_to_payment_page')}
-                            </button>
-                        </form>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </FrontendContentContainer>
