@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CategoryExtraLightResource;
 use App\Models\Category;
 use App\Services\Search\CategoryFilters;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = new CategoryCollection(Category::where(['is_parent' => true])->with('children.children')->paginate(SELF::TAKE_LESS));
+        $elements = new CategoryCollection(Category::where(['is_parent' => true, 'parent_id' => 0])->with('children.children')->paginate(SELF::TAKE_LESS));
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 
@@ -82,7 +83,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return inertia('Backend/Category/CategoryEdit', compact('category'));
+        $elements = CategoryExtraLightResource::collection(Category::where(['is_parent' => true, 'parent_id' => 0])->get());
+        return inertia('Backend/Category/CategoryEdit', compact('category', 'elements'));
     }
 
     /**

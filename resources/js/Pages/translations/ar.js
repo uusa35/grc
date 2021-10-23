@@ -1223,5 +1223,6 @@ export const ar = {
     "paypal" : "باي بال",
     "go_to_payment_page" : "الذهاب لصفحة الدفع",
     "do_u_have_a_coupon" : "في حالة وجود كود للخصم يمكن أدخل كود الخصم وسيتم تفعيله مباشرة على عربة التسوق .. ",
-    "enter_coupon_code" : "أدخل كود الكوبون"
+    "enter_coupon_code" : "أدخل كود الكوبون",
+    "main_category" : "تصنيف رئيسي"
 }

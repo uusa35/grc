@@ -10,8 +10,9 @@ import axios from "axios";
 import {showToastMessage} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FormSection from "../components/widgets/form/FormSection";
+import {map} from 'lodash';
 
-export default function({category}) {
+export default function({category, elements}) {
     const {trans, getLocalized, getThumb, getFileUrl,} = useContext(AppContext);
     const [currentImages, setCurrentImages] = useState([]);
     const {errors} = usePage().props;
@@ -42,7 +43,11 @@ export default function({category}) {
         'max': category.max,
         'file': category.file,
         'active': category.active,
+        'parent_id': category.parent_id,
     });
+
+    console.log('category', category);
+    console.log('elements', elements);
 
     const handleChange = (e) => {
         setData(values => ({
@@ -140,6 +145,33 @@ export default function({category}) {
                             <p className={`mt-2  text-gray-500`}>
                                 {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                             </p>
+                        </div>
+                        <div className="sm:col-span-2">
+                            <label htmlFor="parent_id" className={`block   text-gray-700`}>
+                                {trans('main_category')}
+                            </label>
+                            <div className="mt-1">
+                                <select
+                                    onChange={handleChange}
+                                    id="parent_id"
+                                    name="parent_id"
+                                    value={data.parent_id}
+                                    defaultValue={data.parent_id}
+                                    autoComplete="parent_id"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                >
+                                    <option value="0"
+                                            selected={category.parent_id === 0}
+                                    >{trans('n_a')}</option>
+                                    {
+                                        map(elements, u => (
+                                            <option key={u.id} value={u.id}
+                                                    selected={u.id === category.parent_id}
+                                            >{u[getLocalized()]}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
                         </div>
                         {/* caption_ar  */}
                         <div className="sm:col-span-2">
