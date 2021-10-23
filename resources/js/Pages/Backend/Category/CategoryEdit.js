@@ -43,7 +43,7 @@ export default function({category, elements}) {
         'max': category.max,
         'file': category.file,
         'active': category.active,
-        'parent_id': isNull(category.parent_id) ? 0 : data.parent_id,
+        'parent_id': isNull(category.parent_id) ? 0 : category.parent_id,
     });
 
     console.log('category', category);
@@ -165,7 +165,7 @@ export default function({category, elements}) {
                                     {
                                         map(elements, u => (
                                             <option key={u.id} value={u.id}
-                                                    selected={u.parent_id === category.parent_id}
+                                                    selected={u.id === category.parent_id}
                                             >{u[getLocalized()]}</option>
                                         ))
                                     }
