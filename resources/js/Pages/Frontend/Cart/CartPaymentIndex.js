@@ -18,7 +18,7 @@ export default function({ order }) {
     const {trans, getThumb, getLocalized, classNames, getAsset} = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
     const paymentMethods = [
-        {id: 1, name: 'paypal', paymentRoute: route('paypal.web.payment.create')},
+        {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create')},
         // {id: 2, name: 'myfatorah', paymentRoute: route('myfatoorahv2.web.payment.create')},
         // {id: 3, name: 'tap', paymentRoute: route('tap.web.payment.create')},
     ]
