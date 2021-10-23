@@ -62,6 +62,7 @@ class PaypalController extends Controller
         $transaction->setAmount($amount)
             ->setDescription("Payment description");
 
+        dd($transaction);
         // Create the full payment object
         $payment = new Payment();
         $payment->setIntent('sale')
