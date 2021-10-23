@@ -42,6 +42,8 @@ export default function({ order }) {
         }
     }, [paymentMethod])
 
+    console.log('paymentMethod', paymentMethod);
+
     return (
         <FrontendContainer>
             <FrontendContentContainer>

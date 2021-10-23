@@ -3,10 +3,15 @@
 namespace Usama\Paypal\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\OrderSuccessProcessJob;
+use App\Mail\OrderPaid;
 use App\Models\Order;
+use App\Models\Setting;
 use App\Services\Traits\OrderTrait;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Markdown;
+use Illuminate\Support\Facades\Mail;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
@@ -63,26 +68,33 @@ class PaypalController extends Controller
 
             // Redirect the customer to $approvalUrl
         } catch (PayPal\Exception\PayPalConnectionException $ex) {
-            echo $ex->getCode();
-            echo $ex->getData();
-            die($ex);
+            dd('code : ' . $ex->getCode() . 'data :' .$ex->getData());
         } catch (Exception $ex) {
             die($ex);
         }
     }
 
-    public function result()
+    public function result(Request $request)
     {
-        dd(request()->all());
-//        array:3 [▼
-//  "paymentId" => "PAYID-MFXAH7Q55B2291688002742W"
-//  "token" => "EC-9NP97130FK180431L"
-//  "PayerID" => "JFG5A5CSF2AE4"
-//]
+        $validator = validator($request->all(), [
+            'paymentId' => 'required'
+        ]);
+        if($validator->fails()) {
+            return redirect()->route('frontend.home')->with('error', trans('process_failure'));
+        }
+        $order = Order::where(['reference_id' => $request->paymentId, 'paid' => false])->with('user','order_metas.ordermetable')->first();
+        $order->update([
+            'paid' => true,
+            'status' => 'paid'
+        ]);
+        $settings = Setting::first();
+        Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
+        $markdown = new Markdown(view(), config('mail.markdown'));
+        return $markdown->render('emails.orders.paid', ['order' => $order]);
     }
 
     public function cancel()
     {
-        return ('cancel');
+        return redirect()->route('frontend.home')->with('error', trans('process_failure'));
     }
 }

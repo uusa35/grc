@@ -46,7 +46,7 @@ return array (
   'hot_deal_products' => 'أفضل العروض',
   'close' => 'إغلاق',
   'best_sale_collections' => 'افضل المجموعات التي تم اختيارها من قبل المتسوقين الشخصيين',
-  'type' => 'نوع الحساب',
+  'type' => 'نوع ',
   'facebook' => 'فيس بوك',
   'twitter' => 'تويتر',
   'whatsapp' => 'واتساب',
@@ -1093,5 +1093,10 @@ return array (
     "joinuses" => "إنضم لنا",
     "contactuses" => "اتصل بنا",
     "aboutuses" => "نبذة عنا",
-    "carts" => "عربة التسوق"
+    "carts" => "عربة التسوق",
+    "order_is_sucessfully_paid_and_we_sent_an_email_with_details" => "تمت عملية دفع أمر العمل بنجاح، تم إرسال تفاصيل الفاتور إلى بريدك الإلكتروني المسجل لدينا .. شكرا",
+    "order_items" => "تفاصيل الطلب",
+    "username" => "اسم المستخدم",
+    "net_total" => "الإجمالي بعد الخصم",
+    "invoice_summary" => "تفاصيل الفاتورة"
 );
