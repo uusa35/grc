@@ -78,7 +78,7 @@ trait OrderTrait
             dd($order);
             return $order;
         } catch (\Exception $exception) {
-            dd($exception->getMessage());
+            dd($exception);
             abort('404', $exception->getMessage());
         }
     }
