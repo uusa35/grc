@@ -75,11 +75,9 @@ trait OrderTrait
                     'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
                 ]);
             }
-            dd($order);
             return $order;
         } catch (\Exception $exception) {
-            dd($exception);
-            abort('404', $exception->getMessage());
+            dd($exception->getMessage());
         }
     }
 
