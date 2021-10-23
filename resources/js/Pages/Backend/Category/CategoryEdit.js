@@ -10,7 +10,7 @@ import axios from "axios";
 import {showToastMessage} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FormSection from "../components/widgets/form/FormSection";
-import {map} from 'lodash';
+import {map, isNull} from 'lodash';
 
 export default function({category, elements}) {
     const {trans, getLocalized, getThumb, getFileUrl,} = useContext(AppContext);
@@ -43,7 +43,7 @@ export default function({category, elements}) {
         'max': category.max,
         'file': category.file,
         'active': category.active,
-        'parent_id': category.parent_id,
+        'parent_id': isNull(category.parent_id) ? 0 : data.parent_id,
     });
 
     console.log('category', category);
