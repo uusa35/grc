@@ -24,53 +24,59 @@ use PayPal\Api\Transaction;
 class PaypalController extends Controller
 {
     use OrderTrait;
+
     public function makePayment(Request $request)
     {
         try {
-        $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors()->first());
-        }
-        $clientId = env('PAYPAL_MODE') === 'sandbox' ? config('paypal.sandbox_secret_client_id') : config('paypal.live_secret_client_id');
-        $clientSecret = env('PAYPAL_MODE') === 'sandbox' ? config('paypal.sandbox_client_secret') : config('paypal.live_client_secret');
-        $apiContext = new \PayPal\Rest\ApiContext(new \PayPal\Auth\OAuthTokenCredential($clientId,$clientSecret));
+            $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors()->first());
+            }
+            $clientId = env('PAYPAL_MODE') === 'sandbox' ? config('paypal.sandbox_secret_client_id') : config('paypal.live_secret_client_id');
+            $clientSecret = env('PAYPAL_MODE') === 'sandbox' ? config('paypal.sandbox_client_secret') : config('paypal.live_client_secret');
+            $apiContext = new \PayPal\Rest\ApiContext(new \PayPal\Auth\OAuthTokenCredential($clientId, $clientSecret));
             // Step 2.1 : Between Step 2 and Step 3
             $apiContext->setConfig(
                 array(
-//                    'log.LogEnabled' => false,
-//                    'log.FileName' => 'PayPal.log',
-//                    'log.LogLevel' => 'DEBUG',
-                    'mode' => config('paypal.model')
+                    'mode' => config('paypal.mode'),
+                    'log.LogEnabled' => true,
+                    'log.FileName' => '../PayPal.log',
+                    'log.LogLevel' => 'DEBUG', // PLEASE USE `INFO` LEVEL FOR LOGGING IN LIVE ENVIRONMENTS
+                    'cache.enabled' => true,
+                    //'cache.FileName' => '/PaypalCache' // for determining paypal cache directory
+                    // 'http.CURLOPT_CONNECTTIMEOUT' => 30
+                    // 'http.headers.PayPal-Partner-Attribution-Id' => '123123123'
+                    //'log.AdapterFactory' => '\PayPal\Log\DefaultLogFactory' // Factory class implementing \PayPal\Log\PayPalLogFactory
                 )
             );
+//            dd($apiContext);
             // Create new payer and method
-        $payer = new Payer();
-        $payer->setPaymentMethod("paypal");
+            $payer = new Payer();
+            $payer->setPaymentMethod("paypal");
 
-        // Set redirect URLs
-        $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl(route('paypal.web.payment.result'))
-            ->setCancelUrl(route('paypal.web.payment.cancel'));
+            // Set redirect URLs
+            $redirectUrls = new RedirectUrls();
+            $redirectUrls->setReturnUrl(route('paypal.web.payment.result'))
+                ->setCancelUrl(route('paypal.web.payment.cancel'));
 
-        // Set payment amount
-        $amount = new Amount();
-        $amount->setCurrency("USD")
-            ->setTotal($request->netTotal);
+            // Set payment amount
+            $amount = new Amount();
+            $amount->setCurrency("USD")
+                ->setTotal($request->netTotal);
 
-        // Set transaction object
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setDescription("Payment description");
+            // Set transaction object
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                ->setDescription("Payment description");
 
-        dd($transaction);
-        // Create the full payment object
-        $payment = new Payment();
-        $payment->setIntent('sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirectUrls)
-            ->setTransactions(array($transaction));
-        // Create payment with valid API context
-
+            // Create the full payment object
+            $payment = new Payment();
+            $payment->setIntent('sale')
+                ->setPayer($payer)
+                ->setRedirectUrls($redirectUrls)
+                ->setTransactions(array($transaction));
+            // Create payment with valid API context
+return ($payment);
             $payment->create($apiContext);
             dd($payment);
             // Get PayPal redirect URL and redirect the customer
@@ -80,7 +86,7 @@ class PaypalController extends Controller
 
             // Redirect the customer to $approvalUrl
         } catch (PayPal\Exception\PayPalConnectionException $ex) {
-            dd('code : ' . $ex->getCode() . 'data :' .$ex->getData());
+            dd('code : ' . $ex->getCode() . 'data :' . $ex->getData());
         } catch (Exception $ex) {
             die($ex);
         }
@@ -91,10 +97,10 @@ class PaypalController extends Controller
         $validator = validator($request->all(), [
             'paymentId' => 'required'
         ]);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return redirect()->route('frontend.home')->with('error', trans('process_failure'));
         }
-        $order = Order::where(['reference_id' => $request->paymentId, 'paid' => false])->with('user','order_metas.ordermetable')->first();
+        $order = Order::where(['reference_id' => $request->paymentId, 'paid' => false])->with('user', 'order_metas.ordermetable')->first();
         $order->update([
             'paid' => true,
             'status' => 'paid'
