@@ -26,6 +26,7 @@ class PaypalController extends Controller
     use OrderTrait;
     public function makePayment(Request $request)
     {
+        try {
         $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first());
@@ -33,7 +34,16 @@ class PaypalController extends Controller
         $clientId = env('PAYPAL_MODE') === 'sandbox' ? config('paypal.sandbox_secret_client_id') : config('paypal.live_secret_client_id');
         $clientSecret = env('PAYPAL_MODE') === 'sandbox' ? config('paypal.sandbox_client_secret') : config('paypal.live_client_secret');
         $apiContext = new \PayPal\Rest\ApiContext(new \PayPal\Auth\OAuthTokenCredential($clientId,$clientSecret));
-        // Create new payer and method
+            // Step 2.1 : Between Step 2 and Step 3
+            $apiContext->setConfig(
+                array(
+                    'log.LogEnabled' => true,
+                    'log.FileName' => 'PayPal.log',
+                    'log.LogLevel' => 'DEBUG',
+                    'mode' => config('paypal.model')
+                )
+            );
+            // Create new payer and method
         $payer = new Payer();
         $payer->setPaymentMethod("paypal");
 
@@ -59,8 +69,9 @@ class PaypalController extends Controller
             ->setRedirectUrls($redirectUrls)
             ->setTransactions(array($transaction));
         // Create payment with valid API context
-        try {
+
             $payment->create($apiContext);
+            dd($payment);
             // Get PayPal redirect URL and redirect the customer
             $approvalUrl = $payment->getApprovalLink();
             $this->updateOrderRerferenceId($request->order_id, $payment->id);
