@@ -11,28 +11,28 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
             <div
                 className={classNames(locale.isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col  gap-y-3 text-white text-sm')}>
                 {
-                    onSale && !free && <span
+                    onSale && !free ? <span
                         className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm  bg-red-900 ">
                         {trans('on_sale')}
-                      </span>
+                      </span> : null
                 }
                 {
-                    onNew && <span
+                    onNew ? <span
                         className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-800 ">
                     {trans('on_new')}
-                        </span>
+                        </span> : null
                 }
                 {
-                    exclusive && <span
+                    exclusive ? <span
                         className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-600 ">
                     {trans('exclusive')}
-                        </span>
+                        </span> : null
                 }
                 {
-                    free && <span
+                    free ? <span
                         className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-400 ">
                     {trans('free')}
-                        </span>
+                        </span> : null
                 }
             </div>
             <div
