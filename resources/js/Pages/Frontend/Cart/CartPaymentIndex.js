@@ -36,13 +36,14 @@ export default function({ order }) {
             return axios.post(paymentMethod.paymentRoute, {
                 netTotal: cart.netTotal,
                 order_id : order.id
-            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e', e))
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e ===>', e))
         } else {
             setCurrentUrl('#')
         }
     }, [paymentMethod])
 
     console.log('paymentMethod', paymentMethod);
+    console.log('current', currentURL);
 
     return (
         <FrontendContainer>

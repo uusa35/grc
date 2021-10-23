@@ -7,7 +7,7 @@
  */
 Route::group(['namespace' => 'Usama\Paypal\Controllers'], function () {
     Route::group(['middleware' => 'api'], function () {
-        Route::post('api/paypal/payment', 'PaypalController@makePaymentApi')->name('paypal.api.payment.create');
+        Route::post('api/paypal/payment', 'PaypalController@makePayment')->name('paypal.api.payment.create');
     });
 
     Route::group(['middleware' => ['web', 'auth']], function () {
