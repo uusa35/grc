@@ -64,7 +64,7 @@ export default function({countries, auth}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('frontend.cart.payment.index'), {...data})
+        post(route('frontend.cart.payment.post'), {...data})
     }
 
     return (

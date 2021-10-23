@@ -3,6 +3,8 @@
 namespace Usama\Paypal\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Services\Traits\OrderTrait;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use PayPal\Api\Amount;
@@ -16,6 +18,7 @@ use PayPal\Api\Transaction;
 
 class PaypalController extends Controller
 {
+    use OrderTrait;
     public function makePayment(Request $request)
     {
         $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
@@ -54,9 +57,8 @@ class PaypalController extends Controller
         try {
             $payment->create($apiContext);
             // Get PayPal redirect URL and redirect the customer
-            return $payment;
             $approvalUrl = $payment->getApprovalLink();
-
+            $this->updateOrderRerferenceId($request->order_id, $payment->id);
             return response()->json($approvalUrl, 200);
 
             // Redirect the customer to $approvalUrl

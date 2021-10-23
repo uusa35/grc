@@ -99,8 +99,8 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('cart/coupon', [FrontendCartController::class, 'getCouponCode'])->name('cart.get.coupon');
     Route::post('cart/coupon', [FrontendCartController::class, 'postCouponCode'])->name('cart.coupon');
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.index');
-        Route::post('cart/payment', [FrontendCartController::class, 'getPayment'])->name('cart.payment');
+        Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.get');
+        Route::post('cart/payment', [FrontendCartController::class, 'getPayment'])->name('cart.payment.post');
         Route::resource('rating', FrontendRatingController::class)->only('store');
         Route::resource('favorite', FrontendFavoriteController::class)->only('store');
         Route::resource('user', FrontendUserController::class)->only('edit');

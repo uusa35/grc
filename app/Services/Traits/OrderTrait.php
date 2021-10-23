@@ -68,6 +68,8 @@ trait OrderTrait
                     'description' => $item['description_ar'] . '   /  ' . $item['description_en'],
                     'price' => $item['price'],
                     'qty' => $item['qty'],
+                    'color' => isset($item['color']) ? $item['color'] : null,
+                    'size' => isset($item['size']) ? $item['size'] : null,
                     'merchant_id' => $item['merchant_id'],
                     'ordermetable_id' => $item['element_id'],
                     'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
@@ -75,8 +77,16 @@ trait OrderTrait
             }
             return $order;
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             abort('404', $exception->getMessage());
         }
+    }
+
+    public function updateOrderRerferenceId($orderId, $referenceId)
+    {
+        Order::whereId($orderId)->first()->update([
+            'reference_id' => $referenceId
+        ]);
     }
 
     public function createQuestionnaireOrder(Questionnaire $questionnaire, User $user)
