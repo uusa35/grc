@@ -23,7 +23,7 @@ class FrontendProductController extends Controller
         if ($validator->fails()) {
             return inertia('Backend/Product/ProductIndex', $validator->errors()->all());
         }
-        $elements = new ProductCollection(Product::filters($filters)->with('product_attributes', 'color', 'size','user')
+        $elements = new ProductCollection(Product::active()->filters($filters)->with('product_attributes', 'color', 'size','user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());
         return inertia('Frontend/Product/FrontendProductIndex', compact('elements'));
