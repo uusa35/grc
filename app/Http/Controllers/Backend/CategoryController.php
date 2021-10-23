@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = new CategoryCollection(Category::where(['is_parent' => true])->with('children.children')->paginate(2));
+        $elements = new CategoryCollection(Category::where(['is_parent' => true])->with('children.children')->paginate(SELF::TAKE_LESS));
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 
