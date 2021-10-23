@@ -76,7 +76,6 @@ class PaypalController extends Controller
                 ->setRedirectUrls($redirectUrls)
                 ->setTransactions(array($transaction));
             // Create payment with valid API context
-return ($payment);
             $payment->create($apiContext);
             dd($payment);
             // Get PayPal redirect URL and redirect the customer
