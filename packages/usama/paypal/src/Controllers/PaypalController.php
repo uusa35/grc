@@ -77,7 +77,6 @@ class PaypalController extends Controller
                 ->setTransactions(array($transaction));
             // Create payment with valid API context
             $payment->create($apiContext);
-            dd($payment);
             // Get PayPal redirect URL and redirect the customer
             $approvalUrl = $payment->getApprovalLink();
             $this->updateOrderRerferenceId($request->order_id, $payment->id);
