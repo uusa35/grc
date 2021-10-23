@@ -39,8 +39,8 @@ class PaypalController extends Controller
             $apiContext->setConfig(
                 array(
                     'mode' => config('paypal.mode'),
-                    'log.LogEnabled' => true,
-                    'log.FileName' => '../PayPal.log',
+//                    'log.LogEnabled' => true,
+//                    'log.FileName' => '../PayPal.log',
                     'log.LogLevel' => 'DEBUG', // PLEASE USE `INFO` LEVEL FOR LOGGING IN LIVE ENVIRONMENTS
                     'cache.enabled' => true,
                     //'cache.FileName' => '/PaypalCache' // for determining paypal cache directory
