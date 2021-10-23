@@ -39,7 +39,7 @@ class CreateUsersTable extends Migration
             $table->string('banner')->nullable();
             $table->string('bg')->nullable();
             $table->string('address')->nullable();
-            $table->string('area')->nullable();
+            $table->string('area_name')->nullable();
             $table->string('block')->nullable();
             $table->string('street')->nullable();
             $table->string('building')->nullable();

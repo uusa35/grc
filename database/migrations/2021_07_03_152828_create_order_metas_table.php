@@ -15,6 +15,8 @@ class CreateOrderMetasTable extends Migration
         Schema::create('order_metas', function (Blueprint $table) {
             $table->id();
 
+            $table->string('name')->nullable();
+            $table->mediumText('description')->nullable();
             $table->string('color')->nullable();
             $table->string('size')->nullable();
             $table->integer('qty')->unsigned();

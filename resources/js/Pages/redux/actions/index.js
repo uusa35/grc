@@ -108,3 +108,8 @@ export const setAuth = payload => ({
     type: actions.SET_AUTH,
     payload,
 });
+
+export const setDiscount = payload => ({
+    type: actions.SET_DISCOUNT,
+    payload,
+});

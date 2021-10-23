@@ -13,7 +13,7 @@ import axios from 'axios';
 import {Inertia} from "@inertiajs/inertia";
 
 
-export default function() {
+export default function({ order }) {
     const {cart, currency, locale} = useSelector(state => state);
     const {trans, getThumb, getLocalized, classNames, getAsset} = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
@@ -35,7 +35,9 @@ export default function() {
         if (paymentMethod.name === 'paypal') {
             return axios.post(paymentMethod.paymentRoute, {
                 netTotal: cart.netTotal,
-            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e', e))
+                order_id : order.id
+            }).then(r => console.log('r', r)).catch(e => console.log('the e', e))
+            // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e', e))
         } else {
             setCurrentUrl('#')
         }

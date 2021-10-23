@@ -5,6 +5,7 @@ namespace App\Services\Traits;
 use App\Jobs\sendSuccessOrderEmail;
 use App\Models\Country;
 use App\Models\Order;
+use App\Models\OrderMeta;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\Questionnaire;
@@ -19,12 +20,70 @@ use function PHPUnit\Framework\isNull;
 
 trait OrderTrait
 {
+    public function createOrder(Request $request)
+    {
+        try {
+            $request->validate([
+                'cart.cartId' => 'required',
+                'cart.total' => 'required|numeric',
+                'cart.netTotal' => 'required|numeric',
+                'cart.directPurchaseMode' => 'required|boolean',
+                'cart.multiCartMerchant' => 'required|boolean',
+                'cart.applyGlobalShipment' => 'required|boolean',
+                'cart.merchants' => 'array|required',
+                'cart.currentShipmentCountry' => 'array',
+                'cart.items' => 'array|required',
+                'cart.items.*.cart_id' => 'required|numeric',
+                'cart.items.*.element_id' => 'required|numeric',
+                'cart.items.*.direct_purchase' => 'boolean',
+                'cart.items.*.type' => 'required|string',
+                'cart.items.*.qty' => 'required|numeric',
+                'cart.items.*.price' => 'required|numeric',
+                'cart.items.*.shipmentFees' => 'required|numeric',
+                'cart.items.*.name_ar' => 'required',
+                'cart.items.*.name_en' => 'required',
+                'cart.items.*.merchant_name_ar' => 'required',
+                'cart.items.*.merchant_name_en' => 'required',
+            ]);
+            $auth = User::whereId(auth()->id())->with('country', 'area')->first();
+            $order = Order::updateOrCreate(['reference_id' => $request->cart['cartId']], [
+                'price' => $request->cart['total'],
+                'net_price' => $request->cart['netTotal'],
+                'discount' => $request->cart['discount'],
+                'country_id' => $auth->country_id,
+                'country' => $auth->country->name_en,
+                'area_id' => $auth->area_id,
+                'area' => $auth->area->name_en,
+                'block' => $auth->block,
+                'street' => $auth->street,
+                'building' => $auth->building,
+                'apartment' => $auth->apartment,
+                'floor' => $auth->floor,
+                'mobile' => $auth->mobile,
+                'user_id' => $auth->id
+            ]);
+            foreach ($request->cart['items'] as $item) {
+                OrderMeta::updateOrCreate(['order_id' => $order->id, 'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']), 'ordermetable_id' => $item['element_id']], [
+                    'name' => $item['name_ar'] . '   /  ' . $item['name_en'],
+                    'description' => $item['description_ar'] . '   /  ' . $item['description_en'],
+                    'price' => $item['price'],
+                    'qty' => $item['qty'],
+                    'merchant_id' => $item['merchant_id'],
+                    'ordermetable_id' => $item['element_id'],
+                    'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
+                ]);
+            }
+            return $order;
+        } catch (\Exception $exception) {
+            abort('404', $exception->getMessage());
+        }
+    }
 
     public function createQuestionnaireOrder(Questionnaire $questionnaire, User $user)
     {
         $order = Order::create([
-            'price' => (float) $questionnaire->net_price,
-            'net_price' => (float) $questionnaire->net_price,
+            'price' => (float)$questionnaire->net_price,
+            'net_price' => (float)$questionnaire->net_price,
             'mobile' => $questionnaire->mobile,
             'country' => $user->country->name,
             'email' => $questionnaire->email,
@@ -33,7 +92,7 @@ trait OrderTrait
         ]);
         $orderMeta = $order->order_metas()->create([
             'qty' => 1,
-            'price' => (float) $questionnaire->net_price,
+            'price' => (float)$questionnaire->net_price,
             'notes' => $questionnaire->notes,
             'item_name' => strtoupper(class_basename($questionnaire)),
             'item_type' => strtoupper(class_basename($questionnaire)),
@@ -58,8 +117,8 @@ trait OrderTrait
         $coupon = session()->has('coupon') ? session('coupon') : false;
         $country = Country::whereId($request->country_id)->first();
         $order = Order::create([
-            'price' => (float) $this->getTotalPriceOfProductsOnly($this->cart),
-            'net_price' => (float) getCartNetTotal(),
+            'price' => (float)$this->getTotalPriceOfProductsOnly($this->cart),
+            'net_price' => (float)getCartNetTotal(),
             'mobile' => $request->mobile,
             'country' => $country->name,
             'area' => $request->area ? $request->area : null,
@@ -68,10 +127,10 @@ trait OrderTrait
             'notes' => $request->notes,
             'user_id' => $user->id,
             'cash_on_delivery' => $request->has('cash_on_delivery') ? $request->cash_on_delivery : false,
-            'discount' => (float) $coupon ? ($coupon->is_percentage ? ($this->cart->subTotal() * ($coupon->value / 100)) : $coupon->value) : 0,
+            'discount' => (float)$coupon ? ($coupon->is_percentage ? ($this->cart->subTotal() * ($coupon->value / 100)) : $coupon->value) : 0,
             'coupon_id' => $coupon ? $coupon['id'] : null,
             'payment_method' => $request->payment_method,
-            'shipment_fees' => (float) $this->cart->content()->where('options.type', 'country')->first()->total(),
+            'shipment_fees' => (float)$this->cart->content()->where('options.type', 'country')->first()->total(),
             'receive_on_branch' => $request->has('receive_on_branch') ? $request->receive_on_branch : 0
         ]);
         $request->has('branch_id') && !is_null($request->branch_id) ? $order->update(['branch_id' => $request->branch_id]) : null;
@@ -87,7 +146,7 @@ trait OrderTrait
                         'item_name' => $element->options->element->name,
                         'item_type' => $element->options->type,
                         'qty' => $element->qty,
-                        'price' => (float) $element->price,
+                        'price' => (float)$element->price,
                         'notes' => $element->options->notes ? $element->options->notes : null,
                         'product_size' => $element->options->size ? $element->options->size->name : null,
                         'product_color' => $element->options->color ? $element->options->color->name : null,
@@ -237,8 +296,8 @@ trait OrderTrait
                 }
             }
             $order = Order::create([
-                'price' => (float) $request->price,
-                'net_price' => (float) $request->net_price,
+                'price' => (float)$request->price,
+                'net_price' => (float)$request->net_price,
                 'mobile' => $request->mobile,
                 'country' => $user->country->name,
                 'area' => $request->has('area') ? $request->area : 'N/A',
@@ -251,7 +310,7 @@ trait OrderTrait
                 'notes' => $request->notes,
                 'user_id' => $user->id,
                 'discount' => $request->discount,
-                'shipment_fees' => (float) $request->shipment_fees,
+                'shipment_fees' => (float)$request->shipment_fees,
                 'coupon_id' => $request->has('coupon_id') ? $request->coupon_id : null,
                 'payment_method' => $request->payment_method,
                 'cash_on_delivery' => $request->cash_on_delivery,
@@ -283,7 +342,7 @@ trait OrderTrait
                             'order_id' => $order->id,
                             'service_id' => $item['service_id'],
                             'qty' => $item['qty'],
-                            'price' => (float) $item['element']['finalPrice'],
+                            'price' => (float)$item['element']['finalPrice'],
                             'item_name' => $item['element']['name'],
                             'item_type' => $item['type'],
                             'notes' => $item['notes'] ? $item['notes'] : null,
@@ -357,7 +416,7 @@ trait OrderTrait
                 $prog_lang = 'other';
                 $data = [
                     'content' => 'Order Id : ' . $order->id,
-                    'cost' => (float) $order->net_price,
+                    'cost' => (float)$order->net_price,
                     'payment_method' => $order->payment_method,
                     'default_sender ' => env('APP_NAME'),
 //                    'sender_name' => $sender->name,

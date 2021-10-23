@@ -19,7 +19,6 @@ trait DashboardTrait
 {
     public function changeLanguage()
     {
-        dd(request()->locale);
         app()->setLocale(request('locale'));
         session()->put('locale', request('locale'));
         return redirect()->back();

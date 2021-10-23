@@ -18,7 +18,7 @@ class PaypalController extends Controller
 {
     public function makePayment(Request $request)
     {
-        $validator = validator($request->all(), ['netTotal' => 'required|numeric']);
+        $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors()->first());
         }
@@ -54,6 +54,7 @@ class PaypalController extends Controller
         try {
             $payment->create($apiContext);
             // Get PayPal redirect URL and redirect the customer
+            return $payment;
             $approvalUrl = $payment->getApprovalLink();
 
             return response()->json($approvalUrl, 200);

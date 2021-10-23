@@ -29,13 +29,13 @@ export default function({countries, auth }) {
         'email': auth ? auth.email : '',
         'mobile': auth ? auth.mobile : '',
         'phone': auth ? auth.phone : '',
-        'area': auth ? auth.area : '',
         'block': auth ? auth.block : '',
         'street': auth ? auth.street : '',
         'building': auth ? auth.building : '',
         'floor': auth ? auth.floor : '',
         'apartment': auth ? auth.apartment : '',
         'country_name': auth ? auth.country_name : '',
+        'area_name': auth ? auth.area_name : '',
         'country_id': auth ? auth.country_id : '',
         'area_id': auth ? auth.area_id : '',
     });
@@ -44,7 +44,7 @@ export default function({countries, auth }) {
         // setAreas()
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
         setAreas(selectedCountry.areas)
-        setData('area_id', first(selectedCountry.areas).id)
+        setData('area_id', auth && auth.area_id ? auth.area_id :  first(selectedCountry.areas).id)
     }, [data.country_id])
 
     const handleChange = (e) => {
@@ -62,7 +62,7 @@ export default function({countries, auth }) {
                 ...data,
                 image: data.image,
             }, {
-                forceFormData: true
+                forceFormData: true,
             })
         } else {
             Inertia.post(route(`frontend.user.store`), {
@@ -74,6 +74,9 @@ export default function({countries, auth }) {
             })
         }
     }
+
+    console.log('data', data);
+    console.log('the auth', auth)
 
     return (
         <FrontendContainer>
@@ -273,6 +276,27 @@ export default function({countries, auth }) {
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.building && <div className={`text-red-900`}>{errors.building}</div>}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* apartment */}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="apartment" className="apartment text-sm font-medium text-gray-700">
+                                {trans('apartment')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    id="apartment"
+                                    name="apartment"
+                                    defaultValue={data.apartment}
+                                    autoComplete="given-apartment"
+                                    className="apartment w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.apartment && <div className={`text-red-900`}>{errors.apartment}</div>}
                                 </p>
                             </div>
                         </div>

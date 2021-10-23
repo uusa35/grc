@@ -18,7 +18,7 @@ import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 export default function({countries, auth}) {
     const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
     const [areas, setAreas] = useState([])
-    const { locale } = useSelector(state => state);
+    const {locale, cart} = useSelector(state => state);
     const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
@@ -38,13 +38,21 @@ export default function({countries, auth}) {
         'country_name': auth ? auth.country_name : '',
         'country_id': auth ? auth.country_id : '',
         'area_id': auth ? auth.area_id : '',
+        'cart': cart
     });
 
     useMemo(() => {
-        // setAreas()
+        dispatch({type: 'SET_CART_ID', payload: auth.id})
+    }, [])
+
+    console.log('cart', cart);
+    console.log('the auth', auth.area_id);
+    console.log('the area', data.area_id)
+
+    useMemo(() => {
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
         setAreas(selectedCountry.areas)
-        setData('area_id', first(selectedCountry.areas).id)
+        setData('area_id', auth && auth.area_id ? auth.area_id :  first(selectedCountry.areas).id)
     }, [data.country_id])
 
     const handleChange = (e) => {
@@ -54,25 +62,9 @@ export default function({countries, auth}) {
         }))
     }
 
-    const submit = (e) => {
-        e.preventDefault()
-        if (auth && auth.id) {
-            Inertia.post(route(`frontend.user.update`, auth.id), {
-                _method: 'put',
-                ...data,
-                image: data.image,
-            }, {
-                forceFormData: true
-            })
-        } else {
-            Inertia.post(route(`frontend.user.store`), {
-                _method: 'post',
-                ...data,
-                image: data.image,
-            }, {
-                forceFormData: true
-            })
-        }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post(route('frontend.cart.payment.index'), {...data})
     }
 
     return (
@@ -83,7 +75,7 @@ export default function({countries, auth}) {
                     <CartStepper activeStep={3}/>
                     <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('confirm')} {trans('information')}</h1>
 
-                    <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16 gap-y-5 mt-5" onSubmit={submit}>
+                    <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16 gap-y-5 mt-5">
                         <div className="col-span-full">
                             <h2 className="text-lg font-medium text-gray-900">{trans('contact')} {trans('information')}</h2>
                         </div>
@@ -285,6 +277,28 @@ export default function({countries, auth}) {
                             </div>
                         </div>
 
+                        {/* apartment */}
+                        <div className="lg:col-span-1">
+                            <label htmlFor="apartment" className="apartment text-sm font-medium text-gray-700">
+                                {trans('apartment')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    disabled
+                                    onChange={handleChange}
+                                    type="text"
+                                    id="apartment"
+                                    name="apartment"
+                                    defaultValue={data.apartment}
+                                    autoComplete="given-apartment"
+                                    className="apartment w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                />
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.apartment && <div className={`text-red-900`}>{errors.apartment}</div>}
+                                </p>
+                            </div>
+                        </div>
+
 
                         {/* floor */}
                         <div className="lg:col-span-1">
@@ -307,54 +321,64 @@ export default function({countries, auth}) {
                                 </p>
                             </div>
                         </div>
-
-                        <div className="mt-10 col-span-full flex  flex-wrap justify-between w-full">
-                            <Link
-                                href={route('frontend.cart.information')}
-                                className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
-                            >
-                                <div className="flex">
-                                    {locale.isRTL ?
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                             stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
-                                        </svg>
-                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                               stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
-                                        </svg>
-                                    }
-                                </div>
-                                <span className="flex ltr:pt-2">
+                    </form>
+                    <div className="mt-10 col-span-full flex  flex-wrap justify-between w-full">
+                        <Link
+                            href={route('frontend.cart.information')}
+                            className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                        >
+                            <div className="flex">
+                                {locale.isRTL ?
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                    : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                           viewBox="0 0 24 24"
+                                           stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M15 19l-7-7 7-7"/>
+                                    </svg>
+                                }
+                            </div>
+                            <span className="flex ltr:pt-2">
                                     {trans('previous')}
                                 </span>
-                            </Link>
-                            <div className="flex">
-                                {
-                                    auth ?
-                                        <Link
-                                            href={route('frontend.cart.payment.index')}
-                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                        </Link>
+                        <div className="flex">
+                            {
+                                auth ?
+                                    <form method="post" onSubmit={handleSubmit}>
+                                        <button
+                                            type="submit"
+                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300`, "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                                         >
-                                            <span className="flex ltr:pt-2">
+                                                 <span className="flex ltr:pt-2">
                                             {trans('next')}
                                             </span>
                                             <div className="flex">
                                                 {locale.isRTL ?
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+                                                         fill="none" viewBox="0 0 24 24"
                                                          stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                              strokeWidth={2} d="M15 19l-7-7 7-7"/>
                                                     </svg> :
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+                                                         fill="none" viewBox="0 0 24 24"
                                                          stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                              strokeWidth={2} d="M9 5l7 7-7 7"/>
                                                     </svg>}
                                             </div>
-                                        </Link> : null
-                                }
-                            </div>
+                                        </button>
+                                    </form>
+                                    : null
+                            }
                         </div>
-                    </form>
+                    </div>
                 </div>
 
             </FrontendContentContainer>

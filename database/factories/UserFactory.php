@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Area;
 use App\Models\Country;
 use App\Models\Model;
 use App\Models\Role;
@@ -42,16 +43,16 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
             'remember_token' => $this->faker->linuxPlatformToken(),
-            'mobile' => $this->faker->numberBetween(111111,999999),
-            'phone' => $this->faker->numberBetween(111111,999999),
-            'fax' => $this->faker->numberBetween(111111,999999),
+            'mobile' => $this->faker->numberBetween(111111, 999999),
+            'phone' => $this->faker->numberBetween(111111, 999999),
+            'fax' => $this->faker->numberBetween(111111, 999999),
             'image' => 'square.png',
             'qr' => 'sample.png',
             'banner' => 'sample.png',
             'bg' => 'sample.png',
             'phone' => $this->faker->bankAccountNumber,
             'address' => $this->faker->address,
-            'area' => $this->faker->streetName,
+            'area_name' => $this->faker->streetName,
             'block' => $this->faker->randomDigit,
             'street' => $this->faker->streetName,
             'building' => $this->faker->randomDigit,
@@ -59,6 +60,8 @@ class UserFactory extends Factory
             'apartment' => $this->faker->name,
             'country_name' => $this->faker->country,
             'country_id' => Country::where('is_local', true)->first()->id,
+            'area_id' => Area::all()->random()->id,
+            'governate_id' => Area::all()->random()->id,
             'role_id' => Role::notAdmins()->get()->random()->id,
             'api_token' => $this->faker->bankAccountNumber,
             'merchant_id' => $this->faker->bankAccountNumber,
@@ -68,7 +71,7 @@ class UserFactory extends Factory
             'instagram' => $this->faker->url,
             'youtube' => $this->faker->url,
             'twitter' => $this->faker->url,
-            'whatsapp' => $this->faker->numberBetween(111111,999999),
+            'whatsapp' => $this->faker->numberBetween(111111, 999999),
             'iphone' => $this->faker->url,
             'android' => $this->faker->url,
             'longitude' => $this->faker->longitude,

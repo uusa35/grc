@@ -5,10 +5,12 @@ import {useSelector} from "react-redux";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {isEmpty} from "lodash";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function () {
     const {cart, currency, locale} = useSelector(state => state);
     const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
+    const { settings } = useContext(GlobalContext);
     return (
         <div className="mt-10  sm:mx-10">
             <div className="bg-gray-50 rounded-lg px-4 py-6 sm:p-6 lg:p-8">
@@ -24,14 +26,17 @@ export default function () {
                                     className="mx-2">{`(${getConvertedFinalPrice(cart.total, currency.exchange_rate)} ${currency[getLocalized('currency_symbol')]})`}</span>}
                             </dd>
                         </div>
-                        <div className="py-4 flex items-center justify-between">
-                            <dt className="text-gray-600 capitalize">{trans('shipment_fees')}</dt>
-                            <dd className="font-medium text-gray-900">
-                                {cart.shipmentFees} {trans('kd')}
-                                {!currency.country.is_local && cart.shipmentFees > 0 && <span
-                                    className="mx-2">{`(${getConvertedFinalPrice(cart.shipmentFees, currency.exchange_rate)} ${currency[getLocalized('currency_symbol')]})`}</span>}
-                            </dd>
-                        </div>
+                        {
+                            settings.enable_products ? <div className="py-4 flex items-center justify-between">
+                                <dt className="text-gray-600 capitalize">{trans('shipment_fees')}</dt>
+                                <dd className="font-medium text-gray-900">
+                                    {cart.shipmentFees} {trans('kd')}
+                                    {!currency.country.is_local && cart.shipmentFees > 0 && <span
+                                        className="mx-2">{`(${getConvertedFinalPrice(cart.shipmentFees, currency.exchange_rate)} ${currency[getLocalized('currency_symbol')]})`}</span>}
+                                </dd>
+                            </div>
+                             : null
+                        }
                         <div className="py-4 flex items-center justify-between">
                             <dt className="text-gray-600 capitalize">{trans('discount')}</dt>
                             <dd className="font-medium text-gray-900">

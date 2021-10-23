@@ -38,6 +38,8 @@ class OrderMetaFactory extends Factory
     {
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
+            'name' => $this->faker->name,
+            'description' => $this->faker->paragraph,
             'order_id' => Order::all()->random()->id,
             'qty' => $this->faker->numberBetween(1, 3),
             'price' => $this->faker->numberBetween(10,99),

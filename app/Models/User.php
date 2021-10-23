@@ -183,11 +183,6 @@ class User extends Authenticatable
         return $this->hasMany(Address::class);
     }
 
-    public function localArea()
-    {
-        return $this->belongsTo(Area::class, 'area_id');
-    }
-
     public function subscription()
     {
         return $this->belongsTo(Subscription::class);
