@@ -29,8 +29,8 @@ class HomeController extends Controller
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
         $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
-        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->authors()->orderBy('order','asc')->get());
-        $onHomeClients = UserExtraLightResource::collection(User::active()->OnHome()->designers()->orderBy('order','asc')->get());
+        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::authors()->active()->OnHome()->orderBy('order','asc')->get());
+        $onHomeClients = UserExtraLightResource::collection(User::designers()->active()->OnHome()->orderBy('order','asc')->get());
         $onHomePartners = UserExtraLightResource::collection(User::active()->OnHome()->celebrities()->orderBy('order','asc')->get());
         $meta = SettingResource::make(Setting::first());
         return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses','newOnHomeProducts', 'onHomeClients', 'onHomePartners'))
