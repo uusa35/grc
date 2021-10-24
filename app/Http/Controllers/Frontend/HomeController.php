@@ -25,7 +25,7 @@ class HomeController extends Controller
         $slides = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
             return $q->active()->orderby('order','asc');
         }])->first()->slides);
-        $homeCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->onlyParent()->orderby('order','asc')->get());
+        $homeCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->orderby('order','asc')->get());
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
         $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());

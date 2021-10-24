@@ -1,4 +1,4 @@
-<div dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" style="text-align:  {{ app()->getLocale() === 'ar' ? 'right' : 'left' }} !important;">
+<div dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" style="font-weight: bolder; text-align:  {{ app()->getLocale() === 'ar' ? 'right' : 'left' }} !important;">
 @component('mail::message')
 # {{ trans('general.invoice_no') }} :  {{ $order->id }}
 # {{ trans('general.username') }} : {{ $order->user->name_ar }} - {{ $order->user->name_en }}
@@ -10,7 +10,7 @@
 | ------------- |:-------------:| --------:|
 @endcomponent
 @component('mail::table')
-| {{ trans('id') }}       |  {{ trans('general.name') }}         |  {{ trans('general.type') }}  |
+| {{ trans('general.id') }}       |  {{ trans('general.name') }}         |  {{ trans('general.type') }}  |
 | ------------- |:-------------:| --------:|
 @foreach($order->order_metas as $meta)
 | {{ ($loop->index+1) }}      | {{ $meta->name }}      |    {{ $meta->ordermetable_type }}   |

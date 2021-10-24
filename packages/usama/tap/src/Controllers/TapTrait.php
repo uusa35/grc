@@ -15,70 +15,38 @@ use mysql_xdevapi\Exception;
 trait TapTrait
 {
     use OrderTrait;
-    public function processPayment($order, $user)
+
+    public function processPayment()
     {
         try {
-            $finalArray = [
-                'CustomerDC' => [
-                    "Email" => $order->email,
-                    "Floor" => $order->floor ? $order->floor : "0",
-                    "Gender" => $order->gender ? $order->gender : "0",
-                    "ID" => $user ? $user->id : "0",
-                    "Mobile" => $order->mobile,
-                    "Name" => $user->name,
-                    "Nationality" => $order->nationality ? $order->nationality : "KWT",
-                    "Street" => $order->address ? $order->address : $user->address,
-                    "Area" => $order->area ? $order->area : $user->area_id,
-                    "CivilID" => $order->mobile ? $order->mobile : "0",
-                    "Building" => $user->address,
-                    "Apartment" => $user->address,
-                    "DOB" => $user->created_at
-                ],
-                'lstProductDC' => $this->getProducts($order),
-                'lstGateWayDC' => [$this->getGateWay()],
-                'MerMastDC' => $this->getMerchant($order->net_price),
-            ];
             $curl = curl_init();
+
             curl_setopt_array($curl, array(
-                CURLOPT_URL => config('tap.paymentUrl'),
+                CURLOPT_URL => "https://api.tap.company/v2/invoices",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => json_encode($finalArray, JSON_UNESCAPED_SLASHES),
+                CURLOPT_POSTFIELDS => "{\"draft\":false,\"due\":99999999999,\"expiry\":1604728943000,\"description\":\"test invoice\",\"mode\":\"INVOICE\",\"note\":\"test note\",\"notifications\":{\"channels\":[\"SMS\",\"EMAIL\"],\"dispatch\":true},\"currencies\":[\"KWD\"],\"metadata\":{\"udf1\":\"1\",\"udf2\":\"2\",\"udf3\":\"3\"},\"charge\":{\"receipt\":{\"email\":true,\"sms\":true},\"statement_descriptor\":\"test\"},\"customer\":{\"email\":\"test@test.com\",\"first_name\":\"test\",\"last_name\":\"test\",\"middle_name\":\"test\",\"phone\":{\"country_code\":\"965\",\"number\":\"51234567\"}},\"order\":{\"amount\":12,\"currency\":\"KWD\",\"items\":[{\"amount\":10,\"currency\":\"KWD\",\"description\":\"test\",\"discount\":{\"type\":\"P\",\"value\":0},\"image\":\"\",\"name\":\"test\",\"quantity\":1}],\"shipping\":{\"amount\":1,\"currency\":\"KWD\",\"description\":\"test\",\"provider\":\"ARAMEX\",\"service\":\"test\"},\"tax\":[{\"description\":\"test\",\"name\":\"VAT\",\"rate\":{\"type\":\"F\",\"value\":1}}]},\"payment_methods\":[\"\"],\"post\":{\"url\":\"http://your_website.com/post_url\"},\"redirect\":{\"url\":\"http://your_website.com/redirect_url\"},\"reference\":{\"invoice\":\"INV_00001\",\"order\":\"ORD_00001\"}}",
                 CURLOPT_HTTPHEADER => array(
+                    "authorization: Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ",
                     "content-type: application/json"
                 ),
             ));
 
             $response = curl_exec($curl);
             $err = curl_error($curl);
+
             curl_close($curl);
+
             if ($err) {
                 echo "cURL Error #:" . $err;
             } else {
-                $response = (\GuzzleHttp\json_decode($response));
-                if (!$response->ResponseCode) {
-                    if (empty($order->reference_id) && $order->order_metas->count() > 0) {
-                        $order->update(['reference_id' => $response->ReferenceID]);
-                    } elseif ($order->order_metas->count() > 0) {
-                        $newOrder = $order->replicate();
-                        $newOrder->save();
-                        foreach ($order->order_metas as $order_meta) {
-                            $newOrderMeta = $order_meta->replicate();
-                            $newOrderMeta->save();
-                            $newOrderMeta->update(['order_id' => $newOrder->id]);
-                        }
-                        $order->update(['reference_id' => $response->ReferenceID]);
-                    }
-                    return $response->PaymentURL;
-                }
-                return redirect()->back()->with('error', trans('message.payment_url_error'));
+                echo $response;
             }
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             abort(404, $e->getMessage());
         }
     }
@@ -99,7 +67,7 @@ trait TapTrait
                     'UnitDesc' => $orderMeta->product->description,
                     'VndID' => $orderMeta->product->user->merchant_id,
                 ]);
-            } elseif($orderMeta->isServiceType) {
+            } elseif ($orderMeta->isServiceType) {
                 array_push($productsList, [
                     'CurrencyCode' => env('TAP_CURRENCY_CODE'),
                     'ImgUrl' => $orderMeta->service->imageLargeLink,
@@ -111,7 +79,7 @@ trait TapTrait
                     'UnitDesc' => $orderMeta->service->description,
                     'VndID' => $orderMeta->service->user->merchant_id,
                 ]);
-            } elseif($orderMeta->isQuestionnaireType) {
+            } elseif ($orderMeta->isQuestionnaireType) {
                 array_push($productsList, [
                     'CurrencyCode' => env('TAP_CURRENCY_CODE'),
                     'ImgUrl' => $order->user->imageThumbLink,
@@ -130,10 +98,10 @@ trait TapTrait
                 'CurrencyCode' => env('TAP_CURRENCY_CODE'),
                 'ImgUrl' => asset('images/shipment.png'),
                 'Quantity' => 1,
-                'TotalPrice' => (float) round($order->shipment_fees,2),
+                'TotalPrice' => (float)round($order->shipment_fees, 2),
                 'UnitID' => $order->id,
                 'UnitName' => 'Shipping Cost',
-                'UnitPrice' => (float) $order->shipment_fees,
+                'UnitPrice' => (float)$order->shipment_fees,
                 'UnitDesc' => 'Shipping Cost',
                 'VndID' => $order->user_id,
             ]);
@@ -146,7 +114,7 @@ trait TapTrait
                 'TotalPrice' => -($order->discount),
                 'UnitID' => $order->id,
                 'UnitName' => 'Coupon',
-                'UnitPrice' => '-'.$order->discount,
+                'UnitPrice' => '-' . $order->discount,
                 'UnitDesc' => 'Coupon (Discount)',
                 'VndID' => '',
             ]);

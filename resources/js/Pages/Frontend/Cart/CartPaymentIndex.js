@@ -19,8 +19,8 @@ export default function({ order }) {
     const {settings} = useContext(GlobalContext);
     const paymentMethods = [
         {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create')},
-        // {id: 2, name: 'myfatorah', paymentRoute: route('myfatoorahv2.web.payment.create')},
-        // {id: 3, name: 'tap', paymentRoute: route('tap.web.payment.create')},
+        {id: 2, name: 'myfatorah', paymentRoute: route('myfatoorahv2.web.payment.create')},
+        {id: 3, name: 'tap', paymentRoute: route('tap.api.payment.create')},
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
     const [currentURL, setCurrentUrl] = useState('');
@@ -37,8 +37,12 @@ export default function({ order }) {
                 netTotal: cart.netTotal,
                 order_id : order.id
             }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e ===>', e.response.data))
-        } else {
-            setCurrentUrl('#')
+        } else if(paymentMethod.name === 'tap') {
+            return axios.post(paymentMethod.paymentRoute, {
+                netTotal: cart.netTotal,
+                order_id : order.id
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+            // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
         }
     }, [paymentMethod])
 

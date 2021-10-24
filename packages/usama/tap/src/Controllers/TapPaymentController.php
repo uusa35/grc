@@ -44,17 +44,11 @@ class TapPaymentController extends Controller
     public function makePayment(Request $request)
     {
         try {
-            $validate = validator($request->all(), [
-                'order_id' => 'required|numeric|exists:orders,id',
-            ]);
-            if ($validate->fails()) {
-                return redirect()->back()->with('errors', $validate->errors());
+            $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors()->first());
             }
-            $className = env('ORDER_MODEL_PATH');
-            $order = new $className();
-            $order = $order->whereId($request->order_id)->with('order_metas.product', 'order_metas.product_attribute')->first();
-            $user = auth()->user();
-            $paymentUrl = $this->processPayment($order, $user);
+            $paymentUrl = $this->processPayment();
             if ($paymentUrl) {
                 return redirect()->to($paymentUrl);
             }
