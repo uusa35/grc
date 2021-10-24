@@ -146,9 +146,11 @@ export default function({ countries }) {
                                     id="governate_id"
                                     name="governate_id"
                                     value={data.governate_id}
+                                    required
                                     autoComplete="governate_id"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 >
+                                    <option value="">{trans('choose')} {trans('governate')}</option>
                                     {
                                         map(selectedCountry.governates, u => (
                                             <option key={u.id} value={u.id}
