@@ -12,6 +12,11 @@ use App\Services\Search\QueryFilters;
 
 trait ModelHelpers
 {
+    /**
+     * @param $q
+     * @return \Illuminate\Database\Eloquent\Builder
+     * QueryFilters used within the search
+     */
     public function scopeActive($q)
     {
         return $q->where('active', true);

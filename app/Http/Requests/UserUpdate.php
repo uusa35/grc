@@ -31,7 +31,7 @@ class UserUpdate extends FormRequest
 //            'banner' => 'nullable|image|dimensions:width=1080,height=410',
 //            'bg' => 'nullable|image|dimensions:width=1080,height=350',
             'address' => 'nullable|min:3',
-            'area' => 'nullable|string',
+            'area_name' => 'nullable|string',
             'block' => 'nullable|string',
             'street' => 'nullable|max:100',
             'building' => 'nullable|max:100',
