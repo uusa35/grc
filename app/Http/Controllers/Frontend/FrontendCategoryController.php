@@ -21,7 +21,7 @@ class FrontendCategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = CategoryCollection::make(Category::filters($filters)->orderBy('id', 'desc')
+        $elements = CategoryCollection::make(Category::active()->filters($filters)->orderBy('id', 'desc')
             ->paginate(Self::TAKE_MIN)->withQueryString());
         return inertia('Frontend/Category/FrontendCategoryIndex', compact('elements'));
     }
