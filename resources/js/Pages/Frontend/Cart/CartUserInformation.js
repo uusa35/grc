@@ -75,9 +75,6 @@ export default function({countries, auth }) {
         }
     }
 
-    console.log('data', data);
-    console.log('the auth', auth)
-
     return (
         <FrontendContainer>
             <FrontendContentContainer>
@@ -171,6 +168,7 @@ export default function({countries, auth }) {
                                     required
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 >
+                                    <option value="">{trans('choose')} {trans('country')}</option>
                                     {
                                         map(countries, u => (
                                             <option key={u.id} value={u.id}
@@ -201,6 +199,7 @@ export default function({countries, auth }) {
                                         required
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
+                                        <option value="">{trans('choose')} {trans('area')}</option>
                                         {
                                             map(areas, u => (
                                                 <option key={u.id} value={u.id}

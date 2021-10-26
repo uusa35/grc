@@ -1,10 +1,13 @@
 <?php
+namespace Usama\MyFatoorahV2;
 
 require_once 'MyfatoorahApiV2.php';
 
+use Exception;
+
 /**
  *  PaymentMyfatoorahApiV2 handle the payment process of MyFatoorah API endpoints
- * 
+ *
  * @author MyFatoorah <tech@myfatoorah.com>
  * @copyright 2021 MyFatoorah, All rights reserved
  * @license GNU General Public License v3.0
@@ -14,16 +17,16 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
     /**
      * To specify either the payment will be onsite or offsite
      * (default value: false)
-     * 
-     * @var boolean 
+     *
+     * @var boolean
      */
-    protected $isDirectPayment = false;
+    protected $isDirectPayment = true;
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------    
+//---------------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * List available Payment Gateways.
-     * 
+     *
      * @param real $invoiceValue
      * @param string $displayCurrencyIso
      * @return array
@@ -44,7 +47,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 
     /**
      * List available Payment Gateways by type (direct, normal)
-     * 
+     *
      * @param bool $isDirect
      * @return array
      */
@@ -52,7 +55,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 
         try {
             $gateways = $this->getVendorGateways();
-        } catch (Exception $ex) {
+        } catch (\Exception $ex) {
             return [];
         }
 
@@ -98,7 +101,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 
     /**
      * Get Payment Method Object
-     * 
+     *
      * @param string $gateway
      * @param string $gatewayType ['PaymentMethodId', 'PaymentMethodCode']
      * @param real $invoiceValue
@@ -132,7 +135,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 
     /**
      * Get the invoice/payment URL and the invoice id
-     * 
+     *
      * @param array $curlData
      * @param string $gateway (default value: 'myfatoorah')
      * @param integer|string $orderId (default value: null) used in log file
@@ -154,7 +157,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * 
+     *
      * @param array $curlData
      * @param integer|string $gatewayId
      * @param integer|string $orderId (default value: null) used in log file
@@ -172,7 +175,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * 
+     *
      * @param array $curlData
      * @param integer|string $orderId (default value: null) used in log file
      * @return array
@@ -190,7 +193,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 
     /**
      * Get the direct payment URL and the invoice id
-     * 
+     *
      * @param array $curlData
      * @param integer|string $gateway
      * @param array $cardInfo
@@ -213,14 +216,14 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 
     /**
      * Get the Payment Transaction Status
-     * 
+     *
      * @param string $keyId
      * @param string $KeyType
      * @param integer|string $orderId (default value: null)
      * @param string $price
      * @param string $currncy
      * @return object
-     * @throws Exception
+     * @throws \Exception
      */
     public function getPaymentStatus($keyId, $KeyType, $orderId = null, $price = null, $currncy = null) {
 
@@ -229,8 +232,8 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
         $json     = $this->callAPI("$this->apiURL/v2/GetPaymentStatus", $curlData, $orderId, 'Get Payment Status');
 
         $msgLog = 'Order #' . $json->Data->CustomerReference . ' ----- Get Payment Status';
-        
-        
+
+
         //check for the order information
         if (!$this->checkOrderInformation($json, $orderId, $price, $currncy)) {
             $err = 'Trying to call data of another order';
@@ -256,7 +259,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * 
+     *
      * @param object $json
      * @param string $orderId
      * @param string $price
@@ -284,7 +287,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * 
+     *
      * @param object $json
      * @return object
      */
@@ -303,7 +306,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * 
+     *
      * @param object $json
      * @param string $keyId
      * @param string $KeyType
@@ -367,7 +370,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 
     /**
      * Refund a given Payment
-     * 
+     *
      * @param integer|string $paymentId
      * @param real|string $amount
      * @param string $currencyCode
@@ -395,7 +398,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * 
+     *
      * @param array $curlData
      * @param integer|string $sessionId
      * @param integer|string $orderId (default value: null) used in log file
@@ -413,7 +416,7 @@ class PaymentMyfatoorahApiV2 extends MyfatoorahApiV2 {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     * 
+     *
      * @param integer|string $orderId (default value: null) used in log file
      * @return array
      */

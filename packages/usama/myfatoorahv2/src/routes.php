@@ -7,10 +7,9 @@
  */
 Route::group(['namespace' => 'Usama\MyFatoorahV2\Controllers'], function () {
     Route::group(['middleware' => 'api'], function () {
-        Route::post('api/myfatoorahv2/payment', 'MyFatoorahV2PaymentController@makePaymentApi')->name('myfatoorahv2.api.payment.create');
+        Route::post('api/myfatoorahv2/payment', 'MyFatoorahV2PaymentController@makePayment')->name('myfatoorahv2.api.payment.create');
     });
-
-
+    
     Route::group(['middleware' => ['web', 'auth']], function () {
         Route::post('myfatoorahv2/payment', 'MyFatoorahV2PaymentController@makePayment')->name('myfatoorahv2.web.payment.create');
     });

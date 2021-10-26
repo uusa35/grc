@@ -19,8 +19,8 @@ export default function({ order }) {
     const {settings} = useContext(GlobalContext);
     const paymentMethods = [
         {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create')},
-        {id: 2, name: 'myfatorah', paymentRoute: route('myfatoorahv2.web.payment.create')},
-        {id: 3, name: 'tap', paymentRoute: route('tap.api.payment.create')},
+        // {id: 2, name: 'myfatorah', paymentRoute: route('myfatoorahv2.web.payment.create')},
+        // {id: 3, name: 'tap', paymentRoute: route('tap.api.payment.create')},
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
     const [currentURL, setCurrentUrl] = useState('');

@@ -12,6 +12,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Mail;
+use Usama\MyFatoorahV2\MyfatoorahApiV2;
+use Usama\MyFatoorahV2\PaymentMyfatoorahApiV2;
 
 /**
  * Created by PhpStorm.
@@ -40,21 +42,30 @@ class MyFatoorahV2PaymentController extends Controller
 
     public function makePayment(Request $request)
     {
-        $validate = validator($request->all(), [
-            'order_id' => 'required|numeric|exists:orders,id',
-        ]);
-        if ($validate->fails()) {
-            return redirect()->back()->with('errors', $validate->errors());
+        try {
+            // 1- prepare data
+            // 2- update order with the reference_id
+            // 3- return the paymentURL
+            $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors()->first());
+            }
+            $mfPayment = new PaymentMyfatoorahApiV2(config('myfatoorah.apiKey'), true);
+
+            $postFields = [
+                'NotificationOption' => 'Lnk',
+                'InvoiceValue' => '50',
+                'CustomerName' => 'fname lname',
+            ];
+
+            $data = $mfPayment->getInvoiceURL($postFields);
+
+            $this->updateOrderRerferenceId($request->order_id, $data['invoiceId']);
+            return $data['invoiceURL'];
+
+        } catch (\Exception $ex) {
+            die($ex);
         }
-        $className = env('ORDER_MODEL_PATH');
-        $order = new $className();
-        $order = $order->whereId($request->order_id)->with('order_metas.product', 'order_metas.product_attribute')->first();
-        $user = auth()->user();
-        $paymentUrl = $this->processPayment($order, $user);
-        if ($paymentUrl) {
-            return redirect()->to($paymentUrl);
-        }
-        abort(404, 'Payment Url Failed');
     }
 
     public function result(Request $request)

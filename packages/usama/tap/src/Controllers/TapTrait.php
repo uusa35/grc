@@ -19,17 +19,19 @@ trait TapTrait
     public function processPayment()
     {
         try {
+            // 1- prepare data
+            // 2- update order with the reference_id
+            // 3- return the paymentURL
             $curl = curl_init();
-
             curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.tap.company/v2/invoices",
+                CURLOPT_URL => "https://api.tap.company/v2/orders",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => "{\"draft\":false,\"due\":99999999999,\"expiry\":1604728943000,\"description\":\"test invoice\",\"mode\":\"INVOICE\",\"note\":\"test note\",\"notifications\":{\"channels\":[\"SMS\",\"EMAIL\"],\"dispatch\":true},\"currencies\":[\"KWD\"],\"metadata\":{\"udf1\":\"1\",\"udf2\":\"2\",\"udf3\":\"3\"},\"charge\":{\"receipt\":{\"email\":true,\"sms\":true},\"statement_descriptor\":\"test\"},\"customer\":{\"email\":\"test@test.com\",\"first_name\":\"test\",\"last_name\":\"test\",\"middle_name\":\"test\",\"phone\":{\"country_code\":\"965\",\"number\":\"51234567\"}},\"order\":{\"amount\":12,\"currency\":\"KWD\",\"items\":[{\"amount\":10,\"currency\":\"KWD\",\"description\":\"test\",\"discount\":{\"type\":\"P\",\"value\":0},\"image\":\"\",\"name\":\"test\",\"quantity\":1}],\"shipping\":{\"amount\":1,\"currency\":\"KWD\",\"description\":\"test\",\"provider\":\"ARAMEX\",\"service\":\"test\"},\"tax\":[{\"description\":\"test\",\"name\":\"VAT\",\"rate\":{\"type\":\"F\",\"value\":1}}]},\"payment_methods\":[\"\"],\"post\":{\"url\":\"http://your_website.com/post_url\"},\"redirect\":{\"url\":\"http://your_website.com/redirect_url\"},\"reference\":{\"invoice\":\"INV_00001\",\"order\":\"ORD_00001\"}}",
+                CURLOPT_POSTFIELDS => "{\"amount\":1,\"currency\":\"KWD\",\"customer\":{\"first_name\":\"test\",\"middle_name\":\"\",\"last_name\":\"test\",\"phone\":{\"country_code\":\"965\",\"number\":\"51234567\"},\"email\":\"testcgara@test.com\"},\"items\":[{\"name\":{\"en\":\"test\"},\"description\":{\"en\":\"test\"},\"image\":\"\",\"currency\":\"KWD\",\"amount\":1,\"quantity\":\"1\",\"discount\":{\"type\":\"P\",\"value\":0}}],\"tax\":[{\"description\":\"test\",\"name\":\"VAT\",\"rate\":{\"type\":\"F\",\"value\":1}}],\"shipping\":{\"amount\":1,\"currency\":\"KWD\",\"description\":{\"en\":\"test\"},\"address\":{\"recipient_name\":\"test\",\"line1\":\"sdfghjk\",\"line2\":\"oiuytr\",\"district\":\"hawally\",\"city\":\"hawally\",\"state\":\"hw\",\"zip_code\":\"30003\",\"po_box\":\"200021\",\"country\":\"kuwait\"}},\"metadata\":{\"udf1\":\"\",\"udf2\":\"\"},\"reference\":{\"invoice\":\"\",\"order\":\"\"}}",
                 CURLOPT_HTTPHEADER => array(
                     "authorization: Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ",
                     "content-type: application/json"
