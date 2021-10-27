@@ -3,6 +3,7 @@
 namespace App\Services\Traits;
 
 use App\Jobs\sendSuccessOrderEmail;
+use App\Mail\OrderPaid;
 use App\Models\Country;
 use App\Models\Order;
 use App\Models\OrderMeta;
@@ -15,6 +16,7 @@ use App\Models\Timing;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isNull;
 
@@ -60,7 +62,8 @@ trait OrderTrait
                 'apartment' => $auth->apartment,
                 'floor' => $auth->floor,
                 'mobile' => $auth->mobile,
-                'user_id' => $auth->id
+                'email' => $auth->email,
+                'user_id' => $auth->id,
             ]);
             foreach ($request->cart['items'] as $item) {
                 OrderMeta::updateOrCreate(['order_id' => $order->id, 'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']), 'ordermetable_id' => $item['element_id']], [
@@ -81,11 +84,27 @@ trait OrderTrait
         }
     }
 
-    public function updateOrderRerferenceId($orderId, $referenceId)
+    public function updateOrderRerferenceId($orderId, $referenceId, $paymentMethod)
     {
         Order::whereId($orderId)->first()->update([
-            'reference_id' => $referenceId
+            'reference_id' => $referenceId,
+            'payment_method' => $paymentMethod
         ]);
+    }
+
+    public function orderSuccessAction($reference_id) {
+        $order = Order::where(['reference_id' => $reference_id, 'paid' => false])->with('user', 'order_metas.ordermetable')->first();
+        if($order) {
+            $order->update([
+                'paid' => true,
+                'status' => 'paid'
+            ]);
+            $settings = Setting::first();
+            Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
+            $markdown = new Markdown(view(), config('mail.markdown'));
+            return $markdown->render('emails.orders.paid', ['order' => $order]);
+        }
+        return redirect()->route('frontend.home')->with('error', trans('general.process_failure'));
     }
 
     public function createQuestionnaireOrder(Questionnaire $questionnaire, User $user)

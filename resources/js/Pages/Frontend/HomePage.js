@@ -20,6 +20,7 @@ export default function HomePage({
                                      onHomeClients,
                                      onHomePartners,
     mgt,
+    clearCart = false,
                                      settings
                                  }) {
     const [slideNumber, setSlideNumber] = useState(6)

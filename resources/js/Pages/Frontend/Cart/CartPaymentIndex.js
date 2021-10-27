@@ -11,16 +11,16 @@ import GlobalContext from "../../context/GlobalContext";
 import {map} from 'lodash';
 import axios from 'axios';
 import {Inertia} from "@inertiajs/inertia";
+import {clearCart} from "../../redux/actions";
 
 
-export default function({ order }) {
+export default function({order}) {
     const {cart, currency, locale} = useSelector(state => state);
     const {trans, getThumb, getLocalized, classNames, getAsset} = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
     const paymentMethods = [
         {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create')},
-        // {id: 2, name: 'myfatorah', paymentRoute: route('myfatoorahv2.web.payment.create')},
-        // {id: 3, name: 'tap', paymentRoute: route('tap.api.payment.create')},
+        {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`)},
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
     const [currentURL, setCurrentUrl] = useState('');
@@ -31,16 +31,19 @@ export default function({ order }) {
         paymentMethod: paymentMethod.name
     })
 
+    console.log('settings', settings.payment_method);
     useMemo(() => {
         if (paymentMethod.name === 'paypal') {
             return axios.post(paymentMethod.paymentRoute, {
                 netTotal: cart.netTotal,
-                order_id : order.id
+                order_id: order.id,
+                paymentMethod: paymentMethod.name
             }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e ===>', e.response.data))
-        } else if(paymentMethod.name === 'tap') {
+        } else if (paymentMethod.name === 'tap') {
             return axios.post(paymentMethod.paymentRoute, {
                 netTotal: cart.netTotal,
-                order_id : order.id
+                order_id: order.id,
+                paymentMethod: paymentMethod.name
             }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
             // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
         }
@@ -107,6 +110,7 @@ export default function({ order }) {
                         </Link>
                         <div className="flex">
                             <a
+                                onClick={() => dispatch(clearCart())}
                                 href={currentURL}
                                 className="capitalize flex flex-row w-full sm:w-auto justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                             >

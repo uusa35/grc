@@ -45,10 +45,6 @@ export default function({countries, auth}) {
         dispatch({type: 'SET_CART_ID', payload: auth.id})
     }, [])
 
-    console.log('cart', cart);
-    console.log('the auth', auth.area_id);
-    console.log('the area', data.area_id)
-
     useMemo(() => {
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
         setAreas(selectedCountry.areas)

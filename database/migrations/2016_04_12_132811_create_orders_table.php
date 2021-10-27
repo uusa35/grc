@@ -15,11 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['pending','paid','failed','under_process','shipped','completed','delivered'])->nullable()->default('pending');
+            $table->enum('status', ['pending','paid','failed','under_process','shipped','completed','delivered', 'canceled','unknown'])->nullable()->default('pending');
             $table->boolean('paid')->default(false);
             $table->decimal('price', 6, 2)->unsigned();
-            $table->decimal('shipment_fees', 6, 2)->unsigned()->nullable(); //
-            $table->decimal('discount', 6, 2)->unsigned()->nullable(); //
+            $table->decimal('shipment_fees', 6, 2)->unsigned()->default(0); //
+            $table->decimal('discount', 6, 2)->unsigned()->default(0); //
             $table->decimal('net_price', 6, 2)->unsigned(); // used if coupon code exists
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();

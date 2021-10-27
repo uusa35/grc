@@ -14,6 +14,8 @@ use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Mail;
 use Usama\MyFatoorahV2\MyfatoorahApiV2;
 use Usama\MyFatoorahV2\PaymentMyfatoorahApiV2;
+use function Usama\MyFatoorahV2\directPayment;
+use function Usama\MyFatoorahV2\executePayment;
 
 /**
  * Created by PhpStorm.
@@ -46,22 +48,119 @@ class MyFatoorahV2PaymentController extends Controller
             // 1- prepare data
             // 2- update order with the reference_id
             // 3- return the paymentURL
-            $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
+            $validator = validator($request->all(), [
+                'netTotal' => 'required|numeric',
+                'order_id' => 'required|exists:orders,id',
+                'paymentMethod' => 'required|string'
+            ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors()->first());
             }
-            $mfPayment = new PaymentMyfatoorahApiV2(config('myfatoorah.apiKey'), true);
+            /* ------------------------ Configurations ---------------------------------- */
+//Test
+//            $apiURL = 'https://apitest.myfatoorah.com';
+            $apiKey = ''; //Test token value to be placed here: https://myfatoorah.readme.io/docs/test-token
 
+//Live
+//$apiURL = 'https://api.myfatoorah.com';
+//$apiKey = ''; //Live token value to be placed here: https://myfatoorah.readme.io/docs/live-token
+
+
+            /* ------------------------ Call InitiatePayment Endpoint ------------------- */
+//Fill POST fields array
+            $ipPostFields = ['InvoiceAmount' => 100, 'CurrencyIso' => 'KWD'];
+
+//Call endpoint
+            $paymentMethods = new PaymentMyfatoorahApiV2();
+            $methods = collect($paymentMethods->initiatePayment(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $ipPostFields));
+
+//You can save $paymentMethods information in database to be used later
+            foreach ($paymentMethods as $pm) {
+                if ($pm->PaymentMethodEn == 'Visa/Master Direct 3DS Flow' && $pm->IsDirectPayment) {
+                    $paymentMethodId = $pm->PaymentMethodId;
+                    break;
+                }
+            }
+
+            /* ------------------------ Call ExecutePayment Endpoint -------------------- */
+//Fill customer address array
+            /* $customerAddress = array(
+              'Block'               => 'Blk #', //optional
+              'Street'              => 'Str', //optional
+              'HouseBuildingNo'     => 'Bldng #', //optional
+              'Address'             => 'Addr', //optional
+              'AddressInstructions' => 'More Address Instructions', //optional
+              ); */
+
+//Fill invoice item array
+            /* $invoiceItems[] = [
+              'ItemName'  => 'Item Name', //ISBAN, or SKU
+              'Quantity'  => '2', //Item's quantity
+              'UnitPrice' => '25', //Price per item
+              ]; */
+
+//Fill POST fields array
             $postFields = [
-                'NotificationOption' => 'Lnk',
+                //Fill required data
+                'paymentMethodId' => $methods->where('PaymentMethodId', 1)->first()->PaymentMethodId,
                 'InvoiceValue' => '50',
-                'CustomerName' => 'fname lname',
+                'CallBackUrl' => route('myfatoorahv2.web.payment.result'),
+                'ErrorUrl' => route('myfatoorahv2.web.payment.error'), //or 'https://example.com/error.php'
+                //Fill optional data
+                //'CustomerName'       => 'fname lname',
+                //'DisplayCurrencyIso' => 'KWD',
+                //'MobileCountryCode'  => '+965',
+                //'CustomerMobile'     => '1234567890',
+                //'CustomerEmail'      => 'email@example.com',
+                //'Language'           => 'en', //or 'ar'
+                //'CustomerReference'  => 'orderId',
+                //'CustomerCivilId'    => 'CivilId',
+                //'UserDefinedField'   => 'This could be string, number, or array',
+                //'ExpiryDate'         => '', //The Invoice expires after 3 days by default. Use 'Y-m-d\TH:i:s' format in the 'Asia/Kuwait' time zone.
+                //'SourceInfo'         => 'Pure PHP', //For example: (Laravel/Yii API Ver2.0 integration)
+                //'CustomerAddress'    => $customerAddress,
+                //'InvoiceItems'       => $invoiceItems,
+            ];
+//Call endpoint
+            $data = $paymentMethods->executePayment(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $postFields);
+
+//You can save payment data in database as per your needs
+            $invoiceId = $data->InvoiceId;
+            $paymentURL = $data->PaymentURL;
+
+//            return response()->json($paymentURL, 200);
+
+            /* ------------------------ Call DirectPayment Endpoint --------------------- */
+//Fill POST fields array
+            $cardInfo = [
+                'PaymentType' => 'card',
+                'Bypass3DS' => false,
+                'Card' => [
+                    'Number' => '5123450000000008',
+                    'ExpiryMonth' => '05',
+                    'ExpiryYear' => '21',
+                    'SecurityCode' => '100',
+                    'CardHolderName' => 'fname lname'
+                ]
             ];
 
-            $data = $mfPayment->getInvoiceURL($postFields);
+//Call endpoint
+            $directData = $paymentMethods->directPayment($paymentURL, config('myfatoorah.apiKey'), $cardInfo);
+            dd($directData);
 
-            $this->updateOrderRerferenceId($request->order_id, $data['invoiceId']);
-            return $data['invoiceURL'];
+//You can save payment data in database as per your needs
+            $paymentId = $directData->PaymentId;
+            $paymentLink = $directData->PaymentURL;
+
+            return response()->json($paymentLink, 200);
+//Redirect your customer to the OTP page to complete the payment process
+//Display the payment link to your customer
+            echo "Click on <a href='$paymentLink' target='_blank'>$paymentLink</a> to pay with payment ID: $paymentId, and invoice ID: $invoiceId.";
+            die;
+
+
+//            $this->updateOrderRerferenceId($request->order_id, $data['invoiceId']);
+//            return $data['invoiceURL'];
 
         } catch (\Exception $ex) {
             die($ex);

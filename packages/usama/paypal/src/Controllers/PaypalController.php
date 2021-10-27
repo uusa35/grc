@@ -28,7 +28,11 @@ class PaypalController extends Controller
     public function makePayment(Request $request)
     {
         try {
-            $validator = validator($request->all(), ['netTotal' => 'required|numeric', 'order_id' => 'required|exists:orders,id']);
+            $validator = validator($request->all(), [
+                'netTotal' => 'required|numeric',
+                'order_id' => 'required|exists:orders,id',
+                'paymentMethod' => 'required|string'
+            ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors()->first());
             }
@@ -79,7 +83,7 @@ class PaypalController extends Controller
             $payment->create($apiContext);
             // Get PayPal redirect URL and redirect the customer
             $approvalUrl = $payment->getApprovalLink();
-            $this->updateOrderRerferenceId($request->order_id, $payment->id);
+            $this->updateOrderRerferenceId($request->order_id, $payment->id, $request->paymentMethod);
             return response()->json($approvalUrl, 200);
 
             // Redirect the customer to $approvalUrl
@@ -98,15 +102,7 @@ class PaypalController extends Controller
         if ($validator->fails()) {
             return redirect()->route('frontend.home')->with('error', trans('process_failure'));
         }
-        $order = Order::where(['reference_id' => $request->paymentId, 'paid' => false])->with('user', 'order_metas.ordermetable')->first();
-        $order->update([
-            'paid' => true,
-            'status' => 'paid'
-        ]);
-        $settings = Setting::first();
-        Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
-        $markdown = new Markdown(view(), config('mail.markdown'));
-        return $markdown->render('emails.orders.paid', ['order' => $order]);
+        return $this->orderSuccessAction($request->paymentId);
     }
 
     public function cancel()
