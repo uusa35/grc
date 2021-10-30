@@ -1224,5 +1224,6 @@ export const ar = {
     "go_to_payment_page" : "الذهاب لصفحة الدفع",
     "do_u_have_a_coupon" : "في حالة وجود كود للخصم يمكن أدخل كود الخصم وسيتم تفعيله مباشرة على عربة التسوق .. ",
     "enter_coupon_code" : "أدخل كود الكوبون",
-    "main_category" : "تصنيف رئيسي"
+    "main_category" : "تصنيف رئيسي",
+    "percentage" : "النسبة"
 }

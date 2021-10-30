@@ -12,7 +12,6 @@ export default function({elements}) {
     const {params} = route();
     const dispatch = useDispatch();
 
-    console.log('elements', elements.data);
     return (
         <BackendContainer
             elements={elements}

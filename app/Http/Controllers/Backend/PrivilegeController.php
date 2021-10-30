@@ -25,7 +25,7 @@ class PrivilegeController extends Controller
      */
     public function index()
     {
-        $elements = new PrivilegeCollection(Privilege::paginate(Self::TAKE_LESS));
+        $elements = new PrivilegeCollection(Privilege::orderBy('name_en','asc')->paginate(Self::TAKE_MID));
         return inertia('Backend/Privilege/PrivilegeIndex', compact('elements'));
     }
 

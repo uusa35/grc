@@ -27,7 +27,7 @@ class GovernateController extends Controller
      */
     public function index()
     {
-        $elements = new GovernateCollection(Governate::with('country')->paginate(Self::TAKE_LESS));
+        $elements = new GovernateCollection(Governate::with('country')->orderBy('id','ddesc')->paginate(Self::TAKE_LESS));
         return inertia('Backend/Governate/GovernateIndex', compact('elements'));
     }
 

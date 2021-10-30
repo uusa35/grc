@@ -10,7 +10,10 @@ class Coupon extends PrimaryModel
     protected $dates = ['created_at', 'updated_at','due_date'];
     protected $guarded = [''];
     protected $casts = [
-        'is_percentage' => 'boolean'
+        'is_percentage' => 'boolean',
+        'is_permanent' => 'boolean',
+        'consumed' => 'boolean',
+        'active' => 'boolean'
     ];
 
     public function user()

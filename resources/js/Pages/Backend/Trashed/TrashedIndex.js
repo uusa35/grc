@@ -18,7 +18,7 @@ export default function TrashedIndex({elements, model }) {
         getThumb
     } = useContext(AppContext);
     const [currentData, setCurrentData] = useState();
-    const { sort } = useSelector(state => state);
+    const { sort , locale } = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {

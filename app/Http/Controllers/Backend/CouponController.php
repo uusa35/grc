@@ -26,7 +26,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $elements = new CouponCollection(Coupon::paginate(Self::TAKE_LESS));
+        $elements = new CouponCollection(Coupon::orderBy('id','desc')->paginate(Self::TAKE_LESS));
         return inertia('Backend/Coupon/CouponIndex', compact('elements'));
     }
 
@@ -48,7 +48,22 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'value' => 'required|numeric|max:99',
+            "is_percentage" => 'required|numeric|max:50',
+            "active" => 'boolean',
+            "consumed" => 'boolean',
+            "code" => 'required|min:4|max:20|alpha_num',
+            "minimum_charge" => 'integer|max:99',
+            "is_permanent" => 'boolean',
+            "user_id" => 'integer|exists:users,id',
+            'due_date' => 'required|date|after:yesterday',
+
+        ]);
+        if (Coupon::create($request->all())) {
+            return redirect()->route('backend.coupon.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -70,7 +85,7 @@ class CouponController extends Controller
      */
     public function edit(Coupon $coupon)
     {
-        return inertia('Backend/Coupon/CouponEdit', compact('country'));
+        return inertia('Backend/Coupon/CouponEdit', compact('coupon'));
     }
 
     /**
@@ -83,15 +98,15 @@ class CouponController extends Controller
     public function update(Request $request, Coupon $coupon)
     {
         $request->validate([
-            'value' => 'numeric|max:99',
-            "is_percentage" => 'numeric|max:50',
+            'value' => 'required|numeric|max:99',
+            "is_percentage" => 'required|numeric|max:50',
             "active" => 'boolean',
             "consumed" => 'boolean',
-            "code" => 'max:10',
+            "code" => 'required|min:4|max:20|alpha_num',
             "minimum_charge" => 'integer|max:99',
             "is_permanent" => 'boolean',
             "user_id" => 'integer|exists:users,id',
-            "due_date" => 'date',
+            'due_date' => 'required|date|after:yesterday',
 
         ]);
         if ($coupon->update($request->all())) {

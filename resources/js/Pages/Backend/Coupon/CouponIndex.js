@@ -4,15 +4,21 @@ import {map} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
+import ActiveDot from "../components/widgets/ActiveDot";
 
 export default function({elements}) {
     const {trans, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
     const {params} = route();
 
     return (
-        <BackendContainer elements={elements} showSearch={elements.total > 1}
-                          showNoElements={elements.total < 1}
-                          showMobileView={elements.total > 1}
+        <BackendContainer
+            elements={elements}
+            showSearch={false}
+            showNoElements={elements.meta.total < 1}
+            showMobileView={elements.meta.total > 1}
+            total={elements.meta.total}
+            links={elements.meta.links}
+            mainModule={'coupon'}
         >
             <div className="flex flex-col hidden sm:block">
                 <div className=" overflow-auto">
@@ -33,7 +39,19 @@ export default function({elements}) {
                                         scope="col"
                                         className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
                                     >
-                                        {trans('name')}
+                                        {trans('code')}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                    >
+                                        {trans('value')}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                    >
+                                        {trans('percentage')}
                                     </th>
                                     <th
                                         scope="col"
@@ -63,7 +81,14 @@ export default function({elements}) {
                                 {map(elements.data, element => (
                                     <tr key={element.id}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">
+                                            {element.code}
+                                            <ActiveDot active={element.active}/>
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.value}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">
+                                            <ActiveDot active={element.is_percentage}/>
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.coupon.edit`, element.id)}
