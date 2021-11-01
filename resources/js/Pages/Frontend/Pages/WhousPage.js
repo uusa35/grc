@@ -5,7 +5,7 @@ import {AppContext} from "../../context/AppContext";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
-var __html = require('./import.html');
+var __html = require('./whous.html');
 var template = { __html: __html };
 export default function ({ settings }) {
     const { trans  , getLocalized } = useContext(AppContext)
@@ -13,7 +13,7 @@ export default function ({ settings }) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <SubMetaElement title={trans('import_from_egypt')}/>
+                <SubMetaElement title={trans('whous')}/>
         <div className="bg-white relative overflow-hidden">
             {/* Decorative background image and gradient */}
             <div aria-hidden="true" className="absolute inset-0">
@@ -38,7 +38,7 @@ export default function ({ settings }) {
                         id="sale-heading"
                         className="font-almarai text-center text-4xl mt-10 font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
                     >
-                        {trans('import_from_egypt')}
+                        {trans('whous')}
                     </h2>
                 </div>
             </section>

@@ -225,20 +225,6 @@ export default function MainNav() {
                                                 {capitalize(trans('shop'))}
                                             </a>
                                         </div>
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.user.index', {is_designer: true})}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('our_clients'))}
-                                            </Link>
-                                        </div>
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.user.index', {is_celebrity: true})}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('our_partners'))}
-                                            </Link>
-                                        </div>
                                     </>
                                 }
                                 {
@@ -495,11 +481,11 @@ export default function MainNav() {
                                 {
                                     mgt && <>
                                         <Link
-                                            href={route('frontend.aboutus')}
-                                            onClick={() => dispatch(setParentModule('aboutus'))}
-                                            className={classNames(parentModule == 'aboutus' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                            href={route('frontend.whous')}
+                                            onClick={() => dispatch(setParentModule('whous'))}
+                                            className={classNames(parentModule == 'whous' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                         >
-                                            {capitalize(trans('aboutus'))}
+                                            {capitalize(trans('whous'))}
                                         </Link>
                                         <a
                                             target="_blank"
@@ -535,20 +521,6 @@ export default function MainNav() {
                                             className={classNames(parentModule == 'vacancies' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                         >
                                             {capitalize(trans('vacancies'))}
-                                        </Link>
-                                        <Link
-                                            href={route('frontend.user.index', {is_designer: true})}
-                                            onClick={() => dispatch(setParentModule('client'))}
-                                            className={classNames(parentModule == 'client' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('our_clients'))}VacanciesPage
-                                        </Link>
-                                        <Link
-                                            href={route('frontend.user.index', {is_celebrity: true})}
-                                            onClick={() => dispatch(setParentModule('partner'))}
-                                            className={classNames(parentModule == 'partner' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('our_partners'))}
                                         </Link>
                                     </>
                                     }
@@ -598,7 +570,8 @@ export default function MainNav() {
                                     }
 
                                     {/*     pages */}
-                                    <Popover className="relative flex justify-center">
+                                {
+                                    !mgt ? <Popover className="relative flex justify-center">
                                         {({open}) => (
                                             <>
                                                 <Popover.Button
@@ -797,7 +770,9 @@ export default function MainNav() {
                                                 </Transition>
                                             </>
                                         )}
-                                    </Popover>
+                                    </Popover> : null
+                                }
+
                                     </div>
                                     </Popover.Group>
 

@@ -445,7 +445,7 @@ export const ar = {
     'image_path' : 'image_path',
     'address_ar' : 'العنوان باللغة العربية',
     'address_en' : 'العنوان باللغة الإنجليزية',
-    'aboutus' : 'من نحن',
+    'aboutus' : 'نبذة عنا',
     'create_tag' : 'إنشاء كلمة مفتاحية',
     'tag_main_details' : 'معلومات اساسية للكلمة الافتتاحية',
     'tag_attributes_details' : 'مزيد من التفاصيل',
@@ -1229,5 +1229,6 @@ export const ar = {
     "import_from_egypt" : "الإستيراد من مصر",
     "distribution_service" : "خدمة التوزيع",
     "vacancies" : "الوظائف المتاحة",
-    "distribution_message" : "يمكنك الآن التواصل معنا لمزيد من المعلومات حول خدمة التوزيع"
+    "distribution_message" : "يمكنك الآن التواصل معنا لمزيد من المعلومات حول خدمة التوزيع",
+    "whous" : "من نحن"
 }

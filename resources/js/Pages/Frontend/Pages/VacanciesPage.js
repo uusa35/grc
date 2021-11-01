@@ -15,7 +15,7 @@ export default function ({ settings }) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <SubMetaElement title={trans('aboutus')}/>
+                <SubMetaElement title={trans('vacancies')}/>
                 <div className="bg-white relative overflow-hidden">
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0">

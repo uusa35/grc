@@ -91,6 +91,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('terms', [FrontendPageController::class, 'getTerms'])->name('terms');
     Route::get('services', [FrontendPageController::class, 'getServices'])->name('services');
     Route::get('faqs', [FrontendPageController::class, 'getFaqs'])->name('faqs');
+    Route::get('whous', [FrontendPageController::class, 'getWhous'])->name('whous');
     Route::get('import/egypt', [FrontendPageController::class, 'getImportFromEgypt'])->name('import.egypt');
     Route::get('distribution/service', [FrontendPageController::class, 'getDistributionServicePage'])->name('distribution.service');
     Route::get('vacancies', [FrontendPageController::class, 'getVacancies'])->name('vacancies');

@@ -74,6 +74,11 @@ class FrontendPageController extends Controller
         return inertia('Frontend/Pages/ServicesPage');
     }
 
+    public function getWhous()
+    {
+        return inertia('Frontend/Pages/WhousPage');
+    }
+
     public function getImportFromEgypt()
     {
         return inertia('Frontend/Pages/ImportFromEgyptPage');
