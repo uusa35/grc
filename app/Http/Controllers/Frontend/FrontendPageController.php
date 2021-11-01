@@ -74,6 +74,21 @@ class FrontendPageController extends Controller
         return inertia('Frontend/Pages/ServicesPage');
     }
 
+    public function getImportFromEgypt()
+    {
+        return inertia('Frontend/Pages/ImportFromEgyptPage');
+    }
+
+    public function getDistributionServicePage()
+    {
+        return inertia('Frontend/Pages/DistributionServicePage');
+    }
+
+    public function getVacancies()
+    {
+        return inertia('Frontend/Pages/VacanciesPage');
+    }
+
     public function getFaqs()
     {
         $elements = Faq::active()->get();

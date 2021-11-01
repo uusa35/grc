@@ -91,6 +91,9 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('terms', [FrontendPageController::class, 'getTerms'])->name('terms');
     Route::get('services', [FrontendPageController::class, 'getServices'])->name('services');
     Route::get('faqs', [FrontendPageController::class, 'getFaqs'])->name('faqs');
+    Route::get('import/egypt', [FrontendPageController::class, 'getImportFromEgypt'])->name('import.egypt');
+    Route::get('distribution/service', [FrontendPageController::class, 'getDistributionServicePage'])->name('distribution.service');
+    Route::get('vacancies', [FrontendPageController::class, 'getVacancies'])->name('vacancies');
     Route::get('subscriptions', [FrontendPageController::class, 'getSubscriptions'])->name('subscriptions');
     // cart + coupon + guest registeration + payment
     Route::get('cart', [FrontendCartController::class, 'index'])->name('cart.index');

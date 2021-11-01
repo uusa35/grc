@@ -163,7 +163,7 @@ export const ar = {
     'find_us_on_stores' : 'حمل تطبيقنا على الاستور',
     'my_account' : 'حسابي',
     'register' : 'تسجيل',
-    'about_us' : 'نبذة عنا',
+    'about_us' : 'من نحن',
     'contact_us_info' : 'معلومات الاتصال بنا',
     'location' : 'الموقع',
     'mail' : 'البريد',
@@ -445,7 +445,7 @@ export const ar = {
     'image_path' : 'image_path',
     'address_ar' : 'العنوان باللغة العربية',
     'address_en' : 'العنوان باللغة الإنجليزية',
-    'aboutus' : 'نبذه عنا',
+    'aboutus' : 'من نحن',
     'create_tag' : 'إنشاء كلمة مفتاحية',
     'tag_main_details' : 'معلومات اساسية للكلمة الافتتاحية',
     'tag_attributes_details' : 'مزيد من التفاصيل',
@@ -779,7 +779,7 @@ export const ar = {
     'sign_up_today_and_get' : 'قم بالتسجيل اليوم واحصل على',
     'items' : 'قطع',
     'empty' : 'فارغة',
-    'shop' : 'متجر',
+    'shop' : 'المتجر',
     'have_coupon' : 'لديك كوبون/قسيمة',
     'shippment_package' : 'طريقة الشحن',
     'shippment' : 'شحنة',
@@ -1225,5 +1225,9 @@ export const ar = {
     "do_u_have_a_coupon" : "في حالة وجود كود للخصم يمكن أدخل كود الخصم وسيتم تفعيله مباشرة على عربة التسوق .. ",
     "enter_coupon_code" : "أدخل كود الكوبون",
     "main_category" : "تصنيف رئيسي",
-    "percentage" : "النسبة"
+    "percentage" : "النسبة",
+    "import_from_egypt" : "الإستيراد من مصر",
+    "distribution_service" : "خدمة التوزيع",
+    "vacancies" : "الوظائف المتاحة",
+    "distribution_message" : "يمكنك الآن التواصل معنا لمزيد من المعلومات حول خدمة التوزيع"
 }
