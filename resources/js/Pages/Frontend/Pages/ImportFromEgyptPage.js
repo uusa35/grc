@@ -5,6 +5,8 @@ import {AppContext} from "../../context/AppContext";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
+import {Link} from "@inertiajs/inertia-react";
+import route from "ziggy-js";
 var __html = require('./import.html');
 var template = { __html: __html };
 export default function ({ settings }) {
@@ -49,6 +51,14 @@ export default function ({ settings }) {
                 className="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:py-32 lg:px-8"
             >
                 <div className="max-w-2xl mx-auto lg:max-w-none">
+                    <div className="flex w-full justify-center ">
+                        <Link
+                            href={route('frontend.joinus')}
+                            className="rounded-md shadow-lg text-lg p-5 mb-10 bg-gray-600 text-white text-center"
+                        >
+                            {trans('joinus_message')}
+                        </Link>
+                    </div>
                     <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full">
                         <EmbeddedHtml html={__html} />
                     </div>
