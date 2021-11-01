@@ -1230,5 +1230,6 @@ export const ar = {
     "distribution_service" : "خدمة التوزيع",
     "vacancies" : "الوظائف المتاحة",
     "distribution_message" : "يمكنك الآن التواصل معنا لمزيد من المعلومات حول خدمة التوزيع",
-    "whous" : "من نحن"
+    "whous" : "من نحن",
+    "shop_and_products" : "المتجر (المنتجات)"
 }

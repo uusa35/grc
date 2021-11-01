@@ -113,29 +113,6 @@ export default function HomePage({
                         </>
                     }
                     {
-                        mgt && <>
-                            <ElementSlider
-                                showNavigation={false}
-                                elements={onHomeClients}
-                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-                                title={trans('our_clients')}
-                                type={'user'}
-                                moduleType={'user'}
-                                params={{is_designer:  true}}
-                            />
-                            <ElementSlider
-                                showNavigation={false}
-                                elements={onHomePartners}
-                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-                                title={trans('our_partners')}
-                                type={'user'}
-                                moduleType={'user'}
-                                params={{is_celebrity:  true}}
-                            />
-
-                        </>
-                    }
-                    {
                         settings.enable_newsletter && <NewsLetter/>
                     }
 
@@ -144,3 +121,25 @@ export default function HomePage({
         </FrontendContainer>
     )
 }
+
+    // mgt && <>
+    //     <ElementSlider
+    //         showNavigation={false}
+    //         elements={onHomeClients}
+    //         slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+    //         title={trans('our_clients')}
+    //         type={'user'}
+    //         moduleType={'user'}
+    //         params={{is_designer:  true}}
+    //     />
+    //     <ElementSlider
+    //         showNavigation={false}
+    //         elements={onHomePartners}
+    //         slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+    //         title={trans('our_partners')}
+    //         type={'user'}
+    //         moduleType={'user'}
+    //         params={{is_celebrity:  true}}
+    //     />
+    //
+    // </>

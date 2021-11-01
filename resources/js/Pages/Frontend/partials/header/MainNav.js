@@ -492,7 +492,7 @@ export default function MainNav() {
                                             href={`https://shop.mgt-sa.com`}
                                             className={"flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize"}
                                         >
-                                            {capitalize(trans('shop'))}
+                                            {capitalize(trans('shop_and_products'))}
                                         </a>
                                         <Link
                                             href={route('frontend.import.egypt')}
