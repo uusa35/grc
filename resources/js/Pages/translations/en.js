@@ -1213,5 +1213,15 @@ export const en  = {
     "tap" : "Tap",
     "myfatorah" : "My Fatoorah",
     "paypal" : "Paypal",
-    "go_to_payment_page" : "go to payment page"
+    "go_to_payment_page" : "go to payment page",
+    "do_u_have_a_coupon" : "Do you have a coupon ? please enter the code to get your discount immediately. ",
+    "enter_coupon_code" : "enter coupon's code",
+    "main_category" : "main category",
+    "percentage" : "percentage",
+    "import_from_egypt" : "import from egypt",
+    "distribution_service" : "distribution service",
+    "vacancies" : "vacancies",
+    "distribution_message" : "you can contactus for more information about our distribution services",
+    "whous" : "who us",
+    "shop_and_products" : "shop (Our Products)"
 }
