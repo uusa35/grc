@@ -162,6 +162,54 @@ export default function MainNav() {
                                     </Link>
                                 </div>
                                 {
+                                    mgt && <>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.whous')}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('whous'))}
+                                            </Link>
+                                        </div>
+                                        <div className="flow-root">
+                                            <a
+                                                target="_blank"
+                                                href={`https://shop.mgt-sa.com`}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('shop'))}
+                                            </a>
+                                        </div>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.import.egypt')}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('import_from_egypt'))}
+                                            </Link>
+                                        </div>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.distribution.service')}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('distribution_service'))}
+                                            </Link>
+                                        </div>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.contactus')}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('contactus'))}
+                                            </Link>
+                                        </div>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.vacancies')}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('vacancies'))}
+                                            </Link>
+                                        </div>
+                                    </>
+                                }
+
+                                {
                                     settings.enable_books && <div className="flow-root">
                                         <Link
                                             href={route('frontend.book.index')}
@@ -214,18 +262,6 @@ export default function MainNav() {
                                             {capitalize(trans('products'))}
                                         </Link>
                                     </div>
-                                }
-                                {
-                                    mgt && <>
-                                        <div className="flow-root">
-                                            <a
-                                                target="_blank"
-                                                href={`https://shop.mgt-sa.com`}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('shop'))}
-                                            </a>
-                                        </div>
-                                    </>
                                 }
                                 {
                                     guest ? <>
