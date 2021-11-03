@@ -50,7 +50,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return inertia('Backend/Category/CategoryCreate');
+        $elements = CategoryExtraLightResource::collection(Category::where(['is_parent' => true, 'parent_id' => 0])->get());
+        return inertia('Backend/Category/CategoryCreate', compact('elements'));
     }
 
     /**
@@ -61,7 +62,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'caption_ar' => 'required|max:1000',
+            'caption_en' => 'required|max:1000',
+            'order' => 'integer'
+        ]);
+        $element = Category::create($request->except('image','image_rectangle','file'));
+        if ($element) {
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['500', '500'], false) : null;
+            $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
+            $request->hasFile('image_rectangle') ? $this->saveMimes($element, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
+            return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.progress_failure'));
     }
 
     /**

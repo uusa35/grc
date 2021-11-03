@@ -9,8 +9,8 @@ import {Link} from "@inertiajs/inertia-react";
 import route  from 'ziggy-js';
 var __html = require('./vacancies.html');
 var template = { __html: __html };
-export default function ({ settings }) {
-    const { trans  , getLocalized } = useContext(AppContext)
+export default function () {
+    const { trans } = useContext(AppContext)
 
     return (
         <FrontendContainer>

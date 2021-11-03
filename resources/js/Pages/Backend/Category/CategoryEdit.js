@@ -225,7 +225,7 @@ export default function({category, elements}) {
                                 <input
                                     onChange={handleChange}
                                     required
-                                    type="text"
+                                    type="number"
                                     name="order"
                                     defaultValue={category.order}
                                     id="order"
@@ -294,7 +294,7 @@ export default function({category, elements}) {
                             </p>
                         </div>
                         {/* file pdf */}
-                        <div className="sm:col-span-3">
+                        <div className="sm:col-span-3 invisible">
                             <label htmlFor="main_image"
                                    className={`block  flex flex-row justify-between items-center  text-gray-700`}>
                                 {trans('pdf_file')}

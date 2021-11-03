@@ -14,7 +14,7 @@ import axios from "axios";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 
-export default function () {
+export default function() {
     const {trans, getThumb, getLocalized} = useContext(AppContext);
     const [code, setCode] = useState('');
     const {settings} = useContext(GlobalContext)
@@ -23,7 +23,7 @@ export default function () {
     const {errors} = props;
 
     const {data, setData, post, progress} = useForm({
-        'code' : '',
+        'code': '',
         'first_name': '',
         'last_name': '',
         'notes': '',
@@ -34,10 +34,10 @@ export default function () {
     });
 
     useMemo(() => {
-        const currentCode  = random(1111, 9999);
+        const currentCode = random(1111, 9999);
         setCode(currentCode);
         setData('code', currentCode);
-    },[])
+    }, [])
 
     const handleChange = (e) => {
         setData(values => ({
@@ -191,7 +191,8 @@ export default function () {
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
-                                                                {errors.first_name && <div className={`text-red-900 text-sm`}>{errors.first_name}</div>}
+                                                                {errors.first_name && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.first_name}</div>}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -211,7 +212,8 @@ export default function () {
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
-                                                                {errors.last_name && <div className={`text-red-900 text-sm`}>{errors.last_name}</div>}
+                                                                {errors.last_name && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.last_name}</div>}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -230,7 +232,8 @@ export default function () {
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
-                                                                {errors.email && <div className={`text-red-900 text-sm`}>{errors.email}</div>}
+                                                                {errors.email && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.email}</div>}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -255,7 +258,8 @@ export default function () {
                                                                 aria-describedby="phone-optional"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
-                                                                {errors.mobile && <div className={`text-red-900 text-sm`}>{errors.mobile}</div>}
+                                                                {errors.mobile && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.mobile}</div>}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -274,7 +278,8 @@ export default function () {
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
-                                                                {errors.subject && <div className={`text-red-900 text-sm`}>{errors.subject}</div>}
+                                                                {errors.subject && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.subject}</div>}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -295,7 +300,8 @@ export default function () {
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
-                                                                {errors.code_confirmation && <div className={`text-red-900 text-sm`}>{errors.code_confirmation}</div>}
+                                                                {errors.code_confirmation && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.code_confirmation}</div>}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -309,7 +315,7 @@ export default function () {
                                                               {trans('max_1000_characters')}
                                                             </span>
                                                         </div>
-                                                            <div className="mt-1">
+                                                        <div className="mt-1">
                                                                 <textarea
                                                                     id="content"
                                                                     name="content"
@@ -319,10 +325,11 @@ export default function () {
                                                                     aria-describedby="message-max"
                                                                     defaultValue={''}
                                                                 />
-                                                                <p className={`mt-2  text-gray-500`}>
-                                                                    {errors.content && <div className={`text-red-900 text-sm`}>{errors.content}</div>}
-                                                                </p>
-                                                            </div>
+                                                            <p className={`mt-2  text-gray-500`}>
+                                                                {errors.content && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.content}</div>}
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                     <div className="sm:col-span-2 sm:flex sm:justify-end">
                                                         <button

@@ -40,7 +40,7 @@ export default function NormalServiceWidget({element}) {
                     <img className="w-5 h-5 md:w-10 md:h-10 rounded-full object-fill shadow-sm" src={getThumb(element.user.image)} alt={element.user[getLocalized()]}/>
                 </Link>
             </div>
-            <ElementPrice price={element.price} salePrice={element.sale_price} isOnSale={element.isOnSale}/>
+            <ElementPrice price={element.price} salePrice={element.sale_price} isOnSale={element.isOnSale} free={element.free}/>
         </div>
         </motion.div>
     );

@@ -46,7 +46,7 @@ export default function NormalCourseWidget ({ element }) {
                     <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-cover shadow-sm" src={getThumb(element.user.image)} alt={element.user[getLocalized()]}/>
                 </Link>
             </div>
-            <ElementPrice price={element.price} salePrice={element.sale_price} isOnSale={element.isOnSale}/>
+            <ElementPrice price={element.price} salePrice={element.sale_price} isOnSale={element.isOnSale} free={element.free}/>
         </div>
         </motion.div>
     );

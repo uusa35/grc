@@ -129,7 +129,9 @@ export default function ({element, relatedElements, auth}) {
                             <h2 className="sr-only">{trans('information')}</h2>
                             <ElementPrice price={element.price} salePrice={element.sale_price}
                                           showLocal={true}
-                                          isOnSale={element.isOnSale} large={true}/>
+                                          isOnSale={element.isOnSale} large={true}
+                                          free={element.free}
+                            />
                         </div>
                         {/* Reviews */}
                         {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'course'}/>}

@@ -6,8 +6,6 @@ const SubMetaElement = ({
                             image = null,
                             description = null,
                         }) => {
-
-
     return (
         <InertiaHead>
             <title>{title}</title>

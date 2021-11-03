@@ -115,7 +115,6 @@ export default function HomePage({
                     {
                         settings.enable_newsletter && <NewsLetter/>
                     }
-
                 </div>
             </FrontendContentContainer>
         </FrontendContainer>
