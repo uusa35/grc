@@ -521,7 +521,7 @@ export default function ({users, categories, book, elementCategories}) {
                                 </p>
                             </div>
                             {/* embedded*/}
-                            <div className="sm:col-span-full has-tooltip">
+                            <div className="sm:col-span-full has-tooltip hidden">
                                 <label htmlFor="embedded" className={`block   text-gray-700`}>
                                     {trans('embedded')} {trans('book')}
                                 </label>
@@ -530,7 +530,6 @@ export default function ({users, categories, book, elementCategories}) {
                                              onChange={handleChange}
                                              id="embedded"
                                              name="embedded"
-                                             required
                                              rows={12}
                                              className={`flex-1 shadow-sm focus:ring-gray-500 focus:border-gray-500 block  border-gray-300 rounded-md`}
                                              defaultValue={data.embedded}
