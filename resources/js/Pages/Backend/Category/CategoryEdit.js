@@ -46,8 +46,6 @@ export default function({category, elements}) {
         'parent_id': isNull(category.parent_id) ? 0 : category.parent_id,
     });
 
-    console.log('category', category);
-    console.log('elements', elements);
 
     const handleChange = (e) => {
         setData(values => ({

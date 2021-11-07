@@ -24,19 +24,19 @@ export default function() {
                 </th>
                 <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:inline-block"
                 >
                     {trans('type')}
                 </th>
                 <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:inline-block"
                 >
                     {trans('qty')}
                 </th>
                 <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:inline-block"
                 >
                     {trans('price')}
                 </th>
@@ -92,9 +92,9 @@ export default function() {
                             </div>
                         </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{trans(element.type)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.qty}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block ">{trans(element.type)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block">{element.qty}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block">
                         {element.price} {trans('kd')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">

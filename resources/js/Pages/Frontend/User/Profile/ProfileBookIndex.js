@@ -76,7 +76,7 @@ export default function({elements, firstOrder}) {
                                                             <td className="px-2 py-4 whitespace-nowrap">{element.id}</td>
                                                             <td className="px-2 py-4 whitespace-nowrap">{element.sku}</td>
                                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                                <Link href={route('frontend.profile.book', {
+                                                                <a href={route('frontend.profile.book', {
                                                                     reference_id: firstOrder.reference_id,
                                                                     order_id : firstOrder.id,
                                                                     id: element.id,
@@ -104,7 +104,7 @@ export default function({elements, firstOrder}) {
                                                                             </Link>
                                                                         </div>
                                                                     </div>
-                                                                </Link>
+                                                                </a>
                                                             </td>
                                                             <td className="px-2 py-4 whitespace-nowrap">
                                                                 <Link
@@ -114,7 +114,7 @@ export default function({elements, firstOrder}) {
                                                                 </Link>
                                                             </td>
                                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                                <Link href={route('frontend.profile.book', {
+                                                                <a href={route('frontend.profile.book', {
                                                                     reference_id: firstOrder.reference_id,
                                                                     order_id : firstOrder.id,
                                                                     id: element.id,
@@ -140,7 +140,7 @@ export default function({elements, firstOrder}) {
                                                                                       d="M9 5l7 7-7 7"/>
                                                                             </svg>
                                                                     }
-                                                                </Link>
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                     ))}

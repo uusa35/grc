@@ -10,42 +10,47 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @section('scripts')
+        <script src="{{ asset('js/app.js') }}" defer></script>
+    @show
 
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+<!-- Styles -->
+    @section('styles')
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @show
 </head>
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
-    <div id="app">
-        <header class="bg-blue-900 py-6">
-            <div class="container mx-auto flex justify-between items-center px-6">
-                <div>
-                    <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-                <nav class="hidden space-x-4 text-gray-300 text-sm sm:text-base">
-                    @guest
-                        <a class="no-underline hover:underline" href="{{ route('login') }}">@lang('general.login')</a>
-                        @if (Route::has('register'))
-                            <a class="no-underline hover:underline" href="{{ route('register') }}">@lang('general.register')</a>
-                        @endif
-                    @else
-                        <span>{{ Auth::user()->name }}</span>
-
-                        <a href="{{ route('logout') }}"
-                           class="no-underline hover:underline"
-                           onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">@lang('general.logout')</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                            {{ csrf_field() }}
-                        </form>
-                    @endguest
-                </nav>
+<div id="app">
+    <header class="bg-blue-900 py-6" style="display: none">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <div>
+                <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
             </div>
-        </header>
+            <nav class="hidden space-x-4 text-gray-300 text-sm sm:text-base">
+                @guest
+                    <a class="no-underline hover:underline" href="{{ route('login') }}">@lang('general.login')</a>
+                    @if (Route::has('register'))
+                        <a class="no-underline hover:underline"
+                           href="{{ route('register') }}">@lang('general.register')</a>
+                    @endif
+                @else
+                    <span>{{ Auth::user()->name }}</span>
 
-        @yield('content')
-    </div>
+                    <a href="{{ route('logout') }}"
+                       class="no-underline hover:underline"
+                       onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">@lang('general.logout')</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        {{ csrf_field() }}
+                    </form>
+                @endguest
+            </nav>
+        </div>
+    </header>
+
+    @yield('content')
+</div>
 </body>
 </html>

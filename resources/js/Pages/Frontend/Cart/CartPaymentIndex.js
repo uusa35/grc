@@ -20,7 +20,7 @@ export default function({order}) {
     const {settings} = useContext(GlobalContext);
     const paymentMethods = [
         {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create')},
-        {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`)},
+        // {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`)},
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
     const [currentURL, setCurrentUrl] = useState('');
@@ -31,7 +31,6 @@ export default function({order}) {
         paymentMethod: paymentMethod.name
     })
 
-    console.log('settings', settings.payment_method);
     useMemo(() => {
         if (paymentMethod.name === 'paypal') {
             return axios.post(paymentMethod.paymentRoute, {
@@ -48,9 +47,6 @@ export default function({order}) {
             // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
         }
     }, [paymentMethod])
-
-    console.log('paymentMethod', paymentMethod);
-    console.log('current', currentURL);
 
     return (
         <FrontendContainer>

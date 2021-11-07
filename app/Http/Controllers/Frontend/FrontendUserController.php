@@ -247,9 +247,10 @@ class FrontendUserController extends Controller
             $element = new ServiceResource(Book::whereId($request->id)->with('user', 'images')->with(['comments' => function ($q) {
                 return $q->where('session_id', request()->session_id);
             }])->first());
+            return view('book.show', compact('element'));
             return inertia('Frontend/User/Profile/ProfileBookShow', compact('element'));
         }
-        return redirect()->bakc()->with('error', trans('general.process_failure'));
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     public function getFavorites()

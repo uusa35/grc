@@ -1098,5 +1098,16 @@ return array (
     "order_items" => "تفاصيل الطلب",
     "username" => "اسم المستخدم",
     "net_total" => "الإجمالي بعد الخصم",
-    "invoice_summary" => "تفاصيل الفاتورة"
+    "invoice_summary" => "تفاصيل الفاتورة",
+    "next_page" => "الصفحة التالية",
+    "previous_page" => "الصفحة السابقة",
+    "full_screen" => "عرض الشاشة",
+    "zoom_in" => "تكبير",
+    "zoom_out" => "تصغير",
+    "play" => "تشغيل",
+    "pause" => "إيقاف مؤقت",
+    "share" => "مشاركة",
+    "first_page" => "الصفحة الأولى",
+    "last_page" => "الصفحة الأخيرة",
+
 );

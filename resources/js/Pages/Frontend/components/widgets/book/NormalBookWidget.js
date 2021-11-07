@@ -10,7 +10,6 @@ import {motion} from "framer-motion"
 export default function NormalBookWidget({element}) {
     const {getLocalized, getThumb} = useContext(AppContext);
 
-    console.log('element', element);
     return (
         <motion.div
             initial={false}
