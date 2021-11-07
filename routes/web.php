@@ -102,6 +102,8 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('cart/user/confirmation', [FrontendCartController::class, 'getUserConfirmation'])->name('cart.confirmation');
     Route::get('cart/coupon', [FrontendCartController::class, 'getCouponCode'])->name('cart.get.coupon');
     Route::post('cart/coupon', [FrontendCartController::class, 'postCouponCode'])->name('cart.coupon');
+    // PDF free books only
+    Route::get('free/book/{id}', [FrontendUserController::class,'getFreeBook'])->name('free.book');
     Route::group(['middleware' => 'auth'], function () {
         Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.get');
         Route::post('cart/payment', [FrontendCartController::class, 'getPayment'])->name('cart.payment.post');

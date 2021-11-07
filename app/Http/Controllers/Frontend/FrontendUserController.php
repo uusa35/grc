@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookResource;
 use App\Http\Resources\CourseCollection;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\ServiceCollection;
@@ -236,7 +237,7 @@ class FrontendUserController extends Controller
     {
         $request->validate([
             'reference_id' => 'required',
-            'id' => 'required|exists:courses,id',
+            'id' => 'required|exists:books,id',
             'session_id' => 'required|integer',
             'order_id' => 'required|integer|exists:orders,id'
         ]);
@@ -244,11 +245,20 @@ class FrontendUserController extends Controller
             return $q->where(['ordermetable_type' => 'App\Models\Book']);
         }])->get();
         if (in_array(request()->id, $order->pluck('order_metas')->flatten()->pluck('ordermetable_id')->toArray())) {
-            $element = new ServiceResource(Book::whereId($request->id)->with('user', 'images')->with(['comments' => function ($q) {
+            $element = new BookResource(Book::whereId($request->id)->with('user', 'images')->with(['comments' => function ($q) {
                 return $q->where('session_id', request()->session_id);
             }])->first());
             return view('book.show', compact('element'));
             return inertia('Frontend/User/Profile/ProfileBookShow', compact('element'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
+    }
+
+    public function getFreeBook(Request $request)
+    {
+        $element = new BookResource(Book::whereId($request->id)->with('user', 'images')->first());
+        if ($element->free) {
+            return view('book.show', compact('element'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }

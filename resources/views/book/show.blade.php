@@ -6,20 +6,22 @@
 
 
 @section('content')
-    <header class="bg-blue-900 py-6">
-        <div class="container mx-auto flex justify-between items-center px-6">
-            <div>
-                <button onclick="window.history.back()" class="text-lg font-semibold text-gray-100 no-underline">
-                    <h2>
-                        {{ trans('general.back') }}
-                    </h2>
-                </button>
+    <div style="height: 100vh; width: 100%; background-color: black;">
+        <header class=" py-6" style="background-color: black; display: none">
+            <div class="container mx-auto flex justify-between items-center px-6">
+                <div>
+                    <button onclick="window.history.back()" class="text-lg font-semibold text-gray-100 no-underline">
+                        <h2>
+                            {{ trans('general.back') }}
+                        </h2>
+                    </button>
+                </div>
             </div>
-        </div>
-    </header>
-    <div class="PDFFlip"
-         style="width: 100%; height: auto;"
-         id="PDFF" source="{{ asset(env('FILES').$element->file) }}"></div>
+        </header>
+        <div class="PDFFlip"
+             id="PDFF" source="{{ asset(env('FILES').$element->file) }}"></div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -112,7 +114,8 @@
 
             {{--backgroundImage: "{{ asset(env('THUMBNAIL').$element->image) }}",--}}
 
-            backgroundColor: "#fff",
+            // backgroundColor: "#fff",
+            backgroundColor: "black",
 
             controlsPosition: pdfflip.CONTROLSPOSITION.BOTTOM,
 
