@@ -64,7 +64,7 @@ class BookStore extends FormRequest
             'home_delivery_availability' => 'nullable|boolean',
             'free' => 'boolean',
             'download' => 'boolean',
-            "embedded" => "min:100"
+//            "embedded" => "min:100"
         ];
     }
 }
