@@ -32,11 +32,11 @@ class BookResource extends JsonResource
             'free' => $this->free,
             'download' => $this->download,
             'embedded' => $this->embedded,
-            'file' => $this->file,
+            'file' => encrypt($this->file),
             'is_available' => $this->is_available,
             'direct_purchase' => $this->direct_purchase,
             'user' => UserExtraLightResource::make($this->whenLoaded('user')),
-            'images' => ImageExtraLightResource::collection($this->whenLoaded('images'))
+            'images' => ImageExtraLightResource::collection($this->whenLoaded('images')),
         ];
     }
 }

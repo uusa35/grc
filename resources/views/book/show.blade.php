@@ -19,7 +19,10 @@
             </div>
         </header>
         <div class="PDFFlip"
-             id="PDFF" source="{{ asset(env('FILES').$element->file) }}"></div>
+             id="PDFF"
+             resource="https://{{ encrypt($element->name_ar) }}"
+             url="https://{{ encrypt($element->name_en) }}"
+        ></div>
     </div>
 
 @endsection
@@ -51,6 +54,7 @@
             autoEnableOutline: false,
 
             autoEnableThumbnail: false,
+            source : "{{ asset(env('FILES').$element->file) }}",
 
 
             /* TRANSLATE INTERFACE */

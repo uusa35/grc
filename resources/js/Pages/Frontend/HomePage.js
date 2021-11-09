@@ -19,8 +19,8 @@ export default function HomePage({
                                      onHomeParticipantAuthors,
                                      onHomeClients,
                                      onHomePartners,
-    mgt,
-    clearCart = false,
+                                     mgt,
+                                     clearCart = false,
                                      settings
                                  }) {
     const [slideNumber, setSlideNumber] = useState(6)
@@ -121,24 +121,24 @@ export default function HomePage({
     )
 }
 
-    // mgt && <>
-    //     <ElementSlider
-    //         showNavigation={false}
-    //         elements={onHomeClients}
-    //         slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-    //         title={trans('our_clients')}
-    //         type={'user'}
-    //         moduleType={'user'}
-    //         params={{is_designer:  true}}
-    //     />
-    //     <ElementSlider
-    //         showNavigation={false}
-    //         elements={onHomePartners}
-    //         slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-    //         title={trans('our_partners')}
-    //         type={'user'}
-    //         moduleType={'user'}
-    //         params={{is_celebrity:  true}}
-    //     />
-    //
-    // </>
+// mgt && <>
+//     <ElementSlider
+//         showNavigation={false}
+//         elements={onHomeClients}
+//         slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+//         title={trans('our_clients')}
+//         type={'user'}
+//         moduleType={'user'}
+//         params={{is_designer:  true}}
+//     />
+//     <ElementSlider
+//         showNavigation={false}
+//         elements={onHomePartners}
+//         slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+//         title={trans('our_partners')}
+//         type={'user'}
+//         moduleType={'user'}
+//         params={{is_celebrity:  true}}
+//     />
+//
+// </>
