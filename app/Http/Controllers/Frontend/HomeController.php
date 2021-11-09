@@ -33,7 +33,7 @@ class HomeController extends Controller
         $onHomeClients = UserExtraLightResource::collection(User::active()->OnHome()->designers()->orderBy('order','asc')->get());
         $onHomePartners = UserExtraLightResource::collection(User::active()->OnHome()->celebrities()->orderBy('order','asc')->get());
         $meta = SettingResource::make(Setting::first());
-        return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses','newOnHomeProducts', 'onHomeClients', 'onHomePartners', 'test'))
+        return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses','newOnHomeProducts', 'onHomeClients', 'onHomePartners'))
             ->withViewData([
             'meta' => $meta,
         ]);
