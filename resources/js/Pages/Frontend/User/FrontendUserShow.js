@@ -134,7 +134,7 @@ export default function ({element, relatedElements, auth}) {
                                                         )}
                                                       </span>
                                                 </Disclosure.Button>
-                                                <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                <Disclosure.Panel as="div" className="pb-6">
                                                     <p className="capitalize">
                                                         {element[getLocalized('description')]}
                                                     </p>

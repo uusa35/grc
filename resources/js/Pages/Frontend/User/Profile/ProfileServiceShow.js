@@ -233,7 +233,7 @@ export default function({element}) {
                                                         )}
                                                       </span>
                                                 </Disclosure.Button>
-                                                <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                <Disclosure.Panel as="div" className="pb-6">
                                                     <p className="capitalize">
                                                         {element[getLocalized('description')]}
                                                     </p>
@@ -271,7 +271,7 @@ export default function({element}) {
                                                         )}
                                                       </span>
                                                 </Disclosure.Button>
-                                                <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                <Disclosure.Panel as="div" className="pb-6">
                                                     <p className='capitalize'>
                                                         {element[getLocalized('notes')]}
                                                     </p>
@@ -308,7 +308,7 @@ export default function({element}) {
                                                         )}
                                                       </span>
                                                 </Disclosure.Button>
-                                                <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
+                                                <Disclosure.Panel as="div" className="pb-6">
                                                     <div className="flex flex-1 justify-start items-start">
                                                         <div>
                                                             <img
