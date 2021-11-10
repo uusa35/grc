@@ -14,13 +14,12 @@ import {Inertia} from "@inertiajs/inertia";
 import {clearCart} from "../../redux/actions";
 
 
-export default function({order}) {
+export default function({order, settings}) {
     const {cart, currency, locale} = useSelector(state => state);
     const {trans, getThumb, getLocalized, classNames, getAsset} = useContext(AppContext);
-    const {settings} = useContext(GlobalContext);
     const paymentMethods = [
         {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create')},
-        // {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`)},
+        {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`)},
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
     const [currentURL, setCurrentUrl] = useState('');
@@ -30,6 +29,8 @@ export default function({order}) {
         netTotal: cart.netTotal,
         paymentMethod: paymentMethod.name
     })
+
+    console.log('settings', settings);
 
     useMemo(() => {
         if (paymentMethod.name === 'paypal') {
@@ -45,8 +46,16 @@ export default function({order}) {
                 paymentMethod: paymentMethod.name
             }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
             // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+        } else if (paymentMethod.name === 'myfatoorahv2') {
+            return axios.post(paymentMethod.paymentRoute, {
+                netTotal: cart.netTotal,
+                order_id: order.id,
+                paymentMethod: paymentMethod.name
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+            // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
         }
     }, [paymentMethod])
+
 
     return (
         <FrontendContainer>

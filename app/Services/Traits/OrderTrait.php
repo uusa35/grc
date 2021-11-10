@@ -84,13 +84,7 @@ trait OrderTrait
         }
     }
 
-    public function updateOrderRerferenceId($orderId, $referenceId, $paymentMethod)
-    {
-        Order::whereId($orderId)->first()->update([
-            'reference_id' => $referenceId,
-            'payment_method' => $paymentMethod
-        ]);
-    }
+
 
     public function orderSuccessAction($reference_id) {
         $order = Order::where(['reference_id' => $reference_id, 'paid' => false])->with('user', 'order_metas.ordermetable')->first();
@@ -493,5 +487,13 @@ trait OrderTrait
         } catch (\Exception $e) {
             print_r($e->getMessage() . '- Mirsal Error');
         }
+    }
+
+    public function updateOrderRerferenceId($orderId, $referenceId, $paymentMethod)
+    {
+        Order::whereId($orderId)->first()->update([
+            'reference_id' => $referenceId,
+            'payment_method' => $paymentMethod
+        ]);
     }
 }

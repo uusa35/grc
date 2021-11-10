@@ -9,6 +9,7 @@ use App\Models\Coupon;
 use App\Models\Setting;
 use App\Models\Order;
 use App\Models\User;
+use App\Services\Traits\OrderTrait;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Mail;
@@ -26,7 +27,7 @@ use function Usama\MyFatoorahV2\executePayment;
 class MyFatoorahV2PaymentController extends Controller
 {
 
-    use MyFatoorahV2Trait;
+    use MyFatoorahV2Trait, OrderTrait;
 
     public function makePaymentApi(Request $request)
     {
@@ -68,7 +69,7 @@ class MyFatoorahV2PaymentController extends Controller
 
             /* ------------------------ Call InitiatePayment Endpoint ------------------- */
 //Fill POST fields array
-            $ipPostFields = ['InvoiceAmount' => 100, 'CurrencyIso' => 'KWD'];
+            $ipPostFields = ['InvoiceAmount' => request()->netTotal, 'CurrencyIso' => 'KWD'];
 
 //Call endpoint
             $paymentMethods = new PaymentMyfatoorahApiV2();
@@ -100,10 +101,11 @@ class MyFatoorahV2PaymentController extends Controller
               ]; */
 
 //Fill POST fields array
+            dd($methods);
             $postFields = [
                 //Fill required data
                 'paymentMethodId' => $methods->where('PaymentMethodId', 1)->first()->PaymentMethodId,
-                'InvoiceValue' => '50',
+                'InvoiceValue' => $request->netTotal,
                 'CallBackUrl' => route('myfatoorahv2.web.payment.result'),
                 'ErrorUrl' => route('myfatoorahv2.web.payment.error'), //or 'https://example.com/error.php'
                 //Fill optional data
@@ -122,11 +124,12 @@ class MyFatoorahV2PaymentController extends Controller
                 //'InvoiceItems'       => $invoiceItems,
             ];
 //Call endpoint
-            $data = $paymentMethods->executePayment(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $postFields);
+            $payment = $paymentMethods->executePayment(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $postFields);
 
 //You can save payment data in database as per your needs
-            $invoiceId = $data->InvoiceId;
-            $paymentURL = $data->PaymentURL;
+            $invoiceId = $payment->InvoiceId;
+            $paymentURL = $payment->PaymentURL;
+            $this->updateOrderRerferenceId($request->order_id, $payment->InvoiceId, $request->paymentMethod);
 
 //            return response()->json($paymentURL, 200);
 
@@ -145,14 +148,14 @@ class MyFatoorahV2PaymentController extends Controller
             ];
 
 //Call endpoint
-            $directData = $paymentMethods->directPayment($paymentURL, config('myfatoorah.apiKey'), $cardInfo);
-            dd($directData);
+//            $directData = $paymentMethods->directPayment($paymentURL, config('myfatoorah.apiKey'), $cardInfo);
+//            dd($directData);
 
 //You can save payment data in database as per your needs
-            $paymentId = $directData->PaymentId;
-            $paymentLink = $directData->PaymentURL;
+//            $paymentId = $directData->PaymentId;
+//            $paymentLink = $directData->PaymentURL;
 
-            return response()->json($paymentLink, 200);
+            return response()->json($paymentURL, 200);
 //Redirect your customer to the OTP page to complete the payment process
 //Display the payment link to your customer
             echo "Click on <a href='$paymentLink' target='_blank'>$paymentLink</a> to pay with payment ID: $paymentId, and invoice ID: $invoiceId.";
@@ -163,7 +166,7 @@ class MyFatoorahV2PaymentController extends Controller
 //            return $data['invoiceURL'];
 
         } catch (\Exception $ex) {
-            die($ex);
+            dd($ex);
         }
     }
 
@@ -173,20 +176,10 @@ class MyFatoorahV2PaymentController extends Controller
         $validate = validator($request->all(), [
             'paymentId' => 'required'
         ]);
-        $settings = Setting::first();
-        $referenceId = $this->getInvoiceId($request->has('paymentId') ? $request->paymentId : $request->Id);
-        $order = Order::where(['reference_id' => $referenceId])->with('order_metas.product', 'user', 'order_metas.product_attribute.size', 'order_metas.product_attribute.color')->first();
-        if ($validate->fails() || !$order) {
-            Mail::to($settings->email)->send(new OrderFailed($order, $settings, 'MyFatoorah Resut Case : Order Does not exist or PaymentId does not Exist Case #1'));
-            return abort('404', 'Your payment process is unsuccessful .. your deal is not created please try again or contact us.');
+        if($validate->fails()) {
+            abort('400',trans('general.process_failure'));
         }
-        $order->update(['status' => 'success', 'paid' => true]);
-        $this->decreaseQty($order);
-        $markdown = new Markdown(view(), config('mail.markdown'));
-        OrderSuccessProcessJob::dispatchNow($order, $order->user);
-//        OrderSuccessProcessJob::dispatch($order, $order->user)->delay(now()->addSeconds(15));
-        $this->clearCart();
-        return $markdown->render('emails.order-complete', ['order' => $order, 'user' => $order->user]);
+        return $this->orderSuccessAction($request->paymentId);
     }
 
     public function error(Request $request)

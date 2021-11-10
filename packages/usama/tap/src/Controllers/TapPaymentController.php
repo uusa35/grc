@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\OrderAttribute;
 use App\Models\Plan;
 use App\Models\User;
+use App\Services\Traits\OrderTrait;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Mail;
@@ -26,7 +27,7 @@ use Illuminate\Support\Facades\Mail;
  */
 class TapPaymentController extends Controller
 {
-    use TapTrait;
+    use TapTrait, OrderTrait;
 
     public function makePayment(Request $request)
     {

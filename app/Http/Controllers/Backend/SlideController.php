@@ -162,7 +162,10 @@ class SlideController extends Controller
         if ($slide->update($request->except('image'))) {
             $request->hasFile('image') ? $this->saveMimes($slide, $request, ['image'], ['1900', '750'], false) : null;
             $request->hasFile('file') ? $this->savePath($slide, $request, 'file') : null;
-            return redirect()->back()->with('success', trans('general.process_success'));
+            return redirect()->route('backend.slide.index', [
+                'slidable_type' => 'setting',
+                'slidable_id' => $slide->slideable_id,
+            ])->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
