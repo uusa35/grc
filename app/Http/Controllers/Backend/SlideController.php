@@ -164,7 +164,7 @@ class SlideController extends Controller
             $request->hasFile('file') ? $this->savePath($slide, $request, 'file') : null;
             return redirect()->route('backend.slide.index', [
                 'slidable_type' => 'setting',
-                'slidable_id' => $slide->slideable_id,
+                'slidable_id' => $slide->slidable_id
             ])->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
