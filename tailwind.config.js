@@ -61,7 +61,9 @@ module.exports = {
             //     // yellow: colors.yellow,
         },
         fontFamily: {
-            'cairo': ['cairo', 'sans-serif'],
+            'HelveticaNeueME_1': ['HelveticaNeueME_1', 'sans-serif'],
+            'GESSTwoBold': ['GESSTwoBold', 'sans-serif'],
+            'GESSTwoMedium': ['GESSTwoMedium', 'sans-serif'],
             'DroidArabicKufi': ['DroidArabicKufi', 'sans-serif'],
             'droid-bold': ['DroidArabicKufi-bold', 'sans-serif'],
             // 'Tajawal-Light': ['Tajawal-Light', 'sans-serif'],
@@ -71,7 +73,7 @@ module.exports = {
             'AR-Almarai-Font' : ['AR-Almarai-Font', 'sans-serif'],
             'AlMohanad': ['AlMohanad', 'sans-serif'],
             'Ar-Ith': ['Ar-Ith', 'sans-serif'],
-            'bein-ar-black_0': ['bein-ar-black_0', 'sans-serif'],
+            'bein-ar-black_zzbzbbedb0': ['bein-ar-black_0', 'sans-serif'],
         },
         animations : {
             spin : 'spin 6s liner once'

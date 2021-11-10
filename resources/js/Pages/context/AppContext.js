@@ -74,7 +74,8 @@ const AppContextProvider = ({children}) => {
         isSuper: !isEmpty(auth) && auth.role?.is_super,
         isAuthor: !isEmpty(auth) && auth.role?.is_author,
         guest: isEmpty(auth),
-        arFont: 'font-almarai',
+        // arFont: 'font-almarai',
+        arFont: 'font-gesst-medium',
         enFont: 'font-tajwal-medium'
     };
 

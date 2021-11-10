@@ -11,7 +11,7 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
     const { classNames , trans , getThumb , getLocalized } = useContext(AppContext)
 
     return (
-        <Popover className="flex">
+        <Popover className="flex ">
             {({open}) => (
                 <>
                     <div className="relative flex">
@@ -100,7 +100,7 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                                                                 <li key={child.id}
                                                                     className="flex">
                                                                     <Link href={route(`frontend.${type}.index`, { category_id : child.id})}
-                                                                          className="hover:text-gray-300 truncate capitalize">
+                                                                          className="font-gesst hover:text-gray-300 truncate capitalize">
                                                                         {child[getLocalized()]}
                                                                     </Link>
                                                                 </li>

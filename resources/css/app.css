@@ -14,6 +14,29 @@
 }
 
 @font-face {
+    font-family: 'HelveticaNeueME_1';
+    src: url('../../public/fonts/HelveticaNeueMEforSKYW21-Rg_web.woff2') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GESSTwoBold';
+    src: url('../../public/fonts/GESSTwoBold.eot') format('truetype');
+    src: url('../../public/fonts/GESSTwoBold.otf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GESSTwoMedium';
+    src: url('../../public/fonts/GESSTwoMedium.eot') format('truetype');
+    src: url('../../public/fonts/GESSTwoMedium.otf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'Tajawal-Light';
     src: url('../../public/fonts/Tajawal-Light.ttf') format('truetype');
     font-weight: normal;
@@ -145,6 +168,22 @@
 
 .font-droid-bold {
     font-family: 'DroidArabicKufi-bold', 'sans-serif';
+}
+
+.font-helve-one {
+    font-family: 'HelveticaNeueME_1', 'sans-serif';
+}
+
+.font-helve-two {
+    font-family: 'HelveticaNeueME_2', 'sans-serif';
+}
+
+.font-gesst {
+    font-family: 'GESSTwoBold', 'sans-serif';
+}
+
+.font-gesst-medium {
+    font-family: 'GESSTwoMedium', 'sans-serif';
 }
 
 .share-icons {
