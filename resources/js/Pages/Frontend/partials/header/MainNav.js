@@ -88,10 +88,6 @@ export default function MainNav() {
                         </Link> : null
                     }
                     <Link
-                        href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
-                        {capitalize(trans('contactus'))}
-                    </Link>
-                    <Link
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
@@ -100,10 +96,6 @@ export default function MainNav() {
                     </Link>
                     {
                         guest ? <>
-                            <a
-                                href={route('login')} className="-m-2 p-2 block text-gray-50">
-                                {capitalize(trans('login'))}
-                            </a>
                             {
                                 settings.enable_register ?
                                     <a
@@ -111,8 +103,16 @@ export default function MainNav() {
                                         {capitalize(trans('register'))}
                                     </a> : null
                             }
+                            <a
+                                href={route('login')} className="-m-2 p-2 block text-gray-50">
+                                {capitalize(trans('login'))}
+                            </a>
                         </> : null
                     }
+                    <Link
+                        href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
+                        {capitalize(trans('contactus'))}
+                    </Link>
                 </div>
             </div>
             {/* Mobile menu */}
