@@ -79,7 +79,7 @@ export default function MainNav() {
                         </a>
                     }
                 </div>
-                <div className="flex flex-row justify-center items-center gap-x-5  divide-x divide-gray-400">
+                <div className="flex flex-row justify-center items-center gap-x-5">
                     {
                         settings.enable_subscriptions ? <Link
                             href={route('frontend.subscriptions')}
@@ -91,7 +91,7 @@ export default function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className="-m-2 p-2 block text-gray-50">
+                        className="-m-2 p-2 block text-gray-50 border-l border-gray-200">
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
@@ -99,20 +99,16 @@ export default function MainNav() {
                             {
                                 settings.enable_register ?
                                     <a
-                                        href={route('register')} className="-m-2 p-2 block text-gray-50 sr-only">
+                                        href={route('register')} className="-m-2 p-2 block text-gray-50 border-l border-gray-200">
                                         {capitalize(trans('register'))}
                                     </a> : null
                             }
                             <a
-                                href={route('login')} className="-m-2 p-2 block text-gray-50">
+                                href={route('login')} className="-m-2 p-2 block text-gray-50 border-l border-gray-200 hidden">
                                 {capitalize(trans('login'))}
                             </a>
                         </> : null
                     }
-                    <Link
-                        href={route('frontend.contactus')} className="-m-2 p-2 block text-gray-50 invisible sm:visible">
-                        {capitalize(trans('contactus'))}
-                    </Link>
                 </div>
             </div>
             {/* Mobile menu */}
