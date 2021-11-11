@@ -467,9 +467,9 @@ export default function MainNav() {
                 </Dialog>
             </Transition.Root>
 
-            <header className="relative bg-black text-white py-3 max-w-full">
+            <header className="relative bg-black text-white py-6 max-w-full">
                 <nav aria-label="Top" className="w-auto lg:w-4/5  xl:m-auto">
-                    <div className="h-12 flex items-center">
+                    <div className="h-20 flex items-center">
                         <button
                             type="button"
                             className="p-2 rounded-md lg:hidden"
@@ -483,11 +483,11 @@ export default function MainNav() {
                         <motion.div
                             whileHover={{scale: 0.9}}
                         >
-                            <div className="flex lg:ml-0 rtl:ml-5 ltr:mr-5">
+                            <div className="flex lg:ml-0 rtl:ml-5 ltr:mr-5 w-24 h-auto">
                                 <Link href={route('frontend.home')}>
                                     {/*<span className="sr-only">{settings[getLocalized()]}</span>*/}
                                     <img
-                                        className="w-16 h-auto"
+                                        className="w-24 h-auto"
                                         src={getThumb(settings.image)}
                                         alt={settings[getLocalized()]}
                                     />
