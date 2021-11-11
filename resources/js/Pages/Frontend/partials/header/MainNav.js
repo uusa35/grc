@@ -118,7 +118,7 @@ export default function MainNav() {
             {/* Mobile menu */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div"
-                        className={classNames(locale.isRTL ? `right-0` : `left-0`, "fixed inset-y-0  flex z-40 lg:hidden w-1/3")}
+                        className={classNames(locale.isRTL ? `right-0` : `left-0`, "fixed inset-y-0  flex z-40 lg:hidden w-2/4")}
                         onClose={setOpen}>
                     <Transition.Child
                         as={Fragment}
