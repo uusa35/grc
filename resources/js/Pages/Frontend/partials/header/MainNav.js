@@ -117,7 +117,9 @@ export default function MainNav() {
             </div>
             {/* Mobile menu */}
             <Transition.Root show={open} as={Fragment}>
-                <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setOpen}>
+                <Dialog as="div"
+                        className={classNames(locale.isRTL ? `right-0` : `left-0`, "fixed inset-y-0  flex z-40 lg:hidden w-1/3")}
+                        onClose={setOpen}>
                     <Transition.Child
                         as={Fragment}
                         enter="transition-opacity ease-linear duration-300"
@@ -133,11 +135,11 @@ export default function MainNav() {
                     <Transition.Child
                         as={Fragment}
                         enter="transition ease-in-out duration-300 transform"
-                        enterFrom="-translate-x-full"
-                        enterTo="translate-x-0"
-                        leave="transition ease-in-out duration-300 transform"
-                        leaveFrom="translate-x-0"
-                        leaveTo="-translate-x-full"
+                        // enterFrom="-translate-x-full"
+                        // enterTo="translate-x-0"
+                        // leave="transition ease-in-out duration-300 transform"
+                        // leaveFrom="translate-x-0"
+                        // leaveTo="-translate-x-full"
                     >
                         <div
                             className={classNames(locale.isRTL ? arFont : enFont, "relative max-w-xs w-full bg-white shadow-xl pb-12 flex flex-col overflow-y-auto")}
@@ -149,7 +151,7 @@ export default function MainNav() {
                                     onClick={() => setOpen(false)}
                                 >
                                     <span className="sr-only">Close menu</span>
-                                    <XIcon className="h-6 w-6" aria-hidden="true"/>
+                                    <XIcon className="h-6 w-6 my-5" aria-hidden="true"/>
                                 </button>
                             </div>
 
@@ -219,13 +221,22 @@ export default function MainNav() {
                                     </div>
                                 }
                                 {
-                                    settings.enable_books && <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.user.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
-                                            {capitalize(trans('authors'))}
-                                        </Link>
-                                    </div>
+                                    settings.enable_books && <>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.category.index', { is_book : 1})}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('book_categories'))}
+                                            </Link>
+                                        </div>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.user.index')}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('authors'))}
+                                            </Link>
+                                        </div>
+                                    </>
                                 }
                                 {
                                     settings.enable_services && <div className="flow-root">
@@ -260,6 +271,15 @@ export default function MainNav() {
                                             href={route('frontend.product.index')}
                                             className="-m-2 p-2 block text-gray-900 capitalize ">
                                             {capitalize(trans('products'))}
+                                        </Link>
+                                    </div>
+                                }
+                                {
+                                    settings.enable_cart && <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.cart.index')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('cart'))}
                                         </Link>
                                     </div>
                                 }
@@ -303,7 +323,7 @@ export default function MainNav() {
                             </div>
 
                             {/* Links */}
-                            <Tab.Group as="div" className="mt-2">
+                            <Tab.Group as="div" className="mt-2 hidden">
                                 <div className="border-b border-gray-200">
                                     <Tab.List className="-mb-px flex px-4 space-x-8">
                                         {
@@ -559,53 +579,53 @@ export default function MainNav() {
                                             {capitalize(trans('vacancies'))}
                                         </Link>
                                     </>
-                                    }
-                                    {
-                                        settings.enable_books && <Link
-                                            href={route('frontend.book.index')}
-                                            onClick={() => dispatch(setParentModule('book'))}
-                                            className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('books'))}
-                                        </Link>
-                                    }
-                                    {
-                                        settings.enable_books &&
-                                        <MainNavBookCategoriesList categories={categories} type='book'/>
-                                    }
-                                    {
-                                        settings.enable_products &&
-                                        <MainNavBookCategoriesList categories={categories} type='product'/>
-                                    }
-                                    {
-                                        settings.enable_books && <Link
-                                            href={route('frontend.user.index', {is_author: true})}
-                                            onClick={() => dispatch(setParentModule('user'))}
-                                            className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('authors'))}
-                                        </Link>
-                                    }
-                                    {
-                                        settings.enable_services && <Link
-                                            href={route('frontend.service.index')}
-                                            onClick={() => dispatch(setParentModule('service'))}
-                                            className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('services'))}
-                                        </Link>
-                                    }
-                                    {
-                                        settings.enable_courses && <Link
-                                            href={route('frontend.course.index')}
-                                            onClick={() => dispatch(setParentModule('course'))}
-                                            className={classNames(parentModule == 'course' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('courses'))}
-                                        </Link>
-                                    }
+                                }
+                                {
+                                    settings.enable_books && <Link
+                                        href={route('frontend.book.index')}
+                                        onClick={() => dispatch(setParentModule('book'))}
+                                        className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('books'))}
+                                    </Link>
+                                }
+                                {
+                                    settings.enable_books &&
+                                    <MainNavBookCategoriesList categories={categories} type='book'/>
+                                }
+                                {
+                                    settings.enable_products &&
+                                    <MainNavBookCategoriesList categories={categories} type='product'/>
+                                }
+                                {
+                                    settings.enable_books && <Link
+                                        href={route('frontend.user.index', {is_author: true})}
+                                        onClick={() => dispatch(setParentModule('user'))}
+                                        className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('authors'))}
+                                    </Link>
+                                }
+                                {
+                                    settings.enable_services && <Link
+                                        href={route('frontend.service.index')}
+                                        onClick={() => dispatch(setParentModule('service'))}
+                                        className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('services'))}
+                                    </Link>
+                                }
+                                {
+                                    settings.enable_courses && <Link
+                                        href={route('frontend.course.index')}
+                                        onClick={() => dispatch(setParentModule('course'))}
+                                        className={classNames(parentModule == 'course' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    >
+                                        {capitalize(trans('courses'))}
+                                    </Link>
+                                }
 
-                                    {/*     pages */}
+                                {/*     pages */}
                                 {
                                     !mgt ? <Popover className="relative flex justify-center">
                                         {({open}) => (
@@ -809,45 +829,45 @@ export default function MainNav() {
                                     </Popover> : null
                                 }
 
-                                    </div>
-                                    </Popover.Group>
+                            </div>
+                        </Popover.Group>
 
-                                {/* Search */}
-                                {settings.enable_books && <SearchField type={'book'}/>}
-                                {settings.enable_products && <SearchField type={'product'}/>}
-                                {/* change lang */}
-                                    <div className="ml-auto flex items-center">
-                                    <div
-                                    className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-6 ltr:mr-6">
-                                    <Link
+                        {/* Search */}
+                        {settings.enable_books && <SearchField type={'book'}/>}
+                        {settings.enable_products && <SearchField type={'product'}/>}
+                        {/* change lang */}
+                        <div className="ml-auto flex items-center">
+                            <div
+                                className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-6 ltr:mr-6">
+                                <Link
                                     onClick={() => {
-                                    dispatch(changeLang(locale.otherLang))
-                                }}
+                                        dispatch(changeLang(locale.otherLang))
+                                    }}
                                     href={route('frontend.change.lang', {lang: locale.otherLang})}
                                     className="flex flex-row items-center hover:text-gray-300">
                                     <img
-                                    className="w-5 h-5 rounded-full"
-                                    src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}/>
+                                        className="w-5 h-5 rounded-full"
+                                        src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}/>
                                     <span className="rtl:pr-3 ltr:pl-3">{locale.otherLang}</span>
-                                    </Link>
-                                    </div>
+                                </Link>
+                            </div>
 
 
-                                {/* currency dropdown */}
-                                {settings.enable_prices ? <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
-                                    <div>
+                            {/* currency dropdown */}
+                            {settings.enable_prices ? <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
+                                <div>
                                     <Menu.Button
-                                    className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                                    <span className="sr-only">Open user menu</span>
-                                    <img
-                                    className="h-5 w-5 rounded-full object-cover"
-                                    src={getThumb(currency.image)}
-                                    alt={currency[getLocalized()]}
-                                    />
-                                {currency[getLocalized('currency_symbol')]}
+                                        className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                        <span className="sr-only">Open user menu</span>
+                                        <img
+                                            className="h-5 w-5 rounded-full object-cover"
+                                            src={getThumb(currency.image)}
+                                            alt={currency[getLocalized()]}
+                                        />
+                                        {currency[getLocalized('currency_symbol')]}
                                     </Menu.Button>
-                                    </div>
-                                    <Transition
+                                </div>
+                                <Transition
                                     as={Fragment}
                                     enter="transition ease-out duration-100"
                                     enterFrom="transform opacity-0 scale-95"
@@ -855,47 +875,47 @@ export default function MainNav() {
                                     leave="transition ease-in duration-75"
                                     leaveFrom="transform opacity-100 scale-100"
                                     leaveTo="transform opacity-0 scale-95"
-                                    >
+                                >
                                     <Menu.Items
-                                    className="origin-top-right absolute rtl:-mr-20 ltr:-ml-20 mt-2 w-48 shadow-lg py-1 bg-black ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        className="origin-top-right absolute rtl:-mr-20 ltr:-ml-20 mt-2 w-48 shadow-lg py-1 bg-black ring-1 ring-black ring-opacity-5 focus:outline-none">
 
-                                {
-                                    map(currencies, element => (
-                                    <Menu.Item key={element[getLocalized()]}>
-                                {({active}) => (
-                                    <button
-                                    onClick={() => dispatch(setCurrency(element))}
-                                    className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
-                                    >
-                                    <img
-                                    className="h-5 w-5 rounded-full object-cover"
-                                    src={getThumb(element.image)}
-                                    alt={element[getLocalized()]}
-                                    />
-                                {element[getLocalized()]}
-                                    </button>
-                                    )}
-                                    </Menu.Item>
-                                    ))
-                                }
+                                        {
+                                            map(currencies, element => (
+                                                <Menu.Item key={element[getLocalized()]}>
+                                                    {({active}) => (
+                                                        <button
+                                                            onClick={() => dispatch(setCurrency(element))}
+                                                            className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
+                                                        >
+                                                            <img
+                                                                className="h-5 w-5 rounded-full object-cover"
+                                                                src={getThumb(element.image)}
+                                                                alt={element[getLocalized()]}
+                                                            />
+                                                            {element[getLocalized()]}
+                                                        </button>
+                                                    )}
+                                                </Menu.Item>
+                                            ))
+                                        }
                                     </Menu.Items>
-                                    </Transition>
-                                    </Menu> : null}
+                                </Transition>
+                            </Menu> : null}
 
-                                {/* auth dropdown */}
-                                    <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
-                                    <div>
+                            {/* auth dropdown */}
+                            <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
+                                <div>
                                     <Menu.Button
-                                    className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                                    <span className="sr-only">Open user menu</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
+                                        className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                        <span className="sr-only">Open user menu</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
                                     </Menu.Button>
-                                    </div>
-                                    <Transition
+                                </div>
+                                <Transition
                                     as={Fragment}
                                     enter="transition ease-out duration-100"
                                     enterFrom="transform opacity-0 scale-95"
@@ -903,86 +923,86 @@ export default function MainNav() {
                                     leave="transition ease-in duration-75"
                                     leaveFrom="transform opacity-100 scale-100"
                                     leaveTo="transform opacity-0 scale-95"
-                                    >
+                                >
                                     <Menu.Items
-                                    className="origin-top-right absolute rtl:-mr-48 ltr:-ml-48 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                {
-                                    isAdminOrAbove && <Menu.Item>
-                                {({active}) => (
-                                    <a
-                                    href={route('backend.home')}
-                                    className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
-                                    >
-                                {trans('backend')}
-                                    </a>
-                                    )}
-                                    </Menu.Item>
-                                }
-                                {
-                                    guest ?
-                                    <Menu.Item>
-                                {({active}) => (
-                                    <a
-                                    href={route('login')}
-                                    className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
-                                    >
-                                {trans('login')}
-                                    </a>
-                                    )}
-                                    </Menu.Item>
-                                    :
-                                    <>
-                                    <Menu.Item>
-                                {({active}) => (
-                                    <Link
-                                    className="'group flex items-center px-4 py-2"
-                                    href={route('frontend.user.edit', auth.id)}>
-                                {trans('my_account')}
-                                    </Link>
-                                    )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                {({active}) => (
-                                    <button
-                                    onClick={(e) => {
-                                    e.preventDefault();
-                                    document.getElementById('logout-form').submit()
-                                }}
-                                    className={classNames(
-                                    active ? 'bg-gray-800 text-gray-50' : '',
-                                    'group flex w-full items-center px-4 py-2 '
-                                    )}
-                                    >{trans('logout')}</button>
-                                    )}
-                                    </Menu.Item>
-                                    </>
-                                }
+                                        className="origin-top-right absolute rtl:-mr-48 ltr:-ml-48 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        {
+                                            isAdminOrAbove && <Menu.Item>
+                                                {({active}) => (
+                                                    <a
+                                                        href={route('backend.home')}
+                                                        className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
+                                                    >
+                                                        {trans('backend')}
+                                                    </a>
+                                                )}
+                                            </Menu.Item>
+                                        }
+                                        {
+                                            guest ?
+                                                <Menu.Item>
+                                                    {({active}) => (
+                                                        <a
+                                                            href={route('login')}
+                                                            className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
+                                                        >
+                                                            {trans('login')}
+                                                        </a>
+                                                    )}
+                                                </Menu.Item>
+                                                :
+                                                <>
+                                                    <Menu.Item>
+                                                        {({active}) => (
+                                                            <Link
+                                                                className="'group flex items-center px-4 py-2"
+                                                                href={route('frontend.user.edit', auth.id)}>
+                                                                {trans('my_account')}
+                                                            </Link>
+                                                        )}
+                                                    </Menu.Item>
+                                                    <Menu.Item>
+                                                        {({active}) => (
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.preventDefault();
+                                                                    document.getElementById('logout-form').submit()
+                                                                }}
+                                                                className={classNames(
+                                                                    active ? 'bg-gray-800 text-gray-50' : '',
+                                                                    'group flex w-full items-center px-4 py-2 '
+                                                                )}
+                                                            >{trans('logout')}</button>
+                                                        )}
+                                                    </Menu.Item>
+                                                </>
+                                        }
                                     </Menu.Items>
-                                    </Transition>
-                                    </Menu>
+                                </Transition>
+                            </Menu>
 
-                                {/* Cart */}
-                                {
-                                    settings.enable_cart && <div className="ml-4 flow-root lg:ml-6">
+                            {/* Cart */}
+                            {
+                                settings.enable_cart && <div className="ml-4 flow-root lg:ml-6">
                                     <Link href={route('frontend.cart.index')}
-                                    className="group -m-2 p-2 flex items-center">
-                                    <ShoppingBagIcon
-                                    className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
-                                    aria-hidden="true"
-                                    />
-                                    <span
-                                    className="inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300">
+                                          className="group -m-2 p-2 flex items-center">
+                                        <ShoppingBagIcon
+                                            className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
+                                            aria-hidden="true"
+                                        />
+                                        <span
+                                            className="inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300">
                                 {cart.totalItems}
                                     </span>
-                                    <span className="sr-only">items in cart, view bag</span>
+                                        <span className="sr-only">items in cart, view bag</span>
                                     </Link>
-                                    </div>
-                                }
-                                    </div>
-                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
 
-                                    </nav>
-                                    </header>
-                                    </div>
-                                    )
-                                }
+                </nav>
+            </header>
+        </div>
+    )
+}
