@@ -66,7 +66,7 @@ export default function HomePage({
                             <ElementSlider
                                 elements={onHomeParticipantAuthors}
                                 showNavigation={false}
-                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                slidesPerView={isTablet || isMobile ? 1 : slideNumber}
                                 title={trans('participant_authors')}
                                 type={'user'}
                             />
