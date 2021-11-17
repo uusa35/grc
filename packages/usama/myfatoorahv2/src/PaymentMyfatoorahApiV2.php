@@ -127,4 +127,32 @@ class PaymentMyfatoorahApiV2
     }
 
     /* -------------------------------------------------------------------------- */
+
+    /* ------------------------ Functions --------------------------------------- */
+    /*
+     * Send Payment Endpoint Function
+     */
+
+    function sendPayment($apiURL, $apiKey, $postFields) {
+
+        $json = $this->callAPI("$apiURL/v2/SendPayment", $apiKey, $postFields);
+        return $json->Data;
+    }
+
+    public function getInvoiceId($apiURL, $apiKey, $paymentId)
+    {
+        try {
+            $postFields = [
+                'Key'     => $paymentId,
+                'KeyType' => 'paymentId'
+            ];
+            $json = $this->callAPI("$apiURL/v2/getPaymentStatus", $apiKey, $postFields);
+
+//Display the payment result to your customer
+            return $json->Data;
+
+        } catch (\Exception $e) {
+            return new \Exception('Not Found');
+        }
+    }
 }

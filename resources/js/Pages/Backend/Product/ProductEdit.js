@@ -428,6 +428,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                 </p>
                             </div>
                             {/* more images */}
+                            { element.images.length <=10  &&
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
                                        className={`block   text-gray-700`}>
@@ -452,6 +453,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     {errors.images && <div className={`text-red-900`}>{errors.images}</div>}
                                 </p>
                             </div>
+                            }
                             {/* categories */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"

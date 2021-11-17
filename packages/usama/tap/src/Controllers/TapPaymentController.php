@@ -98,8 +98,7 @@ class TapPaymentController extends Controller
             'tap_id' => 'required'
         ]);
         if ($validate->fails()) {
-            dd('fail');
-//            return redirect()->route('frontend.home')->with(['error' => trans('general.process_failure'), 'clearCart' => true]);
+            return redirect()->route('frontend.home')->with(['error' => trans('general.process_failure')]);
         }
         $curl = curl_init();
 
@@ -123,7 +122,8 @@ class TapPaymentController extends Controller
         curl_close($curl);
 
         if ($err) {
-            echo "cURL Error #:" . $err;
+//            echo "cURL Error #:" . $err;
+            return redirect()->route('frontend.home')->with('error', trans('process_failure'));
         } else {
             $res = json_decode($response);
             // ABANDONED, CANCELLED, FAILED, DECLINED, RESTRICTED, CAPTURED, VOID,TIMEDOUT, UNKNOWN

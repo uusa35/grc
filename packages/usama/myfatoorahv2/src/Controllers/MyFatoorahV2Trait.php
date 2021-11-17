@@ -147,48 +147,7 @@ trait MyFatoorahV2Trait
         return json_encode($productsList, JSON_UNESCAPED_SLASHES);
     }
 
-    public function getInvoiceId($paymentId)
-    {
-        try {
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, ENV('MYFATOORAH_API_URL_TOKEN'));
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(array('grant_type' => 'password', 'username' => ENV('MYFATOORAH_USERNAME'), 'password' => ENV('MYFATOORAH_PASSWORD'))));
-            $result = curl_exec($curl);
-            $error = curl_error($curl);
-            $info = curl_getinfo($curl);
-            curl_close($curl);
-            $json = json_decode($result, true);
-            $access_token = $json['access_token'];
-            $token_type = $json['token_type'];
-            $url = ENV('MYFATOORAH_API_URL_TRANSACTION') . $paymentId;
-            $soap_do1 = curl_init();
-            curl_setopt($soap_do1, CURLOPT_URL, $url);
-            curl_setopt($soap_do1, CURLOPT_CONNECTTIMEOUT, 10);
-            curl_setopt($soap_do1, CURLOPT_TIMEOUT, 10);
-            curl_setopt($soap_do1, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($soap_do1, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($soap_do1, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($soap_do1, CURLOPT_POST, false);
-            curl_setopt($soap_do1, CURLOPT_POST, 0);
-            curl_setopt($soap_do1, CURLOPT_HTTPGET, 1);
-            curl_setopt($soap_do1, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8', 'Accept: application/json', 'Authorization: Bearer ' . $access_token));
-            $result_in = curl_exec($soap_do1);
-            $err_in = curl_error($soap_do1);
-            $file_contents = htmlspecialchars(curl_exec($soap_do1));
-            curl_close($soap_do1);
-            $getRecorById = json_decode($result_in, true);
-            if($getRecorById['OrderId']) {
-                return $getRecorById['OrderId'];
-            }
-            return new \Exception('Not found');
-        } catch (\Exception $e) {
-            return new \Exception('Not Found');
-        }
-    }
+
 
     public function clearCart()
     {

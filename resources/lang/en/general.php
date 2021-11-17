@@ -1062,4 +1062,5 @@ return array (
     "share" => "share",
     "first_page" => "first page",
     "last_page" => "last page",
+    "message_order_failed" => "Your order payment process failed. please try again or contact us. thank you"
 );

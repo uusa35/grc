@@ -28,6 +28,10 @@ class MyFatoorahV2PaymentController extends Controller
 {
 
     use MyFatoorahV2Trait, OrderTrait;
+    public $myFatoorahInstance;
+    public function __construct() {
+        $this->myFatoorahInstance =  new PaymentMyfatoorahApiV2();
+    }
 
     public function makePaymentApi(Request $request)
     {
@@ -72,16 +76,16 @@ class MyFatoorahV2PaymentController extends Controller
             $ipPostFields = ['InvoiceAmount' => request()->netTotal, 'CurrencyIso' => 'KWD'];
 
 //Call endpoint
-            $paymentMethods = new PaymentMyfatoorahApiV2();
-            $methods = collect($paymentMethods->initiatePayment(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $ipPostFields));
+
+//            $methods = collect($paymentMethods->initiatePayment(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $ipPostFields));
 
 //You can save $paymentMethods information in database to be used later
-            foreach ($paymentMethods as $pm) {
-                if ($pm->PaymentMethodEn == 'Visa/Master Direct 3DS Flow' && $pm->IsDirectPayment) {
-                    $paymentMethodId = $pm->PaymentMethodId;
-                    break;
-                }
-            }
+//            foreach ($paymentMethods as $pm) {
+//                if ($pm->PaymentMethodEn == 'Visa/Master Direct 3DS Flow' && $pm->IsDirectPayment) {
+//                    $paymentMethodId = $pm->PaymentMethodId;
+//                    break;
+//                }
+//            }
 
             /* ------------------------ Call ExecutePayment Endpoint -------------------- */
 //Fill customer address array
@@ -101,15 +105,15 @@ class MyFatoorahV2PaymentController extends Controller
               ]; */
 
 //Fill POST fields array
-            dd($methods);
             $postFields = [
                 //Fill required data
-                'paymentMethodId' => $methods->where('PaymentMethodId', 1)->first()->PaymentMethodId,
+                'NotificationOption' => 'Lnk', //'SMS', 'EML', or 'ALL'
+//                'paymentMethodId' => $methods->where('PaymentMethodId', 1)->first()->PaymentMethodId,
                 'InvoiceValue' => $request->netTotal,
                 'CallBackUrl' => route('myfatoorahv2.web.payment.result'),
                 'ErrorUrl' => route('myfatoorahv2.web.payment.error'), //or 'https://example.com/error.php'
                 //Fill optional data
-                //'CustomerName'       => 'fname lname',
+                'CustomerName'       => config('app.name'),
                 //'DisplayCurrencyIso' => 'KWD',
                 //'MobileCountryCode'  => '+965',
                 //'CustomerMobile'     => '1234567890',
@@ -124,11 +128,11 @@ class MyFatoorahV2PaymentController extends Controller
                 //'InvoiceItems'       => $invoiceItems,
             ];
 //Call endpoint
-            $payment = $paymentMethods->executePayment(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $postFields);
+            $payment = $this->myFatoorahInstance->sendPayment(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $postFields);
 
 //You can save payment data in database as per your needs
             $invoiceId = $payment->InvoiceId;
-            $paymentURL = $payment->PaymentURL;
+            $paymentURL = $payment->InvoiceURL;
             $this->updateOrderRerferenceId($request->order_id, $payment->InvoiceId, $request->paymentMethod);
 
 //            return response()->json($paymentURL, 200);
@@ -179,7 +183,8 @@ class MyFatoorahV2PaymentController extends Controller
         if($validate->fails()) {
             abort('400',trans('general.process_failure'));
         }
-        return $this->orderSuccessAction($request->paymentId);
+        $referenceId = $this->myFatoorahInstance->getInvoiceId(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $request->has('paymentId') ? $request->paymentId : $request->Id);
+        return $this->orderSuccessAction($referenceId->InvoiceId);
     }
 
     public function error(Request $request)
@@ -187,16 +192,17 @@ class MyFatoorahV2PaymentController extends Controller
         // once the result is success .. get the deal from refrence then delete all other free deals related to such ad.
         try {
             $settings = Setting::first();
-            $referenceId = $this->getInvoiceId($request->has('paymentId') ? $request->paymentId : $request->Id);
-            $order = Order::withoutGlobalScopes()->where(['reference_id' => $referenceId])->first();
+            $referenceId = $this->myFatoorahInstance->getInvoiceId(config('myfatoorah.apiUrl'), config('myfatoorah.apiKey'), $request->has('paymentId') ? $request->paymentId : $request->Id);
+            $order = Order::withoutGlobalScopes()->where(['reference_id' => $referenceId->InvoiceId])->first();
             if ($order) {
                 $order->update(['status' => 'failed']);
             }
-            Mail::to($settings->email)->send(new OrderFailed($order, $settings, 'MyFatoorah Error Case #1'));
-            abort('404', 'Your payment process is unsuccessful .. your deal is not created please try again or contact us.');
+            Mail::to($settings->email)->cc($order->user->email)->send(new OrderFailed($order));
+            $markdown = new Markdown(view(), config('mail.markdown'));
+            return $markdown->render('emails.orders.failed', ['order' => $order]);
 
         } catch (\Exception $e) {
-            Mail::to($settings->email)->send(new OrderFailed('', $settings, 'MyFatoorah Error Case #2  : ' . $e->getMessage()));
+            Mail::to($settings->email)->cc($order->user->email)->send(new OrderFailed($order));
             abort('404', 'Your payment process is unsuccessful .. your deal is not created please try again or contact us.');
         }
     }

@@ -466,7 +466,7 @@ export default function ({users, categories, book, elementCategories}) {
                                 </p>
                             </div>
                             {/* more images */}
-                            <div className="sm:col-span-3 has-tooltip mt-3">
+                            { book.images.length <= 5 && <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
                                        className={`block   text-gray-700`}>
                                     {trans('more_images')}
@@ -494,7 +494,8 @@ export default function ({users, categories, book, elementCategories}) {
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.images && <div className={`text-red-900`}>{errors.images}</div>}
                                 </p>
-                            </div>
+                            </div>}
+
                             {/* file pdf */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="main_image"
@@ -1465,6 +1466,7 @@ export default function ({users, categories, book, elementCategories}) {
 
                         <FormSection>
                             <div className="mt-1 sm:mt-0 sm:col-span-full">
+                                { book.images.length <= 5 &&
                                 <div
                                     className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                     <div className="space-y-1 text-center">
@@ -1503,6 +1505,8 @@ export default function ({users, categories, book, elementCategories}) {
                                         <p className=" text-gray-500">{trans('upload_up_to_one_mb')}</p>
                                     </div>
                                 </div>
+                                }
+
                             </div>
                         </FormSection>
                         <FormBtns type={'book'}/>

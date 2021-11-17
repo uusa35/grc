@@ -149,7 +149,7 @@ trait DashboardTrait
     {
         try {
             $validate = validator($request->all(), [
-                'images' => 'array|required',
+                'images' => 'array|required|between:0,5',
                 'model' => 'string|required',
                 'id' => 'integer'
             ]);

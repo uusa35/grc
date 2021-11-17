@@ -410,6 +410,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                 </p>
                             </div>
                             {/* more images */}
+                            {service.images.length <= 5 &&
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
                                        className={`block  font-medium text-gray-700`}>
@@ -439,6 +440,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                     {errors.images && <div className={`text-red-900`}>{errors.images}</div>}
                                 </p>
                             </div>
+                            }
                         </FormSection>
 
                         <FormSection>
@@ -1224,6 +1226,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
 
                         <FormSection title={trans('more_images')}>
                             <div className="mt-1 sm:mt-0 sm:col-span-full">
+                                {service.images.length <= 5 &&
                                 <div
                                     className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                     <div className="space-y-1 text-center">
@@ -1262,6 +1265,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         <p className=" text-gray-500">{trans('upload_up_to_one_mb')}</p>
                                     </div>
                                 </div>
+                                }
                             </div>
                         </FormSection>
                         <FormBtns type={'service'}/>

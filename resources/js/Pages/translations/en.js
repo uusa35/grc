@@ -1060,7 +1060,7 @@ export const en  = {
     "book_embedded_notes_instruction": "The book code is the frame that will be applied to view the pages of the book",
     "all_information_required" : "All information in this section is required and must be entered",
     "select_image" : "select the image",
-    "upload_up_to_one_mb": "All types of JPG - JPEG - PNG images can be uploaded, with a maximum image size of 1 megabyte",
+    "upload_up_to_one_mb": "All types of JPG - JPEG - PNG images can be uploaded, with a maximum image size of 1 megabyte (max 5 images Only)",
     "file_url" : "file link",
     "pdf_file" : "PDF file",
     "file_instruction": "upload a PDF file",

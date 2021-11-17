@@ -1068,7 +1068,7 @@ export const ar = {
     "book_embedded_notes_instruction" : "كود الكتاب هو الفريم الذي سيتم تطبيقه لمشاهدة صفحات الكتاب",
     "all_information_required" : "جميع المعلومات بهذا القسم مطلوبة ويجب إدخالها",
     "select_image" : "اختر الصورة",
-    "upload_up_to_one_mb" : "يمكن تحميل جميع أنواع الصور JPG - JPEG - PNG بحد اقصى ١ ميجا للصورة ",
+    "upload_up_to_one_mb" : "يمكن تحميل جميع أنواع الصور JPG - JPEG - PNG بحد اقصى ١ ميجا للصورة بحد أقصى (٥) صور فقط",
     "file_url" : "رابط الملف",
     "pdf_file" : "ملف البي دي اف",
     "file_instruction" : "رفع ملف البي دي اف",

@@ -30,8 +30,6 @@ export default function({order, settings}) {
         paymentMethod: paymentMethod.name
     })
 
-    console.log('settings', settings);
-
     useMemo(() => {
         if (paymentMethod.name === 'paypal') {
             return axios.post(paymentMethod.paymentRoute, {
@@ -55,6 +53,8 @@ export default function({order, settings}) {
             // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
         }
     }, [paymentMethod])
+
+    console.log('payme', paymentMethod);
 
 
     return (
@@ -115,7 +115,7 @@ export default function({order, settings}) {
                         </Link>
                         <div className="flex">
                             <a
-                                onClick={() => dispatch(clearCart())}
+                                // onClick={() => dispatch(clearCart())}
                                 href={currentURL}
                                 className="capitalize flex flex-row w-full sm:w-auto justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                             >
