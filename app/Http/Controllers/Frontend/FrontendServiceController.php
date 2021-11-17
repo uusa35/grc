@@ -24,7 +24,7 @@ class FrontendServiceController extends Controller
         if ($validator->fails()) {
             return inertia('Frontend/Service/FrontendServiceIndex', $validator->errors()->all());
         }
-        $elements = new ServiceCollection(Service::filters($filters)
+        $elements = new ServiceCollection(Service::active()->filters($filters)
             ->with('user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());
