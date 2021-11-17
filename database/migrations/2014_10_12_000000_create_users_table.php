@@ -83,7 +83,7 @@ class CreateUsersTable extends Migration
 
             $table->string('merchant_id')->nullable();
             $table->string('api_token')->nullable();
-            $table->integer('views')->unsigned()->default(true);
+            $table->integer('views')->unsigned()->default(1)->nullable();
 
             $table->boolean('is_available')->default(false);
             $table->boolean('is_online')->default(false);

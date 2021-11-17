@@ -222,6 +222,8 @@ export default function({elements}) {
                                     type="file"
                                     name="image"
                                     id="main_image"
+accept="image/jpg, image/jpeg , image/png"
+accept="image/jpg, image/jpeg , image/png"
                                     autoComplete="main_image"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 />
@@ -248,6 +250,7 @@ export default function({elements}) {
                                     multiple
                                     name="images"
                                     id="more_images"
+accept="image/jpg, image/jpeg , image/png"
                                     autoComplete="more_images"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 />
@@ -278,6 +281,7 @@ export default function({elements}) {
                                     type="file"
                                     name="file"
                                     id="file"
+accept="application/pdf"
                                     autoComplete="pdf_file"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                 />

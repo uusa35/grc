@@ -51,8 +51,8 @@ class GovernateController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ar' => 'max:200',
-            'name_en' => 'max:200',
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
             'country_id' => 'required|exists:countries,id',
             'order' => 'numeric|max:99'
         ]);

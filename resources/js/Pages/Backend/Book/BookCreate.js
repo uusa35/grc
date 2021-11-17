@@ -73,6 +73,7 @@ export default function BookCreate({users, categories}) {
         'file': '',
         'preview': '',
         'embedded': '',
+        'password' : 'secret'
     });
 
     useMemo(() => {
@@ -166,6 +167,28 @@ export default function BookCreate({users, categories}) {
                                     {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
+                        {/* password */}
+                        <div className="sm:col-span-3 has-tooltip">
+                            <label htmlFor="password" className={`block  font-medium text-gray-700`}>
+                                {trans('password')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    required
+                                    type="text"
+                                    name="password"
+                                    defaultValue={data.password}
+                                    id="password"
+                                    autoComplete="password"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
+                                />
+                            </div>
+                            <ToolTipWidget message={trans('book_price_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.password && <div className={`text-red-900`}>{errors.password}</div>}
+                            </p>
+                        </div>
                             {/* price */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="price" className={`block  font-medium text-gray-700`}>
@@ -328,6 +351,8 @@ export default function BookCreate({users, categories}) {
                                         type="file"
                                         name="image"
                                         id="main_image"
+accept="image/jpg, image/jpeg , image/png"
+accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
@@ -354,6 +379,7 @@ export default function BookCreate({users, categories}) {
                                         multiple
                                         name="images"
                                         id="more_images"
+accept="image/jpg, image/jpeg , image/png" accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="more_imagemore_images_instructions"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
@@ -379,6 +405,7 @@ export default function BookCreate({users, categories}) {
                                         type="file"
                                         name="file"
                                         id="file"
+accept="application/pdf"
                                         autoComplete="pdf_file"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />

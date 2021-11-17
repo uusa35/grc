@@ -300,6 +300,7 @@ export default function({role, privileges, auth}) {
                                         type="file"
                                         name="image"
                                         id="main_image"
+accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />

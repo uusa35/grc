@@ -62,7 +62,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        return inertia('Backend/User/UserCreate');
+        $roles = new RoleCollection(Role::active()->where('is_super',false)->get());
+        $categories = new CategoryCollection(Category::active()->onlyParent()->onlyForUsers()->with(['children' => function ($q) {
+            return $q->active()->onlyForUsers()->with(['children' => function ($q) {
+                return $q->active()->onlyForUsers();
+            }]);
+        }])->get());
+        $countries = new CountryCollection(Country::active()->has('areas','>', 0)->with('areas')->get());
+        $subscriptions = new SubscriptionCollection(Subscription::active()->get());
+        return inertia('Backend/User/UserCreate', compact('roles', 'categories', 'countries', 'subscriptions'));
     }
 
     /**
@@ -73,7 +81,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos', 'qr']));
+        if ($user) {
+            $request->has('tags') ? $user->tags()->sync($request->tags) : null;
+            $request->has('videos') ? $user->videos()->sync($request->videos) : null;
+            $request->has('categories') ? $user->categories()->sync($request->categories) : null;
+            $request->hasFile('image') ? $this->saveMimes($user, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('qr') ? $this->saveMimes($user, $request, ['qr'], ['300', '300'], false) : null;
+            $request->hasFile('file') ? $this->savePath($user, $request, 'file') : null;
+            return redirect()->route('backend.user.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->route('backend.user.edit', $user->id)->with('error', 'process_failure');
     }
 
     /**
@@ -97,7 +115,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $user->load('categories','images','country','area','subscription');
-        $roles = new RoleCollection(Role::active()->get());
+        $roles = new RoleCollection(Role::active()->where('is_super',false)->get());
         $categories = new CategoryCollection(Category::active()->onlyParent()->onlyForUsers()->with(['children' => function ($q) {
             return $q->active()->onlyForUsers()->with(['children' => function ($q) {
                 return $q->active()->onlyForUsers();

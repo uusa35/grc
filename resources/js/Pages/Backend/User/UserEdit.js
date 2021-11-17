@@ -16,11 +16,11 @@ import {showToastMessage} from "../../redux/actions";
 import FormSection from "../components/widgets/form/FormSection";
 
 
-export default function ({user, roles, elementCategories, categories , countries, subscriptions  }) {
+export default function({user, roles, elementCategories, categories, countries, subscriptions}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
-    const[areas, setAreas] = useState(map(countries, c => c.id === user.country_id ? c.areas : []))
-    const { parentModule , currentFormTab  } = useSelector(state => state);
+    const [areas, setAreas] = useState(map(countries, c => c.id === user.country_id ? c.areas : []))
+    const {parentModule, currentFormTab} = useSelector(state => state);
 
     const {
         classNames,
@@ -49,75 +49,75 @@ export default function ({user, roles, elementCategories, categories , countries
         'cancellation_en': user.cancellation_en,
         'cancellation_ar': user.cancellation_ar,
         'email': user.email,
-        'mobile' : user.mobile,
-        'phone' : user.phone,
-        'fax' : user.fax,
-        'image' : user.image,
-        'banner' : user.banner,
-        'bg' : user.bg,
-        'address' : user.address,
-        'area' : user.area,
-        'block' : user.block,
-        'street' : user.street,
-        'building' : user.building,
-        'floor' : user.floor,
-        'apartment' : user.apartment,
-        'country_name' : user.country_name,
-        'keywords' : user.keywords,
-        'qr' : user.qr,
-        'file' : user.file,
-        'website' : user.website,
-        'facebook' : user.facebook,
-        'instagram' : user.instagram,
-        'youtube' : user.youtube,
-        'twitter' : user.twitter,
-        'whatsapp' : user.whatsapp,
-        'iphone' : user.iphone,
-        'android' : user.android,
-        'longitude' : user.longitude,
-        'latitude' : user.latitude,
-        'balance' : user.balance,
-        'player_id' : user.player_id,
-        'video_url_one' : user.video_url_one,
-        'video_url_two' : user.video_url_two,
-        'video_url_three' : user.video_url_three,
-        'video_url_four' : user.video_url_four,
-        'video_url_five' : user.video_url_five,
-        'on_home' : user.on_home,
-        'active' : user.active,
-        'role_id' : user.role_id,
-        'country_id' : user.country_id,
-        'governate_id' : user.governate_id,
-        'area_id' : user.area_id,
-        'end_subscription_date' : user.end_subscription_date,
-        'subscription_id' : user.subscription_id,
-        'merchant_id' : user.merchant_id,
-        'api_token' : user.api_token,
-        'views' : user.views,
-        'is_available' : user.is_available,
-        'is_online' : user.is_online,
-        'access_dashboard' : user.access_dashboard,
-        'is_male' : user.is_male,
-        'mobile_verified' : user.mobile_verified,
-        'mobile_code' : user.mobile_code,
-        'fixed_amount_subscription' : user.fixed_amount_subscription,
-        'percentage_subscription' : user.percentage_subscription,
-        'start_subscription' : user.start_subscription,
-        'end_subscription' : user.end_subscription,
-        'code' : user.code,
-        'custome_delivery' : user.custome_delivery,
-        'news_letter_on' : user.news_letter_on,
-        'custome_delivery_fees' : user.custome_delivery_fees,
+        'mobile': user.mobile,
+        'phone': user.phone,
+        'fax': user.fax,
+        'image': user.image,
+        'banner': user.banner,
+        'bg': user.bg,
+        'address': user.address,
+        'area': user.area,
+        'block': user.block,
+        'street': user.street,
+        'building': user.building,
+        'floor': user.floor,
+        'apartment': user.apartment,
+        'country_name': user.country_name,
+        'keywords': user.keywords,
+        'qr': user.qr,
+        'file': user.file,
+        'website': user.website,
+        'facebook': user.facebook,
+        'instagram': user.instagram,
+        'youtube': user.youtube,
+        'twitter': user.twitter,
+        'whatsapp': user.whatsapp,
+        'iphone': user.iphone,
+        'android': user.android,
+        'longitude': user.longitude,
+        'latitude': user.latitude,
+        'balance': user.balance,
+        'player_id': user.player_id,
+        'video_url_one': user.video_url_one,
+        'video_url_two': user.video_url_two,
+        'video_url_three': user.video_url_three,
+        'video_url_four': user.video_url_four,
+        'video_url_five': user.video_url_five,
+        'on_home': user.on_home,
+        'active': user.active,
+        'role_id': user.role_id,
+        'country_id': user.country_id,
+        'governate_id': user.governate_id,
+        'area_id': user.area_id,
+        'end_subscription_date': user.end_subscription_date,
+        'subscription_id': user.subscription_id,
+        'merchant_id': user.merchant_id,
+        'api_token': user.api_token,
+        'views': user.views,
+        'is_available': user.is_available,
+        'is_online': user.is_online,
+        'access_dashboard': user.access_dashboard,
+        'is_male': user.is_male,
+        'mobile_verified': user.mobile_verified,
+        'mobile_code': user.mobile_code,
+        'fixed_amount_subscription': user.fixed_amount_subscription,
+        'percentage_subscription': user.percentage_subscription,
+        'start_subscription': user.start_subscription,
+        'end_subscription': user.end_subscription,
+        'code': user.code,
+        'custome_delivery': user.custome_delivery,
+        'news_letter_on': user.news_letter_on,
+        'custome_delivery_fees': user.custome_delivery_fees,
 
 
     });
 
     useMemo(() => {
         // setAreas()
-        const selectedCountry =  data.country_id ? first(filter(countries , c => c.id == data.country_id)) : first(countries);
+        const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
         setAreas(selectedCountry.areas)
         setData('area_id', first(areas).id)
-    },[data.country_id])
+    }, [data.country_id])
 
     const handleChange = (e) => {
         setData(values => ({
@@ -149,7 +149,7 @@ export default function ({user, roles, elementCategories, categories , countries
                 formData.append(`id`, user.id);
                 formData.append(`order`, user.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
-                    dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
+                    dispatch(showToastMessage({message: trans('process_success'), type: 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});
@@ -249,7 +249,7 @@ export default function ({user, roles, elementCategories, categories , countries
                                 </p>
                             </div>
                             {/* subscription_id */}
-                            { isAdminOrAbove &&
+                            {isAdminOrAbove &&
                             <div className="sm:col-span-2">
                                 <label htmlFor="subscription_id" className="block   text-gray-700">
                                     {trans('subscription')}
@@ -274,7 +274,8 @@ export default function ({user, roles, elementCategories, categories , countries
                                 </div>
                                 <ToolTipWidget message={trans('user_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>
-                                    {errors.subscription_id && <div className={`text-red-900`}>{errors.subscription_id}</div>}
+                                    {errors.subscription_id &&
+                                    <div className={`text-red-900`}>{errors.subscription_id}</div>}
                                 </p>
                             </div>
                             }
@@ -303,7 +304,8 @@ export default function ({user, roles, elementCategories, categories , countries
                                     <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(user.end_subscription_date).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                        {errors.end_subscription_date && <div className={`text-red-900`}>{errors.end_subscription_date}</div>}
+                                        {errors.end_subscription_date &&
+                                        <div className={`text-red-900`}>{errors.end_subscription_date}</div>}
                                     </p>
                                 </div>
                             }
@@ -510,6 +512,7 @@ export default function ({user, roles, elementCategories, categories , countries
                                         type="file"
                                         name="image"
                                         id="main_image"
+                                        accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
@@ -536,6 +539,7 @@ export default function ({user, roles, elementCategories, categories , countries
                                         multiple
                                         name="images"
                                         id="more_images"
+                                        accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="more_images"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
@@ -554,7 +558,7 @@ export default function ({user, roles, elementCategories, categories , countries
                                 </p>
                             </div>
                             {/* file pdf */}
-                            <div className="sm:col-span-3">
+                            <div className="sm:col-span-3 hidden">
                                 <label htmlFor="main_image"
                                        className={`block  flex flex-row justify-between items-center  text-gray-700`}>
                                     {trans('pdf_file')}
@@ -562,10 +566,10 @@ export default function ({user, roles, elementCategories, categories , countries
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
                                     <input
                                         onChange={e => setData('file', e.target.files[0])}
-                                        // required
                                         type="file"
                                         name="file"
                                         id="file"
+                                        accept="application/pdf"
                                         autoComplete="pdf_file"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
@@ -1319,145 +1323,146 @@ export default function ({user, roles, elementCategories, categories , countries
                         {/* more booleans */}
 
                         <FormSection>
-                                {/* news_letter_on */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}> {trans('news_letter_on')}</legend>
+                            {/* news_letter_on */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}> {trans('news_letter_on')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="news_letter_on"
+                                            name="news_letter_on"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={user.news_letter_on}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="news_letter_on"
-                                                name="news_letter_on"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={user.news_letter_on}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="news_letter_on"
-                                                name="news_letter_on"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!user.news_letter_on}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="news_letter_on"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="news_letter_on"
+                                            name="news_letter_on"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!user.news_letter_on}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="news_letter_on"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('user_news_letter_on_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.news_letter_on && <div className={`text-red-900`}>{errors.news_letter_on}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
+                                </div>
+                                <ToolTipWidget message={trans('user_news_letter_on_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.news_letter_on &&
+                                        <div className={`text-red-900`}>{errors.news_letter_on}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
 
-                                {/* is_male */}
-                                <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}> {trans('male')}</legend>
+                            {/* is_male */}
+                            <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}> {trans('male')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="is_male"
+                                            name="is_male"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={user.is_male}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('user')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="is_male"
-                                                name="is_male"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={user.is_male}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('user')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="is_male"
-                                                name="is_male"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!user.is_male}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="is_male"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('female')}
-                                            </label>
-                                        </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="is_male"
+                                            name="is_male"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!user.is_male}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="is_male"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('female')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('user_is_male_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.is_male &&
-                                            <div className={`text-red-900`}>{errors.is_male}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
+                                </div>
+                                <ToolTipWidget message={trans('user_is_male_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.is_male &&
+                                        <div className={`text-red-900`}>{errors.is_male}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
 
-                                {/* access_dashboard */}
-                                {isAdminOrAbove && <fieldset className="mt-1 col-span-1 has-tooltip">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}> {trans('access_dashboard')}</legend>
+                            {/* access_dashboard */}
+                            {isAdminOrAbove && <fieldset className="mt-1 col-span-1 has-tooltip">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}> {trans('access_dashboard')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="access_dashboard"
+                                            name="access_dashboard"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={user.access_dashboard}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="access_dashboard"
-                                                name="access_dashboard"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={user.access_dashboard}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="access_dashboard"
-                                                name="access_dashboard"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!user.access_dashboard}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="access_dashboard"
-                                                   className="ml-3 block   text-gray-700">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="access_dashboard"
+                                            name="access_dashboard"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!user.access_dashboard}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="access_dashboard"
+                                               className="ml-3 block   text-gray-700">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('user_access_dashboard_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.access_dashboard &&
-                                            <div className={`text-red-900`}>{errors.access_dashboard}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>}
+                                </div>
+                                <ToolTipWidget message={trans('user_access_dashboard_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.access_dashboard &&
+                                        <div className={`text-red-900`}>{errors.access_dashboard}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>}
                         </FormSection>
                         <FormBtns type={'user'}/>
                     </div>
@@ -1496,6 +1501,7 @@ export default function ({user, roles, elementCategories, categories , countries
                                                     multiple
                                                     name="images"
                                                     id="more_images"
+                                                    accept="image/jpg, image/jpeg , image/png"
                                                     autoComplete="more_images"
                                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                                 />

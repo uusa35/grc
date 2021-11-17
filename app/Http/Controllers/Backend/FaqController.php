@@ -25,7 +25,7 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $elements = new FaqCollection(Faq::paginate(Self::TAKE_LESS));
+        $elements = new FaqCollection(Faq::orderBy('id','desc')->paginate(Self::TAKE_LESS));
         return inertia('Backend/Faq/FaqIndex', compact('elements'));
     }
 
@@ -47,7 +47,17 @@ class FaqController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'description_ar' => 'required|max:9999',
+            'description_en' => 'required|max:9999',
+            'order' => 'numeric|max:99'
+        ]);
+        if (Faq::create($request->all())) {
+            return redirect()->route('backend.faq.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -81,7 +91,17 @@ class FaqController extends Controller
      */
     public function update(Request $request, faq $faq)
     {
-        //
+        $request->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'description_ar' => 'required|max:9999',
+            'description_en' => 'required|max:9999',
+            'order' => 'numeric|max:99'
+        ]);
+        if ($faq->update($request->all())) {
+            return redirect()->route('backend.faq.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**

@@ -17,10 +17,10 @@ import {showToastMessage} from "../../redux/actions";
 import FormSection from "../components/widgets/form/FormSection";
 
 
-export default function ({users, categories, book, elementCategories}) {
+export default function({users, categories, book, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
-    const { parentModule , currentFormTab} = useSelector(state => state);
+    const {parentModule, currentFormTab} = useSelector(state => state);
     const {
         classNames,
         trans,
@@ -113,7 +113,7 @@ export default function ({users, categories, book, elementCategories}) {
                 formData.append(`id`, book.id);
                 formData.append(`order`, book.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
-                    dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
+                    dispatch(showToastMessage({message: trans('process_success'), type: 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});
@@ -452,6 +452,7 @@ export default function ({users, categories, book, elementCategories}) {
                                         type="file"
                                         name="image"
                                         id="main_image"
+                                        accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
@@ -466,7 +467,7 @@ export default function ({users, categories, book, elementCategories}) {
                                 </p>
                             </div>
                             {/* more images */}
-                            { book.images.length <= 5 && <div className="sm:col-span-3 has-tooltip mt-3">
+                            {book.images.length <= 5 && <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
                                        className={`block   text-gray-700`}>
                                     {trans('more_images')}
@@ -477,7 +478,7 @@ export default function ({users, categories, book, elementCategories}) {
                                         type="file"
                                         multiple
                                         name="images"
-                                        id="more_images"
+                                        accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="more_images"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
@@ -509,6 +510,7 @@ export default function ({users, categories, book, elementCategories}) {
                                         type="file"
                                         name="file"
                                         id="file"
+                                        accept="application/pdf"
                                         autoComplete="pdf_file"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
@@ -830,12 +832,12 @@ export default function ({users, categories, book, elementCategories}) {
                         <FormSection title={trans('more_details')}>
                             {/* description */}
 
-                                <div className="sm:col-span-3 has-tooltip">
-                                    <label htmlFor="description_ar"
-                                           className={`block   text-gray-700`}>
-                                        {trans('description_ar')}
-                                    </label>
-                                    <div className="mt-1">
+                            <div className="sm:col-span-3 has-tooltip">
+                                <label htmlFor="description_ar"
+                                       className={`block   text-gray-700`}>
+                                    {trans('description_ar')}
+                                </label>
+                                <div className="mt-1">
                                          <textarea
                                              onChange={handleChange}
                                              id="description_ar"
@@ -844,19 +846,19 @@ export default function ({users, categories, book, elementCategories}) {
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={book.description_ar}
                                          />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_description_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.description_ar &&
-                                        <div className={`text-red-900`}>{errors.description_ar}</div>}
-                                    </p>
                                 </div>
-                                <div className="sm:col-span-3 has-tooltip">
-                                    <label htmlFor="description_en"
-                                           className={`block   text-gray-700`}>
-                                        {trans('description_en')}
-                                    </label>
-                                    <div className="mt-1">
+                                <ToolTipWidget message={trans('book_description_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.description_ar &&
+                                    <div className={`text-red-900`}>{errors.description_ar}</div>}
+                                </p>
+                            </div>
+                            <div className="sm:col-span-3 has-tooltip">
+                                <label htmlFor="description_en"
+                                       className={`block   text-gray-700`}>
+                                    {trans('description_en')}
+                                </label>
+                                <div className="mt-1">
                                          <textarea
                                              onChange={handleChange}
                                              id="description_en"
@@ -865,19 +867,19 @@ export default function ({users, categories, book, elementCategories}) {
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={book.description_en}
                                          />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_description_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.description_en &&
-                                        <div className={`text-red-900`}>{errors.description_en}</div>}
-                                    </p>
                                 </div>
-                                {/* notes */}
-                                <div className="sm:col-span-3 has-tooltip">
-                                    <label htmlFor="notes_ar" className={`block   text-gray-700`}>
-                                        {trans('notes_ar')}
-                                    </label>
-                                    <div className="mt-1">
+                                <ToolTipWidget message={trans('book_description_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.description_en &&
+                                    <div className={`text-red-900`}>{errors.description_en}</div>}
+                                </p>
+                            </div>
+                            {/* notes */}
+                            <div className="sm:col-span-3 has-tooltip">
+                                <label htmlFor="notes_ar" className={`block   text-gray-700`}>
+                                    {trans('notes_ar')}
+                                </label>
+                                <div className="mt-1">
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_ar"
@@ -886,17 +888,17 @@ export default function ({users, categories, book, elementCategories}) {
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={book.notes_ar}
                                          />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_notes_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.notes_ar && <div className={`text-red-900`}>{errors.notes_ar}</div>}
-                                    </p>
                                 </div>
-                                <div className="sm:col-span-3 has-tooltip">
-                                    <label htmlFor="notes_en" className={`block   text-gray-700`}>
-                                        {trans('notes_en')}
-                                    </label>
-                                    <div className="mt-1">
+                                <ToolTipWidget message={trans('book_notes_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.notes_ar && <div className={`text-red-900`}>{errors.notes_ar}</div>}
+                                </p>
+                            </div>
+                            <div className="sm:col-span-3 has-tooltip">
+                                <label htmlFor="notes_en" className={`block   text-gray-700`}>
+                                    {trans('notes_en')}
+                                </label>
+                                <div className="mt-1">
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_en"
@@ -905,277 +907,278 @@ export default function ({users, categories, book, elementCategories}) {
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={book.notes_en}
                                          />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_notes_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.notes_en && <div className={`text-red-900`}>{errors.notes_en}</div>}
-                                    </p>
                                 </div>
-                                {/* caption */}
-                                <div className="sm:col-span-2 has-tooltip">
-                                    <label htmlFor="caption_ar"
-                                           className={`block   text-gray-700`}>
-                                        {trans('caption_ar')}
-                                    </label>
-                                    <div className="mt-1 ">
-                                        <input
-                                            onChange={handleChange}
-                                            type="text"
-                                            step="any"
-                                            name="caption_ar"
-                                            defaultValue={book.caption_ar}
-                                            id="caption_ar"
-                                            autoComplete="caption_ar"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_caption_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
-                                    </p>
+                                <ToolTipWidget message={trans('book_notes_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.notes_en && <div className={`text-red-900`}>{errors.notes_en}</div>}
+                                </p>
+                            </div>
+                            {/* caption */}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="caption_ar"
+                                       className={`block   text-gray-700`}>
+                                    {trans('caption_ar')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="caption_ar"
+                                        defaultValue={book.caption_ar}
+                                        id="caption_ar"
+                                        autoComplete="caption_ar"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
                                 </div>
-                                <div className="sm:col-span-2 has-tooltip">
-                                    <label htmlFor="caption_en"
-                                           className={`block   text-gray-700`}>
-                                        {trans('caption_en')}
-                                    </label>
-                                    <div className="mt-1 ">
-                                        <input
-                                            onChange={handleChange}
-                                            type="text"
-                                            step="any"
-                                            name="caption_en"
-                                            defaultValue={book.caption_en}
-                                            id="caption_en"
-                                            autoComplete="caption_en"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_caption_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
-                                    </p>
+                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
+                                </p>
+                            </div>
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="caption_en"
+                                       className={`block   text-gray-700`}>
+                                    {trans('caption_en')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="caption_en"
+                                        defaultValue={book.caption_en}
+                                        id="caption_en"
+                                        autoComplete="caption_en"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
                                 </div>
-                                {/* keywords */}
-                                <div className="sm:col-span-2 has-tooltip">
-                                    <label htmlFor="keywords"
-                                           className={`block   text-gray-700`}>
-                                        {trans('keywords')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            onChange={handleChange}
-                                            type="text"
-                                            step="any"
-                                            name="keywords"
-                                            defaultValue={book.keywords}
-                                            id="keywords"
-                                            autoComplete="keywords"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_caption_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.keywords && <div className={`text-red-900`}>{errors.keywords}</div>}
-                                    </p>
+                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
+                                </p>
+                            </div>
+                            {/* keywords */}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="keywords"
+                                       className={`block   text-gray-700`}>
+                                    {trans('keywords')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="keywords"
+                                        defaultValue={book.keywords}
+                                        id="keywords"
+                                        autoComplete="keywords"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
                                 </div>
-                                {/* delivery time*/}
-                                <div className="sm:col-span-2 has-tooltip">
-                                    <label htmlFor="delivery_time"
-                                           className={`block   text-gray-700`}>
-                                        {trans('delivery_time')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            max={99}
-                                            onChange={handleChange}
-                                            type="number"
-                                            step="any"
-                                            name="delivery_time"
-                                            defaultValue={book.delivery_time}
-                                            id="delivery_time"
-                                            autoComplete="delivery_time"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_delivery_time_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.delivery_time && <div className={`text-red-900`}>{errors.delivery_time}</div>}
-                                    </p>
+                                <ToolTipWidget message={trans('book_caption_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.keywords && <div className={`text-red-900`}>{errors.keywords}</div>}
+                                </p>
+                            </div>
+                            {/* delivery time*/}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="delivery_time"
+                                       className={`block   text-gray-700`}>
+                                    {trans('delivery_time')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        max={99}
+                                        onChange={handleChange}
+                                        type="number"
+                                        step="any"
+                                        name="delivery_time"
+                                        defaultValue={book.delivery_time}
+                                        id="delivery_time"
+                                        autoComplete="delivery_time"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
                                 </div>
-                                {/* order*/}
-                                <div className="sm:col-span-2 has-tooltip">
-                                    <label htmlFor="order"
-                                           className={`block   text-gray-700`}>
-                                        {trans('order_appearance')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            max={999}
-                                            onChange={handleChange}
-                                            type="number"
-                                            step="any"
-                                            name="order"
-                                            defaultValue={book.order}
-                                            id="order"
-                                            autoComplete="order"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('order_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
-                                    </p>
+                                <ToolTipWidget message={trans('book_delivery_time_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.delivery_time &&
+                                    <div className={`text-red-900`}>{errors.delivery_time}</div>}
+                                </p>
+                            </div>
+                            {/* order*/}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="order"
+                                       className={`block   text-gray-700`}>
+                                    {trans('order_appearance')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        max={999}
+                                        onChange={handleChange}
+                                        type="number"
+                                        step="any"
+                                        name="order"
+                                        defaultValue={book.order}
+                                        id="order"
+                                        autoComplete="order"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
                                 </div>
-                                <div className="sm:col-span-2">
-                                    <label htmlFor="video_url_one"
-                                           className={`block   text-gray-700`}>
-                                        {trans('video_url_one')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            onChange={handleChange}
-                                            type="url"
-                                            step="any"
-                                            name="video_url_one"
-                                            defaultValue={book.video_url_one}
-                                            id="video_url_one"
-                                            autoComplete="video_url_one"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_video_url_one_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.video_url_one &&
-                                        <div className={`text-red-900`}>{errors.video_url_one}</div>}
-                                    </p>
+                                <ToolTipWidget message={trans('order_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
+                                </p>
+                            </div>
+                            <div className="sm:col-span-2">
+                                <label htmlFor="video_url_one"
+                                       className={`block   text-gray-700`}>
+                                    {trans('video_url_one')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="url"
+                                        step="any"
+                                        name="video_url_one"
+                                        defaultValue={book.video_url_one}
+                                        id="video_url_one"
+                                        autoComplete="video_url_one"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
                                 </div>
-                                <div className="sm:col-span-2">
-                                    <label htmlFor="video_url_two"
-                                           className={`block   text-gray-700`}>
-                                        {trans('video_url_two')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            onChange={handleChange}
-                                            type="url"
-                                            step="any"
-                                            name="video_url_two"
-                                            defaultValue={book.video_url_two}
-                                            id="video_url_two"
-                                            autoComplete="video_url_two"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_video_url_two_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.video_url_two &&
-                                        <div className={`text-red-900`}>{errors.video_url_two}</div>}
-                                    </p>
+                                <ToolTipWidget message={trans('book_video_url_one_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.video_url_one &&
+                                    <div className={`text-red-900`}>{errors.video_url_one}</div>}
+                                </p>
+                            </div>
+                            <div className="sm:col-span-2">
+                                <label htmlFor="video_url_two"
+                                       className={`block   text-gray-700`}>
+                                    {trans('video_url_two')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="url"
+                                        step="any"
+                                        name="video_url_two"
+                                        defaultValue={book.video_url_two}
+                                        id="video_url_two"
+                                        autoComplete="video_url_two"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
                                 </div>
-                                {/* start sale */}
-                                <div className="sm:col-span-2 has-tooltip mb-5">
-                                    <label htmlFor="start_sale"
-                                           className={`block   text-gray-700`}>
-                                        {trans('start_sale')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            // onChange={handleChange}
-                                            onChange={e => console.log(e.target.value)}
-                                            type="datetime-local"
-                                            step="any"
-                                            name="start_sale"
-                                            id="start_sale"
-                                            // min={moment().format()}
-                                            // max={moment().format()}
-                                            autoComplete="start_sale"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_end_sale_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                <ToolTipWidget message={trans('book_video_url_two_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.video_url_two &&
+                                    <div className={`text-red-900`}>{errors.video_url_two}</div>}
+                                </p>
+                            </div>
+                            {/* start sale */}
+                            <div className="sm:col-span-2 has-tooltip mb-5">
+                                <label htmlFor="start_sale"
+                                       className={`block   text-gray-700`}>
+                                    {trans('start_sale')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        // onChange={handleChange}
+                                        onChange={e => console.log(e.target.value)}
+                                        type="datetime-local"
+                                        step="any"
+                                        name="start_sale"
+                                        id="start_sale"
+                                        // min={moment().format()}
+                                        // max={moment().format()}
+                                        autoComplete="start_sale"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('book_end_sale_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                        {errors.start_sale && <div className={`text-red-900`}>{errors.start_sale}</div>}
-                                    </p>
+                                    {errors.start_sale && <div className={`text-red-900`}>{errors.start_sale}</div>}
+                                </p>
+                            </div>
+                            {/* end sale*/}
+                            <div className="sm:col-span-2 has-tooltip mb-5">
+                                <label htmlFor="end_sale"
+                                       className={`block   text-gray-700`}>
+                                    {trans('end_sale')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="datetime-local"
+                                        step="any"
+                                        name="end_sale"
+                                        defaultValue={book.end_sale}
+                                        id="end_sale"
+                                        autoComplete="end_sale"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
                                 </div>
-                                {/* end sale*/}
-                                <div className="sm:col-span-2 has-tooltip mb-5">
-                                    <label htmlFor="end_sale"
-                                           className={`block   text-gray-700`}>
-                                        {trans('end_sale')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <input
-                                            onChange={handleChange}
-                                            type="datetime-local"
-                                            step="any"
-                                            name="end_sale"
-                                            defaultValue={book.end_sale}
-                                            id="end_sale"
-                                            autoComplete="end_sale"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                    </div>
-                                    <ToolTipWidget message={trans('book_start_sale_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                <ToolTipWidget message={trans('book_start_sale_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(book.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
-                                        {errors.end_sale && <div className={`text-red-900`}>{errors.end_sale}</div>}
-                                    </p>
-                                </div>
+                                    {errors.end_sale && <div className={`text-red-900`}>{errors.end_sale}</div>}
+                                </p>
+                            </div>
 
-                                {/*    qr */}
-                                <div className="sm:col-span-3">
-                                    <label htmlFor="qr"
-                                           className={`block   text-gray-700`}>
-                                        {trans('qr')}
-                                    </label>
-                                    <div className="mt-1 flex flex-row flex-1 items-center h-32">
-                                        <input
-                                            onChange={e => setData('qr', e.target.files[0])}
-                                            type="file"
-                                            name="qr"
-                                            id="qr"
-                                            autoComplete="qr"
-                                            className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                        {book.qr && <div
-                                            className="relative h-28 w-28">
-                                            <img
-                                                className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
-                                                src={getThumb(book.qr)}
-                                                alt=""/>
-                                            <Link
-                                                href={route(`backend.element.clear`, {
-                                                    id: book.id,
-                                                    'model': parentModule,
-                                                    colName: 'qr'
-                                                })}
-                                                type="button"
-                                                className="absolute inset-2  focus:outline-none">
-                                                {/*<span className="sr-only">View details for {img.title}</span>*/}
-                                                <span
-                                                    className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
-                                                >
+                            {/*    qr */}
+                            <div className="sm:col-span-3">
+                                <label htmlFor="qr"
+                                       className={`block   text-gray-700`}>
+                                    {trans('qr')}
+                                </label>
+                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
+                                    <input
+                                        onChange={e => setData('qr', e.target.files[0])}
+                                        type="file"
+                                        name="qr"
+                                        id="qr"
+                                        autoComplete="qr"
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                    {book.qr && <div
+                                        className="relative h-28 w-28">
+                                        <img
+                                            className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
+                                            src={getThumb(book.qr)}
+                                            alt=""/>
+                                        <Link
+                                            href={route(`backend.element.clear`, {
+                                                id: book.id,
+                                                'model': parentModule,
+                                                colName: 'qr'
+                                            })}
+                                            type="button"
+                                            className="absolute inset-2  focus:outline-none">
+                                            {/*<span className="sr-only">View details for {img.title}</span>*/}
+                                            <span
+                                                className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
+                                            >
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                         d="M6 18L18 6M6 6l12 12"/>
                                                 </svg>
                                             </span>
-                                            </Link>
-                                        </div>}
-                                    </div>
-                                    <ToolTipWidget message={trans('book_qr_instruction')}/>
-                                    <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                        {trans('square_best_fit')}
-                                    </p>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.qr && <div className={`text-red-900`}>{errors.qr}</div>}
-                                    </p>
+                                        </Link>
+                                    </div>}
                                 </div>
+                                <ToolTipWidget message={trans('book_qr_instruction')}/>
+                                <p className={` text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('square_best_fit')}
+                                </p>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.qr && <div className={`text-red-900`}>{errors.qr}</div>}
+                                </p>
+                            </div>
                         </FormSection>
 
                         <FormSection>
@@ -1466,7 +1469,7 @@ export default function ({users, categories, book, elementCategories}) {
 
                         <FormSection>
                             <div className="mt-1 sm:mt-0 sm:col-span-full">
-                                { book.images.length <= 5 &&
+                                {book.images.length <= 5 &&
                                 <div
                                     className="w-full flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                     <div className="space-y-1 text-center">
@@ -1497,6 +1500,9 @@ export default function ({users, categories, book, elementCategories}) {
                                                     multiple
                                                     name="images"
                                                     id="more_images"
+                                                    accept="image/jpg, image/jpeg , image/png"
+                                                    accept="image/jpg, image/jpeg , image/png"
+                                                    accept="image/jpg, image/jpeg , image/png"
                                                     autoComplete="more_images"
                                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                                 />

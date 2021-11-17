@@ -396,6 +396,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         type="file"
                                         name="image"
                                         id="main_image"
+accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
@@ -423,6 +424,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         multiple
                                         name="images"
                                         id="more_images"
+accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="more_images"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
@@ -1257,6 +1259,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                                     multiple
                                                     name="images"
                                                     id="more_images"
+accept="image/jpg, image/jpeg , image/png"
                                                     autoComplete="more_images"
                                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                                 />
