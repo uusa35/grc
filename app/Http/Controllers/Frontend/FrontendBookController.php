@@ -23,7 +23,7 @@ class FrontendBookController extends Controller
         if ($validator->fails()) {
             return inertia('Frontend/Book/FrontendBookIndex', $validator->errors()->all());
         }
-        $elements = new BookCollection(Book::filters($filters)
+        $elements = new BookCollection(Book::active()->filters($filters)
             ->with('user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());

@@ -24,7 +24,7 @@ class FrontendCourseController extends Controller
         if ($validator->fails()) {
             return inertia('Frontend/Course/FrontendCourseIndex', $validator->errors()->all());
         }
-        $elements = new CourseCollection(Course::filters($filters)
+        $elements = new CourseCollection(Course::active()->filters($filters)
             ->with('user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());
