@@ -259,14 +259,13 @@ export default function BookCreate({users, categories}) {
                                 </p>
                             </div>
                             {/*weight*/}
-                            <div className="sm:col-span-2">
+                            <div className="sm:col-span-2 hidden">
                                 <label htmlFor="weight" className={`block  font-medium text-gray-700`}>
                                     {trans('weight')}
                                 </label>
                                 <div className="mt-1">
                                     <input
                                         onChange={handleChange}
-                                        required
                                         type="number"
                                         step="any"
                                         name="weight"
