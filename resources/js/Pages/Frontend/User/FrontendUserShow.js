@@ -1,5 +1,5 @@
 import {Fragment, useContext, useMemo, useState} from 'react'
-import {Disclosure,Transition, Menu} from '@headlessui/react'
+import {Disclosure, Transition, Menu} from '@headlessui/react'
 import {
     MinusSmIcon,
     PlusSmIcon,
@@ -7,7 +7,7 @@ import {
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map,isEmpty} from 'lodash';
+import {map, isEmpty} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
@@ -26,12 +26,12 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
 
 
-export default function ({element, relatedElements, auth}) {
+export default function({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
-    const { settings } = useContext(GlobalContext);
-    const {cart } = useSelector(state => state);
+    const {settings} = useContext(GlobalContext);
+    const {cart} = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -75,7 +75,8 @@ export default function ({element, relatedElements, auth}) {
                         <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
                             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
                             {/* Reviews */}
-                            {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'user'}/>}
+                            {element.ratings &&
+                            <ElementRating ratings={element.ratings} id={element.id} type={'user'}/>}
                             <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                                 <div className="flex flex-1">
                                     {
@@ -107,11 +108,12 @@ export default function ({element, relatedElements, auth}) {
                                 </h2>
                                 <div className="border-t divide-y divide-gray-200 ">
                                     {/* description */}
-                                    <Disclosure as="div" defaultOpen={true}>
-                                        {({open}) => (
-                                            <>
-                                                <Disclosure.Button
-                                                    className="group relative w-full py-6 flex justify-between items-center text-left">
+                                    {element[getLocalized('description')] && element[getLocalized('description')].length > 5 ?
+                                        <Disclosure as="div" defaultOpen={true}>
+                                            {({open}) => (
+                                                <>
+                                                    <Disclosure.Button
+                                                        className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
                                                                   open ? 'text-gray-600' : 'text-gray-900',
@@ -120,7 +122,7 @@ export default function ({element, relatedElements, auth}) {
                                                           >
                                                             {trans('description')}
                                                           </span>
-                                                    <span className="ml-6 flex items-center">
+                                                        <span className="ml-6 flex items-center">
                                                         {open ? (
                                                             <MinusSmIcon
                                                                 className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
@@ -133,21 +135,21 @@ export default function ({element, relatedElements, auth}) {
                                                             />
                                                         )}
                                                       </span>
-                                                </Disclosure.Button>
-                                                <Disclosure.Panel as="div" className="pb-6">
-                                                    <p className="capitalize">
-                                                        {element[getLocalized('description')]}
-                                                    </p>
-                                                </Disclosure.Panel>
-                                            </>
-                                        )}
-                                    </Disclosure>
+                                                    </Disclosure.Button>
+                                                    <Disclosure.Panel as="div" className="pb-6">
+                                                        <p className="capitalize">
+                                                            {element[getLocalized('description')]}
+                                                        </p>
+                                                    </Disclosure.Panel>
+                                                </>
+                                            )}
+                                        </Disclosure> : null}
                                 </div>
                             </section>
 
                         </div>
                     </div>
-                    <SocialIconShare  />
+                    <SocialIconShare/>
                     {/* related items */}
                     {
                         settings.enable_books && element.books && element.books.length > 0 &&
