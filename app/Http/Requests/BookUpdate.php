@@ -65,6 +65,7 @@ class BookUpdate extends FormRequest
             'home_delivery_availability' => 'nullable|boolean',
             'free' => 'boolean',
             'download' => 'boolean',
+            "file" => "mimes:pdf|max:990000"
 //            "embedded" => "min:100"
         ];
     }
