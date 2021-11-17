@@ -490,7 +490,7 @@ export default function BookCreate({users, categories}) {
                                 </p>
                             </div>
                             {/* embedded*/}
-                            <div className="sm:col-span-full has-tooltip">
+                            <div className="sm:col-span-full has-tooltip hidden">
                                 <label htmlFor="embedded" className={`block  font-medium text-gray-700`}>
                                     {trans('embedded')} {trans('book')}
                                 </label>
@@ -499,7 +499,6 @@ export default function BookCreate({users, categories}) {
                                              onChange={handleChange}
                                              id="embedded"
                                              name="embedded"
-                                             required
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={data.embedded}
