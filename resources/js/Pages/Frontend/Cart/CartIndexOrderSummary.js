@@ -6,6 +6,7 @@ import {removeFromCart} from "../../redux/actions";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
+import {isMobile, isTablet} from 'react-device-detect';
 
 export default function() {
     const { trans, getThumb , getLocalized } = useContext(AppContext);
@@ -62,11 +63,15 @@ export default function() {
                             }
                             <div className="p-3">
                                 <Link href={route().has(`frontend.${element.type}.show`) ? route(`frontend.${element.type}.show`, {id: element.element_id}) : '#'}
-                                      className=" font-extrabold text-gray-700 hover:text-gray-800">
-                                    {element[getLocalized()]}
+                                      className="  font-extrabold text-gray-700 hover:text-gray-800 truncate capitalize overflow-ellipsis overflow-hidden">
+                                    {truncate(element[getLocalized()], {
+                                        'length': isMobile ? 14 : 100,
+                                    })}
                                 </Link>
-                                <p className="capitalize truncate overflow-hidden">
-                                    {trans('owner')} : {truncate(element[getLocalized('merchant_name')], 100)}
+                                <p className="block capitalize truncate overflow-hidden overflow-ellipsis overflow-hidden">
+                                    {trans('owner')} : {truncate(element[getLocalized('merchant_name')], {
+                                    'length': isMobile ? 5 : 50,
+                                })}
                                 </p>
                                 {
                                     element.type === 'product' && <>
