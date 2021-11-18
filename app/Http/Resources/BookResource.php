@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class BookResource extends JsonResource
 {
@@ -34,7 +35,7 @@ class BookResource extends JsonResource
             'free' => $this->free,
             'download' => $this->download,
             'embedded' => $this->embedded,
-            'file' => encrypt($this->file),
+            'file' => Storage::disk('public')->exists('uploads/files/'.$this->file) ? $this->file : null,
             'is_available' => $this->is_available,
             'direct_purchase' => $this->direct_purchase,
             'user' => UserExtraLightResource::make($this->whenLoaded('user')),

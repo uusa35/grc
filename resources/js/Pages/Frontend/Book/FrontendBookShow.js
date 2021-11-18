@@ -7,7 +7,7 @@ import {
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, isEmpty} from 'lodash';
+import {map, isEmpty, isNull} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
@@ -213,13 +213,17 @@ export default function({element, relatedElements, auth}) {
                                 <div className="flex flex-row justify-between items-center gap-x-5">
                                     {
                                         element.free ?
-                                            <a
-                                                target="_blank"
-                                                href={route('frontend.free.book', element.id)}
-                                                className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
-                                            >
-                                                {trans('view')}
-                                            </a>
+                                            <>
+                                                {
+                                                    !isNull(element.file) ? <a
+                                                        target="_blank"
+                                                        href={route('frontend.free.book', element.id)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                    >
+                                                        {trans('view')}
+                                                    </a> : null
+                                                }
+                                            </>
                                             : <form onSubmit={handleSubmit} className="w-full">
                                                 <button
                                                     disabled={!element.is_available}
@@ -345,7 +349,8 @@ export default function({element, relatedElements, auth}) {
                                                       </span>
                                                 </Disclosure.Button>
                                                 <Disclosure.Panel as="div" className="pb-6 ">
-                                                    <div className="flex flex-1 justify-start items-start">
+                                                    <div
+                                                        className="flex flex-1 justify-start items-start">
                                                         <div>
                                                             <img
                                                                 className="w-20 h-auto rounded-sm shadow-md"
