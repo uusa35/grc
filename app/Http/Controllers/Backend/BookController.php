@@ -133,7 +133,7 @@ class BookController extends Controller
             $request->has('categories') ? $book->categories()->sync($request->categories) : null;
             $request->hasFile('image') ? $this->saveMimes($book, $request, ['image'], ['1080', '1440'], false) : null;
             $request->hasFile('qr') ? $this->saveMimes($book, $request, ['qr'], ['300', '300'], false) : null;
-            $request->hasFile('file') ? $this->savePath($book, $request, 'file') : null;
+            $request->hasFile('file')  ? $this->savePath($book, $request, 'file') : null;
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.book.edit', $book->id)->with('error', 'process_failure');
