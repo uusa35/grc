@@ -28,6 +28,7 @@ class CourseExtraLightResource extends JsonResource
             'isOnSale' => $this->isOnSale,
             'exclusive' => $this->exclusive,
             'free' => $this->free,
+            'active' => $this->active,
             'user' => UserExtraLightResource::make($this->whenLoaded('user'))
         ];
     }

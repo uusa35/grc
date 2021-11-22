@@ -27,6 +27,7 @@ class ServiceExtraLightResource extends JsonResource
             'on_new' => $this->on_new,
             'isOnSale' => $this->isOnSale,
             'exclusive' => $this->exclusive,
+            'active' => $this->active,
             'user' => UserExtraLightResource::make($this->whenLoaded('user'))
         ];
     }
