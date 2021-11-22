@@ -20,7 +20,6 @@ class UserExtraLightResource extends JsonResource
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
             'image' => $this->image,
-            'active' => $this->active
         ];
     }
 }

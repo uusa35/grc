@@ -22,6 +22,7 @@ class UserLightResource extends JsonResource
             'caption_en' => $this->caption_en,
             'description_ar' => $this->description_ar,
             'description_en' => $this->description_en,
+            'active' => $this->active,
             'image' => $this->image,
             'role' => RoleExtraLightResource::make($this->whenLoaded('role')),
         ];
