@@ -244,7 +244,7 @@ export default function({element, relatedElements, auth}) {
                                 </h2>
                                 <div className="border-t divide-y divide-gray-200 ">
                                     {/* description */}
-                                    {element[getLocalized('description')] && element[getLocalized('description')] > 5 ?
+                                    {element[getLocalized('description')] && element[getLocalized('description')].length > 5 ?
                                         <Disclosure as="div" defaultOpen={true}>
                                             {({open}) => (
                                                 <>
