@@ -1501,8 +1501,6 @@ export default function({users, categories, book, elementCategories}) {
                                                     name="images"
                                                     id="more_images"
                                                     accept="image/jpg, image/jpeg , image/png"
-                                                    accept="image/jpg, image/jpeg , image/png"
-                                                    accept="image/jpg, image/jpeg , image/png"
                                                     autoComplete="more_images"
                                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                                 />
