@@ -79,11 +79,11 @@ export default function MainNav() {
                         </a>
                     }
                 </div>
-                <div className="flex flex-row justify-center items-center gap-x-5">
+                <div className="flex flex-row justify-center items-center">
                     {
                         settings.enable_subscriptions ? <Link
                             href={route('frontend.subscriptions')}
-                            className=" block text-gray-50 invisible sm:visible text-xs">
+                            className=" mx-2 block text-gray-50 invisible sm:visible text-xs">
                             {capitalize(trans('subscriptions'))}
                         </Link> : null
                     }
@@ -91,7 +91,7 @@ export default function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className="  block text-gray-50  text-xs">
+                        className="mx-2   block text-gray-50  text-xs">
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
@@ -100,13 +100,13 @@ export default function MainNav() {
                                 settings.enable_register ?
                                     <a
                                         href={route('register')}
-                                        className="  block text-gray-50  text-xs">
+                                        className=" mx-2  block text-gray-50  text-xs">
                                         {capitalize(trans('register'))}
                                     </a> : null
                             }
                             <a
                                 href={route('login')}
-                                className="  block text-gray-50  hidden text-xs">
+                                className="mx-2   block text-gray-50  hidden text-xs">
                                 {capitalize(trans('login'))}
                             </a>
                         </> : null

@@ -9,28 +9,28 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
     return (
         <div className="relative opacity-80 z-40">
             <div
-                className={classNames(locale.isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col  gap-y-3 text-white text-sm')}>
+                className={classNames(locale.isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col text-white text-sm')}>
                 {
                     onSale && !free ? <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm  bg-red-900 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm  bg-red-900 mb-3 ">
                         {trans('on_sale')}
                       </span> : null
                 }
                 {
                     onNew ? <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-800 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-800 mb-3">
                     {trans('on_new')}
                         </span> : null
                 }
                 {
                     exclusive ? <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-600 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-600 mb-3">
                     {trans('exclusive')}
                         </span> : null
                 }
                 {
                     free ? <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-400 ">
+                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-400 mb-3">
                     {trans('free')}
                         </span> : null
                 }
