@@ -153,7 +153,7 @@ export default function({element, relatedElements, auth}) {
                     {/* related items */}
                     {
                         settings.enable_books && element.books && element.books.length > 0 &&
-                        <RelatedItems elements={element.books} type={'book'}/>
+                        <RelatedItems elements={element.books} type={'book'} title={trans('authors_books')}/>
                     }
                 </div>
             </FrontendContentContainer>

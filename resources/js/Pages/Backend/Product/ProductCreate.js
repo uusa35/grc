@@ -16,8 +16,8 @@ import {useDispatch, useSelector} from "react-redux";
 export default function ProductCreate({users, sizes, colors, categories}) {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [currentImages, setCurrentImages] = useState([]);
-    const { auth } = useContext(GlobalContext);
-    const { parentModule , formTabs , currentFormTab} = useSelector(state => state);
+    const {auth} = useContext(GlobalContext);
+    const {parentModule, formTabs, currentFormTab} = useSelector(state => state);
     const {
         classNames,
         trans,
@@ -83,7 +83,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
 
     useMemo(() => {
         dispatch(setCurrentFormTab(first(formTabs)));
-    },[]);
+    }, []);
 
     const handleChange = (e) => {
         setData(values => ({
@@ -395,7 +395,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     type="file"
                                     name="image"
                                     id="main_image"
-accept="image/jpg, image/jpeg , image/png"
+                                    accept="image/jpg, image/jpeg , image/png"
                                     autoComplete="main_image"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                 />
@@ -422,7 +422,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     multiple
                                     name="images"
                                     id="more_images"
-accept="image/jpg, image/jpeg , image/png"
+                                    accept="image/jpg, image/jpeg , image/png"
                                     autoComplete="more_images"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                 />

@@ -431,7 +431,7 @@ export default function({element, relatedElements, auth}) {
                     {/* related items */}
                     {
                         relatedElements && relatedElements.meta.total > 0 &&
-                        <RelatedItems elements={relatedElements.data} type={'book'}/>
+                        <RelatedItems elements={relatedElements.data} type={'book'} title={trans('related_books')}/>
                     }
                 </div>
             </FrontendContentContainer>

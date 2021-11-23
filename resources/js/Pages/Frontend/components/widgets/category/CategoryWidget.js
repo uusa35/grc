@@ -13,14 +13,14 @@ const CategoryWidget = ({element, type = 'book'}) => {
             whileHover={{ scale: 0.9 }}
         >
         <div className="block relative overflow-hidden hover:opacity-90">
-            <div className="w-full h-auto bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden">
+            <div className="w-full h-auto bg-gray-200 aspect-w-13 aspect-h-8 rounded-md overflow-hidden">
                 <img
                     src={getMedium(element.image)}
                     alt={element[getLocalized()]}
-                    className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                    className="w-full h-full object-center object-contain lg:w-full lg:h-full"
                 />
             </div>
-            <div className="mt-4 flex justify-between">
+            <div className="mt-4 flex justify-center items-center">
                 <div>
                     <h3 className=" text-gray-700">
                         <Link href={route(`frontend.${type}.index`, {category_id: element.id})}>

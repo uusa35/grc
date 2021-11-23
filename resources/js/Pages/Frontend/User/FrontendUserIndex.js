@@ -45,8 +45,8 @@ export default function ({elements, categories}) {
 
     return (
         <FrontendContainer>
-            <FrontendContentContainer>
-                <SubMetaElement title={trans('users')}/>
+            <FrontendContentContainer parentModuleName={'authors'}>
+                <SubMetaElement title={trans('authors')}/>
                 {/* Mobile filter dialog */}
                 {
                     params.is_author && <SearchIndexSideBarMobile

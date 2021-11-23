@@ -689,7 +689,7 @@ export const ar = {
     'net_total' : 'المجموع الكلي',
     'recommendations' : 'مقترحات',
     'contactus' : 'اتصل بنا',
-    'subscribe_to_our_news_letter' : 'النشرة البريدية اشتراك',
+    'subscribe_to_our_news_letter' : ' التسجيل في النشرة البريدية',
     'subscribe_message_paragraph' : 'اشترك معنا ليصلك كل جديد من ميم ونون .. جميع المنتجات الحصرية وما شابه .....',
     'subscribe' : 'اشترك',
     'select_color' : 'اختار اللون',
@@ -1044,6 +1044,7 @@ export const ar = {
     'image_best_fit_vertical' : 'مقاس الصورة المناسب بشكل مستطيل طولي (العرض 1080  - الطول 1440 px  )',
     'image_best_fit_slide' : 'مقاس الصورة المناسب بشكل مستطيل عرضي (العرض 1900  - الطول 650 px  )',
     'square_best_fit' : 'مقاس الصورة المناسب بشكل مربع (العرض 500  - الطول 500 px  )',
+    'rectangle_best_fit' : 'مقاس الصورة المناسب بشكل مربع (العرض 1440  - الطول 1050 px  )',
     "product_attribute" : "خاصية المنتج",
     "destroy" : "حذف",
     "accounts" : "حسابات",
@@ -1231,5 +1232,9 @@ export const ar = {
     "vacancies" : "الوظائف المتاحة",
     "distribution_message" : "يمكنك الآن التواصل معنا لمزيد من المعلومات حول خدمة التوزيع",
     "whous" : "من نحن",
-    "shop_and_products" : "المتجر (المنتجات)"
+    "shop_and_products" : "المتجر (المنتجات)",
+    "contact_us_on" : "تواصل معنا على",
+    "related_books" : "كتب متعلقة",
+    "related_services" : "استشارات متعلقة",
+    "authors_books" : "بعض كتب المؤلف"
 }

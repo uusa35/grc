@@ -1036,6 +1036,7 @@ export const en  = {
     'image_best_fit' : 'The appropriate image size (width 1080 - height 1440 px )',
     'image_best_fit_slide' : 'The appropriate image size (width 1900 - height 650 px)',
     'square_best_fit' : 'The right image size square (width 500 - length 500 px )',
+    'rectangle_best_fit' : 'The right image size square (width 1440 - length 1080 px )',
     "product_attribute" : "Product Attribute",
     "destroy": "delete",
     "accounts": "accounts",
@@ -1223,5 +1224,8 @@ export const en  = {
     "vacancies" : "vacancies",
     "distribution_message" : "you can contactus for more information about our distribution services",
     "whous" : "who us",
-    "shop_and_products" : "shop (Our Products)"
+    "shop_and_products" : "shop (Our Products)",
+    "related_books" : "related books",
+    "related_services" : "related services",
+    "authors_books" : "related author's books"
 }

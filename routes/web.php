@@ -104,6 +104,8 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::post('cart/coupon', [FrontendCartController::class, 'postCouponCode'])->name('cart.coupon');
     // PDF free books only
     Route::get('free/book/{id}', [FrontendUserController::class,'getFreeBook'])->name('free.book');
+    // Newsletter
+    Route::post('newsletter', [HomeController::class,'postNewsLetter'])->name('newsletter');
     Route::group(['middleware' => 'auth'], function () {
         Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.get');
         Route::post('cart/payment', [FrontendCartController::class, 'getPayment'])->name('cart.payment.post');

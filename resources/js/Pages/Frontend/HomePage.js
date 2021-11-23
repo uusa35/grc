@@ -39,9 +39,11 @@ export default function HomePage({
     return (
         <FrontendContainer showBreadCrumbs={false}>
             {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
-            {slides && <MainGallery elements={slides}/>}
+
             <FrontendContentContainer showBreadCrumbs={false}>
+                {slides && <MainGallery elements={slides}/>}
                 <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:px-8">
+
                     {
                         settings.enable_joinus ? <JoinusHomeSection/> : null
                     }
@@ -112,15 +114,16 @@ export default function HomePage({
                             />
                         </>
                     }
-                    {
-                        settings.enable_newsletter && <NewsLetter/>
-                    }
+
                 </div>
             </FrontendContentContainer>
         </FrontendContainer>
     )
 }
 
+// {
+//     settings.enable_newsletter && <NewsLetter/>
+// }
 // mgt && <>
 //     <ElementSlider
 //         showNavigation={false}

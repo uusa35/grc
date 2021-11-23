@@ -42,7 +42,8 @@
             "Usama\\Upayment\\": "packages/usama/upayment/src/",
             "Usama\\Ibooky\\": "packages/usama/ibooky/src/",
             "Usama\\Tap\\": "packages/usama/tap/src/",
-            "Usama\\Paypal\\": "packages/usama/paypal/src/"
+            "Usama\\Paypal\\": "packages/usama/paypal/src/",
+            "Usama\\OneGlobal\\": "packages/usama/oneglobal/src/"
         }
     },
     "autoload-dev": {

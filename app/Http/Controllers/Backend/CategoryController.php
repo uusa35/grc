@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = new CategoryCollection(Category::where(['is_parent' => true, 'parent_id' => 0])->with('children.children')->orderBy('id','desc')->paginate(SELF::TAKE_LESS));
+        $elements = new CategoryCollection(Category::where(['is_parent' => true, 'parent_id' => 0])->with('children.children')->orderBy('id', 'desc')->paginate(SELF::TAKE_LESS));
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 
@@ -43,6 +43,7 @@ class CategoryController extends Controller
         $elements = Category::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -69,9 +70,9 @@ class CategoryController extends Controller
             'caption_en' => 'required|max:1000',
             'order' => 'integer'
         ]);
-        $element = Category::create($request->except('image','image_rectangle','file'));
+        $element = Category::create($request->except('image', 'image_rectangle', 'file'));
         if ($element) {
-            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['500', '500'], false) : null;
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1440', '1080'], false) : null;
             $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             $request->hasFile('image_rectangle') ? $this->saveMimes($element, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
@@ -82,7 +83,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -93,7 +94,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -105,8 +106,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
@@ -118,8 +119,8 @@ class CategoryController extends Controller
             'caption_en' => 'required|max:1000',
             'order' => 'integer'
         ]);
-        if ($category->update($request->except('image','image_rectangle','file'))) {
-            $request->hasFile('image') ? $this->saveMimes($category, $request, ['image'], ['500', '500'], false) : null;
+        if ($category->update($request->except('image', 'image_rectangle', 'file'))) {
+            $request->hasFile('image') ? $this->saveMimes($category, $request, ['image'], ['1440', '1080'], false) : null;
             $request->hasFile('file') ? $this->savePath($category, $request, 'file') : null;
             $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
@@ -130,7 +131,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)

@@ -41,7 +41,7 @@ export default function ({elements}) {
             showMobileView={elements.meta.total > 1}
             total={elements.meta.total}
             links={elements.meta.links}
-            mainModule={'user'}
+            mainModule={'author'}
         >
             <div className="flex flex-col hidden sm:block">
                 <div className=" overflow-visible">

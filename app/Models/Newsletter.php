@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Newsletter extends PrimaryModel
 {
     use HasFactory;
+    public $guarded = [''];
 }

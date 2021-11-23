@@ -3,12 +3,12 @@ import {useContext, useEffect} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
-import { split} from 'lodash';
+import { split, isNull } from 'lodash';
 import route from 'ziggy-js'
 import {useDispatch, useSelector} from "react-redux";
 import {setParentModule} from "../../redux/actions";
 
-export default function FrontendBreadCrumbs({ childName = ''}) {
+export default function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
     const {trans} = useContext(AppContext);
     const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -49,7 +49,7 @@ export default function FrontendBreadCrumbs({ childName = ''}) {
                         <Link
                             className="capitalize"
                             href={route(`frontend.${parentModule}.index`)}>
-                            {trans(pluralize(parentModule))}
+                            { isNull(parentModuleName) ?  trans(pluralize(parentModule)) : trans(pluralize(parentModuleName))}
                         </Link>
                     </li>
                          :

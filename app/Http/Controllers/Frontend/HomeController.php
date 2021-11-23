@@ -13,30 +13,31 @@ use App\Http\Resources\UserExtraLightResource;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Newsletter;
 use App\Models\Product;
 use App\Models\Setting;
-use App\Models\Slide;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $slides = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
-            return $q->active()->orderby('order','asc');
+            return $q->active()->orderby('order', 'asc');
         }])->first()->slides);
-        $homeCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->orderby('order','asc')->get());
-        $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
-        $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
-        $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('user')->orderBy('order','asc')->get());
-        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->authors()->orderBy('order','asc')->get());
-        $onHomeClients = UserExtraLightResource::collection(User::active()->OnHome()->designers()->orderBy('order','asc')->get());
-        $onHomePartners = UserExtraLightResource::collection(User::active()->OnHome()->celebrities()->orderBy('order','asc')->get());
+        $homeCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->orderby('order', 'asc')->get());
+        $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
+        $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
+        $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
+        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->authors()->orderBy('order', 'asc')->get());
+        $onHomeClients = UserExtraLightResource::collection(User::active()->OnHome()->designers()->orderBy('order', 'asc')->get());
+        $onHomePartners = UserExtraLightResource::collection(User::active()->OnHome()->celebrities()->orderBy('order', 'asc')->get());
         $meta = SettingResource::make(Setting::first());
-        return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses','newOnHomeProducts', 'onHomeClients', 'onHomePartners'))
+        return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts', 'onHomeClients', 'onHomePartners'))
             ->withViewData([
-            'meta' => $meta,
-        ]);
+                'meta' => $meta,
+            ]);
 
     }
 
@@ -48,5 +49,21 @@ class HomeController extends Controller
         app()->setLocale($lang);
         session()->put('lang', $lang);
         return redirect()->back();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * **/
+    public function postNewsLetter(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        if (Newsletter::create($request->all())) {
+            return redirect()->back()->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }

@@ -1,4 +1,4 @@
-import {map} from "lodash";
+import {map, isNull } from "lodash";
 import ElementTags from "./ElementTags";
 import ElementPrice from "./ElementPrice";
 import {useContext} from "react";
@@ -6,13 +6,13 @@ import {AppContext} from "../../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 
-export default function RelatedItems({ elements , type = ''}) {
+export default function RelatedItems({ elements , type = '', title = null }) {
     const { trans, getThumb , getLocalized  } = useContext(AppContext)
     return (
         <section aria-labelledby="related-heading"
                  className="py-10 px-0 sm:px-10">
-            <h2 id="related-heading" className="text-xl font-bold text-gray-900">
-                {trans('related_items')}
+            <h2 id="related-heading" className="text-xl font-bold text-gray-900 capitalize truncate">
+                {isNull(title) ? trans('related_items') : title}
             </h2>
             <div
                 className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">

@@ -14,8 +14,8 @@ import {map} from "lodash";
 
 export default function() {
     const {trans, getLocalized, getThumb, getFileUrl,} = useContext(AppContext);
-    const {errors} = usePage().props;
     const dispatch = useDispatch();
+    const {errors} = usePage().props;
     const {data, setData, put, progress, reset} = useForm({
         'name_ar': '',
         'name_en': '',

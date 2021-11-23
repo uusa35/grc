@@ -95,8 +95,11 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                     <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
                         {/* Image gallery */}
                         <div className="relative">
-                            <ElementTags exclusive={element.exclusive} onSale={element.isOnSale}
-                                         onNew={element.on_new}/>
+                            <ElementTags exclusive={element.exclusive}
+                                         onSale={element.isOnSale}
+                                         onNew={element.on_new}
+                                         showFavoriteIcon={false}
+                            />
                             <ImageGallery
                                 showBullets={true}
                                 showNav={false}
@@ -425,7 +428,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                     {/* related items */}
                     {
                         relatedElements && relatedElements.meta.total > 0 &&
-                        <RelatedItems elements={relatedElements.data} type={'service'}/>
+                        <RelatedItems elements={relatedElements.data} type={'service'} title={trans('related_services')}/>
                     }
                 </div>
             </FrontendContentContainer>

@@ -111,6 +111,7 @@ export default function({element, relatedElements, auth}) {
                                 onSale={element.isOnSale}
                                 onNew={element.on_new}
                                 free={element.free}
+                                showFavoriteIcon={false}
                             />
                             <ImageGallery
                                 showBullets={true}

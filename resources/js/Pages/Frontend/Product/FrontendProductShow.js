@@ -36,7 +36,7 @@ import SocialIconShare from "../partials/SocialIconShare";
 import {FaWhatsapp} from "react-icons/fa";
 
 
-export default function ({element, relatedElements, auth, settings }) {
+export default function({element, relatedElements, auth, settings}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
@@ -83,9 +83,9 @@ export default function ({element, relatedElements, auth, settings }) {
             name_en: element.name_en,
             description_ar: element.description_ar,
             description_en: element.description_en,
-            merchant_id : element.user.id,
-            merchant_name_ar : element.user.name_ar,
-            merchant_name_en : element.user.name_en
+            merchant_id: element.user.id,
+            merchant_name_ar: element.user.name_ar,
+            merchant_name_en: element.user.name_en
         }))
         // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
@@ -102,7 +102,8 @@ export default function ({element, relatedElements, auth, settings }) {
                     {/*    {element.free && <EmbeddedHtml html={element.embedded}/>}*/}
                     {/*</div>*/}
                     {/* Product */}
-                    <div className={classNames(element.video_url_one ? `lg:grid-cols-2`: `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto pb-10")}>
+                    <div
+                        className={classNames(element.video_url_one ? `lg:grid-cols-2` : `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto pb-10")}>
                         {/* Image gallery */}
                         <div className="relative">
                             <ElementTags
@@ -110,6 +111,7 @@ export default function ({element, relatedElements, auth, settings }) {
                                 onSale={element.isOnSale}
                                 onNew={element.on_new}
                                 free={element.free}
+                                showFavoriteIcon={false}
                             />
                             <ImageGallery
                                 showBullets={true}
@@ -134,7 +136,8 @@ export default function ({element, relatedElements, auth, settings }) {
                                 />
                             </div>
                             {/* Reviews */}
-                            {element.ratings && <ElementRating ratings={element.ratings} id={element.id} type={'product'}/>}
+                            {element.ratings &&
+                            <ElementRating ratings={element.ratings} id={element.id} type={'product'}/>}
                             <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                                 <div className="flex flex-1">
                                     {
@@ -209,7 +212,8 @@ export default function ({element, relatedElements, auth, settings }) {
                                                                         <div className="flex capitalize">
                                                                             {`${trans('from')} ${moment(`${t.date} ${t.start}`).format('HH:mm A')}`}
                                                                         </div>
-                                                                        <div className="flex ltr:ml-2 rtl:mr-2 capitalize">
+                                                                        <div
+                                                                            className="flex ltr:ml-2 rtl:mr-2 capitalize">
                                                                             {`${trans('to')} ${moment(`${t.date} ${t.end}`).format('HH:mm A')}`}
                                                                         </div>
                                                                     </div>
@@ -229,7 +233,8 @@ export default function ({element, relatedElements, auth, settings }) {
                                 />}
                                 <div className="flex flex-row justify-between items-center gap-x-5">
                                     {
-                                        settings.enable_cart && <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto">
+                                        settings.enable_cart &&
+                                        <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto">
                                             <button
                                                 disabled={!element.is_available}
                                                 type="submit"
@@ -240,15 +245,17 @@ export default function ({element, relatedElements, auth, settings }) {
                                         </form>
                                     }
                                     {
-                                        settings.enable_favorites && <ElementFavoriteBtn id={element.id} type={'product'}
-                                                                                         favoritesList={auth?.favoritesList}/>
+                                        settings.enable_favorites &&
+                                        <ElementFavoriteBtn id={element.id} type={'product'}
+                                                            favoritesList={auth?.favoritesList}/>
                                     }
                                 </div>
                                 {
-                                    settings.enable_whatsapp_contact && <div className="flex flex-1 w-full mb-auto mt-10 justify-between">
+                                    settings.enable_whatsapp_contact &&
+                                    <div className="flex flex-1 w-full mb-auto mt-10 justify-between">
                                         <a
                                             target="_blank"
-                                            href={getWhatsappLink(settings.whatsapp,`${trans('contactus_to_inquire_about_product')} ${trans('name')} : ${element[getLocalized()]} - ${trans(`sku`)} : ${element.sku}`)}
+                                            href={getWhatsappLink(settings.whatsapp, `${trans('contactus_to_inquire_about_product')} ${trans('name')} : ${element[getLocalized()]} - ${trans(`sku`)} : ${element.sku}`)}
                                             className={classNames(!element.is_available ? `opacity-30` : `bg-green-950`, `btn flex flex-1 justify-between bg-green-950 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-500 sm:w-full`)}
                                         >
                                             {trans('contactus_through_whatsapp')}
@@ -444,7 +451,7 @@ export default function ({element, relatedElements, auth, settings }) {
                             </section>
                         </div>
                     </div>
-                    <SocialIconShare  />
+                    <SocialIconShare/>
                     {/* related items */}
                     {
                         relatedElements && relatedElements.meta.total > 0 &&

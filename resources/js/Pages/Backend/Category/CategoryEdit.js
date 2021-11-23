@@ -248,7 +248,7 @@ export default function({category, elements}) {
                                     type="file"
                                     name="image"
                                     id="main_image"
-accept="image/jpg, image/jpeg , image/png"
+                                    accept="image/jpg, image/jpeg , image/png"
                                     autoComplete="main_image"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 />
@@ -256,7 +256,7 @@ accept="image/jpg, image/jpeg , image/png"
                             </div>
                             <ToolTipWidget message={trans('book_main_image_instruction')}/>
                             <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                {trans('square_best_fit')}
+                                {trans('rectangle_best_fit')}
                             </p>
                             <p className={`mt-2  text-gray-500`}>
                                 {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
@@ -275,8 +275,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     multiple
                                     name="images"
                                     id="more_images"
-accept="image/jpg, image/jpeg , image/png"
-
+                                    accept="image/jpg, image/jpeg , image/png"
                                     autoComplete="more_images"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 />
@@ -307,7 +306,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     type="file"
                                     name="file"
                                     id="file"
-accept="application/pdf"
+                                    accept="application/pdf"
                                     autoComplete="pdf_file"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                 />

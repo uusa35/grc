@@ -83,7 +83,7 @@ export default function MainNav() {
                     {
                         settings.enable_subscriptions ? <Link
                             href={route('frontend.subscriptions')}
-                            className="-m-2 p-2 block text-gray-50 invisible sm:visible">
+                            className="-m-2 p-2 block text-gray-50 invisible sm:visible text-xs">
                             {capitalize(trans('subscriptions'))}
                         </Link> : null
                     }
@@ -91,7 +91,7 @@ export default function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className="-m-2 p-2 block text-gray-50 border-l border-gray-200">
+                        className="-m-2 p-2 block text-gray-50 border-l border-gray-200 text-xs">
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
@@ -99,12 +99,14 @@ export default function MainNav() {
                             {
                                 settings.enable_register ?
                                     <a
-                                        href={route('register')} className="-m-2 p-2 block text-gray-50 border-l border-gray-200">
+                                        href={route('register')}
+                                        className="-m-2 p-2 block text-gray-50 border-l border-gray-200 text-xs">
                                         {capitalize(trans('register'))}
                                     </a> : null
                             }
                             <a
-                                href={route('login')} className="-m-2 p-2 block text-gray-50 border-l border-gray-200 hidden">
+                                href={route('login')}
+                                className="-m-2 p-2 block text-gray-50 border-l border-gray-200 hidden text-xs">
                                 {capitalize(trans('login'))}
                             </a>
                         </> : null
@@ -220,7 +222,7 @@ export default function MainNav() {
                                     settings.enable_books && <>
                                         <div className="flow-root">
                                             <Link
-                                                href={route('frontend.category.index', { is_book : 1})}
+                                                href={route('frontend.category.index', {is_book: 1})}
                                                 className="-m-2 p-2 block text-gray-900 capitalize ">
                                                 {capitalize(trans('book_categories'))}
                                             </Link>
@@ -987,8 +989,8 @@ export default function MainNav() {
                                             aria-hidden="true"
                                         />
                                         <span
-                                            className="inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300">
-                                {cart.totalItems}
+                                            className={classNames(locale.isRTL ? `-right-2` :  `-left-2`, "relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300")}>
+                                            {cart.totalItems}
                                     </span>
                                         <span className="sr-only">items in cart, view bag</span>
                                     </Link>
