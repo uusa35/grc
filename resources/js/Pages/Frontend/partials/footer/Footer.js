@@ -39,7 +39,7 @@ export default function Footer() {
                     <div className=" p-4">
                         <img
                             className="h-28 rounded-sm shadow-md"
-                            src={getThumb(settings.image)}
+                            src={settings.mgt ? getThumb(settings.image) : getThumb(settings.app_logo)}
                             alt={settings[getLocalized()]}
                         />
                         <p className="text-gray-500 capitalize text-base mt-5">

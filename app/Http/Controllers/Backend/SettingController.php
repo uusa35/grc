@@ -96,7 +96,7 @@ class SettingController extends Controller
             $request->has('images') ? $this->saveGallery($setting, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($setting, $request, ['size_chart_image'], ['1080', '1440'], true) : null;
             $request->hasFile('shipment_prices') ? $this->saveMimes($setting, $request, ['shipment_prices'], ['1080', '1440'], true) : null;
-            $request->hasFile('app_logo') ? $this->saveMimes($setting, $request, ['app_logo'], ['1080', '1440'], true) : null;
+            $request->hasFile('app_logo') ? $this->saveMimes($setting, $request, ['app_logo'], ['1000', '1000'], false) : null;
             return redirect()->route('backend.setting.edit', $setting->id)->with('success', trans('general.process_success'));
         }
         return redirect()->back()->withErrors(trans('general.process_failure'));
