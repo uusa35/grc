@@ -37,7 +37,7 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
             </div>
             {
                 showFavoriteIcon ? <div
-                    className={classNames(locale.isRTL ? `left-10` : `right-10`, 'absolute top-8 flex flex-col  gap-y-3 text-white text-sm bg-white rounded-full w-10 h-10 justify-center items-center opacity-80')}>
+                    className={classNames(locale.isRTL ? `left-2` : `right-2`, 'absolute top-8 flex flex-col  gap-y-3 text-white text-sm bg-white rounded-full w-10 h-10 justify-center items-center opacity-80')}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

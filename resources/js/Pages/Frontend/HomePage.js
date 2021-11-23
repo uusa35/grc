@@ -23,7 +23,7 @@ export default function HomePage({
                                      clearCart = false,
                                      settings
                                  }) {
-    const [slideNumber, setSlideNumber] = useState(6)
+    const [slideNumber, setSlideNumber] = useState(5)
     const {trans} = useContext(AppContext)
 
     useEffect(() => {
@@ -68,7 +68,7 @@ export default function HomePage({
                             <ElementSlider
                                 elements={onHomeParticipantAuthors}
                                 showNavigation={false}
-                                slidesPerView={isTablet || isMobile ? 1 : slideNumber}
+                                slidesPerView={isTablet || isMobile ? 1 : 8}
                                 title={trans('participant_authors')}
                                 type={'user'}
                             />
