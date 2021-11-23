@@ -48,7 +48,7 @@ export default function({element, relatedElements, auth}) {
                             description={element[getLocalized('description')]}
                             image={element.image}
             />
-            <FrontendContentContainer childName={element[getLocalized()]}>
+            <FrontendContentContainer childName={element[getLocalized()]} parentModuleName={trans('authors')}>
                 <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                     {/* Product */}
                     <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
