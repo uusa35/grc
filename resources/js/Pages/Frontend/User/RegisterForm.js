@@ -4,13 +4,48 @@ import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import {AppContext} from "../../context/AppContext";
 import GlobalContext from "../../context/GlobalContext";
-import {Link} from "@inertiajs/inertia-react";
+import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
+import {Inertia} from "@inertiajs/inertia";
 
 
 export default function() {
     const {trans, getThumb} = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
+
+    const {props} = usePage();
+    const {errors} = props;
+
+    const {data, setData, post, progress} = useForm({
+        'name': '',
+        'email': '',
+        'password': '',
+        'password_confirmation': '',
+        'mobile': '',
+    });
+
+    const handleChange = (e) => {
+        setData(values => ({
+            ...values,
+            [e.target.id]: e.target.value,
+        }))
+    }
+
+
+    const submit = (e) => {
+        e.preventDefault()
+        Inertia.post(route(`frontend.user.post.registration`), {
+            _method: 'post',
+            ...data,
+        }, {
+            forceFormData: false,
+            preserveScroll: true,
+            resetOnSuccess: false,
+            onSuccess : (page) => {
+                window.location.reload();
+            }
+        })
+    }
 
     return (
         <FrontendContainer>
@@ -30,7 +65,7 @@ export default function() {
 
                     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                            <form className="space-y-6" action="#" method="POST">
+                            <form className="space-y-6" onSubmit={submit}>
                                 {/* name */}
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -43,6 +78,7 @@ export default function() {
                                             type="text"
                                             autoComplete="name"
                                             required
+                                            onChange={handleChange}
                                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                         />
                                     </div>
@@ -59,6 +95,7 @@ export default function() {
                                             type="email"
                                             autoComplete="email"
                                             required
+                                            onChange={handleChange}
                                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                         />
                                     </div>
@@ -75,6 +112,7 @@ export default function() {
                                             type="password"
                                             autoComplete="current-password"
                                             required
+                                            onChange={handleChange}
                                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                         />
                                     </div>
@@ -89,9 +127,10 @@ export default function() {
                                         <input
                                             id="password_confirmation"
                                             name="password_confirmation"
-                                            type="password_confirmation"
+                                            type="password"
                                             autoComplete="current-password"
                                             required
+                                            onChange={handleChange}
                                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                         />
                                     </div>
@@ -107,6 +146,7 @@ export default function() {
                                             name="mobile"
                                             type="number"
                                             autoComplete="mobile"
+                                            onChange={handleChange}
                                             placeholder={trans('mobile_placeholder')}
                                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                         />

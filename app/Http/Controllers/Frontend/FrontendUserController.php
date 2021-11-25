@@ -13,6 +13,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Course;
 use App\Models\Order;
 use App\Models\Role;
@@ -292,8 +293,32 @@ class FrontendUserController extends Controller
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
-    public function getRegister()
+    public function getRegistration()
     {
         return inertia('Frontend/User/RegisterForm');
     }
+
+    public function postRegistration(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|string|unique:users',
+            'mobile' => 'required|min:8',
+            'password' => 'required|min:8|confirmed'
+        ]);
+        $user =  User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => Role::where(['is_client' => true])->first()->id,
+            'country_id' => Country::where(['is_local' => true])->first()->id,
+            'subscription_id' => Subscription::where(['free' => true])->first()->id
+        ]);
+        if($user) {
+            auth()->loginUsingId($user->id);
+            return redirect()->route('frontend.home')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
+    }
+
 }

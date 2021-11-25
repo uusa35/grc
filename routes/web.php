@@ -107,8 +107,8 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     // Login & Registeration
     Route::get('logging',[FrontendUserController::class,'getLogin'])->name('user.logging');
     Route::post('logging',[FrontendUserController::class,'postLogin'])->name('user.post.logging');
-    Route::get('registration',[FrontendUserController::class,'getRegister'])->name('user.registration');
-    Route::post('registration',[FrontendUserController::class,'postRegister'])->name('user.post.registration');
+    Route::get('registration',[FrontendUserController::class,'getRegistration'])->name('user.registration');
+    Route::post('registration',[FrontendUserController::class,'postRegistration'])->name('user.post.registration');
     // Newsletter
     Route::post('newsletter', [HomeController::class,'postNewsLetter'])->name('newsletter');
     Route::group(['middleware' => 'auth'], function () {
