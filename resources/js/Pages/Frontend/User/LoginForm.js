@@ -114,7 +114,7 @@ export default function({ auth }) {
                                     </div>
 
                                     <div className="text-sm">
-                                        <a href="#" className="font-medium text-gray-600 hover:text-gray-500">
+                                        <a href={route('password.request')} target="_blank" className="font-medium text-gray-600 hover:text-gray-500">
                                             {trans("forget_ur_password")}
                                         </a>
                                     </div>
