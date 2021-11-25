@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AuthExtraLightResource;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\CourseCollection;
 use App\Http\Resources\CourseResource;
@@ -272,5 +273,27 @@ class FrontendUserController extends Controller
     {
         $user = new UserResource(User::whereId(auth()->id())->first());
         return inertia('Frontend/User/Profile/ProfileSettingIndex', compact('user'));
+    }
+
+    public function getLogin()
+    {
+        return inertia('Frontend/User/LoginForm');
+    }
+
+    public function postLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ]);
+        if(auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->route('frontend.home')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
+    }
+
+    public function getRegister()
+    {
+        return inertia('Frontend/User/RegisterForm');
     }
 }

@@ -1227,5 +1227,10 @@ export const en  = {
     "shop_and_products" : "shop (Our Products)",
     "related_books" : "related books",
     "related_services" : "related services",
-    "authors_books" : "related author's books"
+    "authors_books" : "related author's books",
+    "sign_in_to_ur_account" : "login to your account",
+    "register_new_user" : "register new user",
+    "forget_ur_password" : "forget your password",
+    "already_a_user_login_to_ur_account" : "already a user. login to your account",
+    "mobile_placeholder" : "965 65 XXXXXX"
 }

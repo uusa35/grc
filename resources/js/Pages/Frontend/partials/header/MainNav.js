@@ -42,10 +42,11 @@ export default function MainNav() {
         guest,
         arFont, enFont,
     } = useContext(AppContext);
-    const {auth, settings, currencies, categories, mgt} = useContext(GlobalContext);
-    const {locale, currency, cart, parentModule} = useSelector(state => state);
+    const {auth,  settings, currencies, categories, mgt} = useContext(GlobalContext);
+    const { locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
+    console.log('the auth', auth);
 
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
@@ -95,20 +96,20 @@ export default function MainNav() {
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
-                        guest ? <>
+                        !auth || !auth.id ? <>
                             {
                                 settings.enable_register ?
-                                    <a
-                                        href={route('register')}
+                                    <Link
+                                        href={route('frontend.user.registration')}
                                         className=" mx-2  block text-gray-50  text-xs">
                                         {capitalize(trans('register'))}
-                                    </a> : null
+                                    </Link> : null
                             }
-                            <a
-                                href={route('login')}
+                            <Link
+                                href={route('frontend.user.logging')}
                                 className="mx-2   block text-gray-50  hidden text-xs">
                                 {capitalize(trans('login'))}
-                            </a>
+                            </Link>
                         </> : null
                     }
                 </div>
@@ -282,16 +283,16 @@ export default function MainNav() {
                                     </div>
                                 }
                                 {
-                                    guest ? <>
+                                    !auth || !auth.id ? <>
                                         <div className="flow-root">
-                                            <Link href={route('login')}
+                                            <Link href={route('frontend.user.logging')}
                                                   className="-m-2 p-2 block text-gray-900 capitalize ">
                                                 {capitalize(trans('login'))}
                                             </Link>
                                         </div>
                                         {
                                             settings.enable_register ? <div className="flow-root">
-                                                <Link href={route('register')}
+                                                <Link href={route('frontend.user.registration')}
                                                       className="-m-2 p-2 block text-gray-900 capitalize">
                                                     {capitalize(trans('register'))}
                                                 </Link>
@@ -925,7 +926,7 @@ export default function MainNav() {
                                     <Menu.Items
                                         className="origin-top-right absolute rtl:-mr-48 ltr:-ml-48 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         {
-                                            isAdminOrAbove && <Menu.Item>
+                                            isAdminOrAbove && auth && auth.id && <Menu.Item>
                                                 {({active}) => (
                                                     <a
                                                         href={route('backend.home')}
@@ -937,15 +938,15 @@ export default function MainNav() {
                                             </Menu.Item>
                                         }
                                         {
-                                            guest ?
+                                            !auth || !auth.id ?
                                                 <Menu.Item>
                                                     {({active}) => (
-                                                        <a
-                                                            href={route('login')}
+                                                        <Link
+                                                            href={route('frontend.user.logging')}
                                                             className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
                                                         >
                                                             {trans('login')}
-                                                        </a>
+                                                        </Link>
                                                     )}
                                                 </Menu.Item>
                                                 :

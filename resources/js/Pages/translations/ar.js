@@ -1236,5 +1236,10 @@ export const ar = {
     "contact_us_on" : "تواصل معنا على",
     "related_books" : "كتب متعلقة",
     "related_services" : "استشارات متعلقة",
-    "authors_books" : "بعض كتب المؤلف"
+    "authors_books" : "بعض كتب المؤلف",
+    "sign_in_to_ur_account" : "تسجيل الدخول إلى الحساب",
+    "register_new_user" : "تسجيل مستخدم جديد",
+    "forget_ur_password" : "نسيت كلمة المرور",
+    "already_a_user_login_to_ur_account" : " مسجل بالفعل .. تسجيل الدخول إلى الحساب",
+    "mobile_placeholder" : "965 65 XXXXXX"
 }

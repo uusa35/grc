@@ -23,7 +23,7 @@ const FrontendContainer = ({children}) => {
                     <SystemMessage/>
                     {children}
                 </div>
-                <Footer/>
+                {/*<Footer/>*/}
             </main>
         </div>
     );
