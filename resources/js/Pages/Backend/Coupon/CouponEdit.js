@@ -44,8 +44,6 @@ export default function({coupon}) {
         })
     }
 
-    console.log('the coupon', coupon);
-
     return (
         <BackendContainer type={'coupon'}>
             <div className="flex flex-col rounded-md bg-transparent">

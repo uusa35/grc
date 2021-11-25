@@ -20,7 +20,6 @@ export default function Footer() {
 
     const submit = (e) => {
         e.preventDefault()
-        console.log('the data', data);
         Inertia.post(route(`frontend.newsletter`), {
             _method: 'post',
             ...data,
@@ -116,14 +115,14 @@ export default function Footer() {
                                 guest ?
                                     <>
                                         <li>
-                                            <Link href={route('login')}
+                                            <Link href={route('frontend.user.logging')}
                                                   className="text-base text-gray-500 capitalize hover:text-gray-900">
                                                 {trans('login')}
                                             </Link>
                                         </li>
                                         {
                                             settings.enable_register ? <li>
-                                                <Link href={route('register')}
+                                                <Link href={route('frontend.user.registration')}
                                                       className="text-base text-gray-500 capitalize hover:text-gray-900">
                                                     {trans('register')} {trans('new_user')}
                                                 </Link>

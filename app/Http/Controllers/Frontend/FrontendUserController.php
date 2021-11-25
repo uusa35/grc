@@ -304,7 +304,8 @@ class FrontendUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|string|unique:users',
             'mobile' => 'required|min:8',
-            'password' => 'required|min:8|confirmed'
+            'password' => 'required|min:8|confirmed',
+            'code' => 'required|confirmed'
         ]);
         $user =  User::create([
             'name' => $request->name,

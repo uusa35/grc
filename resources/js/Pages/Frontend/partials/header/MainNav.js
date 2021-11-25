@@ -46,7 +46,6 @@ export default function MainNav() {
     const { locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
-    console.log('the auth', auth);
 
     return (
         <div className="bg-white rtl:text-right ltr:text-left">

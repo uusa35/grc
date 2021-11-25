@@ -21,22 +21,21 @@ export default function() {
 
     const {props} = usePage();
     const {errors} = props;
-
     const {data, setData, post, progress} = useForm({
-        'code': '',
         'first_name': '',
         'last_name': '',
         'notes': '',
         'content': '',
         'email': '',
         'mobile': '',
+        'code': '',
         'code_confirmation': '',
     });
 
     useMemo(() => {
         const currentCode = random(1111, 9999);
         setCode(currentCode);
-        setData('code', currentCode);
+        setData('code', currentCode.toString());
     }, [])
 
     const handleChange = (e) => {
@@ -54,6 +53,8 @@ export default function() {
             ...data,
         }, {
             forceFormData: true,
+            resetOnSuccess: false,
+            preserveScroll: true,
         })
     }
 
@@ -237,6 +238,7 @@ export default function() {
                                                             </p>
                                                         </div>
                                                     </div>
+                                                    {/* mobile */}
                                                     <div>
                                                         <div className="flex justify-between">
                                                             <label htmlFor="phone"
@@ -263,6 +265,7 @@ export default function() {
                                                             </p>
                                                         </div>
                                                     </div>
+                                                    {/* subject */}
                                                     <div className="sm:col-span-1">
                                                         <label htmlFor="subject"
                                                                className="block text-sm  text-gray-900">
@@ -283,6 +286,7 @@ export default function() {
                                                             </p>
                                                         </div>
                                                     </div>
+                                                    {/* code_confirmation */}
                                                     <div className="sm:col-span-1">
                                                         <label htmlFor="subject"
                                                                className="block text-sm  text-gray-900">

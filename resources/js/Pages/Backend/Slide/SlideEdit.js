@@ -46,8 +46,6 @@ export default function SlideEdit({slide , types, products, services, categories
         }))
     }
 
-    console.log('data active', data.active);
-
     const submit = (e) => {
         e.preventDefault()
         Inertia.post(route(`backend.slide.update`, slide.id), {

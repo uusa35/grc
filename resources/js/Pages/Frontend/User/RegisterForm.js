@@ -1,5 +1,5 @@
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
-import React, {useContext} from "react";
+import React, {useContext, useMemo, useState} from "react";
 import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import {AppContext} from "../../context/AppContext";
@@ -7,12 +7,13 @@ import GlobalContext from "../../context/GlobalContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
+import {random} from "lodash";
 
 
 export default function() {
     const {trans, getThumb} = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
-
+    const [code, setCode] = useState('');
     const {props} = usePage();
     const {errors} = props;
 
@@ -22,7 +23,15 @@ export default function() {
         'password': '',
         'password_confirmation': '',
         'mobile': '',
+        'code': '',
+        'code_confirmation': '',
     });
+
+    useMemo(() => {
+        const currentCode = random(1111, 9999);
+        setCode(currentCode);
+        setData('code', currentCode.toString());
+    }, [])
 
     const handleChange = (e) => {
         setData(values => ({
@@ -46,6 +55,8 @@ export default function() {
             }
         })
     }
+
+    console.log('the code', data);
 
     return (
         <FrontendContainer>
@@ -79,7 +90,7 @@ export default function() {
                                             autoComplete="name"
                                             required
                                             onChange={handleChange}
-                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                         />
                                     </div>
                                 </div>
@@ -96,7 +107,7 @@ export default function() {
                                             autoComplete="email"
                                             required
                                             onChange={handleChange}
-                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                         />
                                     </div>
                                 </div>
@@ -113,7 +124,7 @@ export default function() {
                                             autoComplete="current-password"
                                             required
                                             onChange={handleChange}
-                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                         />
                                     </div>
                                 </div>
@@ -131,7 +142,7 @@ export default function() {
                                             autoComplete="current-password"
                                             required
                                             onChange={handleChange}
-                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                         />
                                     </div>
                                 </div>
@@ -145,11 +156,35 @@ export default function() {
                                             id="mobile"
                                             name="mobile"
                                             type="number"
+                                            min={8}
                                             autoComplete="mobile"
                                             onChange={handleChange}
                                             placeholder={trans('mobile_placeholder')}
-                                            className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                         />
+                                    </div>
+                                </div>
+                                {/* code_confirmation */}
+                                <div>
+                                    <label htmlFor="code_confirmation"
+                                           className="block text-sm  text-gray-900">
+                                        {trans('write_protection_code')} - ({code})
+                                    </label>
+                                    <div className="mt-1">
+                                        <input type="hidden" name="code" value={code}/>
+                                        <input
+                                            id="code_confirmation"
+                                            type="text"
+                                            name="code_confirmation"
+                                            required
+                                            onChange={handleChange}
+                                            placeholder={trans('write_protection_code')}
+                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                        />
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.code_confirmation && <div
+                                                className={`text-red-900 text-sm`}>{errors.code_confirmation}</div>}
+                                        </p>
                                     </div>
                                 </div>
                                 <div>
