@@ -13,7 +13,7 @@ const CategoryWidget = ({element, type = 'book'}) => {
             whileHover={{ scale: 0.9 }}
         >
         <div className="block relative overflow-hidden hover:opacity-90">
-            <div className="w-full h-auto bg-gray-200 aspect-w-13 aspect-h-8 rounded-md overflow-hidden">
+            <div className="w-full h-auto bg-gray-200 aspect-w-13 aspect-h-8 rounded-md overflow-hidden shadow-lg">
                 <img
                     src={getMedium(element.image)}
                     alt={element[getLocalized()]}
