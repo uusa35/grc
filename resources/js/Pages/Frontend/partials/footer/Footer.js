@@ -156,7 +156,7 @@ export default function Footer() {
                                         settings.android && <a
                                             target="_blank"
                                             href={settings.android}
-                                            className="w-1/2 h-20 my-1 bg-gray-100 inline-flex p-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+                                            className="w-3/4 md:w-3/4 xl:w-full h-20 my-1 bg-gray-100 inline-flex p-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="currentColor"
@@ -175,7 +175,7 @@ export default function Footer() {
                                         settings.apple && <a
                                             target="_blank"
                                             href={settings.apple}
-                                            className="w-1/2 h-20 bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+                                            className="w-3/4 md:w-3/4 xl:w-full h-20 bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="currentColor"
