@@ -14,11 +14,11 @@ export default function NormalUserWidget ({ element }) {
         >
         <Link href={route('frontend.user.show', element.id)}
               className="block relative rounded overflow-hidden z-0 hover:opacity-95 ">
-            <div className="w-full h-auto flex items-center justify-center sm:aspect-w-1 sm:aspect-h-1 shadow-lg">
+            <div className="w-full h-auto flex items-center justify-center sm:aspect-w-1 sm:aspect-h-1 ">
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
-                    className="z-0 w-60 h-60 rounded-full shadow-md object-center object-cover group-hover:opacity-75"
+                    className="z-0 w-60 h-60 rounded-full shadow-md object-center object-cover group-hover:opacity-75 shadow-md"
                 />
             </div>
             <h3 className="mt-4 text-center text-gray-700 truncate text-sm">
