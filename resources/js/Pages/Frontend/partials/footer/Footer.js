@@ -150,13 +150,13 @@ export default function Footer() {
                         {
                             (settings.apple || settings.android) &&
                             <>
-                                <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('find_us_on_stores')}</h3>
+                                <h3 className="font-semibold text-gray-600 tracking-wider uppercase mb-4">{trans('find_us_on_stores')}</h3>
                                 <div className=" p-8 pt-0 flex flex-col justify-start items-start gap-y-4 ">
                                     {
                                         settings.android && <a
                                             target="_blank"
                                             href={settings.android}
-                                            className="my-1 bg-gray-100 inline-flex p-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+                                            className="w-1/2 h-20 my-1 bg-gray-100 inline-flex p-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="currentColor"
@@ -175,7 +175,7 @@ export default function Footer() {
                                         settings.apple && <a
                                             target="_blank"
                                             href={settings.apple}
-                                            className="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+                                            className="w-1/2 h-20 bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="currentColor"
