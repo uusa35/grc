@@ -58,13 +58,13 @@ export default function() {
 
     return (
         <FrontendContainer>
-            <FrontendContentContainer parentModuleName={'register'}>
-                <SubMetaElement title={trans('books')}/>
+            <FrontendContentContainer  parentModuleName={'register'} >
+                <SubMetaElement title={trans('register')}/>
                 <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
                         <img
                             className="mx-auto h-16 w-auto"
-                            src={getThumb(settings.image)}
+                            src={settings.mgt ? getThumb(settings.image) : getThumb(settings.app_logo)}
                             alt="Workflow"
                         />
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">{trans('register_new_user')}</h2>

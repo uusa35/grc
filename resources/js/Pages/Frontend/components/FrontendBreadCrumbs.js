@@ -21,6 +21,8 @@ export default function FrontendBreadCrumbs({ childName = '', parentModuleName =
       }
     },[])
 
+    console.log('parentModuleName', parentModuleName)
+    console.log('parentName', parentModule)
     return (
         <div
             className="flex flex-1 flex-row justify-between items-center rounded-md shadow-sm p-5 w-auto">
@@ -49,7 +51,7 @@ export default function FrontendBreadCrumbs({ childName = '', parentModuleName =
                         <Link
                             className="capitalize"
                             href={route(`frontend.${parentModule}.index`)}>
-                            { isNull(parentModuleName) ?  trans(pluralize(parentModule)) : trans(pluralize(parentModuleName))}
+                            { isNull(parentModuleName) ?  trans(pluralize(parentModule)) : trans(parentModuleName)}
                         </Link>
                     </li>
                          :
@@ -66,7 +68,7 @@ export default function FrontendBreadCrumbs({ childName = '', parentModuleName =
                             <Link
                                 className="capitalize"
                                 href="#">
-                                {trans(pluralize(parentModule))}
+                                { isNull(parentModuleName) ?  trans(pluralize(parentModule)) : trans(parentModuleName)}
                             </Link>
                         </li>
                     }

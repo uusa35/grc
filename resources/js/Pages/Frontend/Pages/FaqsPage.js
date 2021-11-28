@@ -15,7 +15,7 @@ export default function FaqsPage({elements}) {
 
     return (
         <FrontendContainer>
-            <FrontendContentContainer>
+            <FrontendContentContainer parentModuleName={'faqs'}>
                 <SubMetaElement title={trans('faqs')}/>
             <div className="bg-white relative overflow-hidden">
                 {/* Decorative background image and gradient */}

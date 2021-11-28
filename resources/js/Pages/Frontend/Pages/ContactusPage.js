@@ -60,7 +60,7 @@ export default function() {
 
     return (
         <FrontendContainer>
-            <FrontendContentContainer>
+            <FrontendContentContainer parentModuleName={'contactus'} >
                 <SubMetaElement title={trans('contactus')}/>
                 <div className="bg-white relative overflow-hidden">
                     {/* Decorative background image and gradient */}

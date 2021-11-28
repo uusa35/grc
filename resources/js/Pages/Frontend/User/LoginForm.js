@@ -55,7 +55,7 @@ export default function({ auth }) {
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
                         <img
                             className="mx-auto h-16 w-auto"
-                            src={getThumb(settings.image)}
+                            src={settings.mgt ? getThumb(settings.image) : getThumb(settings.app_logo)}
                             alt="Workflow"
                         />
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">{trans('sign_in_to_ur_account')}</h2>
