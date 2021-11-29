@@ -59,7 +59,7 @@ class HomeController extends Controller
     public function postNewsLetter(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:newsletters',
         ]);
         if (Newsletter::create($request->all())) {
             return redirect()->back()->with('success', trans('general.process_success'));
