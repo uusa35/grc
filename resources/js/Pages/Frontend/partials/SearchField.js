@@ -8,6 +8,12 @@ import pluralize from 'pluralize'
 export default function SearchField({ type = 'book'}) {
     const[search,setSearch] = useState()
     const { trans } = useContext(AppContext)
+
+    const submit = (e) => {
+        e.preventDefault();
+        window.location.href = route(`frontend.${type}.index`, { search });
+    }
+
     return (
         <div
             className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end invisible 2xl:visible">
@@ -21,7 +27,7 @@ export default function SearchField({ type = 'book'}) {
                         className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <SearchIcon className="h-5 w-5 text-gray-900" aria-hidden="true"/>
                     </Link>
-                    <form onSubmit={() => route(`frontend.${type}.index`, { search })}>
+                    <form onSubmit={submit}>
                         <input
                             onChange={(e) => setSearch(e.target.value)}
                             id="search"
