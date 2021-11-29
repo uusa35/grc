@@ -35,7 +35,6 @@ export default function({coupon = {}}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('couponCode', data.code);
         post(route('frontend.cart.coupon'), {...data})
     }
 

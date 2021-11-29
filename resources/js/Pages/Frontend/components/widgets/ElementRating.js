@@ -45,7 +45,6 @@ export default function ElementRating({ratings, id, type = ''}) {
                          disabled={guest}
                          type='submit'
                          onClick={() => {
-                         console.log('clicked')
                          setData('value', (rating* 20))
                          setCurrentRating(rating)
                      }}>

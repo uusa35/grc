@@ -54,7 +54,6 @@ export default function({order, settings}) {
         }
     }, [paymentMethod])
 
-    console.log('payme', paymentMethod);
 
 
     return (
