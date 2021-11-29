@@ -41,11 +41,13 @@ export default function ({ settings }) {
                     <p className="mt-4 max-w-xl mx-auto text-xl text-gray-600 capitalize">
                         {settings[getLocalized()]}
                     </p>
-                    <div
-                        className="mt-6 inline-block w-full bg-gray-400 border border-transparent rounded-sm py-3 px-8 font-medium text-white  sm:w-auto capitalize"
-                    >
-                        {settings[getLocalized('caption')]}
-                    </div>
+                    {
+                        settings[getLocalized('caption')] && settings[getLocalized('caption')].length > 10 ? <div
+                            className="mt-6 inline-block w-full bg-gray-400 border border-transparent rounded-sm py-3 px-8 font-medium text-white sm:w-auto capitalize"
+                        >
+                            {settings[getLocalized('caption')]}
+                        </div> : null
+                    }
                 </div>
             </section>
 
