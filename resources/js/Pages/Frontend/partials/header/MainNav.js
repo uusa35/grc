@@ -50,7 +50,7 @@ export default function MainNav() {
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}
-            <div className="bg-gray-700 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8">
+            <div className="bg-gray-700 h-10 flex items-center justify-between text-black px-4 sm:px-6 lg:px-8">
                 <div className="flex  flex-row  justify-center items-center gap-x-5">
                     {
                         settings.instagram && <a target="_blank" href={settings.instagram}>
@@ -485,7 +485,7 @@ export default function MainNav() {
                 </Dialog>
             </Transition.Root>
 
-            <header className="relative bg-black text-white py-6 max-w-full">
+            <header className={classNames(mgt ? `bg-black text-black`: `bg-white text-black` , "relative border-b border-gray-400 py-6 max-w-full")}>
                 <nav aria-label="Top" className="w-auto lg:w-full xl:w-full 2xl:w-4/5  2xl:m-auto">
                     <div className="h-20 flex items-center">
                         <button
@@ -632,14 +632,14 @@ export default function MainNav() {
                                                     className={classNames(
                                                         parentModule == 'contactus' || parentModule == 'subscriptions' || parentModule == 'polices' || parentModule == 'terms' || parentModule == 'aboutus' || parentModule == 'faqs'
                                                             ? 'border-b border-hippie-blue-500 pb-2'
-                                                            : 'text-white',
-                                                        'text-white group inline-flex items-center text-white font-extrabold capitalize'
+                                                            : 'text-black',
+                                                        'group inline-flex items-center text-black font-extrabold capitalize'
                                                     )}
                                                 >
                                                     <span>{trans('pages')}</span>
                                                     <ChevronDownIcon
                                                         className={classNames(
-                                                            open ? 'text-white' : 'text-white',
+                                                            open ? 'text-black' : 'text-black',
                                                             'rtl:mr-2 ltr:ml-2 w-5 group-hover:text-gray-100'
                                                         )}
                                                         aria-hidden="true"
@@ -883,7 +883,7 @@ export default function MainNav() {
                                                     {({active}) => (
                                                         <button
                                                             onClick={() => dispatch(setCurrency(element))}
-                                                            className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
+                                                            className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-black')}
                                                         >
                                                             <img
                                                                 className="h-5 w-5 rounded-full object-cover"
@@ -923,7 +923,7 @@ export default function MainNav() {
                                     leaveTo="transform opacity-0 scale-95"
                                 >
                                     <Menu.Items
-                                        className="origin-top-right absolute rtl:-mr-48 ltr:-ml-48 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        className="origin-top-right absolute rtl:-mr-48 ltr:-ml-48 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-black ring-1 ring-black ring-opacity-5 focus:outline-none">
                                         {
                                             isAdminOrAbove && auth && auth.id && <Menu.Item>
                                                 {({active}) => (

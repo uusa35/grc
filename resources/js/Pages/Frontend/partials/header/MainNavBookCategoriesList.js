@@ -18,8 +18,8 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                         <Popover.Button
                             className={classNames(
                                 open
-                                    ? 'text-white'
-                                    : 'text-white',
+                                    ? 'text-black'
+                                    : 'text-black',
                                 'relative z-10 flex items-center transition-colors ease-out duration-200  -mb-px pt-px'
                             )}
                         >
