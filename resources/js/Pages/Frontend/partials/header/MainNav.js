@@ -519,7 +519,7 @@ export default function MainNav() {
                                 <Link
                                     href={route('frontend.home')}
                                     onClick={() => dispatch(setParentModule('home'))}
-                                    className={classNames(parentModule == 'home' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 hover:bg-gray-900 hover:rounded-sm capitalize")}
+                                    className={classNames(parentModule == 'home' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 hover:rounded-sm capitalize")}
                                 >
                                     {capitalize(trans('home'))}
                                 </Link>
