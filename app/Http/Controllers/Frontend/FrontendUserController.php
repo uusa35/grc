@@ -313,6 +313,8 @@ class FrontendUserController extends Controller
             'name_ar' => $request->name,
             'name_en' => $request->name,
             'email' => $request->email,
+            'mobile' => $request->mobile,
+            'whatsapp' => $request->mobile,
             'password' => Hash::make($request->password),
             'role_id' => Role::where(['is_client' => true])->first()->id,
             'country_id' => Country::where(['is_local' => true])->first()->id,
