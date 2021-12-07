@@ -42,10 +42,12 @@ export default function MainNav() {
         guest,
         arFont, enFont,
     } = useContext(AppContext);
-    const {auth,  settings, currencies, categories, mgt} = useContext(GlobalContext);
-    const { locale, currency, cart, parentModule} = useSelector(state => state);
+    const {auth, settings, currencies, categories, mgt} = useContext(GlobalContext);
+    const {locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
+
+    console.log('auth', auth);
 
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
@@ -298,10 +300,17 @@ export default function MainNav() {
                                             </div> : null
                                         }
                                     </> : <div className="flow-root">
-                                        <Link href={route('frontend.user.edit', auth.id)}
-                                              className="-m-2 p-2 block text-gray-900 capitalize">
-                                            {capitalize(trans('my_account'))}
-                                        </Link>
+                                        {
+                                            auth.verified ? <Link href={route('frontend.user.edit', auth.id)}
+                                                                  className="-m-2 p-2 block text-gray-900 capitalize">
+                                                    {capitalize(trans('my_account'))}
+                                                </Link> :
+                                                <a href={route('frontend.user.edit', auth.id)}
+                                                   className="-m-2 p-2 block text-gray-900 capitalize">
+                                                    {capitalize(trans('my_account'))}
+                                                </a>
+                                        }
+
                                     </div>
                                 }
                                 <div className="flow-root">
@@ -485,7 +494,8 @@ export default function MainNav() {
                 </Dialog>
             </Transition.Root>
 
-            <header className={classNames(mgt ? `bg-black text-white`: `bg-white text-black` , "relative border-b border-gray-400 py-6 max-w-full")}>
+            <header
+                className={classNames(mgt ? `bg-black text-white` : `bg-white text-black`, "relative border-b border-gray-400 py-6 max-w-full")}>
                 <nav aria-label="Top" className="w-auto lg:w-full xl:w-full 2xl:w-4/5  2xl:m-auto">
                     <div className="h-20 flex items-center">
                         <button
@@ -952,11 +962,20 @@ export default function MainNav() {
                                                 <>
                                                     <Menu.Item>
                                                         {({active}) => (
-                                                            <Link
-                                                                className="'group flex items-center px-4 py-2"
-                                                                href={route('frontend.user.edit', auth.id)}>
-                                                                {trans('my_account')}
-                                                            </Link>
+                                                            <>
+                                                                {auth.verified ?
+                                                                    <Link
+                                                                        className="'group flex items-center px-4 py-2"
+                                                                        href={route('frontend.user.edit', auth.id)}>
+                                                                        {trans('my_account')}
+                                                                    </Link> :
+                                                                    <a
+                                                                        className="'group flex items-center px-4 py-2"
+                                                                        href={route('frontend.user.edit', auth.id)}>
+                                                                        {trans('my_account')}
+                                                                    </a>
+                                                                }
+                                                            </>
                                                         )}
                                                     </Menu.Item>
                                                     <Menu.Item>
@@ -989,7 +1008,7 @@ export default function MainNav() {
                                             aria-hidden="true"
                                         />
                                         <span
-                                            className={classNames(locale.isRTL ? `-right-2` :  `-left-2`, "relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300")}>
+                                            className={classNames(locale.isRTL ? `-right-2` : `-left-2`, "relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300")}>
                                             {cart.totalItems}
                                     </span>
                                         <span className="sr-only">items in cart, view bag</span>

@@ -7,10 +7,11 @@
  */
 return [
     'mode' => env('PAYPAL_MODE', 'live'),
-    'sandbox_secret_client_id' => env('PAYPAL_SANDBOX_CLIENT_ID'),
-    'sandbox_client_secret' => env('PAYPAL_SANDBOX_CLIENT_SECRET'),
-    'live_secret_client_id' => env('PAYPAL_LIVE_CLIENT_ID'),
-    'live_client_secret' => env('PAYPAL_LIVE_CLIENT_SECRET'),
-    'currency' => env('PAYPAL_CURRENCY', "USD"),
+    'one_global_merchant_id' => env('ONEGLOBAL_MERCHANT_ID'),
+    'one_global_auth_key' => env('ONEGLOBAL_AUTH_KEY'),
+    'one_global_secret_key' => env('ONEGLOBAL_SECRET_KEY'),
+    'one_global_end_point' => env('ONEGLOBAL_END_POINT'),
+    'one_global_callback_url' => env('ONEGLOBAL_CALLBACK_URL'),
+    'currency' => env('PAYPAL_CURRENCY', "KWD"),
     'order' => env('ORDER_MODEL_PATH') ? env('ORDER_MODEL_PATH') : 'App\Order'
 ];

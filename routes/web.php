@@ -70,6 +70,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+Auth::routes(['verify' => true]);
 Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('index');
@@ -111,7 +112,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::post('registration',[FrontendUserController::class,'postRegistration'])->name('user.post.registration');
     // Newsletter
     Route::post('newsletter', [HomeController::class,'postNewsLetter'])->name('newsletter');
-    Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.get');
         Route::post('cart/payment', [FrontendCartController::class, 'getPayment'])->name('cart.payment.post');
         Route::resource('rating', FrontendRatingController::class)->only('store');

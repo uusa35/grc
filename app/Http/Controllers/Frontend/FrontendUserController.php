@@ -288,6 +288,7 @@ class FrontendUserController extends Controller
             'password' => 'required|min:6'
         ]);
         if(auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+//            dd(auth()->user()->hasVerifiedEmail());
             return redirect()->route('frontend.home')->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
@@ -309,6 +310,8 @@ class FrontendUserController extends Controller
         ]);
         $user =  User::create([
             'name' => $request->name,
+            'name_ar' => $request->name,
+            'name_en' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role_id' => Role::where(['is_client' => true])->first()->id,
