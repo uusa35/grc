@@ -43,7 +43,7 @@
                         </button>
 
                         <p class="mt-4 text-xs text-gray-500 hover:text-gray-700 whitespace-no-wrap no-underline hover:underline sm:text-sm sm:order-0 sm:m-0">
-                            <a class="text-gray-500 hover:text-gray-700 no-underline" href="{{ route('login') }}">
+                            <a class="text-gray-500 hover:text-gray-700 no-underline" href="{{ route('frontend.user.logging') }}">
                                 {{ __('Back to login') }}
                             </a>
                         </p>
