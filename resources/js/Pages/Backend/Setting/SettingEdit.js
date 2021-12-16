@@ -1263,6 +1263,54 @@ accept="image/jpg, image/jpeg , image/png"
                                     {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
+
+                            {/* address_ar */}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="address_ar"
+                                       className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('address_ar')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="address_ar"
+                                        defaultValue={setting.address_ar}
+                                        id="address_ar"
+                                        autoComplete="address_ar"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.address_ar && <div className={`text-red-900`}>{errors.address_ar}</div>}
+                                </p>
+                            </div>
+
+                            {/* address_en */}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="address_en"
+                                       className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('address_en')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        step="any"
+                                        name="address_en"
+                                        defaultValue={setting.address_en}
+                                        id="address_en"
+                                        autoComplete="address_en"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_caption_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.address_en && <div className={`text-red-900`}>{errors.address_en}</div>}
+                                </p>
+                            </div>
                         </FormSection>
 
                         <FormSection title={trans('more_details')}>
