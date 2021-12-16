@@ -19,6 +19,7 @@ export default function({currency , countries }) {
     const {data, setData, put, progress, reset} = useForm({
         'name_ar': currency.name_ar,
         'name_en': currency.name_en,
+        'exchange_rate': currency.exchange_rate,
         'calling_code': currency.calling_code,
         'currency_code': currency.currency_code,
         'image': currency.image,
@@ -105,6 +106,28 @@ export default function({currency , countries }) {
                             <ToolTipWidget message={trans('name_en_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
                                 {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
+                            </p>
+                        </div>
+                        {/* exchange_rate */}
+                        <div className="sm:col-span-2">
+                            <label htmlFor="exchange_rate" className={`block text-sm text-gray-700`}>
+                                {trans('exchange_rate')} {trans('kd')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    required
+                                    type="text"
+                                    name="exchange_rate"
+                                    defaultValue={currency.exchange_rate}
+                                    id="exchange_rate"
+                                    autoComplete="exchange_rate"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                />
+                            </div>
+                            <ToolTipWidget message={trans('exchange_rate_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.exchange_rate && <div className={`text-red-900`}>{errors.exchange_rate}</div>}
                             </p>
                         </div>
                         {/* currency_symbol_ar  */}

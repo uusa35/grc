@@ -158,13 +158,11 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::resource('user', UserController::class);
     Route::get('reset/password', [UserController::class,'getResetPassword'])->name('reset.password');
     Route::post('reset/password', [UserController::class,'postResetPassword'])->name('post.reset.password');
-    Route::resource('order', OrderController::class);
-    Route::resource('course', CourseController::class);
+    Route::resource('order', OrderController::class)->except(['create']);
     Route::resource('slide', SlideController::class);
     Route::resource('image', ImageController::class)->only('destroy');
     Route::get('clear/element', [DashboardController::class, 'clearElement'])->name('element.clear');
     Route::resource('product', ProductController::class);
-    Route::resource('coupon', CouponController::class);
     Route::resource('attribute', ProductAttributeController::class);
     Route::resource('commercial', CommercialController::class);
     Route::resource('branch', BranchController::class);
@@ -176,6 +174,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     });
 // admins
     Route::group(['middleware' => 'admin'], function () {
+        Route::resource('course', CourseController::class);
+        Route::resource('coupon', CouponController::class);
         Route::get('toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
         Route::get('trashed', [DashboardController::class, 'trashed'])->name('trashed');
         Route::get('restore', [DashboardController::class, 'restore'])->name('restore');
@@ -189,14 +189,14 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('tag', TagController::class);
         Route::resource('category', CategoryController::class);
         Route::resource('video', VideoController::class);
-        Route::resource('image', ImageController::class);
+        Route::resource('image', ImageController::class)->except('index');
         Route::resource('gallery', GalleryController::class); // images table
         Route::resource('post', PostController::class);
         Route::resource('newsletter', NewsletterController::class);
         Route::resource('device', DeviceController::class);
         Route::resource('setting', SettingController::class);
         Route::resource('notification', NotificationController::class);
-        Route::resource('shipment', ShipmentController::class);
+        Route::resource('shipment', ShipmentController::class)->except('index');
         Route::resource('faq', FaqController::class);
         Route::resource('subscription', SubscriptionController::class);
         // order status switch

@@ -12,7 +12,7 @@ export default function({currentStatus, isPaid, id }) {
         <nav aria-label="Progress print:hidden">
             <ol role="list" className="p-8 md:flex md:space-y-0 md:gap-x-8 hidden md:block">
                 {/* paid or pending */}
-                <li className={classNames(false ? `border-green-900` : `border-gray-100`, "flex flex-1 items-center justify-center border-t-4")}>
+                <li className={classNames(isPaid ? `border-green-900` : `border-gray-100`, "flex flex-1 items-center justify-center border-t-4")}>
                     <Link
                         href="#"
                         disabled
@@ -28,21 +28,24 @@ export default function({currentStatus, isPaid, id }) {
                     </Link>
                 </li>
                 {/*     failed */}
-                <li className={classNames(false ? `border-green-900` : `border-gray-100`, "flex flex-1 items-center justify-center border-t-4")}>
-                    <Link
-                        href="#"
-                        disabled
-                        className="pl-4 py-2 flex flex-1  flex-col items-center justify-center  md:pl-0 md:pt-4 md:pb-0"
-                    >
+                {
+                    isPaid && currentStatus !== 'paid' ?
+                        <li className={classNames(isPaid ? `border-green-900` : `border-gray-100`, "flex flex-1 items-center justify-center border-t-4")}>
+                            <Link
+                                href="#"
+                                disabled
+                                className="pl-4 py-2 flex flex-1  flex-col items-center justify-center  md:pl-0 md:pt-4 md:pb-0"
+                            >
                             <span
                                 className={classNames(currentStatus === 'failed' ? `bg-red-900` : `bg-gray-200`, "text-xs text-gray-50 font-semibold flex items-center justify-center rounded-full h-20 w-20")}>
                                 {trans('failed')}
                             </span>
-                        <span className="text-sm font-medium mt-5">
+                                <span className="text-sm font-medium mt-5">
                                 {trans('failed')}
                             </span>
-                    </Link>
-                </li>
+                            </Link>
+                        </li> : null
+                }
                 {
                     isPaid && currentStatus === 'paid' ? <>
                         <li className={classNames(false ? `border-green-900` : `border-gray-100`, "flex flex-1 items-center justify-center border-t-4")}>

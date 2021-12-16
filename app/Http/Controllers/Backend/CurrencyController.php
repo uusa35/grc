@@ -39,7 +39,8 @@ class CurrencyController extends Controller
      */
     public function create()
     {
-        return inertia('Backend/Currency/CurrencyCreate');
+        $countries = new CountryCollection(Country::active()->get());
+        return inertia('Backend/Currency/CurrencyCreate', compact('countries'));
     }
 
     /**
@@ -50,7 +51,21 @@ class CurrencyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ar' => 'max:200',
+            'name_en' => 'max:200',
+            'currency_symbol_ar' => 'string|max:5',
+            'currency_symbol_en' => 'string|max:5',
+            'order' => 'numeric|max:99',
+            'exchange_rate' => 'numeric|max:99',
+            'country_id' => 'integer|exists:countries,id'
+        ]);
+        $element = Currency::create($request->except('image'));
+        if ($element) {
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['300', '300'], false) : null;
+            return redirect()->route('backend.currency.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -97,7 +112,7 @@ class CurrencyController extends Controller
         ]);
         if ($currency->update($request->except('image'))) {
             $request->hasFile('image') ? $this->saveMimes($currency, $request, ['image'], ['300', '300'], false) : null;
-            return redirect()->back()->with('success', trans('general.process_success'));
+            return redirect()->route('backend.currency.index')->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }

@@ -1241,5 +1241,6 @@ export const ar = {
     "register_new_user" : "تسجيل مستخدم جديد",
     "forget_ur_password" : "نسيت كلمة المرور",
     "already_a_user_login_to_ur_account" : " مسجل بالفعل .. تسجيل الدخول إلى الحساب",
-    "mobile_placeholder" : "965 65 XXXXXX"
+    "mobile_placeholder" : "965 65 XXXXXX",
+    "client_information" : "بيانات العميل (الزبون)"
 }

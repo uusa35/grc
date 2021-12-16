@@ -44,10 +44,13 @@ export default function({order}) {
                             </dd>
                         </dl>
                         <div className="flex flex-row justify-end items-center">
-                            <button onClick={() => handlePrint()} className="flex flex-row justify-center items-center font-medium text-gray-600 hover:text-gray-500">
+                            <button onClick={() => handlePrint()}
+                                    className="flex flex-row justify-center items-center font-medium text-gray-600 hover:text-gray-500">
                                 {trans('print')}
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-3" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
                                 </svg>
                             </button>
                         </div>
@@ -62,12 +65,19 @@ export default function({order}) {
                                 <div>
                                     <dt className="font-medium text-gray-900">{trans('client_information')}</dt>
                                     <dd className="mt-3 text-gray-500">
-                                        <span className="block">{order.user.name}</span>
-                                        <span className="block">{trans('address')} : {`${order.country} - ${order.area} - ${trans('block')} : ${order.block}, ${trans('street')} : ${order.street},`}</span>
-                                        <span className="block">{order.user.country}</span>
+                                        <span className="block">{trans('name')} : {order.user.name}</span>
+                                        <span
+                                            className="block">{trans('address')} : {`${order.country} - ${order.area} - ${trans('block')} : ${order.block}, ${trans('street')} : ${order.street},`}</span>
+                                        <span className="block">{trans('country')} : {order.country}</span>
+                                        {order.mobile && order.mobile.length > 4 ?
+                                            <span className="block">{trans('mobile')} : {order.mobile}</span> : null}
+                                        {order.phone && order.phone.length > 4 ?
+                                            <span className="block">{trans('phone')} : {order.phone}</span> : null}
+                                        {order.email && order.email.length > 4 ?
+                                            <span className="block">{trans('email')} : {order.email}</span> : null}
                                     </dd>
                                 </div>
-                                <div>
+                                <div className="hidden">
                                     <dt className="font-medium text-gray-900">Shipping updates</dt>
                                     <dd className="mt-3 text-gray-500 space-y-3">
                                         <p>{order.user.email}</p>
@@ -103,7 +113,7 @@ export default function({order}) {
                                     </h3>
                                     <div className="flex flex-1 flex-row justify-between items-center">
                                         <p className="font-medium text-gray-900 mt-3">{trans('price')} {m.ordermetable.price}</p>
-                                        <p className="font-medium text-gray-900 mt-3">{trans('type')} :  {trans(getTypeFromModel(m.ordermetable_type))}</p>
+                                        <p className="font-medium text-gray-900 mt-3">{trans('type')} : {trans(getTypeFromModel(m.ordermetable_type))}</p>
                                         {m.color && <p className="text-gray-500 mt-3">{trans('color')} {m.color}</p>}
                                         {m.size && <p className="text-gray-500 mt-3">{trans('size')} {m.size}</p>}
                                         {m.booked_at &&
@@ -119,62 +129,56 @@ export default function({order}) {
 
                 {/* Billing */}
                 <div className="mt-5">
-                    <h2 className="sr-only">Billing Summary</h2>
+                    <h2 className="sr-only">{trans('notes')}</h2>
 
                     <div className="bg-gray-50 rounded-lg py-6 px-6 lg:px-0 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
                         <dl className="grid grid-cols-1 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:pl-8 lg:col-span-5">
                             <div>
-                                <dt className="font-medium text-gray-900">Billing address</dt>
-                                <dd className="mt-3 text-gray-500">
-                                    <span className="block">Floyd Miles</span>
-                                    <span className="block">7363 Cynthia Pass</span>
-                                    <span className="block">Toronto, ON N3Y 4H8</span>
-                                </dd>
-                            </div>
-                            <div>
-                                <dt className="font-medium text-gray-900">Payment information</dt>
-                                <dd className="mt-3 flex">
+                                <dt className="font-medium text-gray-900">{trans('payment_method')}</dt>
+                                <dd className="mt-1 mb-3 flex">
                                     <div>
-                                        <svg
-                                            aria-hidden="true"
-                                            width={36}
-                                            height={24}
-                                            viewBox="0 0 36 24"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-6 w-auto"
-                                        >
-                                            <rect width={36} height={24} rx={4} fill="#224DBA"/>
-                                            <path
-                                                d="M10.925 15.673H8.874l-1.538-6c-.073-.276-.228-.52-.456-.635A6.575 6.575 0 005 8.403v-.231h3.304c.456 0 .798.347.855.75l.798 4.328 2.05-5.078h1.994l-3.076 7.5zm4.216 0h-1.937L14.8 8.172h1.937l-1.595 7.5zm4.101-5.422c.057-.404.399-.635.798-.635a3.54 3.54 0 011.88.346l.342-1.615A4.808 4.808 0 0020.496 8c-1.88 0-3.248 1.039-3.248 2.481 0 1.097.969 1.673 1.653 2.02.74.346 1.025.577.968.923 0 .519-.57.75-1.139.75a4.795 4.795 0 01-1.994-.462l-.342 1.616a5.48 5.48 0 002.108.404c2.108.057 3.418-.981 3.418-2.539 0-1.962-2.678-2.077-2.678-2.942zm9.457 5.422L27.16 8.172h-1.652a.858.858 0 00-.798.577l-2.848 6.924h1.994l.398-1.096h2.45l.228 1.096h1.766zm-2.905-5.482l.57 2.827h-1.596l1.026-2.827z"
-                                                fill="#fff"
-                                            />
-                                        </svg>
-                                        <p className="sr-only">Visa</p>
-                                    </div>
-                                    <div className="ml-4">
-                                        <p className="text-gray-900">Ending with 4242</p>
-                                        <p className="text-gray-600">Expires 02 / 24</p>
+                                        {order.payment_method}
+                                        <p className="sr-only">{order.payment_method}</p>
                                     </div>
                                 </dd>
+                                <dd className="mt-1 mb-3 flex">
+                                    <div className="text-xs">
+                                        {trans('reference_id')} : {order.reference_id}
+                                        <p className="sr-only">{order.reference_id}</p>
+                                    </div>
+                                </dd>
+                                {
+                                    order.notes && order.notes.length > 5 ? <>
+                                        <dt className="font-medium text-gray-900">{trans('notes')}</dt>
+                                        <dd className="mt-1 mb-3 flex">
+                                            <div>
+                                                {order.notes}
+                                                <p className="sr-only">{order.notes}</p>
+                                            </div>
+                                        </dd>
+                                    </> : null
+                                }
                             </div>
                         </dl>
 
                         <dl className="mt-8 divide-y divide-gray-200 text-sm lg:mt-0 lg:pr-8 lg:col-span-7">
                             <div className="pb-4 flex items-center justify-between">
-                                <dt className="text-gray-600">Subtotal</dt>
-                                <dd className="font-medium text-gray-900">$72</dd>
+                                <dt className="text-gray-600">{trans('total')}</dt>
+                                <dd className="font-medium text-gray-900">{order.price} {trans('kd')}</dd>
                             </div>
-                            <div className="py-4 flex items-center justify-between">
-                                <dt className="text-gray-600">Shipping</dt>
-                                <dd className="font-medium text-gray-900">$5</dd>
-                            </div>
-                            <div className="py-4 flex items-center justify-between">
-                                <dt className="text-gray-600">Tax</dt>
-                                <dd className="font-medium text-gray-900">$6.16</dd>
-                            </div>
+                            {order.discount > 0 ? <div className="py-4 flex items-center justify-between">
+                                <dt className="text-gray-600">{trans('discount')}</dt>
+                                <dd className="font-medium text-gray-900">({order.discount})</dd>
+                            </div> : null}
+                            {
+                                order.shipment_fees > 0 ? <div className="py-4 flex items-center justify-between">
+                                    <dt className="text-gray-600">{trans('shipment_fees')}</dt>
+                                    <dd className="font-medium text-gray-900">{order.shipment_fees} {trans('kd')}</dd>
+                                </div> : null
+                            }
                             <div className="pt-4 flex items-center justify-between">
-                                <dt className="font-medium text-gray-900">Order total</dt>
-                                <dd className="font-medium text-gray-600">$83.16</dd>
+                                <dt className="font-medium text-gray-900">{trans('net_price')}</dt>
+                                <dd className="font-medium text-gray-600">{order.net_price} {trans("kd")}</dd>
                             </div>
                         </dl>
                     </div>
