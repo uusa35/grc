@@ -6,6 +6,7 @@ import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {showModal} from "../../redux/actions";
 import {useDispatch} from "react-redux";
+import ActiveDot from "../components/widgets/ActiveDot";
 
 export default function SlideIndex({elements}) {
     const {trans, theme, classNames, getLocalized, getThumb } = useContext(AppContext);
@@ -81,7 +82,12 @@ export default function SlideIndex({elements}) {
                                             className="w-20 h-auto"
                                             src={getThumb(element.image)} alt=""/></td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.slidable_type}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.slidable[getLocalized()]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">
+                                            <div className="flex items-center space-x-3 lg:pl-2">
+                                                <ActiveDot active={element.active}/>
+                                                {element[getLocalized()]}
+                                            </div>
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.slide.edit`, element.id)}
