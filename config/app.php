@@ -2,6 +2,7 @@
 
 use Usama\MyFatoorahV2\MyFatoorahV2ServiceProvider;
 use Usama\OneGlobal\OneGlobalServiceProvider;
+use Usama\Paypal\PaypalServiceProvider;
 use Usama\Tap\TapServiceProvider;
 use Usama\Upayment\UpaymentServiceProvider;
 
@@ -181,6 +182,7 @@ return [
          App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        PaypalServiceProvider::class,
         OneGlobalServiceProvider::class,
         MyFatoorahV2ServiceProvider::class,
         UpaymentServiceProvider::class,

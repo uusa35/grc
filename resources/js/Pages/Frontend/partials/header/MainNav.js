@@ -47,8 +47,6 @@ export default function MainNav() {
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
 
-    console.log('auth', auth);
-
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}

@@ -128,14 +128,16 @@ export default function({ auth }) {
                                         {trans('login')}
                                     </button>
                                 </div>
-                                <div>
-                                    <Link
-                                        href={route('frontend.user.registration')}
-                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-gray-800 bg-white hover:bg-gray-50"
-                                    >
-                                        {trans('register_new_user')}
-                                    </Link>
-                                </div>
+                                {
+                                    settings.enable_register ? <div>
+                                        <Link
+                                            href={route('frontend.user.registration')}
+                                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-gray-800 bg-white hover:bg-gray-50"
+                                        >
+                                            {trans('register_new_user')}
+                                        </Link>
+                                    </div> : null
+                                }
                             </form>
 
                             <div className="mt-6 hidden">

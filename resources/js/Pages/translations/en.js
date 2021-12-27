@@ -1225,6 +1225,7 @@ export const en  = {
     "distribution_message" : "you can contactus for more information about our distribution services",
     "whous" : "who us",
     "shop_and_products" : "shop (Our Products)",
+    "contact_us_on" : "Contact us",
     "related_books" : "related books",
     "related_services" : "related services",
     "authors_books" : "related author's books",

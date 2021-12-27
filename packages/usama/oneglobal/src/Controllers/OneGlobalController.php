@@ -93,7 +93,7 @@ class OneGlobalController extends Controller
                 ),
             );
             $req = json_encode($data, true);
-            return $req;
+            dd($req);
             if (!$endpoint) {
                 $curl = curl_init('https://ogcheckoutstage.oneglobal.com/OgPay/V1/api/GenToken/Validate');
             } else {

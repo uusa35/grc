@@ -51,8 +51,17 @@ export default function({order, settings}) {
                 paymentMethod: paymentMethod.name
             }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
             // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+        } else if (paymentMethod.name === 'oneglobal') {
+            return axios.post(paymentMethod.paymentRoute, {
+                netTotal: cart.netTotal,
+                order_id: order.id,
+                paymentMethod: paymentMethod.name
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+            // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
         }
     }, [paymentMethod])
+
+    console.log('currentUrl', paymentMethod.paymentRoute);
 
 
 
