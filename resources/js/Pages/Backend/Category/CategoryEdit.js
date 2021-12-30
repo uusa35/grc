@@ -262,6 +262,32 @@ export default function({category, elements}) {
                                 {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                             </p>
                         </div>
+                        {/* image_rectangle*/}
+                        <div className="sm:col-span-3 has-tooltip mt-5 hidden">
+                            <label htmlFor="image_rectangle"
+                                   className={`block   text-gray-700`}>
+                                {trans('image_rectangle')}
+                            </label>
+                            <div className="mt-1 flex flex-row flex-1 items-center h-32">
+                                <input
+                                    onChange={e => setData('image_rectangle', e.target.files[0])}
+                                    type="file"
+                                    name="image_rectangle"
+                                    id="image_rectangle"
+                                    accept="image/jpg, image/jpeg , image/png"
+                                    autoComplete="main_image"
+                                    className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                />
+                                <img className={`h-24 w-20 bg-cover rounded-md`} src={getThumb(category.image_rectangle)} alt=""/>
+                            </div>
+                            <ToolTipWidget message={trans('book_main_image_instruction')}/>
+                            <p className={` text-red-500 rtl:text-left ltr:text-right`}>
+                                {trans('rectangle_best_fit')}
+                            </p>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
+                            </p>
+                        </div>
                         {/* more images */}
                         <div className="sm:col-span-3 has-tooltip mt-3 hidden">
                             <label htmlFor="more_images"

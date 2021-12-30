@@ -1242,5 +1242,6 @@ export const ar = {
     "forget_ur_password" : "نسيت كلمة المرور",
     "already_a_user_login_to_ur_account" : " مسجل بالفعل .. تسجيل الدخول إلى الحساب",
     "mobile_placeholder" : "965 65 XXXXXX",
-    "client_information" : "بيانات العميل (الزبون)"
+    "client_information" : "بيانات العميل (الزبون)",
+    "no_attributes" : "لا يوجد خصائص"
 }

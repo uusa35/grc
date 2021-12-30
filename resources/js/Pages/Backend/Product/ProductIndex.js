@@ -3,7 +3,7 @@ import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
 import {Fragment, useContext, useEffect, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isEmpty} from 'lodash';
+import {orderBy, isEmpty, first} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import ActiveDot from "../components/widgets/ActiveDot";
@@ -31,6 +31,8 @@ export default function ProductIndex({elements}) {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
     }, [sort.desc])
 
+
+    console.log('elements', isEmpty(elements.data[0].product_attributes))
     return (
         <BackendContainer elements={elements}
                           showSearch={elements.meta.total >= 1}
@@ -175,7 +177,7 @@ export default function ProductIndex({elements}) {
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
                                                         <span
                                                             className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.has_attributes && !isEmpty(element.product_attributes) ? 'green' : 'red'}-100 text-gray-800`}>
-                                                            {trans('has_attributes')}
+                                                            {element.has_attributes && !isEmpty(element.product_attributes) ? trans('has_attributes') : trans('no_attributes')}
                                                           </span>
                                                     <span
                                                         className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale ? 'green' : 'red'}-100 text-gray-800`}>
@@ -293,54 +295,61 @@ export default function ProductIndex({elements}) {
                                                                             </Menu.Item>
                                                                         </div>
                                                                         <div className="py-1">
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route('backend.attribute.index', {product_id: element.id})}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
-                                                                                        )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor">
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
-                                                                                                  d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
-                                                                                        </svg>
-                                                                                        {trans('product_attribute')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route('backend.attribute.create', {product_id: element.id})}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
-                                                                                        )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor">
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
-                                                                                                  d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
-                                                                                        </svg>
-                                                                                        {trans('add_edit_attributes')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
+                                                                            {
+                                                                                element.has_attributes ?
+                                                                                    <>
+                                                                                        <Menu.Item>
+                                                                                            {({active}) => (
+                                                                                                <Link
+                                                                                                    href={route('backend.attribute.index', {product_id: element.id})}
+                                                                                                    className={classNames(
+                                                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                                        'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
+                                                                                                    )}
+                                                                                                >
+                                                                                                    <svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        className="h-6 w-6 mx-2"
+                                                                                                        fill="none"
+                                                                                                        viewBox="0 0 24 24"
+                                                                                                        stroke="currentColor">
+                                                                                                        <path
+                                                                                                            strokeLinecap="round"
+                                                                                                            strokeLinejoin="round"
+                                                                                                            strokeWidth={2}
+                                                                                                            d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
+                                                                                                    </svg>
+                                                                                                    {trans('product_attribute')}
+                                                                                                </Link>
+                                                                                            )}
+                                                                                        </Menu.Item>
+                                                                                        <Menu.Item>
+                                                                                            {({active}) => (
+                                                                                                <Link
+                                                                                                    href={route('backend.attribute.create', {product_id: element.id})}
+                                                                                                    className={classNames(
+                                                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                                        'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
+                                                                                                    )}
+                                                                                                >
+                                                                                                    <svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        className="h-6 w-6 mx-2"
+                                                                                                        fill="none"
+                                                                                                        viewBox="0 0 24 24"
+                                                                                                        stroke="currentColor">
+                                                                                                        <path
+                                                                                                            strokeLinecap="round"
+                                                                                                            strokeLinejoin="round"
+                                                                                                            strokeWidth={2}
+                                                                                                            d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
+                                                                                                    </svg>
+                                                                                                    {trans('add_edit_attributes')}
+                                                                                                </Link>
+                                                                                            )}
+                                                                                        </Menu.Item>
+                                                                                    </> : null
+                                                                            }
                                                                         </div>
                                                                         <div className="py-1">
                                                                             <Menu.Item>

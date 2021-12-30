@@ -13,8 +13,10 @@ class Product extends PrimaryModel
     protected $guarded = [''];
     protected $dates = ['created_at', 'deleted_at', 'start_sale', 'end_sale'];
     protected $casts = [
+        'qty' => 'integer',
         'price' => 'float',
-        'sale_price' => 'float'
+        'sale_price' => 'float',
+        'has_attributes' => 'boolean'
     ];
 
     public function user()

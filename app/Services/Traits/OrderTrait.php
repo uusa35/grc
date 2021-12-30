@@ -66,7 +66,10 @@ trait OrderTrait
                 'user_id' => $auth->id,
             ]);
             foreach ($request->cart['items'] as $item) {
-                OrderMeta::updateOrCreate(['order_id' => $order->id, 'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']), 'ordermetable_id' => $item['element_id']], [
+                // i commented this due to product_attribute duplication because was element_id unique to add more than product attributes in one order
+//                OrderMeta::updateOrCreate(['order_id' => $order->id, 'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']), 'ordermetable_id' => $item['element_id']], [
+                OrderMeta::create([
+                    'order_id' => $order->id,
                     'name' => $item['name_ar'] . '   /  ' . $item['name_en'],
                     'description' => $item['description_ar'] . '   /  ' . $item['description_en'],
                     'price' => $item['price'],
@@ -85,10 +88,10 @@ trait OrderTrait
     }
 
 
-
-    public function orderSuccessAction($reference_id) {
+    public function orderSuccessAction($reference_id)
+    {
         $order = Order::where(['reference_id' => $reference_id, 'paid' => false])->with('user', 'order_metas.ordermetable')->first();
-        if($order) {
+        if ($order) {
             $order->update([
                 'paid' => true,
                 'status' => 'paid'

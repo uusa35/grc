@@ -429,7 +429,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </p>
                             </div>
                             {/* more images */}
-                            { element.images.length <=10  &&
+                            { product.images.length <=10  &&
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
                                        className={`block   text-gray-700`}>
@@ -1101,7 +1101,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             src={getThumb(product.size_chart_image)}
                                             alt=""/>
                                         <Link
-                                            href={route(`backend.element.clear`, {
+                                            href={route(`backend.product.clear`, {
                                                 id: product.id,
                                                 'model': parentModule,
                                                 colName: 'size_chart_image'
@@ -1152,7 +1152,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             src={getThumb(product.qr)}
                                             alt=""/>
                                         <Link
-                                            href={route(`backend.element.clear`, {
+                                            href={route(`backend.product.clear`, {
                                                 id: product.id,
                                                 'model': 'product',
                                                 colName: 'qr'

@@ -10,7 +10,7 @@ import {
 import {StarIcon} from '@heroicons/react/solid'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, sumBy, isEmpty, first, capitalize, random, isNull, isArray} from 'lodash';
+import {map, sumBy, isEmpty, first, capitalize, random, isNull, isArray, filter, uniqBy} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
@@ -38,17 +38,77 @@ import {FaWhatsapp} from "react-icons/fa";
 
 export default function({element, relatedElements, auth, settings}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
-    const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
+    const [finalPrice, setFinalPrice] = useState(0);
+    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedSize, setSelectedSize] = useState(null);
+    const [selectedAttribute, setSelectedAttribute] = useState(null);
+    const [filteredColorsGroup, setFilteredColorsGroup] = useState([]);
+    const [filteredSizesGroup, setFilteredSizesGroup] = useState([]);
+    const [currentQty, setCurrentQty] = useState(0);
+    const [selectedQty, setSelectedQty] = useState(0);
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'product',
         'cart_id': null,
         'element_id': element.id,
-        'qty': 1,
-        'price': element.isOnSale ? element.sale_price : element.price,
+        'qty': selectedQty,
+        'price': finalPrice,
         'direct_purchase': element.direct_purchase,
     });
+
+    useMemo(() => {
+        console.log('here 1')
+        setFinalPrice(element.has_attributes ? first(element.product_attributes).price : (element.isOnSale ? element.sale_price : element.price));
+        setSelectedColor(element.has_attributes ? first(element.product_attributes).color_id : null)
+        setSelectedSize(element.has_attributes ? first(element.product_attributes).size_id : null)
+        // setSelectedAttribute(element.has_attributes ? first(element.product_attributes) : null);
+        setCurrentQty(element.has_attributes ? first(element.product_attributes).qty : element.qty)
+
+        element.has_attributes ? setFilteredColorsGroup(uniqBy(element.product_attributes, 'color_id')) : [];
+        element.has_attributes ? setFilteredSizesGroup(uniqBy(element.product_attributes, 'size_id')) : [];
+    }, [])
+
+    useMemo(() => {
+        if (!isNull(selectedAttribute) && element.has_attributes) {
+            console.log('attribute changed');
+            // setSelectedColor(selectedAttribute.color);
+            // setSelectedSize(selectedAttribute.size);
+            setFinalPrice(selectedAttribute.price);
+            setCurrentQty(1)
+            setCurrentQty(selectedAttribute.qty)
+        }
+    }, [selectedAttribute])
+
+    // select Color then select size --> show qty
+
+    useMemo(() => {
+        setFilteredSizesGroup(filter(element.product_attributes, c => c.color_id === selectedColor))
+    }, [selectedColor])
+
+    useMemo(() => {
+        if (!isEmpty(filteredSizesGroup) && element.has_attributes) {
+            setSelectedSize(first(filteredSizesGroup).size_id)
+        }
+    }, [filteredSizesGroup])
+
+    useMemo(() => {
+        if (!isEmpty(filteredSizesGroup) && element.has_attributes) {
+            setSelectedAttribute(first(filter(element.product_attributes, a => a.color_id === selectedColor && a.size_id === selectedSize)));
+            setSelectedQty(0)
+        }
+    }, [selectedSize])
+
+
+    console.log('the element', element);
+    // console.log('finalPrice', finalPrice)
+    console.log('selectedAttribute', selectedAttribute);
+    console.log('filteredColorsGroup', filteredColorsGroup);
+    console.log('filteredSizesGroup', filteredSizesGroup);
+    console.log('selectedColor', selectedColor)
+    console.log('selectedSize', selectedSize)
+    console.log('currentQty', currentQty);
+    console.log('selectedQty', selectedQty);
 
     useMemo(() => {
         const images = []
@@ -67,15 +127,24 @@ export default function({element, relatedElements, auth, settings}) {
         setCurrentImages(images);
     }, [element])
 
+    // 'name' => $item['name_ar'] . '   /  ' . $item['name_en'],
+    //     'description' => $item['description_ar'] . '   /  ' . $item['description_en'],
+    //     'price' => $item['price'],
+    //     'qty' => $item['qty'],
+    //     'color' => isset($item['color']) ? $item['color'] : null,
+    //     'size' => isset($item['size']) ? $item['size'] : null,
+    //     'merchant_id' => $item['merchant_id'],
+    //     'ordermetable_id' => $item['element_id'],
+    //     'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(checkCartBeforeAdd({
-            cart_id: element.id,
+            cart_id: `${element.id}${element.has_attributes ? selectedAttribute.id : ''}`,
             type: 'product',
             element_id: element.id,
-            qty: 1,
-            price: parseFloat(element.isOnSale ? element.sale_price : element.price),
+            qty: selectedQty,
+            price: element.has_attributes ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price),
             direct_purchase: element.direct_purchase,
             shipmentFees: 0,
             image: element.image,
@@ -85,9 +154,18 @@ export default function({element, relatedElements, auth, settings}) {
             description_en: element.description_en,
             merchant_id: element.user.id,
             merchant_name_ar: element.user.name_ar,
-            merchant_name_en: element.user.name_en
+            merchant_name_en: element.user.name_en,
+            color: element.has_attributes ? selectedAttribute.color[getLocalized()] : element.color[getLocalized()],
+            size: element.has_attributes ? selectedAttribute.size[getLocalized()] : element.size[getLocalized()]
         }))
-        // dispatch(removeFromCart(element.id +''+selectedTiming.id));
+    }
+
+    const increaseQty = () => {
+        setSelectedQty(selectedQty < currentQty ? selectedQty + 1 : selectedQty)
+    }
+
+    const decreaseQty = () => {
+        setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
 
     return (
@@ -129,7 +207,8 @@ export default function({element, relatedElements, auth, settings}) {
                             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
                             <div className="mt-3">
                                 <h2 className="sr-only">{trans('information')}</h2>
-                                <ElementPrice price={element.price} salePrice={element.sale_price}
+                                <ElementPrice price={finalPrice}
+                                              salePrice={element.has_attributes ? finalPrice : element.sale_price}
                                               showLocal={true}
                                               isOnSale={element.isOnSale} large={true}
                                               free={element.free}
@@ -163,96 +242,147 @@ export default function({element, relatedElements, auth, settings}) {
                                     }
                                 </div>
                             </div>
-                            {/* product timings */}
+                            {/* product attributes */}
                             <div className="mt-6">
-                                {element.timings && element.is_available &&
-                                <Menu as="div" className="relative inline-block text-left mb-5 w-full">
-                                    <div>
-                                        <Menu.Button
-                                            className="flex flex-1 justify-between items-center w-full capitalize rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                            <div>
-                                                {!isEmpty(selectedTiming) ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
-                                            </div>
-                                            <ChevronDownIcon className="h-5 w-5" aria-hidden="true"/>
-                                        </Menu.Button>
-                                    </div>
-                                    <Transition
-                                        as={Fragment}
-                                        enter="transition ease-out duration-100"
-                                        enterFrom="transform opacity-0 scale-95"
-                                        enterTo="transform opacity-100 scale-100"
-                                        leave="transition ease-in duration-75"
-                                        leaveFrom="transform opacity-100 scale-100"
-                                        leaveTo="transform opacity-0 scale-95"
-                                    >
-                                        <Menu.Items
-                                            className="z-30 origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            <div className="py-1">
-                                                {
-                                                    map(element.timings, t =>
-                                                        <Menu.Item key={t.id}>
-                                                            <div
-                                                                onClick={() => setSelectedTiming(t)}
-                                                                className={classNames(
-                                                                    t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                    'block px-4 py-2 text-sm hover:bg-gray-100'
-                                                                )}
-                                                            >
-                                                                <div
-                                                                    className="flex flex-1 flex-col xl:flex-row justify-start items-center text-sm sm:text-lg">
-                                                                    <div
-                                                                        className="flex flex-1 flex-col justify-start xl:flex-row xl:w-1/3 items-center">
-                                                                    <span
-                                                                        className="flex">{`${moment(t.date).format('dddd')} ${trans('equivalent')}`}</span>
-                                                                        <span
-                                                                            className="flex flex-1 justify-start sm:px-2 flex-row">{`${moment(t.date).format('L')}`}</span>
-                                                                    </div>
-                                                                    <div
-                                                                        className="flex flex-col xl:flex-row justify-between items-center">
-                                                                        <div className="flex capitalize">
-                                                                            {`${trans('from')} ${moment(`${t.date} ${t.start}`).format('HH:mm A')}`}
-                                                                        </div>
-                                                                        <div
-                                                                            className="flex ltr:ml-2 rtl:mr-2 capitalize">
-                                                                            {`${trans('to')} ${moment(`${t.date} ${t.end}`).format('HH:mm A')}`}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Menu.Item>
-                                                    )
-                                                }
-                                            </div>
-                                        </Menu.Items>
-                                    </Transition>
-                                </Menu>
-                                }
                                 {!element.is_available && <AlertMessage
                                     title={trans('element_is_not_available')}
                                     message={trans('element_is_not_available_currently_for_order')}
                                 />}
+                                {
+                                    element.has_attributes && !isEmpty(filteredColorsGroup) ?
+                                        <div className="flex flex-row justify-between items-center gap-x-5">
+                                            <div className="mt-2 lg:col-span-5">
+                                                {/* Color picker */}
+                                                <div>
+                                                    <div
+                                                        className="flex w-full flex-1 flex-row justify-between items-center">
+                                                        <div>
+                                                            <h2 className="text-sm font-medium text-gray-900">{trans('color')}</h2>
+                                                        </div>
+                                                        <div>
+                                                            <a href="#"
+                                                               className="text-xs font-medium text-gray-600 hover:text-gray-500">
+                                                                {trans('size_chart')}
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <RadioGroup value={selectedColor} onChange={setSelectedColor}
+                                                                className="mt-4">
+                                                        <RadioGroup.Label
+                                                            className="sr-only">{trans('choose_color')}</RadioGroup.Label>
+                                                        <div className="flex items-center gap-x-3">
+                                                            {filteredColorsGroup.map((attribute) => (
+                                                                <RadioGroup.Option
+                                                                    key={attribute.color.name_ar}
+                                                                    value={attribute.color_id}
+                                                                    className={({active, checked}) =>
+                                                                        classNames(
+                                                                            attribute.color,
+                                                                            active && checked ? 'ring ring-offset-1' : '',
+                                                                            !active && checked ? 'ring-2' : '',
+                                                                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <RadioGroup.Label as="p" className="sr-only">
+                                                                        {attribute.color[getLocalized()]}
+                                                                    </RadioGroup.Label>
+                                                                    <span
+                                                                        aria-hidden="true"
+                                                                        style={{backgroundColor: attribute.color.code}}
+                                                                        className={'h-8 w-8 border border-black border-opacity-10 rounded-full'}
+                                                                    />
+                                                                </RadioGroup.Option>
+                                                            ))}
+                                                        </div>
+                                                    </RadioGroup>
+                                                </div>
+
+                                                {/* Size picker */}
+                                                <div className="mt-4">
+                                                    <div className="flex items-center justify-between">
+                                                        <h2 className="text-sm font-medium text-gray-900">{trans('size')}</h2>
+                                                    </div>
+
+                                                    <RadioGroup value={selectedSize} onChange={setSelectedSize}
+                                                                className="mt-4">
+                                                        <RadioGroup.Label
+                                                            className="sr-only">{trans('choose_size')}</RadioGroup.Label>
+                                                        <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+                                                            {filteredSizesGroup.map((attribute) => (
+                                                                <RadioGroup.Option
+                                                                    key={attribute.size.name_ar}
+                                                                    value={attribute.size_id}
+                                                                    className={({active, checked}) =>
+                                                                        classNames(
+                                                                            attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
+                                                                            active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
+                                                                            checked
+                                                                                ? 'bg-gray-600 border-transparent text-white hover:bg-gray-700'
+                                                                                : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
+                                                                            'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
+                                                                        )
+                                                                    }
+                                                                    disabled={!attribute.size}
+                                                                >
+                                                                    <RadioGroup.Label
+                                                                        as="p">{attribute.size[getLocalized()]}</RadioGroup.Label>
+                                                                </RadioGroup.Option>
+                                                            ))}
+                                                        </div>
+                                                    </RadioGroup>
+                                                </div>
+                                            </div>
+                                        </div> : null
+                                }
+                                <div className="flex flex-1 w-full justify-center items-center mx-auto mt-5">
+                                    <span className="relative z-0 inline-flex shadow-sm rounded-md ">
+                                      <button
+                                          onClick={() => increaseQty()}
+                                          type="button"
+                                          className="relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-lg font-bold text-gray-900 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                                      >
+                                        +
+                                      </button>
+                                      <button
+                                          type="button"
+                                          className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-xl font-bold text-gray-900 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                                      >
+                                        {selectedQty}
+                                      </button>
+                                      <button
+                                          type="button"
+                                          onClick={() => decreaseQty()}
+                                          className="-ml-px relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-lg font-bold text-gray-900 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                                      >
+                                        -
+                                      </button>
+                                    </span>
+                                </div>
+                                {/* add_to_cart_btn */}
                                 <div className="flex flex-row justify-between items-center gap-x-5">
                                     {
                                         settings.enable_cart &&
-                                        <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto">
+                                        <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto mt-5">
                                             <button
-                                                disabled={!element.is_available}
+                                                disabled={!element.is_available || finalPrice === 0 || selectedQty < 1}
                                                 type="submit"
-                                                className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                             >
                                                 {trans('add_to_cart')}
                                             </button>
                                         </form>
                                     }
-                                    {
-                                        settings.enable_favorites &&
-                                        <ElementFavoriteBtn id={element.id} type={'product'}
-                                                            favoritesList={auth?.favoritesList}/>
-                                    }
                                 </div>
                                 {
+                                    settings.enable_favorites &&
+                                    <ElementFavoriteBtn id={element.id} type={'product'}
+                                                        favoritesList={auth?.favoritesList}/>
+                                }
+                                {
                                     settings.enable_whatsapp_contact &&
-                                    <div className="flex flex-1 w-full mb-auto mt-10 justify-between">
+                                    <div className="flex flex-1 w-full mb-auto mt-5 justify-between">
                                         <a
                                             target="_blank"
                                             href={getWhatsappLink(settings.whatsapp, `${trans('contactus_to_inquire_about_product')} ${trans('name')} : ${element[getLocalized()]} - ${trans(`sku`)} : ${element.sku}`)}
@@ -415,21 +545,6 @@ export default function({element, relatedElements, auth, settings}) {
                                                 className="mt-4 text-sm font-medium text-gray-900">{trans('direct_purchase')}</span>
                                             <dd className="mt-1 text-sm text-gray-500">{trans('direct_purchase')}</dd>
                                         </div> : null
-                                    }
-                                    {
-                                        element.timings && <div
-                                            className="flex flex-1 flex-col overflow-clip truncate capitalize justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                                     viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                </svg>
-                                            </div>
-                                            <span
-                                                className="mt-4 text-sm font-medium text-gray-900">{trans('timings')}</span>
-                                            <p className="mt-1 text-xs text-gray-500">{trans('kwt_timing_zone')}</p>
-                                        </div>
                                     }
                                     {
                                         element.sku &&

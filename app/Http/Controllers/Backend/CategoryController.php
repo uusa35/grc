@@ -73,6 +73,7 @@ class CategoryController extends Controller
         $element = Category::create($request->except('image', 'image_rectangle', 'file'));
         if ($element) {
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1440', '1080'], false) : null;
+            $request->hasFile('image_rectangle') ? $this->saveMimes($element, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             $request->hasFile('image_rectangle') ? $this->saveMimes($element, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
@@ -121,6 +122,7 @@ class CategoryController extends Controller
         ]);
         if ($category->update($request->except('image', 'image_rectangle', 'file'))) {
             $request->hasFile('image') ? $this->saveMimes($category, $request, ['image'], ['1440', '1080'], false) : null;
+            $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             $request->hasFile('file') ? $this->savePath($category, $request, 'file') : null;
             $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));

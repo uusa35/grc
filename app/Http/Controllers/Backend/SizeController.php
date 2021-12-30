@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class SizeController extends Controller
 {
+
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Size::class,'size');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +26,14 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        $elements = Size::paginate(Self::TAKE_LESS)
+            ->withQueryString()
+            ->through(fn($element) => [
+                'id' => $element->id,
+                'name_ar' => $element->name_ar,
+                'name_en' => $element->name_en,
+            ]);
+        return inertia('Backend/Size/SizeIndex', compact('elements'));
     }
 
     /**
@@ -25,7 +43,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Backend/Size/SizeCreate');
     }
 
     /**
@@ -58,7 +76,7 @@ class SizeController extends Controller
      */
     public function edit(Size $size)
     {
-        //
+        return inertia('Backend/Size/SizeEdit', compact('size'));
     }
 
     /**

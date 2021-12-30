@@ -13,6 +13,9 @@ class ProductAttribute extends PrimaryModel
     protected $guarded = [''];
 //    protected $localeStrings = ['notes'];
     protected $with = ['color','size'];
+    protected $casts = [
+        'price' => 'float',
+    ];
 
     public function product()
     {

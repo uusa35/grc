@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Size;
+use App\Models\Size;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SizePolicy

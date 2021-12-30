@@ -79,14 +79,14 @@ export default function ProductAttributeIndex({elements, colors, sizes}) {
                                 {map(elements.data, a => (
                                     <tr key={a.id}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{a.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.color[getLocalized('name')]}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.size[getLocalized('name')]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.color[getLocalized()]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.size[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.qty}  {trans('piece')}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{a.price} {trans('kd')}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.attribute.edit`, a.id)}
-                                                      className="text-indigo-600 hover:text-indigo-900">
+                                                      className="text-gray-600 hover:text-gray-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -97,7 +97,7 @@ export default function ProductAttributeIndex({elements, colors, sizes}) {
                                                 <button
                                                     onClick={() => handleDeleteItem('destroy', 'attribute', a.id)}
                                                     // href={route(`backend.attribute.destroy`, a.id)}
-                                                    className="text-indigo-600 hover:text-indigo-900 ">
+                                                    className="text-gray-600 hover:text-gray-900 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"

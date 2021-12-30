@@ -35,10 +35,12 @@ class ProductResource extends JsonResource
             'file' => $this->file,
             'is_available' => $this->is_available,
             'video_url_one' => $this->video_url_one,
+            'has_attributes' => $this->has_attributes,
+            'qty' => $this->qty,
             'user' => UserExtraLightResource::make($this->whenLoaded('user')),
             'color' => ColorExtraLightResource::make($this->whenLoaded('color')),
             'size' => SizeExtraLightResource::make($this->whenLoaded('size')),
-            'product_attributes' => ProductAttributeExtraLightResource::collection($this->whenLoaded('product_attributes')),
+            'product_attributes' => ProductAttributeResource::collection($this->whenLoaded('product_attributes')),
             'images' => ImageExtraLightResource::collection($this->whenLoaded('images')),
             'categories' => CategoryExtraLightResource::collection($this->whenLoaded('categories')),
         ];

@@ -42,7 +42,7 @@ class ProductAttributeController extends Controller
                 'price' => $element->price,
                 'qty' => $element->qty,
                 'color' => $element->color->only('id', 'name_ar', 'name_en'),
-                'size' => $element->color->only('id', 'name_ar', 'name_en'),
+                'size' => $element->size->only('id', 'name_ar', 'name_en'),
                 'product' => $element->product->only('id', 'price')
             ]);
         return inertia('Backend/ProductAttribute/ProductAttributeIndex', compact('elements'));

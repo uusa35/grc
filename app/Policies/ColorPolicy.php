@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Color;
+use App\Models\Color;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ColorPolicy
