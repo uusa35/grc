@@ -850,7 +850,7 @@ export default function MainNav() {
 
 
                         {/* change lang */}
-                        <div className="ml-auto flex flex-1 justify-between items-center">
+                        <div className="ml-auto flex flex-1 justify-end items-center">
                             {/* Search */}
                             {settings.enable_books && <SearchField type={searchType} setSearchType={setSearchType}/>}
                             {/*{settings.enable_products && <SearchField type={'product'}/>}*/}
