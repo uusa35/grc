@@ -1234,5 +1234,6 @@ export const en  = {
     "forget_ur_password" : "forget your password",
     "already_a_user_login_to_ur_account" : "already a user. login to your account",
     "mobile_placeholder" : "65XXXXXX",
-    "client_information" : "client information"
+    "client_information" : "client information",
+    "service_categories" : "Consultations & Seminars"
 }
