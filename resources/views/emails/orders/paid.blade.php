@@ -4,7 +4,6 @@
 # {{ trans('general.username') }} : {{ $order->user->name_ar }} - {{ $order->user->name_en }}
 # {{ trans('general.email') }} : {{ $order->user->email }}
 # {{ trans('general.mobile') }} : {{ $order->user->mobile }}
-
 @component('mail::table')
 |       |  {{ trans('general.order_details') }}||
 | ------------- |:-------------:| --------:|
@@ -13,7 +12,15 @@
 | {{ trans('general.id') }}       |  {{ trans('general.name') }}         |  {{ trans('general.type') }}  |
 | ------------- |:-------------:| --------:|
 @foreach($order->order_metas as $meta)
-| {{ ($loop->index+1) }}      | {{ $meta->name }}      |    {{ $meta->ordermetable_type }}   |
+| {{ ($loop->index+1) }}      | {{ $meta->name }}      |    {{ ucfirst($meta->ordermetable()->first()->type) }}   |
+@if($meta->ordermetable()->first()->type === 'product')
+| | {{ trans('color') }} : {{ $meta->color }}| |
+| | {{ trans('size') }} : {{ $meta->size }}| |
+@endif
+@if($meta->ordermetable()->first()->type === 'service')
+| | {{ trans('booked_at') }} : {{ $meta->booked_at }}| |
+| | {{ trans('time') }} : {{ $meta->time }}| |
+@endif
 @endforeach
 @endcomponent
 

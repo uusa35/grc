@@ -81,7 +81,6 @@ export default function({element, relatedElements, auth, settings}) {
     }, [selectedAttribute])
 
     // select Color then select size --> show qty
-
     useMemo(() => {
         setFilteredSizesGroup(filter(element.product_attributes, c => c.color_id === selectedColor))
     }, [selectedColor])
@@ -89,6 +88,7 @@ export default function({element, relatedElements, auth, settings}) {
     useMemo(() => {
         if (!isEmpty(filteredSizesGroup) && element.has_attributes) {
             setSelectedSize(first(filteredSizesGroup).size_id)
+            setSelectedQty(0)
         }
     }, [filteredSizesGroup])
 

@@ -44,6 +44,7 @@ export default function MainNav() {
     } = useContext(AppContext);
     const {auth, settings, currencies, categories, mgt} = useContext(GlobalContext);
     const {locale, currency, cart, parentModule} = useSelector(state => state);
+    const [searchType,setSearchType] = useState('book');
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
 
@@ -222,13 +223,6 @@ export default function MainNav() {
                                     settings.enable_books && <>
                                         <div className="flow-root">
                                             <Link
-                                                href={route('frontend.category.index', {is_book: 1})}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('book_categories'))}
-                                            </Link>
-                                        </div>
-                                        <div className="flow-root">
-                                            <Link
                                                 href={route('frontend.user.index')}
                                                 className="-m-2 p-2 block text-gray-900 capitalize ">
                                                 {capitalize(trans('authors'))}
@@ -238,9 +232,16 @@ export default function MainNav() {
                                 }
                                 {
                                     settings.enable_services && <div className="flow-root">
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.category.index', {is_service: 1})}
+                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                {capitalize(trans('service_categories'))}
+                                            </Link>
+                                        </div>
                                         <Link
                                             href={route('frontend.service.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className="-m-2 p-2 block text-gray-900 capitalize hideen">
                                             {capitalize(trans('services'))}
                                         </Link>
                                     </div>
@@ -373,7 +374,7 @@ export default function MainNav() {
                                     {/* books categories */}
                                     {settings.enable_books && <Tab.Panel
                                         className="pt-10 pb-8 px-4 space-y-10 capitalize">
-                                        {map(filter(categories, c => c.is_book), parent => (
+                                        {map(filter(categories, c => c.is_service), parent => (
                                             <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
                                                 <div key={parent[getLocalized()]} className="group relative ">
                                                     <div
@@ -381,8 +382,9 @@ export default function MainNav() {
                                                         <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
                                                              className="object-center object-cover"/>
                                                     </div>
-                                                    <Link href={route('frontend.book.index', {category_id: parent.id})}
-                                                          className="mt-6 block text-gray-900 capitalize">
+                                                    <Link
+                                                        href={route('frontend.service.index', {category_id: parent.id})}
+                                                        className="mt-6 block text-gray-900 capitalize">
                                                         <span className="absolute z-10 inset-0" aria-hidden="true"/>
                                                         {parent[getLocalized()]}
                                                     </Link>
@@ -390,10 +392,10 @@ export default function MainNav() {
                                                         {parent[getLocalized('caption')]}
                                                     </p>
                                                 </div>
-                                                {map(filter(parent.children, c => c.is_book), sub => (
+                                                {map(filter(parent.children, c => c.is_service), sub => (
                                                     <div key={sub[getLocalized()]} className="gap-y-5 space-y-2 my-3">
                                                         <Link
-                                                            href={route('frontend.book.index', {category_id: sub.id})}
+                                                            href={route('frontend.service.index', {category_id: sub.id})}
                                                             className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-5 text-gray-500">
                                                             <img src={getThumb(sub.image)} alt=""
                                                                  className="h-10 w-10 rounded-sm mx-2"/>
@@ -404,10 +406,10 @@ export default function MainNav() {
                                                             aria-labelledby={`${parent.id}-${sub.id}-heading-mobile`}
                                                             className="flex flex-col"
                                                         >
-                                                            {map(filter(sub.children, c => c.is_book), child =>
+                                                            {map(filter(sub.children, c => c.is_service), child =>
                                                                 <li key={child[getLocalized()]} className="flow-root">
                                                                     <Link
-                                                                        href={route('frontend.book.index', {category_id: child.id})}
+                                                                        href={route('frontend.service.index', {category_id: child.id})}
                                                                         className="-m-2 p-2 flex flex-1 flex-row items-center justify-start text-gray-500 rtl:mr-10 ltr:ml-10">
                                                                         <img src={getThumb(child.image)} alt=""
                                                                              className="h-10 w-10 rounded-sm mx-3"/>
@@ -596,10 +598,6 @@ export default function MainNav() {
                                     </Link>
                                 }
                                 {
-                                    settings.enable_books &&
-                                    <MainNavBookCategoriesList categories={categories} type='book'/>
-                                }
-                                {
                                     settings.enable_products &&
                                     <MainNavBookCategoriesList categories={categories} type='product'/>
                                 }
@@ -613,13 +611,16 @@ export default function MainNav() {
                                     </Link>
                                 }
                                 {
-                                    settings.enable_services && <Link
-                                        href={route('frontend.service.index')}
-                                        onClick={() => dispatch(setParentModule('service'))}
-                                        className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                    >
-                                        {capitalize(trans('services'))}
-                                    </Link>
+                                    settings.enable_services ? <>
+                                        <Link
+                                            href={route('frontend.service.index')}
+                                            onClick={() => dispatch(setParentModule('service'))}
+                                            className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize hidden")}
+                                        >
+                                            {capitalize(trans('services'))}
+                                        </Link>
+                                        <MainNavBookCategoriesList categories={categories} type='service'/>
+                                    </> : null
                                 }
                                 {
                                     settings.enable_courses && <Link
@@ -633,7 +634,7 @@ export default function MainNav() {
 
                                 {/*     pages */}
                                 {
-                                    !mgt ? <Popover className="relative flex justify-center">
+                                    !mgt ? <Popover className="relative flex justify-center hidden">
                                         {({open}) => (
                                             <>
                                                 <Popover.Button
@@ -838,13 +839,14 @@ export default function MainNav() {
                             </div>
                         </Popover.Group>
 
-                        {/* Search */}
-                        {settings.enable_books && <SearchField type={'book'}/>}
-                        {settings.enable_products && <SearchField type={'product'}/>}
+
                         {/* change lang */}
-                        <div className="ml-auto flex items-center">
+                        <div className="ml-auto flex flex-1 justify-between items-center">
+                            {/* Search */}
+                            {settings.enable_books && <SearchField type={searchType} setSearchType={setSearchType}/>}
+                            {/*{settings.enable_products && <SearchField type={'product'}/>}*/}
                             <div
-                                className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-6 ltr:mr-6">
+                                className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-2 ltr:mr-2">
                                 <Link
                                     onClick={() => {
                                         dispatch(changeLang(locale.otherLang))

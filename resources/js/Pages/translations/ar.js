@@ -1243,5 +1243,6 @@ export const ar = {
     "already_a_user_login_to_ur_account" : " مسجل بالفعل .. تسجيل الدخول إلى الحساب",
     "mobile_placeholder" : "965 65 XXXXXX",
     "client_information" : "بيانات العميل (الزبون)",
-    "no_attributes" : "لا يوجد خصائص"
+    "no_attributes" : "لا يوجد خصائص",
+    "service_categories" : "استشارات وندوات"
 }

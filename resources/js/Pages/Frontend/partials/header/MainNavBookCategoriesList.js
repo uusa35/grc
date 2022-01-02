@@ -26,8 +26,8 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                             <span className="capitalize">{trans(`${type}_categories`)}</span>
                             <ChevronDownIcon
                                 className={classNames(
-                                    open ? 'text-white' : 'text-white',
-                                    'ml-2 w-5 group-hover:text-gray-100'
+                                    open ? 'text-black' : 'text-black',
+                                    'ml-2 w-5 group-hover:text-gray-600'
                                 )}
                                 aria-hidden="true"
                             />
@@ -56,7 +56,7 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                                         <div
                                             className="col-start-2 grid grid-cols-2 gap-x-8">
                                             {/*  featured parents */}
-                                            {map(take(filter(categories, c => c.is_book && c.is_featured && type === 'book' || c.is_product && c.is_featured && type === 'product'), 2),c => (
+                                            {map(take(filter(categories, c => c.is_service && c.is_featured && type === 'service' || c.is_product && c.is_featured && type === 'product'), 2),c => (
                                                 <div key={c[getLocalized()]}
                                                      className="group relative text-base sm:">
                                                     <div
@@ -83,7 +83,7 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                                         {/* categories columns */}
                                         <div
                                             className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 ">
-                                            {map(filter(categories, c => c.is_book && type === 'book' || c.is_product && type === 'product'), parent => (
+                                            {map(filter(categories, c => c.is_service && type === 'service' || c.is_product && type === 'product'), parent => (
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route(`frontend.${type}.index`, { category_id : parent.id})}
@@ -96,7 +96,7 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                                                         className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                                     >
                                                         {
-                                                            map(filter(parent.children, c => c.is_book && type === 'book' || c.is_product && type === 'product'), child => (
+                                                            map(filter(parent.children, c => c.is_service && type === 'service' || c.is_product && type === 'product'), child => (
                                                                 <li key={child.id}
                                                                     className="flex">
                                                                     <Link href={route(`frontend.${type}.index`, { category_id : child.id})}
