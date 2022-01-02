@@ -7,11 +7,11 @@ import GlobalContext from "../../context/GlobalContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
-import {random} from "lodash";
+import {random, map} from "lodash";
 
 
-export default function() {
-    const {trans, getThumb} = useContext(AppContext);
+export default function({countries}) {
+    const {trans, getThumb, getLocalized} = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
     const [code, setCode] = useState('');
     const {props} = usePage();
@@ -25,6 +25,7 @@ export default function() {
         'mobile': '',
         'code': '',
         'code_confirmation': '',
+        'country_id': '',
     });
 
     useMemo(() => {
@@ -50,7 +51,7 @@ export default function() {
             forceFormData: false,
             preserveScroll: true,
             resetOnSuccess: false,
-            onSuccess : (page) => {
+            onSuccess: (page) => {
                 window.location.reload();
             }
         })
@@ -58,7 +59,7 @@ export default function() {
 
     return (
         <FrontendContainer>
-            <FrontendContentContainer  parentModuleName={'register'} >
+            <FrontendContentContainer parentModuleName={'register'}>
                 <SubMetaElement title={trans('register')}/>
                 <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -146,10 +147,28 @@ export default function() {
                                 </div>
                                 {/* mobile */}
                                 <div>
-                                    <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700">
                                         {trans('mobile')}
                                     </label>
-                                    <div className="mt-1">
+                                    <div className="mt-1 relative rounded-md shadow-sm">
+                                        <div className="absolute inset-y-0 left-0 flex items-center">
+                                            <label htmlFor="country" className="sr-only">
+                                                {trans('country')}
+                                            </label>
+                                            <select
+                                                id="country_id"
+                                                name="country_id"
+                                                onChange={handleChange}
+                                                autoComplete="country"
+                                                className="focus:ring-gray-500 focus:border-gray-500 h-full py-0 pl-3 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
+                                            >
+                                                {map(countries, c => (
+                                                    <option value={c.id}
+                                                            selected={data.country_id === c.id}>{c[getLocalized()]} -
+                                                        ({c.calling_code})</option>
+                                                ))}
+                                            </select>
+                                        </div>
                                         <input
                                             id="mobile"
                                             name="mobile"

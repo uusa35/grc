@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AuthExtraLightResource;
 use App\Http\Resources\BookResource;
+use App\Http\Resources\CountryExtraLightResource;
 use App\Http\Resources\CourseCollection;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\ServiceCollection;
@@ -296,7 +297,8 @@ class FrontendUserController extends Controller
 
     public function getRegistration()
     {
-        return inertia('Frontend/User/RegisterForm');
+        $countries = CountryExtraLightResource::collection(Country::active()->get());
+        return inertia('Frontend/User/RegisterForm', compact('countries'));
     }
 
     public function postRegistration(Request $request)
@@ -306,7 +308,8 @@ class FrontendUserController extends Controller
             'email' => 'required|email|string|unique:users',
             'mobile' => 'required|min:8',
             'password' => 'required|min:8|confirmed',
-            'code' => 'required|confirmed'
+            'code' => 'required|confirmed',
+            'country_id' => 'required|exists:countries,id'
         ]);
         $user =  User::create([
             'name' => $request->name,
@@ -317,7 +320,7 @@ class FrontendUserController extends Controller
             'whatsapp' => $request->mobile,
             'password' => Hash::make($request->password),
             'role_id' => Role::where(['is_client' => true])->first()->id,
-            'country_id' => Country::where(['is_local' => true])->first()->id,
+            'country_id' => $request->country_id,
             'subscription_id' => Subscription::where(['free' => true])->first()->id
         ]);
         if($user) {

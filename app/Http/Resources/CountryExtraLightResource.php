@@ -20,6 +20,7 @@ class CountryExtraLightResource extends JsonResource
             'name_en' => $this->name_en,
             'image' => $this->image,
             'is_local' => $this->is_local,
+            'calling_code' => $this->calling_code,
             'fixed_shipment_charge' => (float) $this->fixed_shipment_charge,
             'governates' => GovernateExtraLightResource::make($this->whenLoaded('governates')),
         ];
