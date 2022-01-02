@@ -46,14 +46,14 @@ export default function SearchField({type = 'book', setSearchType}) {
                             type="text"
                             name="search"
                             id="search"
-                            className="focus:ring-gray-200 focus:border-gray-200 block w-full pl-16 sm:text-sm border-gray-200 "
+                            className={classNames(locale.isRTL ? `rounded-r-md` :  `rounded-l-md`, "focus:ring-gray-200 focus:border-gray-200 block w-full pl-16 sm:text-sm border-gray-200")}
                             placeholder={`${trans('search')}`}
                         />
                     </form>
                 </div>
             </div>
             <div
-                className="flex justify-center items-center bg-gray-200 shadow-sm  mt-1">
+                className={classNames(locale.isRTL ? `rounded-l-md` :  `rounded-r-md`, "flex justify-center items-center bg-gray-200 shadow-sm  mt-1 border-gray-200")}>
                 <Link
                     href={route(`frontend.${type}.index`, {search})}
                     className="px-5">

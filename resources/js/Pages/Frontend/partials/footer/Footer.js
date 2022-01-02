@@ -29,7 +29,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className="bg-gray-50" aria-labelledby="footer-heading">
+        <footer className="border-t-2 border-gray-400 bg-gray-50" aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">
                 {trans('footer')}
             </h2>

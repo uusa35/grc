@@ -154,6 +154,7 @@ export default function() {
                                             id="mobile"
                                             name="mobile"
                                             type="number"
+                                            required
                                             min={8}
                                             autoComplete="mobile"
                                             onChange={handleChange}

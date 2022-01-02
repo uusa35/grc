@@ -44,7 +44,7 @@ export default function MainNav() {
     } = useContext(AppContext);
     const {auth, settings, currencies, categories, mgt} = useContext(GlobalContext);
     const {locale, currency, cart, parentModule} = useSelector(state => state);
-    const [searchType,setSearchType] = useState('book');
+    const [searchType, setSearchType] = useState('book');
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
 
@@ -495,7 +495,7 @@ export default function MainNav() {
             </Transition.Root>
 
             <header
-                className={classNames(mgt ? `bg-black text-white` : `bg-white text-black`, "relative border-b border-gray-400 py-6 max-w-full")}>
+                className={classNames(mgt ? `bg-black text-white` : `bg-white text-black`, "relative border-b-2 border-gray-400 py-6 max-w-full")}>
                 <nav aria-label="Top" className="w-auto lg:w-full xl:w-full 2xl:w-4/5  2xl:m-auto">
                     <div className="h-20 flex items-center">
                         <button
@@ -631,6 +631,15 @@ export default function MainNav() {
                                         {capitalize(trans('courses'))}
                                     </Link>
                                 }
+
+
+                                <Link
+                                    href={route('frontend.aboutus')}
+                                    onClick={() => dispatch(setParentModule('aboutus'))}
+                                    className={classNames(parentModule == 'aboutus' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                >
+                                    {capitalize(trans('aboutus'))}
+                                </Link>
 
                                 {/*     pages */}
                                 {
