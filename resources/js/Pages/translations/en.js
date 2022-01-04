@@ -1235,5 +1235,6 @@ export const en  = {
     "already_a_user_login_to_ur_account" : "already a user. login to your account",
     "mobile_placeholder" : "65XXXXXX",
     "client_information" : "client information",
-    "service_categories" : "Consultations & Seminars"
+    "service_categories" : "Consultations & Seminars",
+    "limit" : "limit"
 }

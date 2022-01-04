@@ -88,6 +88,7 @@ class TimingController extends Controller
             'date' => 'required|date_format:Y-m-d',
             'start' => 'required|date_format:H:i',
             'end' => 'required|date_format:H:i|after:start',
+            'limit' => 'required|integer|max:999',
             'notes_ar' => 'max:1000',
             'notes_en' => 'max:1000'
         ]);
@@ -130,6 +131,7 @@ class TimingController extends Controller
             'date' => 'required|date_format:Y-m-d',
             'start' => 'required|date_format:H:i',
             'end' => 'required|date_format:H:i|after:start',
+            'limit' => 'required|integer|max:999',
             'notes_ar' => 'max:1000',
             'notes_en' => 'max:1000'
         ]);

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ServiceCollection;
 use App\Http\Resources\ServiceExtraLightResource;
 use App\Http\Resources\ServiceResource;
+use App\Models\Order;
+use App\Models\OrderMeta;
 use App\Models\Service;
 use App\Services\Search\Filters;
 use App\Services\Search\ProductFilters;
@@ -60,7 +62,19 @@ class FrontendServiceController extends Controller
      */
     public function show(Service $service, Filters $filters)
     {
-        $element = ServiceResource::make($service->load('user', 'timings', 'images', 'ratings', 'user'));
+        $currentElement = Service::whereId($service->id)->with('user', 'images', 'ratings')->with(['timings' => function ($q) {
+            return $q->active();
+        }])->first();
+        $orderMetas = Order::where('paid', true)->whereHas('order_metas', function ($q) use ($currentElement) {
+            return $q->where(['ordermetable_id' => $currentElement->id, 'ordermetable_type' => 'App\Models\Service'])->whereIn('timing_id', $currentElement->timings->pluck('id'));
+        })->get()->pluck('order_metas')->flatten();
+        // deactivate the timing if number of orders is greater than the limit.
+        foreach ($currentElement->timings as $timing) {
+            if ($orderMetas->where('timing_id', $timing->id)->count() + 1 > $timing->limit) {
+                $timing->update(['active' => 0]);
+            }
+        }
+        $element = ServiceResource::make($currentElement);
         request()->request->add(['category_id' => $element->categories->pluck('id')->flatten()->unique()->toArray()]);
         $relatedElements = new ServiceCollection(Service::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_FOUR));
         return inertia('Frontend/Service/FrontendServiceShow', compact('element', 'relatedElements'));

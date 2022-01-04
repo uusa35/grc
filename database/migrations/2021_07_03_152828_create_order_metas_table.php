@@ -19,7 +19,7 @@ class CreateOrderMetasTable extends Migration
             $table->mediumText('description')->nullable();
             $table->string('color')->nullable();
             $table->string('size')->nullable();
-            $table->integer('qty')->unsigned();
+            $table->integer('qty')->unsigned(); // saved as timing_id in case of services
             $table->date('booked_at')->nullable();
             $table->time('time')->nullable();
 

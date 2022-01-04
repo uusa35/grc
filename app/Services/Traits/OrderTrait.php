@@ -76,7 +76,8 @@ trait OrderTrait
                     'qty' => $item['qty'],
                     'color' => isset($item['color']) ? $item['color'] : null,
                     'size' => isset($item['size']) ? $item['size'] : null,
-                    'merchant_id' => $item['merchant_id'],
+                    'merchant_id' => isset($item['merchant_id']) ? $item['merchant_id'] : null,
+                    'timing_id' => isset($item['timing_id']) ? $item['timing_id'] : null,
                     'ordermetable_id' => $item['element_id'],
                     'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
                 ]);

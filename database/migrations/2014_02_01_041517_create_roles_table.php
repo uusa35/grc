@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+ini_set('memory_limit', '-1');
 class CreateRolesTable extends Migration
 {
     /**

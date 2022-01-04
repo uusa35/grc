@@ -14,6 +14,7 @@ export default function TimingEdit({ timing }) {
         'date': timing.date,
         'start': timing.start,
         'end': timing.end,
+        'limit': timing.limit,
         'notes_ar': timing.notes_ar,
         'notes_en': timing.notes_en,
     });
@@ -77,7 +78,7 @@ export default function TimingEdit({ timing }) {
                                 </p>
                             </div>
                             {/* start*/}
-                            <div className="sm:col-span-2 has-tooltip mb-5">
+                            <div className="sm:col-span-1 has-tooltip mb-5">
                                 <label htmlFor="start"
                                        className={`block   text-gray-700`}>
                                     {trans('start')}
@@ -102,7 +103,7 @@ export default function TimingEdit({ timing }) {
                                 </p>
                             </div>
                             {/* end*/}
-                            <div className="sm:col-span-2 has-tooltip mb-5">
+                            <div className="sm:col-span-1 has-tooltip mb-5">
                                 <label htmlFor="end"
                                        className={`block   text-gray-700`}>
                                     {trans('end')}
@@ -126,7 +127,28 @@ export default function TimingEdit({ timing }) {
                                     {errors.end && <div className={`text-red-900`}>{errors.end}</div>}
                                 </p>
                             </div>
-
+                            {/* limit */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="order" className={`block   text-gray-700`}>
+                                    {trans('limit')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="number"
+                                        name="limit"
+                                        defaultValue={data.limit}
+                                        id="limit"
+                                        autoComplete="limit"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('limit_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.limit && <div className={`text-red-900`}>{errors.limit}</div>}
+                                </p>
+                            </div>
                             {/* notes */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="notes_ar" className={`block   text-gray-700`}>
