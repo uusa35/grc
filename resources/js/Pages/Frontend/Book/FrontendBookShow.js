@@ -25,6 +25,7 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
 import route from 'ziggy-js'
+import {getFileType} from "../../helpers";
 
 
 export default function({element, relatedElements, auth}) {
@@ -215,13 +216,17 @@ export default function({element, relatedElements, auth}) {
                                         element.free ?
                                             <>
                                                 {
-                                                    !isNull(element.file) ? <a
+                                                    !isNull(element.file) && getFileType(element.file) === 'pdf' ? <a
                                                         target="_blank"
                                                         href={route('frontend.free.book', element.id)}
                                                         className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                                     >
                                                         {trans('view')}
-                                                    </a> : null
+                                                    </a> : <a
+                                                        href={getFileUrl(element.file)}
+                                                        download={true}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                    >{trans('download')}</a>
                                                 }
                                             </>
                                             : <form onSubmit={handleSubmit} className="w-full">

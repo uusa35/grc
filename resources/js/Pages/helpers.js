@@ -119,3 +119,4 @@ export const isLocal = () => !process.env.NODE_ENV || process.env.NODE_ENV === '
 
 export const calculateRating = (ratings) =>  _.round((_.sumBy(ratings, r => r.value) / (ratings.length)) / 20)
 export const getTypeFromModel = (model) =>  _.lowerCase(_.last(_.split(model, 'Models', 2)));
+export const getFileType = (model) =>  _.lowerCase(_.last(_.split(model, '.', 2)));

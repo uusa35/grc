@@ -404,7 +404,10 @@ accept="image/jpg, image/jpeg , image/png"
                                         type="file"
                                         name="file"
                                         id="file"
-accept="application/pdf"
+                                        accept="application/msword,
+                                        application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.ms-powerpoint,application/pdf,
+                                        application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel
+                                        "
                                         autoComplete="pdf_file"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />

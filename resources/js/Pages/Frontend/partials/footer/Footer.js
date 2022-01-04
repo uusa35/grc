@@ -11,7 +11,7 @@ import {isEmpty} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function Footer() {
-    const {getLocalized, getThumb, trans, guest, baseUrl} = useContext(AppContext)
+    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove} = useContext(AppContext)
     const {auth, settings} = useContext(GlobalContext);
     const {errors} = usePage().props;
     const {data, setData, put, progress, reset} = useForm({
@@ -130,10 +130,21 @@ export default function Footer() {
                                         }
 
                                     </>
-                                    : <Link href={route('frontend.user.edit', auth.id)}
-                                            className="text-base text-gray-500 capitalize hover:text-gray-900">
-                                        {trans('my_account')}
-                                    </Link>
+                                    : <>
+                                        <li>
+                                            <Link href={route('frontend.user.edit', auth.id)}
+                                                  className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                                {trans('my_account')}
+                                            </Link>
+                                        </li>
+                                        {isAdminOrAbove ? <li>
+                                            <a href={route('backend.home')}
+                                               target="_blank"
+                                               className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                                {trans('backend')}
+                                            </a>
+                                        </li> : null}
+                                    </>
                             }
                             {
                                 settings.enable_subscriptions ? <li>

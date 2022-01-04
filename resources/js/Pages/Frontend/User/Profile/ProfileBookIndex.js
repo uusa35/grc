@@ -6,12 +6,13 @@ import GlobalContext from "../../../context/GlobalContext";
 import FrontendContentContainer from "../../components/FrontendContentContainer";
 import {useDispatch, useSelector} from "react-redux";
 import UserEditSideNav from "./UserEditSideNav";
-import {isEmpty, map} from 'lodash';
+import {isEmpty, map, truncate} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import NoElements from "../../../Backend/components/widgets/NoElements";
+import {getFileType} from "../../../helpers";
 
 export default function({elements, firstOrder}) {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
+    const {classNames, trans, getThumb, getLocalized, getFileUrl } = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
     const {locale} = useSelector(state => state);
 
@@ -73,44 +74,54 @@ export default function({elements, firstOrder}) {
                                                     <NoElements display={elements.meta.total < 1}/>
                                                     {map(elements.data, element => (
                                                         <tr key={element.name_en}>
-                                                            <td className="px-2 py-4 whitespace-nowrap">{element.id}</td>
-                                                            <td className="px-2 py-4 whitespace-nowrap">{element.sku}</td>
-                                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                                <a href={route('frontend.profile.book', {
-                                                                    reference_id: firstOrder.reference_id,
-                                                                    order_id : firstOrder.id,
-                                                                    id: element.id,
-                                                                    session_id: `${auth.id}${element.id}`
-                                                                })}
-                                                                      className="flex items-center"
-                                                                >
+                                                            <td className=" py-4 whitespace-nowrap">{element.id}</td>
+                                                            <td className=" py-4 whitespace-nowrap">{element.sku}</td>
+                                                            <td className=" py-4 whitespace-nowrap">
+                                                                <div className="flex flex-1 justify-start items-center flex-row">
                                                                     <div className="flex-shrink-0 h-10 w-10">
                                                                         <img className="h-10 w-10 rounded-full "
                                                                              src={getThumb(element.image)} alt=""/>
                                                                     </div>
                                                                     <div className="ml-4 px-3">
                                                                         <div
-                                                                            className="text-sm font-medium text-gray-900 truncate capitalize">{element[getLocalized()]}</div>
+                                                                            className="text-xs font-medium text-gray-900 truncate capitalize">
+                                                                            {truncate(element[getLocalized()], { length : 30 })}
+                                                                        </div>
                                                                         <div
                                                                             className="text-sm text-gray-500">
-                                                                            <Link
-                                                                                href={route('frontend.profile.book', {
-                                                                                    reference_id: firstOrder.reference_id,
-                                                                                    order_id : firstOrder.id,
-                                                                                    id: element.id,
-                                                                                    session_id: `${auth.id}${element.id}`
-                                                                                })}>
-                                                                                {element[getLocalized('caption')]}
-                                                                            </Link>
+                                                                            {getFileType(element.file) === 'pdf' ?
+                                                                                <Link
+                                                                                    href={route('frontend.profile.book', {
+                                                                                        reference_id: firstOrder.reference_id,
+                                                                                        order_id: firstOrder.id,
+                                                                                        id: element.id,
+                                                                                        session_id: `${auth.id}${element.id}`
+                                                                                    })}
+                                                                                    className="truncate"
+                                                                                >
+                                                                                    {truncate(element[getLocalized('caption')], { length : 15 })}
+                                                                                </Link>
+                                                                                :
+                                                                                <Link href={getFileUrl(element.file)}
+                                                                                      className="truncate"
+                                                                                >
+                                                                                    {truncate(element[getLocalized('caption')], { length : 15 })}
+                                                                                </Link>
+                                                                            }
                                                                         </div>
                                                                     </div>
-                                                                </a>
+                                                                </div>
+
+
+
                                                             </td>
-                                                            <td className="px-2 py-4 whitespace-nowrap">
+                                                            <td className=" py-4 whitespace-nowrap">
                                                                 <Link
                                                                     href={route('frontend.user.show', {id: element.user.id})}>
                                                                     <div
-                                                                        className="text-sm font-medium text-gray-900 truncate capitalize">{element.user[getLocalized()]}</div>
+                                                                        className="text-xs font-medium text-gray-900 truncate capitalize">
+                                                                        {truncate(element.user[getLocalized()], { length : 20 })}
+                                                                    </div>
                                                                 </Link>
                                                             </td>
                                                             <td className="px-6 py-4 whitespace-nowrap">
