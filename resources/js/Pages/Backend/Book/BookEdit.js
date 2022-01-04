@@ -363,7 +363,7 @@ export default function({users, categories, book, elementCategories}) {
                                                                     value={c.id}
                                                                     defaultChecked={first(filter(elementCategories, s => s == c.id))}
                                                                     type="checkbox"
-                                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                                                    className="focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300 rounded"
                                                                 />
                                                             </div>
                                                             <div className="ltr:ml-3 ">
@@ -387,7 +387,7 @@ export default function({users, categories, book, elementCategories}) {
                                                                                 value={sub.id}
                                                                                 defaultChecked={first(filter(elementCategories, s => s == sub.id))}
                                                                                 type="checkbox"
-                                                                                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                                                                className="focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300 rounded"
                                                                             />
                                                                         </div>
                                                                         <div className="ltr:ml-3 ">
@@ -412,7 +412,7 @@ export default function({users, categories, book, elementCategories}) {
                                                                                         value={child.id}
                                                                                         defaultChecked={first(filter(elementCategories, s => s == child.id))}
                                                                                         type="checkbox"
-                                                                                        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                                                                        className="focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300 rounded"
                                                                                     />
                                                                                 </div>
                                                                                 <div className="ltr:ml-3 ">
@@ -1493,7 +1493,7 @@ export default function({users, categories, book, elementCategories}) {
                                         <div className="flex  text-gray-600">
                                             <label
                                                 htmlFor="file-upload"
-                                                className="relative cursor-pointer bg-white rounded-md  text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                className="relative cursor-pointer bg-white rounded-md  text-gray-600 hover:text-gray-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-gray-500"
                                             >
                                             </label>
                                             <p className="pl-1">

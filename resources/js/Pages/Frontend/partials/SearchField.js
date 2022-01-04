@@ -3,14 +3,13 @@ import route from "ziggy-js";
 import {SearchIcon} from "@heroicons/react/outline";
 import {useContext, useState} from "react";
 import {AppContext} from "../../context/AppContext";
-import pluralize from 'pluralize'
 import {useSelector} from "react-redux";
+import { capitalize } from "lodash";
 
 export default function SearchField({type = 'book', setSearchType}) {
     const [search, setSearch] = useState()
     const {trans, classNames } = useContext(AppContext)
     const { locale } = useSelector(state => state);
-    console.log('type', type)
 
     const submit = (e) => {
         e.preventDefault();
@@ -24,7 +23,7 @@ export default function SearchField({type = 'book', setSearchType}) {
                     {trans('search')}
                 </label>
                 <div className="mt-1 w-60 relative  shadow-sm">
-                    <div className={classNames(locale.isRTL ? `left-0` : `left-36` , "absolute inset-y-0  flex items-center")}>
+                    <div className={classNames(locale.isRTL ? `left-0` : `left-32` , "absolute inset-y-0  flex items-center")}>
                         <label htmlFor="search" className="sr-only">
                             {`${trans('search')} `}
                         </label>
@@ -33,11 +32,11 @@ export default function SearchField({type = 'book', setSearchType}) {
                             id="type"
                             name="type"
                             autoComplete="type"
-                            className="focus:ring-gray-200 focus:border-gray-200 h-full py-0 pl-3 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm "
+                            className="focus:ring-gray-200 focus:border-gray-200 h-full py-0 border-transparent bg-transparent text-gray-500 sm:text-sm "
                         >
-                            <option value="book" selected={type === 'book'}>{trans('books')}</option>
-                            <option value="service" selected={type === 'service'}>{trans('services')}</option>
-                            <option value="course" selected={type === 'course'}>{trans('courses')}</option>
+                            <option value="book" selected={type === 'book'}>{capitalize(trans('books'))}</option>
+                            <option value="service" selected={type === 'service'}>{capitalize(trans('services'))}</option>
+                            <option value="course" selected={type === 'course'}>{capitalize(trans('courses'))}</option>
                         </select>
                     </div>
                     <form onSubmit={submit}>
@@ -46,7 +45,7 @@ export default function SearchField({type = 'book', setSearchType}) {
                             type="text"
                             name="search"
                             id="search"
-                            className={classNames(locale.isRTL ? `rounded-r-md` :  `rounded-l-md`, "focus:ring-gray-200 focus:border-gray-200 block w-full pl-16 sm:text-sm border-gray-200")}
+                            className={classNames(locale.isRTL ? `rounded-r-md` :  `rounded-l-md`, "focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm border-gray-200")}
                             placeholder={`${trans('search')}`}
                         />
                     </form>
