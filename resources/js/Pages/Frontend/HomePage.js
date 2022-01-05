@@ -17,8 +17,6 @@ export default function HomePage({
                                      newOnHomeCourses,
                                      newOnHomeProducts,
                                      onHomeParticipantAuthors,
-                                     onHomeClients,
-                                     onHomePartners,
                                      mgt,
                                      clearCart = false,
                                      settings
@@ -124,24 +122,3 @@ export default function HomePage({
 // {
 //     settings.enable_newsletter && <NewsLetter/>
 // }
-// mgt && <>
-//     <ElementSlider
-//         showNavigation={false}
-//         elements={onHomeClients}
-//         slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-//         title={trans('our_clients')}
-//         type={'user'}
-//         moduleType={'user'}
-//         params={{is_designer:  true}}
-//     />
-//     <ElementSlider
-//         showNavigation={false}
-//         elements={onHomePartners}
-//         slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-//         title={trans('our_partners')}
-//         type={'user'}
-//         moduleType={'user'}
-//         params={{is_celebrity:  true}}
-//     />
-//
-// </>

@@ -69,9 +69,11 @@ class FrontendServiceController extends Controller
             return $q->where(['ordermetable_id' => $currentElement->id, 'ordermetable_type' => 'App\Models\Service'])->whereIn('timing_id', $currentElement->timings->pluck('id'));
         })->get()->pluck('order_metas')->flatten();
         // deactivate the timing if number of orders is greater than the limit.
-        foreach ($currentElement->timings as $timing) {
-            if ($orderMetas->where('timing_id', $timing->id)->count() + 1 > $timing->limit) {
-                $timing->update(['active' => 0]);
+        if ($orderMetas->isNotEmpty()) {
+            foreach ($currentElement->timings as $timing) {
+                if ($orderMetas->where('timing_id', $timing->id)->count() + 1 > $timing->limit) {
+                    $timing->update(['active' => 0]);
+                }
             }
         }
         $element = ServiceResource::make($currentElement);
