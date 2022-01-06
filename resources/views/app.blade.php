@@ -4,14 +4,14 @@
     @if(request()->segment(1) !== 'backend')
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
             <title>{{$page['props']['element']->{'name_'.app()->getLocale()}  }}</title>
-            <meta name="description" content="{{$page['props']['element']->{'description_'.app()->getLocale()}  }}"/>
+            <meta name="description" content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,50)  }}"/>
             {{--         facebook --}}
             <meta property="og:type" content="website"/>
             <meta property="og:site_name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:url" content="{{ env('APP_URL') }}"/>
             <meta property="og:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:description"
-                  content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,30) }}"/>
+                  content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,50) }}"/>
             <meta property="og:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
             <meta property="og:mobile" content="{{$page['props']['settings']->mobile }}"/>
             <meta property="og:whatsapp" content="{{$page['props']['settings']->whatsapp }}"/>
