@@ -1,11 +1,4 @@
-{{--@php--}}
-{{--    try {--}}
-{{--        $ssr = Http::get('http://ecommerce-backend.test/render', $page)->throw()->json();--}}
-{{--    } catch (Exception $e) {--}}
-{{--        $ssr = null;--}}
-{{--    }--}}
-{{--@endphp--}}
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     @if(request()->segment(1) !== 'backend')

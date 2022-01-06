@@ -15,13 +15,17 @@ import './../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {settings, auth, currencies, categories, mgt } = props.initialPage.props;
+        const {settings, auth, currencies, categories, mgt} = props.initialPage.props;
         return render(
-            <GlobalContext.Provider value={{auth, settings, currencies, categories, mgt }}>
+            <GlobalContext.Provider value={{auth, settings, currencies, categories, mgt}}>
                 <Provider store={store}>
-                    <PersistGate loading={<LoadingView/>} persistor={persistor}>
+                    <PersistGate loading={<LoadingView/>}
+                                 persistor={persistor}
+                                 onBeforeLift={() => new Promise(resolve =>
+                                     setTimeout(resolve, 1000))}
+                    >
                         <AppContextProvider>
-                                <App {...props} />
+                            <App {...props} />
                         </AppContextProvider>
                     </PersistGate>
                 </Provider>
