@@ -30,7 +30,6 @@
             <meta property="twitter:description"
                   content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
             <meta property="twitter:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
-
         @else
             <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(1) ? ' :: '. trans('general.'.Str::plural(request()->segment(1))) : '' }}</title>
             <meta name="name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
