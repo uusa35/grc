@@ -429,7 +429,7 @@ export default function({element, relatedElements, auth}) {
                             </section>
                         </div>
                     </div>
-                    <SocialIconShare/>
+                    <SocialIconShare imageUrl={getThumb(element.image)} title={element[getLocalized()]}/>
                     {/* related items */}
                     {
                         relatedElements && relatedElements.meta.total > 0 &&
