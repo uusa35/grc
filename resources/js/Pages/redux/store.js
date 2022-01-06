@@ -31,17 +31,17 @@ const sagaMiddleware = createSagaMiddleware();
 let store;
 let persistor;
 
-if (isLocal()) {
+if (process.env.NODE_ENV === "production") {
+    store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
+    persistor = persistStore(store);
+    sagaMiddleware.run(rootSaga);
+} else {
     const appLogger = createLogger({
         collapsed: true,
         duration: true,
     });
     const composeEnhancers = composeWithDevTools({realtime: true, port: 8081});
     store = createStore(persistedReducer, composeEnhancers(applyMiddleware(appLogger, sagaMiddleware)));
-    persistor = persistStore(store);
-    sagaMiddleware.run(rootSaga);
-} else {
-    store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
     persistor = persistStore(store);
     sagaMiddleware.run(rootSaga);
 }
