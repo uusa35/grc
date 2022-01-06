@@ -24,7 +24,7 @@
             <meta property="facebook:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
 
             <meta itemProp="twitter" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
-            <meta property="twitter:card" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
+            <meta property="twitter:card" content="summary"/>
             <meta property="twitter:url" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
             <meta property="twitter:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="twitter:description"
@@ -68,7 +68,7 @@
             <meta property="facebook:image" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
 
             <meta itemProp="twitter" content="{{$page['props']['settings']->twitter }}"/>
-            <meta property="twitter:card" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
+            <meta property="twitter:card" content="summary"/>
             <meta property="twitter:url" content="{{$page['props']['settings']->twitter }}"/>
             <meta property="twitter:title" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="twitter:description"
