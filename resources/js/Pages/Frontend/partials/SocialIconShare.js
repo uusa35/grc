@@ -7,7 +7,7 @@ import {
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 
-export default function({url = '', facebook = '', twitter = '', youtube = '', instagram = '',  imageUrl = '', title = '', description = ''}) {
+export default function({url = '', facebook = '', twitter = '', youtube = '', instagram = ''}) {
     const {trans} = useContext(AppContext);
     return (
         <div className="flex flex-1 w-full justify-end items-center gap-x-6 p-5">
@@ -19,9 +19,8 @@ export default function({url = '', facebook = '', twitter = '', youtube = '', in
             <div>
                 <FacebookShareButton
                     url={window.location.href}
-                    quote={title}
+                    // quote={"CampersTribe - World is yours to explore"}
                     // hashtag="#camperstribe"
-                    imageUrl={imageUrl}
                     className={'shadow-sm rounded-full '}>
                     <FacebookIcon round={true} size={30}/>
                 </FacebookShareButton>
@@ -29,9 +28,8 @@ export default function({url = '', facebook = '', twitter = '', youtube = '', in
             <div>
                 <TwitterShareButton
                     url={window.location.href}
-                    quote={title}
+                    // quote={"CampersTribe - World is yours to explore"}
                     // hashtag="#camperstribe"
-                    imageUrl={imageUrl}
                     className={'shadow-sm rounded-full '}>
                     <TwitterIcon round={true} size={30}/>
                 </TwitterShareButton>
@@ -39,9 +37,8 @@ export default function({url = '', facebook = '', twitter = '', youtube = '', in
             <div>
                 <LinkedinShareButton
                     url={window.location.href}
-                    quote={title}
+                    // quote={"CampersTribe - World is yours to explore"}
                     // hashtag="#camperstribe"
-                    imageUrl={imageUrl}
                     className={'shadow-sm rounded-full '}>
                     <LinkedinIcon round={true} size={30}/>
                 </LinkedinShareButton>
