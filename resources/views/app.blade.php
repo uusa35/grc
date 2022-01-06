@@ -13,6 +13,7 @@
             <meta property="og:description"
                   content="{{substr($page['props']['settings']->{'description_'.app()->getLocale()},0,50) }}"/>
             <meta property="og:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
+            <meta property="og:alt" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:mobile" content="{{$page['props']['settings']->mobile }}"/>
             <meta property="og:whatsapp" content="{{$page['props']['settings']->whatsapp }}"/>
             <meta itemProp="facebook" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
