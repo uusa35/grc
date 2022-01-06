@@ -85,10 +85,10 @@ export default function({element, relatedElements, auth}) {
 
     return (
         <FrontendContainer>
-            {/*<SubMetaElement title={element[getLocalized()]}*/}
-            {/*                description={element[getLocalized('description')]}*/}
-            {/*                image={element.image}*/}
-            {/*/>*/}
+            <SubMetaElement title={element[getLocalized()]}
+                            description={element[getLocalized('description')]}
+                            image={element.image}
+            />
             <FrontendContentContainer childName={element[getLocalized()]}>
                 <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                     <div className="w-full h-auto overflow-hidden mb-10">

@@ -15,7 +15,7 @@ const FrontendContainer = ({children}) => {
         <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize")} dir={locale.dir}>
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
-            {/*<MetaElement />*/}
+            <MetaElement />
             <main
                 className={"flex-1 relative z-0 focus:outline-none max-w-full bg-white font-extrabold capitalize"}>
                 <MainNav/>
