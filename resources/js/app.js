@@ -11,6 +11,10 @@ import {store, persistor} from './Pages/redux/store';
 import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
 import 'react-toastify/dist/ReactToastify.css';
 import './../../node_modules/react-image-gallery/styles/css/image-gallery.css'
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+if (process.env.NODE_ENV === 'production') {
+    disableReactDevTools();
+}
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
