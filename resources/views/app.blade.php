@@ -10,7 +10,7 @@
             <meta property="og:site_name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:url" content="{{ env('APP_URL') }}"/>
             <meta property="og:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
-            <meta property="og:desc" content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
+            <meta property="og:description" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
             <meta property="og:mobile" content="{{$page['props']['settings']->mobile }}"/>
             <meta property="og:whatsapp" content="{{$page['props']['settings']->whatsapp }}"/>
