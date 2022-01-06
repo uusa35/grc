@@ -23,6 +23,7 @@
             <meta property="facebook:description"
                   content="{{substr($page['props']['settings']->{'description_'.app()->getLocale()},0,30) }}"/>
             <meta property="facebook:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
+            <meta property="facebook:image" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
 
             <meta itemProp="twitter" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
             <meta property="twitter:card" content="summary"/>
@@ -57,6 +58,7 @@
             <meta property="og:description"
                   content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
             <meta property="og:image" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
+            <meta property="og:alt" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:mobile" content="{{$page['props']['settings']->mobile }}"/>
             <meta property="og:whatsapp" content="{{$page['props']['settings']->whatsapp }}"/>
 
@@ -67,6 +69,7 @@
             <meta property="facebook:description"
                   content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
             <meta property="facebook:image" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
+            <meta property="facebook:alt" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
 
             <meta itemProp="twitter" content="{{$page['props']['settings']->twitter }}"/>
             <meta property="twitter:card" content="summary"/>
