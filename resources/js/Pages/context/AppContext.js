@@ -135,6 +135,7 @@ const AppContextProvider = ({children}) => {
         }
     }, [])
 
+    console.log('the env', env)
     return (
         <AppContext.Provider value={context}>
             {navigator.onLine || env.NODE_ENV == 'development' ? children : <LoadingView/>}

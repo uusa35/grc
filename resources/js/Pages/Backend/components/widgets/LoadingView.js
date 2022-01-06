@@ -8,7 +8,7 @@ const LoadingView = () => {
         if (isLoading) {
             setTimeout(() => toggleIsLoading(false))
         }
-    }, [])
+    }, [isLoading])
 
     return (
         <div

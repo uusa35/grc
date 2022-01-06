@@ -1,5 +1,6 @@
 const colors = require('tailwindcss/colors')
 module.exports = {
+    mode: 'jit',
     purge: {
         enabled : false,
         // options: {
@@ -107,5 +108,5 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/typography')
-    ],
+    ]
 }
