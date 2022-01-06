@@ -4,7 +4,7 @@
     @if(request()->segment(1) !== 'backend')
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
             <title>{{$page['props']['element']->{'name_'.app()->getLocale()}  }}</title>
-            <meta name="description" content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,50)  }}"/>
+            <meta name="description" content="{{substr($page['props']['element']->{'name_'.app()->getLocale()},0,50)  }}"/>
             {{--         facebook --}}
             <meta property="og:type" content="website"/>
             <meta property="og:site_name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
