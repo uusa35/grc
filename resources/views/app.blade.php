@@ -5,6 +5,7 @@
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
             <title>{{$page['props']['element']->{'name_'.app()->getLocale()}  }}</title>
             <meta property="description" content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
+            <meta property="og:locale" content="{{ app()->getLocale() }}"/>
             <meta property="og:type" content="website"/>
             <meta property="og:site_name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:url" content="{{ env('APP_URL') }}"/>
