@@ -8,7 +8,7 @@
             <meta property="og:locale" content="{{ app()->getLocale() }}"/>
             <meta property="og:type" content="website"/>
             <meta property="og:site_name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
-            <meta property="og:url" content="{{ env('APP_URL') }}"/>
+            <meta property="og:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="og:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:description"
                   content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,50) }}"/>
