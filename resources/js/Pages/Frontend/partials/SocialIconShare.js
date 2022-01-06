@@ -1,11 +1,9 @@
 import {
-    EmailShareButton,
     TwitterIcon, TwitterShareButton,
     FacebookShareButton,
     FacebookIcon, LinkedinIcon,
     LinkedinShareButton
 } from "react-share";
-import route from 'ziggy-js'
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 
@@ -20,7 +18,7 @@ export default function({url = '', facebook = '', twitter = '', youtube = '', in
             </div>
             <div>
                 <FacebookShareButton
-                    url={route().current()}
+                    url={window.location.href}
                     // quote={"CampersTribe - World is yours to explore"}
                     // hashtag="#camperstribe"
                     className={'shadow-sm rounded-full '}>
@@ -29,7 +27,7 @@ export default function({url = '', facebook = '', twitter = '', youtube = '', in
             </div>
             <div>
                 <TwitterShareButton
-                    url={route().current()}
+                    url={window.location.href}
                     // quote={"CampersTribe - World is yours to explore"}
                     // hashtag="#camperstribe"
                     className={'shadow-sm rounded-full '}>
@@ -38,7 +36,7 @@ export default function({url = '', facebook = '', twitter = '', youtube = '', in
             </div>
             <div>
                 <LinkedinShareButton
-                    url={route().current()}
+                    url={window.location.href}
                     // quote={"CampersTribe - World is yours to explore"}
                     // hashtag="#camperstribe"
                     className={'shadow-sm rounded-full '}>

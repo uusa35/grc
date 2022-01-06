@@ -1,31 +1,25 @@
-import React, {Fragment, useContext, useEffect, useMemo, useState} from 'react'
-import {Dialog, Disclosure, Popover, RadioGroup, Tab, Transition, Menu} from '@headlessui/react'
+import React, {Fragment, useContext, useMemo, useState} from 'react'
+import {Disclosure, Transition, Menu} from '@headlessui/react'
 import {
-    HeartIcon,
-    MenuIcon,
     MinusSmIcon,
     PlusSmIcon,
     ChevronDownIcon
 } from '@heroicons/react/outline'
-import {StarIcon} from '@heroicons/react/solid'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, sumBy, isEmpty, first, capitalize, random, isNull, isArray} from 'lodash';
+import {map,isEmpty, isNull} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery';
-import {calculateRating} from "../../helpers";
 import ElementRating from "../components/widgets/ElementRating";
 import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
-import route from 'ziggy-js'
-import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
-import {addToCart, checkCartBeforeAdd, clearCart, removeFromCart} from "../../redux/actions";
+import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
@@ -87,7 +81,6 @@ export default function({element, relatedElements, auth}) {
             merchant_name_ar: element.user.name_ar,
             merchant_name_en: element.user.name_en
         }))
-        // dispatch(removeFromCart(element.id +''+selectedTiming.id));
     }
 
     return (
