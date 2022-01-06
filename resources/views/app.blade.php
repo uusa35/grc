@@ -11,7 +11,7 @@
             <meta property="og:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="og:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:description"
-                  content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,50) }}"/>
+                  content="{{substr($page['props']['settings']->{'description_'.app()->getLocale()},0,50) }}"/>
             <meta property="og:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
             <meta property="og:mobile" content="{{$page['props']['settings']->mobile }}"/>
             <meta property="og:whatsapp" content="{{$page['props']['settings']->whatsapp }}"/>
@@ -28,7 +28,7 @@
             <meta property="twitter:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="twitter:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="twitter:description"
-                  content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
+                  content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
             <meta property="twitter:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
         @else
             <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(1) ? ' :: '. trans('general.'.Str::plural(request()->segment(1))) : '' }}</title>
