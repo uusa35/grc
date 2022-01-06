@@ -20,7 +20,7 @@
             <meta property="facebook:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="facebook:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="facebook:description"
-                  content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,30) }}"/>
+                  content="{{substr($page['props']['settings']->{'description_'.app()->getLocale()},0,30) }}"/>
             <meta property="facebook:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
 
             <meta itemProp="twitter" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
