@@ -134,7 +134,7 @@ const AppContextProvider = ({children}) => {
             dispatch(setModules(filteredModules));
         }
     }, [])
-    
+
     return (
         <AppContext.Provider value={context}>
             {navigator.onLine || env.NODE_ENV == 'development' ? children : <LoadingView/>}
