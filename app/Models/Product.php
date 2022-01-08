@@ -16,7 +16,8 @@ class Product extends PrimaryModel
         'qty' => 'integer',
         'price' => 'float',
         'sale_price' => 'float',
-        'has_attributes' => 'boolean'
+        'has_attributes' => 'boolean',
+        'direct_purchase' => 'boolean'
     ];
 
     public function user()

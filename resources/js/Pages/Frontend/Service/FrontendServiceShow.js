@@ -354,10 +354,12 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                                                 src={getThumb(element.user.image)}
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
-                                                        <div className="rtl:mr-5 ltr:ml-5 pt-5">
-                                                            <h4>{element.user[getLocalized()]}</h4>
-                                                            <h6>{element.user[getLocalized('caption')]}</h6>
-                                                            <p>{element.user[getLocalized('description')]}</p>
+                                                        <div className="rtl:mr-5 ltr:ml-5">
+                                                            <div className="border-b border-gray-200 mb-2 pb-2">
+                                                                <h4>{element.user[getLocalized()]}</h4>
+                                                                <p>{element.user[getLocalized('caption')]}</p>
+                                                            </div>
+                                                            <p className="text-sm">{element.user[getLocalized('description')]}</p>
                                                         </div>
                                                     </div>
                                                 </Disclosure.Panel>

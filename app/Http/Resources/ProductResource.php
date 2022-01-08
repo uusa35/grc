@@ -36,6 +36,7 @@ class ProductResource extends JsonResource
             'is_available' => $this->is_available,
             'video_url_one' => $this->video_url_one,
             'has_attributes' => $this->has_attributes,
+            'direct_purchase' => $this->direct_purchase,
             'qty' => $this->qty,
             'user' => UserExtraLightResource::make($this->whenLoaded('user')),
             'color' => ColorExtraLightResource::make($this->whenLoaded('color')),

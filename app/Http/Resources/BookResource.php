@@ -38,7 +38,7 @@ class BookResource extends JsonResource
             'file' => Storage::disk('public')->exists('uploads/files/' . $this->file) && $this->file ? $this->file : null,
             'is_available' => $this->is_available,
             'direct_purchase' => $this->direct_purchase,
-            'user' => UserExtraLightResource::make($this->whenLoaded('user')),
+            'user' => UserLightResource::make($this->whenLoaded('user')),
             'images' => ImageExtraLightResource::collection($this->whenLoaded('images')),
         ];
     }

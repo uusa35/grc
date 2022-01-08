@@ -38,6 +38,7 @@ import {FaWhatsapp} from "react-icons/fa";
 
 export default function({element, relatedElements, auth, settings}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
+    const { cart } = useSelector(state => state);
     const [currentImages, setCurrentImages] = useState([]);
     const [finalPrice, setFinalPrice] = useState(0);
     const [selectedColor, setSelectedColor] = useState(null);
@@ -93,22 +94,28 @@ export default function({element, relatedElements, auth, settings}) {
     }, [filteredSizesGroup])
 
     useMemo(() => {
-        if (!isEmpty(filteredSizesGroup) && element.has_attributes) {
+        if (!isEmpty(filteredSizesGroup) && element.has_attributes && filteredSizesGroup.length > 1) {
+            console.log('inside size 11111=====>')
             setSelectedAttribute(first(filter(element.product_attributes, a => a.color_id === selectedColor && a.size_id === selectedSize)));
-            setSelectedQty(0)
+        } else if (element.has_attributes) {
+            setSelectedAttribute(first(element.product_attributes))
+        } else {
+            console.log('the else')
         }
+        setSelectedQty(0)
     }, [selectedSize])
-
 
     console.log('the element', element);
     // console.log('finalPrice', finalPrice)
     console.log('selectedAttribute', selectedAttribute);
     console.log('filteredColorsGroup', filteredColorsGroup);
     console.log('filteredSizesGroup', filteredSizesGroup);
+    console.log('filteredSizesGroup len', filteredSizesGroup.length);
     console.log('selectedColor', selectedColor)
     console.log('selectedSize', selectedSize)
     console.log('currentQty', currentQty);
     console.log('selectedQty', selectedQty);
+    console.log('the whole cart', cart)
 
     useMemo(() => {
         const images = []
@@ -136,6 +143,7 @@ export default function({element, relatedElements, auth, settings}) {
     //     'merchant_id' => $item['merchant_id'],
     //     'ordermetable_id' => $item['element_id'],
     //     'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
+
 
     const handleSubmit = (e) => {
         e.preventDefault();

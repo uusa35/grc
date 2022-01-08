@@ -1101,7 +1101,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             src={getThumb(product.size_chart_image)}
                                             alt=""/>
                                         <Link
-                                            href={route(`backend.product.clear`, {
+                                            href={route(`backend.element.clear`, {
                                                 id: product.id,
                                                 'model': parentModule,
                                                 colName: 'size_chart_image'
@@ -1152,7 +1152,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             src={getThumb(product.qr)}
                                             alt=""/>
                                         <Link
-                                            href={route(`backend.product.clear`, {
+                                            href={route(`backend.element.clear`, {
                                                 id: product.id,
                                                 'model': 'product',
                                                 colName: 'qr'

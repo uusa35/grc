@@ -61,6 +61,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                                         autoComplete="size_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     >
+                                        <option value="0">{trans('choose_size')}</option>
                                         {
                                             sizes.map(u => (
                                                 <option key={u.id}
@@ -94,6 +95,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                                         autoComplete="color_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     >
+                                        <option value="0">{trans('choose_color')}</option>
                                         {
                                             colors.map(u => (
                                                 <option key={u.id} value={u.id}

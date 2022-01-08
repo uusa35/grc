@@ -31,8 +31,6 @@ export default function ProductIndex({elements}) {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
     }, [sort.desc])
 
-
-    console.log('elements', isEmpty(elements.data[0].product_attributes))
     return (
         <BackendContainer elements={elements}
                           showSearch={elements.meta.total >= 1}
