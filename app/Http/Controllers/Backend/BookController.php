@@ -79,7 +79,7 @@ class BookController extends Controller
             $element->tags()->sync($request->tags);
             $element->videos()->sync($request->videos);
             $element->categories()->sync($request->categories);
-            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             return redirect()->route('backend.book.index')->with('success', trans('general.process_success'));
@@ -131,7 +131,7 @@ class BookController extends Controller
             $request->has('tags') ? $book->tags()->sync($request->tags) : null;
             $request->has('videos') ? $book->videos()->sync($request->videos) : null;
             $request->has('categories') ? $book->categories()->sync($request->categories) : null;
-            $request->hasFile('image') ? $this->saveMimes($book, $request, ['image'], ['1080', '1440'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($book, $request, ['image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('qr') ? $this->saveMimes($book, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('file')  ? $this->savePath($book, $request, 'file') : null;
             return redirect()->back()->with('success', trans('general.process_success'));

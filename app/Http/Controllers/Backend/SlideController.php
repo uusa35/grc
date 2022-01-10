@@ -108,7 +108,7 @@ class SlideController extends Controller
         $request->request->add(['slidable_type' => 'App\Models\\' . ucfirst($request->slidable_type)]);
         $element = Slide::create($request->except('image', '_token'));
         if ($element) {
-            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1900', '650'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1900', '750'], false) : null;
             $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             return redirect()->route('backend.slide.index', [
                 'slidable_type' => $type,
@@ -160,7 +160,7 @@ class SlideController extends Controller
     public function update(Request $request, Slide $slide)
     {
         if ($slide->update($request->except('image'))) {
-            $request->hasFile('image') ? $this->saveMimes($slide, $request, ['image'], ['1900', '650'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($slide, $request, ['image'], ['1900', '750'], false) : null;
             $request->hasFile('file') ? $this->savePath($slide, $request, 'file') : null;
             return redirect()->route('backend.slide.index', [
                 'slidable_type' => 'setting',

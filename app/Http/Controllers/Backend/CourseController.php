@@ -79,7 +79,7 @@ class CourseController extends Controller
             $element->tags()->sync($request->tags);
             $element->videos()->sync($request->videos);
             $element->categories()->sync($request->categories);
-            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             return redirect()->route('backend.course.edit', $element->id)->with('success', trans('general.process_success'));
@@ -131,7 +131,7 @@ class CourseController extends Controller
             $request->has('tags') ? $course->tags()->sync($request->tags) : null;
             $request->has('videos') ? $course->videos()->sync($request->videos) : null;
             $request->has('categories') ? $course->categories()->sync($request->categories) : null;
-            $request->hasFile('image') ? $this->saveMimes($course, $request, ['image'], ['1080', '1440'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($course, $request, ['image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('qr') ? $this->saveMimes($course, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('file') ? $this->savePath($course, $request, 'file') : null;
             return redirect()->back()->with('success', trans('general.process_success'));

@@ -1034,7 +1034,7 @@ export const en  = {
     "creates": "create",
     "edits": "edit",
     'image_best_fit' : 'The appropriate image size (width 1080 - height 1440 px )',
-    'image_best_fit_slide' : 'The appropriate image size (width 1900 - height 650 px)',
+    'image_best_fit_slide' : 'The appropriate image size (width 1900 - height 750 px)',
     'square_best_fit' : 'The right image size square (width 500 - length 500 px )',
     'rectangle_best_fit' : 'The right image size square (width 1440 - length 1080 px )',
     "product_attribute" : "Product Attribute",
@@ -1236,5 +1236,6 @@ export const en  = {
     "mobile_placeholder" : "65XXXXXX",
     "client_information" : "client information",
     "service_categories" : "Consultations & Seminars",
-    "limit" : "limit"
+    "limit" : "limit",
+    "book_file" : "book file"
 }

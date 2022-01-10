@@ -501,7 +501,7 @@ export default function({users, categories, book, elementCategories}) {
                             <div className="sm:col-span-3">
                                 <label htmlFor="main_image"
                                        className={`block  flex flex-row justify-between items-center  text-gray-700`}>
-                                    {trans('pdf_file')}
+                                    {trans('book_file')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
                                     <input

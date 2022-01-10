@@ -34,7 +34,9 @@ trait ImageHelpers
                                       $inputNames = ['pdf'],
                                       $dimensions = ['1052', '1320'],
                                       $ratio = true,
-                                      $sizes = ['large', 'medium', 'thumbnail'])
+                                      $enableBg = false,
+                                      $sizes = ['large', 'medium', 'thumbnail']
+    )
     {
         try {
             foreach ($inputNames as $key => $inputName) {
@@ -76,8 +78,11 @@ trait ImageHelpers
                             } else {
                                 $imagePath = $request->$inputName->store('public/uploads/images');
                                 $imagePath = str_replace('public/uploads/images/', '', $imagePath);
-                                $this->saveImageVersionsWithBg($imagePath);
-//                                $this->saveImageVersionsWithResize($imagePath, $ratio);
+                                if ($enableBg) {
+                                    $this->saveImageVersionsWithBg($imagePath);
+                                } else {
+                                    $this->saveImageVersionsWithResize($imagePath, $ratio, $dimensions);
+                                }
                                 $model->update([
                                     $inputName => $imagePath,
                                 ]);
@@ -179,7 +184,7 @@ trait ImageHelpers
                             } catch (Exception $e) {
                                 return $e->getMessage();
                             }
-                        } else {;
+                        } else {
                             $imagePath = $this->saveImageForGallery($image, $dimensions, $ratio, $sizes, $model);
                         }
                         $model->images()->create([
@@ -383,8 +388,8 @@ trait ImageHelpers
         $imagePath,
         $ratio = true,
         $dimensions = ['1080', '1440'],
-                                                $sizes = ['large', 'medium', 'thumbnail'],
-                                                $bg = '#ffffff')
+        $sizes = ['large', 'medium', 'thumbnail'],
+        $bg = '#ffffff')
     {
         try {
             $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
