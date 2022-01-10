@@ -39,7 +39,7 @@ trait DashboardTrait
         $element->update([
             'active' => !$element->active
         ]);
-        return redirect()->back()->with('success', 'process_success');
+        return redirect()->back()->with('success', trans('general.process_success'));
     }
 
     public function toggleFeatured(Request $request)
@@ -165,7 +165,7 @@ trait DashboardTrait
                 $element = $element->latest()->first();
             }
 //            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1500', '1080'], false) : null;;
-            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
+            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], true) : null;
             return response()->json(['message' => trans('general.process_success')], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);

@@ -855,7 +855,7 @@ export default function MainNav() {
                             {settings.enable_books && <SearchField type={searchType} setSearchType={setSearchType}/>}
                             {/*{settings.enable_products && <SearchField type={'product'}/>}*/}
                             <div
-                                className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end md:space-x-6 rtl:ml-2 ltr:mr-2">
+                                className="hidden lg:flex xl:flex lg:items-center lg:justify-end md:space-x-6 rtl:ml-2 ltr:mr-2 ">
                                 <Link
                                     onClick={() => {
                                         dispatch(changeLang(locale.otherLang))

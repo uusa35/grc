@@ -29,12 +29,12 @@ trait ImageHelpers
      * @param boolean $ratio
      * @return null
      */
-    public function saveMimes(Model $model,
+    public function saveMimes(Model   $model,
                               Request $request,
-                              $inputNames = ['pdf'],
-                              $dimensions = ['1052', '1320'],
-                              $ratio = true,
-                              $sizes = ['large', 'medium', 'thumbnail'])
+                                      $inputNames = ['pdf'],
+                                      $dimensions = ['1052', '1320'],
+                                      $ratio = true,
+                                      $sizes = ['large', 'medium', 'thumbnail'])
     {
         try {
             foreach ($inputNames as $key => $inputName) {
@@ -76,37 +76,8 @@ trait ImageHelpers
                             } else {
                                 $imagePath = $request->$inputName->store('public/uploads/images');
                                 $imagePath = str_replace('public/uploads/images/', '', $imagePath);
-                                $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
-                                foreach ($sizes as $key => $value) {
-                                    if ($value === 'large') {
-                                        if ($ratio) {
-                                            $img->resize($dimensions[0], null, function ($constraint) {
-                                                $constraint->aspectRatio();
-                                            });
-                                        } else {
-                                            $img->resize($dimensions[0], $dimensions[1]);
-                                        }
-                                        $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
-                                    } elseif ($value === 'medium') {
-                                        if ($ratio) {
-                                            $img->resize($dimensions[0] / 2, null, function ($constraint) {
-                                                $constraint->aspectRatio();
-                                            });
-                                        } else {
-                                            $img->resize($dimensions[0] / 2, $dimensions[1] / 2);
-                                        }
-                                        $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
-                                    } elseif ($value === 'thumbnail') {
-                                        if ($ratio) {
-                                            $img->resize($dimensions[0] / 3, null, function ($constraint) {
-                                                $constraint->aspectRatio();
-                                            });
-                                        } else {
-                                            $img->resize($dimensions[0] / 3, $dimensions[1] / 3);
-                                        }
-                                        $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
-                                    }
-                                }
+                                $this->saveImageVersionsWithBg($imagePath);
+//                                $this->saveImageVersionsWithResize($imagePath, $ratio);
                                 $model->update([
                                     $inputName => $imagePath,
                                 ]);
@@ -120,6 +91,7 @@ trait ImageHelpers
                 }
             }
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return $e->getMessage();
         }
     }
@@ -132,9 +104,9 @@ trait ImageHelpers
      * @param string $height
      */
     public function saveImage(Request $request,
-                              $inputNames = 'image',
-                              $dimensions = ['1200', '560'],
-                              $sizes = ['large', 'medium', 'thumbnail'])
+                                      $inputNames = 'image',
+                                      $dimensions = ['1200', '560'],
+                                      $sizes = ['large', 'medium', 'thumbnail'])
     {
         try {
             foreach ($inputNames as $inputName) {
@@ -185,12 +157,12 @@ trait ImageHelpers
      * @param bool $ratio
      * @param array $sizes
      */
-    public function saveGallery(Model $model,
+    public function saveGallery(Model   $model,
                                 Request $request,
-                                $inputName = 'images',
-                                $dimensions = ['1052', '1320'],
-                                $ratio = true,
-                                $sizes = ['large', 'medium', 'thumbnail'])
+                                        $inputName = 'images',
+                                        $dimensions = ['1052', '1320'],
+                                        $ratio = true,
+                                        $sizes = ['large', 'medium', 'thumbnail'])
     {
         try {
             if ($request->hasFile($inputName)) {
@@ -207,7 +179,7 @@ trait ImageHelpers
                             } catch (Exception $e) {
                                 return $e->getMessage();
                             }
-                        } else {
+                        } else {;
                             $imagePath = $this->saveImageForGallery($image, $dimensions, $ratio, $sizes, $model);
                         }
                         $model->images()->create([
@@ -263,42 +235,10 @@ trait ImageHelpers
         try {
             $imagePath = $image->store('public/uploads/images');
             $imagePath = str_replace('public/uploads/images/', '', $imagePath);
-            $img = Image::make(public_path('storage/uploads/images/' . $imagePath));
-            foreach ($sizes as $key => $value) {
-                if ($value === 'large') {
-                    if ($ratio) {
-                        $img->resize($dimensions[0], null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });
-                    } else {
-                        $img->resize($dimensions[0], $dimensions[1]);
-                    }
-                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
-                } elseif ($value === 'medium') {
-                    if ($ratio) {
-                        $img->resize($dimensions[0] / 2, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });
-                    } else {
-                        $img->resize($dimensions[0] / 2, $dimensions[1] / 2);
-                    }
-                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
-                } elseif ($value === 'thumbnail') {
-                    if ($ratio) {
-                        $img->resize($dimensions[0] / 3, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });
-                    } else {
-                        $img->resize($dimensions[0] / 3, $dimensions[1] / 3);
-                    }
-//                $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath));
-                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
-                }
-            }
+            $this->saveImageVersionsWithBg($imagePath, $ratio);
             Storage::delete(public_path('storage/uploads/images/' . $imagePath));
             return $imagePath;
-        } catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             return $e;
         }
     }
@@ -313,12 +253,12 @@ trait ImageHelpers
      * @param boolean $ratio
      * @return null
      */
-    public function saveMimesGroup(Model $model,
+    public function saveMimesGroup(Model   $model,
                                    Request $request,
-                                   $inputNames = 'images',
-                                   $dimensions = ['1052', '1320'],
-                                   $ratio = true,
-                                   $sizes = ['large', 'medium', 'thumbnail'])
+                                           $inputNames = 'images',
+                                           $dimensions = ['1052', '1320'],
+                                           $ratio = true,
+                                           $sizes = ['large', 'medium', 'thumbnail'])
     {
         try {
             if ($request->has($inputNames)) {
@@ -368,7 +308,7 @@ trait ImageHelpers
         }
     }
 
-    public function savePath($element,Request $request,$colName = 'file')
+    public function savePath($element, Request $request, $colName = 'file')
     {
         try {
             if ($request->hasFile($colName)) {
@@ -387,6 +327,99 @@ trait ImageHelpers
             }
         } catch (\Exception $e) {
             return $e->getMessage();
+        }
+    }
+
+    public function saveImageVersionsWithBg(
+        $imagePath,
+        $ratio = true,
+        $dimensions = ['1080', '1440'],
+        $sizes = ['large', 'medium', 'thumbnail'],
+        $bg = '#ffffff')
+    {
+        try {
+            $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
+            $background = Image::canvas($dimensions[0], $dimensions[1], $bg);
+            foreach ($sizes as $key => $value) {
+                if ($value === 'large') {
+                    if ($ratio) {
+                        $large = Image::make($background);
+                        $large->insert($img->resize($dimensions[0], null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        }), 'center');
+                        $large->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');;
+                    } else {
+                        $img->resize($dimensions[0], $dimensions[1]);
+                        $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
+                    }
+                } elseif ($value === 'medium') {
+                    if ($ratio) {
+                        $medium = Image::make($background)->resize($dimensions[0] / 2, $dimensions[1] / 2);
+                        $medium->insert($img->resize($dimensions[0] / 2, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        }), 'center');
+                        $medium->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
+                    } else {
+                        $img->resize($dimensions[0] / 2, $dimensions[1] / 2)->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
+                    }
+                } elseif ($value === 'thumbnail') {
+                    if ($ratio) {
+                        $thumbnail = Image::make($background)->resize($dimensions[0] / 3, $dimensions[1] / 3);
+                        $thumbnail->insert($img->resize($dimensions[0] / 3, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        }), 'center');
+                        $thumbnail->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
+                    } else {
+                        $img->resize($dimensions[0] / 3, $dimensions[1] / 3)->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function saveImageVersionsWithResize(
+        $imagePath,
+        $ratio = true,
+        $dimensions = ['1080', '1440'],
+                                                $sizes = ['large', 'medium', 'thumbnail'],
+                                                $bg = '#ffffff')
+    {
+        try {
+            $img = Image::make(storage_path('app/public/uploads/images/' . $imagePath));
+            foreach ($sizes as $key => $value) {
+                if ($value === 'large') {
+                    if ($ratio) {
+                        $img->resize($dimensions[0], null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    } else {
+                        $img->resize($dimensions[0], $dimensions[1]);
+                    }
+                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');;
+                } elseif ($value === 'medium') {
+                    if ($ratio) {
+                        $img->resize($dimensions[0] / 2, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    } else {
+                        $img->resize($dimensions[0] / 2, $dimensions[1] / 2)->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
+                    }
+                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');;
+                } elseif ($value === 'thumbnail') {
+                    if ($ratio) {
+                        $img->resize($dimensions[0] / 3, null, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    } else {
+                        $img->resize($dimensions[0] / 3, $dimensions[1] / 3);
+                    }
+                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');;
+                }
+            }
+        } catch (\Exception $e) {
+            dd($e->getMessage());
         }
     }
 }

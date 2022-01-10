@@ -75,7 +75,7 @@ class ServiceController extends Controller
             $element->tags()->sync($request->tags);
             $element->videos()->sync($request->videos);
             $element->categories()->sync($request->categories);
-            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
             $request->hasFile('qr') ? $this->saveMimes($element, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('file') ? $this->savePath($element, $request, 'file') : null;
             return redirect()->route('backend.service.edit', $element->id)->with('success', trans('general.process_success'));
@@ -128,7 +128,7 @@ class ServiceController extends Controller
                 $request->has('tags') ? $service->tags()->sync($request->tags) : null;
                 $request->has('videos') ? $service->videos()->sync($request->videos) : null;
                 $request->has('categories') ? $service->categories()->sync($request->categories) : null;
-                $request->hasFile('image') ? $this->saveMimes($service, $request, ['image'], ['1080', '1440'], false) : null;
+                $request->hasFile('image') ? $this->saveMimes($service, $request, ['image'], ['1080', '1440'], true) : null;
                 $request->hasFile('qr') ? $this->saveMimes($service, $request, ['qr'], ['300', '300'], false) : null;
                 $request->hasFile('file') ? $this->savePath($service, $request, 'file') : null;
                 return redirect()->back()->with('success', 'process_success');

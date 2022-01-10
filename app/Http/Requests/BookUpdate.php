@@ -41,7 +41,7 @@ class BookUpdate extends FormRequest
             'categories' => 'array|min:1',
             'price' => 'numeric|min:0.5|max:999',
             'qty' => ['numeric', 'min:1', 'max:999', 'regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','nullable'],
-            'weight' => ['required','between:0.1,10'],
+            'weight' => ['numeric','between:0.1,10'],
             'order' => ['numeric','min:1','max:9999','regex:/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/','nullable'],
             'on_sale' => 'boolean',
             'on_homepage' => 'boolean',

@@ -5,11 +5,13 @@ import {Link, usePage} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {showModal} from "../../redux/actions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import ActiveDot from "../components/widgets/ActiveDot";
+import ToolTipWidget from "../components/widgets/ToolTipWidget";
 
 export default function SlideIndex({elements}) {
-    const {trans, theme, classNames, getLocalized, getThumb } = useContext(AppContext);
+    const {trans, classNames, getLocalized, getThumb} = useContext(AppContext);
+    const { locale } = useSelector(state => state);
     const {params} = route();
     const dispatch = useDispatch();
 
@@ -59,7 +61,10 @@ export default function SlideIndex({elements}) {
                                             </div>
                                             <div className="flex">
                                                 <Link
-                                                    href={route('backend.slide.create', {slidable_id: params.slidable_id, slidable_type : params.slidable_type})}>
+                                                    href={route('backend.slide.create', {
+                                                        slidable_id: params.slidable_id,
+                                                        slidable_type: params.slidable_type
+                                                    })}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -79,8 +84,8 @@ export default function SlideIndex({elements}) {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <img
-                                            className="w-20 h-auto"
-                                            src={getThumb(element.image)} alt=""/></td>
+                                                className="w-20 h-auto"
+                                                src={getThumb(element.image)} alt=""/></td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.slidable_type}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex items-center space-x-3 lg:pl-2">
@@ -91,13 +96,26 @@ export default function SlideIndex({elements}) {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.slide.edit`, element.id)}
-                                                      className="text-indigo-600 hover:text-indigo-900">
+                                                      className="text-gray-600 hover:text-gray-900 relative">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
                                                               strokeWidth={2}
                                                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                     </svg>
+                                                </Link>
+                                                <Link
+                                                    href={route(`backend.toggle.activate`, {
+                                                        model: 'slide',
+                                                        id: element.id
+                                                    })}
+                                                    className="text-gray-600 hover:text-gray-900 has-tooltip">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                                    </svg>
+                                                    <div className={classNames(locale.isRTL ? `left-10`: `right-10`,'absolute z-50')}>
+                                                        <ToolTipWidget message={trans('toggle_active')}/>
+                                                    </div>
                                                 </Link>
                                                 <button
                                                     onClick={() =>
@@ -110,7 +128,7 @@ export default function SlideIndex({elements}) {
                                                         }))
                                                     }
                                                     // href={route(`backend.slide.destroy`, element.id)}
-                                                    className="text-indigo-600 hover:text-indigo-900 ">
+                                                    className="text-gray-600 hover:text-gray-900 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
