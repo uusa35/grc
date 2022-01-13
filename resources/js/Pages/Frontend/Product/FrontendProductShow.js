@@ -1,35 +1,26 @@
-import React, {Fragment, useContext, useEffect, useMemo, useState} from 'react'
-import {Dialog, Disclosure, Popover, RadioGroup, Tab, Transition, Menu} from '@headlessui/react'
+import React, { useContext, useMemo, useState} from 'react'
+import { Disclosure, RadioGroup,} from '@headlessui/react'
 import {
-    HeartIcon,
-    MenuIcon,
     MinusSmIcon,
     PlusSmIcon,
-    ChevronDownIcon
 } from '@heroicons/react/outline'
-import {StarIcon} from '@heroicons/react/solid'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, sumBy, isEmpty, first, capitalize, random, isNull, isArray, filter, uniqBy} from 'lodash';
+import {map, isEmpty, first, isNull, filter, uniqBy} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
-import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery';
-import {calculateRating, getWhatsappLink} from "../../helpers";
+import {getWhatsappLink} from "../../helpers";
 import ElementRating from "../components/widgets/ElementRating";
 import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
-import route from 'ziggy-js'
-import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
-import {addToCart, checkCartBeforeAdd, clearCart, removeFromCart} from "../../redux/actions";
+import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
-import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
-import MetaElement from "../../Backend/components/partials/MetaElement";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
@@ -38,7 +29,7 @@ import {FaWhatsapp} from "react-icons/fa";
 
 export default function({element, relatedElements, auth, settings}) {
     const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
-    const { cart } = useSelector(state => state);
+    const { locale } = useSelector(state => state);
     const [currentImages, setCurrentImages] = useState([]);
     const [finalPrice, setFinalPrice] = useState(0);
     const [selectedColor, setSelectedColor] = useState(null);
@@ -95,27 +86,15 @@ export default function({element, relatedElements, auth, settings}) {
 
     useMemo(() => {
         if (!isEmpty(filteredSizesGroup) && element.has_attributes && filteredSizesGroup.length > 1) {
-            console.log('inside size 11111=====>')
+            // console.log('inside size 11111=====>')
             setSelectedAttribute(first(filter(element.product_attributes, a => a.color_id === selectedColor && a.size_id === selectedSize)));
         } else if (element.has_attributes) {
             setSelectedAttribute(first(element.product_attributes))
         } else {
-            console.log('the else')
+            // console.log('the else')
         }
         setSelectedQty(0)
     }, [selectedSize])
-
-    console.log('the element', element);
-    // console.log('finalPrice', finalPrice)
-    console.log('selectedAttribute', selectedAttribute);
-    console.log('filteredColorsGroup', filteredColorsGroup);
-    console.log('filteredSizesGroup', filteredSizesGroup);
-    console.log('filteredSizesGroup len', filteredSizesGroup.length);
-    console.log('selectedColor', selectedColor)
-    console.log('selectedSize', selectedSize)
-    console.log('currentQty', currentQty);
-    console.log('selectedQty', selectedQty);
-    console.log('the whole cart', cart)
 
     useMemo(() => {
         const images = []
@@ -133,16 +112,6 @@ export default function({element, relatedElements, auth, settings}) {
         })
         setCurrentImages(images);
     }, [element])
-
-    // 'name' => $item['name_ar'] . '   /  ' . $item['name_en'],
-    //     'description' => $item['description_ar'] . '   /  ' . $item['description_en'],
-    //     'price' => $item['price'],
-    //     'qty' => $item['qty'],
-    //     'color' => isset($item['color']) ? $item['color'] : null,
-    //     'size' => isset($item['size']) ? $item['size'] : null,
-    //     'merchant_id' => $item['merchant_id'],
-    //     'ordermetable_id' => $item['element_id'],
-    //     'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
 
 
     const handleSubmit = (e) => {
@@ -342,14 +311,97 @@ export default function({element, relatedElements, auth, settings}) {
                                                     </RadioGroup>
                                                 </div>
                                             </div>
-                                        </div> : null
+                                        </div> :
+                                        <div className="flex flex-row justify-between items-center gap-x-5">
+                                            <div className="mt-2 lg:col-span-5">
+                                                {/* Color picker */}
+                                                <div>
+                                                    <div
+                                                        className="flex w-full flex-1 flex-row justify-between items-center">
+                                                        <div>
+                                                            <h2 className="text-sm font-medium text-gray-900">{trans('color')}</h2>
+                                                        </div>
+                                                        <div>
+                                                            <a href="#"
+                                                               className="text-xs font-medium text-gray-600 hover:text-gray-500">
+                                                                {trans('size_chart')}
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <RadioGroup value={selectedColor} onChange={setSelectedColor}
+                                                                className="mt-4">
+                                                        <RadioGroup.Label
+                                                            className="sr-only">{trans('choose_color')}</RadioGroup.Label>
+                                                        <div className="flex items-center gap-x-3">
+
+                                                                <RadioGroup.Option
+                                                                    key={element.color.name_ar}
+                                                                    value={element.color_id}
+                                                                    className={({active, checked}) =>
+                                                                        classNames(
+                                                                            element.color,
+                                                                            active && checked ? 'ring ring-offset-1' : '',
+                                                                            !active && checked ? 'ring-2' : '',
+                                                                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <RadioGroup.Label as="p" className="sr-only">
+                                                                        {element.color[getLocalized()]}
+                                                                    </RadioGroup.Label>
+                                                                    <span
+                                                                        aria-hidden="true"
+                                                                        style={{backgroundColor: element.color.code}}
+                                                                        className={'h-8 w-8 border border-black border-opacity-10 rounded-full'}
+                                                                    />
+                                                                </RadioGroup.Option>
+                                                        </div>
+                                                    </RadioGroup>
+                                                </div>
+
+                                                {/* Size picker */}
+                                                <div className="mt-4">
+                                                    <div className="flex items-center justify-between">
+                                                        <h2 className="text-sm font-medium text-gray-900">{trans('size')}</h2>
+                                                    </div>
+
+                                                    <RadioGroup value={selectedSize} onChange={setSelectedSize}
+                                                                className="mt-4">
+                                                        <RadioGroup.Label
+                                                            className="sr-only">{trans('choose_size')}</RadioGroup.Label>
+                                                        <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+
+                                                                <RadioGroup.Option
+                                                                    key={element.size.name_ar}
+                                                                    value={element.size_id}
+                                                                    className={({active, checked}) =>
+                                                                        classNames(
+                                                                            element.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
+                                                                            active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
+                                                                            checked
+                                                                                ? 'bg-gray-600 border-transparent text-white hover:bg-gray-700'
+                                                                                : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
+                                                                            'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
+                                                                        )
+                                                                    }
+                                                                    disabled={!element.size}
+                                                                >
+                                                                    <RadioGroup.Label
+                                                                        as="p">{element.size[getLocalized()]}</RadioGroup.Label>
+                                                                </RadioGroup.Option>
+                                                        </div>
+                                                    </RadioGroup>
+                                                </div>
+                                            </div>
+                                        </div>
                                 }
                                 <div className="flex flex-1 w-full justify-center items-center mx-auto mt-5">
                                     <span className="relative z-0 inline-flex shadow-sm rounded-md ">
                                       <button
                                           onClick={() => increaseQty()}
                                           type="button"
-                                          className="relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-lg font-bold text-gray-900 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                                          className={classNames(locale.isRTL ? `rounded-r-md` : `rounded-l-md`, "relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-lg font-bold text-gray-900 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500")}
                                       >
                                         +
                                       </button>
@@ -362,7 +414,7 @@ export default function({element, relatedElements, auth, settings}) {
                                       <button
                                           type="button"
                                           onClick={() => decreaseQty()}
-                                          className="-ml-px relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-lg font-bold text-gray-900 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+                                          className={classNames(locale.isRTL ? `rounded-l-md` : `rounded-r-md`, "-ml-px relative inline-flex items-center px-4 py-2  border border-gray-300 bg-white text-lg font-bold text-gray-900 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500")}
                                       >
                                         -
                                       </button>

@@ -1,32 +1,25 @@
-import {Fragment, useContext, useMemo, useState} from 'react'
-import {Disclosure, Transition, Menu} from '@headlessui/react'
+import {useContext, useMemo, useState} from 'react'
+import {Disclosure} from '@headlessui/react'
 import {
     MinusSmIcon,
     PlusSmIcon,
-    ChevronDownIcon
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, isEmpty} from 'lodash';
-import ElementPrice from "../components/widgets/ElementPrice";
-import moment from "moment";
+import {map} from 'lodash';
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import ImageGallery from 'react-image-gallery';
 import ElementRating from "../components/widgets/ElementRating";
-import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
-import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
-import {checkCartBeforeAdd} from "../../redux/actions";
-import AlertMessage from "../partials/AlertMessage";
 import GlobalContext from "../../context/GlobalContext";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
 
 
-export default function({element, relatedElements, auth}) {
+export default function({element}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
