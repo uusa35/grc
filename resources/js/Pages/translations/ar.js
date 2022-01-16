@@ -1246,5 +1246,6 @@ export const ar = {
     "no_attributes" : "لا يوجد خصائص",
     "service_categories" : "استشارات وندوات",
     "limit" : "الحد الأقصى",
-    "book_file" : "ملف الكتاب"
+    "book_file" : "ملف الكتاب",
+    "timing_notes" : "ملاحظات خاصة بالتوقيت المختار"
 }

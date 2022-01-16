@@ -57,6 +57,8 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
         !isEmpty(selectedTiming) ? setData('timing_id', selectedTiming.id) : null;
     }, [selectedTiming])
 
+    console.log('selectedTiming', selectedTiming);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isNull(data.timing_id)) {
@@ -151,6 +153,13 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                 </div>
                             </div>
                             <div className="mt-6">
+                                {
+                                    selectedTiming && !isEmpty(selectedTiming[getLocalized('notes')])  && selectedTiming[getLocalized('notes')].length > 5 &&
+                                    <AlertMessage title={trans('timing_notes')}
+                                                  message={selectedTiming[getLocalized('notes')]}
+                                                  color={'green'}
+                                    />
+                                }
                                 {/* service timings */}
                                 {element.timings && element.is_available &&
                                 <Menu as="div" className="relative inline-block text-left mb-5 w-full">
@@ -278,7 +287,6 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                                 </>
                                             )}
                                         </Disclosure> : null}
-
 
                                     {/* notes */}
                                     {element[getLocalized('notes')] && element[getLocalized('notes')].length > 5 ?

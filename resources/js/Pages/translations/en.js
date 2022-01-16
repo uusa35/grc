@@ -1237,5 +1237,6 @@ export const en  = {
     "client_information" : "client information",
     "service_categories" : "Consultations & Seminars",
     "limit" : "limit",
-    "book_file" : "book file"
+    "book_file" : "book file",
+    "timing_notes" : "notes related to chosen timing"
 }
