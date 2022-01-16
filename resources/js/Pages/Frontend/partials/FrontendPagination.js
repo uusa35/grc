@@ -9,7 +9,6 @@ import {isEmpty, map} from 'lodash';
 export default function FrontendPagination({type, total, links, showSearch = false}) {
     const [search, setSearch] = useState('');
     const {classNames } = useContext(AppContext)
-
     return (
         <nav
             className="grid grid-cols-1 sm:grid-cols-1 flex justify-between items-center  bg-transparent sm:px-0">

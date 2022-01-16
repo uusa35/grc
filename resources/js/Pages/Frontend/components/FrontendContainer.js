@@ -12,12 +12,12 @@ const FrontendContainer = ({children}) => {
     const {classNames, arFont, enFont } = useContext(AppContext);
 
     return (
-        <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize")} dir={locale.dir}>
+        <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize ")} dir={locale.dir}>
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement />
             <main
-                className={"flex-1 relative z-0 focus:outline-none max-w-full bg-white font-extrabold capitalize"}>
+                className={"flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize bg-white"}>
                 <MainNav/>
                 <div className="min-h-screen">
                     <SystemMessage/>

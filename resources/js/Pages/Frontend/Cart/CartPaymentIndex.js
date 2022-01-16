@@ -61,10 +61,6 @@ export default function({order, settings}) {
         }
     }, [paymentMethod])
 
-    console.log('currentUrl', paymentMethod.paymentRoute);
-
-
-
     return (
         <FrontendContainer>
             <FrontendContentContainer>

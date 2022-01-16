@@ -9,6 +9,7 @@ import FrontendContentContainer from "./components/FrontendContentContainer";
 import {filter} from 'lodash';
 import JoinusPage from "./Pages/JoinusPage";
 import JoinusHomeSection from "./partials/JoinusHomeSection";
+import CategoriesGroup from "./components/widgets/category/CategoriesGroup";
 
 export default function HomePage({
                                      slides,
@@ -46,15 +47,21 @@ export default function HomePage({
                     }
                     {
                         settings.enable_books && <>
-                            <ElementSlider
-                                showNavigation={true}
-                                elements={filter(homeCategories, c => c.is_book)}
-                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
-                                title={trans('book_home_featured_categories')}
-                                type={'category'}
-                                moduleType={'book'}
+
+                            <CategoriesGroup
                                 params={{is_book: true}}
-                            />
+                                type={'category'}
+                                title={trans('book_home_featured_categories')}
+                                categories={filter(homeCategories, c => c.is_book)}/>
+                            {/*<ElementSlider*/}
+                            {/*    showNavigation={true}*/}
+                            {/*    elements={filter(homeCategories, c => c.is_book)}*/}
+                            {/*    slidesPerView={isTablet || isMobile ? 2 : slideNumber}*/}
+                            {/*    title={trans('book_home_featured_categories')}*/}
+                            {/*    type={'category'}*/}
+                            {/*    moduleType={'book'}*/}
+                            {/*    params={{is_book: true}}*/}
+                            {/*/>*/}
                             <ElementSlider
                                 elements={newOnHomeBooks}
                                 showNavigation={true}
