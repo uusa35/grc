@@ -50,7 +50,7 @@ export default function ElementSlider({
     }, [slidesPerView])
 
     return (
-        <div className="w-full p-10 shadow-sm">
+        <div className="w-full p-10">
             {!isEmpty(elements) && (
                 <>
                     <Link
