@@ -1247,5 +1247,6 @@ export const ar = {
     "service_categories" : "استشارات وندوات",
     "limit" : "الحد الأقصى",
     "book_file" : "ملف الكتاب",
-    "timing_notes" : "ملاحظات خاصة بالتوقيت المختار"
+    "timing_notes" : "ملاحظات خاصة بالتوقيت المختار",
+    "enable_payment_online" : "تفعيل الدفع اونلاين"
 }

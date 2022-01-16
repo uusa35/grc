@@ -107,6 +107,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         app_logo: setting.app_logo,
         theme: setting.theme,
         cash_on_delivery: setting.cash_on_delivery,
+        enable_payment_online: setting.enable_payment_online,
         gift_image: setting.gift_image,
         gift_fee: setting.gift_fee,
         shipment_fixed_rate: setting.shipment_fixed_rate,
@@ -425,6 +426,100 @@ accept="image/jpg, image/jpeg , image/png"
                         {/* booleans */}
                         {
                             isSuper && <FormSection title={trans('more_details')}>
+                                {/*cash_on_delivery*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('cash_on_delivery')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="cash_on_delivery"
+                                                name="cash_on_delivery"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.cash_on_delivery}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="cash_on_delivery"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="cash_on_delivery"
+                                                name="cash_on_delivery"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.cash_on_delivery}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="cash_on_delivery"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.cash_on_delivery &&
+                                            <div className={`text-red-900`}>{errors.cash_on_delivery}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+
+                                {/*enable_payment_online*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_payment_online')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_payment_online"
+                                                name="enable_payment_online"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_payment_online}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_payment_online"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_payment_online"
+                                                name="enable_payment_online"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_payment_online}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_payment_online"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_payment_online &&
+                                            <div className={`text-red-900`}>{errors.enable_payment_online}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+
                                 {/* multi_cart_merchant */}
                                 <fieldset className="mt-1 col-span-2">
                                     <div>

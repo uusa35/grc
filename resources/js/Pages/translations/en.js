@@ -1238,5 +1238,6 @@ export const en  = {
     "service_categories" : "Consultations & Seminars",
     "limit" : "limit",
     "book_file" : "book file",
-    "timing_notes" : "notes related to chosen timing"
+    "timing_notes" : "notes related to chosen timing",
+    "enable_payment_online" : "enable payment online"
 }
