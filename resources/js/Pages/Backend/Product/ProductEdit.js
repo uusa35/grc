@@ -619,7 +619,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             name="on_home"
                                             type="radio"
                                             value={1}
-                                            defaultChecked={product.on_sale}
+                                            defaultChecked={product.on_home}
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
