@@ -5,10 +5,13 @@ import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {showModal} from "../../redux/actions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import ActiveDot from "../components/widgets/ActiveDot";
+import ToolTipWidget from "../components/widgets/ToolTipWidget";
 
 export default function({elements}) {
     const {trans, classNames, getLocalized} = useContext(AppContext);
+    const { locale } = useSelector(state => state);
     const {params} = route();
     const dispatch = useDispatch();
 
@@ -77,7 +80,12 @@ export default function({elements}) {
                                 {map(elements.data, element => (
                                     <tr key={element.id}>
                                         <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
-                                        <td className="px-2 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
+                                        <td className="px-2 py-4 whitespace-nowrap text-sm ">
+                                            <div className='flex flex-row justify-start items-center'>
+                                                <ActiveDot active={element.active}/>
+                                                {element[getLocalized()]}
+                                            </div>
+                                        </td>
                                         <td className="px-2 py-4 whitespace-nowrap text-sm ">
                                             <ol className="rtl:mr-2 ltr:ml-2 space-y-3">
                                                 {element.children.length > 0 && map(element.children, child => (
@@ -87,6 +95,7 @@ export default function({elements}) {
                                                             <Link
                                                                 className="flex flex-1 justify-between items-center"
                                                                 href={route('backend.category.edit', child.id)}>
+                                                                <ActiveDot active={child.active}/>
                                                                 <span
                                                                     className="flex flex-row justify-start flex-1 ">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -104,6 +113,19 @@ export default function({elements}) {
                                                                           strokeWidth={2}
                                                                           d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                                 </svg>
+                                                            </Link>
+                                                            <Link
+                                                                href={route(`backend.toggle.activate`, {
+                                                                    model: 'category',
+                                                                    id: child.id
+                                                                })}
+                                                                className="text-gray-600 hover:text-gray-900 has-tooltip">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                                                </svg>
+                                                                <div className={classNames(locale.isRTL ? `left-10`: `right-10`,'absolute z-50')}>
+                                                                    <ToolTipWidget message={trans('toggle_active')}/>
+                                                                </div>
                                                             </Link>
                                                             <button
                                                                 onClick={() =>
@@ -134,6 +156,7 @@ export default function({elements}) {
                                                                             <Link
                                                                                 className="flex flex-1 flex-row justify-between items-center"
                                                                                 href={route('backend.category.edit', sub.id)}>
+                                                                                <ActiveDot active={sub.active}/>
                                                                             <span
                                                                                 className="flex flex-row justify-start flex-1 ">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -152,6 +175,19 @@ export default function({elements}) {
                                                                                           strokeWidth={2}
                                                                                           d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                                                 </svg>
+                                                                            </Link>
+                                                                            <Link
+                                                                                href={route(`backend.toggle.activate`, {
+                                                                                    model: 'category',
+                                                                                    id: sub.id
+                                                                                })}
+                                                                                className="text-gray-600 hover:text-gray-900 has-tooltip">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                                                                </svg>
+                                                                                <div className={classNames(locale.isRTL ? `left-10`: `right-10`,'absolute z-50')}>
+                                                                                    <ToolTipWidget message={trans('toggle_active')}/>
+                                                                                </div>
                                                                             </Link>
                                                                             <button
                                                                                 onClick={() =>
@@ -193,6 +229,19 @@ export default function({elements}) {
                                                               strokeWidth={2}
                                                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                     </svg>
+                                                </Link>
+                                                <Link
+                                                    href={route(`backend.toggle.activate`, {
+                                                        model: 'category',
+                                                        id: element.id
+                                                    })}
+                                                    className="text-gray-600 hover:text-gray-900 has-tooltip">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                                    </svg>
+                                                    <div className={classNames(locale.isRTL ? `left-10`: `right-10`,'absolute z-50')}>
+                                                        <ToolTipWidget message={trans('toggle_active')}/>
+                                                    </div>
                                                 </Link>
                                                 <button
                                                     onClick={() =>
