@@ -79,7 +79,7 @@ trait ImageHelpers
                                 $imagePath = $request->$inputName->store('public/uploads/images');
                                 $imagePath = str_replace('public/uploads/images/', '', $imagePath);
                                 if ($enableBg) {
-                                    $this->saveImageVersionsWithBg($imagePath);
+                                    $this->saveImageVersionsWithBg($imagePath, $ratio, $dimensions);
                                 } else {
                                     $this->saveImageVersionsWithResize($imagePath, $ratio, $dimensions);
                                 }
