@@ -54,7 +54,6 @@ export default function HomePage({
                             {/*    title={trans('book_home_featured_categories')}*/}
                             {/*    categories={filter(homeCategories, c => c.is_book)}/>*/}
                             <ElementSlider
-                                showNavigation={true}
                                 elements={filter(homeCategories, c => c.is_book)}
                                 slidesPerView={isTablet || isMobile ? 2 : slideNumber}
                                 title={trans('book_home_featured_categories')}
@@ -64,14 +63,12 @@ export default function HomePage({
                             />
                             <ElementSlider
                                 elements={newOnHomeBooks}
-                                showNavigation={true}
                                 slidesPerView={isTablet || isMobile ? 1 : slideNumber}
                                 title={trans('new_chosen_books')}
                                 type={'book'}
                             />
                             <ElementSlider
                                 elements={onHomeParticipantAuthors}
-                                showNavigation={true}
                                 slidesPerView={isTablet || isMobile ? 1 : 8}
                                 title={trans('participant_authors')}
                                 type={'user'}
@@ -81,7 +78,6 @@ export default function HomePage({
                     {
                         settings.enable_courses && <>
                             <ElementSlider
-                                showNavigation={true}
                                 elements={filter(homeCategories, c => c.is_course)}
                                 slidesPerView={isTablet || isMobile ? 2 : slideNumber}
                                 title={trans('course_home_featured_categories')}
@@ -91,7 +87,6 @@ export default function HomePage({
                             />
                             <ElementSlider
                                 elements={newOnHomeCourses}
-                                showNavigation={true}
                                 slidesPerView={isTablet || isMobile ? 1 : slideNumber}
                                 title={trans('featured_courses')}
                                 type={'course'}
@@ -101,7 +96,6 @@ export default function HomePage({
                     {
                         settings.enable_products && <>
                             <ElementSlider
-                                showNavigation={true}
                                 elements={filter(homeCategories, c => c.is_product)}
                                 slidesPerView={isTablet || isMobile ? 2 : slideNumber}
                                 title={trans('product_home_featured_categories')}
@@ -111,7 +105,6 @@ export default function HomePage({
                             />
                             <ElementSlider
                                 elements={newOnHomeProducts}
-                                showNavigation={true}
                                 slidesPerView={isTablet || isMobile ? 1 : slideNumber}
                                 title={trans('featured_products')}
                                 type={'product'}
