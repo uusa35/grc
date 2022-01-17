@@ -349,7 +349,7 @@ trait ImageHelpers
                 if ($value === 'large') {
                     if ($ratio) {
                         $large = Image::make($background);
-                        $large->insert($img->resize(($dimensions[0] - 250), null, function ($constraint) {
+                        $large->insert($img->resize(($dimensions[0] - ($dimensions[0] /2)), null, function ($constraint) {
                             $constraint->aspectRatio();
                         }), 'center');
                         $large->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');;
@@ -360,7 +360,7 @@ trait ImageHelpers
                 } elseif ($value === 'medium') {
                     if ($ratio) {
                         $medium = Image::make($background)->resize($dimensions[0] / 2, $dimensions[1] / 2);
-                        $medium->insert($img->resize(($dimensions[0] - 250) / 2, null, function ($constraint) {
+                        $medium->insert($img->resize(($dimensions[0] - ($dimensions[0] /2)) / 2, null, function ($constraint) {
                             $constraint->aspectRatio();
                         }), 'center');
                         $medium->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
@@ -370,7 +370,7 @@ trait ImageHelpers
                 } elseif ($value === 'thumbnail') {
                     if ($ratio) {
                         $thumbnail = Image::make($background)->resize($dimensions[0] / 3, $dimensions[1] / 3);
-                        $thumbnail->insert($img->resize(($dimensions[0] - 250) / 3, null, function ($constraint) {
+                        $thumbnail->insert($img->resize(($dimensions[0] - ($dimensions[0] /2)) / 3, null, function ($constraint) {
                             $constraint->aspectRatio();
                         }), 'center');
                         $thumbnail->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
