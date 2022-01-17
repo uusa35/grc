@@ -15,11 +15,11 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
         <Link
             href={route(`frontend.${type}.index`, {category_id: element.id})}
             className="block relative overflow-hidden hover:opacity-90">
-            <div className="w-full h-auto bg-gray-200 aspect-w-13 aspect-h-8 rounded-md overflow-hidden shadow-md">
+            <div className="w-full h-auto bg-white aspect-w-13 aspect-h-8 rounded-md overflow-hidden shadow-md">
                 <img
                     src={getMedium(element.image)}
                     alt={element[getLocalized()]}
-                    className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                    className="w-full h-full object-center object-contain lg:w-full lg:h-full"
                 />
             </div>
             {
