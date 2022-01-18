@@ -25,6 +25,7 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
 import {FaWhatsapp} from "react-icons/fa";
+import SizeChartModal from "../partials/SizeChartModal";
 
 
 export default function({element, relatedElements, auth, settings}) {
@@ -39,6 +40,7 @@ export default function({element, relatedElements, auth, settings}) {
     const [filteredSizesGroup, setFilteredSizesGroup] = useState([]);
     const [currentQty, setCurrentQty] = useState(0);
     const [selectedQty, setSelectedQty] = useState(0);
+    const [showModal,setShowModal] = useState(false);
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'product',
@@ -50,7 +52,6 @@ export default function({element, relatedElements, auth, settings}) {
     });
 
     useMemo(() => {
-        console.log('here 1')
         setFinalPrice(element.has_attributes ? first(element.product_attributes).price : (element.isOnSale ? element.sale_price : element.price));
         setSelectedColor(element.has_attributes ? first(element.product_attributes).color_id : null)
         setSelectedSize(element.has_attributes ? first(element.product_attributes).size_id : null)
@@ -145,6 +146,8 @@ export default function({element, relatedElements, auth, settings}) {
         setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
 
+    console.log('element', element.size_chart)
+
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -237,10 +240,11 @@ export default function({element, relatedElements, auth, settings}) {
                                                             <h2 className="text-sm font-medium text-gray-900">{trans('color')}</h2>
                                                         </div>
                                                         <div>
-                                                            <a href="#"
+                                                            <button
+                                                                onClick={() => setShowModal(true)}
                                                                className="text-xs font-medium text-gray-600 hover:text-gray-500">
                                                                 {trans('size_chart')}
-                                                            </a>
+                                                            </button>
                                                         </div>
                                                     </div>
 
@@ -633,6 +637,10 @@ export default function({element, relatedElements, auth, settings}) {
                         <RelatedItems elements={relatedElements.data} type={'product'}/>
                     }
                 </div>
+                <SizeChartModal showModal={showModal} setShowModal={setShowModal}
+                                title={trans('size_chart')}
+                                image={getLarge(element.size_chart_image)}
+                />
             </FrontendContentContainer>
         </FrontendContainer>
     )
