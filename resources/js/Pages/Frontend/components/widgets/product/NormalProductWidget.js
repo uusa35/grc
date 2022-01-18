@@ -38,7 +38,7 @@ export default function NormalProductWidget({element}) {
                         </Link>
                     </h3>
                     <Link href={route('frontend.user.show', element.user.id)}>
-                        <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-fill shadow-sm"
+                        <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-cover shadow-sm"
                              src={getThumb(element.user.image)} alt={element.user[getLocalized()]}/>
                     </Link>
                 </div>
