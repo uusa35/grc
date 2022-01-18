@@ -358,7 +358,7 @@ export default function({element, relatedElements, auth}) {
                                                         className="flex flex-1 justify-start items-start">
                                                         <div>
                                                             <img
-                                                                className="w-20 h-auto rounded-lg shadow-md"
+                                                                className="w-20 h-auto rounded-lg shadow-sm"
                                                                 src={getThumb(element.user.image)}
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>

@@ -352,10 +352,11 @@ export default function({element, relatedElements, auth}) {
                                                       </span>
                                                 </Disclosure.Button>
                                                 <Disclosure.Panel as="div" className="pb-6 ">
-                                                    <div className="flex flex-1 justify-start items-start">
+                                                    <div
+                                                        className="flex flex-1 justify-start items-start">
                                                         <div>
                                                             <img
-                                                                className="w-20 h-auto rounded-sm shadow-md"
+                                                                className="w-20 h-auto rounded-lg shadow-sm"
                                                                 src={getThumb(element.user.image)}
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
