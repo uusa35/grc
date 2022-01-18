@@ -51,31 +51,31 @@ export default function MainNav() {
         <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}
             <div className="bg-gray-700 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8">
-                <div className="flex  flex-row  justify-center items-center space-x-6">
+                <div className="grid grid-cols-5 gap-x-5">
                     {
                         settings.instagram && <a target="_blank" href={settings.instagram}>
-                            <FaInstagram size={22} className={'text-gray-400 hover:text-gray-200'} />
+                            <FaInstagram size={22} className={'col-span-1 text-gray-400 hover:text-gray-200'} />
                         </a>
                     }
                     {
                         settings.facebook && <a target="_blank" href={settings.facebook}>
-                            <FaFacebook size={22} className={'text-gray-400 hover:text-gray-200'}/>
+                            <FaFacebook size={22} className={'col-span-1 text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                     {
                         settings.twitter && <a target="_blank" href={settings.twitter}>
-                            <FaTwitter size={22} className={'text-gray-400 hover:text-gray-200'}/>
+                            <FaTwitter size={22} className={'col-span-1 text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                     {
                         settings.youtube && <a target="_blank" href={settings.youtube}>
-                            <FaYoutube size={22} className={'text-gray-400 hover:text-gray-200'}/>
+                            <FaYoutube size={22} className={'col-span-1 text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                     {
                         settings.whatsapp &&
                         <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
-                            <FaWhatsapp size={22} className={'text-gray-400 hover:text-gray-200'}/>
+                            <FaWhatsapp size={22} className={'col-span-1 text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                 </div>
