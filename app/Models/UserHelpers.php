@@ -79,19 +79,19 @@ trait UserHelpers
     public function scopeDesigners($q)
     {
         return $q->whereHas('role', function ($q) {
-            return $q->where('is_designer', true);
+            return $q->where('is_designer', true)->where('is_visible', true);
         });
     }
 
     public function scopeCelebrities($q)
     {
         return $q->whereHas('role', function ($q) {
-            return $q->where('is_celebrity', true);
+            return $q->where('is_celebrity', true)->where('is_visible', true);
         });
     }
 
     public function scopeSupers($q)
-    {
+    {a
         return $q->whereHas('role', function ($q) {
             return $q->where('is_super', true);
         });
@@ -121,7 +121,7 @@ trait UserHelpers
     public function scopeNotClients($q)
     {
         return $q->whereHas('role', function ($q) {
-            return $q->where('is_client', false);
+            return $q->where('is_client', false)->where('is_visible', true);
         });
     }
 
