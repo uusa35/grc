@@ -51,7 +51,7 @@ export default function MainNav() {
         <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}
             <div className="bg-gray-700 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8">
-                <div className="flex  flex-row  justify-center items-center gap-x-5">
+                <div className="flex  flex-row  justify-center items-center space-x-6">
                     {
                         settings.instagram && <a target="_blank" href={settings.instagram}>
                             <FaInstagram size={22} className={'text-gray-400 hover:text-gray-200'} />

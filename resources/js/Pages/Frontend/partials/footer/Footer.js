@@ -209,7 +209,7 @@ export default function Footer() {
                             </>
                         }
                         <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('contact_us_on')}</h3>
-                        <div className="flex gap-x-6 mt-5">
+                        <div className="flex space-x-6 mt-5">
                             {
                                 settings.facebook && <a target="_blank" href={settings.facebook}
                                                         className="text-gray-600 hover:text-gray-500 capitalize">
