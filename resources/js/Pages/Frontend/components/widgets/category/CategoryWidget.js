@@ -5,7 +5,7 @@ import route from 'ziggy-js';
 import { motion } from "framer-motion"
 
 const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
-    const {getLocalized, getMedium} = useContext(AppContext)
+    const {getLocalized, getThumb} = useContext(AppContext)
 
     return (
         <motion.div
@@ -17,7 +17,7 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
             className="block relative overflow-hidden hover:opacity-90">
             <div className="w-full h-auto bg-white aspect-w-13 aspect-h-8 rounded-md overflow-hidden shadow-md">
                 <img
-                    src={getMedium(element.image)}
+                    src={getThumb(element.image)}
                     alt={element[getLocalized()]}
                     className="w-full h-full object-center object-fill lg:w-full lg:h-full"
                 />
