@@ -91,7 +91,7 @@ trait UserHelpers
     }
 
     public function scopeSupers($q)
-    {a
+    {
         return $q->whereHas('role', function ($q) {
             return $q->where('is_super', true);
         });
