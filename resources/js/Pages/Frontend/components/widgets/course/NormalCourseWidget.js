@@ -36,7 +36,7 @@ export default function NormalCourseWidget ({ element }) {
                 <h3 className="text-base font-semibold text-gray-900 truncate capitalize">
                     <Link href={route('frontend.course.show', element.id)} className="truncate text-sm">
                         <span className="" />
-                        {truncate(element[getLocalized()], { length : 25 })}
+                        {truncate(element[getLocalized()], { length : 20 })}
                         <p className="truncate capitalize text-sm hidden">
                             {element[getLocalized('caption')]}
                         </p>

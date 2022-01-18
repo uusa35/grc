@@ -36,7 +36,7 @@ export default function NormalBookWidget({element}) {
                         <Link
                             href={route('frontend.book.show', element.id)} className="truncate text-sm">
                             <span className=""/>
-                            {truncate(element[getLocalized()], {length: 25})}
+                            {truncate(element[getLocalized()], {length: 20})}
                             <p className="truncate capitalize text-sm hidden">
                                 {element[getLocalized('caption')]}
                             </p>

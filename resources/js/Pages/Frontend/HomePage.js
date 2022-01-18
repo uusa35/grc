@@ -22,7 +22,7 @@ export default function HomePage({
                                      clearCart = false,
                                      settings
                                  }) {
-    const [slideNumber, setSlideNumber] = useState(isTablet ? 2 : (isMobile ? 1 : 5))
+    const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 5))
     const {trans} = useContext(AppContext)
 
     useEffect(() => {

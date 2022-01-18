@@ -30,9 +30,9 @@ export default function NormalServiceWidget({element}) {
             <div className="flex flex-row flex-1 justify-between items-center m-2">
                 <h3 className="text-base font-semibold text-gray-900 truncate capitalize">
                     <Link href={route('frontend.service.show', element.id)} className="truncate text-sm">
-                        {truncate(element[getLocalized()], { length : 25 })}
+                        {truncate(element[getLocalized()], { length : 20 })}
                         <p className="truncate capitalize text-sm hidden">
-                            {truncate(element[getLocalized('caption')], 30)}
+                            {truncate(element[getLocalized('caption')], 15)}
                         </p>
                     </Link>
                 </h3>

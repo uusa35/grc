@@ -214,28 +214,28 @@ export default function Footer() {
                                 settings.facebook && <a target="_blank" href={settings.facebook}
                                                         className="text-gray-600 hover:text-gray-500 capitalize">
                                     <span className="sr-only">{settings[getLocalized]}</span>
-                                    <FaFacebook size={25} className={'text-gray-600'}/>
+                                    <FaFacebook size={25} className={'text-gray-600 hover:text-gray-400'}/>
                                 </a>
                             }
                             {settings.instagram &&
                             <a target="_blank" href={settings.instagram}
                                className="text-gray-600 hover:text-gray-500 capitalize">
                                 <span className="sr-only">{trans('instagram')}</span>
-                                <FaInstagram size={25} className={'text-gray-600'}/>
+                                <FaInstagram size={25} className={'text-gray-600 hover:text-gray-400'}/>
                             </a>
                             }
                             {settings.twitter &&
                             <a target="_blank" href={settings.twitter}
                                className="text-gray-600 hover:text-gray-500 capitalize">
                                 <span className="sr-only">{trans('twitter')}</span>
-                                <FaTwitter size={25} className={'text-gray-600'}/>
+                                <FaTwitter size={25} className={'text-gray-600 hover:text-gray-400'}/>
                             </a>
                             }
                             {settings.youtube &&
                             <a target="_blank" href={settings.youtube}
                                className="text-gray-600 hover:text-gray-500 capitalize">
                                 <span className="sr-only">{trans('youtube')}</span>
-                                <FaYoutube size={25} className={'text-gray-600'}/>
+                                <FaYoutube size={25} className={'text-gray-600 hover:text-gray-400'}/>
                             </a>
                             }
                             {settings.whatsapp &&
@@ -243,7 +243,7 @@ export default function Footer() {
                                href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}
                                className="text-gray-600 hover:text-gray-500 capitalize">
                                 <span className="sr-only">{trans('whatsapp')}</span>
-                                <FaWhatsapp size={25} className={'text-gray-600'}/>
+                                <FaWhatsapp size={25} className={'text-gray-600 hover:text-gray-400'}/>
                             </a>
                             }
                         </div>

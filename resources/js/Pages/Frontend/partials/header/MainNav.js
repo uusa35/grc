@@ -18,7 +18,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {changeLang, setCurrency, setParentModule} from "../../../redux/actions";
 import GlobalContext from "../../../context/GlobalContext";
 import {motion} from "framer-motion"
-import CartIndex from "../../Cart/CartIndex";
 import CartIndexOrderSummary from "../../Cart/CartIndexOrderSummary";
 import NoElements from "../../../Backend/components/widgets/NoElements";
 
@@ -55,28 +54,28 @@ export default function MainNav() {
                 <div className="flex  flex-row  justify-center items-center gap-x-5">
                     {
                         settings.instagram && <a target="_blank" href={settings.instagram}>
-                            <FaInstagram size={22} className={'text-gray-400'}/>
+                            <FaInstagram size={22} className={'text-gray-400 hover:text-gray-200'} />
                         </a>
                     }
                     {
                         settings.facebook && <a target="_blank" href={settings.facebook}>
-                            <FaFacebook size={22} className={'text-gray-400'}/>
+                            <FaFacebook size={22} className={'text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                     {
                         settings.twitter && <a target="_blank" href={settings.twitter}>
-                            <FaTwitter size={22} className={'text-gray-400'}/>
+                            <FaTwitter size={22} className={'text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                     {
                         settings.youtube && <a target="_blank" href={settings.youtube}>
-                            <FaYoutube size={22} className={'text-gray-400'}/>
+                            <FaYoutube size={22} className={'text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                     {
                         settings.whatsapp &&
                         <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
-                            <FaWhatsapp size={22} className={'text-gray-400'}/>
+                            <FaWhatsapp size={22} className={'text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                 </div>
@@ -92,7 +91,7 @@ export default function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className="mx-2   block text-gray-50  text-xs">
+                        className="mx-2  block text-gray-50  text-xs">
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
@@ -323,7 +322,7 @@ export default function MainNav() {
                                             className="w-5 h-5 rounded-full  mx-2"
                                             src={`${baseUrl}images/flags/${locale.otherLang}.png`}
                                             alt={locale.otherLang}/>
-                                        {locale.otherLang}
+                                        {/*<span className='hidden xl:block'>{locale.otherLang}</span>*/}
                                     </Link>
                                 </div>
                             </div>
@@ -636,7 +635,7 @@ export default function MainNav() {
                                 <Link
                                     href={route('frontend.aboutus')}
                                     onClick={() => dispatch(setParentModule('aboutus'))}
-                                    className={classNames(parentModule == 'aboutus' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    className={classNames(parentModule == 'aboutus' ? `border-b border-hippie-blue-500` : ``, "hidden 2xl:flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                 >
                                     {capitalize(trans('aboutus'))}
                                 </Link>
@@ -855,7 +854,7 @@ export default function MainNav() {
                             {settings.enable_books && <SearchField type={searchType} setSearchType={setSearchType}/>}
                             {/*{settings.enable_products && <SearchField type={'product'}/>}*/}
                             <div
-                                className="hidden lg:flex xl:flex lg:items-center lg:justify-end md:space-x-6 rtl:ml-2 ltr:mr-2 ">
+                                className="hidden 2xl:flex lg:items-center lg:justify-end md:space-x-6 rtl:ml-2 ltr:mr-2 ">
                                 <Link
                                     onClick={() => {
                                         dispatch(changeLang(locale.otherLang))

@@ -17,7 +17,7 @@ export default function SearchField({type = 'book', setSearchType}) {
     }
 
     return (
-        <div className="hidden md:flex flex-row px-5">
+        <div className="hidden xl:flex flex-row px-5">
             <div className="flex-1">
                 <label htmlFor="search" className="block text-sm font-medium text-gray-700 hidden">
                     {trans('search')}
