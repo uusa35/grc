@@ -18,7 +18,7 @@ export default function NormalUserWidget ({ element }) {
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
-                    className="z-0 w-60 h-60 rounded-full shadow-md object-center object-cover group-hover:opacity-75 shadow-md"
+                    className="z-0 w-60 h-60 rounded-full shadow-md object-center object-fill group-hover:opacity-75 shadow-md"
                 />
             </div>
             <h3 className="mt-4 text-center text-gray-700 truncate text-sm">
