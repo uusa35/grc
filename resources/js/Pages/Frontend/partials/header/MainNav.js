@@ -494,7 +494,7 @@ export default function MainNav() {
             </Transition.Root>
 
             <header
-                className={classNames(mgt ? `bg-black text-white` : `bg-white text-black`, "relative border-b-2 border-gray-400 py-6 max-w-full")}>
+                className={classNames(mgt ? `bg-black text-white` : `bg-white text-black`, "relative border-b-2 border-gray-400 py-2 max-w-full")}>
                 <nav aria-label="Top" className="w-auto lg:w-4/5 xl:w-4/5 2xl:w-4/5  m-auto">
                     <div className="h-20 flex items-center">
                         <button
