@@ -19,7 +19,7 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
                 <img
                     src={getMedium(element.image)}
                     alt={element[getLocalized()]}
-                    className="w-full h-full object-center object-contain lg:w-full lg:h-full"
+                    className="w-full h-full object-center object-fill lg:w-full lg:h-full"
                 />
             </div>
             {

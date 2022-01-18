@@ -22,7 +22,7 @@ export default function HomePage({
                                      clearCart = false,
                                      settings
                                  }) {
-    const [slideNumber, setSlideNumber] = useState(5)
+    const [slideNumber, setSlideNumber] = useState(isTablet ? 2 : (isMobile ? 1 : 5))
     const {trans} = useContext(AppContext)
 
     useEffect(() => {
@@ -48,14 +48,9 @@ export default function HomePage({
                     {
                         settings.enable_books && <>
 
-                            {/*<CategoriesGroup*/}
-                            {/*    params={{is_book: true}}*/}
-                            {/*    type={'category'}*/}
-                            {/*    title={trans('book_home_featured_categories')}*/}
-                            {/*    categories={filter(homeCategories, c => c.is_book)}/>*/}
                             <ElementSlider
                                 elements={filter(homeCategories, c => c.is_book)}
-                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                slidesPerView={slideNumber}
                                 title={trans('book_home_featured_categories')}
                                 type={'category'}
                                 moduleType={'book'}
@@ -63,7 +58,7 @@ export default function HomePage({
                             />
                             <ElementSlider
                                 elements={newOnHomeBooks}
-                                slidesPerView={isTablet || isMobile ? 1 : slideNumber}
+                                slidesPerView={slideNumber}
                                 title={trans('new_chosen_books')}
                                 type={'book'}
                             />
@@ -79,7 +74,7 @@ export default function HomePage({
                         settings.enable_courses && <>
                             <ElementSlider
                                 elements={filter(homeCategories, c => c.is_course)}
-                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                slidesPerView={slideNumber}
                                 title={trans('course_home_featured_categories')}
                                 type={'category'}
                                 moduleType={'course'}
@@ -87,7 +82,7 @@ export default function HomePage({
                             />
                             <ElementSlider
                                 elements={newOnHomeCourses}
-                                slidesPerView={isTablet || isMobile ? 1 : slideNumber}
+                                slidesPerView={slideNumber}
                                 title={trans('featured_courses')}
                                 type={'course'}
                             />
@@ -95,9 +90,14 @@ export default function HomePage({
                     }
                     {
                         settings.enable_products && <>
+                            <CategoriesGroup
+                                params={{is_product: true}}
+                                type={'product'}
+                                title={trans('product_home_featured_categories')}
+                                categories={filter(homeCategories, c => c.is_product)}/>
                             <ElementSlider
                                 elements={filter(homeCategories, c => c.is_product)}
-                                slidesPerView={isTablet || isMobile ? 2 : slideNumber}
+                                slidesPerView={slideNumber}
                                 title={trans('product_home_featured_categories')}
                                 type={'category'}
                                 moduleType={'product'}
@@ -105,7 +105,7 @@ export default function HomePage({
                             />
                             <ElementSlider
                                 elements={newOnHomeProducts}
-                                slidesPerView={isTablet || isMobile ? 1 : slideNumber}
+                                slidesPerView={slideNumber}
                                 title={trans('featured_products')}
                                 type={'product'}
                             />
