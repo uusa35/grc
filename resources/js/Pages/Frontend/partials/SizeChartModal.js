@@ -43,7 +43,7 @@ export default function({showModal = false, setShowModal, title = '', message = 
                                     <XIcon className="h-6 w-6 text-gray-600" aria-hidden="true" onClick={() => setShowModal(false)}/>
                                 </div>
                                 <div className="mt-3 text-center sm:mt-5">
-                                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                    <Dialog.Title as="h3" className="text-lg leading-6 font-bold text-gray-900 capitalize">
                                         {title}
                                     </Dialog.Title>
                                     <div className="mt-2">

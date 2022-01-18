@@ -242,7 +242,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         <div>
                                                             <button
                                                                 onClick={() => setShowModal(true)}
-                                                               className="text-xs font-medium text-gray-600 hover:text-gray-500">
+                                                               className="text-xs font-medium text-gray-600 hover:text-gray-500 capitalize">
                                                                 {trans('size_chart')}
                                                             </button>
                                                         </div>
@@ -323,11 +323,11 @@ export default function({element, relatedElements, auth, settings}) {
                                                     <div
                                                         className="flex w-full flex-1 flex-row justify-between items-center">
                                                         <div>
-                                                            <h2 className="text-sm font-medium text-gray-900">{trans('color')}</h2>
+                                                            <h2 className="text-sm font-bold text-gray-900 capitalize">{trans('color')}</h2>
                                                         </div>
                                                         <div>
                                                             <a href="#"
-                                                               className="text-xs font-medium text-gray-600 hover:text-gray-500">
+                                                               className="text-sm font-bold text-gray-600 hover:text-gray-500 capitalize">
                                                                 {trans('size_chart')}
                                                             </a>
                                                         </div>
@@ -367,7 +367,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                 {/* Size picker */}
                                                 <div className="mt-4">
                                                     <div className="flex items-center justify-between">
-                                                        <h2 className="text-sm font-medium text-gray-900">{trans('size')}</h2>
+                                                        <h2 className="text-sm font-bold text-gray-900 capitalize">{trans('size')}</h2>
                                                     </div>
 
                                                     <RadioGroup value={selectedSize} onChange={setSelectedSize}
