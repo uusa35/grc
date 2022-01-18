@@ -41,7 +41,7 @@ class ProductResource extends JsonResource
             'has_attributes' => $this->has_attributes,
             'direct_purchase' => $this->direct_purchase,
             'qty' => $this->qty,
-            'user' => UserExtraLightResource::make($this->whenLoaded('user')),
+            'user' => UserLightResource::make($this->whenLoaded('user')),
             'color' => ColorExtraLightResource::make($this->whenLoaded('color')),
             'size' => SizeExtraLightResource::make($this->whenLoaded('size')),
             'product_attributes' => ProductAttributeResource::collection($this->whenLoaded('product_attributes')),
