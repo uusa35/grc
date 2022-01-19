@@ -327,7 +327,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         </div>
                                                         <div>
                                                             <a href="#"
-                                                               className="text-sm font-bold text-gray-600 hover:text-gray-500 capitalize">
+                                                               className="text-sm font-bold text-gray-600 hover:text-gray-900 capitalize">
                                                                 {trans('size_chart')}
                                                             </a>
                                                         </div>
