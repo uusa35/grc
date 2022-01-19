@@ -41,10 +41,12 @@ export default function ConfirmationModal() {
         return destroy(route(`backend.${model}.${type}`, id), {
             preserveScroll: true,
             onSuccess : () => {
-                if(model === 'image') {
-                    return window.location.reload()
+                if(model !== 'image') {
+                    // return window.location.reload()
+                    Inertia.get(route(`backend.${model}.index`))
+                    dispatch(showToastMessage({ message : trans('process_success'), type : 'warning'}))
                 }
-                // dispatch(showToastMessage({ message : trans('process_success'), type : 'warning'}))
+
             },
             onError : () => {
                 dispatch(showToastMessage({ message : trans('process_failure'), type : 'warning'}))

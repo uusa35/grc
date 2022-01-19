@@ -11,16 +11,17 @@ import {Inertia} from '@inertiajs/inertia'
 import ImagesList from "../components/widgets/image/ImagesList";
 import route from 'ziggy-js';
 import React from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import FormSection from "../components/widgets/form/FormSection";
+import {setSettings} from "../../redux/actions";
 
 export default function SettingEdit({setting, themes, paymentMethods}) {
     const [currentImages, setCurrentImages] = useState([]);
     const {classNames, trans, parentModule, getThumb, getLocalized, isSuper} = useContext(AppContext)
     const {lang, currentFormTab, locale} = useSelector(state => state)
-
+    const dispatch = useDispatch();
     let EditorConfig = {
         toolbar: [
             ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -153,7 +154,11 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
             gift_image: data.gift_image,
             shipment_prices: data.shipment_prices,
         }, {
-            forceFormData: true
+            forceFormData: true,
+            onSuccess : () => {
+                Inertia.reload({ only : ['setting']})
+                dispatch(setSettings(setting))
+            }
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {

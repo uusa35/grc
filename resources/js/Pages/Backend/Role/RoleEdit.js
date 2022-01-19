@@ -50,11 +50,11 @@ export default function({role, privileges, auth}) {
             _method: 'put',
             ...data,
             image: data.image,
+        }, {
+            forceFormData: true,
             onSuccess: () => {
                 Inertia.reload({only: ['auth']});
             }
-        }, {
-            forceFormData: true,
         })
     }
 

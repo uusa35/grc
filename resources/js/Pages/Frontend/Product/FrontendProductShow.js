@@ -65,7 +65,6 @@ export default function({element, relatedElements, auth, settings}) {
 
     useMemo(() => {
         if (!isNull(selectedAttribute) && element.has_attributes) {
-            console.log('attribute changed');
             // setSelectedColor(selectedAttribute.color);
             // setSelectedSize(selectedAttribute.size);
             setFinalPrice(selectedAttribute.price);

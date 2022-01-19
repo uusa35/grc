@@ -12,7 +12,8 @@ import {random, map} from "lodash";
 
 export default function({countries}) {
     const {trans, getThumb, getLocalized} = useContext(AppContext);
-    const {settings} = useContext(GlobalContext);
+    const globalContext = useContext(GlobalContext);
+    const { settings } = globalContext;
     const [code, setCode] = useState('');
     const {props} = usePage();
     const {errors} = props;
@@ -51,8 +52,8 @@ export default function({countries}) {
             forceFormData: false,
             preserveScroll: true,
             resetOnSuccess: false,
-            onSuccess: (page) => {
-                window.location.reload();
+            onSuccess: ({props}) => {
+                globalContext.auth = props.auth
             }
         })
     }

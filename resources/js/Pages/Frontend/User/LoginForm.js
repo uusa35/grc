@@ -11,9 +11,10 @@ import {setAuth} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 
 
-export default function({ auth }) {
+export default function() {
     const {trans, getThumb} = useContext(AppContext);
-    const {settings} = useContext(GlobalContext);
+    const globalContext = useContext(GlobalContext);
+    const { settings } = globalContext;
     const dispatch = useDispatch();
 
     const {props} = usePage();
@@ -41,8 +42,9 @@ export default function({ auth }) {
             forceFormData: false,
             preserveScroll: true,
             resetOnSuccess: false,
-            onSuccess : (page) => {
-                window.location.reload();
+            onSuccess : ({ props }) => {
+                globalContext.auth = props.auth
+                // window.location.reload();
             }
         })
     }
