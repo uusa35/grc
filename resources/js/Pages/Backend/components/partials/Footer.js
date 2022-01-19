@@ -18,7 +18,7 @@ const Footer = () => {
                         <img className="w-10 h-10 rtl:ml-5 ltr:mr-5 rounded-full shadow-md"
                              src={getThumb(settings.image)}
                              alt={settings.title}/>
-                        <span className="ml-3 text-xl">{settings[getLocalized()]}</span>
+                        <span className="ml-3 text-md">{settings[getLocalized()]}</span>
                         <div className={`text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4`}>
                             © {moment().format('Y')} {settings[getLocalized('caption')]} — <Link
                             href={settings.twitter ? settings.twitter : '#'}

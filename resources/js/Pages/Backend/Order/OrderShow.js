@@ -131,16 +131,16 @@ export default function({order}) {
                 <div className="mt-5">
                     <h2 className="sr-only">{trans('notes')}</h2>
 
-                    <div className="bg-gray-50 rounded-lg py-6 px-6 lg:px-0 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
-                        <dl className="grid grid-cols-1 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:pl-8 lg:col-span-5">
+                    <div className="bg-gray-50 rounded-lg py-6 px-6  lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
+                        <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-x-8 lg:pl-8 lg:col-span-5">
                             <div>
-                                <dt className="font-medium text-gray-900">{trans('payment_method')}</dt>
-                                <dd className="mt-1 mb-3 flex">
-                                    <div>
-                                        {order.payment_method}
-                                        <p className="sr-only">{order.payment_method}</p>
-                                    </div>
-                                </dd>
+                                <div className="flex flex-row items-center">
+                                    <dt className="font-medium text-gray-900">{trans('payment_method')}:</dt>
+                                    <dd className="mt-1 flex mx-4">
+                                            {order.payment_method}
+                                            <p className="sr-only">{order.payment_method}</p>
+                                    </dd>
+                                </div>
                                 <dd className="mt-1 mb-3 flex">
                                     <div className="text-xs">
                                         {trans('reference_id')} : {order.reference_id}
@@ -161,14 +161,14 @@ export default function({order}) {
                             </div>
                         </dl>
 
-                        <dl className="mt-8 divide-y divide-gray-200 text-sm lg:mt-0 lg:pr-8 lg:col-span-7">
+                        <dl className="mt-8 divide-y divide-gray-200 lg:mt-0 lg:pr-8 lg:col-span-7">
                             <div className="pb-4 flex items-center justify-between">
                                 <dt className="text-gray-600">{trans('total')}</dt>
-                                <dd className="font-medium text-gray-900">{order.price} {trans('kd')}</dd>
+                                <dd className="text-xl font-medium text-gray-900">{order.price} {trans('kd')}</dd>
                             </div>
                             {order.discount > 0 ? <div className="py-4 flex items-center justify-between">
                                 <dt className="text-gray-600">{trans('discount')}</dt>
-                                <dd className="font-medium text-gray-900">({order.discount})</dd>
+                                <dd className="text-xl font-medium text-gray-900">({order.discount})</dd>
                             </div> : null}
                             {
                                 order.shipment_fees > 0 ? <div className="py-4 flex items-center justify-between">
@@ -178,7 +178,7 @@ export default function({order}) {
                             }
                             <div className="pt-4 flex items-center justify-between">
                                 <dt className="font-medium text-gray-900">{trans('net_price')}</dt>
-                                <dd className="font-medium text-gray-600">{order.net_price} {trans("kd")}</dd>
+                                <dd className="text-xl font-medium text-gray-900">{order.net_price} {trans("kd")}</dd>
                             </div>
                         </dl>
                     </div>
