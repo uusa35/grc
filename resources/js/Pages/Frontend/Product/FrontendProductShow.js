@@ -455,7 +455,7 @@ export default function({element, relatedElements, auth, settings}) {
                                 }
                                 {
                                     settings.enable_whatsapp_contact &&
-                                    <div className="flex flex-1 w-full mb-auto mt-5 justify-between">
+                                    <div className="flex flex-1 w-full mb-auto mt-5 justify-between opacity-60">
                                         <a
                                             target="_blank"
                                             href={getWhatsappLink(settings.whatsapp, `${trans('contactus_to_inquire_about_product')} ${trans('name')} : ${element[getLocalized()]} - ${trans(`sku`)} : ${element.sku}`)}
