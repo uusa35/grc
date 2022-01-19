@@ -455,11 +455,11 @@ export default function({element, relatedElements, auth, settings}) {
                                 }
                                 {
                                     settings.enable_whatsapp_contact &&
-                                    <div className="flex flex-1 w-full mb-auto mt-5 justify-between opacity-60">
+                                    <div className="flex flex-1 w-full mb-auto mt-5 justify-between opacity-80">
                                         <a
                                             target="_blank"
                                             href={getWhatsappLink(settings.whatsapp, `${trans('contactus_to_inquire_about_product')} ${trans('name')} : ${element[getLocalized()]} - ${trans(`sku`)} : ${element.sku}`)}
-                                            className={classNames(!element.is_available ? `opacity-30` : `bg-green-950`, `btn flex flex-1 justify-between bg-green-950 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-950 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-500 sm:w-full`)}
+                                            className={classNames(!element.is_available ? `opacity-30` : `bg-green-950`, `btn flex flex-1 justify-between bg-green-950 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-500 sm:w-full`)}
                                         >
                                             {trans('contactus_through_whatsapp')}
                                             <FaWhatsapp size={25} className={'text-white'}/>
