@@ -260,9 +260,9 @@ export default function({element, relatedElements, auth, settings}) {
                                                                     className={({active, checked}) =>
                                                                         classNames(
                                                                             attribute.color,
-                                                                            active && checked ? 'ring-1 ring-offset-1 ' : '',
-                                                                            !active && checked ? 'ring-0' : '',
-                                                                            'ring-gray-100 -m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
+                                                                            active && checked ? 'ring-1 ring-offset-1 ring-gray-200' : '',
+                                                                            !active && checked ? 'ring-1 ring-gray-100' : '',
+                                                                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
                                                                         )
                                                                     }
                                                                 >
