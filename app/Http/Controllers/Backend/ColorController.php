@@ -54,7 +54,17 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'code' => 'required|string|max:20',
+            'active' => 'boolean'
+        ]);
+        $element = Color::create($request->all());
+        if ($element) {
+            return redirect()->route('backend.color.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -88,7 +98,16 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        //
+        $request->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'code' => 'required|string|max:20',
+            'active' => 'boolean'
+        ]);
+        if ($color->update($request->all())) {
+            return redirect()->route('backend.color.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -99,6 +118,9 @@ class ColorController extends Controller
      */
     public function destroy(Color $color)
     {
-        //
+        if ($color->delete()) {
+            return redirect()->route('backend.color.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }

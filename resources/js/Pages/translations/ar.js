@@ -1248,5 +1248,6 @@ export const ar = {
     "limit" : "الحد الأقصى",
     "book_file" : "ملف الكتاب",
     "timing_notes" : "ملاحظات خاصة بالتوقيت المختار",
-    "enable_payment_online" : "تفعيل الدفع اونلاين"
+    "enable_payment_online" : "تفعيل الدفع اونلاين",
+    "heights" : "الأطوال"
 }

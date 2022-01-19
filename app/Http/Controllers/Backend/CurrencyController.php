@@ -52,8 +52,8 @@ class CurrencyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ar' => 'max:200',
-            'name_en' => 'max:200',
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
             'currency_symbol_ar' => 'string|max:5',
             'currency_symbol_en' => 'string|max:5',
             'order' => 'numeric|max:99',

@@ -237,7 +237,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     <div
                                                         className="flex w-full flex-1 flex-row justify-between items-center">
                                                         <div>
-                                                            <h2 className="text-sm font-medium text-gray-900">{trans('color')}</h2>
+                                                            <h2 className="text-sm font-medium text-gray-900">{`${trans('colors')} / ${trans('heights')}`}</h2>
                                                         </div>
                                                         <div>
                                                             <button
@@ -266,7 +266,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         )
                                                                     }
                                                                 >
-                                                                    <RadioGroup.Label as="p" className="sr-only">
+                                                                    <RadioGroup.Label as="p" className="font-bold text-sm mx-2">
                                                                         {attribute.color[getLocalized()]}
                                                                     </RadioGroup.Label>
                                                                     <span
@@ -283,7 +283,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                 {/* Size picker */}
                                                 <div className="mt-4">
                                                     <div className="flex items-center justify-between">
-                                                        <h2 className="text-sm font-medium text-gray-900">{trans('size')}</h2>
+                                                        <h2 className="text-sm font-medium text-gray-900">{trans('sizes')}</h2>
                                                     </div>
 
                                                     <RadioGroup value={selectedSize} onChange={setSelectedSize}

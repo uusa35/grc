@@ -258,6 +258,7 @@ export const en  = {
     'index_color_or_height' : 'list of colors or lengths',
     'colors_or_heights' : 'colors or heights',
     'code' : 'code',
+    'color' : 'color',
     'new_color' : 'add color',
     'edit_color' : 'edit color',
     'roles' : 'roles',
@@ -1239,5 +1240,6 @@ export const en  = {
     "limit" : "limit",
     "book_file" : "book file",
     "timing_notes" : "notes related to chosen timing",
-    "enable_payment_online" : "enable payment online"
+    "enable_payment_online" : "enable payment online",
+    "heights" : "heights"
 }

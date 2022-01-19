@@ -16,7 +16,7 @@ class SizeController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(Size::class,'size');
+        $this->authorizeResource(Size::class, 'size');
     }
 
     /**
@@ -49,18 +49,27 @@ class SizeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'active' => 'boolean'
+        ]);
+        $element = Size::create($request->all());
+        if ($element) {
+            return redirect()->route('backend.size.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Size  $size
+     * @param \App\Models\Size $size
      * @return \Illuminate\Http\Response
      */
     public function show(Size $size)
@@ -71,7 +80,7 @@ class SizeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Size  $size
+     * @param \App\Models\Size $size
      * @return \Illuminate\Http\Response
      */
     public function edit(Size $size)
@@ -82,23 +91,34 @@ class SizeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Size  $size
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Size $size
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Size $size)
     {
-        //
+        $request->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'active' => 'boolean'
+        ]);
+        if ($size->update($request->all())) {
+            return redirect()->route('backend.size.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Size  $size
+     * @param \App\Models\Size $size
      * @return \Illuminate\Http\Response
      */
     public function destroy(Size $size)
     {
-        //
+        if ($size->delete()) {
+            return redirect()->route('backend.size.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }
