@@ -1,8 +1,7 @@
 import BackendContainer from "./../components/containers/BackendContainer";
-import {useContext, useEffect, useMemo, useState} from "react";
+import {useContext, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, map, forEach, isArray, first, remove, uniq} from 'lodash';
+import {useForm, usePage} from "@inertiajs/inertia-react";
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
@@ -16,11 +15,13 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import FormSection from "../components/widgets/form/FormSection";
 import {setSettings} from "../../redux/actions";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function SettingEdit({setting, themes, paymentMethods}) {
     const [currentImages, setCurrentImages] = useState([]);
-    const {classNames, trans, parentModule, getThumb, getLocalized, isSuper} = useContext(AppContext)
-    const {lang, currentFormTab, locale} = useSelector(state => state)
+    const globalContext = useContext(GlobalContext);
+    const {classNames, trans,getThumb, isSuper} = useContext(AppContext)
+    const {currentFormTab, locale} = useSelector(state => state)
     const dispatch = useDispatch();
     let EditorConfig = {
         toolbar: [
@@ -155,9 +156,9 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
             shipment_prices: data.shipment_prices,
         }, {
             forceFormData: true,
-            onSuccess : () => {
-                Inertia.reload({ only : ['setting']})
-                dispatch(setSettings(setting))
+            onSuccess : ({ props }) => {
+                dispatch(setSettings(props.setting))
+                globalContext.settings = props.settings;
             }
         })
         // uploading images module separately due to some errors occurred in setData by inertia
