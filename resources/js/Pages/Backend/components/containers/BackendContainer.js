@@ -26,7 +26,7 @@ const BackendContainer = ({
 
     return (
 
-        <div className={classNames(locale.isRTL ? arFont : enFont, "h-full flex overflow-hidden text-sm md:text-lg capitalize")}
+        <div className={classNames(locale.isRTL ? arFont : enFont, "h-full flex overflow-hidden text-sm capitalize")}
              dir={locale.dir}>
             {/*<Head title={`${cXapitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>*/}
             {/*    <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>*/}
