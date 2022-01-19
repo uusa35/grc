@@ -218,19 +218,35 @@ const BackendHeader = () => {
                     <Menu as="div" className="relative inline-block ltr:text-left rtl:text-right capitalize">
                         {({open}) => (
                             <>
-                                <div className={`rtl:ml-2 ltr:mr-2`}>
-                                    <Menu.Button
-                                        className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-auto w-6  rtl:ml-2 ltr:mr-2"
-                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        </svg>
-                                        {trans('commands')}
-                                        <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
-                                    </Menu.Button>
+                                <div className="flex justify-end items-center">
+                                    <div className={`rtl:ml-2 ltr:mr-2`}>
+                                        <Menu.Button
+                                            className={`inline-flex justify-center items-center  w-full rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6  rtl:ml-2 ltr:mr-2"
+                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            </svg>
+                                            <div className="text-white text-md text-gray-900 text-capitalize font-bold">{trans('commands')}</div>
+                                            <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
+                                        </Menu.Button>
+                                    </div>
+                                    <div className={`rtl:ml-2 ltr:mr-2`}>
+                                        <button
+                                            className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize"
+                                            onClick={() => {
+                                                dispatch(changeLang(locale.otherLang))
+                                            }}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 rtl:ml-2 ltr:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                                            </svg>
+                                            <div className="text-white text-md text-gray-900 text-capitalize font-bold">{locale.otherLang}</div>
+                                        </button>
+                                    </div>
+
                                 </div>
 
                                 <Transition
