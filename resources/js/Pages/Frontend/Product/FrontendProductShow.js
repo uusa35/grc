@@ -260,13 +260,13 @@ export default function({element, relatedElements, auth, settings}) {
                                                                     className={({active, checked}) =>
                                                                         classNames(
                                                                             attribute.color,
-                                                                            active && checked ? 'ring ring-offset-1' : '',
-                                                                            !active && checked ? 'ring-2' : '',
-                                                                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
+                                                                            active && checked ? 'ring-1 ring-offset-1 ' : '',
+                                                                            !active && checked ? 'ring-0' : '',
+                                                                            'ring-gray-100 -m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
                                                                         )
                                                                     }
                                                                 >
-                                                                    <RadioGroup.Label as="p" className="font-bold text-sm mx-2">
+                                                                    <RadioGroup.Label as="p" className="font-bold text-sm mx-2 ">
                                                                         {attribute.color[getLocalized()]}
                                                                     </RadioGroup.Label>
                                                                     <span
