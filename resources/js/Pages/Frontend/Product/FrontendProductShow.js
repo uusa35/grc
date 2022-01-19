@@ -146,8 +146,6 @@ export default function({element, relatedElements, auth, settings}) {
         setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
 
-    console.log('element', element.size_chart)
-
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -242,7 +240,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         <div>
                                                             <button
                                                                 onClick={() => setShowModal(true)}
-                                                               className="text-xs font-medium text-gray-600 hover:text-gray-500 capitalize">
+                                                               className="text-xs font-medium text-gray-600 hover:text-gray-500 capitalize ring-2 ring-offset-1 ring-gray-200">
                                                                 {trans('size_chart')}
                                                             </button>
                                                         </div>
