@@ -300,6 +300,28 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
                                 </p>
                             </div>
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="shipment_fixed_rate" className={`block text-sm font-medium text-gray-700`}>
+                                    {trans('shipment_fixed_rate')} ({trans("kd")})
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="number"
+                                        name="shipment_fixed_rate"
+                                        defaultValue={setting.shipment_fixed_rate}
+                                        id="shipment_fixed_rate"
+                                        autoComplete="shipment_fixed_rate"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('product_shipment_fixed_rate_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.shipment_fixed_rate && <div className={`text-red-900`}>{errors.shipment_fixed_rate}</div>}
+                                </p>
+                            </div>
+
+
 
                             {/* payment_methods */}
                             {
@@ -563,6 +585,53 @@ accept="image/jpg, image/jpeg , image/png"
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.multi_cart_merchant &&
                                             <div className={`text-red-900`}>{errors.multi_cart_merchant}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+
+                                {/* apply_global_shipment */}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('apply_global_shipment')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="apply_global_shipment"
+                                                name="apply_global_shipment"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.apply_global_shipment}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="apply_global_shipment"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="apply_global_shipment"
+                                                name="apply_global_shipment"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.apply_global_shipment}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="apply_global_shipment"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.apply_global_shipment &&
+                                            <div className={`text-red-900`}>{errors.apply_global_shipment}</div>}
                                         </p>
                                     </div>
                                 </fieldset>

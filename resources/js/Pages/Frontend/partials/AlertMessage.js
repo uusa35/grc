@@ -1,7 +1,7 @@
 export default function AlertMessage({ title , message , color = 'lightgray'}) {
     return (
         <div
-            className={`my-4 bg-gray-50 border-l-4 border-gray-800 p-4  m-auto shadow-lg rounded-md m-10`}>
+            className={`my-4 bg-gray-50 border-l-4 border-gray-800 p-4  m-auto shadow-sm rounded-md m-10`}>
             <div className="flex items-center">
                 <div className="flex-shrink-0">
                     <svg className={`h-9 w-9" xmlns="http://www.w3.org/2000/svg`}

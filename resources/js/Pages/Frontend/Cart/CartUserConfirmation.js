@@ -7,18 +7,18 @@ import CartStepper from "./CartStepper";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, first, map} from "lodash";
+import {filter, first, map, round} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 import axios from "axios";
-import {showToastMessage} from "../../redux/actions";
+import {setShipmentFees, showToastMessage} from "../../redux/actions";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 
 export default function({countries, auth}) {
     const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
     const [areas, setAreas] = useState([])
-    const {locale, cart} = useSelector(state => state);
+    const {locale, cart, settings } = useSelector(state => state);
     const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
@@ -43,12 +43,15 @@ export default function({countries, auth}) {
 
     useMemo(() => {
         dispatch({type: 'SET_CART_ID', payload: auth.id})
+        const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
+        dispatch(setShipmentFees(settings.apply_global_shipment ? settings.shipment_fixed_rate : round(parseFloat(selectedCountry.fixed_shipment_charge * cart.items.length), 2)))
     }, [])
 
     useMemo(() => {
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
         setAreas(selectedCountry.areas)
         setData('area_id', auth && auth.area_id ? auth.area_id :  first(selectedCountry.areas).id)
+        // dispatch(setShipmentFees(settings.apply_global_shipment ? settings.shipment_fixed_rate : round(parseFloat(selectedCountry.fixed_shipment_charge * cart.items.length), 2)))
     }, [data.country_id])
 
     const handleChange = (e) => {

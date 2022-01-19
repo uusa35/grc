@@ -34,7 +34,8 @@ export default function(cart = initialState, action) {
                 ...cart,
                 applyGlobalShipment: action.payload.applyGlobalShipment,
                 multiCartMerchant: action.payload.multiCartMerchant,
-                currentShipmentCountry: action.payload.currentShipmentCountry
+                currentShipmentCountry: action.payload.currentShipmentCountry,
+                shipmentFees:  action.payload.shipmentFees
             };
         case SET_CART_ID :
             return {
@@ -83,8 +84,8 @@ export default function(cart = initialState, action) {
             return {
                 ...cart,
                 total: round(parseFloat(sumBy(cart.items, 'price')), 2),
-                netTotal: round(parseFloat(sumBy(cart.items, 'price') - action.payload + action.payload), 2),
-                shipmentFees: round(parseFloat(action.payload.country.fixed_shipment_charge * cart.items.length), 2),
+                netTotal: round(parseFloat(sumBy(cart.items, 'price') + action.payload), 2),
+                shipmentFees: action.payload,
                 totalWeight: round(parseFloat(sumBy(cart.items, 'weight')), 2),
                 currentShipmentCountry: action.payload.country
             };

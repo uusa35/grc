@@ -16,7 +16,7 @@ import {
     prepareCart,
     setBreadCrumbs,
     setModules,
-    setParentModule, showToastMessage,
+    setParentModule, setShipmentFees, showToastMessage,
     startBootStrapped
 } from "../redux/actions";
 import LoadingView from "../Backend/components/widgets/LoadingView";
@@ -111,7 +111,8 @@ const AppContextProvider = ({children}) => {
         dispatch(prepareCart({
             multiCartMerchant: settings.multi_cart_merchant,
             applyGlobalShipment: settings.apply_global_shipment,
-            currentShipmentCountry: auth?.country || isEmpty(cart.currentShipmentCountry) ? auth.country : cart.currentShipmentCountry
+            currentShipmentCountry: auth?.country || isEmpty(cart.currentShipmentCountry) ? auth.country : cart.currentShipmentCountry,
+            shipmentFees : settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
         }))
     }, [])
 

@@ -6,11 +6,13 @@ import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {isEmpty} from "lodash";
 import GlobalContext from "../../context/GlobalContext";
+import AlertMessage from "../partials/AlertMessage";
 
-export default function () {
-    const {cart, currency, locale} = useSelector(state => state);
-    const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
+export default function ({showShipmentAlert = true}) {
+    const {cart, currency} = useSelector(state => state);
+    const {trans, getLocalized} = useContext(AppContext);
     const { settings } = useContext(GlobalContext);
+
     return (
         <div className="mt-10  sm:mx-10">
             <div className="bg-gray-50 rounded-lg px-4 py-6 sm:p-6 lg:p-8">
@@ -56,7 +58,13 @@ export default function () {
                     </dl>
                 </div>
             </div>
-
+            {
+                settings.enable_products && showShipmentAlert && <AlertMessage
+                    title={trans('shipment_notes')}
+                    message={trans('shipment_notes_prices')}
+                    color='black'
+                />
+            }
         </div>
     );
 }

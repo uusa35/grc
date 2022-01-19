@@ -16,6 +16,11 @@ export const prepareCart = payload => ({
     payload,
 });
 
+export const setShipmentFees = payload => ({
+    type : actions.SET_SHIPMENT_FEES,
+    payload
+})
+
 export const enableDirectPurchaseMode = payload => ({
     type: actions.ENABLE_DIRECT_PURCHASE_MODE,
     payload,

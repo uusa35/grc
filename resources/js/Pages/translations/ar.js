@@ -1249,5 +1249,7 @@ export const ar = {
     "book_file" : "ملف الكتاب",
     "timing_notes" : "ملاحظات خاصة بالتوقيت المختار",
     "enable_payment_online" : "تفعيل الدفع اونلاين",
-    "heights" : "الأطوال"
+    "heights" : "الأطوال",
+    "apply_global_shipment" : "سعر الشحن الثابت",
+    "shipment_notes_prices" : "يتم حساب اسعار الشعن بعد ادخال الدولة والعنوان بالكامل"
 }

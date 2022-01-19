@@ -7,11 +7,11 @@ import CartStepper from "./CartStepper";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, first, map} from "lodash";
+import {filter, first, map, round} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 import axios from "axios";
-import {showToastMessage} from "../../redux/actions";
+import {setShipmentFees, showToastMessage} from "../../redux/actions";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 
@@ -63,6 +63,8 @@ export default function({countries, auth }) {
                 image: data.image,
             }, {
                 forceFormData: true,
+                onSuccess : () => Inertia.get(route('frontend.cart.confirmation'))
+
             })
         } else {
             Inertia.post(route(`frontend.user.store`), {
@@ -70,7 +72,8 @@ export default function({countries, auth }) {
                 ...data,
                 image: data.image,
             }, {
-                forceFormData: true
+                forceFormData: true,
+                onSuccess : () => Inertia.get(route('frontend.cart.confirmation'))
             })
         }
     }
@@ -358,26 +361,26 @@ export default function({countries, auth }) {
                                             className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , " border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                                         >
                                             {trans('next')}
-                                        </button> :
-                                        <Link
-                                            href={route('frontend.cart.confirmation')}
-                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
-                                        >
-                                            <span className="flex ltr:pt-2">
-                                            {trans('next')}
-                                            </span>
-                                            <div className="flex">
-                                                {locale.isRTL ?
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                                         stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
-                                                    </svg> :
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                                         stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
-                                                    </svg>}
-                                            </div>
-                                        </Link>
+                                        </button> : null
+                                        // <Link
+                                        //     href={route('frontend.cart.confirmation')}
+                                        //     className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                                        // >
+                                        //     <span className="flex ltr:pt-2">
+                                        //     {trans('next')}
+                                        //     </span>
+                                        //     <div className="flex">
+                                        //         {locale.isRTL ?
+                                        //             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                        //                  stroke="currentColor">
+                                        //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
+                                        //             </svg> :
+                                        //             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                        //                  stroke="currentColor">
+                                        //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                                        //             </svg>}
+                                        //     </div>
+                                        // </Link>
                                 }
 
                             </div>

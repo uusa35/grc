@@ -1241,5 +1241,7 @@ export const en  = {
     "book_file" : "book file",
     "timing_notes" : "notes related to chosen timing",
     "enable_payment_online" : "enable payment online",
-    "heights" : "heights"
+    "heights" : "heights",
+    "apply_global_shipment" : "fixed global shipment price",
+    "shipment_notes_prices" : "shipment prices will be calculated after choosing country address."
 }
