@@ -26,6 +26,7 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
 import {FaWhatsapp} from "react-icons/fa";
 import SizeChartModal from "../partials/SizeChartModal";
+import validate from "validate.js";
 
 
 export default function({element, relatedElements, auth, settings}) {
@@ -146,6 +147,7 @@ export default function({element, relatedElements, auth, settings}) {
         setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
 
+    console.log('ele', element.size_chart_image)
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -237,13 +239,22 @@ export default function({element, relatedElements, auth, settings}) {
                                                         <div>
                                                             <h2 className="text-sm font-medium text-gray-900">{`${trans('colors')} / ${trans('heights')}`}</h2>
                                                         </div>
-                                                        <div>
-                                                            <button
-                                                                onClick={() => setShowModal(true)}
-                                                               className="text-xs font-medium text-gray-600 hover:text-gray-500 capitalize ring-2 ring-offset-1 ring-gray-200">
-                                                                {trans('size_chart')}
-                                                            </button>
-                                                        </div>
+                                                        {
+                                                            element.size_chart_image && !validate.isEmpty(element.size_chart_image) ? <div>
+                                                                <button
+                                                                    onClick={() => setShowModal(true)}
+                                                                    className="flex flex-row items-center justify-center text-xs font-bold text-gray-800 hover:text-gray-500 capitalize p-2 rounded-md border-2 border-gray-100 bg-gray-50">
+                                                                    <div>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div>
+                                                                        {trans('size_chart')}
+                                                                    </div>
+                                                                </button>
+                                                            </div>  : null
+                                                        }
                                                     </div>
 
                                                     <RadioGroup value={selectedColor} onChange={setSelectedColor}
@@ -258,9 +269,9 @@ export default function({element, relatedElements, auth, settings}) {
                                                                     className={({active, checked}) =>
                                                                         classNames(
                                                                             attribute.color,
-                                                                            active && checked ? 'ring-1 ring-offset-1 ring-gray-200' : '',
-                                                                            !active && checked ? 'ring-1 ring-gray-100' : '',
-                                                                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
+                                                                            active && checked ? 'ring-2 ring-offset-1 ring-gray-400' : '',
+                                                                            !active && checked ? 'ring-2 ring-gray-100' : '',
+                                                                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none hover:bg-gray-100'
                                                                         )
                                                                     }
                                                                 >
