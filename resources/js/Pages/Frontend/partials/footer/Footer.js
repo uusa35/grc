@@ -138,11 +138,11 @@ export default function Footer() {
                                             </Link>
                                         </li>
                                         {isAdminOrAbove ? <li>
-                                            <a href={route('backend.home')}
+                                            <Link href={route('backend.home')}
                                                target="_blank"
                                                className="text-base text-gray-500 capitalize hover:text-gray-900">
                                                 {trans('backend')}
-                                            </a>
+                                            </Link>
                                         </li> : null}
                                     </>
                             }
