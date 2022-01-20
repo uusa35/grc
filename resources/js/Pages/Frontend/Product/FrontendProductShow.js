@@ -141,7 +141,6 @@ export default function({element, relatedElements, auth, settings}) {
         setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
 
-    console.log('ele', element.size_chart_image)
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -217,24 +216,24 @@ export default function({element, relatedElements, auth, settings}) {
                                 </div>
                             </div>
                             {/* product attributes */}
-                            <div className="mt-6">
+                            <div className="flex flex-1 flex-col w-full mt-6">
                                 {!element.is_available && <AlertMessage
                                     title={trans('element_is_not_available')}
                                     message={trans('element_is_not_available_currently_for_order')}
                                 />}
                                 {
                                     element.has_attributes && !isEmpty(filteredColorsGroup) ?
-                                        <div className="flex flex-row justify-between items-center gap-x-5">
-                                            <div className="mt-2 lg:col-span-5">
+                                        <div className="flex flex-col justify-between items-center gap-x-5">
+
                                                 {/* Color picker */}
-                                                <div>
+                                                <div className="flex-1 w-full">
                                                     <div
-                                                        className="flex w-full flex-1 flex-row justify-between items-center">
-                                                        <div>
-                                                            <h2 className="text-sm font-medium text-gray-900">{`${trans('colors')} / ${trans('heights')}`}</h2>
-                                                        </div>
+                                                        className="flex w-full flex-row justify-between items-center ">
+
+                                                            <h2 className="text-sm font-bold text-gray-900">{`${trans('colors')} / ${trans('heights')}`}</h2>
+
                                                         {
-                                                            element.size_chart_image && !validate.isEmpty(element.size_chart_image) ? <div>
+                                                            element.size_chart_image && !validate.isEmpty(element.size_chart_image) ? <div className="justify-end items-center">
                                                                 <button
                                                                     onClick={() => setShowModal(true)}
                                                                     className="flex flex-row items-center justify-center text-xs font-bold text-gray-800 hover:text-gray-500 capitalize p-2 rounded-md border-2 border-gray-100 bg-gray-50">
@@ -284,9 +283,9 @@ export default function({element, relatedElements, auth, settings}) {
                                                 </div>
 
                                                 {/* Size picker */}
-                                                <div className="mt-4">
+                                                <div className="flex-1 w-full mt-4">
                                                     <div className="flex items-center justify-between">
-                                                        <h2 className="text-sm font-medium text-gray-900">{trans('sizes')}</h2>
+                                                        <h2 className="text-sm font-bold text-gray-900">{trans('sizes')}</h2>
                                                     </div>
 
                                                     <RadioGroup value={selectedSize} onChange={setSelectedSize}
@@ -317,7 +316,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         </div>
                                                     </RadioGroup>
                                                 </div>
-                                            </div>
+
                                         </div> :
                                         <div className="flex flex-row justify-between items-center gap-x-5">
                                             <div className="mt-2 lg:col-span-5">
@@ -479,7 +478,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                           <span
                                                               className={classNames(
                                                                   open ? 'text-gray-600' : 'text-gray-900',
-                                                                  'capitalize font-extrabold'
+                                                                  'capitalize font-bold'
                                                               )}
                                                           >
                                                             {trans('description')}
@@ -517,7 +516,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                           <span
                                                               className={classNames(
                                                                   open ? 'text-gray-600' : 'text-gray-900',
-                                                                  'capitalize'
+                                                                  'capitalize font-bold'
                                                               )}
                                                           >
                                                             {trans('notes')}
@@ -537,7 +536,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                 </Disclosure.Button>
                                                 <Disclosure.Panel as="div" className="pb-6">
-                                                    <p className='capitalize'>
+                                                    <p className='capitalize font-'>
                                                         {element[getLocalized('notes')]}
                                                     </p>
                                                 </Disclosure.Panel>
@@ -554,7 +553,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                           <span
                                                               className={classNames(
                                                                   open ? 'text-gray-600' : 'text-gray-900',
-                                                                  'capitalize'
+                                                                  'capitalize font-bold'
                                                               )}
                                                           >
                                                             {trans('owner')}
