@@ -1243,5 +1243,9 @@ export const en  = {
     "enable_payment_online" : "enable payment online",
     "heights" : "heights",
     "apply_global_shipment" : "fixed global shipment price",
-    "shipment_notes_prices" : "shipment prices will be calculated after choosing country address."
+    "shipment_notes_prices" : "shipment prices will be calculated after choosing country address.",
+    "faq_message" : "visit faqs page in case there are any questions.",
+    "need_help" : "need help ?",
+    "need_help_message" : "please contact us through our numbers or fill in the form",
+    "aboutus_message" : "more information about us."
 }
