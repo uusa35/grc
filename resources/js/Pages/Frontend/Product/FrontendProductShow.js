@@ -53,7 +53,7 @@ export default function({element, relatedElements, auth, settings}) {
     });
 
     useMemo(() => {
-        setFinalPrice(element.has_attributes ? first(element.product_attributes).price : (element.isOnSale ? element.sale_price : element.price));
+        setFinalPrice(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).price : (element.isOnSale ? element.sale_price : element.price));
         setSelectedColor(element.has_attributes ? first(element.product_attributes).color_id : null)
         setSelectedSize(element.has_attributes ? first(element.product_attributes).size_id : null)
         setCurrentQty(element.has_attributes ? first(element.product_attributes).qty : element.qty)
@@ -183,7 +183,7 @@ export default function({element, relatedElements, auth, settings}) {
                             <div className="mt-3">
                                 <h2 className="sr-only">{trans('information')}</h2>
                                 <ElementPrice price={finalPrice}
-                                              salePrice={element.has_attributes ? finalPrice : element.sale_price}
+                                              salePrice={element.sale_price}
                                               showLocal={true}
                                               isOnSale={element.isOnSale} large={true}
                                               free={element.free}

@@ -40,7 +40,9 @@ export default function NormalProductWidget({element}) {
                              src={getThumb(element.user.image)} alt={element.user[getLocalized()]}/>
                     </Link>
                 </div>
-                <ElementPrice price={element.price} salePrice={element.sale_price} isOnSale={element.isOnSale}/>
+                <ElementPrice price={element.price}
+                              salePrice={element.sale_price}
+                              isOnSale={element.isOnSale}/>
             </div>
         </motion.div>
     );
