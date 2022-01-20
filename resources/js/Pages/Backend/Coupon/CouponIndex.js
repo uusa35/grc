@@ -7,7 +7,7 @@ import {AppContext} from "../../context/AppContext";
 import ActiveDot from "../components/widgets/ActiveDot";
 
 export default function({elements}) {
-    const {trans, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
+    const {trans, handleDeleteItem, classNames, getLocalized} = useContext(AppContext);
     const {params} = route();
 
     return (
@@ -82,8 +82,12 @@ export default function({elements}) {
                                     <tr key={element.id}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
-                                            {element.code}
-                                            <ActiveDot active={element.active}/>
+                                            <div className="flex flex-row">
+                                                <div>
+                                                    {element.code}
+                                                </div>
+                                                <ActiveDot active={element.active}/>
+                                            </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.value}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">

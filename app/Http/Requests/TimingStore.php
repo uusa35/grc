@@ -29,7 +29,8 @@ class TimingStore extends FormRequest
             'user_id' => 'required|exists:users,id',
             'service_id' => 'required|exists:services,id',
             'allow_multi_select' => 'required|boolean',
-            'is_available' => 'required|boolean'
+            'is_available' => 'required|boolean',
+            'limit' => 'required|integer|min:1|max:99'
         ];
     }
 }
