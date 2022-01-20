@@ -74,8 +74,8 @@ class ProductAttributeController extends Controller
             'product_id' => 'required|integer|exists:products,id',
             'color_id' => 'required|exists:colors,id',
             'size_id' => 'required|exists:sizes,id',
-            'qty' => 'required|integer|min:1',
-            'price' => 'required|min:0.5|max:999',
+            'qty' => 'required|integer|min:1|max:999',
+            'price' => 'required|numeric|min:0.5|max:999',
         ]);
         $productAttribute = ProductAttribute::where([
             ['product_id', '=', $request->product_id],
@@ -126,8 +126,8 @@ class ProductAttributeController extends Controller
         request()->validate([
             'color_id' => 'required|exists:colors,id',
             'size_id' => 'required|exists:sizes,id',
-            'qty' => 'required|integer|min:1',
-            'price' => 'required|min:0.5|max:999',
+            'qty' => 'required|integer|min:1|max:999',
+            'price' => 'required|numeric|min:0.5|max:999',
         ]);
         if ($attribute->update($request->all())) {
             return redirect()->route('backend.attribute.index', ['product_id' => $attribute->product_id])->with('success', trans('general.process_success'));

@@ -73,6 +73,8 @@ export default function({element, relatedElements, auth, settings}) {
     // select Color then select size --> show qty
     useMemo(() => {
         setFilteredSizesGroup(filter(element.product_attributes, c => c.color_id === selectedColor))
+        setSelectedAttribute(first(filter(element.product_attributes, c => c.color_id === selectedColor)));
+        setSelectedQty(0)
     }, [selectedColor])
 
     useMemo(() => {
@@ -83,7 +85,7 @@ export default function({element, relatedElements, auth, settings}) {
     }, [filteredSizesGroup])
 
     useMemo(() => {
-        if (!isEmpty(filteredSizesGroup) && element.has_attributes && filteredSizesGroup.length > 1) {
+        if (!isEmpty(filteredSizesGroup) && element.has_attributes && element.product_attributes.length >= 1) {
             setSelectedAttribute(first(filter(element.product_attributes, a => a.color_id === selectedColor && a.size_id === selectedSize)));
         } else if (element.has_attributes) {
             setSelectedAttribute(first(element.product_attributes))
@@ -233,7 +235,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                             <h2 className="text-sm font-bold text-gray-900">{`${trans('colors')} / ${trans('heights')}`}</h2>
 
                                                         {
-                                                            element.size_chart_image && !validate.isEmpty(element.size_chart_image) ? <div className="justify-end items-center">
+                                                            element.show_size_chart  ? <div className="justify-end items-center">
                                                                 <button
                                                                     onClick={() => setShowModal(true)}
                                                                     className="flex flex-row items-center justify-center text-xs font-bold text-gray-800 hover:text-gray-500 capitalize p-2 rounded-md border-2 border-gray-100 bg-gray-50">
@@ -645,10 +647,12 @@ export default function({element, relatedElements, auth, settings}) {
                         <RelatedItems elements={relatedElements.data} type={'product'}/>
                     }
                 </div>
-                <SizeChartModal showModal={showModal} setShowModal={setShowModal}
-                                title={trans('size_chart')}
-                                image={getLarge(element.size_chart_image)}
-                />
+                {
+                    element.show_size_chart && <SizeChartModal showModal={showModal} setShowModal={setShowModal}
+                                                               title={trans('size_chart')}
+                                                               image={element.size_chart_image && !validate.isEmpty(element.size_chart_image) ? getLarge(element.size_chart_image) : getLarge(settings.size_chart_image)}
+                    />
+                }
             </FrontendContentContainer>
         </FrontendContainer>
     )
