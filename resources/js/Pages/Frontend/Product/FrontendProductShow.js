@@ -119,7 +119,7 @@ export default function({element, relatedElements, auth, settings}) {
             type: 'product',
             element_id: element.id,
             qty: selectedQty,
-            price: element.has_attributes ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price),
+            price: element.has_attributes && element.product_attributes.length > 0 && !element.isOnSale ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price),
             direct_purchase: element.direct_purchase,
             shipmentFees: 0,
             image: element.image,
