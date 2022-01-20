@@ -10,6 +10,9 @@ import {filter} from 'lodash';
 import JoinusPage from "./Pages/JoinusPage";
 import JoinusHomeSection from "./partials/JoinusHomeSection";
 import CategoriesGroup from "./components/widgets/category/CategoriesGroup";
+import {Link} from "@inertiajs/inertia-react";
+import route from 'ziggy-js'
+import InformationBtns from "./partials/InformationBtns";
 
 export default function HomePage({
                                      slides,
@@ -70,6 +73,7 @@ export default function HomePage({
                             />
                         </>
                     }
+                    <InformationBtns />
                     {
                         settings.enable_courses && <>
                             <ElementSlider
@@ -111,7 +115,6 @@ export default function HomePage({
                                 categories={filter(homeCategories, c => c.is_product)}/>
                         </>
                     }
-
                 </div>
             </FrontendContentContainer>
         </FrontendContainer>

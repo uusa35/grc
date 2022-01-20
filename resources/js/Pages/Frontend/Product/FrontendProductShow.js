@@ -56,7 +56,6 @@ export default function({element, relatedElements, auth, settings}) {
         setFinalPrice(element.has_attributes ? first(element.product_attributes).price : (element.isOnSale ? element.sale_price : element.price));
         setSelectedColor(element.has_attributes ? first(element.product_attributes).color_id : null)
         setSelectedSize(element.has_attributes ? first(element.product_attributes).size_id : null)
-        // setSelectedAttribute(element.has_attributes ? first(element.product_attributes) : null);
         setCurrentQty(element.has_attributes ? first(element.product_attributes).qty : element.qty)
 
         element.has_attributes ? setFilteredColorsGroup(uniqBy(element.product_attributes, 'color_id')) : [];
@@ -65,8 +64,6 @@ export default function({element, relatedElements, auth, settings}) {
 
     useMemo(() => {
         if (!isNull(selectedAttribute) && element.has_attributes) {
-            // setSelectedColor(selectedAttribute.color);
-            // setSelectedSize(selectedAttribute.size);
             setFinalPrice(selectedAttribute.price);
             setCurrentQty(1)
             setCurrentQty(selectedAttribute.qty)
@@ -87,12 +84,10 @@ export default function({element, relatedElements, auth, settings}) {
 
     useMemo(() => {
         if (!isEmpty(filteredSizesGroup) && element.has_attributes && filteredSizesGroup.length > 1) {
-            // console.log('inside size 11111=====>')
             setSelectedAttribute(first(filter(element.product_attributes, a => a.color_id === selectedColor && a.size_id === selectedSize)));
         } else if (element.has_attributes) {
             setSelectedAttribute(first(element.product_attributes))
         } else {
-            // console.log('the else')
         }
         setSelectedQty(0)
     }, [selectedSize])
@@ -467,7 +462,10 @@ export default function({element, relatedElements, auth, settings}) {
                                 }
                             </div>
 
-                            <section aria-labelledby="details-heading" className="my-12">
+
+                        </div>
+                        <div className="col-span-full">
+                            <section aria-labelledby="details-heading" className="my-12 border-10">
                                 <h2 id="details-heading" className="sr-only">
                                     Additional details
                                 </h2>
@@ -580,7 +578,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         className="flex flex-1 justify-start items-start">
                                                         <div>
                                                             <img
-                                                                className="w-20 h-auto rounded-lg shadow-sm"
+                                                                className="w-20 h-auto object-cover rounded-lg shadow-sm"
                                                                 src={getThumb(element.user.image)}
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
@@ -605,7 +603,7 @@ export default function({element, relatedElements, auth, settings}) {
                                     {trans('notes')}
                                 </h2>
 
-                                <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 capitalize truncate">
+                                <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 capitalize truncate">
                                     {
                                         element.direct_purchase ? <div
                                             className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">

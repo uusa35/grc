@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 
 
+
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
