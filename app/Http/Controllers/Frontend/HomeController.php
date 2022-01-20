@@ -30,7 +30,7 @@ class HomeController extends Controller
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
         $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
-        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->OnHome()->authors()->orderBy('order', 'asc')->get());
+        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->onHome()->authors()->orderBy('order', 'asc')->get());
         return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts'));
     }
 
