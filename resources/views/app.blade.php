@@ -64,6 +64,7 @@
             <meta property="og:whatsapp" content="{{$page['props']['settings']->whatsapp }}"/>
 
             <meta itemProp="facebook" content="{{$page['props']['settings']->facebook }}"/>
+            <meta itemProp="fb:app_id" content="658753405351209"/>
             <meta property="facebook:card" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
             <meta property="facebook:url" content="{{$page['props']['settings']->facebook }}"/>
             <meta property="facebook:title" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
