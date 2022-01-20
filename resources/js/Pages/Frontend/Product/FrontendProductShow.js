@@ -648,7 +648,7 @@ export default function({element, relatedElements, auth, settings}) {
                             </section>
                         </div>
                         {/*     vertical tabs view */}
-                        <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4 capitalize">
+                        <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
                             <Tab.Group as="div">
                                 <div className="border-b border-gray-200 ">
                                     <Tab.List className="-mb-px flex">
@@ -659,7 +659,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         selected
                                                             ? 'border-gray-600 text-gray-600'
                                                             : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
-                                                        'whitespace-nowrap px-10 py-6 border-b-2 font-medium text-sm'
+                                                        'whitespace-nowrap px-10 py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
                                             >
@@ -673,7 +673,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         selected
                                                             ? 'border-gray-600 text-gray-600'
                                                             : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
-                                                        'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm'
+                                                        'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
                                             >
@@ -686,7 +686,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     selected
                                                         ? 'border-gray-600 text-gray-600'
                                                         : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
-                                                    'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm'
+                                                    'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                 )
                                             }
                                         >
@@ -700,7 +700,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         element[getLocalized('description')].length > 50 && <Tab.Panel as="dl" className="text-sm text-gray-500 h-60">
                                             <h3 className="sr-only">{trans('description')}</h3>
                                             <Fragment key={'description'}>
-                                                <dd className="mt-2 prose prose-sm max-w-none text-gray-900 p-10">
+                                                <dd className="mt-2 prose prose-sm max-w-none text-gray-900 p-10 capitalize">
                                                     <p>{element[getLocalized('description')]}</p>
                                                 </dd>
                                             </Fragment>
@@ -710,7 +710,7 @@ export default function({element, relatedElements, auth, settings}) {
                                     {
                                         element[getLocalized('notes')].length > 50 && <Tab.Panel className="text-sm text-gray-500 h-60">
                                             <Fragment key={'description'}>
-                                                <dd className="mt-2 prose prose-sm max-w-none text-gray-900 p-10">
+                                                <dd className="mt-2 prose prose-sm max-w-none text-gray-900 p-10 capitalize">
                                                     <p>
                                                         {element[getLocalized('notes')]}
                                                     </p>
@@ -721,7 +721,7 @@ export default function({element, relatedElements, auth, settings}) {
 
                                     <Tab.Panel className="text-sm text-gray-900 h-60">
                                         <div
-                                            className="flex flex-1 justify-start items-start p-10">
+                                            className="flex flex-1 justify-start items-start p-10 capitalize">
                                             <div>
                                                 <img
                                                     className="w-20 h-auto object-cover rounded-lg shadow-sm"
