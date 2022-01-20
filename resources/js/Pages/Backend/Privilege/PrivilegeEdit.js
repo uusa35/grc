@@ -10,12 +10,13 @@ import {Inertia} from "@inertiajs/inertia";
 import {filter, first, uniq, map, uniqBy, isEmpty} from "lodash";
 import pluralize from 'pluralize'
 import {setAuth, setModules} from "../../redux/actions";
+import GlobalContext from "../../context/GlobalContext";
 
-export default function({privilege, pivotElements, auth }) {
-    const {trans, getLocalized, getThumb, classNames} = useContext(AppContext);
+export default function({privilege, pivotElements}) {
+    const {trans, getLocalized, getThumb} = useContext(AppContext);
+    const globalContext = useContext(GlobalContext);
     const {errors} = usePage().props;
     const dispatch = useDispatch();
-    const {modules} = useSelector(state => state);
     const {data, setData, put, progress} = useForm({
         'name': privilege.name,
         'name_ar': privilege.name_ar,
@@ -45,10 +46,11 @@ export default function({privilege, pivotElements, auth }) {
             image: data.image,
         }, {
             forceFormData: true,
-            onSuccess: () => {
-                Inertia.reload({only: ['auth']});
-                if (!isEmpty(auth && auth.role?.privileges)) {
-                    const filteredModules = map(auth.role.privileges, p => {
+            onSuccess: ({ props }) => {
+                // Inertia.reload({only: ['auth']});
+                globalContext.auth = props.auth;
+                if (!isEmpty(props.auth && props.auth.role?.privileges)) {
+                    const filteredModules = map(props.auth.role.privileges, p => {
                         return {
                             name: p.name_en,
                             index: p.index,

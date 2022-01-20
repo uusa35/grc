@@ -1,7 +1,7 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useEffect, useMemo, useState} from "react";
+import {Fragment, useContext, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {orderBy, isEmpty, first} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";

@@ -31,7 +31,6 @@ const AppContext = createContext({});
 const AppContextProvider = ({children}) => {
     const {lang, locale, bootStrapped, confirmationModal, toastMessage, cart} = useSelector(state => state);
     const {auth, settings, currencies} = useContext(GlobalContext);
-
     const dispatch = useDispatch();
     // const pusher = new Pusher('c7ae6371d15e9b381173');
     // window.Echo = new Echo({
@@ -98,15 +97,6 @@ const AppContextProvider = ({children}) => {
     }, [route().current()])
 
     useEffect(() => {
-        Inertia.on('before', (e) => {
-            isLocal() && console.log('before ==>')
-        })
-        Inertia.on('start', (e) => {
-            isLocal() && console.log('start ==>')
-        })
-        Inertia.on('finish', (e) => {
-            isLocal() && console.log('finish ==>')
-        });
         toast.configure(options)
         dispatch(prepareCart({
             multiCartMerchant: settings.multi_cart_merchant,

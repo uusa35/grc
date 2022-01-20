@@ -1,16 +1,14 @@
 import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
 import {truncate} from "lodash";
 import {motion} from "framer-motion"
-import {useSelector} from "react-redux";
 
 export default function NormalProductWidget({element}) {
-    const {getLocalized, getThumb, classNames} = useContext(AppContext);
-    const {locale} = useSelector(state => state);
+    const {getLocalized, getThumb} = useContext(AppContext);
     return (
         <motion.div
             initial={false}

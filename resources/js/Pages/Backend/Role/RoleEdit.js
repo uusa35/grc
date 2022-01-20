@@ -9,10 +9,12 @@ import {useDispatch} from "react-redux";
 import {Inertia} from "@inertiajs/inertia";
 import {filter, first, uniq, map} from "lodash";
 import {setAuth} from "../../redux/actions";
+import GlobalContext from "../../context/GlobalContext";
 
-export default function({role, privileges, auth}) {
+export default function({role, privileges}) {
     const {trans, getLocalized, getThumb, classNames} = useContext(AppContext);
     const [selectedElements, setSelectedElements] = useState(map(role.privileges, p => p.id));
+    const globalContext = useContext(GlobalContext);
     const {errors} = usePage().props;
     const dispatch = useDispatch();
     const {data, setData, put, progress} = useForm({
@@ -52,8 +54,8 @@ export default function({role, privileges, auth}) {
             image: data.image,
         }, {
             forceFormData: true,
-            onSuccess: () => {
-                Inertia.reload({only: ['auth']});
+            onSuccess: ({ props }) => {
+                globalContext.auth = props.auth
             }
         })
     }
