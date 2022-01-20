@@ -648,7 +648,7 @@ export default function({element, relatedElements, auth, settings}) {
                             </section>
                         </div>
                         {/*     vertical tabs view */}
-                        <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
+                        <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4 capitalize">
                             <Tab.Group as="div">
                                 <div className="border-b border-gray-200 ">
                                     <Tab.List className="-mb-px flex">
