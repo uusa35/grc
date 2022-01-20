@@ -73,7 +73,6 @@ export default function HomePage({
                             />
                         </>
                     }
-                    <InformationBtns />
                     {
                         settings.enable_courses && <>
                             <ElementSlider
@@ -94,6 +93,7 @@ export default function HomePage({
                     }
                     {
                         settings.enable_products && <>
+                            <InformationBtns />
                             <ElementSlider
                                 elements={filter(homeCategories, c => c.is_product)}
                                 slidesPerView={slideNumber}
