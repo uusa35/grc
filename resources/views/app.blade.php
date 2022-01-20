@@ -4,9 +4,9 @@
     @if(request()->segment(1) !== 'backend')
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
             <title>{{$page['props']['element']->{'name_'.app()->getLocale()}  }}</title>
+            <meta property="og:type" content="website"/>
             <meta property="description" content="{{$page['props']['element']->{'description_'.app()->getLocale()} }}"/>
             <meta property="og:locale" content="{{ app()->getLocale() }}"/>
-            <meta property="og:type" content="website"/>
             <meta property="og:site_name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="og:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
@@ -17,6 +17,7 @@
             <meta property="og:mobile" content="{{$page['props']['settings']->mobile }}"/>
             <meta property="og:whatsapp" content="{{$page['props']['settings']->whatsapp }}"/>
             <meta itemProp="facebook" content="{{$page['props']['element']->{'name_'.app()->getLocale()}  }}"/>
+            <meta itemProp="fb:app_id" content="658753405351209"/>
             <meta property="facebook:card" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
             <meta property="facebook:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="facebook:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
@@ -91,25 +92,13 @@
         </script>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('/js/app.js') }}" defer></script>
-    {{--    @foreach($ssr['head'] ?? [] as $element)--}}
-    {{--        {!! $element !!}--}}
-    {{--    @endforeach--}}
 </head>
 <body>
 <div id="lang" style="display: none">{{ session()->get('lang') }}</div>
 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
     @csrf
 </form>
-{{--@if ($ssr)--}}
-{{--    {!! $ssr['body'] !!}--}}
-{{--@else--}}
-{{--<a--}}
-{{--    href="{{ route('frontend.paypal.index') }}"--}}
-{{--    class="mt-10 bg-gray-900">--}}
-{{--    paypall--}}
-{{--</a>--}}
 @routes
 @inertia
-{{--@endif--}}
 </body>
 </html>
