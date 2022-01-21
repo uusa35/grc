@@ -1247,5 +1247,6 @@ export const en  = {
     "faq_message" : "visit faqs page in case there are any questions.",
     "need_help" : "need help ?",
     "need_help_message" : "please contact us through our numbers or fill in the form",
-    "aboutus_message" : "more information about us."
+    "aboutus_message" : "more information about us.",
+    "make_email_verified" : "make email verified"
 }

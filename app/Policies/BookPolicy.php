@@ -21,7 +21,7 @@ class BookPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->index : false;
+        return $user->isAdminOrAbove || $user->role->privileges->where('name', self::MODAL)->first()->pivot->index;
     }
 
     /**
@@ -44,7 +44,7 @@ class BookPolicy
      */
     public function create(User $user)
     {
-        return $user->isAdminOrAbove ? $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__} : false;
+        return $user->isAdminOrAbove || $user->role->privileges->where('name', self::MODAL)->first()->pivot->{__FUNCTION__};
     }
 
     /**

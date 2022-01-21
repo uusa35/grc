@@ -21,7 +21,7 @@ const BackendContainer = ({
                               mainModule = '',
                               total, links
                           }) => {
-    const {classNames, arFont, enFont} = useContext(AppContext);
+    const {classNames, arFont, enFont, isAdminOrAbove } = useContext(AppContext);
     const {locale, isLoading} = useSelector(state => state);
 
     return (
@@ -39,7 +39,7 @@ const BackendContainer = ({
                 <div className="min-h-screen">
                     <div className="align-middle inline-block min-w-full h-auto">
                         <div className="mx-3 space-y-2">
-                            <BreadCrumbs/>
+                            {isAdminOrAbove && <BreadCrumbs/>}
                             <SystemMessage/>
                             {
                                 !isEmpty(elements?.data) && total > 0 && mainModule && <Pagination

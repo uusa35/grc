@@ -35,7 +35,7 @@ const BackendHeader = () => {
         <div className={``}>
             {/* all elements */}
             <div
-                className="border-b border-gray-200 py-3 bg-white rounded-md mx-3  sm:px-6 lg:p-4 sm:flex sm:flex-row sm:items-center sm:justify-between capitalize">
+                className="mb-5 border-b border-gray-200 py-3 bg-white rounded-md mx-3  sm:px-6 lg:p-4 sm:flex sm:flex-row sm:items-center sm:justify-between capitalize">
                 <h1 className="w-60 leading-6 text-gray-900 sm:truncate capitalize">{settings[getLocalized()]}</h1>
                 <div className="flex items-center justify-center w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-4 sm:gap-y-0 gap-x-2 capitalize">
                     {/* all elements */}

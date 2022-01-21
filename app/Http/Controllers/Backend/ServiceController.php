@@ -41,7 +41,10 @@ class ServiceController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = new ServiceCollection(Service::filters($filters)->with('user')->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
+        $elements = new ServiceCollection(Service::filters($filters)
+            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with('user')
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());
         return inertia('Backend/Service/ServiceIndex', compact('elements'));
     }

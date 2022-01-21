@@ -248,9 +248,31 @@ export default function({user, roles, elementCategories, categories, countries, 
                                     {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
+                            {/*email*/}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="email" className={`block   text-gray-700`}>
+                                    {trans('email')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="email"
+                                        name="email"
+                                        defaultValue={user.email}
+                                        id="email"
+                                        autoComplete="email"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('user_price_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
+                                </p>
+                            </div>
                             {/* subscription_id */}
                             {isAdminOrAbove &&
-                            <div className="sm:col-span-2">
+                            <div className="sm:col-span-2 hidden">
                                 <label htmlFor="subscription_id" className="block   text-gray-700">
                                     {trans('subscription')}
                                 </label>
@@ -584,99 +606,102 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                         </FormSection>
 
-                        <FormSection title={trans('more_details')}>
-                            {/* active */}
-                            <fieldset className="mt-1 col-span-1">
-                                <div>
-                                    <legend
-                                        className={`text-base  text-gray-900`}>{trans('active')}</legend>
-                                </div>
-                                <div className="mt-4 space-y-4">
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="active"
-                                            name="active"
-                                            type="radio"
-                                            value={1}
-                                            defaultChecked={user.active}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="active"
-                                               className="ml-3 block   text-gray-700">
-                                            {trans('yes')}
-                                        </label>
+                        {
+                            isAdminOrAbove && <FormSection title={trans('more_details')}>
+                                {/* active */}
+                                <fieldset className="mt-1 col-span-1">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('active')}</legend>
                                     </div>
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="active"
-                                            name="active"
-                                            type="radio"
-                                            value={0}
-                                            defaultChecked={!user.active}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="active"
-                                               className="ml-3 block   text-gray-700">
-                                            {trans('no')}
-                                        </label>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="active"
+                                                name="active"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={user.active}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="active"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="active"
+                                                name="active"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!user.active}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="active"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <ToolTipWidget/>
-                                <div>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
-                                    </p>
-                                </div>
-                            </fieldset>
-                            {/* on home*/}
-                            <fieldset className="mt-1 col-span-1">
-                                <div>
-                                    <legend
-                                        className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
-                                </div>
-                                <div className="mt-4 space-y-4">
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="on_home"
-                                            name="on_home"
-                                            type="radio"
-                                            value={1}
-                                            defaultChecked={user.on_home}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
-                                            {trans('yes')}
-                                        </label>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
+                                        </p>
                                     </div>
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="on_home"
-                                            name="on_home"
-                                            type="radio"
-                                            value={0}
-                                            defaultChecked={!user.on_home}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="on_home"
-                                               className="ml-3 block   text-gray-700">
-                                            {trans('no')}
-                                        </label>
+                                </fieldset>
+                                {/* on home*/}
+                                <fieldset className="mt-1 col-span-1">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
                                     </div>
-                                </div>
-                                <ToolTipWidget/>
-                                <div>
-                                    <p className={`mt-2  text-gray-500`}>
-                                        {errors.on_home &&
-                                        <div className={`text-red-900`}>{errors.on_home}</div>}
-                                    </p>
-                                </div>
-                            </fieldset>
-                        </FormSection>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="on_home"
+                                                name="on_home"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={user.on_home}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="push-everything"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="on_home"
+                                                name="on_home"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!user.on_home}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="on_home"
+                                                   className="ml-3 block   text-gray-700">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.on_home &&
+                                            <div className={`text-red-900`}>{errors.on_home}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                            </FormSection>
+                        }
+
                         <FormBtns type={'user'}/>
                     </div>
                     <div

@@ -13,7 +13,7 @@ export default function PinnedProjects() {
     const activePinned = filter(modules, m => m.main_menu && m.create);
 
     return (
-        <div className="bg-white my-3 mx-3 rounded-md shadow-sm py-3 sm:px-6 lg:px-5 capitalize">
+        <div className="bg-white  mx-3 rounded-md shadow-sm py-3 sm:px-6 lg:px-5 capitalize">
             {/*<h2 className="text-xs font-medium uppercase tracking-wide">{trans('modules')}</h2>*/}
             <ul className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-3 gap-4 sm:gap-6  my-1">
                 {

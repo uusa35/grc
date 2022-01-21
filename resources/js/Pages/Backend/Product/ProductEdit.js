@@ -559,7 +559,7 @@ accept="image/jpg, image/jpeg , image/png"
                             </div>
                         </FormSection>
                         {/*more details booleans */}
-                        <FormSection title={trans('more_details')}>
+                        { isAdminOrAbove && <FormSection title={trans('more_details')}>
                             {/* active */}
                             <fieldset className="mt-1 col-span-1">
                                 <div>
@@ -743,7 +743,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     </p>
                                 </div>
                             </fieldset>
-                        </FormSection>
+                        </FormSection>}
                         <FormBtns type={'product'}/>
                     </div>
                     <div

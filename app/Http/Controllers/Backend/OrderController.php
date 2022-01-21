@@ -39,8 +39,10 @@ class OrderController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = new OrderCollection(Order::filters($filters)->orderBy('id', 'desc')
-            ->paginate(Self::TAKE_MIN)
+        $elements = new OrderCollection(Order::filters($filters)
+            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with('user')
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());
         return inertia('Backend/Order/OrderIndex', compact('elements'));
     }

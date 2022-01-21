@@ -16,7 +16,8 @@ export default function ProductIndex({elements}) {
     const {
         trans,
         classNames,
-        getLocalized
+        getLocalized,
+        isAdminOrAbove
     } = useContext(AppContext);
     const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
@@ -349,7 +350,7 @@ export default function ProductIndex({elements}) {
                                                                                     </> : null
                                                                             }
                                                                         </div>
-                                                                        <div className="py-1">
+                                                                        { isAdminOrAbove && <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
@@ -377,7 +378,7 @@ export default function ProductIndex({elements}) {
                                                                                     </Link>
                                                                                 )}
                                                                             </Menu.Item>
-                                                                        </div>
+                                                                        </div>}
                                                                         <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (

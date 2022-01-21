@@ -16,7 +16,8 @@ export default function BookIndex({elements}) {
     const {
         trans,
         classNames,
-        getLocalized
+        getLocalized,
+        isAdminOrAbove
     } = useContext(AppContext);
     const { sort, locale } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -233,35 +234,37 @@ export default function BookIndex({elements}) {
                                                                                 )}
                                                                             </Menu.Item>
                                                                         </div>
-                                                                        <div className="py-1">
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route(`backend.toggle.activate`, {
-                                                                                            model: 'book',
-                                                                                            id: element.id
-                                                                                        })}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
-                                                                                        )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor">
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
-                                                                                                  d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"/>
-                                                                                        </svg>
-                                                                                        {trans("activate_or_deactivate")}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                        </div>
+                                                                        {
+                                                                            isAdminOrAbove && <div className="py-1">
+                                                                                <Menu.Item>
+                                                                                    {({active}) => (
+                                                                                        <Link
+                                                                                            href={route(`backend.toggle.activate`, {
+                                                                                                model: 'book',
+                                                                                                id: element.id
+                                                                                            })}
+                                                                                            className={classNames(
+                                                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                                'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
+                                                                                            )}
+                                                                                        >
+                                                                                            <svg
+                                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                                className="h-6 w-6 mx-2"
+                                                                                                fill="none"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                stroke="currentColor">
+                                                                                                <path strokeLinecap="round"
+                                                                                                      strokeLinejoin="round"
+                                                                                                      strokeWidth={2}
+                                                                                                      d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"/>
+                                                                                            </svg>
+                                                                                            {trans("activate_or_deactivate")}
+                                                                                        </Link>
+                                                                                    )}
+                                                                                </Menu.Item>
+                                                                            </div>
+                                                                        }
                                                                         <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (

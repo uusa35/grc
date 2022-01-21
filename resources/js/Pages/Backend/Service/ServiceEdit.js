@@ -445,7 +445,7 @@ accept="image/jpg, image/jpeg , image/png"
                             }
                         </FormSection>
 
-                        <FormSection>
+                        { isAdminOrAbove && <FormSection>
                             {/* active */}
                             <fieldset className="mt-1 col-span-1">
                                 <div>
@@ -583,7 +583,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     </p>
                                 </div>
                             </fieldset>
-                        </FormSection>
+                        </FormSection>}
                         <FormBtns type={'service'}/>
                     </div>
                     <div

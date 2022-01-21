@@ -95,7 +95,7 @@ export default function({user}) {
                                             <div>
                                                 <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('profile')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
-                                                    {trans("profile_message")}
+                                                    {trans('account_type')} : {user.role[getLocalized()]}
                                                 </p>
                                             </div>
                                             <div className="flex flex-col lg:flex-row">

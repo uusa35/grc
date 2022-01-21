@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CountryCollection;
@@ -17,6 +18,7 @@ use App\Models\Role;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Services\Search\UserFilters;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Testing\Concerns\Has;
@@ -79,7 +81,7 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStore $request)
     {
         $user = User::create($request->except(['_token', 'image', 'images', 'categories', 'slides', 'tags', 'videos', 'qr']));
         if ($user) {
@@ -194,5 +196,14 @@ class UserController extends Controller
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
+    }
+
+    public function makeEmailVerified(Request $request) {
+        $this->authorize('isSuper');
+        $request->validate([
+            'id' => 'required|integer|exists:users,id',
+        ]);
+        User::whereId($request->id)->first()->update(['email_verified_at' => Carbon::now()]);
+        return redirect()->back()->with('success', trans('general.process_success'));
     }
 }

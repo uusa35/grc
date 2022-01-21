@@ -51,8 +51,6 @@ export default function({ user }) {
         })
     }
 
-
-
     return (
         <FrontendContainer>
             <FrontendContentContainer>

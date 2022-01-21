@@ -988,6 +988,18 @@ export default function MainNav() {
                                                             </>
                                                         )}
                                                     </Menu.Item>
+                                                    {
+                                                        auth.verified && auth.role.is_author && <Menu.Item>
+                                                            {({active}) => (
+                                                                <Link
+                                                                    href={route('backend.home')}
+                                                                    className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
+                                                                >
+                                                                    {trans('backend')}
+                                                                </Link>
+                                                            )}
+                                                        </Menu.Item>
+                                                    }
                                                     <Menu.Item>
                                                         {({active}) => (
                                                             <button

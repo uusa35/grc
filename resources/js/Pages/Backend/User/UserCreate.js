@@ -91,7 +91,7 @@ export default function({roles, categories, countries, subscriptions}) {
         'governate_id': '',
         'area_id': '',
         'end_subscription_date': '01-01-2020',
-        'subscription_id': '',
+        'subscription_id': first(filter(subscriptions, s => s.free)).id,
         'merchant_id': '',
         'views': 1,
         'is_available': 1,
@@ -108,7 +108,7 @@ export default function({roles, categories, countries, subscriptions}) {
         'custome_delivery': 0,
         'news_letter_on': 1,
         'custome_delivery_fees': 1,
-        'password': "secret"
+        'password': ""
     });
 
     useMemo(() => {
@@ -250,9 +250,30 @@ export default function({roles, categories, countries, subscriptions}) {
                                     {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
                                 </p>
                             </div>
+                            {/* password */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="password" className={`block   text-gray-700`}>
+                                    {trans('password')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        required
+                                        type="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        id="password"
+                                        autoComplete="password"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('password_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.password && <div className={`text-red-900`}>{errors.password}</div>}
+                                </p>
+                            </div>
                             {/* subscription_id */}
                             {isAdminOrAbove &&
-                            <div className="sm:col-span-2">
+                            <div className="sm:col-span-2 hidden">
                                 <label htmlFor="subscription_id" className="block   text-gray-700">
                                     {trans('subscription')}
                                 </label>

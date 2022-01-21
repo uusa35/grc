@@ -153,6 +153,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::resource('service', ServiceController::class);
     Route::resource('timing', TimingController::class);
     Route::resource('book', BookController::class);
+    Route::resource('course', CourseController::class);
     Route::resource('section', SectionController::class);
     Route::resource('page', PageController::class);
     Route::resource('user', UserController::class);
@@ -174,7 +175,6 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     });
 // admins
     Route::group(['middleware' => 'admin'], function () {
-        Route::resource('course', CourseController::class);
         Route::resource('coupon', CouponController::class);
         Route::get('toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
         Route::get('trashed', [DashboardController::class, 'trashed'])->name('trashed');
@@ -201,5 +201,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('subscription', SubscriptionController::class);
         // order status switch
         Route::get('order/switch/status', [OrderController::class, 'switchStatus'])->name('order.switch');
+        // email verified
+        Route::get('make/verified', [UserController::class,'makeEmailVerified'])->name('make.verified');
     });
 });

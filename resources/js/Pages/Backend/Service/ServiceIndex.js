@@ -18,7 +18,8 @@ export default function ServiceIndex({elements}) {
         trans,
         classNames,
         handleDeleteItem,
-        getLocalized
+        getLocalized,
+        isAdminOrAbove
     } = useContext(AppContext);
     const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
@@ -236,7 +237,7 @@ export default function ServiceIndex({elements}) {
                                                                                 )}
                                                                             </Menu.Item>
                                                                         </div>
-                                                                        <div className="py-1">
+                                                                        { isAdminOrAbove && <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
@@ -264,7 +265,7 @@ export default function ServiceIndex({elements}) {
                                                                                     </Link>
                                                                                 )}
                                                                             </Menu.Item>
-                                                                        </div>
+                                                                        </div>}
                                                                         {/* timings */}
                                                                         <div className="py-1">
                                                                             <Menu.Item>

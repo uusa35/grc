@@ -505,7 +505,8 @@ accept="application/pdf"
                                 </p>
                             </div>
                         </FormSection>
-                        <FormSection title={trans('more_details')}>
+                        {
+                            isAdminOrAbove && <FormSection title={trans('more_details')}>
                                 {/* active */}
                                 <fieldset className="mt-1 col-span-2">
                                     <div>
@@ -689,7 +690,8 @@ accept="application/pdf"
                                         </p>
                                     </div>
                                 </fieldset>
-                        </FormSection>
+                            </FormSection>
+                        }
                         <FormBtns type={'course'}/>
                     </div>
                     <div

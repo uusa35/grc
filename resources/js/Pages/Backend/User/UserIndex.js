@@ -12,15 +12,16 @@ import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
 
 
-export default function ({elements}) {
+export default function({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
         classNames,
         getLocalized,
-        isAdminOrAbove
+        isAdminOrAbove,
+        isSuper
     } = useContext(AppContext);
-    const { sort, locale  } = useSelector(state => state);
+    const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -85,13 +86,15 @@ export default function ({elements}) {
                                         <div className="flex flex-row justify-start items-center">
                                             {sort.desc ?
 
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M5 15l7-7 7 7"/>
                                                 </svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M19 9l-7 7-7-7"/>
@@ -124,7 +127,7 @@ export default function ({elements}) {
                                             {/*</td>*/}
                                             <td className="px-3 py-4 whitespace-nowrap  text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
-                                                    <ActiveDot active={element.active} />
+                                                    <ActiveDot active={element.active}/>
                                                     {element[getLocalized()]}
                                                 </div>
                                                 <div
@@ -191,23 +194,29 @@ export default function ({elements}) {
                                                                                 isAdminOrAbove && <Menu.Item>
                                                                                     {({active}) => (
                                                                                         <Link
-                                                                                            href={route('backend.reset.password', { id : element.id})}
+                                                                                            href={route('backend.reset.password', {id: element.id})}
                                                                                             className={classNames(
                                                                                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                                                                 'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                             )}
                                                                                         >
-                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                 className="h-6 w-6 mx-2"
-                                                                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                                                                                            <svg
+                                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                                className="h-6 w-6 mx-2"
+                                                                                                fill="none"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                stroke="currentColor">
+                                                                                                <path
+                                                                                                    strokeLinecap="round"
+                                                                                                    strokeLinejoin="round"
+                                                                                                    strokeWidth={2}
+                                                                                                    d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
                                                                                             </svg>
                                                                                             {trans('reset_password')}
                                                                                         </Link>
                                                                                     )}
                                                                                 </Menu.Item>
                                                                             }
-
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
@@ -293,7 +302,34 @@ export default function ({elements}) {
                                                                                     </Link>
                                                                                 )}
                                                                             </Menu.Item>
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <Link
+                                                                                        href={route(`backend.make.verified`, {
+                                                                                            id: element.id
+                                                                                        })}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor">
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  strokeWidth={2}
+                                                                                                  d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"/>
+                                                                                        </svg>
+                                                                                        <span className="text-xs">{trans("make_email_verified")}</span>
+                                                                                    </Link>
+                                                                                )}
+                                                                            </Menu.Item>
                                                                         </div>
+
                                                                         <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (
