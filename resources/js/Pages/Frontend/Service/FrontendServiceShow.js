@@ -57,8 +57,6 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
         !isEmpty(selectedTiming) ? setData('timing_id', selectedTiming.id) : null;
     }, [selectedTiming])
 
-    console.log('selectedTiming', selectedTiming);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isNull(data.timing_id)) {

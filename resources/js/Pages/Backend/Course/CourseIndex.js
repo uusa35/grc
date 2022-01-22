@@ -40,133 +40,140 @@ export default function CourseIndex({elements}) {
                           total={elements.meta.total}
                           links={elements.meta.links}
                           mainModule={'course'}>
-            <div className="flex flex-col hidden sm:block">
+            <div className="flex flex-col">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b overflow-visible border-gray-200 sm:rounded-lg")}>
-                            <table className="min-w-full divide-y divide-gray-200">
-                                <thead
-                                    className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold uppercase")}>
-                                <tr>
+                            className="bg-gray-300 shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
+                            <table className="min-w-full border-collapse block md:table">
+                                <thead className="block md:table-header-group">
+                                <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left  uppercase tracking-wider tracking-wider"
+                                        className="block md:table-cell px-3 py-3  rtl:text-right ltr:text-left  uppercase tracking-wider tracking-wider"
                                         onClick={() => dispatch(toggleSort('id'))}
                                     >
-                                        {sort.desc ?
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
-                                                      d="M5 15l7-7 7 7"/>
-                                            </svg>
-                                            :
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
-                                                      d="M19 9l-7 7-7-7"/>
-                                            </svg>}
-                                        {trans('id')}
+                                        <div className="flex flex-row">
+                                            {sort.desc ?
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
+                                                          d="M5 15l7-7 7 7"/>
+                                                </svg>
+                                                :
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
+                                                          d="M19 9l-7 7-7-7"/>
+                                                </svg>}
+                                            <div>
+                                                {trans('id')}
+                                            </div>
+                                        </div>
                                     </th>
                                     {/*<th*/}
                                     {/*    scope="col"*/}
-                                    {/*    className=" px-3 py-3 rtl:text-right ltr:text-left"*/}
+                                    {/*    className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"*/}
                                     {/*>*/}
                                     {/*    {trans('main_image')}*/}
                                     {/*</th>*/}
                                     <th
                                         scope="col"
-                                        className="py-3 rtl:text-right ltr:text-left"
+                                        className="block md:table-cell py-3 rtl:text-right ltr:text-left"
                                         onClick={() => dispatch(toggleSort('sku'))}
                                     >
-                                        <div className="flex flex-row justify-start flex-1 items-center">
-                                            <div>
-                                                {sort.desc ?
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
-                                                         fill="none"
-                                                         viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinejoin="round" strokeLinejoin="round"
-                                                              strokeWidth="2"
-                                                              d="M5 15l7-7 7 7"/>
-                                                    </svg>
-                                                    :
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
-                                                         fill="none"
-                                                         viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinejoin="round" strokeLinejoin="round"
-                                                              strokeWidth="2"
-                                                              d="M19 9l-7 7-7-7"/>
-                                                    </svg>}
-                                            </div>
-                                            <div>
-                                                {trans('sku')}
-                                            </div>
+                                        <div className="flex flex-row">
+                                            {sort.desc ?
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round"
+                                                          strokeWidth="2"
+                                                          d="M5 15l7-7 7 7"/>
+                                                </svg>
+                                                :
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round"
+                                                          strokeWidth="2"
+                                                          d="M19 9l-7 7-7-7"/>
+                                                </svg>}
+                                            {trans('sku')}
+                                        </div>
+
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
+                                        onClick={() => dispatch(toggleSort('name'))}
+                                    >
+                                        <div className="flex flex-row">
+                                            {sort.desc ?
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
+                                                          d="M5 15l7-7 7 7"/>
+                                                </svg>
+                                                :
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
+                                                          d="M19 9l-7 7-7-7"/>
+                                                </svg>}
+                                            {trans('name')}
                                         </div>
                                     </th>
                                     <th
                                         scope="col"
-                                        className=" px-3 py-3 flex flex-1 flex-row justify-start items-center rtl:text-right ltr:text-left"
-                                        onClick={() => dispatch(toggleSort('name'))}
-                                    >
-                                        {sort.desc ?
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
-                                                      d="M5 15l7-7 7 7"/>
-                                            </svg>
-                                            :
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
-                                                      d="M19 9l-7 7-7-7"/>
-                                            </svg>}
-                                        {trans('name')}
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className=" px-3 py-3 rtl:text-right ltr:text-left"
+                                        className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
                                     >
                                         {trans('commands')}
                                     </th>
                                     <th
                                         scope="col"
-                                        className=" px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left"
+                                        className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
                                         onClick={() => dispatch(toggleSort('price'))}
                                     >
-                                        {sort.desc ?
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
-                                                      d="M5 15l7-7 7 7"/>
-                                            </svg>
-                                            :
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
-                                                 viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
-                                                      d="M19 9l-7 7-7-7"/>
-                                            </svg>}
-                                        {trans('price')}
+                                        <div className="flex flex-row">
+                                            {sort.desc ?
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
+                                                          d="M5 15l7-7 7 7"/>
+                                                </svg>
+                                                :
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
+                                                          d="M19 9l-7 7-7-7"/>
+                                                </svg>}
+                                            {trans('price')}
+                                        </div>
                                     </th>
                                     <th
                                         scope="col"
-                                        className=" px-3 py-3 rtl:text-right ltr:text-left"
+                                        className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
                                     >
                                         {trans('owner_author')}
                                     </th>
 
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="block md:table-row-group">
                                 {
                                     currentData && currentData.map(element =>
-                                        <tr className={'bg-white border-b border-gray-100'} key={element.id}>
-                                            <td className="px-3 py-4 whitespace-nowrap font-medium text-gray-900">{element.id}</td>
+                                        <tr className='block md:table-row bg-white border-b border-gray-100 text-gray-500'
+                                            key={element.id}>
+                                            <td className=" block md:table-cell px-3 py-4 whitespace-nowrap font-medium text-gray-900">{element.id}</td>
                                             {/*<td className="px-3 py-4 whitespace-nowrap text-gray-500">*/}
                                             {/*    <img className="w-14 h-14  object-contain rounded-md shadow-inner"*/}
                                             {/*         src={getThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
                                             {/*</td>*/}
-                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
-                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">
+                                            <td className="block md:table-cell whitespace-nowrap text-gray-500">{element.sku}</td>
+                                            <td className="block md:table-cell whitespace-nowrap text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
                                                     <ActiveDot active={element.active}/>
                                                     {element[getLocalized('name')]}
@@ -302,8 +309,8 @@ export default function CourseIndex({elements}) {
                                                     </Menu>
                                                 </div>
                                             </td>
-                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">{element.price} {trans('kd')}</td>
-                                            <td className="px-3 py-4 whitespace-nowrap text-gray-500">
+                                            <td className="block md:table-cell whitespace-nowrap text-gray-500">{element.price} {trans('kd')}</td>
+                                            <td className="block md:table-cell whitespace-nowrap text-gray-500">
                                                 {
                                                     element.user && <Link
                                                         href={route('backend.user.edit', element.user.id)}

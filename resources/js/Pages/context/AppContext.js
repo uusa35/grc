@@ -84,13 +84,10 @@ const AppContextProvider = ({children}) => {
     }, [lang])
 
     useEffect(() => {
-        isLocal() && console.log('useEffect starts here =====>')
         Inertia.on('navigate', (e) => {
-            isLocal() && console.log('navigate ==>')
             const currentRoute = route().current();
             const breadCrumbs = split(currentRoute, '.');
-            isLocal() && console.log('befre Module', breadCrumbs[1])
-            isLocal() && console.log('bread', breadCrumbs);
+            // isLocal() && console.log('bread', breadCrumbs);
             dispatch(setBreadCrumbs(breadCrumbs))
             dispatch(setParentModule(breadCrumbs[1]));
         })

@@ -34,7 +34,7 @@ export default function TrashedIndex({elements, model }) {
     return (
         <BackendContainer elements={elements} showSearch={elements.total > 1} showNoElements={elements.total < 1}
                           showMobileView={elements.total > 1}>
-            <div className="flex flex-col hidden sm:block">
+            <div className="flex flex-col ">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div

@@ -22,7 +22,7 @@ export default function({elements}) {
             links={elements.meta.links}
             mainModule={'governate'}
         >
-            <div className="flex flex-col hidden sm:block">
+            <div className="flex flex-col ">
                 <div className=" overflow-auto">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div

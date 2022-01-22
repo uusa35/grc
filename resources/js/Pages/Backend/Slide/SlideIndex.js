@@ -18,7 +18,7 @@ export default function SlideIndex({elements}) {
     return (
         <BackendContainer elements={elements} subModule={'slide'} showNoElements={elements.data.length < 1}
                           showMobileView={true}>
-            <div className="flex flex-col hidden sm:block">
+            <div className="flex flex-col ">
                 <div className=" overflow-auto">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div

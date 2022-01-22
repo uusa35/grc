@@ -28,7 +28,6 @@ export function* startCheckCartBeforeAdd(action) {
             ])
         }
     } catch (e) {
-        console.log('the e from check cart', e);
         yield put({
             type: SET_TOAST_MESSAGE, payload: {
                 message: e,
