@@ -7,7 +7,7 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000w",
         "hot": "mix watch --hot",
         "prod": "mix --production && mix --production --mix-config=webpack.ssr.mix.js",
-        "production": "mix --production && npx tailwindcss -o public/css/app.css --minify && npx tailwindcss -o public/css/styles.css.css --minify",
+        "production": "mix --production && postcss resources/css/app.css -o public/css/app.css",
         "prettier": "prettier --write --no-bracket-spacing --single-quote --jsx-bracket-same-line --print-width 80 resources/js/Pages/*/*'"
     },
     "devDependencies": {
@@ -24,7 +24,7 @@
         "browser-sync": "^2.27.5",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.2.13",
+        "postcss": "^8.4.5",
         "postcss-import": "^14.0.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
@@ -52,6 +52,7 @@
         "laravel-mix-tailwind": "^0.1.2",
         "moment": "^2.29.1",
         "pluralize": "^8.0.0",
+        "postcss-cli": "^9.1.0",
         "prop-types": "^15.7.2",
         "pusher-js": "^7.0.3",
         "react-confirm-alert": "^2.7.0",

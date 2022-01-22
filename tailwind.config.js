@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors')
 module.exports = {
     purge: {
-        enabled : false,
+        // enabled : true,
         // options: {
         // Whitelisting some classes to avoid purge
         // safelist: [
@@ -12,7 +12,7 @@ module.exports = {
         // },
         content: [
             './resources/views/**/*.blade.php',
-            './resources/css/**/*.css',
+            'resources/js/**/*.js'
         ]
     },
     darkMode: 'class', // or 'media' or 'class'
