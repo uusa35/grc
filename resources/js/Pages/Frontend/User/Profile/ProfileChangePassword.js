@@ -67,7 +67,7 @@ export default function({element}) {
                                             {/* old_password */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="old_password"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("old_password")}
                                                 </label>
                                                 <input
@@ -89,7 +89,7 @@ export default function({element}) {
                                             {/* new_password */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="new_password"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("new_password")}
                                                 </label>
                                                 <input
@@ -115,7 +115,7 @@ export default function({element}) {
                                         <div className="mt-4 py-4 px-4 flex justify-end gap-x-5">
                                             <button
                                                 type="button"
-                                                className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                                className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
                                             >
                                                 {trans('cancel')}
                                             </button>

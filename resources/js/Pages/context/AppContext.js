@@ -24,7 +24,6 @@ import ConfirmationModal from "../Backend/components/partials/ConfirmationModal"
 import {capitalize} from "lodash/string";
 import Echo from 'laravel-echo'
 import Pusher from "pusher-js";
-import {env} from "tailwindcss/lib/jit/lib/sharedState";
 
 const AppContext = createContext({});
 
@@ -104,7 +103,7 @@ const AppContextProvider = ({children}) => {
     }, [])
 
     useMemo(() => {
-        if ((!bootStrapped && navigator.onLine) || env.NODE_ENV == 'development') {
+        if ((!bootStrapped && navigator.onLine)) {
             dispatch(startBootStrapped({settings, currencies}))
         }
         if (!isEmpty(auth && auth.role?.privileges)) {
@@ -125,7 +124,7 @@ const AppContextProvider = ({children}) => {
 
     return (
         <AppContext.Provider value={context}>
-            {navigator.onLine || env.NODE_ENV == 'development' ? children : <LoadingView/>}
+            {navigator.onLine  ? children : <LoadingView/>}
             <ToastContainer
                 rtl={locale.isRTL}
                 closeButton={() => <GrClose color={'white'}/>}

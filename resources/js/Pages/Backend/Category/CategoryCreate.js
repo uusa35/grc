@@ -76,7 +76,7 @@ export default function({elements}) {
                     <FormSection title={`${trans('create')} ${trans('category')}`}>
                         {/* name ar */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                            <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                 {trans('name_ar')}
                             </label>
                             <div className="mt-1">
@@ -98,7 +98,7 @@ export default function({elements}) {
                         </div>
                         {/* name en */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="name_en" className={`block   text-gray-700`}>
+                            <label htmlFor="name_en" className={`block   text-gray-800`}>
                                 {trans('name_en')}
                             </label>
                             <div className="mt-1">
@@ -119,7 +119,7 @@ export default function({elements}) {
                             </p>
                         </div>
                         <div className="sm:col-span-2">
-                            <label htmlFor="parent_id" className={`block   text-gray-700`}>
+                            <label htmlFor="parent_id" className={`block   text-gray-800`}>
                                 {trans('main_category')}
                             </label>
                             <div className="mt-1">
@@ -146,7 +146,7 @@ export default function({elements}) {
                         </div>
                         {/* caption_ar  */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="caption_ar" className={`block   text-gray-700`}>
+                            <label htmlFor="caption_ar" className={`block   text-gray-800`}>
                                 {trans('caption_ar')}
                             </label>
                             <div className="mt-1">
@@ -168,7 +168,7 @@ export default function({elements}) {
                         </div>
                         {/* caption_en */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="caption_en" className={`block   text-gray-700`}>
+                            <label htmlFor="caption_en" className={`block   text-gray-800`}>
                                 {trans('caption_en')}
                             </label>
                             <div className="mt-1">
@@ -190,7 +190,7 @@ export default function({elements}) {
                         </div>
                         {/* sequance */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="order" className={`block   text-gray-700`}>
+                            <label htmlFor="order" className={`block   text-gray-800`}>
                                 {trans('sequance')}
                             </label>
                             <div className="mt-1">
@@ -213,7 +213,7 @@ export default function({elements}) {
                         {/* image*/}
                         <div className="sm:col-span-3 has-tooltip mt-5">
                             <label htmlFor="main_image"
-                                   className={`block   text-gray-700`}>
+                                   className={`block   text-gray-800`}>
                                 {trans('main_image')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -239,7 +239,7 @@ export default function({elements}) {
                         {/* image_rectangle*/}
                         <div className="sm:col-span-3 has-tooltip mt-5">
                             <label htmlFor="image_rectangle"
-                                   className={`block   text-gray-700`}>
+                                   className={`block   text-gray-800`}>
                                 {trans('image_rectangle')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32 hidden">
@@ -265,7 +265,7 @@ export default function({elements}) {
                         {/* more images */}
                         <div className="sm:col-span-3 has-tooltip mt-3 hidden">
                             <label htmlFor="more_images"
-                                   className={`block   text-gray-700`}>
+                                   className={`block   text-gray-800`}>
                                 {trans('more_images')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -296,7 +296,7 @@ export default function({elements}) {
                         {/* file pdf */}
                         <div className="sm:col-span-3 invisible">
                             <label htmlFor="main_image"
-                                   className={`block  flex flex-row justify-between items-center  text-gray-700`}>
+                                   className={`block  flex flex-row justify-between items-center  text-gray-800`}>
                                 {trans('pdf_file')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -324,7 +324,7 @@ export default function({elements}) {
                         {/* description ar */}
                         <div className="sm:col-span-3 has-tooltip">
                             <label htmlFor="description_ar"
-                                   className={`block   text-gray-700`}>
+                                   className={`block   text-gray-800`}>
                                 {trans('description_ar')}
                             </label>
                             <div className="mt-1">
@@ -346,7 +346,7 @@ export default function({elements}) {
                         {/* description en */}
                         <div className="sm:col-span-3 has-tooltip">
                             <label htmlFor="description_en"
-                                   className={`block   text-gray-700`}>
+                                   className={`block   text-gray-800`}>
                                 {trans('description_en')}
                             </label>
                             <div className="mt-1">
@@ -386,7 +386,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -401,7 +401,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -431,7 +431,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="on_home"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -446,7 +446,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="on_home"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -476,7 +476,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="on_new"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -491,7 +491,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="on_new"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -521,7 +521,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_parent"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -536,7 +536,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_parent"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -566,7 +566,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_featured"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -581,7 +581,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_featured"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -611,7 +611,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_service"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -626,7 +626,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_service"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -656,7 +656,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_product"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -671,7 +671,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_product"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -701,7 +701,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_book"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -716,7 +716,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_book"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -746,7 +746,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_user"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -761,7 +761,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_user"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -791,7 +791,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_course"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -806,7 +806,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_course"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -836,7 +836,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_commercial"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -851,7 +851,7 @@ export default function({elements}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_commercial"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>

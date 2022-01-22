@@ -221,7 +221,7 @@ export default function BookIndex({elements}) {
                                                                                     <Link
                                                                                         href={route('backend.book.edit', element.id)}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -251,7 +251,7 @@ export default function BookIndex({elements}) {
                                                                                                 id: element.id
                                                                                             })}
                                                                                             className={classNames(
-                                                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                                 'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                             )}
                                                                                         >
@@ -287,7 +287,7 @@ export default function BookIndex({elements}) {
                                                                                             }))
                                                                                         }
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 w-full flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right text-red-700'
                                                                                         )}
                                                                                     >

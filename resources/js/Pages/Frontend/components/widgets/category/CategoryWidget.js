@@ -25,7 +25,7 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
             {
                 showTitle && <div className="mt-4 flex justify-center items-center">
                     <div>
-                        <h3 className=" text-gray-700">
+                        <h3 className=" text-gray-800">
                             <Link href={route(`frontend.${type}.index`, {category_id: element.id})}>
                                 <span aria-hidden="true" className="absolute inset-0" />
                                 {element[getLocalized()]}

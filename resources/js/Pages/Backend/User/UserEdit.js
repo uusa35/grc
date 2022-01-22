@@ -184,7 +184,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                         <FormSection title={`${trans('edit')} ${trans(parentModule)}`}>
                             {/* name */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name" className={`block   text-gray-700`}>
+                                <label htmlFor="name" className={`block   text-gray-800`}>
                                     {trans('name')}
                                 </label>
                                 <div className="mt-1">
@@ -206,7 +206,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                             {/* name_ar */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                     {trans('name_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -228,7 +228,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                             {/*name en*/}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_en" className={`block   text-gray-700`}>
+                                <label htmlFor="name_en" className={`block   text-gray-800`}>
                                     {trans('name_en')}
                                 </label>
                                 <div className="mt-1">
@@ -250,7 +250,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                             {/*email*/}
                             <div className="sm:col-span-2">
-                                <label htmlFor="email" className={`block   text-gray-700`}>
+                                <label htmlFor="email" className={`block   text-gray-800`}>
                                     {trans('email')}
                                 </label>
                                 <div className="mt-1">
@@ -273,7 +273,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* subscription_id */}
                             {isAdminOrAbove &&
                             <div className="sm:col-span-2 hidden">
-                                <label htmlFor="subscription_id" className="block   text-gray-700">
+                                <label htmlFor="subscription_id" className="block   text-gray-800">
                                     {trans('subscription')}
                                 </label>
                                 <div className="mt-1">
@@ -305,7 +305,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {
                                 isAdminOrAbove && <div className="sm:col-span-2 has-tooltip mb-5">
                                     <label htmlFor="end_subscription_date"
-                                           className={`block   text-gray-700`}>
+                                           className={`block   text-gray-800`}>
                                         {trans('end_subscription_date')}
                                     </label>
                                     <div className="mt-1">
@@ -334,7 +334,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* role_id */}
                             <div className="sm:col-span-2">
                                 {isAdminOrAbove && <>
-                                    <label htmlFor="role_id" className="block   text-gray-700">
+                                    <label htmlFor="role_id" className="block   text-gray-800">
                                         {trans('role')}
                                     </label>
                                     <div className="mt-1">
@@ -363,7 +363,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                             {/* country_id */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="country_id" className="block   text-gray-700">
+                                <label htmlFor="country_id" className="block   text-gray-800">
                                     {trans('country')}
                                 </label>
                                 <div className="mt-1">
@@ -392,7 +392,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* area_id */}
                             {
                                 areas && <div className="sm:col-span-2">
-                                    <label htmlFor="area_id" className="block   text-gray-700">
+                                    <label htmlFor="area_id" className="block   text-gray-800">
                                         {trans('area')}
                                     </label>
                                     <div className="mt-1">
@@ -424,7 +424,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* categories */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('categories')}
                                 </label>
                                 <div>
@@ -525,7 +525,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* image*/}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -551,7 +551,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* more images */}
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('more_images')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -582,7 +582,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* file pdf */}
                             <div className="sm:col-span-3 hidden">
                                 <label htmlFor="main_image"
-                                       className={`block  flex flex-row justify-between items-center  text-gray-700`}>
+                                       className={`block  flex flex-row justify-between items-center  text-gray-800`}>
                                     {trans('pdf_file')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -626,7 +626,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="active"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -641,7 +641,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="active"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -671,7 +671,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -686,7 +686,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="on_home"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -711,7 +711,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* description */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('description_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -733,7 +733,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* description_en */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_en"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('description_en')}
                                 </label>
                                 <div className="mt-1">
@@ -754,7 +754,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                             {/* service_ar */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="service_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="service_ar" className={`block   text-gray-800`}>
                                     {trans('service_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -774,7 +774,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                             {/* service en*/}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="service_en" className={`block   text-gray-700`}>
+                                <label htmlFor="service_en" className={`block   text-gray-800`}>
                                     {trans('service_en')}
                                 </label>
                                 <div className="mt-1">
@@ -794,7 +794,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                             {/* policy_ar */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="policy_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="policy_ar" className={`block   text-gray-800`}>
                                     {trans('policy_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -814,7 +814,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             </div>
                             {/* policy_en*/}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="policy_en" className={`block   text-gray-700`}>
+                                <label htmlFor="policy_en" className={`block   text-gray-800`}>
                                     {trans('policy_en')}
                                 </label>
                                 <div className="mt-1">
@@ -835,7 +835,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* caption_ar */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_ar"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('caption_ar')}
                                 </label>
                                 <div className="mt-1 ">
@@ -858,7 +858,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* caption en*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_en"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('caption_en')}
                                 </label>
                                 <div className="mt-1 ">
@@ -881,7 +881,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* keywords */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="keywords"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('keywords')}
                                 </label>
                                 <div className="mt-1">
@@ -904,7 +904,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* order*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="order"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('order_appearance')}
                                 </label>
                                 <div className="mt-1">
@@ -928,7 +928,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* mobile*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="mobile"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('mobile')}
                                 </label>
                                 <div className="mt-1">
@@ -950,7 +950,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* phone*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="phone"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('phone')}
                                 </label>
                                 <div className="mt-1">
@@ -972,7 +972,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* fax*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="fax"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('fax')}
                                 </label>
                                 <div className="mt-1">
@@ -994,7 +994,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* whatsapp*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="whatsapp"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('whatsapp')}
                                 </label>
                                 <div className="mt-1">
@@ -1016,7 +1016,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* iphone*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="iphone"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('apple')}
                                 </label>
                                 <div className="mt-1">
@@ -1038,7 +1038,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* android*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="android"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('android')}
                                 </label>
                                 <div className="mt-1">
@@ -1061,7 +1061,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* facebook*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="facebook"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('facebook')}
                                 </label>
                                 <div className="mt-1">
@@ -1084,7 +1084,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* twitter*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="twitter"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('twitter')}
                                 </label>
                                 <div className="mt-1">
@@ -1107,7 +1107,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* instagram*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="instagram"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('instagram')}
                                 </label>
                                 <div className="mt-1">
@@ -1130,7 +1130,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* youtube*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="youtube"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('youtube')}
                                 </label>
                                 <div className="mt-1">
@@ -1153,7 +1153,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* website*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="website"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('website')}
                                 </label>
                                 <div className="mt-1">
@@ -1177,7 +1177,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* video_url_one */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_one"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('video_url_one')}
                                 </label>
                                 <div className="mt-1">
@@ -1201,7 +1201,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* video_url_two */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_two"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('video_url_two')}
                                 </label>
                                 <div className="mt-1">
@@ -1227,7 +1227,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* longitude*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="longitude"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('longitude')}
                                 </label>
                                 <div className="mt-1">
@@ -1250,7 +1250,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* latitude*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="latitude"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('latitude')}
                                 </label>
                                 <div className="mt-1">
@@ -1273,7 +1273,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/* merchant_id*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="merchant_id"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('merchant_id')}
                                 </label>
                                 <div className="mt-1">
@@ -1297,7 +1297,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('qr')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -1366,7 +1366,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1381,7 +1381,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="news_letter_on"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1413,7 +1413,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('user')}
                                         </label>
                                     </div>
@@ -1428,7 +1428,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="is_male"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('female')}
                                         </label>
                                     </div>
@@ -1460,7 +1460,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1475,7 +1475,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="access_dashboard"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>

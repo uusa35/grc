@@ -63,7 +63,7 @@ export default function() {
                     <FormSection title={`${trans('edit')} ${trans('country')}`}>
                         {/* name ar */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                            <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                 {trans('name_ar')}
                             </label>
                             <div className="mt-1">
@@ -85,7 +85,7 @@ export default function() {
                         </div>
                         {/* name en */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="name_en" className={`block   text-gray-700`}>
+                            <label htmlFor="name_en" className={`block   text-gray-800`}>
                                 {trans('name_en')}
                             </label>
                             <div className="mt-1">
@@ -107,7 +107,7 @@ export default function() {
                         </div>
                         {/* currency_symbol_ar  */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="currency_symbol_ar" className={`block   text-gray-700`}>
+                            <label htmlFor="currency_symbol_ar" className={`block   text-gray-800`}>
                                 {trans('currency_symbol_ar')}
                             </label>
                             <div className="mt-1">
@@ -129,7 +129,7 @@ export default function() {
                         </div>
                         {/* currency_symbol_en */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="currency_symbol_en" className={`block   text-gray-700`}>
+                            <label htmlFor="currency_symbol_en" className={`block   text-gray-800`}>
                                 {trans('currency_symbol_en')}
                             </label>
                             <div className="mt-1">
@@ -151,7 +151,7 @@ export default function() {
                         </div>
                         {/* order */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="order" className={`block   text-gray-700`}>
+                            <label htmlFor="order" className={`block   text-gray-800`}>
                                 {trans('sequance')}
                             </label>
                             <div className="mt-1">
@@ -173,7 +173,7 @@ export default function() {
                         </div>
                         {/* calling_code */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="order" className={`block   text-gray-700`}>
+                            <label htmlFor="order" className={`block   text-gray-800`}>
                                 {trans('calling_code')}
                             </label>
                             <div className="mt-1">
@@ -196,7 +196,7 @@ export default function() {
 
                         {/* country_code */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="order" className={`block   text-gray-700`}>
+                            <label htmlFor="order" className={`block   text-gray-800`}>
                                 {trans('country_code')}
                             </label>
                             <div className="mt-1">
@@ -219,7 +219,7 @@ export default function() {
 
                         {/* fixed_shipment_charge */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="order" className={`block   text-gray-700`}>
+                            <label htmlFor="order" className={`block   text-gray-800`}>
                                 {trans('fixed_shipment_charge')}
                             </label>
                             <div className="mt-1">
@@ -243,7 +243,7 @@ export default function() {
                         {/* image*/}
                         <div className="sm:col-span-3 has-tooltip mt-5">
                             <label htmlFor="main_image"
-                                   className={`block   text-gray-700`}>
+                                   className={`block   text-gray-800`}>
                                 {trans('main_image')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -289,7 +289,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -304,7 +304,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -334,7 +334,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_local"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -349,7 +349,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_local"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -380,7 +380,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="has_currency"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -395,7 +395,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="has_currency"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>

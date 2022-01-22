@@ -13,115 +13,117 @@
     @apply visible z-50
 }
 
-@font-face {
-    font-family: 'HelveticaNeueME_1';
-    src: url('../../public/fonts/HelveticaNeueMEforSKYW21-Rg_web.woff2') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+@layer base {
+    @font-face {
+        font-family: 'HelveticaNeueME_1';
+        src: url('../../public/fonts/HelveticaNeueMEforSKYW21-Rg_web.woff2') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'GESSTwoBold';
+        src: url('../../public/fonts/GESSTwoBold.eot') format('truetype');
+        src: url('../../public/fonts/GESSTwoBold.otf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'GESSTwoMedium';
+        src: url('../../public/fonts/GESSTwoMedium.eot') format('truetype');
+        src: url('../../public/fonts/GESSTwoMedium.otf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Tajawal-Light';
+        src: url('../../public/fonts/Tajawal-Light.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Tajawal-Medium';
+        src: url('../../public/fonts/Tajawal-Medium.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+
+    @font-face {
+        font-family: 'DroidArabicKufi';
+        src: url('../../public/fonts/DroidArabicKufi.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Almarai-Bold';
+        src: url('../../public/fonts/Almarai-Bold.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'bein-ar-black_0';
+        src: url('../../public/fonts/bein-ar-black_0.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'bein-ar-normal_0';
+        src: url('../../public/fonts/bein-ar-normal_0.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'AR-BBC-Regular';
+        src: url('../../public/fonts/AR-BBC-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'DroidArabicKufi-bold';
+        src: url('../../public/fonts/DroidArabicKufi-bold.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'cairo';
+        src: url('../../public/fonts/cairo.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+
+    @font-face {
+        font-family: 'Ar-Ith';
+        src: url('../../public/fonts/Ar-Ith.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'AlMohanad';
+        src: url('../../public/fonts/AlMohanad.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'ibm';
+        src: url('../../public/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
 }
-
-@font-face {
-    font-family: 'GESSTwoBold';
-    src: url('../../public/fonts/GESSTwoBold.eot') format('truetype');
-    src: url('../../public/fonts/GESSTwoBold.otf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'GESSTwoMedium';
-    src: url('../../public/fonts/GESSTwoMedium.eot') format('truetype');
-    src: url('../../public/fonts/GESSTwoMedium.otf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Tajawal-Light';
-    src: url('../../public/fonts/Tajawal-Light.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Tajawal-Medium';
-    src: url('../../public/fonts/Tajawal-Medium.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
-@font-face {
-    font-family: 'DroidArabicKufi';
-    src: url('../../public/fonts/DroidArabicKufi.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Almarai-Bold';
-    src: url('../../public/fonts/Almarai-Bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'bein-ar-black_0';
-    src: url('../../public/fonts/bein-ar-black_0.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'bein-ar-normal_0';
-    src: url('../../public/fonts/bein-ar-normal_0.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'AR-BBC-Regular';
-    src: url('../../public/fonts/AR-BBC-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'DroidArabicKufi-bold';
-    src: url('../../public/fonts/DroidArabicKufi-bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'cairo';
-    src: url('../../public/fonts/cairo.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-
-@font-face {
-    font-family: 'Ar-Ith';
-    src: url('../../public/fonts/Ar-Ith.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'AlMohanad';
-    src: url('../../public/fonts/AlMohanad.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'ibm';
-    src: url('../../public/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 .font-ibm {
     font-family: 'ibm', 'sans-serif';
 }

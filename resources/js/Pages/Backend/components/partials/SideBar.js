@@ -121,7 +121,7 @@ const SideBar = () => {
                                                                     <a
                                                                         href="#"
                                                                         className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                             'block px-4 py-2 text-sm'
                                                                         )}
                                                                     >
@@ -134,7 +134,7 @@ const SideBar = () => {
                                                                     <a
                                                                         href="#"
                                                                         className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                             'block px-4 py-2 text-sm'
                                                                         )}
                                                                     >
@@ -147,7 +147,7 @@ const SideBar = () => {
                                                                     <a
                                                                         href="#"
                                                                         className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                             'block px-4 py-2 text-sm'
                                                                         )}
                                                                     >
@@ -162,7 +162,7 @@ const SideBar = () => {
                                                                     <a
                                                                         href="#"
                                                                         className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                             'block px-4 py-2 text-sm'
                                                                         )}
                                                                     >
@@ -175,7 +175,7 @@ const SideBar = () => {
                                                                     <a
                                                                         href="#"
                                                                         className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                             'block px-4 py-2 text-sm'
                                                                         )}
                                                                     >
@@ -190,7 +190,7 @@ const SideBar = () => {
                                                                     <a
                                                                         href="#"
                                                                         className={classNames(
-                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                             'block px-4 py-2 text-sm'
                                                                         )}
                                                                     >
@@ -232,7 +232,7 @@ const SideBar = () => {
                                 <>
                                     <div>
                                         <Menu.Button
-                                            className="group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500">
+                                            className="group w-full bg-gray-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-purple-500">
                                           <span className="flex w-full justify-between items-center">
                                             <span className="flex min-w-0 items-center justify-between space-x-3">
                                               <img
@@ -276,7 +276,7 @@ const SideBar = () => {
                                                         <Link
                                                             href={route('backend.setting.index')}
                                                             className={classNames(
-                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                 `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
                                                             )}
                                                         >
@@ -293,7 +293,7 @@ const SideBar = () => {
                                                         <Link
                                                             href={route('backend.user.edit', auth.id)}
                                                             className={classNames(
-                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                 `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
                                                             )}
                                                         >
@@ -312,7 +312,7 @@ const SideBar = () => {
                                                                 document.getElementById('logout-form').submit()
                                                             }}
                                                             className={classNames(
-                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                 'flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right'
                                                             )}
                                                         >
@@ -361,7 +361,7 @@ const SideBar = () => {
                                                     key={m.name}
                                                     href={route(`backend.${m.name}.search`)}
                                                     className={classNames(
-                                                        m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50',
+                                                        m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-800 hover:text-gray-900 hover:bg-gray-50',
                                                         'group flex items-center py-2 rounded-md capitalize'
                                                     )}
                                                     aria-current={'page'}
@@ -392,7 +392,7 @@ const SideBar = () => {
                                         <a
                                             key={team.name}
                                             href={team.href}
-                                            className="group flex items-center px-3 py-2 text-gray-700 rounded-md hover:text-gray-900 hover:bg-gray-50"
+                                            className="group flex items-center px-3 py-2 text-gray-800 rounded-md hover:text-gray-900 hover:bg-gray-50"
                                         >
                                               <span
                                                   className={classNames(team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full')}

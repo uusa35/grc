@@ -32,7 +32,7 @@ export default function NewsLetter() {
                         <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0 mx-5">
                             <button
                                 type="submit"
-                                className="capitalize w-full flex items-center justify-center py-3 px-5 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                className="capitalize w-full flex items-center justify-center py-3 px-5 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                             >
                                 {trans('register_now')}
                             </button>

@@ -143,7 +143,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                         <FormSection title={`${trans('edit')} ${trans(parentModule)}`}>
                             {/* name_ar */}
                             <div className="sm:col-span-3">
-                                <label htmlFor="name_ar" className={`block  font-medium text-gray-700`}>
+                                <label htmlFor="name_ar" className={`block  font-medium text-gray-800`}>
                                     {trans('name_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -165,7 +165,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             </div>
                             {/* name_en */}
                             <div className="sm:col-span-3">
-                                <label htmlFor="name_en" className={`block  font-medium text-gray-700`}>
+                                <label htmlFor="name_en" className={`block  font-medium text-gray-800`}>
                                     {trans('name_en')}
                                 </label>
                                 <div className="mt-1">
@@ -187,7 +187,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             </div>
                             {/* price */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="price" className={`block  font-medium text-gray-700`}>
+                                <label htmlFor="price" className={`block  font-medium text-gray-800`}>
                                     {trans('price')}
                                 </label>
                                 <div className="mt-1">
@@ -211,7 +211,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             {/* sale_price */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="sale_price"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('sale_price')}
                                 </label>
                                 <div className="mt-1 ">
@@ -234,7 +234,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             </div>
                             {/* sku*/}
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="sku" className={`block  font-medium text-gray-700`}>
+                                <label htmlFor="sku" className={`block  font-medium text-gray-800`}>
                                     {trans('sku')}
                                 </label>
                                 <div className="mt-1">
@@ -257,7 +257,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
 
                             {/* user_id */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="user_id" className="block  font-medium text-gray-700">
+                                <label htmlFor="user_id" className="block  font-medium text-gray-800">
                                     {trans('owner')}
                                 </label>
                                 <div className="mt-1">
@@ -285,7 +285,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             {/* cateogiries */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('categories')}
                                 </label>
                                 <div>
@@ -387,7 +387,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                             {/* image*/}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -414,7 +414,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {service.images.length <= 5 &&
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('more_images')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -464,7 +464,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -479,7 +479,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -509,7 +509,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -524,7 +524,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_home"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -555,7 +555,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -570,7 +570,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_sale"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -592,7 +592,7 @@ accept="image/jpg, image/jpeg , image/png"
                         <FormSection title={trans('more_details')}>
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('description_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -613,7 +613,7 @@ accept="image/jpg, image/jpeg , image/png"
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_en"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('description_en')}
                                 </label>
                                 <div className="mt-1">
@@ -634,7 +634,7 @@ accept="image/jpg, image/jpeg , image/png"
                             </div>
                             {/* notes */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_ar" className={`block  font-medium text-gray-700`}>
+                                <label htmlFor="notes_ar" className={`block  font-medium text-gray-800`}>
                                     {trans('notes_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -653,7 +653,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_en" className={`block  font-medium text-gray-700`}>
+                                <label htmlFor="notes_en" className={`block  font-medium text-gray-800`}>
                                     {trans('notes_en')}
                                 </label>
                                 <div className="mt-1">
@@ -674,7 +674,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/* caption */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_ar"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('caption_ar')}
                                 </label>
                                 <div className="mt-1 ">
@@ -696,7 +696,7 @@ accept="image/jpg, image/jpeg , image/png"
                             </div>
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_en"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('caption_en')}
                                 </label>
                                 <div className="mt-1 ">
@@ -719,7 +719,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/* keywords */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="keywords"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('keywords')}
                                 </label>
                                 <div className="mt-1">
@@ -742,7 +742,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/* delivery time*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="delivery_time"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('delivery_time')}
                                 </label>
                                 <div className="mt-1">
@@ -766,7 +766,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/* order*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="order"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('order_appearance')}
                                 </label>
                                 <div className="mt-1">
@@ -789,7 +789,7 @@ accept="image/jpg, image/jpeg , image/png"
                             </div>
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_one"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('video_url_one')}
                                 </label>
                                 <div className="mt-1">
@@ -812,7 +812,7 @@ accept="image/jpg, image/jpeg , image/png"
                             </div>
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_two"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('video_url_two')}
                                 </label>
                                 <div className="mt-1">
@@ -836,7 +836,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/* start sale */}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="start_sale"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('start_sale')}
                                 </label>
                                 <div className="mt-1">
@@ -863,7 +863,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/* end sale*/}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="end_sale"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('end_sale')}
                                 </label>
                                 <div className="mt-1">
@@ -889,7 +889,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"
-                                       className={`block  font-medium text-gray-700`}>
+                                       className={`block  font-medium text-gray-800`}>
                                     {trans('qr')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -958,7 +958,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -973,7 +973,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="is_available"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1004,7 +1004,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="wrap_as_gift"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1019,7 +1019,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="wrap_as_gift"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1051,7 +1051,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="direct_purchase"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1066,7 +1066,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="direct_purchase"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1098,7 +1098,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1113,7 +1113,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="exclusive"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1144,7 +1144,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1159,7 +1159,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_new"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1190,7 +1190,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1205,7 +1205,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="is_hot_deal"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>

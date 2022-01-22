@@ -171,7 +171,7 @@ export default function({elements}) {
                                                                                     <Link
                                                                                         href={route('backend.user.edit', element.id)}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -196,7 +196,7 @@ export default function({elements}) {
                                                                                         <Link
                                                                                             href={route('backend.reset.password', {id: element.id})}
                                                                                             className={classNames(
-                                                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                                 'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                             )}
                                                                                         >
@@ -225,7 +225,7 @@ export default function({elements}) {
                                                                                             slidable_type: 'user'
                                                                                         })}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -253,7 +253,7 @@ export default function({elements}) {
                                                                                             slidable_type: 'user'
                                                                                         })}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -283,7 +283,7 @@ export default function({elements}) {
                                                                                             id: element.id
                                                                                         })}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -309,7 +309,7 @@ export default function({elements}) {
                                                                                             id: element.id
                                                                                         })}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -344,7 +344,7 @@ export default function({elements}) {
                                                                                             }))
                                                                                         }
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 w-full flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right text-red-700'
                                                                                         )}
                                                                                     >

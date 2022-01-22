@@ -59,7 +59,7 @@ export default function() {
 
                         {/* password */}
                         <div className="sm:col-span-full">
-                            <label htmlFor="password" className={`block   text-gray-700`}>
+                            <label htmlFor="password" className={`block   text-gray-800`}>
                                 {trans('password')}
                             </label>
                             <div className="mt-1">
@@ -81,7 +81,7 @@ export default function() {
 
                         {/* password_confirmation */}
                         <div className="sm:col-span-full">
-                            <label htmlFor="password_confirmation" className={`block   text-gray-700`}>
+                            <label htmlFor="password_confirmation" className={`block   text-gray-800`}>
                                 {trans('password_confirmation')}
                             </label>
                             <div className="mt-1">

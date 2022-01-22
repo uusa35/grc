@@ -104,7 +104,7 @@ export default function InvoiceIndex() {
                                                                 <a
                                                                     href={order.href}
                                                                     className={classNames(
-                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                         'block px-4 py-2 text-sm'
                                                                     )}
                                                                 >
@@ -117,7 +117,7 @@ export default function InvoiceIndex() {
                                                                 <a
                                                                     href={order.invoiceHref}
                                                                     className={classNames(
-                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                         'block px-4 py-2 text-sm'
                                                                     )}
                                                                 >
@@ -133,14 +133,14 @@ export default function InvoiceIndex() {
                                         <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4">
                                             <a
                                                 href={order.href}
-                                                className="flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                className="flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             >
                                                 <span>View Order</span>
                                                 <span className="sr-only">{order.number}</span>
                                             </a>
                                             <a
                                                 href={order.invoiceHref}
-                                                className="flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                className="flex items-center justify-center bg-white py-2 px-2.5 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             >
                                                 <span>View Invoice</span>
                                                 <span className="sr-only">for order {order.number}</span>

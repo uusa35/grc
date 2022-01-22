@@ -63,7 +63,7 @@ export default function PinnedProjects() {
                                                                 <Link
                                                                     href={route().has(`backend.${m.name}.index`) ? route(`backend.${m.name}.create`) : '#'}
                                                                     className={classNames(
-                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                         'block px-4 py-2 '
                                                                     )}
                                                                 >
@@ -78,7 +78,7 @@ export default function PinnedProjects() {
                                                                 <Link
                                                                     href={route().has(`backend.${m.name}.search`) ? route(`backend.${m.name}.search`, { active : 1 }) : '#'}
                                                                     className={classNames(
-                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                         'block px-4 py-2 '
                                                                     )}
                                                                 >
@@ -91,7 +91,7 @@ export default function PinnedProjects() {
                                                                 <Link
                                                                     href={route().has(`backend.${m.name}.search`) ? route(`backend.${m.name}.search`, { active : 0 }) : '#'}
                                                                     className={classNames(
-                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                         'block px-4 py-2 '
                                                                     )}
                                                                 >
@@ -106,7 +106,7 @@ export default function PinnedProjects() {
                                                                 <Link
                                                                     href={route('backend.trashed', { model : m.name})}
                                                                     className={classNames(
-                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                         'block px-4 py-2 '
                                                                     )}
                                                                 >

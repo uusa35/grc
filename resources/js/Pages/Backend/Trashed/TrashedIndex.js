@@ -138,7 +138,7 @@ export default function TrashedIndex({elements, model }) {
                                                                                     <Link
                                                                                         href={route(`backend.restore`, { id : element.id , model })}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >

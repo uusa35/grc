@@ -104,7 +104,7 @@ export default function({ user }) {
                                             <div className="mt-4 py-4 px-4 flex justify-end gap-x-5">
                                                 <button
                                                     type="button"
-                                                    className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                                    className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
                                                 >
                                                     {trans('cancel')}
                                                 </button>

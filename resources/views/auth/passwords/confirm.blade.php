@@ -6,7 +6,7 @@
         <div class="w-full">
             <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
 
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
+                <header class="font-semibold bg-gray-200 text-gray-800 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
                     {{ __('Confirm Password') }}
                 </header>
 
@@ -18,7 +18,7 @@
                     </p>
 
                     <div class="flex flex-wrap">
-                        <label for="password" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="password" class="block text-gray-800 text-sm font-bold mb-2 sm:mb-4">
                             {{ __('Password') }}:
                         </label>
 

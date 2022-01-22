@@ -20,7 +20,7 @@ export default function FrontendPagination({type, total, links, showSearch = fal
                                 <Link
                                     key={page.label}
                                     href={route().has(`frontend.${type}.index`) && page.url ? page.url : '#'}
-                                    className={classNames(page.active ? `border-gray-700 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
+                                    className={classNames(page.active ? `border-gray-800 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
                                 >
                                     {page.label}
                                 </Link>

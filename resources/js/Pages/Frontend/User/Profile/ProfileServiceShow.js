@@ -108,7 +108,7 @@ export default function({element}) {
                                         element[getLocalized('caption')] && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className="text-base text-gray-700 space-y-6"
+                                                className="text-base text-gray-800 space-y-6"
                                             >{element[getLocalized('caption')]}</div>
                                         </div>
                                     }
@@ -118,7 +118,7 @@ export default function({element}) {
                                         element.sku && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
-                                                className="text-base text-gray-700 space-y-6"
+                                                className="text-base text-gray-800 space-y-6"
                                             >
                                                 {trans('reference_id')} :
                                                 {element.sku}
@@ -158,7 +158,7 @@ export default function({element}) {
                                                             <div
                                                                 onClick={() => setSelectedTiming(t)}
                                                                 className={classNames(
-                                                                    t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                    t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                     'block px-4 py-2 text-sm hover:bg-gray-100'
                                                                 )}
                                                             >

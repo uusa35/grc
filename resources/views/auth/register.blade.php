@@ -6,7 +6,7 @@
         <div class="w-full">
             <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
 
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
+                <header class="font-semibold bg-gray-200 text-gray-800 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
                     @lang('general.register')
                 </header>
 
@@ -15,7 +15,7 @@
                     @csrf
 
                     <div class="flex flex-wrap">
-                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="name" class="block text-gray-800 text-sm font-bold mb-2 sm:mb-4">
                             @lang('general.name'):
                         </label>
 
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="email" class="block text-gray-800 text-sm font-bold mb-2 sm:mb-4">
                             @lang('general.email') :
                         </label>
 
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="password" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="password" class="block text-gray-800 text-sm font-bold mb-2 sm:mb-4">
                             @lang('general.password'):
                         </label>
 
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="password-confirm" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="password-confirm" class="block text-gray-800 text-sm font-bold mb-2 sm:mb-4">
                             @lang('general.confirm_password'):
                         </label>
 
@@ -72,13 +72,13 @@
 
                     <div class="flex flex-wrap">
                         <button type="submit"
-                            class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-700 sm:py-4">
+                            class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-gray-500 hover:bg-gray-800 sm:py-4">
                             @lang('general.register')
                         </button>
 
-                        <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
+                        <p class="w-full text-xs text-center text-gray-800 my-6 sm:text-sm sm:my-8">
                             @lang('general.already_have_account')
-                            <a class="text-gray-500 hover:text-gray-700 no-underline hover:underline" href="{{ route('login') }}">
+                            <a class="text-gray-500 hover:text-gray-800 no-underline hover:underline" href="{{ route('login') }}">
                                 @lang('general.login')
                             </a>
                         </p>

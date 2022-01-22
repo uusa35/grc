@@ -199,7 +199,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         element[getLocalized('caption')] && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className="text-base text-gray-700 space-y-6"
+                                                className="text-base text-gray-800 space-y-6"
                                             >{element[getLocalized('caption')]}</div>
                                         </div>
                                     }
@@ -209,7 +209,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         element.sku && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
-                                                className="text-base text-gray-700 space-y-6"
+                                                className="text-base text-gray-800 space-y-6"
                                             >
                                                 {trans('reference_id')} :
                                                 {element.sku}
@@ -311,7 +311,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                         active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
                                                                         checked
-                                                                            ? 'bg-gray-600 border-transparent text-white hover:bg-gray-700'
+                                                                            ? 'bg-gray-600 border-transparent text-white hover:bg-gray-800'
                                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
@@ -395,7 +395,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         element.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                         active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
                                                                         checked
-                                                                            ? 'bg-gray-600 border-transparent text-white hover:bg-gray-700'
+                                                                            ? 'bg-gray-600 border-transparent text-white hover:bg-gray-800'
                                                                             : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
@@ -443,7 +443,7 @@ export default function({element, relatedElements, auth, settings}) {
                                             <button
                                                 disabled={!element.is_available || finalPrice === 0 || selectedQty < 1}
                                                 type="submit"
-                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                             >
                                                 {trans('add_to_cart')}
                                             </button>
@@ -658,7 +658,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     classNames(
                                                         selected
                                                             ? 'border-gray-600 text-gray-600'
-                                                            : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
+                                                            : 'border-transparent text-gray-800 hover:text-gray-800 hover:border-gray-300',
                                                         'whitespace-nowrap px-10 py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
@@ -672,7 +672,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     classNames(
                                                         selected
                                                             ? 'border-gray-600 text-gray-600'
-                                                            : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
+                                                            : 'border-transparent text-gray-800 hover:text-gray-800 hover:border-gray-300',
                                                         'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
@@ -685,7 +685,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                 classNames(
                                                     selected
                                                         ? 'border-gray-600 text-gray-600'
-                                                        : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
+                                                        : 'border-transparent text-gray-800 hover:text-gray-800 hover:border-gray-300',
                                                     'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                 )
                                             }

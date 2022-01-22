@@ -76,7 +76,7 @@ const BackendHeader = () => {
                                                                             key={m.name}
                                                                             href={route(`backend.${m.name}.index`)}
                                                                             className={classNames(
-                                                                                m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
+                                                                                m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-800',
                                                                                 'group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
                                                                             )}
                                                                         >
@@ -132,7 +132,7 @@ const BackendHeader = () => {
                                                                                 key={m.name}
                                                                                 href={route(`backend.${m.name}.index`)}
                                                                                 className={classNames(
-                                                                                    m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
+                                                                                    m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-800',
                                                                                     'group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
                                                                                 )}
                                                                             >
@@ -192,7 +192,7 @@ const BackendHeader = () => {
                                                                         key={m.name}
                                                                         href={route(`backend.${m.name}.create`)}
                                                                         className={classNames(
-                                                                            m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
+                                                                            m.name === parentModule ? 'bg-gray-200 text-gray-900' : 'text-gray-800',
                                                                             'text-sm group flex items-center rounded-md py-2  flex-1 ltr:ml-2 rtl:mr-2 font-extrabold hover:bg-gray-100'
                                                                         )}
                                                                     >
@@ -269,7 +269,7 @@ const BackendHeader = () => {
                                                     <Link
                                                         href={route('frontend.home')}
                                                         className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                             'group flex items-center px-4 py-2 '
                                                         )}
                                                     >
@@ -287,7 +287,7 @@ const BackendHeader = () => {
                                                     <Link
                                                         href={route(`backend.setting.index`)}
                                                         className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                             'group flex items-center px-4 py-2 '
                                                         )}
                                                     >
@@ -309,7 +309,7 @@ const BackendHeader = () => {
                                                     <Link
                                                         href={route('backend.user.edit', { id : auth.id})}
                                                         className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                             'group flex items-center px-4 py-2 '
                                                         )}
                                                     >
@@ -332,7 +332,7 @@ const BackendHeader = () => {
                                                     <Link
                                                         href={route('backend.reset.password', { id : auth.id})}
                                                         className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                             'group flex items-center px-4 py-2 '
                                                         )}
                                                     >
@@ -355,7 +355,7 @@ const BackendHeader = () => {
                                                         }}
                                                         href={route(`backend.change.lang`, { lang : locale.otherLang})}
                                                         className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                             'group flex items-center px-4 py-2 '
                                                         )}
                                                     >
@@ -379,7 +379,7 @@ const BackendHeader = () => {
                                                             document.getElementById('logout-form').submit()
                                                         }}
                                                         className={classNames(
-                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                             'group flex items-center px-4 py-2 '
                                                         )}
                                                     >

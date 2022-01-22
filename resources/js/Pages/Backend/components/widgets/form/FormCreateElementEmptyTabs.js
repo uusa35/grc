@@ -26,7 +26,7 @@ export default function FormCreateElementEmptyTabs() {
                                 </div>
                                 <div className="ml-3">
                                     <h3 className="mb-3 font-extrabold">{trans('alert')}</h3>
-                                    <p className={` text-gray-700`}>
+                                    <p className={` text-gray-800`}>
                                         {trans('basic_information_must_be_entered')}
                                     </p>
                                 </div>
@@ -54,7 +54,7 @@ export default function FormCreateElementEmptyTabs() {
                             </div>
                             <div className="ml-3">
                                 <h3 className="mb-3 font-extrabold">{trans('alert')}</h3>
-                                <p className={` text-gray-700`}>
+                                <p className={` text-gray-800`}>
                                     {trans('basic_information_must_be_entered')}
                                 </p>
                             </div>

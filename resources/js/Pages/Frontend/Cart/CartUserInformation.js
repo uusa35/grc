@@ -92,7 +92,7 @@ export default function({countries, auth }) {
                         </div>
                         {/* name */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-800">
                                 {trans('name')}*
                             </label>
                             <div className="mt-1">
@@ -113,7 +113,7 @@ export default function({countries, auth }) {
                         </div>
                         {/*email*/}
                         <div className="lg:col-span-1">
-                            <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                            <label htmlFor="email-address" className="block text-sm font-medium text-gray-800">
                                 {trans('email')}*
                             </label>
                             <div className="mt-1">
@@ -134,7 +134,7 @@ export default function({countries, auth }) {
                         </div>
                         {/*mobile*/}
                         <div className="lg:col-span-1">
-                            <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">
+                            <label htmlFor="mobile" className="block text-sm font-medium text-gray-800">
                                 {trans('mobile')}
                             </label>
                             <div className="mt-1">
@@ -158,7 +158,7 @@ export default function({countries, auth }) {
 
                         {/* country_id */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="country_id" className="block   text-gray-700">
+                            <label htmlFor="country_id" className="block   text-gray-800">
                                 {trans('country')}
                             </label>
                             <div className="mt-1">
@@ -189,7 +189,7 @@ export default function({countries, auth }) {
                         {/* area_id */}
                         {
                             areas && <div className="lg:col-span-1">
-                                <label htmlFor="area_id" className="block   text-gray-700">
+                                <label htmlFor="area_id" className="block   text-gray-800">
                                     {trans('area')}
                                 </label>
                                 <div className="mt-1">
@@ -221,7 +221,7 @@ export default function({countries, auth }) {
 
                         {/* block */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="block" className="block text-sm font-medium text-gray-700">
+                            <label htmlFor="block" className="block text-sm font-medium text-gray-800">
                                 {trans('block')}
                             </label>
                             <div className="mt-1">
@@ -242,7 +242,7 @@ export default function({countries, auth }) {
 
                         {/* street */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="street" className="street text-sm font-medium text-gray-700">
+                            <label htmlFor="street" className="street text-sm font-medium text-gray-800">
                                 {trans('street')}
                             </label>
                             <div className="mt-1">
@@ -263,7 +263,7 @@ export default function({countries, auth }) {
 
                         {/* building */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="building" className="building text-sm font-medium text-gray-700">
+                            <label htmlFor="building" className="building text-sm font-medium text-gray-800">
                                 {trans('building')}
                             </label>
                             <div className="mt-1">
@@ -284,7 +284,7 @@ export default function({countries, auth }) {
 
                         {/* apartment */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="apartment" className="apartment text-sm font-medium text-gray-700">
+                            <label htmlFor="apartment" className="apartment text-sm font-medium text-gray-800">
                                 {trans('apartment')}
                             </label>
                             <div className="mt-1">
@@ -306,7 +306,7 @@ export default function({countries, auth }) {
 
                         {/* floor */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="floor" className="floor text-sm font-medium text-gray-700">
+                            <label htmlFor="floor" className="floor text-sm font-medium text-gray-800">
                                 {trans('floor')}
                             </label>
                             <div className="mt-1">
@@ -328,7 +328,7 @@ export default function({countries, auth }) {
                         <div className="mt-10 col-span-full flex flex-col sm:flex-row  space-y-5 sm:space-y-0 justify-between items-center w-full">
                             <Link
                                 href={route('frontend.cart.index')}
-                                className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                             >
                                 <div className="flex">
                                     {locale.isRTL ?
@@ -349,7 +349,7 @@ export default function({countries, auth }) {
                             <div className="flex flex-col sm:flex-row flex-wrap space-y-5 sm:space-y-0">
                                 <button
                                     type="submit"
-                                    className="capitalize mx-10 bg-gray-400 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                    className="capitalize mx-10 bg-gray-400 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
                                 >
                                     {trans('save')} {trans('information')}
                                 </button>

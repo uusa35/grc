@@ -52,7 +52,7 @@ export default function MainNav() {
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
             {/* Top Nav*/}
-            <div className="bg-gray-700 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8">
+            <div className="bg-gray-800 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-5 gap-x-5">
                     {
                         settings.instagram && <a target="_blank" href={settings.instagram}>

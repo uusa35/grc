@@ -130,7 +130,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                     >
                         {/* NAME AR*/}
                         <div className="sm:col-span-3 has-tooltip">
-                            <label htmlFor="name_ar" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="name_ar" className={`block  font-medium text-gray-800`}>
                                 {trans('name_ar')}
                             </label>
                             <div className="mt-1">
@@ -152,7 +152,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
                         {/* NAME EN */}
                         <div className="sm:col-span-3 has-tooltip">
-                            <label htmlFor="name_en" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="name_en" className={`block  font-medium text-gray-800`}>
                                 {trans('name_en')}
                             </label>
                             <div className="mt-1">
@@ -174,7 +174,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
                         {/*PRICE*/}
                         <div className="sm:col-span-2 has-tooltip">
-                            <label htmlFor="price" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="price" className={`block  font-medium text-gray-800`}>
                                 {trans('price')}
                             </label>
                             <div className="mt-1">
@@ -198,7 +198,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/* sale price*/}
                         <div className="sm:col-span-2 has-tooltip">
                             <label htmlFor="sale_price"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('sale_price')}
                             </label>
                             <div className="mt-1 ">
@@ -221,7 +221,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
                         {/* qty*/}
                         <div className="sm:col-span-2 has-tooltip">
-                            <label htmlFor="qty" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="qty" className={`block  font-medium text-gray-800`}>
                                 {trans('qty')} {trans('available')}
                             </label>
                             <div className="mt-1">
@@ -244,7 +244,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
                         {/*sku*/}
                         <div className="sm:col-span-2 has-tooltip">
-                            <label htmlFor="sku" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="sku" className={`block  font-medium text-gray-800`}>
                                 {trans('sku')}
                             </label>
                             <div className="mt-1">
@@ -266,7 +266,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
                         {/* weight */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="weight" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="weight" className={`block  font-medium text-gray-800`}>
                                 {trans('weight')}
                             </label>
                             <div className="mt-1">
@@ -291,7 +291,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         <div className="sm:col-span-2">
                             {
                                 isAdminOrAbove && <>
-                                    <label htmlFor="user_id" className="block  font-medium text-gray-700">
+                                    <label htmlFor="user_id" className="block  font-medium text-gray-800">
                                         {trans('owner')}
                                     </label>
                                     <div className="mt-1">
@@ -321,7 +321,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
                         {/* size id */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="size_id" className="block  font-medium text-gray-700">
+                            <label htmlFor="size_id" className="block  font-medium text-gray-800">
                                 {trans('size')}
                             </label>
                             <div className="mt-1">
@@ -352,7 +352,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         </div>
                         {/* color_id */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="color_id" className="block  font-medium text-gray-700">
+                            <label htmlFor="color_id" className="block  font-medium text-gray-800">
                                 {trans('color')}
                             </label>
                             <div className="mt-1">
@@ -385,7 +385,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/* image */}
                         <div className="sm:col-span-3">
                             <label htmlFor="main_image"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('main_image')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -411,7 +411,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/* more images */}
                         <div className="sm:col-span-3 has-tooltip">
                             <label htmlFor="more_images"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('more_images')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -438,7 +438,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/* categories */}
                         <div className="sm:col-span-full has-tooltip">
                             <label htmlFor="categories"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('categories')}
                             </label>
                             <div>
@@ -554,7 +554,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -569,7 +569,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -599,7 +599,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -615,7 +615,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_home"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -645,7 +645,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -660,7 +660,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_sale"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -690,7 +690,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="has_attributes"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -705,7 +705,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="has_attributes"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>

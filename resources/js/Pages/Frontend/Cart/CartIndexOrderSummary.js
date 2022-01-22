@@ -63,7 +63,7 @@ export default function() {
                             }
                             <div className="p-3">
                                 <Link href={route().has(`frontend.${element.type}.show`) ? route(`frontend.${element.type}.show`, {id: element.element_id}) : '#'}
-                                      className="  font-extrabold text-gray-700 hover:text-gray-800 truncate capitalize overflow-ellipsis overflow-hidden">
+                                      className="  font-extrabold text-gray-800 hover:text-gray-800 truncate capitalize overflow-ellipsis overflow-hidden">
                                     {truncate(element[getLocalized()], {
                                         'length': isMobile ? 14 : 100,
                                     })}

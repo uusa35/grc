@@ -101,7 +101,7 @@ export default function({user}) {
                                             <div className="flex flex-col lg:flex-row">
                                                 <div
                                                     className="flex-grow lg:mt-0 lg:ml-6 lg:flex-grow-0 lg:flex-shrink-0">
-                                                    <p className="text-sm font-medium text-gray-700" aria-hidden="true">
+                                                    <p className="text-sm font-medium text-gray-800" aria-hidden="true">
                                                         {trans('personal_image')}
                                                     </p>
                                                     <div className="mt-1 lg:hidden">
@@ -114,7 +114,7 @@ export default function({user}) {
                                                                     className="group relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
                                                                     <label
                                                                         htmlFor="mobile-user-photo"
-                                                                        className="relative text-sm leading-4 font-medium text-gray-700 pointer-events-none"
+                                                                        className="relative text-sm leading-4 font-medium text-gray-800 pointer-events-none"
                                                                     >
                                                                         <span>{trans('change')}</span>
                                                                         <span className="sr-only"> user photo</span>
@@ -160,7 +160,7 @@ export default function({user}) {
                                             {/* email */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="email"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("email")}
                                                 </label>
                                                 <input
@@ -182,7 +182,7 @@ export default function({user}) {
                                             {/* name_en */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="name_en"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("name_en")}
                                                 </label>
                                                 <input
@@ -203,7 +203,7 @@ export default function({user}) {
                                             {/* name_ar */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="name_ar"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("name_ar")}
                                                 </label>
                                                 <input
@@ -224,7 +224,7 @@ export default function({user}) {
                                             {/* mobile */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="mobile"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("mobile")}
                                                 </label>
                                                 <input
@@ -245,7 +245,7 @@ export default function({user}) {
                                             {/* whatsapp */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="whatsapp"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("whatsapp")}
                                                 </label>
                                                 <input
@@ -270,7 +270,7 @@ export default function({user}) {
                                         <div className="mt-4 py-4 px-4 flex justify-end gap-x-5">
                                             <button
                                                 type="button"
-                                                className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                                                className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
                                             >
                                                 {trans('cancel')}
                                             </button>

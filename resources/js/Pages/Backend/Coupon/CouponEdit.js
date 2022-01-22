@@ -56,7 +56,7 @@ export default function({coupon}) {
                     <FormSection title={`${trans('edit')} ${trans('coupon')}`}>
                         {/* value */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="value" className={`block   text-gray-700`}>
+                            <label htmlFor="value" className={`block   text-gray-800`}>
                                 {trans('value')} {trans('kd')}
                             </label>
                             <div className="mt-1">
@@ -78,7 +78,7 @@ export default function({coupon}) {
                         </div>
                         {/* code */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="name_en" className={`block   text-gray-700`}>
+                            <label htmlFor="name_en" className={`block   text-gray-800`}>
                                 {trans('code')}
                             </label>
                             <div className="mt-1">
@@ -102,7 +102,7 @@ export default function({coupon}) {
                         {/* due_date */}
                         <div className="sm:col-span-2 has-tooltip mb-5">
                             <label htmlFor="due_date"
-                                   className={`block   text-gray-700`}>
+                                   className={`block   text-gray-800`}>
                                 {trans('due_date')}
                             </label>
                             <div className="mt-1">
@@ -149,7 +149,7 @@ export default function({coupon}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -164,7 +164,7 @@ export default function({coupon}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -194,7 +194,7 @@ export default function({coupon}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_percentage"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -209,7 +209,7 @@ export default function({coupon}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_percentage"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -240,7 +240,7 @@ export default function({coupon}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_permanent"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -255,7 +255,7 @@ export default function({coupon}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="is_permanent"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>
@@ -286,7 +286,7 @@ export default function({coupon}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="consumed"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -301,7 +301,7 @@ export default function({coupon}) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="consumed"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>

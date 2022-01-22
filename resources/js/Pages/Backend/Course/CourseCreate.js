@@ -119,7 +119,7 @@ export default function CourseCreate({users, categories}) {
                     >
                         {/* name ar*/}
                         <div className="sm:col-span-3 has-tooltip">
-                            <label htmlFor="name_ar" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="name_ar" className={`block  font-medium text-gray-800`}>
                                 {trans('name_ar')}
                             </label>
                             <div className="mt-1">
@@ -141,7 +141,7 @@ export default function CourseCreate({users, categories}) {
                         </div>
                         {/*name en*/}
                         <div className="sm:col-span-3 has-tooltip">
-                            <label htmlFor="name_en" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="name_en" className={`block  font-medium text-gray-800`}>
                                 {trans('name_en')}
                             </label>
                             <div className="mt-1">
@@ -163,7 +163,7 @@ export default function CourseCreate({users, categories}) {
                         </div>
 
                         <div className="sm:col-span-2 has-tooltip">
-                            <label htmlFor="price" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="price" className={`block  font-medium text-gray-800`}>
                                 {trans('price')}
                             </label>
                             <div className="mt-1">
@@ -187,7 +187,7 @@ export default function CourseCreate({users, categories}) {
                         {/* sale price */}
                         <div className="sm:col-span-2 has-tooltip">
                             <label htmlFor="sale_price"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('sale_price')}
                             </label>
                             <div className="mt-1 ">
@@ -210,7 +210,7 @@ export default function CourseCreate({users, categories}) {
                         </div>
                         {/*sku*/}
                         <div className="sm:col-span-2 has-tooltip">
-                            <label htmlFor="sku" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="sku" className={`block  font-medium text-gray-800`}>
                                 {trans('sku')}
                             </label>
                             <div className="mt-1">
@@ -236,7 +236,7 @@ export default function CourseCreate({users, categories}) {
                             <div className="sm:col-span-2">
                                 {
                                     isAdminOrAbove && <>
-                                        <label htmlFor="user_id" className="block  font-medium text-gray-700">
+                                        <label htmlFor="user_id" className="block  font-medium text-gray-800">
                                             {trans('owner')}
                                         </label>
                                         <div className="mt-1">
@@ -274,7 +274,7 @@ export default function CourseCreate({users, categories}) {
                         {/* image */}
                         <div className="sm:col-span-3">
                             <label htmlFor="main_image"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('main_image')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">ore
@@ -300,7 +300,7 @@ accept="image/jpg, image/jpeg , image/png"
                         {/* images */}
                         <div className="sm:col-span-3 has-tooltip">
                             <label htmlFor="more_images"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('more_images')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -327,7 +327,7 @@ accept="image/jpg, image/jpeg , image/png"
                         {/* file pdf */}
                         <div className="sm:col-span-3">
                             <label htmlFor="main_image"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('pdf_file')}
                             </label>
                             <div className="mt-1 flex flex-row flex-1 items-center">
@@ -353,7 +353,7 @@ accept="application/pdf"
                         {/*categories*/}
                         <div className="sm:col-span-full has-tooltip">
                             <label htmlFor="categories"
-                                   className={`block  font-medium text-gray-700`}>
+                                   className={`block  font-medium text-gray-800`}>
                                 {trans('categories')}
                             </label>
                             <div>
@@ -450,7 +450,7 @@ accept="application/pdf"
                         </div>
                         {/* embedded*/}
                         <div className="sm:col-span-full has-tooltip">
-                            <label htmlFor="embedded" className={`block  font-medium text-gray-700`}>
+                            <label htmlFor="embedded" className={`block  font-medium text-gray-800`}>
                                 {trans('embedded')} {trans('course')}
                             </label>
                             <div className="mt-1">
@@ -491,7 +491,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -506,7 +506,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -536,7 +536,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -552,7 +552,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_home"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -583,7 +583,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -598,7 +598,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_sale"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -629,7 +629,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="free"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -644,7 +644,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="free"
-                                               className="ml-3 block  font-medium text-gray-700">
+                                               className="ml-3 block  font-medium text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>

@@ -148,7 +148,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                        <FormSection title={`${trans('edit')} ${trans(parentModule)}`}>
 
                                <div className="sm:col-span-3">
-                                   <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                                   <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                        {trans('name_ar')}
                                    </label>
                                    <div className="mt-1">
@@ -170,7 +170,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                </div>
 
                                <div className="sm:col-span-3">
-                                   <label htmlFor="name_en" className={`block   text-gray-700`}>
+                                   <label htmlFor="name_en" className={`block   text-gray-800`}>
                                        {trans('name_en')}
                                    </label>
                                    <div className="mt-1">
@@ -192,7 +192,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                </div>
 
                                <div className="sm:col-span-2">
-                                   <label htmlFor="price" className={`block   text-gray-700`}>
+                                   <label htmlFor="price" className={`block   text-gray-800`}>
                                        {trans('price')}
                                    </label>
                                    <div className="mt-1">
@@ -216,7 +216,7 @@ export default function CourseEdit({users, categories, course, elementCategories
 
                                <div className="sm:col-span-2 has-tooltip">
                                    <label htmlFor="sale_price"
-                                          className={`block   text-gray-700`}>
+                                          className={`block   text-gray-800`}>
                                        {trans('sale_price')}
                                    </label>
                                    <div className="mt-1 ">
@@ -240,7 +240,7 @@ export default function CourseEdit({users, categories, course, elementCategories
 
 
                                <div className="sm:col-span-2 has-tooltip">
-                                   <label htmlFor="sku" className={`block   text-gray-700`}>
+                                   <label htmlFor="sku" className={`block   text-gray-800`}>
                                        {trans('sku')}
                                    </label>
                                    <div className="mt-1">
@@ -263,7 +263,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                {/* user_id */}
                                <div className="sm:col-span-2">
                                    {isAdminOrAbove && <>
-                                       <label htmlFor="user_id" className="block   text-gray-700">
+                                       <label htmlFor="user_id" className="block   text-gray-800">
                                            {trans('owner')}
                                        </label>
                                        <div className="mt-1">
@@ -294,7 +294,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                             {/* cateogiries */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('categories')}
                                 </label>
                                 <div>
@@ -396,7 +396,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                             {/* image*/}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -425,7 +425,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {course.images.length <= 5 &&
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('more_images')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -457,7 +457,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/* file pdf */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="main_image"
-                                       className={`block  flex flex-row justify-between items-center  text-gray-700`}>
+                                       className={`block  flex flex-row justify-between items-center  text-gray-800`}>
                                     {trans('pdf_file')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -482,7 +482,7 @@ accept="application/pdf"
                             </div>
                             {/* embedded*/}
                             <div className="sm:col-span-full has-tooltip">
-                                <label htmlFor="embedded" className={`block   text-gray-700`}>
+                                <label htmlFor="embedded" className={`block   text-gray-800`}>
                                     {trans('embedded')} {trans('course')}
                                 </label>
                                 <div className="mt-1 flex flex-row justify-between items-center gap-x-2">
@@ -525,7 +525,7 @@ accept="application/pdf"
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="active"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -540,7 +540,7 @@ accept="application/pdf"
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="active"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -570,7 +570,7 @@ accept="application/pdf"
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -585,7 +585,7 @@ accept="application/pdf"
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="on_home"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -616,7 +616,7 @@ accept="application/pdf"
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -631,7 +631,7 @@ accept="application/pdf"
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="on_sale"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -662,7 +662,7 @@ accept="application/pdf"
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="free"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('yes')}
                                             </label>
                                         </div>
@@ -677,7 +677,7 @@ accept="application/pdf"
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
                                             <label htmlFor="free"
-                                                   className="ml-3 block   text-gray-700">
+                                                   className="ml-3 block   text-gray-800">
                                                 {trans('no')}
                                             </label>
                                         </div>
@@ -701,7 +701,7 @@ accept="application/pdf"
                             {/* description_ar */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_ar"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('description_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -723,7 +723,7 @@ accept="application/pdf"
                             {/* description_en */}
                             <div className="sm:col-span-3 has-tooltip">
                                 <label htmlFor="description_en"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('description_en')}
                                 </label>
                                 <div className="mt-1">
@@ -744,7 +744,7 @@ accept="application/pdf"
                             </div>
                             {/* notes */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="notes_ar" className={`block   text-gray-800`}>
                                     {trans('notes_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -763,7 +763,7 @@ accept="application/pdf"
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_en" className={`block   text-gray-700`}>
+                                <label htmlFor="notes_en" className={`block   text-gray-800`}>
                                     {trans('notes_en')}
                                 </label>
                                 <div className="mt-1">
@@ -784,7 +784,7 @@ accept="application/pdf"
                             {/* caption */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_ar"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('caption_ar')}
                                 </label>
                                 <div className="mt-1 ">
@@ -806,7 +806,7 @@ accept="application/pdf"
                             </div>
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="caption_en"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('caption_en')}
                                 </label>
                                 <div className="mt-1 ">
@@ -829,7 +829,7 @@ accept="application/pdf"
                             {/* keywords */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="keywords"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('keywords')}
                                 </label>
                                 <div className="mt-1">
@@ -852,7 +852,7 @@ accept="application/pdf"
                             {/* delivery time*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="delivery_time"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('delivery_time')}
                                 </label>
                                 <div className="mt-1">
@@ -877,7 +877,7 @@ accept="application/pdf"
                             {/* order*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="order"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('order_appearance')}
                                 </label>
                                 <div className="mt-1">
@@ -901,7 +901,7 @@ accept="application/pdf"
                             {/* video_url_one */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="video_url_one"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('course_video_url_one')}
                                 </label>
                                 <div className="mt-1">
@@ -924,7 +924,7 @@ accept="application/pdf"
                             </div>
                             <div className="sm:col-span-2 hidden">
                                 <label htmlFor="video_url_two"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('video_url_two')}
                                 </label>
                                 <div className="mt-1">
@@ -948,7 +948,7 @@ accept="application/pdf"
                             {/* start sale */}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="start_sale"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('start_sale')}
                                 </label>
                                 <div className="mt-1">
@@ -975,7 +975,7 @@ accept="application/pdf"
                             {/* end sale*/}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="end_sale"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('end_sale')}
                                 </label>
                                 <div className="mt-1">
@@ -1000,7 +1000,7 @@ accept="application/pdf"
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('qr')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -1069,7 +1069,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1084,7 +1084,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="is_available"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1115,7 +1115,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="wrap_as_gift"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1130,7 +1130,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="wrap_as_gift"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1162,7 +1162,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="direct_purchase"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1177,7 +1177,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="direct_purchase"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1209,7 +1209,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1224,7 +1224,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="exclusive"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1255,7 +1255,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1270,7 +1270,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_new"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -1301,7 +1301,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -1316,7 +1316,7 @@ accept="application/pdf"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="is_hot_deal"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>

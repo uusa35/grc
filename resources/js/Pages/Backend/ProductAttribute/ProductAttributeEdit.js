@@ -49,7 +49,7 @@ export default function({attribute, colors, sizes}) {
                             {/* size id */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="size_id"
-                                       className="block text-sm font-medium text-gray-700">
+                                       className="block text-sm font-medium text-gray-800">
                                     {trans('size')}
                                 </label>
                                 <div className="mt-1">
@@ -84,7 +84,7 @@ export default function({attribute, colors, sizes}) {
                             {/* color_id */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="color_id"
-                                       className="block text-sm font-medium text-gray-700">
+                                       className="block text-sm font-medium text-gray-800">
                                     {trans('color')}
                                 </label>
                                 <div className="mt-1">
@@ -114,7 +114,7 @@ export default function({attribute, colors, sizes}) {
                             </div>
                             {/* qty */}
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="qty" className={`block text-sm font-medium text-gray-700`}>
+                                <label htmlFor="qty" className={`block text-sm font-medium text-gray-800`}>
                                     {trans('qty')} {trans('available')}
                                 </label>
                                 <div className="mt-1">
@@ -137,7 +137,7 @@ export default function({attribute, colors, sizes}) {
                             </div>
                             {/* price */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="price" className={`block text-sm font-medium text-gray-700`}>
+                                <label htmlFor="price" className={`block text-sm font-medium text-gray-800`}>
                                     {trans('price')}
                                 </label>
                                 <div className="mt-1">

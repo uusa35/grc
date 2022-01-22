@@ -94,7 +94,7 @@ export default function({privilege, pivotElements}) {
                         <div className="pt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                             {/* name  */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                     {trans('name')}
                                 </label>
                                 <div className="mt-1">
@@ -116,7 +116,7 @@ export default function({privilege, pivotElements}) {
                             </div>
                             {/* name ar */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                     {trans('name_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -138,7 +138,7 @@ export default function({privilege, pivotElements}) {
                             </div>
                             {/* name en */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_en" className={`block   text-gray-700`}>
+                                <label htmlFor="name_en" className={`block   text-gray-800`}>
                                     {trans('name_en')}
                                 </label>
                                 <div className="mt-1">
@@ -161,7 +161,7 @@ export default function({privilege, pivotElements}) {
 
                             {/* description_ar  */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="description_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="description_ar" className={`block   text-gray-800`}>
                                     {trans('description_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -184,7 +184,7 @@ export default function({privilege, pivotElements}) {
                             </div>
                             {/* description_en */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="description_en" className={`block   text-gray-700`}>
+                                <label htmlFor="description_en" className={`block   text-gray-800`}>
                                     {trans('description_en')}
                                 </label>
                                 <div className="mt-1">
@@ -208,7 +208,7 @@ export default function({privilege, pivotElements}) {
 
                             {/* sequance */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="order" className={`block   text-gray-700`}>
+                                <label htmlFor="order" className={`block   text-gray-800`}>
                                     {trans('sequance')}
                                 </label>
                                 <div className="mt-1">
@@ -232,7 +232,7 @@ export default function({privilege, pivotElements}) {
                             {/* image */}
                             <div className="sm:col-span-full has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -273,7 +273,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="sm:col-span-full has-tooltip mt-4 border-b border-gray-300"
                                          key={r.pivot.privilage_id}>
                                         <label htmlFor="categories"
-                                               className={`block   text-gray-700`}>
+                                               className={`block   text-gray-800`}>
                                             {r[getLocalized()]}
                                         </label>
                                         <div>
@@ -474,7 +474,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="main_menu"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -489,7 +489,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="main_menu"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -520,7 +520,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_top"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -535,7 +535,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_top"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -566,7 +566,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="hide_module"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -581,7 +581,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="hide_module"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>

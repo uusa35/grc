@@ -60,7 +60,7 @@ export default function({coupon = {}}) {
                                     <form className="space-y-6" onSubmit={handleSubmit}>
                                         <div>
                                             <label htmlFor="code"
-                                                   className="capitalize block text-sm font-medium text-gray-700 mb-5 text-base">
+                                                   className="capitalize block text-sm font-medium text-gray-800 mb-5 text-base">
                                                 {trans('do_u_have_a_coupon')}
                                             </label>
                                             <div className="mt-1">
@@ -79,7 +79,7 @@ export default function({coupon = {}}) {
                                             <button
                                                 disabled={isNull(data.coupon) && data.coupon.length < 3}
                                                 type="submit"
-                                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                             >
                                                 {trans('enter_coupon_code')}
                                             </button>
@@ -94,7 +94,7 @@ export default function({coupon = {}}) {
                     <div className="mt-10 flex justify-end">
                         <Link
                             href={!isEmpty(cart.items) ? route('frontend.cart.information') : '#'}
-                            className={classNames(isEmpty(cart.items) ? `bg-gray-300` : `bg-gray-600`, "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                            className={classNames(isEmpty(cart.items) ? `bg-gray-300` : `bg-gray-600`, "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                         >
                            <span className="flex ltr:pt-2">
                                             {trans('next')}

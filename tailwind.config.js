@@ -10,11 +10,11 @@ module.exports = {
         //     /^w/,/^h/,/^m/
         // ]
         // },
-        content: [
-            './resources/views/**/*.blade.php',
-            'resources/js/**/*.js'
-        ]
     },
+    content: [
+        './resources/views/**/*.blade.php',
+        'resources/js/**/*.js'
+    ],
     darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {
@@ -27,7 +27,6 @@ module.exports = {
                     '400': '#7bb4c1',
                     '500': '#4394a6',
                     '600': '#3c8595',
-                    '700': '#326f7d',
                     '800': '#285964',
                     '900': '#304b52'
                 },
@@ -41,24 +40,7 @@ module.exports = {
                 'yellow': {
                     '400': '#FBBF24'
                 },
-            }
-        },
-        colors: {
-            transparent: 'transparent',
-            black: '#000',
-            //     // blue: colors.blue,
-            //     // blueGray: colors.blueGray,
-            //     // coolGray: colors.coolGray,
-            //     // cyan: colors.cyan,
-            //     // emerald: colors.emerald,
-            //     // fuchsia: colors.fuchsia,
-            gray: colors.trueGray,
-            // green: colors.green,
-            // indigo: colors.indigo,
-            //      red: colors.red,
-            //     // warmGray: colors.warmGray,
-            white: '#FFF',
-            //     // yellow: colors.yellow,
+            },
         },
         fontFamily: {
             'HelveticaNeueME_1': ['HelveticaNeueME_1', 'sans-serif'],
@@ -75,6 +57,24 @@ module.exports = {
             'Ar-Ith': ['Ar-Ith', 'sans-serif'],
             'bein-ar-black_zzbzbbedb0': ['bein-ar-black_0', 'sans-serif'],
         },
+        colors: {
+            transparent: 'transparent',
+            black: '#000',
+            //     // blue: colors.blue,
+            //     // blueGray: colors.blueGray,
+            //     // coolGray: colors.coolGray,
+            //     // cyan: colors.cyan,
+            //     // emerald: colors.emerald,
+            //     // fuchsia: colors.fuchsia,
+            gray: colors.neutral,
+            // green: colors.green,
+            // indigo: colors.indigo,
+            //      red: colors.red,
+            //     // warmGray: colors.warmGray,
+            white: '#FFF',
+            //     // yellow: colors.yellow,
+        },
+
         animations : {
             spin : 'spin 6s liner once'
         }

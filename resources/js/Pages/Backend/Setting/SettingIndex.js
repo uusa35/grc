@@ -77,44 +77,44 @@ export default function SettingIndex({ setting }) {
                             <div className="flex flex-row justify-evenly items-center">
                                 {
                                     setting.apple ? <Link href={setting.apple}
-                                                          className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 md:text-sm"
+                                                          className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 md:text-sm"
                                     >
                                         {trans('apple')}
                                     </Link> : null
                                 }
                                 {setting.android ? <Link href={setting.android}
-                                                         className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 md:text-sm"
+                                                         className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 md:text-sm"
                                 >
                                     {trans('android')}
                                 </Link> : null}
                                 {setting.facebook ? <Link href={setting.facebook}
-                                                          className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 md:text-sm"
+                                                          className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 md:text-sm"
                                 >
                                     {trans('facebook')}
                                 </Link> : null}
                                 {
                                     setting.twitter ? <Link href={setting.twitter}
-                                                             className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 md:text-sm"
+                                                             className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 md:text-sm"
                                     >
                                         {trans('twitter')}
                                     </Link> : null
                                 }
                                 {
                                     setting.youtube ? <Link href={setting.youtube}
-                                                             className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 md:text-sm"
+                                                             className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 md:text-sm"
                                     >
                                         {trans('youtube')}
                                     </Link> : null
                                 }
                                 {
                                     setting.apple ? <Link href={setting.apple}
-                                                          className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 md:text-sm"
+                                                          className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 md:text-sm"
                                     >
                                         {trans('apple')}
                                     </Link> : null
                                 }
                                 {setting.instagram ? <Link href={setting.instagram}
-                                                           className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 md:text-sm"
+                                                           className="flex w-20 p-1 items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 md:text-sm"
                                 >
                                     {trans('instagram')}
                                 </Link> : null}

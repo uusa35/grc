@@ -79,7 +79,7 @@ export default function({countries}) {
                             <form className="space-y-6" onSubmit={submit}>
                                 {/* name */}
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-800">
                                         {trans('name')}
                                     </label>
                                     <div className="mt-1">
@@ -96,7 +96,7 @@ export default function({countries}) {
                                 </div>
                                 {/* email */}
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-800">
                                         {trans('email')}
                                     </label>
                                     <div className="mt-1">
@@ -113,7 +113,7 @@ export default function({countries}) {
                                 </div>
                                 {/* password */}
                                 <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="password" className="block text-sm font-medium text-gray-800">
                                         {trans('password')}
                                     </label>
                                     <div className="mt-1">
@@ -131,7 +131,7 @@ export default function({countries}) {
                                 {/* password_confirm */}
                                 <div>
                                     <label htmlFor="password_confirmation"
-                                           className="block text-sm font-medium text-gray-700">
+                                           className="block text-sm font-medium text-gray-800">
                                         {trans('password_confirmation')}
                                     </label>
                                     <div className="mt-1">
@@ -148,7 +148,7 @@ export default function({countries}) {
                                 </div>
                                 {/* mobile */}
                                 <div>
-                                    <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="phone-number" className="block text-sm font-medium text-gray-800">
                                         {trans('mobile')}
                                     </label>
                                     <div className="mt-1 relative rounded-md shadow-sm">
@@ -209,7 +209,7 @@ export default function({countries}) {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                     >
                                         {trans('register')}
                                     </button>

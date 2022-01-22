@@ -53,7 +53,7 @@ export default function TimingEdit({ timing }) {
                             {/* date */}
                             <div className="sm:col-span-2 has-tooltip mb-5">
                                 <label htmlFor="date"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('date')}
                                 </label>
                                 <div className="mt-1">
@@ -80,7 +80,7 @@ export default function TimingEdit({ timing }) {
                             {/* start*/}
                             <div className="sm:col-span-1 has-tooltip mb-5">
                                 <label htmlFor="start"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('start')}
                                 </label>
                                 <div className="mt-1">
@@ -105,7 +105,7 @@ export default function TimingEdit({ timing }) {
                             {/* end*/}
                             <div className="sm:col-span-1 has-tooltip mb-5">
                                 <label htmlFor="end"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('end')}
                                 </label>
                                 <div className="mt-1">
@@ -129,7 +129,7 @@ export default function TimingEdit({ timing }) {
                             </div>
                             {/* limit */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="order" className={`block   text-gray-700`}>
+                                <label htmlFor="order" className={`block   text-gray-800`}>
                                     {trans('limit')}
                                 </label>
                                 <div className="mt-1">
@@ -151,7 +151,7 @@ export default function TimingEdit({ timing }) {
                             </div>
                             {/* notes */}
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="notes_ar" className={`block   text-gray-800`}>
                                     {trans('notes_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -170,7 +170,7 @@ export default function TimingEdit({ timing }) {
                                 </p>
                             </div>
                             <div className="sm:col-span-3 has-tooltip">
-                                <label htmlFor="notes_en" className={`block   text-gray-700`}>
+                                <label htmlFor="notes_en" className={`block   text-gray-800`}>
                                     {trans('notes_en')}
                                 </label>
                                 <div className="mt-1">

@@ -69,7 +69,7 @@ export default function() {
                         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                             <form className="space-y-6" onSubmit={submit}>
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-800">
                                         {trans('email')}
                                     </label>
                                     <div className="mt-1">
@@ -86,7 +86,7 @@ export default function() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="password" className="block text-sm font-medium text-gray-800">
                                         {trans('password')}
                                     </label>
                                     <div className="mt-1">
@@ -125,7 +125,7 @@ export default function() {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                     >
                                         {trans('login')}
                                     </button>

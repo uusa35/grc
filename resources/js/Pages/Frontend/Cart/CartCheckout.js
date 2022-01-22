@@ -260,7 +260,7 @@ export default function CartCheckout() {
                                             <select
                                                 id="mobile-currency"
                                                 name="currency"
-                                                className="bg-none border-transparent rounded-md py-0.5 pl-2 pr-5 flex items-center text-sm font-medium text-gray-700 group-hover:text-gray-800 focus:outline-none focus:ring-0 focus:border-transparent"
+                                                className="bg-none border-transparent rounded-md py-0.5 pl-2 pr-5 flex items-center text-sm font-medium text-gray-800 group-hover:text-gray-800 focus:outline-none focus:ring-0 focus:border-transparent"
                                             >
                                                 {currencies.map((currency) => (
                                                     <option key={currency}>{currency}</option>
@@ -374,7 +374,7 @@ export default function CartCheckout() {
                                                                     className={classNames(
                                                                         open
                                                                             ? 'border-indigo-600 text-indigo-600'
-                                                                            : 'border-transparent text-gray-700 hover:text-gray-800',
+                                                                            : 'border-transparent text-gray-800 hover:text-gray-800',
                                                                         'relative z-10 flex items-center transition-colors ease-out duration-200 text-sm font-medium border-b-2 -mb-px pt-px'
                                                                     )}
                                                                 >
@@ -442,7 +442,7 @@ export default function CartCheckout() {
                                                 <a
                                                     key={page.name}
                                                     href={page.href}
-                                                    className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                                                    className="flex items-center text-sm font-medium text-gray-800 hover:text-gray-800"
                                                 >
                                                     {page.name}
                                                 </a>
@@ -480,7 +480,7 @@ export default function CartCheckout() {
                                 </a>
 
                                 <div className="flex-1 flex items-center justify-end">
-                                    <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                                    <a href="#" className="hidden text-sm font-medium text-gray-800 hover:text-gray-800 lg:block">
                                         Search
                                     </a>
 
@@ -490,7 +490,7 @@ export default function CartCheckout() {
                                             <span className="sr-only">Help</span>
                                             <QuestionMarkCircleIcon className="w-6 h-6" aria-hidden="true" />
                                         </a>
-                                        <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                                        <a href="#" className="hidden text-sm font-medium text-gray-800 hover:text-gray-800 lg:block">
                                             Help
                                         </a>
 
@@ -501,7 +501,7 @@ export default function CartCheckout() {
                                                     className="flex-shink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                                                     aria-hidden="true"
                                                 />
-                                                <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                                                <span className="ml-2 text-sm font-medium text-gray-800 group-hover:text-gray-800">0</span>
                                                 <span className="sr-only">items in cart, view bag</span>
                                             </a>
                                         </div>
@@ -523,7 +523,7 @@ export default function CartCheckout() {
                                 <h2 className="text-lg font-medium text-gray-900">Contact information</h2>
 
                                 <div className="mt-4">
-                                    <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="email-address" className="block text-sm font-medium text-gray-800">
                                         Email address
                                     </label>
                                     <div className="mt-1">
@@ -543,7 +543,7 @@ export default function CartCheckout() {
 
                                 <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
                                     <div>
-                                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-800">
                                             First name
                                         </label>
                                         <div className="mt-1">
@@ -558,7 +558,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-800">
                                             Last name
                                         </label>
                                         <div className="mt-1">
@@ -573,7 +573,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div className="sm:col-span-2">
-                                        <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="company" className="block text-sm font-medium text-gray-800">
                                             Company
                                         </label>
                                         <div className="mt-1">
@@ -587,7 +587,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div className="sm:col-span-2">
-                                        <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="address" className="block text-sm font-medium text-gray-800">
                                             Address
                                         </label>
                                         <div className="mt-1">
@@ -602,7 +602,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div className="sm:col-span-2">
-                                        <label htmlFor="apartment" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="apartment" className="block text-sm font-medium text-gray-800">
                                             Apartment, suite, etc.
                                         </label>
                                         <div className="mt-1">
@@ -616,7 +616,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="city" className="block text-sm font-medium text-gray-800">
                                             City
                                         </label>
                                         <div className="mt-1">
@@ -630,7 +630,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="country" className="block text-sm font-medium text-gray-800">
                                             Country
                                         </label>
                                         <div className="mt-1">
@@ -648,7 +648,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="province" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="province" className="block text-sm font-medium text-gray-800">
                                             Province
                                         </label>
                                         <div className="mt-1">
@@ -662,7 +662,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="postal-code" className="block text-sm font-medium text-gray-800">
                                             Postal code
                                         </label>
                                         <div className="mt-1">
@@ -677,7 +677,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div className="sm:col-span-2">
-                                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="phone" className="block text-sm font-medium text-gray-800">
                                             Phone
                                         </label>
                                         <div className="mt-1">
@@ -773,7 +773,7 @@ export default function CartCheckout() {
                                                     />
                                                 )}
 
-                                                <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-700">
+                                                <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-800">
                                                     {paymentMethod.title}
                                                 </label>
                                             </div>
@@ -783,7 +783,7 @@ export default function CartCheckout() {
 
                                 <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
                                     <div className="col-span-4">
-                                        <label htmlFor="card-number" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="card-number" className="block text-sm font-medium text-gray-800">
                                             Card number
                                         </label>
                                         <div className="mt-1">
@@ -798,7 +798,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div className="col-span-4">
-                                        <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="name-on-card" className="block text-sm font-medium text-gray-800">
                                             Name on card
                                         </label>
                                         <div className="mt-1">
@@ -813,7 +813,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div className="col-span-3">
-                                        <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="expiration-date" className="block text-sm font-medium text-gray-800">
                                             Expiration date (MM/YY)
                                         </label>
                                         <div className="mt-1">
@@ -828,7 +828,7 @@ export default function CartCheckout() {
                                     </div>
 
                                     <div>
-                                        <label htmlFor="cvc" className="block text-sm font-medium text-gray-700">
+                                        <label htmlFor="cvc" className="block text-sm font-medium text-gray-800">
                                             CVC
                                         </label>
                                         <div className="mt-1">
@@ -862,7 +862,7 @@ export default function CartCheckout() {
                                                 <div className="flex">
                                                     <div className="min-w-0 flex-1">
                                                         <h4 className="text-sm">
-                                                            <a href={product.href} className="font-medium text-gray-700 hover:text-gray-800">
+                                                            <a href={product.href} className="font-medium text-gray-800 hover:text-gray-800">
                                                                 {product.title}
                                                             </a>
                                                         </h4>
@@ -891,7 +891,7 @@ export default function CartCheckout() {
                                                         <select
                                                             id="quantity"
                                                             name="quantity"
-                                                            className="rounded-md border border-gray-300 text-base font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                            className="rounded-md border border-gray-300 text-base font-medium text-gray-800 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                         >
                                                             <option value={1}>1</option>
                                                             <option value={2}>2</option>

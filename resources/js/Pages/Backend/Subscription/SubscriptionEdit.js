@@ -119,7 +119,7 @@ export default function({subscription}) {
                         <div className="pt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                             {/* name ar */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                     {trans('name_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -141,7 +141,7 @@ export default function({subscription}) {
                             </div>
                             {/* name en */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_en" className={`block   text-gray-700`}>
+                                <label htmlFor="name_en" className={`block   text-gray-800`}>
                                     {trans('name_en')}
                                 </label>
                                 <div className="mt-1">
@@ -164,7 +164,7 @@ export default function({subscription}) {
 
                             {/* price */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="price" className={`block   text-gray-700`}>
+                                <label htmlFor="price" className={`block   text-gray-800`}>
                                     {trans('price')}
                                 </label>
                                 <div className="mt-1">
@@ -189,7 +189,7 @@ export default function({subscription}) {
                             {/* sale price */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="sale_price"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('sale_price')}
                                 </label>
                                 <div className="mt-1 ">
@@ -213,7 +213,7 @@ export default function({subscription}) {
 
                             {/* months */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="order" className={`block   text-gray-700`}>
+                                <label htmlFor="order" className={`block   text-gray-800`}>
                                     {trans('months')} {trans('subscription')}
                                 </label>
                                 <div className="mt-1">
@@ -236,7 +236,7 @@ export default function({subscription}) {
 
                             {/* caption_ar  */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="caption_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="caption_ar" className={`block   text-gray-800`}>
                                     {trans('caption_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -258,7 +258,7 @@ export default function({subscription}) {
                             </div>
                             {/* caption_en */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="caption_en" className={`block   text-gray-700`}>
+                                <label htmlFor="caption_en" className={`block   text-gray-800`}>
                                     {trans('caption_en')}
                                 </label>
                                 <div className="mt-1">
@@ -281,7 +281,7 @@ export default function({subscription}) {
 
                             {/* notes_ar  */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="notes_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="notes_ar" className={`block   text-gray-800`}>
                                     {trans('notes_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -303,7 +303,7 @@ export default function({subscription}) {
                             </div>
                             {/* notes_en */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="notes_en" className={`block   text-gray-700`}>
+                                <label htmlFor="notes_en" className={`block   text-gray-800`}>
                                     {trans('notes_en')}
                                 </label>
                                 <div className="mt-1">
@@ -326,7 +326,7 @@ export default function({subscription}) {
 
                             {/* code color */}
                             <div className="sm:col-span-1">
-                                <label htmlFor="code" className={`block   text-gray-700`}>
+                                <label htmlFor="code" className={`block   text-gray-800`}>
                                     {trans('code')}
                                 </label>
                                 <div className="mt-1">
@@ -349,7 +349,7 @@ export default function({subscription}) {
 
                             {/* sequance */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="order" className={`block   text-gray-700`}>
+                                <label htmlFor="order" className={`block   text-gray-800`}>
                                     {trans('sequance')}
                                 </label>
                                 <div className="mt-1">
@@ -373,7 +373,7 @@ export default function({subscription}) {
                             {/* image*/}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -403,7 +403,7 @@ accept="image/jpg, image/jpeg , image/png"
                             {/* description_en*/}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="description_en"
-                                       className={`block text-sm font-medium text-gray-700`}>
+                                       className={`block text-sm font-medium text-gray-800`}>
                                     {trans('description_en')}
                                 </label>
                                 <div className="mt-1">
@@ -424,7 +424,7 @@ accept="image/jpg, image/jpeg , image/png"
                         {/*     description_ar */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="description_ar"
-                                       className={`block text-sm font-medium text-gray-700`}>
+                                       className={`block text-sm font-medium text-gray-800`}>
                                     {trans('description_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -462,7 +462,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -477,7 +477,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -508,7 +508,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_sale"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -523,7 +523,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_sale"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -554,7 +554,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="is_featured"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -569,7 +569,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="is_featured"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -600,7 +600,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="free"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -615,7 +615,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="free"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>

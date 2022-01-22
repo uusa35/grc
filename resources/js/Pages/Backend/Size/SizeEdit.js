@@ -46,7 +46,7 @@ export default function({ size }) {
                     <FormSection title={`${trans('edit')} ${trans('size')}`}>
                         {/* name ar */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                            <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                 {trans('name_ar')}
                             </label>
                             <div className="mt-1">
@@ -68,7 +68,7 @@ export default function({ size }) {
                         </div>
                         {/* name en */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="name_en" className={`block   text-gray-700`}>
+                            <label htmlFor="name_en" className={`block   text-gray-800`}>
                                 {trans('name_en')}
                             </label>
                             <div className="mt-1">
@@ -110,7 +110,7 @@ export default function({ size }) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('yes')}
                                     </label>
                                 </div>
@@ -125,7 +125,7 @@ export default function({ size }) {
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
-                                           className="ml-3 block   text-gray-700">
+                                           className="ml-3 block   text-gray-800">
                                         {trans('no')}
                                     </label>
                                 </div>

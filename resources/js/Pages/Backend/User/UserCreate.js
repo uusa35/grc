@@ -164,7 +164,7 @@ export default function({roles, categories, countries, subscriptions}) {
                         <FormSection title={`${trans('edit')} ${trans(parentModule)}`}>
                             {/* name */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name" className={`block   text-gray-700`}>
+                                <label htmlFor="name" className={`block   text-gray-800`}>
                                     {trans('name')}
                                 </label>
                                 <div className="mt-1">
@@ -186,7 +186,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             </div>
                             {/* name_ar */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_ar" className={`block   text-gray-700`}>
+                                <label htmlFor="name_ar" className={`block   text-gray-800`}>
                                     {trans('name_ar')}
                                 </label>
                                 <div className="mt-1">
@@ -208,7 +208,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             </div>
                             {/*name en*/}
                             <div className="sm:col-span-2">
-                                <label htmlFor="name_en" className={`block   text-gray-700`}>
+                                <label htmlFor="name_en" className={`block   text-gray-800`}>
                                     {trans('name_en')}
                                 </label>
                                 <div className="mt-1">
@@ -230,7 +230,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             </div>
                             {/*email*/}
                             <div className="sm:col-span-2">
-                                <label htmlFor="email" className={`block   text-gray-700`}>
+                                <label htmlFor="email" className={`block   text-gray-800`}>
                                     {trans('email')}
                                 </label>
                                 <div className="mt-1">
@@ -252,7 +252,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             </div>
                             {/* password */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="password" className={`block   text-gray-700`}>
+                                <label htmlFor="password" className={`block   text-gray-800`}>
                                     {trans('password')}
                                 </label>
                                 <div className="mt-1">
@@ -274,7 +274,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             {/* subscription_id */}
                             {isAdminOrAbove &&
                             <div className="sm:col-span-2 hidden">
-                                <label htmlFor="subscription_id" className="block   text-gray-700">
+                                <label htmlFor="subscription_id" className="block   text-gray-800">
                                     {trans('subscription')}
                                 </label>
                                 <div className="mt-1">
@@ -306,7 +306,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             {
                                 isAdminOrAbove && <div className="sm:col-span-2 has-tooltip mb-5">
                                     <label htmlFor="end_subscription_date"
-                                           className={`block   text-gray-700`}>
+                                           className={`block   text-gray-800`}>
                                         {trans('end_subscription_date')}
                                     </label>
                                     <div className="mt-1">
@@ -335,7 +335,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             {/* role_id */}
                             <div className="sm:col-span-2">
                                 {isAdminOrAbove && <>
-                                    <label htmlFor="role_id" className="block   text-gray-700">
+                                    <label htmlFor="role_id" className="block   text-gray-800">
                                         {trans('role')}
                                     </label>
                                     <div className="mt-1">
@@ -364,7 +364,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             </div>
                             {/* country_id */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="country_id" className="block   text-gray-700">
+                                <label htmlFor="country_id" className="block   text-gray-800">
                                     {trans('country')}
                                 </label>
                                 <div className="mt-1">
@@ -393,7 +393,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             {/* area_id */}
                             {
                                 areas && <div className="sm:col-span-2">
-                                    <label htmlFor="area_id" className="block   text-gray-700">
+                                    <label htmlFor="area_id" className="block   text-gray-800">
                                         {trans('area')}
                                     </label>
                                     <div className="mt-1">
@@ -425,7 +425,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             {/* categories */}
                             <div className="sm:col-span-full has-tooltip">
                                 <label htmlFor="categories"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('categories')}
                                 </label>
                                 <div>
@@ -524,7 +524,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             {/* image*/}
                             <div className="sm:col-span-3 has-tooltip mt-5">
                                 <label htmlFor="main_image"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('main_image')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -550,7 +550,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             {/* more images */}
                             <div className="sm:col-span-3 has-tooltip mt-3">
                                 <label htmlFor="more_images"
-                                       className={`block   text-gray-700`}>
+                                       className={`block   text-gray-800`}>
                                     {trans('more_images')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -581,7 +581,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             {/* file pdf */}
                             <div className="sm:col-span-3 hidden">
                                 <label htmlFor="main_image"
-                                       className={`block  flex flex-row justify-between items-center  text-gray-700`}>
+                                       className={`block  flex flex-row justify-between items-center  text-gray-800`}>
                                     {trans('pdf_file')}
                                 </label>
                                 <div className="mt-1 flex flex-row flex-1 items-center h-32">
@@ -624,7 +624,7 @@ export default function({roles, categories, countries, subscriptions}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -639,7 +639,7 @@ export default function({roles, categories, countries, subscriptions}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="active"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>
@@ -669,7 +669,7 @@ export default function({roles, categories, countries, subscriptions}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('yes')}
                                         </label>
                                     </div>
@@ -684,7 +684,7 @@ export default function({roles, categories, countries, subscriptions}) {
                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                         />
                                         <label htmlFor="on_home"
-                                               className="ml-3 block   text-gray-700">
+                                               className="ml-3 block   text-gray-800">
                                             {trans('no')}
                                         </label>
                                     </div>

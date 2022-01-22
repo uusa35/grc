@@ -69,7 +69,7 @@ export default function() {
                                             <div className="col-span-12">
                                                 <div className="flex flex-row justify-between items-center">
                                                     <label htmlFor="old_password"
-                                                           className="block text-sm font-medium text-gray-700">
+                                                           className="block text-sm font-medium text-gray-800">
                                                         {trans("old_password")}
                                                     </label>
                                                     <button
@@ -104,7 +104,7 @@ export default function() {
                                             {/* password */}
                                             <div className="col-span-12">
                                                 <label htmlFor="password"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("password")}
                                                 </label>
                                                 <input
@@ -124,7 +124,7 @@ export default function() {
                                             {/* confirm_password */}
                                             <div className="col-span-12">
                                                 <label htmlFor="password_confirmation"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className="block text-sm font-medium text-gray-800">
                                                     {trans("password_confirmation")}
                                                 </label>
                                                 <input
@@ -149,7 +149,7 @@ export default function() {
                                     <div className="mt-4 py-4 px-4 flex justify-end gap-x-5">
                                         <button
                                             type="button"
-                                            className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                            className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                         >
                                             {trans('cancel')}
                                         </button>

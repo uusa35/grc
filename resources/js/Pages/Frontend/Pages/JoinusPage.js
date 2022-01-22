@@ -265,7 +265,7 @@ export default function() {
                                                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                                         />
                                                                         <label htmlFor="exported_before"
-                                                                               className="ml-3 block   text-sm text-gray-700">
+                                                                               className="ml-3 block   text-sm text-gray-800">
                                                                             {trans('yes')}
                                                                         </label>
                                                                     </div>
@@ -279,7 +279,7 @@ export default function() {
                                                                             className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                                         />
                                                                         <label htmlFor="exported_before"
-                                                                               className="ml-3 block   text-sm  text-gray-700">
+                                                                               className="ml-3 block   text-sm  text-gray-800">
                                                                             {trans('no')}
                                                                         </label>
                                                                     </div>

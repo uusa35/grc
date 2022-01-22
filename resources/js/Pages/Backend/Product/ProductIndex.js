@@ -224,7 +224,7 @@ export default function ProductIndex({elements}) {
                                                                                     <Link
                                                                                         href={route('backend.product.edit', element.id)}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -251,7 +251,7 @@ export default function ProductIndex({elements}) {
                                                                                             slidable_type: 'product'
                                                                                         })}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'hidden flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -279,7 +279,7 @@ export default function ProductIndex({elements}) {
                                                                                             slidable_type: 'product'
                                                                                         })}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'hidden flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -309,7 +309,7 @@ export default function ProductIndex({elements}) {
                                                                                                 <Link
                                                                                                     href={route('backend.attribute.index', {product_id: element.id})}
                                                                                                     className={classNames(
-                                                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                                         'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                                     )}
                                                                                                 >
@@ -334,7 +334,7 @@ export default function ProductIndex({elements}) {
                                                                                                 <Link
                                                                                                     href={route('backend.attribute.create', {product_id: element.id})}
                                                                                                     className={classNames(
-                                                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                                         'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                                     )}
                                                                                                 >
@@ -366,7 +366,7 @@ export default function ProductIndex({elements}) {
                                                                                             id: element.id
                                                                                         })}
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
@@ -400,7 +400,7 @@ export default function ProductIndex({elements}) {
                                                                                             }))
                                                                                         }
                                                                                         className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 w-full flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right text-red-700'
                                                                                         )}
                                                                                     >

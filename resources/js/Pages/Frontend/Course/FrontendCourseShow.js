@@ -137,7 +137,7 @@ export default function({element, relatedElements, auth}) {
                                         element[getLocalized('caption')] && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className="text-base text-gray-700 space-y-6"
+                                                className="text-base text-gray-800 space-y-6"
                                             >{element[getLocalized('caption')]}</div>
                                         </div>
                                     }
@@ -147,7 +147,7 @@ export default function({element, relatedElements, auth}) {
                                         element.sku && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
-                                                className="text-base text-gray-700 space-y-6"
+                                                className="text-base text-gray-800 space-y-6"
                                             >
                                                 {trans('reference_id')} :
                                                 {element.sku}
@@ -187,7 +187,7 @@ export default function({element, relatedElements, auth}) {
                                                             <div
                                                                 onClick={() => setSelectedTiming(t)}
                                                                 className={classNames(
-                                                                    t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                                    t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                     'block px-4 py-2 text-sm hover:bg-gray-100'
                                                                 )}
                                                             >
@@ -230,7 +230,7 @@ export default function({element, relatedElements, auth}) {
                                             <button
                                                 disabled={!element.is_available}
                                                 type="submit"
-                                                className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
                                             >
                                                 {trans('add_to_cart')}
                                             </button>

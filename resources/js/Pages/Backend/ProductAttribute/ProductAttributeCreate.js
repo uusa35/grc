@@ -49,7 +49,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                         <div className="pt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                             <div className="sm:col-span-2">
                                 <label htmlFor="size_id"
-                                       className="block text-sm font-medium text-gray-700">
+                                       className="block text-sm font-medium text-gray-800">
                                     {trans('size')}
                                 </label>
                                 <div className="mt-1">
@@ -83,7 +83,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                             {/* color_id */}
                             <div className="sm:col-span-2">
                                 <label htmlFor="color_id"
-                                       className="block text-sm font-medium text-gray-700">
+                                       className="block text-sm font-medium text-gray-800">
                                     {trans('color')}
                                 </label>
                                 <div className="mt-1">
@@ -112,7 +112,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                             </div>
                             {/* qty */}
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="qty" className={`block text-sm font-medium text-gray-700`}>
+                                <label htmlFor="qty" className={`block text-sm font-medium text-gray-800`}>
                                     {trans('qty')} {trans('available')}
                                 </label>
                                 <div className="mt-1">
@@ -135,7 +135,7 @@ export default function ProductAttributeCreate({colors, sizes, element }) {
                             </div>
                             {/* price */}
                             <div className="sm:col-span-2">
-                                <label htmlFor="price" className={`block text-sm font-medium text-gray-700`}>
+                                <label htmlFor="price" className={`block text-sm font-medium text-gray-800`}>
                                     {trans('price')}
                                 </label>
                                 <div className="mt-1">

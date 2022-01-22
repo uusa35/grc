@@ -70,7 +70,7 @@ export default function ImagesList({images}) {
                         </div>
                         <div className="ml-3">
                             <h3 className="mb-3 font-extrabold text-lgn">{trans('alert')}</h3>
-                            <p className={`text-sm text-gray-700`}>
+                            <p className={`text-sm text-gray-800`}>
                                 {trans('no_elements')}
                             </p>
                         </div>
