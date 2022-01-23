@@ -13,7 +13,8 @@ module.exports = {
     },
     content: [
         './resources/views/**/*.blade.php',
-        'resources/js/Pages/*.js'
+        'resources/js/**/*.js'
+        // 'resources/css/app.css'
     ],
     darkMode: 'class', // or 'media' or 'class'
     theme: {
@@ -43,19 +44,19 @@ module.exports = {
             },
         },
         fontFamily: {
-            'HelveticaNeueME_1': ['HelveticaNeueME_1', 'sans-serif'],
-            'GESSTwoBold': ['GESSTwoBold', 'sans-serif'],
+            // 'HelveticaNeueME_1': ['HelveticaNeueME_1', 'sans-serif'],
+            // 'GESSTwoBold': ['GESSTwoBold', 'sans-serif'],
             'GESSTwoMedium': ['GESSTwoMedium', 'sans-serif'],
-            'DroidArabicKufi': ['DroidArabicKufi', 'sans-serif'],
-            'droid-bold': ['DroidArabicKufi-bold', 'sans-serif'],
+            // 'DroidArabicKufi': ['DroidArabicKufi', 'sans-serif'],
+            // 'droid-bold': ['DroidArabicKufi-bold', 'sans-serif'],
             // 'Tajawal-Light': ['Tajawal-Light', 'sans-serif'],
-            // 'Tajawal-Medium': ['Tajawal-Medium', 'sans-serif'],
+            'Tajawal-Medium': ['Tajawal-Medium', 'sans-serif'],
             // 'AR-Almarai-Font': ['AR-Almarai-Font', 'sans-serif'],
-            'AR-BBC-Regular' : ['AR-BBC-Regular', 'sans-serif'],
-            'AR-Almarai-Font' : ['AR-Almarai-Font', 'sans-serif'],
-            'AlMohanad': ['AlMohanad', 'sans-serif'],
-            'Ar-Ith': ['Ar-Ith', 'sans-serif'],
-            'bein-ar-black_zzbzbbedb0': ['bein-ar-black_0', 'sans-serif'],
+            // 'AR-BBC-Regular' : ['AR-BBC-Regular', 'sans-serif'],
+            // 'AR-Almarai-Font' : ['AR-Almarai-Font', 'sans-serif'],
+            // 'AlMohanad': ['AlMohanad', 'sans-serif'],
+            // 'Ar-Ith': ['Ar-Ith', 'sans-serif'],
+            // 'bein-ar-black_zzbzbbedb0': ['bein-ar-black_0', 'sans-serif'],
         },
         colors: {
             transparent: 'transparent',
