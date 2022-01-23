@@ -496,52 +496,6 @@ export default function MainNav() {
                                     </Link>
                                 }
                                 {
-                                    mgt && <>
-                                        <Link
-                                            href={route('frontend.whous')}
-                                            onClick={() => dispatch(setParentModule('whous'))}
-                                            className={classNames(parentModule == 'whous' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('whous'))}
-                                        </Link>
-                                        <a
-                                            target="_blank"
-                                            href={`https://shop.mgt-sa.com`}
-                                            className={"flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize"}
-                                        >
-                                            {capitalize(trans('shop_and_products'))}
-                                        </a>
-                                        <Link
-                                            href={route('frontend.import.egypt')}
-                                            onClick={() => dispatch(setParentModule('import'))}
-                                            className={classNames(parentModule == 'import' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('import_from_egypt'))}
-                                        </Link>
-                                        <Link
-                                            href={route('frontend.distribution.service')}
-                                            onClick={() => dispatch(setParentModule('distribution'))}
-                                            className={classNames(parentModule == 'distribution' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('distribution_service'))}
-                                        </Link>
-                                        <Link
-                                            href={route('frontend.contactus')}
-                                            onClick={() => dispatch(setParentModule('contactus'))}
-                                            className={classNames(parentModule == 'contactus' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('contactus'))}
-                                        </Link>
-                                        <Link
-                                            href={route('frontend.vacancies')}
-                                            onClick={() => dispatch(setParentModule('vacancies'))}
-                                            className={classNames(parentModule == 'vacancies' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
-                                        >
-                                            {capitalize(trans('vacancies'))}
-                                        </Link>
-                                    </>
-                                }
-                                {
                                     settings.enable_books && <Link
                                         href={route('frontend.book.index')}
                                         onClick={() => dispatch(setParentModule('book'))}

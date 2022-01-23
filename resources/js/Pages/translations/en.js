@@ -1236,7 +1236,7 @@ export const en  = {
     "already_a_user_login_to_ur_account" : "already a user. login to your account",
     "mobile_placeholder" : "65XXXXXX",
     "client_information" : "client information",
-    "service_categories" : "Consultations & Seminars",
+    "service_categories" : "consulting and training",
     "limit" : "limit",
     "book_file" : "book file",
     "timing_notes" : "notes related to chosen timing",
@@ -1251,6 +1251,6 @@ export const en  = {
     "make_email_verified" : "make email verified",
     "library" : "library",
     "exports_and_participants" : 'experts and participants',
-    'consulting_and_training' : 'consulting and traning',
+    'consulting_and_training' : 'consulting and training',
     'e_learning' : 'e learning'
 }

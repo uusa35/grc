@@ -1244,7 +1244,7 @@ export const ar = {
     "mobile_placeholder" : "65XXXXXX",
     "client_information" : "بيانات العميل (الزبون)",
     "no_attributes" : "لا يوجد خصائص",
-    "service_categories" : "استشارات وندوات",
+    "service_categories" : "الاستشارات والتدريب",
     "limit" : "الحد الأقصى",
     "book_file" : "ملف الكتاب",
     "timing_notes" : "ملاحظات خاصة بالتوقيت المختار",
