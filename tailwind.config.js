@@ -13,7 +13,7 @@ module.exports = {
     },
     content: [
         './resources/views/**/*.blade.php',
-        'resources/js/**/*.js'
+        'resources/js/Pages/*.js'
     ],
     darkMode: 'class', // or 'media' or 'class'
     theme: {

@@ -60,7 +60,7 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                                                 <div key={c[getLocalized()]}
                                                      className="group relative text-base sm:">
                                                     <div
-                                                        className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
+                                                        className="aspect-w-12 aspect-h-8 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                                                         <img
                                                             src={getThumb(c.image)}
                                                             alt={c[getLocalized()]}

@@ -15,7 +15,7 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
         <Link
             href={route(`frontend.${type}.index`, {category_id: element.id})}
             className="block relative overflow-hidden hover:opacity-90">
-            <div className="w-full h-auto bg-white aspect-w-13 aspect-h-8 rounded-md overflow-hidden shadow-md">
+            <div className="w-full h-auto bg-white aspect-w-12 aspect-h-8 rounded-md overflow-hidden shadow-md">
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
