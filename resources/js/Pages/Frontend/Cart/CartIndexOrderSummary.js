@@ -51,8 +51,8 @@ export default function() {
             </thead>
             <tbody>
             {map(cart.items, (element, i) => (
-                <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <tr key={i} className={`${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                    <td className=" py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         <div className="flex flex-1 flex-row items-center justify-start">
                             {
                                 !isUndefined(element.image) && !isEmpty(element.image) && <img
@@ -97,9 +97,11 @@ export default function() {
                             </div>
                         </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block ">{trans(element.type)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block">{element.qty}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block">
+                    <td className=" px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block mt-8 ">
+                            {trans(element.type)}
+                    </td>
+                    <td className="  px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block mt-8">{element.qty}</td>
+                    <td className="  px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 hidden md:inline-block mt-8">
                         {element.price} {trans('kd')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
