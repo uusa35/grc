@@ -1257,5 +1257,9 @@ export const ar = {
     "need_help_message" : "يمكنك التواصل معنا من خلال ارقام الهاتف أو التواصل معنا عن طريقة ملئ الاستمارة",
     "aboutus_message" : "المزيد من المعلومات عن الموقع",
     "make_email_verified" : "تفعيل ايميل المستخدم",
-    "account_type" : "نوع الحساب"
+    "account_type" : "نوع الحساب",
+    "library" : "المكتبة",
+    "exports_and_participants" : 'الخبراء والمشاركين',
+    'consulting_and_training' : 'الاستشارات والتدريب',
+    'e_learning' : 'التعليم الإلكتروني'
 }

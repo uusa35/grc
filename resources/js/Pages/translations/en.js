@@ -1248,5 +1248,9 @@ export const en  = {
     "need_help" : "need help ?",
     "need_help_message" : "please contact us through our numbers or fill in the form",
     "aboutus_message" : "more information about us.",
-    "make_email_verified" : "make email verified"
+    "make_email_verified" : "make email verified",
+    "library" : "library",
+    "exports_and_participants" : 'experts and participants',
+    'consulting_and_training' : 'consulting and traning',
+    'e_learning' : 'e learning'
 }

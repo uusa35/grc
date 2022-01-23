@@ -1,4 +1,4 @@
-import {Fragment, useContext, useEffect, useMemo, useState} from 'react'
+import {Fragment, useContext, useEffect, useState} from 'react'
 import {Dialog, Popover, Tab, Transition, Disclosure, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
@@ -164,59 +164,11 @@ export default function MainNav() {
                                     </Link>
                                 </div>
                                 {
-                                    mgt && <>
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.whous')}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('whous'))}
-                                            </Link>
-                                        </div>
-                                        <div className="flow-root">
-                                            <a
-                                                target="_blank"
-                                                href={`https://shop.mgt-sa.com`}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('shop'))}
-                                            </a>
-                                        </div>
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.import.egypt')}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('import_from_egypt'))}
-                                            </Link>
-                                        </div>
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.distribution.service')}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('distribution_service'))}
-                                            </Link>
-                                        </div>
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.contactus')}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('contactus'))}
-                                            </Link>
-                                        </div>
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.vacancies')}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('vacancies'))}
-                                            </Link>
-                                        </div>
-                                    </>
-                                }
-
-                                {
                                     settings.enable_books && <div className="flow-root">
                                         <Link
                                             href={route('frontend.book.index')}
                                             className="-m-2 p-2 block text-gray-900 capitalize ">
-                                            {capitalize(trans('books'))}
+                                            {capitalize(trans('library'))}
                                         </Link>
                                     </div>
                                 }
@@ -226,7 +178,7 @@ export default function MainNav() {
                                             <Link
                                                 href={route('frontend.user.index')}
                                                 className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('authors'))}
+                                                {capitalize(trans('exports_and_participans'))}
                                             </Link>
                                         </div>
                                     </>
@@ -237,12 +189,12 @@ export default function MainNav() {
                                             <Link
                                                 href={route('frontend.category.index', {is_service: 1})}
                                                 className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('service_categories'))}
+                                                {capitalize(trans('consulting_and_training'))}
                                             </Link>
                                         </div>
                                         <Link
                                             href={route('frontend.service.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize hideen">
+                                            className="-m-2 p-2 block text-gray-900 capitalize hidden">
                                             {capitalize(trans('services'))}
                                         </Link>
                                     </div>
@@ -252,7 +204,7 @@ export default function MainNav() {
                                         <Link
                                             href={route('frontend.course.index')}
                                             className="-m-2 p-2 block text-gray-900 capitalize ">
-                                            {capitalize(trans('courses'))}
+                                            {capitalize(trans('e_learning'))}
                                         </Link>
                                     </div>
                                 }
