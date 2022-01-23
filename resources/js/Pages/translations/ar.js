@@ -1259,7 +1259,7 @@ export const ar = {
     "make_email_verified" : "تفعيل ايميل المستخدم",
     "account_type" : "نوع الحساب",
     "library" : "المكتبة",
-    "exports_and_participants" : 'الخبراء والمشاركين',
+    "experts_and_participants" : 'الخبراء والمشاركين',
     'consulting_and_training' : 'الاستشارات والتدريب',
     'e_learning' : 'التعليم الإلكتروني'
 }

@@ -178,7 +178,7 @@ export default function MainNav() {
                                             <Link
                                                 href={route('frontend.user.index')}
                                                 className="-m-2 p-2 block text-gray-900 capitalize ">
-                                                {capitalize(trans('exports_and_participans'))}
+                                                {capitalize(trans('experts_and_participants'))}
                                             </Link>
                                         </div>
                                     </>
@@ -547,7 +547,7 @@ export default function MainNav() {
                                         onClick={() => dispatch(setParentModule('book'))}
                                         className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
-                                        {capitalize(trans('books'))}
+                                        {capitalize(trans('library'))}
                                     </Link>
                                 }
                                 {
@@ -560,7 +560,7 @@ export default function MainNav() {
                                         onClick={() => dispatch(setParentModule('user'))}
                                         className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
-                                        {capitalize(trans('authors'))}
+                                        {capitalize(trans('experts_and_participants'))}
                                     </Link>
                                 }
                                 {
@@ -570,7 +570,7 @@ export default function MainNav() {
                                             onClick={() => dispatch(setParentModule('service'))}
                                             className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize hidden")}
                                         >
-                                            {capitalize(trans('services'))}
+                                            {capitalize(trans('consulting_and_training'))}
                                         </Link>
                                         <MainNavBookCategoriesList categories={categories} type='service'/>
                                     </> : null
@@ -581,7 +581,7 @@ export default function MainNav() {
                                         onClick={() => dispatch(setParentModule('course'))}
                                         className={classNames(parentModule == 'course' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
-                                        {capitalize(trans('courses'))}
+                                        {capitalize(trans('e_learning'))}
                                     </Link>
                                 }
 
