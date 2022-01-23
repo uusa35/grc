@@ -6,7 +6,7 @@ import {AppContext} from "../../context/AppContext";
 export default () =>  {
     const { trans } = useContext(AppContext);
     return (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <Link
                 href={route('frontend.faqs')}
                 className="col-span-1 relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-md flex items-center space-x-3 hover:border-gray-400 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-gray-500"
