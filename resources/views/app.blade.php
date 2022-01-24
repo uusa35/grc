@@ -87,9 +87,9 @@
         <!-- index.html -->
         <script>
             // before React is loaded
-            if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
-                __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
-            }
+            // if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
+            //     __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
+            // }
         </script>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('/js/app.js') }}" defer></script>

@@ -1,4 +1,4 @@
-import {Fragment, useContext, useEffect, useState} from 'react'
+import {Fragment, useContext, useEffect, useMemo, useState} from 'react'
 import {Dialog, Popover, Tab, Transition, Disclosure, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
@@ -33,7 +33,7 @@ const pages = [
     // {name: 'categories', url: route('frontend.category.index')},
 ];
 
-export default function MainNav() {
+function MainNav() {
     const {
         classNames, getThumb, getLocalized, trans,
         baseUrl,
@@ -45,6 +45,8 @@ export default function MainNav() {
     const [searchType, setSearchType] = useState('book');
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
+    const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
+    const serviceCategories  = useMemo(() => filter(categories, c => c.is_service), [categories])
 
     useEffect(() => {
     }, [auth])
@@ -327,7 +329,7 @@ export default function MainNav() {
                                     {/* books categories */}
                                     {settings.enable_books && <Tab.Panel
                                         className="pt-10 pb-8 px-4 space-y-10 capitalize">
-                                        {map(filter(categories, c => c.is_service), parent => (
+                                        {map(serviceCategories, parent => (
                                             <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
                                                 <div key={parent[getLocalized()]} className="group relative ">
                                                     <div
@@ -380,7 +382,7 @@ export default function MainNav() {
                                     {/* product categories */}
                                     {settings.enable_products && <Tab.Panel
                                         className="pt-10 pb-8 px-4 space-y-10 capitalize">
-                                        {map(filter(categories, c => c.is_product), parent => (
+                                        {map(productCategories, parent => (
                                             <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
                                                 <div key={parent[getLocalized()]} className="group relative ">
                                                     <div
@@ -506,7 +508,7 @@ export default function MainNav() {
                                 }
                                 {
                                     settings.enable_products &&
-                                    <MainNavBookCategoriesList categories={categories} type='product'/>
+                                    <MainNavBookCategoriesList categories={filter(categories, c => c.is_product)} type='product'/>
                                 }
                                 {
                                     settings.enable_books && <Link
@@ -526,7 +528,7 @@ export default function MainNav() {
                                         >
                                             {capitalize(trans('consulting_and_training'))}
                                         </Link>
-                                        <MainNavBookCategoriesList categories={categories} type='service'/>
+                                        <MainNavBookCategoriesList categories={filter(categories, c => c.is_service)} type='service'/>
                                     </> : null
                                 }
                                 {
@@ -951,3 +953,6 @@ export default function MainNav() {
         </div>
     )
 }
+
+
+export default MainNav;

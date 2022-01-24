@@ -18,7 +18,7 @@ export default function BreadCrumbs({childName = ''}) {
         if(parentModule === 'home') {
             const currentRoute = route().current();
             const breadCrumbs = split(currentRoute, '.');
-            dispatch(setParentModule(breadCrumbs[1]));
+            // dispatch(setParentModule(breadCrumbs[1]));
         }
     },[])
 

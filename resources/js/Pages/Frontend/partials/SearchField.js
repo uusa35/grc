@@ -31,12 +31,13 @@ export default function SearchField({type = 'book', setSearchType}) {
                             onChange={(e) => setSearchType(e.target.value)}
                             id="type"
                             name="type"
+                            defaultValue={type}
                             autoComplete="type"
                             className="focus:ring-gray-200 focus:border-gray-200 h-full py-0 border-transparent bg-transparent text-gray-500 sm:text-sm "
                         >
-                            <option value="book" selected={type === 'book'}>{capitalize(trans('books'))}</option>
-                            <option value="service" selected={type === 'service'}>{capitalize(trans('services'))}</option>
-                            <option value="course" selected={type === 'course'}>{capitalize(trans('courses'))}</option>
+                            <option value="book">{capitalize(trans('books'))}</option>
+                            <option value="service">{capitalize(trans('services'))}</option>
+                            <option value="course">{capitalize(trans('courses'))}</option>
                         </select>
                     </div>
                     <form onSubmit={submit}>

@@ -17,9 +17,9 @@ import './../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {settings, auth, currencies, categories, mgt} = props.initialPage.props;
+        const {settings, auth, currencies, categories, previousRoute} = props.initialPage.props;
         return render(
-            <GlobalContext.Provider value={{auth, settings, currencies, categories, mgt}}>
+            <GlobalContext.Provider value={{auth, settings, currencies, categories, previousRoute }}>
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>}
                                  persistor={persistor}
@@ -32,7 +32,6 @@ createInertiaApp({
                     </PersistGate>
                 </Provider>
             </GlobalContext.Provider>
-
             , el)
     },
     title: title => `${title} - E-Commerce`,

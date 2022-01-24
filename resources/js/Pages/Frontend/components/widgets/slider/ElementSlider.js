@@ -17,7 +17,7 @@ import './slideStyles.css'
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-export default function ElementSlider({
+function ElementSlider({
                                           elements,
                                           slidesPerView = 4,
                                           type = 'category',
@@ -96,4 +96,6 @@ export default function ElementSlider({
         </div>
     );
 };
+
+export default ElementSlider;
 

@@ -1,13 +1,12 @@
 import {Popover, Transition} from "@headlessui/react";
-import {Fragment, useContext} from "react";
+import React , {Fragment, useContext} from "react";
 import {filter, map, take} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {AppContext} from "../../../context/AppContext";
-import GlobalContext from "../../../context/GlobalContext";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 
-export default function MainNavBookCategoriesList({ categories, type = 'book' }) {
+function MainNavBookCategoriesList({ categories, type = 'book' }) {
     const { classNames , trans , getThumb , getLocalized } = useContext(AppContext)
 
     return (
@@ -54,9 +53,9 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                                         className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
                                         {/* categories with iamges */}
                                         <div
-                                            className="col-start-2 grid grid-cols-2 gap-x-8">
+                                            className="col-start-2 grid grid-cols-3 gap-x-8">
                                             {/*  featured parents */}
-                                            {map(take(filter(categories, c => c.is_service && c.is_featured && type === 'service' || c.is_product && c.is_featured && type === 'product'), 2),c => (
+                                            {map(take(filter(categories,  c => c.is_featured), 3),c => (
                                                 <div key={c[getLocalized()]}
                                                      className="group relative text-base sm:">
                                                     <div
@@ -83,7 +82,7 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
                                         {/* categories columns */}
                                         <div
                                             className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 ">
-                                            {map(filter(categories, c => c.is_service && type === 'service' || c.is_product && type === 'product'), parent => (
+                                            {map(categories, parent => (
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route(`frontend.${type}.index`, { category_id : parent.id})}
@@ -120,3 +119,5 @@ export default function MainNavBookCategoriesList({ categories, type = 'book' })
         </Popover>
     );
 }
+
+export default React.memo(MainNavBookCategoriesList);
