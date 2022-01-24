@@ -1250,7 +1250,7 @@ export const en  = {
     "aboutus_message" : "more information about us.",
     "make_email_verified" : "make email verified",
     "library" : "library",
-    "exports_and_participants" : 'experts and participants',
+    "experts_and_participants" : 'experts and participants',
     'consulting_and_training' : 'consulting and training',
     'e_learning' : 'e learning'
 }
