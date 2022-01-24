@@ -8,12 +8,14 @@ import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import {random, map} from "lodash";
+import {useSelector} from "react-redux";
 
 
 export default function({countries}) {
-    const {trans, getThumb, getLocalized} = useContext(AppContext);
+    const {trans, getThumb, getLocalized, classNames } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const { settings } = globalContext;
+    const { locale} = useSelector(state => state);
     const [code, setCode] = useState('');
     const {props} = usePage();
     const {errors} = props;
@@ -152,7 +154,7 @@ export default function({countries}) {
                                         {trans('mobile')}
                                     </label>
                                     <div className="mt-1 relative rounded-md shadow-sm">
-                                        <div className="absolute inset-y-0 left-0 flex items-center">
+                                        <div className={classNames(locale.isRTL ? `left-0` :  `right-0` , "absolute inset-y-0 flex items-center")}>
                                             <label htmlFor="country" className="sr-only">
                                                 {trans('country')}
                                             </label>
