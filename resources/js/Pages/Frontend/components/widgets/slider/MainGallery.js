@@ -17,7 +17,7 @@ export default function({elements}) {
                 originalTitle: img[getLocalized()],
                 thumbnailTitle: img[getLocalized()],
                 // thumbnailClass : 'shadow-lg border-2 border-gray-800',
-                // originalClass : 'rounded-md',
+                originalClass : 'object-contain',
                 // additionalClass : 'rounded-md',
                 // thumbnailLabel : img[getLocalized()],
                 description:
