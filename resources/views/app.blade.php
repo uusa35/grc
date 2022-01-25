@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 <head>
     @if(request()->segment(1) !== 'backend')
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
@@ -95,7 +95,7 @@
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body>
-<div id="lang" style="display: none">{{ session()->get('lang') }}</div>
+<div id="lang" style="display: none">{{ app()->getLocale() }}</div>
 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
     @csrf
 </form>

@@ -80,7 +80,7 @@ const AppContextProvider = ({children}) => {
 
     useMemo(() => {
         document.getElementById('lang').innerHTML = lang;
-        moment.locale(lang);
+        document.querySelector('html').setAttribute('lang', lang);
     }, [lang])
 
     useEffect(() => {
