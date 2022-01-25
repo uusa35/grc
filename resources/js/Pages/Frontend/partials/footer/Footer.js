@@ -283,17 +283,29 @@ export default function Footer() {
                             <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('payment_methods')}</h3>
                             <div className="flex flex-1 flex-row justify-between items-center gap-x-2">
                                 <div>
-                                    <img src={`${baseUrl}/images/paypal.jpeg`} className="w-auto h-auto"/>
+                                    <img src={`${baseUrl}/images/paypal.jpeg`} className="w-auto h-auto"
+                                         width={60}
+                                         height={60}
+                                    />
                                 </div>
                                 <div>
-                                    <img src={`${baseUrl}/images/mastercard.jpeg`} className="w-auto h-auto"/>
+                                    <img src={`${baseUrl}/images/mastercard.jpeg`} className="w-auto h-auto"
+                                         width={60}
+                                         height={60}
+                                    />
                                 </div>
                                 <div>
-                                    <img src={`${baseUrl}/images/visa.png`} className="w-auto h-auto"/>
+                                    <img src={`${baseUrl}/images/visa.png`} className="w-auto h-auto"
+                                         width={60}
+                                         height={60}
+                                    />
                                 </div>
                                 <div>
                                     <img src={`${baseUrl}/images/${settings.payment_method}.png`}
-                                         className="w-auto h-auto" style={{width: '200px'}}/>
+                                         className="w-auto h-auto" style={{width: '150px'}}
+                                         width={60}
+                                         height={60}
+                                    />
                                 </div>
                             </div>
                         </div>
