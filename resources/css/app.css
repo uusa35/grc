@@ -113,6 +113,7 @@
         src: url('../../public/fonts/GESSTwoMedium.otf') format('truetype');
         font-weight: bold;
         font-style: normal;
+        font-display: swap;
     }
 
     @font-face {
@@ -120,6 +121,7 @@
         src: url('../../public/fonts/Tajawal-Medium.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
+        font-display: swap;
     }
 
 }
