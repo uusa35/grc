@@ -20,6 +20,8 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
                     className="w-full h-full object-center object-fill lg:w-full lg:h-full"
+                    width={360}
+                    height={480}
                 />
             </div>
             {

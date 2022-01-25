@@ -28,6 +28,8 @@ export default function NormalBookWidget({element}) {
                             src={getThumb(element.image)}
                             alt={element[getLocalized()]}
                             className="w-full object-cover object-bottom rounded-t-md"
+                            width={480}
+                            height={360}
                         />
                     </Link>
                 </div>
