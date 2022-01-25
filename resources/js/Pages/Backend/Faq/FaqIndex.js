@@ -4,10 +4,13 @@ import {map} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
+import {showModal} from "../../redux/actions";
+import {useDispatch} from "react-redux";
 
 export default function({elements}) {
-    const {trans, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
+    const {trans, classNames, getLocalized } = useContext(AppContext);
     const {params} = route();
+    const dispatch = useDispatch();
 
     return (
         <BackendContainer elements={elements} showSearch={elements.total > 1}
@@ -76,8 +79,15 @@ export default function({elements}) {
                                                     </svg>
                                                 </Link>
                                                 <button
-                                                    onClick={() => handleDeleteItem('destroy', 'faq', element.id)}
-                                                    // href={route(`backend.faq.destroy`, a.id)}
+                                                    onClick={() =>
+                                                        dispatch(showModal({
+                                                            type: 'destroy',
+                                                            model: 'product',
+                                                            id: element.id,
+                                                            title: `${trans('destroy')} ${trans('product')} ${element[getLocalized()]}`,
+                                                            message: `${trans('confirmation')} ${trans('destroy')} ${trans('product')}`,
+                                                        }))
+                                                    }
                                                     className="text-indigo-600 hover:text-indigo-900 ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -282,13 +282,13 @@ export default function({user, roles, elementCategories, categories, countries, 
                                         id="subscription_id"
                                         name="subscription_id"
                                         value={data.subscription_id}
+                                        defaultValue={data.subscription_id}
                                         autoComplete="subscription_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
                                         {
                                             map(subscriptions, u => (
                                                 <option key={u.id} value={u.id}
-                                                        selected={u.id === user.subscription_id}
                                                 >{u[getLocalized()]}</option>
                                             ))
                                         }
@@ -343,13 +343,13 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             id="role_id"
                                             name="role_id"
                                             value={data.role_id}
+                                            defaultValue={data.role_id}
                                             autoComplete="role_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                         >
                                             {
                                                 roles.map(u => (
                                                     <option key={u.id} value={u.id}
-                                                            selected={u.id === user.role_id}
                                                     >{u[getLocalized()]}</option>
                                                 ))
                                             }

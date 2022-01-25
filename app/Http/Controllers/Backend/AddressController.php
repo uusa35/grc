@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AddressCollection;
+use App\Http\Resources\CountryCollection;
 use App\Models\Address;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -29,7 +31,7 @@ class AddressController extends Controller
             'user_id' => 'integer|exists:users,id'
         ]);
         $elements = Address::query();
-        $request->has('user_id') ? $elements->where(['user_id' => $request->user_id]) : $elements;
+        $request->has('user_id') ? $elements->where(['user_id' => $request->user_id]) : $elements->where(['user_id' => auth()->id()]);
         $elements =  new AddressCollection($elements->paginate(SELF::TAKE_LESS));
         return inertia('Backend/Address/AddressIndex', compact('elements'));
     }
@@ -41,7 +43,11 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        request()->validate([
+            'user_id' => 'integer|exists:users,id'
+        ]);
+        $countries = new CountryCollection(Country::active()->has('areas','>', 0)->with('areas')->get());
+        return inertia('Backend/Address/AddressCreate', compact('countries'));
     }
 
     /**
@@ -52,7 +58,21 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:200',
+            'block' => 'nullable|min:1|max:200',
+            'street' => 'nullable|min:1|max:200',
+            'building' => 'nullable|min:1|max:200',
+            'floor' => 'nullable|min:1|max:200',
+            'content' => 'nullable|min:1|max:200',
+            'user_id' => 'integer|exists:users,id',
+            'country_id' => 'integer|exists:countries,id',
+            'area_id' => 'integer|exists:areas,id'
+        ]);
+        if (Address::create($request->all())) {
+            return redirect()->route('backend.address.index', [ 'user_id'  => request()->user_id ])->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -74,7 +94,8 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        //
+        $countries = new CountryCollection(Country::active()->has('areas','>', 0)->with('areas')->get());
+        return inertia('Backend/Address/AddressEdit', compact('address', 'countries'));
     }
 
     /**
@@ -86,7 +107,21 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:200',
+            'block' => 'nullable|min:1|max:200',
+            'street' => 'nullable|min:1|max:200',
+            'building' => 'nullable|min:1|max:200',
+            'floor' => 'nullable|min:1|max:200',
+            'content' => 'nullable|min:1|max:200',
+            'user_id' => 'required|integer|exists:users,id',
+            'country_id' => 'integer|exists:countries,id',
+            'area_id' => 'integer|exists:areas,id'
+        ]);
+        if ($address->update($request->all())) {
+            return redirect()->route('backend.address.index', ['user_id' => request()->user_id])->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -97,6 +132,10 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        $id = $address->user_id;
+        if ($address->delete()) {
+            return redirect()->route('backend.address.index', ['user_id' => $id])->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }

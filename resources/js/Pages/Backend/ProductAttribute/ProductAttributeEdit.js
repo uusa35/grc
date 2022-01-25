@@ -66,7 +66,6 @@ export default function({attribute, colors, sizes}) {
                                             sizes.map(u => (
                                                 <option key={u.id}
                                                         value={u.id}
-                                                        selected={attribute.size_id === u.id}
                                                 >{u[getLocalized('name')]}</option>
                                             ))
                                         }

@@ -1,5 +1,5 @@
 import {Fragment, useContext, useEffect, useMemo, useState} from 'react'
-import {Dialog, Popover, Tab, Transition, Disclosure, Menu,} from '@headlessui/react'
+import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
     ShoppingBagIcon,
@@ -8,7 +8,7 @@ import {
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
-import {map, capitalize, take, filter, isEmpty} from 'lodash';
+import {map, capitalize, filter, isEmpty} from 'lodash';
 import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
@@ -483,7 +483,7 @@ function MainNav() {
                             <div className="h-full flex gap-x-5">
                                 <Link
                                     href={route('frontend.home')}
-                                    onClick={() => dispatch(setParentModule('home'))}
+                                    // onClick={() => dispatch(setParentModule('home'))}
                                     className={classNames(parentModule == 'home' ? `border-b border-hippie-blue-500` : ``, " flex sm:min-w-max  text-center items-center   hover:text-gray-300 hover:rounded-sm capitalize")}
                                 >
                                     {capitalize(trans('home'))}
@@ -491,7 +491,7 @@ function MainNav() {
                                 {
                                     settings.enable_products && <Link
                                         href={route('frontend.product.index')}
-                                        onClick={() => dispatch(setParentModule('product'))}
+                                        // onClick={() => dispatch(setParentModule('product'))}
                                         className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
                                         {capitalize(trans('products'))}
@@ -500,7 +500,7 @@ function MainNav() {
                                 {
                                     settings.enable_books && <Link
                                         href={route('frontend.book.index')}
-                                        onClick={() => dispatch(setParentModule('book'))}
+                                        // onClick={() => dispatch(setParentModule('book'))}
                                         className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
                                         {capitalize(trans('library'))}
@@ -513,7 +513,7 @@ function MainNav() {
                                 {
                                     settings.enable_books && <Link
                                         href={route('frontend.user.index', {is_author: true})}
-                                        onClick={() => dispatch(setParentModule('user'))}
+                                        // onClick={() => dispatch(setParentModule('user'))}
                                         className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
                                         {capitalize(trans('experts_and_participants'))}
@@ -523,7 +523,7 @@ function MainNav() {
                                     settings.enable_services ? <>
                                         <Link
                                             href={route('frontend.service.index')}
-                                            onClick={() => dispatch(setParentModule('service'))}
+                                            // onClick={() => dispatch(setParentModule('service'))}
                                             className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize hidden")}
                                         >
                                             {capitalize(trans('consulting_and_training'))}
@@ -534,7 +534,7 @@ function MainNav() {
                                 {
                                     settings.enable_courses && <Link
                                         href={route('frontend.course.index')}
-                                        onClick={() => dispatch(setParentModule('course'))}
+                                        // onClick={() => dispatch(setParentModule('course'))}
                                         className={classNames(parentModule == 'course' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                     >
                                         {capitalize(trans('e_learning'))}
@@ -544,7 +544,7 @@ function MainNav() {
 
                                 <Link
                                     href={route('frontend.aboutus')}
-                                    onClick={() => dispatch(setParentModule('aboutus'))}
+                                    // onClick={() => dispatch(setParentModule('aboutus'))}
                                     className={classNames(parentModule == 'aboutus' ? `border-b border-hippie-blue-500` : ``, "hidden 2xl:flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
                                 >
                                     {capitalize(trans('aboutus'))}

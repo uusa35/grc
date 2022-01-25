@@ -1,22 +1,14 @@
 import {Dialog, Menu, Transition} from "@headlessui/react";
 import {SearchIcon, SelectorIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useMemo, useState} from "react";
-import {ClockIcon, HomeIcon, MenuAlt1Icon, ViewListIcon, XIcon} from "@heroicons/react/outline";
+import {Fragment, useContext,useState} from "react";
+import {MenuAlt1Icon} from "@heroicons/react/outline";
 import {AppContext} from "../../../context/AppContext";
 import GlobalContext from "../../../context/GlobalContext";
-import {InertiaLink, Link} from '@inertiajs/inertia-react'
+import {Link} from '@inertiajs/inertia-react'
 import pluralize from 'pluralize';
-import {filter, map, first} from 'lodash';
+import {map} from 'lodash';
 import route from 'ziggy-js';
-import LocalizedText from "../widgets/LocalizedText";
 import {useSelector} from "react-redux";
-
-
-const teams = [
-    {name: 'Engineering', href: '#', bgColorClass: 'bg-indigo-500'},
-    {name: 'Human Resources', href: '#', bgColorClass: 'bg-green-500'},
-    {name: 'Customer Success', href: '#', bgColorClass: 'bg-yellow-500'},
-]
 
 const SideBar = () => {
     const {trans , classNames , getThumb, getLocalized } = useContext(AppContext);
@@ -380,28 +372,6 @@ const SideBar = () => {
                                         }
                                     </span>
                                 ))}
-                            </div>
-                            <div className="mt-8 hidden">
-                                {/* Secondary navigation */}
-                                <h3 className="px-3  font-semibold text-gray-500 uppercase tracking-wider"
-                                    id="teams-headline">
-                                    Teams
-                                </h3>
-                                <div className="mt-1 space-y-1" role="group" aria-labelledby="teams-headline">
-                                    {teams.map((team) => (
-                                        <a
-                                            key={team.name}
-                                            href={team.href}
-                                            className="group flex items-center px-3 py-2 text-gray-800 rounded-md hover:text-gray-900 hover:bg-gray-50"
-                                        >
-                                              <span
-                                                  className={classNames(team.bgColorClass, 'w-2.5 h-2.5 mr-4 rounded-full')}
-                                                  aria-hidden="true"
-                                              />
-                                            <span className="truncate">{team.name}</span>
-                                        </a>
-                                    ))}
-                                </div>
                             </div>
                         </nav>
                     </div>

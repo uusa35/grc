@@ -373,13 +373,13 @@ export default function({roles, categories, countries, subscriptions}) {
                                         id="country_id"
                                         name="country_id"
                                         value={data.country_id}
+                                        defaultValue={data.country_id}
                                         autoComplete="country_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
                                         {
                                             map(countries, u => (
                                                 <option key={u.id} value={u.id}
-                                                        selected={u.id === data.country_id}
                                                 >{u[getLocalized()]}</option>
                                             ))
                                         }
@@ -402,12 +402,13 @@ export default function({roles, categories, countries, subscriptions}) {
                                             id="area_id"
                                             name="area_id"
                                             value={data.area_id}
+                                            defaultValue={data.area_id}
                                             autoComplete="area_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                         >
                                             {
                                                 map(areas, u => (
-                                                    <option key={u.id} value={u.id} selected={u.id === data.area_id}
+                                                    <option key={u.id} value={u.id}
                                                     >{u[getLocalized()]}</option>
                                                 ))
                                             }

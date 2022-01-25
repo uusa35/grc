@@ -1,5 +1,5 @@
+import React, {useContext, useEffect} from "react";
 import {HomeIcon} from '@heroicons/react/solid'
-import {useContext, useEffect} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
@@ -8,7 +8,7 @@ import route from 'ziggy-js'
 import {useDispatch, useSelector} from "react-redux";
 import {setParentModule} from "../../redux/actions";
 
-export default function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
+function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
     const {trans} = useContext(AppContext);
     const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -111,3 +111,6 @@ export default function FrontendBreadCrumbs({ childName = '', parentModuleName =
         </div>
     )
 }
+
+
+export default React.memo(FrontendBreadCrumbs)

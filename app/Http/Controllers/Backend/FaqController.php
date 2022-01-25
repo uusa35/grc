@@ -18,6 +18,7 @@ class FaqController extends Controller
     {
         $this->authorizeResource(Faq::class);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +26,7 @@ class FaqController extends Controller
      */
     public function index()
     {
-        $elements = new FaqCollection(Faq::orderBy('id','desc')->paginate(Self::TAKE_LESS));
+        $elements = new FaqCollection(Faq::orderBy('id', 'desc')->paginate(Self::TAKE_LESS));
         return inertia('Backend/Faq/FaqIndex', compact('elements'));
     }
 
@@ -42,7 +43,7 @@ class FaqController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -63,7 +64,7 @@ class FaqController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\faq  $faq
+     * @param \App\Models\faq $faq
      * @return \Illuminate\Http\Response
      */
     public function show(faq $faq)
@@ -74,7 +75,7 @@ class FaqController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\faq  $faq
+     * @param \App\Models\faq $faq
      * @return \Illuminate\Http\Response
      */
     public function edit(faq $faq)
@@ -85,8 +86,8 @@ class FaqController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\faq  $faq
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\faq $faq
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, faq $faq)
@@ -107,11 +108,14 @@ class FaqController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\faq  $faq
+     * @param \App\Models\faq $faq
      * @return \Illuminate\Http\Response
      */
     public function destroy(faq $faq)
     {
-        //
+        if ($faq->delete()) {
+            return redirect()->route('backend.faq.index')->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 }

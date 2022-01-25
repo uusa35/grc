@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useMemo} from 'react';
+import {createContext, useContext, useEffect, useLayoutEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
 import {split, map, isEmpty} from 'lodash';
 import Ziggy from 'ziggy-js';
@@ -31,6 +31,7 @@ const AppContextProvider = ({children}) => {
     const {lang, locale, bootStrapped, confirmationModal, toastMessage, cart} = useSelector(state => state);
     const {auth, settings, currencies} = useContext(GlobalContext);
     const dispatch = useDispatch();
+    const [currentUrl, setCurrentUrl] = useState(window.location.href);
     // const pusher = new Pusher('c7ae6371d15e9b381173');
     // window.Echo = new Echo({
     //     broadcaster: 'pusher',
@@ -90,7 +91,7 @@ const AppContextProvider = ({children}) => {
             dispatch(setBreadCrumbs(breadCrumbs))
             dispatch(setParentModule(breadCrumbs[1]));
         })
-    }, [route().current()])
+    }, [currentUrl])
 
     useEffect(() => {
         toast.configure(options)
@@ -98,7 +99,7 @@ const AppContextProvider = ({children}) => {
             multiCartMerchant: settings.multi_cart_merchant,
             applyGlobalShipment: settings.apply_global_shipment,
             currentShipmentCountry: auth?.country || isEmpty(cart.currentShipmentCountry) ? auth.country : cart.currentShipmentCountry,
-            shipmentFees : settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
+            shipmentFees: settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
         }))
     }, [])
 
@@ -124,7 +125,7 @@ const AppContextProvider = ({children}) => {
 
     return (
         <AppContext.Provider value={context}>
-            {navigator.onLine  ? children : <LoadingView/>}
+            {navigator.onLine ? children : <LoadingView/>}
             <ToastContainer
                 rtl={locale.isRTL}
                 closeButton={() => <GrClose color={'white'}/>}
