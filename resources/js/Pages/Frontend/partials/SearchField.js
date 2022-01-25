@@ -33,11 +33,11 @@ export default function SearchField({type = 'book', setSearchType}) {
                             name="type"
                             defaultValue={type}
                             autoComplete="type"
-                            className="focus:ring-gray-200 focus:border-gray-200 h-full py-0 border-transparent bg-transparent text-gray-500 sm:text-sm "
+                            className={classNames(locale.isRTL ? `` :  ``, 'border-t border-b rounded-t-md rounded-b-md focus:border-transparent focus:ring-transparent  h-full py-0 border-transparent bg-transparent text-gray-500 sm:text-sm')}
                         >
-                            <option value="book">{capitalize(trans('books'))}</option>
-                            <option value="service">{capitalize(trans('services'))}</option>
-                            <option value="course">{capitalize(trans('courses'))}</option>
+                            <option value="book" >{capitalize(trans('books'))}</option>
+                            <option value="service" >{capitalize(trans('services'))}</option>
+                            <option value="course" >{capitalize(trans('courses'))}</option>
                         </select>
                     </div>
                     <form onSubmit={submit}>
@@ -57,7 +57,7 @@ export default function SearchField({type = 'book', setSearchType}) {
                 <Link
                     href={route(`frontend.${type}.index`, {search})}
                     className="px-5">
-                    <SearchIcon className="h-5 w-5 text-gray-900" aria-hidden="true"/>
+                    <SearchIcon className="h-5 w-5 text-gray-900 " aria-hidden="true"/>
                 </Link>
             </div>
         </div>

@@ -764,7 +764,7 @@ function MainNav() {
                             {settings.enable_books && <SearchField type={searchType} setSearchType={setSearchType}/>}
                             {/*{settings.enable_products && <SearchField type={'product'}/>}*/}
                             <div
-                                className="hidden 2xl:flex lg:items-center lg:justify-end md:space-x-6 rtl:ml-2 ltr:mr-2 ">
+                                className="hidden 2xl:flex lg:items-center lg:justify-end px-1">
                                 <Link
                                     onClick={() => {
                                         dispatch(changeLang(locale.otherLang))
@@ -774,13 +774,12 @@ function MainNav() {
                                     <img
                                         className="w-5 h-5 rounded-full"
                                         src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}/>
-                                    <span className="rtl:pr-3 ltr:pl-3">{locale.otherLang}</span>
                                 </Link>
                             </div>
 
 
                             {/* currency dropdown */}
-                            {settings.enable_prices ? <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
+                            {settings.enable_prices ? <Menu as="div" className="ltr:ml-4 rtl:mr-3 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
                                         className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
@@ -829,7 +828,7 @@ function MainNav() {
                             </Menu> : null}
 
                             {/* auth dropdown */}
-                            <Menu as="div" className="ml-4 relative flex-shrink-0 z-50">
+                            <Menu as="div" className="ltr:ml-4 rtl:mr-3 relative flex-shrink-0 z-50">
                                 <div>
                                     <Menu.Button
                                         className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
@@ -930,7 +929,7 @@ function MainNav() {
 
                             {/* Cart */}
                             {
-                                settings.enable_cart && <div className="ml-4 flow-root lg:ml-6">
+                                settings.enable_cart && <div className="ml-4 flow-root ltr:ml-4 rtl:mr-3 ">
                                     <Link href={route('frontend.cart.index')}
                                           className="group -m-2 p-2 flex items-center">
                                         <ShoppingBagIcon
