@@ -473,6 +473,8 @@ function MainNav() {
                                         className="w-24 h-auto"
                                         src={getThumb(settings.image)}
                                         alt={settings[getLocalized()]}
+                                        width={96}
+                                        height={96}
                                     />
                                 </Link>
                             </div>
@@ -773,7 +775,10 @@ function MainNav() {
                                     className="flex flex-row items-center hover:text-gray-300">
                                     <img
                                         className="w-5 h-5 rounded-full"
-                                        src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}/>
+                                        src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}
+                                        width={60}
+                                        height={60}
+                                    />
                                 </Link>
                             </div>
 
@@ -788,6 +793,8 @@ function MainNav() {
                                             className="h-5 w-5 rounded-full object-cover"
                                             src={getThumb(currency.image)}
                                             alt={currency[getLocalized()]}
+                                            width={60}
+                                            height={60}
                                         />
                                         {currency[getLocalized('currency_symbol')]}
                                     </Menu.Button>
@@ -816,6 +823,8 @@ function MainNav() {
                                                                 className="h-5 w-5 rounded-full object-cover"
                                                                 src={getThumb(element.image)}
                                                                 alt={element[getLocalized()]}
+                                                                width={60}
+                                                                height={60}
                                                             />
                                                             {element[getLocalized()]}
                                                         </button>

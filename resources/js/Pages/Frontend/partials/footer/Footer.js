@@ -38,8 +38,10 @@ export default function Footer() {
                     <div className=" p-4">
                         <img
                             className="h-28 rounded-sm shadow-md"
-                            src={settings.mgt ? getThumb(settings.image) : getThumb(settings.app_logo)}
+                            src={getThumb(settings.app_logo)}
                             alt={settings[getLocalized()]}
+                            width={96}
+                            height={96}
                         />
                         <p className="text-gray-500 capitalize text-base mt-5">
                             {settings[getLocalized('caption')]}
