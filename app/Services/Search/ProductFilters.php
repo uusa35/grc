@@ -31,6 +31,7 @@ class ProductFilters extends QueryFilters
     {
         return $this->builder
             ->where('name_ar', 'like', "%{$search}%")
+            ->orWhere('id', 'like', "%{$search}%")
             ->orWhere('name_en', 'like', "%{$search}%")
             ->orWhere('caption_ar', 'like', "%{$search}%")
             ->orWhere('caption_en', 'like', "%{$search}%")

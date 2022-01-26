@@ -984,7 +984,7 @@ export const ar = {
     'en' : 'English',
     'products' : "المنتجات",
     'books' : "الكتب",
-    'users' : "المستخدمين",
+    'users' : "المشاركين",
     'services' : "الاستشارات",
     'commands' : 'أوامر',
     "edit_attributes" : "تعديل الخصائص",

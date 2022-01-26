@@ -18,7 +18,6 @@ export default function NormalUserWidget ({ element }) {
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
-                    title={element[getLocalized()]}
                     className="z-0 w-60 h-60 rounded-full shadow-md object-center object-cover group-hover:opacity-75 shadow-md"
                     width={360}
                     height={480}

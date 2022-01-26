@@ -75,7 +75,7 @@ class UserUpdate extends FormRequest
             'country_id' => 'required|numeric|exists:countries,id',
             'role_id' => 'required|numeric|exists:roles,id',
             'subscription_id' => 'numeric|exists:subscriptions,id',
-            'merchant_id' => 'nullable|max:200|min:3|unique:users,merchant_id',
+            'merchant_id' => 'nullable|max:200|min:3',
             'categories' => 'array'
         ];
     }

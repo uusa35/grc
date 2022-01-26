@@ -7,6 +7,7 @@ use App\Http\Resources\OrderCollection;
 use App\Models\Order;
 use App\Notifications\OrderPaid;
 use App\Services\Search\Filters;
+use App\Services\Search\OrderFilters;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -32,7 +33,7 @@ class OrderController extends Controller
         return redirect()->route('backend.order.search', request()->getQueryString());
     }
 
-    public function search(Filters $filters)
+    public function search(OrderFilters $filters)
     {
         $this->authorize('search', 'order');
         $validator = validator(request()->all(), ['search' => 'nullable']);

@@ -978,7 +978,7 @@ export const en  = {
     'en' : 'English',
     'products' : 'products',
     'books' : 'books',
-    'users' : 'users',
+    'users' : 'participants',
     'services' : 'consulting',
     'commands' : 'commands',
     "edit_attributes" : "modify properties",

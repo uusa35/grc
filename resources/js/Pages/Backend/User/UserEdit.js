@@ -580,24 +580,40 @@ export default function({user, roles, elementCategories, categories, countries, 
                                 </p>
                             </div>
                             {/* file pdf */}
-                            <div className="sm:col-span-3 hidden">
+                            <div className="sm:col-span-3">
                                 <label htmlFor="main_image"
                                        className={`block  flex flex-row justify-between items-center  text-gray-800`}>
                                     {trans('pdf_file')}
                                 </label>
-                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
-                                    <input
-                                        onChange={e => setData('file', e.target.files[0])}
-                                        type="file"
-                                        name="file"
-                                        id="file"
-                                        accept="application/pdf"
-                                        autoComplete="pdf_file"
-                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
-                                    />
-                                    {user.file && <a
-                                        className={`p-2 ring-2 ring-gray-300 bg-gray-100 rounded-md shadow-md text-center w-1/2`}
-                                        target="_blank" href={getFileUrl(user.file)}>{trans('file_url')}</a>}
+                                <div className="mt-1 flex flex-row flex-1  justify-between items-center h-32">
+                                    <div>
+                                        <input
+                                            onChange={e => setData('file', e.target.files[0])}
+                                            type="file"
+                                            name="file"
+                                            id="file"
+                                            accept="application/pdf"
+                                            autoComplete="pdf_file"
+                                            className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
+                                        />
+                                    </div>
+                                    {user.file && <div>
+                                        <a
+                                            className={`mx-10 p-2 ring-2 ring-gray-300 bg-gray-100 rounded-md shadow-md text-center`}
+                                            target="_blank" href={getFileUrl(user.file)}>{trans('file_url')}</a>
+
+                                        <Link
+                                            className={`p-2 ring-2 ring-red-300 bg-red-900 text-white rounded-md shadow-md text-center`}
+                                            target="_blank"
+                                            href={route(`backend.element.clear`, {
+                                                id: user.id,
+                                                'model': 'user',
+                                                'colName': 'file'
+                                            })}
+                                        >{trans('remove')}</Link>
+
+                                    </div>
+                                    }
                                 </div>
                                 <ToolTipWidget message={trans('file_instruction')}/>
                                 <p className={`mt-2  text-gray-500`}>

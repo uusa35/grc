@@ -5,6 +5,7 @@ import {AppContext} from "../../../context/AppContext";
 import {Link} from '@inertiajs/inertia-react'
 import route from 'ziggy-js';
 import {isEmpty, map} from 'lodash';
+import SearchField from "../../../Frontend/partials/SearchField";
 
 export default function Pagination({type, total, links, showSearch = false, mainModule }) {
     const [search, setSearch] = useState('');
@@ -14,35 +15,8 @@ export default function Pagination({type, total, links, showSearch = false, main
         <nav
             className="grid grid-cols-1 sm:grid-cols-2 flex justify-between items-center  bg-transparent sm:px-0">
             <div
-                className={classNames('col-span-full h-auto sm:col-span-1 flex flex-1 justify-start items-center space-x-5')}>
-                <div className={classNames(showSearch  ? `visible` : 'invisible' , 'flex flex-1 flex-row justify-start items-center h-auto space-x-5')}>
-                    <label htmlFor="search" className="sr-only">
-                        {trans('search')}
-                    </label>
-                    <div className="relative rounded-md shadow-sm w-80">
-                        <div
-                            className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
-                            aria-hidden="true"
-                        >
-                            <SearchIcon className="mr-3 h-4 w-4 text-gray-400" aria-hidden="true"/>
-                        </div>
-                        <input
-                            onChange={(e) => setSearch(e.target.value)}
-                            type="text"
-                            name="search"
-                            defaultValue={search ? search : params?.search}
-                            className={`focus:ring-gray-500 focus:border-gray-500 block w-80 pl-9 border-gray-300 rounded-md`}
-                            placeholder={trans('search')}
-                        />
-                    </div>
-                    <Link
-                        href={(search.length > 2 || params?.search?.length > 2) && route().has(`backend.${mainModule}.index`) ? route(`backend.${mainModule}.index`, {search}) : '#'}
-                        disabled={search.length <= 2}
-                        className={`py-1 px-3 order-0 inline-flex items-center mt-1 border border-transparent shadow-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-gray-500 sm:order-1 sm:ml-3`}
-                    >
-                        {trans("search")}
-                    </Link>
-                </div>
+                className={classNames('col-span-full h-auto sm:col-span-1 flex flex-1 justify-start items-center')}>
+               <SearchField />
                 {
                     (search.length > 2 || params?.search?.length > 2) && route().has(`backend.${mainModule}.index`) && <Link
                         href={route().has(`backend.${type}.index`) ? route(`backend.${type}.index`) : '#'}

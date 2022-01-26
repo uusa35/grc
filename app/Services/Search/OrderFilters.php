@@ -27,10 +27,14 @@ class OrderFilters extends QueryFilters
     public function search($search)
     {
         return $this->builder
-            ->where('name_ar', 'like', "%{$search}%")
-            ->orWhere('name_en', 'like', "%{$search}%")
-            ->orWhere('description_ar', 'like', "%{$search}%")
-            ->orWhere('description_en', 'like', "%{$search}%");
+            ->where('id', 'like', "%{$search}%")
+            ->orWhere('price', 'like', "%{$search}%")
+            ->orWhere('net_price', 'like', "%{$search}%")
+            ->orWhere('email', 'like', "%{$search}%")
+            ->orWhere('address', 'like', "%{$search}%")
+            ->orWhere('phone', 'like', "%{$search}%")
+            ->orWhere('mobile', 'like', "%{$search}%")
+            ->orWhere('country', 'like', "%{$search}%");
     }
 
     public function paid()
@@ -48,5 +52,9 @@ class OrderFilters extends QueryFilters
         return $this->builder->where(['paid' => true, 'cash_on_delivery' => false]);
     }
 
+    public function page()
+    {
+        return $this->builder;
+    }
 
 }

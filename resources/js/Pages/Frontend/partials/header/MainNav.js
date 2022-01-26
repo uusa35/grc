@@ -482,11 +482,11 @@ function MainNav() {
 
                         {/* Categories with sub */}
                         <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                            <div className="h-full flex gap-x-5">
+                            <div className="h-full flex gap-x-5 overflow-hidden">
                                 <Link
                                     href={route('frontend.home')}
                                     // onClick={() => dispatch(setParentModule('home'))}
-                                    className={classNames(parentModule == 'home' ? `border-b border-hippie-blue-500` : ``, " flex sm:min-w-max  text-center items-center   hover:text-gray-300 hover:rounded-sm capitalize")}
+                                    className={classNames(parentModule == 'home' ? `border-b border-hippie-blue-500` : ``, " flex sm:min-w-max  text-center items-center   hover:text-gray-300 hover:rounded-sm capitalize overflow-hidden")}
                                 >
                                     {capitalize(trans('home'))}
                                 </Link>
@@ -494,7 +494,7 @@ function MainNav() {
                                     settings.enable_products && <Link
                                         href={route('frontend.product.index')}
                                         // onClick={() => dispatch(setParentModule('product'))}
-                                        className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                        className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize overflow-hidden")}
                                     >
                                         {capitalize(trans('products'))}
                                     </Link>
@@ -503,7 +503,7 @@ function MainNav() {
                                     settings.enable_books && <Link
                                         href={route('frontend.book.index')}
                                         // onClick={() => dispatch(setParentModule('book'))}
-                                        className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                        className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize overflow-hidden")}
                                     >
                                         {capitalize(trans('library'))}
                                     </Link>
@@ -516,7 +516,7 @@ function MainNav() {
                                     settings.enable_books && <Link
                                         href={route('frontend.user.index', {is_author: true})}
                                         // onClick={() => dispatch(setParentModule('user'))}
-                                        className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                        className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize overflow-hidden")}
                                     >
                                         {capitalize(trans('experts_and_participants'))}
                                     </Link>
@@ -763,7 +763,7 @@ function MainNav() {
                         {/* change lang */}
                         <div className="ml-auto flex flex-1 justify-end items-center">
                             {/* Search */}
-                            {settings.enable_books && <SearchField type={searchType} setSearchType={setSearchType}/>}
+                            {settings.enable_books && <SearchField />}
                             {/*{settings.enable_products && <SearchField type={'product'}/>}*/}
                             <div
                                 className="hidden 2xl:flex lg:items-center lg:justify-end px-1">

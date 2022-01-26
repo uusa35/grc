@@ -118,3 +118,8 @@ export const setDiscount = payload => ({
     type: actions.SET_DISCOUNT,
     payload,
 });
+
+export const setSearchType = payload => ({
+    type : actions.SET_SEARCH_TYPE,
+    payload,
+})

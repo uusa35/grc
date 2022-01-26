@@ -31,6 +31,7 @@ class UserFilters extends QueryFilters
     {
         return $this->builder
             ->where('name_ar', 'like', "%{$search}%")
+            ->orWhere('id', 'like', "%{$search}%")
             ->orWhere('name_en', 'like', "%{$search}%")
             ->orWhere('description_ar', 'like', "%{$search}%")
             ->orWhere('description_en', 'like', "%{$search}%")

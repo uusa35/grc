@@ -16,6 +16,7 @@ import sort from './sort'
 import bootStrapped from './bootStrapped'
 import settings from './settings'
 import parentModule from './parentModule'
+import searchType from "./searchType";
 
 export default combineReducers({
     cart,
@@ -34,5 +35,6 @@ export default combineReducers({
     sort,
     bootStrapped,
     settings,
-    parentModule
+    parentModule,
+    searchType
 });

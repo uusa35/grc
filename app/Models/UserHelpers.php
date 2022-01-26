@@ -121,7 +121,7 @@ trait UserHelpers
     public function scopeNotClients($q)
     {
         return $q->whereHas('role', function ($q) {
-            return $q->where('is_client', false)->where('is_visible', true);
+            return $q->where('is_client', false);
         });
     }
 

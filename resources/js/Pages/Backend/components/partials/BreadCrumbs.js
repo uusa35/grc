@@ -7,6 +7,7 @@ import {isEmpty, map, split, keys} from 'lodash';
 import route from 'ziggy-js'
 import {useDispatch, useSelector} from "react-redux";
 import {setParentModule} from "../../../redux/actions";
+import SearchField from "../../../Frontend/partials/SearchField";
 
 export default function BreadCrumbs({childName = ''}) {
     const {trans, classNames } = useContext(AppContext);
@@ -24,7 +25,7 @@ export default function BreadCrumbs({childName = ''}) {
 
     return (
         <div
-            className="flex flex-1 flex-row justify-between items-center bg-white py-1 rounded-md shadow-sm">
+            className="flex flex-1 flex-row justify-between items-center bg-white py-1 my-2 rounded-md shadow-sm">
             <div className="flex flex-row">
                 <nav
                     className={`flex ltr:pl-5 rtl:pr-5  bg-gray-100" aria-label="Breadcrumb`}>
@@ -77,11 +78,12 @@ export default function BreadCrumbs({childName = ''}) {
                 </nav>
             </div>
             <div className="flex">
+                <SearchField />
                 <Link href={'#'}
                       className={classNames(locale.isRTL ? `rounded-r-lg` : `rounded-l-lg`, 'flex flex-row justify-between items-center w-20 bg-hippie-blue-300 hover:text-white hover:bg-hippie-blue-600 shadow-md')}
                       onClick={() => window.history.back()}
                 >
-                    <h1 className="rtl:pr-4 ltr:pl-4 py-2">{trans('back')}</h1>
+                    <h1 className="rtl:pr-4 ltr:pl-4">{trans('back')}</h1>
                     {locale.isRTL ?
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">

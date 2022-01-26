@@ -1,23 +1,70 @@
+import React , {useContext, useMemo, useState} from "react";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {SearchIcon} from "@heroicons/react/outline";
-import {useContext, useState} from "react";
 import {AppContext} from "../../context/AppContext";
-import {useSelector} from "react-redux";
-import { capitalize } from "lodash";
+import {useDispatch, useSelector} from "react-redux";
+import {capitalize, split, first, map , filter } from "lodash";
+import {setSearchType} from "../../redux/actions";
+import {Inertia} from "@inertiajs/inertia";
+import pluralize from 'pluralize'
 
-export default function SearchField({type = 'book', setSearchType}) {
+const  SearchField  =  ()  => {
     const [search, setSearch] = useState()
-    const {trans, classNames } = useContext(AppContext)
-    const { locale } = useSelector(state => state);
+    const {trans, classNames, settings  } = useContext(AppContext)
+    const { locale, searchType  } = useSelector(state => state);
+    const [requestType,setRequestType] = useState('frontend');
+    const dispatch = useDispatch();
+    const [types,setStype] = useState([
+        {
+            name : 'products',
+            frontend : settings.enable_products,
+            backend : settings.enable_products,
+        },
+        {
+            name : 'book',
+            frontend : settings.enable_books,
+            backend : settings.enable_books,
+        },
+        {
+            name : 'service',
+            frontend : settings.enable_services,
+            backend : settings.enable_services,
+        },
+        {
+            name : 'course',
+            frontend : settings.enable_courses,
+            backend : settings.enable_courses,
+        },
+        {
+            name : 'user',
+            frontend : settings.enable_books,
+            backend : settings.enable_books,
+        },
+        {
+            name : 'order',
+            frontend : false,
+            backend : true,
+        }
+    ])
+
 
     const submit = (e) => {
         e.preventDefault();
-        window.location.href = route(`frontend.${type}.index`, {search});
+        return Inertia.get(route(`${requestType}.${searchType}.index`, {search}))
     }
 
+    const handleSearchType = (e) => dispatch(setSearchType(e))
+
+    useMemo(() => {
+        const currentRoute = first(split(route().current(), '.'))
+        setRequestType(currentRoute);
+    },[route().current()])
+
+    console.log('currentRequestType', requestType);
+
     return (
-        <div className="hidden xl:flex flex-row px-5">
+        <div className="hidden xl:flex flex-row">
             <div className="flex-1">
                 <label htmlFor="search" className="block text-sm font-medium text-gray-800 hidden">
                     {trans('search')}
@@ -28,16 +75,19 @@ export default function SearchField({type = 'book', setSearchType}) {
                             {`${trans('search')} `}
                         </label>
                         <select
-                            onChange={(e) => setSearchType(e.target.value)}
+                            onChange={(e) => handleSearchType(e.target.value)}
                             id="type"
                             name="type"
-                            defaultValue={type}
+                            defaultValue={searchType}
                             autoComplete="type"
                             className={classNames(locale.isRTL ? `` :  ``, 'border-t border-b rounded-t-md rounded-b-md focus:border-transparent focus:ring-transparent  h-full py-0 border-transparent bg-transparent text-gray-500 sm:text-sm')}
                         >
-                            <option value="book" >{capitalize(trans('books'))}</option>
-                            <option value="service" >{capitalize(trans('services'))}</option>
-                            <option value="course" >{capitalize(trans('courses'))}</option>
+                            {
+                                map(filter(types, t => t[requestType]), type => <option key={`${type.name}`} value={`${type.name}`} >{capitalize(trans(pluralize(type.name)))}</option>)
+                            }
+                            {/*<option value="book" >{capitalize(trans('books'))}</option>*/}
+                            {/*<option value="service" >{capitalize(trans('services'))}</option>*/}
+                            {/*<option value="course" >{capitalize(trans('courses'))}</option>*/}
                         </select>
                     </div>
                     <form onSubmit={submit}>
@@ -55,7 +105,7 @@ export default function SearchField({type = 'book', setSearchType}) {
             <div
                 className={classNames(locale.isRTL ? `rounded-l-md` :  `rounded-r-md`, "flex justify-center items-center bg-gray-200 shadow-sm  mt-1 border-gray-200")}>
                 <Link
-                    href={route(`frontend.${type}.index`, {search})}
+                    href={route(`${requestType}.${searchType}.index`, {search})}
                     className="px-5">
                     <SearchIcon className="h-5 w-5 text-gray-900 " aria-hidden="true"/>
                 </Link>
@@ -64,6 +114,7 @@ export default function SearchField({type = 'book', setSearchType}) {
     );
 }
 
+export default React.memo(SearchField)
 // <div
 //     className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end invisible 2xl:visible">
 //     <div className="max-w-lg w-full lg:max-w-xs">
