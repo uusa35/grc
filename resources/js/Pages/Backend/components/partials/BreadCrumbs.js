@@ -80,7 +80,7 @@ export default function BreadCrumbs({childName = ''}) {
             <div className="flex">
                 <SearchField />
                 <Link href={'#'}
-                      className={classNames(locale.isRTL ? `rounded-r-lg` : `rounded-l-lg`, 'flex flex-row justify-between items-center w-20 bg-hippie-blue-300 hover:text-white hover:bg-hippie-blue-600 shadow-md')}
+                      className={classNames(locale.isRTL ? `rounded-r-lg` : `rounded-l-lg`, 'flex flex-row justify-between items-center rtl:mr-5 ltr:ml-5 w-20 bg-hippie-blue-300 hover:text-white hover:bg-hippie-blue-600 shadow-md')}
                       onClick={() => window.history.back()}
                 >
                     <h1 className="rtl:pr-4 ltr:pl-4">{trans('back')}</h1>

@@ -66,7 +66,7 @@ const  SearchField  =  ()  => {
     return (
         <div className="hidden xl:flex flex-row">
             <div className="flex-1">
-                <label htmlFor="search" className="block text-sm font-medium text-gray-800 hidden">
+                <label htmlFor="search" className="block text-sm font-bold text-gray-800 hidden">
                     {trans('search')}
                 </label>
                 <div className="mt-1 w-60 relative  shadow-sm">
@@ -80,7 +80,7 @@ const  SearchField  =  ()  => {
                             name="type"
                             defaultValue={searchType}
                             autoComplete="type"
-                            className={classNames(locale.isRTL ? `` :  ``, 'border-t border-b rounded-t-md rounded-b-md focus:border-transparent focus:ring-transparent  h-full py-0 border-transparent bg-transparent text-gray-500 sm:text-sm')}
+                            className={classNames(locale.isRTL ? `` :  ``, 'border-t border-b rounded-t-md rounded-b-md focus:border-transparent focus:ring-transparent  h-full rtl:pl-4 ltr:pl-1 border-transparent bg-transparent text-gray-500 sm:text-sm font-bold')}
                         >
                             {
                                 map(filter(types, t => t[requestType]), type => <option key={`${type.name}`} value={`${type.name}`} >{capitalize(trans(pluralize(type.name)))}</option>)
@@ -96,7 +96,7 @@ const  SearchField  =  ()  => {
                             type="text"
                             name="search"
                             id="search"
-                            className={classNames(locale.isRTL ? `rounded-r-md` :  `rounded-l-md`, "focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm border-gray-200")}
+                            className={classNames(locale.isRTL ? `rounded-r-md` :  `rounded-l-md`, "font-bold focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm border-gray-200")}
                             placeholder={`${trans('search')}`}
                         />
                     </form>

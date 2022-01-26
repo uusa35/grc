@@ -13,7 +13,12 @@ export default function Pagination({type, total, links, showSearch = false, main
     const { params } = route();
     return (
         <nav
-            className="grid grid-cols-1 sm:grid-cols-2 flex justify-between items-center  bg-transparent sm:px-0">
+            className="flex flex-1 justify-between items-center  bg-transparent sm:px-0">
+            <div>
+                {
+                    showSearch && <SearchField />
+                }
+            </div>
             <div className="col-span-full sm:col-span-1 flex justify-end mt-5 sm:mt-0">
                 {
                     !isEmpty(links) && total > 0 && <div className="md:-mt-px md:flex">
