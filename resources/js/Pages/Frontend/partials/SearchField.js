@@ -8,10 +8,12 @@ import {capitalize, split, first, map , filter } from "lodash";
 import {setSearchType} from "../../redux/actions";
 import {Inertia} from "@inertiajs/inertia";
 import pluralize from 'pluralize'
+import GlobalContext from "../../context/GlobalContext";
 
 const  SearchField  =  ()  => {
     const [search, setSearch] = useState()
-    const {trans, classNames, settings  } = useContext(AppContext)
+    const {trans, classNames  } = useContext(AppContext)
+    const { settings } = useContext(GlobalContext);
     const { locale, searchType  } = useSelector(state => state);
     const [requestType,setRequestType] = useState('frontend');
     const dispatch = useDispatch();
