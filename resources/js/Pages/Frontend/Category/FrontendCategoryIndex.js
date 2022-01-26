@@ -46,14 +46,14 @@ export default function FrontendCategoryIndex({elements}) {
                         {map(elements.data, (element) => (
                             <CategoryWidget element={element} type={type} key={element.id}/>
                         ))}
-                        <Pagination
-                            type={'category'}
-                            total={elements.total}
-                            links={elements.links}
-                            showSearch={false}
-                        />
                     </div>
                 </div>
+                <FrontendPagination
+                    type={'category'}
+                    total={elements.meta.total}
+                    links={elements.meta.links}
+                    showSearch={false}
+                />
             </FrontendContentContainer>
         </FrontendContainer>
     );
