@@ -63,8 +63,6 @@ const  SearchField  =  ()  => {
         setRequestType(currentRoute);
     },[route().current()])
 
-    console.log('currentRequestType', requestType);
-
     return (
         <div className="hidden xl:flex flex-row">
             <div className="flex-1">

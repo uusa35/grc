@@ -17,7 +17,7 @@ object-assign
 */
 
 /*!
- * Pusher JavaScript Library v7.0.3
+ * Pusher JavaScript Library v7.0.4
  * https://pusher.com/
  *
  * Copyright 2020, Pusher
