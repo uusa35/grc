@@ -785,15 +785,15 @@ export default function({element, relatedElements, auth, settings}) {
                     <SocialIconShare/>
                     {/* related items */}
                     {
-                        relatedElements && relatedElements.meta.total > 0 &&
-                        <RelatedItems elements={relatedElements.data} type={'product'}/>
+                        relatedElements && relatedElements.meta.total > 0 ?
+                        <RelatedItems elements={relatedElements.data} type={'product'}/> : null
                     }
                 </div>
                 {
-                    element.show_size_chart && <SizeChartModal showModal={showModal} setShowModal={setShowModal}
+                    element.show_size_chart ? <SizeChartModal showModal={showModal} setShowModal={setShowModal}
                                                                title={trans('size_chart')}
                                                                image={element.size_chart_image && !validate.isEmpty(element.size_chart_image) ? getLarge(element.size_chart_image) : getLarge(settings.size_chart_image)}
-                    />
+                    /> : null
                 }
             </FrontendContentContainer>
         </FrontendContainer>
