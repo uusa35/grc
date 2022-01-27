@@ -20,7 +20,6 @@ const persistConfig = {
         'sideBarOpen',
         'toastMessage',
         'parentModule',
-        'searchType'
         // 'cart'
     ],
     debug: isLocal(),

@@ -1,10 +1,10 @@
-import React , {useContext, useMemo, useState} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {SearchIcon} from "@heroicons/react/outline";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
-import {capitalize, split, first, map , filter } from "lodash";
+import {capitalize, split, first, map, filter, isNull} from "lodash";
 import {setSearchType} from "../../redux/actions";
 import {Inertia} from "@inertiajs/inertia";
 import pluralize from 'pluralize'
@@ -51,7 +51,7 @@ const  SearchField  =  ()  => {
     ]);
 
     useMemo(() => {
-        dispatch(setSearchType(first(filter(types, t => t.frontend)).name))
+        isNull(searchType) ? dispatch(setSearchType(first(filter(types, t => t.frontend)).name)) : null;
     },[])
 
 
