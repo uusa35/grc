@@ -27,6 +27,7 @@ class Setting extends PrimaryModel
         'enable_google_translation' => 'boolean',
         'enable_favorite' => 'boolean',
         'enable_newsletter' => 'boolean',
+        'enable_payment_online' => 'boolean',
     ];
 
     public function images()

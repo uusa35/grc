@@ -1,7 +1,7 @@
 import { SET_TOAST_MESSAGE , CLEAR_TOAST_MESSAGE } from "../actions/types";
 
-const initialState = {title: '', message: '', type: 'info', display: false}
-export default function(toastMessage = initialState, action) {
+const toastMessageInitialState = {title: '', message: '', type: 'info', display: false}
+export default function(toastMessage = toastMessageInitialState, action) {
     switch (action.type) {
         case SET_TOAST_MESSAGE:
             return {
@@ -12,8 +12,8 @@ export default function(toastMessage = initialState, action) {
                 display: true
             };
         case CLEAR_TOAST_MESSAGE:
-            return initialState;
+            return toastMessageInitialState;
         default:
-            return toastMessage;
+            return toastMessageInitialState;
     }
 }

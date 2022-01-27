@@ -55,7 +55,7 @@ export default function({ size }) {
                                     required
                                     type="text"
                                     name="name_ar"
-                                    defaultValue={data.name_ar}
+                                    defaultValue={size.name_ar}
                                     id="name_ar"
                                     autoComplete="name_ar"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -77,7 +77,7 @@ export default function({ size }) {
                                     required
                                     type="text"
                                     name="name_en"
-                                    defaultValue={data.name_en}
+                                    defaultValue={size.name_en}
                                     id="name_en"
                                     autoComplete="name_en"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -106,7 +106,7 @@ export default function({ size }) {
                                         name="active"
                                         type="radio"
                                         value={1}
-                                        defaultChecked={data.active}
+                                        defaultChecked={size.active}
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"
@@ -121,7 +121,7 @@ export default function({ size }) {
                                         name="active"
                                         type="radio"
                                         value={0}
-                                        defaultChecked={!data.active}
+                                        defaultChecked={!size.active}
                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                     />
                                     <label htmlFor="active"

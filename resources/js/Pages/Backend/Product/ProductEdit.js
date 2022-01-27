@@ -322,7 +322,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                             onChange={handleChange}
                                             id="user_id"
                                             name="user_id"
-                                            value={data.user_id}
+                                            defaultValue={data.user_id}
                                             autoComplete="user_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                         >
@@ -351,7 +351,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         required
                                         id="size_id"
                                         name="size_id"
-                                        value={data.size_id}
+                                        defaultValue={data.size_id}
                                         autoComplete="size_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
@@ -381,7 +381,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         required
                                         id="color_id"
                                         name="color_id"
-                                        value={data.color_id}
+                                        defaultValue={data.color_id}
                                         autoComplete="color_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
@@ -1060,7 +1060,7 @@ accept="image/jpg, image/jpeg , image/png"
                                             onChange={handleChange}
                                             id="brand_id"
                                             name="brand_id"
-                                            value={data.brand_id}
+                                            defaultValue={data.brand_id}
                                             autoComplete="brand_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                         >

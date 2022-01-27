@@ -1,6 +1,4 @@
 import {useContext, useMemo, useState} from 'react'
-import {RadioGroup} from '@headlessui/react'
-import {CheckCircleIcon, TrashIcon} from '@heroicons/react/solid'
 import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
@@ -8,10 +6,8 @@ import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {filter, first, map, round} from "lodash";
-import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
-import axios from "axios";
-import {setShipmentFees, showToastMessage} from "../../redux/actions";
+import {setShipmentFees} from "../../redux/actions";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 
@@ -91,7 +87,7 @@ export default function({countries, auth}) {
                                     id="name"
                                     name="name"
                                     required
-                                    defaultValue={data.name_ar}
+                                    defaultValue={auth.name_ar}
                                     autoComplete="given-name"
                                     className="block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
@@ -114,7 +110,7 @@ export default function({countries, auth}) {
                                     name="email"
                                     autoComplete="email"
                                     required
-                                    defaultValue={data.email}
+                                    defaultValue={auth.email}
                                     className="block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
@@ -134,7 +130,7 @@ export default function({countries, auth}) {
                                     type="number"
                                     id="mobile"
                                     name="mobile"
-                                    defaultValue={data.mobile}
+                                    defaultValue={auth.mobile}
                                     autoComplete="mobile"
                                     className="block w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
@@ -158,7 +154,7 @@ export default function({countries, auth}) {
                                     onChange={handleChange}
                                     id="country_id"
                                     name="country_id"
-                                    value={data.country_id}
+                                    defaultValue={auth.country_id}
                                     autoComplete="country_id"
                                     required
                                     className={`shadow-sm bg-gray-100  focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -166,7 +162,6 @@ export default function({countries, auth}) {
                                     {
                                         map(countries, u => (
                                             <option key={u.id} value={u.id}
-                                                    selected={data.country_id && u.id === data.country_id}
                                             >{u[getLocalized()]}</option>
                                         ))
                                     }
@@ -189,7 +184,7 @@ export default function({countries, auth}) {
                                         onChange={handleChange}
                                         id="area_id"
                                         name="area_id"
-                                        value={data.area_id}
+                                        defaultValue={auth.area_id}
                                         autoComplete="area_id"
                                         required
                                         className={`shadow-sm bg-gray-100  focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -197,7 +192,6 @@ export default function({countries, auth}) {
                                         {
                                             map(areas, u => (
                                                 <option key={u.id} value={u.id}
-                                                        selected={data.area_id && u.id === data.area_id}
                                                 >{u[getLocalized()]}</option>
                                             ))
                                         }
@@ -222,7 +216,7 @@ export default function({countries, auth}) {
                                     type="text"
                                     id="block"
                                     name="block"
-                                    defaultValue={data.block}
+                                    defaultValue={auth.block}
                                     autoComplete="given-block"
                                     className="block w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
@@ -244,7 +238,7 @@ export default function({countries, auth}) {
                                     type="text"
                                     id="street"
                                     name="street"
-                                    defaultValue={data.street}
+                                    defaultValue={auth.street}
                                     autoComplete="given-street"
                                     className="street w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
@@ -266,7 +260,7 @@ export default function({countries, auth}) {
                                     type="text"
                                     id="building"
                                     name="building"
-                                    defaultValue={data.building}
+                                    defaultValue={auth.building}
                                     autoComplete="given-building"
                                     className="building w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
@@ -288,7 +282,7 @@ export default function({countries, auth}) {
                                     type="text"
                                     id="apartment"
                                     name="apartment"
-                                    defaultValue={data.apartment}
+                                    defaultValue={auth.apartment}
                                     autoComplete="given-apartment"
                                     className="apartment w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
@@ -311,7 +305,7 @@ export default function({countries, auth}) {
                                     type="text"
                                     id="floor"
                                     name="floor"
-                                    defaultValue={data.floor}
+                                    defaultValue={auth.floor}
                                     autoComplete="given-floor"
                                     className="floor w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
@@ -379,7 +373,6 @@ export default function({countries, auth}) {
                         </div>
                     </div>
                 </div>
-
             </FrontendContentContainer>
         </FrontendContainer>
 

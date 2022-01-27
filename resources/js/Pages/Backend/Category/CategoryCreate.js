@@ -127,7 +127,7 @@ export default function({elements}) {
                                     onChange={handleChange}
                                     id="parent_id"
                                     name="parent_id"
-                                    value={data.parent_id}
+                                    defaultValue={data.parent_id}
                                     autoComplete="parent_id"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 >
@@ -137,7 +137,6 @@ export default function({elements}) {
                                     {
                                         map(elements, u => (
                                             <option key={u.id} value={u.id}
-                                                    selected={u.id === data.parent_id}
                                             >{u[getLocalized()]}</option>
                                         ))
                                     }

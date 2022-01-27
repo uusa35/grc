@@ -115,6 +115,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.get');
         Route::post('cart/payment', [FrontendCartController::class, 'getPayment'])->name('cart.payment.post');
+        Route::get('cart/make/payment', [FrontendCartController::class, 'makeCodPayment'])->name('cart.cod.payment');
         Route::resource('rating', FrontendRatingController::class)->only('store');
         Route::resource('favorite', FrontendFavoriteController::class)->only('store');
         Route::resource('user', FrontendUserController::class)->only('edit');

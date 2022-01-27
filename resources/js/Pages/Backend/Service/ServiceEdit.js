@@ -265,7 +265,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         onChange={handleChange}
                                         id="user_id"
                                         name="user_id"
-                                        value={data.user_id}
+                                        defaultValue={service.user_id}
                                         autoComplete="user_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >

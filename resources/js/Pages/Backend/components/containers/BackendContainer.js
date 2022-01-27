@@ -12,6 +12,7 @@ import {AppContext} from "../../../context/AppContext";
 import LoadingView from "../widgets/LoadingView";
 import {useSelector} from "react-redux";
 import SystemMessage from "../partials/SystemMessage";
+import ConfirmationModal from "../partials/ConfirmationModal";
 
 const BackendContainer = ({
                               children, elements = [],
@@ -22,7 +23,7 @@ const BackendContainer = ({
                               total, links
                           }) => {
     const {classNames, arFont, enFont, isAdminOrAbove } = useContext(AppContext);
-    const {locale, isLoading} = useSelector(state => state);
+    const {locale, isLoading, confirmationModal } = useSelector(state => state);
 
     return (
 
@@ -68,6 +69,7 @@ const BackendContainer = ({
                     </div>
                 </div>
                 <Footer/>
+                {confirmationModal.display && <ConfirmationModal/>}
             </main>
         </div>
 

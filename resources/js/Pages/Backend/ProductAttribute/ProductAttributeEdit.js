@@ -99,7 +99,6 @@ export default function({attribute, colors, sizes}) {
                                         {
                                             colors.map(u => (
                                                 <option key={u.id} value={u.id}
-                                                        selected={attribute.color_id === u.id}
                                                 >{u[getLocalized('name')]}</option>
                                             ))
                                         }

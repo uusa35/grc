@@ -116,14 +116,13 @@ export default function({ countries }) {
                                     onChange={(e) => setSelectedCountry(first(filter(countries, c => c.id == e.target.value)))}
                                     id="country_id"
                                     name="country_id"
-                                    value={data.country_id}
+                                    defaultValue={data.country_id}
                                     autoComplete="country_id"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 >
                                     {
                                         map(countries, u => (
                                             <option key={u.id} value={u.id}
-                                                    selected={u.id === data.country_id}
                                             >{u[getLocalized()]}</option>
                                         ))
                                     }
@@ -145,7 +144,7 @@ export default function({ countries }) {
                                     onChange={handleChange}
                                     id="governate_id"
                                     name="governate_id"
-                                    value={data.governate_id}
+                                    defaultValue={data.governate_id}
                                     required
                                     autoComplete="governate_id"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -154,7 +153,6 @@ export default function({ countries }) {
                                     {
                                         map(selectedCountry.governates, u => (
                                             <option key={u.id} value={u.id}
-                                                    selected={u.id === data.governate_id}
                                             >{u[getLocalized()]}</option>
                                         ))
                                     }

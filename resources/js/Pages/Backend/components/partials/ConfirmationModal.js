@@ -22,9 +22,7 @@ export default function ConfirmationModal() {
     const cancelButtonRef = useRef(null)
     const dispatch = useDispatch();
 
-    const handleCancel = () => {
-        dispatch(hideModal())
-    }
+    const handleCancel = () => dispatch(hideModal())
 
     const handleConfirm = () => {
         if (confirmationModal.type === 'destroy' && confirmationModal.id) {
@@ -54,12 +52,6 @@ export default function ConfirmationModal() {
         });
     }
 
-    // useEffect(() => {
-    //     if (confirmationModal.type && confirmationModal.model) {
-    //         const {id, model, type} = confirmationModal;
-    //     }
-    // }, [confirmationModal.id])
-
     return (
         <Transition.Root show={confirmationModal.display} as={Fragment}>
             <Dialog
@@ -70,7 +62,7 @@ export default function ConfirmationModal() {
                 // open={showConfirmationModal}
                 onClose={() => dispatch(hideModal())}
             >
-                <div className={classNames(locale.isRTL ? 'font-bein' : 'font-tajwal-medium', "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0")}>
+                <div className={classNames(locale.isRTL ? 'font-tajwal-medium' : 'font-tajwal-medium', "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0")}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"

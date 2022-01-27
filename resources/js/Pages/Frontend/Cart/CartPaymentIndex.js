@@ -7,19 +7,20 @@ import {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link, useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
-import GlobalContext from "../../context/GlobalContext";
 import {map} from 'lodash';
 import axios from 'axios';
 import {Inertia} from "@inertiajs/inertia";
-import {clearCart} from "../../redux/actions";
+import {clearCart, showModal} from "../../redux/actions";
+import ConfirmationModal from "../partials/ConfirmationModal";
 
 
 export default function({order, settings}) {
-    const {cart, currency, locale} = useSelector(state => state);
+    const {cart, currency, locale, confirmationModal } = useSelector(state => state);
     const {trans, getThumb, getLocalized, classNames, getAsset} = useContext(AppContext);
     const paymentMethods = [
-        {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create')},
-        {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`)},
+        {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create'), enabled : settings.enable_payment_online},
+        {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`), enabled:  settings.enable_payment_online},
+        {id: 3, name: 'cash_on_delivery', paymentRoute: route(`frontend.cart.cod.payment`), enabled:  settings.cash_on_delivery},
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
     const [currentURL, setCurrentUrl] = useState('');
@@ -29,6 +30,8 @@ export default function({order, settings}) {
         netTotal: cart.netTotal,
         paymentMethod: paymentMethod.name
     })
+
+    console.log('paymentMethods', paymentMethods);
 
     useMemo(() => {
         if (paymentMethod.name === 'paypal') {
@@ -58,9 +61,18 @@ export default function({order, settings}) {
                 paymentMethod: paymentMethod.name
             }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
             // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+        } else if (paymentMethod.name === 'cash_on_delivery') {
+            return dispatch(showModal({
+                type: '',
+                model: '',
+                id: order.id,
+                title: `${trans('confirm')}`,
+                message: `${trans('r_u_sure_u_order_cash_on_delivery')}`,
+            }))
         }
     }, [paymentMethod])
 
+    console.log('confirm', confirmationModal)
     return (
         <FrontendContainer>
             <FrontendContentContainer>
@@ -91,6 +103,15 @@ export default function({order, settings}) {
                                 }
                             </div>
                         </div> : null
+                    }
+                    {/* cash_on_delivery confirmation modal */}
+                    {
+                        settings.cash_on_delivery && <ConfirmationModal
+                            confirmationOpen={confirmationModal.display}
+                            message={trans('r_u_sure_u_order_cash_on_delivery')}
+                            routeName={`frontend.cart.cod.payment`}
+                            paramId={order.id}
+                        />
                     }
                     <div
                         className="mt-10 col-span-full flex justify-between items-center flex-wrap space-y-2 sm:space-y-0 w-full">

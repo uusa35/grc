@@ -271,7 +271,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                                onChange={handleChange}
                                                id="user_id"
                                                name="user_id"
-                                               value={data.user_id}
+                                               defaultValue={course.user_id}
                                                autoComplete="user_id"
                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                            >

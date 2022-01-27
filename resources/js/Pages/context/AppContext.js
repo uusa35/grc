@@ -129,14 +129,13 @@ const AppContextProvider = ({children}) => {
             <ToastContainer
                 rtl={locale.isRTL}
                 closeButton={() => <GrClose color={'white'}/>}
-                className={locale.isRTL ? 'font-bbc  font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full'}
-                bodyClassName={locale.isRTL ? 'font-bbc font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full text-left'}
+                className={locale.isRTL ? 'font-tajwal-medium  font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full'}
+                bodyClassName={locale.isRTL ? 'font-tajwal-medium font-extrabold w-full ' : 'font-tajwal-medium font-extrabold w-full text-left'}
                 closeOnClick={true}
                 pauseOnHover={true}
                 type={toast.TYPE[capitalize(toastMessage.type)]}
                 position={toast.POSITION[locale.isRTL ? 'TOP_LEFT' : 'TOP_RIGHT']}
             />
-            {confirmationModal.display && <ConfirmationModal/>}
         </AppContext.Provider>
     );
 };

@@ -78,7 +78,7 @@ export default function({ countries , address }) {
                                     required
                                     type="text"
                                     name="name"
-                                    defaultValue={data.name}
+                                    defaultValue={address.name}
                                     id="name"
                                     autoComplete="name"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -100,7 +100,7 @@ export default function({ countries , address }) {
                                     onChange={handleChange}
                                     id="country_id"
                                     name="country_id"
-                                    defaultValue={data.country_id}
+                                    defaultValue={address.country_id}
                                     required
                                     autoComplete="country_id"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -130,7 +130,7 @@ export default function({ countries , address }) {
                                         id="area_id"
                                         name="area_id"
                                         required
-                                        defaultValue={data.area_id}
+                                        defaultValue={address.area_id}
                                         autoComplete="area_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
@@ -159,7 +159,7 @@ export default function({ countries , address }) {
                                     onChange={handleChange}
                                     type="text"
                                     name="block"
-                                    defaultValue={data.block}
+                                    defaultValue={address.block}
                                     id="block"
                                     autoComplete="block"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -181,7 +181,7 @@ export default function({ countries , address }) {
                                     onChange={handleChange}
                                     type="text"
                                     name="street"
-                                    defaultValue={data.street}
+                                    defaultValue={address.street}
                                     id="street"
                                     autoComplete="street"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -203,7 +203,7 @@ export default function({ countries , address }) {
                                     onChange={handleChange}
                                     type="text"
                                     name="building"
-                                    defaultValue={data.building}
+                                    defaultValue={address.building}
                                     id="building"
                                     autoComplete="building"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -225,7 +225,7 @@ export default function({ countries , address }) {
                                     onChange={handleChange}
                                     type="text"
                                     name="floor"
-                                    defaultValue={data.floor}
+                                    defaultValue={address.floor}
                                     id="floor"
                                     autoComplete="floor"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -247,7 +247,7 @@ export default function({ countries , address }) {
                                     onChange={handleChange}
                                     type="text"
                                     name="apartment"
-                                    defaultValue={data.apartment}
+                                    defaultValue={address.apartment}
                                     id="apartment"
                                     autoComplete="apartment"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -273,7 +273,7 @@ export default function({ countries , address }) {
                                              name="content"
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                             defaultValue={data.content}
+                                             defaultValue={address.content}
                                          />
                             </div>
                             <ToolTipWidget message={trans('book_description_instruction')}/>

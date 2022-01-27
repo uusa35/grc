@@ -13,8 +13,8 @@ export default function AlertMessage({ title , message , color = 'lightgray'}) {
                     </svg>
                 </div>
                 <div className="mx-5">
-                    <h3 className="mb-3 font-extrabold text-lgn">{title}</h3>
-                    {message}
+                    <h3 className="font-tajwal-medium mb-3 font-extrabold text-lgn">{title}</h3>
+                    <span className="font-tajwal-medium">{message}</span>
                 </div>
             </div>
         </div>

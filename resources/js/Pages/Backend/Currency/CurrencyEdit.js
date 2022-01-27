@@ -207,14 +207,13 @@ export default function({currency , countries }) {
                                     onChange={handleChange}
                                     id="country_id"
                                     name="country_id"
-                                    value={data.country_id}
+                                    defaultValue={currency.country_id}
                                     autoComplete="country_id"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 >
                                     {
                                         map(countries, u => (
                                             <option key={u.id} value={u.id}
-                                                    selected={u.id === currency.country_id}
                                             >{u[getLocalized()]}</option>
                                         ))
                                     }

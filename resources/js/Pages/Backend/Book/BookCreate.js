@@ -292,7 +292,7 @@ export default function BookCreate({users, categories}) {
                                             onChange={handleChange}
                                             id="user_id"
                                             name="user_id"
-                                            value={data.user_id}
+                                            defaultValue={data.user_id}
                                             autoComplete="user_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                         >

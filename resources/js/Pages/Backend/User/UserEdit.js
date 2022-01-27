@@ -108,9 +108,10 @@ export default function({user, roles, elementCategories, categories, countries, 
         'custome_delivery': user.custome_delivery,
         'news_letter_on': user.news_letter_on,
         'custome_delivery_fees': user.custome_delivery_fees,
-
-
     });
+
+    console.log('user area', user.area_id);
+    console.log('data ', data.area_id);
 
     useMemo(() => {
         // setAreas()
@@ -281,8 +282,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                         onChange={handleChange}
                                         id="subscription_id"
                                         name="subscription_id"
-                                        value={data.subscription_id}
-                                        defaultValue={data.subscription_id}
+                                        defaultValue={user.subscription_id}
                                         autoComplete="subscription_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
@@ -316,6 +316,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             step="any"
                                             name="end_subscription_date"
                                             id="end_subscription_date"
+                                            defaultValue={user.end_subscription_date}
                                             // min={moment().format()}
                                             // max={moment().format()}
                                             autoComplete="end_subscription_date"
@@ -342,8 +343,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             onChange={handleChange}
                                             id="role_id"
                                             name="role_id"
-                                            value={data.role_id}
-                                            defaultValue={data.role_id}
+                                            defaultValue={user.role_id}
                                             autoComplete="role_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                         >
@@ -371,14 +371,13 @@ export default function({user, roles, elementCategories, categories, countries, 
                                         onChange={handleChange}
                                         id="country_id"
                                         name="country_id"
-                                        value={data.country_id}
+                                        defaultValue={user.country_id}
                                         autoComplete="country_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
                                         {
                                             map(countries, u => (
                                                 <option key={u.id} value={u.id}
-                                                        selected={u.id === user.country_id}
                                                 >{u[getLocalized()]}</option>
                                             ))
                                         }
@@ -400,13 +399,13 @@ export default function({user, roles, elementCategories, categories, countries, 
                                             onChange={handleChange}
                                             id="area_id"
                                             name="area_id"
-                                            value={data.area_id}
+                                            defaultValue={user.area_id}
                                             autoComplete="area_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                         >
                                             {
                                                 map(areas, u => (
-                                                    <option key={u.id} value={u.id} selected={u.id === user.area_id}
+                                                    <option key={u.id} value={u.id}
                                                     >{u[getLocalized()]}</option>
                                                 ))
                                             }

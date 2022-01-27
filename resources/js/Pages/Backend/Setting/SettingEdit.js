@@ -349,7 +349,6 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                             {
                                                 paymentMethods.map(u => (
                                                     <option key={u} value={u}
-                                                            selected={u === setting.payment_method}
                                                     >{u}</option>
                                                 ))
                                             }
@@ -371,7 +370,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                         onChange={handleChange}
                                         id="theme"
                                         name="theme"
-                                        defaultValue={data.theme}
+                                        defaultValue={setting.theme}
                                         autoComplete="theme"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     >
@@ -1764,7 +1763,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.aboutus_en}
+                                                    defaultValue={setting.aboutus_en}
                                                     onChange={(e) => setData('aboutus_en', e)}
                                                     className="h-40"
                                         />
@@ -1784,7 +1783,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.aboutus_ar}
+                                                    defaultValue={setting.aboutus_ar}
                                                     onChange={(e) => setData('aboutus_ar', e)}
                                                     className="h-40"
                                         />
@@ -1804,7 +1803,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.terms_en}
+                                                    defaultValue={setting.terms_en}
                                                     onChange={(e) => setData('terms_en', e)}
                                                     className="h-40"
                                         />
@@ -1824,7 +1823,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.terms_ar}
+                                                    defaultValue={setting.terms_ar}
                                                     onChange={(e) => setData('terms_ar', e)}
                                                     className="h-40"
                                         />
@@ -1844,7 +1843,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.policy_en}
+                                                    defaultValue={setting.policy_en}
                                                     onChange={(e) => setData('policy_en', e)}
                                                     className="h-40"
                                         />
@@ -1864,7 +1863,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.policy_ar}
+                                                    defaultValue={setting.policy_ar}
                                                     onChange={(e) => setData('policy_ar', e)}
                                                     className="h-40"
                                         />
@@ -1885,7 +1884,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.services_ar}
+                                                    defaultValue={setting.services_ar}
                                                     onChange={(e) => setData('services_ar', e)}
                                                     className="h-40"
                                         />
@@ -1905,7 +1904,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <div className="mt-1">
                                         <ReactQuill theme="snow"
                                                     modules={EditorConfig}
-                                                    value={data.services_en}
+                                                    defaultValue={setting.services_en}
                                                     onChange={(e) => setData('services_en', e)}
                                                     className="h-40"
                                         />

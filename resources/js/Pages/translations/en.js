@@ -1252,5 +1252,6 @@ export const en  = {
     "library" : "library",
     "experts_and_participants" : 'experts and participants',
     'consulting_and_training' : 'consulting and training',
-    'e_learning' : 'e learning'
+    'e_learning' : 'e learning',
+    "r_u_sure_u_order_cash_on_delivery" : "please confirm your order (cash on delivery). this service is only inside kuwait"
 }

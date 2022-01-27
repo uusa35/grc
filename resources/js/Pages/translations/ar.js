@@ -1261,5 +1261,6 @@ export const ar = {
     "library" : "المكتبة",
     "experts_and_participants" : 'الخبراء والمشاركين',
     'consulting_and_training' : 'الاستشارات والتدريب',
-    'e_learning' : 'التعليم الإلكتروني'
+    'e_learning' : 'التعليم الإلكتروني',
+    "r_u_sure_u_order_cash_on_delivery" : "يرجى تأكيد طلبك عن طريق (الدفع عند الاستلام) الدفع عند الاستلام فقط داخل دولة الكويت."
 }

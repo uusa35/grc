@@ -83,7 +83,7 @@ class ProductAttributeController extends Controller
             ['size_id', '=', $request->size_id],
         ])->first();
         if (!is_null($productAttribute) && $productAttribute->id) {
-            return redirect()->back()->withErrors(trans('general.progress_failure'));
+            return redirect()->back()->withErrors('Attribute already exists.');
         } else {
             ProductAttribute::create($request->request->all());
             return redirect()->route('backend.attribute.index', ['product_id' => $request->product_id])->with('success', trans('general.progress_success'));
