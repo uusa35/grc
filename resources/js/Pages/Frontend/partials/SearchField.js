@@ -19,7 +19,7 @@ const  SearchField  =  ()  => {
     const dispatch = useDispatch();
     const [types,setStype] = useState([
         {
-            name : 'products',
+            name : 'product',
             frontend : settings.enable_products,
             backend : settings.enable_products,
         },
@@ -48,7 +48,13 @@ const  SearchField  =  ()  => {
             'frontend' : false,
             'backend' : true,
         }
-    ])
+    ]);
+
+    useMemo(() => {
+        dispatch(setSearchType(first(filter(types, t => t.frontend))))
+    },[])
+
+
 
     const submit = (e) => {
         e.preventDefault();
