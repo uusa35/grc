@@ -252,35 +252,8 @@ export default function Footer() {
                     </div>
                     {/* newsletter */}
                     <div className=" p-4">
-                        {settings.enable_newsletter ?
-                            <>
-                                <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('subscribe_to_our_news_letter')}</h3>
-                                <form className="mt-4 sm:flex sm:max-w-md my-5 space-x-2" onSubmit={submit}>
-                                    <label htmlFor="email" className="sr-only">
-                                        {trans('email')}
-                                    </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        autoComplete="email"
-                                        required
-                                        onChange={(e) => setData('email', e.target.value)}
-                                        className="appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
-                                        placeholder={trans('email')}
-                                    />
-                                    <div className="mt-1 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                                        <button
-                                            type="submit"
-                                            className="w-full bg-gray-500 border border-transparent rounded-md py-2 px-2 flex items-center justify-center text-base font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500"
-                                        >
-                                            {trans('subscribe')}
-                                        </button>
-                                    </div>
-                                </form>
-                            </> : null
-                        }
+                        <h3 className="font-semibold text-gray-600 tracking-wider uppercase mb-4">{trans('payment_methods')}</h3>
                         <div className="py-4 space-y-4 mt-4">
-                            <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('payment_methods')}</h3>
                             <div className="flex flex-1 flex-row justify-between items-center gap-x-2">
                                 <div>
                                     <img src={`${baseUrl}/images/paypal.jpeg`} className="w-auto h-auto"
@@ -309,6 +282,33 @@ export default function Footer() {
                                 </div>
                             </div>
                         </div>
+                        {settings.enable_newsletter ?
+                            <>
+                                <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('subscribe_to_our_news_letter')}</h3>
+                                <form className="mt-4 sm:flex sm:max-w-md my-5 space-x-2" onSubmit={submit}>
+                                    <label htmlFor="email" className="sr-only">
+                                        {trans('email')}
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        autoComplete="email"
+                                        required
+                                        onChange={(e) => setData('email', e.target.value)}
+                                        className="appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400"
+                                        placeholder={trans('email')}
+                                    />
+                                    <div className="mt-1 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+                                        <button
+                                            type="submit"
+                                            className="w-full bg-gray-500 border border-transparent rounded-md py-2 px-2 flex items-center justify-center text-base font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500"
+                                        >
+                                            {trans('subscribe')}
+                                        </button>
+                                    </div>
+                                </form>
+                            </> : null
+                        }
                     </div>
                 </div>
                 <div className="mt-12 border-t border-gray-200 pt-8">
