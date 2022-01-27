@@ -19,7 +19,7 @@ export default function({
     return (
         <div className="w-full bg-gray-50 p-10 shadow-sm">
             <Link
-                href={route(`frontend.${type}.index`, params ? params : '')}
+                href={route(`frontend.category.index`, params ? params : '')}
                 className="w-full flex flex-1 h-auto mb-5 justify-between items-center capitalize rtl:text-right ltr:text-left text-xl "
             >
                 <motion.div
