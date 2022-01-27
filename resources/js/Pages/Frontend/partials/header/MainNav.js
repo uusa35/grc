@@ -766,7 +766,7 @@ function MainNav() {
                             {settings.enable_books && <SearchField />}
                             {settings.enable_products && <SearchField />}
                             <div
-                                className="hidden 2xl:flex lg:items-center lg:justify-end px-1">
+                                className="hidden 2xl:flex lg:items-center lg:justify-end px-1 rtl:mr-2 ltr:ml-2">
                                 <Link
                                     onClick={() => {
                                         dispatch(changeLang(locale.otherLang))
