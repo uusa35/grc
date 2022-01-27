@@ -28,4 +28,13 @@ class OrderMeta extends PrimaryModel
         return $this->belongsTo(User::class, 'merchant_id');
     }
 
+    public function product_attribute()
+    {
+        return $this->belongsTo(ProductAttribute::class, 'attribute_id');
+    }
+
+    public function getTypeAttribute()
+    {
+        return strtolower(class_basename($this->ordermetable_type));
+    }
 }

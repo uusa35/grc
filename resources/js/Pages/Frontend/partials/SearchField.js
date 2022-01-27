@@ -25,31 +25,30 @@ const  SearchField  =  ()  => {
         },
         {
             name : 'book',
-            frontend : settings.enable_books,
-            backend : settings.enable_books,
+            'frontend' : settings.enable_books,
+            'backend' : settings.enable_books,
         },
         {
             name : 'service',
-            frontend : settings.enable_services,
-            backend : settings.enable_services,
+            'frontend' : settings.enable_services,
+            'backend' : settings.enable_services,
         },
         {
             name : 'course',
-            frontend : settings.enable_courses,
-            backend : settings.enable_courses,
+            'frontend' : settings.enable_courses,
+            'backend' : settings.enable_courses,
         },
         {
             name : 'user',
-            frontend : settings.enable_books,
-            backend : settings.enable_books,
+            'frontend' : settings.enable_books,
+            'backend' : settings.enable_books,
         },
         {
             name : 'order',
-            frontend : false,
-            backend : true,
+            'frontend' : false,
+            'backend' : true,
         }
     ])
-
 
     const submit = (e) => {
         e.preventDefault();
@@ -85,9 +84,6 @@ const  SearchField  =  ()  => {
                             {
                                 map(filter(types, t => t[requestType]), type => <option key={`${type.name}`} value={`${type.name}`} >{capitalize(trans(pluralize(type.name)))}</option>)
                             }
-                            {/*<option value="book" >{capitalize(trans('books'))}</option>*/}
-                            {/*<option value="service" >{capitalize(trans('services'))}</option>*/}
-                            {/*<option value="course" >{capitalize(trans('courses'))}</option>*/}
                         </select>
                     </div>
                     <form onSubmit={submit}>
@@ -115,28 +111,3 @@ const  SearchField  =  ()  => {
 }
 
 export default React.memo(SearchField)
-// <div
-//     className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end invisible 2xl:visible">
-//     <div className="max-w-lg w-full lg:max-w-xs">
-//         <label htmlFor="search" className="sr-only">
-//             {trans('search')}
-//         </label>
-//         <div className="relative">
-//             <Link
-//                 href={route(`frontend.${type}.index`, { search })}
-//                 className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-//                 <SearchIcon className="h-5 w-5 text-gray-900" aria-hidden="true"/>
-//             </Link>
-//             <form onSubmit={submit}>
-//                 <input
-//                     onChange={(e) => setSearch(e.target.value)}
-//                     id="search"
-//                     name="search"
-//                     className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-2xl leading-5 text-black bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-500 focus:border-gray-500 sm:"
-//                     placeholder={`${trans('search')} ${trans(pluralize(type))}`}
-//                     type="search"
-//                 />
-//             </form>
-//         </div>
-//     </div>
-// </div>

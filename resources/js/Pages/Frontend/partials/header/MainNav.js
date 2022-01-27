@@ -764,7 +764,7 @@ function MainNav() {
                         <div className="ml-auto flex flex-1 justify-end items-center">
                             {/* Search */}
                             {settings.enable_books && <SearchField />}
-                            {/*{settings.enable_products && <SearchField type={'product'}/>}*/}
+                            {settings.enable_products && <SearchField />}
                             <div
                                 className="hidden 2xl:flex lg:items-center lg:justify-end px-1">
                                 <Link

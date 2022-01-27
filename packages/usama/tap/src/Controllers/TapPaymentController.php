@@ -94,42 +94,47 @@ class TapPaymentController extends Controller
 
     public function tapReturn(Request $request)
     {
-        $validate = validator($request->all(), [
-            'tap_id' => 'required'
-        ]);
-        if ($validate->fails()) {
-            return redirect()->route('frontend.home')->with(['error' => trans('general.process_failure')]);
-        }
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.tap.company/v2/charges/" . $request->tap_id,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_POSTFIELDS => "{}",
-            CURLOPT_HTTPHEADER => array(
-                "authorization: Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ"
-            ),
-        ));
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-//            echo "cURL Error #:" . $err;
-            return redirect()->route('frontend.home')->with('error', trans('process_failure'));
-        } else {
-            $res = json_decode($response);
-            // ABANDONED, CANCELLED, FAILED, DECLINED, RESTRICTED, CAPTURED, VOID,TIMEDOUT, UNKNOWN
-            if ($res->status === 'CAPTURED') {
-                return $this->orderSuccessAction($res->id);
+        try {
+            $validate = validator($request->all(), [
+                'tap_id' => 'required'
+            ]);
+            if ($validate->fails()) {
+                return redirect()->route('frontend.home')->with(['error' => trans('general.process_failure')]);
             }
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.tap.company/v2/charges/" . $request->tap_id,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_POSTFIELDS => "{}",
+                CURLOPT_HTTPHEADER => array(
+                    "authorization: Bearer sk_test_XKokBfNWv6FIYuTMg5sLPjhJ"
+                ),
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+//            echo "cURL Error #:" . $err;
+//                return redirect()->route('frontend.home')->with('error', trans('process_failure'));
+                abort(404, $err);
+            } else {
+                $res = json_decode($response);
+                // ABANDONED, CANCELLED, FAILED, DECLINED, RESTRICTED, CAPTURED, VOID,TIMEDOUT, UNKNOWN
+                if ($res->status === 'CAPTURED') {
+                    return $this->orderSuccessAction($res->id);
+                }
+            }
+        } catch (\Exception $e) {
+            abort(404, $e->getMessage());
         }
     }
 

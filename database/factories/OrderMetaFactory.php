@@ -58,7 +58,9 @@ class OrderMetaFactory extends Factory
                 return Carbon::parse(($array['booked_at']))->format('h:i:s');
             },
             'ordermetable_type' => $this->faker->randomElement([Product::class, Book::class, Course::class, Service::class]),
-            'ordermetable_id' => $this->faker->numberBetween(1, 10)
+            'ordermetable_id' => $this->faker->numberBetween(1, 10),
+            'timing_id' => Timing::all()->random(),
+            'attribute_id' => ProductAttribute::all()->random()
         ];
     }
 }

@@ -132,7 +132,8 @@ export default function({element, relatedElements, auth, settings}) {
             merchant_name_ar: element.user.name_ar,
             merchant_name_en: element.user.name_en,
             color: element.has_attributes ? selectedAttribute.color[getLocalized()] : element.color[getLocalized()],
-            size: element.has_attributes ? selectedAttribute.size[getLocalized()] : element.size[getLocalized()]
+            size: element.has_attributes ? selectedAttribute.size[getLocalized()] : element.size[getLocalized()],
+            attribute_id: `${element.has_attributes ? selectedAttribute.id : ''}`,
         }))
     }
 

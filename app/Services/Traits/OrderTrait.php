@@ -80,6 +80,7 @@ trait OrderTrait
                     'timing_id' => isset($item['timing_id']) ? $item['timing_id'] : null,
                     'ordermetable_id' => $item['element_id'],
                     'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
+                    'attribute_id' => isset($item['attribute_id']) ? $item['attribute_id'] : null,
                 ]);
             }
             return $order;
@@ -91,18 +92,25 @@ trait OrderTrait
 
     public function orderSuccessAction($reference_id)
     {
-        $order = Order::where(['reference_id' => $reference_id, 'paid' => false])->with('user', 'order_metas.ordermetable')->first();
-        if ($order) {
-            $order->update([
-                'paid' => true,
-                'status' => 'paid'
-            ]);
-            $settings = Setting::first();
-            Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
-            $markdown = new Markdown(view(), config('mail.markdown'));
-            return $markdown->render('emails.orders.paid', ['order' => $order]);
+        try {
+            $order = Order::where(['reference_id' => $reference_id, 'paid' => false])->with('user', 'order_metas.ordermetable', 'order_metas.product_attribute')->first();
+            if ($order) {
+                $order->update([
+                    'paid' => true,
+                    'status' => 'paid'
+                ]);
+                $settings = Setting::first();
+                if ($settings->enable_products) {
+                    $this->decreaseQty($order);
+                }
+                Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
+                $markdown = new Markdown(view(), config('mail.markdown'));
+                return $markdown->render('emails.orders.paid', ['order' => $order]);
+            }
+            abort(404, 'Order does not exist');
+        } catch (\Exception $e) {
+            return abort(404, $e->getMessage());
         }
-        return redirect()->route('frontend.home')->with('error', trans('general.process_failure'));
     }
 
     public function createQuestionnaireOrder(Questionnaire $questionnaire, User $user)
@@ -395,23 +403,25 @@ trait OrderTrait
         try {
             if ($order->paid) {
                 $order->order_metas->each(function ($orderMeta) use ($order) {
-                    if ($orderMeta->isProductType) {
-                        if ($orderMeta->product->check_stock) {
-                            if ($orderMeta->product->hasRealAttributes) {
+                    if ($orderMeta->type === 'product') {
+                        if ($orderMeta->ordermetable->check_stock) {
+                            if ($orderMeta->ordermetable->has_attributes) {
                                 $decrement = (int)$orderMeta->product_attribute->qty - (int)$orderMeta->qty > 0 ? (int)$orderMeta->product_attribute->qty - (int)$orderMeta->qty : 0;
                                 $orderMeta->product_attribute->update(['qty' => $decrement]);
                             } else {
-                                $decrement = (int)$orderMeta->product->qty - (int)$orderMeta->qty > 0 ? (int)$orderMeta->product->qty - (int)$orderMeta->qty : 0;
-                                $orderMeta->product->update(['qty' => $decrement]);
+                                // ordermetable is the product itself
+                                $decrement = (int)$orderMeta->ordermetable->qty - (int)$orderMeta->qty > 0 ? (int)$orderMeta->ordermetable->qty - (int)$orderMeta->qty : 0;
+                                $orderMeta->ordermetable->update(['qty' => $decrement]);
                             }
                         }
                     } else {
+//                        dd('stop here');
                         // in case you want to do something for services
                     }
                 });
             }
-        } catch (\Exception $e) {
-            print_r($e->getMessage() . 'Qty not updated. Fatel error');
+        } catch (\Throwable $e) {
+            abort(500, $e->getMessage());
         }
     }
 
