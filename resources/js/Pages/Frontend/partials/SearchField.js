@@ -51,7 +51,7 @@ const  SearchField  =  ()  => {
     ]);
 
     useMemo(() => {
-        dispatch(setSearchType(first(filter(types, t => t.frontend))))
+        dispatch(setSearchType(first(filter(types, t => t.frontend)).name))
     },[])
 
 
