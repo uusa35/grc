@@ -154,7 +154,7 @@ export default function({countries, auth}) {
                                     onChange={handleChange}
                                     id="country_id"
                                     name="country_id"
-                                    defaultValue={auth.country_id}
+                                    defaultValue={data.country_id}
                                     autoComplete="country_id"
                                     required
                                     className={`shadow-sm bg-gray-100  focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -184,7 +184,7 @@ export default function({countries, auth}) {
                                         onChange={handleChange}
                                         id="area_id"
                                         name="area_id"
-                                        defaultValue={auth.area_id}
+                                        defaultValue={data.area_id}
                                         autoComplete="area_id"
                                         required
                                         className={`shadow-sm bg-gray-100  focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
