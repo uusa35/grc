@@ -93,7 +93,7 @@ export default function HomePage({
                     }
                     {
                         settings.enable_products && <>
-                            <InformationBtns />
+
                             <ElementSlider
                                 elements={filter(homeCategories, c => c.is_product)}
                                 slidesPerView={slideNumber}
@@ -108,11 +108,12 @@ export default function HomePage({
                                 title={trans('featured_products')}
                                 type={'product'}
                             />
+                            <InformationBtns />
                             <CategoriesGroup
                                 params={{is_product: true}}
                                 type={'product'}
                                 title={trans('product_home_featured_categories')}
-                                categories={filter(homeCategories, c => c.is_product)}/>
+                                categories={filter(homeCategories, c => c.is_product && c.is_featured)}/>
                         </>
                     }
                 </div>
