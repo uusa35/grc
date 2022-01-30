@@ -15,7 +15,7 @@ const HomeMainCategory = ({element}) => {
                     <div className="absolute inset-0">
                         <img
                             src={getLarge(element.image)}
-                            alt=""
+                            alt={element[getLocalized()]}
                             className="w-full h-full object-center object-cover"
                         />
                     </div>
