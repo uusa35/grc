@@ -1,27 +1,25 @@
 import {HomeIcon} from '@heroicons/react/solid'
-import {useContext, Fragment, useEffect} from "react";
+import {useContext, useEffect} from "react";
 import {AppContext} from "../../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import pluralize from 'pluralize';
-import {isEmpty, map, split, keys} from 'lodash';
+import {split, keys} from 'lodash';
 import route from 'ziggy-js'
 import {useDispatch, useSelector} from "react-redux";
 import {setParentModule} from "../../../redux/actions";
 import SearchField from "../../../Frontend/partials/SearchField";
 
 export default function BreadCrumbs({childName = ''}) {
-    const {trans, classNames } = useContext(AppContext);
-    const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
+    const {trans, classNames} = useContext(AppContext);
+    const {locale, parentModule, breadCrumbs} = useSelector(state => state);
     const dispatch = useDispatch();
-    const { params } = route();
+    const {params} = route();
 
     useEffect(() => {
-        if(parentModule === 'home') {
-            const currentRoute = route().current();
-            const breadCrumbs = split(currentRoute, '.');
-            // dispatch(setParentModule(breadCrumbs[1]));
-        }
-    },[])
+        const currentRoute = route().current();
+        const breadCrumbs = split(currentRoute, '.');
+        dispatch(setParentModule(breadCrumbs[1]));
+    }, [])
 
     return (
         <div
@@ -51,13 +49,14 @@ export default function BreadCrumbs({childName = ''}) {
                             </svg>
                             <Link
                                 className="capitalize"
-                                href={route(`backend.${parentModule}.index`,  keys(params).length >= 2 ?  params : '' )}>
+                                href={route(`backend.${parentModule}.index`, keys(params).length >= 2 ? params : '')}>
                                 {trans(pluralize(parentModule))}
                             </Link>
                         </li>
                         }
                         {
-                            breadCrumbs.length >= 3 && childName && <li className="flex flex-row justify-start items-center invisible sm:visible">
+                            breadCrumbs.length >= 3 && childName &&
+                            <li className="flex flex-row justify-start items-center invisible sm:visible">
                                 <svg
                                     className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
                                     xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +77,7 @@ export default function BreadCrumbs({childName = ''}) {
                 </nav>
             </div>
             <div className="flex">
-                <SearchField />
+                <SearchField/>
                 <Link href={'#'}
                       className={classNames(locale.isRTL ? `rounded-r-lg` : `rounded-l-lg`, 'flex flex-row justify-between items-center rtl:mr-5 ltr:ml-5 w-20 bg-hippie-blue-300 hover:text-white hover:bg-hippie-blue-600 shadow-md')}
                       onClick={() => window.history.back()}

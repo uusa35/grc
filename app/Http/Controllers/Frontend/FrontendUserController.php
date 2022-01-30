@@ -279,7 +279,10 @@ class FrontendUserController extends Controller
 
     public function getLogin()
     {
-        return inertia('Frontend/User/LoginForm');
+        if (!auth()->user()) {
+            return inertia('Frontend/User/LoginForm');
+        }
+        return inertia('Frontend/HomePage');
     }
 
     public function postLogin(Request $request)
@@ -288,9 +291,8 @@ class FrontendUserController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6'
         ]);
-        if(auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
-//            dd(auth()->user()->hasVerifiedEmail());
-            return redirect()->route('frontend.home')->with('success', trans('general.process_success'));
+        if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+            return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
@@ -311,7 +313,7 @@ class FrontendUserController extends Controller
             'code' => 'required|confirmed',
             'country_id' => 'required|exists:countries,id'
         ]);
-        $user =  User::create([
+        $user = User::create([
             'name' => $request->name,
             'name_ar' => $request->name,
             'name_en' => $request->name,
@@ -323,7 +325,7 @@ class FrontendUserController extends Controller
             'country_id' => $request->country_id,
             'subscription_id' => Subscription::where(['free' => true])->first()->id
         ]);
-        if($user) {
+        if ($user) {
             auth()->loginUsingId($user->id);
             return redirect()->route('frontend.home')->with('success', trans('general.process_success'));
         }

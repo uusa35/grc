@@ -34,7 +34,7 @@
                   content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
             <meta property="twitter:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
         @else
-            <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(1) ? ' :: '. trans('general.'.Str::plural(request()->segment(1))) : '' }}</title>
+{{--            <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(0) ? ' :: '. trans('general.'.Str::plural(request()->segment(0))) : '' }} test from 'here'</title>--}}
             <meta name="name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
             <meta name="title" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
             <meta name="description" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>

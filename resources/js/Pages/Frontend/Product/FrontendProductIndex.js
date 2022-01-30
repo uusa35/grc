@@ -30,9 +30,8 @@ export default function ({elements, categories}) {
     }, [sort.desc])
 
     return (
-        <FrontendContainer>
+        <FrontendContainer >
             <FrontendContentContainer>
-                <SubMetaElement title={trans('products')}/>
                 {/* Mobile filter dialog */}
                 <SearchIndexSideBarMobile
                     type={'product'}

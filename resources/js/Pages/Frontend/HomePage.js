@@ -112,8 +112,8 @@ export default function HomePage({
                             <CategoriesGroup
                                 params={{is_product: true}}
                                 type={'product'}
-                                title={trans('product_home_featured_categories')}
-                                categories={filter(homeCategories, c => c.is_product && c.is_featured)}/>
+                                title={trans('other_categories')}
+                                categories={filter(homeCategories, c => c.is_product)}/>
                         </>
                     }
                 </div>

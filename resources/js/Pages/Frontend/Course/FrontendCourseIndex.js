@@ -32,7 +32,6 @@ export default function FrontendCourseIndex({elements, categories}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <SubMetaElement title={trans('courses')}/>
                 {/* Mobile filter dialog */}
                 <SearchIndexSideBarMobile
                     type={'course'}

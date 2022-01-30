@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {InertiaHead} from "@inertiajs/inertia-react";
+import React from 'react';
+import { Head } from '@inertiajs/inertia-react'
 
 const SubMetaElement = ({
                             title = null,
@@ -7,10 +7,10 @@ const SubMetaElement = ({
                             description = null,
                         }) => {
     return (
-        <InertiaHead>
+        <Head>
             <title>{title}</title>
             <meta name="title" content={title}/>
-        </InertiaHead>
+        </Head>
     );
 };
 

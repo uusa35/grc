@@ -13,13 +13,11 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
     const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //   if(parentModule === 'home') {
-    //       const currentRoute = route().current();
-    //       const breadCrumbs = split(currentRoute, '.');
-          // dispatch(setParentModule(breadCrumbs[1]));
-      // }
-    // },[])
+    useEffect(() => {
+          const currentRoute = route().current();
+          const breadCrumbs = split(currentRoute, '.');
+          dispatch(setParentModule(breadCrumbs[1]));
+    },[route().current()])
 
     return (
         <div

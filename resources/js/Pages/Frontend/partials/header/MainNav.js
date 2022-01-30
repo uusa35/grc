@@ -1,4 +1,4 @@
-import {Fragment, useContext, useEffect, useMemo, useState} from 'react'
+import {Fragment, useContext, useMemo, useState} from 'react'
 import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
@@ -40,16 +40,13 @@ function MainNav() {
         isAdminOrAbove,
         arFont, enFont,
     } = useContext(AppContext);
-    const {auth , settings, currencies, categories, mgt} = useContext(GlobalContext);
+    const globalContext = useContext(GlobalContext);
+    const {auth , settings, currencies, categories, mgt} = globalContext;
     const {locale, currency, cart, parentModule} = useSelector(state => state);
-    const [searchType, setSearchType] = useState('book');
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
     const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
     const serviceCategories  = useMemo(() => filter(categories, c => c.is_service), [categories])
-
-    useEffect(() => {
-    }, [auth])
 
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
@@ -873,7 +870,7 @@ function MainNav() {
                                             </Menu.Item>
                                         }
                                         {
-                                            !auth || !auth.id ?
+                                            isEmpty(auth) || !auth.id ?
                                                 <Menu.Item>
                                                     {({active}) => (
                                                         <Link

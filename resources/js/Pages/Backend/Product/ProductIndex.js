@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
 
 
-export default function ProductIndex({elements}) {
+export default function ({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,

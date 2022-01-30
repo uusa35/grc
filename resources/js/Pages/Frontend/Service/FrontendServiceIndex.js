@@ -32,7 +32,6 @@ export default function ({elements, categories}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <SubMetaElement title={trans('services')}/>
                 {/* Mobile filter dialog */}
             <SearchIndexSideBarMobile
                 type={'service'}

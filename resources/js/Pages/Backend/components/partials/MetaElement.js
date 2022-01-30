@@ -1,18 +1,18 @@
-import {InertiaHead} from "@inertiajs/inertia-react";
+import {Head} from "@inertiajs/inertia-react";
 import React, {useContext} from 'react';
 import GlobalContext from "../../../context/GlobalContext";
 import {capitalize} from "lodash";
 import pluralize from "pluralize";
 import {useSelector} from "react-redux";
 import {AppContext} from "../../../context/AppContext";
-import SubMetaElement from "./SubMetaElement";
 
 export default function() {
     const {getLocalized, getThumb, trans} = useContext(AppContext);
     const {parentModule, lang } = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
+
     return (
-        <InertiaHead>
+        <Head>
             <title>{`${capitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}</title>
             <meta head-key="description" name="description"
                   content={ settings[getLocalized('description')]}/>
@@ -74,6 +74,6 @@ export default function() {
             />
             <meta property="og:description" content={ settings[getLocalized()]} key="ogdesc"/>
             <meta property="og:image" content={getThumb(settings.image)} key="ogimage"/>
-        </InertiaHead>
+        </Head>
     );
 }
