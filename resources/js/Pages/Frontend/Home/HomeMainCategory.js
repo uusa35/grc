@@ -8,7 +8,7 @@ export default function({element}) {
     const {getLarge, trans, getLocalized} = useContext(AppContext);
     return (
         <div className="bg-white">
-            <div className="max-w-2xl mx-auto py-5  sm:py-10 lg:max-w-7xl">
+            <div className="max-w-2xl mx-auto lg:max-w-7xl">
                 <div className="relative rounded-lg overflow-hidden lg:h-96">
                     <div className="absolute inset-0">
                         <img
