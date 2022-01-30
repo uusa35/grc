@@ -112,7 +112,7 @@ export default function HomePage({
                             <HomeMainCategory
                                 element={first(filter(homeCategories, c => c.is_product))}
                             />
-                            <InformationBtns />
+                            {/*<InformationBtns />*/}
                             <CategoriesGroup
                                 params={{is_product: true}}
                                 type={'product'}

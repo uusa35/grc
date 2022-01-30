@@ -41,12 +41,12 @@ function MainNav() {
         arFont, enFont,
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
-    const {auth , settings, currencies, categories, mgt} = globalContext;
+    const {auth, settings, currencies, categories, mgt} = globalContext;
     const {locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
     const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
-    const serviceCategories  = useMemo(() => filter(categories, c => c.is_service), [categories])
+    const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
 
     return (
         <div className="bg-white rtl:text-right ltr:text-left">
@@ -55,7 +55,7 @@ function MainNav() {
                 <div className="grid grid-cols-5 gap-x-5">
                     {
                         settings.instagram && <a target="_blank" href={settings.instagram}>
-                            <FaInstagram size={22} className={'col-span-1 text-gray-400 hover:text-gray-200'} />
+                            <FaInstagram size={22} className={'col-span-1 text-gray-400 hover:text-gray-200'}/>
                         </a>
                     }
                     {
@@ -262,6 +262,42 @@ function MainNav() {
                                                 </a>
                                         }
 
+                                    </div>
+                                }
+                                <div className="flow-root">
+                                    <Link
+                                        href={route('frontend.contactus')}
+                                        className="-m-2 p-2 block text-gray-900 capitalize ">
+                                        {capitalize(trans('contactus'))}
+                                    </Link>
+                                </div>
+                                {
+                                    settings.enable_faqs && <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.faqs')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('faqs'))}
+                                        </Link>
+                                    </div>
+                                }
+                                {
+                                    settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 &&
+                                    <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.terms')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('terms'))}
+                                        </Link>
+                                    </div>
+                                }
+                                {
+                                    settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 &&
+                                    <div className="flow-root">
+                                        <Link
+                                            href={route('frontend.polices')}
+                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            {capitalize(trans('policy'))}
+                                        </Link>
                                     </div>
                                 }
                                 <div className="flow-root">
@@ -507,7 +543,8 @@ function MainNav() {
                                 }
                                 {
                                     settings.enable_products &&
-                                    <MainNavBookCategoriesList categories={filter(categories, c => c.is_product)} type='product'/>
+                                    <MainNavBookCategoriesList categories={filter(categories, c => c.is_product)}
+                                                               type='product'/>
                                 }
                                 {
                                     settings.enable_books && <Link
@@ -527,7 +564,8 @@ function MainNav() {
                                         >
                                             {capitalize(trans('consulting_and_training'))}
                                         </Link>
-                                        <MainNavBookCategoriesList categories={filter(categories, c => c.is_service)} type='service'/>
+                                        <MainNavBookCategoriesList categories={filter(categories, c => c.is_service)}
+                                                                   type='service'/>
                                     </> : null
                                 }
                                 {
@@ -760,8 +798,8 @@ function MainNav() {
                         {/* change lang */}
                         <div className="ml-auto flex flex-1 justify-end items-center">
                             {/* Search */}
-                            {settings.enable_books && <SearchField />}
-                            {settings.enable_products && <SearchField />}
+                            {settings.enable_books && <SearchField/>}
+                            {settings.enable_products && <SearchField/>}
                             <div
                                 className="hidden 2xl:flex lg:items-center lg:justify-end px-1 rtl:mr-2 ltr:ml-2">
                                 <Link
@@ -781,57 +819,58 @@ function MainNav() {
 
 
                             {/* currency dropdown */}
-                            {settings.enable_prices ? <Menu as="div" className="ltr:ml-4 rtl:mr-3 relative flex-shrink-0 z-50">
-                                <div>
-                                    <Menu.Button
-                                        className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                                        <span className="sr-only">Open user menu</span>
-                                        <img
-                                            className="h-5 w-5 rounded-full object-cover"
-                                            src={getThumb(currency.image)}
-                                            alt={currency[getLocalized()]}
-                                            width={60}
-                                            height={60}
-                                        />
-                                        {currency[getLocalized('currency_symbol')]}
-                                    </Menu.Button>
-                                </div>
-                                <Transition
-                                    as={Fragment}
-                                    enter="transition ease-out duration-100"
-                                    enterFrom="transform opacity-0 scale-95"
-                                    enterTo="transform opacity-100 scale-100"
-                                    leave="transition ease-in duration-75"
-                                    leaveFrom="transform opacity-100 scale-100"
-                                    leaveTo="transform opacity-0 scale-95"
-                                >
-                                    <Menu.Items
-                                        className="origin-top-right absolute rtl:-mr-20 ltr:-ml-20 mt-2 w-48 shadow-lg py-1 bg-black ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            {settings.enable_prices ?
+                                <Menu as="div" className="ltr:ml-4 rtl:mr-3 relative flex-shrink-0 z-50">
+                                    <div>
+                                        <Menu.Button
+                                            className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                            <span className="sr-only">Open user menu</span>
+                                            <img
+                                                className="h-5 w-5 rounded-full object-cover"
+                                                src={getThumb(currency.image)}
+                                                alt={currency[getLocalized()]}
+                                                width={60}
+                                                height={60}
+                                            />
+                                            {currency[getLocalized('currency_symbol')]}
+                                        </Menu.Button>
+                                    </div>
+                                    <Transition
+                                        as={Fragment}
+                                        enter="transition ease-out duration-100"
+                                        enterFrom="transform opacity-0 scale-95"
+                                        enterTo="transform opacity-100 scale-100"
+                                        leave="transition ease-in duration-75"
+                                        leaveFrom="transform opacity-100 scale-100"
+                                        leaveTo="transform opacity-0 scale-95"
+                                    >
+                                        <Menu.Items
+                                            className="origin-top-right absolute rtl:-mr-20 ltr:-ml-20 mt-2 w-48 shadow-lg py-1 bg-black ring-1 ring-black ring-opacity-5 focus:outline-none">
 
-                                        {
-                                            map(currencies, element => (
-                                                <Menu.Item key={element[getLocalized()]}>
-                                                    {({active}) => (
-                                                        <button
-                                                            onClick={() => dispatch(setCurrency(element))}
-                                                            className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
-                                                        >
-                                                            <img
-                                                                className="h-5 w-5 rounded-full object-cover"
-                                                                src={getThumb(element.image)}
-                                                                alt={element[getLocalized()]}
-                                                                width={60}
-                                                                height={60}
-                                                            />
-                                                            {element[getLocalized()]}
-                                                        </button>
-                                                    )}
-                                                </Menu.Item>
-                                            ))
-                                        }
-                                    </Menu.Items>
-                                </Transition>
-                            </Menu> : null}
+                                            {
+                                                map(currencies, element => (
+                                                    <Menu.Item key={element[getLocalized()]}>
+                                                        {({active}) => (
+                                                            <button
+                                                                onClick={() => dispatch(setCurrency(element))}
+                                                                className={classNames(active ? 'bg-gray-900' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
+                                                            >
+                                                                <img
+                                                                    className="h-5 w-5 rounded-full object-cover"
+                                                                    src={getThumb(element.image)}
+                                                                    alt={element[getLocalized()]}
+                                                                    width={60}
+                                                                    height={60}
+                                                                />
+                                                                {element[getLocalized()]}
+                                                            </button>
+                                                        )}
+                                                    </Menu.Item>
+                                                ))
+                                            }
+                                        </Menu.Items>
+                                    </Transition>
+                                </Menu> : null}
 
                             {/* auth dropdown */}
                             <Menu as="div" className="ltr:ml-4 rtl:mr-3 relative flex-shrink-0 z-50">
