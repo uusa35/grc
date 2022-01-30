@@ -9,8 +9,7 @@ import {Link, useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {map} from 'lodash';
 import axios from 'axios';
-import {Inertia} from "@inertiajs/inertia";
-import {clearCart, showModal} from "../../redux/actions";
+import {showModal} from "../../redux/actions";
 import ConfirmationModal from "../partials/ConfirmationModal";
 
 
@@ -30,8 +29,6 @@ export default function({order, settings}) {
         netTotal: cart.netTotal,
         paymentMethod: paymentMethod.name
     })
-
-    console.log('paymentMethods', paymentMethods);
 
     useMemo(() => {
         if (paymentMethod.name === 'paypal') {
@@ -72,7 +69,6 @@ export default function({order, settings}) {
         }
     }, [paymentMethod])
 
-    console.log('confirm', confirmationModal)
     return (
         <FrontendContainer>
             <FrontendContentContainer>
@@ -106,7 +102,7 @@ export default function({order, settings}) {
                     }
                     {/* cash_on_delivery confirmation modal */}
                     {
-                        settings.cash_on_delivery && <ConfirmationModal
+                        settings.cash_on_delivery && settings.enable_products && <ConfirmationModal
                             confirmationOpen={confirmationModal.display}
                             message={trans('r_u_sure_u_order_cash_on_delivery')}
                             routeName={`frontend.cart.cod.payment`}
