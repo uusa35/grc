@@ -11,11 +11,9 @@ import {showToastMessage} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FormSection from "../components/widgets/form/FormSection";
 import {map, isNull} from 'lodash';
-import GlobalContext from "../../context/GlobalContext";
 
 export default function({category, elements}) {
     const {trans, getLocalized, getThumb, getFileUrl} = useContext(AppContext);
-    const globalContext = useContext(GlobalContext);
     const [currentImages, setCurrentImages] = useState([]);
     const {errors} = usePage().props;
     const dispatch = useDispatch();
@@ -64,9 +62,6 @@ export default function({category, elements}) {
             image: data.image,
         }, {
             forceFormData: true,
-            onSuccess: ({props}) => {
-                globalContext.categories = props.categories;
-            }
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {
