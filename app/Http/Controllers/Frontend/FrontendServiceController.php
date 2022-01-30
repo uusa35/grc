@@ -11,6 +11,7 @@ use App\Models\OrderMeta;
 use App\Models\Service;
 use App\Services\Search\Filters;
 use App\Services\Search\ProductFilters;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FrontendServiceController extends Controller
@@ -63,7 +64,7 @@ class FrontendServiceController extends Controller
     public function show(Service $service, Filters $filters)
     {
         $currentElement = Service::whereId($service->id)->with('user', 'images', 'ratings')->with(['timings' => function ($q) {
-            return $q->active();
+            return $q->active()->whereDate('date', '>', Carbon::now());
         }])->first();
         $orderMetas = Order::where('paid', true)->whereHas('order_metas', function ($q) use ($currentElement) {
             return $q->where(['ordermetable_id' => $currentElement->id, 'ordermetable_type' => 'App\Models\Service'])->whereIn('timing_id', $currentElement->timings->pluck('id'));
