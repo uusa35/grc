@@ -65,7 +65,7 @@ export default function ProductAttributeIndex({elements}) {
                                             </div>
                                             <div className="flex">
                                                 <Link
-                                                    href={route('backend.timing.create', {service_id: elements.data.length > 0 ? elements.data[0]?.service_id : params.product_id})}>
+                                                    href={route('backend.timing.create', {service_id: elements.data.length > 0 ? elements.data[0]?.service_id : params.service_id})}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
