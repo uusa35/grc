@@ -14,6 +14,7 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 import InformationBtns from "./../partials/InformationBtns";
 import HomeMainCategory from "./HomeMainCategory";
+import GlobalContext from "../../context/GlobalContext";
 
 export default function HomePage({
                                      slides,
@@ -27,6 +28,7 @@ export default function HomePage({
                                      settings
                                  }) {
     const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 5))
+    const { categories } = useContext(GlobalContext);
     const {trans} = useContext(AppContext)
 
     useEffect(() => {
@@ -53,7 +55,7 @@ export default function HomePage({
                         settings.enable_books && <>
 
                             <ElementSlider
-                                elements={filter(homeCategories, c => c.is_book)}
+                                elements={filter(categories, c => c.is_book && c.on_home)}
                                 slidesPerView={slideNumber}
                                 title={trans('book_home_featured_categories')}
                                 type={'category'}
@@ -77,7 +79,7 @@ export default function HomePage({
                     {
                         settings.enable_courses && <>
                             <ElementSlider
-                                elements={filter(homeCategories, c => c.is_course)}
+                                elements={filter(categories, c => c.is_course && c.on_home)}
                                 slidesPerView={slideNumber}
                                 title={trans('course_home_featured_categories')}
                                 type={'category'}
@@ -96,7 +98,7 @@ export default function HomePage({
                         settings.enable_products && <>
 
                             <ElementSlider
-                                elements={filter(homeCategories, c => c.is_product)}
+                                elements={filter(categories, c => c.is_product && c.on_home)}
                                 slidesPerView={slideNumber}
                                 title={trans('product_home_featured_categories')}
                                 type={'category'}
@@ -110,14 +112,14 @@ export default function HomePage({
                                 type={'product'}
                             />
                             <HomeMainCategory
-                                element={first(filter(homeCategories, c => c.is_product))}
+                                element={first(filter(categories, c => c.is_product))}
                             />
                             {/*<InformationBtns />*/}
                             <CategoriesGroup
                                 params={{is_product: true}}
                                 type={'product'}
                                 title={trans('other_categories')}
-                                categories={filter(homeCategories, c => c.is_product)}/>
+                                categories={filter(categories, c => c.is_product)}/>
                         </>
                     }
                 </div>

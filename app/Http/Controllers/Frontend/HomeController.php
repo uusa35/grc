@@ -26,12 +26,12 @@ class HomeController extends Controller
         $slides = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
             return $q->active()->orderby('order', 'asc');
         }])->first()->slides);
-        $homeCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->orderby('order', 'asc')->get());
+//        $homeCategories = CategoryExtraLightResource::collection(Category::active()->onHome()->orderby('order', 'asc')->get());
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
         $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
         $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->onHome()->authors()->notClients()->notAdmins()->orderBy('order', 'asc')->get());
-        return inertia('Frontend/Home/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts'));
+        return inertia('Frontend/Home/HomePage', compact('slides', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts'));
     }
 
     public function changeLang($lang)
