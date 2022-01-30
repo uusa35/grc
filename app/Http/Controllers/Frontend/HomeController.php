@@ -31,7 +31,7 @@ class HomeController extends Controller
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
         $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('user')->orderBy('order', 'asc')->get());
         $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->onHome()->authors()->notClients()->notAdmins()->orderBy('order', 'asc')->get());
-        return inertia('Frontend/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts'));
+        return inertia('Frontend/Home/HomePage', compact('slides', 'homeCategories', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts'));
     }
 
     public function changeLang($lang)

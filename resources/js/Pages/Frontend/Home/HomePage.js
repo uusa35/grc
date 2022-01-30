@@ -1,18 +1,19 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {AppContext} from "../context/AppContext";
-import FrontendContainer from "./components/FrontendContainer";
-import ElementSlider from "./components/widgets/slider/ElementSlider";
+import {AppContext} from "../../context/AppContext";
+import FrontendContainer from "./../components/FrontendContainer";
+import ElementSlider from "./../components/widgets/slider/ElementSlider";
 import {isMobile, isTablet} from 'react-device-detect';
-import NewsLetter from "./partials/NewsLetter";
-import MainGallery from "./components/widgets/slider/MainGallery";
-import FrontendContentContainer from "./components/FrontendContentContainer";
-import {filter} from 'lodash';
-import JoinusPage from "./Pages/JoinusPage";
-import JoinusHomeSection from "./partials/JoinusHomeSection";
-import CategoriesGroup from "./components/widgets/category/CategoriesGroup";
+import NewsLetter from "./../partials/NewsLetter";
+import MainGallery from "./../components/widgets/slider/MainGallery";
+import FrontendContentContainer from "./../components/FrontendContentContainer";
+import {filter, first } from 'lodash';
+import JoinusPage from "./../Pages/JoinusPage";
+import JoinusHomeSection from "./../partials/JoinusHomeSection";
+import CategoriesGroup from "./../components/widgets/category/CategoriesGroup";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
-import InformationBtns from "./partials/InformationBtns";
+import InformationBtns from "./../partials/InformationBtns";
+import HomeMainCategory from "./HomeMainCategory";
 
 export default function HomePage({
                                      slides,
@@ -107,6 +108,9 @@ export default function HomePage({
                                 slidesPerView={slideNumber}
                                 title={trans('featured_products')}
                                 type={'product'}
+                            />
+                            <HomeMainCategory
+                                element={first(filter(homeCategories, c => c.is_product))}
                             />
                             <InformationBtns />
                             <CategoriesGroup
