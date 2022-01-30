@@ -1,11 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
+import {useSelector} from "react-redux";
 
 export default function({element}) {
-    const {getLarge, trans, getLocalized} = useContext(AppContext);
+    const {getLarge, trans, getLocalized, classNames } = useContext(AppContext);
+    const { locale } = useSelector(state => state);
     return (
         <div className="bg-white">
             <div className="max-w-2xl mx-auto lg:max-w-7xl">
@@ -14,13 +16,13 @@ export default function({element}) {
                         <img
                             src={getLarge(element.image)}
                             alt=""
-                            className="w-full h-full object-center object-cover"
+                            className="w-full h-full object-center object-fill"
                         />
                     </div>
                     <div aria-hidden="true" className="relative w-full h-96 lg:hidden"/>
                     <div aria-hidden="true" className="relative w-full h-32 lg:hidden"/>
                     <div
-                        className="absolute inset-x-0 bottom-0 bg-black bg-opacity-25 p-6 rounded-bl-lg rounded-br-lg backdrop-filter backdrop-blur sm:flex sm:items-center sm:justify-between lg:inset-y-0 lg:inset-x-auto lg:w-96 lg:rounded-tl-lg lg:rounded-br-none lg:flex-col lg:items-start">
+                        className={classNames(locale.isRTL ? `left-0` :  `right-0` , "absolute inset-y-0 bottom-0 bg-black bg-opacity-10 p-6 rounded-bl-lg rounded-br-lg backdrop-filter backdrop-blur sm:flex sm:items-center sm:justify-between  lg:w-96 lg:rounded-tl-lg lg:rounded-br-none lg:flex-col lg:items-start")}>
                         <div>
                             <h2 className="text-xl font-bold text-white">{element[getLocalized()]}</h2>
                             {
