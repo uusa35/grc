@@ -11,9 +11,11 @@ import {showToastMessage} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FormSection from "../components/widgets/form/FormSection";
 import {map, isNull} from 'lodash';
+import GlobalContext from "../../context/GlobalContext";
 
 export default function({category, elements}) {
-    const {trans, getLocalized, getThumb, getFileUrl,} = useContext(AppContext);
+    const {trans, getLocalized, getThumb, getFileUrl} = useContext(AppContext);
+    const globalContext = useContext(GlobalContext);
     const [currentImages, setCurrentImages] = useState([]);
     const {errors} = usePage().props;
     const dispatch = useDispatch();
@@ -62,6 +64,9 @@ export default function({category, elements}) {
             image: data.image,
         }, {
             forceFormData: true,
+            onSuccess: ({props}) => {
+                globalContext.categories = props.categories;
+            }
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {
@@ -277,7 +282,8 @@ export default function({category, elements}) {
                                     autoComplete="main_image"
                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 />
-                                <img className={`h-24 w-20 bg-cover rounded-md`} src={getThumb(category.image_rectangle)} alt=""/>
+                                <img className={`h-24 w-20 bg-cover rounded-md`}
+                                     src={getThumb(category.image_rectangle)} alt=""/>
                             </div>
                             <ToolTipWidget message={trans('book_main_image_instruction')}/>
                             <p className={` text-red-500 rtl:text-left ltr:text-right`}>
