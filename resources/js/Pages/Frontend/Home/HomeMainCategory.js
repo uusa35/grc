@@ -5,7 +5,7 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 import {useSelector} from "react-redux";
 
-export default function({element}) {
+const HomeMainCategory = ({element}) => {
     const {getLarge, trans, getLocalized, classNames } = useContext(AppContext);
     const { locale } = useSelector(state => state);
     return (
@@ -44,3 +44,5 @@ export default function({element}) {
         </div>
     )
 }
+
+export default React.memo(HomeMainCategory);
