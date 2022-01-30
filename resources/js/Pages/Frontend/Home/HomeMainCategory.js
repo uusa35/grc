@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {useContext, useState} from "react";
+import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
