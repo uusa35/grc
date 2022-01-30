@@ -7,15 +7,15 @@ import {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link, useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
-import {map} from 'lodash';
+import {map, filter} from 'lodash';
 import axios from 'axios';
 import {showModal} from "../../redux/actions";
 import ConfirmationModal from "../partials/ConfirmationModal";
 
 
 export default function({order, settings}) {
-    const {cart, currency, locale, confirmationModal } = useSelector(state => state);
-    const {trans, getThumb, getLocalized, classNames, getAsset} = useContext(AppContext);
+    const {cart, locale, confirmationModal } = useSelector(state => state);
+    const {trans, classNames, getAsset} = useContext(AppContext);
     const paymentMethods = [
         {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create'), enabled : settings.enable_payment_online},
         {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`), enabled:  settings.enable_payment_online},
@@ -85,7 +85,7 @@ export default function({order, settings}) {
                             <div
                                 className="flex w-full flex-row flex-wrap md:flex-nowrap justify-between items-center gap-x-5 gap-y-5 rounded-lg py-6">
                                 {
-                                    map(paymentMethods, p => (
+                                    map(filter(paymentMethods, method => method.enabled), p => (
                                         <div
                                             onClick={() => setPaymentMethod(p)}
                                             key={p.name}
