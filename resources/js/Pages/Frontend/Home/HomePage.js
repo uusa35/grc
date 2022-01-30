@@ -112,7 +112,7 @@ export default function HomePage({
                                 type={'product'}
                             />
                             <HomeMainCategory
-                                element={first(filter(categories, c => c.is_product && c.image))}
+                                element={first(filter(categories, c => c.is_product && c.image.length > 5))}
                             />
                             {/*<InformationBtns />*/}
                             <CategoriesGroup

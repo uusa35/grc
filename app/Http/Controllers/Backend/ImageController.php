@@ -58,7 +58,7 @@ class ImageController extends Controller
      */
     public function edit(Image $image)
     {
-        //
+        return inertia('Backend/Image/ImageEdit', compact('image'));
     }
 
     /**
@@ -70,7 +70,18 @@ class ImageController extends Controller
      */
     public function update(Request $request, Image $image)
     {
-        //
+        $request->validate([
+            'name_ar' => 'max:200',
+            'name_en' => 'max:200',
+            'caption_ar' => 'max:1000',
+            'caption_en' => 'max:1000',
+            'active' => 'required|boolean',
+        ]);
+        if ($image->update($request->except('image'))) {
+            $request->hasFile('image') ? $this->saveMimes($image, $request, ['image'], ['1080', '1440'], true, true) : null;
+            return redirect()->route('backend.' . $image->imagable->type . '.edit', $image->imagable_id)->with('success', trans('general.process_success'));
+        }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**

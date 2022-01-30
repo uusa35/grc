@@ -46,7 +46,7 @@ class ProductResource extends JsonResource
             'color' => ColorExtraLightResource::make($this->whenLoaded('color')),
             'size' => SizeExtraLightResource::make($this->whenLoaded('size')),
             'product_attributes' => ProductAttributeResource::collection($this->whenLoaded('product_attributes')),
-            'images' => ImageExtraLightResource::collection($this->whenLoaded('images')),
+            'images' => ImageLightResource::collection($this->whenLoaded('images')),
             'categories' => CategoryExtraLightResource::collection($this->whenLoaded('categories')),
         ];
     }

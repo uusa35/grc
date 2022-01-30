@@ -81,7 +81,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::resource('service', FrontendServiceController::class)->only(['index', 'show']);
     Route::resource('course', FrontendCourseController::class)->only(['index', 'show']);
     Route::resource('category', FrontendCategoryController::class);
-    Route::resource('user', FrontendUserController::class)->except('destroy','edit');
+    Route::resource('user', FrontendUserController::class)->except('destroy', 'edit');
     Route::resource('faq', FrontendFaqController::class)->only('index');
     Route::get('contactus', [FrontendPageController::class, 'getContactus'])->name('contactus');
     Route::post('contactus', [FrontendPageController::class, 'postContactus'])->name('send.contactus');
@@ -104,14 +104,14 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('cart/coupon', [FrontendCartController::class, 'getCouponCode'])->name('cart.get.coupon');
     Route::post('cart/coupon', [FrontendCartController::class, 'postCouponCode'])->name('cart.coupon');
     // PDF free books only
-    Route::get('free/book/{id}', [FrontendUserController::class,'getFreeBook'])->name('free.book');
+    Route::get('free/book/{id}', [FrontendUserController::class, 'getFreeBook'])->name('free.book');
     // Login & Registeration
-    Route::get('logging',[FrontendUserController::class,'getLogin'])->name('user.logging');
-    Route::post('logging',[FrontendUserController::class,'postLogin'])->name('user.post.logging');
-    Route::get('registration',[FrontendUserController::class,'getRegistration'])->name('user.registration');
-    Route::post('registration',[FrontendUserController::class,'postRegistration'])->name('user.post.registration');
+    Route::get('logging', [FrontendUserController::class, 'getLogin'])->name('user.logging');
+    Route::post('logging', [FrontendUserController::class, 'postLogin'])->name('user.post.logging');
+    Route::get('registration', [FrontendUserController::class, 'getRegistration'])->name('user.registration');
+    Route::post('registration', [FrontendUserController::class, 'postRegistration'])->name('user.post.registration');
     // Newsletter
-    Route::post('newsletter', [HomeController::class,'postNewsLetter'])->name('newsletter');
+    Route::post('newsletter', [HomeController::class, 'postNewsLetter'])->name('newsletter');
     Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.get');
         Route::post('cart/payment', [FrontendCartController::class, 'getPayment'])->name('cart.payment.post');
@@ -119,26 +119,26 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
         Route::resource('rating', FrontendRatingController::class)->only('store');
         Route::resource('favorite', FrontendFavoriteController::class)->only('store');
         Route::resource('user', FrontendUserController::class)->only('edit');
-        Route::resource('order', FrontendOrderController::class)->only(['index','show']);
+        Route::resource('order', FrontendOrderController::class)->only(['index', 'show']);
         // temp routes for testing only
         Route::get('order/{id}/paid', [FrontendOrderController::class, 'makeOrderPaid'])->name('order.paid');
         Route::get('order/{id}/failed', [FrontendOrderController::class, 'makeOrderFailed'])->name('order.failed');
         Route::get('order/paid/{id}/event', [FrontendOrderController::class, 'makeNotify'])->name('order.notify');
-        Route::get('profile/reset/password', [FrontendUserController::class,'getResetPassword'])->name('user.reset');
-        Route::post('profile/reset/password', [FrontendUserController::class,'postResetPassword'])->name('user.post.reset');
-        Route::get('profile/books', [FrontendUserController::class,'getBooks'])->name('profile.books');
-        Route::get('profile/book', [FrontendUserController::class,'getBook'])->name('profile.book');
-        Route::get('profile/courses', [FrontendUserController::class,'getCourses'])->name('profile.courses');
-        Route::get('profile/course', [FrontendUserController::class,'getCourse'])->name('profile.course');
-        Route::get('profile/services', [FrontendUserController::class,'getServices'])->name('profile.services');
-        Route::get('profile/service', [FrontendUserController::class,'getService'])->name('profile.service');
-        Route::get('profile/favorites', [FrontendUserController::class,'getFavorites'])->name('profile.favorites');
-        Route::get('profile/settings', [FrontendUserController::class,'getSettings'])->name('profile.setting');
+        Route::get('profile/reset/password', [FrontendUserController::class, 'getResetPassword'])->name('user.reset');
+        Route::post('profile/reset/password', [FrontendUserController::class, 'postResetPassword'])->name('user.post.reset');
+        Route::get('profile/books', [FrontendUserController::class, 'getBooks'])->name('profile.books');
+        Route::get('profile/book', [FrontendUserController::class, 'getBook'])->name('profile.book');
+        Route::get('profile/courses', [FrontendUserController::class, 'getCourses'])->name('profile.courses');
+        Route::get('profile/course', [FrontendUserController::class, 'getCourse'])->name('profile.course');
+        Route::get('profile/services', [FrontendUserController::class, 'getServices'])->name('profile.services');
+        Route::get('profile/service', [FrontendUserController::class, 'getService'])->name('profile.service');
+        Route::get('profile/favorites', [FrontendUserController::class, 'getFavorites'])->name('profile.favorites');
+        Route::get('profile/settings', [FrontendUserController::class, 'getSettings'])->name('profile.setting');
         Route::resource('profile/address', FrontendAddressController::class);
     });
 });
 
-Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'dashboard','backendInertiaHandler']], function () {
+Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth', 'dashboard', 'backendInertiaHandler']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::get('/home', [DashboardController::class, 'index'])->name('home.index');
     Route::get('/lang/{lang}', [HomeController::class, 'changeLang'])->name('change.lang');
@@ -158,11 +158,11 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::resource('section', SectionController::class);
     Route::resource('page', PageController::class);
     Route::resource('user', UserController::class);
-    Route::get('reset/password', [UserController::class,'getResetPassword'])->name('reset.password');
-    Route::post('reset/password', [UserController::class,'postResetPassword'])->name('post.reset.password');
+    Route::get('reset/password', [UserController::class, 'getResetPassword'])->name('reset.password');
+    Route::post('reset/password', [UserController::class, 'postResetPassword'])->name('post.reset.password');
     Route::resource('order', OrderController::class)->except(['create']);
     Route::resource('slide', SlideController::class);
-    Route::resource('image', ImageController::class)->only('destroy');
+    Route::resource('image', ImageController::class)->only(['destroy', 'edit', 'update']);
     Route::get('clear/element', [DashboardController::class, 'clearElement'])->name('element.clear');
     Route::resource('product', ProductController::class);
     Route::resource('attribute', ProductAttributeController::class);
@@ -203,6 +203,6 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         // order status switch
         Route::get('order/switch/status', [OrderController::class, 'switchStatus'])->name('order.switch');
         // email verified
-        Route::get('make/verified', [UserController::class,'makeEmailVerified'])->name('make.verified');
+        Route::get('make/verified', [UserController::class, 'makeEmailVerified'])->name('make.verified');
     });
 });
