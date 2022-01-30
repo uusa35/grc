@@ -282,7 +282,7 @@ class FrontendUserController extends Controller
         if (!auth()->user()) {
             return inertia('Frontend/User/LoginForm');
         }
-        return inertia('Frontend/HomePage');
+        return inertia('Frontend/Home/HomePage');
     }
 
     public function postLogin(Request $request)
