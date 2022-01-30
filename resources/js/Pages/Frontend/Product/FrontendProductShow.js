@@ -102,10 +102,10 @@ export default function({element, relatedElements, auth, settings}) {
                 thumbnail: getLarge(element.image),
                 original: getLarge(element.image),
                 embedUrl: element.video_url_one,
-                description : element[getLocalized('description')],
+                description : element[getLocalized('caption')],
                 renderItem: () => <EmbeddedIFrameVideo videoUrl={element.video_url_one}/>
             }) : null
-        images.push({thumbnail: getLarge(element.image), original: getLarge(element.image)})
+        images.push({thumbnail: getLarge(element.image), original: getLarge(element.image), description : element[getLocalized('caption')]})
         map(element.images, img => {
             images.push({thumbnail: getLarge(img.image), original: getLarge(img.image), description : img[getLocalized('caption')] })
         })
