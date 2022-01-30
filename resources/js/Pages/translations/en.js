@@ -1108,6 +1108,7 @@ export const en  = {
     "course_home_featured_categories" : "selected course categories",
     "service_home_featured_categories" : "selected service categories",
     "product_home_featured_categories" : "selected product categories",
+    "other_categories" : "other categories",
     "featured_courses" : "selected courses",
     "aboutus_en" : "aboutus english",
     "aboutus_ar" : "aboutus arabic",
