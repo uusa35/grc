@@ -14,7 +14,7 @@ const SystemMessage = () => {
         success && !isEmpty(success) ? dispatch(showToastMessage({message: success, type: 'success'})) : null;
         errors && !isEmpty(errors) ? dispatch(showToastMessage({message: first(map(errors, e => e)), type: 'error'})) : null;
         error && !isEmpty(error) ? dispatch(showToastMessage({message: error, type: 'error'})) : null;
-        setTimeout(() => dispatch(hideToastMessage({ testing : 'test'})), 3000)
+        setTimeout(() => dispatch(hideToastMessage()), 3000)
     }, [success, errors, error])
 
     return (

@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 const HomeMainCategory = ({element}) => {
     const {getLarge, trans, getLocalized, classNames } = useContext(AppContext);
     const { locale } = useSelector(state => state);
+
     return (
         <div className="bg-white">
             <div className="max-w-2xl mx-auto lg:max-w-7xl">

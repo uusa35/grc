@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CountryCollection;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isEmpty;
 
 class CountryController extends Controller
 {
@@ -128,6 +129,16 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
-        //
+        try {
+            if (!$country->currency()->first() && !$country->users->isEmpty()) {
+                if ($country->delete()) {
+                    return redirect()->route('backend.country.index')->with('success', trans('general.process_success'));
+                }
+                throw new \Exception(trans('general.process_failure'));
+            }
+            throw new \Exception(trans('general.process_failure'));
+        } catch (\Exception $e) {
+            return redirect()->route('backend.country.index')->with('error', $e->getMessage());
+        }
     }
 }
