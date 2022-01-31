@@ -1,26 +1,22 @@
 const colors = require('tailwindcss/colors')
 module.exports = {
-    purge: {
-        // enabled : true,
-        // options: {
-        // Whitelisting some classes to avoid purge
-        // safelist: [
-        //     /^bg-/, /^text-/, /^border-/,/^rtl:/,
-        //     /^ltr:/,/^p/,/^m/,/^leading/,/^font/,/^hover/,/^w-/,/^h-/,/^space/,
-        //     /^w/,/^h/,/^m/
-        // ]
-        // },
-    },
     content: [
         './resources/views/**/*.blade.php',
         'resources/js/**/*.js',
-        'resources/css/app.css'
+        './resources/**/*.blade.php',
+        'resources/js/**/*.js',
+        './storage/framework/views/*.php',
     ],
-    darkMode: 'class', // or 'media' or 'class'
+    safelist: [
+        {
+            pattern: /(bg|text)-(pink|blue|amber|cyan|corn)-(50|100|200|300|400|500|600|700|800|900)/,
+            variants: ['lg', 'hover', 'focus', 'lg:hover'],
+        },
+    ],
     theme: {
         extend: {
             screens: {
-                'print': {'raw': 'print'},
+                print: { raw: 'print' },
             },
             colors: {
                 'hippie-blue': {
@@ -41,7 +37,7 @@ module.exports = {
                 yellow: {
                     400: '#FBBF24',
                 },
-                'gold': {
+                'corn': {
                     '50': '#fefcf2',
                     '100': '#fcf9e6',
                     '200': '#f8f0c0',
@@ -52,37 +48,13 @@ module.exports = {
                     '700': '#aa9102',
                     '800': '#887401',
                     '900': '#6f5f01'
-                },
-                'pink': {
-                    '50': '#fbf2f8',
-                    '100': '#f7e6f2',
-                    '200': '#ebc0de',
-                    '300': '#df9bc9',
-                    '400': '#c74fa1',
-                    '500': '#af0479',
-                    '600': '#9e046d',
-                    '700': '#83035b',
-                    '800': '#690249',
-                    '900': '#56023b'
-                },
-                gray: {
-                    50: '#f6f6f6',
-                    100: '#ececec',
-                    200: '#d1d1d1',
-                    300: '#b5b5b5',
-                    400: '#7d7d7d',
-                    500: '#454545',
-                    600: '#3e3e3e',
-                    700: '#343434',
-                    800: '#292929',
-                    900: '#222222',
-                },
+                }
             },
         },
         fontFamily: {
             // 'HelveticaNeueME_1': ['HelveticaNeueME_1', 'sans-serif'],
             // 'GESSTwoBold': ['GESSTwoBold', 'sans-serif'],
-            'GESSTwoMedium': ['GESSTwoMedium', 'sans-serif'],
+            GESSTwoMedium: ['GESSTwoMedium', 'sans-serif'],
             // 'DroidArabicKufi': ['DroidArabicKufi', 'sans-serif'],
             // 'droid-bold': ['DroidArabicKufi-bold', 'sans-serif'],
             // 'Tajawal-Light': ['Tajawal-Light', 'sans-serif'],
@@ -94,31 +66,30 @@ module.exports = {
             // 'Ar-Ith': ['Ar-Ith', 'sans-serif'],
             // 'bein-ar-black_zzbzbbedb0': ['bein-ar-black_0', 'sans-serif'],
         },
-        // colors: {
-        //     transparent: 'transparent',
-        //     black: '#000',
-            // blue: colors.blue,
-            // blueGray: colors.blueGray,
-            // coolGray: colors.coolGray,
-            // cyan: colors.cyan,
+        colors: {
+            transparent: 'transparent',
+            black: '#000',
+            blue: colors.blue,
+            cyan: colors.cyan,
             // emerald: colors.emerald,
             // fuchsia: colors.fuchsia,
-            // gray: colors.neutral,
+            gray: colors.stone,
             // indigo: colors.indigo,
-            //      red: colors.red,
-            // warmGray: colors.warmGray,
-            // white: '#FFF',
-            //     // yellow: colors.yellow,
-        // },
+            red: colors.red,
+            // pink: colors.pink,
+            amber : colors.amber,
+            white: '#FFF',
+            // yellow: colors.yellow,
+        },
 
         animations: {
-            spin: 'spin 6s liner once'
-        }
+            spin: 'spin 6s liner once',
+        },
     },
     variants: {
         extend: {
             backgroundColor: ['responsive', 'hover', 'focus', 'active'],
-            animation: ['hover', 'group-hover']
+            animation: ['hover', 'group-hover'],
         },
         float: ['responsive', 'direction'],
         position: ['responsive', 'direction'],
@@ -135,13 +106,12 @@ module.exports = {
         flexGrow: ['responsive', 'direction'],
         flexShrink: ['responsive', 'direction'],
         flexWrap: ['responsive', 'direction'],
-        float: ['responsive', 'direction'],
     },
     plugins: [
         // require('tailwindcss-rtl'),
         require('tailwindcss-dir')(),
         require('@tailwindcss/forms'),
         require('@tailwindcss/aspect-ratio'),
-        require('@tailwindcss/typography')
-    ]
+        require('@tailwindcss/typography'),
+    ],
 }

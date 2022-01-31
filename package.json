@@ -53,6 +53,7 @@
         "postcss-cli": "^9.1.0",
         "postcss-import": "^14.0.2",
         "postcss-loader": "^6.2.1",
+        "postcss-nesting": "^10.1.2",
         "prop-types": "^15.7.2",
         "pusher-js": "^7.0.3",
         "react-confirm-alert": "^2.7.0",

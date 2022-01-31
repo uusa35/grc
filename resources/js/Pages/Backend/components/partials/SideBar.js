@@ -49,7 +49,7 @@ const SideBar = () => {
                         leaveTo="-translate-x-full"
                     >
                         <div
-                            className="absolute top-10 left-10 bg-pink-400 z-10 flex-shrink-0 flex h-16 border-b border-gray-200 lg:hidden capitalize">
+                            className="absolute top-10 left-10 bg-gray-400 z-10 flex-shrink-0 flex h-16 border-b border-gray-200 lg:hidden capitalize">
                             <button
                                 className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
                                 onClick={() => toggleSideBar(true)}

@@ -11,7 +11,7 @@ import {isEmpty} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function Footer() {
-    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove} = useContext(AppContext)
+    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, theme } = useContext(AppContext)
     const {auth, settings} = useContext(GlobalContext);
     const {errors} = usePage().props;
     const {data, setData, put, progress, reset} = useForm({
@@ -29,7 +29,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className="border-t-2 border-gray-400 bg-gray-50" aria-labelledby="footer-heading">
+        <footer className={`border-t-2 border-${theme}-400 bg-${theme}-50`} aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">
                 {trans('footer')}
             </h2>
