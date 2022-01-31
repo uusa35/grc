@@ -76,7 +76,7 @@ function ElementSlider({
                     <Swiper
                         navigation={showNavigation}
                         pagination={showPagination}
-                        lazy={showNavigation}
+                        lazy={true}
                         mousewheel={true}
                         keyboard={true}
                         cssMode={true}

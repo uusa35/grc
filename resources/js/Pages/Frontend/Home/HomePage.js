@@ -6,11 +6,10 @@ import {isMobile, isTablet} from 'react-device-detect';
 import NewsLetter from "./../partials/NewsLetter";
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
-import {filter, first, shuffle } from 'lodash';
+import {filter, first} from 'lodash';
 import JoinusPage from "./../Pages/JoinusPage";
 import JoinusHomeSection from "./../partials/JoinusHomeSection";
 import CategoriesGroup from "./../components/widgets/category/CategoriesGroup";
-import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 import InformationBtns from "./../partials/InformationBtns";
 import HomeMainCategory from "./HomeMainCategory";
@@ -28,7 +27,7 @@ export default function HomePage({
                                      settings
                                  }) {
     const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 5))
-    const { categories } = useContext(GlobalContext);
+    const {categories} = useContext(GlobalContext);
     const {trans} = useContext(AppContext)
 
     useEffect(() => {
