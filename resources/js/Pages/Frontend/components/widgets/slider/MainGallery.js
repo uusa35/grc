@@ -20,6 +20,8 @@ export default function({elements}) {
                 originalHeight : 750,
                 thumbnailWidth : 92,
                 thumbnailHeight : 36,
+                loading : 'lazy',
+                thumbnailLoading : 'lazy',
                 // thumbnailClass : 'shadow-lg border-2 border-gray-800',
                 originalClass : 'object-contain',
                 // additionalClass : 'rounded-md',

@@ -19,6 +19,7 @@ const HomeMainCategory = ({element}) => {
                             className="w-full h-full object-center object-cover"
                             width={1440}
                             height={1080}
+                            loading={'lazy'}
                         />
                     </div>
                     <div aria-hidden="true" className="relative w-full h-96 lg:hidden"/>

@@ -310,7 +310,9 @@ function MainNav() {
                                         <img
                                             className="w-5 h-5 rounded-full  mx-2"
                                             src={`${baseUrl}images/flags/${locale.otherLang}.png`}
-                                            alt={locale.otherLang}/>
+                                            alt={locale.otherLang}
+                                            loading={'lazy'}
+                                        />
                                         {/*<span className='hidden xl:block'>{locale.otherLang}</span>*/}
                                     </Link>
                                 </div>
@@ -368,7 +370,9 @@ function MainNav() {
                                                     <div
                                                         className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                                                         <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
-                                                             className="object-center object-cover"/>
+                                                             className="object-center object-cover"
+                                                             loading={'lazy'}
+                                                        />
                                                     </div>
                                                     <Link
                                                         href={route('frontend.service.index', {category_id: parent.id})}
@@ -386,7 +390,9 @@ function MainNav() {
                                                             href={route('frontend.service.index', {category_id: sub.id})}
                                                             className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-5 text-gray-500">
                                                             <img src={getThumb(sub.image)} alt=""
-                                                                 className="h-10 w-10 rounded-sm mx-2"/>
+                                                                 className="h-10 w-10 rounded-sm mx-2"
+                                                                 loading={'lazy'}
+                                                            />
                                                             {sub[getLocalized()]}
                                                         </Link>
                                                         <ul
@@ -400,7 +406,9 @@ function MainNav() {
                                                                         href={route('frontend.service.index', {category_id: child.id})}
                                                                         className="-m-2 p-2 flex flex-1 flex-row items-center justify-start text-gray-500 rtl:mr-10 ltr:ml-10">
                                                                         <img src={getThumb(child.image)} alt=""
-                                                                             className="h-10 w-10 rounded-sm mx-3"/>
+                                                                             className="h-10 w-10 rounded-sm mx-3"
+                                                                             loading={'lazy'}
+                                                                        />
                                                                         {child[getLocalized()]}
                                                                     </Link>
                                                                 </li>
@@ -421,7 +429,9 @@ function MainNav() {
                                                     <div
                                                         className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                                                         <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
-                                                             className="object-center object-cover"/>
+                                                             className="object-center object-cover"
+                                                             loading={'lazy'}
+                                                        />
                                                     </div>
                                                     <Link href={route('frontend.book.index', {category_id: parent.id})}
                                                           className="mt-6 block text-gray-900 capitalize">
@@ -438,7 +448,9 @@ function MainNav() {
                                                             href={route('frontend.book.index', {category_id: sub.id})}
                                                             className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-5 text-gray-500">
                                                             <img src={getThumb(sub.image)} alt=""
-                                                                 className="h-10 w-10 rounded-sm mx-2"/>
+                                                                 className="h-10 w-10 rounded-sm mx-2"
+                                                                 loading={'lazy'}
+                                                            />
                                                             {sub[getLocalized()]}
                                                         </Link>
                                                         <ul
@@ -452,7 +464,9 @@ function MainNav() {
                                                                         href={route('frontend.book.index', {category_id: child.id})}
                                                                         className="-m-2 p-2 flex flex-1 flex-row items-center justify-start text-gray-500 rtl:mr-10 ltr:ml-10">
                                                                         <img src={getThumb(child.image)} alt=""
-                                                                             className="h-10 w-10 rounded-sm mx-3"/>
+                                                                             className="h-10 w-10 rounded-sm mx-3"
+                                                                             loading={'lazy'}
+                                                                        />
                                                                         {child[getLocalized()]}
                                                                     </Link>
                                                                 </li>
@@ -508,6 +522,7 @@ function MainNav() {
                                         alt={settings[getLocalized()]}
                                         width={96}
                                         height={96}
+                                        loading={'lazy'}
                                     />
                                 </Link>
                             </div>
@@ -813,6 +828,7 @@ function MainNav() {
                                         src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}
                                         width={60}
                                         height={60}
+                                        loading={'lazy'}
                                     />
                                 </Link>
                             </div>
@@ -831,6 +847,7 @@ function MainNav() {
                                                 alt={currency[getLocalized()]}
                                                 width={60}
                                                 height={60}
+                                                loading={'lazy'}
                                             />
                                             {currency[getLocalized('currency_symbol')]}
                                         </Menu.Button>
@@ -861,6 +878,7 @@ function MainNav() {
                                                                     alt={element[getLocalized()]}
                                                                     width={60}
                                                                     height={60}
+                                                                    loading={'lazy'}
                                                                 />
                                                                 {element[getLocalized()]}
                                                             </button>

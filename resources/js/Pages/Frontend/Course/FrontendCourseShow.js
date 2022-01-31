@@ -52,9 +52,10 @@ export default function({element, relatedElements, auth}) {
                 original: getLarge(element.image),
                 embedUrl: 'https://www.youtube.com/embed/4pSzhZ76GdM?autoplay=1&showinfo=0',
                 description: 'Render custom slides (such as videos)',
+                loading : 'lazy',
                 renderItem: () => <EmbeddedIFrameVideo videoUrl={element.video_url_one}/>
             }) : null
-        images.push({thumbnail: getLarge(element.image), original: getLarge(element.image)})
+        images.push({thumbnail: getLarge(element.image), original: getLarge(element.image), loading : 'lazy'})
         map(element.images, img => {
             images.push({thumbnail: getLarge(img.image), original: getLarge(img.image)})
         })

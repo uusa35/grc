@@ -48,6 +48,7 @@ export default function NormalCourseWidget ({ element }) {
                     <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-fill shadow-sm" src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
                          width={360}
                          height={480}
+                         loading='lazy'
                     />
                 </Link>
             </div>

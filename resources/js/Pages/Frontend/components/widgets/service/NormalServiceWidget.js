@@ -26,6 +26,7 @@ export default function NormalServiceWidget({element}) {
                         className="w-full object-cover object-bottom rounded-t-md"
                         width={480}
                         height={360}
+                        loading='lazy'
                     />
                 </Link>
             </div>
@@ -42,6 +43,7 @@ export default function NormalServiceWidget({element}) {
                     <img className="w-5 h-5 md:w-10 md:h-10 rounded-full object-fill shadow-sm" src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
                          width={360}
                          height={480}
+                         loading='lazy'
                     />
                 </Link>
             </div>

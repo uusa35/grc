@@ -42,6 +42,7 @@ export default function Footer() {
                             alt={settings[getLocalized()]}
                             width={96}
                             height={96}
+                            loading={'lazy'}
                         />
                         <p className="text-gray-500 capitalize text-base mt-5">
                             {settings[getLocalized('caption')]}
@@ -260,6 +261,7 @@ export default function Footer() {
                                          width={60}
                                          height={60}
                                          alt={'paypal'}
+                                         loading={'lazy'}
                                     />
                                 </div>
                                 <div>
@@ -267,6 +269,7 @@ export default function Footer() {
                                          width={60}
                                          height={60}
                                          alt={'mastercard'}
+                                         loading={'lazy'}
                                     />
                                 </div>
                                 <div>
@@ -274,6 +277,7 @@ export default function Footer() {
                                          width={60}
                                          height={60}
                                          alt={'visa'}
+                                         loading={'lazy'}
                                     />
                                 </div>
                                 <div>
@@ -282,6 +286,7 @@ export default function Footer() {
                                          width={60}
                                          height={60}
                                          alt={settings.payment_method}
+                                         loading={'lazy'}
                                     />
                                 </div>
                             </div>

@@ -27,6 +27,7 @@ export default function NormalProductWidget({element}) {
                             className="w-full object-cover object-bottom rounded-t-md"
                             width={480}
                             height={360}
+                            loading='lazy'
                         />
                     </Link>
                 </div>
@@ -42,6 +43,7 @@ export default function NormalProductWidget({element}) {
                              src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
                              width={360}
                              height={480}
+                             loading='lazy'
                         />
                     </Link>
                 </div>

@@ -103,11 +103,12 @@ export default function({element, relatedElements, auth, settings}) {
                 original: getLarge(element.image),
                 embedUrl: element.video_url_one,
                 description : element[getLocalized('caption')],
+                loading : 'lazy',
                 renderItem: () => <EmbeddedIFrameVideo videoUrl={element.video_url_one}/>
             }) : null
-        images.push({thumbnail: getLarge(element.image), original: getLarge(element.image), description : element[getLocalized('caption')]})
+        images.push({thumbnail: getLarge(element.image), original: getLarge(element.image), description : element[getLocalized('caption')], loading : 'lazy',})
         map(element.images, img => {
-            images.push({thumbnail: getLarge(img.image), original: getLarge(img.image), description : img[getLocalized('caption')] })
+            images.push({thumbnail: getLarge(img.image), original: getLarge(img.image), description : img[getLocalized('caption')], loading : 'lazy', })
         })
         setCurrentImages(images);
     }, [element])

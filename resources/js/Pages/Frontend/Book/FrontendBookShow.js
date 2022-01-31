@@ -47,9 +47,9 @@ export default function({element, relatedElements, auth}) {
     });
 
     useMemo(() => {
-        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
+        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image), loading : 'lazy'}]
         map(element.images, img => {
-            images.push({thumbnail: getThumb(img.image), original: getLarge(img.image)})
+            images.push({thumbnail: getThumb(img.image), original: getLarge(img.image), loading : 'lazy'})
         })
         setCurrentImages(images);
     }, [element])
