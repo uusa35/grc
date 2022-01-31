@@ -75,8 +75,11 @@ const AppContextProvider = ({children}) => {
         guest: isEmpty(auth),
         // arFont: 'font-almarai',
         arFont: 'font-gesst-medium',
-        enFont: 'font-tajwal-medium'
+        enFont: 'font-tajwal-medium',
+        theme : settings.theme
     };
+
+    console.log('settings', settings);
 
     useMemo(() => {
         document.getElementById('lang').innerHTML = lang;

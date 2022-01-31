@@ -3,7 +3,7 @@ import {AppContext} from "../../../context/AppContext";
 import {useSelector} from "react-redux";
 
 export default function ElementTags({onNew = false , onSale = false , exclusive = false, free = false, showFavoriteIcon  = true}) {
-    const {classNames, trans} = useContext(AppContext)
+    const {classNames, trans, theme } = useContext(AppContext)
     const { locale } = useSelector(state => state)
 
     return (
@@ -12,25 +12,25 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
                 className={classNames(locale.isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col text-white text-sm')}>
                 {
                     onSale && !free ? <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm  bg-red-900 mb-3 ">
+                        className={`inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm  bg-red-900 mb-3 `}>
                         {trans('on_sale')}
                       </span> : null
                 }
                 {
                     onNew ? <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-800 mb-3">
+                        className={`inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-800 mb-3`}>
                     {trans('on_new')}
                         </span> : null
                 }
                 {
                     exclusive ? <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-600 mb-3">
+                        className={`inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-600 mb-3`}>
                     {trans('exclusive')}
                         </span> : null
                 }
                 {
                     free ? <span
-                        className="inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-400 mb-3">
+                        className={`inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-400 mb-3`}>
                     {trans('free')}
                         </span> : null
                 }

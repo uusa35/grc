@@ -13,33 +13,69 @@ module.exports = {
     },
     content: [
         './resources/views/**/*.blade.php',
-        'resources/js/**/*.js'
-        // 'resources/css/app.css'
+        'resources/js/**/*.js',
+        'resources/css/app.css'
     ],
     darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {
-            screens : {
+            screens: {
                 'print': {'raw': 'print'},
             },
             colors: {
                 'hippie-blue': {
-                    '300': '#b4d4db',
-                    '400': '#7bb4c1',
-                    '500': '#4394a6',
-                    '600': '#3c8595',
-                    '800': '#285964',
-                    '900': '#304b52'
+                    300: '#b4d4db',
+                    400: '#7bb4c1',
+                    500: '#4394a6',
+                    600: '#3c8595',
+                    800: '#285964',
+                    900: '#304b52',
                 },
-                'red': {
-                    '900': '#d7161f'
+                red: {
+                    900: '#d7161f',
                 },
-                'green': {
-                    '900': '#078231',
-                    '950' : '#25d366'
+                green: {
+                    900: '#078231',
+                    950: '#25d366',
                 },
-                'yellow': {
-                    '400': '#FBBF24'
+                yellow: {
+                    400: '#FBBF24',
+                },
+                'gold': {
+                    '50': '#fefcf2',
+                    '100': '#fcf9e6',
+                    '200': '#f8f0c0',
+                    '300': '#f4e69a',
+                    '400': '#ebd44e',
+                    '500': '#e3c102',
+                    '600': '#ccae02',
+                    '700': '#aa9102',
+                    '800': '#887401',
+                    '900': '#6f5f01'
+                },
+                'pink': {
+                    '50': '#fbf2f8',
+                    '100': '#f7e6f2',
+                    '200': '#ebc0de',
+                    '300': '#df9bc9',
+                    '400': '#c74fa1',
+                    '500': '#af0479',
+                    '600': '#9e046d',
+                    '700': '#83035b',
+                    '800': '#690249',
+                    '900': '#56023b'
+                },
+                gray: {
+                    50: '#f6f6f6',
+                    100: '#ececec',
+                    200: '#d1d1d1',
+                    300: '#b5b5b5',
+                    400: '#7d7d7d',
+                    500: '#454545',
+                    600: '#3e3e3e',
+                    700: '#343434',
+                    800: '#292929',
+                    900: '#222222',
                 },
             },
         },
@@ -58,26 +94,25 @@ module.exports = {
             // 'Ar-Ith': ['Ar-Ith', 'sans-serif'],
             // 'bein-ar-black_zzbzbbedb0': ['bein-ar-black_0', 'sans-serif'],
         },
-        colors: {
-            transparent: 'transparent',
-            black: '#000',
-            //     // blue: colors.blue,
-            //     // blueGray: colors.blueGray,
-            //     // coolGray: colors.coolGray,
-            //     // cyan: colors.cyan,
-            //     // emerald: colors.emerald,
-            //     // fuchsia: colors.fuchsia,
-            gray: colors.neutral,
-            // green: colors.green,
+        // colors: {
+        //     transparent: 'transparent',
+        //     black: '#000',
+            // blue: colors.blue,
+            // blueGray: colors.blueGray,
+            // coolGray: colors.coolGray,
+            // cyan: colors.cyan,
+            // emerald: colors.emerald,
+            // fuchsia: colors.fuchsia,
+            // gray: colors.neutral,
             // indigo: colors.indigo,
             //      red: colors.red,
-            //     // warmGray: colors.warmGray,
-            white: '#FFF',
+            // warmGray: colors.warmGray,
+            // white: '#FFF',
             //     // yellow: colors.yellow,
-        },
+        // },
 
-        animations : {
-            spin : 'spin 6s liner once'
+        animations: {
+            spin: 'spin 6s liner once'
         }
     },
     variants: {
