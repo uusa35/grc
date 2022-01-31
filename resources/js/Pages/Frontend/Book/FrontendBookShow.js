@@ -29,7 +29,7 @@ import {getFileType} from "../../helpers";
 
 
 export default function({element, relatedElements, auth}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl, theme } = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
     const {settings} = useContext(GlobalContext);
@@ -219,13 +219,13 @@ export default function({element, relatedElements, auth}) {
                                                     !isNull(element.file) && getFileType(element.file) === 'pdf' ? <a
                                                         target="_blank"
                                                         href={route('frontend.free.book', element.id)}
-                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${theme}-600`, `flex flex-1 bg-${theme}-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-50 focus:ring-${theme}-500 sm:w-full`)}
                                                     >
                                                         {trans('view')}
                                                     </a> : <a
                                                         href={getFileUrl(element.file)}
                                                         download={true}
-                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${theme}-600`, `flex flex-1 bg-${theme}-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-50 focus:ring-${theme}-500 sm:w-full`)}
                                                     >{trans('download')}</a>
                                                 }
                                             </>
@@ -233,7 +233,7 @@ export default function({element, relatedElements, auth}) {
                                                 <button
                                                     disabled={!element.is_available}
                                                     type="submit"
-                                                    className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                                    className={classNames(!element.is_available ? `opacity-30` : `bg-${theme}-600`, `flex flex-1 bg-${theme}-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-50 focus:ring-${theme}-500 sm:w-full`)}
                                                 >
                                                     {trans('add_to_cart')}
                                                 </button>

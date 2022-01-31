@@ -29,7 +29,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className={`border-t-2 border-${theme}-400 bg-${theme}-50`} aria-labelledby="footer-heading">
+        <footer className={`border-t-2 border-gray-400 bg-gray-50`} aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">
                 {trans('footer')}
             </h2>
@@ -215,38 +215,38 @@ export default function Footer() {
                         <div className="grid grid-cols-5 mt-5">
                             {
                                 settings.facebook && <div><a target="_blank" href={settings.facebook}
-                                                        className="col-span-1 text-gray-600 hover:text-gray-500 capitalize">
+                                                        className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
                                     <span className="sr-only">{settings[getLocalized]}</span>
-                                    <FaFacebook size={25} className={'text-gray-600 hover:text-gray-400'}/>
+                                    <FaFacebook size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
                                 </a></div>
                             }
                             {settings.instagram &&
                             <a target="_blank" href={settings.instagram}
-                               className="col-span-1 text-gray-600 hover:text-gray-500 capitalize">
+                               className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
                                 <span className="sr-only">{trans('instagram')}</span>
-                                <FaInstagram size={25} className={'text-gray-600 hover:text-gray-400'}/>
+                                <FaInstagram size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
                             </a>
                             }
                             {settings.twitter &&
                             <a target="_blank" href={settings.twitter}
-                               className="col-span-1 text-gray-600 hover:text-gray-500 capitalize">
+                               className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
                                 <span className="sr-only">{trans('twitter')}</span>
-                                <FaTwitter size={25} className={'text-gray-600 hover:text-gray-400'}/>
+                                <FaTwitter size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
                             </a>
                             }
                             {settings.youtube &&
                             <a target="_blank" href={settings.youtube}
-                               className="col-span-1 text-gray-600 hover:text-gray-500 capitalize">
+                               className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
                                 <span className="sr-only">{trans('youtube')}</span>
-                                <FaYoutube size={25} className={'text-gray-600 hover:text-gray-400'}/>
+                                <FaYoutube size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
                             </a>
                             }
                             {settings.whatsapp &&
                             <a target="_blank"
                                href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}
-                               className="col-span-1 text-gray-600 hover:text-gray-500 capitalize">
+                               className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
                                 <span className="sr-only">{trans('whatsapp')}</span>
-                                <FaWhatsapp size={25} className={'text-gray-600 hover:text-gray-400'}/>
+                                <FaWhatsapp size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
                             </a>
                             }
                         </div>

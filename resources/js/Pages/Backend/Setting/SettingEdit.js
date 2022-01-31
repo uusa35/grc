@@ -387,6 +387,33 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                     {errors.theme && <div className={`text-red-900`}>{errors.theme}</div>}
                                 </p>
                             </div>
+                            {/* main_theme_color */}
+                            <div className="sm:col-span-2">
+                                <label htmlFor="main_theme_colors" className="block text-sm font-medium text-gray-800">
+                                    {trans('main_theme_color')}
+                                </label>
+                                <div className="mt-1">
+                                    <select
+                                        onChange={handleChange}
+                                        id="main_theme_color"
+                                        name="main_theme_color"
+                                        defaultValue={setting.main_theme_color}
+                                        autoComplete="main_theme_color"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    >
+                                        {
+                                            themes.map(u => (
+                                                <option key={u} value={u}
+                                                >{u}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <ToolTipWidget message={trans('product_user_instruction')}/>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.main_theme_color && <div className={`text-red-900`}>{errors.main_theme_color}</div>}
+                                </p>
+                            </div>
                         </FormSection>
 
                         <FormSection title={trans('more_details')}>

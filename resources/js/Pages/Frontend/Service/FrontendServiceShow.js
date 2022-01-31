@@ -28,7 +28,7 @@ import SocialIconShare from "../partials/SocialIconShare";
 
 
 export default function FrontendServiceShow({element, relatedElements, auth}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, theme} = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
     const {cart, parentModule, breadCrumbs} = useSelector(state => state);
@@ -230,7 +230,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                         <button
                                             disabled={!element.is_available}
                                             type="submit"
-                                            className={classNames(!element.is_available ? `opacity-30` : `bg-gray-600`, `flex flex-1 bg-gray-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500 sm:w-full`)}
+                                            className={classNames(!element.is_available ? `opacity-30` : `bg-${theme}-900`, `flex flex-1 bg-${theme}-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-50 focus:ring-${theme}-600 sm:w-full`)}
                                         >
                                             {trans('add_to_cart')}
                                         </button>

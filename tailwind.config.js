@@ -9,7 +9,7 @@ module.exports = {
     ],
     safelist: [
         {
-            pattern: /(bg|text)-(pink|blue|amber|cyan|corn)-(50|100|200|300|400|500|600|700|800|900)/,
+            pattern: /(bg|text)-(pink|blue|amber|cyan|corn|hippie-blue)-(50|100|200|300|400|500|600|700|800|900)/,
             variants: ['lg', 'hover', 'focus', 'lg:hover'],
         },
     ],
@@ -76,7 +76,7 @@ module.exports = {
             gray: colors.stone,
             // indigo: colors.indigo,
             red: colors.red,
-            // pink: colors.pink,
+            pink: colors.pink,
             amber : colors.amber,
             white: '#FFF',
             // yellow: colors.yellow,
