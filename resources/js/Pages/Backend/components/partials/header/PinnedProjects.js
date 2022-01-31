@@ -61,7 +61,7 @@ export default function PinnedProjects() {
                                                         <Menu.Item>
                                                             {({active}) => (
                                                                 <Link
-                                                                    href={route().has(`backend.${m.name}.index`) ? route(`backend.${m.name}.create`) : '#'}
+                                                                    href={route().has(`backend.${m.name}.create`) ? route(`backend.${m.name}.create`) : '#'}
                                                                     className={classNames(
                                                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                         'block px-4 py-2 '

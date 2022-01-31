@@ -77,8 +77,8 @@ export default function({elements}) {
                                 {map(elements.data, element => (
                                     <tr key={element.id}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.country[getLocalized()]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm truncate">{element[getLocalized()]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm truncate">{element.country[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.area.edit`, element.id)}

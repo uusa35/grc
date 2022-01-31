@@ -159,7 +159,6 @@ export default function CourseIndex({elements}) {
                                     >
                                         {trans('owner_author')}
                                     </th>
-
                                 </tr>
                                 </thead>
                                 <tbody className="block md:table-row-group">
@@ -176,7 +175,7 @@ export default function CourseIndex({elements}) {
                                             <td className="block md:table-cell whitespace-nowrap text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
                                                     <ActiveDot active={element.active}/>
-                                                    {element[getLocalized('name')]}
+                                                    {element[getLocalized()]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">

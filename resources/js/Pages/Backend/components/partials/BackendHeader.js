@@ -45,7 +45,7 @@ const BackendHeader = () => {
                                 <div>
                                     <div className={`rtl:ml-2 ltr:mr-2`}>
                                         <Menu.Button
-                                            className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
+                                            className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-bold text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
                                             {trans('list')} {trans('all_elements')}
                                             <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                         </Menu.Button>
@@ -101,7 +101,7 @@ const BackendHeader = () => {
                                     <div>
                                         <div className={`rtl:ml-2 ltr:mr-2`}>
                                             <Menu.Button
-                                                className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
+                                                className={`inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-bold text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
                                                 {trans('list')} {trans('all_elements')}
                                                 <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                             </Menu.Button>
@@ -161,7 +161,7 @@ const BackendHeader = () => {
                             <div>
                                 <div className={`rtl:ml-2 ltr:mr-2`}>
                                     <Menu.Button
-                                        className={`capitalize inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
+                                        className={`capitalize inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-600  font-bold text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
                                         {trans('create')} {trans('element')}
                                         <ChevronDownIcon className="mx-2 h-5 w-5" aria-hidden="true"/>
                                     </Menu.Button>
@@ -221,7 +221,7 @@ const BackendHeader = () => {
                                 <div className="flex justify-end items-center">
                                     <div className={`rtl:ml-2 ltr:mr-2`}>
                                         <Menu.Button
-                                            className={`inline-flex justify-center items-center  w-full rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
+                                            className={`inline-flex justify-center items-center  w-full rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-gray-600  font-bold text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6  rtl:ml-2 ltr:mr-2"
                                                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -235,7 +235,7 @@ const BackendHeader = () => {
                                     </div>
                                     <div className={`rtl:ml-2 ltr:mr-2`}>
                                         <button
-                                            className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-gray-600  font-medium text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize"
+                                            className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-gray-800  font-bold text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize"
                                             onClick={() => {
                                                 dispatch(changeLang(locale.otherLang))
                                             }}
@@ -246,7 +246,6 @@ const BackendHeader = () => {
                                             <div className="text-white text-md text-gray-900 text-capitalize font-bold">{locale.otherLang}</div>
                                         </button>
                                     </div>
-
                                 </div>
 
                                 <Transition
@@ -261,7 +260,7 @@ const BackendHeader = () => {
                                 >
                                     <Menu.Items
                                         static
-                                        className="origin-top-right absolute rtl:-mr-20 ltr:-ml-5 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none capitalize"
+                                        className="origin-top-right absolute rtl:-mr-50 ltr:-ml-5 mt-2 w-56 z-50 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none capitalize"
                                     >
                                         <div className="py-1 capitalize">
                                             <Menu.Item>

@@ -52,6 +52,13 @@ class OrderFilters extends QueryFilters
         return $this->builder->where(['paid' => true, 'cash_on_delivery' => false]);
     }
 
+
+    public function active()
+    {
+        return $this->builder->where(['status' => 'paid']);
+    }
+
+
     public function page()
     {
         return $this->builder;
