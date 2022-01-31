@@ -34,7 +34,7 @@
                   content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
             <meta property="twitter:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
         @else
-{{--            <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(0) ? ' :: '. trans('general.'.Str::plural(request()->segment(0))) : '' }} test from 'here'</title>--}}
+            {{--            <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(0) ? ' :: '. trans('general.'.Str::plural(request()->segment(0))) : '' }} test from 'here'</title>--}}
             <meta name="name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
             <meta name="title" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
             <meta name="description" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
@@ -81,16 +81,23 @@
                   content="{{$page['props']['settings']->{'description_'.app()->getLocale()} }}"/>
             <meta property="twitter:image" content="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}"/>
         @endif
+        <link rel="apple-touch-icon" href="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}">
+        <link rel="apple-touch-icon" sizes="152x152"
+              href="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}">
+        <link rel="apple-touch-icon" sizes="180x180"
+              href="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}">
+        <link rel="apple-touch-icon" sizes="167x167"
+              href="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}">
     @endif
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-        <!-- index.html -->
-        <script>
-            // before React is loaded
-            // if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
-            //     __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
-            // }
-        </script>
+    <!-- index.html -->
+    <script>
+        // before React is loaded
+        // if (typeof window.__REACT_DEVTOOLS_GLOBAL_HOOK__ === 'object') {
+        //     __REACT_DEVTOOLS_GLOBAL_HOOK__.inject = function() {};
+        // }
+    </script>
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>

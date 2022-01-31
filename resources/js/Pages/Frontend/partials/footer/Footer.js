@@ -259,18 +259,21 @@ export default function Footer() {
                                     <img src={`${baseUrl}/images/paypal.jpeg`} className="w-auto h-auto"
                                          width={60}
                                          height={60}
+                                         alt={'paypal'}
                                     />
                                 </div>
                                 <div>
                                     <img src={`${baseUrl}/images/mastercard.jpeg`} className="w-auto h-auto"
                                          width={60}
                                          height={60}
+                                         alt={'mastercard'}
                                     />
                                 </div>
                                 <div>
                                     <img src={`${baseUrl}/images/visa.png`} className="w-auto h-auto"
                                          width={60}
                                          height={60}
+                                         alt={'visa'}
                                     />
                                 </div>
                                 <div>
@@ -278,6 +281,7 @@ export default function Footer() {
                                          className="w-auto h-auto" style={{width: '150px'}}
                                          width={60}
                                          height={60}
+                                         alt={settings.payment_method}
                                     />
                                 </div>
                             </div>
