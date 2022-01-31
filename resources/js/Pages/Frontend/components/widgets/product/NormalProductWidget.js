@@ -20,7 +20,7 @@ export default function NormalProductWidget({element}) {
                     <Link
                         className="z-30"
                         href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
-                        <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}/>
+                        <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive} rounded={true}/>
                         <img
                             src={getThumb(element.image)}
                             alt={element[getLocalized()]}
