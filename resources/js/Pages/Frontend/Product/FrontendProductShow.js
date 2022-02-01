@@ -438,10 +438,10 @@ export default function({element, relatedElements, auth, settings}) {
                                     </span>
                                 </div>
                                 {/* add_to_cart_btn */}
-                                <div className="flex flex-row justify-between items-center gap-x-5">
+                                <div className="flex flex-row justify-between items-center gap-x-5 mt-5">
                                     {
                                         settings.enable_cart &&
-                                        <form onSubmit={handleSubmit} className="flex-grow mt-5">
+                                        <form onSubmit={handleSubmit} className="grow">
                                             <button
                                                 disabled={!element.is_available || finalPrice === 0 || selectedQty < 1}
                                                 type="submit"
@@ -451,12 +451,14 @@ export default function({element, relatedElements, auth, settings}) {
                                             </button>
                                         </form>
                                     }
+                                    {
+                                        settings.enable_favorite &&
+                                        <div className="flex-none w-10">
+                                            <ElementFavoriteBtn id={element.id} type={'product'}
+                                                                favoritesList={auth?.favoritesList}/>
+                                        </div>
+                                    }
                                 </div>
-                                {
-                                    settings.enable_favorite &&
-                                    <ElementFavoriteBtn id={element.id} type={'product'}
-                                                        favoritesList={auth?.favoritesList}/>
-                                }
                                 {
                                     settings.enable_whatsapp_contact &&
                                     <div className="flex flex-1 w-full mb-auto mt-5 justify-between opacity-80">

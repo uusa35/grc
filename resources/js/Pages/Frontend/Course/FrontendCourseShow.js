@@ -239,8 +239,11 @@ export default function({element, relatedElements, auth}) {
                                         </form> : null
                                     }
                                     {
-                                        settings.enable_favorite && <ElementFavoriteBtn id={element.id} type={'course'}
-                                                                                         favoritesList={auth?.favoritesList}/>
+                                        settings.enable_favorite &&
+                                        <div className="flex-none w-10">
+                                            <ElementFavoriteBtn id={element.id} type={'course'}
+                                                                favoritesList={auth?.favoritesList}/>
+                                        </div>
                                     }
                                 </div>
                             </div>

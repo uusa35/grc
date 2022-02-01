@@ -1,4 +1,4 @@
-import {Fragment, useContext, useMemo, useState} from 'react'
+import React, {Fragment, useContext, useMemo, useState} from 'react'
 import {Disclosure, Transition, Menu} from '@headlessui/react'
 import {
     MinusSmIcon,
@@ -239,8 +239,11 @@ export default function({element, relatedElements, auth}) {
                                             </form>
                                     }
                                     {
-                                        settings.enable_favorite && <ElementFavoriteBtn id={element.id} type={'book'}
-                                                                                        favoritesList={auth?.favoritesList}/>
+                                        settings.enable_favorite &&
+                                        <div className="flex-none w-10">
+                                            <ElementFavoriteBtn id={element.id} type={'book'}
+                                                                favoritesList={auth?.favoritesList}/>
+                                        </div>
                                     }
                                 </div>
                             </div>
