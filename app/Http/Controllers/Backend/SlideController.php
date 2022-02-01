@@ -102,7 +102,7 @@ class SlideController extends Controller
         request()->validate([
             'slidable_id' => 'required|integer',
             'slidable_type' => 'required|string',
-            'image' => "image"
+            'image' => "image|max:".env('MAX_IMAGE_SIZE').'"'
         ]);
         $type = $request->slidable_type;
         $request->request->add(['slidable_type' => 'App\Models\\' . ucfirst($request->slidable_type)]);
@@ -159,6 +159,9 @@ class SlideController extends Controller
      */
     public function update(Request $request, Slide $slide)
     {
+        request()->validate([
+            'image' => "image|max:".env('MAX_IMAGE_SIZE').'"'
+        ]);
         if ($slide->update($request->except('image'))) {
             $request->hasFile('image') ? $this->saveMimes($slide, $request, ['image'], ['1900', '750'], true , true) : null;
             $request->hasFile('file') ? $this->savePath($slide, $request, 'file') : null;

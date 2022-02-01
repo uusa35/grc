@@ -110,9 +110,6 @@ export default function({user, roles, elementCategories, categories, countries, 
         'custome_delivery_fees': user.custome_delivery_fees,
     });
 
-    console.log('user area', user.area_id);
-    console.log('data ', data.area_id);
-
     useMemo(() => {
         // setAreas()
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
