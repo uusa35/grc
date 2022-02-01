@@ -88,6 +88,7 @@
               href="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}">
         <link rel="apple-touch-icon" sizes="167x167"
               href="{{asset(env('THUMBNAIL').$page['props']['settings']->image) }}">
+        <meta name="theme-color" content="{{$page['props']['settings']->theme }}">
     @endif
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
