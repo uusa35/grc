@@ -9,7 +9,7 @@ module.exports = {
     ],
     safelist: [
         {
-            pattern: /(bg|text)-(pink|blue|amber|cyan|corn|hippie-blue)-(50|100|200|300|400|500|600|700|800|900)/,
+            pattern: /(bg|text|fill|border)-(pink|blue|amber|cyan|corn|hippie-blue)-(50|100|200|300|400|500|600|700|800|900)/,
             variants: ['lg', 'hover', 'focus', 'lg:hover'],
         },
     ],

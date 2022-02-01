@@ -79,8 +79,6 @@ const AppContextProvider = ({children}) => {
         theme : settings.theme
     };
 
-    console.log('settings', settings);
-
     useMemo(() => {
         document.getElementById('lang').innerHTML = lang;
         document.querySelector('html').setAttribute('lang', lang);

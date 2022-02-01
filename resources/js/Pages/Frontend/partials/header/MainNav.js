@@ -3,6 +3,7 @@ import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
     ShoppingBagIcon,
+    ShoppingCartIcon,
     XIcon
 } from '@heroicons/react/outline'
 import {Link} from "@inertiajs/inertia-react";
@@ -538,7 +539,7 @@ function MainNav() {
                                 <Link
                                     href={route('frontend.home')}
                                     // onClick={() => dispatch(setParentModule('home'))}
-                                    className={classNames(parentModule == 'home' ? `border-b border-hippie-blue-500` : ``, " flex sm:min-w-max  text-center items-center   hover:text-gray-300 hover:rounded-sm capitalize overflow-hidden")}
+                                    className={classNames(parentModule == 'home' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 hover:rounded-sm capitalize overflow-hidden`)}
                                 >
                                     {capitalize(trans('home'))}
                                 </Link>
@@ -546,7 +547,7 @@ function MainNav() {
                                     settings.enable_products && <Link
                                         href={route('frontend.product.index')}
                                         // onClick={() => dispatch(setParentModule('product'))}
-                                        className={classNames(parentModule == 'product' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize overflow-hidden")}
+                                        className={classNames(parentModule == 'product' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('products'))}
                                     </Link>
@@ -555,7 +556,7 @@ function MainNav() {
                                     settings.enable_books && <Link
                                         href={route('frontend.book.index')}
                                         // onClick={() => dispatch(setParentModule('book'))}
-                                        className={classNames(parentModule == 'book' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize overflow-hidden")}
+                                        className={classNames(parentModule == 'book' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('library'))}
                                     </Link>
@@ -569,7 +570,7 @@ function MainNav() {
                                     settings.enable_books && <Link
                                         href={route('frontend.user.index', {is_author: true})}
                                         // onClick={() => dispatch(setParentModule('user'))}
-                                        className={classNames(parentModule == 'user' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize overflow-hidden")}
+                                        className={classNames(parentModule == 'user' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('experts_and_participants'))}
                                     </Link>
@@ -579,7 +580,7 @@ function MainNav() {
                                         <Link
                                             href={route('frontend.service.index')}
                                             // onClick={() => dispatch(setParentModule('service'))}
-                                            className={classNames(parentModule == 'service' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize hidden")}
+                                            className={classNames(parentModule == 'service' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize hidden`)}
                                         >
                                             {capitalize(trans('consulting_and_training'))}
                                         </Link>
@@ -591,7 +592,7 @@ function MainNav() {
                                     settings.enable_courses && <Link
                                         href={route('frontend.course.index')}
                                         // onClick={() => dispatch(setParentModule('course'))}
-                                        className={classNames(parentModule == 'course' ? `border-b border-hippie-blue-500` : ``, "flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                        className={classNames(parentModule == 'course' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize`)}
                                     >
                                         {capitalize(trans('e_learning'))}
                                     </Link>
@@ -601,7 +602,7 @@ function MainNav() {
                                 <Link
                                     href={route('frontend.aboutus')}
                                     // onClick={() => dispatch(setParentModule('aboutus'))}
-                                    className={classNames(parentModule == 'aboutus' ? `border-b border-hippie-blue-500` : ``, "hidden 2xl:flex sm:min-w-max  text-center items-center   hover:text-gray-300 capitalize")}
+                                    className={classNames(parentModule == 'aboutus' ? `border-b border-${theme}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize`)}
                                 >
                                     {capitalize(trans('aboutus'))}
                                 </Link>
@@ -648,7 +649,7 @@ function MainNav() {
                                                                 {
                                                                     settings.enable_subscriptions && <Link
                                                                         href={route('frontend.subscriptions')}
-                                                                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                        className={`m-3 p-3 flex items-start rounded-lg hover:text-${theme}-800 capitalize`}
                                                                     >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                              className="h-6 w-6 text-gray-800"
@@ -668,7 +669,7 @@ function MainNav() {
                                                                 {/* contact us page */}
                                                                 <Link
                                                                     href={route('frontend.contactus')}
-                                                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                    className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${theme}-800 capitalize`}
                                                                 >
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                          className="h-6 w-6 text-gray-800" fill="none"
@@ -685,7 +686,7 @@ function MainNav() {
 
                                                                 <Link
                                                                     href={route('frontend.aboutus')}
-                                                                    className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                    className={`-m-3 p-3 flex items-start rounded-lg hover:text-${theme}-800 capitalize`}
                                                                 >
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                          className="h-6 w-6 text-gray-800" fill="none"
@@ -706,7 +707,7 @@ function MainNav() {
                                                                 {settings[getLocalized('services')] && settings[getLocalized('services')].length > 50 ?
                                                                     <Link
                                                                         href={route('frontend.services')}
-                                                                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${theme}-800 capitalize`}
                                                                     >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                              className="h-6 w-6 text-gray-800"
@@ -726,8 +727,7 @@ function MainNav() {
                                                                 {settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ?
                                                                     <Link
                                                                         href={route('frontend.polices')}
-                                                                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
-                                                                    >
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${theme}-800 capitalize`}                                                                    >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                              className="h-6 w-6 text-gray-800"
                                                                              fill="none"
@@ -746,7 +746,7 @@ function MainNav() {
                                                                     settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 ?
                                                                         <Link
                                                                             href={route('frontend.terms')}
-                                                                            className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                            className={`-m-3 p-3 flex items-start rounded-lg hover:text-${theme}-800 capitalize`}
                                                                         >
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                  className="h-6 w-6 text-gray-800"
@@ -766,7 +766,7 @@ function MainNav() {
                                                                 {
                                                                     settings.enable_faqs ? <Link
                                                                         href={route('frontend.faqs')}
-                                                                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${theme}-800 capitalize`}
                                                                     >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                              className="h-6 w-6 text-gray-800"
@@ -785,7 +785,7 @@ function MainNav() {
                                                                 {
                                                                     settings.enable_joinus ? <Link
                                                                         href={route('frontend.joinus')}
-                                                                        className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 capitalize"
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${theme}-800 capitalize`}
                                                                     >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                              className="h-6 w-6 text-gray-800"
@@ -900,7 +900,7 @@ function MainNav() {
                                     <Menu.Button
                                         className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                         <span className="sr-only">Open user menu</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none"
+                                        <svg xmlns="http://www.w3.org/2000/svg" className={`h-7 w-7 hover:text-${theme}-800`} fill={'none'}
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -1000,7 +1000,7 @@ function MainNav() {
                                     <Link href={route('frontend.cart.index')}
                                           className="group -m-2 p-2 flex items-center">
                                         <ShoppingBagIcon
-                                            className="flex-shink-0 h-6 w-6 group-hover:text-gray-300"
+                                            className={`flex-shink-0 h-6 w-6 cursor-pointer hover:text-${theme}-800`}
                                             aria-hidden="true"
                                         />
                                         <span

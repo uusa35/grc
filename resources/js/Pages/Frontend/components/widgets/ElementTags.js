@@ -9,7 +9,7 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
     const { locale } = useSelector(state => state)
 
     return (
-        <div className="relative opacity-60 z-40">
+        <div className="relative opacity-50 z-40">
             <div
                 className={classNames(locale.isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col text-white text-sm')}>
                 {
@@ -39,7 +39,7 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
             </div>
             {
                 showFavoriteIcon ? <div
-                    className={classNames(locale.isRTL ? `left-2` : `right-2`, 'absolute top-8 flex flex-col  gap-y-3 text-white text-sm bg-white rounded-full w-10 h-10 justify-center items-center opacity-60')}>
+                    className={classNames(locale.isRTL ? `left-2` : `right-2`, 'absolute top-8 flex flex-col  gap-y-3 text-white text-sm bg-white rounded-full w-10 h-10 justify-center items-center opacity-50')}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path strokeLinecap="round" strokeWidth="round" strokeWidth="2"

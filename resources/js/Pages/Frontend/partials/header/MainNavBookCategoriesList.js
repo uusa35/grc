@@ -1,13 +1,13 @@
 import {Popover, Transition} from "@headlessui/react";
-import React , {Fragment, useContext} from "react";
+import React, {Fragment, useContext} from "react";
 import {filter, map, take} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {AppContext} from "../../../context/AppContext";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 
-function MainNavBookCategoriesList({ categories, type = 'book' }) {
-    const { classNames , trans , getThumb , getLocalized } = useContext(AppContext)
+function MainNavBookCategoriesList({categories, type = 'book'}) {
+    const {classNames, trans, getThumb, getLocalized, theme} = useContext(AppContext)
 
     return (
         <Popover className="flex ">
@@ -19,14 +19,15 @@ function MainNavBookCategoriesList({ categories, type = 'book' }) {
                                 open
                                     ? 'text-black'
                                     : 'text-black',
-                                'relative z-10 flex items-center transition-colors ease-out duration-200  -mb-px pt-px'
+                                `relative z-10 flex items-center transition-colors ease-out duration-200  -mb-px pt-px`
                             )}
                         >
-                            <span className="capitalize">{trans(`${type}_categories`)}</span>
+                            <span
+                                className={`capitalize text-gray-900 hover:text-${theme}-800`}>{trans(`${type}_categories`)}</span>
                             <ChevronDownIcon
                                 className={classNames(
-                                    open ? 'text-black' : 'text-black',
-                                    'ml-2 w-5 group-hover:text-gray-600'
+                                    open ? `text-${theme}-800` : `text-gray-900`,
+                                    `ml-2 w-5 group-hover:text-${theme}-800`
                                 )}
                                 aria-hidden="true"
                             />
@@ -55,7 +56,7 @@ function MainNavBookCategoriesList({ categories, type = 'book' }) {
                                         <div
                                             className="col-start-2 grid grid-cols-3 gap-x-8">
                                             {/*  featured parents */}
-                                            {map(take(filter(categories,  c => c.is_featured), 3),c => (
+                                            {map(take(filter(categories, c => c.is_featured), 3), c => (
                                                 <div key={c[getLocalized()]}
                                                      className="group relative text-base sm:">
                                                     <div
@@ -66,8 +67,8 @@ function MainNavBookCategoriesList({ categories, type = 'book' }) {
                                                             className="object-center object-cover"
                                                         />
                                                     </div>
-                                                    <Link href={route(`frontend.${type}.index`, { category_id : c.id})}
-                                                          className="mt-6 block text-gray-900 capitalize">
+                                                    <Link href={route(`frontend.${type}.index`, {category_id: c.id})}
+                                                          className={`mt-6 block text-gray-900 hover:text-${theme}-800 capitalize `}>
                                                             <span
                                                                 className="absolute z-10 inset-0"
                                                                 aria-hidden="true"/>
@@ -85,8 +86,8 @@ function MainNavBookCategoriesList({ categories, type = 'book' }) {
                                             {map(categories, parent => (
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
-                                                          href={route(`frontend.${type}.index`, { category_id : parent.id})}
-                                                          className="text-gray-900 truncate capitalize">
+                                                          href={route(`frontend.${type}.index`, {category_id: parent.id})}
+                                                          className={`text-gray-900 hover:text-${theme}-800 truncate capitalize`}>
                                                         {parent[getLocalized()]}
                                                     </Link>
                                                     <ul
@@ -98,8 +99,9 @@ function MainNavBookCategoriesList({ categories, type = 'book' }) {
                                                             map(filter(parent.children, c => c.is_service && type === 'service' || c.is_product && type === 'product'), child => (
                                                                 <li key={child.id}
                                                                     className="flex">
-                                                                    <Link href={route(`frontend.${type}.index`, { category_id : child.id})}
-                                                                          className="font-gesst hover:text-gray-300 truncate capitalize">
+                                                                    <Link
+                                                                        href={route(`frontend.${type}.index`, {category_id: child.id})}
+                                                                        className={`hover:text-${theme}-800 truncate capitalize`}>
                                                                         {child[getLocalized()]}
                                                                     </Link>
                                                                 </li>
