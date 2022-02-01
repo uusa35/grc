@@ -160,7 +160,7 @@ class SlideController extends Controller
     public function update(Request $request, Slide $slide)
     {
         request()->validate([
-            'image' => "nullable|image|max:".env('MAX_IMAGE_SIZE').'"'
+            'image' => "max:".env('MAX_IMAGE_SIZE').'"'
         ]);
         if ($slide->update($request->except('image'))) {
             $request->hasFile('image') ? $this->saveMimes($slide, $request, ['image'], ['1900', '750'], true , true) : null;
