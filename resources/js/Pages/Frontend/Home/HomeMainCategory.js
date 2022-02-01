@@ -31,7 +31,7 @@ const HomeMainCategory = ({element = {}}) => {
                             <h2 className="text-xl font-bold text-white truncate capitalize">{element[getLocalized()]}</h2>
                             {
                                 element[getLocalized('description')] && element[getLocalized('description')].length > 5 &&
-                                <p className="mt-2 text-sm text-white font-bold capitalize break-words leading-relaxed">
+                                <p className="mt-2 text-sm text-white font-bold capitalize break-normal leading-relaxed">
                                     {element[getLocalized('description')]}
                                 </p>
                             }
