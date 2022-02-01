@@ -17,7 +17,7 @@ import ElementRating from "../components/widgets/ElementRating";
 import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
 import {useForm} from "@inertiajs/inertia-react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import GlobalContext from "../../context/GlobalContext";
@@ -30,10 +30,9 @@ import {getFileType} from "../../helpers";
 
 export default function({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl, theme } = useContext(AppContext)
+    const {settings} = useContext(GlobalContext);
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
-    const {settings} = useContext(GlobalContext);
-    const {cart} = useSelector(state => state);
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'book',
@@ -84,7 +83,7 @@ export default function({element, relatedElements, auth}) {
             <FrontendContentContainer childName={element[getLocalized()]}>
                 <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                     {/* Product */}
-                    <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
+                    <div className="lg:grid lg:grid-cols-2  lg:px-4 lg:items-start">
                         {/* Image gallery */}
                         <div className="relative">
                             <ElementTags
@@ -229,7 +228,7 @@ export default function({element, relatedElements, auth}) {
                                                     >{trans('download')}</a>
                                                 }
                                             </>
-                                            : <form onSubmit={handleSubmit} className="w-full">
+                                            : <form onSubmit={handleSubmit} className="flex-grow">
                                                 <button
                                                     disabled={!element.is_available}
                                                     type="submit"
@@ -239,8 +238,10 @@ export default function({element, relatedElements, auth}) {
                                                 </button>
                                             </form>
                                     }
-                                    <ElementFavoriteBtn id={element.id} type={'book'}
-                                                        favoritesList={auth?.favoritesList}/>
+                                    {
+                                        settings.enable_favorite && <ElementFavoriteBtn id={element.id} type={'book'}
+                                                                                        favoritesList={auth?.favoritesList}/>
+                                    }
                                 </div>
                             </div>
                             <section aria-labelledby="details-heading" className="my-12">

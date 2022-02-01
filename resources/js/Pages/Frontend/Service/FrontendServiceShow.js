@@ -19,19 +19,20 @@ import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
 import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import SocialIconShare from "../partials/SocialIconShare";
+import GlobalContext from "../../context/GlobalContext";
 
 
 export default function FrontendServiceShow({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, theme} = useContext(AppContext)
+    const { settings } = useContext(GlobalContext);
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
-    const {cart, parentModule, breadCrumbs} = useSelector(state => state);
 
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
@@ -92,7 +93,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
             <FrontendContentContainer childName={element[getLocalized()]}>
                 <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
                     {/* Product */}
-                    <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
+                    <div className="lg:grid lg:grid-cols-2 lg:px-4 lg:items-start">
                         {/* Image gallery */}
                         <div className="relative">
                             <ElementTags exclusive={element.exclusive}
@@ -226,7 +227,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                     message={trans('element_is_not_available_currently_for_order')}
                                 />}
                                 <div className="flex flex-row justify-between items-center gap-x-5">
-                                    <form onSubmit={handleSubmit} className="w-full">
+                                    <form onSubmit={handleSubmit} className="flex-grow">
                                         <button
                                             disabled={!element.is_available}
                                             type="submit"
@@ -235,8 +236,10 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                             {trans('add_to_cart')}
                                         </button>
                                     </form>
-                                    <ElementFavoriteBtn id={element.id} type={'service'}
-                                                        favoritesList={auth?.favoritesList}/>
+                                    {
+                                        settings.enable_favorite && <ElementFavoriteBtn id={element.id} type={'service'}
+                                                                                        favoritesList={auth?.favoritesList}/>
+                                    }
                                 </div>
                             </div>
                             {element.is_available && <AlertMessage

@@ -159,7 +159,7 @@ export default function({element, relatedElements, auth, settings}) {
                     {/*</div>*/}
                     {/* Product */}
                     <div
-                        className={classNames(element.video_url_one ? `lg:grid-cols-2` : `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto pb-10")}>
+                        className={classNames(element.video_url_one ? `lg:grid-cols-2` : `lg:grid-cols-2`, "lg:grid  lg:px-4 lg:items-start m-auto pb-10")}>
                         {/* Image gallery */}
                         <div className="relative">
                             <ElementTags
@@ -441,7 +441,7 @@ export default function({element, relatedElements, auth, settings}) {
                                 <div className="flex flex-row justify-between items-center gap-x-5">
                                     {
                                         settings.enable_cart &&
-                                        <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto mt-5">
+                                        <form onSubmit={handleSubmit} className="flex-grow mt-5">
                                             <button
                                                 disabled={!element.is_available || finalPrice === 0 || selectedQty < 1}
                                                 type="submit"
@@ -453,7 +453,7 @@ export default function({element, relatedElements, auth, settings}) {
                                     }
                                 </div>
                                 {
-                                    settings.enable_favorites &&
+                                    settings.enable_favorite &&
                                     <ElementFavoriteBtn id={element.id} type={'product'}
                                                         favoritesList={auth?.favoritesList}/>
                                 }

@@ -18,7 +18,7 @@ import ElementRating from "../components/widgets/ElementRating";
 import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
 import {useForm} from "@inertiajs/inertia-react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
@@ -27,13 +27,14 @@ import MetaElement from "../../Backend/components/partials/MetaElement";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
+import GlobalContext from "../../context/GlobalContext";
 
 
 export default function({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, theme } = useContext(AppContext)
+    const { settings } = useContext(GlobalContext);
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
-    const {cart} = useSelector(state => state);
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'course',
@@ -97,7 +98,7 @@ export default function({element, relatedElements, auth}) {
                     </div>
                     {/* Product */}
                     <div
-                        className={classNames(element.video_url_one ? `lg:grid-cols-2` : `lg:grid-cols-2`, "lg:grid lg:gap-x-4 lg:px-4 lg:items-start m-auto pb-10")}>
+                        className={classNames(element.video_url_one ? `lg:grid-cols-2` : `lg:grid-cols-2`, "lg:grid  lg:px-4 lg:items-start m-auto pb-10")}>
                         {/* Image gallery */}
                         <div className="relative">
                             <ElementTags
@@ -227,7 +228,7 @@ export default function({element, relatedElements, auth}) {
                                 />}
                                 <div className="flex flex-row justify-between items-center gap-x-5">
                                     {
-                                        !element.free ? <form onSubmit={handleSubmit} className="w-1/2 w-auto mb-auto">
+                                        !element.free ? <form onSubmit={handleSubmit} className="flex-grow mb-auto">
                                             <button
                                                 disabled={!element.is_available}
                                                 type="submit"
@@ -237,8 +238,10 @@ export default function({element, relatedElements, auth}) {
                                             </button>
                                         </form> : null
                                     }
-                                    <ElementFavoriteBtn id={element.id} type={'course'}
-                                                        favoritesList={auth?.favoritesList}/>
+                                    {
+                                        settings.enable_favorite && <ElementFavoriteBtn id={element.id} type={'course'}
+                                                                                         favoritesList={auth?.favoritesList}/>
+                                    }
                                 </div>
                             </div>
 
