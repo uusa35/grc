@@ -27,6 +27,7 @@ class CategoryExtraLightResource extends JsonResource
             'is_user' => $this->is_user,
             'is_featured' => $this->is_featured,
             'parent_id' => $this->parent_id,
+            'is_parent' => $this->is_parent,
             'on_home' => $this->on_home,
             'children' => CategoryChildExtraLightResource::collection($this->whenLoaded('children'))
         ];
