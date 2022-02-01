@@ -58,7 +58,9 @@ const  SearchField  =  ()  => {
 
     const submit = (e) => {
         e.preventDefault();
-        return Inertia.get(route(`${requestType}.${searchType}.index`, {search}))
+        if(searchType && requestType && route().has(`${requestType}.${searchType}.index`)) {
+            return Inertia.get(route(`${requestType}.${searchType}.index`, {search}))
+        }
     }
 
     const handleSearchType = (e) => dispatch(setSearchType(e))

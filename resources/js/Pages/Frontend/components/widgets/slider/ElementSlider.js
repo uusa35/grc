@@ -51,7 +51,7 @@ function ElementSlider({
 
     return (
         <div className="w-full p-2">
-            {!isEmpty(elements) && (
+            {!isEmpty(elements) && route().has(`frontend.${type}.index`) && (
                 <>
                     <Link
                         href={route(`frontend.${type}.index`, params ? params : '')}

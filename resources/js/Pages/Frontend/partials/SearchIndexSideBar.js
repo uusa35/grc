@@ -28,7 +28,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                 </div>
                 <div className="flex">
                     <Link
-                        href={type ? route(`frontend.${type}.index`) : '#'}
+                        href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
                         className="inline-flex items-center lg:hidden text-white bg-gray-900 p-3 rounded-md shadow-md capitalize"
                     >
                         {trans('clear_search')}
@@ -43,7 +43,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                         </div>
                         <div className="flex">
                             <Link
-                                href={type ? route(`frontend.${type}.index`) : '#'}
+                                href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
                                 className="px-3 py-1 text-gray-800 rounded-md shadow-sm ring-2 ring-gray-400 capitalize"
                             >
                                 {trans('clear_search')}
@@ -63,7 +63,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                         <fieldset className="space-y-3">
                                             <div className="pt-3 space-y-3">
                                                 <Link
-                                                    href={route(`frontend.${type}.index`, { ...params , max: r, min : parseInt(r -50)})}
+                                                    href={route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`, { ...params , max: r, min : parseInt(r -50)}) : '#'}
                                                     className={classNames(params.max == r ? `bg-gray-50 p-3 rounded-md shadow-md`: '' , "flex items-center")}>
                                                     {
                                                         locale.isRTL ?

@@ -26,7 +26,7 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
                 />
             </div>
             {
-                showTitle && <div className="mt-4 flex justify-center items-center">
+                showTitle && route().has(`frontend.${type}.index`) &&  <div className="mt-4 flex justify-center items-center">
                     <div>
                         <h3 className=" text-gray-800">
                             <Link href={route(`frontend.${type}.index`, {category_id: element.id})}>
