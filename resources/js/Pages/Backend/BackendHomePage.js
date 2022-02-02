@@ -7,9 +7,36 @@ import GlobalContext from "../context/GlobalContext";
 import {isEmpty, map , filter } from "lodash";
 import route from 'ziggy-js';
 import {useSelector} from "react-redux";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    ArcElement,
+    PointElement,
+    LineElement,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Line, Bar , Pie} from 'react-chartjs-2';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    BarElement,
+    ArcElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
+
 
 export default function BackendHomePage() {
-    const {trans , getLocalized, getThumb, classNames } = useContext(AppContext);
+    const {trans , getLocalized, getThumb, classNames, arFont , enFont  } = useContext(AppContext);
     const { auth } = useContext(GlobalContext);
     const { modules} = useSelector(state => state);
 
@@ -57,6 +84,21 @@ export default function BackendHomePage() {
                         </div>
                     </div>
                     <div className={`bg-white shadow-md rounded-md p-4 my-4`}>
+                        <div className="flex flex-row justify-evenly items-center">
+                            {/*<div className="flex-1 w-1/3 rounded-md shadow-md p-3 ml-5 ">*/}
+                            {/*    <Line options={previousYearChart.options} data={previousYearChart} className={`${arFont} text-sm font-bold `}/>*/}
+                            {/*</div>*/}
+                            {/*<div className="w-1/3 rounded-md shadow-md p-3 ">*/}
+                            {/*    <Line options={previousYearChart.options} data={previousYearChart} />*/}
+                            {/*</div>*/}
+                            {/*<div className="w-1/3 rounded-md shadow-md p-3 ">*/}
+                            {/*    <Bar options={previousYearChart.options} data={previousYearChart} />*/}
+                            {/*</div>*/}
+                            {/*<div className="w-1/3 rounded-md shadow-md p-3 ">*/}
+                            {/*    <Pie options={previousYearChart.options} data={previousYearChart} />*/}
+                            {/*</div>*/}
+                        </div>
+
                         <h2 className={`text-lg font-medium text-gray-900`}>{trans('modules')}</h2>
                         <p className="mt-1 text-sm text-gray-500">
                             {trans('all_modules_message')}

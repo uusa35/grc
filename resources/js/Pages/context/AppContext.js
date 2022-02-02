@@ -108,6 +108,9 @@ const AppContextProvider = ({children}) => {
         if ((!bootStrapped && navigator.onLine)) {
             dispatch(startBootStrapped({settings, currencies}))
         }
+    }, [])
+
+    useEffect(() => {
         if (!isEmpty(auth && auth.role?.privileges)) {
             const filteredModules = map(auth.role.privileges, p => {
                 return {
@@ -122,7 +125,7 @@ const AppContextProvider = ({children}) => {
             });
             dispatch(setModules(filteredModules));
         }
-    }, [])
+    }, [auth])
 
     return (
         <AppContext.Provider value={context}>

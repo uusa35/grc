@@ -49,7 +49,7 @@ class FrontendHandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            'auth' => $request->user() ? AuthExtraLightResource::make(User::whereId($request->user()->id)->with('role','favoritesList','orders','country')->first()) : [],
+            'auth' => $request->user() ? AuthExtraLightResource::make(User::whereId($request->user()->id)->with('role.privileges', 'favoritesList', 'orders', 'country')->first()) : [],
             'settings' => fn() => new SettingResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
