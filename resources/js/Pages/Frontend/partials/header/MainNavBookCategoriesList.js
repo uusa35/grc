@@ -51,7 +51,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                             <div className="relative bg-white">
                                 <div className="max-w-7xl px-8">
                                     <div
-                                        className="grid grid-cols-2 gap-y-10 gap-x-8 py-16">
+                                        className="grid grid-cols-2 gap-y-10 gap-x-8 py-8">
                                         {/* categories with iamges */}
                                         <div
                                             className="col-start-2 grid grid-cols-3 gap-x-8">
