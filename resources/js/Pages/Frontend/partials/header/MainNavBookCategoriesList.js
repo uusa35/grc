@@ -10,7 +10,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
     const {classNames, trans, getThumb, getLocalized, theme} = useContext(AppContext)
 
     return (
-        <Popover className="flex ">
+        <Popover className="flex">
             {({open}) => (
                 <>
                     <div className="relative flex">
@@ -49,7 +49,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                             <div className="absolute inset-0 top-1/2 bg-white shadow"
                                  aria-hidden="true"/>
                             <div className="relative bg-white">
-                                <div className="max-w-7xl px-8">
+                                <div className="max-w-full px-8">
                                     <div
                                         className="grid grid-cols-2 gap-y-10 gap-x-8 py-8">
                                         {/* categories with iamges */}
