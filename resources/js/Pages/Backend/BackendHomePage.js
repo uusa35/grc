@@ -109,12 +109,12 @@ export default function BackendHomePage({previousYearChart, currentYearChart}) {
                                     {/*    <Line options={previousYearChart.options} data={previousYearChart} className={`${arFont} text-sm font-bold `}/>*/}
                                     {/*</div>*/}
                                     {
-                                        !isNull(previousYearChart) && <div className="w-1/3 rounded-md shadow-md p-3 ">
+                                        !isNull(previousYearChart) && previousYearChart.data && <div className="w-1/3 rounded-md shadow-md p-3 ">
                                             <Line options={previousYearChart.options} data={previousYearChart.data}/>
                                         </div>
                                     }
                                     {
-                                        !isNull(currentYearChart) && <div className="w-1/3 rounded-md shadow-md p-3 ">
+                                        !isNull(currentYearChart) && currentYearChart.data && <div className="w-1/3 rounded-md shadow-md p-3 ">
                                             <Line options={currentYearChart.options} data={currentYearChart.data}/>
                                         </div>
                                     }
