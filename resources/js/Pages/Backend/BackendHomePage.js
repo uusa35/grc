@@ -4,7 +4,7 @@ import {AppContext} from './../context/AppContext';
 import BackendContainer from "./components/containers/BackendContainer";
 import pluralize from 'pluralize';
 import GlobalContext from "../context/GlobalContext";
-import {isEmpty, map, filter} from "lodash";
+import {isEmpty, map, filter, isNull} from "lodash";
 import route from 'ziggy-js';
 import {useSelector} from "react-redux";
 import {
@@ -101,19 +101,23 @@ export default function BackendHomePage({previousYearChart, currentYearChart}) {
                     </div>
 
                     {
-                        settings.enable_products && !isEmpty(currentYearChart) && !isEmpty(previousYearChart) &&
+                        settings.enable_products &&
                             <div className={`bg-white shadow-md rounded-md p-8 py-12 my-6`}>
                                 <h2 className={`text-lg font-medium text-gray-900`}>{trans('sales')}</h2>
                                 <div className=" hidden lg:flex flex-row justify-evenly items-center h-auto">
                                     {/*<div className="flex-1 w-1/3 rounded-md shadow-md p-3 ml-5 ">*/}
                                     {/*    <Line options={previousYearChart.options} data={previousYearChart} className={`${arFont} text-sm font-bold `}/>*/}
                                     {/*</div>*/}
-                                    <div className="w-1/3 rounded-md shadow-md p-3 ">
-                                        <Line options={previousYearChart.options} data={previousYearChart.data}/>
-                                    </div>
-                                    <div className="w-1/3 rounded-md shadow-md p-3 ">
-                                        <Line options={currentYearChart.options} data={currentYearChart.data}/>
-                                    </div>
+                                    {
+                                        !isNull(previousYearChart) && <div className="w-1/3 rounded-md shadow-md p-3 ">
+                                            <Line options={previousYearChart.options} data={previousYearChart.data}/>
+                                        </div>
+                                    }
+                                    {
+                                        !isNull(currentYearChart) && <div className="w-1/3 rounded-md shadow-md p-3 ">
+                                            <Line options={currentYearChart.options} data={currentYearChart.data}/>
+                                        </div>
+                                    }
                                     {/*<div className="w-1/3 rounded-md shadow-md p-3 ">*/}
                                     {/*    <Pie options={previousYearChart.options} data={previousYearChart.data} />*/}
                                     {/*</div>*/}

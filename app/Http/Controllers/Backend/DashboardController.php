@@ -45,7 +45,7 @@ class DashboardController extends Controller
                 'created_at',
                 DB::raw("DATE_FORMAT(created_at,'%M') as month"),
             )
-            ->whereYear('created_at', '=', Carbon::now()->year)
+            ->whereYear('created_at', '>', Carbon::now()->year)
             ->orderBy('created_at')
             ->get()
             ->groupBy('month');
