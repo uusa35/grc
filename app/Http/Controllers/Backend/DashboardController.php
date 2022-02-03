@@ -49,9 +49,9 @@ class DashboardController extends Controller
             ->orderBy('created_at')
             ->get()
             ->groupBy('month');
-        $previousYearChart = new ChartCollection($previousYear);
-        $currentYearChart = new ChartCollection($currentYear);
-        return inertia('Backend/BackendHomePage', compact('previousYearChart','currentYearChart'));
+        $previousYearChart = $previousYear->isNotEmpty() ? new ChartCollection($previousYear) : null;
+        $currentYearChart = $currentYear->isNotEmpty() ? new ChartCollection($currentYear) : null;
+        return inertia('Backend/BackendHomePage', compact('previousYearChart', 'currentYearChart'));
     }
 
     /**
