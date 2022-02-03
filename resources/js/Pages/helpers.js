@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import _ from 'lodash';
-import geolib, {getDistance} from 'geolib';
+// import geolib, {getDistance} from 'geolib';
 import validate from 'validate.js';
 import storage from 'redux-persist/lib/storage';
 import Ziggy from "ziggy-js";
@@ -58,30 +58,30 @@ export function getImageName(img) {
 //   return await checkInternetConnection();
 // }
 
-export function calculateDistance(
-  currentLat,
-  currentLong,
-  latitude,
-  longitude
-) {
-  let currentLongA = !validate.isEmpty(currentLong) ? currentLong : null;
-  let currentLatA = !validate.isEmpty(currentLat) ? currentLat : null;
-  let latitudeA = !validate.isEmpty(latitude) ? latitude : null;
-  let longitudeA = !validate.isEmpty(longitude) ? longitude : null;
-  if (
-    !validate.isEmpty(currentLatA) &&
-    !validate.isEmpty(currentLongA) &&
-    !validate.isEmpty(latitudeA) &&
-    !validate.isEmpty(longitudeA)
-  ) {
-    return getDistance(
-      {latitude: parseFloat(currentLatA), longitude: currentLongA},
-      {latitude: parseFloat(latitudeA), longitude: longitudeA}
-    );
-  } else {
-    return null;
-  }
-}
+// export function calculateDistance(
+//   currentLat,
+//   currentLong,
+//   latitude,
+//   longitude
+// ) {
+//   let currentLongA = !validate.isEmpty(currentLong) ? currentLong : null;
+//   let currentLatA = !validate.isEmpty(currentLat) ? currentLat : null;
+//   let latitudeA = !validate.isEmpty(latitude) ? latitude : null;
+//   let longitudeA = !validate.isEmpty(longitude) ? longitude : null;
+//   if (
+//     !validate.isEmpty(currentLatA) &&
+//     !validate.isEmpty(currentLongA) &&
+//     !validate.isEmpty(latitudeA) &&
+//     !validate.isEmpty(longitudeA)
+//   ) {
+//     return getDistance(
+//       {latitude: parseFloat(currentLatA), longitude: currentLongA},
+//       {latitude: parseFloat(latitudeA), longitude: longitudeA}
+//     );
+//   } else {
+//     return null;
+//   }
+// }
 
 export function getPathForDeepLinking(url) {
   const delimiter = url.split('://');
