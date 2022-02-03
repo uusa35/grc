@@ -38,21 +38,21 @@ export default function BackendHomePage({previousYearChart, currentYearChart}) {
     const {auth, settings} = useContext(GlobalContext);
     const {modules} = useSelector(state => state);
 
-    const data = {
-        labels: previousYearChart.data.labels,
-        datasets: [
+    // const data = {
+    //     labels: previousYearChart.data.labels,
+    //     datasets: [
             // {
             //     label: 'Dataset 1',
             //     data: [10,20,30],
             //     backgroundColor: 'rgba(255, 99, 132, 0.5)',
             // },
-            {
-                label: 'Dataset 2',
-                data: [10, 20, 30, 40, 50, 60],
-                backgroundColor: 'rgba(53, 162, 235, 0.5)',
-            },
-        ],
-    };
+    //         {
+    //             label: 'Dataset 2',
+    //             data: [10, 20, 30, 40, 50, 60],
+    //             backgroundColor: 'rgba(53, 162, 235, 0.5)',
+    //         },
+    //     ],
+    // };
 
     return (
         <BackendContainer type={'home'}>
