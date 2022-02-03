@@ -26,36 +26,32 @@ class DashboardController extends Controller
      */
     public function index()
     {
-//        $previousYear = DB::table('orders')
-//            ->select('net_price',
-//                'created_at',
+        $previousYear = DB::table('orders')
+            ->select('net_price',
+                'created_at',
 //                DB::raw('YEAR(created_at) as year'),
-//                DB::raw("DATE_FORMAT(created_at,'%M') as month"),
+                DB::raw("DATE_FORMAT(created_at,'%M') as month"),
 //                DB::raw("DATE_FORMAT(created_at,'%m%Y') as month_year"),
 //                DB::raw("DATE_FORMAT(created_at,'%M %Y') as month_and_year"),
 //                DB::raw("DATE_FORMAT(created_at,'%Y') as year"),
-//            )
-//            ->whereYear('created_at', '=', Carbon::now()->subYear())
-//            ->orderBy('created_at')
-//            ->get()
-//        ->groupBy('month');
-//        return $previousYear;
-//        $currentYear = DB::table('orders')
-//            ->select('net_price',
-//                'created_at',
-//                DB::raw('YEAR(created_at) as year'),
-//                DB::raw("DATE_FORMAT(created_at,'%M') as month"),
-//                DB::raw("DATE_FORMAT(created_at,'%m%Y') as month_year"),
-//                DB::raw("DATE_FORMAT(created_at,'%M %Y') as month_and_year"),
-//                DB::raw("DATE_FORMAT(created_at,'%Y') as year"),
-//            )
-//            ->whereYear('created_at', '=', Carbon::now()->year)
-//            ->orderBy('created _at')
-//            ->get()->groupBy('month_year');
-//        $previousYearChart = new ChartCollection($previousYear);
-//        $currentYearChart = new ChartCollection($currentYear);
-//        return $previousYearChart;
-        return inertia('Backend/BackendHomePage');
+            )
+//            ->where('paid', true)
+            ->whereYear('created_at', '=', Carbon::now()->subYear())
+            ->orderBy('created_at')
+            ->get()
+            ->groupBy('month');
+        $currentYear = DB::table('orders')
+            ->select('net_price',
+                'created_at',
+                DB::raw("DATE_FORMAT(created_at,'%M') as month"),
+            )
+            ->whereYear('created_at', '=', Carbon::now()->year)
+            ->orderBy('created_at')
+            ->get()
+            ->groupBy('month');
+        $previousYearChart = new ChartCollection($previousYear);
+        $currentYearChart = new ChartCollection($currentYear);
+        return inertia('Backend/BackendHomePage', compact('previousYearChart','currentYearChart'));
     }
 
     /**

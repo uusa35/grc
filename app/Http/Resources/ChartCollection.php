@@ -22,13 +22,14 @@ class ChartCollection extends ResourceCollection
                     'legend' => 'top',
                     'title' => [
                         'display' => true,
-                        'text' => trans("general.sales")
+                        'text' => trans("general.sales") .' '.' ('. trans('general.kd') .') '
                     ]
                 ]
             ]),
-            'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August','September', 'October', 'November','December'],
-//            'labels' => $this->collection->map(fn ($r) => $r->pluck('month'))->flatten()->unique()->toArray(),
-            'datasets' => ChartResource::make($this->collection)
+            'data' => [
+                'labels' => $this->collection->map(fn($r) => $r->pluck('month'))->flatten()->unique()->toArray(),
+                'datasets' => [ChartResource::make($this->collection)]
+            ]
         ];
     }
 }

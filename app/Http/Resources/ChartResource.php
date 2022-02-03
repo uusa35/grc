@@ -16,10 +16,12 @@ class ChartResource extends JsonResource
     public function toArray($request)
     {
         return [
-                'label' => Carbon::parse($this->first()->created_at)->format('F Y'),
-                'data' => [$this->sum('net_price')],
-                'borderColor' => ['#aa1414', '#22cae8', '#b319c4'][rand(0, 2)],
-                'backgroundColor' => ['#aa1414', '#22cae8', '#b319c4'][rand(0, 2)]
+                'label' => Carbon::parse($this->first()->first()->created_at)->translatedFormat('Y'),
+                'data' => $this->map(function ($d) {
+                    return $d->sum('net_price');
+                })->flatten(),
+                'borderColor' => ['#bc1212','#bc1212'][rand(0, 1)],
+                'backgroundColor' => ['#75bcdd','#75bcdd'][rand(0, 1)]
         ];
     }
 }
