@@ -7,7 +7,7 @@
 
 @section('content')
     <div style="height: 100vh; width: 100%; background-color: black;">
-        <header class=" py-6" style="background-color: black; display: none">
+        <header class="py-6" style="background-color: black; display: none">
             <div class="container mx-auto flex justify-between items-center px-6">
                 <div>
                     <button onclick="window.history.back()" class="text-lg font-semibold text-gray-100 no-underline">

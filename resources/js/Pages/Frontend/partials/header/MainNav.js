@@ -3,7 +3,6 @@ import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
     ShoppingBagIcon,
-    ShoppingCartIcon,
     XIcon
 } from '@heroicons/react/outline'
 import {Link} from "@inertiajs/inertia-react";
@@ -59,29 +58,34 @@ function MainNav() {
             <div className={`bg-${theme}-800 h-10 flex items-center justify-between text-white px-4 sm:px-6 lg:px-8`}>
                 <div className="grid grid-cols-5 gap-x-5">
                     {
-                        settings.instagram && <a target="_blank" href={settings.instagram}>
+                        settings.instagram && <a target="_blank" href={settings.instagram} >
                             <FaInstagram size={22} className={`col-span-1 text-${theme}-50 hover:text-${theme}-400`}/>
+                            <span className="sr-only">{trans('instagram')}</span>
                         </a>
                     }
                     {
                         settings.facebook && <a target="_blank" href={settings.facebook}>
                             <FaFacebook size={22} className={`col-span-1 text-${theme}-50 hover:text-${theme}-400`}/>
+                            <span className="sr-only">{trans('facebook')}</span>
                         </a>
                     }
                     {
                         settings.twitter && <a target="_blank" href={settings.twitter}>
                             <FaTwitter size={22} className={`col-span-1 text-${theme}-50 hover:text-${theme}-400`}/>
+                            <span className="sr-only">{trans('twitter')}</span>
                         </a>
                     }
                     {
                         settings.youtube && <a target="_blank" href={settings.youtube}>
                             <FaYoutube size={22} className={`col-span-1 text-${theme}-50 hover:text-${theme}-400`}/>
+                            <span className="sr-only">{trans('youtube')}</span>
                         </a>
                     }
                     {
                         settings.whatsapp &&
                         <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
                             <FaWhatsapp size={22} className={`col-span-1 text-${theme}-50 hover:text-${theme}-400`}/>
+                            <span className="sr-only">{trans('whatsapp')}</span>
                         </a>
                     }
                 </div>
@@ -97,7 +101,7 @@ function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className="mx-2  block text-gray-50  text-xs">
+                        className={`mx-2  block text-gray-50  text-xs bg-${theme}-900`}>
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
