@@ -23,7 +23,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                             )}
                         >
                             <span
-                                className={`capitalize text-gray-900 hover:text-${theme}-800`}>{trans(`${type}_categories`)}</span>
+                                className={`capitalize text-gray-900 font-bold hover:text-${theme}-800`}>{trans(`${type}_categories`)}</span>
                             <ChevronDownIcon
                                 className={classNames(
                                     open ? `text-${theme}-800` : `text-gray-900`,
@@ -68,7 +68,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                         />
                                                     </div>
                                                     <Link href={route(`frontend.${type}.index`, {category_id: c.id})}
-                                                          className={`mt-6 block text-gray-900 hover:text-${theme}-800 capitalize `}>
+                                                          className={`mt-6 block text-gray-900 font-bold hover:text-${theme}-800 capitalize font-bold`}>
                                                             <span
                                                                 className="absolute z-10 inset-0"
                                                                 aria-hidden="true"/>
@@ -87,7 +87,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route(`frontend.${type}.index`, {category_id: parent.id})}
-                                                          className={`text-gray-900 hover:text-${theme}-800 truncate capitalize`}>
+                                                          className={`text-gray-900 hover:text-${theme}-800 truncate capitalize font-bold`}>
                                                         {parent[getLocalized()]}
                                                     </Link>
                                                     <ul
@@ -101,7 +101,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                                     className="flex">
                                                                     <Link
                                                                         href={route(`frontend.${type}.index`, {category_id: child.id})}
-                                                                        className={`hover:text-${theme}-800 truncate capitalize`}>
+                                                                        className={`hover:text-${theme}-800 truncate capitalize font-bold`}>
                                                                         {child[getLocalized()]}
                                                                     </Link>
                                                                 </li>

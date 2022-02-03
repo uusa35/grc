@@ -192,7 +192,7 @@ function MainNav() {
                                         <div className="flow-root">
                                             <Link
                                                 href={route('frontend.category.index', {is_service: 1})}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                className="-m-2 p-2 block text-gray-900 capitalize font-bold">
                                                 {capitalize(trans('consulting_and_training'))}
                                             </Link>
                                         </div>
@@ -539,7 +539,7 @@ function MainNav() {
                                 <Link
                                     href={route('frontend.home')}
                                     // onClick={() => dispatch(setParentModule('home'))}
-                                    className={classNames(parentModule == 'home' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 hover:rounded-sm capitalize overflow-hidden`)}
+                                    className={classNames(parentModule == 'home' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${theme}-800 hover:rounded-sm capitalize overflow-hidden`)}
                                 >
                                     {capitalize(trans('home'))}
                                 </Link>
@@ -547,7 +547,7 @@ function MainNav() {
                                     settings.enable_products && <Link
                                         href={route('frontend.product.index')}
                                         // onClick={() => dispatch(setParentModule('product'))}
-                                        className={classNames(parentModule == 'product' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
+                                        className={classNames(parentModule == 'product' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('products'))}
                                     </Link>
@@ -556,7 +556,7 @@ function MainNav() {
                                     settings.enable_books && <Link
                                         href={route('frontend.book.index')}
                                         // onClick={() => dispatch(setParentModule('book'))}
-                                        className={classNames(parentModule == 'book' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
+                                        className={classNames(parentModule == 'book' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('library'))}
                                     </Link>
@@ -570,7 +570,7 @@ function MainNav() {
                                     settings.enable_books && <Link
                                         href={route('frontend.user.index', {is_author: true})}
                                         // onClick={() => dispatch(setParentModule('user'))}
-                                        className={classNames(parentModule == 'user' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
+                                        className={classNames(parentModule == 'user' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${theme}-800 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('experts_and_participants'))}
                                     </Link>
@@ -580,7 +580,7 @@ function MainNav() {
                                         <Link
                                             href={route('frontend.service.index')}
                                             // onClick={() => dispatch(setParentModule('service'))}
-                                            className={classNames(parentModule == 'service' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize hidden`)}
+                                            className={classNames(parentModule == 'service' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${theme}-800 capitalize hidden`)}
                                         >
                                             {capitalize(trans('consulting_and_training'))}
                                         </Link>
@@ -592,7 +592,7 @@ function MainNav() {
                                     settings.enable_courses && <Link
                                         href={route('frontend.course.index')}
                                         // onClick={() => dispatch(setParentModule('course'))}
-                                        className={classNames(parentModule == 'course' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize`)}
+                                        className={classNames(parentModule == 'course' ? `border-b border-${theme}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${theme}-800 capitalize`)}
                                     >
                                         {capitalize(trans('e_learning'))}
                                     </Link>
@@ -602,7 +602,7 @@ function MainNav() {
                                 <Link
                                     href={route('frontend.aboutus')}
                                     // onClick={() => dispatch(setParentModule('aboutus'))}
-                                    className={classNames(parentModule == 'aboutus' ? `border-b border-${theme}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center items-center   hover:text-${theme}-800 capitalize`)}
+                                    className={classNames(parentModule == 'aboutus' ? `border-b border-${theme}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${theme}-800 capitalize`)}
                                 >
                                     {capitalize(trans('aboutus'))}
                                 </Link>
@@ -923,7 +923,7 @@ function MainNav() {
                                                 {({active}) => (
                                                     <Link
                                                         href={route('backend.home')}
-                                                        className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
+                                                        className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 font-bold ')}
                                                     >
                                                         {trans('backend')}
                                                     </Link>
@@ -936,7 +936,7 @@ function MainNav() {
                                                     {({active}) => (
                                                         <Link
                                                             href={route('frontend.user.logging')}
-                                                            className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
+                                                            className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 font-bold ')}
                                                         >
                                                             {trans('login')}
                                                         </Link>
@@ -967,7 +967,7 @@ function MainNav() {
                                                             {({active}) => (
                                                                 <Link
                                                                     href={route('backend.home')}
-                                                                    className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 ')}
+                                                                    className={classNames(active ? 'bg-gray-800' : '', 'block px-4 py-2 font-bold ')}
                                                                 >
                                                                     {trans('backend')}
                                                                 </Link>
@@ -983,7 +983,7 @@ function MainNav() {
                                                                 }}
                                                                 className={classNames(
                                                                     active ? 'bg-gray-800 text-gray-50' : '',
-                                                                    'group flex w-full items-center px-4 py-2 '
+                                                                    'group flex w-full items-center px-4 py-2 font-bold'
                                                                 )}
                                                             >{trans('logout')}</button>
                                                         )}
