@@ -16,9 +16,9 @@ class ChartResource extends JsonResource
     public function toArray($request)
     {
         return [
-                'label' => Carbon::parse($this->first()->first()->created_at)->translatedFormat('Y'),
+                'label' => Carbon::parse($this->first()->first()->created_at)->format('Y'),
                 'data' => $this->map(function ($d) {
-                    return $d->sum('net_price');
+                    return round($d->sum('net_price'), 2);
                 })->flatten(),
                 'borderColor' => ['#bc1212','#bc1212'][rand(0, 1)],
                 'backgroundColor' => ['#75bcdd','#75bcdd'][rand(0, 1)]

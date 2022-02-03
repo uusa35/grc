@@ -30,7 +30,7 @@ ChartJS.register(
     ArcElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
 );
 
 export default function BackendHomePage({previousYearChart, currentYearChart}) {
@@ -41,11 +41,11 @@ export default function BackendHomePage({previousYearChart, currentYearChart}) {
     // const data = {
     //     labels: previousYearChart.data.labels,
     //     datasets: [
-            // {
-            //     label: 'Dataset 1',
-            //     data: [10,20,30],
-            //     backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            // },
+    // {
+    //     label: 'Dataset 1',
+    //     data: [10,20,30],
+    //     backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    // },
     //         {
     //             label: 'Dataset 2',
     //             data: [10, 20, 30, 40, 50, 60],
@@ -53,6 +53,21 @@ export default function BackendHomePage({previousYearChart, currentYearChart}) {
     //         },
     //     ],
     // };
+
+    const options = (text) => {
+        return {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text,
+                },
+            }
+        }
+    };
 
     return (
         <BackendContainer type={'home'}>
@@ -102,27 +117,23 @@ export default function BackendHomePage({previousYearChart, currentYearChart}) {
 
                     {
                         settings.enable_products &&
-                            <div className={`bg-white shadow-md rounded-md p-8 py-12 my-6`}>
-                                <h2 className={`text-lg font-medium text-gray-900`}>{trans('sales')}</h2>
-                                <div className=" hidden lg:flex flex-row justify-evenly items-center h-auto">
-                                    {/*<div className="flex-1 w-1/3 rounded-md shadow-md p-3 ml-5 ">*/}
-                                    {/*    <Line options={previousYearChart.options} data={previousYearChart} className={`${arFont} text-sm font-bold `}/>*/}
-                                    {/*</div>*/}
-                                    {
-                                        !isNull(previousYearChart) && previousYearChart.data && <div className="w-1/3 rounded-md shadow-md p-3 ">
-                                            <Line options={previousYearChart.options} data={previousYearChart.data}/>
-                                        </div>
-                                    }
-                                    {
-                                        !isNull(currentYearChart) && currentYearChart.data && <div className="w-1/3 rounded-md shadow-md p-3 ">
-                                            <Line options={currentYearChart.options} data={currentYearChart.data}/>
-                                        </div>
-                                    }
-                                    {/*<div className="w-1/3 rounded-md shadow-md p-3 ">*/}
-                                    {/*    <Pie options={previousYearChart.options} data={previousYearChart.data} />*/}
-                                    {/*</div>*/}
-                                </div>
+                        <div className={`bg-white shadow-md rounded-md p-8 py-12 my-6`}>
+                            <h2 className={`text-lg font-medium text-gray-900`}>{trans('sales')}</h2>
+                            <div className=" hidden lg:flex flex-row justify-evenly items-center h-auto">
+                                {
+                                    !isNull(previousYearChart) && previousYearChart.data &&
+                                    <div className="w-1/3 rounded-md shadow-md p-3 ">
+                                        <Line options={options(previousYearChart.title)} data={previousYearChart.data}/>
+                                    </div>
+                                }
+                                {
+                                    !isNull(currentYearChart) && currentYearChart.data &&
+                                    <div className="w-1/3 rounded-md shadow-md p-3 ">
+                                        <Bar options={options(currentYearChart.title)} data={currentYearChart.data}/>
+                                    </div>
+                                }
                             </div>
+                        </div>
                     }
 
                     <div className={`bg-white shadow-md rounded-md p-4 my-4`}>

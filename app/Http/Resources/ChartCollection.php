@@ -16,18 +16,10 @@ class ChartCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'options' => collect([
-                'responsive' => true,
-                'plugins' => [
-                    'legend' => 'top',
-                    'title' => [
-                        'display' => true,
-                        'text' => trans("general.sales") .' '.' ('. trans('general.kd') .') '
-                    ]
-                ]
-            ]),
+            'title'  => trans("general.sales") .' '.' ('. trans('general.kd') .') ',
             'data' => [
                 'labels' => $this->collection->map(fn($r) => $r->pluck('month'))->flatten()->unique()->toArray(),
+//                'labels' => ['Jan','Feb','Mar', 'Apr','May'],
                 'datasets' => [ChartResource::make($this->collection)]
             ]
         ];
