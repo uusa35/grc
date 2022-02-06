@@ -52,9 +52,9 @@ function MainNav() {
     const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
 
     return (
-        <div className={`bg-${headerBgColor}-${getTheme(50,800)} rtl:text-right ltr:text-left`}>
+        <div className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 rtl:text-right ltr:text-left`}>
             {/* Top Nav*/}
-            <div className={` bg-${headerBgColor}-${getTheme(800,800)} h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
+            <div className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
                 <div className="grid grid-cols-5 gap-x-5">
                     {
                         settings.instagram && <a target="_blank" href={settings.instagram} >
@@ -505,7 +505,7 @@ function MainNav() {
             </Transition.Root>
 
             <header
-                className={`bg-${headerBgColor}-${getTheme(50,800)} text-${headerColor}-${getTheme(800,50)} "relative border-b-2 border-gray-400 py-2 max-w-full`}>
+                className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 text-${headerColor}-${getTheme(800,50)} "relative border-b-2 border-gray-400 py-2 max-w-full`}>
                 <nav aria-label="Top" className="w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto">
                     <div className="h-20 flex items-center">
                         <button
@@ -926,7 +926,7 @@ function MainNav() {
                                                 {({active}) => (
                                                     <Link
                                                         href={route('backend.home')}
-                                                        className={classNames(active ? `bg-${headerBgColor}-${getTheme(50,800)}` : '', 'block px-4 py-2 font-bold ')}
+                                                        className={classNames(active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800` : '', 'block px-4 py-2 font-bold ')}
                                                     >
                                                         {trans('backend')}
                                                     </Link>
@@ -939,7 +939,7 @@ function MainNav() {
                                                     {({active}) => (
                                                         <Link
                                                             href={route('frontend.user.logging')}
-                                                            className={classNames(active ? `bg-${headerBgColor}-${getTheme(50,800)}` : '', 'block px-4 py-2 font-bold ')}
+                                                            className={classNames(active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800` : '', 'block px-4 py-2 font-bold ')}
                                                         >
                                                             {trans('login')}
                                                         </Link>
@@ -970,7 +970,7 @@ function MainNav() {
                                                             {({active}) => (
                                                                 <Link
                                                                     href={route('backend.home')}
-                                                                    className={classNames(active ? `bg-${headerBgColor}-${getTheme(50,800)}` : '', 'block px-4 py-2 font-bold ')}
+                                                                    className={classNames(active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800` : '', 'block px-4 py-2 font-bold ')}
                                                                 >
                                                                     {trans('backend')}
                                                                 </Link>
@@ -985,7 +985,7 @@ function MainNav() {
                                                                     document.getElementById('logout-form').submit()
                                                                 }}
                                                                 className={classNames(
-                                                                    active ? `bg-${headerBgColor}-${getTheme(50,800)} text-${headerColor}-${getTheme(800,50)}` : '',
+                                                                    active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 text-${headerColor}-${getTheme(800,50)}` : '',
                                                                     'group flex w-full items-center px-4 py-2 font-bold'
                                                                 )}
                                                             >{trans('logout')}</button>

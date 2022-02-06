@@ -8,7 +8,7 @@ import {isEmpty, map} from 'lodash';
 
 export default function FrontendPagination({type, total, links, showSearch = false}) {
     const [search, setSearch] = useState('');
-    const {classNames, mainColor , getTheme } = useContext(AppContext)
+    const {classNames, mainColor } = useContext(AppContext)
     return (
         <nav
             className="grid grid-cols-1 sm:grid-cols-1 flex justify-between items-center  bg-transparent sm:px-0">
@@ -20,7 +20,7 @@ export default function FrontendPagination({type, total, links, showSearch = fal
                                 <Link
                                     key={page.label}
                                     href={route().has(`frontend.${type}.index`) && page.url ? page.url : '#'}
-                                    className={classNames(page.active ? `text-${mainColor}-${getTheme(800,600)} border-t-2` : '', `border-transparent text-${mainColor}-${getTheme(800,50)} hover:text-${mainColor}-${getTheme(800,50)} hover:text-${mainColor}-${getTheme(800,50)} border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
+                                    className={classNames(page.active ? `text-${mainColor}-800 dark:text-${mainColor}-200 border-t-2` : '', `border-transparent text-${mainColor}-600 dark:text-${mainColor}-100 hover:text-${mainColor}-900 hover:dark:text-${mainColor}-400 border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
                                 >
                                     {page.label}
                                 </Link>

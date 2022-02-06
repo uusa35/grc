@@ -13,7 +13,7 @@ import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function FrontendBookIndex({elements, categories}) {
-    const {trans} = useContext(AppContext);
+    const {trans, mainColor} = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
     const { sort } = useSelector(state => state);
@@ -41,8 +41,8 @@ export default function FrontendBookIndex({elements, categories}) {
             <main className="max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8">
                 <div className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
                     <div className="flex flex-1 flex-col w-full sm:w-auto">
-                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 capitalize">{trans('books')}</h1>
-                        <p className="mt-4 text-base text-gray-500 capitalize">
+                        <h1 className={`text-4xl font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-100 capitalize`}>{trans('books')}</h1>
+                        <p className={`mt-4 text-base text-${mainColor}-600 dark:text-${mainColor}-200 capitalize`}>
                             {trans('list')} {trans('books')}
                         </p>
                     </div>

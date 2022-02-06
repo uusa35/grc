@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mobileFiltersOpen, type, enablePrice = true}) {
-    const {trans, getLocalized, classNames, mainColor , getTheme, mainBgColor } = useContext(AppContext)
+    const {trans, getLocalized, classNames, mainColor , mainBgColor } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
     const {params} = route();
@@ -39,12 +39,12 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                 <div className="divide-y divide-gray-200 space-y-3">
                     <div className="flex flex-1 justify-between items-center">
                         <div className="flex">
-                            <h3 className="capitalize">{trans('filters')}</h3>
+                            <h3 className={`capitalize text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('filters')}</h3>
                         </div>
                         <div className="flex">
                             <Link
                                 href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
-                                className={`px-3 py-1 text-${mainColor}-${getTheme(800,100)} rounded-md shadow-sm ring-2 ring-gray-400 capitalize`}
+                                className={`px-3 py-1 text-${mainColor}-800 dark:text-${mainColor}-100 rounded-md shadow-sm ring-2 ring-gray-400 capitalize`}
                             >
                                 {trans('clear_search')}
                             </Link>
@@ -55,7 +55,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                     {
                         enablePrice && settings.enable_prices && <>
                             <div className="flex pt-3">
-                                <h3 className="capitalize">{trans('prices')}</h3>
+                                <h3 className={`capitalize text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('prices')}</h3>
                             </div>
                             {
                                 map(range(50, 300, 50), r =>
@@ -64,16 +64,16 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                             <div className="pt-3 space-y-3">
                                                 <Link
                                                     href={route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`, { ...params , max: r, min : parseInt(r -50)}) : '#'}
-                                                    className={classNames(params.max == r ? `bg-${mainBgColor}-${getTheme(800,400)} p-3 rounded-md shadow-md`: `` , "flex items-center")}>
+                                                    className={classNames(params.max == r ? `bg-${mainBgColor}-800 dark:bg-${mainBgColor}-400 p-3 rounded-md shadow-md`: `` , "flex items-center")}>
                                                     {
                                                         locale.isRTL ?
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
                                                                  viewBox="0 0 20 20" fill="currentColor">
                                                                 <path fillRule="evenodd"
                                                                       d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                                       clipRule="evenodd"/>
                                                             </svg>
-                                                            : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                            : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
                                                                    viewBox="0 0 20 20" fill="currentColor">
                                                                 <path fillRule="evenodd"
                                                                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -81,7 +81,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                             </svg>
                                                     }
                                                     <label htmlFor={'name'}
-                                                           className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-${getTheme(800,100)} capitalize`}>
+                                                           className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
                                                         {`${trans("less_than")} ${r} ${trans('kd')}`}
                                                     </label>
                                                 </Link>
@@ -94,7 +94,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                     }
 
                     <div className="flex pt-3">
-                        <h3 className="capitalize">{trans('categories')}</h3>
+                        <h3 className={`capitalize text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('categories')}</h3>
                     </div>
                     {map(categories, c => (
                         <div key={c.id} className="pt-3">
@@ -104,13 +104,13 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                         href={route(`frontend.${type}.index`, { ...params , category_id: c.id})}
                                         className="flex items-center">
                                         {
-                                            locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                            locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
                                                                 viewBox="0 0 20 20" fill="currentColor">
                                                     <path fillRule="evenodd"
                                                           d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                           clipRule="evenodd"/>
                                                 </svg>
-                                                : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
                                                        viewBox="0 0 20 20" fill="currentColor">
                                                     <path fillRule="evenodd"
                                                           d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -118,7 +118,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                 </svg>
                                         }
                                         <label htmlFor={'name'}
-                                               className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-${getTheme(800,100)} capitalize`}>
+                                               className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
                                             {c[getLocalized()]}
                                         </label>
                                     </Link>
@@ -136,13 +136,13 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                 />
                                                 {
                                                     locale.isRTL ?
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
                                                              viewBox="0 0 20 20" fill="currentColor">
                                                             <path fillRule="evenodd"
                                                                   d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                                   clipRule="evenodd"/>
                                                         </svg>
-                                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
                                                                viewBox="0 0 20 20" fill="currentColor">
                                                             <path fillRule="evenodd"
                                                                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -150,7 +150,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                         </svg>
                                                 }
                                                 <label htmlFor={'name'}
-                                                       className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-${getTheme(800,100)} capitalize`}>
+                                                       className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
                                                     {child[getLocalized()]}
                                                 </label>
                                             </Link>
@@ -167,7 +167,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                             />
                                                             {
                                                                 locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    className="h-5 w-5"
+                                                                                    className="h-5 w-5" color={mainColor}
                                                                                     viewBox="0 0 20 20"
                                                                                     fill="currentColor">
                                                                         <path fillRule="evenodd"
@@ -175,7 +175,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                                               clipRule="evenodd"/>
                                                                     </svg>
                                                                     : <svg xmlns="http://www.w3.org/2000/svg"
-                                                                           className="h-5 w-5" viewBox="0 0 20 20"
+                                                                           className="h-5 w-5" color={mainColor} viewBox="0 0 20 20"
                                                                            fill="currentColor">
                                                                         <path fillRule="evenodd"
                                                                               d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
@@ -183,7 +183,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                                     </svg>
                                                             }
                                                             <label htmlFor={'name'}
-                                                                   className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-${getTheme(800,100)} capitalize`}>
+                                                                   className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
                                                                 {sub[getLocalized()]}
                                                             </label>
                                                         </Link>

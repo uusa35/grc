@@ -29,7 +29,7 @@ import {getFileType} from "../../helpers";
 
 
 export default function({element, relatedElements, auth}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl, theme } = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl, theme , mainColor, mainBgColor } = useContext(AppContext)
     const {settings} = useContext(GlobalContext);
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
@@ -105,7 +105,7 @@ export default function({element, relatedElements, auth}) {
                         </div>
                         {/* Product info */}
                         <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
-                            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
+                            <h1 className={`text-3xl font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-100`}>{element[getLocalized()]}</h1>
                             <div className="mt-3">
                                 <h2 className="sr-only">{trans('information')}</h2>
                                 <ElementPrice price={element.price} salePrice={element.sale_price}
@@ -123,7 +123,7 @@ export default function({element, relatedElements, auth}) {
                                         !isNull(element[getLocalized('caption')]) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className="text-base text-gray-800 space-y-6"
+                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
                                             >{element[getLocalized('caption')]}</div>
                                         </div>
                                     }
@@ -133,7 +133,7 @@ export default function({element, relatedElements, auth}) {
                                         !isNull(element.sku) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
-                                                className="text-base text-gray-800 space-y-6"
+                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
                                             >
                                                 {trans('reference_id')} :
                                                 {element.sku}
@@ -143,69 +143,6 @@ export default function({element, relatedElements, auth}) {
                                 </div>
                             </div>
                             <div className="mt-6">
-                                {/* book timings */}
-                                {element.timings && element.is_available &&
-                                <Menu as="div" className="relative inline-block text-left mb-5 w-full">
-                                    <div>
-                                        <Menu.Button
-                                            className="flex flex-1 justify-between items-center w-full capitalize rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500">
-                                            <div>
-                                                {!isEmpty(selectedTiming) ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
-                                            </div>
-                                            <ChevronDownIcon className="h-5 w-5" aria-hidden="true"/>
-                                        </Menu.Button>
-                                    </div>
-                                    <Transition
-                                        as={Fragment}
-                                        enter="transition ease-out duration-100"
-                                        enterFrom="transform opacity-0 scale-95"
-                                        enterTo="transform opacity-100 scale-100"
-                                        leave="transition ease-in duration-75"
-                                        leaveFrom="transform opacity-100 scale-100"
-                                        leaveTo="transform opacity-0 scale-95"
-                                    >
-                                        <Menu.Items
-                                            className="z-30 origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                            <div className="py-1">
-                                                {
-                                                    map(element.timings, t =>
-                                                        <Menu.Item key={t.id}>
-                                                            <div
-                                                                onClick={() => setSelectedTiming(t)}
-                                                                className={classNames(
-                                                                    t.id === selectedTiming?.id ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                    'block px-4 py-2 text-sm hover:bg-gray-100'
-                                                                )}
-                                                            >
-                                                                <div
-                                                                    className="flex flex-1 flex-col xl:flex-row justify-start items-center text-sm sm:text-lg">
-                                                                    <div
-                                                                        className="flex flex-1 flex-col justify-start xl:flex-row xl:w-1/3 items-center">
-                                                                    <span
-                                                                        className="flex">{`${moment(t.date).format('dddd')} ${trans('equivalent')}`}</span>
-                                                                        <span
-                                                                            className="flex flex-1 justify-start sm:px-2 flex-row">{`${moment(t.date).format('L')}`}</span>
-                                                                    </div>
-                                                                    <div
-                                                                        className="flex flex-col xl:flex-row justify-between items-center">
-                                                                        <div className="flex capitalize">
-                                                                            {`${trans('from')} ${moment(`${t.date} ${t.start}`).format('HH:mm A')}`}
-                                                                        </div>
-                                                                        <div
-                                                                            className="flex ltr:ml-2 rtl:mr-2 capitalize">
-                                                                            {`${trans('to')} ${moment(`${t.date} ${t.end}`).format('HH:mm A')}`}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </Menu.Item>
-                                                    )
-                                                }
-                                            </div>
-                                        </Menu.Items>
-                                    </Transition>
-                                </Menu>
-                                }
                                 {!element.is_available && <AlertMessage
                                     title={trans('element_is_not_available')}
                                     message={trans('element_is_not_available_currently_for_order')}
@@ -218,13 +155,13 @@ export default function({element, relatedElements, auth}) {
                                                     !isNull(element.file) && getFileType(element.file) === 'pdf' ? <a
                                                         target="_blank"
                                                         href={route('frontend.free.book', element.id)}
-                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${theme}-600`, `flex flex-1 bg-${theme}-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-50 focus:ring-${theme}-500 sm:w-full`)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100`, `flex flex-1 bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-900 dark:text-${mainColor}-600 hover:bg-${mainColor}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                     >
                                                         {trans('view')}
                                                     </a> : <a
                                                         href={getFileUrl(element.file)}
                                                         download={true}
-                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${theme}-600`, `flex flex-1 bg-${theme}-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-50 focus:ring-${theme}-500 sm:w-full`)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100`, `flex flex-1 bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-900 dark:text-${mainColor}-600 hover:bg-${mainColor}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                     >{trans('download')}</a>
                                                 }
                                             </>
@@ -232,7 +169,7 @@ export default function({element, relatedElements, auth}) {
                                                 <button
                                                     disabled={!element.is_available}
                                                     type="submit"
-                                                    className={classNames(!element.is_available ? `opacity-30` : `bg-${theme}-600`, `flex flex-1 bg-${theme}-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-50 focus:ring-${theme}-500 sm:w-full`)}
+                                                    className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100`, `flex flex-1 bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-900 dark:text-${mainColor}-600 hover:bg-${mainColor}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                 >
                                                     {trans('add_to_cart')}
                                                 </button>
@@ -261,7 +198,7 @@ export default function({element, relatedElements, auth}) {
                                                         className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  open ? `text-${mainColor}-600 dark:text-${mainColor}-100` : `text-${mainColor}-600 dark:text-${mainColor}-100`,
                                                                   'capitalize font-extrabold'
                                                               )}
                                                           >
@@ -300,7 +237,7 @@ export default function({element, relatedElements, auth}) {
                                                         className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  open ? `text-${mainColor}-600 dark:text-${mainColor}-100` : `text-${mainColor}-600 dark:text-${mainColor}-100`,
                                                                   'capitalize'
                                                               )}
                                                           >
@@ -337,7 +274,7 @@ export default function({element, relatedElements, auth}) {
                                                     className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  open ? `text-${mainColor}-600 dark:text-${mainColor}-100` : `text-${mainColor}-600 dark:text-${mainColor}-100`,
                                                                   'capitalize'
                                                               )}
                                                           >

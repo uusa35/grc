@@ -7,7 +7,7 @@ import {AppContext} from "../../../context/AppContext";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 
 function MainNavBookCategoriesList({categories, type = 'book'}) {
-    const {classNames, trans, getThumb, getLocalized, headerColor, headerBgColor, getTheme  } = useContext(AppContext)
+    const {classNames, trans, getThumb, getLocalized, headerColor, headerBgColor} = useContext(AppContext)
 
     return (
         <Popover className="flex">
@@ -17,17 +17,17 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                         <Popover.Button
                             className={classNames(
                                 open
-                                    ? `text-${headerColor}-${getTheme(50,800)}`
-                                    : `text-${headerColor}-${getTheme(800,50)}`,
+                                    ? `text-${headerColor}-50 dark:text-${headerColor}-800`
+                                    : `text-${headerColor}-800 dark:text-${headerColor}-50`,
                                 `relative z-10 flex items-center transition-colors ease-out duration-200  -mb-px pt-px`
                             )}
                         >
                             <span
-                                className={`capitalize text-${headerColor}-${getTheme(600,50)} font-bold hover:text-${headerColor}-${getTheme(800,50)}`}>{trans(`${type}_categories`)}</span>
+                                className={`capitalize text-${headerColor}-600 dark:text-${headerColor}-50 font-bold hover:text-${headerColor}-800 dark:hover:text-${headerColor}-50`}>{trans(`${type}_categories`)}</span>
                             <ChevronDownIcon
                                 className={classNames(
-                                    open ? `text-${headerColor}-400` : `text-${headerColor}-${getTheme(600,50)}`,
-                                    `ml-2 w-5 group-hover:text-${headerColor}-${getTheme(400,800)}`
+                                    open ? `text-${headerColor}-400` : `text-${headerColor}-600 dark:text-${headerColor}-50`,
+                                    `ml-2 w-5 group-hover:text-${headerColor}-400 dark:hover:text-${headerColor}-800`
                                 )}
                                 aria-hidden="true"
                             />
@@ -44,9 +44,9 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                         leaveTo="opacity-0"
                     >
                         <Popover.Panel
-                        className="absolute z-40 inset-x-20 top-32 transform shadow-lg">
+                            className="absolute z-40 inset-x-20 top-32 transform shadow-lg">
                             {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                            <div className={`relative bg-${headerBgColor}-${getTheme(50,800)}`}>
+                            <div className={`relative bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800`}>
                                 <div className="max-w-full px-8 mt-2">
                                     <div
                                         className="grid grid-cols-2 gap-y-10 gap-x-8 py-8">
@@ -66,7 +66,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                         />
                                                     </div>
                                                     <Link href={route(`frontend.${type}.index`, {category_id: c.id})}
-                                                          className={`mt-6 block text-${headerColor}-${getTheme(600,50)} font-bold hover:text-${headerColor}-${getTheme(400,800)} capitalize font-bold`}>
+                                                          className={`mt-6 block text-${headerColor}-600 dark:text-${headerColor}-50 font-bold hover:text-${headerColor}-400 dark:hover:text-${headerColor}-800 capitalize font-bold`}>
                                                             <span
                                                                 className="absolute z-10 inset-0"
                                                                 aria-hidden="true"/>
@@ -85,7 +85,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route(`frontend.${type}.index`, {category_id: parent.id})}
-                                                          className={`text-${headerColor}-${getTheme(600,50)} hover:text-${headerColor}-${getTheme(400,800)} truncate capitalize font-bold`}>
+                                                          className={`text-${headerColor}-600 dark:text-${headerColor}-50 hover:text-${headerColor}-400 dark:hover:text-${headerColor}-100 truncate capitalize font-bold`}>
                                                         {parent[getLocalized()]}
                                                     </Link>
                                                     <ul
@@ -99,7 +99,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                                     className="flex">
                                                                     <Link
                                                                         href={route(`frontend.${type}.index`, {category_id: child.id})}
-                                                                        className={`hover:text-${headerColor}-${getTheme(400,800)} truncate capitalize font-bold`}>
+                                                                        className={`hover:text-${headerColor}-400 dark:hover:text-${headerColor}-100 truncate capitalize font-bold`}>
                                                                         {child[getLocalized()]}
                                                                     </Link>
                                                                 </li>

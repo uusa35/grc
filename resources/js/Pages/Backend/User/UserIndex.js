@@ -18,8 +18,7 @@ export default function({elements}) {
         trans,
         classNames,
         getLocalized,
-        isAdminOrAbove,
-        isSuper
+        isAdminOrAbove
     } = useContext(AppContext);
     const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
@@ -90,13 +89,15 @@ export default function({elements}) {
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M5 15l7-7 7 7"/>
                                                 </svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M19 9l-7 7-7-7"/>
@@ -279,12 +280,12 @@ export default function({elements}) {
                                                                                 )}
                                                                             </Menu.Item>
 
-                                                                        {/*    addresses */}
+                                                                            {/*    addresses */}
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
                                                                                         href={route(`backend.address.index`, {
-                                                                                            user_id : element.id,
+                                                                                            user_id: element.id,
                                                                                         })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
@@ -385,7 +386,8 @@ export default function({elements}) {
                                                                                                   strokeWidth={2}
                                                                                                   d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"/>
                                                                                         </svg>
-                                                                                        <span className="text-xs">{trans("make_email_verified")}</span>
+                                                                                        <span
+                                                                                            className="text-xs">{trans("make_email_verified")}</span>
                                                                                     </Link>
                                                                                 )}
                                                                             </Menu.Item>

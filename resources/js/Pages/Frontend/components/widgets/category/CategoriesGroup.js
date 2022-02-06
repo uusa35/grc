@@ -14,7 +14,7 @@ export default function({
                             params = ''
                         }) {
     const {locale} = useSelector(state => state);
-    const {getLocalized, mainColor , getTheme } = useContext(AppContext);
+    const {getLocalized, mainColor } = useContext(AppContext);
 
     return (
         <div className="w-full shadow-sm">
@@ -26,7 +26,7 @@ export default function({
                     initial={false}
                     whileHover={{scale: 1.08}}
                 >
-                    <span className={`text-${mainColor}-${getTheme(800,100)}`}>{pluralize(title)}</span>
+                    <span className={`text-${mainColor}-800 dark:text-${mainColor}-100)}`}>{pluralize(title)}</span>
                 </motion.div>
                 {
                     locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" color={`${mainColor}`} fill="none"

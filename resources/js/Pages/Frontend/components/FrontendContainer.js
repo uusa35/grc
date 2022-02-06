@@ -9,10 +9,10 @@ import SystemMessage from "../../Backend/components/partials/SystemMessage";
 
 const FrontendContainer = ({children}) => {
     const {locale} = useSelector(state => state)
-    const {classNames, arFont, enFont , mainColor, mainBgColor, getTheme } = useContext(AppContext);
+    const {classNames, arFont, enFont , mainColor, mainBgColor, getTheme, theme } = useContext(AppContext);
 
     return (
-        <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize ")} dir={locale.dir}>
+        <div className={classNames(locale.isRTL ? arFont : enFont,` ${theme} h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize `)} dir={locale.dir}>
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement />

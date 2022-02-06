@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map} from 'lodash';
+import {map, isNull} from 'lodash';
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import ImageGallery from 'react-image-gallery';
@@ -20,7 +20,7 @@ import SocialIconShare from "../partials/SocialIconShare";
 
 
 export default function({element}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, getFileUrl} = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor } = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
     const {settings} = useContext(GlobalContext);
@@ -66,7 +66,7 @@ export default function({element}) {
                         </div>
                         {/* Product info */}
                         <div className="mx-5 mt-10 sm:px-0 sm:mt-16 lg:mt-0">
-                            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
+                            <h1 className={`text-3xl font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-100`}>{element[getLocalized()]}</h1>
                             {/* Reviews */}
                             {element.ratings &&
                             <ElementRating ratings={element.ratings} id={element.id} type={'user'}/>}
@@ -76,21 +76,8 @@ export default function({element}) {
                                         element[getLocalized('caption')] && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className="text-base text-gray-800 space-y-6"
+                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
                                             >{element[getLocalized('caption')]}</div>
-                                        </div>
-                                    }
-                                </div>
-                                <div className="flex">
-                                    {
-                                        element.sku && <div className="mt-6">
-                                            <h3 className="sr-only">{trans('sku')}</h3>
-                                            <div
-                                                className="text-base text-gray-800 space-y-6"
-                                            >
-                                                {trans('reference_id')} :
-                                                {element.sku}
-                                            </div>
                                         </div>
                                     }
                                 </div>
@@ -109,7 +96,7 @@ export default function({element}) {
                                                         className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  open ? `text-${mainColor}-900 dark:text-${mainColor}-100` : `text-${mainColor}-600 dark:text-${mainColor}-200`,
                                                                   'capitalize font-extrabold'
                                                               )}
                                                           >

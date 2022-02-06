@@ -7,11 +7,11 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 
 export default function RelatedItems({ elements , type = '', title = null }) {
-    const { trans, getThumb , getLocalized  } = useContext(AppContext)
+    const { trans, getThumb , getLocalized , mainColor } = useContext(AppContext)
     return (
         <section aria-labelledby="related-heading"
                  className="py-10 px-0 sm:px-10">
-            <h2 id="related-heading" className="text-xl font-bold text-gray-900 capitalize truncate">
+            <h2 id="related-heading" className={`text-xl font-bold text-${mainColor}-900 dark:text-${mainColor}-100 capitalize truncate`}>
                 {isNull(title) ? trans('related_items') : title}
             </h2>
             <div
@@ -30,7 +30,7 @@ export default function RelatedItems({ elements , type = '', title = null }) {
                                 />
                             </div>
                             <div className="relative mt-4">
-                                <h3 className="text-sm font-medium text-gray-900">{element[getLocalized()]}</h3>
+                                <h3 className={`text-sm font-medium text-${mainColor}-900 dark:text-${mainColor}-100`}>{element[getLocalized()]}</h3>
                                 {/*<p className="mt-1 text-sm text-gray-500">{element.color}</p>*/}
                             </div>
                             <div

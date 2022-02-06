@@ -1,5 +1,6 @@
 const colors = require('tailwindcss/colors')
 module.exports = {
+    darkMode: 'class',
     content: [
         './resources/views/**/*.blade.php',
         'resources/js/**/*.js',
@@ -10,7 +11,7 @@ module.exports = {
     safelist: [
         {
             pattern: /(bg|text|fill|border|shadow)-(pink|blue|amber|cyan|corn|hippie-blue|gray|midnight|white|black)-(50|100|200|300|400|500|600|700|800|900)/,
-            variants: ['lg', 'hover', 'focus', 'lg:hover'],
+            variants: ['lg', 'hover', 'focus', 'lg:hover','dark'],
         },
     ],
     theme: {
