@@ -8,7 +8,7 @@ import {AppContext} from "../../context/AppContext";
 import { map , filter } from 'lodash'
 
 export default function FrontendSortIndexMenu({ showPrice = true }) {
-    const { trans, getLocalized , classNames} = useContext(AppContext);
+    const { trans, getLocalized , classNames, mainColor, mainBgColor, getTheme } = useContext(AppContext);
     const { sort } = useSelector(state => state);
     const dispatch = useDispatch();
     const sortOptions = [
@@ -20,10 +20,10 @@ export default function FrontendSortIndexMenu({ showPrice = true }) {
         <div className="flex w-full sm:w-auto justify-between items-center">
             <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button
-                    className="w-40 group inline-flex px-3 py-1 mt-flex flex-1 justify-between items-center gap-x-3 text-gray-800 hover:text-gray-900 ring-2 ring-gray-400 rounded-md ">
+                    className={`w-40 group inline-flex px-3 py-1 mt-flex flex-1 justify-between items-center gap-x-3 text-${mainColor}-${getTheme(800,50)} hover:text-${mainColor}-${getTheme(800,50)} ring-2 text-${mainColor}-${getTheme(800,50)} rounded-md`}>
                     {trans('sort')}
                     <ChevronDownIcon
-                        className="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                        className={`flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-${mainColor}-${getTheme(800,400)} group-hover:text-${mainColor}-${getTheme(800,600)}`}
                         aria-hidden="true"
                     />
                 </Menu.Button>
@@ -45,13 +45,13 @@ export default function FrontendSortIndexMenu({ showPrice = true }) {
                                         <div
                                             onClick={() => dispatch(toggleSort(option.colName))}
                                             className={classNames(
-                                                option.current ? ' text-gray-900' : 'text-gray-500',
-                                                active ? 'bg-gray-100' : '',
+                                                option.current ? `text-${mainColor}-${getTheme(800,400)}` : `text-${mainColor}-${getTheme(800,400)}`,
+                                                active ? `bg-${mainBgColor}-${getTheme(50,800)}` : '',
                                                 'block flex flex-row flex-1 justify-between items-center px-4 py-2 text-md font-extrabold'
                                             )}
                                         >
                                             {trans(option.name)}
-                                            <AiOutlineSortAscending size={25} className={'text-gray-400'}/>
+                                            <AiOutlineSortAscending size={25} className={`text-${mainColor}-${getTheme(800,400)}`}/>
                                         </div>
                                     )}
                                 </Menu.Item>
@@ -62,7 +62,7 @@ export default function FrontendSortIndexMenu({ showPrice = true }) {
             </Menu>
             <button
                 type="button"
-                className="p-2 mx-8 text-gray-400 hover:text-gray-500 lg:hidden"
+                className={`p-2 mx-8 text-${mainColor}-${getTheme(800,50)} hover:text-gray-500 lg:hidden`}
                 onClick={() => setMobileFiltersOpen(true)}
             >
                 <span className="sr-only">{trans('filters')}</span>

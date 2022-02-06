@@ -63,17 +63,17 @@ function ElementSlider({
                             initial={false}
                             whileHover={{scale: 1.08}}
                         >
-                            <span className={`text-${mainColor}-${getTheme(800,100)}`}>{pluralize(title)}</span>
+                            <span className={`text-${mainColor}-${getTheme(800,400)}`}>{pluralize(title)}</span>
                         </motion.div>
                         {
                             isRTL ? <div className={`flex flex-row items-center`}>
-                                <span className={`text-${mainColor}-${getTheme(800,100)} text-xs`}>{trans('show_all')}</span>
+                                <span className={`text-${mainColor}-${getTheme(800,400)} text-xs`}>{trans('show_all')}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`} fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
                                 </svg>
                             </div> : <div className={`flex flex-row items-center`}>
-                                <span className={`text-${mainColor}-${getTheme(800,100)} text-xs`}>{trans('show_all')}</span>
+                                <span className={`text-${mainColor}-${getTheme(800,400)} text-xs`}>{trans('show_all')}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`} fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>

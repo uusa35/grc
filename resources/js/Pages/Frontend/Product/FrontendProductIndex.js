@@ -14,7 +14,7 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import NormalProductWidget from "../components/widgets/product/NormalProductWidget";
 
 export default function ({elements, categories}) {
-    const {trans} = useContext(AppContext);
+    const {trans, mainColor , getTheme } = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
     const {sort} = useSelector(state => state);
@@ -42,8 +42,8 @@ export default function ({elements, categories}) {
                 <main className="max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8">
                     <div className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
                         <div className="flex flex-1 flex-col w-full sm:w-auto">
-                            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 capitalize">{trans('products')}</h1>
-                            <p className="mt-4 text-base text-gray-500 capitalize">
+                            <h1 className={`text-4xl font-extrabold tracking-tight text-${mainColor}-${getTheme(800,400)} capitalize`}>{trans('products')}</h1>
+                            <p className={`mt-4 text-base text-${mainColor}-${getTheme(800,50)} capitalize`}>
                                 {trans('list')} {trans('products')}
                             </p>
                         </div>

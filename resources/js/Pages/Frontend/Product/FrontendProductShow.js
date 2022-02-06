@@ -182,7 +182,7 @@ export default function({element, relatedElements, auth, settings}) {
                         </div>
                         {/* Product info */}
                         <div className="mx-5 mt-10 pt-10 sm:px-0 sm:mt-16 lg:mt-0">
-                            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{element[getLocalized()]}</h1>
+                            <h1 className={`text-3xl font-bold tracking-tight text-${mainColor}-${getTheme(800,50)}`}>{element[getLocalized()]}</h1>
                             <div className="mt-3">
                                 <h2 className="sr-only">{trans('information')}</h2>
                                 <ElementPrice price={finalPrice}
@@ -201,7 +201,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         !isNull(element[getLocalized('caption')]) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className="text-base text-gray-800 space-y-6"
+                                                className={`text-base text-${mainColor}-${getTheme(800,100)} space-y-6`}
                                             >{element[getLocalized('caption')]}</div>
                                         </div>
                                     }
@@ -211,7 +211,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         !isNull(element.sku) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
-                                                className="text-base text-gray-800 space-y-6"
+                                                className={`text-base text-${mainColor}-${getTheme(800,100)} space-y-6`}
                                             >
                                                 {trans('reference_id')} :
                                                 {element.sku}
@@ -311,10 +311,10 @@ export default function({element, relatedElements, auth, settings}) {
                                                                 className={({active, checked}) =>
                                                                     classNames(
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
-                                                                        active ? `ring-2 ring-offset-2 ring-${mainBgColor}-${getTheme(100,800)}` : '',
+                                                                        active ? `ring-2 ring-offset-2 ring-${mainBgColor}-${getTheme(200,800)}` : '',
                                                                         checked
-                                                                            ? `bg-${mainBgColor}-${getTheme(600,50)} border-transparent text-white hover:bg-${mainBgColor}-${getTheme(800,50)}`
-                                                                            : `bg-${mainBgColor}-${getTheme(50,600)} border-gray-200 text-gray-900 hover:bg-${mainBgColor}-${getTheme(50,800)}`,
+                                                                            ? `bg-${mainBgColor}-${getTheme(600,600)} border-transparent text-${mainColor}-${getTheme(50,50)} hover:bg-${mainBgColor}-${getTheme(600,600)}`
+                                                                            : `bg-${mainBgColor}-${getTheme(600,600)} border-gray-200 text-${mainColor}-${getTheme(50,50)} hover:bg-${mainBgColor}-${getTheme(600,800)}`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
                                                                 }

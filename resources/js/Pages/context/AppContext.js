@@ -82,7 +82,7 @@ const AppContextProvider = ({children}) => {
         headerBgColor : settings.header_theme_bg,
         footerColor : settings.footer_theme_color,
         footerBgColor : settings.footer_bg_theme_color,
-        getTheme : (lightVal = 100, darkVal = 900 ) => settings.theme === 'dark' ? darkVal  : lightVal ,
+        getTheme : (lightVal = 100, darkVal = 900 ) => settings.theme === 'dark' ? darkVal  : lightVal,
     };
 
     useMemo(() => {

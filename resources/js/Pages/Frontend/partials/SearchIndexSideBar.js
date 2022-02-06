@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mobileFiltersOpen, type, enablePrice = true}) {
-    const {trans, getLocalized, classNames } = useContext(AppContext)
+    const {trans, getLocalized, classNames, mainColor , getTheme, mainBgColor } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
     const {params} = route();
@@ -44,7 +44,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                         <div className="flex">
                             <Link
                                 href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
-                                className="px-3 py-1 text-gray-800 rounded-md shadow-sm ring-2 ring-gray-400 capitalize"
+                                className={`px-3 py-1 text-${mainColor}-${getTheme(800,100)} rounded-md shadow-sm ring-2 ring-gray-400 capitalize`}
                             >
                                 {trans('clear_search')}
                             </Link>
@@ -64,7 +64,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                             <div className="pt-3 space-y-3">
                                                 <Link
                                                     href={route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`, { ...params , max: r, min : parseInt(r -50)}) : '#'}
-                                                    className={classNames(params.max == r ? `bg-gray-50 p-3 rounded-md shadow-md`: '' , "flex items-center")}>
+                                                    className={classNames(params.max == r ? `bg-${mainBgColor}-${getTheme(800,400)} p-3 rounded-md shadow-md`: `` , "flex items-center")}>
                                                     {
                                                         locale.isRTL ?
                                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
@@ -81,7 +81,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                             </svg>
                                                     }
                                                     <label htmlFor={'name'}
-                                                           className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600 capitalize">
+                                                           className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-${getTheme(800,100)} capitalize`}>
                                                         {`${trans("less_than")} ${r} ${trans('kd')}`}
                                                     </label>
                                                 </Link>
@@ -118,7 +118,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                 </svg>
                                         }
                                         <label htmlFor={'name'}
-                                               className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600 capitalize">
+                                               className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-${getTheme(800,100)} capitalize`}>
                                             {c[getLocalized()]}
                                         </label>
                                     </Link>
@@ -150,7 +150,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                         </svg>
                                                 }
                                                 <label htmlFor={'name'}
-                                                       className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600 capitalize">
+                                                       className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-${getTheme(800,100)} capitalize`}>
                                                     {child[getLocalized()]}
                                                 </label>
                                             </Link>
@@ -183,7 +183,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                                                     </svg>
                                                             }
                                                             <label htmlFor={'name'}
-                                                                   className="rtl:mr-3 ltr:ml-3 text-sm text-gray-600 capitalize">
+                                                                   className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-${getTheme(800,100)} capitalize`}>
                                                                 {sub[getLocalized()]}
                                                             </label>
                                                         </Link>

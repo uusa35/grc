@@ -10,7 +10,7 @@ const HomeMainCategory = ({element = {}}) => {
     const { locale } = useSelector(state => state);
 
     return (
-        <div className="bg-white">
+        <div className="bg-transparent">
             <div className="max-w-2xl mx-auto lg:max-w-7xl">
                 <div className="relative rounded-lg overflow-hidden lg:h-96">
                     <div className="absolute inset-0">
