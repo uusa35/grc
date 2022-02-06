@@ -14,10 +14,10 @@ export default function({
                             params = ''
                         }) {
     const {locale} = useSelector(state => state);
-    const {getLocalized} = useContext(AppContext);
+    const {getLocalized, mainColor , getTheme } = useContext(AppContext);
 
     return (
-        <div className="w-full bg-gray-50 p-10 shadow-sm">
+        <div className="w-full shadow-sm">
             <Link
                 href={route(`frontend.category.index`, params ? params : '')}
                 className="w-full flex flex-1 h-auto mb-5 justify-between items-center capitalize rtl:text-right ltr:text-left text-xl "
@@ -26,10 +26,10 @@ export default function({
                     initial={false}
                     whileHover={{scale: 1.08}}
                 >
-                    <span>{pluralize(title)}</span>
+                    <span className={`text-${mainColor}-${getTheme(800,100)}`}>{pluralize(title)}</span>
                 </motion.div>
                 {
-                    locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                    locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" color={`${mainColor}`} fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
                     </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"

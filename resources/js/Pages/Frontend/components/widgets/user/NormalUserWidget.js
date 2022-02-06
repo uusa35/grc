@@ -6,7 +6,7 @@ import {truncate} from "lodash";
 import { motion } from "framer-motion"
 
 export default function NormalUserWidget ({ element }) {
-    const { getLocalized, getThumb  } = useContext(AppContext);
+    const { getLocalized, getThumb, mainColor , getTheme  } = useContext(AppContext);
     return (
         <motion.div
             initial={false}
@@ -24,7 +24,7 @@ export default function NormalUserWidget ({ element }) {
                     loading='lazy'
                 />
             </div>
-            <h3 className="mt-4 text-center text-gray-800 truncate text-sm">
+            <h3 className={`mt-4 text-center text-${mainColor}-${getTheme(800,100)} truncate text-sm`}>
                 {truncate(element[getLocalized()], { length : 25 })}
             </h3>
         </Link>

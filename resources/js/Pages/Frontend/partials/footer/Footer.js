@@ -11,7 +11,7 @@ import {isEmpty} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function Footer() {
-    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, theme } = useContext(AppContext)
+    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, footerColor , footerBgColor , getTheme} = useContext(AppContext)
     const {auth, settings} = useContext(GlobalContext);
     const {errors} = usePage().props;
     const {data, setData, put, progress, reset} = useForm({
@@ -29,7 +29,7 @@ export default function Footer() {
     }
 
     return (
-        <footer className={`border-t-2 border-gray-400 bg-gray-50`} aria-labelledby="footer-heading">
+        <footer className={`border-t-2 border-${footerColor}-400 bg-${footerBgColor}-${getTheme(50,800)}`} aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">
                 {trans('footer')}
             </h2>
@@ -44,23 +44,23 @@ export default function Footer() {
                             height={96}
                             loading={'lazy'}
                         />
-                        <p className="text-gray-500 capitalize text-base mt-5">
+                        <p className={`text-${footerColor}-${getTheme(800,200)} capitalize text-base mt-5`}>
                             {settings[getLocalized('caption')]}
                         </p>
                     </div>
                     {/* support and polices */}
                     <div className=" p-4">
-                        <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('pages')}</h3>
+                        <h3 className={`font-bold text-${footerColor}-${getTheme(800,200)} tracking-wider uppercase`}>{trans('pages')}</h3>
                         <ul className="mt-4 space-y-4">
                             <li>
                                 <Link href={route('frontend.contactus')}
-                                      className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                      className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                     {trans('contactus')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href={route('frontend.aboutus')}
-                                      className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                      className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                     {trans('aboutus')}
                                 </Link>
                             </li>
@@ -68,7 +68,7 @@ export default function Footer() {
                                 settings[getLocalized('services')] && settings[getLocalized('services')].length > 50 ?
                                     <li>
                                         <Link href={route('frontend.services')}
-                                              className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                              className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                             {trans('our_services')}
                                         </Link>
                                     </li> : null
@@ -77,7 +77,7 @@ export default function Footer() {
                                 settings[getLocalized('polices')] && settings[getLocalized('polices')].length > 50 ?
                                     <li>
                                         <Link href={route('frontend.polices')}
-                                              className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                              className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                             {trans('polices')}
                                         </Link>
                                     </li> : null
@@ -85,7 +85,7 @@ export default function Footer() {
                             {
                                 settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 ? <li>
                                     <Link href={route('frontend.terms')}
-                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                          className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                         {trans('terms')}
                                     </Link>
                                 </li> : null
@@ -93,7 +93,7 @@ export default function Footer() {
                             {
                                 settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ? <li>
                                     <Link href={route('frontend.polices')}
-                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                          className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                         {trans('polices')}
                                     </Link>
                                 </li> : null
@@ -101,7 +101,7 @@ export default function Footer() {
                             {
                                 settings.enable_faqs ? <li>
                                     <Link href={route('frontend.faqs')}
-                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                          className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                         {trans('faqs')}
                                     </Link>
                                 </li> : null
@@ -109,7 +109,7 @@ export default function Footer() {
                             {
                                 settings.enable_joinus ? <li>
                                     <Link href={route('frontend.joinus')}
-                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                          className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                         {trans('joinus')}
                                     </Link>
                                 </li> : null
@@ -119,14 +119,14 @@ export default function Footer() {
                                     <>
                                         <li>
                                             <Link href={route('frontend.user.logging')}
-                                                  className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                                  className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                                 {trans('login')}
                                             </Link>
                                         </li>
                                         {
                                             settings.enable_register ? <li>
                                                 <Link href={route('frontend.user.registration')}
-                                                      className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                                      className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                                     {trans('register')} {trans('new_user')}
                                                 </Link>
                                             </li> : null
@@ -136,14 +136,14 @@ export default function Footer() {
                                     : <>
                                         <li>
                                             <Link href={route('frontend.user.edit', auth.id)}
-                                                  className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                                  className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                                 {trans('my_account')}
                                             </Link>
                                         </li>
                                         {isAdminOrAbove ? <li>
                                             <Link href={route('backend.home')}
                                                target="_blank"
-                                               className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                               className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                                 {trans('backend')}
                                             </Link>
                                         </li> : null}
@@ -152,7 +152,7 @@ export default function Footer() {
                             {
                                 settings.enable_subscriptions ? <li>
                                     <Link href={route('frontend.subscriptions')}
-                                          className="text-base text-gray-500 capitalize hover:text-gray-900">
+                                          className={`text-base text-${footerColor}-${getTheme(800,50)} capitalize hover:text-${footerColor}-${getTheme(800,400)}`}>
                                         {trans('subscriptions')}
                                     </Link>
                                 </li> : null
@@ -164,13 +164,13 @@ export default function Footer() {
                         {
                             (settings.apple || settings.android) &&
                             <>
-                                <h3 className="font-semibold text-gray-600 tracking-wider uppercase mb-4">{trans('find_us_on_stores')}</h3>
-                                <div className=" p-8 pt-0 flex flex-col justify-start items-start gap-y-4 ">
+                                <h3 className={`font-bold text-${footerColor}-${getTheme(800,200)} tracking-wider uppercase mb-4`}>{trans('find_us_on_stores')}</h3>
+                                <div className="  pt-0  mb-6 flex flex-col justify-start items-start gap-y-4 ">
                                     {
                                         settings.android && <a
                                             target="_blank"
                                             href={settings.android}
-                                            className="w-3/4 md:w-3/4 xl:w-full h-20 my-1 bg-gray-100 inline-flex p-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+                                            className={`w-3/4 md:w-3/4 xl:w-full h-20  bg-${footerColor}-100 inline-flex p-5 rounded-lg items-center hover:bg-${footerBgColor}-200 focus:outline-none`}>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="currentColor"
@@ -189,7 +189,7 @@ export default function Footer() {
                                         settings.apple && <a
                                             target="_blank"
                                             href={settings.apple}
-                                            className="w-3/4 md:w-3/4 xl:w-full h-20 bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
+                                            className={`w-3/4 md:w-3/4 xl:w-full h-20  bg-${footerColor}-100 inline-flex p-5 rounded-lg items-center hover:bg-${footerBgColor}-200 focus:outline-none`}>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="currentColor"
@@ -211,49 +211,49 @@ export default function Footer() {
                                 </div>
                             </>
                         }
-                        <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('contact_us_on')}</h3>
+                        <h3 className={`font-bold text-${footerColor}-${getTheme(800,200)} tracking-wider uppercase`}>{trans('contact_us_on')}</h3>
                         <div className="grid grid-cols-5 mt-5">
                             {
                                 settings.facebook && <div><a target="_blank" href={settings.facebook}
-                                                        className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
+                                                        className={`col-span-1 text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)} capitalize`}>
                                     <span className="sr-only">{settings[getLocalized]}</span>
-                                    <FaFacebook size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
+                                    <FaFacebook size={25} className={`text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)}`}/>
                                 </a></div>
                             }
                             {settings.instagram &&
                             <a target="_blank" href={settings.instagram}
-                               className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
+                               className={`col-span-1 text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)} capitalize`}>
                                 <span className="sr-only">{trans('instagram')}</span>
-                                <FaInstagram size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
+                                <FaInstagram size={25} className={`text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)}`}/>
                             </a>
                             }
                             {settings.twitter &&
                             <a target="_blank" href={settings.twitter}
-                               className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
+                               className={`col-span-1 text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)} capitalize`}>
                                 <span className="sr-only">{trans('twitter')}</span>
-                                <FaTwitter size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
+                                <FaTwitter size={25} className={`text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)}`}/>
                             </a>
                             }
                             {settings.youtube &&
                             <a target="_blank" href={settings.youtube}
-                               className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
+                               className={`col-span-1 text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)} capitalize`}>
                                 <span className="sr-only">{trans('youtube')}</span>
-                                <FaYoutube size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
+                                <FaYoutube size={25} className={`text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)}`}/>
                             </a>
                             }
                             {settings.whatsapp &&
                             <a target="_blank"
                                href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}
-                               className={`col-span-1 text-${theme}-600 hover:text-${theme}-500 capitalize`}>
+                               className={`col-span-1 text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)} capitalize`}>
                                 <span className="sr-only">{trans('whatsapp')}</span>
-                                <FaWhatsapp size={25} className={`text-${theme}-800 hover:text-${theme}-400`}/>
+                                <FaWhatsapp size={25} className={`text-${footerColor}-${getTheme(800,50)} hover:text-${footerColor}-${getTheme(800,400)}`}/>
                             </a>
                             }
                         </div>
                     </div>
                     {/* newsletter */}
                     <div className=" p-4">
-                        <h3 className="font-semibold text-gray-600 tracking-wider uppercase mb-4">{trans('payment_methods')}</h3>
+                        <h3 className={`font-bold text-${footerColor}-${getTheme(800,200)} tracking-wider uppercase mb-4`}>{trans('payment_methods')}</h3>
                         <div className="py-4 space-y-4 mt-4">
                             <div className="flex flex-1 flex-row justify-between items-center gap-x-2">
                                 <div>
@@ -293,7 +293,7 @@ export default function Footer() {
                         </div>
                         {settings.enable_newsletter ?
                             <>
-                                <h3 className="font-semibold text-gray-600 tracking-wider uppercase">{trans('subscribe_to_our_news_letter')}</h3>
+                                <h3 className={`font-bold text-${footerColor}-${getTheme(800,200)} tracking-wider uppercase`}>{trans('subscribe_to_our_news_letter')}</h3>
                                 <form className="mt-4 sm:flex sm:max-w-md my-5 space-x-2" onSubmit={submit}>
                                     <label htmlFor="email" className="sr-only">
                                         {trans('email')}
@@ -320,8 +320,8 @@ export default function Footer() {
                         }
                     </div>
                 </div>
-                <div className="mt-12 border-t border-gray-200 pt-8">
-                    <p className="text-base text-gray-600 xl:text-center">&copy; {moment().format('y')} {settings[getLocalized()]}, {trans('all_rights_reserved')}.</p>
+                <div className={`mt-12 border-t border-${footerColor}-200 pt-8`}>
+                    <p className={`text-base text-${footerColor}-${getTheme(800,50)} xl:text-center`}>&copy; {moment().format('y')} {settings[getLocalized()]}, {trans('all_rights_reserved')}.</p>
                 </div>
             </div>
         </footer>

@@ -1,11 +1,9 @@
 import {useContext} from "react";
 import {AppContext} from "../../../context/AppContext";
 import {useSelector} from "react-redux";
-import GlobalContext from "../../../context/GlobalContext";
 
 export default function ElementTags({onNew = false , onSale = false , exclusive = false, free = false, showFavoriteIcon  = true, rounded = false}) {
-    const {classNames, trans, theme } = useContext(AppContext)
-    const { settings } = useContext(GlobalContext);
+    const {classNames, trans } = useContext(AppContext)
     const { locale } = useSelector(state => state)
 
     return (
@@ -20,19 +18,19 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
                 }
                 {
                     onNew ? <span
-                        className={classNames(rounded ? `rounded-tl-lg rounded-br-lg` : `` , `inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-${settings.main_theme_color}-900 mb-3`)}>
+                        className={classNames(rounded ? `rounded-tl-lg rounded-br-lg` : `` , `inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-900 mb-3`)}>
                     {trans('on_new')}
                         </span> : null
                 }
                 {
                     exclusive ? <span
-                        className={classNames(rounded ? `rounded-tl-lg rounded-br-lg` : `` , `inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-${settings.main_theme_color}-800 mb-3`)}>
+                        className={classNames(rounded ? `rounded-tl-lg rounded-br-lg` : `` , `inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-800 mb-3`)}>
                     {trans('exclusive')}
                         </span> : null
                 }
                 {
                     free ? <span
-                        className={classNames(rounded ? `rounded-tl-lg rounded-br-lg` : `` , `inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-${settings.main_theme_color}-600 mb-3`)}>
+                        className={classNames(rounded ? `rounded-tl-lg rounded-br-lg` : `` , `inline-flex justify-center items-center capitalize shadow-md px-4 py-0.5 rounded-sm bg-hippie-blue-600 mb-3`)}>
                     {trans('free')}
                         </span> : null
                 }

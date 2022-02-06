@@ -6,7 +6,7 @@ import {isMobile, isTablet} from 'react-device-detect';
 import NewsLetter from "./../partials/NewsLetter";
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
-import {filter, first} from 'lodash';
+import {filter, first, isEmpty, map} from 'lodash';
 import JoinusPage from "./../Pages/JoinusPage";
 import JoinusHomeSection from "./../partials/JoinusHomeSection";
 import CategoriesGroup from "./../components/widgets/category/CategoriesGroup";
@@ -24,11 +24,12 @@ export default function HomePage({
                                      onHomeParticipantAuthors,
                                      mgt,
                                      clearCart = false,
-                                     settings
+                                     settings,
+                                     categoriesWithProducts
                                  }) {
     const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 5))
     const {categories} = useContext(GlobalContext);
-    const {trans} = useContext(AppContext)
+    const {trans, getLocalized, mainBgColor } = useContext(AppContext)
 
     useEffect(() => {
         function handleResize() {
@@ -45,8 +46,7 @@ export default function HomePage({
             {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
             <FrontendContentContainer showBreadCrumbs={false}>
                 {slides && <MainGallery elements={slides}/>}
-                <div className="bg-white space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:px-8">
-
+                <div className={`bg-transparent space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:px-8`}>
                     {
                         settings.enable_joinus ? <JoinusHomeSection/> : null
                     }
@@ -95,7 +95,6 @@ export default function HomePage({
                     }
                     {
                         settings.enable_products && <>
-
                             <ElementSlider
                                 elements={filter(categories, c => c.is_product && c.on_home)}
                                 slidesPerView={slideNumber}
@@ -113,6 +112,16 @@ export default function HomePage({
                             <HomeMainCategory
                                 element={first(filter(categories, c => c.is_product && c.image.length > 5))}
                             />
+                            {map(filter(categoriesWithProducts, c => c.products && !isEmpty(c.products)), category =>
+                                <ElementSlider
+                                    key={category.id}
+                                    elements={category.products}
+                                    slidesPerView={slideNumber}
+                                    title={category[getLocalized()]}
+                                    type={'product'}
+                                    params={{ category_id : category.id}}
+                                />
+                            )}
                             {/*<InformationBtns />*/}
                             <CategoriesGroup
                                 params={{is_product: true}}

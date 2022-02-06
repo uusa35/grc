@@ -8,14 +8,14 @@ import {truncate} from "lodash";
 import {motion} from "framer-motion"
 
 export default function NormalProductWidget({element}) {
-    const {getLocalized, getThumb} = useContext(AppContext);
+    const {getLocalized, getThumb, mainBgColor , mainColor , getTheme } = useContext(AppContext);
     return (
         <motion.div
             initial={false}
             whileHover={{scale: 0.95}}
         >
             <div
-                className="block relative overflow-hidden shadow-md mb-5 rounded-b-md hover:opacity-95 hover:shadow-lg">
+                className={`block relative overflow-hidden shadow-md border border-${mainBgColor}-${getTheme(50,400)} mb-5 rounded-md hover:opacity-95 hover:shadow-lg`}>
                 <div className="w-full rounded-t-md overflow-hidden  sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                     <Link
                         className="z-30"
@@ -32,7 +32,7 @@ export default function NormalProductWidget({element}) {
                     </Link>
                 </div>
                 <div className="flex flex-row flex-1 justify-between items-center m-2">
-                    <h3 className="text-base font-semibold text-gray-900 truncate">
+                    <h3 className={`text-base font-bold text-${mainColor}-${getTheme(800,50)} truncate`}>
                         <Link href={route('frontend.product.show', element.id)}>
                             <span className=""/>
                             {truncate(element[getLocalized()], {length: 20})}

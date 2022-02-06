@@ -120,7 +120,7 @@ export default function({element, relatedElements, auth}) {
                             <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                                 <div className="flex flex-1">
                                     {
-                                        element[getLocalized('caption')] && <div className="mt-6">
+                                        !isNull(element[getLocalized('caption')]) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
                                                 className="text-base text-gray-800 space-y-6"
@@ -130,7 +130,7 @@ export default function({element, relatedElements, auth}) {
                                 </div>
                                 <div className="flex">
                                     {
-                                        element.sku && <div className="mt-6">
+                                        !isNull(element.sku) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
                                                 className="text-base text-gray-800 space-y-6"
@@ -253,7 +253,7 @@ export default function({element, relatedElements, auth}) {
                                 </h2>
                                 <div className="border-t divide-y divide-gray-200 ">
                                     {/* description */}
-                                    {element[getLocalized('description')] && element[getLocalized('description')].length > 5 ?
+                                    {!isNull(element[getLocalized('description')]) && element[getLocalized('description')].length > 5 ?
                                         <Disclosure as="div" defaultOpen={true}>
                                             {({open}) => (
                                                 <>
@@ -292,7 +292,7 @@ export default function({element, relatedElements, auth}) {
                                     }
 
                                     {/* notes */}
-                                    {element[getLocalized('notes')] && element[getLocalized('notes')].length > 5 ?
+                                    {!isNull(element[getLocalized('notes')]) && element[getLocalized('notes')].length > 5 ?
                                         <Disclosure as="div" defaultOpen={false}>
                                             {({open}) => (
                                                 <>

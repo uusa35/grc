@@ -9,7 +9,7 @@ module.exports = {
     ],
     safelist: [
         {
-            pattern: /(bg|text|fill|border)-(pink|blue|amber|cyan|corn|hippie-blue)-(50|100|200|300|400|500|600|700|800|900)/,
+            pattern: /(bg|text|fill|border|shadow)-(pink|blue|amber|cyan|corn|hippie-blue|gray|midnight|white|black)-(50|100|200|300|400|500|600|700|800|900)/,
             variants: ['lg', 'hover', 'focus', 'lg:hover'],
         },
     ],
@@ -48,6 +48,18 @@ module.exports = {
                     '700': '#aa9102',
                     '800': '#887401',
                     '900': '#6f5f01'
+                },
+                'midnight': {
+                    '50': '#f3f3f5',
+                    '100': '#e6e8ea',
+                    '200': '#c1c5cb',
+                    '300': '#9ca1ac',
+                    '400': '#515b6e',
+                    '500': '#071530',
+                    '600': '#06132b',
+                    '700': '#051024',
+                    '800': '#040d1d',
+                    '900': '#030a18'
                 }
             },
         },
@@ -68,7 +80,7 @@ module.exports = {
         },
         colors: {
             transparent: 'transparent',
-            black: '#000',
+            black: colors.black,
             blue: colors.blue,
             cyan: colors.cyan,
             // emerald: colors.emerald,
@@ -78,7 +90,7 @@ module.exports = {
             red: colors.red,
             pink: colors.pink,
             amber : colors.amber,
-            white: '#FFF',
+            white: colors.white,
             // yellow: colors.yellow,
         },
 

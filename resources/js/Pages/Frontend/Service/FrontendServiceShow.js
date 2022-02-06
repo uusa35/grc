@@ -255,7 +255,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                 </h2>
                                 <div className="border-t divide-y divide-gray-200 ">
                                     {/* description */}
-                                    {element[getLocalized('description')] && element[getLocalized('description')].length > 5 ?
+                                    {!isNull(element[getLocalized('description')]) && element[getLocalized('description')] && element[getLocalized('description')].length > 5 ?
                                         <Disclosure as="div" defaultOpen={true}>
                                             {({open}) => (
                                                 <>
@@ -293,7 +293,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                         </Disclosure> : null}
 
                                     {/* notes */}
-                                    {element[getLocalized('notes')] && element[getLocalized('notes')].length > 5 ?
+                                    {!isNull(element[getLocalized('notes')]) && element[getLocalized('notes')].length > 5 ?
                                         <Disclosure as="div" defaultOpen={false}>
                                             {({open}) => (
                                                 <>

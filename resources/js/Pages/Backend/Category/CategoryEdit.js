@@ -61,8 +61,9 @@ export default function({category, elements}) {
             ...data,
             image: data.image,
         }, {
-            forceFormData: true,
+            forceFormData: true
         })
+
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {
             setTimeout(() => {

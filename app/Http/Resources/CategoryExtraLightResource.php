@@ -31,7 +31,8 @@ class CategoryExtraLightResource extends JsonResource
             'parent_id' => $this->parent_id,
             'is_parent' => $this->is_parent,
             'on_home' => $this->on_home,
-            'children' => CategoryChildExtraLightResource::collection($this->whenLoaded('children'))
+            'children' => CategoryChildExtraLightResource::collection($this->whenLoaded('children')),
+            'products' => ProductExtraLightResource::collection($this->whenLoaded('products'))
         ];
     }
 }

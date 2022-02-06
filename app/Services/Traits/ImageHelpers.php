@@ -352,7 +352,7 @@ trait ImageHelpers
                         $large->insert($img->resize($dimensions[0], null, function ($constraint) {
                             $constraint->aspectRatio();
                         }), 'center');
-                        $large->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');;
+                        $large->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
                     } else {
                         $img->resize($dimensions[0], $dimensions[1]);
                         $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');

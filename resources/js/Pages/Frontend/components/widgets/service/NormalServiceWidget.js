@@ -8,7 +8,7 @@ import {truncate} from "lodash";
 import { motion } from "framer-motion"
 
 export default function NormalServiceWidget({element}) {
-    const {getLocalized, getThumb} = useContext(AppContext);
+    const {getLocalized, getThumb, mainColor , getTheme } = useContext(AppContext);
     return (
         <motion.div
             initial={false}
@@ -31,7 +31,7 @@ export default function NormalServiceWidget({element}) {
                 </Link>
             </div>
             <div className="flex flex-row flex-1 justify-between items-center m-2">
-                <h3 className="text-base font-semibold text-gray-900 truncate capitalize">
+                <h3 className={`text-base font-bold text-${mainColor}-${getTheme(800,50)} truncate`}>
                     <Link href={route('frontend.service.show', element.id)} className="truncate text-sm">
                         {truncate(element[getLocalized()], { length : 20 })}
                         <p className="truncate capitalize text-sm hidden">

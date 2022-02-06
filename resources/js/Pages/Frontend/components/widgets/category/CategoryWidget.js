@@ -5,7 +5,7 @@ import route from 'ziggy-js';
 import { motion } from "framer-motion"
 
 const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
-    const {getLocalized, getThumb} = useContext(AppContext)
+    const {getLocalized, getThumb, mainColor , getTheme } = useContext(AppContext)
 
     return (
         <motion.div
@@ -28,13 +28,13 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
             {
                 showTitle && route().has(`frontend.${type}.index`) &&  <div className="mt-4 flex justify-center items-center">
                     <div>
-                        <h3 className="text-gray-800">
+                        <h3 className={`text-${mainColor}-${getTheme(800,100)}`}>
                             <Link href={route(`frontend.${type}.index`, {category_id: element.id})}>
                                 <span aria-hidden="true" className="absolute inset-0" />
                                 {element[getLocalized()]}
                             </Link>
                         </h3>
-                        <p className="mt-1 text-gray-500 truncate overflow-ellipsis overflow-hidden truncate">
+                        <p className={`mt-1 text-${mainColor}-${getTheme(800,100)} truncate overflow-ellipsis overflow-hidden truncate`}>
                             {element[getLocalized('caption')]}
                         </p>
                     </div>

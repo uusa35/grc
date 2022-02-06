@@ -1174,7 +1174,7 @@ export const ar = {
     "order_status" : "حالة الطلب",
     "order_elements" : "بنود الفاتورة (الطلب)",
     "this_cart_is_not_multi_you_can_not_buy_from_two_different_vendors" : "يمكنك اضافه عناصر اخرى من نفس الشركة او التاجر فقط",
-    "theme" : "اللون المفضل",
+    "theme" : "نمط اللون",
     "images" : "الصور",
     "on_top" : "القائمة العلوية",
     "hide_module" : "إخفاء الموديول",
@@ -1265,5 +1265,8 @@ export const ar = {
     "experts_and_participants" : 'الخبراء والمشاركين',
     'consulting_and_training' : 'الاستشارات والتدريب',
     'e_learning' : 'التعليم الإلكتروني',
-    "r_u_sure_u_order_cash_on_delivery" : "يرجى تأكيد طلبك عن طريق (الدفع عند الاستلام) الدفع عند الاستلام فقط داخل دولة الكويت."
+    "r_u_sure_u_order_cash_on_delivery" : "يرجى تأكيد طلبك عن طريق (الدفع عند الاستلام) الدفع عند الاستلام فقط داخل دولة الكويت.",
+    "dark" : "غامق",
+    "light" : "فاتح",
+    "show_all" : "عرض الكل"
 }

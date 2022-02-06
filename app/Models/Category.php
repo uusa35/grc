@@ -65,7 +65,7 @@ class Category extends PrimaryModel
 
     public function products()
     {
-        return $this->morphedByMany(Product::class, 'categoryable','category_id','categoryable_id');
+        return $this->morphedByMany(Product::class, 'categoryable');
     }
 
     public function commercials()

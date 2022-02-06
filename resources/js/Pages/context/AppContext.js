@@ -76,7 +76,13 @@ const AppContextProvider = ({children}) => {
         // arFont: 'font-almarai',
         arFont: 'font-gesst-medium',
         enFont: 'font-tajwal-medium',
-        theme : settings.theme
+        mainColor : settings.main_theme_color,
+        mainBgColor : settings.main_theme_bg_color,
+        headerColor : settings.header_theme_color,
+        headerBgColor : settings.header_theme_bg,
+        footerColor : settings.footer_theme_color,
+        footerBgColor : settings.footer_bg_theme_color,
+        getTheme : (lightVal = 100, darkVal = 900 ) => settings.theme === 'dark' ? darkVal  : lightVal ,
     };
 
     useMemo(() => {

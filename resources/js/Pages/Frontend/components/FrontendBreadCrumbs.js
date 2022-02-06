@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setParentModule} from "../../redux/actions";
 
 function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
-    const {trans} = useContext(AppContext);
+    const {trans, mainColor , getTheme } = useContext(AppContext);
     const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                     <li className="flex flex-1 flex-row justify-start items-center">
                         <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>
                         <Link
-                            className="capitalize flex-1"
+                            className={`text-${mainColor}-${getTheme(800,50)} capitalize flex-1`}
                             href={route('frontend.home')}>
                             {trans('home')}
                         </Link>
@@ -36,7 +36,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                     {parentModule && route().has(`frontend.${parentModule}.index`) ?
                     <li className="flex flex-row justify-start items-center">
                         <svg
-                            className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
+                            className={`mx-2 flex-shrink-0 h-5 w-5 text-${mainColor}-${getTheme(800,50)}`}
                             xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor"
                             viewBox="0 0 20 20"
@@ -45,7 +45,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                             <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
                         </svg>
                         <Link
-                            className="capitalize"
+                            className={`text-${mainColor}-${getTheme(800,50)} capitalize`}
                             href={route(`frontend.${parentModule}.index`)}>
                             { isNull(parentModuleName) ?  trans(pluralize(parentModule)) : trans(parentModuleName)}
                         </Link>
@@ -53,7 +53,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                          :
                         <li className="flex flex-row justify-start items-center">
                             <svg
-                                className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
+                                className={`mx-2 flex-shrink-0 h-5 w-5 text-${mainColor}-${getTheme(800,50)}`}
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
@@ -62,7 +62,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                                 <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
                             </svg>
                             <Link
-                                className="capitalize"
+                                className={`text-${mainColor}-${getTheme(800,50)} capitalize`}
                                 href="#">
                                 { isNull(parentModuleName) ?  trans(pluralize(parentModule)) : trans(parentModuleName)}
                             </Link>
@@ -71,7 +71,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                     {
                         breadCrumbs.length >= 3 && childName && <li className="flex flex-row justify-start items-center invisible sm:visible">
                             <svg
-                                className={`mx-2 flex-shrink-0 h-5 w-5 text-gray-300`}
+                                className={`mx-2 flex-shrink-0 h-5 w-5 text-${mainColor}-${getTheme(800,50)}`}
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
@@ -80,7 +80,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                                 <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
                             </svg>
                             <Link
-                                className="capitalize truncate "
+                                className={`text-${mainColor}-${getTheme(800,50)} capitalize truncate `}
                                 href={'#'}>
                                 {childName}
                             </Link>

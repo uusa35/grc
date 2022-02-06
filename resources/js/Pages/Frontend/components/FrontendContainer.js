@@ -9,7 +9,7 @@ import SystemMessage from "../../Backend/components/partials/SystemMessage";
 
 const FrontendContainer = ({children}) => {
     const {locale} = useSelector(state => state)
-    const {classNames, arFont, enFont } = useContext(AppContext);
+    const {classNames, arFont, enFont , mainColor, mainBgColor, getTheme } = useContext(AppContext);
 
     return (
         <div className={classNames(locale.isRTL ? arFont : enFont,"h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize ")} dir={locale.dir}>
@@ -17,9 +17,9 @@ const FrontendContainer = ({children}) => {
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement />
             <main
-                className={"flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize bg-white"}>
+                className={`flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
                 <MainNav/>
-                <div className="min-h-screen">
+                <div className={`min-h-screen bg-${mainBgColor}-${getTheme(50,900)} text-${mainColor}-50`}>
                     <SystemMessage/>
                     {children}
                 </div>

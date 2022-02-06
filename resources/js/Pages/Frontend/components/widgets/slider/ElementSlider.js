@@ -6,7 +6,7 @@ import pluralize from 'pluralize'
 import CategoryWidget from './../category/CategoryWidget';
 import NormalProductWidget from './../product/NormalProductWidget';
 import NormalUserWidget from '../user/NormalUserWidget';
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
 import NormalBookWidget from "../book/NormalBookWidget";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
@@ -14,6 +14,7 @@ import NormalCourseWidget from "../course/NormalCourseWidget";
 import {useSelector} from "react-redux";
 import {motion} from "framer-motion"
 import './slideStyles.css'
+import {AppContext} from "../../../../context/AppContext";
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
@@ -28,6 +29,7 @@ function ElementSlider({
                                           params = ''
                                       }) {
     const {isRTL} = useSelector(state => state.locale)
+    const { mainColor , getTheme , trans } = useContext(AppContext);
 
     const handleComponent = (s) => {
         switch (type) {
@@ -61,17 +63,24 @@ function ElementSlider({
                             initial={false}
                             whileHover={{scale: 1.08}}
                         >
-                            <span>{pluralize(title)}</span>
+                            <span className={`text-${mainColor}-${getTheme(800,100)}`}>{pluralize(title)}</span>
                         </motion.div>
                         {
-                            isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                         viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
-                            </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                          viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
-                            </svg>
+                            isRTL ? <div className={`flex flex-row items-center`}>
+                                <span className={`text-${mainColor}-${getTheme(800,100)} text-xs`}>{trans('show_all')}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`} fill={`none`}
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </div> : <div className={`flex flex-row items-center`}>
+                                <span className={`text-${mainColor}-${getTheme(800,100)} text-xs`}>{trans('show_all')}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`} fill={`none`}
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
                         }
+
                     </Link>
                     <Swiper
                         navigation={showNavigation}

@@ -31,7 +31,7 @@ import {Tab} from '@headlessui/react'
 
 
 export default function({element, relatedElements, auth, settings}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, theme } = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor, mainBgColor , getTheme } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const [currentImages, setCurrentImages] = useState([]);
     const [finalPrice, setFinalPrice] = useState(0);
@@ -198,7 +198,7 @@ export default function({element, relatedElements, auth, settings}) {
                             <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                                 <div className="flex flex-1">
                                     {
-                                        element[getLocalized('caption')] && <div className="mt-6">
+                                        !isNull(element[getLocalized('caption')]) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
                                                 className="text-base text-gray-800 space-y-6"
@@ -208,7 +208,7 @@ export default function({element, relatedElements, auth, settings}) {
                                 </div>
                                 <div className="flex">
                                     {
-                                        element.sku && <div className="mt-6">
+                                        !isNull(element.sku) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
                                                 className="text-base text-gray-800 space-y-6"
@@ -235,14 +235,14 @@ export default function({element, relatedElements, auth, settings}) {
                                                 <div
                                                     className="flex w-full flex-row justify-between items-center ">
 
-                                                    <h2 className="text-sm font-bold text-gray-900">{`${trans('colors')} / ${trans('heights')}`}</h2>
+                                                    <h2 className={`text-sm font-bold text-${mainColor}-${getTheme(900,50)}`}>{`${trans('colors')} / ${trans('heights')}`}</h2>
 
                                                     {
                                                         element.show_size_chart ?
                                                             <div className="justify-end items-center">
                                                                 <button
                                                                     onClick={() => setShowModal(true)}
-                                                                    className="flex flex-row items-center justify-center text-xs font-bold text-gray-800 hover:text-gray-500 capitalize p-2 rounded-md border-2 border-gray-100 bg-gray-50">
+                                                                    className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-${getTheme(800,50)} hover:text-${mainColor}-${getTheme(600,200)} capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50`}>
                                                                     <div>
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                              className="h-6 w-6 mx-1" fill="none"
@@ -272,14 +272,14 @@ export default function({element, relatedElements, auth, settings}) {
                                                                 className={({active, checked}) =>
                                                                     classNames(
                                                                         attribute.color,
-                                                                        active && checked ? 'ring-2 ring-offset-1 ring-gray-400' : '',
-                                                                        !active && checked ? 'ring-2 ring-gray-100' : '',
-                                                                        '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none hover:bg-gray-100'
+                                                                        active && checked ? `ring-2 ring-offset-1 ring-${mainColor}-${getTheme(100,400)}` : '',
+                                                                        !active && checked ? `ring-2 ring-${mainColor}-${getTheme(100,800)}` : '',
+                                                                        `-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none hover:bg-${mainColor}-${getTheme(100,800)}`
                                                                     )
                                                                 }
                                                             >
                                                                 <RadioGroup.Label as="p"
-                                                                                  className="font-bold text-sm mx-2 ">
+                                                                                  className={`text-${mainColor}-${getTheme(800,50)} font-bold text-sm mx-2`}>
                                                                     {attribute.color[getLocalized()]}
                                                                 </RadioGroup.Label>
                                                                 <span
@@ -296,7 +296,7 @@ export default function({element, relatedElements, auth, settings}) {
                                             {/* Size picker */}
                                             <div className="flex-1 w-full mt-4">
                                                 <div className="flex items-center justify-between">
-                                                    <h2 className="text-sm font-bold text-gray-900">{trans('sizes')}</h2>
+                                                    <h2 className={`text-sm font-bold text-${mainColor}-${getTheme(900,50)}`}>{trans('sizes')}</h2>
                                                 </div>
 
                                                 <RadioGroup value={selectedSize} onChange={setSelectedSize}
@@ -311,10 +311,10 @@ export default function({element, relatedElements, auth, settings}) {
                                                                 className={({active, checked}) =>
                                                                     classNames(
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
-                                                                        active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
+                                                                        active ? `ring-2 ring-offset-2 ring-${mainBgColor}-${getTheme(100,800)}` : '',
                                                                         checked
-                                                                            ? 'bg-gray-600 border-transparent text-white hover:bg-gray-800'
-                                                                            : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
+                                                                            ? `bg-${mainBgColor}-${getTheme(600,50)} border-transparent text-white hover:bg-${mainBgColor}-${getTheme(800,50)}`
+                                                                            : `bg-${mainBgColor}-${getTheme(50,600)} border-gray-200 text-gray-900 hover:bg-${mainBgColor}-${getTheme(50,800)}`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
                                                                 }
@@ -336,7 +336,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     <div
                                                         className="flex w-full flex-1 flex-row justify-between items-center">
                                                         <div>
-                                                            <h2 className="text-sm font-bold text-gray-900 capitalize">{trans('color')}</h2>
+                                                            <h2 className={`text-sm font-bold text-${mainColor}-${getTheme(800,50)} capitalize`}>{trans('color')}</h2>
                                                         </div>
                                                         <div>
                                                             <a href="#"
@@ -397,8 +397,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         element.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                         active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
                                                                         checked
-                                                                            ? 'bg-gray-600 border-transparent text-white hover:bg-gray-800'
-                                                                            : 'bg-white border-gray-200 text-gray-900 hover:bg-gray-50',
+                                                                            ? `bg-${mainBgColor}-${getTheme(600,50)} border-transparent text-white hover:bg-${mainBgColor}-${getTheme(800,50)}`
+                                                                            : `bg-${mainBgColor}-${getTheme(50,800)} border-gray-200 text-gray-900 hover:bg-${mainBgColor}-${getTheme(50,600)}`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
                                                                 }
@@ -445,7 +445,7 @@ export default function({element, relatedElements, auth, settings}) {
                                             <button
                                                 disabled={!element.is_available || finalPrice === 0 || selectedQty < 1}
                                                 type="submit"
-                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30` : `bg-${theme}-900`, `flex flex-1 bg-${theme}-900 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-${theme}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${theme}-50 focus:ring-${theme}-500 sm:w-full`)}
+                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30` : `bg-${mainBgColor}-${getTheme(700,50)}`, `flex flex-1 bg-${mainBgColor}-${getTheme(900,50)} border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-${getTheme(50,800)} hover:bg-${mainBgColor}-${getTheme(900,50)} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                             >
                                                 {trans('add_to_cart')}
                                             </button>
@@ -485,14 +485,14 @@ export default function({element, relatedElements, auth, settings}) {
                                 <div className="border-t divide-y divide-gray-200 ">
                                     {/* description */}
                                     {
-                                        element[getLocalized('description')].length > 50 && <Disclosure as="div" defaultOpen={true}>
+                                        !isNull(element[getLocalized('description')]) && element[getLocalized('description')].length > 50 && <Disclosure as="div" defaultOpen={true}>
                                             {({open}) => (
                                                 <>
                                                     <Disclosure.Button
                                                         className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  open ? `text-${mainColor}-${getTheme(200,800)}` : `text-${mainColor}-${getTheme(900,200)}`,
                                                                   'capitalize font-bold'
                                                               )}
                                                           >
@@ -513,7 +513,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className="capitalize">
+                                                        <p className={`capitalize font-bold text-${mainColor}-${getTheme(100,800)}`}>
                                                             {element[getLocalized('description')]}
                                                         </p>
                                                     </Disclosure.Panel>
@@ -524,14 +524,14 @@ export default function({element, relatedElements, auth, settings}) {
 
                                     {/* notes */}
                                     {
-                                        element[getLocalized('notes')].length > 50 && <Disclosure as="div" defaultOpen={false}>
+                                        !isNull(element[getLocalized('notes')]) && element[getLocalized('notes')].length > 50 && <Disclosure as="div" defaultOpen={false}>
                                             {({open}) => (
                                                 <>
                                                     <Disclosure.Button
                                                         className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  open ? `text-${mainColor}-${getTheme(50,800)}` : `text-${mainColor}-${getTheme(50,700)}`,
                                                                   'capitalize font-bold'
                                                               )}
                                                           >
@@ -552,7 +552,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className='capitalize font-medium'>
+                                                        <p className={`capitalize font-bold text-${mainColor}-${getTheme(100,800)}`}>
                                                             {element[getLocalized('notes')]}
                                                         </p>
                                                     </Disclosure.Panel>
@@ -569,7 +569,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? 'text-gray-600' : 'text-gray-900',
+                                                                  open ? `text-${mainColor}-${getTheme(200,800)}` : `text-${mainColor}-${getTheme(900,200)}`,
                                                                   'capitalize font-bold'
                                                               )}
                                                           >
@@ -657,12 +657,12 @@ export default function({element, relatedElements, auth, settings}) {
                                 <div className="border-b border-gray-200 ">
                                     <Tab.List className="-mb-px flex">
                                         {
-                                            element[getLocalized('description')].length > 50 && <Tab
+                                            !isNull(element[getLocalized('description')]) && element[getLocalized('description')].length > 50 && <Tab
                                                 className={({selected}) =>
                                                     classNames(
                                                         selected
-                                                            ? 'border-gray-600 text-gray-600'
-                                                            : 'border-transparent text-gray-800 hover:text-gray-800 hover:border-gray-300',
+                                                            ? `border-${mainColor}-${getTheme(600,50)} text-${mainColor}-${getTheme(600,50)}`
+                                                            : `border-transparent text-${mainColor}-${getTheme(600,200)} hover:text-${mainColor}-${getTheme(600,200)} hover:border-${mainColor}-${getTheme(100,600)}`,
                                                         'whitespace-nowrap px-10 py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
@@ -671,12 +671,12 @@ export default function({element, relatedElements, auth, settings}) {
                                             </Tab>
                                         }
                                         {
-                                            element[getLocalized('notes')].length > 50 && <Tab
+                                            !isNull(element[getLocalized('notes')]) && element[getLocalized('notes')].length > 50 && <Tab
                                                 className={({selected}) =>
                                                     classNames(
                                                         selected
-                                                            ? 'border-gray-600 text-gray-600'
-                                                            : 'border-transparent text-gray-800 hover:text-gray-800 hover:border-gray-300',
+                                                            ? `border-${mainColor}-${getTheme(600,50)} text-${mainColor}-${getTheme(600,50)}`
+                                                            : `border-transparent text-${mainColor}-${getTheme(600,200)} hover:text-${mainColor}-${getTheme(600,200)} hover:border-${mainColor}-${getTheme(100,600)}`,
                                                         'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
@@ -688,8 +688,8 @@ export default function({element, relatedElements, auth, settings}) {
                                             className={({selected}) =>
                                                 classNames(
                                                     selected
-                                                        ? 'border-gray-600 text-gray-600'
-                                                        : 'border-transparent text-gray-800 hover:text-gray-800 hover:border-gray-300',
+                                                        ? `border-${mainColor}-${getTheme(600,50)} text-${mainColor}-${getTheme(600,50)}`
+                                                        : `border-transparent text-${mainColor}-${getTheme(600,200)} hover:text-${mainColor}-${getTheme(600,200)} hover:border-${mainColor}-${getTheme(100,600)}`,
                                                     'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                 )
                                             }
@@ -701,10 +701,10 @@ export default function({element, relatedElements, auth, settings}) {
                                 <Tab.Panels as={Fragment}>
                                     {/* description */}
                                     {
-                                        element[getLocalized('description')].length > 50 && <Tab.Panel as="dl" className="text-sm text-gray-500 h-60">
+                                        !isNull(element[getLocalized('description')]) && element[getLocalized('description')].length > 50 && <Tab.Panel as="dl" className="text-sm text-gray-500 h-60">
                                             <h3 className="sr-only">{trans('description')}</h3>
                                             <Fragment key={'description'}>
-                                                <dd className="mt-2 prose prose-sm max-w-none text-gray-900 p-10 capitalize">
+                                                <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-${getTheme(900,100)} p-10 capitalize`}>
                                                     <p>{element[getLocalized('description')]}</p>
                                                 </dd>
                                             </Fragment>
@@ -712,9 +712,9 @@ export default function({element, relatedElements, auth, settings}) {
                                     }
                                     {/* notes */}
                                     {
-                                        element[getLocalized('notes')].length > 50 && <Tab.Panel className="text-sm text-gray-500 h-60">
+                                        !isNull(element[getLocalized('description')]) && element[getLocalized('notes')].length > 50 && <Tab.Panel className="text-sm text-gray-500 h-60">
                                             <Fragment key={'description'}>
-                                                <dd className="mt-2 prose prose-sm max-w-none text-gray-900 p-10 capitalize">
+                                                <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-${getTheme(900,100)} p-10 capitalize`}>
                                                     <p>
                                                         {element[getLocalized('notes')]}
                                                     </p>
@@ -734,10 +734,10 @@ export default function({element, relatedElements, auth, settings}) {
                                             </div>
                                             <div className="rtl:mr-5 ltr:ml-5">
                                                 <div className="border-b border-gray-200 mb-2 pb-2">
-                                                    <h4>{element.user[getLocalized()]}</h4>
-                                                    <p>{element.user[getLocalized('caption')]}</p>
+                                                    <h4 className={`text-${mainColor}-${getTheme(800,100)}`}>{element.user[getLocalized()]}</h4>
+                                                    <p className={`text-${mainColor}-${getTheme(800,100)}`}>{element.user[getLocalized('caption')]}</p>
                                                 </div>
-                                                <p className="text-sm">{element.user[getLocalized('description')]}</p>
+                                                <p className={`text-sm text-${mainColor}-${getTheme(800,100)}`}>{element.user[getLocalized('description')]}</p>
                                             </div>
                                         </div>
 
