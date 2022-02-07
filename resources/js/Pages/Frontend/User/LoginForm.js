@@ -9,7 +9,7 @@ import {Inertia} from "@inertiajs/inertia";
 
 
 export default function() {
-    const {trans, getThumb} = useContext(AppContext);
+    const {trans, getThumb, mainColor , mainBgColor } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const {settings} = globalContext;
     const {props} = usePage();
@@ -51,11 +51,11 @@ export default function() {
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
                         <img
                             className="mx-auto h-16 w-auto"
-                            src={settings.mgt ? getThumb(settings.image) : getThumb(settings.app_logo)}
+                            src={getThumb(settings.app_logo)}
                             alt="Workflow"
                         />
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">{trans('sign_in_to_ur_account')}</h2>
-                        <p className="mt-2 text-center text-sm text-gray-600">
+                        <h2 className={`mt-6 text-center text-3xl font-extrabold text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('sign_in_to_ur_account')}</h2>
+                        <p className={`mt-2 text-center text-sm text-${mainColor}-800 dark:text-${mainColor}-100`}>
                         </p>
                     </div>
 
@@ -63,7 +63,7 @@ export default function() {
                         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                             <form className="space-y-6" onSubmit={submit}>
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-800">
+                                    <label htmlFor="email" className={`block text-sm font-medium text-${mainColor}-800 dark:text-${mainColor}-100`}>
                                         {trans('email')}
                                     </label>
                                     <div className="mt-1">
@@ -80,7 +80,7 @@ export default function() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-gray-800">
+                                    <label htmlFor="password" className={`block text-sm font-medium text-${mainColor}-800 dark:text-${mainColor}-100`}>
                                         {trans('password')}
                                     </label>
                                     <div className="mt-1">
@@ -120,7 +120,7 @@ export default function() {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${mainBgColor}-400  hover:bg-${mainBgColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${mainColor}-500`}
                                     >
                                         {trans('login')}
                                     </button>
@@ -129,7 +129,7 @@ export default function() {
                                     settings.enable_register ? <div>
                                         <Link
                                             href={route('frontend.user.registration')}
-                                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-gray-800 bg-white hover:bg-gray-50"
+                                            className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-${mainColor}-800 bg-white hover:bg-${mainBgColor}-50`}
                                         >
                                             {trans('register_new_user')}
                                         </Link>

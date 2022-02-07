@@ -64,7 +64,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                                             <div className="pt-3 space-y-3">
                                                 <Link
                                                     href={route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`, { ...params , max: r, min : parseInt(r -50)}) : '#'}
-                                                    className={classNames(params.max == r ? `bg-${mainBgColor}-800 dark:bg-${mainBgColor}-400 p-3 rounded-md shadow-md`: `` , "flex items-center")}>
+                                                    className={classNames(params.max == r ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-400 p-3 rounded-md shadow-md`: `` , "flex items-center")}>
                                                     {
                                                         locale.isRTL ?
                                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}

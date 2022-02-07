@@ -219,7 +219,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         !isNull(element[getLocalized('caption')]) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100800,100)} space-y-6`}
+                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
                                             >{element[getLocalized('caption')]}</div>
                                         </div>
                                     }
@@ -229,7 +229,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         !isNull(element.sku) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
-                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100800,100)} space-y-6`}
+                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
                                             >
                                                 {trans('reference_id')} :
                                                 {element.sku}
@@ -331,8 +331,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                         active ? `ring-2 ring-offset-2 ring-${mainBgColor}-200 dark:ring-${mainBgColor}-800` : '',
                                                                         checked
-                                                                            ? `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-600 border-transparent text-${mainColor}-800 dark:text-${mainColor}-10050,50)} hover:bg-${mainBgColor}-600 dark:bg-${mainBgColor}-600`
-                                                                            : `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-600 border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-10050,50)} hover:bg-${mainBgColor}-600 dark:hover:bg-${mainBgColor}-800`,
+                                                                            ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-600 border-transparent text-${mainColor}-800 dark:text-${mainColor}-100 hover:bg-${mainBgColor}-300 dark:hover:bg-${mainBgColor}-400`
+                                                                            : `bg-${mainBgColor}-100 dark:bg-${mainBgColor}-600 border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-10050,50)} hover:bg-${mainBgColor}-600 dark:hover:bg-${mainBgColor}-800`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
                                                                 }
@@ -511,7 +511,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? `text-${mainColor}-800 dark:text-${mainColor}-100` : `text-${mainColor}-800 dark:text-${mainColor}-100`,
+                                                                  open ? `text-${mainColor}-800 dark:text-${mainColor}-100` : `text-${mainColor}-600 dark:text-${mainColor}-200`,
                                                                   'capitalize font-bold'
                                                               )}
                                                           >
@@ -532,7 +532,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-100100,800)}`}>
+                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>
                                                             {element[getLocalized('description')]}
                                                         </p>
                                                     </Disclosure.Panel>
@@ -551,7 +551,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? `text-${mainColor}-800 dark:text-${mainColor}-10050,800)}` : `text-${mainColor}-800 dark:text-${mainColor}-10050,700)}`,
+                                                                  open ? `text-${mainColor}-800 dark:text-${mainColor}-100` : `text-${mainColor}-600 dark:text-${mainColor}-200`,
                                                                   'capitalize font-bold'
                                                               )}
                                                           >
@@ -572,7 +572,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-100100,800)}`}>
+                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>
                                                             {element[getLocalized('notes')]}
                                                         </p>
                                                     </Disclosure.Panel>
@@ -589,7 +589,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     className="group relative w-full py-6 flex justify-between items-center text-left">
                                                           <span
                                                               className={classNames(
-                                                                  open ? `text-${mainColor}-800 dark:text-${mainColor}-100200,800)}` : `text-${mainColor}-800 dark:text-${mainColor}-100900,200)}`,
+                                                                  open ? `text-${mainColor}-800 dark:text-${mainColor}-100` : `text-${mainColor}-600 dark:text-${mainColor}-200`,
                                                                   'capitalize font-bold'
                                                               )}
                                                           >
@@ -619,11 +619,11 @@ export default function({element, relatedElements, auth, settings}) {
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
                                                         <div className="rtl:mr-5 ltr:ml-5">
-                                                            <div className="border-b border-gray-200 mb-2 pb-2">
+                                                            <div className={`border-b border-${mainColor}-800 dark:text-${mainColor}-100 mb-2 pb-2`}>
                                                                 <h4>{element.user[getLocalized()]}</h4>
                                                                 <p>{element.user[getLocalized('caption')]}</p>
                                                             </div>
-                                                            <p className="text-sm">{element.user[getLocalized('description')]}</p>
+                                                            <p className={`text-sm text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized('description')]}</p>
                                                         </div>
                                                     </div>
                                                 </Disclosure.Panel>
@@ -639,7 +639,7 @@ export default function({element, relatedElements, auth, settings}) {
                                 <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 capitalize truncate">
                                     {
                                         element.direct_purchase ? <div
-                                            className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                            className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
@@ -655,17 +655,17 @@ export default function({element, relatedElements, auth, settings}) {
                                     {
                                         element.sku &&
                                         <div
-                                            className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                            className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
                                             <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" color={mainColor}
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                           d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                                                 </svg>
                                             </div>
                                             <span
-                                                className="mt-4 text-sm font-medium text-gray-900">{trans('reference_id')}</span>
-                                            <dd className="mt-1 text-sm text-gray-500">{element.sku}</dd>
+                                                className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('reference_id')}</span>
+                                            <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{element.sku}</dd>
                                         </div>
                                     }
                                 </dl>
@@ -682,8 +682,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                 className={({selected}) =>
                                                     classNames(
                                                         selected
-                                                            ? `border-${mainColor}-600 dark:border-${mainColor}-100600, 50)} text-${mainColor}-800 dark:text-${mainColor}-100600,50)}`
-                                                            : `border-transparent text-${mainColor}-800 dark:text-${mainColor}-100600,200)} hover:text-${mainColor}-800 dark:text-${mainColor}-100600,200)} hover:border-${mainColor}-100 dark:border-${mainColor}-600100, 600)}`,
+                                                            ? `border-${mainColor}-600 dark:border-${mainColor}-100 text-${mainColor}-800 dark:text-${mainColor}-200`
+                                                            : `border-transparent text-${mainColor}-600 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
                                                         'whitespace-nowrap px-10 py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
@@ -697,8 +697,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                 className={({selected}) =>
                                                     classNames(
                                                         selected
-                                                            ? `border-${mainColor}-100 dark:border-${mainColor}-600600, 50)} text-${mainColor}-800 dark:text-${mainColor}-100600,50)}`
-                                                            : `border-transparent text-${mainColor}-800 dark:text-${mainColor}-100600,200)} hover:text-${mainColor}-800 dark:text-${mainColor}-100600,200)} hover:border-${mainColor}-100 dark:border-${mainColor}-600100, 600)}`,
+                                                            ? `border-${mainColor}-600 dark:border-${mainColor}-100 text-${mainColor}-800 dark:text-${mainColor}-200`
+                                                            : `border-transparent text-${mainColor}-600 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
                                                         'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
@@ -710,8 +710,8 @@ export default function({element, relatedElements, auth, settings}) {
                                             className={({selected}) =>
                                                 classNames(
                                                     selected
-                                                        ? `border-${mainColor}-100 dark:border-${mainColor}-600600, 50)} text-${mainColor}-800 dark:text-${mainColor}-100600,50)}`
-                                                        : `border-transparent text-${mainColor}-800 dark:text-${mainColor}-100600,200)} hover:text-${mainColor}-800 dark:text-${mainColor}-100600,200)} hover:border-${mainColor}-100 dark:border-${mainColor}-600100, 600)}`,
+                                                        ? `border-${mainColor}-600 dark:border-${mainColor}-100 text-${mainColor}-800 dark:text-${mainColor}-200`
+                                                        : `border-transparent text-${mainColor}-600 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
                                                     'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                 )
                                             }
@@ -757,11 +757,11 @@ export default function({element, relatedElements, auth, settings}) {
                                                     alt={element.user[getLocalized()]}/>
                                             </div>
                                             <div className="rtl:mr-5 ltr:ml-5">
-                                                <div className="border-b border-gray-200 mb-2 pb-2">
-                                                    <h4 className={`text-${mainColor}-800 dark:text-${mainColor}-100800,100)}`}>{element.user[getLocalized()]}</h4>
-                                                    <p className={`text-${mainColor}-800 dark:text-${mainColor}-100800,100)}`}>{element.user[getLocalized('caption')]}</p>
+                                                <div className={`border-b border-${mainColor}-200 dark:text-${mainColor}-100 mb-2 pb-2`}>
+                                                    <h4 className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized()]}</h4>
+                                                    <p className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized('caption')]}</p>
                                                 </div>
-                                                <p className={`text-sm text-${mainColor}-800 dark:text-${mainColor}-100800,100)}`}>{element.user[getLocalized('description')]}</p>
+                                                <p className={`text-sm text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized('description')]}</p>
                                             </div>
                                         </div>
 
@@ -769,37 +769,37 @@ export default function({element, relatedElements, auth, settings}) {
                                             <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 capitalize truncate">
                                                 {
                                                     element.direct_purchase ? <div
-                                                        className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                                        className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                  className="h-6 w-6" fill="none"
-                                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                                 viewBox="0 0 24 24" stroke="currentColor" color={mainColor}>
                                                                 <path strokeLinecap="round" strokeLinejoin="round"
                                                                       strokeWidth={2}
                                                                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                             </svg>
                                                         </div>
                                                         <span
-                                                            className="mt-4 text-sm font-medium text-gray-900">{trans('direct_purchase')}</span>
-                                                        <dd className="mt-1 text-sm text-gray-500">{trans('direct_purchase')}</dd>
+                                                            className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('direct_purchase')}</span>
+                                                        <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('direct_purchase')}</dd>
                                                     </div> : null
                                                 }
                                                 {
                                                     element.sku &&
                                                     <div
-                                                        className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                                        className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                  className="h-6 w-6" fill="none"
-                                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                                 viewBox="0 0 24 24" stroke="currentColor" color={mainColor}>
                                                                 <path strokeLinecap="round" strokeLinejoin="round"
                                                                       strokeWidth={2}
                                                                       d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                                                             </svg>
                                                         </div>
                                                         <span
-                                                            className="mt-4 text-sm font-medium text-gray-900">{trans('reference_id')}</span>
-                                                        <dd className="mt-1 text-sm text-gray-500">{element.sku}</dd>
+                                                            className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('reference_id')}</span>
+                                                        <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{element.sku}</dd>
                                                     </div>
                                                 }
                                             </dl>

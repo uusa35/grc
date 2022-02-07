@@ -34,7 +34,7 @@ import GlobalContext from "../../../context/GlobalContext";
 
 
 export default function({element}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames} = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor, mainBgColor } = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
     const {cart} = useSelector(state => state);
@@ -338,7 +338,7 @@ export default function({element}) {
                                 <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 capitalize truncate">
                                     {
                                         element.direct_purchase ? <div
-                                            className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                            className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
@@ -369,7 +369,7 @@ export default function({element}) {
                                     {
                                         element.sku &&
                                         <div
-                                            className="flex flex-1 flex-col justify-start items-center bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
+                                            className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
@@ -378,8 +378,8 @@ export default function({element}) {
                                                 </svg>
                                             </div>
                                             <span
-                                                className="mt-4 text-sm font-medium text-gray-900">{trans('reference_id')}</span>
-                                            <dd className="mt-1 text-sm text-gray-500">{element.sku}</dd>
+                                                className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('reference_id')}</span>
+                                            <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{element.sku}</dd>
                                         </div>
                                     }
                                 </dl>

@@ -11,7 +11,7 @@ import {Link} from "@inertiajs/inertia-react";
 import NoElements from "../../../Backend/components/widgets/NoElements";
 
 export default function({elements, firstOrder}) {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
+    const {classNames, trans, getThumb, getLocalized, mainColor , mainBgColor } = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
     const {locale} = useSelector(state => state);
 

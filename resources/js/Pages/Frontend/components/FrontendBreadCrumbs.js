@@ -26,7 +26,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                 className="flex flex-1" aria-label="Breadcrumb">
                 <ol className="flex flex-1 flex-row items-center space-x-4  max-w-max">
                     <li className="flex flex-1 flex-row justify-start items-center">
-                        <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true"/>
+                        <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true" color={mainColor}/>
                         <Link
                             className={`text-${mainColor}-800 dark:text-${mainColor}-50 capitalize flex-1`}
                             href={route('frontend.home')}>
@@ -36,7 +36,8 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                     {parentModule && route().has(`frontend.${parentModule}.index`) ?
                     <li className="flex flex-row justify-start items-center">
                         <svg
-                            className={`mx-2 flex-shrink-0 h-5 w-5 text-${mainColor}-800 dark:text-${mainColor}-50`}
+                            className={`mx-2 flex-shrink-0 h-5 w-5 dark:text-${mainColor}-50`}
+                            color={mainColor}
                             xmlns="http://www.w3.org/2000/svg"
                             fill="currentColor"
                             viewBox="0 0 20 20"

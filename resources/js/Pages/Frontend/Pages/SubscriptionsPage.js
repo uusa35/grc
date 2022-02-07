@@ -12,7 +12,7 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer"; // Import css
 
 export default function SubscriptionsPage({elements}) {
-    const {trans, getLocalized, getThumb, classNames} = useContext(AppContext)
+    const {trans, getLocalized, mainColor } = useContext(AppContext)
     const {settings, currency, cart, locale} = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -94,9 +94,9 @@ export default function SubscriptionsPage({elements}) {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('subscriptions')}/>
-                <div className="bg-white relative overflow-hidden">
+                <div className="bg-transparent relative overflow-hidden">
                     {/* Decorative background image and gradient */}
-                    <div aria-hidden="true" className="absolute inset-0">
+                    <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
                             <img
                                 src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg"
@@ -116,11 +116,11 @@ export default function SubscriptionsPage({elements}) {
                         <div className="w-full">
                             <h2
                                 id="sale-heading"
-                                className="text-4xl mt-10 font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
+                                className={`text-4xl mt-10 font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-200 sm:text-5xl lg:text-6xl`}
                             >
                                 {trans('subscriptions')}
                             </h2>
-                            <p className="mt-4 max-w-xl mx-auto text-xl text-gray-600">
+                            <p className={`mt-4 max-w-xl mx-auto text-xl text-${mainColor}-800 dark:text-${mainColor}-200`}>
                                 {settings[getLocalized()]}
                             </p>
                             <div

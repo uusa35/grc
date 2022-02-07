@@ -117,7 +117,7 @@ export default function({element}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className="capitalize">
+                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>
                                                             {element[getLocalized('description')]}
                                                         </p>
                                                     </Disclosure.Panel>

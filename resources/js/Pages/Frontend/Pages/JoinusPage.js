@@ -64,9 +64,9 @@ export default function() {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('joinus')}/>
-                <div className="bg-white relative overflow-hidden">
+                <div className="bg-transparent relative overflow-hidden">
                     {/* Decorative background image and gradient */}
-                    <div aria-hidden="true" className="absolute inset-0">
+                    <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
                             {/*<img*/}
                             {/*    src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg"*/}
@@ -86,7 +86,7 @@ export default function() {
                         <div className="w-full">
                             <h2
                                 id="sale-heading"
-                                className="text-4xl mt-10 font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
+                                className={`text-4xl mt-10 font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-200 sm:text-5xl lg:text-6xl`}
                             >
                                 {trans('joinus')}
                             </h2>

@@ -12,7 +12,7 @@ import NoElements from "../../../Backend/components/widgets/NoElements";
 import {getFileType} from "../../../helpers";
 
 export default function({elements, firstOrder}) {
-    const {classNames, trans, getThumb, getLocalized, getFileUrl } = useContext(AppContext)
+    const {classNames, trans, getThumb, getLocalized, getFileUrl, mainColor , mainBgColor } = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
     const {locale} = useSelector(state => state);
 

@@ -171,7 +171,7 @@ function MainNav() {
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.home')}
-                                        className="-m-2 p-2 block text-gray-900 capitalize ">
+                                        className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100} capitalize`}>
                                         {capitalize(trans('home'))}
                                     </Link>
                                 </div>
@@ -179,7 +179,7 @@ function MainNav() {
                                     settings.enable_books && <div className="flow-root">
                                         <Link
                                             href={route('frontend.book.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                             {capitalize(trans('library'))}
                                         </Link>
                                     </div>
@@ -189,7 +189,7 @@ function MainNav() {
                                         <div className="flow-root">
                                             <Link
                                                 href={route('frontend.user.index')}
-                                                className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                                 {capitalize(trans('experts_and_participants'))}
                                             </Link>
                                         </div>
@@ -200,13 +200,13 @@ function MainNav() {
                                         <div className="flow-root">
                                             <Link
                                                 href={route('frontend.category.index', {is_service: 1})}
-                                                className="-m-2 p-2 block text-gray-900 capitalize font-bold">
+                                                className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize font-bold`}>
                                                 {capitalize(trans('consulting_and_training'))}
                                             </Link>
                                         </div>
                                         <Link
                                             href={route('frontend.service.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize hidden">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize hidden`}>
                                             {capitalize(trans('services'))}
                                         </Link>
                                     </div>
@@ -215,7 +215,7 @@ function MainNav() {
                                     settings.enable_courses && <div className="flow-root">
                                         <Link
                                             href={route('frontend.course.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                             {capitalize(trans('e_learning'))}
                                         </Link>
                                     </div>
@@ -224,7 +224,7 @@ function MainNav() {
                                     settings.enable_subscriptions && <div className="flow-root">
                                         <Link
                                             href={route('frontend.subscription.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                             {capitalize(trans('subscriptions'))}
                                         </Link>
                                     </div>
@@ -233,7 +233,7 @@ function MainNav() {
                                     settings.enable_products && <div className="flow-root">
                                         <Link
                                             href={route('frontend.product.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                             {capitalize(trans('products'))}
                                         </Link>
                                     </div>
@@ -242,7 +242,7 @@ function MainNav() {
                                     settings.enable_cart && <div className="flow-root">
                                         <Link
                                             href={route('frontend.cart.index')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                             {capitalize(trans('cart'))}
                                         </Link>
                                     </div>
@@ -251,7 +251,7 @@ function MainNav() {
                                     !auth || !auth.id ? <>
                                         <div className="flow-root">
                                             <Link href={route('frontend.user.logging')}
-                                                  className="-m-2 p-2 block text-gray-900 capitalize ">
+                                                  className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                                 {capitalize(trans('login'))}
                                             </Link>
                                         </div>
@@ -280,7 +280,7 @@ function MainNav() {
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.contactus')}
-                                        className="-m-2 p-2 block text-gray-900 capitalize ">
+                                        className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100} capitalize`}>
                                         {capitalize(trans('contactus'))}
                                     </Link>
                                 </div>
@@ -288,7 +288,7 @@ function MainNav() {
                                     settings.enable_faqs && <div className="flow-root">
                                         <Link
                                             href={route('frontend.faqs')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                             {capitalize(trans('faqs'))}
                                         </Link>
                                     </div>
@@ -298,7 +298,7 @@ function MainNav() {
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.terms')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                             {capitalize(trans('terms'))}
                                         </Link>
                                     </div>
@@ -308,7 +308,7 @@ function MainNav() {
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.polices')}
-                                            className="-m-2 p-2 block text-gray-900 capitalize ">
+                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100 capitalize`}>
                                             {capitalize(trans('policy'))}
                                         </Link>
                                     </div>
@@ -945,7 +945,7 @@ function MainNav() {
                                                     {({active}) => (
                                                         <Link
                                                             href={route('frontend.user.logging')}
-                                                            className={classNames(active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800` : '', 'block px-4 py-2 font-bold ')}
+                                                            className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
                                                         >
                                                             {trans('login')}
                                                         </Link>

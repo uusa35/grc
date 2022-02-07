@@ -10,16 +10,16 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 
 
 export default function FaqsPage({elements}) {
-    const {trans, getThumb, getLocalized, classNames} = useContext(AppContext)
+    const {trans, getLocalized, classNames, mainColor } = useContext(AppContext)
     const {settings} = useContext(GlobalContext);
 
     return (
         <FrontendContainer>
             <FrontendContentContainer parentModuleName={'faqs'}>
                 <SubMetaElement title={trans('faqs')}/>
-                <div className="bg-white relative overflow-hidden">
+                <div className="bg-transparent relative overflow-hidden">
                     {/* Decorative background image and gradient */}
-                    <div aria-hidden="true" className="absolute inset-0">
+                    <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
                             <img
                                 src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg"
@@ -48,7 +48,7 @@ export default function FaqsPage({elements}) {
                             </p>
                             {
                                 settings[getLocalized('caption')] && settings[getLocalized('caption')].length > 10 ? <div
-                                    className="mt-6 inline-block w-full bg-gray-400 border border-transparent rounded-sm py-3 px-8 font-medium text-white sm:w-auto capitalize"
+                                    className={`mt-6 inline-block w-full text-${mainColor}-600 dark:text-${mainColor}-300 border border-transparent rounded-sm py-3 px-8 font-medium  sm:w-auto capitalize`}
                                 >
                                     {settings[getLocalized('caption')]}
                                 </div> : null

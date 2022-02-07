@@ -17,9 +17,9 @@ export default function () {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('aboutus')}/>
-                <div className="bg-white relative overflow-hidden">
+                <div className="bg-transparent relative overflow-hidden">
                     {/* Decorative background image and gradient */}
-                    <div aria-hidden="true" className="absolute inset-0">
+                    <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
                             <img
                                 src="https://tailwindui.com/img/ecommerce-images/home-page-02-sale-full-width.jpg"

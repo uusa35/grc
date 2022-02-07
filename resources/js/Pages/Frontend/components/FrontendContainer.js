@@ -19,7 +19,7 @@ const FrontendContainer = ({children}) => {
             <main
                 className={`flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
                 <MainNav/>
-                <div className={`min-h-screen bg-${mainBgColor}-50 dark:bg-${mainBgColor}-900 text-${mainColor}-50`}>
+                <div className={`min-h-screen bg-white-50 dark:bg-${mainBgColor}-900 text-${mainColor}-50`}>
                     <SystemMessage/>
                     {children}
                 </div>
