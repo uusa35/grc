@@ -1256,5 +1256,6 @@ export const en  = {
     'e_learning' : 'e learning',
     "r_u_sure_u_order_cash_on_delivery" : "please confirm your order (cash on delivery). this service is only inside kuwait",
     "dark" : "dark",
-    "light" : "light"
+    "light" : "light",
+    "show_all" : "show all"
 }

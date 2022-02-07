@@ -165,13 +165,13 @@ export default function({element, relatedElements, auth}) {
                                                     !isNull(element.file) && getFileType(element.file) === 'pdf' ? <a
                                                         target="_blank"
                                                         href={route('frontend.free.book', element.id)}
-                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100`, `flex flex-1 bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-900 dark:text-${mainColor}-600 hover:bg-${mainColor}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-300`, `flex flex-1 bg-${mainBgColor}-600 dark:bg-${mainBgColor}-300 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-200 dark:text-${mainColor}-400 hover:bg-${mainBgColor}-400 dark:hover:bg-${mainBgColor}-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                     >
                                                         {trans('view')}
                                                     </a> : <a
                                                         href={getFileUrl(element.file)}
                                                         download={true}
-                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100`, `flex flex-1 bg-${mainBgColor}-900 dark:bg-${mainBgColor}-100 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-900 dark:text-${mainColor}-600 hover:bg-${mainColor}-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-300`, `flex flex-1 bg-${mainBgColor}-600 dark:bg-${mainBgColor}-300 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-200 dark:text-${mainColor}-400 hover:bg-${mainBgColor}-400  dark:hover:bg-${mainBgColor}-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                     >{trans('download')}</a>
                                                 }
                                             </>
@@ -179,7 +179,7 @@ export default function({element, relatedElements, auth}) {
                                                 <button
                                                     disabled={!element.is_available}
                                                     type="submit"
-                                                    className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-700 dark:bg-${mainBgColor}-50`, `flex flex-1 bg-${mainBgColor}-800 dark:bg-${mainBgColor}-50 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-200 dark:text-${mainColor}-100 hover:bg-${mainBgColor}-900 dark:hover:bg-${mainBgColor}-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                                    className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-300`, `flex flex-1 bg-${mainBgColor}-800 dark:bg-${mainBgColor}-300 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-200 dark:text-${mainColor}-400 hover:bg-${mainBgColor}-400 dark:hover:bg-${mainBgColor}-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                 >
                                                     {trans('add_to_cart')}
                                                 </button>

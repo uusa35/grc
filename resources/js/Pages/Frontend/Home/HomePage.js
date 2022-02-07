@@ -27,13 +27,13 @@ export default function HomePage({
                                      settings,
                                      categoriesWithProducts
                                  }) {
-    const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 5))
+    const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 4))
     const {categories} = useContext(GlobalContext);
     const {trans, getLocalized, mainBgColor } = useContext(AppContext)
 
     useEffect(() => {
         function handleResize() {
-            window.innerWidth < 1200 ? setSlideNumber(2) : setSlideNumber(5);
+            window.innerWidth < 1200 ? setSlideNumber(2) : setSlideNumber(4);
         }
 
         window.addEventListener("resize", handleResize);
@@ -118,6 +118,7 @@ export default function HomePage({
                                     elements={category.products}
                                     slidesPerView={slideNumber}
                                     title={category[getLocalized()]}
+                                    description={category[getLocalized('description')]}
                                     type={'product'}
                                     params={{ category_id : category.id}}
                                 />
