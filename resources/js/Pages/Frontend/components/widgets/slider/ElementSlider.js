@@ -30,7 +30,7 @@ function ElementSlider({
                            params = ''
                        }) {
     const {isRTL} = useSelector(state => state.locale)
-    const {mainColor, trans, classNames } = useContext(AppContext);
+    const {mainColor, mainBgColor, trans, classNames } = useContext(AppContext);
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
     const [currentRefValue,setCurrentRevValue] = useState('prev')
@@ -74,7 +74,7 @@ function ElementSlider({
                             >
                                 <div className="flex items-center justify-center">
                                     <span
-                                        className={`text-${mainColor}-800 dark:text-${mainColor}-50`}>{pluralize(title)}</span>
+                                        className={`text-md lg:text-2xl text-${mainColor}-800 dark:text-${mainColor}-50`}>{pluralize(title)}</span>
                                 </div>
                                 {
                                     description ? <div className="flex items-center justify-center my-4">
@@ -88,16 +88,18 @@ function ElementSlider({
                             isRTL ? <div className={`flex flex-row items-center`}>
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`}
-                                     fill={`none`}
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                          d="M15 19l-7-7 7-7"/>
-                                </svg>
+                                <div className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-sm`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`}
+                                         fill={`none`}
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M15 19l-7-7 7-7"/>
+                                    </svg>
+                                </div>
                             </div> : <div className={`flex flex-row items-center`}>
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`}
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 p-10 bg-${mainBgColor}-200 dark:bg-${mainBgColor}-700`} color={`${mainColor}`}
                                      fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}

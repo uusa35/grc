@@ -110,9 +110,7 @@ export default function HomePage({
                                 title={trans('featured_products')}
                                 type={'product'}
                             />
-                            <HomeMainCategory
-                                element={first(filter(categories, c => c.is_product && c.image.length > 5))}
-                            />
+
                             {map(filter(categoriesWithProducts, c => c.products && !isEmpty(c.products)), category =>
                                 <ElementSlider
                                     key={category.id}
@@ -124,12 +122,15 @@ export default function HomePage({
                                     params={{ category_id : category.id}}
                                 />
                             )}
+                            <HomeMainCategory
+                                element={first(filter(categories, c => c.is_product && c.image.length > 5))}
+                            />
                             {/*<InformationBtns />*/}
-                            <CategoriesGroup
-                                params={{is_product: true}}
-                                type={'product'}
-                                title={trans('other_categories')}
-                                categories={filter(categories, c => c.is_product)}/>
+                            {/*<CategoriesGroup*/}
+                            {/*    params={{is_product: true}}*/}
+                            {/*    type={'product'}*/}
+                            {/*    title={trans('other_categories')}*/}
+                            {/*    categories={filter(categories, c => c.is_product)}/>*/}
                         </>
                     }
                 </div>
