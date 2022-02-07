@@ -71,7 +71,7 @@ const  SearchField  =  ()  => {
     },[route().current()])
 
     return (
-        <div className="hidden xl:flex flex-row">
+        <div className="hidden xl:flex flex-row mb-1">
             <div className="flex-1">
                 <label htmlFor="search" className={`block text-sm font-bold text-gray-800 hidden`}>
                     {trans('search')}
