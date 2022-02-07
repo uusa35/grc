@@ -15,6 +15,7 @@ import InformationBtns from "./../partials/InformationBtns";
 import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
 
+
 export default function HomePage({
                                      slides,
                                      homeCategories,

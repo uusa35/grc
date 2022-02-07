@@ -1,12 +1,14 @@
 // import Swiper core and required modules
 import SwiperCore, {Navigation, Pagination, Scrollbar, A11y, EffectFade} from 'swiper';
 import {isEmpty, map} from 'lodash';
-import {Swiper, SwiperSlide} from 'swiper/react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
 // Import Swiper styles
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
-import 'swiper/components/pagination/pagination.scss';
-import 'swiper/components/scrollbar/scrollbar.scss';
+import 'swiper/css';
+// import 'swiper/components/navigation/navigation.scss';
+// import 'swiper/components/pagination/pagination.scss';
+// import 'swiper/components/scrollbar/scrollbar.scss';
 import {useContext, useState} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import {isMobile} from "react-device-detect";
