@@ -46,7 +46,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                         <Popover.Panel
                             className="absolute z-40 inset-x-20 top-32 transform shadow-lg">
                             {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                            <div className={`relative bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800`}>
+                            <div className={`relative bg-${headerBgColor}-50 dark:bg-${headerBgColor}-700`}>
                                 <div className="max-w-full px-8 mt-2">
                                     <div
                                         className="grid grid-cols-2 gap-y-10 gap-x-8 py-8">

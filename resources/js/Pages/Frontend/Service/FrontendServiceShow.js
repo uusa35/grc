@@ -231,7 +231,7 @@ export default function FrontendServiceShow({element, relatedElements, auth}) {
                                         <button
                                             disabled={!element.is_available}
                                             type="submit"
-                                            className={classNames(!element.is_available ? `opacity-30` : `bg-${mainBgColor}-700 dark:bg-${mainBgColor}-50`, `flex flex-1 bg-${mainBgColor}-800 dark:bg-${mainBgColor}-50 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainColor}-200 dark:text-${mainColor}-100 hover:bg-${mainBgColor}-900 dark:hover:bg-${mainBgColor}-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                            className={classNames(!element.is_available ? `opacity-30` : `bg-${mainColor}-600 dark:bg-${mainColor}-400 `, `flex flex-1 bg-${mainColor}-800 dark:bg-${mainColor}-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                         >
                                             {trans('add_to_cart')}
                                         </button>

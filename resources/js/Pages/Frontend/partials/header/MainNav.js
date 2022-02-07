@@ -932,7 +932,7 @@ function MainNav() {
                                                 {({active}) => (
                                                     <Link
                                                         href={route('backend.home')}
-                                                        className={classNames(active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800` : '', 'block px-4 py-2 font-bold ')}
+                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
                                                     >
                                                         {trans('backend')}
                                                     </Link>
@@ -958,12 +958,12 @@ function MainNav() {
                                                             <>
                                                                 {auth.verified ?
                                                                     <Link
-                                                                        className="'group flex items-center px-4 py-2"
+                                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}
                                                                     </Link> :
                                                                     <a
-                                                                        className="'group flex items-center px-4 py-2"
+                                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}
                                                                     </a>
@@ -976,7 +976,7 @@ function MainNav() {
                                                             {({active}) => (
                                                                 <Link
                                                                     href={route('backend.home')}
-                                                                    className={classNames(active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800` : '', 'block px-4 py-2 font-bold ')}
+                                                                    className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
                                                                 >
                                                                     {trans('backend')}
                                                                 </Link>
@@ -990,10 +990,7 @@ function MainNav() {
                                                                     e.preventDefault();
                                                                     document.getElementById('logout-form').submit()
                                                                 }}
-                                                                className={classNames(
-                                                                    active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 text-${headerColor}-800 dark:text-${headerColor}-100` : '',
-                                                                    'group flex w-full items-center px-4 py-2 font-bold'
-                                                                )}
+                                                                className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
                                                             >{trans('logout')}</button>
                                                         )}
                                                     </Menu.Item>

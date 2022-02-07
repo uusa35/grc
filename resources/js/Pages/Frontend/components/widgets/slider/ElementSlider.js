@@ -74,7 +74,7 @@ function ElementSlider({
                                 {
                                     description ? <div className="flex items-center justify-center my-4">
                                         <p
-                                            className={`break-normal text-xs text-ellipsis overflow-hidden capitalize text-${mainColor}-600 dark:text-${mainColor}-300`}>{truncate(description, { length : 80})}</p>
+                                            className={`break-normal text-xs text-ellipsis overflow-hidden capitalize text-${mainColor}-600 dark:text-${mainColor}-200`}>{truncate(description, { length : 80})}</p>
                                     </div> : null
                                 }
                             </motion.div>
@@ -82,7 +82,7 @@ function ElementSlider({
                         {
                             isRTL ? <div className={`flex flex-row items-center`}>
                                 <span
-                                    className={`text-${mainColor}-800 dark:text-${mainColor}-200 text-xs`}>{trans('show_all')}</span>
+                                    className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`}
                                      fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
@@ -91,7 +91,7 @@ function ElementSlider({
                                 </svg>
                             </div> : <div className={`flex flex-row items-center`}>
                                 <span
-                                    className={`text-${mainColor}-800 dark:text-${mainColor}-300 text-xs`}>{trans('show_all')}</span>
+                                    className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`}
                                      fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
