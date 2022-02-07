@@ -41,10 +41,9 @@ function MainNav() {
         arFont, enFont,
         headerColor,
         headerBgColor,
-        getTheme,
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
-    const {auth, settings, currencies, categories, mgt } = globalContext;
+    const {auth, settings, currencies, categories, mgt} = globalContext;
     const {locale, currency, cart, parentModule} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
@@ -54,36 +53,42 @@ function MainNav() {
     return (
         <div className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 rtl:text-right ltr:text-left`}>
             {/* Top Nav*/}
-            <div className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
+            <div
+                className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
                 <div className="grid grid-cols-5 gap-x-5">
                     {
-                        settings.instagram && <a target="_blank" href={settings.instagram} >
-                            <FaInstagram size={22} className={`col-span-1 text-${headerColor}-${getTheme(200,50)} hover:text-${headerColor}-400`}/>
+                        settings.instagram && <a target="_blank" href={settings.instagram}>
+                            <FaInstagram size={22}
+                                         className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('instagram')}</span>
                         </a>
                     }
                     {
                         settings.facebook && <a target="_blank" href={settings.facebook}>
-                            <FaFacebook size={22} className={`col-span-1 text-${headerColor}-${getTheme(200,50)} hover:text-${headerColor}-400`}/>
+                            <FaFacebook size={22}
+                                        className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('facebook')}</span>
                         </a>
                     }
                     {
                         settings.twitter && <a target="_blank" href={settings.twitter}>
-                            <FaTwitter size={22} className={`col-span-1 text-${headerColor}-${getTheme(200,50)} hover:text-${headerColor}-400`}/>
+                            <FaTwitter size={22}
+                                       className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('twitter')}</span>
                         </a>
                     }
                     {
                         settings.youtube && <a target="_blank" href={settings.youtube}>
-                            <FaYoutube size={22} className={`col-span-1 text-${headerColor}-${getTheme(200,50)} hover:text-${headerColor}-400`}/>
+                            <FaYoutube size={22}
+                                       className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('youtube')}</span>
                         </a>
                     }
                     {
                         settings.whatsapp &&
                         <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
-                            <FaWhatsapp size={22} className={`col-span-1 text-${headerColor}-${getTheme(200,50)} hover:text-${headerColor}-400`}/>
+                            <FaWhatsapp size={22}
+                                        className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('whatsapp')}</span>
                         </a>
                     }
@@ -100,7 +105,7 @@ function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className={`mx-2  block  text-xs text-${headerColor}-${getTheme(200,50)}`}>
+                        className={`mx-2  block  text-xs text-${headerColor}-200 text-${headerColor}-50`}>
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
@@ -332,7 +337,7 @@ function MainNav() {
                                     <Tab.List className="-mb-px flex px-4 space-x-8">
                                         {
                                             settings.enable_books && <Tab
-                                                className={({selected},  headerColor) =>
+                                                className={({selected}, headerColor) =>
                                                     classNames(
                                                         selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent`,
                                                         `flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium`
@@ -344,7 +349,7 @@ function MainNav() {
                                         }
                                         {
                                             settings.enable_products && <Tab
-                                                className={({selected},  headerColor) =>
+                                                className={({selected}, headerColor) =>
                                                     classNames(
                                                         selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent test`,
                                                         `flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium`
@@ -356,7 +361,7 @@ function MainNav() {
                                         }
                                         {
                                             settings.enable_cart && <Tab
-                                                className={({selected},  headerColor) =>
+                                                className={({selected}, headerColor) =>
                                                     classNames(
                                                         selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent`,
                                                         `flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium`
@@ -376,7 +381,7 @@ function MainNav() {
                                             <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
                                                 <div key={parent[getLocalized()]} className="group relative ">
                                                     <div
-                                                        className="aspect-w-1 aspect-h-1 rounded-lg bg-${headerBgColor}-${getTheme(5900150 overflow-hidden group-hover:opacity-75">
+                                                        className="aspect-w-1 aspect-h-1 rounded-lg bg-${headerBgColor}-50 bg-${headerBgColor}-800 overflow-hidden group-hover:opacity-75">
                                                         <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
                                                              className="object-center object-cover"
                                                              loading={'lazy'}
@@ -435,7 +440,7 @@ function MainNav() {
                                             <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
                                                 <div key={parent[getLocalized()]} className="group relative ">
                                                     <div
-                                                        className="aspect-w-1 aspect-h-1 rounded-lg bg-${headerBgColor}-${getTheme(5900150 overflow-hidden group-hover:opacity-75">
+                                                        className={`aspect-w-1 aspect-h-1 rounded-lg bg-${headerBgColor}-50 bg-${headerBgColor}-800 overflow-hidden group-hover:opacity-75`}>
                                                         <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
                                                              className="object-center object-cover"
                                                              loading={'lazy'}
@@ -505,7 +510,7 @@ function MainNav() {
             </Transition.Root>
 
             <header
-                className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 text-${headerColor}-${getTheme(800,50)} "relative border-b-2 border-gray-400 py-2 max-w-full`}>
+                className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 text-${headerColor}-800 dark:text-${headerColor}-100 "relative border-b-2 border-gray-400 py-2 max-w-full`}>
                 <nav aria-label="Top" className="w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto">
                     <div className="h-20 flex items-center">
                         <button
@@ -542,7 +547,7 @@ function MainNav() {
                                 <Link
                                     href={route('frontend.home')}
                                     // onClick={() => dispatch(setParentModule('home'))}
-                                    className={classNames(parentModule == 'home' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max text-${headerColor}-${getTheme(800,50)} text-center font-bold items-center   hover:text-${headerColor}-400 hover:rounded-sm capitalize overflow-hidden`)}
+                                    className={classNames(parentModule == 'home' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max text-${headerColor}-800 dark:text-${headerColor}-100 text-center font-bold items-center   hover:text-${headerColor}-400 hover:rounded-sm capitalize overflow-hidden`)}
                                 >
                                     {capitalize(trans('home'))}
                                 </Link>
@@ -730,7 +735,7 @@ function MainNav() {
                                                                 {settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ?
                                                                     <Link
                                                                         href={route('frontend.polices')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}                                                                    >
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}>
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                              className="h-6 w-6 text-gray-800"
                                                                              fill="none"
@@ -829,7 +834,7 @@ function MainNav() {
                                         dispatch(changeLang(locale.otherLang))
                                     }}
                                     href={route('frontend.change.lang', {lang: locale.otherLang})}
-                                    className={`flex flex-row items-center text-${headerColor}-${getTheme(800,50)} hover:text-${headerColor}-${getTheme(600,200)}`}>
+                                    className={`flex flex-row items-center text-${headerColor}-800 dark:text-${headerColor}-100 hover:text-${headerColor}-600 dark:hover:text-${headerColor}-200)}`}>
                                     <img
                                         className="w-5 h-5 rounded-full"
                                         src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}
@@ -877,7 +882,7 @@ function MainNav() {
                                                         {({active}) => (
                                                             <button
                                                                 onClick={() => dispatch(setCurrency(element))}
-                                                                className={classNames(active ? 'bg-${headerBgColor}-${getTheme(5900950' : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
+                                                                className={classNames(active ? `bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600` : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
                                                             >
                                                                 <img
                                                                     className="h-5 w-5 rounded-full object-cover"
@@ -903,7 +908,8 @@ function MainNav() {
                                     <Menu.Button
                                         className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                         <span className="sr-only">Open user menu</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className={`h-7 w-7 hover:text-${headerColor}-400`} fill={'none'}
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             className={`h-7 w-7 hover:text-${headerColor}-400`} fill={'none'}
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                                   d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -985,7 +991,7 @@ function MainNav() {
                                                                     document.getElementById('logout-form').submit()
                                                                 }}
                                                                 className={classNames(
-                                                                    active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 text-${headerColor}-${getTheme(800,50)}` : '',
+                                                                    active ? `bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 text-${headerColor}-800 dark:text-${headerColor}-100` : '',
                                                                     'group flex w-full items-center px-4 py-2 font-bold'
                                                                 )}
                                                             >{trans('logout')}</button>

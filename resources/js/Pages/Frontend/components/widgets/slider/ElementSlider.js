@@ -29,7 +29,7 @@ function ElementSlider({
                                           params = ''
                                       }) {
     const {isRTL} = useSelector(state => state.locale)
-    const { mainColor , getTheme , trans } = useContext(AppContext);
+    const { mainColor  , trans } = useContext(AppContext);
 
     const handleComponent = (s) => {
         switch (type) {
