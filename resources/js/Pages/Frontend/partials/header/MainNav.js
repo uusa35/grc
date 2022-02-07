@@ -41,6 +41,7 @@ function MainNav() {
         arFont, enFont,
         headerColor,
         headerBgColor,
+        mainBgColor
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const {auth, settings, currencies, categories, mgt} = globalContext;
@@ -510,7 +511,7 @@ function MainNav() {
             </Transition.Root>
 
             <header
-                className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 text-${headerColor}-800 dark:text-${headerColor}-100 "relative border-b-2 border-gray-400 py-2 max-w-full`}>
+                className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-700 text-${headerColor}-800 dark:text-${headerColor}-100 "relative border-b-2 border-gray-400 dark:border-${mainBgColor}-900 py-2 max-w-full`}>
                 <nav aria-label="Top" className="w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto">
                     <div className="h-20 flex items-center">
                         <button
@@ -834,14 +835,15 @@ function MainNav() {
                                         dispatch(changeLang(locale.otherLang))
                                     }}
                                     href={route('frontend.change.lang', {lang: locale.otherLang})}
-                                    className={`flex flex-row items-center text-${headerColor}-800 dark:text-${headerColor}-100 hover:text-${headerColor}-600 dark:hover:text-${headerColor}-200)}`}>
-                                    <img
-                                        className="w-5 h-5 rounded-full"
-                                        src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}
-                                        width={60}
-                                        height={60}
-                                        loading={'lazy'}
-                                    />
+                                    className={`flex flex-row items-center justify-center text-center text-${headerColor}-800 dark:text-${headerColor}-100 hover:bg-${headerColor}-600 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-400`}>
+                                    {/*<img*/}
+                                    {/*    className="w-5 h-5 rounded-full"*/}
+                                    {/*    src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}*/}
+                                    {/*    width={60}*/}
+                                    {/*    height={60}*/}
+                                    {/*    loading={'lazy'}*/}
+                                    {/*/>*/}
+                                    {locale.otherLang}
                                 </Link>
                             </div>
 

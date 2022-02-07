@@ -12,7 +12,7 @@ import GlobalContext from "../../context/GlobalContext";
 
 const  SearchField  =  ()  => {
     const [search, setSearch] = useState()
-    const {trans, classNames  } = useContext(AppContext)
+    const {trans, classNames, headerColor, headerBgColor  } = useContext(AppContext)
     const { settings } = useContext(GlobalContext);
     const { locale, searchType  } = useSelector(state => state);
     const [requestType,setRequestType] = useState('frontend');
@@ -73,7 +73,7 @@ const  SearchField  =  ()  => {
     return (
         <div className="hidden xl:flex flex-row">
             <div className="flex-1">
-                <label htmlFor="search" className="block text-sm font-bold text-gray-800 hidden">
+                <label htmlFor="search" className={`block text-sm font-bold text-gray-800 hidden`}>
                     {trans('search')}
                 </label>
                 <div className="mt-1 w-60 relative  shadow-sm">
@@ -107,11 +107,11 @@ const  SearchField  =  ()  => {
                 </div>
             </div>
             <div
-                className={classNames(locale.isRTL ? `rounded-l-md` :  `rounded-r-md`, "flex justify-center items-center bg-gray-200 shadow-sm  mt-1 border-gray-200")}>
+                className={classNames(locale.isRTL ? `rounded-l-md` :  `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border-${headerColor}-200  dark:border-${headerColor}-400`)}>
                 <Link
                     href={route(`${requestType}.${searchType}.index`, {search})}
                     className="px-5">
-                    <SearchIcon className="h-5 w-5 text-gray-900 " aria-hidden="true"/>
+                    <SearchIcon className={`h-5 w-5 text-${headerColor}-900 dark:text-${headerColor}-400`} aria-hidden="true"/>
                 </Link>
             </div>
         </div>
