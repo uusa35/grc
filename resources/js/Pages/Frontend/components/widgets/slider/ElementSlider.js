@@ -134,17 +134,6 @@ function ElementSlider({
                     {
                         elements.length > 4 && <div className="flex grow items-center justify-center space-x-8  h-auto">
                             <button
-                                onClick={handleNext}
-                                ref={navigationNextRef}>
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     className={classNames(currentRefValue === 'next' ? `text-${mainColor}-800 dark:text-${mainColor}-100` : `text-${mainColor}-200 dark:text-${mainColor}-400`, `h-8 w-8`)}
-                                     fille='none'
-                                     viewBox="0 0 24 24"
-                                     stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/>
-                                </svg>
-                            </button>
-                            <button
                                 onClick={handlePrev}
                                 ref={navigationPrevRef}>
                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +144,17 @@ function ElementSlider({
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/>
                                 </svg>
                             </button>
-
+                            <button
+                                onClick={handleNext}
+                                ref={navigationNextRef}>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     className={classNames(currentRefValue === 'next' ? `text-${mainColor}-800 dark:text-${mainColor}-100` : `text-${mainColor}-200 dark:text-${mainColor}-400`, `h-8 w-8`)}
+                                     fille='none'
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/>
+                                </svg>
+                            </button>
                         </div>
                     }
 
