@@ -76,8 +76,8 @@ const  SearchField  =  ()  => {
                 <label htmlFor="search" className={`block text-sm font-bold text-gray-800 hidden`}>
                     {trans('search')}
                 </label>
-                <div className="mt-1 w-60 relative  shadow-sm">
-                    <div className={classNames(locale.isRTL ? `left-0` : `left-32` , "absolute inset-y-0  flex items-center")}>
+                <div className="mt-1 w-60 relative  shadow-sm rounded-md">
+                    <div className={classNames(locale.isRTL ? `left-0` : `left-32` , "absolute inset-y-0  flex items-center rounded-md")}>
                         <label htmlFor="search" className="sr-only">
                             {`${trans('search')} `}
                         </label>
@@ -100,14 +100,14 @@ const  SearchField  =  ()  => {
                             type="text"
                             name="search"
                             id="search"
-                            className={classNames(locale.isRTL ? `rounded-r-md` :  `rounded-l-md`, "font-bold focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm border-gray-200")}
+                            className={classNames(locale.isRTL ? `rounded-r-md` :  `rounded-l-md `, `font-bold focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm  border-${headerColor}-50  dark:border-${headerColor}-400`)}
                             placeholder={`${trans('search')}`}
                         />
                     </form>
                 </div>
             </div>
             <div
-                className={classNames(locale.isRTL ? `rounded-l-md` :  `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border-${headerColor}-200  dark:border-${headerColor}-400`)}>
+                className={classNames(locale.isRTL ? `rounded-l-md` :  `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border border-${headerColor}-50  dark:border-${headerColor}-400`)}>
                 <Link
                     href={route(`${requestType}.${searchType}.index`, {search})}
                     className="px-5">

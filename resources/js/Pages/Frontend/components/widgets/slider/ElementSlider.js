@@ -15,7 +15,7 @@ import NormalUserWidget from '../user/NormalUserWidget';
 
 // import Swiper core and required modules
 import {Navigation, Pagination, Scrollbar, A11y} from 'swiper';
-import {Swiper, SwiperSlide } from 'swiper/react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 
 
 function ElementSlider({
@@ -30,10 +30,10 @@ function ElementSlider({
                            params = ''
                        }) {
     const {isRTL} = useSelector(state => state.locale)
-    const {mainColor, mainBgColor, trans, classNames } = useContext(AppContext);
+    const {mainColor, mainBgColor, trans, classNames} = useContext(AppContext);
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
-    const [currentRefValue,setCurrentRevValue] = useState('prev')
+    const [currentRefValue, setCurrentRevValue] = useState('prev')
 
 
     const handleComponent = (s) => {
@@ -88,8 +88,10 @@ function ElementSlider({
                             isRTL ? <div className={`flex flex-row items-center`}>
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
-                                <div className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-sm`}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} color={`${mainColor}`}
+                                <div
+                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-sm`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
                                          fill={`none`}
                                          viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -99,12 +101,16 @@ function ElementSlider({
                             </div> : <div className={`flex flex-row items-center`}>
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 p-10 bg-${mainBgColor}-200 dark:bg-${mainBgColor}-700`} color={`${mainColor}`}
-                                     fill={`none`}
-                                     viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                                          d="M9 5l7 7-7 7"/>
-                                </svg>
+                                <div
+                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-sm`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
+                                         fill={`none`}
+                                         viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                              d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </div>
                             </div>
                         }
 
