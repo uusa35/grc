@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 import SearchField from "../../../Frontend/partials/SearchField";
 
 const SideBar = () => {
-    const {trans , classNames , getThumb, getLocalized } = useContext(AppContext);
+    const {trans , classNames , getThumb, getLocalized, isAdminOrAbove  } = useContext(AppContext);
     const { modules, parentModule } = useSelector(state => state);
     const[sideBarOpen, toggleSideBar] = useState(false)
     const {settings, auth} = useContext(GlobalContext);
@@ -264,23 +264,67 @@ const SideBar = () => {
                                             className="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
                                         >
                                             <div className="py-1 w-full">
-                                                <Menu.Item>
-                                                    {({active}) => (
-                                                        <Link
-                                                            href={route('backend.setting.index')}
-                                                            className={classNames(
-                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
+                                                {
+                                                    isAdminOrAbove && <>
+                                                        <Menu.Item>
+                                                            {({active}) => (
+                                                                <Link
+                                                                    href={route('backend.setting.index')}
+                                                                    className={classNames(
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                        `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
+                                                                    )}
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                    </svg>
+                                                                    {trans('settings')}
+                                                                </Link>
                                                             )}
-                                                        >
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                            </svg>
-                                                            {trans('settings')}
-                                                        </Link>
-                                                    )}
-                                                </Menu.Item>
+                                                        </Menu.Item>
+                                                        <Menu.Item>
+                                                            {({active}) => (
+                                                                <Link
+                                                                    href={route('backend.slide.index', {'slidable_id' : 1 , 'slidable_type' : 'setting'})}
+                                                                    className={classNames(
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                        `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
+                                                                    )}
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 mx-2" fill="none"
+                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round"
+                                                                              strokeLinejoin="round" strokeWidth="2"
+                                                                              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                                                    </svg>
+                                                                    {trans('main_page_slides')}
+                                                                </Link>
+                                                            )}
+                                                        </Menu.Item>
+                                                        <Menu.Item>
+                                                            {({active}) => (
+                                                                <Link
+                                                                    href={route('backend.translation.index')}
+                                                                    className={classNames(
+                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                        `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
+                                                                    )}
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 mx-2" fill="none"
+                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round"
+                                                                              strokeLinejoin="round" strokeWidth="2"
+                                                                              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                                                                    </svg>
+                                                                    {trans('translation_management')}
+                                                                </Link>
+                                                            )}
+                                                        </Menu.Item>
+                                                    </>
+                                                }
                                                 <Menu.Item>
                                                     {({active}) => (
                                                         <Link

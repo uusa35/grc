@@ -36,6 +36,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubscriptionController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Backend\TimingController;
+use App\Http\Controllers\Backend\TranslationController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Frontend\FrontendAddressController;
@@ -199,6 +200,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('notification', NotificationController::class);
         Route::resource('shipment', ShipmentController::class)->except('index');
         Route::resource('faq', FaqController::class);
+        Route::resource('translation', TranslationController::class);
         Route::resource('subscription', SubscriptionController::class);
         // order status switch
         Route::get('order/switch/status', [OrderController::class, 'switchStatus'])->name('order.switch');

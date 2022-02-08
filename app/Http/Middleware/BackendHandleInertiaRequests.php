@@ -50,7 +50,7 @@ class BackendHandleInertiaRequests extends Middleware
                     return $q->orderBy('order', 'asc');
                 }]);
             }])->first()) : null,
-//            'currencies' => fn() => CurrencyExtraLightResource::collection(Currency::active()->with('country')->get()),
+            'currencies' => fn() => CurrencyExtraLightResource::collection(Currency::active()->with('country')->get()),
             'settings' => fn() => new SettingResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),

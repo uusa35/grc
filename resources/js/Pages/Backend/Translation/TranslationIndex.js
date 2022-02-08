@@ -8,7 +8,7 @@ import {showModal} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 
 export default function({elements}) {
-    const {trans, classNames, getLocalized } = useContext(AppContext);
+    const {trans, classNames } = useContext(AppContext);
     const {params} = route();
     const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ export default function({elements}) {
                           showMobileView={elements.meta.total > 1}
                           total={elements.meta.total}
                           links={elements.meta.links}
-                          mainModule={'faq'}
+                          mainModule={'translation'}
         >
             <div className="flex flex-col ">
                 <div className=" overflow-auto">
@@ -40,7 +40,13 @@ export default function({elements}) {
                                         scope="col"
                                         className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
                                     >
-                                        {trans('name')}
+                                        {trans('ar')}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                    >
+                                        {trans('en')}
                                     </th>
                                     <th
                                         scope="col"
@@ -52,7 +58,7 @@ export default function({elements}) {
                                             </div>
                                             <div className="flex">
                                                 <Link
-                                                    href={route('backend.faq.create', {user_id: elements.data.length > 0 ? elements.data[0]?.user_id : params.user_id})}>
+                                                    href={route('backend.translation.create', {user_id: elements.data.length > 0 ? elements.data[0]?.user_id : params.user_id})}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round"
@@ -69,11 +75,12 @@ export default function({elements}) {
                                 <tbody className="bg-white divide-y divide-gray-200">
                                 {map(elements.data, element => (
                                     <tr key={element.id}>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.id}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.ar}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.en}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
-                                                <Link href={route(`backend.faq.edit`, element.id)}
+                                                <Link href={route(`backend.translation.edit`, element.id)}
                                                       className="text-indigo-600 hover:text-indigo-900">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,10 +93,10 @@ export default function({elements}) {
                                                     onClick={() =>
                                                         dispatch(showModal({
                                                             type: 'destroy',
-                                                            model: 'faq',
+                                                            model: 'translation',
                                                             id: element.id,
-                                                            title: `${trans('destroy')} ${trans('faq')} ${element[getLocalized()]}`,
-                                                            message: `${trans('confirmation')} ${trans('destroy')} ${trans('faq')}`,
+                                                            title: `${trans('destroy')} ${trans('translation')} ${element.en}`,
+                                                            message: `${trans('confirmation')} ${trans('destroy')} ${trans('translation')}`,
                                                         }))
                                                     }
                                                     className="text-indigo-600 hover:text-indigo-900 ">
