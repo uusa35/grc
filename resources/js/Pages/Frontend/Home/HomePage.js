@@ -30,7 +30,7 @@ export default function HomePage({
                                  }) {
     const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 4))
     const {categories} = useContext(GlobalContext);
-    const {trans, getLocalized, mainBgColor } = useContext(AppContext)
+    const {trans, getLocalized } = useContext(AppContext)
 
     useEffect(() => {
         function handleResize() {
@@ -41,6 +41,7 @@ export default function HomePage({
         handleResize();
         return () => window.removeEventListener("resize", handleResize);
     }, []); // Empty array ensures that effect is only run on mount
+
 
     return (
         <FrontendContainer showBreadCrumbs={false}>

@@ -19,9 +19,9 @@ import 'swiper/css';
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {settings, auth, currencies, categories, previousRoute} = props.initialPage.props;
+        const {settings, auth, currencies, categories, translations} = props.initialPage.props;
         return render(
-            <GlobalContext.Provider value={{auth, settings, currencies, categories, previousRoute }}>
+            <GlobalContext.Provider value={{auth, settings, currencies, categories , translations }}>
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>}
                                  persistor={persistor}

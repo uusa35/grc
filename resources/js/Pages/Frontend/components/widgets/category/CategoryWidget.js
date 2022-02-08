@@ -29,10 +29,10 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
                 showTitle && route().has(`frontend.${type}.index`) &&  <div className="mt-4 flex justify-center items-center">
                     <div>
                         <h3 className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>
-                            <Link href={route(`frontend.${type}.index`, {category_id: element.id})}>
+                            <div>
                                 <span aria-hidden="true" className="absolute inset-0" />
                                 {element[getLocalized()]}
-                            </Link>
+                            </div>
                         </h3>
                         <p className={`mt-1 text-${mainColor}-800 dark:text-${mainColor}-100 truncate overflow-ellipsis overflow-hidden truncate`}>
                             {element[getLocalized('caption')]}

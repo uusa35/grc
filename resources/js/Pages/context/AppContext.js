@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useLayoutEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
-import {split, map, isEmpty} from 'lodash';
+import {split, map, isEmpty, filter, first} from 'lodash';
 import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
@@ -28,7 +28,15 @@ import Pusher from "pusher-js";
 const AppContext = createContext({});
 
 const AppContextProvider = ({children}) => {
-    const {lang, locale, bootStrapped, confirmationModal, toastMessage, cart} = useSelector(state => state);
+    const {
+        lang,
+        locale,
+        bootStrapped,
+        confirmationModal,
+        toastMessage,
+        cart,
+        translations
+    } = useSelector(state => state);
     const {auth, settings, currencies} = useContext(GlobalContext);
     const dispatch = useDispatch();
     const [currentUrl, setCurrentUrl] = useState(window.location.href);
@@ -60,7 +68,7 @@ const AppContextProvider = ({children}) => {
     };
 
     const context = {
-        trans: (name) => translations[lang][name],
+        trans: (name) => translations[name] ? translations[name][lang] : name,
         classNames: (...classes) => classes.filter(Boolean).join(' '),
         getLocalized: (element = 'name') => lang === 'ar' ? `${element}_ar` : `${element}_en`,
         getAsset: (element, type = 'png') => `${Ziggy().t.url}/images/${element}.${type}`,
@@ -76,13 +84,13 @@ const AppContextProvider = ({children}) => {
         // arFont: 'font-almarai',
         arFont: 'font-gesst-medium',
         enFont: 'font-tajwal-medium',
-        mainColor : settings.main_theme_color,
-        mainBgColor : settings.main_theme_bg_color,
-        headerColor : settings.header_theme_color,
-        headerBgColor : settings.header_theme_bg,
-        footerColor : settings.footer_theme_color,
-        footerBgColor : settings.footer_bg_theme_color,
-        theme : settings.theme
+        mainColor: settings.main_theme_color,
+        mainBgColor: settings.main_theme_bg_color,
+        headerColor: settings.header_theme_color,
+        headerBgColor: settings.header_theme_bg,
+        footerColor: settings.footer_theme_color,
+        footerBgColor: settings.footer_bg_theme_color,
+        theme: settings.theme
     };
 
     useMemo(() => {
@@ -111,9 +119,9 @@ const AppContextProvider = ({children}) => {
     }, [])
 
     useMemo(() => {
-        if ((!bootStrapped && navigator.onLine)) {
-            dispatch(startBootStrapped({settings, currencies}))
-        }
+        // if ((!bootStrapped && navigator.onLine)) {
+        dispatch(startBootStrapped({currencies}))
+        // }
     }, [])
 
     useEffect(() => {

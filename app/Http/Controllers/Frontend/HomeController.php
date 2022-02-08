@@ -9,6 +9,7 @@ use App\Http\Resources\CourseExtraLightResource;
 use App\Http\Resources\ProductExtraLightResource;
 use App\Http\Resources\SettingResource;
 use App\Http\Resources\SlideExtraLightResource;
+use App\Http\Resources\TranslationResource;
 use App\Http\Resources\UserExtraLightResource;
 use App\Models\Book;
 use App\Models\Category;
@@ -16,6 +17,7 @@ use App\Models\Course;
 use App\Models\Newsletter;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Translation;
 use App\Models\User;
 use Illuminate\Http\Request;
 

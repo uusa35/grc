@@ -25,7 +25,7 @@ class TranslationsTableSeeder extends Seeder
                 'key' => $key,
                 'group' => 'general',
                 'ar' => $value,
-                'en' => trans('general.'.$key)
+                'en' => trans('general.'.$key,[],'en')
             ]);
         }
     }

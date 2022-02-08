@@ -14,9 +14,10 @@ import toastMessage from './toastMessage'
 import sideBarOpen from './sideBarOpen'
 import sort from './sort'
 import bootStrapped from './bootStrapped'
-import settings from './settings'
+// import settings from './settings'
 import parentModule from './parentModule'
 import searchType from "./searchType";
+import translations from "./translations";
 
 export default combineReducers({
     cart,
@@ -34,7 +35,8 @@ export default combineReducers({
     sideBarOpen,
     sort,
     bootStrapped,
-    settings,
+    // settings,
     parentModule,
-    searchType
+    searchType,
+    translations
 });

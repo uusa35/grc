@@ -10,10 +10,12 @@ import CartStepper from "../../Frontend/Cart/CartStepper";
 import OrderStepper from "./OrderStepper";
 import {useSelector} from "react-redux";
 import ReactToPrint, {useReactToPrint} from 'react-to-print';
+import GlobalContext from "../../context/GlobalContext";
 
 export default function({order}) {
     const {classNames, trans, getThumb, getLocalized} = useContext(AppContext);
-    const {locale, settings} = useSelector(state => state);
+    const {locale} = useSelector(state => state);
+    const { settings } = useContext(GlobalContext);
     const componentRef = useRef();
 
     const handlePrint = useReactToPrint({

@@ -58,28 +58,28 @@ function MainNav() {
                 className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
                 <div className="grid grid-cols-5 gap-x-5">
                     {
-                        settings.instagram && <a target="_blank" href={settings.instagram}>
+                        settings.instagram && <a as={Link} target="_blank" href={settings.instagram}>
                             <FaInstagram size={22}
                                          className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('instagram')}</span>
                         </a>
                     }
                     {
-                        settings.facebook && <a target="_blank" href={settings.facebook}>
+                        settings.facebook && <a as={Link} target="_blank" href={settings.facebook}>
                             <FaFacebook size={22}
                                         className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('facebook')}</span>
                         </a>
                     }
                     {
-                        settings.twitter && <a target="_blank" href={settings.twitter}>
+                        settings.twitter && <a as={Link} target="_blank" href={settings.twitter}>
                             <FaTwitter size={22}
                                        className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('twitter')}</span>
                         </a>
                     }
                     {
-                        settings.youtube && <a target="_blank" href={settings.youtube}>
+                        settings.youtube && <a as={Link} target="_blank" href={settings.youtube}>
                             <FaYoutube size={22}
                                        className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('youtube')}</span>
@@ -87,7 +87,7 @@ function MainNav() {
                     }
                     {
                         settings.whatsapp &&
-                        <a target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
+                        <a as={Link} target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
                             <FaWhatsapp size={22}
                                         className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('whatsapp')}</span>
@@ -965,6 +965,7 @@ function MainNav() {
                                                                         {trans('my_account')}
                                                                     </Link> :
                                                                     <a
+                                                                        as={Link}
                                                                         className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}

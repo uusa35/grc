@@ -9,12 +9,14 @@ import {filter, first, map, round} from "lodash";
 import route from "ziggy-js";
 import {setShipmentFees} from "../../redux/actions";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
+import GlobalContext from "../../context/GlobalContext";
 
 
 export default function({countries, auth}) {
     const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
     const [areas, setAreas] = useState([])
-    const {locale, cart, settings } = useSelector(state => state);
+    const {locale, cart } = useSelector(state => state);
+    const { settings } = useContext(GlobalContext);
     const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
