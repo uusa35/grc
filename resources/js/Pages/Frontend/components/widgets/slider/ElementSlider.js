@@ -85,7 +85,7 @@ function ElementSlider({
                             </motion.div>
                         </div>
                         {
-                            isRTL ? <div className={`flex flex-row items-center`}>
+                            isRTL ? <div className={`hidden lg:flex flex-row items-center`}>
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
                                 <div
@@ -98,7 +98,7 @@ function ElementSlider({
                                               d="M15 19l-7-7 7-7"/>
                                     </svg>
                                 </div>
-                            </div> : <div className={`flex flex-row items-center`}>
+                            </div> : <div className={`hidden lg:flex flex-row items-center`}>
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
                                 <div
