@@ -23,7 +23,7 @@ export function* startEnableBootStrappedScenario(action) {
 }
 
 export async function getTranslations() {
-    return await axios.get(`http://ecommerce-backend.test/api/translations`).then(r => r.data).catch(e => console.log(e));
+    return await axios.get(`api/translations`).then(r => r.data).catch(e => console.log(e));
 }
 
 export function* startChangeLangScenario(action) {
