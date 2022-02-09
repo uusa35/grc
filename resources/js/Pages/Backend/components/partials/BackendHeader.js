@@ -224,9 +224,9 @@ const BackendHeader = () => {
                                             className={`inline-flex justify-center items-center  w-full rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-gray-600  font-bold text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize`}>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6  rtl:ml-2 ltr:mr-2"
                                                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                       d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                             </svg>
                                             <div className="text-white text-md text-gray-900 text-capitalize font-bold">{trans('commands')}</div>
@@ -241,7 +241,7 @@ const BackendHeader = () => {
                                             }}
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 rtl:ml-2 ltr:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                                             </svg>
                                             <div className="text-white text-md text-gray-900 text-capitalize font-bold">{locale.otherLang}</div>
                                         </button>
@@ -273,7 +273,7 @@ const BackendHeader = () => {
                                                         )}
                                                     >
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                                         </svg>
                                                         {trans('main_page')}
                                                     </Link>
@@ -291,7 +291,7 @@ const BackendHeader = () => {
                                                         )}
                                                     >
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                                         </svg>
                                                         {trans('dashboard')}
                                                     </Link>
@@ -310,9 +310,9 @@ const BackendHeader = () => {
                                                     >
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-4"
                                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                                   d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                                   d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                                         </svg>
                                                         {trans('settings')}
@@ -335,7 +335,7 @@ const BackendHeader = () => {
                                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path strokeLinecap="round"
                                                                   strokeLinejoin="round"
-                                                                  strokeWidth={2}
+                                                                  strokeWidth="2"
                                                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                         </svg>
                                                         {trans('edit')} {trans('information')}
@@ -356,7 +356,7 @@ const BackendHeader = () => {
                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                              className="h-6 w-6 mx-2"
                                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                                                         </svg>
                                                         {trans('reset_password')}
                                                     </Link>
@@ -379,7 +379,7 @@ const BackendHeader = () => {
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-4"
                                                              fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path strokeLinecap="round" strokeLinejoin="round"
-                                                                  strokeWidth={2}
+                                                                  strokeWidth="2"
                                                                   d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
                                                         </svg>
                                                         {trans(locale.otherLang)}
@@ -401,7 +401,7 @@ const BackendHeader = () => {
                                                         )}
                                                     >
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                                         </svg>
                                                         {trans('logout')}
                                                     </button>

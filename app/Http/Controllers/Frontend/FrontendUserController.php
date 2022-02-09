@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AuthExtraLightResource;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\CountryExtraLightResource;
 use App\Http\Resources\CourseCollection;
@@ -13,7 +12,6 @@ use App\Http\Resources\ServiceResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Book;
-use App\Models\Category;
 use App\Models\Country;
 use App\Models\Course;
 use App\Models\Order;
@@ -294,6 +292,7 @@ class FrontendUserController extends Controller
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->back()->with('success', trans('general.process_success'));
         }
+        return redirect()->back()->with(['error' => trans('general.process_failure')]);
     }
 
     public function getRegistration()

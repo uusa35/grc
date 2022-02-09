@@ -94,7 +94,7 @@ function ElementSlider({
                                          className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
                                          fill={`none`}
                                          viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                               d="M15 19l-7-7 7-7"/>
                                     </svg>
                                 </div>
@@ -107,7 +107,7 @@ function ElementSlider({
                                          className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
                                          fill={`none`}
                                          viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                               d="M9 5l7 7-7 7"/>
                                     </svg>
                                 </div>

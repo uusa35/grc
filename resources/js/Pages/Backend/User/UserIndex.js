@@ -188,7 +188,7 @@ export default function({elements}) {
                                                                                             stroke="currentColor">
                                                                                             <path strokeLinecap="round"
                                                                                                   strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
+                                                                                                  strokeWidth="2"
                                                                                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                                                         </svg>
                                                                                         {trans('edit')} {trans('user')}
@@ -214,7 +214,7 @@ export default function({elements}) {
                                                                                                 <path
                                                                                                     strokeLinecap="round"
                                                                                                     strokeLinejoin="round"
-                                                                                                    strokeWidth={2}
+                                                                                                    strokeWidth="2"
                                                                                                     d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
                                                                                             </svg>
                                                                                             {trans('reset_password')}
@@ -243,7 +243,7 @@ export default function({elements}) {
                                                                                             stroke="currentColor">
                                                                                             <path strokeLinecap="round"
                                                                                                   strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
+                                                                                                  strokeWidth="2"
                                                                                                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                                                                         </svg>
                                                                                         {trans('list')} {trans('slides')}
@@ -271,7 +271,7 @@ export default function({elements}) {
                                                                                             stroke="currentColor">
                                                                                             <path strokeLinecap="round"
                                                                                                   strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
+                                                                                                  strokeWidth="2"
                                                                                                   d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
                                                                                         </svg>
                                                                                         {trans('create')} {trans('slide')}
@@ -300,7 +300,7 @@ export default function({elements}) {
                                                                                             stroke="currentColor">
                                                                                             <path strokeLinecap="round"
                                                                                                   strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
+                                                                                                  strokeWidth="2"
                                                                                                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                                                                         </svg>
                                                                                         {trans('list')} {trans('addresses')}
@@ -327,7 +327,7 @@ export default function({elements}) {
                                                                                             stroke="currentColor">
                                                                                             <path strokeLinecap="round"
                                                                                                   strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
+                                                                                                  strokeWidth="2"
                                                                                                   d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
                                                                                         </svg>
                                                                                         {trans('create')} {trans('address')}
@@ -357,7 +357,7 @@ export default function({elements}) {
                                                                                             stroke="currentColor">
                                                                                             <path strokeLinecap="round"
                                                                                                   strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
+                                                                                                  strokeWidth="2"
                                                                                                   d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"/>
                                                                                         </svg>
                                                                                         {trans("activate_or_deactivate")}
@@ -383,7 +383,7 @@ export default function({elements}) {
                                                                                             stroke="currentColor">
                                                                                             <path strokeLinecap="round"
                                                                                                   strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
+                                                                                                  strokeWidth="2"
                                                                                                   d="M16 15v-1a4 4 0 00-4-4H8m0 0l3 3m-3-3l3-3m9 14V5a2 2 0 00-2-2H6a2 2 0 00-2 2v16l4-2 4 2 4-2 4 2z"/>
                                                                                         </svg>
                                                                                         <span
@@ -419,7 +419,7 @@ export default function({elements}) {
                                                                                             stroke="currentColor">
                                                                                             <path strokeLinecap="round"
                                                                                                   strokeLinejoin="round"
-                                                                                                  strokeWidth={2}
+                                                                                                  strokeWidth="2"
                                                                                                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                                                                         </svg>
                                                                                         {trans("delete")}
