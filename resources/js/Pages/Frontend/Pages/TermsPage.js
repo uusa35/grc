@@ -6,7 +6,7 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function ({ settings }) {
-    const { trans ,getLocalized } = useContext(AppContext)
+    const { trans ,getLocalized , mainColor} = useContext(AppContext)
 
     return (
         <FrontendContainer>
@@ -34,7 +34,7 @@ export default function ({ settings }) {
                 <div className="w-full">
                     <h2
                         id="sale-heading"
-                        className="text-4xl mt-10 font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl capitalize"
+                        className={`text-4xl my-5 font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-50 sm:text-5xl lg:text-6xl`}
                     >
                         {trans('terms_and_conditions')}
                     </h2>
