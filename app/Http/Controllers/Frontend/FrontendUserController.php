@@ -294,7 +294,7 @@ class FrontendUserController extends Controller
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->back()->with('success', trans('general.process_success'));
         }
-        return redirect()->back()->with('error', trans('general.process_failure'));
+        return redirect()->route('frontend.user.logging')->with('error', trans('general.process_failure'));
     }
 
     public function getRegistration()
