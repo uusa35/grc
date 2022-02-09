@@ -15,7 +15,7 @@ import ConfirmationModal from "../partials/ConfirmationModal";
 
 export default function({order, settings}) {
     const {cart, locale, confirmationModal } = useSelector(state => state);
-    const {trans, classNames, getAsset} = useContext(AppContext);
+    const {trans, classNames, getAsset, mainColor , mainBgColor } = useContext(AppContext);
     const paymentMethods = [
         {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create'), enabled : settings.enable_payment_online},
         {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`), enabled:  settings.enable_payment_online},
@@ -72,16 +72,16 @@ export default function({order, settings}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <div className="w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 ">
+                <div className={`text-${mainColor}-900 dark:text-${mainColor}-50 w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 `}>
                     <CartStepper activeStep={4}/>
-                    <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('payment_process')}</h1>
+                    <h1 className="text-3xl font-extrabold py-5 ">{trans('payment_process')}</h1>
                     <OrderSummary/>
 
                     {
                         settings.enable_payment_online ? <div
                             className="flex flex-col flex-1 justify-between items-start px-8 py-6 sm:p-6 lg:p-8 border-t border-gray-50">
 
-                            <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('choose_payment_method')}</h1>
+                            <h1 className="text-3xl font-extrabold py-5 ">{trans('choose_payment_method')}</h1>
                             <div
                                 className="flex w-full flex-row flex-wrap md:flex-nowrap justify-between items-center gap-x-5 gap-y-5 rounded-lg py-6">
                                 {
@@ -140,7 +140,7 @@ export default function({order, settings}) {
                                 <a
                                     // onClick={() => dispatch(clearCart())}
                                     href={currentURL}
-                                    className="capitalize flex flex-row w-full sm:w-auto justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                    className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 capitalize flex flex-row w-full sm:w-auto justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                 >
                                     {trans('go_to_payment_page')}
                                 </a>

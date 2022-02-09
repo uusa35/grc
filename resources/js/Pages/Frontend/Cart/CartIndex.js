@@ -17,8 +17,8 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import OrderSummary from "./OrderSummary";
 
 export default function({coupon = {}}) {
-    const {cart, currency, locale} = useSelector(state => state);
-    const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
+    const {cart, locale} = useSelector(state => state);
+    const {trans, classNames, mainColor , mainBgColor } = useContext(AppContext);
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
@@ -49,18 +49,18 @@ export default function({coupon = {}}) {
             <FrontendContentContainer>
                 <div className="w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 ">
                     <CartStepper/>
-                    <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('cart')}</h1>
+                    <h1 className={`text-3xl font-bold py-5 text-${mainColor}-900 dark:text-${mainColor}-50`}>{trans('cart')}</h1>
                     <CartIndexOrderSummary/>
                     <NoElements display={isEmpty(cart.items)}/>
                     {/* Order summary */}
                     {
                         !isEmpty(cart.items) ?
                             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                                <div className={`border-${mainColor}-100 dark:border-${mainColor}-800 border  py-8 px-4 shadow sm:rounded-lg sm:px-10`}>
                                     <form className="space-y-6" onSubmit={handleSubmit}>
                                         <div>
                                             <label htmlFor="code"
-                                                   className="capitalize block text-sm font-medium text-gray-800 mb-5 text-base">
+                                                   className={`capitalize block text-sm font-medium text-${mainColor}-800 dark:text-${mainColor}-600 mb-5 text-base`}>
                                                 {trans('do_u_have_a_coupon')}
                                             </label>
                                             <div className="mt-1">
@@ -71,7 +71,7 @@ export default function({coupon = {}}) {
                                                     autoComplete="code"
                                                     onChange={handleChange}
                                                     required
-                                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                                    className={`appearance-none block w-full px-3 py-2 border border-${mainColor}-300 rounded-md shadow-sm placeholder-${mainColor}-600 text-${mainColor}-900 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm`}
                                                 />
                                             </div>
                                         </div>
@@ -79,7 +79,7 @@ export default function({coupon = {}}) {
                                             <button
                                                 disabled={isNull(data.coupon) && data.coupon.length < 3}
                                                 type="submit"
-                                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
                                             >
                                                 {trans('enter_coupon_code')}
                                             </button>

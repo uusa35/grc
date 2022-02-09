@@ -1,25 +1,20 @@
 import {useContext, useMemo, useState} from 'react'
-import {RadioGroup} from '@headlessui/react'
-import {CheckCircleIcon, TrashIcon} from '@heroicons/react/solid'
 import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, first, map, round} from "lodash";
+import {filter, first, map} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
-import axios from "axios";
-import {setShipmentFees, showToastMessage} from "../../redux/actions";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 
 export default function({countries, auth }) {
-    const {trans, getThumb, getLocalized, classNames } = useContext(AppContext);
+    const {trans, getLocalized, classNames, mainColor , mainBgColor  } = useContext(AppContext);
     const { locale } = useSelector(state => state);
     const [areas, setAreas] = useState([])
-    const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
@@ -82,17 +77,17 @@ export default function({countries, auth }) {
         <FrontendContainer>
             <FrontendContentContainer>
 
-                <div className="w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 ">
+                <div className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-50`}>
                     <CartStepper activeStep={2}/>
-                    <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('information')}</h1>
+                    <h1 className="text-3xl font-extrabold py-5 ">{trans('information')}</h1>
 
                     <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16 gap-y-5 mt-5" onSubmit={submit}>
                         <div className="col-span-full">
-                            <h2 className="text-lg font-medium text-gray-900">{trans('contact')} {trans('information')}</h2>
+                            <h2 className="text-lg font-medium "> {trans('information')}</h2>
                         </div>
                         {/* name */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-800">
+                            <label htmlFor="first-name" className="block text-sm font-medium ">
                                 {trans('name')}*
                             </label>
                             <div className="mt-1">
@@ -104,16 +99,16 @@ export default function({countries, auth }) {
                                     required
                                     defaultValue={data.name_ar}
                                     autoComplete="given-name"
-                                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.name && <div className={`text-red-900`}>{errors.name}</div>}
                                 </p>
                             </div>
                         </div>
                         {/*email*/}
                         <div className="lg:col-span-1">
-                            <label htmlFor="email-address" className="block text-sm font-medium text-gray-800">
+                            <label htmlFor="email-address" className="block text-sm font-medium ">
                                 {trans('email')}*
                             </label>
                             <div className="mt-1">
@@ -125,16 +120,16 @@ export default function({countries, auth }) {
                                     autoComplete="email"
                                     required
                                     defaultValue={data.email}
-                                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
                                 </p>
                             </div>
                         </div>
                         {/*mobile*/}
                         <div className="lg:col-span-1">
-                            <label htmlFor="mobile" className="block text-sm font-medium text-gray-800">
+                            <label htmlFor="mobile" className="block text-sm font-medium ">
                                 {trans('mobile')}
                             </label>
                             <div className="mt-1">
@@ -145,20 +140,20 @@ export default function({countries, auth }) {
                                     name="mobile"
                                     defaultValue={data.mobile}
                                     autoComplete="mobile"
-                                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
                                 </p>
                             </div>
                         </div>
                         <div className="col-span-full">
-                            <h2 className="text-lg font-medium text-gray-900">{trans('contact')} {trans('address')}</h2>
+                            <h2 className="text-lg font-medium "> {trans('address')}</h2>
                         </div>
 
                         {/* country_id */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="country_id" className="block   text-gray-800">
+                            <label htmlFor="country_id" className="block   ">
                                 {trans('country')}
                             </label>
                             <div className="mt-1">
@@ -169,7 +164,7 @@ export default function({countries, auth }) {
                                     defaultValue={data.country_id}
                                     autoComplete="country_id"
                                     required
-                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
                                 >
                                     <option value="">{trans('choose')} {trans('country')}</option>
                                     {
@@ -181,14 +176,14 @@ export default function({countries, auth }) {
                                 </select>
                             </div>
                             <ToolTipWidget message={trans('user_instruction')}/>
-                            <p className={`mt-2  text-gray-500`}>
+                            <p className={`mt-2  `}>
                                 {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
                             </p>
                         </div>
                         {/* area_id */}
                         {
                             areas && <div className="lg:col-span-1">
-                                <label htmlFor="area_id" className="block   text-gray-800">
+                                <label htmlFor="area_id" className="block   ">
                                     {trans('area')}
                                 </label>
                                 <div className="mt-1">
@@ -199,7 +194,7 @@ export default function({countries, auth }) {
                                         defaultValue={data.area_id}
                                         autoComplete="area_id"
                                         required
-                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
                                     >
                                         <option value="">{trans('choose')} {trans('area')}</option>
                                         {
@@ -211,7 +206,7 @@ export default function({countries, auth }) {
                                     </select>
                                 </div>
                                 <ToolTipWidget message={trans('user_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.area_id && <div className={`text-red-900`}>{errors.area_id}</div>}
                                 </p>
                             </div>
@@ -219,7 +214,7 @@ export default function({countries, auth }) {
 
                         {/* block */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="block" className="block text-sm font-medium text-gray-800">
+                            <label htmlFor="block" className="block text-sm font-medium ">
                                 {trans('block')}
                             </label>
                             <div className="mt-1">
@@ -230,9 +225,9 @@ export default function({countries, auth }) {
                                     name="block"
                                     defaultValue={data.block}
                                     autoComplete="given-block"
-                                    className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.block && <div className={`text-red-900`}>{errors.block}</div>}
                                 </p>
                             </div>
@@ -240,7 +235,7 @@ export default function({countries, auth }) {
 
                         {/* street */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="street" className="street text-sm font-medium text-gray-800">
+                            <label htmlFor="street" className="street text-sm font-medium ">
                                 {trans('street')}
                             </label>
                             <div className="mt-1">
@@ -251,9 +246,9 @@ export default function({countries, auth }) {
                                     name="street"
                                     defaultValue={data.street}
                                     autoComplete="given-street"
-                                    className="street w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className=" w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.street && <div className={`text-red-900`}>{errors.street}</div>}
                                 </p>
                             </div>
@@ -261,7 +256,7 @@ export default function({countries, auth }) {
 
                         {/* building */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="building" className="building text-sm font-medium text-gray-800">
+                            <label htmlFor="building" className="building text-sm font-medium ">
                                 {trans('building')}
                             </label>
                             <div className="mt-1">
@@ -272,9 +267,9 @@ export default function({countries, auth }) {
                                     name="building"
                                     defaultValue={data.building}
                                     autoComplete="given-building"
-                                    className="building w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className=" w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.building && <div className={`text-red-900`}>{errors.building}</div>}
                                 </p>
                             </div>
@@ -282,7 +277,7 @@ export default function({countries, auth }) {
 
                         {/* apartment */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="apartment" className="apartment text-sm font-medium text-gray-800">
+                            <label htmlFor="apartment" className="apartment text-sm font-medium ">
                                 {trans('apartment')}
                             </label>
                             <div className="mt-1">
@@ -293,9 +288,9 @@ export default function({countries, auth }) {
                                     name="apartment"
                                     defaultValue={data.apartment}
                                     autoComplete="given-apartment"
-                                    className="apartment w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.apartment && <div className={`text-red-900`}>{errors.apartment}</div>}
                                 </p>
                             </div>
@@ -304,7 +299,7 @@ export default function({countries, auth }) {
 
                         {/* floor */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="floor" className="floor text-sm font-medium text-gray-800">
+                            <label htmlFor="floor" className="floor text-sm font-medium ">
                                 {trans('floor')}
                             </label>
                             <div className="mt-1">
@@ -315,9 +310,9 @@ export default function({countries, auth }) {
                                     name="floor"
                                     defaultValue={data.floor}
                                     autoComplete="given-floor"
-                                    className="floor w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className=" w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2  `}>
                                     {errors.floor && <div className={`text-red-900`}>{errors.floor}</div>}
                                 </p>
                             </div>
@@ -326,7 +321,7 @@ export default function({countries, auth }) {
                         <div className="mt-10 col-span-full flex flex-col sm:flex-row  space-y-5 sm:space-y-0 justify-between items-center w-full">
                             <Link
                                 href={route('frontend.cart.index')}
-                                className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                             >
                                 <div className="flex">
                                     {locale.isRTL ?
@@ -347,7 +342,7 @@ export default function({countries, auth }) {
                             <div className="flex flex-col sm:flex-row flex-wrap space-y-5 sm:space-y-0">
                                 <button
                                     type="submit"
-                                    className="capitalize mx-10 bg-gray-400 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                                    className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 capitalize mx-10 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                 >
                                     {trans('save')} {trans('information')}
                                 </button>
@@ -356,7 +351,7 @@ export default function({countries, auth }) {
                                         <button
                                             type="button"
                                             disabled
-                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , " border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , `text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`)}
                                         >
                                             {trans('next')}
                                         </button> : null

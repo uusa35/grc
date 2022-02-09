@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 import SearchField from "../../../Frontend/partials/SearchField";
 
 const SideBar = () => {
-    const {trans , classNames , getThumb, getLocalized, isAdminOrAbove  } = useContext(AppContext);
+    const {trans , classNames , getThumb, getLocalized, isAdminOrAbove, isSuper  } = useContext(AppContext);
     const { modules, parentModule } = useSelector(state => state);
     const[sideBarOpen, toggleSideBar] = useState(false)
     const {settings, auth} = useContext(GlobalContext);
@@ -303,26 +303,28 @@ const SideBar = () => {
                                                                 </Link>
                                                             )}
                                                         </Menu.Item>
-                                                        <Menu.Item>
-                                                            {({active}) => (
-                                                                <Link
-                                                                    href={route('backend.translation.search')}
-                                                                    className={classNames(
-                                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                        `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
-                                                                    )}
-                                                                >
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                         className="h-6 w-6 mx-2" fill="none"
-                                                                         viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path strokeLinecap="round"
-                                                                              strokeLinejoin="round" strokeWidth="2"
-                                                                              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
-                                                                    </svg>
-                                                                    {trans('translation_management')}
-                                                                </Link>
-                                                            )}
-                                                        </Menu.Item>
+                                                        {
+                                                            isSuper && <Menu.Item>
+                                                                {({active}) => (
+                                                                    <Link
+                                                                        href={route('backend.translation.search')}
+                                                                        className={classNames(
+                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                            `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`
+                                                                        )}
+                                                                    >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             className="h-6 w-6 mx-2" fill="none"
+                                                                             viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path strokeLinecap="round"
+                                                                                  strokeLinejoin="round" strokeWidth="2"
+                                                                                  d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                                                                        </svg>
+                                                                        {trans('translation_management')}
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+                                                        }
                                                     </>
                                                 }
                                                 <Menu.Item>

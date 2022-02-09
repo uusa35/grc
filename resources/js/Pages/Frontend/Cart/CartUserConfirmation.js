@@ -13,7 +13,7 @@ import GlobalContext from "../../context/GlobalContext";
 
 
 export default function({countries, auth}) {
-    const {trans, getThumb, getLocalized, classNames} = useContext(AppContext);
+    const {trans, getLocalized, classNames, mainColor , mainBgColor } = useContext(AppContext);
     const [areas, setAreas] = useState([])
     const {locale, cart } = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
@@ -68,17 +68,17 @@ export default function({countries, auth}) {
         <FrontendContainer>
             <FrontendContentContainer>
 
-                <div className="w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 ">
+                <div className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-50`}>
                     <CartStepper activeStep={3}/>
-                    <h1 className="text-3xl font-extrabold py-5 text-gray-900">{trans('confirm')} {trans('information')}</h1>
+                    <h1 className="text-3xl font-extrabold py-5 ">{trans('confirm')} {trans('information')}</h1>
 
                     <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16 gap-y-5 mt-5">
                         <div className="col-span-full">
-                            <h2 className="text-lg font-medium text-gray-900">{trans('contact')} {trans('information')}</h2>
+                            <h2 className="text-lg font-medium "> {trans('information')}</h2>
                         </div>
                         {/* name */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-800">
+                            <label htmlFor="first-name" className="block text-sm font-medium ">
                                 {trans('name')}*
                             </label>
                             <div className="mt-1">
@@ -91,7 +91,7 @@ export default function({countries, auth}) {
                                     required
                                     defaultValue={auth.name_ar}
                                     autoComplete="given-name"
-                                    className="block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.name && <div className={`text-red-900`}>{errors.name}</div>}
@@ -100,7 +100,7 @@ export default function({countries, auth}) {
                         </div>
                         {/*email*/}
                         <div className="lg:col-span-1">
-                            <label htmlFor="email-address" className="block text-sm font-medium text-gray-800">
+                            <label htmlFor="email-address" className="block text-sm font-medium ">
                                 {trans('email')}*
                             </label>
                             <div className="mt-1">
@@ -113,7 +113,7 @@ export default function({countries, auth}) {
                                     autoComplete="email"
                                     required
                                     defaultValue={auth.email}
-                                    className="block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
@@ -122,7 +122,7 @@ export default function({countries, auth}) {
                         </div>
                         {/*mobile*/}
                         <div className="lg:col-span-1">
-                            <label htmlFor="mobile" className="block text-sm font-medium text-gray-800">
+                            <label htmlFor="mobile" className="block text-sm font-medium ">
                                 {trans('mobile')}
                             </label>
                             <div className="mt-1">
@@ -134,7 +134,7 @@ export default function({countries, auth}) {
                                     name="mobile"
                                     defaultValue={auth.mobile}
                                     autoComplete="mobile"
-                                    className="block w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="block w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
@@ -142,12 +142,12 @@ export default function({countries, auth}) {
                             </div>
                         </div>
                         <div className="col-span-full">
-                            <h2 className="text-lg font-medium text-gray-900">{trans('contact')} {trans('address')}</h2>
+                            <h2 className="text-lg font-medium "> {trans('address')}</h2>
                         </div>
 
                         {/* country_id */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="country_id" className="block   text-gray-800">
+                            <label htmlFor="country_id" className="block   ">
                                 {trans('country')}
                             </label>
                             <div className="mt-1">
@@ -177,7 +177,7 @@ export default function({countries, auth}) {
                         {/* area_id */}
                         {
                             areas && <div className="lg:col-span-1">
-                                <label htmlFor="area_id" className="block   text-gray-800">
+                                <label htmlFor="area_id" className="block   ">
                                     {trans('area')}
                                 </label>
                                 <div className="mt-1">
@@ -208,7 +208,7 @@ export default function({countries, auth}) {
 
                         {/* block */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="block" className="block text-sm font-medium text-gray-800">
+                            <label htmlFor="block" className="block text-sm font-medium ">
                                 {trans('block')}
                             </label>
                             <div className="mt-1">
@@ -220,7 +220,7 @@ export default function({countries, auth}) {
                                     name="block"
                                     defaultValue={auth.block}
                                     autoComplete="given-block"
-                                    className="block w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="block w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.block && <div className={`text-red-900`}>{errors.block}</div>}
@@ -230,7 +230,7 @@ export default function({countries, auth}) {
 
                         {/* street */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="street" className="street text-sm font-medium text-gray-800">
+                            <label htmlFor="street" className="street text-sm font-medium ">
                                 {trans('street')}
                             </label>
                             <div className="mt-1">
@@ -242,7 +242,7 @@ export default function({countries, auth}) {
                                     name="street"
                                     defaultValue={auth.street}
                                     autoComplete="given-street"
-                                    className="street w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="street w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.street && <div className={`text-red-900`}>{errors.street}</div>}
@@ -252,7 +252,7 @@ export default function({countries, auth}) {
 
                         {/* building */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="building" className="building text-sm font-medium text-gray-800">
+                            <label htmlFor="building" className="building text-sm font-medium ">
                                 {trans('building')}
                             </label>
                             <div className="mt-1">
@@ -264,7 +264,7 @@ export default function({countries, auth}) {
                                     name="building"
                                     defaultValue={auth.building}
                                     autoComplete="given-building"
-                                    className="building w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="building w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.building && <div className={`text-red-900`}>{errors.building}</div>}
@@ -274,7 +274,7 @@ export default function({countries, auth}) {
 
                         {/* apartment */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="apartment" className="apartment text-sm font-medium text-gray-800">
+                            <label htmlFor="apartment" className="apartment text-sm font-medium ">
                                 {trans('apartment')}
                             </label>
                             <div className="mt-1">
@@ -286,7 +286,7 @@ export default function({countries, auth}) {
                                     name="apartment"
                                     defaultValue={auth.apartment}
                                     autoComplete="given-apartment"
-                                    className="apartment w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="apartment w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.apartment && <div className={`text-red-900`}>{errors.apartment}</div>}
@@ -297,7 +297,7 @@ export default function({countries, auth}) {
 
                         {/* floor */}
                         <div className="lg:col-span-1">
-                            <label htmlFor="floor" className="floor text-sm font-medium text-gray-800">
+                            <label htmlFor="floor" className="floor text-sm font-medium ">
                                 {trans('floor')}
                             </label>
                             <div className="mt-1">
@@ -309,7 +309,7 @@ export default function({countries, auth}) {
                                     name="floor"
                                     defaultValue={auth.floor}
                                     autoComplete="given-floor"
-                                    className="floor w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    className="floor w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.floor && <div className={`text-red-900`}>{errors.floor}</div>}
@@ -320,7 +320,7 @@ export default function({countries, auth}) {
                     <div className="mt-10 col-span-full flex  flex-wrap justify-between w-full">
                         <Link
                             href={route('frontend.cart.information')}
-                            className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                            className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 flex flex-row justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                         >
                             <div className="flex">
                                 {locale.isRTL ?
@@ -348,7 +348,7 @@ export default function({countries, auth}) {
                                     <form method="post" onSubmit={handleSubmit}>
                                         <button
                                             type="submit"
-                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300`, "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300`, `text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`)}
                                         >
                                                  <span className="flex ltr:pt-2">
                                             {trans('next')}
