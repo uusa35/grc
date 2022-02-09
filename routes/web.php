@@ -108,7 +108,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('free/book/{id}', [FrontendUserController::class, 'getFreeBook'])->name('free.book');
     // Login & Registeration
     Route::get('logging', [FrontendUserController::class, 'getLogin'])->name('user.logging');
-    Route::post('logging', [FrontendUserController::class, 'postLogin'])->name('user.post.logging');
+    Route::post('logging/user', [FrontendUserController::class, 'postLogin'])->name('user.post.logging');
     Route::get('registration', [FrontendUserController::class, 'getRegistration'])->name('user.registration');
     Route::post('registration', [FrontendUserController::class, 'postRegistration'])->name('user.post.registration');
     // Newsletter
