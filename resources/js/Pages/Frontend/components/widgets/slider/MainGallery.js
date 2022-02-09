@@ -27,11 +27,11 @@ export default function({elements}) {
                 // additionalClass : 'rounded-md',
                 // thumbnailLabel : img[getLocalized()],
                 description:
-                    (img[getLocalized('description')] && img[getLocalized('description')].length > 10) || (img[getLocalized()] && img[getLocalized()].length > 10) ? <div className="flex flex-1 flex-col space-y-4 truncate capitalize p-5 w-auto h-auto">
+                    (img[getLocalized('caption')] && img[getLocalized('caption')].length > 10) || (img[getLocalized()] && img[getLocalized()].length > 10) ? <div className="flex flex-1 flex-col space-y-4 truncate capitalize p-5 w-auto h-auto">
                         <h1>{img[getLocalized()]}</h1>
                         {
-                            img[getLocalized('description')] && img[getLocalized('description')].length > 10 && <p>
-                                {img[getLocalized('description')]}
+                            img[getLocalized('caption')] && img[getLocalized('caption')].length > 10 && <p>
+                                {img[getLocalized('caption')]}
                             </p>
                                 }
                     </div> : null

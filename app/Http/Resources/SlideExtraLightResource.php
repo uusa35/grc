@@ -21,12 +21,8 @@ class SlideExtraLightResource extends JsonResource
             'type' => $this->type,
             'slidable_id' => $this->slidable_id,
             'slidable_type' => $this->slidable_type,
-            'name_ar' => $this->name_ar,
-            'name_en' => $this->name_en,
             'caption_ar' => $this->caption_ar,
             'caption_en' => $this->caption_en,
-            'description_ar' => $this->description_ar,
-            'description_en' => $this->description_en,
             'url' => $this->url,
             'image' => $this->image
         ];
