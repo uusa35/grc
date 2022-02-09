@@ -155,7 +155,7 @@ function MainNav() {
                         // leaveTo="-translate-x-full"
                     >
                         <div
-                            className={classNames(locale.isRTL ? arFont : enFont, "relative max-w-xs w-full shadow-xl pb-12 flex flex-col overflow-y-auto")}
+                            className={classNames(locale.isRTL ? arFont : enFont, "bg-white relative max-w-xs w-full shadow-xl pb-12 flex flex-col overflow-y-auto")}
                             dir={locale.dir}>
                             <div className="px-4 pt-5 pb-2 flex">
                                 <button
