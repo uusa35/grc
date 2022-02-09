@@ -200,6 +200,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('notification', NotificationController::class);
         Route::resource('shipment', ShipmentController::class)->except('index');
         Route::resource('faq', FaqController::class);
+        Route::get('translation/search', [TranslationController::class,'search'])->name('translation.search');
         Route::resource('translation', TranslationController::class);
         Route::resource('subscription', SubscriptionController::class);
         // order status switch

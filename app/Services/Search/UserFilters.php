@@ -290,4 +290,13 @@ class UserFilters extends QueryFilters
             });
         }
     }
+
+    // items for Translation search
+    public function item($search)
+    {
+        return $this->builder
+            ->where('ar', 'like', "%{$search}%")
+            ->orWhere('en', 'like', "%{$search}%")
+            ->orWhere('key', 'like', "%{$search}%");
+    }
 }

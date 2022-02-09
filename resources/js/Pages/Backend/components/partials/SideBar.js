@@ -306,7 +306,7 @@ const SideBar = () => {
                                                         <Menu.Item>
                                                             {({active}) => (
                                                                 <Link
-                                                                    href={route('backend.translation.index')}
+                                                                    href={route('backend.translation.search')}
                                                                     className={classNames(
                                                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                         `flex flex-1 flex-row items-center block px-4 py-2 text-sm w-full ltr:text-left rtl:text-right border-b border-gray-200`

@@ -10,55 +10,59 @@ import {Inertia} from "@inertiajs/inertia";
 import pluralize from 'pluralize'
 import GlobalContext from "../../context/GlobalContext";
 
-const  SearchField  =  ()  => {
+const SearchField = () => {
     const [search, setSearch] = useState()
-    const {trans, classNames, headerColor, headerBgColor  } = useContext(AppContext)
-    const { settings } = useContext(GlobalContext);
-    const { locale, searchType  } = useSelector(state => state);
-    const [requestType,setRequestType] = useState('frontend');
+    const {trans, classNames, headerColor, headerBgColor, isAdminOrAbove} = useContext(AppContext)
+    const {settings} = useContext(GlobalContext);
+    const {locale, searchType} = useSelector(state => state);
+    const [requestType, setRequestType] = useState('frontend');
     const dispatch = useDispatch();
-    const [types,setStype] = useState([
+    const [types, setStype] = useState([
         {
-            name : 'product',
-            frontend : settings.enable_products,
-            backend : settings.enable_products,
+            name: 'product',
+            frontend: settings.enable_products,
+            backend: settings.enable_products,
         },
         {
-            name : 'book',
-            'frontend' : settings.enable_books,
-            'backend' : settings.enable_books,
+            name: 'book',
+            'frontend': settings.enable_books,
+            'backend': settings.enable_books,
         },
         {
-            name : 'service',
-            'frontend' : settings.enable_services,
-            'backend' : settings.enable_services,
+            name: 'service',
+            'frontend': settings.enable_services,
+            'backend': settings.enable_services,
         },
         {
-            name : 'course',
-            'frontend' : settings.enable_courses,
-            'backend' : settings.enable_courses,
+            name: 'course',
+            'frontend': settings.enable_courses,
+            'backend': settings.enable_courses,
         },
         {
-            name : 'user',
-            'frontend' : settings.enable_books,
-            'backend' : settings.enable_books,
+            name: 'user',
+            'frontend': settings.enable_books,
+            'backend': settings.enable_books,
         },
         {
-            name : 'order',
-            'frontend' : false,
-            'backend' : true,
-        }
+            name: 'order',
+            'frontend': false,
+            'backend': true,
+        },
+        {
+            name: 'translation',
+            'frontend': false,
+            'backend': isAdminOrAbove,
+        },
     ]);
 
     useMemo(() => {
         isNull(searchType) ? dispatch(setSearchType(first(filter(types, t => t.frontend)).name)) : null;
-    },[])
-
+    }, [])
 
 
     const submit = (e) => {
         e.preventDefault();
-        if(searchType && requestType && route().has(`${requestType}.${searchType}.index`)) {
+        if (searchType && requestType && route().has(`${requestType}.${searchType}.index`)) {
             return Inertia.get(route(`${requestType}.${searchType}.index`, {search}))
         }
     }
@@ -68,7 +72,7 @@ const  SearchField  =  ()  => {
     useMemo(() => {
         const currentRoute = first(split(route().current(), '.'))
         setRequestType(currentRoute);
-    },[route().current()])
+    }, [route().current()])
 
     return (
         <div className="hidden xl:flex flex-row mb-1">
@@ -77,7 +81,8 @@ const  SearchField  =  ()  => {
                     {trans('search')}
                 </label>
                 <div className="mt-1 w-60 relative  shadow-sm rounded-md">
-                    <div className={classNames(locale.isRTL ? `left-0` : `left-32` , "absolute inset-y-0  flex items-center rounded-md")}>
+                    <div
+                        className={classNames(locale.isRTL ? `left-0` : `left-32`, "absolute inset-y-0  flex items-center rounded-md")}>
                         <label htmlFor="search" className="sr-only">
                             {`${trans('search')} `}
                         </label>
@@ -87,10 +92,11 @@ const  SearchField  =  ()  => {
                             name="type"
                             defaultValue={searchType}
                             autoComplete="type"
-                            className={classNames(locale.isRTL ? `` :  ``, 'border-t border-b rounded-t-md rounded-b-md focus:border-transparent focus:ring-transparent  h-full rtl:pl-4 ltr:pl-1 border-transparent bg-transparent text-gray-500 sm:text-sm font-bold')}
+                            className={classNames(locale.isRTL ? `` : ``, 'border-t border-b rounded-t-md rounded-b-md focus:border-transparent focus:ring-transparent  h-full rtl:pl-4 ltr:pl-1 border-transparent bg-transparent text-gray-500 sm:text-sm font-bold')}
                         >
                             {
-                                map(filter(types, t => t[requestType]), type => <option key={`${type.name}`} value={`${type.name}`} >{capitalize(trans(pluralize(type.name)))}</option>)
+                                map(filter(types, t => t[requestType]), type => <option key={`${type.name}`}
+                                                                                        value={`${type.name}`}>{capitalize(trans(pluralize(type.name)))}</option>)
                             }
                         </select>
                     </div>
@@ -100,18 +106,19 @@ const  SearchField  =  ()  => {
                             type="text"
                             name="search"
                             id="search"
-                            className={classNames(locale.isRTL ? `rounded-r-md` :  `rounded-l-md `, `font-bold focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm  border-${headerColor}-50  dark:border-${headerColor}-400`)}
+                            className={classNames(locale.isRTL ? `rounded-r-md` : `rounded-l-md `, `font-bold focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm  border-${headerColor}-50  dark:border-${headerColor}-400`)}
                             placeholder={`${trans('search')}`}
                         />
                     </form>
                 </div>
             </div>
             <div
-                className={classNames(locale.isRTL ? `rounded-l-md` :  `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border border-${headerColor}-50  dark:border-${headerColor}-400`)}>
+                className={classNames(locale.isRTL ? `rounded-l-md` : `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border border-${headerColor}-50  dark:border-${headerColor}-400`)}>
                 <Link
-                    href={route(`${requestType}.${searchType}.index`, {search})}
+                    href={route().has(`${requestType}.${searchType}.index`) ? route(`${requestType}.${searchType}.index`, {search}) : '#'}
                     className="px-5">
-                    <SearchIcon className={`h-5 w-5 text-${headerColor}-900 dark:text-${headerColor}-400`} aria-hidden="true"/>
+                    <SearchIcon className={`h-5 w-5 text-${headerColor}-900 dark:text-${headerColor}-400`}
+                                aria-hidden="true"/>
                 </Link>
             </div>
         </div>

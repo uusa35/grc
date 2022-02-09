@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TranslationLightResource;
 use App\Models\Translation;
+use App\Services\Search\TranslationFilters;
 use Illuminate\Http\Request;
 
 class TranslationController extends Controller
@@ -16,7 +17,17 @@ class TranslationController extends Controller
      */
     public function index()
     {
-        $elements = TranslationLightResource::collection(Translation::paginate(Self::TAKE_MID));
+        return redirect()->route('backend.translation.search',request()->getQueryString());
+    }
+
+    public function search(TranslationFilters $filters)
+    {
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+        if ($validator->fails()) {
+            return inertia('Backend/Translation/TranslationIndex', $validator->errors()->all());
+        }
+        $elements = TranslationLightResource::collection(Translation::filters($filters)->paginate(Self::TAKE_MID)
+            ->withQueryString());
         return inertia('Backend/Translation/TranslationIndex', compact('elements'));
     }
 
