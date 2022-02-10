@@ -16,6 +16,7 @@ import NormalUserWidget from '../user/NormalUserWidget';
 // import Swiper core and required modules
 import {Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import VirticalProductWidget from "../product/VirticalProductWidget";
 
 
 function ElementSlider({
@@ -41,7 +42,7 @@ function ElementSlider({
             case 'category':
                 return <CategoryWidget element={s} type={moduleType}/>;
             case 'product':
-                return <NormalProductWidget element={s}/>;
+                return slidesPerView === 2 ? <VirticalProductWidget element={s}/> : <NormalProductWidget element={s}/> ;
             case 'book':
                 return <NormalBookWidget element={s}/>;
             case 'course':

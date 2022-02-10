@@ -12,7 +12,7 @@ export default function ElementPrice({price, salePrice, isOnSale, large = false,
     const [localCurrency, setLocalCurrency] = useState(first(filter(currencies, c => c.country.is_local)));
 
     return (
-        <>
+        <div className={`w-full`}>
             {
                 settings.enable_prices ? <>
                         <div className="flex flex-row flex-1 justify-between items-start m-2">
@@ -49,6 +49,6 @@ export default function ElementPrice({price, salePrice, isOnSale, large = false,
                     : null
             }
 
-        </>
+        </div>
     );
 }

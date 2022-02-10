@@ -107,7 +107,7 @@ export default function HomePage({
                             />
                             <ElementSlider
                                 elements={newOnHomeProducts}
-                                slidesPerView={slideNumber}
+                                slidesPerView={2}
                                 title={trans('featured_products')}
                                 type={'product'}
                             />
