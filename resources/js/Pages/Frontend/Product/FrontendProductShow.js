@@ -200,7 +200,7 @@ export default function({element, relatedElements, auth, settings}) {
                         </div>
                         {/* Product info */}
                         <div className="mx-5 mt-10 pt-10 sm:px-0 sm:mt-16 lg:mt-0">
-                            <h1 className={`text-3xl font-bold tracking-tight text-${mainColor}-800 dark:text-${mainColor}-50800,50)}`}>{element[getLocalized()]}</h1>
+                            <h1 className={`text-3xl font-bold tracking-tight text-${mainColor}-800 dark:text-${mainColor}-50`}>{element[getLocalized()]}</h1>
                             <div className="mt-3">
                                 <h2 className="sr-only">{trans('information')}</h2>
                                 <ElementPrice price={finalPrice}
