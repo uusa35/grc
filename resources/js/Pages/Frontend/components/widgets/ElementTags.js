@@ -40,7 +40,7 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
                 showFavoriteIcon && <div
                     className={classNames(locale.isRTL ? `left-2` : `right-2`, `absolute top-8 flex flex-col  gap-y-3 text-white text-sm bg-transparent rounded-full w-10 h-10 justify-center items-center opacity-80`)}>
                     <HeartIcon fill={'none'}
-                               className={`h-7 w-7 text-${mainColor}-800 text-${mainColor}-600 hover:text-${mainColor}-400`}/>
+                               className={`h-7 w-7 text-${mainColor}-800 text-${mainColor}-800 hover:text-${mainColor}-400`}/>
                 </div>
             }
         </div>
