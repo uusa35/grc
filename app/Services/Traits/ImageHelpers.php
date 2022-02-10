@@ -223,7 +223,7 @@ trait ImageHelpers
         $img->resize($width, null, function ($constraint) {
             $constraint->aspectRatio();
         });
-        $img->save(storage_path('app/public/uploads/images/' . $sizeType . '/' . $imagePath), env('IMAGE_QUALITY');
+        $img->save(storage_path('app/public/uploads/images/' . $sizeType . '/' . $imagePath), env('IMAGE_QUALITY'));
         if (env('FILESYSTEM_CLOUD') === 'do') {
             try {
                 $fullPath = 'public/uploads/images/' . $sizeType . '/' . $imagePath;
