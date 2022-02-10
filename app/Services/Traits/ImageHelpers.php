@@ -411,7 +411,7 @@ trait ImageHelpers
                     } else {
                         $img->resize($dimensions[0] / 2, $dimensions[1] / 2)->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
                     }
-                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
+                    $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');;
                 } elseif ($value === 'thumbnail') {
                     if ($ratio) {
                         $img->resize($dimensions[0] / 3, null, function ($constraint) {
@@ -422,7 +422,7 @@ trait ImageHelpers
                     }
                     $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
                 }
-            }a
+            }
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
