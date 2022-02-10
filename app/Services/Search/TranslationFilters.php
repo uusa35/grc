@@ -20,4 +20,9 @@ class TranslationFilters extends QueryFilters
             ->orWhere('en', 'like', "%{$search}%")
             ->orWhere('key', 'like', "%{$search}%");
     }
+
+    public function page()
+    {
+        return $this->builder;
+    }
 }
