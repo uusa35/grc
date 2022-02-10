@@ -10,6 +10,7 @@ import route from "ziggy-js";
 import {setShipmentFees} from "../../redux/actions";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 import GlobalContext from "../../context/GlobalContext";
+import {Inertia} from "@inertiajs/inertia";
 
 
 export default function({countries, auth}) {
@@ -20,7 +21,7 @@ export default function({countries, auth}) {
     const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
-    const {data, setData, put, post, progress, reset} = useForm({
+    const {data, setData, put, post, get, progress, reset} = useForm({
         'name': auth ? auth.name_ar : '',
         'name_ar': auth ? auth.name_ar : '',
         'name_en': auth ? auth.name_ar : '',
@@ -61,7 +62,11 @@ export default function({countries, auth}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('frontend.cart.payment.post'), {...data})
+        if(cart.items.length === 0) {
+            return Inertia.get(route(`frontend.cart.index`), {}, { error : 'Your cart is empty'})
+        } else {
+            return post(route('frontend.cart.payment.post'), {...data})
+        }
     }
 
     return (

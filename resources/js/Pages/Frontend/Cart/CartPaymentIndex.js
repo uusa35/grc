@@ -11,6 +11,7 @@ import {map, filter} from 'lodash';
 import axios from 'axios';
 import {showModal} from "../../redux/actions";
 import ConfirmationModal from "../partials/ConfirmationModal";
+import { clearCart} from "../../redux/actions";
 
 
 export default function({order, settings}) {
@@ -138,7 +139,7 @@ export default function({order, settings}) {
                         {
                             settings.enable_payment_online ? <div className="flex">
                                 <a
-                                    // onClick={() => dispatch(clearCart())}
+                                    onClick={() => dispatch(clearCart())}
                                     href={currentURL}
                                     className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 capitalize flex flex-row w-full sm:w-auto justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                 >
