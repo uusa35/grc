@@ -76,8 +76,8 @@ export default function({elements}) {
                                 {map(elements.data, element => (
                                     <tr key={element.id}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm break-all text-ellipsis overflow-hidden capitalize  ">{element.ar}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm break-all text-ellipsis overflow-hidden capitalize">{element.en}</td>
+                                        <td className="px-6 py-4  text-sm break-all text-ellipsis overflow-hidden capitalize  ">{element.ar}</td>
+                                        <td className="px-6 py-4  text-sm break-all text-ellipsis overflow-hidden capitalize">{element.en}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.translation.edit`, element.id)}
