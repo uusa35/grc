@@ -12,6 +12,7 @@ export default function AboutusPage({settings}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
+                <SubMetaElement title={trans('aboutus')}/>
                 <div className="bg-transparent relative overflow-hidden">
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
