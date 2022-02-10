@@ -110,6 +110,7 @@ export default function HomePage({
                                 slidesPerView={2}
                                 title={trans('featured_products')}
                                 type={'product'}
+                                virtical={!isMobile}
                             />
 
                             {map(filter(categoriesWithProducts, c => c.products && !isEmpty(c.products)), category =>

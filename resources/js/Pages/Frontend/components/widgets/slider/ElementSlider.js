@@ -17,7 +17,7 @@ import NormalUserWidget from '../user/NormalUserWidget';
 import {Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import VirticalProductWidget from "../product/VirticalProductWidget";
-
+import {isMobile, isTablet} from 'react-device-detect';
 
 function ElementSlider({
                            elements,
@@ -29,6 +29,7 @@ function ElementSlider({
                            showNavigation = true,
                            showPagination = true,
                            params = '',
+    virtical = false,
                        }) {
     const {isRTL} = useSelector(state => state.locale)
     const {mainColor, mainBgColor, trans, classNames} = useContext(AppContext);
@@ -42,7 +43,7 @@ function ElementSlider({
             case 'category':
                 return <CategoryWidget element={s} type={moduleType}/>;
             case 'product':
-                return slidesPerView === 2 ? <VirticalProductWidget element={s}/> : <NormalProductWidget element={s}/> ;
+                return slidesPerView === 2 && virtical  ? <VirticalProductWidget element={s}/> : <NormalProductWidget element={s}/> ;
             case 'book':
                 return <NormalBookWidget element={s}/>;
             case 'course':
@@ -68,12 +69,12 @@ function ElementSlider({
                         href={route(`frontend.${type}.index`, params ? params : '')}
                         className="w-full flex flex-grow h-auto mb-5 justify-center items-center capitalize rtl:text-right ltr:text-left text-xl "
                     >
-                        <div className="flex flex-grow flex-col items-center justify-center rtl:pr-10 ltr:pl-10">
+                        <div className="flex flex-grow flex-col items-center justify-center p-0 lg:rtl:pr-10 lg:ltr:pl-10">
                             <motion.div
                                 initial={false}
                                 whileHover={{scale: 1.08}}
                             >
-                                <div className="flex items-center justify-end">
+                                <div className="flex items-center justify-center">
                                     <span
                                         className={`text-md lg:text-2xl text-${mainColor}-800 dark:text-${mainColor}-50`}>{pluralize(title)}</span>
                                 </div>
