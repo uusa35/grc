@@ -7,12 +7,12 @@ import axios from "axios";
 export function* startEnableBootStrappedScenario(action) {
     try {
         const translations = yield call(getTranslations);
-        const {currencies } = action.payload;
+        const {currencies , theme } = action.payload;
         yield all([
             put({type: actions.SET_CURRENCIES, payload: currencies}),
             put({type: actions.SET_CURRENCY, payload: first(currencies)}),
             // put({type: actions.SET_SETTINGS, payload: settings}),
-            // put({type: actions.SET_AUTH, payload: auth}),
+            put({type: actions.SET_THEME, payload: theme}),
             put({type: actions.SET_TRANSLATIONS, payload: translations}),
             put({type: actions.DISABLE_LOADING}),
             put({type: actions.ENABLE_BOOTSTRAPPED}),

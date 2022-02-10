@@ -1,15 +1,17 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import PropTypes from 'prop-types';
 import MainNav from "../partials/header/MainNav";
 import {AppContext} from "../../context/AppContext";
 import Footer from "../partials/footer/Footer";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 import SystemMessage from "../../Backend/components/partials/SystemMessage";
+import GlobalContext from "../../context/GlobalContext";
+import {setTheme} from "../../redux/actions";
 
 const FrontendContainer = ({children}) => {
-    const {locale} = useSelector(state => state)
-    const {classNames, arFont, enFont , mainColor, mainBgColor, theme } = useContext(AppContext);
+    const {locale, theme } = useSelector(state => state)
+    const {classNames, arFont, enFont , mainColor, mainBgColor } = useContext(AppContext);
 
     return (
         <div className={classNames(locale.isRTL ? arFont : enFont,` ${theme} h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize `)} dir={locale.dir}>

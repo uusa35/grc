@@ -89,8 +89,7 @@ const AppContextProvider = ({children}) => {
         headerColor: settings.header_theme_color,
         headerBgColor: settings.header_theme_bg,
         footerColor: settings.footer_theme_color,
-        footerBgColor: settings.footer_bg_theme_color,
-        theme: settings.theme
+        footerBgColor: settings.footer_bg_theme_color
     };
 
     useMemo(() => {
@@ -119,9 +118,9 @@ const AppContextProvider = ({children}) => {
     }, [])
 
     useMemo(() => {
-        // if ((!bootStrapped && navigator.onLine)) {
-        dispatch(startBootStrapped({currencies}))
-        // }
+        if ((!bootStrapped && navigator.onLine)) {
+        dispatch(startBootStrapped({currencies, theme : settings.theme }))
+        }
     }, [])
 
     useEffect(() => {

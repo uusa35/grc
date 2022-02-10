@@ -123,3 +123,8 @@ export const setSearchType = payload => ({
     type : actions.SET_SEARCH_TYPE,
     payload,
 })
+
+export const setTheme = payload => ({
+    type : actions.SET_THEME,
+    payload,
+})

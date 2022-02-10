@@ -42,3 +42,4 @@ export const SET_FORM_TABS = 'SET_FORM_TABS';
 export const SET_CURRENT_FORM_TAB = 'SET_CURRENT_FORM_TAB';
 export const SET_SEARCH_TYPE = 'SET_SEARCH_TYPE';
 export const SET_TRANSLATIONS = 'SET_TRANSLATIONS';
+export const SET_THEME  = 'SET_THEME';

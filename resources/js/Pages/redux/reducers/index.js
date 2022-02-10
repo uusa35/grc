@@ -14,7 +14,7 @@ import toastMessage from './toastMessage'
 import sideBarOpen from './sideBarOpen'
 import sort from './sort'
 import bootStrapped from './bootStrapped'
-// import settings from './settings'
+import theme from './theme'
 import parentModule from './parentModule'
 import searchType from "./searchType";
 import translations from "./translations";
@@ -35,7 +35,7 @@ export default combineReducers({
     sideBarOpen,
     sort,
     bootStrapped,
-    // settings,
+    theme,
     parentModule,
     searchType,
     translations

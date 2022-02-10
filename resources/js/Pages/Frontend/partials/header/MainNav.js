@@ -3,7 +3,8 @@ import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
     ShoppingBagIcon,
-    XIcon
+    XIcon,
+MoonIcon
 } from '@heroicons/react/outline'
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
@@ -15,7 +16,7 @@ import SearchField from "../SearchField";
 import MainNavBookCategoriesList from "./MainNavBookCategoriesList";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 import {useDispatch, useSelector} from "react-redux";
-import {changeLang, setCurrency, setParentModule} from "../../../redux/actions";
+import {changeLang, setCurrency, setParentModule, setTheme} from "../../../redux/actions";
 import GlobalContext from "../../../context/GlobalContext";
 import {motion} from "framer-motion"
 import CartIndexOrderSummary from "../../Cart/CartIndexOrderSummary";
@@ -41,22 +42,30 @@ function MainNav() {
         arFont, enFont,
         headerColor,
         headerBgColor,
-        mainBgColor
+        mainBgColor,
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const {auth, settings, currencies, categories, mgt} = globalContext;
-    const {locale, currency, cart, parentModule} = useSelector(state => state);
+    const {locale, currency, cart, parentModule, theme } = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch();
     const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
     const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
+
+    const handleTheme = () => dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
 
     return (
         <div className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 rtl:text-right ltr:text-left`}>
             {/* Top Nav*/}
             <div
                 className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
-                <div className="grid grid-cols-5 gap-x-5">
+                <div className="grid grid-cols-6 gap-x-5">
+                    <button className={`col-span-1`} onClick={() => handleTheme()}>
+                        <MoonIcon size={22}
+                                  fill={theme === 'dark' ? headerColor : 'none'}
+                                     className={`text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                        <span className="sr-only">{trans('theme')}</span>
+                    </button>
                     {
                         settings.instagram && <a as={Link} target="_blank" href={settings.instagram}>
                             <FaInstagram size={22}
