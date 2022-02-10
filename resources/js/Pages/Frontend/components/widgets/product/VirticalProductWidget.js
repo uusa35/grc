@@ -9,8 +9,8 @@ import {motion} from "framer-motion"
 import {useSelector} from "react-redux";
 
 export default function({element}) {
-    const {getLocalized, getThumb, mainBgColor, mainColor, trans, classNames } = useContext(AppContext);
-    const { locale } = useSelector(state => state);
+    const {getLocalized, getThumb, mainBgColor, mainColor, trans, classNames} = useContext(AppContext);
+    const {locale} = useSelector(state => state);
 
     return (
         <motion.div
@@ -38,7 +38,7 @@ export default function({element}) {
                     <div className="flex flex-row w-full justify-between items-center">
                         <h3 className={`text-2xl text-base font-bold text-${mainColor}-800 dark:text-${mainColor}-50  truncate`}>
                             <Link
-                                href={route('frontend.product.show', element.id)}>
+                                href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
                                 <span className=""/>
                                 {truncate(element[getLocalized()], {length: 20})}
                             </Link>
@@ -60,14 +60,15 @@ export default function({element}) {
                         }
                     </div>
                     <Link
-                        href={route('frontend.product.show', element.id)}
+                        href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}
                         className={`flex bg-${mainColor}-800 dark:bg-${mainColor}-400 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
                     >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`} fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                                 </svg>
                             </div>
                             <div className={`text-sm`}>

@@ -33,7 +33,7 @@ export default function NormalProductWidget({element}) {
                 </div>
                 <div className="flex flex-row flex-1 justify-between items-center m-2">
                     <h3 className={`text-base font-bold text-${mainColor}-800 dark:text-${mainColor}-50  truncate`}>
-                        <Link href={route('frontend.product.show', element.id)}>
+                        <Link href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
                             <span className=""/>
                             {truncate(element[getLocalized()], {length: 20})}
                         </Link>
