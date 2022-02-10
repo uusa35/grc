@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 
 
 export default function({countries}) {
-    const {trans, getThumb, getLocalized, classNames } = useContext(AppContext);
+    const {trans, getThumb, getLocalized, classNames, mainColor , mainBgColor  } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const { settings } = globalContext;
     const { locale} = useSelector(state => state);
@@ -68,10 +68,10 @@ export default function({countries}) {
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
                         <img
                             className="mx-auto h-16 w-auto"
-                            src={settings.mgt ? getThumb(settings.image) : getThumb(settings.app_logo)}
+                            src={getThumb(settings.image)}
                             alt="Workflow"
                         />
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">{trans('register_new_user')}</h2>
+                        <h2 className={`mt-6 text-center text-3xl font-extrabold text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('register_new_user')}</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
                         </p>
                     </div>
@@ -211,7 +211,7 @@ export default function({countries}) {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                        className="capitalize w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                                     >
                                         {trans('register')}
                                     </button>

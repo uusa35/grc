@@ -60,10 +60,10 @@ export default function() {
                     </div>
 
                     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                        <div className={`bg-white dark:bg-${mainBgColor}-500  py-8 px-4 shadow sm:rounded-lg sm:px-10`}>
                             <form className="space-y-6" onSubmit={submit}>
                                 <div>
-                                    <label htmlFor="email" className={`block text-sm font-medium text-${mainColor}-800 dark:text-${mainColor}-100`}>
+                                    <label htmlFor="email" className={`block text-sm font-medium text-${mainColor}-800 dark:text-${mainColor}-900`}>
                                         {trans('email')}
                                     </label>
                                     <div className="mt-1">
@@ -80,7 +80,7 @@ export default function() {
                                 </div>
 
                                 <div>
-                                    <label htmlFor="password" className={`block text-sm font-medium text-${mainColor}-800 dark:text-${mainColor}-100`}>
+                                    <label htmlFor="password" className={`block text-sm font-medium text-${mainColor}-800 dark:text-${mainColor}-900`}>
                                         {trans('password')}
                                     </label>
                                     <div className="mt-1">
@@ -102,9 +102,9 @@ export default function() {
                                             id="remember-me"
                                             name="remember-me"
                                             type="checkbox"
-                                            className="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded"
+                                            className="h-4 w-4 focus:ring-gray-500 border-gray-300 rounded"
                                         />
-                                        <label htmlFor="remember-me" className="mx-2 block text-sm text-gray-900">
+                                        <label htmlFor="remember-me" className={`mx-2 block text-sm text-black dark:text-${mainColor}-50`}>
                                             {trans('remember_me')}
                                         </label>
                                     </div>
@@ -120,7 +120,7 @@ export default function() {
                                 <div>
                                     <button
                                         type="submit"
-                                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${mainBgColor}-400  hover:bg-${mainBgColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${mainColor}-500`}
+                                        className={`capitalize w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${mainBgColor}-400  hover:bg-${mainBgColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${mainColor}-500`}
                                     >
                                         {trans('login')}
                                     </button>
