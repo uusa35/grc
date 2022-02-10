@@ -1,29 +1,25 @@
-import {createContext, useContext, useEffect, useLayoutEffect, useMemo, useState} from 'react';
+import {createContext, useContext, useEffect, useMemo, useState} from 'react';
 import GlobalContext from "./GlobalContext";
-import {split, map, isEmpty, filter, first} from 'lodash';
+import {split, map, isEmpty} from 'lodash';
 import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
-import {isLocal} from "../helpers";
-import moment from "moment";
 import {ToastContainer} from 'react-toastify';
 
 import {toast} from 'react-toastify';
 import {GrClose, IoCloseOutline} from "react-icons/all";
 import {useSelector, useDispatch} from "react-redux";
-import {translations} from './../../Pages/translations';
 import {
     prepareCart,
     setBreadCrumbs,
     setModules,
-    setParentModule, setShipmentFees, showToastMessage,
+    setParentModule,
     startBootStrapped
 } from "../redux/actions";
 import LoadingView from "../Backend/components/widgets/LoadingView";
-import ConfirmationModal from "../Backend/components/partials/ConfirmationModal";
 import {capitalize} from "lodash/string";
-import Echo from 'laravel-echo'
-import Pusher from "pusher-js";
+// import Echo from 'laravel-echo'
+// import Pusher from "pusher-js";
 
 const AppContext = createContext({});
 

@@ -16,7 +16,7 @@ import SearchField from "../SearchField";
 import MainNavBookCategoriesList from "./MainNavBookCategoriesList";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 import {useDispatch, useSelector} from "react-redux";
-import {changeLang, setCurrency, setParentModule, setTheme} from "../../../redux/actions";
+import {changeLang, setCurrency, setTheme} from "../../../redux/actions";
 import GlobalContext from "../../../context/GlobalContext";
 import {motion} from "framer-motion"
 import CartIndexOrderSummary from "../../Cart/CartIndexOrderSummary";
