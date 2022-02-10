@@ -17,16 +17,16 @@ export default function ElementPrice({price, salePrice, isOnSale, large = false,
                 settings.enable_prices ? <>
                         <div className="flex flex-row flex-1 justify-between items-start m-2">
                             {free ?
-                                <p className={classNames(isOnSale ? '' : '', `mt-1  text-${mainColor}-800 dark:text=${mainColor}-50 ${large ? 'text-lg sm:text-3xl' : 'text-sm smm:text-lg'}`)}>
+                                <p className={classNames(isOnSale ? '' : '', `mt-1  text-${mainColor}-800 dark:text=${mainColor}-50 ${large ? 'text-lg sm:text-3xl' : 'text-sm sm:text-lg'}`)}>
                                     {trans('free')}
                                 </p> :
-                                <p className={classNames(isOnSale ? 'line-through' : '', `mt-1  text-${mainColor}-800 dark:text-${mainColor}-400 ${large ? 'text-lg sm:text-3xl' : 'text-sm smm:text-lg'}`)}>
+                                <p className={classNames(isOnSale ? 'line-through' : '', `mt-1  text-${mainColor}-800 dark:text-${mainColor}-400 ${large ? 'text-lg sm:text-3xl' : 'text-sm sm:text-lg'}`)}>
                                     {getConvertedFinalPrice(price, currency.exchange_rate)} {currency[getLocalized('currency_symbol')]}
                                 </p>
                             }
                             {
                                 isOnSale && !free &&
-                                <p className={`mt-1  text-red-900 ${large ? 'text-lg sm:text-3xl' : 'text-sm smm:text-lg'}`}>
+                                <p className={`mt-1  text-red-900 ${large ? 'text-lg sm:text-3xl' : 'text-sm sm:text-lg'}`}>
                                     {getConvertedFinalPrice(salePrice, currency.exchange_rate)} {currency[getLocalized('currency_symbol')]}
                                 </p>
                             }
@@ -34,12 +34,12 @@ export default function ElementPrice({price, salePrice, isOnSale, large = false,
                         {
                             !isEmpty(currency) && !currency.country?.is_local && showLocal && !free &&
                             <div className="flex flex-row flex-1 justify-between items-start m-2">
-                                <p className={classNames(isOnSale ? 'line-through' : '', `mt-1  text-${mainColor}-800 dark:text-${mainColor}-400 ${large ? 'text-sm sm:text-lg' : 'text-sm smm:text-lg'}`)}>
+                                <p className={classNames(isOnSale ? 'line-through' : '', `mt-1  text-${mainColor}-800 dark:text-${mainColor}-400 ${large ? 'text-sm sm:text-lg' : 'text-sm sm:text-lg'}`)}>
                                     {getConvertedFinalPrice(price, localCurrency.exchange_rate)} {localCurrency[getLocalized('currency_symbol')]}
                                 </p>
                                 {
                                     isOnSale && !free &&
-                                    <p className={`mt-1  text-red-800 dark:text-red-400 ${large ? 'text-sm sm:text-lg' : 'text-sm sm:text-sm'}`}>
+                                    <p className={`mt-1  text-red-800 dark:text-red-400 ${large ? 'text-sm sm:text-lg' : 'text-sm sm:text-lg'}`}>
                                         {getConvertedFinalPrice(salePrice, localCurrency.exchange_rate)} {localCurrency[getLocalized('currency_symbol')]}
                                     </p>
                                 }

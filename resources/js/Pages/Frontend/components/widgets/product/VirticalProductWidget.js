@@ -35,19 +35,26 @@ export default function({element}) {
                     <ElementPrice price={element.price}
                                   salePrice={element.sale_price}
                                   isOnSale={element.isOnSale}/>
-                    <div className="flex justify-between">
+                    <div className="flex flex-row w-full justify-between items-center">
                         <h3 className={`text-2xl text-base font-bold text-${mainColor}-800 dark:text-${mainColor}-50  truncate`}>
                             <Link
-                                className="font-medium text-gray-700 hover:text-gray-800"
                                 href={route('frontend.product.show', element.id)}>
                                 <span className=""/>
                                 {truncate(element[getLocalized()], {length: 20})}
                             </Link>
                         </h3>
+                        <Link href={route('frontend.user.show', element.user.id)}>
+                            <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-cover shadow-sm"
+                                 src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
+                                 width={360}
+                                 height={480}
+                                 loading='lazy'
+                            />
+                        </Link>
                     </div>
                     <div className={`flex flex-1`}>
                         {element[getLocalized('description')] && element[getLocalized('description')].length > 10 &&
-                        <p className={`break-all pt-3 text-sm text-ellipsis overflow-hidden capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-50`}>
+                        <p className={`break-all pt-3 text-sm text-ellipsis overflow-hidden capitalize text-${mainColor}-800 dark:text-${mainColor}-50`}>
                             {truncate(element[getLocalized('description')], {length: 150})}
                         </p>
                         }
