@@ -131,7 +131,7 @@ function ElementSlider({
                         cssMode={true}
                         className="mySwiper"
                         slidesPerGroup={slidesPerView}
-                        spaceBetween={20}
+                        spaceBetween={10}
                         slidesPerView={slidesPerView}
                         // onSlideChange={() => console.log('slide change')}
                         // onSwiper={(swiper) => console.log(swiper)}

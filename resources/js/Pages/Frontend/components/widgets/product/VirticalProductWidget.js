@@ -17,7 +17,7 @@ export default function({element}) {
             initial={false}
             whileHover={{scale: 0.95}}
         >
-            <div className={`bg-transparent flex border border-${mainColor}-100 dark:border-${mainColor}-100 rounded-md`}>
+            <div className={`bg-transparent flex border border-${mainBgColor}-100 dark:border-${mainBgColor}-400 border-opacity-20 rounded-md`}>
 
                 <div className="w-1/2 rounded-t-sm overflow-hidden  sm:h-auto">
                     <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}
