@@ -60,14 +60,14 @@ function ElementSlider({
     const handlePrev = () => setCurrentRevValue('prev')
 
     return (
-        <div className={`w-full  dark:bg-${mainBgColor}-400 rounded-lg shadow-md sm:p-6 lg:p-8`}>
+        <div className={`w-full  dark:bg-${mainBgColor}-600 rounded-lg shadow-md sm:p-6 lg:p-8`}>
             {!isEmpty(elements) && route().has(`frontend.${type}.index`) && (
                 <>
                     <Link
                         href={route(`frontend.${type}.index`, params ? params : '')}
                         className="w-full flex flex-grow h-auto mb-5 justify-between items-center capitalize rtl:text-right ltr:text-left text-xl "
                     >
-                        <div className="flex flex-grow flex-col items-center justify-center rtl:pr-10 ltr:pl-10">
+                        <div className="flex flex-grow flex-col items-center justify-center rtl:pr-8 ltr:pl-8">
                             <motion.div
                                 initial={false}
                                 whileHover={{scale: 1.08}}
@@ -89,7 +89,7 @@ function ElementSlider({
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
                                 <div
-                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-md`}>
+                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-md dark:border dark:border-${mainBgColor}-400`}>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
                                          fill={`none`}
@@ -102,7 +102,7 @@ function ElementSlider({
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
                                 <div
-                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-md`}>
+                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-md dark:border dark:border-${mainBgColor}-400`}>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
                                          fill={`none`}
@@ -140,9 +140,10 @@ function ElementSlider({
                         ))}
                     </Swiper>
                     {
-                        elements.length > 4 && <div className="flex grow items-center justify-center space-x-8  h-auto">
+                        elements.length > 4 && <div className="flex grow items-center justify-center  h-auto">
                             <button
                                 onClick={handlePrev}
+                                className={`ltr:ml-5 rtl:mr-5`}
                                 ref={navigationPrevRef}>
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                      className={classNames(currentRefValue === 'prev' ? `text-${mainColor}-800 dark:text-${mainColor}-100` : `text-${mainColor}-200 dark:text-${mainColor}-400`, `h-8 w-8`)}
