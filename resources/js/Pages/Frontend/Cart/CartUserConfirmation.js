@@ -68,7 +68,7 @@ export default function({countries, auth}) {
         <FrontendContainer>
             <FrontendContentContainer>
 
-                <div className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-50`}>
+                <div className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-500`}>
                     <CartStepper activeStep={3}/>
                     <h1 className="text-3xl font-extrabold py-5 ">{trans('confirm')} {trans('information')}</h1>
 
@@ -91,7 +91,7 @@ export default function({countries, auth}) {
                                     required
                                     defaultValue={auth.name_ar}
                                     autoComplete="given-name"
-                                    className="block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    className="block w-full  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.name && <div className={`text-red-900`}>{errors.name}</div>}
@@ -113,7 +113,7 @@ export default function({countries, auth}) {
                                     autoComplete="email"
                                     required
                                     defaultValue={auth.email}
-                                    className="block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    className="block w-full  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
@@ -134,7 +134,7 @@ export default function({countries, auth}) {
                                     name="mobile"
                                     defaultValue={auth.mobile}
                                     autoComplete="mobile"
-                                    className="block w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    className="w-full   border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
@@ -159,7 +159,7 @@ export default function({countries, auth}) {
                                     defaultValue={data.country_id}
                                     autoComplete="country_id"
                                     required
-                                    className={`shadow-sm bg-gray-100  focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    className={`shadow-sm   focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 >
                                     {
                                         map(countries, u => (
@@ -189,7 +189,7 @@ export default function({countries, auth}) {
                                         defaultValue={data.area_id}
                                         autoComplete="area_id"
                                         required
-                                        className={`shadow-sm bg-gray-100  focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        className={`shadow-sm   focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
                                         {
                                             map(areas, u => (
@@ -220,7 +220,7 @@ export default function({countries, auth}) {
                                     name="block"
                                     defaultValue={auth.block}
                                     autoComplete="given-block"
-                                    className="block w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    className="w-full   border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.block && <div className={`text-red-900`}>{errors.block}</div>}
@@ -242,7 +242,7 @@ export default function({countries, auth}) {
                                     name="street"
                                     defaultValue={auth.street}
                                     autoComplete="given-street"
-                                    className="street w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    className="w-full   border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.street && <div className={`text-red-900`}>{errors.street}</div>}
@@ -264,7 +264,7 @@ export default function({countries, auth}) {
                                     name="building"
                                     defaultValue={auth.building}
                                     autoComplete="given-building"
-                                    className="building w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    className="w-full   border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.building && <div className={`text-red-900`}>{errors.building}</div>}
@@ -286,7 +286,7 @@ export default function({countries, auth}) {
                                     name="apartment"
                                     defaultValue={auth.apartment}
                                     autoComplete="given-apartment"
-                                    className="apartment w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    className="w-full   border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.apartment && <div className={`text-red-900`}>{errors.apartment}</div>}
@@ -309,7 +309,7 @@ export default function({countries, auth}) {
                                     name="floor"
                                     defaultValue={auth.floor}
                                     autoComplete="given-floor"
-                                    className="floor w-full bg-gray-100  border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                    className="w-full   border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                 />
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.floor && <div className={`text-red-900`}>{errors.floor}</div>}

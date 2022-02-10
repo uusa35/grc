@@ -89,7 +89,7 @@ export default function({order, settings}) {
                                         <div
                                             onClick={() => setPaymentMethod(p)}
                                             key={p.name}
-                                            className={classNames(p.name === paymentMethod.name ? `bg-gray-100 border-gray-400 shadow-lg` : `border-gray-100 shadow-sm`, "flex flex-row w-full max-w-md justify-center items-center p-10 border-2 rounded-lg gap-x-4")}>
+                                            className={classNames(p.name === paymentMethod.name ? `bg-${mainBgColor}-200 text-${mainColor}-900 dark:bg-${mainBgColor}-400 dark:text-${mainColor}-50 border-gray-400 shadow-lg` : `border-gray-100 shadow-sm`, "flex flex-row w-full max-w-md justify-center items-center p-10 border-2 rounded-lg gap-x-4")}>
                                             <img src={getAsset(p.name)} alt="" className="w-auto h-10"/>
                                             <span className="font-extrabold text-lg invisible sm:visible">
                                         {trans(p.name)}
@@ -113,7 +113,7 @@ export default function({order, settings}) {
                         className="mt-10 col-span-full flex justify-between items-center flex-wrap space-y-2 sm:space-y-0 w-full">
                         <Link
                             href={route('frontend.cart.confirmation')}
-                            className="flex flex-row justify-between items-center bg-gray-600 border border-transparent rounded-md shadow-sm py-3 px-4  text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500"
+                            className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4  text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                         >
                             <div className="flex">
                                 {locale.isRTL ?
