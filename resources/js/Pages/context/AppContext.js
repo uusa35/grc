@@ -114,7 +114,8 @@ const AppContextProvider = ({children}) => {
     }, [])
 
     useMemo(() => {
-        if ((!bootStrapped && navigator.onLine)) {
+        // if ((!bootStrapped && navigator.onLine)) {
+        if (navigator.onLine) {
         dispatch(startBootStrapped({currencies, theme : settings.theme }))
         }
     }, [])
