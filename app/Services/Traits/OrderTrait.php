@@ -103,7 +103,9 @@ trait OrderTrait
                 if ($settings->enable_products) {
                     $this->decreaseQty($order);
                 }
-                Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
+                if(env('MAIL_ENABLED')) {
+                    Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
+                }
                 $markdown = new Markdown(view(), config('mail.markdown'));
                 return $markdown->render('emails.orders.paid', ['order' => $order]);
             }
