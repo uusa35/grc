@@ -61,7 +61,7 @@ function MainNav() {
                 className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
                 <div className="grid grid-cols-6 gap-x-5">
                     {
-                        settings.enable_products && <button className={`col-span-1`} onClick={() => handleTheme()}>
+                        settings.enable_products && theme !== 'none' && <button className={`col-span-1`} onClick={() => handleTheme()}>
                             <MoonIcon size={22}
                                       fill={theme === 'dark' ? headerColor : 'none'}
                                       className={`text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>

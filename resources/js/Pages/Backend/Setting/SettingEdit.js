@@ -377,6 +377,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                                 >
                                                     <option value="dark">{trans("dark")}</option>
                                                     <option value="light">{trans("light")}</option>
+                                                    <option value="none">{trans("none")}</option>
                                                 </select>
                                             </div>
                                             <ToolTipWidget message={trans('product_user_instruction')}/>
