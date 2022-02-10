@@ -172,13 +172,13 @@ export default function() {
                                             </div>
 
                                             {/* Contact form */}
-                                            <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                                                <h3 className="text-lg  text-gray-900">{trans('for_any_inquires_contact_us')}</h3>
+                                            <div className={`py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 text-${mainColor}-900 dark:text-${mainColor}-50`}>
+                                                <h3 className="text-lg  ">{trans('for_any_inquires_contact_us')}</h3>
                                                 <form onSubmit={submit}
                                                       className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
                                                     <div>
                                                         <label htmlFor="first-name"
-                                                               className="block text-sm  text-gray-900">
+                                                               className="block text-sm  ">
                                                             {trans('first_name')}*
                                                         </label>
                                                         <div className="mt-1">
@@ -189,7 +189,7 @@ export default function() {
                                                                 id="first_name"
                                                                 onChange={handleChange}
                                                                 autoComplete="given-name"
-                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                                                className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
                                                                 {errors.first_name && <div
@@ -199,7 +199,7 @@ export default function() {
                                                     </div>
                                                     <div>
                                                         <label htmlFor="last-name"
-                                                               className="block text-sm  text-gray-900">
+                                                               className="block text-sm  ">
                                                             {trans('last_name')}*
                                                         </label>
                                                         <div className="mt-1">
@@ -210,7 +210,7 @@ export default function() {
                                                                 id="last_name"
                                                                 onChange={handleChange}
                                                                 autoComplete="family-name"
-                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                                                className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
                                                                 {errors.last_name && <div
@@ -219,7 +219,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <label htmlFor="email" className="block text-sm  text-gray-900">
+                                                        <label htmlFor="email" className="block text-sm  ">
                                                             {trans('email')}*
                                                         </label>
                                                         <div className="mt-1">
@@ -230,7 +230,7 @@ export default function() {
                                                                 type="email"
                                                                 onChange={handleChange}
                                                                 autoComplete="email"
-                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                                                className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
                                                                 {errors.email && <div
@@ -242,7 +242,7 @@ export default function() {
                                                     <div>
                                                         <div className="flex justify-between">
                                                             <label htmlFor="phone"
-                                                                   className="block text-sm  text-gray-900">
+                                                                   className="block text-sm  ">
                                                                 {trans('mobile')}
                                                             </label>
                                                             <span id="phone-optional" className="text-sm text-gray-500">
@@ -256,7 +256,7 @@ export default function() {
                                                                 id="mobile"
                                                                 onChange={handleChange}
                                                                 autoComplete="tel"
-                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                                                className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                                 aria-describedby="phone-optional"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
@@ -268,7 +268,7 @@ export default function() {
                                                     {/* subject */}
                                                     <div className="sm:col-span-1">
                                                         <label htmlFor="subject"
-                                                               className="block text-sm  text-gray-900">
+                                                               className="block text-sm  ">
                                                             {trans('subject')}*
                                                         </label>
                                                         <div className="mt-1">
@@ -278,7 +278,7 @@ export default function() {
                                                                 required
                                                                 id="subject"
                                                                 onChange={handleChange}
-                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                                                className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
                                                                 {errors.subject && <div
@@ -289,7 +289,7 @@ export default function() {
                                                     {/* code_confirmation */}
                                                     <div className="sm:col-span-1">
                                                         <label htmlFor="subject"
-                                                               className="block text-sm  text-gray-900">
+                                                               className="block text-sm  ">
                                                             {trans('write_protection_code')} - ({code})
                                                         </label>
                                                         <div className="mt-1">
@@ -301,7 +301,7 @@ export default function() {
                                                                 id="code_confirmation"
                                                                 onChange={handleChange}
                                                                 placeholder={trans('write_protection_code')}
-                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                                                className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
                                                             <p className={`mt-2  text-gray-500`}>
                                                                 {errors.code_confirmation && <div
@@ -312,7 +312,7 @@ export default function() {
                                                     <div className="sm:col-span-2">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="message"
-                                                                   className="block text-sm  text-gray-900">
+                                                                   className="block text-sm  ">
                                                                 {trans('content')}
                                                             </label>
                                                             <span id="message-max" className="text-sm text-gray-500">
@@ -325,7 +325,7 @@ export default function() {
                                                                     name="content"
                                                                     onChange={handleChange}
                                                                     rows={4}
-                                                                    className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border border-gray-300 rounded-md"
+                                                                    className="py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border border-gray-300 rounded-md"
                                                                     aria-describedby="message-max"
                                                                     defaultValue={''}
                                                                 />
@@ -338,7 +338,7 @@ export default function() {
                                                     <div className="sm:col-span-2 sm:flex sm:justify-end">
                                                         <button
                                                             type="submit"
-                                                            className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base  bg-gray-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto"
+                                                            className={`bg-${mainBgColor}-800 dark:bg-${mainBgColor}-400 capitalize mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto`}
                                                         >
                                                             {trans('submit')}
                                                         </button>

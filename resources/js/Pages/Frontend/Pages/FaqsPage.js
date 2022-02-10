@@ -17,7 +17,7 @@ export default function FaqsPage({elements}) {
         <FrontendContainer>
             <FrontendContentContainer parentModuleName={'faqs'}>
                 <SubMetaElement title={trans('faqs')}/>
-                <div className="bg-transparent relative overflow-hidden">
+                <div className={` text-${mainColor}-900 dark:text-${mainColor}-50 bg-transparent relative overflow-hidden`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
@@ -34,16 +34,16 @@ export default function FaqsPage({elements}) {
                     {/* Callout */}
                     <section
                         aria-labelledby="sale-heading"
-                        className="relative  flex flex-col items-center text-center"
+                        className={`relative  flex flex-col items-center text-center`}
                     >
                         <div className="w-full">
                             <h2
                                 id="sale-heading"
-                                className="text-4xl mt-10 font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl capitalize"
+                                className="text-4xl mt-10 font-extrabold tracking-tight  sm:text-5xl lg:text-6xl capitalize"
                             >
                                 {trans('faqs')}
                             </h2>
-                            <p className="mt-4 max-w-xl mx-auto text-xl text-gray-600 capitalize">
+                            <p className="mt-4 max-w-xl mx-auto text-xl  capitalize">
                                 {settings[getLocalized()]}
                             </p>
                             {
@@ -59,7 +59,7 @@ export default function FaqsPage({elements}) {
                     {/* Testimonials */}
                     <section
                         aria-labelledby="testimonial-heading"
-                        className="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:py-32 lg:px-8"
+                        className={` relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:py-32 lg:px-8`}
                     >
                         <div className="max-w-2xl mx-auto lg:max-w-none">
                             <div
@@ -71,13 +71,13 @@ export default function FaqsPage({elements}) {
                                                 <>
                                                     <dt className="text-lg">
                                                         <Disclosure.Button
-                                                            className="text-left w-full flex justify-between items-center text-gray-400">
+                                                            className="text-left w-full flex justify-between items-center ">
                                                             <div
                                                                 className="flex flex-1 flex-col justify-start rtl:text-right ltr:text-left">
                                                             <span
-                                                                className="font-extrabold text-gray-900 capitalize">{element[getLocalized()]}</span>
+                                                                className="font-extrabold  capitalize">{element[getLocalized()]}</span>
                                                                 <span
-                                                                    className="font-medium text-sm text-gray-900 capitalize">{element[getLocalized('caption')]}</span>
+                                                                    className="font-medium text-sm  capitalize">{element[getLocalized('caption')]}</span>
                                                             </div>
                                                             <span className="ml-6 h-7 flex items-center">
                                                       <ChevronDownIcon
@@ -88,7 +88,7 @@ export default function FaqsPage({elements}) {
                                                         </Disclosure.Button>
                                                     </dt>
                                                     <Disclosure.Panel as="dd" className="mt-2">
-                                                        <p className="text-base text-gray-500 mt-5 border-t border-gray-200 pt-10">{element[getLocalized('description')]}</p>
+                                                        <p className="text-base  mt-5 border-t border-gray-200 pt-10">{element[getLocalized('description')]}</p>
                                                     </Disclosure.Panel>
                                                 </>
                                             )}
