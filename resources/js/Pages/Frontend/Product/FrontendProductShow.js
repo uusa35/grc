@@ -331,8 +331,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                         active ? `ring-2 ring-offset-2 ring-${mainBgColor}-200 dark:ring-${mainBgColor}-800` : '',
                                                                         checked
-                                                                            ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-400 border-transparent text-${mainColor}-800 dark:text-${mainColor}-800 hover:bg-${mainBgColor}-300 dark:hover:bg-${mainBgColor}-400`
-                                                                            : `bg-${mainBgColor}-100 dark:bg-${mainBgColor}-400 border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-700 hover:bg-${mainBgColor}-600 dark:hover:bg-${mainBgColor}-800`,
+                                                                            ? `bg-${mainBgColor}800 dark:bg-${mainBgColor}-600 border-transparent text-${mainColor}-800 dark:text-${mainColor}-50 hover:bg-${mainBgColor}-300 dark:hover:bg-${mainBgColor}-400`
+                                                                            : `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-600 border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-200 hover:bg-${mainBgColor}-600 dark:hover:bg-${mainBgColor}-800`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
                                                                 }
@@ -727,7 +727,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         <Tab.Panel as="dl" className="text-sm text-gray-500 h-60">
                                             <h3 className="sr-only">{trans('description')}</h3>
                                             <Fragment key={'description'}>
-                                                <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-800 dark:text-${mainColor}-100900,100)} p-10 capitalize`}>
+                                                <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-800 dark:text-${mainColor}-50 p-10 capitalize`}>
                                                     <p>{element[getLocalized('description')]}</p>
                                                 </dd>
                                             </Fragment>
@@ -738,7 +738,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         !isNull(element[getLocalized('description')]) && element[getLocalized('notes')].length > 50 &&
                                         <Tab.Panel className="text-sm text-gray-500 h-60">
                                             <Fragment key={'description'}>
-                                                <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-800 dark:text-${mainColor}-100900,100)} p-10 capitalize`}>
+                                                <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-800 dark:text-${mainColor}-50 p-10 capitalize`}>
                                                     <p>
                                                         {element[getLocalized('notes')]}
                                                     </p>
