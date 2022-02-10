@@ -11,7 +11,7 @@ export default function AboutusPage({settings}) {
 
     return (
         <FrontendContainer>
-            <FrontendContentContainer>
+            <FrontendContentContainer parentModuleName={'aboutus'}>
                 <SubMetaElement title={trans('aboutus')}/>
                 <div className="bg-transparent relative overflow-hidden">
                     {/* Decorative background image and gradient */}
