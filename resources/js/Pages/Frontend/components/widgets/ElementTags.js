@@ -1,9 +1,10 @@
 import {useContext} from "react";
 import {AppContext} from "../../../context/AppContext";
 import {useSelector} from "react-redux";
+import {HeartIcon} from '@heroicons/react/outline'
 
 export default function ElementTags({onNew = false , onSale = false , exclusive = false, free = false, showFavoriteIcon  = true, rounded = false}) {
-    const {classNames, trans } = useContext(AppContext)
+    const {classNames, trans , mainColor , mainBgColor } = useContext(AppContext)
     const { locale } = useSelector(state => state)
 
     return (
@@ -36,14 +37,11 @@ export default function ElementTags({onNew = false , onSale = false , exclusive 
                 }
             </div>
             {
-                showFavoriteIcon ? <div
-                    className={classNames(locale.isRTL ? `left-2` : `right-2`, 'absolute top-8 flex flex-col  gap-y-3 text-white text-sm bg-white rounded-full w-10 h-10 justify-center items-center opacity-50')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor">
-                        <path strokeLinecap="round" strokeWidth="round" strokeWidth="2"
-                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                    </svg>
-                </div>  : null
+                showFavoriteIcon && <div
+                    className={classNames(locale.isRTL ? `left-2` : `right-2`, `absolute top-8 flex flex-col  gap-y-3 text-white text-sm bg-transparent rounded-full w-10 h-10 justify-center items-center opacity-80`)}>
+                    <HeartIcon fill={'none'}
+                               className={`h-7 w-7 text-${mainColor}-800 text-${mainColor}-600 hover:text-${mainColor}-400`}/>
+                </div>
             }
         </div>
     );

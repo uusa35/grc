@@ -62,45 +62,45 @@ function MainNav() {
                 <div className="grid grid-cols-6 gap-x-5">
                     {
                         settings.enable_products && theme !== 'none' && <button className={`col-span-1`} onClick={() => handleTheme()}>
-                            <MoonIcon size={22}
-                                      fill={theme === 'dark' ? headerColor : 'none'}
-                                      className={`text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                            <MoonIcon
+                                      fill={theme  === 'dark' ? headerColor : 'none'}
+                                      className={`h-5 w-5 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('theme')}</span>
                         </button>
                     }
                     {
                         settings.instagram && <a as={Link} target="_blank" href={settings.instagram}>
-                            <FaInstagram size={22}
-                                         className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                            <FaInstagram
+                                         className={`h-5 w-5 col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('instagram')}</span>
                         </a>
                     }
                     {
                         settings.facebook && <a as={Link} target="_blank" href={settings.facebook}>
-                            <FaFacebook size={22}
-                                        className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                            <FaFacebook
+                                        className={`h-5 w-5 col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('facebook')}</span>
                         </a>
                     }
                     {
                         settings.twitter && <a as={Link} target="_blank" href={settings.twitter}>
-                            <FaTwitter size={22}
-                                       className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                            <FaTwitter
+                                       className={`h-5 w-5 col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('twitter')}</span>
                         </a>
                     }
                     {
                         settings.youtube && <a as={Link} target="_blank" href={settings.youtube}>
-                            <FaYoutube size={22}
-                                       className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                            <FaYoutube
+                                       className={`h-5 w-5 col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('youtube')}</span>
                         </a>
                     }
                     {
                         settings.whatsapp &&
                         <a as={Link} target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
-                            <FaWhatsapp size={22}
-                                        className={`col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                            <FaWhatsapp
+                                        className={`h-5 w-5 co5-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
                             <span className="sr-only">{trans('whatsapp')}</span>
                         </a>
                     }
