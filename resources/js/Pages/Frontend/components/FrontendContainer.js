@@ -19,7 +19,7 @@ const FrontendContainer = ({children}) => {
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement />
             <main
-                className={`flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
+                className={`bg-white dark:bg-${mainBgColor}-900 flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
                 <MainNav/>
                 <div className={`min-h-screen bg-white-50 dark:bg-${mainBgColor}-900 text-${mainColor}-50`}>
                     <SystemMessage/>

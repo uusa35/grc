@@ -551,6 +551,34 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                                 {errors.footer_bg_theme_color && <div className={`text-red-900`}>{errors.footer_bg_theme_color}</div>}
                                             </p>
                                         </div>
+                                        {/* btn_bg_theme_color */}
+                                        {/* note that i used this element only for html Background (name is different) */}
+                                        <div className="sm:col-span-2">
+                                            <label htmlFor="btn_bg_theme_colors" className="block text-sm font-medium text-gray-800">
+                                                {trans('btn_bg_theme_color')}
+                                            </label>
+                                            <div className="mt-1">
+                                                <select
+                                                    onChange={handleChange}
+                                                    id="btn_bg_theme_color"
+                                                    name="btn_bg_theme_color"
+                                                    defaultValue={setting.btn_bg_theme_color}
+                                                    autoComplete="btn_bg_theme_color"
+                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                                >
+                                                    <option value="#030a18">midnight</option>
+                                                    <option value="#6f5f01">corn</option>
+                                                    <option value="#304b52">hippie-blue</option>
+                                                    <option value="white">white</option>
+                                                    <option value="black">black</option>
+                                                    <option value="gray">gray</option>
+                                                </select>
+                                            </div>
+                                            <ToolTipWidget message={trans('product_user_instruction')}/>
+                                            <p className={`mt-2 text-xs text-gray-500`}>
+                                                {errors.btn_bg_theme_color && <div className={`text-red-900`}>{errors.btn_bg_theme_color}</div>}
+                                            </p>
+                                        </div>
                                 </>
                             }
 
