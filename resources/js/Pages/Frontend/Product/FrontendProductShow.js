@@ -331,8 +331,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                         active ? `ring-2 ring-offset-2 ring-${mainBgColor}-200 dark:ring-${mainBgColor}-800` : '',
                                                                         checked
-                                                                            ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-600 border-transparent text-${mainColor}-800 dark:text-${mainColor}-100 hover:bg-${mainBgColor}-300 dark:hover:bg-${mainBgColor}-400`
-                                                                            : `bg-${mainBgColor}-100 dark:bg-${mainBgColor}-600 border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-10050,50)} hover:bg-${mainBgColor}-600 dark:hover:bg-${mainBgColor}-800`,
+                                                                            ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-400 border-transparent text-${mainColor}-800 dark:text-${mainColor}-800 hover:bg-${mainBgColor}-300 dark:hover:bg-${mainBgColor}-400`
+                                                                            : `bg-${mainBgColor}-100 dark:bg-${mainBgColor}-400 border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-700 hover:bg-${mainBgColor}-600 dark:hover:bg-${mainBgColor}-800`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
                                                                 }
@@ -532,7 +532,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>
+                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-50`}>
                                                             {element[getLocalized('description')]}
                                                         </p>
                                                     </Disclosure.Panel>
@@ -572,7 +572,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>
+                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-50`}>
                                                             {element[getLocalized('notes')]}
                                                         </p>
                                                     </Disclosure.Panel>
