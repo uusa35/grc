@@ -27,7 +27,7 @@ function ElementSlider({
                            description = '',
                            showNavigation = true,
                            showPagination = true,
-                           params = ''
+                           params = '',
                        }) {
     const {isRTL} = useSelector(state => state.locale)
     const {mainColor, mainBgColor, trans, classNames} = useContext(AppContext);
@@ -60,7 +60,7 @@ function ElementSlider({
     const handlePrev = () => setCurrentRevValue('prev')
 
     return (
-        <div className="w-full p-2">
+        <div className={`w-full  dark:bg-${mainBgColor}-400 rounded-lg shadow-md sm:p-6 lg:p-8`}>
             {!isEmpty(elements) && route().has(`frontend.${type}.index`) && (
                 <>
                     <Link
@@ -89,7 +89,7 @@ function ElementSlider({
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
                                 <div
-                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-sm`}>
+                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-md`}>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
                                          fill={`none`}
@@ -102,7 +102,7 @@ function ElementSlider({
                                 <span
                                     className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
                                 <div
-                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-sm`}>
+                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-md`}>
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
                                          fill={`none`}

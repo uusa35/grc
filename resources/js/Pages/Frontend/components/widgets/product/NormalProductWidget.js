@@ -15,7 +15,7 @@ export default function NormalProductWidget({element}) {
             whileHover={{scale: 0.95}}
         >
             <div
-                className={`block relative overflow-hidden shadow-md border border-${mainBgColor}-50 dark:border-${mainBgColor}-400  mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>
+                className={`block relative overflow-hidden shadow-md border border-${mainBgColor}-50 dark:border-${mainBgColor}-400 bg-white dark:bg-${mainBgColor}-600  mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>
                 <div className="w-full rounded-t-sm overflow-hidden  sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                     <Link
                         className="z-30"
