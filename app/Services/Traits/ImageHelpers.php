@@ -421,8 +421,8 @@ trait ImageHelpers
                         $img->resize($dimensions[0] / 3, $dimensions[1] / 3);
                     }
                     $img->save(storage_path('app/public/uploads/images/' . $value . '/' . $imagePath), env('IMAGE_QUALITY'), 'jpg');
-                }ad
-            }
+                }
+            }a
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
