@@ -65,14 +65,14 @@ function ElementSlider({
                 <>
                     <Link
                         href={route(`frontend.${type}.index`, params ? params : '')}
-                        className="w-full flex flex-grow h-auto mb-5 justify-between items-center capitalize rtl:text-right ltr:text-left text-xl "
+                        className="w-full flex flex-grow h-auto mb-5 justify-center items-center capitalize rtl:text-right ltr:text-left text-xl "
                     >
-                        <div className="flex flex-grow flex-col items-center justify-center rtl:pr-8 ltr:pl-8">
+                        <div className="flex flex-grow flex-col items-center justify-center rtl:pr-10 ltr:pl-10">
                             <motion.div
                                 initial={false}
                                 whileHover={{scale: 1.08}}
                             >
-                                <div className="flex items-center justify-center">
+                                <div className="flex items-center justify-end">
                                     <span
                                         className={`text-md lg:text-2xl text-${mainColor}-800 dark:text-${mainColor}-50`}>{pluralize(title)}</span>
                                 </div>
