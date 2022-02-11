@@ -57,7 +57,7 @@ export default function NormalProductWidget({element}) {
                 }
                 <Link
                     href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}
-                    className={`flex bg-${mainColor}-800 dark:bg-${mainColor}-400 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
+                    className={`hidden lg:flex bg-${mainColor}-800 dark:bg-${mainColor}-400 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
                 >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>
                             <div>
