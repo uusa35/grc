@@ -15,7 +15,7 @@ export default function NormalProductWidget({element}) {
             whileHover={{scale: 0.95}}
         >
             <div
-                className={`block relative overflow-hidden p-4 dark:shadow-md border border-${mainBgColor}-50 dark:border-${mainBgColor}-400 bg-white dark:bg-${mainBgColor}-600  mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>
+                className={`block relative overflow-hidden p-4 dark:shadow-md border border-${mainColor}-100 dark:border-${mainBgColor}-400 bg-white dark:bg-${mainBgColor}-600  dark:border-opacity-20 mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>
                 <div className="w-full rounded-t-sm overflow-hidden  sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                     <Link
                         className="z-30"
@@ -34,7 +34,7 @@ export default function NormalProductWidget({element}) {
                 <ElementPrice price={element.price}
                               salePrice={element.sale_price}
                               isOnSale={element.isOnSale}/>
-                <div className="flex flex-row flex-1 justify-between items-center m-2 border border-gray-900">
+                <div className="flex flex-row flex-1 justify-between items-center m-2">
                     <h3 className={` text-base font-bold  text-${mainColor}-800 dark:text-${mainColor}-50  truncate`}>
                         <Link  href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
                             <span className=""/>
