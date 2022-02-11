@@ -51,7 +51,7 @@ export default function NormalProductWidget({element}) {
                     </Link>
                 </div>
                 {
-                    element[getLocalized('description')] && element[getLocalized('description')].length > 5 && <p className={`h-12 text-${mainColor}-800 dark:text-${mainColor}-50 m-2 opacity-70 text-sm text-center`}>
+                    element[getLocalized('description')] && element[getLocalized('description')].length > 5 && <p className={`h-8 text-${mainColor}-800 dark:text-${mainColor}-50 m-2 opacity-70 text-sm text-center`}>
                         {truncate(element[getLocalized('description')], { length : 30 })}
                     </p>
                 }
