@@ -1,6 +1,6 @@
 import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
@@ -8,14 +8,14 @@ import {truncate} from "lodash";
 import {motion} from "framer-motion"
 
 export default function NormalProductWidget({element}) {
-    const {getLocalized, getThumb, mainBgColor , mainColor } = useContext(AppContext);
+    const {getLocalized, getThumb, mainBgColor , mainColor, trans  } = useContext(AppContext);
     return (
         <motion.div
             initial={false}
             whileHover={{scale: 0.95}}
         >
             <div
-                className={`block relative overflow-hidden shadow-md border border-${mainBgColor}-50 dark:border-${mainBgColor}-400 bg-white dark:bg-${mainBgColor}-600  mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>
+                className={`block relative overflow-hidden p-4 dark:shadow-md border border-${mainBgColor}-50 dark:border-${mainBgColor}-400 bg-white dark:bg-${mainBgColor}-600  mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>
                 <div className="w-full rounded-t-sm overflow-hidden  sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                     <Link
                         className="z-30"
@@ -31,9 +31,12 @@ export default function NormalProductWidget({element}) {
                         />
                     </Link>
                 </div>
-                <div className="flex flex-row flex-1 justify-between items-center m-2">
-                    <h3 className={`text-base font-bold text-${mainColor}-800 dark:text-${mainColor}-50  truncate`}>
-                        <Link href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
+                <ElementPrice price={element.price}
+                              salePrice={element.sale_price}
+                              isOnSale={element.isOnSale}/>
+                <div className="flex flex-row flex-1 justify-between items-center m-2 border border-gray-900">
+                    <h3 className={` text-base font-bold  text-${mainColor}-800 dark:text-${mainColor}-50  truncate`}>
+                        <Link  href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
                             <span className=""/>
                             {truncate(element[getLocalized()], {length: 20})}
                         </Link>
@@ -47,9 +50,28 @@ export default function NormalProductWidget({element}) {
                         />
                     </Link>
                 </div>
-                <ElementPrice price={element.price}
-                              salePrice={element.sale_price}
-                              isOnSale={element.isOnSale}/>
+                {
+                    element[getLocalized('description')] && element[getLocalized('description')].length > 5 && <p className={`text-${mainColor}-800 dark:text-${mainColor}-50 m-2 opacity-70 text-sm text-center`}>
+                        {truncate(element[getLocalized('description')], { length : 60 })}
+                    </p>
+                }
+                <Link
+                    href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}
+                    className={`flex bg-${mainColor}-800 dark:bg-${mainColor}-400 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
+                >
+                        <span className={`flex flex-row flex-1 justify-evenly items-center`}>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 hover:animate-bounce`} fill={`none`}
+                                     viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                </svg>
+                            </div>
+                            <div className={`text-sm`}>
+                                {trans('view_details')}
+                            </div>
+                        </span>
+                </Link>
             </div>
         </motion.div>
     );

@@ -62,7 +62,7 @@ function ElementSlider({
     const handlePrev = () => setCurrentRevValue('prev')
 
     return (
-        <div className={`w-full  dark:bg-${mainBgColor}-600 rounded-lg shadow-md sm:p-6 lg:p-8`}>
+        <div className={`w-full  dark:bg-${mainBgColor}-600 rounded-lg dark:shadow-lg sm:p-6 lg:p-8`}>
             {!isEmpty(elements) && route().has(`frontend.${type}.index`) && (
                 <>
                     <Link
