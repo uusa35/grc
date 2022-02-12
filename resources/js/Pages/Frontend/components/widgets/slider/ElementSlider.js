@@ -62,14 +62,14 @@ function ElementSlider({
     const handlePrev = () => setCurrentRevValue('prev')
 
     return (
-        <div className={`w-full  dark:bg-${mainBgColor}-600 rounded-lg dark:shadow-lg sm:p-6 lg:p-8`}>
+        <div className={`w-full  dark:bg-${mainBgColor}-600 rounded-lg dark:shadow-lg p-6 lg:p-8`}>
             {!isEmpty(elements) && route().has(`frontend.${type}.index`) && (
                 <>
                     <Link
                         href={route(`frontend.${type}.index`, params ? params : '')}
                         className="w-full flex flex-grow h-auto mb-5 justify-center items-center capitalize rtl:text-right ltr:text-left text-xl "
                     >
-                        <div className={classNames(isRTL ? `lg:pr-20` : `lg:pl-20`, ` flex flex-grow flex-col items-center justify-center p-10`)}>
+                        <div className={classNames(isRTL ? `lg:pr-20` : `lg:pl-20`, ` flex flex-grow flex-col items-center justify-center`)}>
                             <motion.div
                                 initial={false}
                                 whileHover={{scale: 1.08}}
