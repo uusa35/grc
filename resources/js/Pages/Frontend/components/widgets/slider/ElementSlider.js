@@ -69,7 +69,7 @@ function ElementSlider({
                         href={route(`frontend.${type}.index`, params ? params : '')}
                         className="w-full flex flex-grow h-auto mb-5 justify-center items-center capitalize rtl:text-right ltr:text-left text-xl "
                     >
-                        <div className={classNames(isRTL ? `pr-20` : `pl-20`, ` flex flex-grow flex-col items-center justify-center p-0`)}>
+                        <div className={classNames(isRTL ? `lg:pr-20` : `lg:pl-20`, ` flex flex-grow flex-col items-center justify-center p-0`)}>
                             <motion.div
                                 initial={false}
                                 whileHover={{scale: 1.08}}
