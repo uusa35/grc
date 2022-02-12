@@ -81,7 +81,7 @@ function ElementSlider({
                                 {
                                     description ? <div className="flex items-center justify-center my-4">
                                         <p
-                                            className={`break-normal text-xs text-ellipsis overflow-hidden capitalize text-${mainColor}-600 dark:text-${mainColor}-200`}>{truncate(description, {length: 80})}</p>
+                                            className={`break-normal text-xs text-ellipsis overflow-hidden capitalize text-${mainColor}-600 dark:text-${mainColor}-200`}>{truncate(description, {length: 60})}</p>
                                     </div> : null
                                 }
                             </motion.div>
