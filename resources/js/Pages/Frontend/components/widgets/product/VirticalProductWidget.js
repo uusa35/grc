@@ -71,7 +71,7 @@ export default function({element}) {
                                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                                 </svg>
                             </div>
-                            <div className={`text-sm`}>
+                            <div className={`text-xs`}>
                                 {trans('view_details')}
                             </div>
                         </span>
