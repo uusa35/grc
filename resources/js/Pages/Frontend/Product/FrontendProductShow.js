@@ -247,7 +247,7 @@ export default function({element, relatedElements, auth, settings}) {
                                     message={trans('element_is_not_available_currently_for_order')}
                                 />}
                                 {
-                                    element.has_attributes && !isEmpty(filteredColorsGroup)  ?
+                                    element.has_attributes && !isEmpty(filteredColorsGroup) ?
                                         <div className="flex flex-col justify-between items-center gap-x-5">
 
                                             {/* Color picker */}
@@ -258,7 +258,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>{`${trans('colors')} / ${trans('heights')}`}</h2>
 
                                                     {
-                                                        element.show_size_chart  ?
+                                                        element.show_size_chart ?
                                                             <div className="justify-end items-center">
                                                                 <button
                                                                     onClick={() => setShowModal(true)}
@@ -355,7 +355,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                 <div className="mt-2 lg:col-span-5">
                                                     {/* Color picker */}
                                                     <div>
-                                                        <div
+                                                        {element.show_size_chart && <div
                                                             className="flex w-full flex-1 flex-row justify-between items-center">
                                                             <div>
                                                                 <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>{trans('color')}</h2>
@@ -367,7 +367,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                     {trans('size_chart')}
                                                                 </button>
                                                             </div>
-                                                        </div>
+                                                        </div>}
 
                                                         <RadioGroup value={selectedColor} onChange={setSelectedColor}
                                                                     className="mt-4">
@@ -626,7 +626,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
                                                         <div className="rtl:mr-5 ltr:ml-5">
-                                                            <div className={`border-b border-${mainColor}-800 dark:text-${mainColor}-100 mb-2 pb-2`}>
+                                                            <div
+                                                                className={`border-b border-${mainColor}-800 dark:text-${mainColor}-100 mb-2 pb-2`}>
                                                                 <h4>{element.user[getLocalized()]}</h4>
                                                                 <p>{element.user[getLocalized('caption')]}</p>
                                                             </div>
@@ -664,7 +665,8 @@ export default function({element, relatedElements, auth, settings}) {
                                         <div
                                             className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
                                             <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" color={mainColor}
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                     color={mainColor}
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
@@ -764,7 +766,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                     alt={element.user[getLocalized()]}/>
                                             </div>
                                             <div className="rtl:mr-5 ltr:ml-5">
-                                                <div className={`border-b border-${mainColor}-200 dark:text-${mainColor}-100 mb-2 pb-2`}>
+                                                <div
+                                                    className={`border-b border-${mainColor}-200 dark:text-${mainColor}-100 mb-2 pb-2`}>
                                                     <h4 className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized()]}</h4>
                                                     <p className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized('caption')]}</p>
                                                 </div>
@@ -780,7 +783,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                  className="h-6 w-6" fill="none"
-                                                                 viewBox="0 0 24 24" stroke="currentColor" color={mainColor}>
+                                                                 viewBox="0 0 24 24" stroke="currentColor"
+                                                                 color={mainColor}>
                                                                 <path strokeLinecap="round" strokeLinejoin="round"
                                                                       strokeWidth="2"
                                                                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -798,7 +802,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                  className="h-6 w-6" fill="none"
-                                                                 viewBox="0 0 24 24" stroke="currentColor" color={mainColor}>
+                                                                 viewBox="0 0 24 24" stroke="currentColor"
+                                                                 color={mainColor}>
                                                                 <path strokeLinecap="round" strokeLinejoin="round"
                                                                       strokeWidth="2"
                                                                       d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
