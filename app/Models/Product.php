@@ -17,6 +17,7 @@ class Product extends PrimaryModel
         'price' => 'float',
         'sale_price' => 'float',
         'has_attributes' => 'boolean',
+        'show_attribute' => 'boolean',
         'direct_purchase' => 'boolean'
     ];
 

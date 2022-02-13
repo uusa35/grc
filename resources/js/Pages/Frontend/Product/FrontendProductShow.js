@@ -131,6 +131,8 @@ export default function({element, relatedElements, auth, settings}) {
         setCurrentImages(images);
     }, [element])
 
+    console.log('element', element);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -245,7 +247,7 @@ export default function({element, relatedElements, auth, settings}) {
                                     message={trans('element_is_not_available_currently_for_order')}
                                 />}
                                 {
-                                    element.has_attributes && !isEmpty(filteredColorsGroup) ?
+                                    element.has_attributes && !isEmpty(filteredColorsGroup)  ?
                                         <div className="flex flex-col justify-between items-center gap-x-5">
 
                                             {/* Color picker */}
@@ -253,14 +255,14 @@ export default function({element, relatedElements, auth, settings}) {
                                                 <div
                                                     className="flex w-full flex-row justify-between items-center ">
 
-                                                    <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100900,50)}`}>{`${trans('colors')} / ${trans('heights')}`}</h2>
+                                                    <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>{`${trans('colors')} / ${trans('heights')}`}</h2>
 
                                                     {
-                                                        element.show_size_chart ?
+                                                        element.show_size_chart  ?
                                                             <div className="justify-end items-center">
                                                                 <button
                                                                     onClick={() => setShowModal(true)}
-                                                                    className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50`}>
+                                                                    className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
                                                                     <div>
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                                              className="h-6 w-6 mx-1" fill="none"
@@ -297,7 +299,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                 }
                                                             >
                                                                 <RadioGroup.Label as="p"
-                                                                                  className={`text-${mainColor}-800 dark:text-${mainColor}-100800,50)} font-bold text-sm mx-2`}>
+                                                                                  className={`text-${mainColor}-800 dark:text-${mainColor}-100 font-bold text-sm mx-2`}>
                                                                     {attribute.color[getLocalized()]}
                                                                 </RadioGroup.Label>
                                                                 <span
@@ -314,7 +316,7 @@ export default function({element, relatedElements, auth, settings}) {
                                             {/* Size picker */}
                                             <div className="flex-1 w-full mt-4">
                                                 <div className="flex items-center justify-between">
-                                                    <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100900,50)}`}>{trans('sizes')}</h2>
+                                                    <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('sizes')}</h2>
                                                 </div>
 
                                                 <RadioGroup value={selectedSize} onChange={setSelectedSize}
@@ -347,89 +349,94 @@ export default function({element, relatedElements, auth, settings}) {
                                             </div>
 
                                         </div> :
-                                        <div className="flex flex-row justify-between items-center gap-x-5">
-                                            <div className="mt-2 lg:col-span-5">
-                                                {/* Color picker */}
-                                                <div>
-                                                    <div
-                                                        className="flex w-full flex-1 flex-row justify-between items-center">
-                                                        <div>
-                                                            <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100800,50)} capitalize`}>{trans('color')}</h2>
+                                        <>
+                                            {element.show_attribute &&
+                                            <div className="flex flex-row justify-between items-center gap-x-5">
+                                                <div className="mt-2 lg:col-span-5">
+                                                    {/* Color picker */}
+                                                    <div>
+                                                        <div
+                                                            className="flex w-full flex-1 flex-row justify-between items-center">
+                                                            <div>
+                                                                <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>{trans('color')}</h2>
+                                                            </div>
+                                                            <div>
+                                                                <button
+                                                                    onClick={() => setShowModal(true)}
+                                                                    className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
+                                                                    {trans('size_chart')}
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                        <div>
-                                                            <a href="#"
-                                                               className="text-sm font-bold text-gray-600 hover:text-gray-900 capitalize">
-                                                                {trans('size_chart')}
-                                                            </a>
-                                                        </div>
+
+                                                        <RadioGroup value={selectedColor} onChange={setSelectedColor}
+                                                                    className="mt-4">
+                                                            <RadioGroup.Label
+                                                                className="sr-only">{trans('choose_color')}</RadioGroup.Label>
+                                                            <div className="flex items-center gap-x-3">
+
+                                                                <RadioGroup.Option
+                                                                    key={element.color.name_ar}
+                                                                    value={element.color_id}
+                                                                    className={({active, checked}) =>
+                                                                        classNames(
+                                                                            element.color,
+                                                                            active && checked ? 'ring ring-offset-1' : '',
+                                                                            !active && checked ? 'ring-2' : '',
+                                                                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <RadioGroup.Label as="p" className="sr-only">
+                                                                        {element.color[getLocalized()]}
+                                                                    </RadioGroup.Label>
+                                                                    <span
+                                                                        aria-hidden="true"
+                                                                        style={{backgroundColor: element.color.code}}
+                                                                        className={'h-8 w-8 border border-black border-opacity-10 rounded-full'}
+                                                                    />
+                                                                </RadioGroup.Option>
+                                                            </div>
+                                                        </RadioGroup>
                                                     </div>
 
-                                                    <RadioGroup value={selectedColor} onChange={setSelectedColor}
-                                                                className="mt-4">
-                                                        <RadioGroup.Label
-                                                            className="sr-only">{trans('choose_color')}</RadioGroup.Label>
-                                                        <div className="flex items-center gap-x-3">
-
-                                                            <RadioGroup.Option
-                                                                key={element.color.name_ar}
-                                                                value={element.color_id}
-                                                                className={({active, checked}) =>
-                                                                    classNames(
-                                                                        element.color,
-                                                                        active && checked ? 'ring ring-offset-1' : '',
-                                                                        !active && checked ? 'ring-2' : '',
-                                                                        '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
-                                                                    )
-                                                                }
-                                                            >
-                                                                <RadioGroup.Label as="p" className="sr-only">
-                                                                    {element.color[getLocalized()]}
-                                                                </RadioGroup.Label>
-                                                                <span
-                                                                    aria-hidden="true"
-                                                                    style={{backgroundColor: element.color.code}}
-                                                                    className={'h-8 w-8 border border-black border-opacity-10 rounded-full'}
-                                                                />
-                                                            </RadioGroup.Option>
+                                                    {/* Size picker */}
+                                                    <div className="mt-4">
+                                                        <div className="flex items-center justify-between">
+                                                            <h2 className="text-sm font-bold text-gray-900 capitalize">{trans('size')}</h2>
                                                         </div>
-                                                    </RadioGroup>
-                                                </div>
 
-                                                {/* Size picker */}
-                                                <div className="mt-4">
-                                                    <div className="flex items-center justify-between">
-                                                        <h2 className="text-sm font-bold text-gray-900 capitalize">{trans('size')}</h2>
+                                                        <RadioGroup value={selectedSize} onChange={setSelectedSize}
+                                                                    className="mt-4">
+                                                            <RadioGroup.Label
+                                                                className="sr-only">{trans('choose_size')}</RadioGroup.Label>
+                                                            <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+
+                                                                <RadioGroup.Option
+                                                                    key={element.size.name_ar}
+                                                                    value={element.size_id}
+                                                                    className={({active, checked}) =>
+                                                                        classNames(
+                                                                            element.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
+                                                                            active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
+                                                                            checked
+                                                                                ? `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-50 border-transparent text-white hover:bg-${mainBgColor}-800 dark:bg-${mainBgColor}-50`
+                                                                                : `bg-${mainBgColor}-50, dark:bg-${mainBgColor}-800 border-gray-200 text-gray-900 hover:bg-${mainBgColor}-50 dark:hover:bg-${mainBgColor}-600`,
+                                                                            'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
+                                                                        )
+                                                                    }
+                                                                    disabled={!element.size}
+                                                                >
+                                                                    <RadioGroup.Label
+                                                                        as="p">{element.size[getLocalized()]}</RadioGroup.Label>
+                                                                </RadioGroup.Option>
+                                                            </div>
+                                                        </RadioGroup>
                                                     </div>
-
-                                                    <RadioGroup value={selectedSize} onChange={setSelectedSize}
-                                                                className="mt-4">
-                                                        <RadioGroup.Label
-                                                            className="sr-only">{trans('choose_size')}</RadioGroup.Label>
-                                                        <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-
-                                                            <RadioGroup.Option
-                                                                key={element.size.name_ar}
-                                                                value={element.size_id}
-                                                                className={({active, checked}) =>
-                                                                    classNames(
-                                                                        element.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
-                                                                        active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
-                                                                        checked
-                                                                            ? `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-50 border-transparent text-white hover:bg-${mainBgColor}-800 dark:bg-${mainBgColor}-50`
-                                                                            : `bg-${mainBgColor}-50, dark:bg-${mainBgColor}-800 border-gray-200 text-gray-900 hover:bg-${mainBgColor}-50 dark:hover:bg-${mainBgColor}-600`,
-                                                                        'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
-                                                                    )
-                                                                }
-                                                                disabled={!element.size}
-                                                            >
-                                                                <RadioGroup.Label
-                                                                    as="p">{element.size[getLocalized()]}</RadioGroup.Label>
-                                                            </RadioGroup.Option>
-                                                        </div>
-                                                    </RadioGroup>
                                                 </div>
                                             </div>
-                                        </div>
+                                            }
+                                        </>
                                 }
                                 <div className="flex flex-1 w-full justify-center items-center mx-auto mt-5">
                                     <span className="relative z-0 inline-flex shadow-sm rounded-md ">

@@ -743,6 +743,52 @@ accept="image/jpg, image/jpeg , image/png"
                                     </p>
                                 </div>
                             </fieldset>
+                            {/* show_attribute */}
+                            <fieldset className="mt-1 has-tooltip col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('show_attribute')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="show_attribute"
+                                            name="show_attribute"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={product.show_attribute}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="show_attribute"
+                                               className="ml-3 block   text-gray-800">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="show_attribute"
+                                            name="show_attribute"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!product.show_attribute}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="show_attribute"
+                                               className="ml-3 block   text-gray-800">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
+                                </div>
+                                <ToolTipWidget message={trans('product_show_attribute_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.show_attribute &&
+                                        <div className={`text-red-900`}>{errors.show_attribute}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
                         </FormSection>}
                         <FormBtns type={'product'}/>
                     </div>
