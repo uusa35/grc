@@ -128,3 +128,12 @@ export const setTheme = payload => ({
     type : actions.SET_THEME,
     payload,
 })
+
+export const setTranslations = payload => ({
+    type : actions.SET_TRANSLATIONS,
+    payload,
+})
+
+export const getTranslations = () => ({
+    type : actions.GET_TRANSLATIONS,
+})

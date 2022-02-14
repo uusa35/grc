@@ -35,3 +35,7 @@ export function* triggerStartBootStrapped() {
 export function* triggerStartToastMessage() {
     yield takeLatest(actions.SET_TOAST_MESSAGE, requestSaga.startToastMessageScenario);
 }
+
+export function* triggerGetTranslations() {
+    yield takeLatest(actions.GET_TRANSLATIONS, requestSaga.startGetTranslationsScenario);
+}

@@ -12,6 +12,7 @@ export default function* rootSaga() {
         fork(triggers.triggerChangeLang),
         fork(triggers.triggerStartBootStrapped),
         fork(triggers.triggerStartToastMessage),
+        fork(triggers.triggerGetTranslations),
     ]);
     yield take(REHYDRATE); // Wait for rehydrate to prevent sagas from running with empty store
     yield take(PURGE);

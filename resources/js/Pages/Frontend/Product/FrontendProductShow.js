@@ -131,9 +131,6 @@ export default function({element, relatedElements, auth, settings}) {
         setCurrentImages(images);
     }, [element])
 
-    console.log('element', element);
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(checkCartBeforeAdd({

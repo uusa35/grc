@@ -7,9 +7,12 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 import {Inertia} from "@inertiajs/inertia";
 import FormSection from "../components/widgets/form/FormSection";
+import {useDispatch} from "react-redux";
+import {getTranslations} from "../../redux/actions";
 
 export default function({translation }) {
     const {trans} = useContext(AppContext);
+    const dispatch = useDispatch();
     const {errors} = usePage().props;
     const {data, setData, put, progress, reset} = useForm({
         'ar': translation.ar,
@@ -31,6 +34,7 @@ export default function({translation }) {
             ...data,
         }, {
             forceFormData: true,
+            onSuccess : () => dispatch(getTranslations())
         })
     }
 
