@@ -20,7 +20,7 @@ const persistConfig = {
         'parentModule',
         // 'cart'
     ],
-    debug: isLocal(),
+    debug: process.env.NODE_ENV !== "production",
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
@@ -29,7 +29,7 @@ const sagaMiddleware = createSagaMiddleware();
 let store;
 let persistor;
 
-if (isLocal()) {
+if (process.env.NODE_ENV !== "production") {
     const appLogger = createLogger({
         collapsed: true,
         duration: true,
