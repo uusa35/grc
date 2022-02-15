@@ -28,7 +28,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 let store;
 let persistor;
-
+console.log('env', process.env.NODE_ENV)
 if (process.env.NODE_ENV !== "production") {
     const appLogger = createLogger({
         collapsed: true,
