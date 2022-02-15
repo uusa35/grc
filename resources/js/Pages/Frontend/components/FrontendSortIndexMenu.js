@@ -17,7 +17,7 @@ export default function FrontendSortIndexMenu({ showPrice = true }) {
         {name: 'sort_price', current: false, colName: 'price', display: showPrice},
     ]
     return (
-        <div className="flex w-full sm:w-auto justify-between items-center">
+        <div className="flex w-full sm:w-auto justify-end items-center mt-5 sm:mt-0">
             <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button
                     className={`w-40 group inline-flex px-3 py-1 mt-flex flex-1 justify-between items-center gap-x-3 text-${mainColor}-800 dark:text-${mainColor}-50 hover:text-${mainColor}-800 dark:text-${mainColor}-50 ring-2 text-${mainColor}-800 dark:text-${mainColor}-50 rounded-md`}>
@@ -60,14 +60,7 @@ export default function FrontendSortIndexMenu({ showPrice = true }) {
                     </Menu.Items>
                 </Transition>
             </Menu>
-            <button
-                type="button"
-                className={`p-2 mx-8 text-${mainColor}-800 dark:text-${mainColor}-50 hover:text-gray-500 lg:hidden`}
-                onClick={() => setMobileFiltersOpen(true)}
-            >
-                <span className="sr-only">{trans('filters')}</span>
-                <FilterIcon className="w-5 h-5" aria-hidden="true"/>
-            </button>
+
         </div>
     );
 }

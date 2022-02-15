@@ -19,7 +19,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                 <div className="flex">
                     <button
                         type="button"
-                        className="inline-flex items-center lg:hidden bg-gray-900 p-3 rounded-md shadow-md capitalize"
+                        className={`inline-flex items-center lg:hidden bg-gray-900 dark:bg-${mainColor}-600 p-3 rounded-md shadow-md capitalize`}
                         onClick={() => setMobileFiltersOpen(true)}
                     >
                         <span className="text-white capitalize">{trans('advanced_search')}</span>
@@ -29,7 +29,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                 <div className="flex">
                     <Link
                         href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
-                        className="inline-flex items-center lg:hidden text-white bg-gray-900 p-3 rounded-md shadow-md capitalize"
+                        className={`inline-flex items-center lg:hidden text-white bg-gray-900 dark:bg-${mainColor}-600 p-3 rounded-md shadow-md capitalize`}
                     >
                         {trans('clear_search')}
                     </Link>

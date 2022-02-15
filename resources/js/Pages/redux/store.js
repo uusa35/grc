@@ -3,9 +3,7 @@ import {createStore, applyMiddleware} from 'redux'
 import {persistStore, persistReducer} from 'redux-persist'
 import rootSaga from './saga/rootSaga';
 import createSagaMiddleware from 'redux-saga';
-//import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import reducers from './reducers'
 import {isLocal} from "../helpers";
 import {composeWithDevTools} from 'redux-devtools-extension';
