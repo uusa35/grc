@@ -3,7 +3,7 @@ import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
 import {Fragment, useContext, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isEmpty, first} from 'lodash';
+import {orderBy, isEmpty, sumBy } from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import ActiveDot from "../components/widgets/ActiveDot";
@@ -17,7 +17,8 @@ export default function ({elements}) {
         trans,
         classNames,
         getLocalized,
-        isAdminOrAbove
+        isAdminOrAbove,
+        getThumb
     } = useContext(AppContext);
     const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
@@ -158,6 +159,12 @@ export default function ({elements}) {
                                         scope="col"
                                         className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
                                     >
+                                        {trans('qty')}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
+                                    >
                                         {trans('owner_author')}
                                     </th>
 
@@ -175,9 +182,11 @@ export default function ({elements}) {
                                             {/*</td>*/}
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">
-                                                <div className="flex items-center space-x-3 lg:pl-2">
-                                                    <ActiveDot active={element.active}/>
-                                                    {element[getLocalized('name')]}
+                                                <div className="flex flex-row items-center space-x-3 lg:pl-2">
+                                                    <img src={getThumb(element.image)} className={`w-20 h-auto ltr:pr-5 rtl:pl-5`}/>
+
+                                                        <ActiveDot active={element.active}/>
+                                                        {element[getLocalized('name')]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
@@ -428,6 +437,7 @@ export default function ({elements}) {
                                                 </div>
                                             </td>
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.price} {trans('kd')}</td>
+                                            <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.has_attributes ? sumBy(element.product_attributes,'qty') : element.qty}  {trans('pieces')}</td>
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">
                                                 {
                                                     element.user && <Link

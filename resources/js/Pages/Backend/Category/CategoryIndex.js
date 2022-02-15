@@ -44,7 +44,7 @@ export default function({elements}) {
                                         scope="col"
                                         className="px-3 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
                                     >
-                                        {trans('name')}
+                                        {trans('main_category')}
                                     </th>
                                     <th
                                         scope="col"

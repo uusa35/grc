@@ -3,7 +3,7 @@ import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
 import {Fragment, useContext, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isEmpty, isArray, map} from 'lodash';
+import {orderBy} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import moment from "moment";
@@ -12,14 +12,16 @@ import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
 
 
-export default function ({elements}) {
+export default function({elements}) {
     const [currentData, setCurrentData] = useState();
+    const [currentDate, setCurrentDate] = useState('')
     const {
         trans,
         classNames,
-        getLocalized
+        getLocalized,
+        isAdminOrAbove
     } = useContext(AppContext);
-    const { sort, locale  } = useSelector(state => state);
+    const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -45,6 +47,44 @@ export default function ({elements}) {
             <div className="flex flex-col">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
+                        {
+                            isAdminOrAbove &&
+                            <div className="flex items-center justify-evenly py-2 bg-white rounded-sm shadow-sm mb-3">
+                                <div className="sm:col-span-2 has-tooltip mb-5">
+                                    <label htmlFor="start_sale"
+                                           className={`block   text-gray-800`}>
+                                        {trans('from_till_current_date')}
+                                    </label>
+                                    <div className="mt-1 flex flex-row">
+                                        <input
+                                            // onChange={(e => setCurrentData(e.target.value)}
+                                            onChange={e => setCurrentDate(moment(e.target.value).format('DD-MM-Y'))}
+                                            type="date"
+                                            step="any"
+                                            name="current_date"
+                                            id="current_date"
+                                            autoComplete="current_date"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        />
+                                        <Link
+                                            className={`border border-gray-400 bg-gray-200 rounded-md shadow-md p-3 mx-2`}
+                                            href={route('backend.order.index', {created_at: currentDate})}>
+                                            {trans('search')}
+                                        </Link>
+                                    </div>
+                                </div>
+                                <Link
+                                    className={`border border-gray-400 rounded-sm shadow-md p-5`}
+                                    href={route('backend.order.index', {paid: true})}>
+                                    {trans('paid_orders')}
+                                </Link>
+                                <Link
+                                    className={`border border-gray-400 rounded-sm shadow-md p-5`}
+                                    href={route('backend.order.index', {paid: false})}>
+                                    {trans('unpaid_orders')}
+                                </Link>
+                            </div>
+                        }
                         <div
                             className="bg-gray-300 shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
                             <table className="min-w-full border-collapse block md:table">
@@ -82,13 +122,15 @@ export default function ({elements}) {
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M5 15l7-7 7 7"/>
                                                 </svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M19 9l-7 7-7-7"/>
@@ -109,13 +151,15 @@ export default function ({elements}) {
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M5 15l7-7 7 7"/>
                                                 </svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M19 9l-7 7-7-7"/>
@@ -144,7 +188,7 @@ export default function ({elements}) {
                                             {/*</td>*/}
                                             <td className="block md:table-cell whitespace-nowrap  text-gray-500">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
-                                                    <ActiveDot active={element.paid} />
+                                                    <ActiveDot active={element.paid}/>
                                                     {trans('order_no')} {element.id}
                                                 </div>
                                                 <div
@@ -192,10 +236,16 @@ export default function ({elements}) {
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor">
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  strokeWidth="2"
+                                                                                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                                                                                         </svg>
                                                                                         {trans('show')} {trans('order')}
                                                                                     </Link>
@@ -247,7 +297,7 @@ export default function ({elements}) {
                                                 {element.net_price} {trans("kd")}
                                             </td>
                                             <td className="block md:table-cell whitespace-nowrap  text-gray-500">
-                                                {moment(element.created_at).format('l')}
+                                                {moment(element.created_at).format('Y-MM-DD')}
                                             </td>
                                         </tr>
                                     )

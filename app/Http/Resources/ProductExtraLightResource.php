@@ -29,6 +29,7 @@ class ProductExtraLightResource extends JsonResource
             'isOnSale' => $this->isOnSale,
             'exclusive' => $this->exclusive,
             'on_new' => $this->on_new,
+            'qty' => $this->qty,
             'description_ar' => $this->description_ar,
             'description_en' => $this->description_en,
             'user' => UserExtraLightResource::make($this->whenLoaded('user')),

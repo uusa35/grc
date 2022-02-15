@@ -64,4 +64,9 @@ class OrderFilters extends QueryFilters
         return $this->builder;
     }
 
+    public function created_at($date)
+    {
+        return $this->builder->whereDate('created_at', '>=', Carbon::parse($date));
+    }
+
 }
