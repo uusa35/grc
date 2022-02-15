@@ -4,18 +4,13 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\AuthExtraLightResource;
 use App\Http\Resources\CategoryCollection;
-use App\Http\Resources\CategoryExtraLightResource;
 use App\Http\Resources\CurrencyExtraLightResource;
-use App\Http\Resources\SettingExtraLightResource;
 use App\Http\Resources\SettingResource;
-use App\Http\Resources\TranslationResource;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Setting;
-use App\Models\Translation;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -64,7 +59,6 @@ class FrontendHandleInertiaRequests extends Middleware
                 }])
                 ->orderBy('order', 'asc')
                 ->get()),
-            'mgt' => config('app.mgt'),
             'ziggy' => (new Ziggy())->toArray()
         ]);
     }

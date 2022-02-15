@@ -3,8 +3,6 @@ import {render} from 'react-dom'
 import {createInertiaApp} from '@inertiajs/inertia-react'
 import GlobalContext from "./Pages/context/GlobalContext";
 import {AppContextProvider} from "./Pages/context/AppContext";
-// import 'swiper/swiper-bundle.min.css';
-// import 'swiper/components/pagination/pagination.min.css';
 import {Provider} from 'react-redux'
 import {PersistGate} from 'redux-persist/integration/react'
 import {store, persistor} from './Pages/redux/store';
@@ -19,9 +17,9 @@ import 'swiper/css';
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {settings, auth, currencies, categories, translations} = props.initialPage.props;
+        const {settings, auth, currencies, categories} = props.initialPage.props;
         return render(
-            <GlobalContext.Provider value={{auth, settings, currencies, categories , translations }}>
+            <GlobalContext.Provider value={{auth, settings, currencies, categories }}>
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>}
                                  persistor={persistor}
@@ -35,6 +33,5 @@ createInertiaApp({
                 </Provider>
             </GlobalContext.Provider>
             , el)
-    },
-    title: title => `${title} - E-Commerce`,
+    }
 });
