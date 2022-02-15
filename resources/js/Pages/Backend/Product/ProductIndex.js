@@ -191,7 +191,7 @@ export default function ({elements}) {
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
                                                         <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.has_attributes && !isEmpty(element.product_attributes) ? 'green' : 'red'}-100 text-gray-800`}>
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.has_attributes && !isEmpty(element.product_attributes) ? 'green' : 'red'}-900 text-white`}>
                                                             {element.has_attributes && !isEmpty(element.product_attributes) ? trans('has_attributes') : trans('no_attributes')}
                                                           </span>
                                                     <span
