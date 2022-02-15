@@ -14,7 +14,7 @@ import ActiveDot from "../components/widgets/ActiveDot";
 
 export default function({elements}) {
     const [currentData, setCurrentData] = useState();
-    const [currentDate, setCurrentDate] = useState('')
+    const [currentDate, setCurrentDate] = useState(moment().format('DD-MM-Y'))
     const {
         trans,
         classNames,
