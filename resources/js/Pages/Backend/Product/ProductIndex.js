@@ -195,8 +195,8 @@ export default function ({elements}) {
                                                             {element.has_attributes && !isEmpty(element.product_attributes) ? trans('has_attributes') : trans('no_attributes')}
                                                           </span>
                                                     <span
-                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale ? 'red' : 'gray'}-900 text-white`}>
-                                                            {trans('on_sale')}
+                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.isOnSale ? 'red' : 'green'}-900 text-white`}>
+                                                            {element.isOnSale ? trans('no_sale') : trans('on_sale')}
                                                           </span>
                                                 </div>
                                             </td>
