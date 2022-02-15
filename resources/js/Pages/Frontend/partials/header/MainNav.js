@@ -55,7 +55,7 @@ function MainNav() {
     const handleTheme = () => dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
 
     return (
-        <div className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-800 rtl:text-right ltr:text-left`}>
+        <div className={`bg-white dark:bg-${headerBgColor}-800 rtl:text-right ltr:text-left`}>
             {/* Top Nav*/}
             <div
                 className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
@@ -522,7 +522,7 @@ function MainNav() {
             </Transition.Root>
 
             <header
-                className={`bg-${headerBgColor}-50 dark:bg-${headerBgColor}-700 text-${headerColor}-800 dark:text-${headerColor}-100 "relative border-b-2 border-gray-400 dark:border-${mainBgColor}-900 py-2 max-w-full`}>
+                className={`bg-white dark:bg-${headerBgColor}-700 text-${headerColor}-800 dark:text-${headerColor}-100 "relative border-b-2 border-gray-400 dark:border-${mainBgColor}-900 py-2 max-w-full`}>
                 <nav aria-label="Top" className="w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto">
                     <div className="h-20 flex items-center">
                         <button
