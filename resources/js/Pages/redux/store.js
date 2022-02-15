@@ -1,11 +1,9 @@
-// configureStore.js
 import {createStore, applyMiddleware} from 'redux'
 import {persistStore, persistReducer} from 'redux-persist'
 import rootSaga from './saga/rootSaga';
 import createSagaMiddleware from 'redux-saga';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import reducers from './reducers'
-import {isLocal} from "../helpers";
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {createLogger} from 'redux-logger';
 
@@ -28,18 +26,18 @@ const sagaMiddleware = createSagaMiddleware();
 
 let store;
 let persistor;
-console.log('env', process.env.NODE_ENV)
-if (process.env.NODE_ENV !== "production") {
+console.log('production', process.env.NODE_ENV === "production")
+if (process.env.NODE_ENV === "production") {
+    store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
+    persistor = persistStore(store);
+    sagaMiddleware.run(rootSaga);
+} else {
     const appLogger = createLogger({
         collapsed: true,
         duration: true,
     });
     const composeEnhancers = composeWithDevTools({realtime: true, port: 8081});
     store = createStore(persistedReducer, composeEnhancers(applyMiddleware(appLogger, sagaMiddleware)));
-    persistor = persistStore(store);
-    sagaMiddleware.run(rootSaga);
-} else {
-    store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
     persistor = persistStore(store);
     sagaMiddleware.run(rootSaga);
 }
