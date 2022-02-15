@@ -26,12 +26,12 @@ const sagaMiddleware = createSagaMiddleware();
 
 let store;
 let persistor;
-console.log('production', process.env.NODE_ENV === "production")
 if (process.env.NODE_ENV === "production") {
     store = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
     persistor = persistStore(store);
     sagaMiddleware.run(rootSaga);
 } else {
+    console.log('env = ', process.env.NODE_ENV)
     const appLogger = createLogger({
         collapsed: true,
         duration: true,
