@@ -4,9 +4,7 @@
 import React from 'react';
 import _ from 'lodash';
 // import geolib, {getDistance} from 'geolib';
-import validate from 'validate.js';
 import storage from 'redux-persist/lib/storage';
-import Ziggy from "ziggy-js";
 
 export const convertNumberToEnglish = (n) => {
   return n.replace(
@@ -115,8 +113,7 @@ export function adjustColor(color, amount) {
   );
 }
 
-export const isLocal = () => !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
-
+export const isLocal = () => process.env.NODE_ENV !== "production";
 export const calculateRating = (ratings) =>  _.round((_.sumBy(ratings, r => r.value) / (ratings.length)) / 20)
 export const getTypeFromModel = (model) =>  _.lowerCase(_.last(_.split(model, 'Models', 2)));
 export const getFileType = (model) =>  _.lowerCase(_.last(_.split(model, '.', 2)));

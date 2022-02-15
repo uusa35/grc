@@ -17,7 +17,6 @@ import NormalUserWidget from '../user/NormalUserWidget';
 import {Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import VirticalProductWidget from "../product/VirticalProductWidget";
-import {isMobile, isTablet} from 'react-device-detect';
 
 function ElementSlider({
                            elements,

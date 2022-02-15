@@ -3,15 +3,15 @@ import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "./../components/FrontendContainer";
 import ElementSlider from "./../components/widgets/slider/ElementSlider";
 import {isMobile, isTablet} from 'react-device-detect';
-import NewsLetter from "./../partials/NewsLetter";
+// import NewsLetter from "./../partials/NewsLetter";
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
 import {filter, first, isEmpty, map} from 'lodash';
-import JoinusPage from "./../Pages/JoinusPage";
+// import JoinusPage from "./../Pages/JoinusPage";
 import JoinusHomeSection from "./../partials/JoinusHomeSection";
-import CategoriesGroup from "./../components/widgets/category/CategoriesGroup";
-import route from 'ziggy-js'
-import InformationBtns from "./../partials/InformationBtns";
+// import CategoriesGroup from "./../components/widgets/category/CategoriesGroup";
+// import route from 'ziggy-js'
+// import InformationBtns from "./../partials/InformationBtns";
 import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
 
@@ -23,8 +23,6 @@ export default function HomePage({
                                      newOnHomeCourses,
                                      newOnHomeProducts,
                                      onHomeParticipantAuthors,
-                                     mgt,
-                                     clearCart = false,
                                      settings,
                                      categoriesWithProducts
                                  }) {
