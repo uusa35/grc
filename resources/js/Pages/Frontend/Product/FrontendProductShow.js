@@ -61,6 +61,7 @@ export default function({element, relatedElements, auth, settings}) {
         'direct_purchase': element.direct_purchase,
     });
 
+    console.log('element', element);
     useMemo(() => {
         setFinalPrice(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).price : (element.isOnSale ? element.sale_price : element.price));
         setSelectedColor(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).color_id : element.color_id)
