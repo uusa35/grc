@@ -63,13 +63,21 @@ export default function({element, relatedElements, auth, settings}) {
 
     console.log('element', element);
     useMemo(() => {
-        setFinalPrice(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).price : (element.isOnSale ? element.sale_price : element.price));
-        setSelectedColor(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).color_id : element.color_id)
-        setSelectedSize(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).size_id : element.size_id)
-        setCurrentQty(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).qty : element.qty)
+        if (element.has_attributes && !isEmpty(element.product_attributes)) {
+            setFinalPrice(first(element.product_attributes).price);
+            setSelectedColor(first(element.product_attributes).color_id)
+            setSelectedSize(first(element.product_attributes).size_id)
+            setCurrentQty(first(element.product_attributes).qty)
 
-        element.has_attributes && element.product_attributes.length > 0 ? setFilteredColorsGroup(uniqBy(element.product_attributes, 'color_id')) : [];
-        element.has_attributes && element.product_attributes.length > 0 ? setFilteredSizesGroup(uniqBy(element.product_attributes, 'size_id')) : [];
+            setFilteredColorsGroup(uniqBy(element.product_attributes, 'color_id'));
+            setFilteredSizesGroup(uniqBy(element.product_attributes, 'size_id'));
+        } else {
+            setFinalPrice(element.isOnSale ? element.sale_price : element.price);
+            setSelectedColor(element.color_id)
+            setSelectedSize(element.size_id)
+            setCurrentQty(element.qty)
+        }
+
     }, [])
 
     useMemo(() => {
