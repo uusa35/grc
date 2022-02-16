@@ -39,7 +39,7 @@ class ProductResource extends JsonResource
             'file' => $this->file,
             'is_available' => $this->is_available,
             'video_url_one' => $this->video_url_one,
-            'has_attributes' => $this->has_attributes,
+            'has_attributes' => $this->has_attributes && $this->product_attributes->isNotEmpty(),
             'show_attribute' => $this->show_attribute,
             'direct_purchase' => $this->direct_purchase,
             'qty' => $this->qty,

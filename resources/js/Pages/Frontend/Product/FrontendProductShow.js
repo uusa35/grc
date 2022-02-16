@@ -63,7 +63,7 @@ export default function({element, relatedElements, auth, settings}) {
 
     console.log('element', element);
     useMemo(() => {
-        if (element.has_attributes && !isEmpty(element.product_attributes)) {
+        if (element.has_attributes) {
             setFinalPrice(first(element.product_attributes).price);
             setSelectedColor(first(element.product_attributes).color_id)
             setSelectedSize(first(element.product_attributes).size_id)
@@ -103,7 +103,7 @@ export default function({element, relatedElements, auth, settings}) {
     }, [filteredSizesGroup])
 
     useMemo(() => {
-        if (!isEmpty(filteredSizesGroup) && element.has_attributes && element.product_attributes.length >= 1) {
+        if (!isEmpty(filteredSizesGroup) && element.has_attributes) {
             setSelectedAttribute(first(filter(element.product_attributes, a => a.color_id === selectedColor && a.size_id === selectedSize)));
         } else if (element.has_attributes) {
             setSelectedAttribute(first(element.product_attributes))
@@ -147,7 +147,7 @@ export default function({element, relatedElements, auth, settings}) {
             type: 'product',
             element_id: element.id,
             qty: selectedQty,
-            price: element.has_attributes && element.product_attributes.length > 0 && !element.isOnSale ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price),
+            price: element.has_attributes && !element.isOnSale ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price),
             direct_purchase: element.direct_purchase,
             shipmentFees: 0,
             image: element.image,
