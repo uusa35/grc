@@ -1,5 +1,5 @@
 import React, {useContext, useMemo, useState, Fragment} from 'react'
-import {Disclosure, RadioGroup,} from '@headlessui/react'
+import {Disclosure, RadioGroup, Tab} from '@headlessui/react'
 import {
     MinusSmIcon,
     PlusSmIcon,
@@ -27,7 +27,6 @@ import SocialIconShare from "../partials/SocialIconShare";
 import {FaWhatsapp} from "react-icons/fa";
 import SizeChartModal from "../partials/SizeChartModal";
 import validate from "validate.js";
-import {Tab} from '@headlessui/react'
 
 
 export default function({element, relatedElements, auth, settings}) {
@@ -259,9 +258,7 @@ export default function({element, relatedElements, auth, settings}) {
                                             <div className="flex-1 w-full">
                                                 <div
                                                     className="flex w-full flex-row justify-between items-center ">
-
-                                                    <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100`}>{`${trans('colors')} / ${trans('heights')}`}</h2>
-
+                                                    <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-white`}>{`${trans('colors')} / ${trans('heights')}`}</h2>
                                                     {
                                                         element.show_size_chart ?
                                                             <div className="justify-end items-center">
@@ -360,19 +357,21 @@ export default function({element, relatedElements, auth, settings}) {
                                                 <div className="mt-2 lg:col-span-5">
                                                     {/* Color picker */}
                                                     <div>
-                                                        {element.show_size_chart ? <div
+                                                        <div
                                                             className="flex w-full flex-1 flex-row justify-between items-center">
                                                             <div>
                                                                 <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-white capitalize`}>{trans('color')}</h2>
                                                             </div>
                                                             <div>
-                                                                <button
-                                                                    onClick={() => setShowModal(true)}
-                                                                    className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-white hover:text-${mainColor}-800  dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
-                                                                    {trans('size_chart')}
-                                                                </button>
+                                                                {
+                                                                    element.show_size_chart && <button
+                                                                        onClick={() => setShowModal(true)}
+                                                                        className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-white hover:text-${mainColor}-800  dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
+                                                                        {trans('size_chart')}
+                                                                    </button>
+                                                                }
                                                             </div>
-                                                        </div> : null}
+                                                        </div>
 
                                                         <RadioGroup value={selectedColor} onChange={setSelectedColor}
                                                                     className="mt-4">
