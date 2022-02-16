@@ -61,7 +61,6 @@ export default function({element, relatedElements, auth, settings}) {
         'direct_purchase': element.direct_purchase,
     });
 
-    console.log('element', element);
     useMemo(() => {
         if (element.has_attributes) {
             setFinalPrice(first(element.product_attributes).price);
