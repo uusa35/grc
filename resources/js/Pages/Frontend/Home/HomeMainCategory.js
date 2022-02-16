@@ -6,8 +6,8 @@ import route from 'ziggy-js'
 import {useSelector} from "react-redux";
 
 const HomeMainCategory = ({element = {}}) => {
-    const {getLarge, trans, getLocalized, classNames, mainColor , mainBgColor } = useContext(AppContext);
-    const { locale } = useSelector(state => state);
+    const {getLarge, trans, getLocalized, classNames, mainColor, mainBgColor} = useContext(AppContext);
+    const {locale} = useSelector(state => state);
 
     return (
         <div className="bg-transparent">
@@ -26,7 +26,7 @@ const HomeMainCategory = ({element = {}}) => {
                     <div aria-hidden="true" className="relative w-full h-96 lg:hidden"/>
                     <div aria-hidden="true" className="relative w-full h-32 lg:hidden"/>
                     <div
-                        className={classNames(locale.isRTL ? `left-0` :  `right-0` , "break-all absolute inset-y-0 bottom-0 bg-black bg-opacity-5 p-6 rounded-bl-lg rounded-br-lg backdrop-filter backdrop-blur-sm sm:flex sm:items-center sm:justify-between  lg:w-96 lg:rounded-tl-lg lg:rounded-br-none lg:flex-col lg:items-start")}>
+                        className={classNames(locale.isRTL ? `left-0` : `right-0`, "break-all absolute inset-y-0 bottom-0 bg-black bg-opacity-5 p-6 rounded-bl-lg rounded-br-lg backdrop-filter backdrop-blur-sm sm:flex sm:items-center sm:justify-between  lg:w-96 lg:rounded-tl-lg lg:rounded-br-none lg:flex-col lg:items-start")}>
                         <div>
                             <h2 className={`text-xl font-bold text-${mainColor}-400 dark:text-${mainColor}-800 truncate capitalize`}>{element[getLocalized()]}</h2>
                             {
