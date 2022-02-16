@@ -63,12 +63,12 @@ export default function({element, relatedElements, auth, settings}) {
 
     useMemo(() => {
         setFinalPrice(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).price : (element.isOnSale ? element.sale_price : element.price));
-        setSelectedColor(element.has_attributes ? first(element.product_attributes).color_id : null)
-        setSelectedSize(element.has_attributes ? first(element.product_attributes).size_id : null)
-        setCurrentQty(element.has_attributes ? first(element.product_attributes).qty : element.qty)
+        setSelectedColor(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).color_id : element.color_id)
+        setSelectedSize(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).size_id : element.size_id)
+        setCurrentQty(element.has_attributes && element.product_attributes.length > 0 ? first(element.product_attributes).qty : element.qty)
 
-        element.has_attributes ? setFilteredColorsGroup(uniqBy(element.product_attributes, 'color_id')) : [];
-        element.has_attributes ? setFilteredSizesGroup(uniqBy(element.product_attributes, 'size_id')) : [];
+        element.has_attributes && element.product_attributes.length > 0 ? setFilteredColorsGroup(uniqBy(element.product_attributes, 'color_id')) : [];
+        element.has_attributes && element.product_attributes.length > 0 ? setFilteredSizesGroup(uniqBy(element.product_attributes, 'size_id')) : [];
     }, [])
 
     useMemo(() => {
