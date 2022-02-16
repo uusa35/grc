@@ -46,6 +46,10 @@ export const startBootStrapped = payload => ({
     payload
 });
 
+export const disableBootStrapped = () => ({
+    type: actions.DISABLE_BOOTSTRAPPED
+});
+
 export const setCurrency = payload => ({
     type: actions.SET_CURRENCY,
     payload,

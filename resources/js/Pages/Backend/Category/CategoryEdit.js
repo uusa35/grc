@@ -64,9 +64,6 @@ export default function({category, elements}) {
             image: data.image,
         }, {
             forceFormData: true,
-            onSuccess : ({ props }) => {
-                globalContext.categories = props.categories;
-            }
         })
 
         // uploading images module separately due to some errors occurred in setData by inertia

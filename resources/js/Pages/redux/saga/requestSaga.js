@@ -15,7 +15,7 @@ export function* startEnableBootStrappedScenario(action) {
             // put({type: actions.SET_TRANSLATIONS, payload: translations}),
             put({type: actions.GET_TRANSLATIONS}),
             put({type: actions.DISABLE_LOADING}),
-            put({type: actions.ENABLE_BOOTSTRAPPED}),
+            put({type: actions.ENABLE_BOOTSTRAPPED})
         ])
     } catch (e) {
         console.log('e', e)

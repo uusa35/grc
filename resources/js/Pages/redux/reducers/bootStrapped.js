@@ -5,7 +5,7 @@ export default function(bootStrapped = false, action) {
         case ENABLE_BOOTSTRAPPED:
             return true;
         case DISABLE_BOOTSTRAPPED:
-            return true;
+            return false;
         default:
             return bootStrapped;
     }

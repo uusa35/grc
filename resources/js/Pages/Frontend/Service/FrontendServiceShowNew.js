@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useMemo, useState} from 'react'
+import React, {Fragment, useContext, useMemo, useState, useRef} from 'react'
 import {Disclosure, Transition, Menu} from '@headlessui/react'
 import {
     MinusSmIcon,
@@ -7,9 +7,8 @@ import {
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, isEmpty, capitalize, isNull} from 'lodash';
+import {map, isEmpty, capitalize, isNull, first} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
-import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
@@ -19,18 +18,34 @@ import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
 import {toast} from "react-toastify";
 import {useForm} from "@inertiajs/inertia-react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import SocialIconShare from "../partials/SocialIconShare";
 import GlobalContext from "../../context/GlobalContext";
+import moment from 'moment'
+import Paper from '@mui/material/Paper';
+import {ViewState} from '@devexpress/dx-react-scheduler';
+import {
+    Scheduler,
+    DayView,
+    WeekView,
+    MonthView,
+    Appointments,
+    Toolbar,
+    ViewSwitcher,
+    DateNavigator,
+    AppointmentTooltip,
+    Resources
+} from '@devexpress/dx-react-scheduler-material-ui';
 
 
-export default function ({element, relatedElements, auth}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor , mainBgColor } = useContext(AppContext)
-    const { settings } = useContext(GlobalContext);
+export default function({element, relatedElements, auth}) {
+    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor, mainBgColor} = useContext(AppContext)
+    const {settings} = useContext(GlobalContext);
+    const {lang} = useSelector(state => state);
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
 
@@ -47,9 +62,9 @@ export default function ({element, relatedElements, auth}) {
     });
 
     useMemo(() => {
-        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image), loading : 'lazy'}]
+        const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image), loading: 'lazy'}]
         map(element.images, img => {
-            images.push({thumbnail: getThumb(img.image), original: getLarge(img.image), loading : 'lazy'})
+            images.push({thumbnail: getThumb(img.image), original: getLarge(img.image), loading: 'lazy'})
         })
         setCurrentImages(images);
     }, [element])
@@ -84,6 +99,24 @@ export default function ({element, relatedElements, auth}) {
         }
     }
 
+
+    const [currentTimings, setCurrentTimigns] = useState([]);
+
+    useMemo(() => {
+        const emptyTimings = [];
+        if (element.timings) {
+            map(element.timings, t => emptyTimings.push({
+                title: t[getLocalized('notes')],
+                startDate: new Date(moment(t.date + ' ' + t.start)),
+                endDate: new Date(moment(t.date + ' ' + t.end)),
+                id: t.id,
+            }));
+            setCurrentTimigns(emptyTimings);
+        }
+    }, [])
+
+    const handleClick = (e) => console.log('the click', e)
+
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -92,6 +125,68 @@ export default function ({element, relatedElements, auth}) {
             />
             <FrontendContentContainer childName={element[getLocalized()]}>
                 <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
+
+                    <Paper>
+                        <Scheduler
+                            data={currentTimings}
+                            height={660}
+                            locale={lang}
+                        >
+                            <ViewState
+                                defaultCurrentDate={moment(first(element.timings).date + ' ' + first(element.timings).start).format('YYYY-MM-DD H:m')}
+                                defaultCurrentViewName="Day"
+                            />
+
+                            <DayView
+                                startDayHour={9}
+                                endDayHour={22}
+                            />
+                            <WeekView
+                                startDate={moment(first(element.timings).date + ' ' + first(element.timings).start).format('YYYY-MM-DD H:m')}
+                                isShaded={true}
+                                startDayHour={9}
+                                endDayHour={22}
+                            />
+                            <Appointments
+                                // appointmentComponent={({data, onClick}) => {
+                                //     return <div
+                                //         key={data.id}
+                                //         className={`p-5 bg-gray-100 flex justify-center items-center`}
+                                //         onClick={() => handleClick(data)}>
+                                //         {data.title}
+                                //     </div>
+                                // }}
+                            />
+                            <AppointmentTooltip
+                                contentComponent={({
+                                                       appointmentData, appointmentResources,
+                                                   }) => {
+                                    // console.log('appointmentData', appointmentData)
+                                    // console.log('resources', appointmentResources)
+                                    return <div className={`flex flex-col justify-start items-center p-5`}>
+                                        <h3 className={`text-center`}>{appointmentData.title}</h3>
+                                        <h3>{moment(appointmentData.startDate).format('l')}</h3>
+                                        <div className="flex justify-between items-center">
+                                            <button
+                                                onClick={() => console.log('select')}
+                                                className={`bg-gray-200 text-center p-3 m-3 rounded-md shadow-md`}>
+                                                {trans('select')}
+                                            </button>
+                                            <button
+                                                onClick={() => console.log('cancel')}
+                                                className={`bg-red-900 text-white text-center p-3 m-3 rounded-md shadow-md`}>
+                                                {trans('cancel')}
+                                            </button>
+                                        </div>
+                                    </div>
+                                }}
+                            />
+                            <Toolbar/>
+                            <DateNavigator/>
+                            <ViewSwitcher/>
+                        </Scheduler>
+                    </Paper>
+
                     {/* Product */}
                     <div className="lg:grid lg:grid-cols-2 lg:px-4 lg:items-start">
                         {/* Image gallery */}
@@ -153,7 +248,7 @@ export default function ({element, relatedElements, auth}) {
                             </div>
                             <div className="mt-6">
                                 {
-                                    selectedTiming && !isEmpty(selectedTiming[getLocalized('notes')])  && selectedTiming[getLocalized('notes')].length > 5 &&
+                                    selectedTiming && !isEmpty(selectedTiming[getLocalized('notes')]) && selectedTiming[getLocalized('notes')].length > 5 &&
                                     <AlertMessage title={trans('timing_notes')}
                                                   message={selectedTiming[getLocalized('notes')]}
                                                   color={'green'}
@@ -368,7 +463,8 @@ export default function ({element, relatedElements, auth}) {
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
                                                         <div className="rtl:mr-5 ltr:ml-5">
-                                                            <div className={`border-b border-${mainColor}-200 dark:text-${mainColor}-100 mb-2 pb-2`}>
+                                                            <div
+                                                                className={`border-b border-${mainColor}-200 dark:text-${mainColor}-100 mb-2 pb-2`}>
                                                                 <h4 className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized()]}</h4>
                                                                 <p className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized('caption')]}</p>
                                                             </div>
@@ -443,7 +539,8 @@ export default function ({element, relatedElements, auth}) {
                     {/* related items */}
                     {
                         relatedElements && relatedElements.meta.total > 0 &&
-                        <RelatedItems elements={relatedElements.data} type={'service'} title={trans('related_services')}/>
+                        <RelatedItems elements={relatedElements.data} type={'service'}
+                                      title={trans('related_services')}/>
                     }
                 </div>
             </FrontendContentContainer>
