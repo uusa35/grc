@@ -364,11 +364,11 @@ export default function({element, relatedElements, auth, settings}) {
                                                             </div>
                                                             <div>
                                                                 {
-                                                                    element.show_size_chart && <button
+                                                                    element.show_size_chart ? <button
                                                                         onClick={() => setShowModal(true)}
                                                                         className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-white hover:text-${mainColor}-800  dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
                                                                         {trans('size_chart')}
-                                                                    </button>
+                                                                    </button> : null
                                                                 }
                                                             </div>
                                                         </div>
