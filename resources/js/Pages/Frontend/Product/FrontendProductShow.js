@@ -360,19 +360,19 @@ export default function({element, relatedElements, auth, settings}) {
                                                 <div className="mt-2 lg:col-span-5">
                                                     {/* Color picker */}
                                                     <div>
-                                                        {element.show_size_chart && <div
+                                                        {element.show_size_chart ? <div
                                                             className="flex w-full flex-1 flex-row justify-between items-center">
                                                             <div>
-                                                                <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>{trans('color')}</h2>
+                                                                <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-white capitalize`}>{trans('color')}</h2>
                                                             </div>
                                                             <div>
                                                                 <button
                                                                     onClick={() => setShowModal(true)}
-                                                                    className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
+                                                                    className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-white hover:text-${mainColor}-800  dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
                                                                     {trans('size_chart')}
                                                                 </button>
                                                             </div>
-                                                        </div>}
+                                                        </div> : null}
 
                                                         <RadioGroup value={selectedColor} onChange={setSelectedColor}
                                                                     className="mt-4">
@@ -408,7 +408,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     {/* Size picker */}
                                                     <div className="mt-4">
                                                         <div className="flex items-center justify-between">
-                                                            <h2 className="text-sm font-bold text-gray-900 capitalize">{trans('size')}</h2>
+                                                            <h2 className={`text-sm font-bold text-${mainColor}-900 dark:text-white capitalize`}>{trans('size')}</h2>
                                                         </div>
 
                                                         <RadioGroup value={selectedSize} onChange={setSelectedSize}
