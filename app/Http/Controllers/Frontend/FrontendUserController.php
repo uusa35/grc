@@ -20,6 +20,7 @@ use App\Models\Service;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Services\Search\UserFilters;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -321,7 +322,8 @@ class FrontendUserController extends Controller
             'password' => Hash::make($request->password),
             'role_id' => Role::where(['is_client' => true])->first()->id,
             'country_id' => $request->country_id,
-            'subscription_id' => Subscription::where(['free' => true])->first()->id
+            'subscription_id' => Subscription::where(['free' => true])->first()->id,
+            'email_verified_at' => Carbon::now()
         ]);
         if ($user) {
             auth()->loginUsingId($user->id);
