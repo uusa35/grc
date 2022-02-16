@@ -6,7 +6,7 @@ import route from 'ziggy-js'
 import {useSelector} from "react-redux";
 
 const HomeMainCategory = ({element = {}}) => {
-    const {getLarge, trans, getLocalized, classNames, mainColor } = useContext(AppContext);
+    const {getLarge, trans, getLocalized, classNames, mainColor , mainBgColor } = useContext(AppContext);
     const { locale } = useSelector(state => state);
 
     return (
@@ -38,7 +38,7 @@ const HomeMainCategory = ({element = {}}) => {
                         </div>
                         <Link
                             href={route('frontend.product.index', {category_id: element.id})}
-                            className={`mt-6 flex-shrink-0 flex text-${mainColor}-400 dark:text-${mainColor}-800 bg-opacity-0 py-3 px-4 border border-white border-opacity-25 rounded-md items-center justify-center text-base font-medium text-white hover:bg-opacity-10 sm:mt-0 sm:ml-8 lg:ml-0 lg:w-full capitalize`}
+                            className={`mt-6 flex-shrink-0 flex text-${mainColor}-400 bg-white dark:bg-${mainBgColor}-600 dark:text-${mainColor}-800 bg-opacity-0 py-3 px-4 border border-white border-opacity-25 rounded-md items-center justify-center text-base font-medium text-white hover:bg-opacity-10 sm:mt-0 sm:ml-8 lg:ml-0 lg:w-full capitalize`}
                         >
                             {trans('view')}
                         </Link>
