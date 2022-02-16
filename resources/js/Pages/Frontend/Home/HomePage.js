@@ -22,24 +22,23 @@ export default function HomePage({
                                      newOnHomeBooks,
                                      newOnHomeCourses,
                                      newOnHomeProducts,
-                                     onHomeParticipantAuthors,
                                      settings,
+                                     onHomeParticipantAuthors,
                                      categoriesWithProducts
                                  }) {
     const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 4))
     const {categories} = useContext(GlobalContext);
-    const {trans, getLocalized } = useContext(AppContext)
+    const {trans, getLocalized} = useContext(AppContext)
 
     useEffect(() => {
         function handleResize() {
             window.innerWidth < 1200 ? setSlideNumber(2) : setSlideNumber(4);
         }
+
         window.addEventListener("resize", handleResize);
         handleResize();
         return () => window.removeEventListener("resize", handleResize);
     }, []); // Empty array ensures that effect is only run on mount
-
-
 
     return (
         <FrontendContainer showBreadCrumbs={false}>
@@ -119,7 +118,7 @@ export default function HomePage({
                                     title={category[getLocalized()]}
                                     description={category[getLocalized('description')]}
                                     type={'product'}
-                                    params={{ category_id : category.id}}
+                                    params={{category_id: category.id}}
                                 />
                             )}
                             <HomeMainCategory

@@ -41,14 +41,16 @@ export default function NormalProductWidget({element}) {
                             {truncate(element[getLocalized()], {length: 20})}
                         </Link>
                     </h3>
-                    <Link href={route('frontend.user.show', element.user.id)}>
-                        <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-cover shadow-sm"
-                             src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
-                             width={360}
-                             height={480}
-                             loading='lazy'
-                        />
-                    </Link>
+                    {
+                        element.user && <Link href={route('frontend.user.show', element.user.id)}>
+                            <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-cover shadow-sm"
+                                 src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
+                                 width={360}
+                                 height={480}
+                                 loading='lazy'
+                            />
+                        </Link>
+                    }
                 </div>
                 {
                     element[getLocalized('description')] && element[getLocalized('description')].length > 5 && <p className={`h-8 text-${mainColor}-800 dark:text-${mainColor}-50 m-2 opacity-70 text-sm text-center`}>

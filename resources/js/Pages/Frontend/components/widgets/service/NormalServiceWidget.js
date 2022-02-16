@@ -40,13 +40,13 @@ export default function NormalServiceWidget({element}) {
                         </p>
                     </Link>
                 </h3>
-                <Link href={route('frontend.user.show', element.user.id)}>
+                { element.user && <Link href={route('frontend.user.show', element.user.id)}>
                     <img className="w-5 h-5 md:w-10 md:h-10 rounded-full object-fill shadow-sm" src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
                          width={360}
                          height={480}
                          loading='lazy'
                     />
-                </Link>
+                </Link>}
             </div>
             <ElementPrice price={element.price} salePrice={element.sale_price} isOnSale={element.isOnSale} free={element.free}/>
         </div>
