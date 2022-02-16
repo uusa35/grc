@@ -6,7 +6,7 @@ import route from 'ziggy-js'
 import {useSelector} from "react-redux";
 
 const HomeMainCategory = ({element = {}}) => {
-    const {getLarge, trans, getLocalized, classNames } = useContext(AppContext);
+    const {getLarge, trans, getLocalized, classNames, mainColor } = useContext(AppContext);
     const { locale } = useSelector(state => state);
 
     return (
@@ -28,10 +28,10 @@ const HomeMainCategory = ({element = {}}) => {
                     <div
                         className={classNames(locale.isRTL ? `left-0` :  `right-0` , "break-all absolute inset-y-0 bottom-0 bg-black bg-opacity-5 p-6 rounded-bl-lg rounded-br-lg backdrop-filter backdrop-blur-sm sm:flex sm:items-center sm:justify-between  lg:w-96 lg:rounded-tl-lg lg:rounded-br-none lg:flex-col lg:items-start")}>
                         <div>
-                            <h2 className="text-xl font-bold text-white truncate capitalize">{element[getLocalized()]}</h2>
+                            <h2 className={`text-xl font-bold text-${mainColor}-400 dark:text-${mainColor}-800 truncate capitalize`}>{element[getLocalized()]}</h2>
                             {
                                 element[getLocalized('description')] && element[getLocalized('description')].length > 5 &&
-                                <p className="mt-2 text-sm text-white font-bold capitalize break-normal leading-relaxed">
+                                <p className={`mt-2 text-sm text-${mainColor}-400 dark:text-${mainColor}-800 font-bold capitalize break-normal leading-relaxed`}>
                                     {element[getLocalized('description')]}
                                 </p>
                             }

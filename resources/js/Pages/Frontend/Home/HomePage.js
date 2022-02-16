@@ -6,7 +6,7 @@ import {isMobile, isTablet} from 'react-device-detect';
 // import NewsLetter from "./../partials/NewsLetter";
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
-import {filter, first, isEmpty, map} from 'lodash';
+import {filter, first, isEmpty, map, random} from 'lodash';
 // import JoinusPage from "./../Pages/JoinusPage";
 import JoinusHomeSection from "./../partials/JoinusHomeSection";
 // import CategoriesGroup from "./../components/widgets/category/CategoriesGroup";
@@ -122,7 +122,7 @@ export default function HomePage({
                                 />
                             )}
                             <HomeMainCategory
-                                element={first(filter(categories, c => c.is_product && c.image.length > 5))}
+                                element={first(random(filter(categories, c => c.is_product && c.image.length > 5)))}
                             />
                             {/*<InformationBtns />*/}
                             {/*<CategoriesGroup*/}
