@@ -425,8 +425,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                                             element.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                             active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
                                                                             checked
-                                                                                ? `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-50 border-transparent text-white hover:bg-${mainBgColor}-800 dark:bg-${mainBgColor}-50`
-                                                                                : `bg-${mainBgColor}-50, dark:bg-${mainBgColor}-800 border-gray-200 text-gray-900 hover:bg-${mainBgColor}-50 dark:hover:bg-${mainBgColor}-600`,
+                                                                                ? `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-50 border-transparent text-white dark:text-${mainColor}-900 hover:bg-${mainBgColor}-800 dark:bg-${mainBgColor}-50`
+                                                                                : `bg-${mainBgColor}-50 dark:bg-${mainBgColor}-800 border-gray-200 text-gray-900 hover:bg-${mainBgColor}-50 dark:hover:bg-${mainBgColor}-600`,
                                                                             'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                         )
                                                                     }
