@@ -223,6 +223,7 @@ export default function({countries, auth }) {
                                     type="text"
                                     id="block"
                                     name="block"
+                                    required
                                     defaultValue={data.block}
                                     autoComplete="given-block"
                                     className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
@@ -244,6 +245,7 @@ export default function({countries, auth }) {
                                     type="text"
                                     id="street"
                                     name="street"
+                                    required
                                     defaultValue={data.street}
                                     autoComplete="given-street"
                                     className=" w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
@@ -265,6 +267,7 @@ export default function({countries, auth }) {
                                     type="text"
                                     id="building"
                                     name="building"
+                                    required
                                     defaultValue={data.building}
                                     autoComplete="given-building"
                                     className=" w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Governate extends PrimaryModel
 {
-    protected $localeStrings = ['name'];
     protected $guarded = [''];
 
     public function country() {

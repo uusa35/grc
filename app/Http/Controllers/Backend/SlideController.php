@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SlideResource;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Course;
@@ -63,7 +64,8 @@ class SlideController extends Controller
                 'name_en' => $element->name_en,
                 'image' => $element->image,
                 'active' => $element->active,
-                'slidable_type' => class_basename($element->slidable),
+                'type' => $element->type,
+                'slidable_type' => $element->realType,
                 'slidable_id' => $element->slidable_id,
                 'slidable' => $element->slidable->only('id', 'name_ar', 'name_en')
             ]);
@@ -81,7 +83,7 @@ class SlideController extends Controller
             'slidable_id' => 'required|integer',
             'slidable_type' => 'required|string'
         ]);
-        $types = ['category', 'book', 'product', 'course', 'service', 'user'];
+        $types = ['category', 'book', 'product', 'course', 'service', 'user','url','n_a'];
         $products = Product::active()->select('id', 'name_ar', 'name_en')->get();
         $services = Service::active()->select('id', 'name_ar', 'name_en')->get();
         $courses = Course::active()->select('id', 'name_ar', 'name_en')->get();
@@ -140,7 +142,7 @@ class SlideController extends Controller
      */
     public function edit(Slide $slide)
     {
-        $types = ['category', 'book', 'product', 'course', 'service', 'user'];
+        $types = ['category', 'book', 'product', 'course', 'service', 'user','url','n_a'];
         $products = Product::active()->select('id', 'name_ar', 'name_en')->get();
         $services = Service::active()->select('id', 'name_ar', 'name_en')->get();
         $courses = Course::active()->select('id', 'name_ar', 'name_en')->get();
@@ -160,7 +162,7 @@ class SlideController extends Controller
     public function update(Request $request, Slide $slide)
     {
         request()->validate([
-            'image' => "max:".env('MAX_IMAGE_SIZE').'"'
+//            'image' => "image|max:".env('MAX_IMAGE_SIZE').'"'
         ]);
         if ($slide->update($request->except('image'))) {
             $request->hasFile('image') ? $this->saveMimes($slide, $request, ['image'], ['1900', '750'], true , true) : null;

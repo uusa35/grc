@@ -23,7 +23,7 @@ export default function SlideEdit({slide , types, products, services, categories
         notes_en: slide.notes_en,
         active: slide.active,
         order: slide.order,
-        image: slide.image,
+        image: '',
         file: slide.file,
         url: slide.url,
         on_home: slide.on_home,
@@ -66,6 +66,8 @@ export default function SlideEdit({slide , types, products, services, categories
         setData('category_id', '')
         setData('product_id', '')
     }, [data.type])
+
+    console.log('slide', slide);
 
     return (
         <BackendContainer mainModule={params.slidable_type} subModule={'slide'}>
@@ -128,7 +130,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         onChange={handleChange}
                                         type="text"
                                         name="name_ar"
-                                        defaultValue={data.name_ar}
+                                        defaultValue={slide.name_ar}
                                         id="name_ar"
                                         autoComplete="name_ar"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
@@ -150,7 +152,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         onChange={handleChange}
                                         type="text"
                                         name="name_en"
-                                        defaultValue={data.name_en}
+                                        defaultValue={slide.name_en}
                                         id="name_en"
                                         autoComplete="name_en"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
@@ -172,7 +174,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         onChange={handleChange}
                                         type="text"
                                         name="caption_ar"
-                                        defaultValue={data.caption_ar}
+                                        defaultValue={slide.caption_ar}
                                         id="caption_ar"
                                         autoComplete="caption_ar"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
@@ -194,7 +196,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         onChange={handleChange}
                                         type="text"
                                         name="caption_en"
-                                        defaultValue={data.caption_en}
+                                        defaultValue={slide.caption_en}
                                         id="caption_en"
                                         autoComplete="caption_en"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
@@ -219,7 +221,7 @@ accept="image/jpg, image/jpeg , image/png"
                                              name="description_ar"
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                             defaultValue={data.description_ar}
+                                             defaultValue={slide.description_ar}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('description_instruction')}/>
@@ -241,7 +243,7 @@ accept="image/jpg, image/jpeg , image/png"
                                              name="description_en"
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                             defaultValue={data.description_en}
+                                             defaultValue={slide.description_en}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('description_instruction')}/>
@@ -262,7 +264,7 @@ accept="image/jpg, image/jpeg , image/png"
                                              name="notes_ar"
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                             defaultValue={data.notes_ar}
+                                             defaultValue={slide.notes_ar}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('notes_instruction')}/>
@@ -282,7 +284,7 @@ accept="image/jpg, image/jpeg , image/png"
                                              name="notes_en"
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                             defaultValue={data.notes_en}
+                                             defaultValue={slide.notes_en}
                                          />
                                 </div>
                                 <ToolTipWidget message={trans('notes_instruction')}/>
@@ -304,7 +306,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         type="number"
                                         step="any"
                                         name="order"
-                                        defaultValue={data.order}
+                                        defaultValue={slide.order}
                                         id="order"
                                         autoComplete="order"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -327,7 +329,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         type="url"
                                         step="any"
                                         name="url"
-                                        defaultValue={data.url}
+                                        defaultValue={slide.url}
                                         id="url"
                                         autoComplete="url"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -391,12 +393,13 @@ accept="application/pdf"
                                                 id="type"
                                                 name="type"
                                                 value={data.type}
+                                                defaultValue={slide.type}
                                                 autoComplete="type"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
                                                 {
                                                     map(types, u => (
-                                                        <option key={u} value={u}
+                                                        <option key={u} value={u} defaultValue={slide.type}
                                                         >{trans(u)}</option>
                                                     ))
                                                 }
@@ -418,7 +421,8 @@ accept="application/pdf"
                                                 onChange={handleChange}
                                                 id="user_id"
                                                 name="user_id"
-                                                value={data.user_id}
+                                                value={slide.user_id}
+                                                defaultValue={slide.user_id}
                                                 autoComplete="user_id"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
@@ -440,14 +444,15 @@ accept="application/pdf"
                                     <div
                                         className={classNames(data.type === 'product' ? 'visible' : 'hidden', 'sm:col-span-2')}>
                                         <label htmlFor="product_id" className="block  font-medium text-gray-800">
-                                            {trans(data.type)}
+                                            {trans(slide.type)}
                                         </label>
                                         <div className="mt-1">
                                             <select
                                                 onChange={handleChange}
                                                 id="product_id"
                                                 name="product_id"
-                                                value={data.product_id}
+                                                value={slide.product_id}
+                                                defaultValue={slide.product_id}
                                                 autoComplete="product_id"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
@@ -470,14 +475,15 @@ accept="application/pdf"
                                     <div
                                         className={classNames(data.type === 'category' ? 'visible' : 'hidden', 'sm:col-span-2')}>
                                         <label htmlFor="category_id" className="block  font-medium text-gray-800">
-                                            {trans(data.type)}
+                                            {trans(slide.type)}
                                         </label>
                                         <div className="mt-1">
                                             <select
                                                 onChange={handleChange}
                                                 id="category_id"
                                                 name="category_id"
-                                                value={data.category_id}
+                                                value={slide.category_id}
+                                                defaultValue={slide.category_id}
                                                 autoComplete="category_id"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
@@ -501,14 +507,15 @@ accept="application/pdf"
                                     <div
                                         className={classNames(data.type === 'book' ? 'visible' : 'hidden', 'sm:col-span-2')}>
                                         <label htmlFor="book_id" className="block  font-medium text-gray-800">
-                                            {trans(data.type)}
+                                            {trans(slide.type)}
                                         </label>
                                         <div className="mt-1">
                                             <select
                                                 onChange={handleChange}
                                                 id="book_id"
                                                 name="book_id"
-                                                value={data.book_id}
+                                                value={slide.book_id}
+                                                defaultValue={slide.book_id}
                                                 autoComplete="book_id"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
@@ -531,14 +538,15 @@ accept="application/pdf"
                                     <div
                                         className={classNames(data.type === 'course' ? 'visible' : 'hidden', 'sm:col-span-2')}>
                                         <label htmlFor="course_id" className="block  font-medium text-gray-800">
-                                            {trans(data.type)}
+                                            {trans(slide.type)}
                                         </label>
                                         <div className="mt-1">
                                             <select
                                                 onChange={handleChange}
                                                 id="course_id"
                                                 name="course_id"
-                                                value={data.course_id}
+                                                value={slide.course_id}
+                                                defaultValue={slide.course_id}
                                                 autoComplete="course_id"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
@@ -562,14 +570,15 @@ accept="application/pdf"
                                     <div
                                         className={classNames(data.type === 'service' ? 'visible' : 'hidden', 'sm:col-span-2')}>
                                         <label htmlFor="service_id" className="block  font-medium text-gray-800">
-                                            {trans(data.type)}
+                                            {trans(slide.type)}
                                         </label>
                                         <div className="mt-1">
                                             <select
                                                 onChange={handleChange}
                                                 id="service_id"
                                                 name="service_id"
-                                                value={data.service_id}
+                                                value={slide.service_id}
+                                                defaultValue={slide.service_id}
                                                 autoComplete="service_id"
                                                 className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                             >
@@ -614,7 +623,7 @@ accept="application/pdf"
                                                     name="active"
                                                     id="active"
                                                     type="radio"
-                                                    defaultChecked={data.active}
+                                                    defaultChecked={slide.active}
                                                     value={1}
                                                     className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
@@ -629,7 +638,7 @@ accept="application/pdf"
                                                     name="active"
                                                     id="active"
                                                     type="radio"
-                                                    defaultChecked={!data.active}
+                                                    defaultChecked={!slide.active}
                                                     value={0}
                                                     className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
@@ -659,7 +668,7 @@ accept="application/pdf"
                                                         onChange={handleChange}
                                                         name="on_home"
                                                         id="on_home"
-                                                        defaultChecked={data.on_home}
+                                                        defaultChecked={slide.on_home}
                                                         type="radio"
                                                         value={1}
                                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
@@ -675,7 +684,7 @@ accept="application/pdf"
                                                         name="on_home"
                                                         id="on_home"
                                                         type="radio"
-                                                        defaultChecked={!data.on_home}
+                                                        defaultChecked={!slide.on_home}
                                                         value={0}
                                                         className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                     />
@@ -708,7 +717,7 @@ accept="application/pdf"
                                                     name="is_video"
                                                     type="radio"
                                                     value={1}
-                                                    defaultChecked={data.is_video}
+                                                    defaultChecked={slide.is_video}
                                                     className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="push-everything"
@@ -723,7 +732,7 @@ accept="application/pdf"
                                                     name="is_video"
                                                     type="radio"
                                                     value={0}
-                                                    defaultChecked={!data.is_video}
+                                                    defaultChecked={!slide.is_video}
                                                     className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="is_video"
@@ -754,7 +763,7 @@ accept="application/pdf"
                                                     name="is_intro"
                                                     type="radio"
                                                     value={1}
-                                                    defaultChecked={data.is_intro}
+                                                    defaultChecked={slide.is_intro}
                                                     className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="is_intro"
@@ -769,7 +778,7 @@ accept="application/pdf"
                                                     name="is_intro"
                                                     type="radio"
                                                     value={0}
-                                                    defaultChecked={!data.is_intro}
+                                                    defaultChecked={!slide.is_intro}
                                                     className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                                 />
                                                 <label htmlFor="is_intro"

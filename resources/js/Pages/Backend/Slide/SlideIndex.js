@@ -1,7 +1,7 @@
 import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
-import {isEmpty, map} from "lodash";
-import {Link, usePage} from "@inertiajs/inertia-react";
+import {map} from "lodash";
+import {Link} from "@inertiajs/inertia-react";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {showModal} from "../../redux/actions";
@@ -11,7 +11,7 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 
 export default function SlideIndex({elements}) {
     const {trans, classNames, getLocalized, getThumb} = useContext(AppContext);
-    const { locale } = useSelector(state => state);
+    const {locale} = useSelector(state => state);
     const {params} = route();
     const dispatch = useDispatch();
 
@@ -86,7 +86,7 @@ export default function SlideIndex({elements}) {
                                             <img
                                                 className="w-20 h-auto"
                                                 src={getThumb(element.image)} alt=""/></td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.slidable_type}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.type}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex items-center space-x-3 lg:pl-2">
                                                 <ActiveDot active={element.active}/>
@@ -110,10 +110,14 @@ export default function SlideIndex({elements}) {
                                                         id: element.id
                                                     })}
                                                     className="text-gray-600 hover:text-gray-900 has-tooltip">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                              strokeWidth="2"
+                                                              d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
                                                     </svg>
-                                                    <div className={classNames(locale.isRTL ? `left-10`: `right-10`,'absolute z-50')}>
+                                                    <div
+                                                        className={classNames(locale.isRTL ? `left-10` : `right-10`, 'absolute z-50')}>
                                                         <ToolTipWidget message={trans('toggle_active')}/>
                                                     </div>
                                                 </Link>
