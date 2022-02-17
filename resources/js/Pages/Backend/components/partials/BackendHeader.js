@@ -298,7 +298,7 @@ const BackendHeader = () => {
                                                 )}
                                             </Menu.Item>
                                         </div>
-                                        {isAdminOrAbove && <div className="py-1 capitalize">
+                                        {isAdminOrAbove && <><div className="py-1 capitalize">
                                             <Menu.Item>
                                                 {({active}) => (
                                                     <Link
@@ -319,7 +319,30 @@ const BackendHeader = () => {
                                                     </Link>
                                                 )}
                                             </Menu.Item>
-                                        </div>}
+                                        </div>
+                                            <div className="py-1 capitalize">
+                                                <Menu.Item>
+                                                    {({active}) => (
+                                                        <Link
+                                                            href={route('backend.translation.search')}
+                                                            className={classNames(
+                                                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                'group flex items-center px-4 py-2 '
+                                                            )}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                 className="h-6 w-6 mx-4" fill="none"
+                                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path strokeLinecap="round"
+                                                                      strokeLinejoin="round" strokeWidth="2"
+                                                                      d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                                                            </svg>
+                                                            {trans('translation_management')}
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                            </div>
+                                        </>}
                                         <div className="py-1 capitalize">
                                             <Menu.Item>
                                                 {({active}) => (

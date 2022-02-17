@@ -2,7 +2,7 @@ import {map} from 'lodash';
 import {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ImageGallery from "react-image-gallery";
-import {Link} from "@inertiajs/inertia-react";
+
 import route from 'ziggy-js';
 
 export default function({elements}) {

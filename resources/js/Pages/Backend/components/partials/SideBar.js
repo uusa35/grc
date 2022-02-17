@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 import SearchField from "../../../Frontend/partials/SearchField";
 
 const SideBar = () => {
-    const {trans , classNames , getThumb, getLocalized, isAdminOrAbove, isSuper  } = useContext(AppContext);
+    const {trans , classNames , getThumb, getLocalized, isAdminOrAbove  } = useContext(AppContext);
     const { modules, parentModule } = useSelector(state => state);
     const[sideBarOpen, toggleSideBar] = useState(false)
     const {settings, auth} = useContext(GlobalContext);
@@ -304,7 +304,7 @@ const SideBar = () => {
                                                             )}
                                                         </Menu.Item>
                                                         {
-                                                            isSuper && <Menu.Item>
+                                                            isAdminOrAbove && <Menu.Item>
                                                                 {({active}) => (
                                                                     <Link
                                                                         href={route('backend.translation.search')}
