@@ -30,7 +30,7 @@ export default function({elements}) {
                 // thumbnailLabel : img[getLocalized()],
                 description:
                     (img[getLocalized('description')] && img[getLocalized('description')].length > 10) || (img[getLocalized()] && img[getLocalized()].length > 10) ?
-                        <Link
+                        <a
                             href={route().has(`frontend.${img.type}.show`) ? route(`frontend.${img.type}.show`, {id: img.slidable_id}) : (img.url ? img.url : '#')}
                             className="flex flex-1 flex-col space-y-4 truncate capitalize p-5 w-auto h-auto">
                             <h1>{img[getLocalized()]}</h1>
@@ -39,7 +39,7 @@ export default function({elements}) {
                                     {img[getLocalized('description')]}
                                 </p>
                             }
-                        </Link> : null
+                        </a> : null
             })
         })
         setCurrentImages(images);

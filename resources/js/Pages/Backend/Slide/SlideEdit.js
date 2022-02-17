@@ -67,8 +67,6 @@ export default function SlideEdit({slide , types, products, services, categories
         setData('product_id', '')
     }, [data.type])
 
-    console.log('slide', slide);
-
     return (
         <BackendContainer mainModule={params.slidable_type} subModule={'slide'}>
             <div className="flex flex-col bg-white shadow-md rounded-md">
