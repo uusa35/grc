@@ -1,15 +1,13 @@
-import React, {Fragment, useContext, useMemo, useState} from 'react'
-import {Disclosure, Transition, Menu} from '@headlessui/react'
+import React, {useContext, useMemo, useState} from 'react'
+import {Disclosure} from '@headlessui/react'
 import {
     MinusSmIcon,
     PlusSmIcon,
-    ChevronDownIcon
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, isEmpty, isNull} from 'lodash';
+import {map, size, isNull} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
-import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import ImageGallery from 'react-image-gallery';
@@ -201,7 +199,7 @@ export default function({element, relatedElements, auth}) {
                                 </h2>
                                 <div className="border-t divide-y divide-gray-200 ">
                                     {/* description */}
-                                    {!isNull(element[getLocalized('description')]) && element[getLocalized('description')].length > 5 ?
+                                    {!isNull(element[getLocalized('description')]) && size(element[getLocalized('description')]) > 5 ?
                                         <Disclosure as="div" defaultOpen={true}>
                                             {({open}) => (
                                                 <>
@@ -240,7 +238,7 @@ export default function({element, relatedElements, auth}) {
                                     }
 
                                     {/* notes */}
-                                    {!isNull(element[getLocalized('notes')]) && element[getLocalized('notes')].length > 5 ?
+                                    {!isNull(element[getLocalized('notes')]) && size(element[getLocalized('notes')]) > 5 ?
                                         <Disclosure as="div" defaultOpen={false}>
                                             {({open}) => (
                                                 <>

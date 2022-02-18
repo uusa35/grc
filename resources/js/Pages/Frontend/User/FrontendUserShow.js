@@ -6,13 +6,12 @@ import {
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, isNull} from 'lodash';
+import {map, isNull, size } from 'lodash';
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import ImageGallery from 'react-image-gallery';
 import ElementRating from "../components/widgets/ElementRating";
 import {isMobile} from "react-device-detect";
-import {useDispatch, useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
@@ -21,11 +20,8 @@ import SocialIconShare from "../partials/SocialIconShare";
 
 export default function({element}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, mainColor } = useContext(AppContext)
-    const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
     const {settings} = useContext(GlobalContext);
-    const {cart} = useSelector(state => state);
-    const dispatch = useDispatch();
 
     useMemo(() => {
         const images = [{thumbnail: getThumb(element.image), original: getLarge(element.image)}]
@@ -88,7 +84,7 @@ export default function({element}) {
                                 </h2>
                                 <div className="border-t divide-y divide-gray-200 ">
                                     {/* description */}
-                                    {!isNull(element[getLocalized('description')]) && element[getLocalized('description')] && element[getLocalized('description')].length > 5 ?
+                                    {!isNull(element[getLocalized('description')]) && element[getLocalized('description')] && size(element[getLocalized('description')]) > 5 ?
                                         <Disclosure as="div" defaultOpen={true}>
                                             {({open}) => (
                                                 <>

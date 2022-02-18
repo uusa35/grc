@@ -9,7 +9,7 @@ MoonIcon
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
-import {map, capitalize, filter, isEmpty} from 'lodash';
+import {map, capitalize, filter, isEmpty, size } from 'lodash';
 import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
@@ -306,7 +306,7 @@ function MainNav() {
                                     </div>
                                 }
                                 {
-                                    settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 &&
+                                    settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 &&
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.terms')}
@@ -316,7 +316,7 @@ function MainNav() {
                                     </div>
                                 }
                                 {
-                                    settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 &&
+                                    settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 &&
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.polices')}
@@ -724,7 +724,7 @@ function MainNav() {
                                                                     </div>
                                                                 </Link>
 
-                                                                {settings[getLocalized('services')] && settings[getLocalized('services')].length > 50 ?
+                                                                {settings[getLocalized('services')] && size(settings[getLocalized('services')]) > 50 ?
                                                                     <Link
                                                                         href={route('frontend.services')}
                                                                         className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}
@@ -744,7 +744,7 @@ function MainNav() {
                                                                     </Link> : null
                                                                 }
 
-                                                                {settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ?
+                                                                {settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ?
                                                                     <Link
                                                                         href={route('frontend.polices')}
                                                                         className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}>
@@ -763,7 +763,7 @@ function MainNav() {
                                                                     </Link> : null
                                                                 }
                                                                 {
-                                                                    settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 ?
+                                                                    settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ?
                                                                         <Link
                                                                             href={route('frontend.terms')}
                                                                             className={`-m-3 p-3 flex items-start rounded-lg hover:text-${headerColor}-400 capitalize`}

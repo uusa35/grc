@@ -4,7 +4,7 @@ import React, {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
-import {truncate} from "lodash";
+import {truncate, size } from "lodash";
 import {motion} from "framer-motion"
 
 export default function NormalProductWidget({element}) {
@@ -53,7 +53,7 @@ export default function NormalProductWidget({element}) {
                     }
                 </div>
                 {
-                    element[getLocalized('description')] && element[getLocalized('description')].length > 5 && <p className={`h-8 text-${mainColor}-800 dark:text-${mainColor}-50 m-2 opacity-70 text-sm text-center`}>
+                    element[getLocalized('description')] && size(element[getLocalized('description')]) > 5 && <p className={`h-8 text-${mainColor}-800 dark:text-${mainColor}-50 m-2 opacity-70 text-sm text-center`}>
                         {truncate(element[getLocalized('description')], { length : 30 })}
                     </p>
                 }

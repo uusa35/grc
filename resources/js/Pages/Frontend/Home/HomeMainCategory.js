@@ -4,6 +4,7 @@ import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 import {useSelector} from "react-redux";
+import { size } from 'lodash';
 
 const HomeMainCategory = ({element = {}}) => {
     const {getLarge, trans, getLocalized, classNames, mainColor, mainBgColor} = useContext(AppContext);
@@ -30,7 +31,7 @@ const HomeMainCategory = ({element = {}}) => {
                         <div>
                             <h2 className={`text-xl font-bold text-${mainColor}-400 dark:text-${mainColor}-800 truncate capitalize`}>{element[getLocalized()]}</h2>
                             {
-                                element[getLocalized('description')] && element[getLocalized('description')].length > 5 &&
+                                element[getLocalized('description')] && size(element[getLocalized('description')]) > 5 &&
                                 <p className={`mt-2 text-sm text-${mainColor}-400 dark:text-${mainColor}-800 font-bold capitalize break-normal leading-relaxed`}>
                                     {element[getLocalized('description')]}
                                 </p>

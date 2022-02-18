@@ -4,7 +4,7 @@ import React, {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
-import {truncate} from "lodash";
+import {truncate, size } from "lodash";
 import {motion} from "framer-motion"
 import {useSelector} from "react-redux";
 
@@ -55,7 +55,7 @@ export default function({element}) {
                         }
                     </div>
                     <div className={`flex flex-1`}>
-                        {element[getLocalized('description')] && element[getLocalized('description')].length > 10 &&
+                        {element[getLocalized('description')] && size(element[getLocalized('description')]) > 5 &&
                         <p className={`break-all pt-3 text-sm text-ellipsis overflow-hidden capitalize text-${mainColor}-800 dark:text-${mainColor}-50`}>
                             {truncate(element[getLocalized('description')], {length: 150})}
                         </p>

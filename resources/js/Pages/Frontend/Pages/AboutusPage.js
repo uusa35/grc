@@ -5,6 +5,7 @@ import {AppContext} from "../../context/AppContext";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
+import { size } from 'lodash';
 
 export default function AboutusPage({settings}) {
     const {trans, getLocalized, mainColor } = useContext(AppContext)
@@ -43,7 +44,7 @@ export default function AboutusPage({settings}) {
                                 {settings[getLocalized()]}
                             </p>
                             {
-                                settings[getLocalized('caption')] && settings[getLocalized('caption')].length > 10 ?
+                                settings[getLocalized('caption')] && size(settings[getLocalized('caption')]) > 5 ?
                                     <div
                                         className={`mt-6 inline-block w-full text-${mainColor}-600 dark:text-${mainColor}-300 border border-transparent rounded-sm py-3 px-8 font-medium  sm:w-auto capitalize`}
                                     >

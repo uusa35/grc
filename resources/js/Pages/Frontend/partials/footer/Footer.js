@@ -1,13 +1,12 @@
 import {useContext} from "react";
-import {FaWhatsapp, FaTwitter, FaFacebook, FaInstagram, FaPhone, FaYoutube} from 'react-icons/fa';
+import {FaWhatsapp, FaTwitter, FaFacebook, FaInstagram, FaYoutube} from 'react-icons/fa';
 import moment from 'moment'
 import {AppContext} from "../../../context/AppContext";
 import GlobalContext from "../../../context/GlobalContext";
 import route from 'ziggy-js';
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {getWhatsappLink} from "../../../helpers";
-import {useSelector} from "react-redux";
-import {isEmpty} from "lodash";
+import {size} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function Footer() {
@@ -65,7 +64,7 @@ export default function Footer() {
                                 </Link>
                             </li>
                             {
-                                settings[getLocalized('services')] && settings[getLocalized('services')].length > 50 ?
+                                settings[getLocalized('services')] && size(settings[getLocalized('services')]) > 50 ?
                                     <li>
                                         <Link href={route('frontend.services')}
                                               className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
@@ -74,7 +73,7 @@ export default function Footer() {
                                     </li> : null
                             }
                             {
-                                settings[getLocalized('polices')] && settings[getLocalized('polices')].length > 50 ?
+                                settings[getLocalized('polices')] && size(settings[getLocalized('polices')]) > 50 ?
                                     <li>
                                         <Link href={route('frontend.polices')}
                                               className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
@@ -83,7 +82,7 @@ export default function Footer() {
                                     </li> : null
                             }
                             {
-                                settings[getLocalized('terms')] && settings[getLocalized('terms')].length > 50 ? <li>
+                                settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ? <li>
                                     <Link href={route('frontend.terms')}
                                           className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
                                         {trans('terms')}
@@ -91,7 +90,7 @@ export default function Footer() {
                                 </li> : null
                             }
                             {
-                                settings[getLocalized('policy')] && settings[getLocalized('policy')].length > 50 ? <li>
+                                settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ? <li>
                                     <Link href={route('frontend.polices')}
                                           className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
                                         {trans('polices')}
