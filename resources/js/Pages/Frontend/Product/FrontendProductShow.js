@@ -294,8 +294,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                                 className={({active, checked}) =>
                                                                     classNames(
                                                                         attribute.color,
-                                                                        active && checked ? `ring-2 ring-offset-1 ring-${mainColor}-100 dark:ring-${mainColor}-400` : '',
-                                                                        !active && checked ? `ring-2 ring-${mainColor}-100 dark:ring-${mainColor}-800` : '',
+                                                                        active && checked ? `ring-2 ring-offset-1 ring-${mainColor}-100 dark:ring-${mainColor}-400` : `ring-2 ring-offset-1 ring-${mainColor}-100 dark:ring-${mainColor}-400`,
+                                                                        !active && checked ? `ring-2 ring-${mainColor}-100 dark:ring-${mainColor}-800` : `ring-2 ring-${mainColor}-200 dark:ring-${mainColor}-600`,
                                                                         `-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none hover:bg-${mainBgColor}-100 dark:hover:bg-${mainBgColor}-800`
                                                                     )
                                                                 }
