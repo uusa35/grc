@@ -335,7 +335,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                         active ? `ring-2 ring-offset-2 ring-${mainBgColor}-200 dark:ring-${mainBgColor}-800` : '',
                                                                         checked
-                                                                            ? `bg-${mainBgColor}800 dark:bg-${mainBgColor}-600 border-transparent text-${mainColor}-800 dark:text-${mainColor}-50 hover:bg-${mainBgColor}-300 dark:hover:bg-${mainBgColor}-400`
+                                                                            ? `bg-${mainBgColor}-800 dark:bg-${mainBgColor}-600 border-transparent text-${mainColor}-800 dark:text-${mainColor}-50 hover:bg-${mainBgColor}-300 dark:hover:bg-${mainBgColor}-400`
                                                                             : `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-600 border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-200 hover:bg-${mainBgColor}-600 dark:hover:bg-${mainBgColor}-800`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
