@@ -222,7 +222,7 @@ export default function({element, relatedElements, auth, settings}) {
                             <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                                 <div className="flex flex-1">
                                     {
-                                        !isNull(element[getLocalized('caption')]) && <div className="mt-6">
+                                        !isNull(element[getLocalized('caption')]) && size(element[getLocalized('caption')]) > 5 && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
                                                 className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
@@ -514,7 +514,7 @@ export default function({element, relatedElements, auth, settings}) {
                                 <div className="border-t divide-y divide-gray-200 ">
                                     {/* description */}
                                     {
-                                        !isNull(element[getLocalized('description')]) && size(element[getLocalized('description')]) > 10 &&
+                                        !isNull(element[getLocalized('description')]) && size(element[getLocalized('description')]) > 5 &&
                                         <Disclosure as="div" defaultOpen={true}>
                                             {({open}) => (
                                                 <>
@@ -554,7 +554,7 @@ export default function({element, relatedElements, auth, settings}) {
 
                                     {/* notes */}
                                     {
-                                        !isNull(element[getLocalized('notes')]) && size(element[getLocalized('notes')]) > 10 &&
+                                        !isNull(element[getLocalized('notes')]) && size(element[getLocalized('notes')]) > 5 &&
                                         <Disclosure as="div" defaultOpen={false}>
                                             {({open}) => (
                                                 <>
@@ -690,7 +690,7 @@ export default function({element, relatedElements, auth, settings}) {
                                 <div className="border-b border-gray-200 ">
                                     <Tab.List className="-mb-px flex">
                                         {
-                                            !isNull(element[getLocalized('description')]) && size(element[getLocalized('description')]) > 10 &&
+                                            !isNull(element[getLocalized('description')]) && size(element[getLocalized('description')]) > 5 &&
                                             <Tab
                                                 className={({selected}) =>
                                                     classNames(
@@ -705,7 +705,7 @@ export default function({element, relatedElements, auth, settings}) {
                                             </Tab>
                                         }
                                         {
-                                            !isNull(element[getLocalized('notes')]) && size(element[getLocalized('notes')]) > 10 &&
+                                            !isNull(element[getLocalized('notes')]) && size(element[getLocalized('notes')]) > 5 &&
                                             <Tab
                                                 className={({selected}) =>
                                                     classNames(
@@ -736,7 +736,7 @@ export default function({element, relatedElements, auth, settings}) {
                                 <Tab.Panels as={Fragment}>
                                     {/* description */}
                                     {
-                                        !isNull(element[getLocalized('description')]) && size(element[getLocalized('description')]) > 10 &&
+                                        !isNull(element[getLocalized('description')]) && size(element[getLocalized('description')]) > 5 &&
                                         <Tab.Panel as="dl" className="text-sm text-gray-500 h-60">
                                             <h3 className="sr-only">{trans('description')}</h3>
                                             <Fragment key={'description'}>
@@ -748,7 +748,7 @@ export default function({element, relatedElements, auth, settings}) {
                                     }
                                     {/* notes */}
                                     {
-                                        !isNull(element[getLocalized('description')]) && size(element[getLocalized('notes')]) > 10 &&
+                                        !isNull(element[getLocalized('notes')]) && size(element[getLocalized('notes')]) > 5 &&
                                         <Tab.Panel className="text-sm text-gray-500 h-60">
                                             <Fragment key={'description'}>
                                                 <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-800 dark:text-${mainColor}-50 p-10 capitalize`}>
