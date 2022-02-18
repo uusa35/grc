@@ -37,8 +37,8 @@
             {{--            <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(0) ? ' :: '. trans('general.'.Str::plural(request()->segment(0))) : '' }} test from 'here'</title>--}}
             <meta name="name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
             <meta name="title" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
-            <meta name="description" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
-            <meta name="keywords" content="{{ trans('general.app_keywords') }}"/>
+            <meta name="description" content="{{$page['props']['settings']->{'keywords'}  }}"/>
+            <meta name="keywords" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
             <meta name="author" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
             <meta name="country" content="{{$page['props']['settings']->{'country_'.app()->getLocale()} }}">
             <meta name="mobile" content="{{$page['props']['settings']->mobile }}">
