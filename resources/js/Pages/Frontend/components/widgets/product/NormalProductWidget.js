@@ -7,7 +7,7 @@ import ElementTags from "../ElementTags";
 import {truncate, size } from "lodash";
 import {motion} from "framer-motion"
 
-export default function NormalProductWidget({element}) {
+const NormalProductWidget = ({element}) => {
     const {getLocalized, getThumb, mainBgColor , mainColor, trans  } = useContext(AppContext);
     return (
         <motion.div
@@ -78,3 +78,6 @@ export default function NormalProductWidget({element}) {
         </motion.div>
     );
 }
+
+
+export default React.memo(NormalProductWidget);

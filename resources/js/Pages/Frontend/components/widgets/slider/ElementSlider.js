@@ -1,3 +1,4 @@
+import React from 'react';
 import {isEmpty, truncate} from 'lodash';
 import pluralize from 'pluralize'
 import {useContext, useEffect, useRef, useState} from "react";
@@ -16,7 +17,7 @@ import NormalUserWidget from '../user/NormalUserWidget';
 // import Swiper core and required modules
 import {Navigation, Pagination, Scrollbar, A11y} from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import VirticalProductWidget from "../product/VirticalProductWidget";
+import VerticalProductWidget from "../product/VerticalProductWidget";
 
 function ElementSlider({
                            elements,
@@ -42,7 +43,7 @@ function ElementSlider({
             case 'category':
                 return <CategoryWidget element={s} type={moduleType}/>;
             case 'product':
-                return slidesPerView === 2 && virtical  ? <VirticalProductWidget element={s}/> : <NormalProductWidget element={s}/> ;
+                return slidesPerView === 2 && virtical  ? <VerticalProductWidget element={s}/> : <NormalProductWidget element={s}/> ;
             case 'book':
                 return <NormalBookWidget element={s}/>;
             case 'course':

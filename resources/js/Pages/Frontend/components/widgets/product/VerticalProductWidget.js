@@ -8,7 +8,7 @@ import {truncate, size } from "lodash";
 import {motion} from "framer-motion"
 import {useSelector} from "react-redux";
 
-export default function({element}) {
+const VerticalProductWidget  = ({element}) => {
     const {getLocalized, getThumb, mainBgColor, mainColor, trans, classNames} = useContext(AppContext);
     const {locale} = useSelector(state => state);
 
@@ -83,3 +83,5 @@ export default function({element}) {
         </motion.div>
     );
 }
+
+export default React.memo(VerticalProductWidget);

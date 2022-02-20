@@ -1,15 +1,14 @@
+import React, {useContext} from "react";
 import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
-import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementTags from "../ElementTags";
 import ElementPrice from "../ElementPrice";
 import {truncate} from "lodash";
 import {motion} from "framer-motion"
 
-export default function NormalBookWidget({element}) {
+const NormalBookWidget = ({element})  => {
     const {getLocalized, getThumb, mainColor, mainBgColor } = useContext(AppContext);
-
     return (
         <motion.div
             initial={false}
@@ -61,3 +60,5 @@ export default function NormalBookWidget({element}) {
         </motion.div>
     );
 }
+
+export default React.memo(NormalBookWidget);

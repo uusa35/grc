@@ -1,11 +1,11 @@
+import React,  {useContext} from "react";
 import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
-import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import {truncate} from "lodash";
 import { motion } from "framer-motion"
 
-export default function NormalUserWidget ({ element }) {
+const NormalUserWidget =  ({ element }) => {
     const { getLocalized, getThumb, mainColor  } = useContext(AppContext);
     return (
         <motion.div
@@ -31,3 +31,5 @@ export default function NormalUserWidget ({ element }) {
         </motion.div>
     );
 }
+
+export default React.memo(NormalUserWidget);

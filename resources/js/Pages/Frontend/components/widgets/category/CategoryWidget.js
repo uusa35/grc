@@ -6,7 +6,6 @@ import { motion } from "framer-motion"
 
 const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
     const {getLocalized, getThumb, mainColor } = useContext(AppContext)
-
     return (
         <motion.div
             initial={false}
@@ -45,4 +44,4 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
     );
 };
 
-export default CategoryWidget;
+export default React.memo(CategoryWidget);

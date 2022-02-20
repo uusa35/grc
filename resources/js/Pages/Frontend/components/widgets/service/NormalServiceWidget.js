@@ -1,13 +1,13 @@
+import React,  {useContext} from "react";
 import route from "ziggy-js";
 import {Link} from "@inertiajs/inertia-react";
-import {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
 import {truncate} from "lodash";
 import { motion } from "framer-motion"
 
-export default function NormalServiceWidget({element}) {
+const  NormalServiceWidget = ({element}) => {
     const {getLocalized, getThumb, mainColor , mainBgColor } = useContext(AppContext);
     return (
         <motion.div
@@ -53,3 +53,5 @@ export default function NormalServiceWidget({element}) {
         </motion.div>
     );
 }
+
+export default React.memo(NormalServiceWidget)
