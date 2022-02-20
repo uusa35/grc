@@ -10,7 +10,7 @@ import {size} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function Footer() {
-    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, footerColor , footerBgColor} = useContext(AppContext)
+    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, footerColor , footerBgColor, mainColor } = useContext(AppContext)
     const {auth, settings} = useContext(GlobalContext);
     const {errors} = usePage().props;
     const {data, setData, put, progress, reset} = useForm({
@@ -43,23 +43,23 @@ export default function Footer() {
                             height={96}
                             loading={'lazy'}
                         />
-                        <p className={`text-${footerColor}-800 dark:text-${footerColor}-600 capitalize text-base mt-5`}>
+                        <p className={`text-${footerColor}-800 dark:text-${footerColor}-800 capitalize text-base mt-5`}>
                             {settings[getLocalized('caption')]}
                         </p>
                     </div>
                     {/* support and polices */}
                     <div className=" p-4">
-                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${footerColor}-400 tracking-wider uppercase`}>{trans('pages')}</h3>
+                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase`}>{trans('pages')}</h3>
                         <ul className="mt-4 space-y-4">
                             <li>
                                 <Link href={route('frontend.contactus')}
-                                      className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                      className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                     {trans('contactus')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href={route('frontend.aboutus')}
-                                      className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                      className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                     {trans('aboutus')}
                                 </Link>
                             </li>
@@ -67,7 +67,7 @@ export default function Footer() {
                                 settings[getLocalized('services')] && size(settings[getLocalized('services')]) > 50 ?
                                     <li>
                                         <Link href={route('frontend.services')}
-                                              className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                              className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                             {trans('our_services')}
                                         </Link>
                                     </li> : null
@@ -76,7 +76,7 @@ export default function Footer() {
                                 settings[getLocalized('polices')] && size(settings[getLocalized('polices')]) > 50 ?
                                     <li>
                                         <Link href={route('frontend.polices')}
-                                              className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                              className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                             {trans('polices')}
                                         </Link>
                                     </li> : null
@@ -84,7 +84,7 @@ export default function Footer() {
                             {
                                 settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ? <li>
                                     <Link href={route('frontend.terms')}
-                                          className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                         {trans('terms')}
                                     </Link>
                                 </li> : null
@@ -92,7 +92,7 @@ export default function Footer() {
                             {
                                 settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ? <li>
                                     <Link href={route('frontend.polices')}
-                                          className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                         {trans('polices')}
                                     </Link>
                                 </li> : null
@@ -100,7 +100,7 @@ export default function Footer() {
                             {
                                 settings.enable_faqs ? <li>
                                     <Link href={route('frontend.faqs')}
-                                          className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                         {trans('faqs')}
                                     </Link>
                                 </li> : null
@@ -108,7 +108,7 @@ export default function Footer() {
                             {
                                 settings.enable_joinus ? <li>
                                     <Link href={route('frontend.joinus')}
-                                          className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                         {trans('joinus')}
                                     </Link>
                                 </li> : null
@@ -118,14 +118,14 @@ export default function Footer() {
                                     <>
                                         <li>
                                             <Link href={route('frontend.user.logging')}
-                                                  className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                                  className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                                 {trans('login')}
                                             </Link>
                                         </li>
                                         {
                                             settings.enable_register ? <li>
                                                 <Link href={route('frontend.user.registration')}
-                                                      className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                                      className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                                     {trans('register')} {trans('new_user')}
                                                 </Link>
                                             </li> : null
@@ -135,14 +135,14 @@ export default function Footer() {
                                     : <>
                                         <li>
                                             <Link href={route('frontend.user.edit', auth.id)}
-                                                  className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                                  className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                                 {trans('my_account')}
                                             </Link>
                                         </li>
                                         {isAdminOrAbove ? <li>
                                             <Link href={route('backend.home')}
                                                target="_blank"
-                                               className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                               className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                                 {trans('backend')}
                                             </Link>
                                         </li> : null}
@@ -151,7 +151,7 @@ export default function Footer() {
                             {
                                 settings.enable_subscriptions ? <li>
                                     <Link href={route('frontend.subscriptions')}
-                                          className={`text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 capitalize`}>
+                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
                                         {trans('subscriptions')}
                                     </Link>
                                 </li> : null
@@ -163,7 +163,7 @@ export default function Footer() {
                         {
                             (settings.apple || settings.android) &&
                             <>
-                                <h3 className={`font-bold text-${footerColor}-800 dark:text-${footerColor}-400 tracking-wider uppercase mb-4`}>{trans('find_us_on_stores')}</h3>
+                                <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase mb-4`}>{trans('find_us_on_stores')}</h3>
                                 <div className="  pt-0  mb-6 flex flex-col justify-start items-start gap-y-4 ">
                                     {
                                         settings.android && <a
@@ -210,49 +210,49 @@ export default function Footer() {
                                 </div>
                             </>
                         }
-                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${footerColor}-400 tracking-wider uppercase`}>{trans('contact_us_on')}</h3>
+                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase`}>{trans('contact_us_on')}</h3>
                         <div className="grid grid-cols-5 mt-5">
                             {
                                 settings.facebook && <div><a target="_blank" href={settings.facebook}
-                                                        className={`col-span-1 text-${footerColor}-800 dark:text-${footerColor}-50 hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
+                                                        className={`col-span-1 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
                                     <span className="sr-only">{settings[getLocalized]}</span>
-                                    <FaFacebook className={`h-7 w-7 text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 `}/>
+                                    <FaFacebook className={`h-7 w-7 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 `}/>
                                 </a></div>
                             }
                             {settings.instagram &&
                             <a target="_blank" href={settings.instagram}
-                               className={`col-span-1 text-${footerColor}-800 dark:text-${footerColor}-50 hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
+                               className={`col-span-1 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
                                 <span className="sr-only">{trans('instagram')}</span>
-                                <FaInstagram className={`h-7 w-7 text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 `}/>
+                                <FaInstagram className={`h-7 w-7 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 `}/>
                             </a>
                             }
                             {settings.twitter &&
                             <a target="_blank" href={settings.twitter}
-                               className={`col-span-1 text-${footerColor}-800 dark:text-${footerColor}-50 hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
+                               className={`col-span-1 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
                                 <span className="sr-only">{trans('twitter')}</span>
-                                <FaTwitter className={`h-7 w-7 text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 `}/>
+                                <FaTwitter className={`h-7 w-7 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 `}/>
                             </a>
                             }
                             {settings.youtube &&
                             <a target="_blank" href={settings.youtube}
-                               className={`col-span-1 text-${footerColor}-800 dark:text-${footerColor}-50 hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
+                               className={`col-span-1 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
                                 <span className="sr-only">{trans('youtube')}</span>
-                                <FaYoutube className={`h-7 w-7 text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 `}/>
+                                <FaYoutube className={`h-7 w-7 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 `}/>
                             </a>
                             }
                             {settings.whatsapp &&
                             <a target="_blank"
                                href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}
-                               className={`col-span-1 text-${footerColor}-800 dark:text-${footerColor}-50 hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
+                               className={`col-span-1 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-800 dark:hover:text-${footerColor}-400 capitalize`}>
                                 <span className="sr-only">{trans('whatsapp')}</span>
-                                <FaWhatsapp className={`h-7 w-7 text-${footerColor}-600 text-${footerColor}-50 hover:text-${footerColor}-400 `}/>
+                                <FaWhatsapp className={`h-7 w-7 text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 `}/>
                             </a>
                             }
                         </div>
                     </div>
                     {/* newsletter */}
                     <div className=" p-4">
-                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${footerColor}-400 tracking-wider uppercase mb-4`}>{trans('payment_methods')}</h3>
+                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase mb-4`}>{trans('payment_methods')}</h3>
                         <div className="py-4 space-y-4 mt-4">
                             <div className="flex flex-1 flex-row justify-between items-center gap-x-2">
                                 <div>
@@ -292,7 +292,7 @@ export default function Footer() {
                         </div>
                         {settings.enable_newsletter ?
                             <>
-                                <h3 className={`font-bold text-${footerColor}-800 dark:text-${footerColor}-400 tracking-wider uppercase`}>{trans('subscribe_to_our_news_letter')}</h3>
+                                <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase`}>{trans('subscribe_to_our_news_letter')}</h3>
                                 <form className="mt-4 sm:flex sm:max-w-md my-5 space-x-2" onSubmit={submit}>
                                     <label htmlFor="email" className="sr-only">
                                         {trans('email')}
@@ -320,7 +320,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className={`mt-12 border-t border-${footerColor}-200 pt-8`}>
-                    <p className={`text-base text-${footerColor}-800 dark:text-${footerColor}-50 xl:text-center`}>&copy; {moment().format('y')} {settings[getLocalized()]}, {trans('all_rights_reserved')}.</p>
+                    <p className={`text-base text-${footerColor}-800 dark:text-white xl:text-center`}>&copy; {moment().format('y')} {settings[getLocalized()]}, {trans('all_rights_reserved')}.</p>
                 </div>
             </div>
         </footer>

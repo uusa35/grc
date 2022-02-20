@@ -1,13 +1,16 @@
-import React, {useContext, useEffect, useMemo, useState} from "react";
+import React, {useContext,} from "react";
 import PropTypes from 'prop-types';
 import MainNav from "../partials/header/MainNav";
 import {AppContext} from "../../context/AppContext";
 import Footer from "../partials/footer/Footer";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 import SystemMessage from "../../Backend/components/partials/SystemMessage";
-import GlobalContext from "../../context/GlobalContext";
-import {setTheme} from "../../redux/actions";
+// import GlobalContext from "../../context/GlobalContext";
+// import {setTheme} from "../../redux/actions";
+import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
+// Import Swiper styles
+import 'swiper/css';
 
 const FrontendContainer = ({children}) => {
     const {locale, theme } = useSelector(state => state)
