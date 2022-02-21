@@ -1,9 +1,9 @@
-import React, {useContext,} from "react";
+import React, {useContext} from "react";
 import PropTypes from 'prop-types';
 import MainNav from "../partials/header/MainNav";
 import {AppContext} from "../../context/AppContext";
 import Footer from "../partials/footer/Footer";
-import { useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import MetaElement from "../../Backend/components/partials/MetaElement";
 import SystemMessage from "../../Backend/components/partials/SystemMessage";
 // import GlobalContext from "../../context/GlobalContext";
@@ -13,20 +13,22 @@ import './../../../../../node_modules/react-image-gallery/styles/css/image-galle
 import 'swiper/css';
 
 const FrontendContainer = ({children}) => {
-    const {locale, theme } = useSelector(state => state)
-    const {classNames, arFont, enFont , mainColor, mainBgColor } = useContext(AppContext);
+    const {locale, theme} = useSelector(state => state)
+    const {classNames, arFont, enFont, mainColor, mainBgColor} = useContext(AppContext);
 
     return (
-        <div className={classNames(locale.isRTL ? arFont : enFont,` ${theme} h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize `)} dir={locale.dir}>
+        <div
+            className={classNames(locale.isRTL ? arFont : enFont, ` ${theme} h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize `)}
+            dir={locale.dir}>
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
-            <MetaElement />
+            <MetaElement/>
             <main
                 className={`bg-white dark:bg-${mainBgColor}-900 flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
                 <MainNav/>
                 <div className={`min-h-screen bg-white-50 dark:bg-${mainBgColor}-900 text-${mainColor}-50`}>
                     <SystemMessage/>
-                    {children}
+                        {children}
                 </div>
                 <Footer/>
             </main>

@@ -9,7 +9,6 @@ import SearchIndexSideBar from "../partials/SearchIndexSideBar";
 import SearchIndexSideBarMobile from "../partials/SearchIndexSideBarMobile";
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
-import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import NormalProductWidget from "../components/widgets/product/NormalProductWidget";
 
