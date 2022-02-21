@@ -18,8 +18,8 @@ createInertiaApp({
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>}
                                  persistor={persistor}
-                                 onBeforeLift={() => new Promise(resolve =>
-                                     setTimeout(resolve, 500))}
+                                 // onBeforeLift={() => new Promise(resolve =>
+                                 //     setTimeout(resolve, 500))}
                     >
                         <AppContextProvider>
                             <App {...props} />
