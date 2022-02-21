@@ -1,7 +1,7 @@
+import React , {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {orderBy} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
@@ -12,7 +12,7 @@ import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
 
 
-export default function({elements}) {
+export default React.memo(function({elements}) {
     const [currentData, setCurrentData] = useState();
     const [currentDate, setCurrentDate] = useState(moment().format('DD-MM-Y'))
     const {
@@ -310,5 +310,5 @@ export default function({elements}) {
             </div>
         </BackendContainer>
     );
-}
+})
 

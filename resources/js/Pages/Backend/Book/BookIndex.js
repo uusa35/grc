@@ -1,7 +1,7 @@
+import React, {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {orderBy} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
 
 
-export default function BookIndex({elements}) {
+export default React.memo(function ({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
@@ -182,10 +182,15 @@ export default function BookIndex({elements}) {
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
-                                                    <span
-                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.on_sale ? 'green' : 'red'}-100 text-gray-800`}>
+                                                    {
+                                                        element.isOnSale ? <span
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-green-900 text-white`}>
                                                             {trans('on_sale')}
+                                                          </span> : <span
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-red-900 text-white`}>
+                                                            {trans('no_sale')}
                                                           </span>
+                                                    }
                                                 </div>
                                             </td>
                                             <td className=" block md:table-cell px-6 py-4 whitespace-nowrap text-right font-medium">
@@ -335,5 +340,5 @@ export default function BookIndex({elements}) {
             </div>
         </BackendContainer>
     );
-}
+})
 

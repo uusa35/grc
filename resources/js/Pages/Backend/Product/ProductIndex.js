@@ -1,7 +1,7 @@
+import React, {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {orderBy, isEmpty, sumBy } from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
 
 
-export default function ({elements}) {
+export default React.memo(function ({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
@@ -194,10 +194,15 @@ export default function ({elements}) {
                                                             className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.has_attributes && !isEmpty(element.product_attributes) ? 'green' : 'red'}-900 text-white`}>
                                                             {element.has_attributes && !isEmpty(element.product_attributes) ? trans('has_attributes') : trans('no_attributes')}
                                                           </span>
-                                                    <span
-                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-${element.isOnSale ? 'red' : 'green'}-900 text-white`}>
-                                                            {element.isOnSale ? trans('no_sale') : trans('on_sale')}
+                                                    {
+                                                        element.isOnSale ? <span
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-green-900 text-white`}>
+                                                            {trans('on_sale')}
+                                                          </span> : <span
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-red-900 text-white`}>
+                                                            {trans('no_sale')}
                                                           </span>
+                                                    }
                                                 </div>
                                             </td>
                                             <td className=" px-6 py-4 whitespace-nowrap text-right font-medium">
@@ -458,5 +463,5 @@ export default function ({elements}) {
             </div>
         </BackendContainer>
     );
-}
+})
 

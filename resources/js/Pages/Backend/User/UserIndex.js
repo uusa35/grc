@@ -1,7 +1,7 @@
+import React, {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {orderBy, isArray, map} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
@@ -12,13 +12,14 @@ import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
 
 
-export default function({elements}) {
+export default React.memo(function({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
         classNames,
         getLocalized,
-        isAdminOrAbove
+        isAdminOrAbove,
+        getThumb
     } = useContext(AppContext);
     const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
@@ -76,12 +77,6 @@ export default function({elements}) {
                                             </div>
                                         </div>
                                     </th>
-                                    {/*<th*/}
-                                    {/*    scope="col"*/}
-                                    {/*    className=" px-3 py-3 rtl:text-right ltr:text-left"*/}
-                                    {/*>*/}
-                                    {/*    {trans('main_image')}*/}
-                                    {/*</th>*/}
                                     <th
                                         scope="col"
                                         className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
@@ -113,7 +108,7 @@ export default function({elements}) {
                                     </th>
                                     <th
                                         scope="col"
-                                        className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
+                                        className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
                                     >
                                         {trans('created_at')}
                                     </th>
@@ -121,7 +116,7 @@ export default function({elements}) {
                                 </thead>
                                 <tbody className="block md:table-row-group">
                                 {
-                                    isArray(currentData) && map(currentData, element =>
+                                    currentData && map(currentData, element =>
                                         <tr className='block md:table-row bg-white border-b border-gray-100 text-gray-500'
                                             key={element.id}>
                                             <td className=" block md:table-cell px-3 py-4 whitespace-nowrap font-medium text-gray-900">{element.id}</td>
@@ -129,11 +124,12 @@ export default function({elements}) {
                                             {/*    <img className="w-14 h-14  object-contain rounded-md shadow-inner"*/}
                                             {/*         src={getThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
                                             {/*</td>*/}
-                                            <td className="block md:table-cell whitespace-nowrap text-gray-500">{element.sku}</td>
                                             <td className="block md:table-cell whitespace-nowrap text-gray-500">
-                                                <div className="flex items-center space-x-3 lg:pl-2">
+                                                <div className="flex flex-row items-center space-x-3 lg:pl-2">
+                                                    <img src={getThumb(element.image)} className={`w-20 h-auto ltr:pr-5 rtl:pl-5`}/>
+
                                                     <ActiveDot active={element.active}/>
-                                                    {element[getLocalized()]}
+                                                    {element[getLocalized('name')]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
@@ -448,5 +444,5 @@ export default function({elements}) {
             </div>
         </BackendContainer>
     );
-}
+})
 

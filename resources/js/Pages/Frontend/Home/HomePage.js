@@ -14,10 +14,10 @@ import JoinusHomeSection from "./../partials/JoinusHomeSection";
 // import InformationBtns from "./../partials/InformationBtns";
 import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
-import InformationBtns from "../partials/InformationBtns";
+// import InformationBtns from "../partials/InformationBtns";
 
 
-export default function HomePage({
+export default React.memo(function ({
                                      slides,
                                      homeCategories,
                                      newOnHomeBooks,
@@ -137,7 +137,7 @@ export default function HomePage({
             </FrontendContentContainer>
         </FrontendContainer>
     )
-}
+})
 
 // {
 //     settings.enable_newsletter && <NewsLetter/>
