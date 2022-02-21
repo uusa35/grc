@@ -1,4 +1,3 @@
-import {lazy, Suspense} from 'react';
 import {render} from 'react-dom'
 import {createInertiaApp} from '@inertiajs/inertia-react'
 import GlobalContext from "./Pages/context/GlobalContext";
@@ -22,11 +21,9 @@ createInertiaApp({
                         // onBeforeLift={() => new Promise(resolve =>
                         //     setTimeout(resolve, 500))}
                     >
-                        <Suspense fallback={<LoadingView/>}>
-                            <AppContextProvider>
-                                <App {...props} />
-                            </AppContextProvider>
-                        </Suspense>
+                        <AppContextProvider>
+                            <App {...props} />
+                        </AppContextProvider>
                     </PersistGate>
                 </Provider>
             </GlobalContext.Provider>
