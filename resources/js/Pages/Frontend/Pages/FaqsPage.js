@@ -4,20 +4,21 @@ import {AppContext} from "../../context/AppContext";
 import {Disclosure} from "@headlessui/react";
 import {ChevronDownIcon} from "@heroicons/react/outline";
 import GlobalContext from "../../context/GlobalContext";
-import {map} from 'lodash';
+import {map, size} from 'lodash';
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
 
 export default function FaqsPage({elements}) {
-    const {trans, getLocalized, classNames, mainColor } = useContext(AppContext)
+    const {trans, getLocalized, classNames, mainColor} = useContext(AppContext)
     const {settings} = useContext(GlobalContext);
 
     return (
         <FrontendContainer>
             <FrontendContentContainer parentModuleName={'faqs'}>
                 <SubMetaElement title={trans('faqs')}/>
-                <div className={` text-${mainColor}-900 dark:text-${mainColor}-50 bg-transparent relative overflow-hidden`}>
+                <div
+                    className={` text-${mainColor}-900 dark:text-${mainColor}-50 bg-transparent relative overflow-hidden`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
@@ -59,7 +60,7 @@ export default function FaqsPage({elements}) {
                     {/* Testimonials */}
                     <section
                         aria-labelledby="testimonial-heading"
-                        className={` relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:py-32 lg:px-8`}
+                        className={` relative max-w-7xl min-h-screen mx-auto py-24 px-4 sm:px-6 lg:py-32 lg:px-8`}
                     >
                         <div className="max-w-2xl mx-auto lg:max-w-none">
                             <div

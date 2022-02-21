@@ -1,16 +1,16 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useEffect, useMemo, useState} from "react";
+import {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isEmpty} from 'lodash';
+import {orderBy} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
-import LocalizedText from "../components/widgets/LocalizedText";
 import {useDispatch, useSelector} from "react-redux";
+import {toggleSort} from "../../redux/actions";
 
 
-export default function TrashedIndex({elements, model }) {
+export default function TrashedIndex({elements, model}) {
     const {
         trans,
         classNames,
@@ -18,7 +18,7 @@ export default function TrashedIndex({elements, model }) {
         getThumb
     } = useContext(AppContext);
     const [currentData, setCurrentData] = useState();
-    const { sort , locale } = useSelector(state => state);
+    const {sort, locale} = useSelector(state => state);
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -46,7 +46,7 @@ export default function TrashedIndex({elements, model }) {
                                     <th
                                         scope="col"
                                         className="px-3 py-3 flex flex-row justify-start items-center rtl:text-right ltr:text-left  uppercase tracking-wider tracking-wider"
-                                        onClick={() => dispatch(toggleSort('id'))}
+                                        onClick={useCallback(() => dispatch(toggleSort('id')))}
                                     >
                                         {sort.desc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
@@ -71,7 +71,7 @@ export default function TrashedIndex({elements, model }) {
                                     <th
                                         scope="col"
                                         className=" px-3 py-3 flex flex-1 flex-row justify-start items-center rtl:text-right ltr:text-left"
-                                        onClick={() => dispatch(toggleSort('name'))}
+                                        onClick={useCallback(() => dispatch(toggleSort('name')))}
                                     >
                                         {sort.desc ?
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
@@ -136,7 +136,10 @@ export default function TrashedIndex({elements, model }) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
-                                                                                        href={route(`backend.restore`, { id : element.id , model })}
+                                                                                        href={route(`backend.restore`, {
+                                                                                            id: element.id,
+                                                                                            model
+                                                                                        })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2 ltr:text-left rtl:text-right'

@@ -1,12 +1,11 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useEffect, useMemo, useState} from "react";
+import {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isEmpty} from 'lodash';
+import {orderBy} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
-import LocalizedText from "../components/widgets/LocalizedText";
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
@@ -55,7 +54,7 @@ export default function ServiceIndex({elements}) {
                                     <th
                                         scope="col"
                                         className="block md:table-cell px-3 py-3  rtl:text-right ltr:text-left  uppercase tracking-wider tracking-wider"
-                                        onClick={() => dispatch(toggleSort('id'))}
+                                        onClick={useCallback(() => dispatch(toggleSort('id')))}
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
@@ -86,7 +85,7 @@ export default function ServiceIndex({elements}) {
                                     <th
                                         scope="col"
                                         className="block md:table-cell py-3 rtl:text-right ltr:text-left"
-                                        onClick={() => dispatch(toggleSort('sku'))}
+                                        onClick={useCallback(() => dispatch(toggleSort('sku')))}
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
@@ -112,7 +111,7 @@ export default function ServiceIndex({elements}) {
                                     <th
                                         scope="col"
                                         className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
-                                        onClick={() => dispatch(toggleSort('name'))}
+                                        onClick={useCallback(() => dispatch(toggleSort('name')))}
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
@@ -139,7 +138,7 @@ export default function ServiceIndex({elements}) {
                                     <th
                                         scope="col"
                                         className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
-                                        onClick={() => dispatch(toggleSort('price'))}
+                                        onClick={useCallback(() => dispatch(toggleSort('price')))}
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?

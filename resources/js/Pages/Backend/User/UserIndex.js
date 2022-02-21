@@ -1,9 +1,9 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
-import {Fragment, useContext, useMemo, useState} from "react";
+import {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isEmpty, isArray, map} from 'lodash';
+import {orderBy, isArray, map} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import moment from "moment";
@@ -54,7 +54,7 @@ export default function({elements}) {
                                     <th
                                         scope="col"
                                         className="block md:table-cell px-3 py-3  rtl:text-right ltr:text-left  uppercase tracking-wider tracking-wider"
-                                        onClick={() => dispatch(toggleSort('id'))}
+                                        onClick={useCallback(() => dispatch(toggleSort('id')))}
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
@@ -85,7 +85,7 @@ export default function({elements}) {
                                     <th
                                         scope="col"
                                         className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
-                                        onClick={() => dispatch(toggleSort('name'))}
+                                        onClick={useCallback(() => dispatch(toggleSort('name')))}
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?

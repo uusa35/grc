@@ -14,6 +14,7 @@ import JoinusHomeSection from "./../partials/JoinusHomeSection";
 // import InformationBtns from "./../partials/InformationBtns";
 import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
+import InformationBtns from "../partials/InformationBtns";
 
 
 export default function HomePage({
@@ -60,18 +61,19 @@ export default function HomePage({
                                 moduleType={'book'}
                                 params={{is_book: true}}
                             />
-                            <ElementSlider
+                            {newOnHomeBooks && <ElementSlider
                                 elements={newOnHomeBooks}
                                 slidesPerView={slideNumber}
                                 title={trans('new_chosen_books')}
                                 type={'book'}
                             />
-                            <ElementSlider
+                            }
+                            {onHomeParticipantAuthors && <ElementSlider
                                 elements={onHomeParticipantAuthors}
                                 slidesPerView={isTablet || isMobile ? 1 : 8}
                                 title={trans('participant_authors')}
                                 type={'user'}
-                            />
+                            />}
                         </>
                     }
                     {
@@ -84,12 +86,12 @@ export default function HomePage({
                                 moduleType={'course'}
                                 params={{is_course: true}}
                             />
-                            <ElementSlider
+                            {newOnHomeCourses && <ElementSlider
                                 elements={newOnHomeCourses}
                                 slidesPerView={slideNumber}
                                 title={trans('featured_courses')}
                                 type={'course'}
-                            />
+                            />}
                         </>
                     }
                     {
@@ -102,14 +104,13 @@ export default function HomePage({
                                 moduleType={'product'}
                                 params={{is_product: true}}
                             />
-                            <ElementSlider
+                            {newOnHomeProducts && <ElementSlider
                                 elements={newOnHomeProducts}
                                 slidesPerView={2}
                                 title={trans('featured_products')}
                                 type={'product'}
                                 virtical={!isMobile}
-                            />
-
+                            />}
                             {map(filter(categoriesWithProducts, c => c.products && !isEmpty(c.products)), category =>
                                 <ElementSlider
                                     key={category.id}

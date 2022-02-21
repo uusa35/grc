@@ -1,19 +1,19 @@
 import {Menu, Transition} from "@headlessui/react";
-import {ChevronDownIcon, FilterIcon} from "@heroicons/react/solid";
-import React, {Fragment, useContext} from "react";
+import {ChevronDownIcon} from "@heroicons/react/solid";
+import React, {Fragment, useContext, useCallback} from "react";
 import {toggleSort} from "../../redux/actions";
 import {AiOutlineSortAscending} from "react-icons/ai";
 import {useDispatch, useSelector} from "react-redux";
 import {AppContext} from "../../context/AppContext";
-import { map , filter } from 'lodash'
+import {map, filter} from 'lodash'
 
-export default function FrontendSortIndexMenu({ showPrice = true }) {
-    const { trans, getLocalized , classNames, mainColor, mainBgColor } = useContext(AppContext);
-    const { sort } = useSelector(state => state);
+export default function FrontendSortIndexMenu({showPrice = true}) {
+    const {trans, getLocalized, classNames, mainColor, mainBgColor} = useContext(AppContext);
+    const {sort} = useSelector(state => state);
     const dispatch = useDispatch();
     const sortOptions = [
-        {name: 'alphabetical_a_to_z', current: false, colName: getLocalized(), display : true },
-        {name: 'new_to_old', current: false, colName: 'id', display : true },
+        {name: 'alphabetical_a_to_z', current: false, colName: getLocalized(), display: true},
+        {name: 'new_to_old', current: false, colName: 'id', display: true},
         {name: 'sort_price', current: false, colName: 'price', display: showPrice},
     ]
     return (
@@ -43,7 +43,7 @@ export default function FrontendSortIndexMenu({ showPrice = true }) {
                                 <Menu.Item key={option.name}>
                                     {({active}) => (
                                         <div
-                                            onClick={() => dispatch(toggleSort(option.colName))}
+                                            onClick={useCallback(() => dispatch(toggleSort(option.colName)))}
                                             className={classNames(
                                                 option.current ? `text-${mainColor}-800 dark:text-${mainColor}-400` : `text-${mainColor}-800 dark:text-${mainColor}-400`,
                                                 active ? `bg-${mainBgColor}-50 dark:bg-${mainColor}-800` : '',
@@ -51,7 +51,8 @@ export default function FrontendSortIndexMenu({ showPrice = true }) {
                                             )}
                                         >
                                             {trans(option.name)}
-                                            <AiOutlineSortAscending size={25} className={`text-${mainColor}-800 dark:text-${mainColor}-400`}/>
+                                            <AiOutlineSortAscending size={25}
+                                                                    className={`text-${mainColor}-800 dark:text-${mainColor}-400`}/>
                                         </div>
                                     )}
                                 </Menu.Item>
