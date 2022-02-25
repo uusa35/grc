@@ -63,7 +63,6 @@ module.exports = {
             },
         },
         fontFamily: {
-            'HelveticaNeueME_1': ['HelveticaNeueME_1', 'sans-serif'],
             'GESSTwoBold': ['GESSTwoBold', 'sans-serif'],
             'GESSTwoMedium': ['GESSTwoMedium', 'sans-serif'],
             'DroidArabicKufi': ['DroidArabicKufi', 'sans-serif'],

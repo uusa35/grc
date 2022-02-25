@@ -10,9 +10,7 @@ export function* startEnableBootStrappedScenario(action) {
         yield all([
             put({type: actions.SET_CURRENCIES, payload: currencies}),
             put({type: actions.SET_CURRENCY, payload: first(currencies)}),
-            // put({type: actions.SET_SETTINGS, payload: settings}),
             put({type: actions.SET_THEME, payload: theme}),
-            // put({type: actions.SET_TRANSLATIONS, payload: translations}),
             put({type: actions.GET_TRANSLATIONS}),
             put({type: actions.DISABLE_LOADING}),
             put({type: actions.ENABLE_BOOTSTRAPPED})
