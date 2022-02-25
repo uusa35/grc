@@ -94,7 +94,7 @@ const SearchField = () => {
                             autoComplete="type"
                             className={classNames(locale.isRTL ? `` : ``, 'border-t border-b rounded-t-md rounded-b-md focus:border-transparent focus:ring-transparent  h-full rtl:pl-4 ltr:pl-1 border-transparent bg-transparent text-gray-500 sm:text-sm font-bold')}
                         >
-                            <option value="">{trans('search_type')}</option>
+                            <option value="">{capitalize(trans('search_type'))}</option>
                             {
                                 map(filter(types, t => t[requestType]), type => <option key={`${type.name}`}
                                                                                         value={`${type.name}`}>{capitalize(trans(pluralize(type.name)))}</option>)
