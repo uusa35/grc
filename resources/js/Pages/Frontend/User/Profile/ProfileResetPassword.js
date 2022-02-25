@@ -1,21 +1,16 @@
-import {Fragment, useContext, useState} from 'react'
+import { useContext, useState} from 'react'
 import {AppContext} from "../../../context/AppContext";
 import FrontendContainer from "../../components/FrontendContainer";
 import route from 'ziggy-js';
-import GlobalContext from "../../../context/GlobalContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import FrontendContentContainer from "../../components/FrontendContentContainer";
-import {useDispatch, useSelector} from "react-redux";
 import {Inertia} from "@inertiajs/inertia";
 import UserEditSideNav from "./UserEditSideNav";
 
 export default function() {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
-    const {auth} = useContext(GlobalContext);
-    const {locale} = useSelector(state => state);
+    const {trans} = useContext(AppContext)
     const [viewPass, setViewPass] = useState(false)
 
-    const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
@@ -113,7 +108,7 @@ export default function() {
                                                     id="password"
                                                     onChange={handleChange}
                                                     autoComplete={trans("email")}
-                                                    className=" mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                                    className="text-black mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.password &&
@@ -133,7 +128,7 @@ export default function() {
                                                     id="password_confirmation"
                                                     onChange={handleChange}
                                                     autoComplete={trans("password_confirmation")}
-                                                    className=" mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                                                    className="text-black mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.password_confirmation &&

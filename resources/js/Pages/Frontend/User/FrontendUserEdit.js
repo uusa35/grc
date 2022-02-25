@@ -23,30 +23,8 @@ import {Inertia} from "@inertiajs/inertia";
 import UserEditSideNav from "./Profile/UserEditSideNav";
 
 export default function({user}) {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
-    const {locale} = useSelector(state => state);
-    const [availableToHire, setAvailableToHire] = useState(true)
-    const [privateAccount, setPrivateAccount] = useState(false)
-    const [allowCommenting, setAllowCommenting] = useState(true)
-    const [allowMentions, setAllowMentions] = useState(true)
+    const {trans, getThumb, getLocalized} = useContext(AppContext)
 
-    const subNavigation = [
-        {
-            name: 'personal_information',
-            href: route('frontend.user.edit', user.id),
-            icon: UserCircleIcon,
-            current: true
-        },
-        {name: 'change_password', href: '#', icon: KeyIcon, current: false},
-        {name: 'my_addresses', href: '#', icon: ViewGridAddIcon, current: false},
-        {name: 'my_books_list', href: '#', icon: BellIcon, current: false},
-        {name: 'my_courses_list', href: '#', icon: BellIcon, current: false},
-        {name: 'my_subscription', href: '#', icon: CreditCardIcon, current: false},
-        {name: 'orders_list', href: '#', icon: ViewGridAddIcon, current: false},
-        {name: 'favorites_list', href: '#', icon: ViewGridAddIcon, current: false},
-    ];
-
-    const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
@@ -171,7 +149,7 @@ export default function({user}) {
                                                     // onChange={handleChange}
                                                     defaultValue={user.email}
                                                     autoComplete={trans("email")}
-                                                    className="disabled mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                    className="disabled mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.email &&
@@ -192,7 +170,7 @@ export default function({user}) {
                                                     onChange={handleChange}
                                                     defaultValue={user.name_en}
                                                     autoComplete={trans("name_en")}
-                                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.name_en &&
@@ -213,7 +191,7 @@ export default function({user}) {
                                                     onChange={handleChange}
                                                     defaultValue={user.name_ar}
                                                     autoComplete={trans("name_ar")}
-                                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.name_ar &&
@@ -234,7 +212,7 @@ export default function({user}) {
                                                     onChange={handleChange}
                                                     defaultValue={user.mobile}
                                                     autoComplete={trans("mobile")}
-                                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.mobile &&
@@ -255,7 +233,7 @@ export default function({user}) {
                                                     onChange={handleChange}
                                                     defaultValue={user.whatsapp}
                                                     autoComplete={trans("whatsapp")}
-                                                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
                                                 />
                                                 <p className={`mt-2  text-gray-500`}>
                                                     {errors.whatsapp &&
