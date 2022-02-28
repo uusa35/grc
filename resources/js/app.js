@@ -7,19 +7,25 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {store, persistor} from './Pages/redux/store';
 import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
 import 'react-toastify/dist/ReactToastify.css';
-
+import { InertiaProgress } from '@inertiajs/progress'
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
         const {settings, auth, currencies, categories} = props.initialPage.props;
+        InertiaProgress.init({
+            delay: 0,
+            color: '#f92d34',
+            includeCSS: true,
+            showSpinner: true,
+        })
         return render(
             <GlobalContext.Provider value={{auth, settings, currencies, categories}}>
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>}
                                  persistor={persistor}
                         // onBeforeLift={() => new Promise(resolve =>
-                        //     setTimeout(resolve, 500))}
+                        //     setTimeout(resolve, 2000))}
                     >
                         <AppContextProvider>
                             <App {...props} />
