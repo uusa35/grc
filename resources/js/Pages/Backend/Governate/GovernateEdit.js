@@ -22,6 +22,7 @@ export default function({governate, countries }) {
         'order': governate.order,
         'code': governate.code,
         'country_id': governate.country_id,
+        'price': governate.price,
         'active': governate.active,
     });
 
@@ -147,6 +148,30 @@ export default function({governate, countries }) {
                             <ToolTipWidget message={trans('order_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
                                 {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
+                            </p>
+                        </div>
+
+                        {/* price */}
+                        <div className="sm:col-span-2">
+                            <label htmlFor="price" className={`block   text-gray-800`}>
+                                {trans('price')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    required
+                                    type="number"
+                                    step="any"
+                                    name="price"
+                                    defaultValue={governate.price}
+                                    id="price"
+                                    autoComplete="price"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                />
+                            </div>
+                            <ToolTipWidget message={trans('price_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
                             </p>
                         </div>
 

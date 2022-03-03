@@ -22,6 +22,7 @@ export default function({countries }) {
         'order': '',
         'code': '',
         'country_id': '',
+        'price': '',
         'active': 1,
     });
 
@@ -145,6 +146,30 @@ export default function({countries }) {
                             <ToolTipWidget message={trans('order_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
                                 {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
+                            </p>
+                        </div>
+
+                        {/*PRICE*/}
+                        <div className="sm:col-span-2 has-tooltip">
+                            <label htmlFor="price" className={`block  font-medium text-gray-800`}>
+                                {trans('price')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    required
+                                    type="number"
+                                    step="any"
+                                    name="price"
+                                    defaultValue={data.price}
+                                    id="price"
+                                    autoComplete="price"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
+                                />
+                            </div>
+                            <ToolTipWidget message={trans('price_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
                             </p>
                         </div>
 

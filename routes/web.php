@@ -101,7 +101,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     // cart + coupon + guest registeration + payment
     Route::get('cart', [FrontendCartController::class, 'index'])->name('cart.index');
     Route::get('cart/user/information', [FrontendCartController::class, 'getUserInformation'])->name('cart.information');
-    Route::get('cart/user/confirmation', [FrontendCartController::class, 'getUserConfirmation'])->name('cart.confirmation');
+    // cart/user/confirmation in auth middleware
     Route::get('cart/coupon', [FrontendCartController::class, 'getCouponCode'])->name('cart.get.coupon');
     Route::post('cart/coupon', [FrontendCartController::class, 'postCouponCode'])->name('cart.coupon');
     // PDF free books only
@@ -136,6 +136,9 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
         Route::get('profile/favorites', [FrontendUserController::class, 'getFavorites'])->name('profile.favorites');
         Route::get('profile/settings', [FrontendUserController::class, 'getSettings'])->name('profile.setting');
         Route::resource('profile/address', FrontendAddressController::class);
+
+        // cart that must be logged in and verified
+        Route::get('cart/user/confirmation', [FrontendCartController::class, 'getUserConfirmation'])->name('cart.confirmation');
     });
 });
 

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Area;
 use App\Models\Country;
+use App\Models\Governate;
 use App\Models\Model;
 use App\Models\Role;
 use App\Models\Subscription;
@@ -60,8 +61,8 @@ class UserFactory extends Factory
             'apartment' => $this->faker->name,
             'country_name' => $this->faker->country,
             'country_id' => Country::where('is_local', true)->first()->id,
-            'area_id' => Area::all()->random()->id,
-            'governate_id' => Area::all()->random()->id,
+            'governate_id' => Governate::all()->random()->id,
+            'area_id' => fn ($array) => Area::where('governate_id', $array['governate_id'])->first(),
             'role_id' => Role::notAdmins()->get()->random()->id,
             'api_token' => $this->faker->bankAccountNumber,
             'merchant_id' => $this->faker->bankAccountNumber,

@@ -16,6 +16,7 @@ import {Inertia} from "@inertiajs/inertia";
 export default function({countries, auth}) {
     const {trans, getLocalized, classNames, mainColor , mainBgColor } = useContext(AppContext);
     const [areas, setAreas] = useState([])
+    const [governates, setGovernates] = useState([])
     const {locale, cart } = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
     const dispatch = useDispatch();
@@ -36,22 +37,20 @@ export default function({countries, auth}) {
         'apartment': auth ? auth.apartment : '',
         'country_name': auth ? auth.country_name : '',
         'country_id': auth ? auth.country_id : '',
+        'governate_id': auth ? auth.governate_id : '',
         'area_id': auth ? auth.area_id : '',
         'cart': cart
     });
 
     useMemo(() => {
         dispatch({type: 'SET_CART_ID', payload: auth.id})
-        const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
-        dispatch(setShipmentFees(settings.apply_global_shipment ? settings.shipment_fixed_rate : round(parseFloat(selectedCountry.fixed_shipment_charge * cart.items.length), 2)))
+        const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(filter(countries, c => c.id == auth.country_id));
+        setGovernates(selectedCountry.governates);
+        const governate = first(filter(selectedCountry.governates, g => g.id == data.governate_id));
+        setAreas(governate.areas);
+        dispatch(setShipmentFees(settings.apply_global_shipment ? parseFloat(settings.shipment_fixed_rate) : selectedCountry.is_local ? parseFloat(governate.price) : parseFloat(governate.price) * cart.totalItems))
     }, [])
 
-    useMemo(() => {
-        const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
-        setAreas(selectedCountry.areas)
-        setData('area_id', auth && auth.area_id ? auth.area_id :  first(selectedCountry.areas).id)
-        // dispatch(setShipmentFees(settings.apply_global_shipment ? settings.shipment_fixed_rate : round(parseFloat(selectedCountry.fixed_shipment_charge * cart.items.length), 2)))
-    }, [data.country_id])
 
     const handleChange = (e) => {
         setData(values => ({
@@ -62,7 +61,7 @@ export default function({countries, auth}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(cart.items.length === 0) {
+        if(cart.totalItems === 0) {
             return Inertia.get(route(`frontend.cart.index`), {}, { error : 'Your cart is empty'})
         } else {
             return post(route('frontend.cart.payment.post'), {...data})
@@ -72,7 +71,6 @@ export default function({countries, auth}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-
                 <div className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-500`}>
                     <CartStepper activeStep={3}/>
                     <h1 className="text-3xl font-extrabold py-5 ">{trans('confirm')} {trans('information')}</h1>

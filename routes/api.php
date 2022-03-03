@@ -24,6 +24,8 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Resources\AuthExtraLightResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,27 +45,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::post('authenticate', fn() => auth()->attempt(request()->all()) ? \request()->user() : []);
 Route::group(['middleware' => 'auth:api'], function () {
-//    Route::resource('setting', SettingController::class)->except('index');
+    Route::post('reauthenticate', fn() => AuthExtraLightResource::make(User::whereId(request()->user()->id)->with('role.privileges', 'favoritesList', 'orders', 'country')->first()));
 });
 Route::resource('product', ProductController::class)->only('index', 'show');
 Route::resource('book', BookController::class)->only('index', 'show');
-Route::resource('course', CourseController::class)->only(['index','show']);
-Route::resource('service', ServiceController::class)->only(['index','show']);
-Route::resource('user', UserController::class)->only('index','show');
+Route::resource('course', CourseController::class)->only(['index', 'show']);
+Route::resource('service', ServiceController::class)->only(['index', 'show']);
+Route::resource('user', UserController::class)->only('index', 'show');
 Route::get('setting', [SettingController::class, 'index']);
-Route::resource('slide', SlideController::class)->only('index','show');
+Route::resource('slide', SlideController::class)->only('index', 'show');
 Route::resource('category', CategoryController::class)->only('index', 'show');
 Route::resource('faq', FaqController::class)->only('index');
-Route::resource('country', CountryController::class)->only('index','show');
-Route::resource('currency', CurrencyController::class)->only('index','show');
+Route::resource('country', CountryController::class)->only('index', 'show');
+Route::resource('currency', CurrencyController::class)->only('index', 'show');
 //Route::resource('page', PageController::class)->only('index','show');
-Route::get('search/user', [UserController::class,'search']);
-Route::get('search/product', [ProductController::class,'search']);
-Route::get('search/service', [ServiceController::class,'search']);
-Route::get('search/course', [CourseController::class,'search']);
-Route::get('search/book', [BookController::class,'search']);
-Route::get('search/category', [CategoryController::class,'search']);
-Route::get('search/slide', [SlideController::class,'search']);
-Route::post('images/upload',[DashboardController::class,'uploadImages']);
+Route::get('search/user', [UserController::class, 'search']);
+Route::get('search/product', [ProductController::class, 'search']);
+Route::get('search/service', [ServiceController::class, 'search']);
+Route::get('search/course', [CourseController::class, 'search']);
+Route::get('search/book', [BookController::class, 'search']);
+Route::get('search/category', [CategoryController::class, 'search']);
+Route::get('search/slide', [SlideController::class, 'search']);
+Route::post('images/upload', [DashboardController::class, 'uploadImages']);
 Route::get('translations', [TranslationController::class, 'getTranslations'])->name('translation.index');

@@ -14,9 +14,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserFilters $filters)
     {
-        //
+        $elements = User::active()->filters($filters)->orderBy('id', 'desc')
+            ->paginate(Self::TAKE_LESS)
+            ->withQueryString();
+        return response()->json($elements, 200);
     }
 
     public function search(UserFilters $filters)

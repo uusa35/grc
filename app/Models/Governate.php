@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Governate extends PrimaryModel
 {
     protected $guarded = [''];
+    protected $casts = [
+        'price' => 'float',
+    ];
 
     public function country() {
         return $this->belongsTo(Country::class);

@@ -5,15 +5,16 @@ import CartStepper from "./CartStepper";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, first, map} from "lodash";
+import {filter, first, isEmpty, map} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 
-export default function({countries, auth }) {
-    const {trans, getLocalized, classNames, mainColor , mainBgColor  } = useContext(AppContext);
-    const { locale } = useSelector(state => state);
+export default function({countries, auth}) {
+    const {trans, getLocalized, classNames, mainColor, mainBgColor} = useContext(AppContext);
+    const {locale} = useSelector(state => state);
+    const [governates, setGovernates] = useState([])
     const [areas, setAreas] = useState([])
     const {props} = usePage();
     const {errors} = props;
@@ -33,14 +34,24 @@ export default function({countries, auth }) {
         'area_name': auth ? auth.area_name : '',
         'country_id': auth ? auth.country_id : '',
         'area_id': auth ? auth.area_id : '',
+        'governate_id': auth ? auth.governate_id : '',
     });
 
     useMemo(() => {
-        // setAreas()
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
-        setAreas(selectedCountry.areas)
-        setData('area_id', auth && auth.area_id ? auth.area_id :  first(selectedCountry.areas).id)
+        setGovernates(selectedCountry.governates)
+        const areas = first(selectedCountry.governates).areas;
+        setAreas(areas)
+        setData('area_id', first(areas).id)
     }, [data.country_id])
+
+    useMemo(() => {
+        if (!isEmpty(governates)) {
+            const selectedGovernate = data.governate_id ? first(filter(governates, c => c.id == data.governate_id)) : first(governates);
+            setAreas(selectedGovernate.areas);
+            setData('area_id', first(selectedGovernate.areas).id)
+        }
+    }, [data.governate_id])
 
     const handleChange = (e) => {
         setData(values => ({
@@ -51,14 +62,17 @@ export default function({countries, auth }) {
 
     const submit = (e) => {
         e.preventDefault()
-        if(auth && auth.id) {
+        if (auth && auth.id) {
             Inertia.post(route(`frontend.user.update`, auth.id), {
                 _method: 'put',
                 ...data,
                 image: data.image,
             }, {
                 forceFormData: true,
-                onSuccess : () => Inertia.get(route('frontend.cart.confirmation'))
+                onSuccess: () => Inertia.get(route('frontend.cart.confirmation', {
+                    _method : 'get',
+                    ...data
+                }))
 
             })
         } else {
@@ -68,7 +82,10 @@ export default function({countries, auth }) {
                 image: data.image,
             }, {
                 forceFormData: true,
-                onSuccess : () => Inertia.get(route('frontend.cart.confirmation'))
+                onSuccess: () => Inertia.get(route('frontend.cart.confirmation', {
+                    _method : 'get',
+                    ...data
+                }))
             })
         }
     }
@@ -77,7 +94,8 @@ export default function({countries, auth }) {
         <FrontendContainer>
             <FrontendContentContainer>
 
-                <div className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-50`}>
+                <div
+                    className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-50`}>
                     <CartStepper activeStep={2}/>
                     <h1 className="text-3xl font-extrabold py-5 ">{trans('information')}</h1>
 
@@ -180,6 +198,37 @@ export default function({countries, auth }) {
                                 {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
                             </p>
                         </div>
+                        {/* governate_id  */}
+                        {
+                            governates && <div className="lg:col-span-1">
+                                <label htmlFor="governate_id" className="block   ">
+                                    {trans('governate')}
+                                </label>
+                                <div className="mt-1">
+                                    <select
+                                        required
+                                        onChange={handleChange}
+                                        id="governate_id"
+                                        name="governate_id"
+                                        defaultValue={data.governate_id}
+                                        autoComplete="governate_id"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
+                                    >
+                                        {/*<option value="">{trans('choose')} {trans('governate')}</option>*/}
+                                        {
+                                            map(governates, u => (
+                                                <option key={u.id} value={u.id}
+                                                >{u[getLocalized()]}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <ToolTipWidget message={trans('user_instruction')}/>
+                                <p className={`mt-2  `}>
+                                    {errors.governate_id && <div className={`text-red-900`}>{errors.governate_id}</div>}
+                                </p>
+                            </div>
+                        }
                         {/* area_id */}
                         {
                             areas && <div className="lg:col-span-1">
@@ -189,14 +238,14 @@ export default function({countries, auth }) {
                                 <div className="mt-1">
                                     <select
                                         onChange={handleChange}
+                                        required
                                         id="area_id"
                                         name="area_id"
                                         defaultValue={data.area_id}
                                         autoComplete="area_id"
-                                        required
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
                                     >
-                                        <option value="">{trans('choose')} {trans('area')}</option>
+                                        {/*<option value="">{trans('choose')} {trans('area')}</option>*/}
                                         {
                                             map(areas, u => (
                                                 <option key={u.id} value={u.id}
@@ -321,20 +370,25 @@ export default function({countries, auth }) {
                             </div>
                         </div>
 
-                        <div className="mt-10 col-span-full flex flex-col sm:flex-row  space-y-5 sm:space-y-0 justify-between items-center w-full">
+                        <div
+                            className="mt-10 col-span-full flex flex-col sm:flex-row  space-y-5 sm:space-y-0 justify-between items-center w-full">
                             <Link
                                 href={route('frontend.cart.index')}
                                 className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                             >
                                 <div className="flex">
                                     {locale.isRTL ?
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24"
                                              stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                  d="M9 5l7 7-7 7"/>
                                         </svg>
-                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                               viewBox="0 0 24 24"
                                                stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/>
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                  d="M15 19l-7-7 7-7"/>
                                         </svg>
                                     }
                                 </div>
@@ -354,29 +408,29 @@ export default function({countries, auth }) {
                                         <button
                                             type="button"
                                             disabled
-                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , `text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`)}
+                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300`, `text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`)}
                                         >
                                             {trans('next')}
                                         </button> : null
-                                        // <Link
-                                        //     href={route('frontend.cart.confirmation')}
-                                        //     className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
-                                        // >
-                                        //     <span className="flex ltr:pt-2">
-                                        //     {trans('next')}
-                                        //     </span>
-                                        //     <div className="flex">
-                                        //         {locale.isRTL ?
-                                        //             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                        //                  stroke="currentColor">
-                                        //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/>
-                                        //             </svg> :
-                                        //             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                        //                  stroke="currentColor">
-                                        //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-                                        //             </svg>}
-                                        //     </div>
-                                        // </Link>
+                                    // <Link
+                                    //     href={route('frontend.cart.confirmation')}
+                                    //     className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
+                                    // >
+                                    //     <span className="flex ltr:pt-2">
+                                    //     {trans('next')}
+                                    //     </span>
+                                    //     <div className="flex">
+                                    //         {locale.isRTL ?
+                                    //             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    //                  stroke="currentColor">
+                                    //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/>
+                                    //             </svg> :
+                                    //             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    //                  stroke="currentColor">
+                                    //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
+                                    //             </svg>}
+                                    //     </div>
+                                    // </Link>
                                 }
 
                             </div>

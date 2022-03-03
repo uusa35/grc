@@ -20,6 +20,8 @@ class GovernatesTableSeeder extends Seeder
                 'order' => $gov->order,
                 'active' => 1,
                 'country_id' => $gov->country_id,
+                'code' => $gov->code,
+                'price' => $gov->price,
             ]);
         }
     }

@@ -11,19 +11,35 @@ import {map, filter} from 'lodash';
 import axios from 'axios';
 import {showModal} from "../../redux/actions";
 import ConfirmationModal from "../partials/ConfirmationModal";
-import { clearCart} from "../../redux/actions";
+import {clearCart} from "../../redux/actions";
 
 
 export default function({order, settings}) {
-    const {cart, locale, confirmationModal } = useSelector(state => state);
-    const {trans, classNames, getAsset, mainColor , mainBgColor } = useContext(AppContext);
+    const {cart, locale, confirmationModal} = useSelector(state => state);
+    const {trans, classNames, getAsset, mainColor, mainBgColor} = useContext(AppContext);
     const paymentMethods = [
-        {id: 1, name: 'paypal', paymentRoute: route('paypal.api.payment.create'), enabled : settings.enable_payment_online},
-        {id: 2, name: settings.payment_method, paymentRoute: route(`${settings.payment_method}.api.payment.create`), enabled:  settings.enable_payment_online},
-        {id: 3, name: 'cash_on_delivery', paymentRoute: route(`frontend.cart.cod.payment`), enabled:  settings.cash_on_delivery},
+        {
+            id: 1,
+            name: 'paypal',
+            paymentRoute: route('paypal.api.payment.create'),
+            enabled: settings.enable_payment_online
+        },
+        {
+            id: 2,
+            name: settings.payment_method,
+            paymentRoute: route(`${settings.payment_method}.api.payment.create`),
+            enabled: settings.enable_payment_online
+        },
+        {
+            id: 3,
+            name: 'cash_on_delivery',
+            paymentRoute: route(`frontend.cart.cod.payment`),
+            enabled: settings.cash_on_delivery
+        },
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
     const [currentURL, setCurrentUrl] = useState('');
+    const [btnDisabled, setBtnDisabled] = useState(false);
     const dispatch = useDispatch()
 
     const {data, setData, put, post, progress, reset} = useForm({
@@ -37,28 +53,25 @@ export default function({order, settings}) {
                 netTotal: cart.netTotal,
                 order_id: order.id,
                 paymentMethod: paymentMethod.name
-            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e ===>', e.response.data))
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('the e ===>', e.response.data)).finally(() => setBtnDisabled(false))
         } else if (paymentMethod.name === 'tap') {
             return axios.post(paymentMethod.paymentRoute, {
                 netTotal: cart.netTotal,
                 order_id: order.id,
                 paymentMethod: paymentMethod.name
-            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
-            // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data)).finally(() => setBtnDisabled(false))
         } else if (paymentMethod.name === 'myfatoorahv2') {
             return axios.post(paymentMethod.paymentRoute, {
                 netTotal: cart.netTotal,
                 order_id: order.id,
                 paymentMethod: paymentMethod.name
-            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
-            // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data)).finally(() => setBtnDisabled(false))
         } else if (paymentMethod.name === 'oneglobal') {
             return axios.post(paymentMethod.paymentRoute, {
                 netTotal: cart.netTotal,
                 order_id: order.id,
                 paymentMethod: paymentMethod.name
-            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
-            // }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data))
+            }).then(r => setCurrentUrl(r.data)).catch(e => console.log('e', e.response.data)).finally(() => setBtnDisabled(false));
         } else if (paymentMethod.name === 'cash_on_delivery') {
             return dispatch(showModal({
                 type: '',
@@ -70,10 +83,16 @@ export default function({order, settings}) {
         }
     }, [paymentMethod])
 
+    const handleChoosePaymentMethod = (p) => {
+        setPaymentMethod(p)
+        setBtnDisabled(true)
+    }
+
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <div className={`text-${mainColor}-900 dark:text-${mainColor}-50 w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 `}>
+                <div
+                    className={`text-${mainColor}-900 dark:text-${mainColor}-50 w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 `}>
                     <CartStepper activeStep={4}/>
                     <h1 className="text-3xl font-extrabold py-5 ">{trans('payment_process')}</h1>
                     <OrderSummary/>
@@ -87,15 +106,15 @@ export default function({order, settings}) {
                                 className="flex w-full flex-row flex-wrap md:flex-nowrap justify-between items-center gap-x-5 gap-y-5 rounded-lg py-6">
                                 {
                                     map(filter(paymentMethods, method => method.enabled), p => (
-                                        <div
-                                            onClick={() => setPaymentMethod(p)}
+                                        <button
+                                            onClick={() => handleChoosePaymentMethod(p)}
                                             key={p.name}
                                             className={classNames(p.name === paymentMethod.name ? `bg-${mainBgColor}-200 text-${mainColor}-900 dark:bg-${mainBgColor}-400 dark:text-${mainColor}-50 border-gray-400 shadow-lg` : `border-gray-100 shadow-sm`, "flex flex-row w-full max-w-md justify-center items-center p-10 border-2 rounded-lg gap-x-4")}>
                                             <img src={getAsset(p.name)} alt="" className="w-auto h-10"/>
                                             <span className="font-extrabold text-lg invisible sm:visible">
                                         {trans(p.name)}
                                     </span>
-                                        </div>
+                                        </button>
                                     ))
                                 }
                             </div>
@@ -140,8 +159,8 @@ export default function({order, settings}) {
                             settings.enable_payment_online ? <div className="flex">
                                 <a
                                     onClick={() => dispatch(clearCart())}
-                                    href={currentURL}
-                                    className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 capitalize flex flex-row w-full sm:w-auto justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
+                                    href={!btnDisabled ? currentURL : '#'}
+                                    className={`disabled text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 capitalize flex flex-row w-full sm:w-auto justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                 >
                                     {trans('go_to_payment_page')}
                                 </a>

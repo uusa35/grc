@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CurrencyExtraLightResource;
 use App\Models\Currency;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        $elements = Currency::active()->with('country')->get();
+        $elements = CurrencyExtraLightResource::collection(Currency::active()->with('country')->get());
         return response()->json($elements, 200);
     }
 

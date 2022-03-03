@@ -30,21 +30,34 @@ class FrontendCartController extends Controller
 
     public function getUserInformation()
     {
-        $countries = new CountryCollection(Country::active()->has('areas', '>', 0)->with('areas')->get());
+        $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
+            ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()
+            )->with('areas')
+            ])->get());
         $auth = auth()->id() ? new UserResource(User::whereId(request()->user()->id)->with(['role', 'country'])->first()) : null;
         return inertia('Frontend/Cart/CartUserInformation', compact('countries', 'auth'));
     }
 
-    public function getUserConfirmation()
+    public function getUserConfirmation(Request $request)
     {
-        $countries = new CountryCollection(Country::active()->has('areas', '>', 0)->with('areas')->get());
+        $request->validate([
+            'area_id' => 'required|exists:areas,id',
+            'governate_id' => 'required|exists:governates,id',
+            'country_id' => 'required|exists:countries,id',
+            'email' => 'required|email|exists:users,email',
+            'mobile' => 'required'
+        ]);
+        $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
+            ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()
+            )->with('areas')
+            ])->get());
         $auth = auth()->id() ? new UserResource(User::whereId(request()->user()->id)->with(['role', 'country'])->first()) : null;
         return inertia('Frontend/Cart/CartUserConfirmation', compact('auth', 'countries'));
     }
 
     public function getPaymentIndex(Request $request)
     {
-        return redirect()->route('frontend.cart.confirmation');
+        return redirect()->route('frontend.cart.information');
     }
 
     public function getPayment(Request $request)
@@ -61,7 +74,7 @@ class FrontendCartController extends Controller
         }
         $order = Order::whereId($request->order_id)->with('user')->first();
         $settings = Setting::first();
-        if(env('MAIL_ENABLED')) {
+        if (env('MAIL_ENABLED')) {
             Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
         }
         $markdown = new Markdown(view(), config('mail.markdown'));

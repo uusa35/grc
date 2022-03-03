@@ -77,11 +77,11 @@ export default function({countries}) {
                     </div>
 
                     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                        <div className={`bg-white dark:bg-${mainBgColor}-500  py-8 px-4 shadow sm:rounded-lg sm:px-10`}>
                             <form className="space-y-6" onSubmit={submit}>
                                 {/* name */}
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-800">
+                                    <label htmlFor="name" className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
                                         {trans('name')}
                                     </label>
                                     <div className="mt-1">
@@ -92,13 +92,13 @@ export default function({countries}) {
                                             autoComplete="name"
                                             required
                                             onChange={handleChange}
-                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                            className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
                                     </div>
                                 </div>
                                 {/* email */}
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-800">
+                                    <label htmlFor="email" className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
                                         {trans('email')}
                                     </label>
                                     <div className="mt-1">
@@ -109,13 +109,13 @@ export default function({countries}) {
                                             autoComplete="email"
                                             required
                                             onChange={handleChange}
-                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                            className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
                                     </div>
                                 </div>
                                 {/* password */}
                                 <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-gray-800">
+                                    <label htmlFor="password" className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
                                         {trans('password')}
                                     </label>
                                     <div className="mt-1">
@@ -126,14 +126,14 @@ export default function({countries}) {
                                             autoComplete="current-password"
                                             required
                                             onChange={handleChange}
-                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                            className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
                                     </div>
                                 </div>
                                 {/* password_confirm */}
                                 <div>
                                     <label htmlFor="password_confirmation"
-                                           className="block text-sm font-medium text-gray-800">
+                                           className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
                                         {trans('password_confirmation')}
                                     </label>
                                     <div className="mt-1">
@@ -144,13 +144,13 @@ export default function({countries}) {
                                             autoComplete="current-password"
                                             required
                                             onChange={handleChange}
-                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                            className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
                                     </div>
                                 </div>
                                 {/* mobile */}
                                 <div>
-                                    <label htmlFor="phone-number" className="block text-sm font-medium text-gray-800">
+                                    <label htmlFor="phone-number" className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
                                         {trans('mobile')}
                                     </label>
                                     <div className="mt-1 relative rounded-md shadow-sm">
@@ -181,7 +181,7 @@ export default function({countries}) {
                                             autoComplete="mobile"
                                             onChange={handleChange}
                                             placeholder={trans('mobile_placeholder')}
-                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                            className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
                                     </div>
                                 </div>
@@ -200,7 +200,7 @@ export default function({countries}) {
                                             required
                                             onChange={handleChange}
                                             placeholder={trans('write_protection_code')}
-                                            className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                            className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.code_confirmation && <div
@@ -211,7 +211,7 @@ export default function({countries}) {
                                 <div>
                                     <button
                                         type="submit"
-                                        className="capitalize w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                        className={`capitalize w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${mainBgColor}-400  hover:bg-${mainBgColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
                                     >
                                         {trans('register')}
                                     </button>
@@ -219,7 +219,7 @@ export default function({countries}) {
                                 <div>
                                     <Link
                                         href={route('frontend.user.logging')}
-                                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-gray-800 bg-white hover:bg-gray-50 capitalize"
+                                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-${mainColor}-800 dark:text-white hover:bg-${mainBgColor}-300 capitalize`}
                                     >
                                         {trans('already_a_user_login_to_ur_account')}
                                     </Link>

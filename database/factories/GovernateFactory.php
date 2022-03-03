@@ -31,6 +31,7 @@ class GovernateFactory extends Factory
             'name_en' => $this->faker->name,
             'order' => $this->faker->numberBetween(1, 10),
             'active' => $this->faker->boolean(true),
+            'price' => $this->faker->randomFloat(3, 1, 1.5),
         ];
     }
 }
