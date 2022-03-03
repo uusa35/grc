@@ -18,14 +18,12 @@ export default function({
     const {trans} = useContext(AppContext);
     const dispatch = useDispatch();
 
-    const handleHideModal = () => {
-        dispatch(clearCart())
-        dispatch(hideModal());
-    }
+    const handleHideModal = () => dispatch(hideModal());
 
     return (
         <Transition.Root show={confirmationOpen} as={Fragment}>
-            <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" initialFocus={cancelButtonRef}
+            <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto"
+                    initialFocus={cancelButtonRef}
                     onClose={() => handleHideModal()}
             >
                 <div
@@ -79,7 +77,7 @@ export default function({
                                 <a
                                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 font-bold text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:col-start-2 sm:text-sm"
                                     href={route(routeName, {order_id: paramId})}
-                                    onClick={() => handleHideModal()}
+                                    onClick={() => dispatch(clearCart())}
                                 >
                                     {trans('confirm')}
                                 </a>
