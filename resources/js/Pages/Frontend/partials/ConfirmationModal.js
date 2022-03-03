@@ -1,9 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {Fragment, useContext, useRef, useState} from 'react'
+import {Fragment, useContext, useRef} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {CheckIcon} from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
-import {Link} from "@inertiajs/inertia-react";
 import {useDispatch} from "react-redux";
 import {clearCart, hideModal} from "../../redux/actions";
 import route from 'ziggy-js';

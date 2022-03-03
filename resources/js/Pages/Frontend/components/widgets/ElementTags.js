@@ -4,11 +4,11 @@ import {useSelector} from "react-redux";
 import {HeartIcon} from '@heroicons/react/outline'
 
 export default function ElementTags({onNew = false , onSale = false , exclusive = false, free = false, showFavoriteIcon  = true, rounded = false}) {
-    const {classNames, trans , mainColor , mainBgColor } = useContext(AppContext)
+    const {classNames, trans , mainColor } = useContext(AppContext)
     const { locale } = useSelector(state => state)
 
     return (
-        <div className="relative opacity-50 z-40">
+        <div className="relative opacity-50 z-30">
             <div
                 className={classNames(locale.isRTL ? `` : ``, 'absolute top-8 ltr:ml-5 rtl:mr-5 flex flex-col text-white text-sm')}>
                 {
