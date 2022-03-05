@@ -92,7 +92,7 @@ class FrontendUserController extends Controller
      */
     public function show(User $user)
     {
-        $element = new UserResource($user->load('role', 'books', 'images', 'ratings'));
+        $element = new UserResource($user->load('role', 'images', 'ratings', 'books'));
         return inertia('Frontend/User/FrontendUserShow', compact('element'));
     }
 
