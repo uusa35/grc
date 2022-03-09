@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SlideExtraLightResource;
+use App\Models\Setting;
 use App\Models\Slide;
 use App\Services\Search\Filters;
 use Illuminate\Http\Request;
@@ -16,7 +18,10 @@ class SlideController extends Controller
      */
     public function index()
     {
-        //
+        $elements = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
+            return $q->active()->orderby('order', 'asc');
+        }])->first()->slides);
+        return response()->json($elements, 200);
     }
 
     public function search(Filters $filters)
