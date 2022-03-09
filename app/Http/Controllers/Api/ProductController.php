@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductCollection;
 use App\Models\Product;
 use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
@@ -22,9 +23,9 @@ class ProductController extends Controller
 
     public function search(ProductFilters $filters)
     {
-        $elements = Product::active()->filters($filters)->orderBy('id', 'desc')
-            ->paginate(Self::TAKE_LESS)
-            ->withQueryString();
+        $elements = new ProductCollection(Product::active()->filters($filters)->with('product_attributes', 'color', 'size')
+            ->orderBy('order', 'desc')->paginate(Self::TAKE)
+            ->withQueryString());
         return response()->json($elements, 200);
     }
 
