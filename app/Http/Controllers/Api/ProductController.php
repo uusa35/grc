@@ -26,6 +26,7 @@ class ProductController extends Controller
         $elements = new ProductCollection(Product::active()->filters($filters)->with('product_attributes', 'color', 'size')
             ->orderBy('order', 'desc')->paginate(Self::TAKE)
             ->withQueryString());
+        return $elements;
         return response()->json($elements, 200);
     }
 
