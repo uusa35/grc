@@ -27,7 +27,7 @@ class ProductController extends Controller
             ->orderBy('order', 'desc')->paginate(Self::TAKE)
             ->withQueryString());
         return $elements;
-        return response()->json($elements, 200);
+//        return response()->json($elements, 200);
     }
 
     /**
