@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
@@ -59,7 +60,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return response()->json($product, 200);
+        $element = ProductResource::make($product->load('images','product_attributes.color','product_attributes.size','color','size','categories','user'));
+        return response()->json($element, 200);
     }
 
     /**
