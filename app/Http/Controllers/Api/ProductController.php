@@ -60,7 +60,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $element = ProductResource::make($product->load('images','product_attributes.color','product_attributes.size','color','size','categories','user'));
+        $element = ProductResource::make(Product::whereId($product->id)->with('images','product_attributes.color','product_attributes.size','color','size','categories','user')->first());
         return response()->json($element, 200);
     }
 
