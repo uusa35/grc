@@ -3,18 +3,12 @@ import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "./../components/FrontendContainer";
 import ElementSlider from "./../components/widgets/slider/ElementSlider";
 import {isMobile, isTablet} from 'react-device-detect';
-// import NewsLetter from "./../partials/NewsLetter";
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
 import {filter, first, isEmpty, map, shuffle} from 'lodash';
-// import JoinusPage from "./../Pages/JoinusPage";
 import JoinusHomeSection from "./../partials/JoinusHomeSection";
-// import CategoriesGroup from "./../components/widgets/category/CategoriesGroup";
-// import route from 'ziggy-js'
-// import InformationBtns from "./../partials/InformationBtns";
 import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
-// import InformationBtns from "../partials/InformationBtns";
 
 
 export default React.memo(function ({
@@ -125,12 +119,6 @@ export default React.memo(function ({
                             <HomeMainCategory
                                 element={first(shuffle(filter(categories, c => c.is_product)))}
                             />
-                            {/*<InformationBtns />*/}
-                            {/*<CategoriesGroup*/}
-                            {/*    params={{is_product: true}}*/}
-                            {/*    type={'product'}*/}
-                            {/*    title={trans('other_categories')}*/}
-                            {/*    categories={filter(categories, c => c.is_product)}/>*/}
                         </>
                     }
                 </div>
@@ -139,6 +127,3 @@ export default React.memo(function ({
     )
 })
 
-// {
-//     settings.enable_newsletter && <NewsLetter/>
-// }
