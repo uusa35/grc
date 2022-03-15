@@ -21,12 +21,12 @@ const BackendContainer = ({
                               mainModule = '',
                               total, links
                           }) => {
-    const {classNames, arFont, enFont, isAdminOrAbove } = useContext(AppContext);
+    const {classNames, currentFont, isAdminOrAbove } = useContext(AppContext);
     const {locale, isLoading, confirmationModal } = useSelector(state => state);
 
     return (
 
-        <div className={classNames(locale.isRTL ? arFont : enFont, "h-full flex overflow-hidden text-sm capitalize")}
+        <div className={`${currentFont} h-full flex overflow-hidden text-sm capitalize`}
              dir={locale.dir}>
             {/*<Head title={`${cXapitalize(trans(pluralize(parentModule)))} :: ${settings[getLocalized()]}`}>*/}
             {/*    <meta head-key="description" name="description" content={settings[getLocalized('description')]}/>*/}

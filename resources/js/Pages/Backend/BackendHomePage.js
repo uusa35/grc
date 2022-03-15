@@ -34,7 +34,7 @@ ChartJS.register(
 );
 
 export default function BackendHomePage({previousYearChart, currentYearChart}) {
-    const {trans, getLocalized, getThumb, classNames, arFont, enFont} = useContext(AppContext);
+    const {trans, getLocalized, getThumb, classNames} = useContext(AppContext);
     const {auth, settings} = useContext(GlobalContext);
     const {modules} = useSelector(state => state);
 

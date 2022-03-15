@@ -39,7 +39,7 @@ function MainNav() {
         classNames, getThumb, getLocalized, trans,
         baseUrl,
         isAdminOrAbove,
-        arFont, enFont,
+        currentFont,
         headerColor,
         headerBgColor,
         mainBgColor,
@@ -166,7 +166,7 @@ function MainNav() {
                         // leaveTo="-translate-x-full"
                     >
                         <div
-                            className={classNames(locale.isRTL ? arFont : enFont, "bg-white relative max-w-xs w-full shadow-xl pb-12 flex flex-col overflow-y-auto")}
+                            className={`${currentFont} bg-white relative max-w-xs w-full shadow-xl pb-12 flex flex-col overflow-y-auto`}
                             dir={locale.dir}>
                             <div className="px-4 pt-5 pb-2 flex">
                                 <button

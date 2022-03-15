@@ -1,7 +1,7 @@
 import BackendContainer from "./../components/containers/BackendContainer";
 import {useContext, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
-import {useForm, usePage} from "@inertiajs/inertia-react";
+import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
@@ -2129,9 +2129,32 @@ accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="size_chart_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
-                                    <img className={`h-20 w-20 bg-cover rounded-md`}
-                                         src={getThumb(setting.size_chart_image)}
-                                         alt=""/>
+                                    {setting.size_chart_image && <div
+                                        className="relative h-28 w-28">
+                                        <img
+                                            className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
+                                            src={getThumb(setting.size_chart_image)}
+                                            alt=""/>
+                                        <Link
+                                            href={route(`backend.element.clear`, {
+                                                id: setting.id,
+                                                'model': 'setting',
+                                                colName: 'size_chart_image'
+                                            })}
+                                            type="button"
+                                            className="absolute inset-2  focus:outline-none">
+                                            {/*<span className="sr-only">View details for {img.title}</span>*/}
+                                            <span
+                                                className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                        d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </div>}
                                 </div>
                                 <ToolTipWidget message={trans('product_size_chart_image_instruction')}/>
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
@@ -2169,6 +2192,56 @@ accept="image/jpg, image/jpeg , image/png"
                                     {errors.app_logo && <div className={`text-red-900`}>{errors.app_logo}</div>}
                                 </p>
                             </div>
+                            {/*main_bg*/}
+                            <div className="sm:col-span-3">
+                                <label htmlFor="main_bg"
+                                       className={`block text-sm font-medium text-gray-800`}>
+                                    {trans('main_bg')}
+                                </label>
+                                <div className="mt-1 flex flex-row flex-1 items-center">
+                                    <input
+                                        onChange={e => setData('main_bg', e.target.files[0])}
+                                        type="file"
+                                        name="main_bg"
+                                        id="main_bg"
+                                        autoComplete="main_bg"
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                    {setting.main_bg && <div
+                                        className="relative h-28 w-28">
+                                        <img
+                                            className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
+                                            src={getThumb(setting.main_bg)}
+                                            alt=""/>
+                                        <Link
+                                            href={route(`backend.element.clear`, {
+                                                id: setting.id,
+                                                'model': 'setting',
+                                                colName: 'main_bg'
+                                            })}
+                                            type="button"
+                                            className="absolute inset-2  focus:outline-none">
+                                            {/*<span className="sr-only">View details for {img.title}</span>*/}
+                                            <span
+                                                className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                        d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </div>}
+                                </div>
+                                <ToolTipWidget message={trans('product_main_bg_instruction')}/>
+                                <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('main_bg_best_fit')}
+                                </p>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.main_bg && <div className={`text-red-900`}>{errors.main_bg}</div>}
+                                </p>
+                            </div>
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"
@@ -2184,8 +2257,32 @@ accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="qr"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
-                                    <img className={`h-20 w-20 bg-cover rounded-md`} src={getThumb(setting.qr)}
-                                         alt=""/>
+                                    {setting.qr && <div
+                                        className="relative h-28 w-28">
+                                        <img
+                                            className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
+                                            src={getThumb(setting.qr)}
+                                            alt=""/>
+                                        <Link
+                                            href={route(`backend.element.clear`, {
+                                                id: setting.id,
+                                                'model': 'setting',
+                                                colName: 'qr'
+                                            })}
+                                            type="button"
+                                            className="absolute inset-2  focus:outline-none">
+                                            {/*<span className="sr-only">View details for {img.title}</span>*/}
+                                            <span
+                                                className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                        d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </div>}
                                 </div>
                                 <ToolTipWidget message={trans('product_qr_instruction')}/>
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
@@ -2210,9 +2307,32 @@ accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="shipment_prices"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
-                                    <img className={`h-20 w-20 bg-cover rounded-md`}
-                                         src={getThumb(setting.shipment_prices)}
-                                         alt=""/>
+                                    {setting.shipment_prices && <div
+                                        className="relative h-28 w-28">
+                                        <img
+                                            className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
+                                            src={getThumb(setting.shipment_prices)}
+                                            alt=""/>
+                                        <Link
+                                            href={route(`backend.element.clear`, {
+                                                id: setting.id,
+                                                'model': 'setting',
+                                                colName: 'shipment_prices'
+                                            })}
+                                            type="button"
+                                            className="absolute inset-2  focus:outline-none">
+                                            {/*<span className="sr-only">View details for {img.title}</span>*/}
+                                            <span
+                                                className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                        d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </div>}
                                 </div>
                                 <ToolTipWidget message={trans('shipment_prices_instruction')}/>
                                 <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>

@@ -77,7 +77,7 @@ const AppContextProvider = ({children}) => {
         isSuper: !isEmpty(auth) && auth.role?.is_super,
         isAuthor: !isEmpty(auth) && auth.role?.is_author,
         guest: isEmpty(auth),
-        arFont: settings.enable_products ? 'font-tajwal-medium' : 'font-gesst-medium',
+        currentFont : locale.isRTL ? 'font-tajwal-medium' : 'font-gesst-medium',
         enFont : 'font-tajwal-medium',
         mainColor: settings.main_theme_color,
         mainBgColor: settings.main_theme_bg_color,

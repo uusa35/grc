@@ -11,22 +11,24 @@ import SystemMessage from "../../Backend/components/partials/SystemMessage";
 import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 // Import Swiper styles
 import 'swiper/css';
+import GlobalContext from "../../context/GlobalContext";
 
 const FrontendContainer = ({children}) => {
     const {locale, theme} = useSelector(state => state)
-    const {classNames, arFont, enFont, mainColor, mainBgColor} = useContext(AppContext);
+    const { settings } = useContext(GlobalContext);
+    const {currentFont, mainColor, mainBgColor, getThumb} = useContext(AppContext);
 
     return (
         <div
-            className={classNames(locale.isRTL ? arFont : enFont, ` ${theme} h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize `)}
-            dir={locale.dir}>
+            className={`${theme} ${currentFont} h-full flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize mainBgImage`}
+            dir={locale.dir} style={{ backgroundImage : `url(${getThumb(settings.main_bg)})`}}>
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement/>
             <main
-                className={`bg-white dark:bg-${mainBgColor}-900 flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
+                className={`bg-transparent dark:bg-${mainBgColor}-900 flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
                 <MainNav/>
-                <div className={`min-h-screen bg-white-50 dark:bg-${mainBgColor}-900 text-${mainColor}-50`}>
+                <div className={`min-h-screen bg-transparent dark:bg-${mainBgColor}-900 text-${mainColor}-50`}>
                     <SystemMessage/>
                         {children}
                 </div>
