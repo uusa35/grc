@@ -16,7 +16,8 @@ class Order extends PrimaryModel
         'discount' => 'float',
         'paid' => 'boolean',
         'receive_on_branch' => 'boolean',
-        'multi_cart_merchant' => 'boolean'
+        'multi_cart_merchant' => 'boolean',
+        'mobile' => 'string'
     ];
 
     /**

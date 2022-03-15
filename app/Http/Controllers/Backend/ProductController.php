@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\ProductsExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStore;
 use App\Http\Requests\ProductUpdate;
@@ -13,6 +14,7 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Models\User;
 use App\Services\Search\ProductFilters;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -170,6 +172,16 @@ class ProductController extends Controller
             dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage());
         }
+    }
+
+    public function export(ProductFilters $filters)
+    {
+        $this->authorize('search', 'product');
+        $elements = Product::filters($filters)->with('product_attributes', 'color', 'size')
+            ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
+            ->orderBy('id', 'desc');
+        return Excel::download(new ProductsExport($elements), 'elements.xlsx');
+//        return Excel::download(new ProductsExport($elements), 'elements.pdf');
     }
 
 }

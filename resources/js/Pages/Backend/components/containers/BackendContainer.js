@@ -21,7 +21,7 @@ const BackendContainer = ({
                               mainModule = '',
                               total, links
                           }) => {
-    const {classNames, currentFont, isAdminOrAbove } = useContext(AppContext);
+    const {currentFont, isAdminOrAbove } = useContext(AppContext);
     const {locale, isLoading, confirmationModal } = useSelector(state => state);
 
     return (

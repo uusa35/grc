@@ -210,5 +210,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::get('order/switch/status', [OrderController::class, 'switchStatus'])->name('order.switch');
         // email verified
         Route::get('make/verified', [UserController::class, 'makeEmailVerified'])->name('make.verified');
+        Route::get('export/product', [ProductController::class, 'export'])->name('product.export');
+        Route::get('export/order', [OrderController::class, 'export'])->name('order.export');
     });
 });

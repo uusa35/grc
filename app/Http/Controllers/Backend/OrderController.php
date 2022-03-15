@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\OrdersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderCollection;
 use App\Models\Order;
+use App\Models\Product;
 use App\Notifications\OrderPaid;
 use App\Services\Search\Filters;
 use App\Services\Search\OrderFilters;
+use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -135,5 +139,14 @@ class OrderController extends Controller
         }
     }
 
+    public function export(OrderFilters $filters)
+    {
+        $this->authorize('search', 'product');
+        $elements = Order::filters($filters)
+            ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
+            ->orderBy('id', 'desc');
+        return Excel::download(new OrdersExport($elements), 'elements.xlsx');
+//        return Excel::download(new ProductsExport($elements), 'elements.pdf');
+    }
 
 }
