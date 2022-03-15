@@ -70,3 +70,8 @@ Route::get('search/category', [CategoryController::class, 'search']);
 Route::get('search/slide', [SlideController::class, 'search']);
 Route::post('images/upload', [DashboardController::class, 'uploadImages']);
 Route::get('translations', [TranslationController::class, 'getTranslations'])->name('translation.index');
+Route::get('locale', fn () => response()->json(app()->getLocale(), 200))->name('locale.index');
+Route::get('/lang/{lang}', function ($lang) {
+    app()->setLocale($lang);
+  return response()->json(app()->getLocale());
+})->name('lang.change');
