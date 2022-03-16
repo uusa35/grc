@@ -438,7 +438,7 @@ const BackendHeader = () => {
                     </Menu>
                 </div>
             </div>
-            {isAdminOrAbove && <PinnedProjects />}
+            {/*{isAdminOrAbove && <PinnedProjects />}*/}
         </div>
     );
 }

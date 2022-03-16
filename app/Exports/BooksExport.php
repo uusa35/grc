@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
-class OrdersExport implements FromQuery, WithMapping, WithHeadings, WithEvents, ShouldAutoSize
+class BooksExport implements  FromQuery, WithMapping, WithHeadings, WithEvents, ShouldAutoSize
 {
     public $elements;
 
@@ -29,17 +29,12 @@ class OrdersExport implements FromQuery, WithMapping, WithHeadings, WithEvents, 
     {
         return [
             '#',
-            'status',
-            'paid',
+            'name_ar',
+            'name_en',
             'price',
-            'shipment_fees',
-            'discount',
-            'net_price',
-            'email',
-            'mobile',
-            'address',
-            'payment_method',
-            'reference_id',
+            'sale_price',
+            'on_sale',
+            'owner',
         ];
     }
 
@@ -47,17 +42,12 @@ class OrdersExport implements FromQuery, WithMapping, WithHeadings, WithEvents, 
     {
         return [
             $element->id,
-            $element->status,
-            $element->paid ? 'Y' : 'N',
+            $element->name_ar,
+            $element->name_en,
             $element->price,
-            $element->shipment_fees,
-            $element->discount,
-            $element->net_price,
-            $element->email,
-            $element->mobile,
-            $element->address,
-            $element->payment_method,
-            $element->reference_id,
+            $element->sale_price,
+            $element->on_sale ? 'Y' : 'N',
+            $element->user->name_en
         ];
     }
 
@@ -74,8 +64,6 @@ class OrdersExport implements FromQuery, WithMapping, WithHeadings, WithEvents, 
             'D' => 25,
             'E' => 25,
             'F' => 25,
-            'G' => 25,
-            'H' => 25,
         ];
     }
 

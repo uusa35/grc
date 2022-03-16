@@ -3,15 +3,16 @@ import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isEmpty, sumBy } from 'lodash';
+import {orderBy, isEmpty, sumBy} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
+import TableViewIcon from '@mui/icons-material/TableView';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
-
-export default React.memo(function ({elements}) {
+export default React.memo(function({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
@@ -114,13 +115,15 @@ export default React.memo(function ({elements}) {
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M5 15l7-7 7 7"/>
                                                 </svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M19 9l-7 7-7-7"/>
@@ -141,13 +144,15 @@ export default React.memo(function ({elements}) {
                                     >
                                         <div className="flex flex-row">
                                             {sort.desc ?
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M5 15l7-7 7 7"/>
                                                 </svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                     fill="none"
                                                      viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinejoin="round" strokeLinejoin="round" strokeWidth="2"
                                                           d="M19 9l-7 7-7-7"/>
@@ -169,17 +174,20 @@ export default React.memo(function ({elements}) {
                                             <div className="flex">
                                                 {trans('owner_author')}
                                             </div>
-                                            <div className="flex">
+                                            <div className="flex items-center justify-center">
                                                 <a
-                                                    href={route('backend.product.export', {})}>
+                                                    className={`pl-3 hover:bg-gray-200 hover:rounded-lg`}
+                                                    href={route('backend.product.export', {fileType: 'pdf'})}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                                                          viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                              d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
-                                                              clip-rule="evenodd"/>
+                                                        <PictureAsPdfIcon/>
                                                     </svg>
                                                 </a>
-
+                                                <a
+                                                    className={`pl-3 hover:bg-gray-200 hover:rounded-lg`}
+                                                    href={route('backend.product.export', {fileType: 'xlsx'})}>
+                                                    <TableViewIcon/>
+                                                </a>
                                             </div>
                                         </div>
                                     </th>
@@ -199,10 +207,11 @@ export default React.memo(function ({elements}) {
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">
                                                 <div className="flex flex-row items-center space-x-3 lg:pl-2">
-                                                    <img src={getThumb(element.image)} className={`w-20 h-auto ltr:pr-5 rtl:pl-5`}/>
+                                                    <img src={getThumb(element.image)}
+                                                         className={`w-20 h-auto ltr:pr-5 rtl:pl-5`}/>
 
-                                                        <ActiveDot active={element.active}/>
-                                                        {element[getLocalized('name')]}
+                                                    <ActiveDot active={element.active}/>
+                                                    {element[getLocalized('name')]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
@@ -387,7 +396,7 @@ export default React.memo(function ({elements}) {
                                                                                     </> : null
                                                                             }
                                                                         </div>
-                                                                        { isAdminOrAbove && <div className="py-1">
+                                                                        {isAdminOrAbove && <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
@@ -458,7 +467,7 @@ export default React.memo(function ({elements}) {
                                                 </div>
                                             </td>
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.price} {trans('kd')}</td>
-                                            <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.has_attributes ? sumBy(element.product_attributes,'qty') : element.qty}  {trans('pieces')}</td>
+                                            <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.has_attributes ? sumBy(element.product_attributes, 'qty') : element.qty} {trans('pieces')}</td>
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">
                                                 {
                                                     element.user && <Link

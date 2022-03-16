@@ -10,6 +10,8 @@ import moment from "moment";
 import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import TableViewIcon from "@mui/icons-material/TableView";
 
 
 export default React.memo(function({elements}) {
@@ -147,6 +149,12 @@ export default React.memo(function({elements}) {
                                         scope="col"
                                         className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
                                     >
+                                        {trans('owner')}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
+                                    >
                                         {trans('commands')}
                                     </th>
                                     <th
@@ -180,17 +188,20 @@ export default React.memo(function({elements}) {
                                             <div className="flex">
                                                 {trans('created_at')}
                                             </div>
-                                            <div className="flex">
+                                            <div className="flex items-center justify-center">
                                                 <a
-                                                    href={route('backend.order.export', {})}>
+                                                    className={`pl-3 hover:bg-gray-200 hover:rounded-lg`}
+                                                    href={route('backend.order.export', {fileType: 'pdf'})}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                                                          viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                              d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
-                                                              clip-rule="evenodd"/>
+                                                        <PictureAsPdfIcon/>
                                                     </svg>
                                                 </a>
-
+                                                <a
+                                                    className={`pl-3 hover:bg-gray-200 hover:rounded-lg`}
+                                                    href={route('backend.order.export', {fileType: 'xlsx'})}>
+                                                    <TableViewIcon/>
+                                                </a>
                                             </div>
                                         </div>
                                     </th>
@@ -218,6 +229,21 @@ export default React.memo(function({elements}) {
                                                             className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-100 text-gray-800`}>
                                                             {element.status}
                                                           </span>
+                                                </div>
+                                            </td>
+                                            <td className="block md:table-cell whitespace-nowrap  text-gray-500">
+                                                <div className="flex flex-col">
+                                                    <div className="flex">{element.user[getLocalized()]}</div>
+                                                    <div className="flex">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                                        </svg>
+                                                        : {element.user.mobile}</div>
+                                                    <div className="flex">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
+                                                        </svg>
+                                                        {element.user.email}</div>
                                                 </div>
                                             </td>
                                             <td className=" block md:table-cell px-6 py-4 whitespace-nowrap text-right  font-medium">

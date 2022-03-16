@@ -178,10 +178,10 @@ class ProductController extends Controller
     {
         $this->authorize('search', 'product');
         $elements = Product::filters($filters)->with('product_attributes', 'color', 'size')
+            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
             ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
             ->orderBy('id', 'desc');
-        return Excel::download(new ProductsExport($elements), 'elements.xlsx');
-//        return Excel::download(new ProductsExport($elements), 'elements.pdf');
+        return Excel::download(new ProductsExport($elements), 'elements.'.request()->fileType);
     }
 
 }

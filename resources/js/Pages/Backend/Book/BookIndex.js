@@ -9,6 +9,8 @@ import route from 'ziggy-js';
 import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import TableViewIcon from "@mui/icons-material/TableView";
 
 
 export default React.memo(function ({elements}) {
@@ -159,7 +161,26 @@ export default React.memo(function ({elements}) {
                                         scope="col"
                                         className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
                                     >
-                                        {trans('owner_author')}
+                                        <div className="flex flex-row justify-between items-center">
+                                            <div className="flex">
+                                                {trans('owner_author')}
+                                            </div>
+                                            <div className="flex items-center justify-center">
+                                                <a
+                                                    className={`pl-3 hover:bg-gray-200 hover:rounded-lg`}
+                                                    href={route('backend.book.export', {fileType: 'pdf'})}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                         viewBox="0 0 20 20" fill="currentColor">
+                                                        <PictureAsPdfIcon/>
+                                                    </svg>
+                                                </a>
+                                                <a
+                                                    className={`pl-3 hover:bg-gray-200 hover:rounded-lg`}
+                                                    href={route('backend.book.export', {fileType: 'xlsx'})}>
+                                                    <TableViewIcon/>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </th>
 
                                 </tr>

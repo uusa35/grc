@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\Http\Resources\ProductExtraLightResource;
-use App\Models\Product;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;

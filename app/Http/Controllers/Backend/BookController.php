@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\BooksExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookStore;
 use App\Http\Requests\BookUpdate;
@@ -10,7 +11,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
 use App\Services\Search\ProductFilters;
-use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookController extends Controller
 {
@@ -160,5 +161,15 @@ class BookController extends Controller
             dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage());
         }
+    }
+
+    public function export(ProductFilters $filters)
+    {
+        $this->authorize('search', 'product');
+        $elements = Book::filters($filters)
+            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
+            ->orderBy('id', 'desc');
+        return Excel::download(new BooksExport($elements), 'elements.'.request()->fileType);
     }
 }
