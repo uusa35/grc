@@ -34,7 +34,6 @@ class ProductsExport implements  FromQuery, WithMapping, WithHeadings, WithEvent
             'price',
             'sale_price',
             'on_sale',
-            'user_id',
             'owner',
             'image',
         ];
@@ -49,7 +48,6 @@ class ProductsExport implements  FromQuery, WithMapping, WithHeadings, WithEvent
             $element->price,
             $element->sale_price,
             $element->on_sale ? 'Y' : 'N',
-            $element->user_id,
             $element->user->name_en,
             url(env('LARGE').$element->image)
         ];
