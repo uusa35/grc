@@ -29,7 +29,7 @@ const FrontendContainer = ({children}) => {
             <main
                 className={`bg-transparent dark:bg-${mainBgColor}-900 flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
 
-                <div className={`min-h-full bg-transparent dark:bg-${mainBgColor}-900 text-${mainColor}-50 pt-32`}>
+                <div className={`min-h-screen bg-transparent dark:bg-${mainBgColor}-900 text-${mainColor}-50 pt-32`}>
                     <SystemMessage/>
                         {children}
                 </div>
