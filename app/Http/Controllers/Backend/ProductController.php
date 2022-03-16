@@ -205,7 +205,7 @@ class ProductController extends Controller
         ]);
         $path = request()->file('file')->store('public/uploads/files');
         $result = Excel::import(new ProductsImport(request()->user_id), $path);
-        return redirect()->route(`backend.`.request()->model.`index`)->with('success', trans('general.process_success'));
+        return redirect()->route(`backend.`.request()->model.`.index`)->with('success', trans('general.process_success'));
     }
 
 }
