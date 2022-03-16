@@ -55,7 +55,7 @@ function MainNav() {
     const handleTheme = () => dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
 
     return (
-        <div className={`bg-white dark:bg-${headerBgColor}-800 rtl:text-right ltr:text-left`}>
+        <div className={`bg-white dark:bg-${headerBgColor}-800 rtl:text-right ltr:text-left md:fixed inset-0 h-32 z-40`}>
             {/* Top Nav*/}
             <div
                 className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
