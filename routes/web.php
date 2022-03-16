@@ -213,5 +213,7 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::get('export/product/{fileType}', [ProductController::class, 'export'])->name('product.export');
         Route::get('export/order/{fileType}', [OrderController::class, 'export'])->name('order.export');
         Route::get('export/book/{fileType}', [BookController::class, 'export'])->name('book.export');
+        Route::get('import/create', [ProductController::class, 'getImport'])->name('import.create');
+        Route::post('import/store', [ProductController::class, 'postImport'])->name('import.store');
     });
 });

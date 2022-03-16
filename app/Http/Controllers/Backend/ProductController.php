@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStore;
 use App\Http\Requests\ProductUpdate;
 use App\Http\Resources\ProductCollection;
+use App\Imports\ProductsImport;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
@@ -14,7 +15,10 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Models\User;
 use App\Services\Search\ProductFilters;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 class ProductController extends Controller
 {
@@ -181,7 +185,27 @@ class ProductController extends Controller
             ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
             ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
             ->orderBy('id', 'desc');
-        return Excel::download(new ProductsExport($elements), 'elements.'.request()->fileType);
+        return Excel::download(new ProductsExport($elements), 'elements.' . request()->fileType);
+    }
+
+    public function getImport(Request $request)
+    {
+        $request->validate(['model' => 'required']);
+        $users = User::active()->hasMerchantBehaviour()->select('id', 'name_ar', 'name_en')->get();
+        $model = request()->model;
+        return Inertia::render('Backend/Import/ImportCreate', compact('users', 'model'));
+    }
+
+    public function postImport(Request $request)
+    {
+        $request->validate([
+            'model' => 'required',
+            'user_id' => 'required|exists:users,id',
+            "file" => "required|mimes:xlsx|max:990000"
+        ]);
+        $path = request()->file('file')->store('public/uploads/files');
+        $result = Excel::import(new ProductsImport(request()->user_id), $path);
+        return redirect()->route(`backend.`.request()->model.`index`)->with('success', trans('general.process_success'));
     }
 
 }
