@@ -50,6 +50,12 @@ function MainNav() {
     const {locale, currency, cart, parentModule, theme } = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const [offset, setOffset] = useState(0);
+    const dispatch = useDispatch();
+    const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
+    const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
+
+    const handleTheme = () => dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
+
     useEffect(() => {
         const onScroll = () => setOffset(window.pageYOffset);
         // clean up code
@@ -57,13 +63,6 @@ function MainNav() {
         window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
-
-    console.log(offset);
-    const dispatch = useDispatch();
-    const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
-    const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
-
-    const handleTheme = () => dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
 
 
 
@@ -77,35 +76,35 @@ function MainNav() {
                         settings.enable_products && theme !== 'none' && <button className={`col-span-1`} onClick={() => handleTheme()}>
                             <MoonIcon
                                       fill={theme  === 'dark' ? headerColor : 'none'}
-                                      className={`h-5 w-5 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                                      className={`h-5 w-5 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('theme')}</span>
                         </button>
                     }
                     {
                         settings.instagram && <a as={Link} target="_blank" href={settings.instagram}>
                             <FaInstagram
-                                         className={`h-5 w-5 col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                                         className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('instagram')}</span>
                         </a>
                     }
                     {
                         settings.facebook && <a as={Link} target="_blank" href={settings.facebook}>
                             <FaFacebook
-                                        className={`h-5 w-5 col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                                        className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('facebook')}</span>
                         </a>
                     }
                     {
                         settings.twitter && <a as={Link} target="_blank" href={settings.twitter}>
                             <FaTwitter
-                                       className={`h-5 w-5 col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                                       className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('twitter')}</span>
                         </a>
                     }
                     {
                         settings.youtube && <a as={Link} target="_blank" href={settings.youtube}>
                             <FaYoutube
-                                       className={`h-5 w-5 col-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                                       className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('youtube')}</span>
                         </a>
                     }
@@ -113,7 +112,7 @@ function MainNav() {
                         settings.whatsapp &&
                         <a as={Link} target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
                             <FaWhatsapp
-                                        className={`h-5 w-5 co5-span-1 text-${headerColor}-200 text-${headerColor}-50 hover:text-${headerColor}-400`}/>
+                                        className={`h-5 w-5 co5-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('whatsapp')}</span>
                         </a>
                     }
@@ -130,7 +129,7 @@ function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className={`mx-2  block  text-xs text-${headerColor}-200 text-${headerColor}-50`}>
+                        className={`mx-2  block  text-xs text-black dark:text-white`}>
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
@@ -139,13 +138,13 @@ function MainNav() {
                                 settings.enable_register ?
                                     <Link
                                         href={route('frontend.user.registration')}
-                                        className=" mx-2  block text-gray-50  text-xs">
+                                        className=" mx-2  block text-black dark:text-white  text-xs">
                                         {capitalize(trans('register'))}
                                     </Link> : null
                             }
                             <Link
                                 href={route('frontend.user.logging')}
-                                className="mx-2   block text-gray-50  hidden text-xs">
+                                className="mx-2   block text-black dark:text-white  hidden text-xs">
                                 {capitalize(trans('login'))}
                             </Link>
                         </> : null
@@ -624,20 +623,50 @@ function MainNav() {
                                 {
                                     settings.enable_courses && <Link
                                         href={route('frontend.course.index')}
-                                        // onClick={() => dispatch(setParentModule('course'))}
                                         className={classNames(parentModule == 'course' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
                                     >
                                         {capitalize(trans('e_learning'))}
                                     </Link>
                                 }
 
+                                {
+                                    settings.corporate_mode && <>
+                                        <Link
+                                            href={`#our_services`}
+                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                        >
+                                            {capitalize(trans('our_services'))}
+                                        </Link>
+                                        <a
+                                            href={`https://shop.mgt-sa.com`}
+                                            className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                        >
+                                            {capitalize(trans('our_shop'))}
+                                        </a>
+                                    </>
+                                }
+
+                                {
+                                    settings.enable_joinus && <Link
+                                        href={route('frontend.joinus')}
+                                        className={classNames(parentModule == 'joinus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                    >
+                                        {capitalize(trans('joinus'))}
+                                    </Link>
+                                }
 
                                 <Link
                                     href={route('frontend.aboutus')}
-                                    // onClick={() => dispatch(setParentModule('aboutus'))}
                                     className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
                                 >
                                     {capitalize(trans('aboutus'))}
+                                </Link>
+
+                                <Link
+                                    href={route('frontend.contactus')}
+                                    className={classNames(parentModule == 'contactus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                >
+                                    {capitalize(trans('contactus'))}
                                 </Link>
 
                                 {/*     pages */}

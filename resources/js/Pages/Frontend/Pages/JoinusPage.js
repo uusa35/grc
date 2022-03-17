@@ -1,22 +1,17 @@
 import React, {useContext, useMemo, useState} from 'react'
-import {MailIcon, PhoneIcon} from '@heroicons/react/outline'
 import FrontendContainer from "../components/FrontendContainer";
 import {AppContext} from "../../context/AppContext";
 import GlobalContext from "../../context/GlobalContext";
-import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
-import {getWhatsappLink} from "../../helpers";
 import {random} from "lodash";
-import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import {useForm, usePage} from "@inertiajs/inertia-react";
-import axios from "axios";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 export default function() {
-    const {trans, getThumb, getLocalized} = useContext(AppContext);
+    const {trans, getThumb, getLocalized, mainColor } = useContext(AppContext);
     const [code, setCode] = useState('');
     const {settings} = useContext(GlobalContext)
 
