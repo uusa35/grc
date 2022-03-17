@@ -550,7 +550,7 @@ function MainNav() {
                         <motion.div
                             whileHover={{scale: 0.9}}
                         >
-                            <div className="flex lg:ml-0 rtl:ml-5 ltr:mr-5 w-24 h-auto">
+                            <div className="hidden sm:flex lg:ml-0 rtl:ml-5 ltr:mr-5 w-24 h-auto ">
                                 <Link href={route('frontend.home')}>
                                     {/*<span className="sr-only">{settings[getLocalized()]}</span>*/}
                                     <img

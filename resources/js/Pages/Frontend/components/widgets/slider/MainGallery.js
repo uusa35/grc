@@ -31,7 +31,7 @@ export default function({elements}) {
                     (img[getLocalized('description')] && size(img[getLocalized('description')]) > 5) || (img[getLocalized()] && size(img[getLocalized()]) > 5) ?
                         <a
                             href={route().has(`frontend.${img.type}.show`) ? route(`frontend.${img.type}.show`, {id: img.slidable_id}) : (img.url ? img.url : '#')}
-                            className="flex flex-1 flex-col space-y-4 truncate capitalize p-5 w-auto h-auto text-lg">
+                            className="hidden sm:flex flex-1 flex-col space-y-4 truncate capitalize p-5 w-auto h-auto text-lg">
                             <h1 className={`text-lg`}>{img[getLocalized()]}</h1>
                             {
                                 img[getLocalized('description')] && size(img[getLocalized('description')]) > 5 && <p className={`text-md`}>
