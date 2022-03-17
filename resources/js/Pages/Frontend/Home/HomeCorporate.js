@@ -347,7 +347,7 @@ export default React.memo(function({
                             </div>
                             <div className="relative py-32">
                                 <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
-                                    لماذا وساطة وضمان
+                                    خدمـات متكاملة
                                 </h1>
                                 <div className="mt-4 sm:mt-6">
                                     <a
