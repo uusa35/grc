@@ -22,7 +22,7 @@ export default React.memo(function ({
                                  }) {
     const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 4))
     const {categories} = useContext(GlobalContext);
-    const {trans, getLocalized} = useContext(AppContext)
+    const {trans, getLocalized, classNames } = useContext(AppContext)
 
     useEffect(() => {
         function handleResize() {
@@ -39,7 +39,7 @@ export default React.memo(function ({
             {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
             <FrontendContentContainer showBreadCrumbs={false}>
                 {slides && <MainGallery elements={slides}/>}
-                <div className={`bg-transparent space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:px-8`}>
+                <div className={classNames(settings.wide_screen ? `xl:w-4/5 2xl:w-3/5` : `w-full`, `bg-transparent space-y-10 py-14 m-auto px-4 sm:py-14 sm:px-6 lg:px-8`)}>
                     {
                         settings.enable_books && <>
                             <ElementSlider
