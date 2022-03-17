@@ -576,36 +576,36 @@ function MainNav() {
                                     {capitalize(trans('home'))}
                                 </Link>
                                 {
-                                    settings.enable_products && <Link
+                                    settings.enable_products ? <Link
                                         href={route('frontend.product.index')}
                                         // onClick={() => dispatch(setParentModule('product'))}
                                         className={classNames(parentModule == 'product' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('products'))}
-                                    </Link>
+                                    </Link> : null
                                 }
                                 {
-                                    settings.enable_books && <Link
+                                    settings.enable_books ? <Link
                                         href={route('frontend.book.index')}
                                         // onClick={() => dispatch(setParentModule('book'))}
                                         className={classNames(parentModule == 'book' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('library'))}
-                                    </Link>
+                                    </Link> : null
                                 }
                                 {
-                                    settings.enable_products &&
+                                    settings.enable_products ?
                                     <MainNavBookCategoriesList categories={filter(categories, c => c.is_product)}
-                                                               type='product'/>
+                                                               type='product'/> : null
                                 }
                                 {
-                                    settings.enable_books && <Link
+                                    settings.enable_books ? <Link
                                         href={route('frontend.user.index', {is_author: true})}
                                         // onClick={() => dispatch(setParentModule('user'))}
                                         className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('experts_and_participants'))}
-                                    </Link>
+                                    </Link> : null
                                 }
                                 {
                                     settings.enable_services ? <>
@@ -621,12 +621,12 @@ function MainNav() {
                                     </> : null
                                 }
                                 {
-                                    settings.enable_courses && <Link
+                                    settings.enable_courses ? <Link
                                         href={route('frontend.course.index')}
                                         className={classNames(parentModule == 'course' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
                                     >
                                         {capitalize(trans('e_learning'))}
-                                    </Link>
+                                    </Link> : null
                                 }
 
                                 {
@@ -647,12 +647,12 @@ function MainNav() {
                                 }
 
                                 {
-                                    settings.enable_joinus && <Link
+                                    settings.enable_joinus ? <Link
                                         href={route('frontend.joinus')}
                                         className={classNames(parentModule == 'joinus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
                                     >
                                         {capitalize(trans('joinus'))}
-                                    </Link>
+                                    </Link> : null
                                 }
 
                                 <Link
