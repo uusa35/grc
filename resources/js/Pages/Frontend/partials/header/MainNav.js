@@ -198,7 +198,7 @@ function MainNav() {
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.home')}
-                                        className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100} capitalize`}>
+                                        className={`-m-2 p-2 block ${textColor} capitalize`}>
                                         {capitalize(trans('home'))}
                                     </Link>
                                 </div>
@@ -307,7 +307,7 @@ function MainNav() {
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.contactus')}
-                                        className={`-m-2 p-2 block text-${headerColor}-900 dark:text${headerColor}-100} capitalize`}>
+                                        className={`-m-2 p-2 block ${textColor} capitalize`}>
                                         {capitalize(trans('contactus'))}
                                     </Link>
                                 </div>
@@ -553,7 +553,7 @@ function MainNav() {
                         <motion.div
                             whileHover={{scale: 0.9}}
                         >
-                            <div className="hidden sm:flex lg:ml-0 rtl:ml-5 ltr:mr-5 w-24 h-auto ">
+                            <div className=" sm:flex lg:ml-0 rtl:ml-5 ltr:mr-5 w-24 h-auto ">
                                 <Link href={route('frontend.home')}>
                                     {/*<span className="sr-only">{settings[getLocalized()]}</span>*/}
                                     <img
