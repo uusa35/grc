@@ -172,11 +172,7 @@ export default function({element, relatedElements, auth, settings}) {
     const decreaseQty = () => {
         setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
-
-    console.log('dis', !element.is_available || finalPrice === 0 || selectedQty < 1)
-    console.log('av', element.is_available)
-    console.log('final', finalPrice)
-    console.log('qty', selectedQty)
+    
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -389,10 +385,10 @@ export default function({element, relatedElements, auth, settings}) {
                                                                 className={({active, checked}) =>
                                                                     classNames(
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
-                                                                        active ? `ring-2 ring-offset-2 ring-${mainBgColor}-200 dark:ring-${mainBgColor}-800` : '',
+                                                                        active ? `ring-2 ring-offset-2 ring-${mainColor}-200 dark:ring-${mainColor}-800` : '',
                                                                         checked
-                                                                            ? `bg-${mainBgColor}-400 dark:bg-${mainBgColor}-400 border-transparent text-${mainColor}-800 dark:text-${mainColor}-50 hover:bg-${mainBgColor}-400 dark:hover:bg-${mainBgColor}-400`
-                                                                            : `bg-${mainBgColor}-400 dark:bg-${mainBgColor}-400 border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-200 hover:bg-${mainBgColor}-400 dark:hover:bg-${mainBgColor}-400`,
+                                                                            ? `bg-${mainColor}-400 dark:bg-${mainColor}-400 border-transparent text-${mainColor}-800 dark:text-${mainColor}-50 hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`
+                                                                            : `${mainBgColor} border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-200 hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
                                                                 }
