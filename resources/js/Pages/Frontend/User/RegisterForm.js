@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 
 
 export default function({countries}) {
-    const {trans, getThumb, getLocalized, classNames, mainColor , mainBgColor  } = useContext(AppContext);
+    const {trans, getThumb, getLocalized, classNames, mainColor , mainBgColor, textColor  , btnClass   } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const { settings } = globalContext;
     const { locale} = useSelector(state => state);
@@ -77,11 +77,11 @@ export default function({countries}) {
                     </div>
 
                     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                        <div className={`bg-white dark:bg-${mainBgColor}-500  py-8 px-4 shadow sm:rounded-lg sm:px-10`}>
+                        <div className={`${mainBgColor}  py-8 px-4 shadow sm:rounded-lg sm:px-10`}>
                             <form className="space-y-6" onSubmit={submit}>
                                 {/* name */}
                                 <div>
-                                    <label htmlFor="name" className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
+                                    <label htmlFor="name" className={`block text-sm font-medium ${textColor}`}>
                                         {trans('name')}
                                     </label>
                                     <div className="mt-1">
@@ -98,7 +98,7 @@ export default function({countries}) {
                                 </div>
                                 {/* email */}
                                 <div>
-                                    <label htmlFor="email" className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
+                                    <label htmlFor="email" className={`block text-sm font-medium ${textColor}`}>
                                         {trans('email')}
                                     </label>
                                     <div className="mt-1">
@@ -115,7 +115,7 @@ export default function({countries}) {
                                 </div>
                                 {/* password */}
                                 <div>
-                                    <label htmlFor="password" className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
+                                    <label htmlFor="password" className={`block text-sm font-medium ${textColor}`}>
                                         {trans('password')}
                                     </label>
                                     <div className="mt-1">
@@ -133,7 +133,7 @@ export default function({countries}) {
                                 {/* password_confirm */}
                                 <div>
                                     <label htmlFor="password_confirmation"
-                                           className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
+                                           className={`block text-sm font-medium ${textColor}`}>
                                         {trans('password_confirmation')}
                                     </label>
                                     <div className="mt-1">
@@ -150,7 +150,7 @@ export default function({countries}) {
                                 </div>
                                 {/* mobile */}
                                 <div>
-                                    <label htmlFor="phone-number" className={`block text-sm font-medium text-${mainColor}-800 dark:text-white`}>
+                                    <label htmlFor="phone-number" className={`block text-sm font-medium ${textColor}`}>
                                         {trans('mobile')}
                                     </label>
                                     <div className="mt-1 relative rounded-md shadow-sm">
@@ -166,8 +166,10 @@ export default function({countries}) {
                                                 className="focus:ring-gray-500 focus:border-gray-500 h-full py-0 pl-3 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
                                             >
                                                 {map(countries, c => (
-                                                    <option value={c.id}
-                                                            selected={data.country_id === c.id}>{c[getLocalized()]} -
+                                                    <option
+                                                        key={c.id}
+                                                        value={c.id}
+                                                        defaultValue={data.country_id === c.id}>{c[getLocalized()]} -
                                                         ({c.calling_code})</option>
                                                 ))}
                                             </select>
@@ -192,7 +194,7 @@ export default function({countries}) {
                                         {trans('write_protection_code')} - ({code})
                                     </label>
                                     <div className="mt-1">
-                                        <input type="hidden" name="code" value={code}/>
+                                        <input type="hidden" name="code" defaultValue={code}/>
                                         <input
                                             id="code_confirmation"
                                             type="text"
@@ -211,7 +213,7 @@ export default function({countries}) {
                                 <div>
                                     <button
                                         type="submit"
-                                        className={`capitalize w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-${mainBgColor}-400  hover:bg-${mainBgColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
+                                        className={`capitalize w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium ${btnClass} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
                                     >
                                         {trans('register')}
                                     </button>
@@ -219,7 +221,7 @@ export default function({countries}) {
                                 <div>
                                     <Link
                                         href={route('frontend.user.logging')}
-                                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium text-${mainColor}-800 dark:text-white hover:bg-${mainBgColor}-300 capitalize`}
+                                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md text-sm font-medium ${btnClass} capitalize`}
                                     >
                                         {trans('already_a_user_login_to_ur_account')}
                                     </Link>

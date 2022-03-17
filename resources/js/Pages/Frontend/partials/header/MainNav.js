@@ -4,12 +4,12 @@ import {
     MenuIcon,
     ShoppingBagIcon,
     XIcon,
-MoonIcon
+    MoonIcon
 } from '@heroicons/react/outline'
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
 import route from 'ziggy-js'
-import {map, capitalize, filter, isEmpty, size } from 'lodash';
+import {map, capitalize, filter, isEmpty, size} from 'lodash';
 import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
 import {getWhatsappLink} from "../../../helpers";
 import SearchField from "../SearchField";
@@ -43,11 +43,12 @@ function MainNav() {
         headerColor,
         headerBgColor,
         mainBgColor,
-        currentHome
+        currentHome,
+        textColor
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const {auth, settings, currencies, categories, mgt} = globalContext;
-    const {locale, currency, cart, parentModule, theme } = useSelector(state => state);
+    const {locale, currency, cart, parentModule, theme} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const [offset, setOffset] = useState(0);
     const dispatch = useDispatch();
@@ -60,59 +61,61 @@ function MainNav() {
         const onScroll = () => setOffset(window.pageYOffset);
         // clean up code
         window.removeEventListener('scroll', onScroll);
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('scroll', onScroll, {passive: true});
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
 
-
     return (
-        <div className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` : `bg-white dark:bg-${headerBgColor}-800`,  ` rtl:text-right ltr:text-left fixed inset-0 h-32 z-40`)}>
+        <div
+            className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` : `bg-white dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
             {/* Top Nav*/}
             <div
-                className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` :  `bg-${headerBgColor}-900` , ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
+                className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` : `bg-${headerBgColor}-900`, ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
                 <div className="grid grid-cols-6 gap-x-5">
                     {
-                        settings.enable_products && theme !== 'none' && <button className={`col-span-1`} onClick={() => handleTheme()}>
+                        settings.enable_products && theme !== 'none' &&
+                        <button className={`col-span-1`} onClick={() => handleTheme()}>
                             <MoonIcon
-                                      fill={theme  === 'dark' ? headerColor : 'none'}
-                                      className={`h-5 w-5 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                fill={theme === 'dark' ? headerColor : 'none'}
+                                className={`h-5 w-5 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('theme')}</span>
                         </button>
                     }
                     {
                         settings.instagram && <a as={Link} target="_blank" href={settings.instagram}>
                             <FaInstagram
-                                         className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('instagram')}</span>
                         </a>
                     }
                     {
                         settings.facebook && <a as={Link} target="_blank" href={settings.facebook}>
                             <FaFacebook
-                                        className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('facebook')}</span>
                         </a>
                     }
                     {
                         settings.twitter && <a as={Link} target="_blank" href={settings.twitter}>
                             <FaTwitter
-                                       className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('twitter')}</span>
                         </a>
                     }
                     {
                         settings.youtube && <a as={Link} target="_blank" href={settings.youtube}>
                             <FaYoutube
-                                       className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('youtube')}</span>
                         </a>
                     }
                     {
                         settings.whatsapp &&
-                        <a as={Link} target="_blank" href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
+                        <a as={Link} target="_blank"
+                           href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
                             <FaWhatsapp
-                                        className={`h-5 w-5 co5-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 co5-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
                             <span className="sr-only">{trans('whatsapp')}</span>
                         </a>
                     }
@@ -129,7 +132,7 @@ function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className={`mx-2  block  text-xs text-black dark:text-white`}>
+                        className={`mx-2  block  text-xs text-white `}>
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
@@ -138,13 +141,13 @@ function MainNav() {
                                 settings.enable_register ?
                                     <Link
                                         href={route('frontend.user.registration')}
-                                        className=" mx-2  block text-black dark:text-white  text-xs">
+                                        className={`mx-2  block  text-white text-xs`}>
                                         {capitalize(trans('register'))}
                                     </Link> : null
                             }
                             <Link
                                 href={route('frontend.user.logging')}
-                                className="mx-2   block text-black dark:text-white  hidden text-xs">
+                                className={`mx-2   block text-white hidden text-xs`}>
                                 {capitalize(trans('login'))}
                             </Link>
                         </> : null
@@ -534,7 +537,7 @@ function MainNav() {
             </Transition.Root>
 
             <header
-                className={classNames(settings.wide_screen  && offset < 200 && currentHome ? `bg-transparent border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 ` , ` text-${headerColor}-800 dark:text-${headerColor}-100 relative py-2 max-w-full`)}>
+                className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 `, ` text-${headerColor}-800 dark:text-${headerColor}-100 relative py-2 max-w-full`)}>
                 <nav aria-label="Top" className="w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto">
                     <div className="h-20 flex items-center">
                         <button
@@ -595,8 +598,8 @@ function MainNav() {
                                 }
                                 {
                                     settings.enable_products ?
-                                    <MainNavBookCategoriesList categories={filter(categories, c => c.is_product)}
-                                                               type='product'/> : null
+                                        <MainNavBookCategoriesList categories={filter(categories, c => c.is_product)}
+                                                                   type='product'/> : null
                                 }
                                 {
                                     settings.enable_books ? <Link

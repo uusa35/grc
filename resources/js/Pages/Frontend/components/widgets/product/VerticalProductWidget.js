@@ -9,7 +9,7 @@ import {motion} from "framer-motion"
 import {useSelector} from "react-redux";
 
 const VerticalProductWidget  = ({element}) => {
-    const {getLocalized, getThumb, mainBgColor, mainColor, trans, classNames} = useContext(AppContext);
+    const {getLocalized, getThumb, mainBgColor, mainColor, trans, classNames, textColor, btnClass  } = useContext(AppContext);
     const {locale} = useSelector(state => state);
 
     return (
@@ -36,7 +36,7 @@ const VerticalProductWidget  = ({element}) => {
                                   salePrice={element.sale_price}
                                   isOnSale={element.isOnSale}/>
                     <div className="flex flex-row w-full justify-between items-center">
-                        <h3 className={`text-2xl text-base font-bold text-${mainColor}-800 dark:text-${mainColor}-50  truncate`}>
+                        <h3 className={`text-2xl text-base font-bold ${textColor}  truncate`}>
                             <Link
                                 href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
                                 <span className=""/>
@@ -56,14 +56,14 @@ const VerticalProductWidget  = ({element}) => {
                     </div>
                     <div className={`flex flex-1`}>
                         {element[getLocalized('description')] && size(element[getLocalized('description')]) > 5 &&
-                        <p className={`break-all pt-3 text-sm text-ellipsis overflow-hidden capitalize text-${mainColor}-800 dark:text-${mainColor}-50`}>
+                        <p className={`break-all pt-3 text-sm text-ellipsis overflow-hidden capitalize ${textColor}`}>
                             {truncate(element[getLocalized('description')], {length: 150})}
                         </p>
                         }
                     </div>
                     <Link
                         href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}
-                        className={`hidden lg:flex bg-${mainColor}-800 dark:bg-${mainColor}-400 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
+                        className={`hidden lg:flex ${btnClass} rounded-md py-3 px-8 flex items-center justify-center text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
                     >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>
                             <div>

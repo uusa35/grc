@@ -11,7 +11,7 @@ import route from "ziggy-js";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 export default function() {
-    const {trans, getThumb, getLocalized, mainColor } = useContext(AppContext);
+    const {trans, getThumb, getLocalized, mainColor , mainBgColor , btnClass , textColor} = useContext(AppContext);
     const [code, setCode] = useState('');
     const {settings} = useContext(GlobalContext)
 
@@ -59,7 +59,7 @@ export default function() {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('joinus')}/>
-                <div className="bg-transparent relative overflow-hidden">
+                <div className={`${mainBgColor} relative overflow-hidden`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
@@ -81,7 +81,7 @@ export default function() {
                         <div className="w-full">
                             <h2
                                 id="sale-heading"
-                                className={`text-4xl mt-10 font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-200 sm:text-5xl lg:text-6xl`}
+                                className={`text-4xl mt-10 font-extrabold tracking-tight ${textColor} sm:text-5xl lg:text-6xl`}
                             >
                                 {trans('joinus')}
                             </h2>
@@ -98,12 +98,12 @@ export default function() {
                                         <div className="grid grid-cols-full lg:grid-cols-1">
                                             {/* Contact form */}
                                             <div className="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                                                <h3 className="text-lg  text-gray-900">{trans('export_message')}</h3>
+                                                <h3 className={`text-lg  ${textColor}`}>{trans('export_message')}</h3>
                                                 <form onSubmit={submit}
                                                       className="mt-6 grid grid-cols-2 gap-y-6 sm:gap-x-8">
                                                     <div className="col-span-full">
                                                         <label htmlFor="name"
-                                                               className="block text-sm  text-gray-900">
+                                                               className={`block text-sm  ${textColor}`}>
                                                             {trans('factory_name')}*
                                                         </label>
                                                         <div className="mt-1">
@@ -116,7 +116,7 @@ export default function() {
                                                                 autoComplete="given-name"
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  ${textColor}`}>
                                                                 {errors.name && <div
                                                                     className={`text-red-900 text-sm`}>{errors.name}</div>}
                                                             </p>
@@ -124,7 +124,7 @@ export default function() {
                                                     </div>
                                                     {/* email */}
                                                     <div className="col-span-full md:col-span-1">
-                                                        <label htmlFor="email" className="block text-sm  text-gray-900">
+                                                        <label htmlFor="email" className={`block text-sm ${textColor}`}>
                                                             {trans('email')}*
                                                         </label>
                                                         <div className="mt-1">
@@ -137,7 +137,7 @@ export default function() {
                                                                 autoComplete="email"
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  ${textColor}`}>
                                                                 {errors.email && <div
                                                                     className={`text-red-900 text-sm`}>{errors.email}</div>}
                                                             </p>
@@ -147,7 +147,7 @@ export default function() {
                                                     <div className="col-span-full md:col-span-1">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="phone"
-                                                                   className="block text-sm  text-gray-900">
+                                                                   className={`block text-sm  ${textColor}`}>
                                                                 {trans('mobile')}
                                                             </label>
                                                             <span id="phone-optional" className="text-sm text-gray-500">
@@ -164,7 +164,7 @@ export default function() {
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                                 aria-describedby="phone-optional"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  ${textColor}`}>
                                                                 {errors.mobile && <div
                                                                     className={`text-red-900 text-sm`}>{errors.mobile}</div>}
                                                             </p>
@@ -173,7 +173,7 @@ export default function() {
                                                     {/* address */}
                                                     <div className="col-span-full">
                                                         <label htmlFor="address"
-                                                               className="block text-sm  text-gray-900">
+                                                               className={`block text-sm  ${textColor}`}>
                                                             {trans('address')}*
                                                         </label>
                                                         <div className="mt-1">
@@ -186,7 +186,7 @@ export default function() {
                                                                 autoComplete="family-name"
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  ${textColor}`}>
                                                                 {errors.address && <div
                                                                     className={`text-red-900 text-sm`}>{errors.address}</div>}
                                                             </p>
@@ -196,7 +196,7 @@ export default function() {
                                                     <div className="col-span-full md:col-span-1">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="phone"
-                                                                   className="block text-sm  text-gray-900">
+                                                                   className={`block text-sm  ${textColor}`}>
                                                                 {trans('website')}
                                                             </label>
                                                             <span id="phone-optional" className="text-sm text-gray-500">
@@ -213,7 +213,7 @@ export default function() {
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                                 aria-describedby="phone-optional"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  ${textColor}`}>
                                                                 {errors.website && <div
                                                                     className={`text-red-900 text-sm`}>{errors.website}</div>}
                                                             </p>
@@ -222,7 +222,7 @@ export default function() {
                                                     {/* code*/}
                                                     <div className="col-span-full md:col-span-1">
                                                         <label htmlFor="code"
-                                                               className="block text-sm  text-gray-900">
+                                                               className={`block text-sm  ${textColor}`}>
                                                             {trans('write_protection_code')} - ({code})
                                                         </label>
                                                         <div className="mt-1">
@@ -236,7 +236,7 @@ export default function() {
                                                                 placeholder={trans('write_protection_code')}
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  ${textColor}`}>
                                                                 {errors.code_confirmation && <div
                                                                     className={`text-red-900 text-sm`}>{errors.code_confirmation}</div>}
                                                             </p>
@@ -281,7 +281,7 @@ export default function() {
                                                                 </div>
                                                                 <ToolTipWidget/>
                                                                 <div>
-                                                                    <p className={`mt-2  text-gray-500`}>
+                                                                    <p className={`mt-2  ${textColor}`}>
                                                                         {errors.exported_before &&
                                                                         <div className={`text-red-900`}>{errors.exported_before}</div>}
                                                                     </p>
@@ -293,7 +293,7 @@ export default function() {
                                                     <div className="col-span-full">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="message"
-                                                                   className="block text-sm  text-gray-900">
+                                                                   className={`block text-sm  ${textColor}`}>
                                                                 {trans('about_our_products')}
                                                             </label>
                                                             <span id="message-max" className="text-sm text-gray-500">
@@ -310,7 +310,7 @@ export default function() {
                                                                     aria-describedby="message-max"
                                                                     defaultValue={''}
                                                                 />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  ${textColor}`}>
                                                                 {errors.content && <div
                                                                     className={`text-red-900 text-sm`}>{errors.content}</div>}
                                                             </p>
@@ -320,7 +320,7 @@ export default function() {
                                                     <div className="col-span-full">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="notes"
-                                                                   className="block text-sm  text-gray-900">
+                                                                   className={`block text-sm  ${textColor}`}>
                                                                 {trans('other_notes')}
                                                             </label>
                                                             <span id="message-max" className="text-sm text-gray-500">
@@ -337,7 +337,7 @@ export default function() {
                                                                     aria-describedby="message-max"
                                                                     defaultValue={''}
                                                                 />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  ${textColor}`}>
                                                                 {errors.notes && <div
                                                                     className={`text-red-900 text-sm`}>{errors.notes}</div>}
                                                             </p>
@@ -346,7 +346,7 @@ export default function() {
                                                     <div className="col-span-full sm:flex sm:justify-end">
                                                         <button
                                                             type="submit"
-                                                            className="mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base  bg-gray-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto"
+                                                            className={`${btnClass} mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto`}
                                                         >
                                                             {trans('submit')}
                                                         </button>

@@ -15,7 +15,7 @@ import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 
 export default function() {
-    const {trans, getThumb, getLocalized, mainColor , mainBgColor } = useContext(AppContext);
+    const {trans, getThumb, getLocalized, mainColor , mainBgColor, btnClass , textColor  } = useContext(AppContext);
     const [code, setCode] = useState('');
     const {settings} = useContext(GlobalContext)
 
@@ -62,7 +62,7 @@ export default function() {
         <FrontendContainer>
             <FrontendContentContainer parentModuleName={'contactus'} >
                 <SubMetaElement title={trans('contactus')}/>
-                <div className="bg-transparent relative overflow-hidden">
+                <div className={`${mainBgColor} relative overflow-hidden`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
@@ -84,7 +84,7 @@ export default function() {
                         <div className="w-full">
                             <h2
                                 id="sale-heading"
-                                className={`text-4xl my-5 font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-50 sm:text-5xl lg:text-6xl`}
+                                className={`text-4xl my-5 font-extrabold tracking-tight ${textColor} sm:text-5xl lg:text-6xl`}
                             >
                                 {trans('contactus')}
                             </h2>
@@ -109,7 +109,7 @@ export default function() {
                             <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full ">
                                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                                     <div className="relative">
-                                        <div className={`grid grid-cols-1 lg:grid-cols-3 text-${mainColor}-900 dark:text-${mainColor}-50`}>
+                                        <div className={`grid grid-cols-1 lg:grid-cols-3 ${textColor}`}>
                                             {/* Contact information */}
                                             <div
                                                 className="relative overflow-hidden py-10 px-6  sm:px-10 xl:p-12">
@@ -172,7 +172,7 @@ export default function() {
                                             </div>
 
                                             {/* Contact form */}
-                                            <div className={`py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 text-${mainColor}-900 dark:text-${mainColor}-50`}>
+                                            <div className={`py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 ${textColor}`}>
                                                 <h3 className="text-lg  ">{trans('for_any_inquires_contact_us')}</h3>
                                                 <form onSubmit={submit}
                                                       className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
@@ -338,7 +338,7 @@ export default function() {
                                                     <div className="sm:col-span-2 sm:flex sm:justify-end">
                                                         <button
                                                             type="submit"
-                                                            className={`bg-${mainBgColor}-800 dark:bg-${mainBgColor}-400 text-white capitalize mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto`}
+                                                            className={`${btnClass} capitalize mt-2 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:w-auto`}
                                                         >
                                                             {trans('submit')}
                                                         </button>

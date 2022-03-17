@@ -16,7 +16,7 @@ import GlobalContext from "../../context/GlobalContext";
 const FrontendContainer = ({children}) => {
     const {locale, theme} = useSelector(state => state)
     const { settings } = useContext(GlobalContext);
-    const {currentFont, mainColor, mainBgColor, getThumb, classNames, currentHome  } = useContext(AppContext);
+    const {currentFont, textColor , mainBgColor, getThumb, classNames, currentHome  } = useContext(AppContext);
 
     return (
         <div
@@ -25,11 +25,11 @@ const FrontendContainer = ({children}) => {
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement/>
-            <MainNav/>
-            <main
-                className={`bg-transparent dark:bg-${mainBgColor}-900 flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
 
-                <div className={classNames(settings.wide_screen && currentHome ? `` : `pt-32`, `min-h-screen bg-transparent dark:bg-${mainBgColor}-900 text-${mainColor}-50`)}>
+            <main
+                className={` ${mainBgColor} flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
+                <MainNav/>
+                <div className={classNames(settings.wide_screen && currentHome ? `` : `pt-32`, `min-h-screen ${mainBgColor} ${textColor}`)}>
                     <SystemMessage/>
                         {children}
                 </div>

@@ -8,14 +8,14 @@ import {truncate, size } from "lodash";
 import {motion} from "framer-motion"
 
 const NormalProductWidget = ({element}) => {
-    const {getLocalized, getThumb, mainBgColor , mainColor, trans  } = useContext(AppContext);
+    const {getLocalized, getThumb, mainBgColor , mainColor, trans, bgColor , textColor, btnClass    } = useContext(AppContext);
     return (
         <motion.div
             initial={false}
             whileHover={{scale: 0.95}}
         >
             <div
-                className={`block relative overflow-hidden p-0 md:p-4 dark:shadow-md border border-${mainColor}-100 dark:border-${mainBgColor}-400 bg-white dark:bg-${mainBgColor}-600  dark:border-opacity-20 mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>
+                className={`block relative overflow-hidden p-0 md:p-4 dark:shadow-md border border-${mainColor}-100 dark:border-${mainBgColor}-400 ${mainBgColor}  dark:border-opacity-20 mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>
                 <div className="w-full rounded-t-sm overflow-hidden  sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                     <Link
                         className="z-30"
@@ -53,13 +53,13 @@ const NormalProductWidget = ({element}) => {
                     }
                 </div>
                 {
-                    element[getLocalized('description')] && size(element[getLocalized('description')]) > 5 && <p className={`h-8 text-${mainColor}-800 dark:text-${mainColor}-50 m-2 opacity-70 text-sm text-center`}>
+                    element[getLocalized('description')] && size(element[getLocalized('description')]) > 5 && <p className={`h-8 ${textColor} m-2 opacity-70 text-sm text-center`}>
                         {truncate(element[getLocalized('description')], { length : 30 })}
                     </p>
                 }
                 <Link
                     href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}
-                    className={`hidden lg:flex bg-${mainColor}-800 dark:bg-${mainColor}-400 rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
+                    className={`hidden lg:flex ${btnClass} rounded-md py-3 px-8 flex items-center justify-center text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
                 >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>
                             <div>

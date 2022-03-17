@@ -32,7 +32,7 @@ function ElementSlider({
     virtical = false,
                        }) {
     const {isRTL} = useSelector(state => state.locale)
-    const {mainColor, mainBgColor, trans, classNames} = useContext(AppContext);
+    const {mainColor, mainBgColor, trans, classNames, textColor, bgColor  } = useContext(AppContext);
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
     const [currentRefValue, setCurrentRevValue] = useState('prev')
@@ -62,7 +62,7 @@ function ElementSlider({
     const handlePrev = () => setCurrentRevValue('prev')
 
     return (
-        <div className={`w-full  dark:bg-${mainBgColor}-600 rounded-lg dark:shadow-lg p-6 lg:p-8`}>
+        <div className={`w-full rounded-lg dark:shadow-lg p-6 lg:p-8`}>
             {!isEmpty(elements) && route().has(`frontend.${type}.index`) && (
                 <>
                     <Link
@@ -89,11 +89,11 @@ function ElementSlider({
                         {
                             isRTL ? <div className={`hidden lg:flex flex-row items-center`}>
                                 <span
-                                    className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
+                                    className={`${textColor} text-xs`}>{trans('show_all')}</span>
                                 <div
-                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-md dark:border dark:border-${mainBgColor}-400`}>
+                                    className={`p-1 rtl:mr-2 ltr:ml-2 ${bgColor} rounded-md dark:border dark:border-${mainBgColor}-400`}>
                                     <svg xmlns="http://www.w3.org/2000/svg"
-                                         className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
+                                         className={`h-6 w-6 ${textColor}`}
                                          fill={`none`}
                                          viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
@@ -102,11 +102,11 @@ function ElementSlider({
                                 </div>
                             </div> : <div className={`hidden lg:flex flex-row items-center`}>
                                 <span
-                                    className={`text-${mainColor}-800 dark:text-${mainColor}-600 text-xs`}>{trans('show_all')}</span>
+                                    className={`${textColor} text-xs`}>{trans('show_all')}</span>
                                 <div
-                                    className={`p-1 rtl:mr-2 ltr:ml-2 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-500 rounded-md dark:border dark:border-${mainBgColor}-400`}>
+                                    className={`p-1 rtl:mr-2 ltr:ml-2 ${bgColor} rounded-md dark:border dark:border-${mainBgColor}-400`}>
                                     <svg xmlns="http://www.w3.org/2000/svg"
-                                         className={`h-6 w-6 text-${mainColor}-200 dark:text-${mainColor}-900 `}
+                                         className={`h-6 w-6 ${textColor}`}
                                          fill={`none`}
                                          viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
