@@ -81,6 +81,24 @@ const products = [
     },
 ];
 
+const collections = [
+    {
+        name: "تخزن بآمان",
+        href: '#',
+        imageSrc: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvr5J6XsAQ9ISU.jpeg',
+    },
+    {
+        name: "تغلف بعناية",
+        href: '#',
+        imageSrc: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvrszGXIA4A2QR.jpeg',
+    },
+    {
+        name: 'تنقل بسرعة',
+        href: '#',
+        imageSrc: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvshzbWQAEARmq.jpeg',
+    },
+]
+
 export default React.memo(function({
                                        slides,
                                        newOnHomeProducts
@@ -104,7 +122,6 @@ export default React.memo(function({
             {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
             <FrontendContentContainer showBreadCrumbs={false}>
                 {slides && <MainGallery elements={slides}/>}
-
 
 
                 {/*why wasta and daman */}
@@ -169,7 +186,7 @@ export default React.memo(function({
                                 </Link>
                             </div>
                         </div>
-                     </div>
+                    </div>
 
 
                     {/* our services */}
@@ -192,7 +209,8 @@ export default React.memo(function({
                                         <div key={service.id}
                                              className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                             <div className="flex-shrink-0">
-                                                <img className="h-96 w-full object-cover" src={service.imageUrl} alt=""/>
+                                                <img className="h-96 w-full object-cover" src={service.imageUrl}
+                                                     alt=""/>
                                             </div>
                                             <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                                 <div className="flex-1">
@@ -293,6 +311,98 @@ export default React.memo(function({
                                 ))}
                             </div>
                         </div>
+                    </div>
+
+
+                    <div className="relative bg-white">
+                        {/* Background image and overlap */}
+                        <div aria-hidden="true" className="hidden absolute inset-0 sm:flex sm:flex-col">
+                            <div className="flex-1 relative w-full bg-gray-800">
+                                <div className="absolute inset-0 overflow-hidden">
+                                    <img
+                                        src="https://mgt-sa.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-12-at-10.32.40-PM2.jpeg"
+                                        alt=""
+                                        className="w-full h-full object-center object-cover"
+                                    />
+                                </div>
+                                <div className="absolute inset-0 bg-gray-900 opacity-50"/>
+                            </div>
+                            <div className="w-full bg-white h-32 md:h-40 lg:h-48"/>
+                        </div>
+
+                        <div className="relative max-w-3xl mx-auto pb-96 px-4 text-center sm:pb-0 sm:px-6 lg:px-8">
+                            {/* Background image and overlap */}
+                            <div aria-hidden="true" className="absolute inset-0 flex flex-col sm:hidden">
+                                <div className="flex-1 relative w-full bg-gray-800">
+                                    <div className="absolute inset-0 overflow-hidden">
+                                        <img
+                                            src="https://mgt-sa.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-12-at-10.32.40-PM2.jpeg"
+                                            alt=""
+                                            className="w-full h-full object-center object-cover"
+                                        />
+                                    </div>
+                                    <div className="absolute inset-0 bg-gray-900 opacity-50"/>
+                                </div>
+                                <div className="w-full bg-white h-48"/>
+                            </div>
+                            <div className="relative py-32">
+                                <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
+                                    لماذا وساطة وضمان
+                                </h1>
+                                <div className="mt-4 sm:mt-6">
+                                    <a
+                                        href="#"
+                                        className="inline-block bg-indigo-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-indigo-700"
+                                    >
+
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <section aria-labelledby="collection-heading" className="-mt-96 relative sm:mt-0">
+                            <h2 id="collection-heading" className="sr-only">
+                                Collections
+                            </h2>
+                            <div
+                                className="max-w-md mx-auto grid grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:px-6 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:px-8 lg:gap-x-8">
+                                {collections.map((collection) => (
+                                    <div
+                                        key={collection.name}
+                                        className="group relative h-96 bg-white rounded-lg shadow-xl sm:h-auto sm:aspect-w-4 sm:aspect-h-5"
+                                    >
+                                        <div>
+                                            <div aria-hidden="true"
+                                                 className="absolute inset-0 rounded-lg overflow-hidden">
+                                                <div
+                                                    className="absolute inset-0 overflow-hidden group-hover:opacity-75">
+                                                    <img
+                                                        src={collection.imageSrc}
+                                                        alt={collection.imageAlt}
+                                                        className="w-full h-full object-center object-cover"
+                                                    />
+                                                </div>
+                                                <div
+                                                    className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"/>
+                                            </div>
+                                            <div className="absolute inset-0 rounded-lg p-6 flex items-end">
+                                                <div>
+                                                    <p aria-hidden="true" className="text-sm text-white">
+                                                        {collection.name}
+                                                    </p>
+                                                    <h3 className="mt-1 font-semibold text-white">
+                                                        <a href={collection.href}>
+                                                            <span className="absolute inset-0"/>
+                                                            {/*{collection.name}*/}
+                                                        </a>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
                     </div>
 
 
