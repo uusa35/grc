@@ -9,7 +9,7 @@ export default function () {
         <div className="relative py-32 px-6 sm:py-40 sm:px-12 lg:px-16 rounded-lg">
             <div className="absolute inset-0 overflow-hidden rounded-lg">
                 <img
-                    src="https://www.barnikels.com/wp-content/uploads/2016/11/Boxes.jpg"
+                    src="https://mgt-sa.com/wp-content/uploads/2022/03/271225116_141735514888982_6489732401877590299_n.jpeg"
                     alt=""
                     className="w-full h-full object-center object-cover rounded-lg"
                 />

@@ -23,7 +23,7 @@ const blogPosts = [
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
         imageUrl:
-            'https://mgt-sa.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-13-at-10.42.13-PM.jpeg',
+            'https://mgt-sa.com/wp-content/uploads/2022/03/269779541_139101728485694_7997432037786870327_n-1.jpeg',
         preview:
             'عن طريق شركائنا في مُختلف دول العالم، يُمكنك الآن الاستفادة من خُصومات شركة وساطة وضمان السعودية على جميع أشكال ومقاسات مُنتجات التعبئة والتغليف بجودة عالية مطابقة للمواصفات العالمية',
     },
@@ -34,7 +34,7 @@ const blogPosts = [
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
         imageUrl:
-            'https://mgt-sa.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-13-at-10.42.28-PM.jpeg',
+            'https://mgt-sa.com/wp-content/uploads/2022/03/275383085_153690203693513_8167701926030083832_n.jpeg',
         preview:
             'نُمكّن منتجات التعبئة والتغليف الخاصة بشركتك من الوصول الى شريحة أكبر من العملاء المحتملين في مُختلف المناطق داخل المملكة العربية السعودية مقابل أسعار رمزية'
     },
@@ -45,7 +45,7 @@ const blogPosts = [
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
         imageUrl:
-            'https://mgt-sa.com/wp-content/uploads/2022/03/DSC_3786-scaled.jpg',
+            'https://mgt-sa.com/wp-content/uploads/2022/03/273568089_148496084212925_8466813059061908296_n.jpeg',
         preview:
             'تعرّف على منتجات شركة وساطة وضمان صديقة البيئة، المصنوعة من أجود خامات قصب السُكر القابلة للتحلل، حل بيئي واقتصادي جديد لمنتجات التعبئة والتغليف الغذائية غير ضار تمامًا بالبيئة وصحّة الانسان'
     }
@@ -78,7 +78,7 @@ export default React.memo(function({
 
                     <div className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent ">
                         <div className={`grid-cols-1`}>
-                            <img src={`https://mgt-sa.com/wp-content/uploads/2022/03/DSC_4162.jpg`}
+                            <img src={`https://mgt-sa.com/wp-content/uploads/2022/03/275923707_155477013514832_2749966635233669569_n.jpeg`}
                                                             className={`w-full h-auto object-cover`}/>
                         </div>
                         <div className={`grid-cols-1 flex flex-col flex-grow`}>
@@ -121,7 +121,7 @@ export default React.memo(function({
                                 {blogPosts.map((post) => (
                                     <div key={post.id} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                         <div className="flex-shrink-0">
-                                            <img className="h-48 w-full object-cover" src={post.imageUrl} alt="" />
+                                            <img className="h-96 w-full object-cover" src={post.imageUrl} alt="" />
                                         </div>
                                         <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                             <div className="flex-1">
@@ -151,7 +151,7 @@ export default React.memo(function({
                                     <div className="aspect-w-14 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                                         <img
                                             className="object-cover lg:h-full lg:w-full"
-                                            src="https://mgt-sa.com/wp-content/uploads/2022/03/DSC_3788.jpg"
+                                            src="https://mgt-sa.com/wp-content/uploads/2022/03/269779541_139101728485694_7997432037786870327_n-1.jpeg"
                                             alt=""
                                         />
                                     </div>
