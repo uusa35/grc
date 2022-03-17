@@ -188,12 +188,12 @@ export default React.memo(function({
 
                     {/* shop */}
                     <div className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent ">
-                        <div className={`grid-cols-1`}>
+                        <div className={`col-span-full lg:col-span-1`}>
                             <img
                                 src={`https://mgt-sa.com/wp-content/uploads/2022/03/275923707_155477013514832_2749966635233669569_n.jpeg`}
                                 className={`w-full h-auto object-cover rounded-lg`}/>
                         </div>
-                        <div className={`grid-cols-1 flex flex-col flex-grow`}>
+                        <div className={`col-span-full lg:col-span-1 flex flex-col flex-grow`}>
                             <div className={`justify-center p-3 pt-10`}>
                                 <h1 className={`text-gray-800 dark:text-white text-3xl pb-10`}>
                                     المتجر الإلكتروني
