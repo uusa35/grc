@@ -11,7 +11,7 @@ import route from "ziggy-js";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 export default function() {
-    const {trans, getThumb, getLocalized, mainColor , mainBgColor , btnClass , textColor} = useContext(AppContext);
+    const {trans, getThumb, getLocalized, mainColor , mainBgColor , btnClass , textColor, contentBgColor } = useContext(AppContext);
     const [code, setCode] = useState('');
     const {settings} = useContext(GlobalContext)
 
@@ -59,7 +59,7 @@ export default function() {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('joinus')}/>
-                <div className={`${mainBgColor} relative overflow-hidden`}>
+                <div className={`${contentBgColor} relative overflow-hidden min-h-screen`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">

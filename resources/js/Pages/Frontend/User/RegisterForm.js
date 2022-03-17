@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 
 
 export default function({countries}) {
-    const {trans, getThumb, getLocalized, classNames, mainColor , mainBgColor, textColor  , btnClass   } = useContext(AppContext);
+    const {trans, getThumb, getLocalized, classNames, mainColor , mainBgColor, textColor  , btnClass , contentBgColor } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const { settings } = globalContext;
     const { locale} = useSelector(state => state);
@@ -64,7 +64,7 @@ export default function({countries}) {
         <FrontendContainer>
             <FrontendContentContainer parentModuleName={'register'}>
                 <SubMetaElement title={trans('register')}/>
-                <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+                <div className={`${contentBgColor} min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8`}>
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
                         <img
                             className="mx-auto h-16 w-auto"

@@ -12,13 +12,13 @@ var __html = require('./import.html');
 var template = {__html: __html};
 
 export default function() {
-    const {trans} = useContext(AppContext)
+    const {trans, contentBgcolor } = useContext(AppContext)
 
     return (
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('import_from_egypt')}/>
-                <div className="bg-transparent relative overflow-hidden">
+                <div className={`${contentBgColor} relative overflow-hidden min-h-screen`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">

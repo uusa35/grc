@@ -12,7 +12,7 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer"; // Import css
 
 export default function SubscriptionsPage({elements}) {
-    const {trans, getLocalized, mainColor } = useContext(AppContext)
+    const {trans, getLocalized, mainColor, contentBgColor } = useContext(AppContext)
     const {settings, currency, cart, locale} = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -94,7 +94,7 @@ export default function SubscriptionsPage({elements}) {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('subscriptions')}/>
-                <div className="bg-transparent relative overflow-hidden">
+                <div className={`${contentBgColor} relative overflow-hidden min-h-screen`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">

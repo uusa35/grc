@@ -8,13 +8,13 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import { size } from 'lodash';
 
 export default function AboutusPage({settings}) {
-    const {trans, getLocalized, mainColor } = useContext(AppContext)
+    const {trans, getLocalized, mainColor, contentBgColor } = useContext(AppContext)
 
     return (
         <FrontendContainer>
             <FrontendContentContainer parentModuleName={'aboutus'}>
                 <SubMetaElement title={trans('aboutus')}/>
-                <div className="bg-transparent relative overflow-hidden">
+                <div className={`${contentBgColor} relative overflow-hidden min-h-screen`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">

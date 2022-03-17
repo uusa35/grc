@@ -6,13 +6,13 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function({settings}) {
-    const {trans, getLocalized} = useContext(AppContext)
+    const {trans, getLocalized, contentBgColor } = useContext(AppContext)
 
     return (
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('our_services')}/>
-                <div className="bg-transparent relative overflow-hidden">
+                <div className={`${contentBgColor} relative overflow-hidden min-h-screen`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">

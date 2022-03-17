@@ -15,7 +15,7 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import route from 'ziggy-js';
 
 export default function({elements, categories}) {
-    const {trans, mainColor} = useContext(AppContext);
+    const {trans, mainColor, contentBgColor} = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
     const {sort} = useSelector(state => state);
@@ -55,7 +55,7 @@ export default function({elements, categories}) {
                         mobileFiltersOpen={mobileFiltersOpen}
                     />
                 }
-                <main className="max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8">
+                <main className={`${contentBgColor} max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8`}>
                     <div
                         className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
                         <div className="flex flex-1 flex-col w-full sm:w-auto">

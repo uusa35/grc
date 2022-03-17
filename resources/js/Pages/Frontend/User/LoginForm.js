@@ -9,7 +9,7 @@ import {Inertia} from "@inertiajs/inertia";
 
 
 export default function() {
-    const {trans, getThumb, mainColor , mainBgColor , btnClass, textColor  } = useContext(AppContext);
+    const {trans, getThumb, mainColor , mainBgColor , btnClass, textColor  , contentBgColor } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const {settings} = globalContext;
     const {props} = usePage();
@@ -47,7 +47,7 @@ export default function() {
     return (
         <FrontendContainer>
             <FrontendContentContainer parentModuleName={'login'}>
-                <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+                <div className={`${contentBgColor} min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8`}>
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
                         <img
                             className="mx-auto h-16 w-auto"
