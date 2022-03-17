@@ -79,6 +79,33 @@ const products = [
         imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvr06wX0AUNZjL.jpeg',
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
+    {
+        id: 7,
+        name: 'حامل الأكواب',
+        href: '#',
+        price: '',
+        description: '',
+        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvtPBYXEAIcWpl.jpeg',
+        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+    },
+    {
+        id: 7,
+        name: 'جميع الأحجام والمقاسات المختلفة',
+        href: '#',
+        price: '',
+        description: '',
+        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvsSXEXoAYXT4g.jpeg',
+        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+    },
+    {
+        id: 7,
+        name: 'قفازات البلاستيك الآمنة',
+        href: '#',
+        price: '',
+        description: '',
+        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvsV2GWUAEEgxQ.jpeg',
+        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+    },
 ];
 
 const collections = [
