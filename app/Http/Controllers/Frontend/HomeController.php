@@ -35,7 +35,7 @@ class HomeController extends Controller
         $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->onHome()->authors()->notClients()->notAdmins()->orderBy('order', 'asc')->get());
         $categoriesWithProducts = CategoryExtraLightResource::collection(Category::active()->onlyParent()->onlyForProducts()->orderBy('order', 'asc')->limit(3)->with('products.product_attributes')->get());
         if ($settings->corporate_mode) {
-            return inertia('Frontend/Home/HomeCorporate', compact('slides'));
+            return inertia('Frontend/Home/HomeCorporate', compact('slides','newOnHomeProducts'));
         }
         return inertia('Frontend/Home/HomePage', compact('slides', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts', 'categoriesWithProducts'));
     }
