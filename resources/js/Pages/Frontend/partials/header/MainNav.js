@@ -1,4 +1,4 @@
-import {Fragment, useContext, useMemo, useState} from 'react'
+import {Fragment, useContext, useMemo, useState, useEffect} from 'react'
 import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
@@ -43,22 +43,35 @@ function MainNav() {
         headerColor,
         headerBgColor,
         mainBgColor,
+        currentHome
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const {auth, settings, currencies, categories, mgt} = globalContext;
     const {locale, currency, cart, parentModule, theme } = useSelector(state => state);
     const [open, setOpen] = useState(false)
+    const [offset, setOffset] = useState(0);
+    useEffect(() => {
+        const onScroll = () => setOffset(window.pageYOffset);
+        // clean up code
+        window.removeEventListener('scroll', onScroll);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
+
+    console.log(offset);
     const dispatch = useDispatch();
     const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
     const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
 
     const handleTheme = () => dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
 
+
+
     return (
-        <div className={`bg-white dark:bg-${headerBgColor}-800 rtl:text-right ltr:text-left md:fixed inset-0 h-32 z-40`}>
+        <div className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` : `bg-white dark:bg-${headerBgColor}-800`,  ` rtl:text-right ltr:text-left md:fixed inset-0 h-32 z-40`)}>
             {/* Top Nav*/}
             <div
-                className={` bg-${headerBgColor}-900 text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`}>
+                className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` :  `bg-${headerBgColor}-900` , ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
                 <div className="grid grid-cols-6 gap-x-5">
                     {
                         settings.enable_products && theme !== 'none' && <button className={`col-span-1`} onClick={() => handleTheme()}>
@@ -352,7 +365,7 @@ function MainNav() {
                                                 className={({selected}, headerColor) =>
                                                     classNames(
                                                         selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent`,
-                                                        `flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium`
+                                                        `flex-1 whitespace-nowrap py-2 px-1 border-b-2  font-medium`
                                                     )
                                                 }
                                             >
@@ -364,7 +377,7 @@ function MainNav() {
                                                 className={({selected}, headerColor) =>
                                                     classNames(
                                                         selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent test`,
-                                                        `flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium`
+                                                        `flex-1 whitespace-nowrap py-2 px-1 border-b-2  font-medium`
                                                     )
                                                 }
                                             >
@@ -376,7 +389,7 @@ function MainNav() {
                                                 className={({selected}, headerColor) =>
                                                     classNames(
                                                         selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent`,
-                                                        `flex-1 whitespace-nowrap py-4 px-1 border-b-2 text-base font-medium`
+                                                        `flex-1 whitespace-nowrap py-2 px-1 border-b-2  font-medium`
                                                     )
                                                 }
                                             >
@@ -522,7 +535,7 @@ function MainNav() {
             </Transition.Root>
 
             <header
-                className={`bg-white dark:bg-${headerBgColor}-700 text-${headerColor}-800 dark:text-${headerColor}-100 "relative border-b-2 border-gray-400 dark:border-${mainBgColor}-900 py-2 max-w-full`}>
+                className={classNames(settings.wide_screen  && offset < 200 && currentHome ? `bg-transparent border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 ` , ` text-${headerColor}-800 dark:text-${headerColor}-100 "relative py-2 max-w-full`)}>
                 <nav aria-label="Top" className="w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto">
                     <div className="h-20 flex items-center">
                         <button

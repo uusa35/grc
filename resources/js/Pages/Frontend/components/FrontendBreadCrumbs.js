@@ -21,7 +21,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
 
     return (
         <div
-            className="flex flex-1 flex-row justify-between items-center rounded-md shadow-sm p-5 w-auto">
+            className="flex flex-1 flex-row justify-between items-center rounded-md shadow-sm p-5 w-auto mt-3">
             <nav
                 className="flex flex-1" aria-label="Breadcrumb">
                 <ol className="flex flex-1 flex-row items-center space-x-4  max-w-max">

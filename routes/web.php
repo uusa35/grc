@@ -76,6 +76,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/home', [HomeController::class, 'index'])->name('index');
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/corporate', [HomeController::class, 'corporate'])->name('home.corporate');
     Route::get('/lang/{lang}', [HomeController::class, 'changeLang'])->name('change.lang');
     Route::resource('product', FrontendProductController::class)->only(['index', 'show']);
     Route::resource('book', FrontendBookController::class)->only(['index', 'show']);

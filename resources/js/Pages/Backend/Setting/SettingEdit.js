@@ -132,6 +132,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         enable_favorite : setting.enable_favorite,
         enable_faqs : setting.enable_faqs,
         enable_register : setting.enable_register,
+        corporate_mode : setting.corporate_mode,
     });
     const {props} = usePage();
     const {errors} = props;
@@ -1437,6 +1438,98 @@ accept="image/jpg, image/jpeg , image/png"
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_register &&
                                             <div className={`text-red-900`}>{errors.enable_register}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*corporate_mode*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('corporate_mode')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="corporate_mode"
+                                                name="corporate_mode"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.corporate_mode}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="corporate_mode"
+                                                   className="ml-3 block   text-gray-800">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="corporate_mode"
+                                                name="corporate_mode"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.corporate_mode}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="corporate_mode"
+                                                   className="ml-3 block   text-gray-800">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.corporate_mode &&
+                                            <div className={`text-red-900`}>{errors.corporate_mode}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+                                {/*wide_screen*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('wide_screen')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="wide_screen"
+                                                name="wide_screen"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.wide_screen}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="wide_screen"
+                                                   className="ml-3 block   text-gray-800">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="wide_screen"
+                                                name="wide_screen"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.wide_screen}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="wide_screen"
+                                                   className="ml-3 block   text-gray-800">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.wide_screen &&
+                                            <div className={`text-red-900`}>{errors.wide_screen}</div>}
                                         </p>
                                     </div>
                                 </fieldset>

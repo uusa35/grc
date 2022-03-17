@@ -252,44 +252,49 @@ export default function Footer() {
                     </div>
                     {/* newsletter */}
                     <div className=" p-4">
-                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase mb-4`}>{trans('payment_methods')}</h3>
-                        <div className="py-4 space-y-4 mt-4">
-                            <div className="flex flex-1 flex-row justify-between items-center gap-x-2">
-                                <div>
-                                    <img src={`${baseUrl}/images/paypal.jpeg`} className="w-auto h-auto"
-                                         width={60}
-                                         height={60}
-                                         alt={'paypal'}
-                                         loading={'lazy'}
-                                    />
+                        {
+                            settings.enable_payment_online ? <>
+                                <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase mb-4`}>{trans('payment_methods')}</h3>
+                                <div className="py-4 space-y-4 mt-4">
+                                    <div className="flex flex-1 flex-row justify-between items-center gap-x-2">
+                                        <div>
+                                            <img src={`${baseUrl}/images/paypal.jpeg`} className="w-auto h-auto"
+                                                 width={60}
+                                                 height={60}
+                                                 alt={'paypal'}
+                                                 loading={'lazy'}
+                                            />
+                                        </div>
+                                        <div>
+                                            <img src={`${baseUrl}/images/mastercard.jpeg`} className="w-auto h-auto"
+                                                 width={60}
+                                                 height={60}
+                                                 alt={'mastercard'}
+                                                 loading={'lazy'}
+                                            />
+                                        </div>
+                                        <div>
+                                            <img src={`${baseUrl}/images/visa.png`} className="w-auto h-auto"
+                                                 width={60}
+                                                 height={60}
+                                                 alt={'visa'}
+                                                 loading={'lazy'}
+                                            />
+                                        </div>
+                                        <div>
+                                            <img src={`${baseUrl}/images/${settings.payment_method}.png`}
+                                                 className="w-auto h-auto" style={{width: '150px'}}
+                                                 width={60}
+                                                 height={60}
+                                                 alt={settings.payment_method}
+                                                 loading={'lazy'}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <img src={`${baseUrl}/images/mastercard.jpeg`} className="w-auto h-auto"
-                                         width={60}
-                                         height={60}
-                                         alt={'mastercard'}
-                                         loading={'lazy'}
-                                    />
-                                </div>
-                                <div>
-                                    <img src={`${baseUrl}/images/visa.png`} className="w-auto h-auto"
-                                         width={60}
-                                         height={60}
-                                         alt={'visa'}
-                                         loading={'lazy'}
-                                    />
-                                </div>
-                                <div>
-                                    <img src={`${baseUrl}/images/${settings.payment_method}.png`}
-                                         className="w-auto h-auto" style={{width: '150px'}}
-                                         width={60}
-                                         height={60}
-                                         alt={settings.payment_method}
-                                         loading={'lazy'}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                            </> : null
+                        }
+
                         {settings.enable_newsletter ?
                             <>
                                 <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase`}>{trans('subscribe_to_our_news_letter')}</h3>

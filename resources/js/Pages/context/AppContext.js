@@ -72,6 +72,7 @@ const AppContextProvider = ({children}) => {
         getMedium: (element) => `${Ziggy().t.url}/storage/uploads/images/medium/${element}`,
         getLarge: (element) => `${Ziggy().t.url}/storage/uploads/images/large/${element}`,
         getFileUrl: (element) => `${Ziggy().t.url}/storage/uploads/files/${element}`,
+        currentHome : route().current('frontend.home') || route().current('frontend.home.corporate') || route().current('frontend.index'),
         baseUrl: `${Ziggy().t.url}/`,
         isAdminOrAbove: !isEmpty(auth) && (auth.role?.is_admin || auth.role?.is_super),
         isSuper: !isEmpty(auth) && auth.role?.is_super,

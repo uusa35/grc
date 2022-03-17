@@ -25,16 +25,19 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $slides = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
+        $settings = Setting::whereId(1)->with(['slides' => function ($q) {
             return $q->active()->orderby('order', 'asc');
-        }])->first()->slides);
+        }])->first();
+        $slides = SlideExtraLightResource::collection($settings->slides);
         $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->orderBy('order', 'asc')->get());
         $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->orderBy('order', 'asc')->get());
         $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('product_attributes')->orderBy('order', 'asc')->get());
         $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->onHome()->authors()->notClients()->notAdmins()->orderBy('order', 'asc')->get());
         $categoriesWithProducts = CategoryExtraLightResource::collection(Category::active()->onlyParent()->onlyForProducts()->orderBy('order', 'asc')->limit(3)->with('products.product_attributes')->get());
+        if ($settings->corporate_mode) {
+            return inertia('Frontend/Home/HomeCorporate', compact('slides'));
+        }
         return inertia('Frontend/Home/HomePage', compact('slides', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts', 'categoriesWithProducts'));
-//        return inertia('Frontend/Home/HomePage', compact('slides', 'newOnHomeProducts','categoriesWithProducts'));
     }
 
     public function changeLang($lang)
@@ -61,5 +64,13 @@ class HomeController extends Controller
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
+    }
+
+    public function corporate()
+    {
+        $slides = SlideExtraLightResource::collection(Setting::whereId(1)->with(['slides' => function ($q) {
+            return $q->active()->orderby('order', 'asc');
+        }])->first()->slides);
+        return inertia('Frontend/Home/HomeCorporate', compact('slides'));
     }
 }

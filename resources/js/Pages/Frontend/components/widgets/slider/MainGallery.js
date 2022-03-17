@@ -52,8 +52,8 @@ export default function({elements}) {
             showThumbnails={true}
             useBrowserFullscreen={true}
             useTranslate3D={true}
-            showIndex={true}
-            autoPlay={true}
+            showIndex={false}
+            autoPlay={false}
             showFullscreenButton={false}
             showPlayButton={false}
             thumbnailPosition={'bottom'}

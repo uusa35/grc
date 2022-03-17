@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" style="background-color : {{$page['props']['settings']->theme === 'dark' ? $page['props']['settings']->btn_bg_theme_color : 'white' }}">
+<html lang="{{ app()->getLocale() }}" style="background-color : {{$page['props']['settings']->theme === 'dark' ? $page['props']['settings']->btn_bg_theme_color : 'white' }}" class="scroll-smooth">
 <head>
     @if(request()->segment(1) !== 'backend')
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))

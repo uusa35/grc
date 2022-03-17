@@ -35,4 +35,4 @@ class ProductsImport implements ToCollection
             }
         }
     }
-}a
+}

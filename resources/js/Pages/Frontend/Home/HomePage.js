@@ -6,7 +6,6 @@ import {isMobile, isTablet} from 'react-device-detect';
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
 import {filter, first, isEmpty, map, shuffle} from 'lodash';
-import JoinusHomeSection from "./../partials/JoinusHomeSection";
 import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
 
@@ -42,11 +41,7 @@ export default React.memo(function ({
                 {slides && <MainGallery elements={slides}/>}
                 <div className={`bg-transparent space-y-10 py-14 w-full px-4 sm:py-14 sm:px-6 lg:px-8`}>
                     {
-                        settings.enable_joinus ? <JoinusHomeSection/> : null
-                    }
-                    {
                         settings.enable_books && <>
-
                             <ElementSlider
                                 elements={filter(categories, c => c.is_book && c.on_home)}
                                 slidesPerView={slideNumber}
