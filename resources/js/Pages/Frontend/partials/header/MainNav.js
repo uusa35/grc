@@ -630,7 +630,7 @@ function MainNav() {
                                 }
 
                                 {
-                                    settings.corporate_mode && <>
+                                    settings.corporate_mode ? <>
                                         <Link
                                             href={`#our_services`}
                                             className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
@@ -643,7 +643,7 @@ function MainNav() {
                                         >
                                             {capitalize(trans('our_shop'))}
                                         </a>
-                                    </>
+                                    </> : null
                                 }
 
                                 {
