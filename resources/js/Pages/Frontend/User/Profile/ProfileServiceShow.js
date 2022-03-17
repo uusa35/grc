@@ -34,7 +34,7 @@ import GlobalContext from "../../../context/GlobalContext";
 
 
 export default function({element}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor, mainBgColor } = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor, mainBgColor, contentBgcolor } = useContext(AppContext)
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
     const {cart} = useSelector(state => state);
@@ -66,7 +66,7 @@ export default function({element}) {
                             image={element.image}
             />
             <FrontendContentContainer childName={element[getLocalized()]}>
-                <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
+                <div className={`${contentBgColor} max-w-2xl mx-auto lg:max-w-none pt-10 h-full`}>
                     <div className="w-full h-auto overflow-hidden mb-10">
                         <EmbeddedHtml html={element.embedded}/>
                     </div>

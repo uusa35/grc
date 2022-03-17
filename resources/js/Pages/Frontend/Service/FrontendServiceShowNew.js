@@ -124,7 +124,7 @@
 //                             image={element.image}
 //             />
 //             <FrontendContentContainer childName={element[getLocalized()]}>
-//                 <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
+//                 <div className={`${contentBgColor} max-w-2xl mx-auto lg:max-w-none pt-10 h-full`}>
 //
 //                     <Paper>
 //                         <Scheduler

@@ -38,6 +38,9 @@ export default function({element, relatedElements, auth, settings}) {
         classNames,
         mainColor,
         mainBgColor,
+        contentBgColor,
+        textColor,
+        btnClass
     } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const [currentImages, setCurrentImages] = useState([]);
@@ -170,6 +173,10 @@ export default function({element, relatedElements, auth, settings}) {
         setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
 
+    console.log('dis', !element.is_available || finalPrice === 0 || selectedQty < 1)
+    console.log('av', element.is_available)
+    console.log('final', finalPrice)
+    console.log('qty', selectedQty)
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -177,7 +184,7 @@ export default function({element, relatedElements, auth, settings}) {
                             image={element.image}
             />
             <FrontendContentContainer childName={element[getLocalized()]}>
-                <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
+                <div className={`${contentBgColor} max-w-2xl mx-auto lg:max-w-none pt-10 h-full`}>
                     {/*<div className="w-full h-auto overflow-hidden mb-10">*/}
                     {/*    {element.free && <EmbeddedHtml html={element.embedded}/>}*/}
                     {/*</div>*/}
@@ -523,7 +530,7 @@ export default function({element, relatedElements, auth, settings}) {
                                             <button
                                                 disabled={!element.is_available || finalPrice === 0 || selectedQty < 1}
                                                 type="submit"
-                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30` : `bg-${mainColor}-600 dark:bg-${mainColor}-400 `, `flex flex-1 bg-${mainColor}-800 dark:bg-${mainColor}-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30` : `opacity-100 bg-${mainColor}-600 text-white dark:text-black dark:bg-${mainColor}-400`, `flex flex-1 bg-${mainColor}-800 dark:bg-${mainColor}-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium ${textColor} hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                             >
                                                 {trans('add_to_cart')}
                                             </button>

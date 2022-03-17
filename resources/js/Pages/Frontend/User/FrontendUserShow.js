@@ -19,7 +19,7 @@ import SocialIconShare from "../partials/SocialIconShare";
 
 
 export default function({element}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor } = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, mainColo, contentBgColorr } = useContext(AppContext)
     const [currentImages, setCurrentImages] = useState([]);
     const {settings} = useContext(GlobalContext);
 
@@ -38,7 +38,7 @@ export default function({element}) {
                             image={element.image}
             />
             <FrontendContentContainer childName={element[getLocalized()]} parentModuleName={'authors'}>
-                <div className="max-w-2xl mx-auto lg:max-w-none mt-10 h-full">
+                <div className={`${contentBgColor} max-w-2xl mx-auto lg:max-w-none pt-10 h-full`}>
                     {/* Product */}
                     <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 lg:px-4 lg:items-start">
                         {/* Image gallery */}
