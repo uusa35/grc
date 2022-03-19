@@ -172,7 +172,7 @@ export default function({element, relatedElements, auth, settings}) {
     const decreaseQty = () => {
         setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
-    
+
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}
@@ -305,8 +305,8 @@ export default function({element, relatedElements, auth, settings}) {
                                 />}
                                 {
                                     element.has_attributes && !isEmpty(filteredColorsGroup) ?
+                                        // multi attributes
                                         <div className="flex flex-col justify-between items-center gap-x-5">
-
                                             {/* Color picker */}
                                             <div className="flex-1 w-full">
                                                 <div
@@ -404,6 +404,7 @@ export default function({element, relatedElements, auth, settings}) {
 
                                         </div> :
                                         <>
+                                            {/* single  attribute */}
                                             {element.show_attribute &&
                                             <div className="flex flex-row justify-between items-center gap-x-5">
                                                 <div className="mt-2 lg:col-span-5">
@@ -474,10 +475,10 @@ export default function({element, relatedElements, auth, settings}) {
                                                                     className={({active, checked}) =>
                                                                         classNames(
                                                                             element.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
-                                                                            active ? 'ring-2 ring-offset-2 ring-gray-500' : '',
+                                                                            active ? `ring-2 ring-offset-2 ring-${mainColor}-200 dark:ring-${mainColor}-800` : '',
                                                                             checked
-                                                                                ? `bg-${mainBgColor}-600 dark:bg-${mainBgColor}-50 border-transparent text-white dark:text-${mainColor}-900 hover:bg-${mainBgColor}-800 dark:bg-${mainBgColor}-50`
-                                                                                : `bg-${mainBgColor}-50 dark:bg-${mainBgColor}-800 border-gray-200 text-gray-900 hover:bg-${mainBgColor}-400 dark:hover:bg-${mainBgColor}-600`,
+                                                                                ? `bg-${mainColor}-400 dark:bg-${mainColor}-400 border-transparent text-${mainColor}-800 dark:text-${mainColor}-50 hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`
+                                                                                : `${mainBgColor} border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-200 hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`,
                                                                             'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                         )
                                                                     }
