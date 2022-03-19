@@ -43,13 +43,13 @@ export default function Footer() {
                             height={96}
                             loading={'lazy'}
                         />
-                        <p className={`text-${footerColor}-800 dark:text-${footerColor}-800 capitalize text-base mt-5`}>
+                        <p className={`text-${footerColor}-800 dark:text-white capitalize text-base mt-5`}>
                             {settings[getLocalized('caption')]}
                         </p>
                     </div>
                     {/* support and polices */}
                     <div className=" p-4">
-                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase`}>{trans('pages')}</h3>
+                        <h3 className={`font-bold text-${footerColor}-800 dark:text-white tracking-wider uppercase`}>{trans('pages')}</h3>
                         <ul className="mt-4 space-y-4">
                             <li>
                                 <Link href={route('frontend.contactus')}
@@ -163,7 +163,7 @@ export default function Footer() {
                         {
                             (settings.apple || settings.android) &&
                             <>
-                                <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase mb-4`}>{trans('find_us_on_stores')}</h3>
+                                <h3 className={`font-bold text-${footerColor}-800 dark:text-white tracking-wider uppercase mb-4`}>{trans('find_us_on_stores')}</h3>
                                 <div className="  pt-0  mb-6 flex flex-col justify-start items-start gap-y-4 ">
                                     {
                                         settings.android && <a
@@ -210,7 +210,7 @@ export default function Footer() {
                                 </div>
                             </>
                         }
-                        <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase`}>{trans('contact_us_on')}</h3>
+                        <h3 className={`font-bold text-${footerColor}-800 dark:text-white tracking-wider uppercase`}>{trans('contact_us_on')}</h3>
                         <div className="grid grid-cols-5 mt-5">
                             {
                                 settings.facebook && <div><a target="_blank" href={settings.facebook}
@@ -254,7 +254,7 @@ export default function Footer() {
                     <div className=" p-4">
                         {
                             settings.enable_payment_online ? <>
-                                <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase mb-4`}>{trans('payment_methods')}</h3>
+                                <h3 className={`font-bold text-${footerColor}-800 dark:text-white tracking-wider uppercase mb-4`}>{trans('payment_methods')}</h3>
                                 <div className="py-4 space-y-4 mt-4">
                                     <div className="flex flex-1 flex-row justify-between items-center gap-x-2">
                                         <div>
@@ -297,7 +297,7 @@ export default function Footer() {
 
                         {settings.enable_newsletter ?
                             <>
-                                <h3 className={`font-bold text-${footerColor}-800 dark:text-${mainColor}-600 tracking-wider uppercase`}>{trans('subscribe_to_our_news_letter')}</h3>
+                                <h3 className={`font-bold text-${footerColor}-800 dark:text-white tracking-wider uppercase`}>{trans('subscribe_to_our_news_letter')}</h3>
                                 <form className="mt-4 sm:flex sm:max-w-md my-5 space-x-2" onSubmit={submit}>
                                     <label htmlFor="email" className="sr-only">
                                         {trans('email')}

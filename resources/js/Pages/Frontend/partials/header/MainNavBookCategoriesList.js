@@ -17,16 +17,16 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                         <Popover.Button
                             className={classNames(
                                 open
-                                    ? `text-${headerColor}-50 dark:text-${headerColor}-800`
-                                    : `text-${headerColor}-800 dark:text-${headerColor}-50`,
+                                    ? `text-${headerColor}-50 dark:text-black`
+                                    : `text-${headerColor}-800 dark:text-black`,
                                 `relative z-10 flex items-center transition-colors ease-out duration-200  -mb-px pt-px`
                             )}
                         >
                             <span
-                                className={`capitalize text-${headerColor}-600 dark:text-${headerColor}-50 font-bold hover:text-${headerColor}-800 dark:hover:text-${headerColor}-50`}>{trans(`${type}_categories`)}</span>
+                                className={`capitalize text-${headerColor}-600 dark:text-black font-bold hover:text-${headerColor}-800 dark:hover:text-${headerColor}-50`}>{trans(`${type}_categories`)}</span>
                             <ChevronDownIcon
                                 className={classNames(
-                                    open ? `text-${headerColor}-400` : `text-${headerColor}-600 dark:text-${headerColor}-50`,
+                                    open ? `text-${headerColor}-400` : `text-${headerColor}-600 dark:text-black`,
                                     `ml-2 w-5 group-hover:text-${headerColor}-400 dark:hover:text-${headerColor}-800`
                                 )}
                                 aria-hidden="true"
@@ -66,7 +66,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                         />
                                                     </div>
                                                     <Link href={route(`frontend.${type}.index`, {category_id: c.id})}
-                                                          className={`mt-6 block text-${headerColor}-600 dark:text-${headerColor}-50 font-bold hover:text-${headerColor}-400 dark:hover:text-${headerColor}-800 capitalize font-bold`}>
+                                                          className={`mt-6 block text-${headerColor}-600 dark:text-black font-bold hover:text-${headerColor}-400 dark:hover:text-${headerColor}-800 capitalize font-bold`}>
                                                             <span
                                                                 className="absolute z-10 inset-0"
                                                                 aria-hidden="true"/>
@@ -85,7 +85,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route(`frontend.${type}.index`, {category_id: parent.id})}
-                                                          className={`text-${headerColor}-600 dark:text-${headerColor}-50 hover:text-${headerColor}-400 dark:hover:text-${headerColor}-100 truncate capitalize font-bold`}>
+                                                          className={`text-${headerColor}-600 dark:text-black hover:text-${headerColor}-400 dark:hover:text-${headerColor}-100 truncate capitalize font-bold`}>
                                                         {parent[getLocalized()]}
                                                     </Link>
                                                     <ul
