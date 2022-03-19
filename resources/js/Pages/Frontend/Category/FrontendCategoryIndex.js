@@ -31,7 +31,7 @@ export default function FrontendCategoryIndex({elements}) {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('categories')}/>
-                <div className={` ${contentBgColor} max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8`}>
+                <div className={` ${contentBgColor} min-h-screen max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8`}>
                     <div className={`${contentBgColor} flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5`}>
                         <div className="flex flex-1 flex-col w-full sm:w-auto">
                             <h1 className={`text-4xl font-extrabold tracking-tight ${textColor} capitalize`}>{trans('categories')}</h1>
