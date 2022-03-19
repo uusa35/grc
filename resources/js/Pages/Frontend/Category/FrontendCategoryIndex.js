@@ -9,7 +9,7 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import route from 'ziggy-js';
 
 export default function FrontendCategoryIndex({elements}) {
-    const {trans , contentBgColor} = useContext(AppContext);
+    const {trans , contentBgColor, textColor , mainColor } = useContext(AppContext);
     const {params} = route();
     const [type, setType] = useState('book')
 
@@ -31,27 +31,34 @@ export default function FrontendCategoryIndex({elements}) {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans('categories')}/>
-                <FrontendPagination
-                    type={'category'}
-                    total={elements.meta.total}
-                    links={elements.meta.links}
-                    showSearch={false}
-                />
-                <div className={` ${contentBgColor} max-w-2xl mx-auto py-16 px-4 sm:py-14 sm:px-6 lg:max-w-7xl lg:px-8`}>
-                    <h2 className="sr-only">{trans('products')}</h2>
+                <div className={` ${contentBgColor} max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8`}>
+                    <div className={`${contentBgColor} flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5`}>
+                        <div className="flex flex-1 flex-col w-full sm:w-auto">
+                            <h1 className={`text-4xl font-extrabold tracking-tight ${textColor} capitalize`}>{trans('categories')}</h1>
+                            <p className={`mt-4 text-base text-${mainColor}-800 dark:text-${mainColor}-50 capitalize`}>
+                                {trans('list')} {trans('categories')}
+                            </p>
+                        </div>
+                        <FrontendPagination
+                            type={'category'}
+                            total={elements.meta.total}
+                            links={elements.meta.links}
+                            showSearch={false}
+                        />
+                    </div>
                     <div
-                        className="grid grid-cols-1 gap-y-14 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                        className="grid grid-cols-1 gap-y-14 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 py-6">
                         {map(elements.data, (element) => (
                             <CategoryWidget element={element} type={type} key={element.id}/>
                         ))}
                     </div>
+                    <FrontendPagination
+                        type={'category'}
+                        total={elements.meta.total}
+                        links={elements.meta.links}
+                        showSearch={false}
+                    />
                 </div>
-                <FrontendPagination
-                    type={'category'}
-                    total={elements.meta.total}
-                    links={elements.meta.links}
-                    showSearch={false}
-                />
             </FrontendContentContainer>
         </FrontendContainer>
     );

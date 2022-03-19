@@ -8,11 +8,11 @@ import {isEmpty, map} from 'lodash';
 
 export default function FrontendPagination({type, total, links, showSearch = false}) {
     const [search, setSearch] = useState('');
-    const {classNames, mainColor } = useContext(AppContext)
+    const {classNames, mainColor, contentBgColor  } = useContext(AppContext)
     return (
         <nav
-            className="grid grid-cols-1 sm:grid-cols-1 flex justify-between items-center  bg-transparent sm:px-0">
-            <div className="col-span-full sm:col-span-1 flex justify-end mt-5 sm:mt-0">
+            className={`grid grid-cols-1 sm:grid-cols-1 flex justify-between items-center  bg-transparent sm:px-0`}>
+            <div className={` ${contentBgColor} col-span-full sm:col-span-1 flex justify-end mt-5 sm:mt-0`}>
                 {
                     !isEmpty(links) && total > 0 && <div className="md:-mt-px md:flex">
                         {
