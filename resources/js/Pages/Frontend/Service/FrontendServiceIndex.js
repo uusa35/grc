@@ -10,7 +10,6 @@ import SearchIndexSideBarMobile from "../partials/SearchIndexSideBarMobile";
 import NormalServiceWidget from "../components/widgets/service/NormalServiceWidget";
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
-import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function ({elements, categories}) {

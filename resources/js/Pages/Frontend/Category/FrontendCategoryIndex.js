@@ -1,17 +1,15 @@
 import FrontendContainer from "../components/FrontendContainer";
 import React, {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
-import Pagination from "../../Backend/components/partials/Pagination";
 import CategoryWidget from "../components/widgets/category/CategoryWidget";
 import {map} from 'lodash';
-import MetaElement from "../../Backend/components/partials/MetaElement";
 import FrontendPagination from "../partials/FrontendPagination";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import route from 'ziggy-js';
 
 export default function FrontendCategoryIndex({elements}) {
-    const {trans} = useContext(AppContext);
+    const {trans , contentBgColor} = useContext(AppContext);
     const {params} = route();
     const [type, setType] = useState('book')
 
@@ -39,7 +37,7 @@ export default function FrontendCategoryIndex({elements}) {
                     links={elements.meta.links}
                     showSearch={false}
                 />
-                <div className="max-w-2xl mx-auto py-16 px-4 sm:py-14 sm:px-6 lg:max-w-7xl lg:px-8">
+                <div className={` ${contentBgColor} max-w-2xl mx-auto py-16 px-4 sm:py-14 sm:px-6 lg:max-w-7xl lg:px-8`}>
                     <h2 className="sr-only">{trans('products')}</h2>
                     <div
                         className="grid grid-cols-1 gap-y-14 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
