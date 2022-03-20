@@ -3,6 +3,7 @@ import {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ImageGallery from "react-image-gallery";
 import route from 'ziggy-js';
+import {motion} from 'framer-motion';
 
 export default function({elements}) {
     const {getLarge, getThumb, getLocalized} = useContext(AppContext)
@@ -29,7 +30,10 @@ export default function({elements}) {
                 // thumbnailLabel : img[getLocalized()],
                 description:
                     (img[getLocalized('description')] && size(img[getLocalized('description')]) > 5) || (img[getLocalized()] && size(img[getLocalized()]) > 5) ?
-                        <a
+                        <motion.a
+                            initial={{ x : -100 }}
+                            animate={{ x : 0 }}
+                            transtion={{ stiffness : 200 , delay : 0.5 }}
                             href={route().has(`frontend.${img.type}.show`) ? route(`frontend.${img.type}.show`, {id: img.slidable_id}) : (img.url ? img.url : '#')}
                             className="hidden sm:flex flex-1 flex-col space-y-4 truncate capitalize p-5 w-auto h-auto text-lg">
                             <h1 className={`text-lg`}>{img[getLocalized()]}</h1>
@@ -38,7 +42,7 @@ export default function({elements}) {
                                     {img[getLocalized('description')]}
                                 </p>
                             }
-                        </a> : null
+                        </motion.a> : null
             })
         })
         setCurrentImages(images);
