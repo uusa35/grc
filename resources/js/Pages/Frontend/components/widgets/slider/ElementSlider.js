@@ -62,7 +62,8 @@ function ElementSlider({
     const handlePrev = () => setCurrentRevValue('prev')
 
     return (
-        <div className={`w-full rounded-lg dark:shadow-lg p-6 lg:p-8`}>
+        <div
+            className={`w-full rounded-lg dark:shadow-lg p-6 lg:p-8`}>
             {!isEmpty(elements) && route().has(`frontend.${type}.index`) && (
                 <>
                     <Link
@@ -71,7 +72,7 @@ function ElementSlider({
                     >
                         <div className={classNames(isRTL ? `lg:pr-20` : `lg:pl-20`, ` flex flex-grow flex-col items-center justify-center`)}>
                             <motion.div
-                                initial={false}
+                                initial={true}
                                 whileHover={{scale: 1.08}}
                             >
                                 <div className="flex items-center justify-center">

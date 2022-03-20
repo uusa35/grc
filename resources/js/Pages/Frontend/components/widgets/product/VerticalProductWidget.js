@@ -22,6 +22,8 @@ const VerticalProductWidget  = ({element}) => {
                 <div className="w-1/2 rounded-t-sm overflow-hidden  sm:h-auto">
                     <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}
                                  rounded={true}/>
+                    <Link
+                        href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
                     <img
                         src={getThumb(element.image)}
                         alt={element[getLocalized()]}
@@ -30,6 +32,7 @@ const VerticalProductWidget  = ({element}) => {
                         height={360}
                         loading='lazy'
                     />
+                    </Link>
                 </div>
                 <div className="p-6 flex-1 flex flex-col justify-start items-start">
                     <ElementPrice price={element.price}

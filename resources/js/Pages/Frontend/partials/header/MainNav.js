@@ -72,7 +72,11 @@ function MainNav() {
             {/* Top Nav*/}
             <div
                 className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` : `bg-${headerBgColor}-900`, ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
-                <div className="grid grid-cols-6 gap-x-5">
+                <motion.div
+                    className="grid grid-cols-6 gap-x-5"
+                    initial={{ x : -100 }}
+                    animate={{ x : 0 }}
+                >
                     {
                         settings.enable_products && theme !== 'none' &&
                         <button className={`col-span-1`} onClick={() => handleTheme()}>
@@ -119,7 +123,7 @@ function MainNav() {
                             <span className="sr-only">{trans('whatsapp')}</span>
                         </a>
                     }
-                </div>
+                </motion.div>
                 <div className="flex flex-row justify-center items-center">
                     {
                         settings.enable_subscriptions ? <Link
@@ -880,7 +884,11 @@ function MainNav() {
 
 
                         {/* change lang */}
-                        <div className="ml-auto flex flex-1 justify-end items-center">
+                        <motion.div
+                            className="ml-auto flex flex-1 justify-end items-center"
+                            initial={{ x : -250 }}
+                            animate={{ x : 0 }}
+                        >
                             {/* Search */}
                             {settings.enable_books && <SearchField/>}
                             {settings.enable_products && <SearchField/>}
@@ -1076,7 +1084,7 @@ function MainNav() {
                                     </Link>
                                 </div>
                             }
-                        </div>
+                        </motion.div>
                     </div>
 
                 </nav>
