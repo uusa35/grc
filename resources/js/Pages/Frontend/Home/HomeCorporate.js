@@ -12,6 +12,7 @@ import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
+import {motion} from 'framer-motion';
 
 
 const services = [
@@ -126,6 +127,8 @@ const collections = [
     },
 ]
 
+
+
 export default React.memo(function({
                                        slides,
                                        newOnHomeProducts
@@ -152,7 +155,9 @@ export default React.memo(function({
 
 
                 {/*why wasta and daman */}
-                <div className="relative py-32 px-6 sm:py-40 sm:px-12 lg:px-16 rounded-lg mt-6">
+                <div
+                    className="relative py-32 px-6 sm:py-40 sm:px-12 lg:px-16 rounded-lg mt-6"
+                >
                     <div className="absolute inset-0 overflow-hidden rounded-lg">
                         <img
                             src="https://mgt-sa.com/wp-content/uploads/2022/03/258006283_131728082556392_8484546533647944764_n.jpeg"
@@ -183,11 +188,14 @@ export default React.memo(function({
                     </div>
                 </div>
 
-                <div className={`xl:w-4/5 2xl:w-3/5 m-auto space-y-20 mt-10 rounded-lg`}>
-
-
+                <div
+                    className={`xl:w-4/5 2xl:w-3/5 m-auto space-y-20 mt-10 rounded-lg`}>
                     {/* shop */}
-                    <div className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent ">
+                    <motion.div
+                        className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent "
+                        initial={{ x : -250}}
+                        animate={{ x : 0 }}
+                    >
                         <div className={`col-span-full lg:col-span-1`}>
                             <img
                                 src={`https://mgt-sa.com/wp-content/uploads/2022/03/275923707_155477013514832_2749966635233669569_n.jpeg`}
@@ -213,7 +221,7 @@ export default React.memo(function({
                                 </Link>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
 
                     {/* our services */}
@@ -233,7 +241,16 @@ export default React.memo(function({
                                 <div
                                     className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
                                     {map(services, (service) => (
-                                        <div key={service.id}
+                                        <motion.div
+                                            initial={false}
+                                            whileHover={{
+                                                scale: 0.95, transition: {
+                                                    yoyo: 100,
+                                                    duration: 0.8
+                                                }
+                                            }}
+                                            key={service.id}
+
                                              className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                             <div className="flex-shrink-0">
                                                 <img className="h-96 w-full object-cover" src={service.imageUrl}
@@ -248,7 +265,7 @@ export default React.memo(function({
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </motion.div>
                                     ))}
                                 </div>
                             </div>
@@ -329,12 +346,20 @@ export default React.memo(function({
                             <div
                                 className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
                                 {map(products, (p) => (
-                                    <div key={p.id}
+                                    <motion.div
+                                        initial={false}
+                                        whileHover={{
+                                            scale: 0.95, transition: {
+                                                yoyo: 100,
+                                                duration: 0.8
+                                            }
+                                        }}
+                                        key={p.id}
                                          className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                         <div className="flex-shrink-0">
                                             <img className="h-96 w-full object-cover" src={p.imageUrl} alt=""/>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
@@ -394,7 +419,14 @@ export default React.memo(function({
                             <div
                                 className="max-w-md mx-auto grid grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:px-6 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:px-8 lg:gap-x-8">
                                 {collections.map((collection) => (
-                                    <div
+                                    <motion.div
+                                        initial={false}
+                                        whileHover={{
+                                            scale: 0.95, transition: {
+                                                yoyo: 100,
+                                                duration: 0.8
+                                            }
+                                        }}
                                         key={collection.name}
                                         className="group relative h-96 bg-white rounded-lg shadow-xl sm:h-auto sm:aspect-w-4 sm:aspect-h-5"
                                     >
@@ -426,7 +458,7 @@ export default React.memo(function({
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         </section>

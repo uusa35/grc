@@ -74,6 +74,7 @@ function ElementSlider({
                             <motion.div
                                 initial={true}
                                 whileHover={{scale: 1.08}}
+                                transtion={{ yoyo : 10 , duration : 0.6 }}
                             >
                                 <div className="flex items-center justify-center">
                                     <span

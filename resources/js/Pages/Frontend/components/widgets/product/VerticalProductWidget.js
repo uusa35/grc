@@ -4,34 +4,49 @@ import React, {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
-import {truncate, size } from "lodash";
+import {truncate, size} from "lodash";
 import {motion} from "framer-motion"
 import {useSelector} from "react-redux";
 
-const VerticalProductWidget  = ({element}) => {
-    const {getLocalized, getThumb, mainBgColor, mainColor, trans, classNames, textColor, btnClass  } = useContext(AppContext);
+const VerticalProductWidget = ({element}) => {
+    const {
+        getLocalized,
+        getThumb,
+        mainBgColor,
+        mainColor,
+        trans,
+        classNames,
+        textColor,
+        btnClass
+    } = useContext(AppContext);
     const {locale} = useSelector(state => state);
 
     return (
         <motion.div
             initial={false}
-            whileHover={{scale: 0.95}}
+            whileHover={{
+                scale: 0.95, transition: {
+                    yoyo: 100,
+                    duration: 0.8
+                }
+            }}
         >
-            <div className={`bg-transparent flex  dark:shadow-md border border-${mainColor}-100 dark:border-${mainBgColor}-400 dark:border-opacity-20 rounded-md`}>
+            <div
+                className={`bg-transparent flex  dark:shadow-md border border-${mainColor}-100 dark:border-${mainBgColor}-400 dark:border-opacity-20 rounded-md`}>
 
                 <div className="w-1/2 rounded-t-sm overflow-hidden  sm:h-auto">
                     <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}
                                  rounded={true}/>
                     <Link
                         href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
-                    <img
-                        src={getThumb(element.image)}
-                        alt={element[getLocalized()]}
-                        className={classNames(locale.isRTL ? `rounded-r-md` : `rounded-l-md`, `w-full object-cover object-bottom`)}
-                        width={480}
-                        height={360}
-                        loading='lazy'
-                    />
+                        <img
+                            src={getThumb(element.image)}
+                            alt={element[getLocalized()]}
+                            className={classNames(locale.isRTL ? `rounded-r-md` : `rounded-l-md`, `w-full object-cover object-bottom`)}
+                            width={480}
+                            height={360}
+                            loading='lazy'
+                        />
                     </Link>
                 </div>
                 <div className="p-6 flex-1 flex flex-col justify-start items-start">
@@ -70,7 +85,8 @@ const VerticalProductWidget  = ({element}) => {
                     >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>
                             <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 hover:animate-bounce`} fill={`none`}
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 hover:animate-bounce`}
+                                     fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>

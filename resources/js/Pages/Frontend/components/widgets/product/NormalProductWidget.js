@@ -12,7 +12,12 @@ const NormalProductWidget = ({element}) => {
     return (
         <motion.div
             initial={false}
-            whileHover={{scale: 0.95}}
+            whileHover={{
+                scale: 0.95, transition: {
+                    yoyo: 100,
+                    duration: 0.8
+                }
+            }}
         >
             <div
                 className={`block relative overflow-hidden p-0 md:p-4 dark:shadow-md border border-${mainColor}-100 dark:border-${mainBgColor}-400 ${mainBgColor}  dark:border-opacity-20 mb-5 rounded-sm hover:opacity-95 hover:shadow-lg`}>

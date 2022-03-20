@@ -79,6 +79,7 @@ const AppContextProvider = ({children}) => {
         isAuthor: !isEmpty(auth) && auth.role?.is_author,
         guest: isEmpty(auth),
         currentFont : locale.isRTL ? 'font-tajwal-medium' : 'font-tajwal-medium',
+        // currentFont : locale.isRTL ? 'font-bein-bold' : 'font-bein-bold',
         enFont : 'font-tajwal-medium',
         textColor : `text-${settings.main_theme_color}-900 dark:text-white`,
         mainBgColor: `bg-transparent dark:bg-${settings.main_theme_bg_color}-900`,

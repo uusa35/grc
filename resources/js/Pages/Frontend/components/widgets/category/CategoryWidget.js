@@ -9,7 +9,12 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
     return (
         <motion.div
             initial={false}
-            whileHover={{ scale: 0.9 }}
+            whileHover={{
+                scale: 0.95, transition: {
+                    yoyo: 100,
+                    duration: 0.8
+                }
+            }}
         >
         <Link
             href={route(`frontend.${type}.index`, {category_id: element.id})}

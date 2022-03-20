@@ -5,7 +5,6 @@ import {XIcon} from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 
 export default function({showModal = false, setShowModal, title = '', message = '', image = ''}) {
-    const { trans } = useContext(AppContext);
     return (
         <Transition.Root show={showModal} as={Fragment}>
             <Dialog as="div" className="font-gesst-medium fixed z-10 inset-0 overflow-y-auto" onClose={setShowModal}>

@@ -77,7 +77,7 @@
 
     /*@font-face {*/
     /*    font-family: 'cairo';*/
-    /*    src: url('../../public/fonts/cairo.ttf') format('truetype');*/
+    /*    src: url('../../public/fonts/Cairo_Semi_Bold.ttf') format('truetype');*/
     /*    font-weight: normal;*/
     /*    font-style: normal;*/
     /*}*/
@@ -104,14 +104,14 @@
     /*    font-style: normal;*/
     /*}*/
 
-    @font-face {
-        font-family: 'GESSTwoMedium';
-        src: url('../../public/fonts/GESSTwoMedium.eot') format('truetype');
-        src: url('../../public/fonts/GESSTwoMedium.otf') format('truetype');
-        font-weight: bold;
-        font-style: normal;
-        font-display: swap;
-    }
+    /*@font-face {*/
+    /*    font-family: 'GESSTwoMedium';*/
+    /*    src: url('../../public/fonts/GESSTwoMedium.eot') format('truetype');*/
+    /*    src: url('../../public/fonts/GESSTwoMedium.otf') format('truetype');*/
+    /*    font-weight: bold;*/
+    /*    font-style: normal;*/
+    /*    font-display: swap;*/
+    /*}*/
 
     @font-face {
         font-family: 'Tajawal-Medium';
@@ -142,9 +142,9 @@
 /*    font-family: 'Almarai-Bold', 'sans-serif';*/
 /*}*/
 
-/*.font-bein-bold {*/
-/*    font-family: 'bein-ar-black_0', 'sans-serif';*/
-/*}*/
+.font-bein-bold {
+    font-family: 'bein-ar-black_0', 'sans-serif';
+}
 
 /*.font-bein {*/
 /*    font-family: 'bein-ar-normal_0', 'sans-serif';*/
@@ -157,7 +157,6 @@
 /*.font-tajwal-light {*/
 /*    font-family: 'Tajawal-Medium', 'sans-serif';*/
 /*}*/
-
 
 
 /*.font-droid {*/
@@ -176,13 +175,13 @@
 /*    font-family: 'HelveticaNeueME_2', 'sans-serif';*/
 /*}*/
 
-.font-gesst {
-    font-family: 'GESSTwoBold', 'sans-serif';
-}
+/*.font-gesst {*/
+/*    font-family: 'GESSTwoBold', 'sans-serif';*/
+/*}*/
 
-.font-gesst-medium {
-    font-family: 'GESSTwoMedium', 'sans-serif';
-}
+/*.font-gesst-medium {*/
+/*    font-family: 'GESSTwoMedium', 'sans-serif';*/
+/*}*/
 
 .font-tajwal-medium {
     font-family: 'Tajawal-Medium', 'sans-serif';

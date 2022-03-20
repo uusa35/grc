@@ -74,8 +74,8 @@ function MainNav() {
                 className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` : `bg-${headerBgColor}-900`, ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
                 <motion.div
                     className="grid grid-cols-6 gap-x-5"
-                    initial={{ x : -100 }}
-                    animate={{ x : 0 }}
+                    initial={{x: -100}}
+                    animate={{x: 0}}
                 >
                     {
                         settings.enable_products && theme !== 'none' &&
@@ -555,22 +555,21 @@ function MainNav() {
 
                         {/* Logo */}
                         <motion.div
-                            whileHover={{scale: 0.9}}
+                            className=" sm:flex lg:ml-0 rtl:ml-5 ltr:mr-5 w-24 h-auto"
                         >
-                            <div className=" sm:flex lg:ml-0 rtl:ml-5 ltr:mr-5 w-24 h-auto ">
-                                <Link href={route('frontend.home')}>
-                                    {/*<span className="sr-only">{settings[getLocalized()]}</span>*/}
-                                    <img
-                                        className="w-24 h-auto"
-                                        src={getThumb(settings.image)}
-                                        alt={settings[getLocalized()]}
-                                        width={96}
-                                        height={96}
-                                        loading={'lazy'}
-                                    />
-                                </Link>
-                            </div>
+                            <Link href={route('frontend.home')}>
+                                {/*<span className="sr-only">{settings[getLocalized()]}</span>*/}
+                                <img
+                                    className="w-24 h-auto"
+                                    src={getThumb(settings.image)}
+                                    alt={settings[getLocalized()]}
+                                    width={96}
+                                    height={96}
+                                    loading={'lazy'}
+                                />
+                            </Link>
                         </motion.div>
+
 
                         {/* Categories with sub */}
                         <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
@@ -886,8 +885,8 @@ function MainNav() {
                         {/* change lang */}
                         <motion.div
                             className="ml-auto flex flex-1 justify-end items-center"
-                            initial={{ x : -250 }}
-                            animate={{ x : 0 }}
+                            initial={{x: -250}}
+                            animate={{x: 0}}
                         >
                             {/* Search */}
                             {settings.enable_books && <SearchField/>}
