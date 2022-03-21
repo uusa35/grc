@@ -24,7 +24,7 @@ const services = [
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
         imageUrl:
-            'https://mgt-sa.com/wp-content/uploads/2022/03/271225116_141735514888982_6489732401877590299_n.jpeg',
+            'https://wp.mgt-sa.com/wp-content/uploads/2022/03/271225116_141735514888982_6489732401877590299_n.jpeg',
         preview:
             'عن طريق شركائنا في مُختلف دول العالم، يُمكنك الآن الاستفادة من خُصومات شركة وساطة وضمان السعودية على جميع أشكال ومقاسات مُنتجات التعبئة والتغليف بجودة عالية مطابقة للمواصفات العالمية',
     },
@@ -35,7 +35,7 @@ const services = [
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
         imageUrl:
-            'https://mgt-sa.com/wp-content/uploads/2022/03/275383085_153690203693513_8167701926030083832_n.jpeg',
+            'https://wp.mgt-sa.com/wp-content/uploads/2022/03/275383085_153690203693513_8167701926030083832_n.jpeg',
         preview:
             'نُمكّن منتجات التعبئة والتغليف الخاصة بشركتك من الوصول الى شريحة أكبر من العملاء المحتملين في مُختلف المناطق داخل المملكة العربية السعودية مقابل أسعار رمزية'
     },
@@ -46,7 +46,7 @@ const services = [
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
         imageUrl:
-            'https://mgt-sa.com/wp-content/uploads/2022/03/273568089_148496084212925_8466813059061908296_n.jpeg',
+            'https://wp.mgt-sa.com/wp-content/uploads/2022/03/273568089_148496084212925_8466813059061908296_n.jpeg',
         preview:
             'تعرّف على منتجات شركة وساطة وضمان صديقة البيئة، المصنوعة من أجود خامات قصب السُكر القابلة للتحلل، حل بيئي واقتصادي جديد لمنتجات التعبئة والتغليف الغذائية غير ضار تمامًا بالبيئة وصحّة الانسان'
     }
@@ -60,7 +60,7 @@ const products = [
         href: '#',
         price: '',
         description: '',
-        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/260406114_132949502434250_208895838802599038_n.jpeg',
+        imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/260406114_132949502434250_208895838802599038_n.jpeg',
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
@@ -69,7 +69,7 @@ const products = [
         href: '#',
         price: '',
         description: '',
-        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvr_SUXMAQnv6k.jpeg',
+        imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvr_SUXMAQnv6k.jpeg',
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
@@ -78,7 +78,7 @@ const products = [
         href: '#',
         price: '',
         description: '',
-        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvr06wX0AUNZjL.jpeg',
+        imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvr06wX0AUNZjL.jpeg',
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
@@ -87,7 +87,7 @@ const products = [
         href: '#',
         price: '',
         description: '',
-        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvtPBYXEAIcWpl.jpeg',
+        imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvtPBYXEAIcWpl.jpeg',
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
@@ -96,7 +96,7 @@ const products = [
         href: '#',
         price: '',
         description: '',
-        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvsSXEXoAYXT4g.jpeg',
+        imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvsSXEXoAYXT4g.jpeg',
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
@@ -105,7 +105,7 @@ const products = [
         href: '#',
         price: '',
         description: '',
-        imageUrl: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvsV2GWUAEEgxQ.jpeg',
+        imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvsV2GWUAEEgxQ.jpeg',
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
 ];
@@ -114,17 +114,17 @@ const collections = [
     {
         name: "تخزن بآمان",
         href: '#',
-        imageSrc: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvr5J6XsAQ9ISU.jpeg',
+        imageSrc: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvr5J6XsAQ9ISU.jpeg',
     },
     {
         name: "تغلف بعناية",
         href: '#',
-        imageSrc: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvrszGXIA4A2QR.jpeg',
+        imageSrc: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvrszGXIA4A2QR.jpeg',
     },
     {
         name: 'تنقل بسرعة',
         href: '#',
-        imageSrc: 'https://mgt-sa.com/wp-content/uploads/2022/03/FNvshzbWQAEARmq.jpeg',
+        imageSrc: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvshzbWQAEARmq.jpeg',
     },
 ]
 
@@ -182,7 +182,7 @@ export default React.memo(function({
                 >
                     <div className="absolute inset-0 overflow-hidden rounded-lg">
                         <img
-                            src="https://mgt-sa.com/wp-content/uploads/2022/03/258006283_131728082556392_8484546533647944764_n.jpeg"
+                            src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/258006283_131728082556392_8484546533647944764_n.jpeg"
                             alt=""
                             className="w-full h-full object-center object-cover rounded-lg"
                         />
@@ -224,7 +224,7 @@ export default React.memo(function({
                     >
                         <div className={`col-span-full lg:col-span-1`}>
                             <img
-                                src={`https://mgt-sa.com/wp-content/uploads/2022/03/275923707_155477013514832_2749966635233669569_n.jpeg`}
+                                src={`https://wp.mgt-sa.com/wp-content/uploads/2022/03/275923707_155477013514832_2749966635233669569_n.jpeg`}
                                 className={`w-full h-auto object-cover rounded-lg`}/>
                         </div>
                         <div className={`col-span-full lg:col-span-1 flex flex-col flex-grow`}>
@@ -309,7 +309,7 @@ export default React.memo(function({
                                         className="aspect-w-14 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                                         <img
                                             className="object-cover lg:h-full lg:w-full"
-                                            src="https://mgt-sa.com/wp-content/uploads/2022/03/269779541_139101728485694_7997432037786870327_n-1.jpeg"
+                                            src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/269779541_139101728485694_7997432037786870327_n-1.jpeg"
                                             alt=""
                                         />
                                     </div>
@@ -398,7 +398,7 @@ export default React.memo(function({
                             <div className="flex-1 relative w-full bg-gray-800">
                                 <div className="absolute inset-0 overflow-hidden">
                                     <img
-                                        src="https://mgt-sa.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-12-at-10.32.40-PM2.jpeg"
+                                        src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-12-at-10.32.40-PM2.jpeg"
                                         alt=""
                                         className="w-full h-full object-center object-cover"
                                     />
@@ -414,7 +414,7 @@ export default React.memo(function({
                                 <div className="flex-1 relative w-full bg-gray-800">
                                     <div className="absolute inset-0 overflow-hidden">
                                         <img
-                                            src="https://mgt-sa.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-12-at-10.32.40-PM2.jpeg"
+                                            src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-12-at-10.32.40-PM2.jpeg"
                                             alt=""
                                             className="w-full h-full object-center object-cover"
                                         />
