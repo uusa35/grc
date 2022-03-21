@@ -19,7 +19,7 @@ import SocialIconShare from "../partials/SocialIconShare";
 
 
 export default function({element}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, mainColo, contentBgColorr } = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor, contentBgColor } = useContext(AppContext)
     const [currentImages, setCurrentImages] = useState([]);
     const {settings} = useContext(GlobalContext);
 

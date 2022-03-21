@@ -38,6 +38,7 @@ export default function({element, relatedElements, auth}) {
         mainColor,
         mainBgColor,
         contentBgColor,
+        btnClass,
         textColor
     } = useContext(AppContext)
     const {settings} = useContext(GlobalContext);
@@ -166,13 +167,13 @@ export default function({element, relatedElements, auth}) {
                                                     !isNull(element.file) && getFileType(element.file) === 'pdf' ? <a
                                                         target="_blank"
                                                         href={route('frontend.free.book', element.id)}
-                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${mainColor}-600 dark:bg-${mainColor}-400 `, `flex flex-1 bg-${mainColor}-600 dark:bg-${mainColor}-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `${btnClass}`, `flex flex-1 ${btnClass} border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                     >
                                                         {trans('view')}
                                                     </a> : <a
                                                         href={getFileUrl(element.file)}
                                                         download={true}
-                                                        className={classNames(!element.is_available ? `opacity-30` : `bg-${mainColor}-600 dark:bg-${mainColor}-400 `, `flex flex-1 bg-${mainColor}-600 dark:bg-${mainColor}-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-${mainBgColor}-200 dark:text-${mainBgColor}-100 hover:bg-${mainColor}-600  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                                        className={classNames(!element.is_available ? `opacity-30` : `${btnClass} `, `flex flex-1 ${btnClass} border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                     >{trans('download')}</a>
                                                 }
                                             </>
@@ -180,7 +181,7 @@ export default function({element, relatedElements, auth}) {
                                                 <button
                                                     disabled={!element.is_available}
                                                     type="submit"
-                                                    className={classNames(!element.is_available ? `opacity-30` : `opacity-100 bg-${mainColor}-600 text-white dark:text-black dark:bg-${mainColor}-400`, `flex flex-1 bg-${mainColor}-800 dark:bg-${mainColor}-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium ${textColor} hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                                    className={classNames(!element.is_available ? `opacity-30` : `opacity-100 ${btnClass}`, `${btnClass} flex flex-1  border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                                 >
                                                     {trans('add_to_cart')}
                                                 </button>
