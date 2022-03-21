@@ -12,7 +12,8 @@ import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
-import {motion} from 'framer-motion';
+import { useAnimation, motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 
 const services = [
@@ -127,7 +128,10 @@ const collections = [
     },
 ]
 
-
+const currentVariants = {
+    visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
+    hidden: { opacity: 0.4, scale: 0.9 }
+};
 
 export default React.memo(function({
                                        slides,
@@ -136,6 +140,21 @@ export default React.memo(function({
     const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 4))
     const {categories, settings} = useContext(GlobalContext);
     const {trans, getLocalized, getLarge} = useContext(AppContext)
+    const controls = useAnimation();
+    const [elementOne, elementOneInView] = useInView();
+    const [elementTwo, elementTwoInView] = useInView();
+
+    useEffect(() => {
+        if (elementOneInView) {
+            controls.start("visible");
+        }
+    }, [controls, elementOneInView]);
+
+    useEffect(() => {
+        if (elementTwoInView) {
+            controls.start("visible");
+        }
+    }, [controls, elementTwoInView]);
 
     useEffect(() => {
         function handleResize() {
@@ -153,9 +172,12 @@ export default React.memo(function({
             <FrontendContentContainer showBreadCrumbs={false}>
                 {slides && <MainGallery elements={slides}/>}
 
-
                 {/*why wasta and daman */}
-                <div
+                <motion.div
+                    ref={elementOne}
+                    variants={currentVariants}
+                    animate={controls}
+                    initial="hidden"
                     className="relative py-32 px-6 sm:py-40 sm:px-12 lg:px-16 rounded-lg mt-6"
                 >
                     <div className="absolute inset-0 overflow-hidden rounded-lg">
@@ -186,15 +208,19 @@ export default React.memo(function({
                             {trans('joinus')}
                         </Link>
                     </div>
-                </div>
+                </motion.div>
 
                 <div
                     className={`xl:w-4/5 2xl:w-3/5 m-auto space-y-20 mt-10 rounded-lg`}>
                     {/* shop */}
                     <motion.div
                         className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent "
-                        initial={{ x : -250}}
-                        animate={{ x : 0 }}
+                        // initial={{ x : -250}}
+                        // animate={{ x : 0 }}
+                        ref={elementTwo}
+                        variants={currentVariants}
+                        animate={controls}
+                        initial="hidden"
                     >
                         <div className={`col-span-full lg:col-span-1`}>
                             <img

@@ -9,6 +9,7 @@ import {ChevronDownIcon} from "@heroicons/react/solid";
 function MainNavBookCategoriesList({categories, type = 'book'}) {
     const {classNames, trans, getThumb, getLocalized, headerColor, headerBgColor} = useContext(AppContext)
 
+
     return (
         <Popover className="flex">
             {({open}) => (

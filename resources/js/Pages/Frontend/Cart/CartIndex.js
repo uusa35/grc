@@ -18,7 +18,7 @@ import OrderSummary from "./OrderSummary";
 
 export default function({coupon = {}}) {
     const {cart, locale} = useSelector(state => state);
-    const {trans, classNames, mainColor , mainBgColor } = useContext(AppContext);
+    const {trans, classNames, mainColor , mainBgColor, contentBgColor, btnClass   } = useContext(AppContext);
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
@@ -47,7 +47,7 @@ export default function({coupon = {}}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <div className="w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 ">
+                <div className={`${contentBgColor} w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 `}>
                     <CartStepper/>
                     <h1 className={`text-3xl font-bold py-5 text-${mainColor}-900 dark:text-${mainColor}-50`}>{trans('cart')}</h1>
                     <CartIndexOrderSummary/>

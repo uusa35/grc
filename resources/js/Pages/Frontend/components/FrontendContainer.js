@@ -29,7 +29,7 @@ const FrontendContainer = ({children}) => {
             <main
                 className={` ${mainBgColor} flex-1 relative z-0 focus:outline-none max-w-full font-extrabold capitalize`}>
                 <MainNav/>
-                <div className={classNames(settings.wide_screen && currentHome ? `` : `pt-32`, `min-h-screen ${mainBgColor} ${textColor}`)}>
+                <div className={classNames(settings.wide_screen && currentHome ? `` : `lg:pt-32`, `min-h-screen ${mainBgColor} ${textColor}`)}>
                     <SystemMessage/>
                         {children}
                 </div>

@@ -12,7 +12,7 @@ import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 
 export default function({countries, auth}) {
-    const {trans, getLocalized, classNames, mainColor, mainBgColor} = useContext(AppContext);
+    const {trans, getLocalized, classNames, mainColor, mainBgColor, contentBgColor, textColor, btnClass  } = useContext(AppContext);
     const {locale} = useSelector(state => state);
     const [governates, setGovernates] = useState([])
     const [areas, setAreas] = useState([])
@@ -95,7 +95,7 @@ export default function({countries, auth}) {
             <FrontendContentContainer>
 
                 <div
-                    className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-50`}>
+                    className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 ${textColor} ${contentBgColor}`}>
                     <CartStepper activeStep={2}/>
                     <h1 className="text-3xl font-extrabold py-5 ">{trans('information')}</h1>
 
@@ -399,7 +399,7 @@ export default function({countries, auth}) {
                             <div className="flex flex-col sm:flex-row flex-wrap space-y-5 sm:space-y-0">
                                 <button
                                     type="submit"
-                                    className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 capitalize mx-10 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
+                                    className={`${btnClass} capitalize mx-10 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                 >
                                     {trans('save')} {trans('information')}
                                 </button>

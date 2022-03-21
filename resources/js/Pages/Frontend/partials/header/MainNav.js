@@ -68,10 +68,10 @@ function MainNav() {
 
     return (
         <div
-            className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` : `bg-white dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
+            className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-white lg:bg-transparent` : `bg-white :dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
             {/* Top Nav*/}
             <div
-                className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent` : `bg-${headerBgColor}-900`, ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
+                className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-white lg:bg-transparent` : `bg-${headerBgColor}-900`, ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
                 <motion.div
                     className="grid grid-cols-6 gap-x-5"
                     initial={{x: -100}}

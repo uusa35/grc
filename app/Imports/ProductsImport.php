@@ -24,12 +24,13 @@ class ProductsImport implements ToCollection
                     'name_ar' => $row[1],
                     'name_en' => $row[2],
                     'price' => (float) $row[3],
-                    'sale_price' => (float) $row[4],
-                    'on_sale' => (boolean) $row[5],
+                    'sale_price' => (float) $row[3],
+                    'description_ar' => (float) $row[4],
+                    'description_en' => (float) $row[5],
                     'user_id' => (integer) $this->userId,
                     'image' => 'product.png',
                     'sku' => rand(111,999),
-                    'qty' => rand(1,9),
+                    'qty' => [6 ],
                     'weight' => '0.1',
                 ]);
             }
