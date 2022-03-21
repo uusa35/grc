@@ -34,6 +34,20 @@ const pages = [
     // {name: 'categories', url: route('frontend.category.index')},
 ];
 
+const currentVariants = {
+    hidden : {
+        opacity : 0
+    },
+    visible : {
+        opacity  : 1 ,
+        // transition : { delay : 0.2 },
+    },
+    exit : {
+        x : '-100vw',
+        // transition : { ease : 'easeInOut', delay : 0.5 }
+    }
+};
+
 function MainNav() {
     const {
         classNames, getThumb, getLocalized, trans,
@@ -72,10 +86,8 @@ function MainNav() {
             {/* Top Nav*/}
             <div
                 className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-white lg:bg-transparent` : `bg-${headerBgColor}-900`, ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
-                <motion.div
+                <div
                     className="grid grid-cols-6 gap-x-5"
-                    initial={{x: -100}}
-                    animate={{x: 0}}
                 >
                     {
                         settings.enable_products && theme !== 'none' &&
@@ -123,7 +135,7 @@ function MainNav() {
                             <span className="sr-only">{trans('whatsapp')}</span>
                         </a>
                     }
-                </motion.div>
+                </div>
                 <div className="flex flex-row justify-center items-center">
                     {
                         settings.enable_subscriptions ? <Link
@@ -883,10 +895,8 @@ function MainNav() {
 
 
                         {/* change lang */}
-                        <motion.div
+                        <div
                             className="ml-auto flex flex-1 justify-end items-center"
-                            initial={{x: -250}}
-                            animate={{x: 0}}
                         >
                             {/* Search */}
                             {settings.enable_books && <SearchField/>}
@@ -1083,7 +1093,7 @@ function MainNav() {
                                     </Link>
                                 </div>
                             }
-                        </motion.div>
+                        </div>
                     </div>
 
                 </nav>

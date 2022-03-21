@@ -35,8 +35,8 @@ class ProductsExport implements  FromQuery, WithMapping, WithHeadings, WithEvent
             'sale_price',
             'description_ar',
             'description_en',
+            'qty',
             'user',
-            'qty'
 
         ];
     }
@@ -49,8 +49,10 @@ class ProductsExport implements  FromQuery, WithMapping, WithHeadings, WithEvent
             $element->name_en,
             $element->price,
             $element->price,
-            $element->user->name_en,
+            $element->description_ar,
+            $element->description_en,
             $element->qty,
+            $element->user->name_en,
         ];
     }
 

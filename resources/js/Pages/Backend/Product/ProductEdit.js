@@ -355,6 +355,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         autoComplete="size_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
+                                        <option value="">{trans('choose_size')}</option>
                                         {
                                             sizes.map(u => (
                                                 <option key={u.id}
@@ -385,6 +386,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         autoComplete="color_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
+                                        <option value="">{trans('choose_color')}</option>
                                         {
                                             colors.map(u => (
                                                 <option key={u.id} value={u.id}
