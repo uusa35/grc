@@ -14,7 +14,7 @@ import {Inertia} from "@inertiajs/inertia";
 
 
 export default function({countries, auth}) {
-    const {trans, getLocalized, classNames, mainColor , mainBgColor } = useContext(AppContext);
+    const {trans, getLocalized, classNames, mainColor , mainBgColor, textColor , contentBgColor , btnClass  } = useContext(AppContext);
     const [areas, setAreas] = useState([])
     const [governates, setGovernates] = useState([])
     const {locale, cart } = useSelector(state => state);
@@ -71,7 +71,7 @@ export default function({countries, auth}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <div className={`w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 text-${mainColor}-900 dark:text-${mainColor}-500`}>
+                <div className={`${contentBgColor} w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 ${textColor}`}>
                     <CartStepper activeStep={3}/>
                     <h1 className="text-3xl font-extrabold py-5 ">{trans('confirm')} {trans('information')}</h1>
 
@@ -323,7 +323,7 @@ export default function({countries, auth}) {
                     <div className="mt-10 col-span-full flex  flex-wrap justify-between w-full">
                         <Link
                             href={route('frontend.cart.information')}
-                            className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 flex flex-row justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
+                            className={`${btnClass} flex flex-row justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                         >
                             <div className="flex">
                                 {locale.isRTL ?
@@ -351,7 +351,7 @@ export default function({countries, auth}) {
                                     <form method="post" onSubmit={handleSubmit}>
                                         <button
                                             type="submit"
-                                            className={classNames(auth ? `bg-gray-600` : `bg-gray-300`, `text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`)}
+                                            className={`${btnClass} flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                         >
                                                  <span className="flex ltr:pt-2">
                                             {trans('next')}

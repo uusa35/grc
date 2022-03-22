@@ -495,7 +495,8 @@ export default function({element, relatedElements, auth, settings}) {
                                             }
                                         </>
                                 }
-                                <div className="flex flex-1 w-full justify-center items-center mx-auto mt-5">
+                                {
+                                    element.is_available ? <div className="flex flex-1 w-full justify-center items-center mx-auto mt-5">
                                     <span className="relative z-0 inline-flex shadow-sm rounded-md ">
                                       <button
                                           onClick={() => increaseQty()}
@@ -518,7 +519,9 @@ export default function({element, relatedElements, auth, settings}) {
                                         -
                                       </button>
                                     </span>
-                                </div>
+                                    </div> : null
+                                }
+
                                 {/* add_to_cart_btn */}
                                 <div className="flex flex-row justify-between items-center gap-x-5 mt-5">
                                     {

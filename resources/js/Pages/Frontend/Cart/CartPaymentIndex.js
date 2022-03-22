@@ -16,7 +16,7 @@ import {clearCart} from "../../redux/actions";
 
 export default function({order, settings}) {
     const {cart, locale, confirmationModal} = useSelector(state => state);
-    const {trans, classNames, getAsset, mainColor, mainBgColor} = useContext(AppContext);
+    const {trans, classNames, getAsset, mainColor, mainBgColor, textColor , contentBgColor , btnClass } = useContext(AppContext);
     const paymentMethods = [
         {
             id: 1,
@@ -92,7 +92,7 @@ export default function({order, settings}) {
         <FrontendContainer>
             <FrontendContentContainer>
                 <div
-                    className={`text-${mainColor}-900 dark:text-${mainColor}-50 w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 `}>
+                    className={`${textColor} ${contentBgColor} w-full mx-auto py-5 px-4 sm:px-6 lg:px-8 `}>
                     <CartStepper activeStep={4}/>
                     <h1 className="text-3xl font-extrabold py-5 ">{trans('payment_process')}</h1>
                     <OrderSummary/>
@@ -133,7 +133,7 @@ export default function({order, settings}) {
                         className="mt-10 col-span-full flex justify-between items-center flex-wrap space-y-2 sm:space-y-0 w-full">
                         <Link
                             href={route('frontend.cart.confirmation')}
-                            className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4  text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
+                            className={`${btnClass} flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4  text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                         >
                             <div className="flex">
                                 {locale.isRTL ?
@@ -160,7 +160,7 @@ export default function({order, settings}) {
                                 <a
                                     onClick={() => dispatch(clearCart())}
                                     href={!btnDisabled ? currentURL : '#'}
-                                    className={`disabled text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 capitalize flex flex-row w-full sm:w-auto justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
+                                    className={`disabled ${btnClass} capitalize flex flex-row w-full sm:w-auto justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                 >
                                     {trans('go_to_payment_page')}
                                 </a>
