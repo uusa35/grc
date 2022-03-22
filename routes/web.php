@@ -174,6 +174,10 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::resource('commercial', CommercialController::class);
     Route::resource('branch', BranchController::class);
     Route::resource('address', AddressController::class);
+    // for all merchants
+    Route::get('export/order/{fileType}', [OrderController::class, 'export'])->name('order.export');
+    Route::get('export/product/{fileType}', [ProductController::class, 'export'])->name('product.export');
+    Route::get('export/book/{fileType}', [BookController::class, 'export'])->name('book.export');
 //  super
     Route::group(['middleware' => 'super'], function () {
         Route::resource('role', RoleController::class);
@@ -211,9 +215,6 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::get('order/switch/status', [OrderController::class, 'switchStatus'])->name('order.switch');
         // email verified
         Route::get('make/verified', [UserController::class, 'makeEmailVerified'])->name('make.verified');
-        Route::get('export/product/{fileType}', [ProductController::class, 'export'])->name('product.export');
-        Route::get('export/order/{fileType}', [OrderController::class, 'export'])->name('order.export');
-        Route::get('export/book/{fileType}', [BookController::class, 'export'])->name('book.export');
         Route::get('import/create', [ProductController::class, 'getImport'])->name('import.create');
         Route::post('import/store', [ProductController::class, 'postImport'])->name('import.store');
     });

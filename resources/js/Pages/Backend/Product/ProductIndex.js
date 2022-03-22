@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
 import TableViewIcon from '@mui/icons-material/TableView';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import ToolTipWidget from "../components/widgets/ToolTipWidget";
 
 export default React.memo(function({elements}) {
     const [currentData, setCurrentData] = useState();
@@ -176,25 +177,30 @@ export default React.memo(function({elements}) {
                                             </div>
                                             <div className="flex items-center justify-center">
                                                 <a
-                                                    className={`pl-3`}
-                                                    href={route('backend.product.export', {fileType: 'pdf'})}>
+                                                    className={`pl-3 has-tooltip`}
+                                                    title={trans('pdf')}
+                                                    href={route('backend.product.export', {...route().params , fileType: 'pdf'})}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                                                          viewBox="0 0 20 20" fill="currentColor">
                                                         <PictureAsPdfIcon className={`hover:text-red-900`}/>
                                                     </svg>
+                                                    <ToolTipWidget message={trans('pdf')}/>
                                                 </a>
                                                 <a
-                                                    className={`pl-3`}
-                                                    href={route('backend.product.export', {fileType: 'xlsx'})}>
+                                                    className={`pl-3 has-tooltip`}
+                                                    title={trans('xlsx')}
+                                                    href={route('backend.product.export', {...route().params , fileType: 'xlsx'})}>
                                                     <TableViewIcon className={`hover:text-red-900`}/>
+                                                    <ToolTipWidget message={trans('xlsx')}/>
                                                 </a>
                                                 {
                                                     isAdminOrAbove && <Link
-                                                        className={`pl-3`}
+                                                        className={`pl-3 has-tooltip`}
                                                         href={route('backend.import.create', {model: 'product'})}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 hover:text-red-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                                                         </svg>
+                                                        <ToolTipWidget message={trans('import')}/>
                                                     </Link>
                                                 }
                                             </div>

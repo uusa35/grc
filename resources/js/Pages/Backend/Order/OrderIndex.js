@@ -50,7 +50,6 @@ export default React.memo(function({elements}) {
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         {
-                            isAdminOrAbove &&
                             <div className="flex items-center justify-evenly py-2 bg-white rounded-sm shadow-sm mb-3">
                                 <div className="sm:col-span-2 has-tooltip mb-5">
                                     <label htmlFor="start_sale"
@@ -82,12 +81,12 @@ export default React.memo(function({elements}) {
                                 </div>
                                 <Link
                                     className={`border border-gray-400 rounded-sm shadow-md p-3`}
-                                    href={route('backend.order.index', {paid: true})}>
+                                    href={route('backend.order.index', {...route().params , paid: true})}>
                                     {trans('paid_orders')}
                                 </Link>
                                 <Link
                                     className={`border border-gray-400 rounded-sm shadow-md p-3`}
-                                    href={route('backend.order.index', {paid: false})}>
+                                    href={route('backend.order.index', {...route().params , paid: false })}>
                                     {trans('unpaid_orders')}
                                 </Link>
                             </div>
@@ -191,7 +190,7 @@ export default React.memo(function({elements}) {
                                             <div className="flex items-center justify-center">
                                                 <a
                                                     className={`pl-3`}
-                                                    href={route('backend.order.export', {fileType: 'pdf'})}>
+                                                    href={route('backend.order.export', {...route().params, fileType: 'pdf' })}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                                                          viewBox="0 0 20 20" fill="currentColor">
                                                         <PictureAsPdfIcon className={`hover:text-red-900`}/>
@@ -199,7 +198,7 @@ export default React.memo(function({elements}) {
                                                 </a>
                                                 <a
                                                     className={`pl-3`}
-                                                    href={route('backend.order.export', {fileType: 'xlsx'})}>
+                                                    href={route('backend.order.export', {...route().params , fileType: 'xlsx' })}>
                                                     <TableViewIcon className={`hover:text-red-900`}/>
                                                 </a>
                                             </div>

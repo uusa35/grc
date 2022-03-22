@@ -45,7 +45,7 @@ class OrderController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = new OrderCollection(Order::filters($filters)
-            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->whereHas('order_metas.ordermetable', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
             ->with('user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());
@@ -143,10 +143,12 @@ class OrderController extends Controller
     {
         $this->authorize('search', 'product');
         $elements = Order::filters($filters)
-            ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
+            ->whereHas('order_metas.ordermetable', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
             ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
             ->orderBy('id', 'desc');
-        return Excel::download(new OrdersExport($elements), 'elements.'.request()->fileType);
+
+
+        return Excel::download(new OrdersExport($elements), 'elements.' . request()->fileType);
     }
 
 }

@@ -1,7 +1,9 @@
+import React from "react";
+
 const ToolTipWidget = ({ message }) => {
     return (
         <div>
-            { message && <div className="relative mx-2 tooltip w-60 max-h-0">
+            { message && <div className="relative  tooltip max-w-sm w-auto max-h-0">
                 <div
                     className="bg-black text-white text-sm font-bold rounded p-2 bottom-full mt-2">
                     {message}

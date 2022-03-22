@@ -168,7 +168,7 @@ export default React.memo(function ({elements}) {
                                             <div className="flex items-center justify-center">
                                                 <a
                                                     className={`pl-3 hover:bg-gray-200 hover:rounded-lg`}
-                                                    href={route('backend.book.export', {fileType: 'pdf'})}>
+                                                    href={route('backend.book.export', {...route().params, fileType: 'pdf'})}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                                                          viewBox="0 0 20 20" fill="currentColor">
                                                         <PictureAsPdfIcon/>
@@ -176,7 +176,7 @@ export default React.memo(function ({elements}) {
                                                 </a>
                                                 <a
                                                     className={`pl-3 hover:bg-gray-200 hover:rounded-lg`}
-                                                    href={route('backend.book.export', {fileType: 'xlsx'})}>
+                                                    href={route('backend.book.export', {...route().params , fileType: 'xlsx'})}>
                                                     <TableViewIcon/>
                                                 </a>
                                             </div>
