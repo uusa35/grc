@@ -899,8 +899,7 @@ function MainNav() {
                             className="ml-auto flex flex-1 justify-end items-center"
                         >
                             {/* Search */}
-                            {settings.enable_books && <SearchField/>}
-                            {settings.enable_products && <SearchField/>}
+                            {settings.enable_books || settings.enable_products ?  <SearchField/> : null }
                             <div
                                 className="hidden 2xl:flex lg:items-center lg:justify-end px-1 rtl:mr-2 ltr:ml-2">
                                 <a
@@ -910,17 +909,9 @@ function MainNav() {
                                     href={'#'}
                                     // href={route('frontend.change.lang', {lang: locale.otherLang})}
                                     className={`flex flex-row items-center justify-center text-center text-${headerColor}-800 dark:text-white hover:bg-${headerColor}-400 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-400`}>
-                                    {/*<img*/}
-                                    {/*    className="w-5 h-5 rounded-full"*/}
-                                    {/*    src={`${baseUrl}images/flags/${locale.otherLang}.png`} alt={locale.otherLang}*/}
-                                    {/*    width={60}*/}
-                                    {/*    height={60}*/}
-                                    {/*    loading={'lazy'}*/}
-                                    {/*/>*/}
                                     {locale.otherLang}
                                 </a>
                             </div>
-
 
                             {/* currency dropdown */}
                             {settings.enable_prices ?

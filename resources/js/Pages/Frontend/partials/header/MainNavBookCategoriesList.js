@@ -5,13 +5,26 @@ import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {AppContext} from "../../../context/AppContext";
 import {ChevronDownIcon} from "@heroicons/react/solid";
+import {motion} from "framer-motion"
+
+const currentVariants = {
+    hidden : {
+        y : -50
+    },
+    visible : {
+        y  : 0 ,
+    },
+    exit : {
+        opacity : 0,
+    }
+};
 
 function MainNavBookCategoriesList({categories, type = 'book'}) {
     const {classNames, trans, getThumb, getLocalized, headerColor, headerBgColor} = useContext(AppContext)
 
-
     return (
-        <Popover className="flex">
+        <Popover className="flex"
+        >
             {({open}) => (
                 <>
                     <div className="relative flex">
@@ -35,19 +48,17 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                         </Popover.Button>
                     </div>
 
-                    <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-200"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="transition ease-in duration-150"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
+
                         <Popover.Panel
                             className="absolute z-40 inset-x-20 top-24 transform shadow-lg">
                             {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                            <div className={`relative bg-white dark:bg-${headerBgColor}-700 shadow-lg shadow-blue-200/50`}>
+                            <motion.div
+                                className={`relative bg-white dark:bg-${headerBgColor}-700 shadow-lg shadow-blue-200/50 z-0`}
+                                variants={currentVariants}
+                                initial={`hidden`}
+                                animate={`visible`}
+                                exit={`exit`}
+                            >
                                 <div className="max-w-full px-8 mt-2">
                                     <div
                                         className="grid grid-cols-2 gap-y-10 gap-x-8 py-8">
@@ -112,9 +123,8 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </Popover.Panel>
-                    </Transition>
                 </>
             )}
         </Popover>
