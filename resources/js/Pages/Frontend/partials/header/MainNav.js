@@ -903,11 +903,12 @@ function MainNav() {
                             {settings.enable_products && <SearchField/>}
                             <div
                                 className="hidden 2xl:flex lg:items-center lg:justify-end px-1 rtl:mr-2 ltr:ml-2">
-                                <Link
+                                <a
                                     onClick={() => {
                                         dispatch(changeLang(locale.otherLang))
                                     }}
-                                    href={route('frontend.change.lang', {lang: locale.otherLang})}
+                                    href={'#'}
+                                    // href={route('frontend.change.lang', {lang: locale.otherLang})}
                                     className={`flex flex-row items-center justify-center text-center text-${headerColor}-800 dark:text-white hover:bg-${headerColor}-400 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-400`}>
                                     {/*<img*/}
                                     {/*    className="w-5 h-5 rounded-full"*/}
@@ -917,7 +918,7 @@ function MainNav() {
                                     {/*    loading={'lazy'}*/}
                                     {/*/>*/}
                                     {locale.otherLang}
-                                </Link>
+                                </a>
                             </div>
 
 

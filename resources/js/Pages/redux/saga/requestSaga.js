@@ -42,12 +42,10 @@ export function* startChangeLangScenario(action) {
                 }
             });
         }
-
-
     } catch (e) {
         console.log('e', e)
     } finally {
-
+        yield call(changeLangOnServer, action.payload)
     }
 }
 
@@ -76,4 +74,8 @@ export function* startGetTranslationsScenario() {
 
 export async function getTranslations() {
     return await axios.get(`/api/translations`).then(r => r.data).catch(e => console.log(e));
+}
+
+export async function changeLangOnServer(lang) {
+    return await axios.get(`/api/lang/${lang}`).then(r => r.data).catch(e => console.log(e));
 }

@@ -18,8 +18,7 @@ import { useInView } from "react-intersection-observer";
 
 const services = [
     {
-        id: 1,
-        title: 'خدمة التوريد المباشر',
+        name: 'خدمة التوريد المباشر',
         href: '#',
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
@@ -29,8 +28,7 @@ const services = [
             'عن طريق شركائنا في مُختلف دول العالم، يُمكنك الآن الاستفادة من خُصومات شركة وساطة وضمان السعودية على جميع أشكال ومقاسات مُنتجات التعبئة والتغليف بجودة عالية مطابقة للمواصفات العالمية',
     },
     {
-        id: 2,
-        title: 'خدمة التوزيع داخل المملكة العربية السعودية',
+        name: 'خدمة التوزيع داخل المملكة العربية السعودية',
         href: '#',
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
@@ -40,8 +38,7 @@ const services = [
             'نُمكّن منتجات التعبئة والتغليف الخاصة بشركتك من الوصول الى شريحة أكبر من العملاء المحتملين في مُختلف المناطق داخل المملكة العربية السعودية مقابل أسعار رمزية'
     },
     {
-        id: 3,
-        title: 'منتجات صديقة البيئة',
+        name: 'منتجات صديقة البيئة',
         href: '#',
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
@@ -55,7 +52,6 @@ const services = [
 
 const products = [
     {
-        id: 4,
         name: 'المنتجات الورقية الملونة',
         href: '#',
         price: '',
@@ -64,7 +60,6 @@ const products = [
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
-        id: 5,
         name: 'منتجات القصدير بأنواعها',
         href: '#',
         price: '',
@@ -73,7 +68,6 @@ const products = [
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
-        id: 6,
         name: 'أطباق آمنه للميكرويف',
         href: '#',
         price: '',
@@ -82,7 +76,6 @@ const products = [
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
-        id: 7,
         name: 'حامل الأكواب',
         href: '#',
         price: '',
@@ -91,7 +84,6 @@ const products = [
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
-        id: 7,
         name: 'جميع الأحجام والمقاسات المختلفة',
         href: '#',
         price: '',
@@ -100,7 +92,6 @@ const products = [
         imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
     },
     {
-        id: 7,
         name: 'قفازات البلاستيك الآمنة',
         href: '#',
         price: '',
@@ -275,7 +266,7 @@ export default React.memo(function({
                                                     duration: 0.8
                                                 }
                                             }}
-                                            key={service.id}
+                                            key={service.name}
 
                                              className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                             <div className="flex-shrink-0">
@@ -285,7 +276,7 @@ export default React.memo(function({
                                             <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                                 <div className="flex-1">
                                                     <a href={service.href} className="block mt-2">
-                                                        <p className="text-xl font-semibold text-gray-900">{service.title}</p>
+                                                        <p className="text-xl font-semibold text-gray-900">{service.name}</p>
                                                         <p className="mt-3 text-base text-gray-500">{service.preview}</p>
                                                     </a>
                                                 </div>
@@ -380,7 +371,7 @@ export default React.memo(function({
                                                 duration: 0.8
                                             }
                                         }}
-                                        key={p.id}
+                                        key={p.name}
                                          className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                         <div className="flex-shrink-0">
                                             <img className="h-96 w-full object-cover" src={p.imageUrl} alt=""/>
