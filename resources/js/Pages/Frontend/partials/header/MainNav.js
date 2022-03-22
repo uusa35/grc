@@ -649,12 +649,12 @@ function MainNav() {
 
                                 {
                                     settings.corporate_mode ? <>
-                                        <a
+                                        <Link
                                             href={`/#our_services`}
                                             className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
                                         >
                                             {capitalize(trans('our_services'))}
-                                        </a>
+                                        </Link>
                                         <a
                                             href={`https://shop.mgt-sa.com`}
                                             className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
