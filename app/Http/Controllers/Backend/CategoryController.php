@@ -61,7 +61,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $elements = CategoryExtraLightResource::collection(Category::where(['is_parent' => true, 'parent_id' => 0])->get());
+        $elements = CategoryExtraLightResource::collection(Category::where(['is_parent' => true])->get());
         return inertia('Backend/Category/CategoryCreate', compact('elements'));
     }
 
@@ -110,7 +110,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        $elements = CategoryExtraLightResource::collection(Category::where(['is_parent' => true, 'parent_id' => 0])->get());
+        $elements = CategoryExtraLightResource::collection(Category::where(['is_parent' => true])->get());
         return inertia('Backend/Category/CategoryEdit', compact('category', 'elements'));
     }
 
