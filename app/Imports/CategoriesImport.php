@@ -25,9 +25,14 @@ class CategoriesImport implements ToCollection
                     'caption_ar' => (string)$row[3],
                     'caption_en' => (string)$row[4],
                     'parent_id' => $row[5] ? $row[5] : 0,
-                    'is_parent' => $row[6] ? $row[6] : 0,
-                    'order' => rand(1, 99),
+                    'is_parent' => $row[7] ? $row[6] : 0,
+                    'is_product' => 1,
+                    'is_user' => 1,
+                    'is_book' => 1,
+                    'is_market' => 1,
+                    'order' => $row[6],
                     'image' => $row[8] ? $row[8] : 'square.png',
+                    'image_rectangle' => $row[8] ? $row[8] : 'square.png',
                 ]);
             }
         }
