@@ -365,7 +365,7 @@ export default React.memo(function({elements}) {
                                                                         </div>
                                                                         <div className="py-1">
                                                                             {
-                                                                                element.has_attributes ?
+                                                                                element.has_real_attributes ?
                                                                                     <>
                                                                                         <Menu.Item>
                                                                                             {({active}) => (
