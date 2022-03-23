@@ -13,6 +13,7 @@ class CategoriesImport implements ToCollection
         foreach ($rows as $row) {
             if ($row[0] !== '#' && !is_null($row[0])) {
                 Category::create([
+                    'id' => $row[0],
                     'name' => $row[2],
                     'name_ar' => $row[1],
                     'name_en' => $row[2],
