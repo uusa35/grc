@@ -8,10 +8,6 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 
 class CategoriesImport implements ToCollection
 {
-    public function __construct()
-    {
-    }
-
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
