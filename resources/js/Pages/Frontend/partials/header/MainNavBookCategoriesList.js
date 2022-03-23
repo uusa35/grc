@@ -68,7 +68,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                             {/*  featured parents */}
                                             {map(take(filter(categories, c => c.is_featured), 3), c => (
                                                 <div key={c[getLocalized()]}
-                                                     className="group relative text-base sm:">
+                                                     className="group relative text-base">
                                                     <div
                                                         className="aspect-w-12 aspect-h-8 rounded-lg  overflow-hidden group-hover:opacity-75">
                                                         <img
@@ -92,12 +92,12 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                         </div>
                                         {/* categories columns */}
                                         <div
-                                            className="row-start-1 grid grid-cols-3 gap-y-2 gap-x-2 ">
+                                            className="row-start-1 grid grid-cols-4 gap-y-2 gap-x-2">
                                             {map(categories, parent => (
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route(`frontend.${type}.index`, {category_id: parent.id})}
-                                                          className={`text-${headerColor}-600 dark:text-white hover:text-${headerColor}-400 dark:hover:text-${headerColor}-100 truncate capitalize font-bold`}>
+                                                          className={` border-b-2 border-gray-400 dark:border-gray-100 pb-1 text-${headerColor}-600 dark:text-white hover:text-${headerColor}-400 dark:hover:text-${headerColor}-100 truncate capitalize font-bold`}>
                                                         {parent[getLocalized()]}
                                                     </Link>
                                                     <ul
