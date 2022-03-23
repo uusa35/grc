@@ -51,7 +51,7 @@ class CategoriesExport implements  FromQuery, WithMapping, WithHeadings, WithEve
             $element->description_en,
             $element->parent_id,
             $element->order,
-            $element->is_parent,
+            $element->is_parent ? 1 : 0,
             $element->image,
         ];
     }
