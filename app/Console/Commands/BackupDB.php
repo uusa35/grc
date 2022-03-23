@@ -39,9 +39,9 @@ class BackupDB extends Command
      */
     public function handle()
     {
-        $username = $this->argument('username');
+        $username = $this->argument('username') ? env('DB_USERNAME') : $this->argument('username');
 
-        $password = $this->argument('password');
+        $password = $this->argument('password') ? env('DB_PASSWORD') : $this->argument('password');
 
         $dbName = env('DB_DATABASE');
 
@@ -49,7 +49,7 @@ class BackupDB extends Command
 
         $fileName = $extention . env('APP_NAME').'-' . Carbon::now()->format('d-m-Y');
 
-        $command = 'mysqldump -e -f -u'. $username .' -p ' .' '. $dbName. ' > ' .$fileName.'.sql';
+        $command = 'mysqldump -e -f -u'. $username .' -p ' .$password.' '. $dbName. ' > ' .$fileName.'.sql';
 
         exec($command);
     }
