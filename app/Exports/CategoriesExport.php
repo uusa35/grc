@@ -28,15 +28,15 @@ class CategoriesExport implements  FromQuery, WithMapping, WithHeadings, WithEve
     public function headings(): array
     {
         return [
-            '#',
-            'name_ar',
-            'name_en',
-            'description_ar',
-            'description_en',
-            'parent_id',
-            'order',
-            'is_parent',
-            'image',
+            '#', //0
+            'name_ar', //1
+            'name_en', //2
+            'description_ar', //3
+            'description_en', // 4
+            'parent_id',  // 5
+            'order', // 6
+            'is_parent', // 7
+            'image', // 8
 
         ];
     }
