@@ -27,7 +27,7 @@ class CategoriesImport implements ToCollection
                     'parent_id' => $row[5] ? $row[5] : 0,
                     'is_parent' => $row[6] ? $row[6] : 0,
                     'order' => rand(1, 99),
-                    'image' => 'square.png',
+                    'image' => $row[8] ? $row[8] : 'square.png',
                 ]);
             }
         }
