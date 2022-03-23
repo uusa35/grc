@@ -14,6 +14,7 @@ class Category extends PrimaryModel
         'on_new' => 'boolean',
         'is_featured' => 'boolean',
         'is_parent' => 'boolean',
+        'is_product' => 'boolean',
         'is_service' => 'boolean',
         'is_product' => 'boolean',
         'is_commercial' => 'boolean',
