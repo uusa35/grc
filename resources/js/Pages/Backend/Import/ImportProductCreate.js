@@ -48,7 +48,7 @@ export default function ({model, users}) {
         e.preventDefault()
         let formData = new FormData();
         formData.append(`model`, model);
-        post(route('backend.import.product.create'));
+        post('/backend/import/product/store');
     }
 
 
