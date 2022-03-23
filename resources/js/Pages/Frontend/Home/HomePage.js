@@ -100,6 +100,7 @@ export default React.memo(function ({
                                 type={'product'}
                                 virtical={!isMobile}
                             />}
+                            {/* is_featured */}
                             {map(filter(categoriesWithProducts, c => c.products && !isEmpty(c.products)), category =>
                                 <ElementSlider
                                     key={category.id}

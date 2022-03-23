@@ -7,7 +7,7 @@ import {useSelector} from "react-redux";
 import { size } from 'lodash';
 
 const HomeMainCategory = ({element = {}}) => {
-    const {getLarge, trans, getLocalized, classNames, mainColor, mainBgColor} = useContext(AppContext);
+    const {getLarge, trans, getLocalized, classNames, mainColor, textColor, btnClass } = useContext(AppContext);
     const {locale} = useSelector(state => state);
 
     return (
@@ -29,7 +29,7 @@ const HomeMainCategory = ({element = {}}) => {
                     <div
                         className={classNames(locale.isRTL ? `left-0` : `right-0`, "break-all absolute inset-y-0 bottom-0 bg-black bg-opacity-5 p-6 rounded-bl-lg rounded-br-lg backdrop-filter backdrop-blur-sm sm:flex sm:items-center sm:justify-between  lg:w-96 lg:rounded-tl-lg lg:rounded-br-none lg:flex-col lg:items-start")}>
                         <div>
-                            <h2 className={`text-xl font-bold text-${mainColor}-400 dark:text-${mainColor}-800 truncate capitalize`}>{element[getLocalized()]}</h2>
+                            <h2 className={`text-xl font-bold ${textColor} truncate capitalize`}>{element[getLocalized()]}</h2>
                             {
                                 element[getLocalized('description')] && size(element[getLocalized('description')]) > 5 &&
                                 <p className={`mt-2 text-sm text-${mainColor}-400 dark:text-${mainColor}-800 font-bold capitalize break-normal leading-relaxed`}>
@@ -39,7 +39,7 @@ const HomeMainCategory = ({element = {}}) => {
                         </div>
                         <Link
                             href={route('frontend.product.index', {category_id: element.id})}
-                            className={`mt-6 flex-shrink-0 flex text-${mainColor}-600 bg-white dark:bg-${mainBgColor}-600 dark:text-white py-3 px-4 border border-white border-opacity-25 rounded-md items-center justify-center text-base font-medium hover:bg-opacity-10 sm:mt-0 sm:ml-8 lg:ml-0 lg:w-full capitalize`}
+                            className={`mt-6 flex-shrink-0 flex ${btnClass} py-3 px-4 border border-white border-opacity-25 rounded-md items-center justify-center text-base font-medium hover:bg-opacity-10 sm:mt-0 sm:ml-8 lg:ml-0 lg:w-full capitalize`}
                         >
                             {trans('view')}
                         </Link>

@@ -61,10 +61,10 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                             >
                                 <div className="max-w-full px-8 mt-2">
                                     <div
-                                        className="grid grid-cols-2 gap-y-10 gap-x-8 py-8">
+                                        className="grid grid-cols-2 gap-y-3 gap-x-3 py-8">
                                         {/* categories with iamges */}
                                         <div
-                                            className="col-start-2 grid grid-cols-3 gap-x-8">
+                                            className="col-start-2 grid grid-cols-3 gap-x-4">
                                             {/*  featured parents */}
                                             {map(take(filter(categories, c => c.is_featured), 3), c => (
                                                 <div key={c[getLocalized()]}
@@ -92,7 +92,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                         </div>
                                         {/* categories columns */}
                                         <div
-                                            className="row-start-1 grid grid-cols-3 gap-y-10 gap-x-8 ">
+                                            className="row-start-1 grid grid-cols-3 gap-y-2 gap-x-2 ">
                                             {map(categories, parent => (
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
