@@ -112,9 +112,9 @@ export default React.memo(function ({
                                     params={{category_id: category.id}}
                                 />
                             )}
-                            <HomeMainCategory
-                                element={first(shuffle(filter(categories, c => c.is_product)))}
-                            />
+                            {/*<HomeMainCategory*/}
+                            {/*    element={first(shuffle(filter(categories, c => c.is_product)))}*/}
+                            {/*/>*/}
                         </>
                     }
                 </div>
