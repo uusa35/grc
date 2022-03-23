@@ -11,12 +11,10 @@ import {showToastMessage} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FormSection from "../components/widgets/form/FormSection";
 import {map, isNull} from 'lodash';
-import GlobalContext from "../../context/GlobalContext";
 
 export default function({category, elements}) {
     const {trans, getLocalized, getThumb, getFileUrl} = useContext(AppContext);
     const [currentImages, setCurrentImages] = useState([]);
-    const globalContext = useContext(GlobalContext);
     const {errors} = usePage().props;
     const dispatch = useDispatch();
     const {data, setData, put, progress, reset} = useForm({
