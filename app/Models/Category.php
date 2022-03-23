@@ -101,7 +101,7 @@ class Category extends PrimaryModel
 
     public function scopeOnlyParent($q)
     {
-        return $q->where('is_parent', 1);
+        return $q->where('is_parent', true);
     }
 
     public function scopeOnlyChildren($q)
