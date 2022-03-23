@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Country extends PrimaryModel
 {
     use ModelHelpers;
+
     protected $guarded = [''];
     protected $casts = [
         'is_local' => 'boolean',
@@ -63,8 +64,14 @@ class Country extends PrimaryModel
         return $this->hasMany(ShipmentPackage::class);
     }
 
-    public function addresses() {
+    public function addresses()
+    {
         return $this->hasMany(Address::class);
     }
+
+//    public function scope($q)
+//    {
+//        return $q->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0);
+//    }
 
 }

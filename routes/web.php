@@ -178,6 +178,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::get('export/order/{fileType}', [OrderController::class, 'export'])->name('order.export');
     Route::get('export/product/{fileType}', [ProductController::class, 'export'])->name('product.export');
     Route::get('export/book/{fileType}', [BookController::class, 'export'])->name('book.export');
+    Route::get('export/user/{fileType}', [UserController::class, 'export'])->name('user.export');
+    Route::get('export/category/{fileType}', [CategoryController::class, 'export'])->name('category.export');
 //  super
     Route::group(['middleware' => 'super'], function () {
         Route::resource('role', RoleController::class);
@@ -208,14 +210,18 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('notification', NotificationController::class);
         Route::resource('shipment', ShipmentController::class)->except('index');
         Route::resource('faq', FaqController::class);
-        Route::get('translation/search', [TranslationController::class,'search'])->name('translation.search');
+        Route::get('translation/search', [TranslationController::class, 'search'])->name('translation.search');
         Route::resource('translation', TranslationController::class);
         Route::resource('subscription', SubscriptionController::class);
         // order status switch
         Route::get('order/switch/status', [OrderController::class, 'switchStatus'])->name('order.switch');
         // email verified
         Route::get('make/verified', [UserController::class, 'makeEmailVerified'])->name('make.verified');
-        Route::get('import/create', [ProductController::class, 'getImport'])->name('import.create');
-        Route::post('import/store', [ProductController::class, 'postImport'])->name('import.store');
+        Route::get('import/product/create', [ProductController::class, 'getImport'])->name('import.product.create');
+        Route::post('import/product/store', [ProductController::class, 'postImport'])->name('import.product.store');
+        Route::get('import/user/create', [UserController::class, 'getImport'])->name('import.user.create');
+        Route::post('import/user/store', [UserController::class, 'postImport'])->name('import.user.store');
+        Route::get('import/category/create', [CategoryController::class, 'getImport'])->name('import.category.create');
+        Route::post('import/category/store', [CategoryController::class, 'postImport'])->name('import.category.store');
     });
 });

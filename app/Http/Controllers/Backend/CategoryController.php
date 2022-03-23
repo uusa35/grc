@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\CategoriesExport;
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryExtraLightResource;
+use App\Imports\CategoriesImport;
+use App\Imports\UsersImport;
 use App\Models\Category;
+use App\Models\Country;
+use App\Models\Role;
+use App\Models\User;
 use App\Services\Search\CategoryFilters;
+use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -29,7 +39,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = new CategoryCollection(Category::where(['is_parent' => true, 'parent_id' => 0])->with('children.children')->orderBy('id', 'desc')->paginate(SELF::TAKE_LESS));
+        $elements = new CategoryCollection(Category::where(['is_parent' => true])->with('children.children')->orderBy('id', 'desc')->paginate(SELF::TAKE_LESS));
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 
@@ -142,5 +152,30 @@ class CategoryController extends Controller
             return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
+    }
+
+    public function export(CategoryFilters $filters)
+    {
+        $this->authorize('index', 'category');
+        $elements = Category::filters($filters)->orderBy('id', 'desc');
+        return Excel::download(new CategoriesExport($elements), 'elements.' . request()->fileType);
+    }
+
+    public function getImport(Request $request)
+    {
+        $request->validate(['model' => 'required']);
+        $model = request()->model;
+        return Inertia::render('Backend/Import/ImportCategoryCreate', compact('model'));
+    }
+
+    public function postImport(Request $request)
+    {
+        $request->validate([
+            'model' => 'required',
+            "file" => "required|mimes:xlsx|max:990000"
+        ]);
+        $path = request()->file('file')->store('public/uploads/files');
+        $result = Excel::import(new CategoriesImport(), $path);
+        return redirect()->route('backend.' . request()->model . '.index')->with('success', trans('general.process_success'));
     }
 }

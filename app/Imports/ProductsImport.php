@@ -30,7 +30,7 @@ class ProductsImport implements ToCollection
                     'qty' => (integer) [7],
                     'weight' => '0.1',
                     'sku' => rand(111,999),
-                    'image' => 'product.png',
+                    'image' => $row[8] ? $row[8] : 'product.png',
                     'user_id' => (integer) $this->userId,
                 ]);
             }

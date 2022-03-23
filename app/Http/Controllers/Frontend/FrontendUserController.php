@@ -298,7 +298,7 @@ class FrontendUserController extends Controller
 
     public function getRegistration()
     {
-        $countries = CountryExtraLightResource::collection(Country::active()->get());
+        $countries = CountryExtraLightResource::collection(Country::has('governates.areas','>', 0)->active()->get());
         return inertia('Frontend/User/RegisterForm', compact('countries'));
     }
 

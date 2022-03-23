@@ -70,7 +70,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['secret']),
             'role_id' => Role::where(['is_client' => true])->first()->id,
             'country_id' => Country::where(['is_local' => true])->first()->id,
             'subscription_id' => Subscription::where(['free' => true])->first()->id

@@ -193,7 +193,7 @@ class ProductController extends Controller
         $request->validate(['model' => 'required']);
         $users = User::active()->hasMerchantBehaviour()->select('id', 'name_ar', 'name_en')->get();
         $model = request()->model;
-        return Inertia::render('Backend/Import/ImportCreate', compact('users', 'model'));
+        return Inertia::render('Backend/Import/ImportProductCreate', compact('users', 'model'));
     }
 
     public function postImport(Request $request)

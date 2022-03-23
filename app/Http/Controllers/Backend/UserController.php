@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\UsersExport;
 use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;
 use App\Http\Resources\CategoryCollection;
@@ -12,6 +13,7 @@ use App\Http\Resources\SubscriptionCollection;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserExtraLightResource;
 use App\Http\Controllers\Controller;
+use App\Imports\UsersImport;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Role;
@@ -21,7 +23,9 @@ use App\Services\Search\UserFilters;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 use Inertia\Testing\Concerns\Has;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -42,7 +46,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return redirect()->route('backend.user.search',request()->getQueryString());
+        return redirect()->route('backend.user.search', request()->getQueryString());
     }
 
     public function search(UserFilters $filters)
@@ -64,13 +68,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = new RoleCollection(Role::active()->where('is_super',false)->get());
+        $roles = new RoleCollection(Role::active()->where('is_super', false)->get());
         $categories = new CategoryCollection(Category::active()->onlyParent()->onlyForUsers()->with(['children' => function ($q) {
             return $q->active()->onlyForUsers()->with(['children' => function ($q) {
                 return $q->active()->onlyForUsers();
             }]);
         }])->get());
-        $countries = new CountryCollection(Country::active()->has('areas','>', 0)->with('areas')->get());
+        $countries = new CountryCollection(Country::active()->has('governates.areas', '>', 0)->with('areas')->get());
         $subscriptions = new SubscriptionCollection(Subscription::active()->get());
         return inertia('Backend/User/UserCreate', compact('roles', 'categories', 'countries', 'subscriptions'));
     }
@@ -116,17 +120,17 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $user->load('categories','images','country','area','subscription');
-        $roles = new RoleCollection(Role::active()->where('is_super',false)->get());
+        $user->load('categories', 'images', 'country', 'area', 'subscription');
+        $roles = new RoleCollection(Role::active()->where('is_super', false)->get());
         $categories = new CategoryCollection(Category::active()->onlyParent()->onlyForUsers()->with(['children' => function ($q) {
             return $q->active()->onlyForUsers()->with(['children' => function ($q) {
                 return $q->active()->onlyForUsers();
             }]);
         }])->get());
         $elementCategories = $user->categories->pluck('id')->toArray();
-        $countries = new CountryCollection(Country::active()->has('areas','>', 0)->with('areas')->get());
+        $countries = new CountryCollection(Country::active()->has('governates.areas', '>', 0)->with('areas')->get());
         $subscriptions = new SubscriptionCollection(Subscription::active()->get());
-        return inertia('Backend/User/UserEdit', compact('user','roles','elementCategories', 'categories', 'countries', 'subscriptions'));
+        return inertia('Backend/User/UserEdit', compact('user', 'roles', 'elementCategories', 'categories', 'countries', 'subscriptions'));
     }
 
     /**
@@ -178,32 +182,64 @@ class UserController extends Controller
         }
     }
 
-    public function getResetPassword(Request $request) {
+    public function getResetPassword(Request $request)
+    {
         $request->validate([
             'id' => 'required|integer|exists:users,id'
         ]);
         return inertia('Backend/User/ResetPassword');
     }
 
-    public function postResetPassword(Request $request) {
+    public function postResetPassword(Request $request)
+    {
         $request->validate([
             'id' => 'required|integer|exists:users,id',
             'password' => 'required|string|min:6|confirmed',
         ]);
         $authenticated = auth()->user()->isAdminOrAbove || auth()->id() === $request->id;
-        if($authenticated) {
+        if ($authenticated) {
             User::whereId($request->id)->first()->update(['password' => Hash::make($request->password)]);
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
-    public function makeEmailVerified(Request $request) {
+    public function makeEmailVerified(Request $request)
+    {
         $this->authorize('isSuper');
         $request->validate([
             'id' => 'required|integer|exists:users,id',
         ]);
         User::whereId($request->id)->first()->update(['email_verified_at' => Carbon::now()]);
         return redirect()->back()->with('success', trans('general.process_success'));
+    }
+
+    public function export(UserFilters $filters)
+    {
+        $this->authorize('search', 'user');
+        $elements = User::filters($filters)->with('role')->orderBy('id', 'desc');
+        return Excel::download(new UsersExport($elements), 'elements.' . request()->fileType);
+    }
+
+    public function getImport(Request $request)
+    {
+        $request->validate(['model' => 'required']);
+        $roles = Role::active()->notAdmins()->select('id', 'name_ar', 'name_en')->get();
+        $countries = Country::has('governates.areas','>', 0)->active()->select('id','name_ar','name_en')->get();
+        $model = request()->model;
+        return Inertia::render('Backend/Import/ImportUserCreate', compact('roles', 'model', 'countries'));
+    }
+
+    public function postImport(Request $request)
+    {
+        $request->validate([
+            'model' => 'required',
+            'country_id' => 'required|exists:countries,id',
+            'role_id' => 'required|exists:roles,id',
+            "file" => "required|mimes:xlsx|max:990000"
+        ]);
+        $path = request()->file('file')->store('public/uploads/files');
+        $result = Excel::import(new UsersImport(request()->role_id, request()->country_id), $path);
+        return redirect()->route('backend.' . request()->model . '.index')->with('success', trans('general.process_success'));
     }
 }

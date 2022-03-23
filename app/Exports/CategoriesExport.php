@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
-class UsersExport implements  FromQuery, WithMapping, WithHeadings, WithEvents, ShouldAutoSize
+class CategoriesExport implements  FromQuery, WithMapping, WithHeadings, WithEvents, ShouldAutoSize
 {
     public $elements;
 
@@ -33,9 +33,9 @@ class UsersExport implements  FromQuery, WithMapping, WithHeadings, WithEvents, 
             'name_en',
             'description_ar',
             'description_en',
-            'email',
-            'whatsapp',
-            'role_id',
+            'parent_id',
+            'order',
+            'is_parent',
             'image',
 
         ];
@@ -49,9 +49,9 @@ class UsersExport implements  FromQuery, WithMapping, WithHeadings, WithEvents, 
             $element->name_en,
             $element->description_ar,
             $element->description_en,
-            $element->email,
-            $element->whatsapp,
-            $element->role->name,
+            $element->parent_id,
+            $element->order,
+            $element->is_parent,
             $element->image,
         ];
     }

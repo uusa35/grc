@@ -1,5 +1,5 @@
 import BackendContainer from "./../components/containers/BackendContainer";
-import {useContext, useMemo, useState} from "react";
+import React, {useContext, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {filter, map, first, uniq} from 'lodash';
@@ -347,6 +347,7 @@ export default function({roles, categories, countries, subscriptions}) {
                                             autoComplete="role_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                         >
+                                            <option value="">{trans('choose')} {trans('role')}</option>
                                             {
                                                 roles.map(u => (
                                                     <option key={u.id} value={u.id}
@@ -376,6 +377,7 @@ export default function({roles, categories, countries, subscriptions}) {
                                         autoComplete="country_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     >
+                                        <option value="">{trans('choose')} {trans('country')}</option>
                                         {
                                             map(countries, u => (
                                                 <option key={u.id} value={u.id}
@@ -405,6 +407,7 @@ export default function({roles, categories, countries, subscriptions}) {
                                             autoComplete="area_id"
                                             className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                         >
+                                            <option value="">{trans('choose')} {trans('area')}</option>
                                             {
                                                 map(areas, u => (
                                                     <option key={u.id} value={u.id}
