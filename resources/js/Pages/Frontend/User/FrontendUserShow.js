@@ -160,7 +160,7 @@ export default function({element}) {
                                                                 </div>
                                                                 <div className="mt-3 space-y-3">
                                                                     {/* mobile */}
-                                                                    <div className="flex">
+                                                                    {element.mobile && <div className="flex">
                                                                         <div className="flex-shrink-0">
                                                                             <PhoneIcon className="h-5 w-5 ml-4"
                                                                                        aria-hidden="true"/>
@@ -168,9 +168,9 @@ export default function({element}) {
                                                                         <div className="ml-3 text-base">
                                                                             <p>{element.mobile}</p>
                                                                         </div>
-                                                                    </div>
+                                                                    </div>}
                                                                     {/*     whatsapp */}
-                                                                    <div className="flex">
+                                                                    {element.whatsapp && <div className="flex">
                                                                         <div className="flex-shrink-0">
                                                                             <FaWhatsapp className="h-5 w-5 ml-4"
                                                                                         aria-hidden="true"/>
@@ -181,9 +181,9 @@ export default function({element}) {
                                                                                 {settings.whatsapp}
                                                                             </a>
                                                                         </div>
-                                                                    </div>
+                                                                    </div>}
                                                                     {/*    address */}
-                                                                    <div className="flex">
+                                                                    {element.address && <div className="flex">
                                                                         <div className="flex-shrink-0">
                                                                             <FaLocationArrow className="h-5 w-5 ml-4"
                                                                                              aria-hidden="true"/>
@@ -191,9 +191,9 @@ export default function({element}) {
                                                                         <div className="ml-3 text-base ">
                                                                             <p>{element.address}</p>
                                                                         </div>
-                                                                    </div>
+                                                                    </div>}
                                                                     {/*     facebook */}
-                                                                    <div className="flex">
+                                                                    {element.facebook && <div className="flex">
                                                                         <div className="flex-shrink-0">
                                                                             <FaFacebook className="h-5 w-5 ml-4"
                                                                                         aria-hidden="true"/>
@@ -201,8 +201,9 @@ export default function({element}) {
                                                                         <div className="ml-3 text-base ">
                                                                             <p>{element.facebook}</p>
                                                                         </div>
-                                                                    </div>
+                                                                    </div>}
                                                                     {/*     twitter */}
+                                                                    {element.twitter &&
                                                                     <div className="flex">
                                                                         <div className="flex-shrink-0">
                                                                             <FaTwitter className="h-5 w-5 ml-4"
@@ -211,7 +212,7 @@ export default function({element}) {
                                                                         <div className="ml-3 text-base ">
                                                                             <p>{element.twitter}</p>
                                                                         </div>
-                                                                    </div>
+                                                                    </div>}
 
                                                                 </div>
                                                             </div>
