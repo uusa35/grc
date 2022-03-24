@@ -141,3 +141,8 @@ export const setTranslations = payload => ({
 export const getTranslations = () => ({
     type : actions.GET_TRANSLATIONS,
 })
+
+export const setMenuBg = payload => ({
+    type : actions.SET_MENU_BG,
+    payload,
+})

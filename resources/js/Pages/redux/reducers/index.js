@@ -18,6 +18,7 @@ import theme from './theme'
 import parentModule from './parentModule'
 import searchType from "./searchType";
 import translations from "./translations";
+import menuBg from "./menuBg";
 
 export default combineReducers({
     cart,
@@ -38,5 +39,6 @@ export default combineReducers({
     theme,
     parentModule,
     searchType,
-    translations
+    translations,
+    menuBg
 });

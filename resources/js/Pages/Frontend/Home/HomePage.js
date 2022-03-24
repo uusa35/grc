@@ -37,9 +37,10 @@ export default React.memo(function ({
     return (
         <FrontendContainer showBreadCrumbs={false}>
             {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
+            {slides && settings.wide_screen ?  <MainGallery elements={slides}/> : null}
             <FrontendContentContainer showBreadCrumbs={false}>
-                {slides && <MainGallery elements={slides}/>}
-                <div className={classNames(settings.wide_screen ? `xl:w-4/5 2xl:w-3/5` : `w-full`, `${contentBgColor} shadow-lg space-y-10 py-14 m-auto px-4 sm:py-14 sm:px-6 lg:px-8`)}>
+                {slides && !settings.wide_screen ? <MainGallery elements={slides}/> : null}
+                <div className={classNames(settings.wide_screen ? `xl:w-5/5 2xl:w-5/5` : `w-full`, `${contentBgColor} shadow-lg space-y-10 py-14 m-auto px-4 sm:py-14 sm:px-6 lg:px-8`)}>
                     {
                         settings.enable_books && <>
                             <ElementSlider

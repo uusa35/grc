@@ -20,7 +20,7 @@ const currentVariants = {
 };
 
 function MainNavBookCategoriesList({categories, type = 'book'}) {
-    const {classNames, trans, getThumb, getLocalized, headerColor, headerBgColor} = useContext(AppContext)
+    const {classNames, trans, getThumb, getLocalized, headerColor, headerBgColor, menuTextColor} = useContext(AppContext)
 
     return (
         <Popover className="flex"
@@ -37,7 +37,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                             )}
                         >
                             <span
-                                className={`capitalize text-${headerColor}-600 dark:text-white font-bold hover:text-${headerColor}-800 dark:hover:text-${headerColor}-50`}>{trans(`${type}_categories`)}</span>
+                                className={`${menuTextColor}`}>{trans(`${type}_categories`)}</span>
                             <ChevronDownIcon
                                 className={classNames(
                                     open ? `text-${headerColor}-400` : `text-${headerColor}-600 dark:text-white`,
@@ -78,7 +78,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                         />
                                                     </div>
                                                     <Link href={route(`frontend.${type}.index`, {category_id: c.id})}
-                                                          className={`mt-6 block text-${headerColor}-600 dark:text-white font-bold hover:text-${headerColor}-400 dark:hover:text-${headerColor}-800 capitalize font-bold`}>
+                                                          className={`mt-6 block ${menuTextColor}`}>
                                                             <span
                                                                 className="absolute z-10 inset-0"
                                                                 aria-hidden="true"/>
@@ -97,7 +97,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                 <div key={parent[getLocalized()]}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route(`frontend.${type}.index`, {category_id: parent.id})}
-                                                          className={` border-b-2 border-gray-100  pb-1 text-${headerColor}-600 dark:text-white hover:text-${headerColor}-400 dark:hover:text-${headerColor}-100 truncate capitalize font-bold`}>
+                                                          className={` border-b-2 border-gray-100  pb-1 ${menuTextColor} `}>
                                                         {parent[getLocalized()]}
                                                     </Link>
                                                     <ul
@@ -111,7 +111,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                                     className="flex">
                                                                     <Link
                                                                         href={route(`frontend.${type}.index`, {category_id: child.id})}
-                                                                        className={`hover:text-${headerColor}-400 dark:hover:text-${headerColor}-100 truncate capitalize font-bold`}>
+                                                                        className={`${menuTextColor}`}>
                                                                         {child[getLocalized()]}
                                                                     </Link>
                                                                 </li>

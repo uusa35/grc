@@ -82,12 +82,14 @@ const AppContextProvider = ({children}) => {
         // currentFont : locale.isRTL ? 'font-bein-bold' : 'font-bein-bold',
         enFont : 'font-tajwal-medium',
         textColor : `text-${settings.main_theme_color}-900 dark:text-white`,
-        mainBgColor: `bg-transparent dark:bg-${settings.main_theme_bg_color}-900`,
+        // mainBgColor: `bg-transparent dark:bg-${settings.main_theme_bg_color}-900`,
+        mainBgColor: `bg-transparent`,
         contentBgColor: `bg-white dark:bg-${settings.main_theme_bg_color}-900`,
         mainColor: settings.main_theme_color,
         bgColor: `bg-${settings.main_theme_bg_color}-100 dark:bg-${settings.main_theme_bg_color}-600`,
         btnClass : `text-${settings.main_theme_color}-900 dark:text-white bg-${settings.main_theme_bg_color}-200 dark:bg-${settings.main_theme_bg_color}-600 hover:bg-${settings.main_theme_bg_color}-400 dark:hover:bg-${settings.main_theme_bg_color}-400 dark:hover:text-white  hover:text-white`,
         headerColor: settings.header_theme_color,
+        menuTextColor : `text-${settings.header_theme_color}-900 dark:text-white hover:text-${settings.header_theme_color}-800 dark:hover:text-${settings.header_theme_color}-600 capitalize font-bold`,
         headerBgColor: settings.header_theme_bg,
         footerColor: settings.footer_theme_color,
         footerBgColor: settings.footer_bg_theme_color
@@ -120,7 +122,7 @@ const AppContextProvider = ({children}) => {
 
     useMemo(() => {
         if (navigator.onLine) {
-            return dispatch(startBootStrapped({currencies, theme: settings.theme}))
+            return dispatch(startBootStrapped({currencies, theme: settings.theme, menuBg : settings.menu_bg}))
         }
     }, [])
 

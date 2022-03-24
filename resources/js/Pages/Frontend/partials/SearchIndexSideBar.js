@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mobileFiltersOpen, type, enablePrice = true}) {
-    const {trans, getLocalized, classNames, mainColor , mainBgColor } = useContext(AppContext)
+    const {trans, getLocalized, classNames, mainColor , mainBgColor, btnClass , textColor  } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
     const {params} = route();
@@ -19,7 +19,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                 <div className="flex">
                     <button
                         type="button"
-                        className={`inline-flex items-center lg:hidden bg-gray-900 dark:bg-${mainColor}-600 p-3 rounded-md shadow-md capitalize`}
+                        className={`inline-flex items-center lg:hidden ${btnClass} p-3 rounded-md shadow-sm capitalize`}
                         onClick={() => setMobileFiltersOpen(true)}
                     >
                         <span className="text-white capitalize">{trans('advanced_search')}</span>
@@ -29,7 +29,7 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                 <div className="flex">
                     <Link
                         href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
-                        className={`inline-flex items-center lg:hidden text-white bg-gray-900 dark:bg-${mainColor}-600 p-3 rounded-md shadow-md capitalize`}
+                        className={`inline-flex items-center lg:hidden ${btnClass} p-3 rounded-sm shadow-md capitalize`}
                     >
                         {trans('clear_search')}
                     </Link>
@@ -39,12 +39,12 @@ export default function SearchIndexSideBar({setMobileFiltersOpen, categories, mo
                 <div className="divide-y divide-gray-200 space-y-3">
                     <div className="flex flex-1 justify-between items-center">
                         <div className="flex">
-                            <h3 className={`capitalize text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('filters')}</h3>
+                            <h3 className={`capitalize ${textColor}`}>{trans('filters')}</h3>
                         </div>
                         <div className="flex">
                             <Link
                                 href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
-                                className={`px-3 py-1 text-${mainColor}-800 dark:text-${mainColor}-100 rounded-md shadow-sm ring-2 ring-gray-400 capitalize`}
+                                className={`px-3 py-1 ${btnClass} rounded-sm shadow-sm ring-1 ring-gray-400 capitalize`}
                             >
                                 {trans('clear_search')}
                             </Link>

@@ -75,13 +75,11 @@ export default function({elements, categories}) {
                     </div>
                     <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                         {/* search SideBar */}
-                        {
-                            params.is_author && <SearchIndexSideBar
+                        <SearchIndexSideBar
                                 type={'user'}
                                 enablePrice={false}
                                 categories={filter(categories, c => c.is_user)}
                                 setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
-                        }
 
                         {/* Product grid */}
                         <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">

@@ -9,7 +9,7 @@ import {getWhatsappLink} from "../../../helpers";
 import {size} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
-export default function Footer() {
+export default function () {
     const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, footerColor , footerBgColor, mainColor } = useContext(AppContext)
     const {auth, settings} = useContext(GlobalContext);
     const {errors} = usePage().props;

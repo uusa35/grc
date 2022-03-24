@@ -35,16 +35,14 @@ const pages = [
 ];
 
 const currentVariants = {
-    hidden : {
-        opacity : 0
+    hidden: {
+        opacity: 0
     },
-    visible : {
-        opacity  : 1 ,
-        // transition : { delay : 0.2 },
+    visible: {
+        opacity: 1,
     },
-    exit : {
-        x : '-100vw',
-        // transition : { ease : 'easeInOut', delay : 0.5 }
+    exit: {
+        x: '-100vw',
     }
 };
 
@@ -57,8 +55,9 @@ function MainNav() {
         headerColor,
         headerBgColor,
         mainBgColor,
-        currentHome,
-        textColor
+        textColor,
+        menuTextColor,
+        contentBgColor,
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
     const {auth, settings, currencies, categories, mgt} = globalContext;
@@ -82,10 +81,10 @@ function MainNav() {
 
     return (
         <div
-            className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-white lg:bg-transparent` : `bg-white :dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
+            className={classNames(settings.wide_screen && offset < 45 ? `bg-red-900 lg:bg-transparent` : `bg-white dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
             {/* Top Nav*/}
             <div
-                className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-white lg:bg-transparent` : `bg-${headerBgColor}-900`, ` text-${headerColor}-100 h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
+                className={classNames(settings.wide_screen && offset < 45 ? `bg-white lg:bg-transparent` : `bg-${headerBgColor}-900 text-white`, `h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
                 <div
                     className="grid grid-cols-6 gap-x-5"
                 >
@@ -94,35 +93,35 @@ function MainNav() {
                         <button className={`col-span-1`} onClick={() => handleTheme()}>
                             <MoonIcon
                                 fill={theme === 'dark' ? headerColor : 'none'}
-                                className={`h-5 w-5 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5`}/>
                             <span className="sr-only">{trans('theme')}</span>
                         </button>
                     }
                     {
                         settings.instagram && <a as={Link} target="_blank" href={settings.instagram}>
                             <FaInstagram
-                                className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 col-span-1`}/>
                             <span className="sr-only">{trans('instagram')}</span>
                         </a>
                     }
                     {
                         settings.facebook && <a as={Link} target="_blank" href={settings.facebook}>
                             <FaFacebook
-                                className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 col-span-1`}/>
                             <span className="sr-only">{trans('facebook')}</span>
                         </a>
                     }
                     {
                         settings.twitter && <a as={Link} target="_blank" href={settings.twitter}>
                             <FaTwitter
-                                className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 col-span-1`}/>
                             <span className="sr-only">{trans('twitter')}</span>
                         </a>
                     }
                     {
                         settings.youtube && <a as={Link} target="_blank" href={settings.youtube}>
                             <FaYoutube
-                                className={`h-5 w-5 col-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 col-span-1`}/>
                             <span className="sr-only">{trans('youtube')}</span>
                         </a>
                     }
@@ -131,7 +130,7 @@ function MainNav() {
                         <a as={Link} target="_blank"
                            href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}>
                             <FaWhatsapp
-                                className={`h-5 w-5 co5-span-1 text-${headerColor}-400 text-${headerColor}-50 hover:text-${headerColor}-800`}/>
+                                className={`h-5 w-5 co5-span-1`}/>
                             <span className="sr-only">{trans('whatsapp')}</span>
                         </a>
                     }
@@ -140,7 +139,7 @@ function MainNav() {
                     {
                         settings.enable_subscriptions ? <Link
                             href={route('frontend.subscriptions')}
-                            className=" mx-2 block text-gray-50 invisible sm:visible text-xs">
+                            className=" mx-2 block invisible sm:visible text-xs">
                             {capitalize(trans('subscriptions'))}
                         </Link> : null
                     }
@@ -148,7 +147,7 @@ function MainNav() {
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        className={`mx-2  block  text-xs text-white `}>
+                        className={`mx-2  block  text-xs  `}>
                         {capitalize(trans(locale.otherLang))}
                     </Link>
                     {
@@ -157,13 +156,13 @@ function MainNav() {
                                 settings.enable_register ?
                                     <Link
                                         href={route('frontend.user.registration')}
-                                        className={`mx-2  block  text-white text-xs`}>
+                                        className={`mx-2  block   text-xs`}>
                                         {capitalize(trans('register'))}
                                     </Link> : null
                             }
                             <Link
                                 href={route('frontend.user.logging')}
-                                className={`mx-2   block text-white hidden text-xs`}>
+                                className={`mx-2   block  hidden text-xs`}>
                                 {capitalize(trans('login'))}
                             </Link>
                         </> : null
@@ -214,7 +213,7 @@ function MainNav() {
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.home')}
-                                        className={`-m-2 p-2 block ${textColor} capitalize`}>
+                                        className={`-m-2 p-2 block ${textColor} ${menuTextColor}`}>
                                         {capitalize(trans('home'))}
                                     </Link>
                                 </div>
@@ -222,7 +221,7 @@ function MainNav() {
                                     settings.enable_books && <div className="flow-root">
                                         <Link
                                             href={route('frontend.book.index')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                            className={`-m-2 p-2 block `}>
                                             {capitalize(trans('library'))}
                                         </Link>
                                     </div>
@@ -232,7 +231,7 @@ function MainNav() {
                                         <div className="flow-root">
                                             <Link
                                                 href={route('frontend.user.index')}
-                                                className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                                className={`-m-2 p-2 block `}>
                                                 {capitalize(trans('experts_and_participants'))}
                                             </Link>
                                         </div>
@@ -243,13 +242,13 @@ function MainNav() {
                                         <div className="flow-root">
                                             <Link
                                                 href={route('frontend.category.index', {is_service: 1})}
-                                                className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize font-bold`}>
+                                                className={`-m-2 p-2 block  font-bold`}>
                                                 {capitalize(trans('consulting_and_training'))}
                                             </Link>
                                         </div>
                                         <Link
                                             href={route('frontend.service.index')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize hidden`}>
+                                            className={`-m-2 p-2 block  hidden`}>
                                             {capitalize(trans('services'))}
                                         </Link>
                                     </div>
@@ -258,7 +257,7 @@ function MainNav() {
                                     settings.enable_courses && <div className="flow-root">
                                         <Link
                                             href={route('frontend.course.index')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                            className={`-m-2 p-2 block `}>
                                             {capitalize(trans('e_learning'))}
                                         </Link>
                                     </div>
@@ -267,7 +266,7 @@ function MainNav() {
                                     settings.enable_subscriptions && <div className="flow-root">
                                         <Link
                                             href={route('frontend.subscription.index')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                            className={`-m-2 p-2 block `}>
                                             {capitalize(trans('subscriptions'))}
                                         </Link>
                                     </div>
@@ -276,7 +275,7 @@ function MainNav() {
                                     settings.enable_products && <div className="flow-root">
                                         <Link
                                             href={route('frontend.product.index')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                            className={`-m-2 p-2 block `}>
                                             {capitalize(trans('products'))}
                                         </Link>
                                     </div>
@@ -285,7 +284,7 @@ function MainNav() {
                                     settings.enable_cart && <div className="flow-root">
                                         <Link
                                             href={route('frontend.cart.index')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                            className={`-m-2 p-2 block `}>
                                             {capitalize(trans('cart'))}
                                         </Link>
                                     </div>
@@ -294,14 +293,14 @@ function MainNav() {
                                     !auth || !auth.id ? <>
                                         <div className="flow-root">
                                             <Link href={route('frontend.user.logging')}
-                                                  className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                                  className={`-m-2 p-2 block `}>
                                                 {capitalize(trans('login'))}
                                             </Link>
                                         </div>
                                         {
                                             settings.enable_register ? <div className="flow-root">
                                                 <Link href={route('frontend.user.registration')}
-                                                      className="-m-2 p-2 block text-gray-900 capitalize">
+                                                      className="-m-2 p-2 block  capitalize">
                                                     {capitalize(trans('register'))}
                                                 </Link>
                                             </div> : null
@@ -309,11 +308,11 @@ function MainNav() {
                                     </> : <div className="flow-root">
                                         {
                                             auth.verified ? <Link href={route('frontend.user.edit', auth.id)}
-                                                                  className="-m-2 p-2 block text-gray-900 capitalize">
+                                                                  className="-m-2 p-2 block  capitalize">
                                                     {capitalize(trans('my_account'))}
                                                 </Link> :
                                                 <a href={route('frontend.user.edit', auth.id)}
-                                                   className="-m-2 p-2 block text-gray-900 capitalize">
+                                                   className="-m-2 p-2 block  capitalize">
                                                     {capitalize(trans('my_account'))}
                                                 </a>
                                         }
@@ -323,7 +322,7 @@ function MainNav() {
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.contactus')}
-                                        className={`-m-2 p-2 block ${textColor} capitalize`}>
+                                        className={`-m-2 p-2 block ${textColor} ${menuTextColor}`}>
                                         {capitalize(trans('contactus'))}
                                     </Link>
                                 </div>
@@ -331,7 +330,7 @@ function MainNav() {
                                     settings.enable_faqs && <div className="flow-root">
                                         <Link
                                             href={route('frontend.faqs')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                            className={`-m-2 p-2 block `}>
                                             {capitalize(trans('faqs'))}
                                         </Link>
                                     </div>
@@ -341,7 +340,7 @@ function MainNav() {
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.terms')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                            className={`-m-2 p-2 block `}>
                                             {capitalize(trans('terms'))}
                                         </Link>
                                     </div>
@@ -351,7 +350,7 @@ function MainNav() {
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.polices')}
-                                            className={`-m-2 p-2 block text-${headerColor}-900 dark:text-white capitalize`}>
+                                            className={`-m-2 p-2 block `}>
                                             {capitalize(trans('policy'))}
                                         </Link>
                                     </div>
@@ -362,7 +361,7 @@ function MainNav() {
                                             dispatch(changeLang(locale.otherLang))
                                         }}
                                         href={route('frontend.change.lang', {lang: locale.otherLang})}
-                                        className="flex flex-row justify-start -m-2 p-2 block text-gray-900 capitalize">
+                                        className="flex flex-row justify-start -m-2 p-2 block  capitalize">
                                         <img
                                             className="w-5 h-5 rounded-full  mx-2"
                                             src={`${baseUrl}images/flags/${locale.otherLang}.png`}
@@ -382,7 +381,7 @@ function MainNav() {
                                             settings.enable_books && <Tab
                                                 className={({selected}, headerColor) =>
                                                     classNames(
-                                                        selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent`,
+                                                        selected ? `text-${headerColor}-600 border-${headerColor}-600` : ` border-transparent`,
                                                         `flex-1 whitespace-nowrap py-2 px-1 border-b-2  font-medium`
                                                     )
                                                 }
@@ -394,7 +393,7 @@ function MainNav() {
                                             settings.enable_products && <Tab
                                                 className={({selected}, headerColor) =>
                                                     classNames(
-                                                        selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent test`,
+                                                        selected ? `border-${headerColor}-600` : ` border-transparent`,
                                                         `flex-1 whitespace-nowrap py-2 px-1 border-b-2  font-medium`
                                                     )
                                                 }
@@ -406,7 +405,7 @@ function MainNav() {
                                             settings.enable_cart && <Tab
                                                 className={({selected}, headerColor) =>
                                                     classNames(
-                                                        selected ? `text-${headerColor}-600 border-${headerColor}-600` : `text-${headerColor}-900 capitalize border-transparent`,
+                                                        selected ? `border-${headerColor}-600` : ` border-transparent`,
                                                         `flex-1 whitespace-nowrap py-2 px-1 border-b-2  font-medium`
                                                     )
                                                 }
@@ -432,7 +431,7 @@ function MainNav() {
                                                     </div>
                                                     <Link
                                                         href={route('frontend.service.index', {category_id: parent.id})}
-                                                        className="mt-6 block text-gray-900 capitalize">
+                                                        className="mt-6 block  capitalize">
                                                         <span className="absolute z-10 inset-0" aria-hidden="true"/>
                                                         {parent[getLocalized()]}
                                                     </Link>
@@ -444,7 +443,7 @@ function MainNav() {
                                                     <div key={sub[getLocalized()]} className="gap-y-5 space-y-2 my-3">
                                                         <Link
                                                             href={route('frontend.service.index', {category_id: sub.id})}
-                                                            className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-5 text-gray-500">
+                                                            className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-50">
                                                             <img src={getThumb(sub.image)} alt=""
                                                                  className="h-10 w-10 rounded-sm mx-2"
                                                                  loading={'lazy'}
@@ -460,7 +459,7 @@ function MainNav() {
                                                                 <li key={child[getLocalized()]} className="flow-root">
                                                                     <Link
                                                                         href={route('frontend.service.index', {category_id: child.id})}
-                                                                        className="-m-2 p-2 flex flex-1 flex-row items-center justify-start text-gray-500 rtl:mr-10 ltr:ml-10">
+                                                                        className="-m-2 p-2 flex flex-1 flex-row items-center justify-start0 rtl:mr-10 ltr:ml-10">
                                                                         <img src={getThumb(child.image)} alt=""
                                                                              className="h-10 w-10 rounded-sm mx-3"
                                                                              loading={'lazy'}
@@ -490,7 +489,7 @@ function MainNav() {
                                                         />
                                                     </div>
                                                     <Link href={route('frontend.book.index', {category_id: parent.id})}
-                                                          className="mt-6 block text-gray-900 capitalize">
+                                                          className="mt-6 block  capitalize">
                                                         <span className="absolute z-10 inset-0" aria-hidden="true"/>
                                                         {parent[getLocalized()]}
                                                     </Link>
@@ -502,7 +501,7 @@ function MainNav() {
                                                     <div key={sub[getLocalized()]} className="gap-y-5 space-y-2 my-3">
                                                         <Link
                                                             href={route('frontend.book.index', {category_id: sub.id})}
-                                                            className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-5 text-gray-500">
+                                                            className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-50">
                                                             <img src={getThumb(sub.image)} alt=""
                                                                  className="h-10 w-10 rounded-sm mx-2"
                                                                  loading={'lazy'}
@@ -518,7 +517,7 @@ function MainNav() {
                                                                 <li key={child[getLocalized()]} className="flow-root">
                                                                     <Link
                                                                         href={route('frontend.book.index', {category_id: child.id})}
-                                                                        className="-m-2 p-2 flex flex-1 flex-row items-center justify-start text-gray-500 rtl:mr-10 ltr:ml-10">
+                                                                        className="-m-2 p-2 flex flex-1 flex-row items-center justify-start0 rtl:mr-10 ltr:ml-10">
                                                                         <img src={getThumb(child.image)} alt=""
                                                                              className="h-10 w-10 rounded-sm mx-3"
                                                                              loading={'lazy'}
@@ -553,8 +552,8 @@ function MainNav() {
             </Transition.Root>
 
             <header
-                className={classNames(settings.wide_screen && offset < 200 && currentHome ? `bg-transparent border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 `, ` text-${headerColor}-800 dark:text-white relative py-2 max-w-full`)}>
-                <nav aria-label="Top" className="w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto">
+                className={classNames(settings.wide_screen && offset < 45 ? `bg-red-900 lg:bg-transparent border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 `, `relative py-2 max-w-full`)}>
+                <nav aria-label="Top" className={`w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto`}>
                     <div className="h-20 flex items-center">
                         <button
                             type="button"
@@ -589,7 +588,7 @@ function MainNav() {
                                 <Link
                                     href={route('frontend.home')}
                                     // onClick={() => dispatch(setParentModule('home'))}
-                                    className={classNames(parentModule == 'home' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max text-${headerColor}-800 dark:text-white text-center font-bold items-center   hover:text-${headerColor}-400 hover:rounded-sm capitalize overflow-hidden`)}
+                                    className={classNames(parentModule == 'home' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center  hover:rounded-sm capitalize overflow-hidden`)}
                                 >
                                     {capitalize(trans('home'))}
                                 </Link>
@@ -597,7 +596,7 @@ function MainNav() {
                                     settings.enable_products ? <Link
                                         href={route('frontend.product.index')}
                                         // onClick={() => dispatch(setParentModule('product'))}
-                                        className={classNames(parentModule == 'product' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize overflow-hidden`)}
+                                        className={classNames(parentModule == 'product' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('products'))}
                                     </Link> : null
@@ -606,7 +605,7 @@ function MainNav() {
                                     settings.enable_books ? <Link
                                         href={route('frontend.book.index')}
                                         // onClick={() => dispatch(setParentModule('book'))}
-                                        className={classNames(parentModule == 'book' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize overflow-hidden`)}
+                                        className={classNames(parentModule == 'book' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('library'))}
                                     </Link> : null
@@ -620,7 +619,7 @@ function MainNav() {
                                     settings.enable_books ? <Link
                                         href={route('frontend.user.index', {is_author: true})}
                                         // onClick={() => dispatch(setParentModule('user'))}
-                                        className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize overflow-hidden`)}
+                                        className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('experts_and_participants'))}
                                     </Link> : null
@@ -630,7 +629,7 @@ function MainNav() {
                                         <Link
                                             href={route('frontend.service.index')}
                                             // onClick={() => dispatch(setParentModule('service'))}
-                                            className={classNames(parentModule == 'service' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize hidden`)}
+                                            className={classNames(parentModule == 'service' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize hidden`)}
                                         >
                                             {capitalize(trans('consulting_and_training'))}
                                         </Link>
@@ -641,7 +640,7 @@ function MainNav() {
                                 {
                                     settings.enable_courses ? <Link
                                         href={route('frontend.course.index')}
-                                        className={classNames(parentModule == 'course' ? `border-b border-${headerColor}-500` : ``, `flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                        className={classNames(parentModule == 'course' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                     >
                                         {capitalize(trans('e_learning'))}
                                     </Link> : null
@@ -651,13 +650,13 @@ function MainNav() {
                                     settings.corporate_mode ? <>
                                         <Link
                                             href={`/#our_services`}
-                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_services'))}
                                         </Link>
                                         <a
                                             href={`https://shop.mgt-sa.com`}
-                                            className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                            className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_shop'))}
                                         </a>
@@ -667,7 +666,7 @@ function MainNav() {
                                 {
                                     settings.enable_joinus ? <Link
                                         href={route('frontend.joinus')}
-                                        className={classNames(parentModule == 'joinus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                        className={classNames(parentModule == 'joinus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                     >
                                         {capitalize(trans('joinus'))}
                                     </Link> : null
@@ -675,14 +674,14 @@ function MainNav() {
 
                                 <Link
                                     href={route('frontend.aboutus')}
-                                    className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                    className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                 >
                                     {capitalize(trans('aboutus'))}
                                 </Link>
 
                                 <Link
                                     href={route('frontend.contactus')}
-                                    className={classNames(parentModule == 'contactus' ? `border-b border-${headerColor}-500` : ``, `hidden 2xl:flex sm:min-w-max  text-center font-bold items-center   hover:text-${headerColor}-400 capitalize`)}
+                                    className={classNames(parentModule == 'contactus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                 >
                                     {capitalize(trans('contactus'))}
                                 </Link>
@@ -697,13 +696,13 @@ function MainNav() {
                                                         parentModule == 'contactus' || parentModule == 'subscriptions' || parentModule == 'polices' || parentModule == 'terms' || parentModule == 'aboutus' || parentModule == 'faqs'
                                                             ? 'border-b border-hippie-blue-500 pb-2'
                                                             : 'text-black',
-                                                        'group inline-flex items-center text-black font-extrabold capitalize'
+                                                        'group inline-flex items-center font-extrabold capitalize'
                                                     )}
                                                 >
                                                     <span>{trans('pages')}</span>
                                                     <ChevronDownIcon
                                                         className={classNames(
-                                                            open ? 'text-white' : 'text-white',
+                                                            open ? '' : '',
                                                             'rtl:mr-2 ltr:ml-2 w-5 group-hover:text-gray-100'
                                                         )}
                                                         aria-hidden="true"
@@ -720,7 +719,7 @@ function MainNav() {
                                                     leaveTo="opacity-0 translate-y-1"
                                                 >
                                                     <Popover.Panel
-                                                        className="absolute top-full text-gray-500 z-50 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
+                                                        className="absolute top-full0 z-50 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
                                                         <div
                                                             className="z-80 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                                             <div
@@ -729,10 +728,10 @@ function MainNav() {
                                                                 {
                                                                     settings.enable_subscriptions && <Link
                                                                         href={route('frontend.subscriptions')}
-                                                                        className={`m-3 p-3 flex items-start rounded-lg hover:text-${headerColor}-400 capitalize`}
+                                                                        className={`m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
                                                                     >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 text-gray-800"
+                                                                             className="h-6 w-6 "
                                                                              viewBox="0 0 20 20" fill="currentColor">
                                                                             <path
                                                                                 d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
@@ -741,7 +740,7 @@ function MainNav() {
                                                                                   clipRule="evenodd"/>
                                                                         </svg>
                                                                         <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className="text-base font-medium text-gray-900 capitalize">{trans('subscriptions')}</p>
+                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('subscriptions')}</p>
                                                                         </div>
                                                                     </Link>
                                                                 }
@@ -749,10 +748,10 @@ function MainNav() {
                                                                 {/* contact us page */}
                                                                 <Link
                                                                     href={route('frontend.contactus')}
-                                                                    className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}
+                                                                    className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
                                                                 >
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
-                                                                         className="h-6 w-6 text-gray-800" fill="none"
+                                                                         className="h-6 w-6 " fill="none"
                                                                          viewBox="0 0 24 24" stroke="currentColor">
                                                                         <path strokeLinecap="round"
                                                                               strokeLinejoin="round"
@@ -760,16 +759,16 @@ function MainNav() {
                                                                               d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
                                                                     </svg>
                                                                     <div className="ltr:ml-5 rtl:mr-5">
-                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('contactus')}</p>
+                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('contactus')}</p>
                                                                     </div>
                                                                 </Link>
 
                                                                 <Link
                                                                     href={route('frontend.aboutus')}
-                                                                    className={`-m-3 p-3 flex items-start rounded-lg hover:text-${headerColor}-400 capitalize`}
+                                                                    className={`-m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
                                                                 >
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
-                                                                         className="h-6 w-6 text-gray-800" fill="none"
+                                                                         className="h-6 w-6 " fill="none"
                                                                          viewBox="0 0 24 24" stroke="currentColor">
                                                                         <path d="M12 14l9-5-9-5-9 5 9 5z"/>
                                                                         <path
@@ -780,17 +779,17 @@ function MainNav() {
                                                                               d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
                                                                     </svg>
                                                                     <div className="ltr:ml-5 rtl:mr-5">
-                                                                        <p className="text-base font-medium text-gray-900 capitalize">{trans('aboutus')}</p>
+                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('aboutus')}</p>
                                                                     </div>
                                                                 </Link>
 
                                                                 {settings[getLocalized('services')] && size(settings[getLocalized('services')]) > 50 ?
                                                                     <Link
                                                                         href={route('frontend.services')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
                                                                     >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 text-gray-800"
+                                                                             className="h-6 w-6 "
                                                                              fill="none"
                                                                              viewBox="0 0 24 24" stroke="currentColor">
                                                                             <path strokeLinecap="round"
@@ -799,7 +798,7 @@ function MainNav() {
                                                                                   d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                                                                         </svg>
                                                                         <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className="text-base font-medium text-gray-900 capitalize">{trans('our_services')}</p>
+                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('our_services')}</p>
                                                                         </div>
                                                                     </Link> : null
                                                                 }
@@ -807,9 +806,9 @@ function MainNav() {
                                                                 {settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ?
                                                                     <Link
                                                                         href={route('frontend.polices')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}>
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}>
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 text-gray-800"
+                                                                             className="h-6 w-6 "
                                                                              fill="none"
                                                                              viewBox="0 0 24 24" stroke="currentColor">
                                                                             <path strokeLinecap="round"
@@ -818,7 +817,7 @@ function MainNav() {
                                                                                   d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                                                                         </svg>
                                                                         <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className="text-base font-medium text-gray-900 capitalize">{trans('polices')}</p>
+                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('polices')}</p>
                                                                         </div>
                                                                     </Link> : null
                                                                 }
@@ -826,10 +825,10 @@ function MainNav() {
                                                                     settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ?
                                                                         <Link
                                                                             href={route('frontend.terms')}
-                                                                            className={`-m-3 p-3 flex items-start rounded-lg hover:text-${headerColor}-400 capitalize`}
+                                                                            className={`-m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
                                                                         >
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                 className="h-6 w-6 text-gray-800"
+                                                                                 className="h-6 w-6 "
                                                                                  fill="none"
                                                                                  viewBox="0 0 24 24"
                                                                                  stroke="currentColor">
@@ -839,17 +838,17 @@ function MainNav() {
                                                                                       d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
                                                                             </svg>
                                                                             <div className="ltr:ml-5 rtl:mr-5">
-                                                                                <p className="text-base font-medium text-gray-900 capitalize">{trans('terms')}</p>
+                                                                                <p className={`text-base font-medium  ${menuTextColor}`}>{trans('terms')}</p>
                                                                             </div>
                                                                         </Link> : null
                                                                 }
                                                                 {
                                                                     settings.enable_faqs ? <Link
                                                                         href={route('frontend.faqs')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
                                                                     >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 text-gray-800"
+                                                                             className="h-6 w-6 "
                                                                              fill="none"
                                                                              viewBox="0 0 24 24" stroke="currentColor">
                                                                             <path strokeLinecap="round"
@@ -858,17 +857,17 @@ function MainNav() {
                                                                                   d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                                         </svg>
                                                                         <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className="text-base font-medium text-gray-900 capitalize">{trans('faqs')}</p>
+                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('faqs')}</p>
                                                                         </div>
                                                                     </Link> : null
                                                                 }
                                                                 {
                                                                     settings.enable_joinus ? <Link
                                                                         href={route('frontend.joinus')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg text-gray-900 hover:text-${headerColor}-400 capitalize`}
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
                                                                     >
                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 text-gray-800"
+                                                                             className="h-6 w-6 "
                                                                              fill="none"
                                                                              viewBox="0 0 24 24" stroke="currentColor">
                                                                             <path strokeLinecap="round"
@@ -877,7 +876,7 @@ function MainNav() {
                                                                                   d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                                         </svg>
                                                                         <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className="text-base font-medium text-gray-900 capitalize">{trans('joinus')}</p>
+                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('joinus')}</p>
                                                                         </div>
                                                                     </Link> : null
                                                                 }
@@ -899,7 +898,7 @@ function MainNav() {
                             className="ml-auto flex flex-1 justify-end items-center"
                         >
                             {/* Search */}
-                            {settings.enable_books || settings.enable_products ?  <SearchField/> : null }
+                            {settings.enable_books || settings.enable_products ? <SearchField/> : null}
                             <div
                                 className="hidden 2xl:flex lg:items-center lg:justify-end px-1 rtl:mr-2 ltr:ml-2">
                                 <a
@@ -908,7 +907,7 @@ function MainNav() {
                                     }}
                                     href={'#'}
                                     // href={route('frontend.change.lang', {lang: locale.otherLang})}
-                                    className={`flex flex-row items-center justify-center text-center text-${headerColor}-800 dark:text-white hover:bg-${headerColor}-400 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-400`}>
+                                    className={`flex flex-row items-center justify-center text-center  hover:bg-${headerColor}-400 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-400`}>
                                     {locale.otherLang}
                                 </a>
                             </div>
@@ -949,7 +948,7 @@ function MainNav() {
                                                         {({active}) => (
                                                             <button
                                                                 onClick={() => dispatch(setCurrency(element))}
-                                                                className={classNames(active ? `bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600` : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  text-white')}
+                                                                className={classNames(active ? `bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600` : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  ')}
                                                             >
                                                                 <img
                                                                     className="h-5 w-5 rounded-full object-cover"
@@ -976,7 +975,7 @@ function MainNav() {
                                         className="rounded-full flex  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                                         <span className="sr-only">Open user menu</span>
                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                             className={`h-7 w-7 hover:text-${headerColor}-400`} fill={'none'}
+                                             className={`h-7 w-7 ${menuTextColor}`} fill={'none'}
                                              viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                   d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -993,13 +992,13 @@ function MainNav() {
                                     leaveTo="transform opacity-0 scale-95"
                                 >
                                     <Menu.Items
-                                        className="origin-top-right absolute rtl:-mr-48 ltr:-ml-48 mt-2 w-48 rounded-md shadow-lg py-1 bg-black text-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        className={`${contentBgColor} origin-top-right absolute rtl:-mr-48 ltr:-ml-48 mt-2 w-48 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none`}>
                                         {
                                             isAdminOrAbove && auth && auth.id && <Menu.Item>
                                                 {({active}) => (
                                                     <Link
                                                         href={route('backend.home')}
-                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
+                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                     >
                                                         {trans('backend')}
                                                     </Link>
@@ -1012,7 +1011,7 @@ function MainNav() {
                                                     {({active}) => (
                                                         <Link
                                                             href={route('frontend.user.logging')}
-                                                            className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
+                                                            className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                         >
                                                             {trans('login')}
                                                         </Link>
@@ -1025,13 +1024,12 @@ function MainNav() {
                                                             <>
                                                                 {auth.verified ?
                                                                     <Link
-                                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
+                                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}
                                                                     </Link> :
                                                                     <a
-                                                                        as={Link}
-                                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
+                                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}
                                                                     </a>
@@ -1044,7 +1042,7 @@ function MainNav() {
                                                             {({active}) => (
                                                                 <Link
                                                                     href={route('backend.home')}
-                                                                    className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
+                                                                    className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                                 >
                                                                     {trans('backend')}
                                                                 </Link>
@@ -1058,7 +1056,7 @@ function MainNav() {
                                                                     e.preventDefault();
                                                                     document.getElementById('logout-form').submit()
                                                                 }}
-                                                                className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', 'block px-4 py-2 font-bold ')}
+                                                                className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                             >{trans('logout')}</button>
                                                         )}
                                                     </Menu.Item>
@@ -1074,11 +1072,11 @@ function MainNav() {
                                     <Link href={route('frontend.cart.index')}
                                           className="group -m-2 p-2 flex items-center">
                                         <ShoppingBagIcon
-                                            className={`flex-shink-0 h-6 w-6 cursor-pointer hover:text-${headerColor}-400`}
+                                            className={`flex-shink-0 h-6 w-6 cursor-pointer ${menuTextColor}`}
                                             aria-hidden="true"
                                         />
                                         <span
-                                            className={classNames(locale.isRTL ? `-right-2` : `-left-2`, "relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 text-gray-50 group-hover:text-gray-300")}>
+                                            className={classNames(locale.isRTL ? `-right-2` : `-left-2`, `text-white relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 group-hover:text-gray-300`)}>
                                             {cart.totalItems}
                                     </span>
                                         <span className="sr-only">items in cart, view bag</span>

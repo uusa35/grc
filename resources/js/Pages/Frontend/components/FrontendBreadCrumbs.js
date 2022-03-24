@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setParentModule} from "../../redux/actions";
 
 function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
-    const {trans, mainColor } = useContext(AppContext);
+    const {trans, mainColor, contentBgColor  } = useContext(AppContext);
     const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -21,9 +21,9 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
 
     return (
         <div
-            className="bg-white dark:bg-transparent flex flex-1 flex-row justify-between items-center rounded-md shadow-sm p-5 w-auto mt-3">
+            className={`${contentBgColor} flex flex-1 flex-row justify-between items-center rounded-t-md shadow-sm p-5 w-auto mt-3`}>
             <nav
-                className="flex flex-1" aria-label="Breadcrumb">
+                className="flex flex-1 " aria-label="Breadcrumb">
                 <ol className="flex flex-1 flex-row items-center space-x-4  max-w-max">
                     <li className="flex flex-1 flex-row justify-start items-center">
                         <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true" color={mainColor}/>

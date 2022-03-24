@@ -8,7 +8,7 @@ import {AppContext} from "../../context/AppContext";
 import {map, filter} from 'lodash'
 
 export default function FrontendSortIndexMenu({showPrice = true}) {
-    const {trans, getLocalized, classNames, mainColor, mainBgColor} = useContext(AppContext);
+    const {trans, getLocalized, classNames, mainColor, mainBgColor, textColor } = useContext(AppContext);
     const {sort} = useSelector(state => state);
     const dispatch = useDispatch();
     const sortOptions = [
@@ -20,7 +20,7 @@ export default function FrontendSortIndexMenu({showPrice = true}) {
         <div className="flex w-full sm:w-auto justify-end items-center mt-5 sm:mt-0">
             <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button
-                    className={`w-40 group inline-flex px-3 py-1 mt-flex flex-1 justify-between items-center gap-x-3 text-${mainColor}-800 dark:text-${mainColor}-50 hover:text-${mainColor}-800 dark:text-${mainColor}-50 ring-2 text-${mainColor}-800 dark:text-${mainColor}-50 rounded-md`}>
+                    className={`w-40 group inline-flex px-3 py-1 mt-flex flex-1 justify-between items-center gap-x-3 ${textColor} ring-2 rounded-sm`}>
                     {trans('sort')}
                     <ChevronDownIcon
                         className={`flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-${mainColor}-800 dark:text-${mainColor}-400 group-hover:text-${mainColor}-800 dark:group-hover:text-${mainColor}-100`}
@@ -37,7 +37,7 @@ export default function FrontendSortIndexMenu({showPrice = true}) {
                     leaveTo="transform opacity-0 scale-95"
                 >
                     <Menu.Items
-                        className="origin-top-right absolute z-50 -right-20 mt-2 w-56 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        className="origin-top-right absolute z-50 -right-20 mt-2 w-56 rounded-sm shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="py-1">
                             {map(filter(sortOptions, o => o.display), option => (
                                 <Menu.Item key={option.name}>

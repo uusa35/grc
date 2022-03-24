@@ -44,3 +44,4 @@ export const SET_SEARCH_TYPE = 'SET_SEARCH_TYPE';
 export const SET_TRANSLATIONS = 'SET_TRANSLATIONS';
 export const GET_TRANSLATIONS = 'GET_TRANSLATIONS';
 export const SET_THEME  = 'SET_THEME';
+export const SET_MENU_BG  = 'SET_MENU_BG';
