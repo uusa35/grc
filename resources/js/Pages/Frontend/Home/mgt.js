@@ -156,10 +156,8 @@ export default React.memo(function({
 
     return (
         <FrontendContainer showBreadCrumbs={false}>
-            {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
+            {slides && <MainGallery elements={slides}/>}
             <FrontendContentContainer showBreadCrumbs={false}>
-                {slides && <MainGallery elements={slides}/>}
-
                     {/*why wasta and daman */}
                     <motion.div
                         ref={elementOne}
@@ -201,7 +199,7 @@ export default React.memo(function({
 
 
                     <div
-                        className={`xl:w-4/5 2xl:w-3/5 m-auto space-y-20 mt-10 rounded-lg`}>
+                        className={`w-full m-auto space-y-20 mt-10 rounded-lg`}>
                         {/* shop */}
                         <motion.div
                             className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent "
