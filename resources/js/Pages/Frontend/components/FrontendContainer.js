@@ -31,7 +31,7 @@ const FrontendContainer = ({children}) => {
 
     return (
         <div
-            className={classNames(theme === `dark` ? `bg-black` : ``, `${theme} ${currentFont} flex overflow-hidden text-sm md:text-sm lg:text-sm capitalize`)}
+            className={classNames(theme === `dark` ? `bg-black` : ``, `${theme} ${currentFont} flex flex-col overflow-hidden text-sm md:text-sm lg:text-sm capitalize`)}
             dir={locale.dir}
             // style={{backgroundImage: `url(${getThumb(settings.main_bg)})`}}
         >

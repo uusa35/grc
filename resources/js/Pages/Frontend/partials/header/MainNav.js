@@ -82,7 +82,7 @@ function MainNav() {
 
     return (
         <div
-            className={classNames(settings.wide_screen && offset < 45 ? `bg-red-900 lg:bg-transparent` : `bg-white dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
+            className={classNames(settings.wide_screen && offset < 45 ? `lg:bg-transparent` : `bg-white dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
             {/* Top Nav*/}
             <div
                 className={classNames(settings.wide_screen && offset < 45 ? `bg-white lg:bg-transparent` : `bg-${headerBgColor}-900 text-white`, `h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
@@ -553,7 +553,7 @@ function MainNav() {
             </Transition.Root>
 
             <header
-                className={classNames(settings.wide_screen && offset < 45 ? `bg-red-900 lg:bg-transparent border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 `, `relative py-2 max-w-full`)}>
+                className={classNames(settings.wide_screen && offset < 45 ? `lg:bg-transparent border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 `, `relative py-2 max-w-full`)}>
                 <nav aria-label="Top" className={`w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto`}>
                     <div className="h-20 flex items-center">
                         <button
@@ -1086,7 +1086,7 @@ function MainNav() {
                                             aria-hidden="true"
                                         />
                                         <span
-                                            className={classNames(locale.isRTL ? `-right-2` : `-left-2`, `text-white relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium bg-red-900 group-hover:text-gray-300`)}>
+                                            className={classNames(locale.isRTL ? `-right-2` : `-left-2`, `text-white relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium group-hover:text-gray-300`)}>
                                             {cart.totalItems}
                                     </span>
                                         <span className="sr-only">items in cart, view bag</span>
