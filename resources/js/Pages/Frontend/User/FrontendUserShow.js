@@ -255,7 +255,7 @@ export default function({element}) {
                                                         <Disclosure.Panel as="div" className="pb-6">
                                                             <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                                                                 <div
-                                                                    className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
+                                                                    className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-4 2xl:grid-cols-4 xl:gap-x-8 gap-x-6">
                                                                     {map(element.products, p => (
                                                                         <NormalProductWidget element={p} key={p.id}/>
                                                                     ))}
@@ -301,7 +301,7 @@ export default function({element}) {
                                                         <Disclosure.Panel as="div" className="pb-6">
                                                             <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                                                                 <div
-                                                                    className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
+                                                                    className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-4 2xl:grid-cols-4 xl:gap-x-8 gap-x-6">
                                                                     {map(element.books, p => (
                                                                         <NormalBookWidget element={p} key={p.id}/>
                                                                     ))}
@@ -321,8 +321,8 @@ export default function({element}) {
                     <SocialIconShare/>
                     {/* related items */}
                     {
-                        settings.enable_books && element.books && element.books.length > 0 &&
-                        <RelatedItems elements={element.books} type={'book'} title={trans('authors_books')}/>
+                        // settings.enable_books && element.books && element.books.length > 0 &&
+                        // <RelatedItems elements={element.books} type={'book'} title={trans('authors_books')}/>
                     }
                 </div>
             </FrontendContentContainer>
