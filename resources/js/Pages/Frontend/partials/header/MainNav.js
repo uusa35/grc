@@ -65,6 +65,7 @@ function MainNav() {
     const [open, setOpen] = useState(false)
     const [offset, setOffset] = useState(0);
     const dispatch = useDispatch();
+    const userCategories  = useMemo(() => filter(categories, c => c.is_user), [categories])
     const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
     const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
 
@@ -622,6 +623,15 @@ function MainNav() {
                                         className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('experts_and_participants'))}
+                                    </Link> : null
+                                }
+                                {
+                                    settings.enable_users ? <Link
+                                        href={route('frontend.user.index', {is_company: true})}
+                                        // onClick={() => dispatch(setParentModule('user'))}
+                                        className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
+                                    >
+                                        {capitalize(trans('merchants'))}
                                     </Link> : null
                                 }
                                 {

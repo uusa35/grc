@@ -121,6 +121,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         android_version: setting.android_version,
         apple_version: setting.apple_version,
         enable_products : setting.enable_products,
+        enable_users : setting.enable_users,
         enable_prices : setting.enable_prices,
         enable_courses : setting.enable_courses,
         enable_services : setting.enable_services,
@@ -881,6 +882,53 @@ accept="image/jpg, image/jpeg , image/png"
                                         <p className={`mt-2  text-gray-500`}>
                                             {errors.enable_products &&
                                             <div className={`text-red-900`}>{errors.enable_products}</div>}
+                                        </p>
+                                    </div>
+                                </fieldset>
+
+                                {/*enable_users*/}
+                                <fieldset className="mt-1 col-span-2">
+                                    <div>
+                                        <legend
+                                            className={`text-base  text-gray-900`}>{trans('enable_users')}</legend>
+                                    </div>
+                                    <div className="mt-4 space-y-4">
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_users"
+                                                name="enable_users"
+                                                type="radio"
+                                                value={1}
+                                                defaultChecked={setting.enable_users}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_users"
+                                                   className="ml-3 block   text-gray-800">
+                                                {trans('yes')}
+                                            </label>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <input
+                                                onChange={handleChange}
+                                                id="enable_users"
+                                                name="enable_users"
+                                                type="radio"
+                                                value={0}
+                                                defaultChecked={!setting.enable_users}
+                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                            />
+                                            <label htmlFor="enable_users"
+                                                   className="ml-3 block   text-gray-800">
+                                                {trans('no')}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <ToolTipWidget/>
+                                    <div>
+                                        <p className={`mt-2  text-gray-500`}>
+                                            {errors.enable_users &&
+                                            <div className={`text-red-900`}>{errors.enable_users}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
@@ -2335,6 +2383,58 @@ accept="image/jpg, image/jpeg , image/png"
                                     {errors.main_bg && <div className={`text-red-900`}>{errors.main_bg}</div>}
                                 </p>
                             </div>
+
+                            {/*menu_bg*/}
+                            <div className="sm:col-span-3">
+                                <label htmlFor="menu_bg"
+                                       className={`block text-sm font-medium text-gray-800`}>
+                                    {trans('menu_bg')}
+                                </label>
+                                <div className="mt-1 flex flex-row flex-1 items-center">
+                                    <input
+                                        onChange={e => setData('menu_bg', e.target.files[0])}
+                                        type="file"
+                                        name="menu_bg"
+                                        id="menu_bg"
+                                        autoComplete="menu_bg"
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                    />
+                                    {setting.menu_bg && <div
+                                        className="relative h-28 w-28">
+                                        <img
+                                            className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
+                                            src={getThumb(setting.menu_bg)}
+                                            alt=""/>
+                                        <Link
+                                            href={route(`backend.element.clear`, {
+                                                id: setting.id,
+                                                'model': 'setting',
+                                                colName: 'menu_bg'
+                                            })}
+                                            type="button"
+                                            className="absolute inset-2  focus:outline-none">
+                                            {/*<span className="sr-only">View details for {img.title}</span>*/}
+                                            <span
+                                                className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                        d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </div>}
+                                </div>
+                                <ToolTipWidget message={trans('product_menu_bg_instruction')}/>
+                                <p className={`text-xs text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('menu_bg_best_fit')}
+                                </p>
+                                <p className={`mt-2 text-xs text-gray-500`}>
+                                    {errors.menu_bg && <div className={`text-red-900`}>{errors.menu_bg}</div>}
+                                </p>
+                            </div>
+
                             {/*    qr */}
                             <div className="sm:col-span-3">
                                 <label htmlFor="qr"

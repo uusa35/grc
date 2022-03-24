@@ -98,6 +98,7 @@ class SettingController extends Controller
             $request->hasFile('shipment_prices') ? $this->saveMimes($setting, $request, ['shipment_prices'], ['1080', '1440'], true) : null;
             $request->hasFile('app_logo') ? $this->saveMimes($setting, $request, ['app_logo'], ['1000', '1000'], false) : null;
             $request->hasFile('main_bg') ? $this->saveMimes($setting, $request, ['main_bg'], ['1000', '1000'], false) : null;
+            $request->hasFile('menu_bg') ? $this->saveMimes($setting, $request, ['menu_bg'], ['1900', '255'], false) : null;
             return redirect()->route('backend.setting.edit', $setting->id)->with('success', trans('general.process_success'));
         }
         return redirect()->back()->withErrors(trans('general.process_failure'));

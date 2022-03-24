@@ -149,6 +149,7 @@ class UserController extends Controller
             $request->has('categories') ? $user->categories()->sync($request->categories) : null;
             $request->hasFile('image') ? $this->saveMimes($user, $request, ['image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('qr') ? $this->saveMimes($user, $request, ['qr'], ['300', '300'], false) : null;
+            $request->hasFile('banner') ? $this->saveMimes($user, $request, ['banner'], ['1900', '255'], false) : null;
             $request->hasFile('file') ? $this->savePath($user, $request, 'file') : null;
             return redirect()->back()->with('success', trans('general.process_success'));
         }

@@ -1359,6 +1359,57 @@ export default function({user, roles, elementCategories, categories, countries, 
                                     {errors.qr && <div className={`text-red-900`}>{errors.qr}</div>}
                                 </p>
                             </div>
+
+                            {/*    banner */}
+                            <div className="sm:col-span-3">
+                                <label htmlFor="banner"
+                                       className={`block   text-gray-800`}>
+                                    {trans('banner')}
+                                </label>
+                                <div className="mt-1 flex flex-row flex-1 items-center h-32">
+                                    <input
+                                        onChange={e => setData('banner', e.target.files[0])}
+                                        type="file"
+                                        name="banner"
+                                        id="banner"
+                                        autoComplete="banner"
+                                        className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                    {user.banner && <div
+                                        className="relative h-28 w-28">
+                                        <img
+                                            className={`h-28 w-28 object-cover pointer-events-none group-hover:opacity-100 rounded-md shadow-md`}
+                                            src={getThumb(user.banner)}
+                                            alt=""/>
+                                        <Link
+                                            href={route(`backend.element.clear`, {
+                                                id: user.id,
+                                                'model': parentModule,
+                                                colName: 'banner'
+                                            })}
+                                            type="button"
+                                            className="absolute inset-2  focus:outline-none">
+                                            {/*<span className="sr-only">View details for {img.title}</span>*/}
+                                            <span
+                                                className={'rounded-full inline-flex p-3 ring-4 ring-red-900 text-white bg-red-600 opacity-80 shadow-lg'}
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                        d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    </div>}
+                                </div>
+                                <ToolTipWidget message={trans('user_banner_instruction')}/>
+                                <p className={` text-red-500 rtl:text-left ltr:text-right`}>
+                                    {trans('square_best_fit')}
+                                </p>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.banner && <div className={`text-red-900`}>{errors.banner}</div>}
+                                </p>
+                            </div>
                         </FormSection>
                         {/* more booleans */}
 

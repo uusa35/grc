@@ -34,10 +34,7 @@ class HomeController extends Controller
         $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('product_attributes')->orderBy('order', 'asc')->get());
         $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->onHome()->authors()->notClients()->notAdmins()->orderBy('order', 'asc')->get());
         $categoriesWithProducts = CategoryExtraLightResource::collection(Category::active()->onlyParent()->onlyForProducts()->where('is_featured', true)->orderBy('order', 'asc')->limit(3)->with('products.product_attributes')->get());
-        if ($settings->corporate_mode) {
-            return inertia('Frontend/Home/HomeCorporate', compact('slides','newOnHomeProducts'));
-        }
-        return inertia('Frontend/Home/HomePage', compact('slides', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts', 'categoriesWithProducts'));
+        return inertia('Frontend/Home/'.env('APP_NAME'), compact('slides', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts', 'categoriesWithProducts'));
     }
 
     public function changeLang($lang)
