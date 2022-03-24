@@ -48,7 +48,7 @@ export default function(cart = initialState, action) {
                 items: action.payload.items,
                 discount: 0,
                 total: round(parseFloat(sumBy(action.payload.items, 'price')), 2),
-                netTotal: round(parseFloat(sumBy(action.payload.items, 'price') - parseFloat(cart.shipmentFees)), 2),
+                netTotal: round(parseFloat(sumBy(action.payload.items, 'price') + parseFloat(cart.shipmentFees)), 2),
                 totalItems: parseInt(sumBy(map(action.payload.items, item => item.cart_id === action.payload.cart_id ? action.payload : item), 'qty')),
                 merchants: action.payload.merchants,
             }
@@ -59,7 +59,7 @@ export default function(cart = initialState, action) {
                 items: filter(items, item => item.cart_id !== action.payload),
                 discount: 0,
                 total: round(parseFloat(sumBy(items, 'price')), 2),
-                netTotal: round(parseFloat(sumBy(items, 'price') - parseFloat(cart.shipmentFees)), 2),
+                netTotal: round(parseFloat(sumBy(items, 'price') + parseFloat(cart.shipmentFees)), 2),
                 totalItems: parseInt(sumBy(map(items, item => item.cart_id === action.payload.cart_id ? action.payload : item), 'qty')),
                 merchants: filter(items, i => i.merchant_id)
             };
