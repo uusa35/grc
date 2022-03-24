@@ -22,7 +22,7 @@ export default function({order, settings}) {
             id: 1,
             name: 'paypal',
             paymentRoute: route('paypal.api.payment.create'),
-            enabled: settings.enable_payment_online
+            enabled: settings.enable_payment_online && settings.enable_books
         },
         {
             id: 2,
