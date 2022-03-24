@@ -42,7 +42,7 @@ export default React.memo(function({
             <FrontendContentContainer showBreadCrumbs={false}>
                 {slides && !settings.wide_screen ? <MainGallery elements={slides}/> : null}
                 <div
-                    className={classNames(settings.wide_screen ? `xl:w-5/5 2xl:w-5/5` : `w-full`, `${contentBgColor} shadow-lg space-y-10 py-14 m-auto px-4 sm:py-14 sm:px-6 lg:px-8`)}>
+                    className={classNames(settings.wide_screen ? `xl:w-5/5 2xl:w-5/5` : `w-full`, `${contentBgColor} min-h-screen space-y-10 py-14 m-auto px-4 sm:py-14 sm:px-6 lg:px-8`)}>
                     {
                         settings.enable_books && <>
                             <ElementSlider

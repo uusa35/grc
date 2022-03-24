@@ -33,12 +33,12 @@ class FrontendUserController extends Controller
      */
     public function index(UserFilters $filters)
     {
-//        dd(Category::active()->onlyParent()->with('children.children')->first());
         $validator = validator(request()->all(), ['search' => 'nullable']);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = new UserCollection(User::active()->filters($filters)->notAdmins()->notClients()
+            ->whereHas('role', fn ($q) => $q->where('is_visible', true))
             ->paginate(SELF::TAKE_LESS)
             ->withQueryString());
         return inertia('Frontend/User/FrontendUserIndex', compact('elements'));
