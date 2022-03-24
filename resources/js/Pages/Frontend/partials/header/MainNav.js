@@ -1086,7 +1086,7 @@ function MainNav() {
                                             aria-hidden="true"
                                         />
                                         <span
-                                            className={classNames(locale.isRTL ? `-right-2` : `-left-2`, `text-white relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium group-hover:text-gray-300`)}>
+                                            className={classNames(locale.isRTL ? `-right-2` : `-left-2`, `text-white bg-red-900 opacity-80 relative inset-0 inline-flex items-center justify-center p-2 h-6 w-6 rounded-full text-sm font-medium group-hover:text-gray-300`)}>
                                             {cart.totalItems}
                                     </span>
                                         <span className="sr-only">items in cart, view bag</span>
