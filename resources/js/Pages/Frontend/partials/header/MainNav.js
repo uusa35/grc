@@ -144,13 +144,14 @@ function MainNav() {
                             {capitalize(trans('subscriptions'))}
                         </Link> : null
                     }
-                    <Link
+                    <a
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
-                        href={route('frontend.change.lang', {lang: locale.otherLang})}
+                        // href={route('frontend.change.lang', {lang: locale.otherLang})}
+                        href={`#`}
                         className={`mx-2  block  text-xs  `}>
                         {capitalize(trans(locale.otherLang))}
-                    </Link>
+                    </a>
                     {
                         !auth || !auth.id ? <>
                             {
@@ -357,11 +358,12 @@ function MainNav() {
                                     </div>
                                 }
                                 <div className="flow-root">
-                                    <Link
+                                    <a
                                         onClick={() => {
                                             dispatch(changeLang(locale.otherLang))
                                         }}
-                                        href={route('frontend.change.lang', {lang: locale.otherLang})}
+                                        href={`#`}
+                                        // href={route('frontend.change.lang', {lang: locale.otherLang})}
                                         className="flex flex-row justify-start -m-2 p-2 block  capitalize">
                                         <img
                                             className="w-5 h-5 rounded-full  mx-2"
@@ -370,7 +372,7 @@ function MainNav() {
                                             loading={'lazy'}
                                         />
                                         {/*<span className='hidden xl:block'>{locale.otherLang}</span>*/}
-                                    </Link>
+                                    </a>
                                 </div>
                             </div>
 
