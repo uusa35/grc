@@ -49,7 +49,7 @@ class UserUpdate extends FormRequest
             'keywords' => 'nullable|max:500',
             'qr' => 'nullable|max:500',
 
-            'file' => 'nullable|mimes:pdf',
+            'file' => 'nullable',
             'website' => 'nullable|url',
             'facebook' => 'nullable|url',
             'instagram' => 'nullable|url',
