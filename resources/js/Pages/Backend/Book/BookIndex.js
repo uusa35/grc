@@ -188,7 +188,7 @@ export default React.memo(function ({elements}) {
                                 <tbody className="block md:table-row-group">
                                 {
                                     currentData && currentData.map(element =>
-                                        <tr className='block md:table-row bg-white border-b border-gray-100 text-gray-500'
+                                        <tr className='block md:table-row bg-white border-b border-gray-100 text-gray-500 odd:bg-white even:bg-gray-100'
                                             key={element.id}>
                                             <td className=" block md:table-cell px-3 py-4 whitespace-nowrap font-medium text-gray-900">{element.id}</td>
                                             {/*<td className=" block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">*/}

@@ -30,7 +30,7 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $elements = new AreaCollection(Area::with('country')->orderBy('id','desc')->paginate(Self::TAKE_MIN));
+        $elements = new AreaCollection(Area::with('country')->orderBy('id','desc')->paginate(Self::TAKE_MID));
         return inertia('Backend/Area/AreaIndex', compact('elements'));
     }
 

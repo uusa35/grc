@@ -69,7 +69,7 @@ export default function({elements, firstOrder}) {
                                                         </th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody className="bg-white divide-y divide-gray-200">
+                                                    <tbody className="bg-white divide-y divide-gray-200 border-r border-l border-b border-gray-400">
                                                     <NoElements display={elements.meta.total < 1}/>
                                                     {map(elements.data, element => (
                                                         <tr key={element.name_en}>

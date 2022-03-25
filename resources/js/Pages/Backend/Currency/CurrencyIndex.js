@@ -6,7 +6,7 @@ import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 
 export default function({elements}) {
-    const {trans, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
+    const {trans, handleDeleteItem, getLocalized } = useContext(AppContext);
     const {params} = route();
 
     return (
@@ -18,11 +18,10 @@ export default function({elements}) {
                 <div className=" overflow-auto">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
-                            className={classNames(true ? `bg-gray-600` : 'bg-blue-600', "shadow border-b border-gray-200 sm:rounded-lg")}>
-                            <table className="min-w-full divide-y divide-gray-200">
-                                <thead
-                                    className={classNames(true ? `bg-gray-300` : '', "text-black font-extrabold text-sm uppercase")}>
-                                <tr>
+                            className="bg-gray-300 shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
+                            <table className="min-w-full border-collapse block md:table">
+                                <thead className="block md:table-header-group">
+                                <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
                                     <th
                                         scope="col"
                                         className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
@@ -59,9 +58,9 @@ export default function({elements}) {
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody className="bg-white divide-y divide-gray-200">
+                                <tbody className="bg-white divide-y divide-gray-200 border-r border-l border-b border-gray-400">
                                 {map(elements.data, element => (
-                                    <tr key={element.id}>
+                                    <tr key={element.id} className={`odd:bg-white even:bg-gray-100`}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
