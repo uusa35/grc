@@ -6,6 +6,7 @@ use App\Http\Resources\CountryCollection;
 use App\Http\Resources\GovernateCollection;
 use App\Models\Country;
 use App\Models\Governate;
+use App\Services\Search\CategoryFilters;
 use Illuminate\Http\Request;
 
 class GovernateController extends Controller
@@ -25,9 +26,9 @@ class GovernateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CategoryFilters $filters)
     {
-        $elements = new GovernateCollection(Governate::with('country')->orderBy('id','desc')->paginate(Self::TAKE_LESS));
+        $elements = new GovernateCollection(Governate::filters($filters)->with('country')->orderBy('id','desc')->paginate(Self::TAKE_LESS));
         return inertia('Backend/Governate/GovernateIndex', compact('elements'));
     }
 

@@ -31,10 +31,10 @@ class CategoryFilters extends QueryFilters
     {
         return $this->builder
             ->where('name_ar', 'like', "%{$search}%")
-            ->orWhere('name_en', 'like', "%{$search}%")
-            ->orWhere('description_ar', 'like', "%{$search}%")
-            ->orWhere('description_en', 'like', "%{$search}%")
-            ->orWhere('email', 'like', "%{$search}%");
+            ->orWhere('name_en', 'like', "%{$search}%");
+//            ->orWhere('description_ar', 'like', "%{$search}%")
+//            ->orWhere('description_en', 'like', "%{$search}%")
+//            ->orWhere('email', 'like', "%{$search}%");
 //            ->orWhere('notes_ar', 'like', "%{$search}%")
 //            ->orWhere('notes_en', 'like', "%{$search}%");
     }

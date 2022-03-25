@@ -159,7 +159,6 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::get('service/search', [ServiceController::class, 'search'])->name('service.search');
     Route::get('user/search', [UserController::class, 'search'])->name('user.search');
     Route::get('book/search', [BookController::class, 'search'])->name('book.search');
-    Route::get('category/search', [CategoryController::class, 'search'])->name('category.search');
     Route::get('order/search', [OrderController::class, 'search'])->name('order.search');
     Route::get('course/search', [CourseController::class, 'search'])->name('course.search');
     Route::get('slide/search', [SlideController::class, 'search'])->name('slide.search');
@@ -219,6 +218,9 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
         Route::resource('shipment', ShipmentController::class)->except('index');
         Route::resource('faq', FaqController::class);
         Route::get('translation/search', [TranslationController::class, 'search'])->name('translation.search');
+        Route::get('category/search', [CategoryController::class, 'search'])->name('category.search');
+        Route::get('area/search', [AreaController::class, 'index'])->name('area.search');
+        Route::get('governate/search', [GovernateController::class, 'index'])->name('governate.search');
         Route::resource('translation', TranslationController::class);
         Route::resource('subscription', SubscriptionController::class);
         // order status switch

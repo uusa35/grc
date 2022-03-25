@@ -10,6 +10,7 @@ use App\Http\Resources\GovernateCollection;
 use App\Models\Area;
 use App\Models\Country;
 use App\Models\Governate;
+use App\Services\Search\CategoryFilters;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -28,9 +29,9 @@ class AreaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CategoryFilters $filters)
     {
-        $elements = new AreaCollection(Area::with('country')->orderBy('id','desc')->paginate(Self::TAKE_MID));
+        $elements = new AreaCollection(Area::filters($filters)->with('country')->orderBy('id','desc')->paginate(Self::TAKE_MID));
         return inertia('Backend/Area/AreaIndex', compact('elements'));
     }
 

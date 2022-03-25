@@ -15,6 +15,7 @@ export default function({elements}) {
     return (
         <BackendContainer
             elements={elements}
+            showSearch={true}
             showSearch={elements.meta.total >= 1}
             showNoElements={elements.meta.total < 1}
             showMobileView={elements.meta.total > 1}
