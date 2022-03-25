@@ -37,10 +37,17 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CategoryFilters $filters)
     {
-        $elements = new CategoryCollection(Category::where(['parent_id' => ''])->with('children.children')->orderBy('id', 'desc')->paginate(SELF::TAKE_LESS));
+        $this->authorize('search', 'category');
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+        $elements = CategoryCollection::make(Category::filters($filters)->with('children.children')->orderBy('id', 'desc')->paginate(Self::TAKE_MIN));
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
+//        $elements = new CategoryCollection(Category::where(['parent_id' => ''])->with('children.children')->orderBy('id', 'desc')->paginate(SELF::TAKE_LESS));
+//        return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 
     public function search(CategoryFilters $filters)
