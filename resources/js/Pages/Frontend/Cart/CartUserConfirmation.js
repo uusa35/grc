@@ -48,7 +48,7 @@ export default function({countries, auth}) {
         setGovernates(selectedCountry.governates);
         const governate = first(filter(selectedCountry.governates, g => g.id == data.governate_id));
         setAreas(governate.areas);
-        dispatch(setShipmentFees(settings.apply_global_shipment ? parseFloat(settings.shipment_fixed_rate) : selectedCountry.is_local ? parseFloat(governate.price) : parseFloat(governate.price) * cart.totalItems))
+        dispatch(setShipmentFees(settings.apply_global_shipment ? parseFloat(selectedCountry.fixed_shipment_charge) : selectedCountry.is_local ? parseFloat(governate.price) : parseFloat(governate.price) * cart.totalItems))
     }, [])
 
 

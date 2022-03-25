@@ -68,7 +68,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// points
+// 1- btn of the discount in carIndex
+// 2- testing cart and discount
+// 3- in store (fixed color + fixed size)
 
 Auth::routes();
 Auth::routes(['verify' => true]);
