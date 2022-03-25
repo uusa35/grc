@@ -44,7 +44,7 @@ class CategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = CategoryCollection::make(Category::filters($filters)->with('children.children')->orderBy('id', 'desc')->paginate(Self::TAKE_MIN));
+        $elements = CategoryCollection::make(Category::filters($filters)->with('children.children')->orderBy('id', 'desc')->paginate(Self::TAKE_MID));
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
 //        $elements = new CategoryCollection(Category::where(['parent_id' => ''])->with('children.children')->orderBy('id', 'desc')->paginate(SELF::TAKE_LESS));
 //        return inertia('Backend/Category/CategoryIndex', compact('elements'));
@@ -57,7 +57,7 @@ class CategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = Category::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MIN);
+        $elements = Category::filters($filters)->orderBy('id', 'desc')->paginate(Self::TAKE_MID);
         return inertia('Backend/Category/CategoryIndex', compact('elements'));
     }
 
