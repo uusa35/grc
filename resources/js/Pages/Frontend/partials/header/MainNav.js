@@ -144,14 +144,14 @@ function MainNav() {
                             {capitalize(trans('subscriptions'))}
                         </Link> : null
                     }
-                    <a
+                    <Link
                         title={capitalize(trans(locale.otherLang))}
                         onClick={() => dispatch(changeLang(locale.otherLang))}
-                        // href={route('frontend.change.lang', {lang: locale.otherLang})}
-                        href={`#`}
+                        href={route('frontend.change.lang', {lang: locale.otherLang})}
+                        // href={`#`}
                         className={`mx-2  block  text-xs  `}>
                         {capitalize(trans(locale.otherLang))}
-                    </a>
+                    </Link>
                     {
                         !auth || !auth.id ? <>
                             {
@@ -358,12 +358,11 @@ function MainNav() {
                                     </div>
                                 }
                                 <div className="flow-root">
-                                    <a
+                                    <Link
                                         onClick={() => {
                                             dispatch(changeLang(locale.otherLang))
                                         }}
-                                        href={`#`}
-                                        // href={route('frontend.change.lang', {lang: locale.otherLang})}
+                                        href={route('frontend.change.lang', {lang: locale.otherLang})}
                                         className="flex flex-row justify-start -m-2 p-2 block  capitalize">
                                         <img
                                             className="w-5 h-5 rounded-full  mx-2"
@@ -372,7 +371,7 @@ function MainNav() {
                                             loading={'lazy'}
                                         />
                                         {/*<span className='hidden xl:block'>{locale.otherLang}</span>*/}
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
 
@@ -913,15 +912,15 @@ function MainNav() {
                             {settings.enable_books || settings.enable_products ? <SearchField/> : null}
                             <div
                                 className="hidden 2xl:flex lg:items-center lg:justify-end px-1 rtl:mr-2 ltr:ml-2">
-                                <a
+                                <Link
                                     onClick={() => {
                                         dispatch(changeLang(locale.otherLang))
                                     }}
-                                    href={'#'}
-                                    // href={route('frontend.change.lang', {lang: locale.otherLang})}
+                                    // href={'#'}
+                                    href={route('frontend.change.lang', {lang: locale.otherLang})}
                                     className={`flex flex-row items-center justify-center text-center  hover:bg-${headerColor}-400 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-400`}>
                                     {locale.otherLang}
-                                </a>
+                                </Link>
                             </div>
 
                             {/* currency dropdown */}

@@ -73,5 +73,7 @@ Route::get('translations', [TranslationController::class, 'getTranslations'])->n
 Route::get('locale', fn () => response()->json(app()->getLocale(), 200))->name('locale.index');
 Route::get('/lang/{lang}', function ($lang) {
     app()->setLocale($lang);
+    request()->setLocale($lang);
+    request()->header('lang', $lang);
   return response()->json(app()->getLocale());
 })->name('lang.change');

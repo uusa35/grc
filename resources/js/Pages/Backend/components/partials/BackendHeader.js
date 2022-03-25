@@ -234,17 +234,18 @@ const BackendHeader = () => {
                                         </Menu.Button>
                                     </div>
                                     <div className={`rtl:ml-2 ltr:mr-2`}>
-                                        <button
+                                        <Link
                                             className="inline-flex justify-center items-center rounded-md border border-gray-300 shadow-sm px-2 py-1 bg-gray-800  font-bold text-gray-50 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500 capitalize"
                                             onClick={() => {
                                                 dispatch(changeLang(locale.otherLang))
                                             }}
+                                            href={route('frontend.change.lang', {lang: locale.otherLang})}
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 rtl:ml-2 ltr:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                                             </svg>
                                             <div className="text-white text-md text-gray-900 text-capitalize font-bold">{locale.otherLang}</div>
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
 
