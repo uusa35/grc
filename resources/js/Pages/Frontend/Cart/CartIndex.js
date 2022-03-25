@@ -18,7 +18,7 @@ import OrderSummary from "./OrderSummary";
 
 export default function({coupon = {}}) {
     const {cart, locale} = useSelector(state => state);
-    const {trans, classNames, mainColor , mainBgColor, contentBgColor, btnClass   } = useContext(AppContext);
+    const {trans, classNames, mainColor , mainBgColor, contentBgColor, btnClass, textColor    } = useContext(AppContext);
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
@@ -60,7 +60,7 @@ export default function({coupon = {}}) {
                                     <form className="space-y-6" onSubmit={handleSubmit}>
                                         <div>
                                             <label htmlFor="code"
-                                                   className={`capitalize block text-sm font-medium text-${mainColor}-800 dark:text-${mainColor}-600 mb-5 text-base`}>
+                                                   className={`${textColor} block text-sm font-medium mb-5 text-base`}>
                                                 {trans('do_u_have_a_coupon')}
                                             </label>
                                             <div className="mt-1">
@@ -79,7 +79,7 @@ export default function({coupon = {}}) {
                                             <button
                                                 disabled={isNull(data.coupon) && data.coupon.length < 3}
                                                 type="submit"
-                                                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
+                                                className={`${btnClass} w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
                                             >
                                                 {trans('enter_coupon_code')}
                                             </button>
@@ -89,7 +89,6 @@ export default function({coupon = {}}) {
                             </div>
                             : null
                     }
-
                     <OrderSummary/>
                     <div className="mt-10 flex justify-end">
                         <Link

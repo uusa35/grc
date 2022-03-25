@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\CountryExtraLightResource;
 use App\Http\Resources\CourseCollection;
 use App\Http\Resources\CourseResource;
+use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ServiceCollection;
 use App\Http\Resources\ServiceResource;
 use App\Http\Resources\UserCollection;
@@ -92,8 +94,10 @@ class FrontendUserController extends Controller
      */
     public function show(User $user)
     {
-        $element = new UserResource($user->load('role', 'images', 'ratings', 'books','products'));
-        return inertia('Frontend/User/FrontendUserShow', compact('element'));
+        $element = new UserResource($user->load('role', 'images', 'ratings'));
+        $books = BookCollection::make($element->books()->active()->paginate(SELF::TAKE_MIN));
+        $products = ProductCollection::make($element->products()->active()->paginate(SELF::TAKE_MIN));
+        return inertia('Frontend/User/FrontendUserShow', compact('element','products', 'books'));
     }
 
     /**

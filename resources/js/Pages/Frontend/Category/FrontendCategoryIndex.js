@@ -43,6 +43,7 @@ export default function FrontendCategoryIndex({elements}) {
                             type={'category'}
                             total={elements.meta.total}
                             links={elements.meta.links}
+                            lastPage={elements.meta.last_page}
                             showSearch={false}
                         />
                     </div>
@@ -56,6 +57,7 @@ export default function FrontendCategoryIndex({elements}) {
                         type={'category'}
                         total={elements.meta.total}
                         links={elements.meta.links}
+                        lastPage={elements.meta.last_page}
                         showSearch={false}
                     />
                 </div>

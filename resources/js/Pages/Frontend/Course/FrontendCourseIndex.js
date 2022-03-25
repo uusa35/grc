@@ -52,6 +52,7 @@ export default function FrontendCourseIndex({elements, categories}) {
                             type={'course'}
                             total={elements.meta.total}
                             links={elements.meta.links}
+                            lastPage={elements.meta.last_page}
                             showSearch={false}
                         />
                         {/* sort options */}
@@ -79,6 +80,7 @@ export default function FrontendCourseIndex({elements, categories}) {
                         type={'course'}
                         total={elements.meta.total}
                         links={elements.meta.links}
+                        lastPage={elements.meta.last_page}
                         showSearch={false}
                     />
                 </main>

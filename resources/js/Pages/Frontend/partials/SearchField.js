@@ -40,8 +40,8 @@ const SearchField = () => {
         },
         {
             name: 'user',
-            'frontend': settings.enable_books,
-            'backend': settings.enable_books,
+            'frontend': settings.enable_users,
+            'backend': settings.enable_users,
         },
         {
             name: 'order',

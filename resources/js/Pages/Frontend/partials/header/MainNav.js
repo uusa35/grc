@@ -562,7 +562,7 @@ function MainNav() {
                             onClick={() => setOpen(true)}
                         >
                             <span className="sr-only">Open menu</span>
-                            <MenuIcon className="h-6 w-6" aria-hidden="true"/>
+                            <MenuIcon className={`h-6 w-6 ${textColor}`} aria-hidden="true"/>
                         </button>
 
                         {/* Logo */}
@@ -950,7 +950,7 @@ function MainNav() {
                                         leaveTo="transform opacity-0 scale-95"
                                     >
                                         <Menu.Items
-                                            className="origin-top-right absolute rtl:-mr-20 ltr:-ml-20 mt-2 w-48 shadow-lg py-1 bg-black ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                            className={`${contentBgColor} origin-top-right absolute rtl:-mr-20 ltr:-ml-20 mt-2 w-48 shadow-lg py-1  ring-1 ring-black ring-opacity-5 focus:outline-none`}>
 
                                             {
                                                 map(currencies, element => (
@@ -958,7 +958,7 @@ function MainNav() {
                                                         {({active}) => (
                                                             <button
                                                                 onClick={() => dispatch(setCurrency(element))}
-                                                                className={classNames(active ? `bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600` : '', 'flex flex-row w-full justify-content items-center gap-3 px-4 py-2  ')}
+                                                                className={classNames(active ? `bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600` : '', `${textColor} flex flex-row w-full justify-content items-center gap-3 px-4 py-2  `)}
                                                             >
                                                                 <img
                                                                     className="h-5 w-5 rounded-full object-cover"

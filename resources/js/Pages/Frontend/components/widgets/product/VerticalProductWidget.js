@@ -85,7 +85,7 @@ const VerticalProductWidget = ({element}) => {
                     >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>
                             <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 hover:animate-bounce`}
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6`}
                                      fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

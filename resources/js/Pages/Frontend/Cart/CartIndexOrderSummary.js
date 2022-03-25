@@ -15,36 +15,36 @@ export default function() {
 
     return (
         <div className={`p-3 bg-white rounded-lg`}>
-            <table className="min-w-full divide-y divide-gray-200 ltr:text-left rtl:text-right">
+            <table className="min-w-full divide-y divide-gray-200 ltr:text-left rtl:text-right px-4">
                 <thead className="bg-gray-50">
                 <tr>
                     <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className={`text-black dark:text-black px-6 py-3 text-xs font-medium  uppercase tracking-wider`}
                     >
                         {trans('name')}
                     </th>
                     <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:inline-block"
+                        className={`text-black dark:text-black px-6 py-3 text-xs font-medium  uppercase tracking-wider hidden md:inline-block`}
                     >
                         {trans('type')}
                     </th>
                     <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:inline-block"
+                        className={`text-black dark:text-black px-6 py-3 text-xs font-medium  uppercase tracking-wider hidden md:inline-block`}
                     >
                         {trans('qty')}
                     </th>
                     <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:inline-block"
+                        className={`text-black dark:text-black px-6 py-3 text-xs font-medium  uppercase tracking-wider hidden md:inline-block`}
                     >
                         {trans('price')}
                     </th>
                     <th
                         scope="col"
-                        className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className={`text-black dark:text-black px-6 py-3 text-xs font-medium  uppercase tracking-wider`}
                     >
                         {trans('remove')}
                     </th>
@@ -76,8 +76,8 @@ export default function() {
                                     </p>
                                     {
                                         element.type === 'product' && <>
-                                            <p className="mt-1  text-gray-500">{element.color}</p>
-                                            {element.size && <p className="mt-1  text-gray-500">{element.size}</p>}
+                                            <p className="mt-1  ">{element.color}</p>
+                                            {element.size && <p className="mt-1  ">{element.size}</p>}
                                         </>
                                     }
                                     {element.type === 'service' && element.timing &&

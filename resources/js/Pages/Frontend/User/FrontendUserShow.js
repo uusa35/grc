@@ -23,9 +23,10 @@ import NormalProductWidget from "../components/widgets/product/NormalProductWidg
 import NormalBookWidget from "../components/widgets/book/NormalBookWidget";
 import {setMenuBg} from "../../redux/actions";
 import {useDispatch} from "react-redux";
+import FrontendPagination from "../partials/FrontendPagination";
 
 
-export default function({element}) {
+export default function({element, products , books }) {
     const {
         getThumb,
         getLarge,
@@ -104,10 +105,10 @@ export default function({element}) {
                                                 element[getLocalized('caption')] && <div className="mt-3">
                                                     <h3 className="sr-only">{trans('caption')}</h3>
                                                     <div
-                                                        className={`text-base ${textColor} space-y-6`}
+                                                        className={`text-base ${textColor} space-y-6 capitalize`}
                                                     >{element[getLocalized('caption')]}</div>
                                                     <div
-                                                        className={`text-base ${textColor} space-y-6`}
+                                                        className={`text-base ${textColor} space-y-6 capitalize`}
                                                     >{element.role[getLocalized()]}</div>
                                                 </div>
                                             }
@@ -129,7 +130,7 @@ export default function({element}) {
                                                           <span
                                                               className={classNames(
                                                                   open ? `` : ``,
-                                                                  `${textColor} font-extrabold text-lg`
+                                                                  `${textColor} font-extrabold text-lg capitalize`
                                                               )}
                                                           >
                                                             {trans('information')}
@@ -225,7 +226,7 @@ export default function({element}) {
 
                                     {/*     products */}
                                     {
-                                        settings.enable_products && !isEmpty(element.products) ?
+                                        settings.enable_products && !isEmpty(products.data) ?
                                             <Disclosure as="div" defaultOpen={true}>
                                                 {({open}) => (
                                                     <>
@@ -234,7 +235,7 @@ export default function({element}) {
                                                           <span
                                                               className={classNames(
                                                                   open ? `` : ``,
-                                                                  `${textColor} font-extrabold text-lg`
+                                                                  `${textColor} font-extrabold text-lg capitalize`
                                                               )}
                                                           >
                                                             {trans('products')}
@@ -257,10 +258,17 @@ export default function({element}) {
                                                             <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                                                                 <div
                                                                     className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-4 2xl:grid-cols-4 xl:gap-x-8 gap-x-6">
-                                                                    {map(element.products, p => (
+                                                                    {map(products.data, p => (
                                                                         <NormalProductWidget element={p} key={p.id}/>
                                                                     ))}
                                                                 </div>
+                                                                <FrontendPagination
+                                                                    type={'product'}
+                                                                    total={products.meta.total}
+                                                                    links={products.meta.links}
+                                                                    showSearch={false}
+                                                                    lastPage={books.meta.last_page}
+                                                                />
                                                             </div>
                                                         </Disclosure.Panel>
                                                     </>
@@ -271,7 +279,7 @@ export default function({element}) {
 
                                     {/*     books */}
                                     {
-                                        settings.enable_books && !isEmpty(element.books) ?
+                                        settings.enable_books && !isEmpty(books.data) ?
                                             <Disclosure as="div" defaultOpen={true}>
                                                 {({open}) => (
                                                     <>
@@ -280,7 +288,7 @@ export default function({element}) {
                                                           <span
                                                               className={classNames(
                                                                   open ? `` : ``,
-                                                                  `${textColor} font-extrabold text-lg`
+                                                                  `${textColor} font-extrabold text-lg capitalize`
                                                               )}
                                                           >
                                                             {trans('books')}
@@ -303,10 +311,17 @@ export default function({element}) {
                                                             <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                                                                 <div
                                                                     className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-4 2xl:grid-cols-4 xl:gap-x-8 gap-x-6">
-                                                                    {map(element.books, p => (
+                                                                    {map(books.data , p => (
                                                                         <NormalBookWidget element={p} key={p.id}/>
                                                                     ))}
                                                                 </div>
+                                                                <FrontendPagination
+                                                                    type={'book'}
+                                                                    total={books.meta.total}
+                                                                    links={books.meta.links}
+                                                                    showSearch={false}
+                                                                    lastPage={books.meta.last_page}
+                                                                />
                                                             </div>
                                                         </Disclosure.Panel>
                                                     </>

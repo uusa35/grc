@@ -50,6 +50,7 @@ export default function ({elements, categories}) {
                         type={'service'}
                         total={elements.meta.total}
                         links={elements.meta.links}
+                        lastPage={elements.meta.last_page}
                         showSearch={false}
                     />
                     {/* sort options */}
@@ -76,6 +77,7 @@ export default function ({elements, categories}) {
                     type={'service'}
                     total={elements.meta.total}
                     links={elements.meta.links}
+                    lastPage={elements.meta.last_page}
                     showSearch={false}
                 />
             </main>

@@ -69,9 +69,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // points
-// 1- btn of the discount in carIndex
+// 1- btn of the discount in carIndex ===> done
 // 2- testing cart and discount
 // 3- in store (fixed color + fixed size)
+// 4- bar icon dark and light theme ===> done
+// 5- on click (categories user) go to CategoryIndex with sorting issue A - Z
+// 6- search in users (SearchBtn in MainNav) ===> done
+// 7 - remove moving icon from Productwidget ===> done
+// 8- Pagination for products and books for UserShow ====> done
 
 Auth::routes();
 Auth::routes(['verify' => true]);
