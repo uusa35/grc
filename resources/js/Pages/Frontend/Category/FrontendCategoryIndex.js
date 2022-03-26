@@ -2,16 +2,21 @@ import FrontendContainer from "../components/FrontendContainer";
 import React, {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import CategoryWidget from "../components/widgets/category/CategoryWidget";
-import {map} from 'lodash';
+import {map, orderBy} from 'lodash';
 import FrontendPagination from "../partials/FrontendPagination";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import route from 'ziggy-js';
+import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
+import {useSelector} from "react-redux";
 
 export default function FrontendCategoryIndex({elements}) {
     const {trans , contentBgColor, textColor , mainColor } = useContext(AppContext);
     const {params} = route();
     const [type, setType] = useState('book')
+    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const [currentData, setCurrentData] = useState();
+    const {sort} = useSelector(state => state);
 
     useMemo(() => {
         if (params && params.is_course) {
@@ -26,6 +31,16 @@ export default function FrontendCategoryIndex({elements}) {
             setType('book')
         }
     }, [])
+
+    useMemo(() => {
+        if (!currentData) {
+            setCurrentData(elements.data);
+        }
+    }, [elements.data])
+
+    useMemo(() => {
+        setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
+    }, [sort.desc])
 
     return (
         <FrontendContainer>
@@ -46,10 +61,12 @@ export default function FrontendCategoryIndex({elements}) {
                             lastPage={elements.meta.last_page}
                             showSearch={false}
                         />
+                        {/* sort options */}
+                        <FrontendSortIndexMenu showPrice={false}/>
                     </div>
                     <div
                         className="grid grid-cols-1 gap-y-14 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 py-6">
-                        {map(elements.data, (element) => (
+                        {map(currentData, (element) => (
                             <CategoryWidget element={element} type={type} key={element.id}/>
                         ))}
                     </div>

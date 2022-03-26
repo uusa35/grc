@@ -25,6 +25,7 @@ use App\Services\Search\UserFilters;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use function GuzzleHttp\Promise\all;
 
 class FrontendUserController extends Controller
 {
@@ -122,6 +123,7 @@ class FrontendUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+//        dd($request->all());
         $request->validate([
             'name_ar' => 'required|min:3|max:255',
             'name_en' => 'required|min:3|max:255',

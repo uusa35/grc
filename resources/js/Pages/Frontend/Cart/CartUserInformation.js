@@ -40,10 +40,12 @@ export default function({countries, auth}) {
     useMemo(() => {
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
         setGovernates(selectedCountry.governates)
+        setData('governate_id', first(selectedCountry.governates).id)
         const areas = first(selectedCountry.governates).areas;
         setAreas(areas)
         setData('area_id', first(areas).id)
     }, [data.country_id])
+
 
     useMemo(() => {
         if (!isEmpty(governates)) {
@@ -214,7 +216,7 @@ export default function({countries, auth}) {
                                         autoComplete="governate_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
                                     >
-                                        {/*<option value="">{trans('choose')} {trans('governate')}</option>*/}
+                                        <option value="">{trans('choose')} {trans('governate')}</option>
                                         {
                                             map(governates, u => (
                                                 <option key={u.id} value={u.id}
@@ -245,7 +247,7 @@ export default function({countries, auth}) {
                                         autoComplete="area_id"
                                         className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
                                     >
-                                        {/*<option value="">{trans('choose')} {trans('area')}</option>*/}
+                                        <option value="">{trans('choose')} {trans('area')}</option>
                                         {
                                             map(areas, u => (
                                                 <option key={u.id} value={u.id}

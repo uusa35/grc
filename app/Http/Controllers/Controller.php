@@ -13,6 +13,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ImageHelpers;
     const TAKE_ALL = 500;
     const TAKE = 100;
+    const TAKE_LARGE = 50;
     const TAKE_MID = 24;
     const TAKE_MIN = 12;
     const TAKE_LESS = 9;

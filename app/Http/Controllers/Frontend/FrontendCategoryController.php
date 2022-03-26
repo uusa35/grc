@@ -22,7 +22,7 @@ class FrontendCategoryController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = CategoryCollection::make(Category::active()->filters($filters)->orderBy('order', 'asc')
-            ->paginate(Self::TAKE_MIN)->withQueryString());
+            ->paginate(Self::TAKE_LARGE)->withQueryString());
         return inertia('Frontend/Category/FrontendCategoryIndex', compact('elements'));
     }
 
