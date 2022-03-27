@@ -264,7 +264,7 @@ export default function({element, products , books, categories }) {
                                                                     {/* search SideBar */}
                                                                     <SearchUserShowSideBar
                                                                         id={element.id}
-                                                                        categories={filter(categories, c => c)}
+                                                                        categories={categories}
                                                                         setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
                                                                     {/* Product grid */}
                                                                     <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
