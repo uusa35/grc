@@ -90,6 +90,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::resource('category', FrontendCategoryController::class)->only(['index']);
     Route::get('category/alpha', [FrontendCategoryController::class, 'alpha'])->name('category.alpha');
     Route::resource('user', FrontendUserController::class)->except('destroy', 'edit');
+    Route::get('search/user/products/{id}', [FrontendUserController::class,'getProducts'])->name('user.search.products');
     Route::resource('faq', FrontendFaqController::class)->only('index');
     Route::get('contactus', [FrontendPageController::class, 'getContactus'])->name('contactus');
     Route::post('contactus', [FrontendPageController::class, 'postContactus'])->name('send.contactus');

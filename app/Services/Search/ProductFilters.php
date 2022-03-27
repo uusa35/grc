@@ -125,9 +125,9 @@ class ProductFilters extends QueryFilters
         return $this->builder->where('price', '<=', (double)request()->max);
     }
 
-    public function user()
+    public function user_id()
     {
-        return $this->builder->where('user_id', '=', request()->user);
+        return $this->builder->where('user_id', '=', request()->user_id);
     }
 
 }

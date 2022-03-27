@@ -26,6 +26,7 @@ import {useDispatch} from "react-redux";
 import FrontendPagination from "../partials/FrontendPagination";
 import SearchIndexSideBar from "../partials/SearchIndexSideBar";
 import NoElements from "../../Backend/components/widgets/NoElements";
+import SearchUserShowSideBar from "../partials/SearchUserShowSideBar";
 
 
 export default function({element, products , books, categories }) {
@@ -229,7 +230,7 @@ export default function({element, products , books, categories }) {
 
                                     {/*     products */}
                                     {
-                                        settings.enable_products && !isEmpty(products.data) ?
+                                        settings.enable_products  ?
                                             <Disclosure as="div" defaultOpen={true}>
                                                 {({open}) => (
                                                     <>
@@ -261,9 +262,9 @@ export default function({element, products , books, categories }) {
                                                             <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                                                                 <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                                                                     {/* search SideBar */}
-                                                                    <SearchIndexSideBar
-                                                                        type={'product'}
-                                                                        categories={filter(categories, c => c.is_product)}
+                                                                    <SearchUserShowSideBar
+                                                                        id={element.id}
+                                                                        categories={filter(categories, c => c)}
                                                                         setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
                                                                     {/* Product grid */}
                                                                     <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
@@ -295,7 +296,7 @@ export default function({element, products , books, categories }) {
 
                                     {/*     books */}
                                     {
-                                        settings.enable_books && !isEmpty(books.data) ?
+                                        settings.enable_books  ?
                                             <Disclosure as="div" defaultOpen={true}>
                                                 {({open}) => (
                                                     <>

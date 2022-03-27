@@ -22,6 +22,7 @@ use App\Models\Role;
 use App\Models\Service;
 use App\Models\Subscription;
 use App\Models\User;
+use App\Services\Search\ProductFilters;
 use App\Services\Search\UserFilters;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -105,6 +106,21 @@ class FrontendUserController extends Controller
         $element = new UserResource($user->load('role', 'images', 'ratings'));
         $books = BookCollection::make($element->books()->active()->paginate(SELF::TAKE_MIN));
         $products = ProductCollection::make($element->products()->active()->with('categories.children')->paginate(SELF::TAKE_MIN));
+        $categories = CategoryCollection::make($products->pluck('categories')->flatten());
+        return inertia('Frontend/User/FrontendUserShow', compact('element', 'products', 'books', 'categories'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param \App\Models\User $user
+     * @return \Illuminate\Http\Request
+     */
+    public function getProducts(ProductFilters $filters)
+    {
+        $element = new UserResource(User::whereId(request()->id)->with('role', 'images', 'ratings')->first());
+        $books = BookCollection::make($element->books()->active()->paginate(SELF::TAKE_MIN));
+        $products = ProductCollection::make($element->products()->filters($filters)->active()->with('categories.children')->paginate(SELF::TAKE_MIN));
         $categories = CategoryCollection::make($products->pluck('categories')->flatten());
         return inertia('Frontend/User/FrontendUserShow', compact('element', 'products', 'books', 'categories'));
     }

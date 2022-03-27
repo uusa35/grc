@@ -7,7 +7,7 @@ import {AppContext} from "../../context/AppContext";
 import {useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 
-export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, type, enablePrice = true}) {
+export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, id , enablePrice = true}) {
     const {trans, getLocalized, classNames, mainColor , mainBgColor, btnClass , textColor  } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
@@ -28,7 +28,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                 </div>
                 <div className="flex">
                     <Link
-                        href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
+                        href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, { id }) : '#'}
                         className={`inline-flex items-center lg:hidden ${btnClass} p-3 rounded-sm shadow-md capitalize`}
                     >
                         {trans('clear_search')}
@@ -43,7 +43,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                         </div>
                         <div className="flex">
                             <Link
-                                href={type && route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`) : '#'}
+                                href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, { id }) : '#'}
                                 className={`px-3 py-1 ${btnClass} rounded-sm shadow-sm ring-1 ring-gray-400 capitalize`}
                             >
                                 {trans('clear_search')}
@@ -63,7 +63,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                         <fieldset className="space-y-3">
                                             <div className="pt-3 space-y-3">
                                                 <Link
-                                                    href={route().has(`frontend.${type}.index`) ? route(`frontend.${type}.index`, { ...params , max: r, min : parseInt(r -50)}) : '#'}
+                                                    href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, { ...params , user_id : id , id  ,  max: r, min : parseInt(r -50)}) : '#'}
                                                     className={classNames(params.max == r ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-400 p-3 rounded-md shadow-md`: `` , "flex items-center")}>
                                                     {
                                                         locale.isRTL ?
@@ -101,7 +101,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                             <fieldset className="space-y-3">
                                 <div className="pt-3 space-y-3">
                                     <Link
-                                        href={route(`frontend.${type}.index`, { ...params , category_id: c.id})}
+                                        href={route(`frontend.user.search.products`, { ...params , user_id : id , id ,  category_id: c.id})}
                                         className="flex items-center">
                                         {
                                             locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
@@ -127,7 +127,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                     map(c.children, child => (
                                         <div className="pt-1 space-y-3 mx-5" key={child.id}>
                                             <Link
-                                                href={route(`frontend.${type}.index`, { ...params , category_id: child.id})}
+                                                href={route(`frontend.user.search.products`, { ...params , user_id : id , id ,  category_id: child.id})}
                                                 className="flex items-center">
                                                 <input
                                                     readOnly
@@ -158,7 +158,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                                 map(child.children, sub => (
                                                     <div className="pt-1 space-y-3 mx-2" key={sub.id}>
                                                         <Link
-                                                            href={route(`frontend.${type}.index`, { ...params, category_id: sub.id})}
+                                                            href={route(`frontend.user.search.products`, { ...params, category_id: sub.id, id , user_id : id })}
                                                             className="flex items-center">
                                                             <input
                                                                 readOnly
