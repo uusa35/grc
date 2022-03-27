@@ -130,4 +130,9 @@ class ProductFilters extends QueryFilters
         return $this->builder->where('user_id', '=', request()->user_id);
     }
 
+    public function user()
+    {
+        return $this->builder->where('user_id', '=', request()->user);
+    }
+
 }
