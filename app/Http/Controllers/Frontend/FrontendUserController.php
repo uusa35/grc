@@ -121,7 +121,7 @@ class FrontendUserController extends Controller
         $element = new UserResource(User::whereId(request()->id)->with('role', 'images', 'ratings')->first());
         $books = BookCollection::make($element->books()->active()->paginate(SELF::TAKE_MIN));
         $products = ProductCollection::make($element->products()->filters($filters)->active()->with('categories')->paginate(SELF::TAKE_MIN));
-        $categories = CategoryCollection::make($products->pluck('categories')->unique('id')->flatten()->unique('id'));
+        $categories = CategoryCollection::make($products->pluck('categories')->unique('id')->flatten());
         return inertia('Frontend/User/FrontendUserShow', compact('element', 'products', 'books', 'categories'));
     }
 
