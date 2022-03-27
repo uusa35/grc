@@ -12,7 +12,7 @@ import {InertiaProgress} from '@inertiajs/progress'
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {settings, auth, currencies, categories} = props.initialPage.props;
+        const {settings, auth, currencies, categories, appName } = props.initialPage.props;
         InertiaProgress.init({
             delay: 0,
             color: '#f92d34',
@@ -20,7 +20,7 @@ createInertiaApp({
             showSpinner: true,
         })
         return render(
-            <GlobalContext.Provider value={{auth, settings, currencies, categories}}>
+            <GlobalContext.Provider value={{auth, settings, currencies, categories, appName }}>
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>}
                                  persistor={persistor}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
+use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CountryExtraLightResource;
 use App\Http\Resources\CourseCollection;
 use App\Http\Resources\CourseResource;
@@ -103,8 +104,9 @@ class FrontendUserController extends Controller
     {
         $element = new UserResource($user->load('role', 'images', 'ratings'));
         $books = BookCollection::make($element->books()->active()->paginate(SELF::TAKE_MIN));
-        $products = ProductCollection::make($element->products()->active()->paginate(SELF::TAKE_MIN));
-        return inertia('Frontend/User/FrontendUserShow', compact('element', 'products', 'books'));
+        $products = ProductCollection::make($element->products()->active()->with('categories')->paginate(SELF::TAKE_MIN));
+        $categories = CategoryCollection::make($products->pluck('categories')->flatten());
+        return inertia('Frontend/User/FrontendUserShow', compact('element', 'products', 'books', 'categories'));
     }
 
     /**

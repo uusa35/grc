@@ -13,14 +13,14 @@ import GlobalContext from "../../context/GlobalContext";
 const SearchField = () => {
     const [search, setSearch] = useState()
     const {trans, classNames, headerColor, headerBgColor, isAdminOrAbove} = useContext(AppContext)
-    const {settings} = useContext(GlobalContext);
+    const {settings, appName } = useContext(GlobalContext);
     const {locale, searchType} = useSelector(state => state);
     const [requestType, setRequestType] = useState('frontend');
     const dispatch = useDispatch();
     const [types, setStype] = useState([
         {
             name: 'product',
-            frontend: settings.enable_products,
+            frontend: settings.enable_products && appName !== 'istores',
             backend: settings.enable_products,
         },
         {

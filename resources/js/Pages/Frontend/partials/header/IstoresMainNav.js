@@ -46,7 +46,7 @@ const currentVariants = {
     }
 };
 
-export default function ()  {
+export default function () {
     const {
         classNames, getThumb, getLocalized, trans,
         baseUrl,
@@ -220,26 +220,6 @@ export default function ()  {
                                     </Link>
                                 </div>
                                 {
-                                    settings.enable_books && <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.book.index')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('library'))}
-                                        </Link>
-                                    </div>
-                                }
-                                {
-                                    settings.enable_books && <>
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.user.index')}
-                                                className={`-m-2 p-2 block `}>
-                                                {capitalize(trans('experts_and_participants'))}
-                                            </Link>
-                                        </div>
-                                    </>
-                                }
-                                {
                                     settings.enable_services && <div className="flow-root">
                                         <div className="flow-root">
                                             <Link
@@ -252,33 +232,6 @@ export default function ()  {
                                             href={route('frontend.service.index')}
                                             className={`-m-2 p-2 block  hidden`}>
                                             {capitalize(trans('services'))}
-                                        </Link>
-                                    </div>
-                                }
-                                {
-                                    settings.enable_courses && <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.course.index')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('e_learning'))}
-                                        </Link>
-                                    </div>
-                                }
-                                {
-                                    settings.enable_subscriptions && <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.subscription.index')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('subscriptions'))}
-                                        </Link>
-                                    </div>
-                                }
-                                {
-                                    settings.enable_products && <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.product.index')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('products'))}
                                         </Link>
                                     </div>
                                 }
@@ -380,30 +333,6 @@ export default function ()  {
                                 <div className="border-b border-gray-200">
                                     <Tab.List className="-mb-px flex px-4 space-x-8">
                                         {
-                                            settings.enable_books && <Tab
-                                                className={({selected}, headerColor) =>
-                                                    classNames(
-                                                        selected ? `text-${headerColor}-600 border-${headerColor}-600` : ` border-transparent`,
-                                                        `flex-1 whitespace-nowrap py-2 px-1 border-b-2  font-medium`
-                                                    )
-                                                }
-                                            >
-                                                {trans("book_categories")}
-                                            </Tab>
-                                        }
-                                        {
-                                            settings.enable_products && <Tab
-                                                className={({selected}, headerColor) =>
-                                                    classNames(
-                                                        selected ? `border-${headerColor}-600` : ` border-transparent`,
-                                                        `flex-1 whitespace-nowrap py-2 px-1 border-b-2  font-medium`
-                                                    )
-                                                }
-                                            >
-                                                {trans("product_categories")}
-                                            </Tab>
-                                        }
-                                        {
                                             settings.enable_cart && <Tab
                                                 className={({selected}, headerColor) =>
                                                     classNames(
@@ -418,123 +347,6 @@ export default function ()  {
                                     </Tab.List>
                                 </div>
                                 <Tab.Panels as={Fragment}>
-                                    {/* books categories */}
-                                    {settings.enable_books && <Tab.Panel
-                                        className="pt-10 pb-8 px-4 space-y-10 capitalize">
-                                        {map(serviceCategories, parent => (
-                                            <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
-                                                <div key={parent[getLocalized()]} className="group relative ">
-                                                    <div
-                                                        className="aspect-w-1 aspect-h-1 rounded-lg bg-${headerBgColor}-50 bg-${headerBgColor}-800 overflow-hidden group-hover:opacity-75">
-                                                        <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
-                                                             className="object-center object-cover"
-                                                             loading={'lazy'}
-                                                        />
-                                                    </div>
-                                                    <Link
-                                                        href={route('frontend.service.index', {category_id: parent.id})}
-                                                        className="mt-6 block  capitalize">
-                                                        <span className="absolute z-10 inset-0" aria-hidden="true"/>
-                                                        {parent[getLocalized()]}
-                                                    </Link>
-                                                    <p aria-hidden="true" className="mt-1 capitalize truncate">
-                                                        {parent[getLocalized('caption')]}
-                                                    </p>
-                                                </div>
-                                                {map(filter(parent.children, c => c.is_service), sub => (
-                                                    <div key={sub[getLocalized()]} className="gap-y-5 space-y-2 my-3">
-                                                        <Link
-                                                            href={route('frontend.service.index', {category_id: sub.id})}
-                                                            className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-50">
-                                                            <img src={getThumb(sub.image)} alt=""
-                                                                 className="h-10 w-10 rounded-sm mx-2"
-                                                                 loading={'lazy'}
-                                                            />
-                                                            {sub[getLocalized()]}
-                                                        </Link>
-                                                        <ul
-                                                            role="list"
-                                                            aria-labelledby={`${parent.id}-${sub.id}-heading-mobile`}
-                                                            className="flex flex-col"
-                                                        >
-                                                            {map(filter(sub.children, c => c.is_service), child =>
-                                                                <li key={child[getLocalized()]} className="flow-root">
-                                                                    <Link
-                                                                        href={route('frontend.service.index', {category_id: child.id})}
-                                                                        className="-m-2 p-2 flex flex-1 flex-row items-center justify-start0 rtl:mr-10 ltr:ml-10">
-                                                                        <img src={getThumb(child.image)} alt=""
-                                                                             className="h-10 w-10 rounded-sm mx-3"
-                                                                             loading={'lazy'}
-                                                                        />
-                                                                        {child[getLocalized()]}
-                                                                    </Link>
-                                                                </li>
-                                                            )}
-                                                        </ul>
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                        ))}
-                                    </Tab.Panel>}
-                                    {/* product categories */}
-                                    {settings.enable_products && <Tab.Panel
-                                        className="pt-10 pb-8 px-4 space-y-10 capitalize">
-                                        {map(productCategories, parent => (
-                                            <div className="grid grid-cols-1 gap-x-4" key={parent[getLocalized()]}>
-                                                <div key={parent[getLocalized()]} className="group relative ">
-                                                    <div
-                                                        className={`aspect-w-1 aspect-h-1 rounded-lg bg-${headerBgColor}-50 bg-${headerBgColor}-800 overflow-hidden group-hover:opacity-75`}>
-                                                        <img src={getThumb(parent.image)} alt={parent[getLocalized()]}
-                                                             className="object-center object-cover"
-                                                             loading={'lazy'}
-                                                        />
-                                                    </div>
-                                                    <Link href={route('frontend.book.index', {category_id: parent.id})}
-                                                          className="mt-6 block  capitalize">
-                                                        <span className="absolute z-10 inset-0" aria-hidden="true"/>
-                                                        {parent[getLocalized()]}
-                                                    </Link>
-                                                    <p aria-hidden="true" className="mt-1 capitalize truncate">
-                                                        {parent[getLocalized('caption')]}
-                                                    </p>
-                                                </div>
-                                                {map(filter(parent.children, c => c.is_product), sub => (
-                                                    <div key={sub[getLocalized()]} className="gap-y-5 space-y-2 my-3">
-                                                        <Link
-                                                            href={route('frontend.book.index', {category_id: sub.id})}
-                                                            className="-m-2 p-2 flex flex-1 flex-row items-center justify-start space-x-50">
-                                                            <img src={getThumb(sub.image)} alt=""
-                                                                 className="h-10 w-10 rounded-sm mx-2"
-                                                                 loading={'lazy'}
-                                                            />
-                                                            {sub[getLocalized()]}
-                                                        </Link>
-                                                        <ul
-                                                            role="list"
-                                                            aria-labelledby={`${parent.id}-${sub.id}-heading-mobile`}
-                                                            className="flex flex-col"
-                                                        >
-                                                            {map(filter(sub.children, c => c.is_product), child =>
-                                                                <li key={child[getLocalized()]} className="flow-root">
-                                                                    <Link
-                                                                        href={route('frontend.book.index', {category_id: child.id})}
-                                                                        className="-m-2 p-2 flex flex-1 flex-row items-center justify-start0 rtl:mr-10 ltr:ml-10">
-                                                                        <img src={getThumb(child.image)} alt=""
-                                                                             className="h-10 w-10 rounded-sm mx-3"
-                                                                             loading={'lazy'}
-                                                                        />
-                                                                        {child[getLocalized()]}
-                                                                    </Link>
-                                                                </li>
-                                                            )}
-                                                        </ul>
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                        ))}
-                                    </Tab.Panel>}
                                     {
                                         settings.enable_cart &&
                                         <Tab.Panel
@@ -594,36 +406,6 @@ export default function ()  {
                                     {capitalize(trans('home'))}
                                 </Link>
                                 {
-                                    settings.enable_products ? <Link
-                                        href={route('frontend.product.index')}
-                                        className={classNames(parentModule == 'product' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
-                                    >
-                                        {capitalize(trans('products'))}
-                                    </Link> : null
-                                }
-                                {
-                                    settings.enable_books ? <Link
-                                        href={route('frontend.book.index')}
-                                        className={classNames(parentModule == 'book' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
-                                    >
-                                        {capitalize(trans('library'))}
-                                    </Link> : null
-                                }
-                                {
-                                    settings.enable_products ?
-                                        <MainNavBookCategoriesList
-                                            categories={filter(categories, c => c.is_product && c.on_home)}
-                                            type='product'/> : null
-                                }
-                                {
-                                    settings.enable_books ? <Link
-                                        href={route('frontend.user.index', {is_author: true})}
-                                        className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
-                                    >
-                                        {capitalize(trans('experts_and_participants'))}
-                                    </Link> : null
-                                }
-                                {
                                     settings.enable_users ? <Link
                                         href={route('frontend.user.index', {is_company: true})}
                                         className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
@@ -631,53 +413,6 @@ export default function ()  {
                                         {capitalize(trans('merchants'))}
                                     </Link> : null
                                 }
-                                {
-                                    settings.enable_services ? <>
-                                        <Link
-                                            href={route('frontend.service.index')}
-                                            className={classNames(parentModule == 'service' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize hidden`)}
-                                        >
-                                            {capitalize(trans('consulting_and_training'))}
-                                        </Link>
-                                        <MainNavBookCategoriesList categories={filter(categories, c => c.is_service)}
-                                                                   type='service'/>
-                                    </> : null
-                                }
-                                {
-                                    settings.enable_courses ? <Link
-                                        href={route('frontend.course.index')}
-                                        className={classNames(parentModule == 'course' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
-                                    >
-                                        {capitalize(trans('e_learning'))}
-                                    </Link> : null
-                                }
-
-                                {
-                                    settings.corporate_mode ? <>
-                                        <Link
-                                            href={`/#our_services`}
-                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
-                                        >
-                                            {capitalize(trans('our_services'))}
-                                        </Link>
-                                        <a
-                                            href={`https://shop.mgt-sa.com`}
-                                            className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
-                                        >
-                                            {capitalize(trans('our_shop'))}
-                                        </a>
-                                    </> : null
-                                }
-
-                                {
-                                    settings.enable_joinus ? <Link
-                                        href={route('frontend.joinus')}
-                                        className={classNames(parentModule == 'joinus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
-                                    >
-                                        {capitalize(trans('joinus'))}
-                                    </Link> : null
-                                }
-
                                 <Link
                                     href={route('frontend.aboutus')}
                                     className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
@@ -1097,5 +832,4 @@ export default function ()  {
         </div>
     )
 }
-
 

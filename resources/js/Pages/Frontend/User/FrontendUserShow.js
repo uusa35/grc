@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, isNull, size, isEmpty} from 'lodash';
+import {map, isNull, size, isEmpty, filter} from 'lodash';
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
 import ImageGallery from 'react-image-gallery';
@@ -24,9 +24,11 @@ import NormalBookWidget from "../components/widgets/book/NormalBookWidget";
 import {setMenuBg} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FrontendPagination from "../partials/FrontendPagination";
+import SearchIndexSideBar from "../partials/SearchIndexSideBar";
+import NoElements from "../../Backend/components/widgets/NoElements";
 
 
-export default function({element, products , books }) {
+export default function({element, products , books, categories }) {
     const {
         getThumb,
         getLarge,
@@ -39,6 +41,7 @@ export default function({element, products , books }) {
     } = useContext(AppContext)
     const [currentImages, setCurrentImages] = useState([]);
     const {settings} = useContext(GlobalContext);
+    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const dispatch = useDispatch();
 
     useMemo(() => {
@@ -256,19 +259,32 @@ export default function({element, products , books }) {
                                                         </Disclosure.Button>
                                                         <Disclosure.Panel as="div" className="pb-6">
                                                             <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
-                                                                <div
-                                                                    className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-4 2xl:grid-cols-4 xl:gap-x-8 gap-x-6">
-                                                                    {map(products.data, p => (
-                                                                        <NormalProductWidget element={p} key={p.id}/>
-                                                                    ))}
+                                                                <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
+                                                                    {/* search SideBar */}
+                                                                    <SearchIndexSideBar
+                                                                        type={'product'}
+                                                                        categories={filter(categories, c => c.is_product)}
+                                                                        setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
+                                                                    {/* Product grid */}
+                                                                    <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
+                                                                        <div className="col-span-full mb-3">
+                                                                            <FrontendPagination
+                                                                                type={'product'}
+                                                                                total={products.meta.total}
+                                                                                links={products.meta.links}
+                                                                                showSearch={false}
+                                                                                lastPage={products.meta.last_page}
+                                                                            />
+                                                                        </div>
+                                                                        <NoElements display={products.meta.total < 1}/>
+                                                                        <div
+                                                                            className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
+                                                                            {map(products.data, element => (
+                                                                                <NormalProductWidget element={element} key={element.id}/>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <FrontendPagination
-                                                                    type={'product'}
-                                                                    total={products.meta.total}
-                                                                    links={products.meta.links}
-                                                                    showSearch={false}
-                                                                    lastPage={books.meta.last_page}
-                                                                />
                                                             </div>
                                                         </Disclosure.Panel>
                                                     </>

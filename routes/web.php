@@ -69,11 +69,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // points
-// 1- btn of the discount in carIndex ===> done
+// 1- Search Products in FrontendUserShow redirects !!
 // 2- testing cart and discount
-// 3- in store (fixed color + fixed size) ===> done
-// 5- on click (categories user) go to CategoryIndex with sorting issue A - Z
-// 6- Area and Governate in cartIndex  ===> done
+// 3- Product Notes for order in ProductShow
+// 4- Order Notes in CartUserInformation
+// 5- new Option to choose DOC or Receive from shop
 
 Auth::routes();
 Auth::routes(['verify' => true]);

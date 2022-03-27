@@ -13,10 +13,11 @@ import './../../../../../node_modules/react-image-gallery/styles/css/image-galle
 import 'swiper/css';
 import GlobalContext from "../../context/GlobalContext";
 import {motion} from 'framer-motion';
+import IstoresMainNav from "../partials/header/IstoresMainNav";
 
 const FrontendContainer = ({children}) => {
     const {locale, theme, menuBg } = useSelector(state => state)
-    const {settings} = useContext(GlobalContext);
+    const {settings, appName } = useContext(GlobalContext);
     const {
         currentFont,
         textColor,
@@ -38,7 +39,8 @@ const FrontendContainer = ({children}) => {
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement/>
-            <MainNav/>
+            { appName === 'istores' && <IstoresMainNav />}
+            { appName !== 'istores' && <MainNav />}
             <div className="hidden lg:flex z-0 absolute inset-0 min-w-full">
                 {
                     settings.wide_screen ? <motion.img

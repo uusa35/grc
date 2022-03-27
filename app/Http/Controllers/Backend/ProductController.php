@@ -57,6 +57,7 @@ class ProductController extends Controller
         return inertia('Backend/Product/ProductIndex', compact('elements'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *

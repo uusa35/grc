@@ -59,7 +59,8 @@ class FrontendHandleInertiaRequests extends Middleware
                 }])
                 ->orderBy('order', 'asc')
                 ->get()),
-            'ziggy' => (new Ziggy())->toArray()
+            'ziggy' => (new Ziggy())->toArray(),
+             'appName' => env('APP_NAME')
         ]);
     }
 }

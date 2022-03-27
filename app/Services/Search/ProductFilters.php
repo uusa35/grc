@@ -117,12 +117,17 @@ class ProductFilters extends QueryFilters
 
     public function min()
     {
-        return $this->builder->where('price', '>=' ,(double)request()->min);
+        return $this->builder->where('price', '>=', (double)request()->min);
     }
 
     public function max()
     {
-        return $this->builder->where('price', '<=' ,(double)request()->max);
+        return $this->builder->where('price', '<=', (double)request()->max);
+    }
+
+    public function user()
+    {
+        return $this->builder->where('user_id', '=', request()->user);
     }
 
 }
