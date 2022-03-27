@@ -65,7 +65,7 @@ function MainNav() {
     const [open, setOpen] = useState(false)
     const [offset, setOffset] = useState(0);
     const dispatch = useDispatch();
-    const userCategories  = useMemo(() => filter(categories, c => c.is_user), [categories])
+    const userCategories = useMemo(() => filter(categories, c => c.is_user), [categories])
     const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
     const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
 
@@ -589,7 +589,6 @@ function MainNav() {
                             <div className="h-full flex gap-x-5 overflow-hidden">
                                 <Link
                                     href={route('frontend.home')}
-                                    // onClick={() => dispatch(setParentModule('home'))}
                                     className={classNames(parentModule == 'home' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center  hover:rounded-sm capitalize overflow-hidden`)}
                                 >
                                     {capitalize(trans('home'))}
@@ -597,7 +596,6 @@ function MainNav() {
                                 {
                                     settings.enable_products ? <Link
                                         href={route('frontend.product.index')}
-                                        // onClick={() => dispatch(setParentModule('product'))}
                                         className={classNames(parentModule == 'product' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('products'))}
@@ -606,7 +604,6 @@ function MainNav() {
                                 {
                                     settings.enable_books ? <Link
                                         href={route('frontend.book.index')}
-                                        // onClick={() => dispatch(setParentModule('book'))}
                                         className={classNames(parentModule == 'book' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('library'))}
@@ -614,13 +611,13 @@ function MainNav() {
                                 }
                                 {
                                     settings.enable_products ?
-                                        <MainNavBookCategoriesList categories={filter(categories, c => c.is_product)}
-                                                                   type='product'/> : null
+                                        <MainNavBookCategoriesList
+                                            categories={filter(categories, c => c.is_product && c.on_home)}
+                                            type='product'/> : null
                                 }
                                 {
                                     settings.enable_books ? <Link
                                         href={route('frontend.user.index', {is_author: true})}
-                                        // onClick={() => dispatch(setParentModule('user'))}
                                         className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('experts_and_participants'))}
@@ -629,7 +626,6 @@ function MainNav() {
                                 {
                                     settings.enable_users ? <Link
                                         href={route('frontend.user.index', {is_company: true})}
-                                        // onClick={() => dispatch(setParentModule('user'))}
                                         className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >
                                         {capitalize(trans('merchants'))}
@@ -639,7 +635,6 @@ function MainNav() {
                                     settings.enable_services ? <>
                                         <Link
                                             href={route('frontend.service.index')}
-                                            // onClick={() => dispatch(setParentModule('service'))}
                                             className={classNames(parentModule == 'service' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize hidden`)}
                                         >
                                             {capitalize(trans('consulting_and_training'))}
