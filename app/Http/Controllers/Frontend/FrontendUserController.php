@@ -41,7 +41,7 @@ class FrontendUserController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = new UserCollection(User::active()->filters($filters)->notAdmins()->notClients()
-            ->whereHas('role', fn ($q) => $q->where('is_visible', true))
+            ->whereHas('role', fn($q) => $q->where('is_visible', true))
             ->paginate(SELF::TAKE_LESS)
             ->withQueryString());
         return inertia('Frontend/User/FrontendUserIndex', compact('elements'));
@@ -77,7 +77,13 @@ class FrontendUserController extends Controller
             'apartment' => 'max:20',
             'floor' => 'max:20',
         ]);
-        $request->request->add(['name_ar' => $request->name, 'name_en' => $request->name, 'password' => Hash::make('secret'), 'role_id' => Role::where('is_client', true)->first()->id, 'subscription_id' => Subscription::where('free', true)->first()->id]);
+        $country = Country::whereId(request()->country_id)->with('governates.areas')->first();
+        $request->request->add(['name_ar' => $request->name, 'name_en' => $request->name, 'password' => Hash::make('secret'),
+            'role_id' => Role::where('is_client', true)->first()->id,
+            'subscription_id' => Subscription::where('free', true)->first()->id,
+            'governate_id' => $country->governates->first()->id,
+            'area_id' => $country->governates->first()->areas->first()->id,
+        ]);
         $user = User::create($request->all());
         if ($user) {
             $auth = new UserResource($user);
@@ -98,7 +104,7 @@ class FrontendUserController extends Controller
         $element = new UserResource($user->load('role', 'images', 'ratings'));
         $books = BookCollection::make($element->books()->active()->paginate(SELF::TAKE_MIN));
         $products = ProductCollection::make($element->products()->active()->paginate(SELF::TAKE_MIN));
-        return inertia('Frontend/User/FrontendUserShow', compact('element','products', 'books'));
+        return inertia('Frontend/User/FrontendUserShow', compact('element', 'products', 'books'));
     }
 
     /**
@@ -123,7 +129,6 @@ class FrontendUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-//        dd($request->all());
         $request->validate([
             'name_ar' => 'required|min:3|max:255',
             'name_en' => 'required|min:3|max:255',
@@ -304,7 +309,7 @@ class FrontendUserController extends Controller
 
     public function getRegistration()
     {
-        $countries = CountryExtraLightResource::collection(Country::has('governates.areas','>', 0)->active()->get());
+        $countries = CountryExtraLightResource::collection(Country::has('governates.areas', '>', 0)->active()->get());
         return inertia('Frontend/User/RegisterForm', compact('countries'));
     }
 

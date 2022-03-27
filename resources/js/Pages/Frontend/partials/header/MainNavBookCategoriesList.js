@@ -62,7 +62,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                 <div className="max-w-full px-8 mt-2">
                                     <div
                                         className="grid grid-cols-2 gap-y-3 gap-x-3 py-8">
-                                        {/* categories with iamges */}
+                                        {/* categories with images */}
                                         <div
                                             className="col-start-2 grid grid-cols-3 gap-x-4">
                                             {/*  featured parents */}
@@ -94,10 +94,10 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                         <div
                                             className="row-start-1 grid grid-cols-4 gap-y-2 gap-x-2">
                                             {map(categories, parent => (
-                                                <div key={parent[getLocalized()]}>
+                                                <div key={parent[getLocalized()]} className={`mb-3 flex flex-col border-l border-dotted border-gray-200 p-3`}>
                                                     <Link id={`${parent.id}-heading`}
                                                           href={route(`frontend.${type}.index`, {category_id: parent.id})}
-                                                          className={` border-b-2 border-gray-100  pb-1 ${menuTextColor} `}>
+                                                          className={`border-b border-dashed border-gray-100  pb-1 ${menuTextColor} font-extrabold`}>
                                                         {parent[getLocalized()]}
                                                     </Link>
                                                     <ul
@@ -108,7 +108,10 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                                         {
                                                             map(filter(parent.children, c => c.is_service && type === 'service' || c.is_product && type === 'product'), child => (
                                                                 <li key={child.id}
-                                                                    className="flex">
+                                                                    className="flex flex-row items-center">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 rtl:ml-2 ltr:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M20 12H4" />
+                                                                    </svg>
                                                                     <Link
                                                                         href={route(`frontend.${type}.index`, {category_id: child.id})}
                                                                         className={`${menuTextColor}`}>

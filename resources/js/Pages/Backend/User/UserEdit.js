@@ -2,7 +2,7 @@ import BackendContainer from "./../components/containers/BackendContainer";
 import React, {useContext, useMemo, useState} from "react";
 import {AppContext} from "./../../context/AppContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, map, first, uniq} from 'lodash';
+import {filter, map, first, uniq, isEmpty} from 'lodash';
 import FormTabsContainer from "./../components/containers/FormTabsContainer";
 import ToolTipWidget from "./../components/widgets/ToolTipWidget";
 import FormBtns from "./../components/widgets/form/FormBtns";
@@ -19,7 +19,8 @@ import FormSection from "../components/widgets/form/FormSection";
 export default function({user, roles, elementCategories, categories, countries, subscriptions}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
-    const [areas, setAreas] = useState(map(countries, c => c.id === user.country_id ? c.areas : []))
+    const [governates, setGovernates] = useState([])
+    const [areas, setAreas] = useState([])
     const {parentModule, currentFormTab} = useSelector(state => state);
 
     const {
@@ -111,11 +112,22 @@ export default function({user, roles, elementCategories, categories, countries, 
     });
 
     useMemo(() => {
-        // setAreas()
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
-        setAreas(selectedCountry.areas)
+        setGovernates(selectedCountry.governates)
+        setData('governate_id', first(selectedCountry.governates).id)
+        const areas = first(selectedCountry.governates).areas;
+        setAreas(areas)
         setData('area_id', first(areas).id)
     }, [data.country_id])
+
+
+    useMemo(() => {
+        if (!isEmpty(governates)) {
+            const selectedGovernate = data.governate_id ? first(filter(governates, c => c.id == data.governate_id)) : first(governates);
+            setAreas(selectedGovernate.areas);
+            setData('area_id', first(selectedGovernate.areas).id)
+        }
+    }, [data.governate_id])
 
     const handleChange = (e) => {
         setData(values => ({
@@ -360,7 +372,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                 </>}
                             </div>
                             {/* country_id */}
-                            <div className="sm:col-span-2">
+                            <div className="sm:col-span-1">
                                 <label htmlFor="country_id" className="block   text-gray-800">
                                     {trans('country')}
                                 </label>
@@ -387,9 +399,40 @@ export default function({user, roles, elementCategories, categories, countries, 
                                     {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
                                 </p>
                             </div>
+                            {/* governate_id  */}
+                            {
+                                governates && <div className="lg:col-span-1">
+                                    <label htmlFor="governate_id" className="block   ">
+                                        {trans('governate')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <select
+                                            required
+                                            onChange={handleChange}
+                                            id="governate_id"
+                                            name="governate_id"
+                                            defaultValue={user.governate_id}
+                                            autoComplete="governate_id"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
+                                        >
+                                            <option value="">{trans('choose')} {trans('governate')}</option>
+                                            {
+                                                map(governates, u => (
+                                                    <option key={u.id} value={u.id}
+                                                    >{u[getLocalized()]}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                    <ToolTipWidget message={trans('user_instruction')}/>
+                                    <p className={`mt-2  `}>
+                                        {errors.governate_id && <div className={`text-red-900`}>{errors.governate_id}</div>}
+                                    </p>
+                                </div>
+                            }
                             {/* area_id */}
                             {
-                                areas && <div className="sm:col-span-2">
+                                areas && <div className="sm:col-span-1">
                                     <label htmlFor="area_id" className="block   text-gray-800">
                                         {trans('area')}
                                     </label>
