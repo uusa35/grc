@@ -59,8 +59,7 @@ class FrontendHandleInertiaRequests extends Middleware
                 }])
                 ->orderBy('order', 'asc')
                 ->get()),
-            'ziggy' => (new Ziggy())->toArray(),
-             'lang' => app()->getLocale()
+            'ziggy' => (new Ziggy())->toArray()
         ]);
     }
 }

@@ -7,13 +7,12 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {store, persistor} from './Pages/redux/store';
 import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
 import 'react-toastify/dist/ReactToastify.css';
-import { InertiaProgress } from '@inertiajs/progress'
+import {InertiaProgress} from '@inertiajs/progress'
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),
     setup({el, App, props}) {
-        const {settings, auth, currencies, categories, lang } = props.initialPage.props;
-        console.log('the lang from server', lang);
+        const {settings, auth, currencies, categories} = props.initialPage.props;
         InertiaProgress.init({
             delay: 0,
             color: '#f92d34',
@@ -21,7 +20,7 @@ createInertiaApp({
             showSpinner: true,
         })
         return render(
-            <GlobalContext.Provider value={{auth, settings, currencies, categories }}>
+            <GlobalContext.Provider value={{auth, settings, currencies, categories}}>
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>}
                                  persistor={persistor}
