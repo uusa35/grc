@@ -239,7 +239,7 @@ export default React.memo(function({
                         </motion.div>
 
                         {/* our services */}
-                        <section id={`our_services`}>
+                        <section id={`our_services anchorBehave`}>
                             <div className="relative bg-gray-50 py-16">
                                 <div className="relative">
                                     <div
