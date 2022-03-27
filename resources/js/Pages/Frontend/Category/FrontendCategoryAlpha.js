@@ -2,7 +2,7 @@ import FrontendContainer from "../components/FrontendContainer";
 import React, {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import CategoryWidget from "../components/widgets/category/CategoryWidget";
-import {map, orderBy} from 'lodash';
+import {lowerCase} from 'lodash';
 import FrontendPagination from "../partials/FrontendPagination";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
@@ -76,7 +76,7 @@ export default function({elements}) {
                                         </div>
                                     </h3>
                                     <div className={`flex flex-col border-l border-gray-100`}>
-                                        {elements.filter((element) => element[getLocalized()].startsWith(c)).map((item, index) => (
+                                        {elements.filter((element) => lowerCase(element[getLocalized()]).startsWith(c)).map((item, index) => (
                                             <li key={index} className={`flex flex-row my-2 w-full px-4`}>
                                                 <Link
                                                     href={route(`frontend.${type}.index`, {category_id: item.id})}
