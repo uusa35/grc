@@ -32,8 +32,8 @@ class FrontendCategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = CategoryCollection::make(Category::active()->filters($filters)->orderBy('order', 'asc')
-            ->paginate(Self::TAKE_LARGE)->withQueryString());
+        $elements = CategoryCollection::make(Category::active()->filters($filters)->with('children.children')->orderBy('order', 'asc')
+            ->get()->flatten());
         return inertia('Frontend/Category/FrontendCategoryAlpha', compact('elements'));
     }
 

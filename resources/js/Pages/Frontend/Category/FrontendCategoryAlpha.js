@@ -18,8 +18,6 @@ export default function({elements}) {
     const {trans, contentBgColor, textColor, mainColor, getLocalized, getThumb} = useContext(AppContext);
     const {params} = route();
     const [type, setType] = useState('book')
-    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-    const [currentData, setCurrentData] = useState();
     const {sort, locale} = useSelector(state => state);
     const [currentAlpha, setCurrentAlpha] = useState(locale.isRTL ? arAlphabet : enAlphabet);
 
@@ -38,18 +36,8 @@ export default function({elements}) {
     }, [])
 
     useMemo(() => {
-        locale.isRTL ? setCurrentData(arAlphabet) : setCurrentData(enAlphabet);
+        locale.isRTL ? setCurrentAlpha(arAlphabet) : setCurrentAlpha(enAlphabet);
     }, [locale.isRTL])
-
-    useMemo(() => {
-        if (!currentData) {
-            setCurrentData(elements.data);
-        }
-    }, [elements.data])
-
-    useMemo(() => {
-        setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
-    }, [sort.desc])
 
     return (
         <FrontendContainer>
@@ -88,8 +76,8 @@ export default function({elements}) {
                                         </div>
                                     </h3>
                                     <div className={`flex flex-col border-l border-gray-100`}>
-                                        {elements.data.filter((element) => element[getLocalized()].startsWith(c)).map((item, index) => (
-                                            <li key={index} className={`flex flex-row my-2 w-full`}>
+                                        {elements.filter((element) => element[getLocalized()].startsWith(c)).map((item, index) => (
+                                            <li key={index} className={`flex flex-row my-2 w-full px-4`}>
                                                 <Link
                                                     href={route(`frontend.${type}.index`, {category_id: item.id})}
                                                     className={`flex flex-row items-center justify-center`}
