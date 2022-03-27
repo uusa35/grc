@@ -55,11 +55,11 @@ export default function({elements}) {
                         </div>
                     </div>
 
-                    <div className={`flex flex-row mb-10 flex-grow w-full items-center justify-center`}>
+                    <div className={`flex flex-row w-full mb-10  items-center justify-center flex-wrap`}>
                         {currentAlpha.split("").map((c) => {
                             return (
                                 <div
-                                    className={`flex-grow text-center py-4 hover:border-b hover:border-dashed hover:text-gray-600`}>
+                                    className={`w-10 text-center py-4 hover:border-b hover:border-dashed hover:text-gray-600`}>
                                     <h3><a href={`#${c}`}>{c}</a></h3>
                                 </div>
                             );
