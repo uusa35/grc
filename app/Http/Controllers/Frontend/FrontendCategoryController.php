@@ -26,6 +26,17 @@ class FrontendCategoryController extends Controller
         return inertia('Frontend/Category/FrontendCategoryIndex', compact('elements'));
     }
 
+    public function alpha(CategoryFilters $filters)
+    {
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+        $elements = CategoryCollection::make(Category::active()->filters($filters)->orderBy('order', 'asc')
+            ->paginate(Self::TAKE_LARGE)->withQueryString());
+        return inertia('Frontend/Category/FrontendCategoryAlpha', compact('elements'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

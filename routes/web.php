@@ -87,7 +87,8 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::resource('book', FrontendBookController::class)->only(['index', 'show']);
     Route::resource('service', FrontendServiceController::class)->only(['index', 'show']);
     Route::resource('course', FrontendCourseController::class)->only(['index', 'show']);
-    Route::resource('category', FrontendCategoryController::class);
+    Route::resource('category', FrontendCategoryController::class)->only(['index']);
+    Route::get('category/alpha', [FrontendCategoryController::class, 'alpha'])->name('category.alpha');
     Route::resource('user', FrontendUserController::class)->except('destroy', 'edit');
     Route::resource('faq', FrontendFaqController::class)->only('index');
     Route::get('contactus', [FrontendPageController::class, 'getContactus'])->name('contactus');

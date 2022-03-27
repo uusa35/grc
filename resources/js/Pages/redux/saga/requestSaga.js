@@ -80,5 +80,4 @@ export async function getTranslations() {
 
 export async function changeLangOnServer(lang) {
     const current = await axios.get(`/api/lang/${lang}`).then(r => r.data).catch(e => console.log(e));
-    console.log('current', current);
 }
