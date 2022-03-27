@@ -662,7 +662,7 @@ function MainNav() {
                                         </Link>
                                         <a
                                             href={`https://shop.mgt-sa.com`}
-                                            className={classNames(parentModule == 'aboutus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_shop'))}
                                         </a>

@@ -50,7 +50,7 @@ export default function({element, products , books }) {
     }, [element])
 
     useEffect(() => {
-        element.banner ? dispatch(setMenuBg(element.banner)) : null;
+        element.banner ? dispatch(setMenuBg(element.banner)) : dispatch(setMenuBg(element.image));
         return () => dispatch(setMenuBg(settings.menu_bg));
     }, [])
 
@@ -89,7 +89,7 @@ export default function({element, products , books }) {
                                 <img
                                     src={getThumb(element.image)}
                                     alt={element[getLocalized()]}
-                                    className="z-0 w-40 h-40 rounded-full shadow-md object-center object-cover group-hover:opacity-75 shadow-md"
+                                    className="z-0 w-40 h-40 rounded-full shadow-lg object-center object-cover group-hover:opacity-75"
                                     width={100}
                                     height={100}
                                     loading='lazy'
