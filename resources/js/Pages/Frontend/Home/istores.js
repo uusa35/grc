@@ -58,7 +58,7 @@ export default React.memo(function({
                                         </Link>
                                     </h1>
                                     {
-                                        locale.isRTL ? <Link className={`hidden lg:flex flex-row items-center`} href={route('frontend.category.alpha')}>
+                                        locale.isRTL ? <Link className={`hidden lg:flex flex-row items-center`} href={route('frontend.category.alpha', { is_user : true })}>
                                 <span
                                     className={`${textColor} text-xs`}>{trans('show_all')}</span>
                                             <div

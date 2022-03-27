@@ -82,12 +82,17 @@ export default function({elements}) {
                         {currentAlpha.split("").map((c) => {
                             return (
                                 <div className={`col-span-full lg:col-span-1`} id={`${c}`}>
-                                    <h3 className={`text-2xl border-b border-dashed p-2 mb-2`}>{c}</h3>
+                                    <h3 className={`text-2xl border-b border-dashed p-4`}>
+                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center bg-gray-100 hover:bg-gray-300`}>
+                                            {c}
+                                        </div>
+                                    </h3>
                                     <div className={`flex flex-col border-l border-gray-100`}>
-                                        {elements.data.filter((element) => element.name_ar.startsWith(c)).map((item, index) => (
+                                        {elements.data.filter((element) => element[getLocalized()].startsWith(c)).map((item, index) => (
                                             <li key={index} className={`flex flex-row my-2 w-full`}>
-                                                <Link href={route('frontend.user.index', {category_user_id: item.id})}
-                                                      className={`flex flex-row items-center justify-center`}
+                                                <Link
+                                                    href={route(`frontend.${type}.index`, {category_id: item.id})}
+                                                    className={`flex flex-row items-center justify-center`}
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                          className="h-3 w-3 rtl:ml-2 ltr:mr-2" fill="none"
