@@ -71,7 +71,7 @@ export default React.memo(function({
                                                           d="M15 19l-7-7 7-7"/>
                                                 </svg>
                                             </div>
-                                        </Link> : <div className={`hidden lg:flex flex-row items-center`}>
+                                        </Link> : <Link className={`hidden lg:flex flex-row items-center`} href={route('frontend.category.alpha', { is_user : true })}>
                                 <span
                                     className={`${textColor} text-xs`}>{trans('show_all')}</span>
                                             <div
@@ -84,7 +84,7 @@ export default React.memo(function({
                                                           d="M9 5l7 7-7 7"/>
                                                 </svg>
                                             </div>
-                                        </div>
+                                        </Link>
                                     }
 
                                 </div>
