@@ -353,7 +353,7 @@ function MainNav() {
                                         <Link
                                             href={route('frontend.polices')}
                                             className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('policy'))}
+                                            {capitalize(trans('policies'))}
                                         </Link>
                                     </div>
                                 }
