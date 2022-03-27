@@ -206,3 +206,7 @@
     background-position: center center;
     background-attachment: fixed;
 }
+
+.anchorBehave {
+    scroll-margin-top: 150px;
+}

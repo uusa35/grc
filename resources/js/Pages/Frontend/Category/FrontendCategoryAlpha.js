@@ -69,9 +69,10 @@ export default function({elements}) {
                     <div className={`grid grid-cols-1 lg:grid-cols-4 mb-5`}>
                         {currentAlpha.split("").map((c) => {
                             return (
-                                <div className={`col-span-full lg:col-span-1`} id={`${c}`}>
+                                <div className={`col-span-full lg:col-span-1 anchorBehave`} id={`${c}`}>
                                     <h3 className={`text-2xl border-b border-dashed p-4`}>
-                                        <div className={`w-12 h-12 rounded-full flex items-center justify-center bg-gray-100 hover:bg-gray-300`}>
+                                        <div
+                                            className={`w-12 h-12 rounded-full flex items-center justify-center bg-gray-100 hover:bg-gray-300`}>
                                             {c}
                                         </div>
                                     </h3>
