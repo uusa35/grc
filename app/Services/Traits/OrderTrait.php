@@ -25,6 +25,7 @@ trait OrderTrait
     public function createOrder(Request $request)
     {
 //        try {
+        dd($request->all());
             $request->validate([
                 'cart.cartId' => 'required',
                 'cart.total' => 'required|numeric',
