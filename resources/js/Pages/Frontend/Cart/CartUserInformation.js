@@ -55,6 +55,7 @@ export default function({countries, auth, settings}) {
         'receive_from_shop': 0
     });
 
+
     useMemo(() => {
         const currentCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
         setSelectedCountry(currentCountry);
@@ -85,17 +86,20 @@ export default function({countries, auth, settings}) {
             data.receive_from_shop == 1,
             settings.enable_receive_from_shop,
             settings.apply_global_shipment,
-            selectedCountry.price, // globalFees
+            parseFloat(selectedCountry.fixed_shipment_charge), // globalFees
             settings.multi_cart_merchant,
             merchantEnableReceiveFromShop,
             firstProduct.merchant_custome_delivery,
-            firstProduct.merchant_custome_delivery_fees,
-            selectedGovernate.price,
-            selectedCountry.price,
+            parseFloat(firstProduct.merchant_custome_delivery_fees),
+            parseFloat(selectedGovernate.price),
+            parseFloat(selectedCountry.fixed_shipment_charge),
             cart.totalItems
         );
         setCurrentShipmentFees(shipmentFees)
     }, [data.receive_from_shop, data.country_id, data.governate_id, data.area_id])
+
+    console.log('selected country', selectedCountry);
+    console.log('selected governate', selectedGovernate);
 
     const handleChange = (e) => {
         setData(values => ({

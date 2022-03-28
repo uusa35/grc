@@ -112,10 +112,7 @@ export default function(cart = initialState, action) {
             shipmentCountry = action.payload.shipmentCountry;
             shipmentGovernate = action.payload.shipmentGovernate;
             currentShipmentFees = action.payload.shipmentFees;
-            currentNetTotal = round(parseFloat(round(parseFloat(sumBy(cart.items, 'totalPrice')), 2) - currentDiscount + currentShipmentFees), 2);
-            console.log('shipmentFees', currentShipmentFees);
-            console.log('total', currentTotal);
-            console.log('currentNetTotal', currentNetTotal);
+            currentNetTotal = round(parseFloat(currentTotal - currentDiscount + currentShipmentFees), 2);
             return {
                 ...cart,
                 netTotal: currentNetTotal,
