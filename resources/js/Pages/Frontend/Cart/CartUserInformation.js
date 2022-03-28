@@ -104,6 +104,9 @@ export default function({countries, auth, settings}) {
         }))
     }
 
+    console.log('currentShipmentFees', currentShipmentFees);
+    console.log('data.receive from shop', data.receive_from_shop);
+
     const submit = (e) => {
         e.preventDefault()
         dispatch({type: SET_CART_NOTES, payload: data.notes});
