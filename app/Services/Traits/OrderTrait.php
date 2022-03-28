@@ -24,7 +24,7 @@ trait OrderTrait
 {
     public function createOrder(Request $request)
     {
-        try {
+//        try {
             $request->validate([
                 'cart.cartId' => 'required',
                 'cart.total' => 'required|numeric',
@@ -93,9 +93,9 @@ trait OrderTrait
                 ]);
             }
             return $order;
-        } catch (\Exception $exception) {
-            dd($exception->getMessage());
-        }
+//        } catch (\Exception $exception) {
+//            dd($exception->getMessage());
+//        }
     }
 
 
