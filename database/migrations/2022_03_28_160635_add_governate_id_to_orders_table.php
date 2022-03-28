@@ -14,7 +14,7 @@ class AddGovernateIdToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->foreignId('governate_id')->references('id')->on('governates');
+            $table->foreignId('governate_id')->nullable()->constrained();
         });
     }
 
