@@ -98,18 +98,12 @@ export default function({countries, auth, settings}) {
         setCurrentShipmentFees(shipmentFees)
     }, [data.receive_from_shop, data.country_id, data.governate_id, data.area_id])
 
-    console.log('selected country', selectedCountry);
-    console.log('selected governate', selectedGovernate);
-
     const handleChange = (e) => {
         setData(values => ({
             ...values,
             [e.target.id]: e.target.value,
         }))
     }
-
-    console.log('currentShipmentFees', currentShipmentFees);
-    console.log('data.receive from shop', data.receive_from_shop);
 
     const submit = (e) => {
         e.preventDefault()

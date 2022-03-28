@@ -136,21 +136,19 @@ export const calculateShipmentFees = (
     cartTotalItems
 ) => {
 
-    console.log('enableProducts', enableProducts);
-    console.log('countryIsLocal', countryIsLocal);
-    console.log('receiveFromShop', receiveFromShop);
-    console.log('globalReceiveFromShop', globalReceiveFromShop);
-    console.log('applyGlobalShipment', applyGlobalShipment);
-    console.log('globalShipmentFees', globalShipmentFees);
-    console.log('multiCartMerchant', multiCartMerchant);
-    console.log('merchantEnableReceiveFromShop', merchantEnableReceiveFromShop);
-    console.log('merchantCustomeDelivery', merchantCustomeDelivery);
-    console.log('merchantCustomeDeliveryFees', merchantCustomeDeliveryFees);
-    console.log('governatePrice', governatePrice);
-    console.log('countryPrice', countryPrice);
-    console.log('cartTotalItem', cartTotalItems);
-    // receive from branch
-
+    // console.log('enableProducts', enableProducts);
+    // console.log('countryIsLocal', countryIsLocal);
+    // console.log('receiveFromShop', receiveFromShop);
+    // console.log('globalReceiveFromShop', globalReceiveFromShop);
+    // console.log('applyGlobalShipment', applyGlobalShipment);
+    // console.log('globalShipmentFees', globalShipmentFees);
+    // console.log('multiCartMerchant', multiCartMerchant);
+    // console.log('merchantEnableReceiveFromShop', merchantEnableReceiveFromShop);
+    // console.log('merchantCustomeDelivery', merchantCustomeDelivery);
+    // console.log('merchantCustomeDeliveryFees', merchantCustomeDeliveryFees);
+    // console.log('governatePrice', governatePrice);
+    // console.log('countryPrice', countryPrice);
+    // console.log('cartTotalItem', cartTotalItems);
     if (!enableProducts) {
         return 0;
     }
