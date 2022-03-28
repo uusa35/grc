@@ -31,9 +31,10 @@ trait OrderTrait
                 'cart.netTotal' => 'required|numeric',
                 'cart.directPurchaseMode' => 'required|boolean',
                 'cart.multiCartMerchant' => 'required|boolean',
-                'cart.applyGlobalShipment' => 'required|boolean',
                 'cart.merchants' => 'array|required',
                 'cart.currentShipmentCountry' => 'array',
+                'cart.receiveFromShop' => 'required|boolean',
+                'cart.totalWeight' => 'required|numeric',
                 'cart.items' => 'array|required',
                 'cart.items.*.cart_id' => 'required|numeric',
                 'cart.items.*.element_id' => 'required|numeric',
@@ -41,21 +42,26 @@ trait OrderTrait
                 'cart.items.*.type' => 'required|string',
                 'cart.items.*.qty' => 'required|numeric',
                 'cart.items.*.price' => 'required|numeric',
-                'cart.items.*.shipmentFees' => 'required|numeric',
+//                'cart.items.*.shipmentFees' => 'numeric',
                 'cart.items.*.name_ar' => 'required',
                 'cart.items.*.name_en' => 'required',
                 'cart.items.*.merchant_name_ar' => 'required',
                 'cart.items.*.merchant_name_en' => 'required',
+//                'cart.items.*.merchant_enable_receive_from_shop' => 'required',
             ]);
+
             $auth = User::whereId(auth()->id())->with('country', 'area')->first();
             $order = Order::updateOrCreate(['reference_id' => $request->cart['cartId']], [
                 'price' => $request->cart['total'],
                 'net_price' => $request->cart['netTotal'],
                 'discount' => $request->cart['discount'],
-                'country_id' => $auth->country_id,
-                'country' => $auth->country->name_en,
-                'area_id' => $auth->area_id,
-                'area' => $auth->area->name_en,
+                'shipment_fees' => $request->cart['shipmentFees'],
+                'receive_on_branch' => $request->cart['receiveFromShop'],
+                'notes' => $request->cart['notes'],
+                'country_id' => $request->cart['shipmentCountry']['id'],
+                'country' => $request->cart['shipmentCountry']['name_en'],
+                'governate_id' => $request->cart['shipmentGovernate']['id'],
+                'area' => $request->cart['shipmentGovernate']['name_en'],
                 'block' => $auth->block,
                 'street' => $auth->street,
                 'building' => $auth->building,
@@ -65,6 +71,8 @@ trait OrderTrait
                 'email' => $auth->email,
                 'user_id' => $auth->id,
             ]);
+//            http://ecommerce-backend.test/tap/return?tap_id=chg_TS040120222149k4K52803336
+            $order->order_metas()->delete();
             foreach ($request->cart['items'] as $item) {
                 // i commented this due to product_attribute duplication because was element_id unique to add more than product attributes in one order
 //                OrderMeta::updateOrCreate(['order_id' => $order->id, 'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']), 'ordermetable_id' => $item['element_id']], [
@@ -74,6 +82,7 @@ trait OrderTrait
                     'description' => $item['description_ar'] . '   /  ' . $item['description_en'],
                     'price' => $item['price'],
                     'qty' => $item['qty'],
+                    'notes' => isset($item['notes']) ? $item['notes'] : null,
                     'color' => isset($item['color']) ? $item['color'] : null,
                     'size' => isset($item['size']) ? $item['size'] : null,
                     'merchant_id' => isset($item['merchant_id']) ? $item['merchant_id'] : null,
@@ -144,7 +153,8 @@ trait OrderTrait
             'country_id' => 'required|exists:countries,id',
             'collection_id' => 'exists:collections,id',
             'payment_method' => 'required|min:3',
-            'branch_id' => 'required_if:receive_on_branch,1|exists:branches,id'
+'receiveFromShop' => 'required|boolean'
+//            'branch_id' => 'required_if:receive_on_branch,1|exists:branches,id'
 //            'shipment_fees' => 'required|numeric'
         ]);
         if ($validate->fails()) {
@@ -167,7 +177,7 @@ trait OrderTrait
             'coupon_id' => $coupon ? $coupon['id'] : null,
             'payment_method' => $request->payment_method,
             'shipment_fees' => (float)$this->cart->content()->where('options.type', 'country')->first()->total(),
-            'receive_on_branch' => $request->has('receive_on_branch') ? $request->receive_on_branch : 0
+            'receive_on_branch' => $request->has('receive') ? $request->receive_on_branch : 0
         ]);
         $request->has('branch_id') && !is_null($request->branch_id) ? $order->update(['branch_id' => $request->branch_id]) : null;
         if ($order) {

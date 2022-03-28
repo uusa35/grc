@@ -12,9 +12,10 @@ import axios from 'axios';
 import {showModal} from "../../redux/actions";
 import ConfirmationModal from "../partials/ConfirmationModal";
 import {clearCart} from "../../redux/actions";
+import GlobalContext from "../../context/GlobalContext";
 
 
-export default function({order, settings}) {
+export default function({order, settings , auth }) {
     const {cart, locale, confirmationModal} = useSelector(state => state);
     const {trans, classNames, getAsset, mainColor, mainBgColor, textColor , contentBgColor , btnClass } = useContext(AppContext);
     const paymentMethods = [
@@ -34,7 +35,7 @@ export default function({order, settings}) {
             id: 3,
             name: 'cash_on_delivery',
             paymentRoute: route(`frontend.cart.cod.payment`),
-            enabled: settings.cash_on_delivery
+            enabled: settings.cash_on_delivery && cart.shipmentCountry.is_local
         },
     ]
     const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
@@ -132,7 +133,7 @@ export default function({order, settings}) {
                     <div
                         className="mt-10 col-span-full flex justify-between items-center flex-wrap space-y-2 sm:space-y-0 w-full">
                         <Link
-                            href={route('frontend.cart.confirmation')}
+                            href={route('frontend.cart.confirmation', { email : auth.email , country_id : cart.shipmentCountry.id })}
                             className={`${btnClass} flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4  text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                         >
                             <div className="flex">

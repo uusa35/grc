@@ -54,9 +54,9 @@ class Country extends PrimaryModel
         return $this->hasManyThrough(Branch::class, Area::class);
     }
 
-    public function order_metas()
+    public function orders()
     {
-        return $this->hasMany(OrderMeta::class, 'destination_id');
+        return $this->hasMany(Order::class);
     }
 
     public function shipment_packages()

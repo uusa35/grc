@@ -16,10 +16,11 @@ import {showToastMessage} from "../../redux/actions";
 import FormSection from "../components/widgets/form/FormSection";
 
 
-export default function({user, roles, elementCategories, categories, countries, subscriptions}) {
+export default function({user, roles, elementCategories, categories, countries, subscriptions, settings }) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
     const [governates, setGovernates] = useState([])
+    const [selectedCountry,setSelectedCountry] = useState('');
     const [areas, setAreas] = useState([])
     const {parentModule, currentFormTab} = useSelector(state => state);
 
@@ -109,15 +110,18 @@ export default function({user, roles, elementCategories, categories, countries, 
         'custome_delivery': user.custome_delivery,
         'news_letter_on': user.news_letter_on,
         'custome_delivery_fees': user.custome_delivery_fees,
+        'enable_receive_from_shop': user.enable_receive_from_shop,
     });
 
     useMemo(() => {
-        const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
-        setGovernates(selectedCountry.governates)
-        setData('governate_id', first(selectedCountry.governates).id)
-        const areas = first(selectedCountry.governates).areas;
+        const currentCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
+        setSelectedCountry(currentCountry);
+        setGovernates(currentCountry.governates)
+        setData('governate_id', first(currentCountry.governates).id)
+        const areas = first(currentCountry.governates).areas;
         setAreas(areas)
         setData('area_id', first(areas).id)
+        setData('enable_receive_from_shop', false);
     }, [data.country_id])
 
 
@@ -426,7 +430,8 @@ export default function({user, roles, elementCategories, categories, countries, 
                                     </div>
                                     <ToolTipWidget message={trans('user_instruction')}/>
                                     <p className={`mt-2  `}>
-                                        {errors.governate_id && <div className={`text-red-900`}>{errors.governate_id}</div>}
+                                        {errors.governate_id &&
+                                        <div className={`text-red-900`}>{errors.governate_id}</div>}
                                     </p>
                                 </div>
                             }
@@ -757,6 +762,55 @@ export default function({user, roles, elementCategories, categories, countries, 
                                         </p>
                                     </div>
                                 </fieldset>
+                                {/* enable_receive_from_shop*/}
+                                {
+                                    settings.enable_receive_from_shop  ? <fieldset className="mt-1 col-span-1">
+                                        <div>
+                                            <legend
+                                                className={`text-base  text-gray-900`}>{trans('enable_receive_from_shop')}</legend>
+                                        </div>
+                                        <div className="mt-4 space-y-4">
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="enable_receive_from_shop"
+                                                    name="enable_receive_from_shop"
+                                                    type="radio"
+                                                    value={1}
+                                                    defaultChecked={user.enable_receive_from_shop}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="push-everything"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('yes')}
+                                                </label>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="enable_receive_from_shop"
+                                                    name="enable_receive_from_shop"
+                                                    type="radio"
+                                                    value={0}
+                                                    defaultChecked={!user.enable_receive_from_shop}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="enable_receive_from_shop"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('no')}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <ToolTipWidget/>
+                                        <div>
+                                            <p className={`mt-2  text-gray-500`}>
+                                                {errors.enable_receive_from_shop &&
+                                                <div className={`text-red-900`}>{errors.enable_receive_from_shop}</div>}
+                                            </p>
+                                        </div>
+                                    </fieldset> : null
+                                }
+
                             </FormSection>
                         }
 
@@ -1328,6 +1382,29 @@ export default function({user, roles, elementCategories, categories, countries, 
                                 </p>
                             </div>
 
+                            {/* custome_delivery_fees*/}
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="custome_delivery_fees"
+                                       className={`block   text-gray-800`}>
+                                    {trans('custome_delivery_fees')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        type="text"
+                                        name="custome_delivery_fees"
+                                        defaultValue={user.custome_delivery_fees}
+                                        id="custome_delivery_fees"
+                                        autoComplete="custome_delivery_fees"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('custome_delivery_fees_instruction')}/>
+                                <p className={`mt-2  text-gray-500`}>
+                                    {errors.custome_delivery_fees && <div className={`text-red-900`}>{errors.custome_delivery_fees}</div>}
+                                </p>
+                            </div>
+
                             {/* merchant_id*/}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="merchant_id"
@@ -1550,7 +1627,52 @@ export default function({user, roles, elementCategories, categories, countries, 
                                     </p>
                                 </div>
                             </fieldset>
-
+                            {/*custome_delivery*/}
+                            <fieldset className="mt-1 col-span-1">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('custome_delivery')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="custome_delivery"
+                                            name="custome_delivery"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={user.custome_delivery}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-800">
+                                            {trans('yes')}
+                                        </label>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="custome_delivery"
+                                            name="custome_delivery"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!user.custome_delivery}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="custome_delivery"
+                                               className="ml-3 block   text-gray-800">
+                                            {trans('no')}
+                                        </label>
+                                    </div>
+                                </div>
+                                <ToolTipWidget/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.custome_delivery &&
+                                        <div className={`text-red-900`}>{errors.custome_delivery}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
                             {/* access_dashboard */}
                             {isAdminOrAbove && <fieldset className="mt-1 col-span-1 has-tooltip">
                                 <div>

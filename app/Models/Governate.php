@@ -11,11 +11,13 @@ class Governate extends PrimaryModel
         'price' => 'float',
     ];
 
-    public function country() {
+    public function country()
+    {
         return $this->belongsTo(Country::class);
     }
 
-    public function areas() {
+    public function areas()
+    {
         return $this->hasMany(Area::class);
     }
 
@@ -25,11 +27,18 @@ class Governate extends PrimaryModel
 //        ];
 //    }
 
-    public function users() {
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
 
-    public function addresses() {
+    public function addresses()
+    {
         return $this->hasMany(Address::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

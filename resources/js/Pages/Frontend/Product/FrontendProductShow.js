@@ -6,7 +6,7 @@ import {
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, isEmpty, first, isNull, filter, uniqBy, size } from 'lodash';
+import {map, isEmpty, first, isNull, filter, uniqBy, size} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
@@ -53,6 +53,7 @@ export default function({element, relatedElements, auth, settings}) {
     const [currentQty, setCurrentQty] = useState(0);
     const [selectedQty, setSelectedQty] = useState(0);
     const [showModal, setShowModal] = useState(false);
+    const [notes, setNotes] = useState('')
     const dispatch = useDispatch();
     const {data, setData, post, progress} = useForm({
         'type': 'product',
@@ -143,12 +144,14 @@ export default function({element, relatedElements, auth, settings}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const currentPrice = element.has_attributes && !element.isOnSale ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price);
         dispatch(checkCartBeforeAdd({
             cart_id: `${element.id}${element.has_attributes ? selectedAttribute.id : ''}`,
             type: 'product',
             element_id: element.id,
             qty: selectedQty,
-            price: element.has_attributes && !element.isOnSale ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price),
+            price: currentPrice,
+            totalPrice :  parseFloat(currentPrice * selectedQty),
             direct_purchase: element.direct_purchase,
             shipmentFees: 0,
             image: element.image,
@@ -159,9 +162,14 @@ export default function({element, relatedElements, auth, settings}) {
             merchant_id: element.user.id,
             merchant_name_ar: element.user.name_ar,
             merchant_name_en: element.user.name_en,
+            merchant_enable_receive_from_shop : element.user.enable_receive_from_shop,
+            merchant_custome_delivery : element.user.custome_delivery,
+            merchant_custome_delivery_fees : element.user.custome_delivery_fees,
             color: element.has_attributes ? selectedAttribute.color[getLocalized()] : element.color[getLocalized()],
             size: element.has_attributes ? selectedAttribute.size[getLocalized()] : element.size[getLocalized()],
             attribute_id: `${element.has_attributes ? selectedAttribute.id : ''}`,
+            weight : parseFloat(element.weight) ? element.weight : 0,
+            notes
         }))
     }
 
@@ -199,7 +207,7 @@ export default function({element, relatedElements, auth, settings}) {
                             <ImageGallery
                                 showBullets={true}
                                 showNav={true}
-                                renderLeftNav={(onClick,disabled) => <button
+                                renderLeftNav={(onClick, disabled) => <button
                                     type="button"
                                     className="image-gallery-icon image-gallery-left-nav"
                                     disabled={disabled}
@@ -207,18 +215,20 @@ export default function({element, relatedElements, auth, settings}) {
                                     aria-label="Previous Slide"
                                 >
                                     {locale.isRTL ?
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/>
                                         </svg>
 
-                                         :
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                        :
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/>
                                         </svg>
                                     }
 
                                 </button>}
-                                renderRightNav={(onClick,disabled) => <button
+                                renderRightNav={(onClick, disabled) => <button
                                     type="button"
                                     className="image-gallery-icon image-gallery-right-nav"
                                     disabled={disabled}
@@ -226,29 +236,33 @@ export default function({element, relatedElements, auth, settings}) {
                                     aria-label="Previous Slide"
                                 >
                                     {locale.isRTL ?
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/>
                                         </svg>
 
                                         :
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/>
                                         </svg>
                                     }
 
                                 </button>}
-                                renderFullscreenButton={(onClick,disabled) => <button
+                                renderFullscreenButton={(onClick, disabled) => <button
                                     type="button"
                                     className="image-gallery-icon image-gallery-fullscreen-button"
                                     disabled={disabled}
                                     onClick={onClick}
                                     aria-label="Previous Slide"
-                                    >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
                                     </svg>
                                 </button>
-                                    }
+                                }
                                 originalAlt={element[getLocalized()]}
                                 originalTitle={element[getLocalized()]}
                                 thumbnailLabel={element[getLocalized()]}
@@ -275,7 +289,8 @@ export default function({element, relatedElements, auth, settings}) {
                             <div className="flex flex-1 flex-col sm:flex-row justify-between items-center">
                                 <div className="flex flex-1">
                                     {
-                                        !isNull(element[getLocalized('caption')]) && size(element[getLocalized('caption')]) > 5 && <div className="mt-6">
+                                        !isNull(element[getLocalized('caption')]) && size(element[getLocalized('caption')]) > 5 &&
+                                        <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
                                                 className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
@@ -496,7 +511,26 @@ export default function({element, relatedElements, auth, settings}) {
                                         </>
                                 }
                                 {
-                                    element.is_available ? <div className="flex flex-1 w-full justify-center items-center mx-auto mt-5">
+                                    element.is_available ?
+                                        <div className={`flex flex-col my-4`}>
+                                            <div className="flex-grow w-full">
+                                                <label htmlFor="notes"
+                                                       className="block text-sm font-medium text-gray-700">
+                                                    {trans('notes')}
+                                                </label>
+                                                <div className="mt-1">
+                                                    <textarea
+                                                        id="notes"
+                                                        name="notes"
+                                                        rows={3}
+                                                        className="shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                                                        onChange={(e) => setNotes(e.target.value)}
+                                                    />
+                                                </div>
+                                                <p className="mt-2 text-sm text-gray-500">{trans('u_can_write_notes_related_to_product_ordered')}</p>
+                                            </div>
+                                            <div
+                                                className="flex flex-1 w-full justify-center items-center mx-auto mt-5">
                                     <span className="relative z-0 inline-flex shadow-sm rounded-md ">
                                       <button
                                           onClick={() => increaseQty()}
@@ -519,7 +553,8 @@ export default function({element, relatedElements, auth, settings}) {
                                         -
                                       </button>
                                     </span>
-                                    </div> : null
+                                            </div>
+                                        </div> : null
                                 }
 
                                 {/* add_to_cart_btn */}

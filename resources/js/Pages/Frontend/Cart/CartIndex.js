@@ -12,7 +12,6 @@ import NoElements from "../../Backend/components/widgets/NoElements";
 import {removeFromCart, setDiscount} from "../../redux/actions";
 import CartStepper from "./CartStepper";
 import CartIndexOrderSummary from "./CartIndexOrderSummary";
-import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import OrderSummary from "./OrderSummary";
 
@@ -92,7 +91,7 @@ export default function({coupon = {}}) {
                     <OrderSummary/>
                     <div className="mt-10 flex justify-end">
                         <Link
-                            href={!isEmpty(cart.items) ? route('frontend.cart.information') : '#'}
+                            href={!isEmpty(cart.items) ? route('frontend.cart.information', { totalItems : cart.totalItems, cartId : cart.cartId }) : '#'}
                             className={classNames(isEmpty(cart.items) ? `opacity-30` : `bg-${mainColor}-600 dark:bg-${mainColor}-400`, "flex flex-row justify-between items-center border border-transparent rounded-md shnotesadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                         >
                            <span className="flex ltr:pt-2">

@@ -24,6 +24,7 @@ class UserLightResource extends JsonResource
             'description_en' => $this->description_en,
             'active' => $this->active,
             'image' => $this->image,
+//            'enable_receive_from_shop' => $this->enable_receive_from_shop,
             'role' => RoleExtraLightResource::make($this->whenLoaded('role')),
         ];
     }

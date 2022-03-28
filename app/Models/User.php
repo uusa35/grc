@@ -13,20 +13,25 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, ModelHelpers, UserHelpers, SoftDeletes, HasEvents;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $guarded = [''];
-    protected $dates = ['created_at', 'deleted_at',  'end_subscription_date'];
+    protected $dates = ['created_at', 'deleted_at', 'end_subscription_date'];
+    protected $casts = [
+        'enable_receive_from_shop' => 'boolean',
+        'merchant_custome_delivery_fees' => 'float',
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token','api_token'];
+    protected $hidden = ['password', 'remember_token', 'api_token'];
 
     public function products()
     {
@@ -88,7 +93,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphMany(Favorite::class, 'favoritable');
     }
 
-    public function favoritesList() {
+    public function favoritesList()
+    {
         return $this->hasMany(Favorite::class, 'user_id');
     }
 

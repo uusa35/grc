@@ -1259,5 +1259,8 @@ return array (
     "r_u_sure_u_order_cash_on_delivery" => "please confirm your order (cash on delivery). this service is only inside kuwait",
     "dark" => "dark",
     "light" => "light",
-    "show_all" => "show all"
+    "show_all" => "show all",
+    "invoice_summary" => "Invoice Summary",
+    "thanks" => "thanks",
+    "username" => "username"
 );

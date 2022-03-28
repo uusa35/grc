@@ -14,12 +14,14 @@
 @foreach($order->order_metas as $meta)
 | {{ ($loop->index+1) }}      | {{ $meta->name }}      |    {{ ucfirst($meta->ordermetable()->first()->type) }}   |
 @if($meta->ordermetable()->first()->type === 'product')
-| | {{ trans('color') }} : {{ $meta->color }}| |
-| | {{ trans('size') }} : {{ $meta->size }}| |
+| | {{ trans('general.color') }} : {{ $meta->color }}| |
+| | {{ trans('general.size') }} : {{ $meta->size }}| |
+| | {{ trans('general.notes') }} : {{ $meta->notes }}| |
 @endif
 @if($meta->ordermetable()->first()->type === 'service')
-| | {{ trans('booked_at') }} : {{ $meta->booked_at }}| |
-| | {{ trans('time') }} : {{ $meta->time }}| |
+| | {{ trans('genreal.booked_at') }} : {{ $meta->booked_at }}| |
+| | {{ trans('general.time') }} : {{ $meta->time }}| |
+| | {{ trans('general.notes') }} : {{ $meta->notes }}| |
 @endif
 @endforeach
 @endcomponent
@@ -32,6 +34,7 @@
 |       |           |  {{ trans('general.total') }}  |
 | ------------- |:-------------:| --------:|
 | {{ trans('general.price') }}      |       |    {{ $order->price }}   {{ trans('general.kd') }}|
+| {{ trans('general.shipment_fees') }}      |       |    {{ $order->shipment_fees }}   {{ trans('general.kd') }}|
 | {{ trans('general.discount') }}      |       |    {{ $order->discount }}   {{ trans('general.kd') }}|
 | {{ trans('general.net_total') }}      |       |    {{ $order->net_price }}   {{ trans("general.kd") }}|
 @endcomponent

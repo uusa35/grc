@@ -95,6 +95,11 @@ export default function() {
                                         </div>
                                     </div>
                                     }
+                                    <p className="block capitalize truncate overflow-hidden overflow-ellipsis overflow-hidden">
+                                        {trans('notes')} : {truncate(element.notes, {
+                                        'length': isMobile ? 5 : 50,
+                                    })}
+                                    </p>
                                 </div>
                             </div>
                         </td>

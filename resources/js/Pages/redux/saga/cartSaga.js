@@ -1,27 +1,26 @@
 import {toast} from "react-toastify";
 import {capitalize, concat, filter, uniq, union} from "lodash";
-import {translations} from "../../translations";
 import {select, put, all} from 'redux-saga/effects';
 import {ADD_TO_CART, CLEAR_CART, DISABLE_DIRECT_PURCHASE_MODE, SET_TOAST_MESSAGE} from "../actions/types";
 
 export function* startCheckCartBeforeAdd(action) {
     try {
-        const { cart , lang }  = yield select();
+        const { cart , lang , translations }  = yield select();
         const newItems = concat(filter(cart.items, item => item && item?.cart_id != action.payload.cart_id), action.payload);
         const merchants = union([action.payload.merchant_id],cart.merchants);
         // check if it already has item with directPurchase Model (like a subscription or a product with directPurchase)
         if(cart.directPurchaseMode && cart.items.length === 1) {
-            throw capitalize(translations[lang]['an_element_with_direct_purchase_mode_is_one_to_add_to_cart_u_have_to_clear_cart_first']);
+            throw capitalize(translations['an_element_with_direct_purchase_mode_is_one_to_add_to_cart_u_have_to_clear_cart_first'][lang]);
         }
         // check if not multi cart only items for single merchant
         else if(!cart.multiCartMerchant && merchants.length > 1) {
-            throw capitalize(translations[lang]['this_cart_is_not_multi_you_can_not_buy_from_two_different_vendors']);
+            throw capitalize(translations['this_cart_is_not_multi_you_can_not_buy_from_two_different_vendors'][lang]);
         } else {
             yield all([
                 put({ type : ADD_TO_CART , payload : { items : newItems, merchants}}),
                  put({
                     type: SET_TOAST_MESSAGE, payload: {
-                        message: capitalize(translations[lang]['item_added_successfully']),
+                        message: capitalize(translations['item_added_successfully'][lang]),
                         type: 'success'
                     }
                 })
@@ -54,10 +53,10 @@ export function* startEnableDirectPurchaseModelScenario(action) {
         // yield put({type: CLEAR_CART});
     } catch (e) {
     } finally {
-        const {lang} = yield select();
+        const {lang, translations } = yield select();
         yield put({
             type: SET_TOAST_MESSAGE, payload: {
-                message: capitalize(translations[lang]['item_added_successfully']),
+                message: capitalize(translations['item_added_successfully'][lang]),
                 type: 'success'
             }
         });
@@ -70,8 +69,8 @@ export function* startRemoveFromCartScenario(action) {
 
     } catch (e) {
     } finally {
-        const {lang, cart} = yield select();
-        toast.info(capitalize(translations[lang]['item_removed_successfully']));
+        const {lang, cart, translations } = yield select();
+        toast.info(capitalize(translations['item_removed_successfully'][lang]));
         if(cart.directPurchaseMode) {
             yield put({ type : DISABLE_DIRECT_PURCHASE_MODE })
         }

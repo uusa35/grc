@@ -68,6 +68,7 @@ class UserUpdate extends FormRequest
             'video_url_four' => 'url|nullable|max:99',
             'video_url_five' => 'url|nullable|max:99',
             'order' => 'nullable|integer|min:1|max:999',
+            'custome_delivery_fees' => 'nullable|numeric',
 
             'on_home' => 'nullable|boolean',
             'active' => 'nullable|boolean',

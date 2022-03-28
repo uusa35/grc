@@ -70,6 +70,7 @@ export default function ({element, relatedElements, auth}) {
                 timing_id: selectedTiming.id,
                 qty: 1,
                 price: element.isOnSale ? element.sale_price : element.price,
+                totalPrice : element.isOnSale ? element.sale_price : element.price,
                 direct_purchase: element.direct_purchase,
                 shipmentFees: 0,
                 image: element.image,

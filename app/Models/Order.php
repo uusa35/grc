@@ -89,4 +89,12 @@ class Order extends PrimaryModel
 
         return $this->data->user_one_signal_id;
     }
+
+    public function country() {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function governate() {
+        return $this->belongsTo(Governate::class);
+    }
 }

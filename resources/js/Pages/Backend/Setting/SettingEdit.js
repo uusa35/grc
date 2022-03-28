@@ -20,7 +20,7 @@ import GlobalContext from "../../context/GlobalContext";
 export default function SettingEdit({setting, themes, paymentMethods}) {
     const [currentImages, setCurrentImages] = useState([]);
     const globalContext = useContext(GlobalContext);
-    const {classNames, trans,getThumb, isSuper} = useContext(AppContext)
+    const {classNames, trans, getThumb, isSuper} = useContext(AppContext)
     const {currentFormTab, locale} = useSelector(state => state)
     const dispatch = useDispatch();
     let EditorConfig = {
@@ -120,20 +120,21 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         global_custome_delivery: setting.global_custome_delivery,
         android_version: setting.android_version,
         apple_version: setting.apple_version,
-        enable_products : setting.enable_products,
-        enable_users : setting.enable_users,
-        enable_prices : setting.enable_prices,
-        enable_courses : setting.enable_courses,
-        enable_services : setting.enable_services,
-        enable_books : setting.enable_books,
-        enable_subscriptions : setting.enable_subscriptions,
-        enable_whatsapp_contact : setting.enable_whatsapp_contact,
-        enable_cart : setting.enable_cart,
-        enable_google_translation : setting.enable_google_translation,
-        enable_favorite : setting.enable_favorite,
-        enable_faqs : setting.enable_faqs,
-        enable_register : setting.enable_register,
-        corporate_mode : setting.corporate_mode,
+        enable_products: setting.enable_products,
+        enable_users: setting.enable_users,
+        enable_prices: setting.enable_prices,
+        enable_courses: setting.enable_courses,
+        enable_services: setting.enable_services,
+        enable_books: setting.enable_books,
+        enable_subscriptions: setting.enable_subscriptions,
+        enable_whatsapp_contact: setting.enable_whatsapp_contact,
+        enable_cart: setting.enable_cart,
+        enable_google_translation: setting.enable_google_translation,
+        enable_favorite: setting.enable_favorite,
+        enable_faqs: setting.enable_faqs,
+        enable_register: setting.enable_register,
+        corporate_mode: setting.corporate_mode,
+        enable_receive_from_shop: setting.enable_receive_from_shop,
     });
     const {props} = usePage();
     const {errors} = props;
@@ -158,7 +159,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
             shipment_prices: data.shipment_prices,
         }, {
             forceFormData: true,
-            onSuccess : ({ props }) => {
+            onSuccess: ({props}) => {
                 dispatch(setSettings(props.setting))
                 globalContext.settings = props.settings;
             }
@@ -309,7 +310,8 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </p>
                             </div>
                             <div className="sm:col-span-2 has-tooltip">
-                                <label htmlFor="shipment_fixed_rate" className={`block text-sm font-medium text-gray-800`}>
+                                <label htmlFor="shipment_fixed_rate"
+                                       className={`block text-sm font-medium text-gray-800`}>
                                     {trans('shipment_fixed_rate')} ({trans("kd")})
                                 </label>
                                 <div className="mt-1">
@@ -325,262 +327,276 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                 </div>
                                 <ToolTipWidget message={trans('product_shipment_fixed_rate_instruction')}/>
                                 <p className={`mt-2 text-xs text-gray-500`}>
-                                    {errors.shipment_fixed_rate && <div className={`text-red-900`}>{errors.shipment_fixed_rate}</div>}
+                                    {errors.shipment_fixed_rate &&
+                                    <div className={`text-red-900`}>{errors.shipment_fixed_rate}</div>}
                                 </p>
                             </div>
-
 
 
                             {/* payment_methods */}
                             {
                                 isSuper &&
-                                    <>
-                                <div className="sm:col-span-2">
-                                    <label htmlFor="payment_methodss"
-                                           className="block text-sm font-medium text-gray-800">
-                                        {trans('payment_methods')}
-                                    </label>
-                                    <div className="mt-1">
-                                        <select
-                                            onChange={handleChange}
-                                            id="payment_method"
-                                            name="payment_method"
-                                            defaultValue={data.payment_method}
-                                            autoComplete="payment_method"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                        >
-                                            {
-                                                paymentMethods.map(u => (
-                                                    <option key={u} value={u}
-                                                    >{u}</option>
-                                                ))
-                                            }
-                                        </select>
+                                <>
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="payment_methodss"
+                                               className="block text-sm font-medium text-gray-800">
+                                            {trans('payment_methods')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="payment_method"
+                                                name="payment_method"
+                                                defaultValue={data.payment_method}
+                                                autoComplete="payment_method"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                {
+                                                    paymentMethods.map(u => (
+                                                        <option key={u} value={u}
+                                                        >{u}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.theme && <div className={`text-red-900`}>{errors.theme}</div>}
+                                        </p>
                                     </div>
-                                    <ToolTipWidget message={trans('product_user_instruction')}/>
-                                    <p className={`mt-2 text-xs text-gray-500`}>
-                                        {errors.theme && <div className={`text-red-900`}>{errors.theme}</div>}
-                                    </p>
-                                </div>
 
-                                        {/* theme */}
-                                        <div className="sm:col-span-2">
-                                            <label htmlFor="themes" className="block text-sm font-medium text-gray-800">
-                                                {trans('theme')}
-                                            </label>
-                                            <div className="mt-1">
-                                                <select
-                                                    onChange={handleChange}
-                                                    id="theme"
-                                                    name="theme"
-                                                    defaultValue={setting.theme}
-                                                    autoComplete="theme"
-                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                                >
-                                                    <option value="dark">{trans("dark")}</option>
-                                                    <option value="light">{trans("light")}</option>
-                                                    <option value="none">{trans("none")}</option>
-                                                </select>
-                                            </div>
-                                            <ToolTipWidget message={trans('product_user_instruction')}/>
-                                            <p className={`mt-2 text-xs text-gray-500`}>
-                                                {errors.theme && <div className={`text-red-900`}>{errors.theme}</div>}
-                                            </p>
+                                    {/* theme */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="themes" className="block text-sm font-medium text-gray-800">
+                                            {trans('theme')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="theme"
+                                                name="theme"
+                                                defaultValue={setting.theme}
+                                                autoComplete="theme"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                <option value="dark">{trans("dark")}</option>
+                                                <option value="light">{trans("light")}</option>
+                                                <option value="none">{trans("none")}</option>
+                                            </select>
                                         </div>
-                                        {/* main_theme_color */}
-                                        <div className="sm:col-span-2">
-                                            <label htmlFor="main_theme_colors" className="block text-sm font-medium text-gray-800">
-                                                {trans('main_theme_color')}
-                                            </label>
-                                            <div className="mt-1">
-                                                <select
-                                                    onChange={handleChange}
-                                                    id="main_theme_color"
-                                                    name="main_theme_color"
-                                                    defaultValue={setting.main_theme_color}
-                                                    autoComplete="main_theme_color"
-                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                                >
-                                                    {
-                                                        themes.map(u => (
-                                                            <option key={u} value={u}
-                                                            >{u}</option>
-                                                        ))
-                                                    }
-                                                </select>
-                                            </div>
-                                            <ToolTipWidget message={trans('product_user_instruction')}/>
-                                            <p className={`mt-2 text-xs text-gray-500`}>
-                                                {errors.main_theme_color && <div className={`text-red-900`}>{errors.main_theme_color}</div>}
-                                            </p>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.theme && <div className={`text-red-900`}>{errors.theme}</div>}
+                                        </p>
+                                    </div>
+                                    {/* main_theme_color */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="main_theme_colors"
+                                               className="block text-sm font-medium text-gray-800">
+                                            {trans('main_theme_color')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="main_theme_color"
+                                                name="main_theme_color"
+                                                defaultValue={setting.main_theme_color}
+                                                autoComplete="main_theme_color"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                {
+                                                    themes.map(u => (
+                                                        <option key={u} value={u}
+                                                        >{u}</option>
+                                                    ))
+                                                }
+                                            </select>
                                         </div>
-                                        {/* main_theme_bg_color */}
-                                        <div className="sm:col-span-2">
-                                            <label htmlFor="main_theme_bg_colors" className="block text-sm font-medium text-gray-800">
-                                                {trans('main_theme_bg_color')}
-                                            </label>
-                                            <div className="mt-1">
-                                                <select
-                                                    onChange={handleChange}
-                                                    id="main_theme_bg_color"
-                                                    name="main_theme_bg_color"
-                                                    defaultValue={setting.main_theme_bg_color}
-                                                    autoComplete="main_theme_bg_color"
-                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                                >
-                                                    {
-                                                        themes.map(u => (
-                                                            <option key={u} value={u}
-                                                            >{u}</option>
-                                                        ))
-                                                    }
-                                                </select>
-                                            </div>
-                                            <ToolTipWidget message={trans('product_user_instruction')}/>
-                                            <p className={`mt-2 text-xs text-gray-500`}>
-                                                {errors.main_theme_bg_color && <div className={`text-red-900`}>{errors.main_theme_bg_color}</div>}
-                                            </p>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.main_theme_color &&
+                                            <div className={`text-red-900`}>{errors.main_theme_color}</div>}
+                                        </p>
+                                    </div>
+                                    {/* main_theme_bg_color */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="main_theme_bg_colors"
+                                               className="block text-sm font-medium text-gray-800">
+                                            {trans('main_theme_bg_color')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="main_theme_bg_color"
+                                                name="main_theme_bg_color"
+                                                defaultValue={setting.main_theme_bg_color}
+                                                autoComplete="main_theme_bg_color"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                {
+                                                    themes.map(u => (
+                                                        <option key={u} value={u}
+                                                        >{u}</option>
+                                                    ))
+                                                }
+                                            </select>
                                         </div>
-
-
-                                        {/* header_theme_color */}
-                                        <div className="sm:col-span-2">
-                                            <label htmlFor="header_theme_colors" className="block text-sm font-medium text-gray-800">
-                                                {trans('header_theme_color')}
-                                            </label>
-                                            <div className="mt-1">
-                                                <select
-                                                    onChange={handleChange}
-                                                    id="header_theme_color"
-                                                    name="header_theme_color"
-                                                    defaultValue={setting.header_theme_color}
-                                                    autoComplete="header_theme_color"
-                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                                >
-                                                    {
-                                                        themes.map(u => (
-                                                            <option key={u} value={u}
-                                                            >{u}</option>
-                                                        ))
-                                                    }
-                                                </select>
-                                            </div>
-                                            <ToolTipWidget message={trans('product_user_instruction')}/>
-                                            <p className={`mt-2 text-xs text-gray-500`}>
-                                                {errors.header_theme_color && <div className={`text-red-900`}>{errors.header_theme_color}</div>}
-                                            </p>
-                                        </div>
-                                        {/* header_theme_bg */}
-                                        <div className="sm:col-span-2">
-                                            <label htmlFor="header_theme_bgs" className="block text-sm font-medium text-gray-800">
-                                                {trans('header_theme_bg')}
-                                            </label>
-                                            <div className="mt-1">
-                                                <select
-                                                    onChange={handleChange}
-                                                    id="header_theme_bg"
-                                                    name="header_theme_bg"
-                                                    defaultValue={setting.header_theme_bg}
-                                                    autoComplete="header_theme_bg"
-                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                                >
-                                                    {
-                                                        themes.map(u => (
-                                                            <option key={u} value={u}
-                                                            >{u}</option>
-                                                        ))
-                                                    }
-                                                </select>
-                                            </div>
-                                            <ToolTipWidget message={trans('product_user_instruction')}/>
-                                            <p className={`mt-2 text-xs text-gray-500`}>
-                                                {errors.header_theme_bg && <div className={`text-red-900`}>{errors.header_theme_bg}</div>}
-                                            </p>
-                                        </div>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.main_theme_bg_color &&
+                                            <div className={`text-red-900`}>{errors.main_theme_bg_color}</div>}
+                                        </p>
+                                    </div>
 
 
-                                        {/* footer_theme_color */}
-                                        <div className="sm:col-span-2">
-                                            <label htmlFor="footer_theme_colors" className="block text-sm font-medium text-gray-800">
-                                                {trans('footer_theme_color')}
-                                            </label>
-                                            <div className="mt-1">
-                                                <select
-                                                    onChange={handleChange}
-                                                    id="footer_theme_color"
-                                                    name="footer_theme_color"
-                                                    defaultValue={setting.footer_theme_color}
-                                                    autoComplete="footer_theme_color"
-                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                                >
-                                                    {
-                                                        themes.map(u => (
-                                                            <option key={u} value={u}
-                                                            >{u}</option>
-                                                        ))
-                                                    }
-                                                </select>
-                                            </div>
-                                            <ToolTipWidget message={trans('product_user_instruction')}/>
-                                            <p className={`mt-2 text-xs text-gray-500`}>
-                                                {errors.footer_theme_color && <div className={`text-red-900`}>{errors.footer_theme_color}</div>}
-                                            </p>
+                                    {/* header_theme_color */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="header_theme_colors"
+                                               className="block text-sm font-medium text-gray-800">
+                                            {trans('header_theme_color')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="header_theme_color"
+                                                name="header_theme_color"
+                                                defaultValue={setting.header_theme_color}
+                                                autoComplete="header_theme_color"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                {
+                                                    themes.map(u => (
+                                                        <option key={u} value={u}
+                                                        >{u}</option>
+                                                    ))
+                                                }
+                                            </select>
                                         </div>
-                                        {/* footer_bg_theme_color */}
-                                        <div className="sm:col-span-2">
-                                            <label htmlFor="footer_bg_theme_colors" className="block text-sm font-medium text-gray-800">
-                                                {trans('footer_bg_theme_color')}
-                                            </label>
-                                            <div className="mt-1">
-                                                <select
-                                                    onChange={handleChange}
-                                                    id="footer_bg_theme_color"
-                                                    name="footer_bg_theme_color"
-                                                    defaultValue={setting.footer_bg_theme_color}
-                                                    autoComplete="footer_bg_theme_color"
-                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                                >
-                                                    {
-                                                        themes.map(u => (
-                                                            <option key={u} value={u}
-                                                            >{u}</option>
-                                                        ))
-                                                    }
-                                                </select>
-                                            </div>
-                                            <ToolTipWidget message={trans('product_user_instruction')}/>
-                                            <p className={`mt-2 text-xs text-gray-500`}>
-                                                {errors.footer_bg_theme_color && <div className={`text-red-900`}>{errors.footer_bg_theme_color}</div>}
-                                            </p>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.header_theme_color &&
+                                            <div className={`text-red-900`}>{errors.header_theme_color}</div>}
+                                        </p>
+                                    </div>
+                                    {/* header_theme_bg */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="header_theme_bgs"
+                                               className="block text-sm font-medium text-gray-800">
+                                            {trans('header_theme_bg')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="header_theme_bg"
+                                                name="header_theme_bg"
+                                                defaultValue={setting.header_theme_bg}
+                                                autoComplete="header_theme_bg"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                {
+                                                    themes.map(u => (
+                                                        <option key={u} value={u}
+                                                        >{u}</option>
+                                                    ))
+                                                }
+                                            </select>
                                         </div>
-                                        {/* btn_bg_theme_color */}
-                                        {/* note that i used this element only for html Background (name is different) */}
-                                        <div className="sm:col-span-2">
-                                            <label htmlFor="btn_bg_theme_colors" className="block text-sm font-medium text-gray-800">
-                                                {trans('btn_bg_theme_color')}
-                                            </label>
-                                            <div className="mt-1">
-                                                <select
-                                                    onChange={handleChange}
-                                                    id="btn_bg_theme_color"
-                                                    name="btn_bg_theme_color"
-                                                    defaultValue={setting.btn_bg_theme_color}
-                                                    autoComplete="btn_bg_theme_color"
-                                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
-                                                >
-                                                    <option value="#030a18">midnight</option>
-                                                    <option value="#6f5f01">corn</option>
-                                                    <option value="#304b52">hippie-blue</option>
-                                                    <option value="white">white</option>
-                                                    <option value="black">black</option>
-                                                    <option value="gray">gray</option>
-                                                </select>
-                                            </div>
-                                            <ToolTipWidget message={trans('product_user_instruction')}/>
-                                            <p className={`mt-2 text-xs text-gray-500`}>
-                                                {errors.btn_bg_theme_color && <div className={`text-red-900`}>{errors.btn_bg_theme_color}</div>}
-                                            </p>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.header_theme_bg &&
+                                            <div className={`text-red-900`}>{errors.header_theme_bg}</div>}
+                                        </p>
+                                    </div>
+
+
+                                    {/* footer_theme_color */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="footer_theme_colors"
+                                               className="block text-sm font-medium text-gray-800">
+                                            {trans('footer_theme_color')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="footer_theme_color"
+                                                name="footer_theme_color"
+                                                defaultValue={setting.footer_theme_color}
+                                                autoComplete="footer_theme_color"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                {
+                                                    themes.map(u => (
+                                                        <option key={u} value={u}
+                                                        >{u}</option>
+                                                    ))
+                                                }
+                                            </select>
                                         </div>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.footer_theme_color &&
+                                            <div className={`text-red-900`}>{errors.footer_theme_color}</div>}
+                                        </p>
+                                    </div>
+                                    {/* footer_bg_theme_color */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="footer_bg_theme_colors"
+                                               className="block text-sm font-medium text-gray-800">
+                                            {trans('footer_bg_theme_color')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="footer_bg_theme_color"
+                                                name="footer_bg_theme_color"
+                                                defaultValue={setting.footer_bg_theme_color}
+                                                autoComplete="footer_bg_theme_color"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                {
+                                                    themes.map(u => (
+                                                        <option key={u} value={u}
+                                                        >{u}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.footer_bg_theme_color &&
+                                            <div className={`text-red-900`}>{errors.footer_bg_theme_color}</div>}
+                                        </p>
+                                    </div>
+                                    {/* btn_bg_theme_color */}
+                                    {/* note that i used this element only for html Background (name is different) */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="btn_bg_theme_colors"
+                                               className="block text-sm font-medium text-gray-800">
+                                            {trans('btn_bg_theme_color')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="btn_bg_theme_color"
+                                                name="btn_bg_theme_color"
+                                                defaultValue={setting.btn_bg_theme_color}
+                                                autoComplete="btn_bg_theme_color"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                <option value="#030a18">midnight</option>
+                                                <option value="#6f5f01">corn</option>
+                                                <option value="#304b52">hippie-blue</option>
+                                                <option value="white">white</option>
+                                                <option value="black">black</option>
+                                                <option value="gray">gray</option>
+                                            </select>
+                                        </div>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.btn_bg_theme_color &&
+                                            <div className={`text-red-900`}>{errors.btn_bg_theme_color}</div>}
+                                        </p>
+                                    </div>
                                 </>
                             }
 
@@ -600,7 +616,7 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                         type="file"
                                         name="image"
                                         id="main_image"
-accept="image/jpg, image/jpeg , image/png"
+                                        accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
@@ -628,7 +644,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         multiple
                                         name="images"
                                         id="more_images"
-accept="image/jpg, image/jpeg , image/png"
+                                        accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="more_images"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                     />
@@ -1256,24 +1272,24 @@ accept="image/jpg, image/jpeg , image/png"
                                         </p>
                                     </div>
                                 </fieldset>
-                                {/*enable_google_translation*/}
+                                {/*enable_receive_from_shop*/}
                                 <fieldset className="mt-1 col-span-2">
                                     <div>
                                         <legend
-                                            className={`text-base  text-gray-900`}>{trans('enable_google_translation')}</legend>
+                                            className={`text-base  text-gray-900`}>{trans('enable_receive_from_shop')}</legend>
                                     </div>
                                     <div className="mt-4 space-y-4">
                                         <div className="flex items-center">
                                             <input
                                                 onChange={handleChange}
-                                                id="enable_google_translation"
-                                                name="enable_google_translation"
+                                                id="enable_receive_from_shop"
+                                                name="enable_receive_from_shop"
                                                 type="radio"
                                                 value={1}
-                                                defaultChecked={setting.enable_google_translation}
+                                                defaultChecked={setting.enable_receive_from_shop}
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
-                                            <label htmlFor="enable_google_translation"
+                                            <label htmlFor="enable_receive_from_shop"
                                                    className="ml-3 block   text-gray-800">
                                                 {trans('yes')}
                                             </label>
@@ -1281,14 +1297,14 @@ accept="image/jpg, image/jpeg , image/png"
                                         <div className="flex items-center">
                                             <input
                                                 onChange={handleChange}
-                                                id="enable_google_translation"
-                                                name="enable_google_translation"
+                                                id="enable_receive_from_shop"
+                                                name="enable_receive_from_shop"
                                                 type="radio"
                                                 value={0}
-                                                defaultChecked={!setting.enable_google_translation}
+                                                defaultChecked={!setting.enable_receive_from_shop}
                                                 className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
                                             />
-                                            <label htmlFor="enable_google_translation"
+                                            <label htmlFor="enable_receive_from_shop"
                                                    className="ml-3 block   text-gray-800">
                                                 {trans('no')}
                                             </label>
@@ -1297,11 +1313,57 @@ accept="image/jpg, image/jpeg , image/png"
                                     <ToolTipWidget/>
                                     <div>
                                         <p className={`mt-2  text-gray-500`}>
-                                            {errors.enable_google_translation &&
-                                            <div className={`text-red-900`}>{errors.enable_google_translation}</div>}
+                                            {errors.enable_receive_from_shop &&
+                                            <div className={`text-red-900`}>{errors.enable_receive_from_shop}</div>}
                                         </p>
                                     </div>
                                 </fieldset>
+                                {/*enable_google_translation*/}
+                                {/*<fieldset className="mt-1 col-span-2">*/}
+                                {/*    <div>*/}
+                                {/*        <legend*/}
+                                {/*            className={`text-base  text-gray-900`}>{trans('enable_google_translation')}</legend>*/}
+                                {/*    </div>*/}
+                                {/*    <div className="mt-4 space-y-4">*/}
+                                {/*        <div className="flex items-center">*/}
+                                {/*            <input*/}
+                                {/*                onChange={handleChange}*/}
+                                {/*                id="enable_google_translation"*/}
+                                {/*                name="enable_google_translation"*/}
+                                {/*                type="radio"*/}
+                                {/*                value={1}*/}
+                                {/*                defaultChecked={setting.enable_google_translation}*/}
+                                {/*                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}*/}
+                                {/*            />*/}
+                                {/*            <label htmlFor="enable_google_translation"*/}
+                                {/*                   className="ml-3 block   text-gray-800">*/}
+                                {/*                {trans('yes')}*/}
+                                {/*            </label>*/}
+                                {/*        </div>*/}
+                                {/*        <div className="flex items-center">*/}
+                                {/*            <input*/}
+                                {/*                onChange={handleChange}*/}
+                                {/*                id="enable_google_translation"*/}
+                                {/*                name="enable_google_translation"*/}
+                                {/*                type="radio"*/}
+                                {/*                value={0}*/}
+                                {/*                defaultChecked={!setting.enable_google_translation}*/}
+                                {/*                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}*/}
+                                {/*            />*/}
+                                {/*            <label htmlFor="enable_google_translation"*/}
+                                {/*                   className="ml-3 block   text-gray-800">*/}
+                                {/*                {trans('no')}*/}
+                                {/*            </label>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+                                {/*    <ToolTipWidget/>*/}
+                                {/*    <div>*/}
+                                {/*        <p className={`mt-2  text-gray-500`}>*/}
+                                {/*            {errors.enable_google_translation &&*/}
+                                {/*            <div className={`text-red-900`}>{errors.enable_google_translation}</div>}*/}
+                                {/*        </p>*/}
+                                {/*    </div>*/}
+                                {/*</fieldset>*/}
                                 {/*enable_favorite*/}
                                 <fieldset className="mt-1 col-span-2">
                                     <div>
@@ -1632,7 +1694,6 @@ accept="image/jpg, image/jpeg , image/png"
                         }
                         <FormBtns type={'setting'}/>
                     </div>
-
                     <div
                         className={classNames(currentFormTab.id !== 1 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
                         <FormSection title={trans('more_details')}>
@@ -1769,7 +1830,6 @@ accept="image/jpg, image/jpeg , image/png"
                                     {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                 </p>
                             </div>
-
                             {/* address_ar */}
                             <div className="sm:col-span-2 has-tooltip">
                                 <label htmlFor="address_ar"
@@ -2576,7 +2636,7 @@ accept="image/jpg, image/jpeg , image/png"
                                                     multiple
                                                     name="images"
                                                     id="more_images"
-accept="image/jpg, image/jpeg , image/png"
+                                                    accept="image/jpg, image/jpeg , image/png"
                                                     autoComplete="more_images"
                                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
                                                 />

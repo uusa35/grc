@@ -18,7 +18,7 @@ class AuthExtraLightResource extends JsonResource
             'id' => $this->id,
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
-            'image' => $this->image,
+            'email' => $this->email,
             'image' => $this->image,
             'verified' => $this->hasVerifiedEmail(),
             'role' => RoleExtraLightResource::make($this->whenLoaded('role')),

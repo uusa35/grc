@@ -1,4 +1,4 @@
-import {useContext, useMemo, useState} from 'react'
+import React, {useContext, useMemo, useState} from 'react'
 import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
@@ -9,15 +9,31 @@ import {filter, first, isEmpty, map} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
+import {SET_CART_NOTES} from "../../redux/actions/types";
+import {setShipmentFees} from "../../redux/actions";
+import { calculateShipmentFees } from "../../helpers";
 
 
-export default function({countries, auth}) {
-    const {trans, getLocalized, classNames, mainColor, mainBgColor, contentBgColor, textColor, btnClass  } = useContext(AppContext);
-    const {locale} = useSelector(state => state);
+export default function({countries, auth, settings}) {
+    const {
+        trans,
+        getLocalized,
+        classNames,
+        mainColor,
+        mainBgColor,
+        contentBgColor,
+        textColor,
+        btnClass
+    } = useContext(AppContext);
+    const {locale, cart} = useSelector(state => state);
+    const [selectedCountry, setSelectedCountry] = useState('')
+    const [selectedGovernate, setSelectedGovernate] = useState('')
+    const [currentShipmentFees, setCurrentShipmentFees] = useState(0)
     const [governates, setGovernates] = useState([])
     const [areas, setAreas] = useState([])
     const {props} = usePage();
     const {errors} = props;
+    const dispatch = useDispatch();
     const {data, setData, put, post, progress, reset} = useForm({
         'name': auth ? auth.name_ar : '',
         'name_ar': auth ? auth.name_ar : '',
@@ -33,27 +49,53 @@ export default function({countries, auth}) {
         'country_name': auth ? auth.country_name : '',
         'area_name': auth ? auth.area_name : '',
         'country_id': auth ? auth.country_id : '',
-        'area_id': auth ? auth.area_id : '',
-        'governate_id': auth ? auth.governate_id : '',
+        'governate_id': '',
+        'area_id': '',
+        'notes': cart.notes,
+        'receive_from_shop': 0
     });
 
     useMemo(() => {
-        const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
-        setGovernates(selectedCountry.governates)
-        setData('governate_id', first(selectedCountry.governates).id)
-        const areas = first(selectedCountry.governates).areas;
+        const currentCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
+        setSelectedCountry(currentCountry);
+        setGovernates(currentCountry.governates)
+        setData('governate_id', first(currentCountry.governates).id)
+        const areas = first(currentCountry.governates).areas;
         setAreas(areas)
         setData('area_id', first(areas).id)
+        setData('receive_from_shop', 0)
     }, [data.country_id])
-
 
     useMemo(() => {
         if (!isEmpty(governates)) {
-            const selectedGovernate = data.governate_id ? first(filter(governates, c => c.id == data.governate_id)) : first(governates);
-            setAreas(selectedGovernate.areas);
-            setData('area_id', first(selectedGovernate.areas).id)
+            const currentGovernate = data.governate_id ? first(filter(governates, c => c.id == data.governate_id)) : first(governates);
+            setSelectedGovernate(currentGovernate)
+            setAreas(currentGovernate.areas);
+            setData('area_id', first(currentGovernate.areas).id)
         }
     }, [data.governate_id])
+
+    useMemo(() => {
+        const firstProduct = first(filter(cart.items, item => item.type === 'product'))
+        const merchantEnableReceiveFromShop = firstProduct ? firstProduct.merchant_enable_receive_from_shop : false;
+        // const shipmentFees = selectedCountry.is_local && (data.receive_from_shop == 1) && settings.enable_receive_from_shop && merchantEnableReceiveFromShop ? 0 : (settings.apply_global_shipment ? parseFloat(selectedCountry.fixed_shipment_charge) : (firstProduct.merchant_custome_delivery && !settings.multi_cart_merchant ? firstProduct.merchant_custome_delivery_fees : selectedCountry.is_local && selectedGovernate ? parseFloat(selectedGovernate.price) : parseFloat(selectedGovernate.price) * cart.totalItems));
+        const shipmentFees = calculateShipmentFees(
+            settings.enable_products,
+            selectedCountry.is_local,
+            data.receive_from_shop == 1,
+            settings.enable_receive_from_shop,
+            settings.apply_global_shipment,
+            selectedCountry.price, // globalFees
+            settings.multi_cart_merchant,
+            merchantEnableReceiveFromShop,
+            firstProduct.merchant_custome_delivery,
+            firstProduct.merchant_custome_delivery_fees,
+            selectedGovernate.price,
+            selectedCountry.price,
+            cart.totalItems
+        );
+        setCurrentShipmentFees(shipmentFees)
+    }, [data.receive_from_shop, data.country_id, data.governate_id, data.area_id])
 
     const handleChange = (e) => {
         setData(values => ({
@@ -64,6 +106,22 @@ export default function({countries, auth}) {
 
     const submit = (e) => {
         e.preventDefault()
+        dispatch({type: SET_CART_NOTES, payload: data.notes});
+        dispatch(setShipmentFees({
+                shipmentFees: currentShipmentFees,
+                receiveFromShop: selectedCountry.is_local && data.receive_from_shop,
+                shipmentCountry: selectedCountry,
+                shipmentGovernate: {
+                    id: selectedGovernate.id,
+                    country_id: selectedGovernate.country_id,
+                    price: selectedGovernate.price,
+                    name_ar: selectedGovernate.name_ar,
+                    name_en: selectedGovernate.name_en
+                },
+                area_id: auth.area_id
+            }
+        ));
+
         if (auth && auth.id) {
             Inertia.post(route(`frontend.user.update`, auth.id), {
                 _method: 'put',
@@ -72,7 +130,7 @@ export default function({countries, auth}) {
             }, {
                 forceFormData: true,
                 onSuccess: () => Inertia.get(route('frontend.cart.confirmation', {
-                    _method : 'get',
+                    _method: 'get',
                     ...data
                 }))
 
@@ -85,7 +143,7 @@ export default function({countries, auth}) {
             }, {
                 forceFormData: true,
                 onSuccess: () => Inertia.get(route('frontend.cart.confirmation', {
-                    _method : 'get',
+                    _method: 'get',
                     ...data
                 }))
             })
@@ -371,12 +429,89 @@ export default function({countries, auth}) {
                                 </p>
                             </div>
                         </div>
+                        {/*enable_receive_from_shop*/}
+                        {
+                            settings.enable_receive_from_shop && selectedCountry.is_local ?
+                                <div className="col-span-full">
+                                    <div className="pt-6 sm:pt-5">
+                                        <div role="group" aria-labelledby="label-notifications">
+                                            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                                                <div>
+                                                    <div
+                                                        className="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
+                                                        id="label-notifications"
+                                                    >
+                                                        {trans('delivery_options')}
+                                                    </div>
+                                                </div>
+                                                <div className="sm:col-span-2">
+                                                    <div className="max-w-lg">
+                                                        <p className="text-sm text-gray-500">{trans('delivery_options_instructions')}</p>
+                                                        <div className="mt-4 space-y-4">
+                                                            <div className="flex items-center">
+                                                                <input
+                                                                    id="receive_from_shop"
+                                                                    name="receive_from_shop"
+                                                                    onChange={handleChange}
+                                                                    value={0}
+                                                                    defaultChecked={!data.receive_from_shop}
+                                                                    type="radio"
+                                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                                                />
+                                                                <label htmlFor="delivery"
+                                                                       className="rtl:mr-3 ltr:ml-3 block text-sm font-medium text-gray-700">
+                                                                    {trans('delivery')}
+                                                                </label>
+                                                            </div>
+                                                            <div className="flex items-center">
+                                                                <input
+                                                                    id="receive_from_shop"
+                                                                    name="receive_from_shop"
+                                                                    onChange={handleChange}
+                                                                    value={1}
+                                                                    defaultChecked={data.receive_from_shop}
+                                                                    type="radio"
+                                                                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                                                                />
+                                                                <label htmlFor="receive_from_shop"
+                                                                       className="rtl:mr-3 ltr:ml-3 block text-sm font-medium text-gray-700">
+                                                                    {trans('receive_from_shop')}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> : null
+                        }
+
+
+                        {/* notes */}
+                        <div className="lg:col-span-full">
+                            <label htmlFor="notes"
+                                   className="block text-sm font-medium text-gray-700">
+                                {trans('notes')}
+                            </label>
+                            <div className="mt-1">
+                                                    <textarea
+                                                        id="notes"
+                                                        defaultValue={data.notes}
+                                                        name="notes"
+                                                        rows={3}
+                                                        className="shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                                                        onChange={(e) => setData('notes', e.target.value)}
+                                                    />
+                            </div>
+                            <p className="mt-2 text-sm text-gray-500">{trans('u_can_write_notes_related_to_order')}</p>
+                        </div>
 
                         <div
                             className="mt-10 col-span-full flex flex-col sm:flex-row  space-y-5 sm:space-y-0 justify-between items-center w-full">
                             <Link
                                 href={route('frontend.cart.index')}
-                                className={`text-${mainColor}-50 dark:text-${mainBgColor}-600 bg-${mainBgColor}-800 dark:bg-${mainColor}-400 hover:bg-gray-800 flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
+                                className={`${btnClass} flex flex-row justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                             >
                                 <div className="flex">
                                     {locale.isRTL ?

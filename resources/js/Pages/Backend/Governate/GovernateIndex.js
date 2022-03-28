@@ -53,6 +53,12 @@ export default function({elements}) {
                                         scope="col"
                                         className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
                                     >
+                                        {trans('price')}
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                    >
                                         <div className="flex flex-row justify-between items-center">
                                             <div className="flex">
                                                 {trans('commands')}
@@ -79,6 +85,7 @@ export default function({elements}) {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.country[getLocalized()]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.price}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.governate.edit`, element.id)}

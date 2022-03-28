@@ -28,6 +28,7 @@ class Setting extends PrimaryModel
         'enable_favorite' => 'boolean',
         'enable_newsletter' => 'boolean',
         'enable_payment_online' => 'boolean',
+        'enable_receive_from_shop' => 'boolean'
     ];
 
     public function images()

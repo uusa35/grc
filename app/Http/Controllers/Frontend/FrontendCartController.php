@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AuthExtraLightResource;
 use App\Http\Resources\CountryCollection;
-use App\Http\Resources\UserLightResource;
 use App\Http\Resources\UserResource;
 use App\Mail\OrderPaid;
 use App\Models\Country;
@@ -30,6 +28,13 @@ class FrontendCartController extends Controller
 
     public function getUserInformation()
     {
+        $validator = validator(request()->all(), [
+            'cartId' => 'required|numeric',
+            'totalItems' => 'required|numeric',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('frontend.home')->withErrors($validator->errors()->first());
+        }
         $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
             ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()
             )->with('areas')
@@ -41,11 +46,8 @@ class FrontendCartController extends Controller
     public function getUserConfirmation(Request $request)
     {
         $request->validate([
-            'area_id' => 'required|exists:areas,id',
-            'governate_id' => 'required|exists:governates,id',
-            'country_id' => 'required|exists:countries,id',
             'email' => 'required|email|exists:users,email',
-            'mobile' => 'required'
+            'country_id' => 'required|exists:countries,id'
         ]);
         $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
             ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()

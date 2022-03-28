@@ -72,6 +72,7 @@ export default function({element, relatedElements, auth}) {
             element_id: element.id,
             qty: 1,
             price: parseFloat(element.isOnSale ? element.sale_price : element.price),
+            totalPrice : parseFloat(element.isOnSale ? element.sale_price : element.price),
             direct_purchase: element.direct_purchase,
             shipmentFees: 0,
             image: element.image,

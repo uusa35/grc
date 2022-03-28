@@ -1,4 +1,4 @@
-import {useContext, useMemo, useState} from 'react'
+import React, {useContext, useMemo, useState} from 'react'
 import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
@@ -14,11 +14,20 @@ import {Inertia} from "@inertiajs/inertia";
 
 
 export default function({countries, auth}) {
-    const {trans, getLocalized, classNames, mainColor , mainBgColor, textColor , contentBgColor , btnClass  } = useContext(AppContext);
+    const {
+        trans,
+        getLocalized,
+        classNames,
+        mainColor,
+        mainBgColor,
+        textColor,
+        contentBgColor,
+        btnClass
+    } = useContext(AppContext);
     const [areas, setAreas] = useState([])
     const [governates, setGovernates] = useState([])
-    const {locale, cart } = useSelector(state => state);
-    const { settings } = useContext(GlobalContext);
+    const {locale, cart} = useSelector(state => state);
+    const {settings} = useContext(GlobalContext);
     const dispatch = useDispatch();
     const {props} = usePage();
     const {errors} = props;
@@ -43,12 +52,22 @@ export default function({countries, auth}) {
     });
 
     useMemo(() => {
-        dispatch({type: 'SET_CART_ID', payload: auth.id})
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(filter(countries, c => c.id == auth.country_id));
         setGovernates(selectedCountry.governates);
         const governate = first(filter(selectedCountry.governates, g => g.id == data.governate_id));
         setAreas(governate.areas);
-        dispatch(setShipmentFees(settings.apply_global_shipment ? parseFloat(selectedCountry.fixed_shipment_charge) : selectedCountry.is_local ? parseFloat(governate.price) : parseFloat(governate.price) * cart.totalItems))
+        // dispatch(setShipmentFees({
+        //         globalShipment: settings.apply_global_shipment, shipmentCountry: selectedCountry,
+        //         shipmentGovernate: {
+        //             id: governate.id,
+        //             country_id: governate.country_id,
+        //             price: governate.price,
+        //             name_ar : governate.name_ar,
+        //             name_en : governate.name_en
+        //         },
+        //         area_id: auth.area_id
+        //     }
+        // ));
     }, [])
 
 
@@ -61,8 +80,8 @@ export default function({countries, auth}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(cart.totalItems === 0) {
-            return Inertia.get(route(`frontend.cart.index`), {}, { error : 'Your cart is empty'})
+        if (cart.totalItems === 0) {
+            return Inertia.get(route(`frontend.cart.index`), {}, {error: 'Your cart is empty'})
         } else {
             return post(route('frontend.cart.payment.post'), {...data})
         }
@@ -319,10 +338,31 @@ export default function({countries, auth}) {
                                 </p>
                             </div>
                         </div>
+
+                        {/* notes */}
+                        <div className="lg:col-span-full">
+                            <label htmlFor="notes"
+                                   className="block text-sm font-medium text-gray-700">
+                                {trans('notes')}
+                            </label>
+                            <div className="mt-1">
+                                                    <textarea
+                                                        id="notes"
+                                                        disabled
+                                                        defaultValue={cart.notes}
+                                                        name="notes"
+                                                        rows={3}
+                                                        className="shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                                                        onChange={(e) => setData('notes', e.target.value)}
+                                                    />
+                            </div>
+                            <p className="mt-2 text-sm text-gray-500">{trans('u_can_write_notes_related_to_order')}</p>
+                        </div>
+
                     </form>
                     <div className="mt-10 col-span-full flex  flex-wrap justify-between w-full">
                         <Link
-                            href={route('frontend.cart.information')}
+                            href={route('frontend.cart.information', { totalItems : cart.totalItems , cartId : cart.cartId })}
                             className={`${btnClass} flex flex-row justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                         >
                             <div className="flex">
