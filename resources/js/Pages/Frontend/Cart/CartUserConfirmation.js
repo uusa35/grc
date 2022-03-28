@@ -56,18 +56,6 @@ export default function({countries, auth}) {
         setGovernates(selectedCountry.governates);
         const governate = first(filter(selectedCountry.governates, g => g.id == data.governate_id));
         setAreas(governate.areas);
-        // dispatch(setShipmentFees({
-        //         globalShipment: settings.apply_global_shipment, shipmentCountry: selectedCountry,
-        //         shipmentGovernate: {
-        //             id: governate.id,
-        //             country_id: governate.country_id,
-        //             price: governate.price,
-        //             name_ar : governate.name_ar,
-        //             name_en : governate.name_en
-        //         },
-        //         area_id: auth.area_id
-        //     }
-        // ));
     }, [])
 
 
