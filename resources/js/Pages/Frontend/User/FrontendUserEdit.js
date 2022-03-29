@@ -56,7 +56,7 @@ export default function({user}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <main className="relative mt-5 bg-white ">
+                <main className="relative pt-5 bg-white ">
                     <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                         <div className="overflow-hidden">
                             <div className=" lg:grid lg:grid-cols-12">
