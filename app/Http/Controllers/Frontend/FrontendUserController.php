@@ -27,7 +27,6 @@ use App\Services\Search\UserFilters;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use function GuzzleHttp\Promise\all;
 
 class FrontendUserController extends Controller
 {

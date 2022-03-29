@@ -1,12 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
 
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 
 export default function ({ activeStep = 1}) {
-    const { trans, classNames, mainColor , mainBgColor, textColor , contentBgColor  } = useContext(AppContext);
+    const { trans, classNames, mainColor, textColor , contentBgColor  } = useContext(AppContext);
     const steps = [
         { id: 1, label : trans('page'), name: trans('cart'), href: route('frontend.cart.index'), status: 'upcoming' },
         { id: 2, label : trans('page'), name: trans('information'), href: '#', status: 'current' },

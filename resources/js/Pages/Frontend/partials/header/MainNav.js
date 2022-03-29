@@ -46,7 +46,7 @@ const currentVariants = {
     }
 };
 
-export default function ()  {
+export default function() {
     const {
         classNames, getThumb, getLocalized, trans,
         baseUrl,
@@ -60,7 +60,7 @@ export default function ()  {
         contentBgColor,
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
-    const {auth, settings, currencies, categories, mgt} = globalContext;
+    const {auth, settings, currencies, categories, appName} = globalContext;
     const {locale, currency, cart, parentModule, theme} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const [offset, setOffset] = useState(0);
@@ -653,7 +653,7 @@ export default function ()  {
                                 }
 
                                 {
-                                    settings.corporate_mode ? <>
+                                    appName === 'mgt' ? <>
                                         <Link
                                             href={`/#our_services`}
                                             className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
@@ -661,11 +661,23 @@ export default function ()  {
                                             {capitalize(trans('our_services'))}
                                         </Link>
                                         <a
-                                            href={`https://shop.mgt-sa.com`}
+                                            href={`/#our_shop`}
                                             className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_shop'))}
                                         </a>
+                                        <Link
+                                            href={`/#our_products`}
+                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('our_products'))}
+                                        </Link>
+                                        <Link
+                                            href={`/#our_message`}
+                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('our_message'))}
+                                        </Link>
                                     </> : null
                                 }
 
@@ -693,207 +705,205 @@ export default function ()  {
                                 </Link>
 
                                 {/*     pages */}
-                                {
-                                    !mgt ? <Popover className="relative flex justify-center hidden">
-                                        {({open}) => (
-                                            <>
-                                                <Popover.Button
+                                <Popover className="relative flex justify-center hidden">
+                                    {({open}) => (
+                                        <>
+                                            <Popover.Button
+                                                className={classNames(
+                                                    parentModule == 'contactus' || parentModule == 'subscriptions' || parentModule == 'polices' || parentModule == 'terms' || parentModule == 'aboutus' || parentModule == 'faqs'
+                                                        ? 'border-b border-hippie-blue-500 pb-2'
+                                                        : 'text-black',
+                                                    'group inline-flex items-center font-extrabold capitalize'
+                                                )}
+                                            >
+                                                <span>{trans('pages')}</span>
+                                                <ChevronDownIcon
                                                     className={classNames(
-                                                        parentModule == 'contactus' || parentModule == 'subscriptions' || parentModule == 'polices' || parentModule == 'terms' || parentModule == 'aboutus' || parentModule == 'faqs'
-                                                            ? 'border-b border-hippie-blue-500 pb-2'
-                                                            : 'text-black',
-                                                        'group inline-flex items-center font-extrabold capitalize'
+                                                        open ? '' : '',
+                                                        'rtl:mr-2 ltr:ml-2 w-5 group-hover:text-gray-100'
                                                     )}
-                                                >
-                                                    <span>{trans('pages')}</span>
-                                                    <ChevronDownIcon
-                                                        className={classNames(
-                                                            open ? '' : '',
-                                                            'rtl:mr-2 ltr:ml-2 w-5 group-hover:text-gray-100'
-                                                        )}
-                                                        aria-hidden="true"
-                                                    />
-                                                </Popover.Button>
+                                                    aria-hidden="true"
+                                                />
+                                            </Popover.Button>
 
-                                                <Transition
-                                                    as={Fragment}
-                                                    enter="transition ease-out duration-200"
-                                                    enterFrom="opacity-0 translate-y-1"
-                                                    enterTo="opacity-100 translate-y-0"
-                                                    leave="transition ease-in duration-150"
-                                                    leaveFrom="opacity-100 translate-y-0"
-                                                    leaveTo="opacity-0 translate-y-1"
-                                                >
-                                                    <Popover.Panel
-                                                        className="absolute top-full0 z-50 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
+                                            <Transition
+                                                as={Fragment}
+                                                enter="transition ease-out duration-200"
+                                                enterFrom="opacity-0 translate-y-1"
+                                                enterTo="opacity-100 translate-y-0"
+                                                leave="transition ease-in duration-150"
+                                                leaveFrom="opacity-100 translate-y-0"
+                                                leaveTo="opacity-0 translate-y-1"
+                                            >
+                                                <Popover.Panel
+                                                    className="absolute top-full0 z-50 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
+                                                    <div
+                                                        className="z-80 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                                         <div
-                                                            className="z-80 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                                                            <div
-                                                                className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                                                                {/* subscriptioins page*/}
-                                                                {
-                                                                    settings.enable_subscriptions && <Link
-                                                                        href={route('frontend.subscriptions')}
-                                                                        className={`m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
-                                                                    >
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 "
-                                                                             viewBox="0 0 20 20" fill="currentColor">
-                                                                            <path
-                                                                                d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
-                                                                            <path fillRule="evenodd"
-                                                                                  d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                                                                                  clipRule="evenodd"/>
-                                                                        </svg>
-                                                                        <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('subscriptions')}</p>
-                                                                        </div>
-                                                                    </Link>
-                                                                }
+                                                            className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                                            {/* subscriptioins page*/}
+                                                            {
+                                                                settings.enable_subscriptions && <Link
+                                                                    href={route('frontend.subscriptions')}
+                                                                    className={`m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 "
+                                                                         viewBox="0 0 20 20" fill="currentColor">
+                                                                        <path
+                                                                            d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"/>
+                                                                        <path fillRule="evenodd"
+                                                                              d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                                                              clipRule="evenodd"/>
+                                                                    </svg>
+                                                                    <div className="ltr:ml-5 rtl:mr-5">
+                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('subscriptions')}</p>
+                                                                    </div>
+                                                                </Link>
+                                                            }
 
-                                                                {/* contact us page */}
+                                                            {/* contact us page */}
+                                                            <Link
+                                                                href={route('frontend.contactus')}
+                                                                className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 " fill="none"
+                                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path strokeLinecap="round"
+                                                                          strokeLinejoin="round"
+                                                                          strokeWidth="2"
+                                                                          d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                                                                </svg>
+                                                                <div className="ltr:ml-5 rtl:mr-5">
+                                                                    <p className={`text-base font-medium  ${menuTextColor}`}>{trans('contactus')}</p>
+                                                                </div>
+                                                            </Link>
+
+                                                            <Link
+                                                                href={route('frontend.aboutus')}
+                                                                className={`-m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     className="h-6 w-6 " fill="none"
+                                                                     viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                                                    <path
+                                                                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                                                                    <path strokeLinecap="round"
+                                                                          strokeLinejoin="round"
+                                                                          strokeWidth="2"
+                                                                          d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+                                                                </svg>
+                                                                <div className="ltr:ml-5 rtl:mr-5">
+                                                                    <p className={`text-base font-medium  ${menuTextColor}`}>{trans('aboutus')}</p>
+                                                                </div>
+                                                            </Link>
+
+                                                            {settings[getLocalized('services')] && size(settings[getLocalized('services')]) > 50 ?
                                                                 <Link
-                                                                    href={route('frontend.contactus')}
+                                                                    href={route('frontend.services')}
                                                                     className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
                                                                 >
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
-                                                                         className="h-6 w-6 " fill="none"
+                                                                         className="h-6 w-6 "
+                                                                         fill="none"
                                                                          viewBox="0 0 24 24" stroke="currentColor">
                                                                         <path strokeLinecap="round"
                                                                               strokeLinejoin="round"
                                                                               strokeWidth="2"
-                                                                              d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+                                                                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                                                                     </svg>
                                                                     <div className="ltr:ml-5 rtl:mr-5">
-                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('contactus')}</p>
+                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('our_services')}</p>
                                                                     </div>
-                                                                </Link>
+                                                                </Link> : null
+                                                            }
 
+                                                            {settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ?
                                                                 <Link
-                                                                    href={route('frontend.aboutus')}
-                                                                    className={`-m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
+                                                                    href={route('frontend.polices')}
+                                                                    className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 "
+                                                                         fill="none"
+                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round"
+                                                                              strokeLinejoin="round"
+                                                                              strokeWidth="2"
+                                                                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                                                    </svg>
+                                                                    <div className="ltr:ml-5 rtl:mr-5">
+                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('polices')}</p>
+                                                                    </div>
+                                                                </Link> : null
+                                                            }
+                                                            {
+                                                                settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ?
+                                                                    <Link
+                                                                        href={route('frontend.terms')}
+                                                                        className={`-m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
+                                                                    >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             className="h-6 w-6 "
+                                                                             fill="none"
+                                                                             viewBox="0 0 24 24"
+                                                                             stroke="currentColor">
+                                                                            <path strokeLinecap="round"
+                                                                                  strokeLinejoin="round"
+                                                                                  strokeWidth="2"
+                                                                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                                                                        </svg>
+                                                                        <div className="ltr:ml-5 rtl:mr-5">
+                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('terms')}</p>
+                                                                        </div>
+                                                                    </Link> : null
+                                                            }
+                                                            {
+                                                                settings.enable_faqs ? <Link
+                                                                    href={route('frontend.faqs')}
+                                                                    className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
                                                                 >
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
-                                                                         className="h-6 w-6 " fill="none"
+                                                                         className="h-6 w-6 "
+                                                                         fill="none"
                                                                          viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path d="M12 14l9-5-9-5-9 5 9 5z"/>
-                                                                        <path
-                                                                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
                                                                         <path strokeLinecap="round"
                                                                               strokeLinejoin="round"
                                                                               strokeWidth="2"
-                                                                              d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+                                                                              d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                                     </svg>
                                                                     <div className="ltr:ml-5 rtl:mr-5">
-                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('aboutus')}</p>
+                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('faqs')}</p>
                                                                     </div>
-                                                                </Link>
-
-                                                                {settings[getLocalized('services')] && size(settings[getLocalized('services')]) > 50 ?
-                                                                    <Link
-                                                                        href={route('frontend.services')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
-                                                                    >
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 "
-                                                                             fill="none"
-                                                                             viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path strokeLinecap="round"
-                                                                                  strokeLinejoin="round"
-                                                                                  strokeWidth="2"
-                                                                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                                                                        </svg>
-                                                                        <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('our_services')}</p>
-                                                                        </div>
-                                                                    </Link> : null
-                                                                }
-
-                                                                {settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ?
-                                                                    <Link
-                                                                        href={route('frontend.polices')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 "
-                                                                             fill="none"
-                                                                             viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path strokeLinecap="round"
-                                                                                  strokeLinejoin="round"
-                                                                                  strokeWidth="2"
-                                                                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                                                                        </svg>
-                                                                        <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('polices')}</p>
-                                                                        </div>
-                                                                    </Link> : null
-                                                                }
-                                                                {
-                                                                    settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ?
-                                                                        <Link
-                                                                            href={route('frontend.terms')}
-                                                                            className={`-m-3 p-3 flex items-start rounded-lg  ${menuTextColor}`}
-                                                                        >
-                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                 className="h-6 w-6 "
-                                                                                 fill="none"
-                                                                                 viewBox="0 0 24 24"
-                                                                                 stroke="currentColor">
-                                                                                <path strokeLinecap="round"
-                                                                                      strokeLinejoin="round"
-                                                                                      strokeWidth="2"
-                                                                                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-                                                                            </svg>
-                                                                            <div className="ltr:ml-5 rtl:mr-5">
-                                                                                <p className={`text-base font-medium  ${menuTextColor}`}>{trans('terms')}</p>
-                                                                            </div>
-                                                                        </Link> : null
-                                                                }
-                                                                {
-                                                                    settings.enable_faqs ? <Link
-                                                                        href={route('frontend.faqs')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
-                                                                    >
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 "
-                                                                             fill="none"
-                                                                             viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path strokeLinecap="round"
-                                                                                  strokeLinejoin="round"
-                                                                                  strokeWidth="2"
-                                                                                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                                        </svg>
-                                                                        <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('faqs')}</p>
-                                                                        </div>
-                                                                    </Link> : null
-                                                                }
-                                                                {
-                                                                    settings.enable_joinus ? <Link
-                                                                        href={route('frontend.joinus')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
-                                                                    >
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 "
-                                                                             fill="none"
-                                                                             viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path strokeLinecap="round"
-                                                                                  strokeLinejoin="round"
-                                                                                  strokeWidth="2"
-                                                                                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                                        </svg>
-                                                                        <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('joinus')}</p>
-                                                                        </div>
-                                                                    </Link> : null
-                                                                }
-                                                            </div>
+                                                                </Link> : null
+                                                            }
+                                                            {
+                                                                settings.enable_joinus ? <Link
+                                                                    href={route('frontend.joinus')}
+                                                                    className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         className="h-6 w-6 "
+                                                                         fill="none"
+                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path strokeLinecap="round"
+                                                                              strokeLinejoin="round"
+                                                                              strokeWidth="2"
+                                                                              d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                                    </svg>
+                                                                    <div className="ltr:ml-5 rtl:mr-5">
+                                                                        <p className={`text-base font-medium  ${menuTextColor}`}>{trans('joinus')}</p>
+                                                                    </div>
+                                                                </Link> : null
+                                                            }
                                                         </div>
-                                                    </Popover.Panel>
-                                                </Transition>
-                                            </>
-                                        )}
-                                    </Popover> : null
-                                }
+                                                    </div>
+                                                </Popover.Panel>
+                                            </Transition>
+                                        </>
+                                    )}
+                                </Popover>
 
                             </div>
                         </Popover.Group>

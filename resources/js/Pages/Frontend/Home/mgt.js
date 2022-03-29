@@ -199,7 +199,8 @@ export default React.memo(function({
 
 
                     <div
-                        className={`w-full m-auto space-y-20 mt-10 rounded-lg`}>
+                        id={`our_shop`}
+                        className={`w-full m-auto space-y-20 mt-10 rounded-lg anchorBehave`}>
                         {/* shop */}
                         <motion.div
                             className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent "
@@ -218,7 +219,9 @@ export default React.memo(function({
                             <div className={`col-span-full lg:col-span-1 flex flex-col flex-grow`}>
                                 <div className={`justify-center p-3 pt-10`}>
                                     <h1 className={`text-gray-800 dark:text-white text-3xl pb-10`}>
-                                        المتجر الإلكتروني
+                                        <a href="https://shop.mgt-sa.com">
+                                            المتجر الإلكتروني
+                                        </a>
                                     </h1>
                                     <p className={`text-gray-600 dark:text-white text-lg leading-loose`}>
                                         يُمكنك الآن طلب جميع منتجات التعبئة والتغليف الغذائية بمُختلف الأشكال والمقاسات
@@ -229,17 +232,17 @@ export default React.memo(function({
                                     </p>
                                 </div>
                                 <div className={`flex justify-end items-end text-center mx-6`}>
-                                    <Link
+                                    <a
                                         className={`p-5 rounded-md shadow-md text-black dark:text-white border-2 border-gray-800 hover:bg-gray-200`}
-                                        href={route('frontend.home')}>
+                                        href={`https://shop.mgt-sa.com`}>
                                         الذهب للمتجر الإلكتروني
-                                    </Link>
+                                    </a>
                                 </div>
                             </div>
                         </motion.div>
 
                         {/* our services */}
-                        <section id={`our_services anchorBehave`}>
+                        <section id={`our_services`} className={`anchorBehave`}>
                             <div className="relative bg-gray-50 py-16">
                                 <div className="relative">
                                     <div
@@ -287,8 +290,10 @@ export default React.memo(function({
                         </section>
 
 
-                        {/* company features */}
-                        <div className="pb-16 bg-gradient-to-r from-gray-100 to-gray-300 lg:pb-0 lg:z-10 lg:relative ">
+                        {/* our_message */}
+                        <div
+                            id={`our_message`}
+                            className="pb-16 bg-gradient-to-r from-gray-100 to-gray-300 lg:pb-0 lg:z-10 lg:relative anchorBehave">
                             <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-8">
                                 <div className="relative lg:-my-8">
                                     <div aria-hidden="true"
@@ -318,8 +323,7 @@ export default React.memo(function({
                                                     <path
                                                         d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/>
                                                 </svg>
-                                                <h1 className={`text-center text-xl text-gray-900`}>وساطة وضمان
-                                                    السعودية</h1>
+                                                <h1 className={`text-center text-xl text-gray-900`}>رسالتنـــا</h1>
                                                 <p className="mt-6 text-lg font-medium text-gray-600">
                                                     نسعى لتقديم خدمة لا مثيل لها في سوق التعبئة والتغليف بالمملكة
                                                     العربية
@@ -349,7 +353,7 @@ export default React.memo(function({
 
 
                         {/* products */}
-                        <div className="relative bg-gray-50 py-16">
+                        <div id={`our_products`} className="relative bg-gray-50 py-16 anchorBehave">
                             <div className="relative">
                                 <div
                                     className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
