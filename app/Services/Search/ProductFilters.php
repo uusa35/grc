@@ -135,4 +135,9 @@ class ProductFilters extends QueryFilters
         return $this->builder->where('user_id', '=', request()->user);
     }
 
+    public function slug()
+    {
+        return $this->builder;
+    }
+
 }
