@@ -232,7 +232,7 @@ export default function() {
                                     settings.enable_books && <>
                                         <div className="flow-root">
                                             <Link
-                                                href={route('frontend.user.index')}
+                                                href={route('frontend.user.index', { is_author : true })}
                                                 className={`-m-2 p-2 block `}>
                                                 {capitalize(trans('experts_and_participants'))}
                                             </Link>
@@ -624,7 +624,7 @@ export default function() {
                                     </Link> : null
                                 }
                                 {
-                                    settings.enable_users ? <Link
+                                    settings.enable_users && settings.enable_products ? <Link
                                         href={route('frontend.user.index', {is_company: true})}
                                         className={classNames(parentModule == 'user' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} flex sm:min-w-max  text-center font-bold items-center    capitalize overflow-hidden`)}
                                     >

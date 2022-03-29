@@ -19,7 +19,7 @@ const NormalBookWidget = ({element})  => {
                 <div className="w-full rounded-t-md overflow-hidden sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                     <Link
                         className="z-30"
-                        href={route('frontend.book.show', element.id) + `?slug=${element[getLocalized()]}`}>
+                        href={route('frontend.book.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}>
                         <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}
                                      free={element.free}
                         />
@@ -36,7 +36,7 @@ const NormalBookWidget = ({element})  => {
                 <div className="flex flex-row flex-1 justify-between items-center m-2">
                     <h3 className={`text-base font-bold text-${mainColor}-800 dark:text-${mainColor}-100 truncate`}>
                         <Link
-                            href={route('frontend.book.show', element.id)} className="truncate text-sm">
+                            href={route('frontend.book.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`} className="truncate text-sm">
                             <span className=""/>
                             {truncate(element[getLocalized()], {length: 20})}
                             <p className="truncate capitalize text-sm hidden">
@@ -44,7 +44,7 @@ const NormalBookWidget = ({element})  => {
                             </p>
                         </Link>
                     </h3>
-                    { element.user && <Link href={route('frontend.user.show', element.user.id)}>
+                    { element.user && <Link href={route('frontend.user.show', element.user.id) + `?slug=${element.user[getLocalized()].replace(/ /g, '-')}`}>
                         <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-fill shadow-sm"
                              src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
                              width={360}

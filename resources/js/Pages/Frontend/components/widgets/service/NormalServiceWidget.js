@@ -33,14 +33,14 @@ const  NormalServiceWidget = ({element}) => {
             </div>
             <div className="flex flex-row flex-1 justify-between items-center m-2">
                 <h3 className={`text-base font-bold ${textColor} truncate`}>
-                    <Link href={route('frontend.service.show', element.id)} className="truncate text-sm">
+                    <Link href={route('frontend.service.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`} className="truncate text-sm">
                         {truncate(element[getLocalized()], { length : 20 })}
                         <p className="truncate capitalize text-sm hidden">
                             {truncate(element[getLocalized('caption')], 15)}
                         </p>
                     </Link>
                 </h3>
-                { element.user && <Link href={route('frontend.user.show', element.user.id)}>
+                { element.user && <Link href={route('frontend.user.show', element.user.id) + `?slug=${element.user[getLocalized()].replace(/ /g, '-')}`}>
                     <img className="w-5 h-5 md:w-10 md:h-10 rounded-full object-fill shadow-sm" src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
                          width={360}
                          height={480}
