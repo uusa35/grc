@@ -82,6 +82,12 @@
                                 @lang('general.login')
                             </a>
                         </p>
+
+                        <a
+                            href="{{ route('frontend.home') }}"
+                            class="text-center w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-50 bg-gray-400 hover:bg-gray-800 sm:py-4 my-4">
+                            @lang('general.home')
+                        </a>
                     </div>
                 </form>
 

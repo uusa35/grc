@@ -80,11 +80,16 @@ class FrontendUserController extends Controller
             'floor' => 'max:20',
         ]);
         $country = Country::whereId(request()->country_id)->with('governates.areas')->first();
-        $request->request->add(['name_ar' => $request->name, 'name_en' => $request->name, 'password' => Hash::make('secret'),
+        $request->request->add([
+            'name_ar' => $request->name,
+            'name_en' => $request->name,
+            'password' => Hash::make('secret'),
             'role_id' => Role::where('is_client', true)->first()->id,
             'subscription_id' => Subscription::where('free', true)->first()->id,
             'governate_id' => $country->governates->first()->id,
             'area_id' => $country->governates->first()->areas->first()->id,
+            'email_verified_at' => Carbon::today()
+
         ]);
         $user = User::create($request->all());
         if ($user) {
@@ -148,8 +153,8 @@ class FrontendUserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name_ar' => 'required|min:3|max:255',
-            'name_en' => 'required|min:3|max:255',
+            'name_ar' => 'min:3|max:255',
+            'name_en' => 'min:3|max:255',
             'mobile' => 'min:6|max:12',
             'whatsapp' => 'min:5|max:12',
             'news_letter_on' => 'boolean'

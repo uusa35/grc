@@ -55,7 +55,6 @@ export default function({countries, auth, settings}) {
         'receive_from_shop': 0
     });
 
-
     useMemo(() => {
         const currentCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
         setSelectedCountry(currentCountry);
@@ -119,7 +118,7 @@ export default function({countries, auth, settings}) {
                     name_ar: selectedGovernate.name_ar,
                     name_en: selectedGovernate.name_en
                 },
-                area_id: auth.area_id
+                area_id: data.area_id
             }
         ));
 
@@ -180,6 +179,8 @@ export default function({countries, auth, settings}) {
                                     autoComplete="given-name"
                                     className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
                                 />
+                                <input type="hidden" name={`name_ar`} defaultValue={data.name_ar}/>
+                                <input type="hidden" name={`name_en`} defaultValue={data.name_en}/>
                                 <p className={`mt-2  `}>
                                     {errors.name && <div className={`text-red-900`}>{errors.name}</div>}
                                 </p>

@@ -115,7 +115,7 @@ const AppContextProvider = ({children}) => {
         dispatch(prepareCart({
             multiCartMerchant: settings.multi_cart_merchant,
             applyGlobalShipment: settings.apply_global_shipment,
-            currentShipmentCountry: auth?.country || isEmpty(cart.currentShipmentCountry) ? auth.country : cart.currentShipmentCountry,
+            shipmentCountry: auth && auth.country && isEmpty(cart.shipmentCountry) ? auth.country : cart.shipmentCountry,
             shipmentFees: settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
         }))
     }, [])
