@@ -4,11 +4,11 @@ import React, {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
-import {truncate, size } from "lodash";
+import {truncate, size, trim  } from "lodash";
 import {motion} from "framer-motion"
 
 const NormalProductWidget = ({element}) => {
-    const {getLocalized, getThumb, mainBgColor , mainColor, trans, bgColor , textColor, btnClass    } = useContext(AppContext);
+    const {getLocalized, getThumb, mainBgColor , mainColor, trans , textColor, btnClass    } = useContext(AppContext);
     return (
         <motion.div
             initial={false}
@@ -24,7 +24,7 @@ const NormalProductWidget = ({element}) => {
                 <div className="w-full rounded-t-sm overflow-hidden  sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                     <Link
                         className="z-30"
-                        href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
+                        href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}>
                         <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive} rounded={true}/>
                         <img
                             src={getThumb(element.image)}
@@ -41,7 +41,7 @@ const NormalProductWidget = ({element}) => {
                               isOnSale={element.isOnSale}/>
                 <div className="flex flex-row flex-1 justify-between items-center m-2">
                     <h3 className={` text-base font-bold  text-${mainColor}-800 dark:text-${mainColor}-50  truncate`}>
-                        <Link  href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
+                        <Link  href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}>
                             <span className=""/>
                             {truncate(element[getLocalized()], {length: 20})}
                         </Link>
@@ -63,7 +63,7 @@ const NormalProductWidget = ({element}) => {
                     </p>
                 }
                 <Link
-                    href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}
+                    href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}
                     className={`hidden lg:flex ${btnClass} rounded-md py-3 px-8 flex items-center justify-center text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
                 >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>

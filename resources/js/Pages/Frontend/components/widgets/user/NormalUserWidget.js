@@ -12,7 +12,7 @@ const NormalUserWidget =  ({ element }) => {
             initial={false}
             whileHover={{ scale: 0.95 }}
         >
-        <Link href={route('frontend.user.show', element.id)}
+        <Link href={route('frontend.user.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}
               className="block relative rounded overflow-hidden z-0">
             <div className="w-full h-auto flex items-center justify-center sm:aspect-w-1 sm:aspect-h-1 ">
                 <img
