@@ -364,14 +364,14 @@ export default function({element, relatedElements, auth}) {
                                                 </Disclosure.Button>
                                                 <Disclosure.Panel as="div" className="pb-6 ">
                                                     <div
-                                                        className="flex flex-1 justify-start items-start">
-                                                        <div>
+                                                        className="flex flex-row justify-start items-start">
+                                                        <div className={`w-20`}>
                                                             <img
-                                                                className="w-20 h-20 rounded-full object-cover shadow-sm"
+                                                                className="w-20 h-20 rounded-full object-cover shadow-md"
                                                                 src={getThumb(element.user.image)}
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
-                                                        <div className="rtl:mr-5 ltr:ml-5">
+                                                        <div className="flex-1 rtl:mr-5 ltr:ml-5">
                                                             <div
                                                                 className={`border-b border-${mainColor}-200 dark:text-${mainColor}-100 mb-2 pb-2`}>
                                                                 <h4 className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized()]}</h4>
