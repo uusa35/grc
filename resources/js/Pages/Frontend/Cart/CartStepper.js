@@ -18,7 +18,7 @@ export default function ({ activeStep = 1}) {
         <nav aria-label="Progress">
             <ol role="list" className="p-8 md:flex md:space-y-0 md:gap-x-8 hidden md:block">
                 {steps.map((step) => (
-                    <li key={step.name} className={classNames(step.id <= activeStep ? `border-${mainColor}-800 dark:border-${mainColor}-100` : `border-${mainColor}-600 dark:border-${mainColor}-200`,"flex flex-1 items-center justify-center border-t-4")}>
+                    <li key={step.name} className={classNames(step.id <= activeStep ? `border-${mainColor}-900 dark:border-${mainColor}-500` : `border-${mainColor}-400 dark:border-${mainColor}-200`,"flex flex-1 items-center justify-center border-t-4")}>
                         <Link
                             href={step.href}
                             className="pl-4 py-2 flex flex-1  flex-col items-center justify-center  md:pl-0 md:pt-4 md:pb-0"
