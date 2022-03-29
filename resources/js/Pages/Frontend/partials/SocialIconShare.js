@@ -10,7 +10,7 @@ import {AppContext} from "../../context/AppContext";
 export default function({url = '', facebook = '', twitter = '', youtube = '', instagram = ''}) {
     const {trans} = useContext(AppContext);
     return (
-        <div className="flex flex-1 w-full justify-end items-center gap-x-6 p-5">
+        <div className="flex flex-1 w-full justify-end items-center gap-x-6 p-5 mt-10">
             <div className="mb-3">
                 <h1>
                     {trans('share')}

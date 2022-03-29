@@ -716,7 +716,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         className="flex flex-1 justify-start items-start">
                                                         <div>
                                                             <img
-                                                                className="w-20 h-auto object-cover rounded-lg shadow-sm"
+                                                                className="w-20 h-20 object-cover rounded-full shadow-md"
                                                                 src={getThumb(element.user.image)}
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
@@ -853,14 +853,14 @@ export default function({element, relatedElements, auth, settings}) {
 
                                     <Tab.Panel className="text-sm text-gray-900 h-60">
                                         <div
-                                            className="flex flex-1 justify-start items-start p-10 capitalize">
+                                            className="flex w-full justify-start items-start p-10 capitalize">
                                             <div>
                                                 <img
-                                                    className="w-20 h-auto object-cover rounded-lg shadow-sm"
+                                                    className="w-20 h-20 object-cover rounded-full shadow-md"
                                                     src={getThumb(element.user.image)}
                                                     alt={element.user[getLocalized()]}/>
                                             </div>
-                                            <div className="rtl:mr-5 ltr:ml-5">
+                                            <div className="rtl:mr-5 ltr:ml-5 w-full">
                                                 <div
                                                     className={`border-b border-${mainColor}-200 dark:text-${mainColor}-100 mb-2 pb-2`}>
                                                     <h4 className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized()]}</h4>
