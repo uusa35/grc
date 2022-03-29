@@ -72,7 +72,7 @@ export default function({element, relatedElements, auth}) {
             element_id: element.id,
             qty: 1,
             price: parseFloat(element.isOnSale ? element.sale_price : element.price),
-            totalPrice : parseFloat(element.isOnSale ? element.sale_price : element.price),
+            totalPrice: parseFloat(element.isOnSale ? element.sale_price : element.price),
             direct_purchase: element.direct_purchase,
             shipmentFees: 0,
             image: element.image,
@@ -83,9 +83,9 @@ export default function({element, relatedElements, auth}) {
             merchant_id: element.user.id,
             merchant_name_ar: element.user.name_ar,
             merchant_name_en: element.user.name_en,
-            merchant_enable_receive_from_shop : element.user.enable_receive_from_shop,
-            merchant_custome_delivery : element.user.custome_delivery,
-            merchant_custome_delivery_fees : element.user.custome_delivery_fees,
+            merchant_enable_receive_from_shop: element.user.enable_receive_from_shop,
+            merchant_custome_delivery: element.user.custome_delivery,
+            merchant_custome_delivery_fees: element.user.custome_delivery_fees,
         }))
     }
 
@@ -315,7 +315,7 @@ export default function({element, relatedElements, auth}) {
                                                         className="flex flex-1 justify-start items-start">
                                                         <div>
                                                             <img
-                                                                className="w-20 h-auto rounded-lg shadow-sm"
+                                                                className="w-20 h-20 rounded-full object-cover shadow-sm"
                                                                 src={getThumb(element.user.image)}
                                                                 alt={element.user[getLocalized()]}/>
                                                         </div>
