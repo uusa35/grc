@@ -199,13 +199,11 @@ export default React.memo(function({
 
 
                 <div
-                    id={`our_shop`}
-                    className={`w-full m-auto space-y-20 mt-10 rounded-lg anchorBehave`}>
+                    className={`w-full m-auto space-y-20 mt-10 rounded-lg mb-5`}>
                     {/* shop */}
                     <motion.div
-                        className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent "
-                        // initial={{ x : -250}}
-                        // animate={{ x : 0 }}
+                        id={`our_shop`}
+                        className="grid grid-cols-2 gap-4 h-auto shadow-sm bg-gray-50 dark:bg-transparent anchorBehave"
                         ref={elementTwo}
                         variants={currentVariants}
                         animate={controls}
@@ -490,7 +488,7 @@ export default React.memo(function({
 
 
                     {/*    joinus */}
-                    <div className={`bg-transparent w-full anchorBehave mb-5`} id={`join_us`}>
+                    <div className={`bg-transparent w-full anchorBehave`} id={`join_us`}>
                         <JoinusHomeSection/>
                     </div>
                 </div>
