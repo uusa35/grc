@@ -11,7 +11,7 @@
             <meta property="og:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="og:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:description"
-                  content="{{substr($page['props']['settings']->{'description_'.app()->getLocale()},0,50) . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }} "/>
+                  content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,50) . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }} "/>
             <meta property="og:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
             <meta property="og:image:alt" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:mobile" content="{{$page['props']['settings']->mobile }}"/>
@@ -22,7 +22,7 @@
             <meta property="facebook:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="facebook:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="facebook:description"
-                  content="{{substr($page['props']['settings']->{'description_'.app()->getLocale()},0,30) . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
+                  content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,30) . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="facebook:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
             <meta property="facebook:image" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
 
@@ -31,7 +31,7 @@
             <meta property="twitter:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
             <meta property="twitter:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} }}"/>
             <meta property="twitter:description"
-                  content="{{$page['props']['settings']->{'description_'.app()->getLocale()} . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
+                  content="{{$page['props']['element']->{'description_'.app()->getLocale()} . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="twitter:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
         @else
             {{--            <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(0) ? ' :: '. trans('general.'.Str::plural(request()->segment(0))) : '' }} test from 'here'</title>--}}
