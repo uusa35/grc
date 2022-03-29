@@ -14,7 +14,7 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import route from 'ziggy-js';
 
-export default function({elements, categories}) {
+export default function({elements, categories, settings}) {
     const {trans, mainColor, contentBgColor} = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
@@ -47,14 +47,12 @@ export default function({elements, categories}) {
         <FrontendContainer>
             <FrontendContentContainer>
                 {/* Mobile filter dialog */}
-                {
-                    params.is_author && <SearchIndexSideBarMobile
-                        type={'user'}
-                        categories={filter(categories, c => c.is_user)}
-                        setMobileFiltersOpen={setMobileFiltersOpen}
-                        mobileFiltersOpen={mobileFiltersOpen}
-                    />
-                }
+                <SearchIndexSideBarMobile
+                    type={'user'}
+                    categories={filter(categories, c => c.is_user)}
+                    setMobileFiltersOpen={setMobileFiltersOpen}
+                    mobileFiltersOpen={mobileFiltersOpen}
+                />
                 <main className={`${contentBgColor} max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8`}>
                     <div
                         className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
@@ -76,12 +74,12 @@ export default function({elements, categories}) {
                     <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                         {/* search SideBar */}
                         <SearchIndexSideBar
-                                type={'user'}
-                                enablePrice={false}
-                                categories={filter(categories, c => c.is_user)}
-                                setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
+                            type={'user'}
+                            enablePrice={false}
+                            categories={filter(categories, c => c.is_user)}
+                            setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
 
-                        {/* Product grid */}
+                        {/* User grid */}
                         <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
                             <NoElements display={elements.meta.total < 1}/>
                             <div

@@ -27,6 +27,7 @@ import FrontendPagination from "../partials/FrontendPagination";
 import SearchIndexSideBar from "../partials/SearchIndexSideBar";
 import NoElements from "../../Backend/components/widgets/NoElements";
 import SearchUserShowSideBar from "../partials/SearchUserShowSideBar";
+import UserShowSearchSideBarMobile from "../partials/UserShowSearchSideBarMobile";
 
 
 export default function({element, products , books, categories }) {
@@ -262,8 +263,15 @@ export default function({element, products , books, categories }) {
                                                             <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                                                                 <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                                                                     {/* search SideBar */}
+                                                                    <UserShowSearchSideBarMobile
+                                                                        id={element.id}
+                                                                        enablePrice={settings.enable_prices}
+                                                                        categories={filter(categories, c => c.is_parent)}
+                                                                        setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}
+                                                                    />
                                                                     <SearchUserShowSideBar
                                                                         id={element.id}
+                                                                        enablePrice={settings.enable_prices}
                                                                         categories={filter(categories, c => c.is_parent)}
                                                                         setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
                                                                     {/* Product grid */}

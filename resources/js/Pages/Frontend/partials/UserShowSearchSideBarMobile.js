@@ -8,7 +8,7 @@ import route from "ziggy-js";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
 
-export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categories , mobileFiltersOpen, type }) {
+export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpen, id }) {
     const { trans, getLocalized , classNames  , mainColor , mainBgColor } = useContext(AppContext)
     const { locale } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -77,7 +77,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                                 <div className="space-y-6 w-full divide-y divide-gray-100 flex flex-1 flex-col justify-start items-end capitalize" dir={locale.dir}>
                                                     <Link
                                                         className={classNames(locale.isRTL ? 'justify-end' :  'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
-                                                        href={route(`frontend.${type}.index`, { category_id : c.id, ...params })}
+                                                        href={route(`frontend.user.search.products`, { id , user_id : id ,category_id : c.id, ...params })}
                                                     >
                                                         {c[getLocalized()]}
                                                     </Link>
@@ -86,7 +86,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                                             <Link
                                                                 className={classNames(locale.isRTL ? 'justify-end' : 'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
                                                                 key={child.id}
-                                                                href={route(`frontend.${type}.index`, { category_id : child.id})}
+                                                                href={route(`frontend.user.search.products`, { category_id : child.id, id , user_id : id })}
                                                             >
                                                                 {child[getLocalized()]}
                                                             </Link>

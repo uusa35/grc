@@ -65,9 +65,6 @@ export default function () {
     const [open, setOpen] = useState(false)
     const [offset, setOffset] = useState(0);
     const dispatch = useDispatch();
-    const userCategories = useMemo(() => filter(categories, c => c.is_user), [categories])
-    const productCategories = useMemo(() => filter(categories, c => c.is_product), [categories])
-    const serviceCategories = useMemo(() => filter(categories, c => c.is_service), [categories])
 
     const handleTheme = () => dispatch(setTheme(theme === 'dark' ? 'light' : 'dark'));
 
@@ -220,18 +217,11 @@ export default function () {
                                     </Link>
                                 </div>
                                 {
-                                    settings.enable_services && <div className="flow-root">
-                                        <div className="flow-root">
-                                            <Link
-                                                href={route('frontend.category.index', {is_service: 1})}
-                                                className={`-m-2 p-2 block  font-bold`}>
-                                                {capitalize(trans('consulting_and_training'))}
-                                            </Link>
-                                        </div>
+                                    settings.enable_users && <div className="flow-root">
                                         <Link
-                                            href={route('frontend.service.index')}
-                                            className={`-m-2 p-2 block  hidden`}>
-                                            {capitalize(trans('services'))}
+                                            href={route('frontend.user.index', { is_company : true })}
+                                            className={`-m-2 p-2 block `}>
+                                            {capitalize(trans('merchants'))}
                                         </Link>
                                     </div>
                                 }
@@ -523,26 +513,6 @@ export default function () {
                                                                         <p className={`text-base font-medium  ${menuTextColor}`}>{trans('aboutus')}</p>
                                                                     </div>
                                                                 </Link>
-
-                                                                {settings[getLocalized('services')] && size(settings[getLocalized('services')]) > 50 ?
-                                                                    <Link
-                                                                        href={route('frontend.services')}
-                                                                        className={`-m-3 p-3 flex items-start rounded-lg   ${menuTextColor}`}
-                                                                    >
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             className="h-6 w-6 "
-                                                                             fill="none"
-                                                                             viewBox="0 0 24 24" stroke="currentColor">
-                                                                            <path strokeLinecap="round"
-                                                                                  strokeLinejoin="round"
-                                                                                  strokeWidth="2"
-                                                                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                                                                        </svg>
-                                                                        <div className="ltr:ml-5 rtl:mr-5">
-                                                                            <p className={`text-base font-medium  ${menuTextColor}`}>{trans('our_services')}</p>
-                                                                        </div>
-                                                                    </Link> : null
-                                                                }
 
                                                                 {settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ?
                                                                     <Link

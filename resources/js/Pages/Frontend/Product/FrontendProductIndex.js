@@ -12,7 +12,7 @@ import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import NormalProductWidget from "../components/widgets/product/NormalProductWidget";
 
-export default function ({elements, categories}) {
+export default function ({elements, categories, settings }) {
     const {trans, mainColor , contentBgColor, textColor } = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
@@ -60,6 +60,7 @@ export default function ({elements, categories}) {
                         {/* search SideBar */}
                         <SearchIndexSideBar
                             type={'product'}
+                            enablePrice={settings.enable_prices}
                             categories={filter(categories, c => c.is_product)}
                             setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
                         {/* Product grid */}
