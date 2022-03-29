@@ -654,36 +654,36 @@ export default function() {
 
                                 {
                                     appName === 'mgt' ? <>
-                                        <Link
+                                        <a
                                             href={`/#our_services`}
                                             className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_services'))}
-                                        </Link>
+                                        </a>
                                         <a
                                             href={`/#our_shop`}
                                             className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_shop'))}
                                         </a>
-                                        <Link
+                                        <a
                                             href={`/#our_products`}
                                             className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_products'))}
-                                        </Link>
-                                        <Link
+                                        </a>
+                                        <a
                                             href={`/#our_message`}
                                             className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_message'))}
-                                        </Link>
-                                        <Link
+                                        </a>
+                                        <a
                                             href={`/#join_us`}
                                             className={classNames(parentModule == 'join_us' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('joinus'))}
-                                        </Link>
+                                        </a>
                                     </> : null
                                 }
 
