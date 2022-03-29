@@ -89,8 +89,8 @@ export default function({countries, auth, settings}) {
             parseFloat(selectedCountry.fixed_shipment_charge), // globalFees
             settings.multi_cart_merchant,
             merchantEnableReceiveFromShop,
-            firstProduct.merchant_custome_delivery,
-            parseFloat(firstProduct.merchant_custome_delivery_fees),
+            firstProduct ? firstProduct.merchant_custome_delivery : false,
+            parseFloat(firstProduct ? firstProduct.merchant_custome_delivery_fees : 0),
             parseFloat(selectedGovernate.price),
             parseFloat(selectedCountry.fixed_shipment_charge),
             cart.totalItems
