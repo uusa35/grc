@@ -668,15 +668,21 @@ export default function() {
                                         </a>
                                         <Link
                                             href={`/#our_products`}
-                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_products'))}
                                         </Link>
                                         <Link
                                             href={`/#our_message`}
-                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_message'))}
+                                        </Link>
+                                        <Link
+                                            href={`/#join_us`}
+                                            className={classNames(parentModule == 'join_us' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('joinus'))}
                                         </Link>
                                     </> : null
                                 }
