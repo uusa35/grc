@@ -55,7 +55,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                     {
                         enablePrice && settings.enable_prices && <>
                             <div className="flex pt-3">
-                                <h3 className={`capitalize text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('prices')}</h3>
+                                <h3 className={`capitalize ${textColor}`}>{trans('prices')}</h3>
                             </div>
                             {
                                 map(range(50, 300, 50), r =>
@@ -81,7 +81,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                                             </svg>
                                                     }
                                                     <label htmlFor={'name'}
-                                                           className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
+                                                           className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
                                                         {`${trans("less_than")} ${r} ${trans('kd')}`}
                                                     </label>
                                                 </Link>
@@ -94,7 +94,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                     }
 
                     <div className="flex pt-3">
-                        <h3 className={`capitalize text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('categories')}</h3>
+                        <h3 className={`capitalize ${textColor}`}>{trans('categories')}</h3>
                     </div>
                     {map(categories, c => (
                         <div key={c.id} className="pt-3">
@@ -103,22 +103,13 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                     <Link
                                         href={route(`frontend.${type}.index`, { ...params , category_id: c.id})}
                                         className="flex items-center">
-                                        {
-                                            locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                                viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd"
-                                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                          clipRule="evenodd"/>
-                                                </svg>
-                                                : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                       viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd"
-                                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                          clipRule="evenodd"/>
-                                                </svg>
-                                        }
                                         <label htmlFor={'name'}
-                                               className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
+                                               className={`flex flex-row rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2"
+                                            color={mainColor}
+                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                                            </svg>
                                             {c[getLocalized()]}
                                         </label>
                                     </Link>
@@ -134,23 +125,8 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                                     type="checkbox"
                                                     checked={child.id == params.category_id}
                                                 />
-                                                {
-                                                    locale.isRTL ?
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                             viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd"
-                                                                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                                  clipRule="evenodd"/>
-                                                        </svg>
-                                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                               viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd"
-                                                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                                  clipRule="evenodd"/>
-                                                        </svg>
-                                                }
                                                 <label htmlFor={'name'}
-                                                       className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
+                                                       className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
                                                     {child[getLocalized()]}
                                                 </label>
                                             </Link>
@@ -165,25 +141,8 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                                                 type="checkbox"
                                                                 checked={sub.id == params.category_id}
                                                             />
-                                                            {
-                                                                locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    className="h-5 w-5" color={mainColor}
-                                                                                    viewBox="0 0 20 20"
-                                                                                    fill="currentColor">
-                                                                        <path fillRule="evenodd"
-                                                                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                                              clipRule="evenodd"/>
-                                                                    </svg>
-                                                                    : <svg xmlns="http://www.w3.org/2000/svg"
-                                                                           className="h-5 w-5" color={mainColor} viewBox="0 0 20 20"
-                                                                           fill="currentColor">
-                                                                        <path fillRule="evenodd"
-                                                                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                                              clipRule="evenodd"/>
-                                                                    </svg>
-                                                            }
                                                             <label htmlFor={'name'}
-                                                                   className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
+                                                                   className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
                                                                 {sub[getLocalized()]}
                                                             </label>
                                                         </Link>

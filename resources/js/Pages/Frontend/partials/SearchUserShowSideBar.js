@@ -7,10 +7,10 @@ import {AppContext} from "../../context/AppContext";
 import {useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 
-export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, id , enablePrice = true}) {
-    const {trans, getLocalized, classNames, mainColor , mainBgColor, btnClass , textColor  } = useContext(AppContext)
+export default function({setMobileFiltersOpen, categories, mobileFiltersOpen, id, enablePrice = true}) {
+    const {trans, getLocalized, classNames, mainColor, mainBgColor, btnClass, textColor} = useContext(AppContext)
     const {locale} = useSelector(state => state);
-    const { settings } = useContext(GlobalContext);
+    const {settings} = useContext(GlobalContext);
     const {params} = route();
     return (
         <aside>
@@ -23,12 +23,12 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, i
                         onClick={() => setMobileFiltersOpen(true)}
                     >
                         <span className="text-white capitalize">{trans('advanced_search')}</span>
-                        <PlusSmIcon className="flex-shrink-0 ml-1 h-5 w-5 text-gray-400" aria-hidden="true"/>
+                        <PlusSmIcon className="flex-shrink-0 mx-2 h-5 w-5 text-gray-400" aria-hidden="true"/>
                     </button>
                 </div>
                 <div className="flex">
                     <Link
-                        href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, { id }) : '#'}
+                        href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, {id}) : '#'}
                         className={`inline-flex items-center lg:hidden ${btnClass} p-3 rounded-sm shadow-md capitalize`}
                     >
                         {trans('clear_search')}
@@ -43,7 +43,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, i
                         </div>
                         <div className="flex">
                             <Link
-                                href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, { id }) : '#'}
+                                href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, {id}) : '#'}
                                 className={`px-3 py-1 ${btnClass} rounded-sm shadow-sm ring-1 ring-gray-400 capitalize`}
                             >
                                 {trans('clear_search')}
@@ -55,7 +55,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, i
                     {
                         enablePrice && settings.enable_prices && <>
                             <div className="flex pt-3">
-                                <h3 className={`capitalize text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('prices')}</h3>
+                                <h3 className={`capitalize ${textColor}`}>{trans('prices')}</h3>
                             </div>
                             {
                                 map(range(50, 300, 50), r =>
@@ -63,25 +63,34 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, i
                                         <fieldset className="space-y-3">
                                             <div className="pt-3 space-y-3">
                                                 <Link
-                                                    href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, { ...params , user_id : id , id  ,  max: r, min : parseInt(r -50)}) : '#'}
-                                                    className={classNames(params.max == r ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-400 p-3 rounded-md shadow-md`: `` , "flex items-center")}>
+                                                    href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, {
+                                                        ...params,
+                                                        user_id: id,
+                                                        id,
+                                                        max: r,
+                                                        min: parseInt(r - 50)
+                                                    }) : '#'}
+                                                    className={classNames(params.max == r ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-400 p-3 rounded-md shadow-md` : ``, "flex items-center")}>
                                                     {
                                                         locale.isRTL ?
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                                 color={mainColor}
                                                                  viewBox="0 0 20 20" fill="currentColor">
                                                                 <path fillRule="evenodd"
                                                                       d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                                                                       clipRule="evenodd"/>
                                                             </svg>
-                                                            : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                                   viewBox="0 0 20 20" fill="currentColor">
+                                                            :
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                                 color={mainColor}
+                                                                 viewBox="0 0 20 20" fill="currentColor">
                                                                 <path fillRule="evenodd"
                                                                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                                       clipRule="evenodd"/>
                                                             </svg>
                                                     }
                                                     <label htmlFor={'name'}
-                                                           className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
+                                                           className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
                                                         {`${trans("less_than")} ${r} ${trans('kd')}`}
                                                     </label>
                                                 </Link>
@@ -94,31 +103,28 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, i
                     }
 
                     <div className="flex pt-3">
-                        <h3 className={`capitalize text-${mainColor}-800 dark:text-${mainColor}-100`}>{trans('categories')}</h3>
+                        <h3 className={`capitalize ${textColor}`}>{trans('categories')}</h3>
                     </div>
                     {map(categories, c => (
                         <div key={c.id} className="pt-3">
                             <fieldset className="space-y-3">
                                 <div className="pt-3 space-y-3">
                                     <Link
-                                        href={route(`frontend.user.search.products`, { ...params , user_id : id , id ,  category_id: c.id})}
+                                        href={route(`frontend.user.search.products`, {
+                                            ...params,
+                                            user_id: id,
+                                            id,
+                                            category_id: c.id
+                                        })}
                                         className="flex items-center">
-                                        {
-                                            locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                                viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd"
-                                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                          clipRule="evenodd"/>
-                                                </svg>
-                                                : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                       viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fillRule="evenodd"
-                                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                          clipRule="evenodd"/>
-                                                </svg>
-                                        }
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                                             color={mainColor}
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"/>
+                                        </svg>
                                         <label htmlFor={'name'}
-                                               className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
+                                               className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
                                             {c[getLocalized()]}
                                         </label>
                                     </Link>
@@ -127,30 +133,20 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, i
                                     map(c.children, child => (
                                         <div className="pt-1 space-y-3 mx-5" key={child.id}>
                                             <Link
-                                                href={route(`frontend.user.search.products`, { ...params , user_id : id , id ,  category_id: child.id})}
+                                                href={route(`frontend.user.search.products`, {
+                                                    ...params,
+                                                    user_id: id,
+                                                    id,
+                                                    category_id: child.id
+                                                })}
                                                 className="flex items-center">
                                                 <input
                                                     readOnly
                                                     type="checkbox"
                                                     checked={child.id == params.category_id}
                                                 />
-                                                {
-                                                    locale.isRTL ?
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                             viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd"
-                                                                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                                  clipRule="evenodd"/>
-                                                        </svg>
-                                                        : <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" color={mainColor}
-                                                               viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd"
-                                                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                                  clipRule="evenodd"/>
-                                                        </svg>
-                                                }
                                                 <label htmlFor={'name'}
-                                                       className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
+                                                       className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
                                                     {child[getLocalized()]}
                                                 </label>
                                             </Link>
@@ -158,32 +154,20 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, i
                                                 map(child.children, sub => (
                                                     <div className="pt-1 space-y-3 mx-2" key={sub.id}>
                                                         <Link
-                                                            href={route(`frontend.user.search.products`, { ...params, category_id: sub.id, id , user_id : id })}
+                                                            href={route(`frontend.user.search.products`, {
+                                                                ...params,
+                                                                category_id: sub.id,
+                                                                id,
+                                                                user_id: id
+                                                            })}
                                                             className="flex items-center">
                                                             <input
                                                                 readOnly
                                                                 type="checkbox"
                                                                 checked={sub.id == params.category_id}
                                                             />
-                                                            {
-                                                                locale.isRTL ? <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    className="h-5 w-5" color={mainColor}
-                                                                                    viewBox="0 0 20 20"
-                                                                                    fill="currentColor">
-                                                                        <path fillRule="evenodd"
-                                                                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                                              clipRule="evenodd"/>
-                                                                    </svg>
-                                                                    : <svg xmlns="http://www.w3.org/2000/svg"
-                                                                           className="h-5 w-5" color={mainColor} viewBox="0 0 20 20"
-                                                                           fill="currentColor">
-                                                                        <path fillRule="evenodd"
-                                                                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                                              clipRule="evenodd"/>
-                                                                    </svg>
-                                                            }
                                                             <label htmlFor={'name'}
-                                                                   className={`rtl:mr-3 ltr:ml-3 text-sm text-${mainColor}-800 dark:text-${mainColor}-100 capitalize`}>
+                                                                   className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
                                                                 {sub[getLocalized()]}
                                                             </label>
                                                         </Link>
