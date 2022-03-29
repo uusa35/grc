@@ -37,7 +37,7 @@ class CourseResource extends JsonResource
             'file' => $this->file,
             'is_available' => $this->is_available,
             'video_url_one' => $this->video_url_one,
-            'user' => UserLightResource::make($this->whenLoaded('user')),
+            'user' => UserResource::make($this->whenLoaded('user')),
             'images' => ImageExtraLightResource::collection($this->whenLoaded('images')),
             'comments' => CommentExtraLightResource::collection($this->whenLoaded('comments'))
         ];

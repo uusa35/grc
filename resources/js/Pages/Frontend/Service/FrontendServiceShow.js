@@ -79,8 +79,12 @@ export default function ({element, relatedElements, auth}) {
                 description_ar: element.description_ar,
                 description_en: element.description_en,
                 timing: selectedTiming,
+                merchant_id: element.user.id,
                 merchant_name_ar: element.user.name_ar,
-                merchant_name_en: element.user.name_en
+                merchant_name_en: element.user.name_en,
+                merchant_enable_receive_from_shop : element.user.enable_receive_from_shop,
+                merchant_custome_delivery : element.user.custome_delivery,
+                merchant_custome_delivery_fees : element.user.custome_delivery_fees,
             }))
         }
     }
