@@ -1,47 +1,21 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect} from 'react'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "./../components/FrontendContainer";
-import ElementSlider from "./../components/widgets/slider/ElementSlider";
-import {isMobile, isTablet} from 'react-device-detect';
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
-import {filter, first, isEmpty, map, shuffle} from 'lodash';
-import HomeMainCategory from "./HomeMainCategory";
-import GlobalContext from "../../context/GlobalContext";
+import {filter, map} from 'lodash';
 import CategoryWidget from "../components/widgets/category/CategoryWidget";
-import {Link} from "@inertiajs/inertia-react";
-import route from "ziggy-js";
-import {useSelector} from "react-redux";
 
 
 export default React.memo(function({
                                        slides,
-                                       homeCategories,
-                                       newOnHomeBooks,
-                                       newOnHomeCourses,
-                                       newOnHomeProducts,
                                        settings,
-                                       onHomeParticipantAuthors,
-                                       categoriesWithProducts
+                                       categories
                                    }) {
-    const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 4))
-    const {categories} = useContext(GlobalContext);
-    const {trans, getLocalized, classNames, contentBgColor, textColor, bgColor, mainBgColor} = useContext(AppContext)
-    const {locale} = useSelector(state => state);
-
-    useEffect(() => {
-        function handleResize() {
-            window.innerWidth < 1200 ? setSlideNumber(2) : setSlideNumber(4);
-        }
-
-        window.addEventListener("resize", handleResize);
-        handleResize();
-        return () => window.removeEventListener("resize", handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
+    const {trans, classNames, contentBgColor, textColor} = useContext(AppContext)
 
     return (
         <FrontendContainer showBreadCrumbs={false}>
-            {/*{mainSlides && <MainSwiper elements={mainSlides}/>}*/}
             {slides && settings.wide_screen ? <MainGallery elements={slides}/> : null}
             <FrontendContentContainer showBreadCrumbs={false}>
                 {slides && !settings.wide_screen ? <MainGallery elements={slides}/> : null}
