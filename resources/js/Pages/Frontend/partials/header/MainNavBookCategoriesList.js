@@ -6,6 +6,7 @@ import route from "ziggy-js";
 import {AppContext} from "../../../context/AppContext";
 import {ChevronDownIcon} from "@heroicons/react/solid";
 import {motion} from "framer-motion"
+import {useSelector} from "react-redux";
 
 const currentVariants = {
     hidden: {
@@ -30,6 +31,7 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
         menuTextColor,
         btnClass
     } = useContext(AppContext)
+    const { isRTL } = useSelector(state => state.locale);
 
     return (
         <Popover className="flex"
@@ -145,9 +147,14 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
                                         className={`${btnClass} flex flex-row justify-between items-center p-3 mb-3 rounded-sm`}
                                     >
                                         {trans('show_all')}
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                                        </svg>
+                                        {
+                                            isRTL ? <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                            </svg> : <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        }
+
                                     </Link>
                                 </div>
                             </div>
