@@ -16,7 +16,7 @@ class CreateProductUserPivotTable extends Migration
             $table->id();
             $table->foreignId('product_id')->references('id')->on('products');
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->primary(['product_id', 'user_id']);
+//            $table->primary(['product_id', 'user_id']);
         });
     }
 

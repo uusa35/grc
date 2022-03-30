@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Branch;
 use App\Models\Country;
 use App\Models\Coupon;
+use App\Models\Governate;
 use App\Models\Order;
 use App\Models\Model;
 use App\Models\User;
@@ -56,6 +57,9 @@ class OrderFactory extends Factory
             'paid' => $this->faker->boolean(true),
             'shipment_reference' => $this->faker->bankAccountNumber,
             'cash_on_delivery' => $this->faker->boolean,
+            'country_id' => Country::has('governates.areas')->get()->random(),
+            'governate_id' => fn($array) => Governate::where(['country_id' => $array['country_id']])->first(),
+            'area_id' => fn($array) => Governate::where(['id' => $array['governate_id']])->first(),
         ];
     }
 }

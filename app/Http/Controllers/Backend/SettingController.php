@@ -73,7 +73,8 @@ class SettingController extends Controller
         $setting = Setting::with('images')->first();
         $themes = explode(",", env('THEMES'));
         $paymentMethods = explode(",", env('PAYMENT_METHODS'));
-        return inertia('Backend/Setting/SettingEdit', compact('setting', 'themes', 'paymentMethods'));
+        $fonts  = ['font-tajwal-medium', 'font-bein', 'font-bein-bold', 'font-bbc','font-gesst','font-gesst-medium','font-helve-one', 'font-kufi', 'font-noto','font-fredoka'];
+        return inertia('Backend/Setting/SettingEdit', compact('setting', 'themes', 'paymentMethods', 'fonts'));
     }
 
     /**

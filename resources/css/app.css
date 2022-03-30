@@ -11,31 +11,31 @@
 }
 
 @layer base {
-    /*@font-face {*/
-    /*    font-family: 'HelveticaNeueME_1';*/
-    /*    src: url('../../public/fonts/HelveticaNeueMEforSKYW21-Rg_web.woff2') format('truetype');*/
-    /*    font-weight: bold;*/
-    /*    font-style: normal;*/
-    /*}*/
+    @font-face {
+        font-family: 'HelveticaNeueME_1';
+        src: url('../../public/fonts/HelveticaNeueMEforSKYW21-Rg_web.woff2') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
 
-    /*@font-face {*/
-    /*    font-family: 'GESSTwoBold';*/
-    /*    src: url('../../public/fonts/GESSTwoBold.eot') format('truetype');*/
-    /*    src: url('../../public/fonts/GESSTwoBold.otf') format('truetype');*/
-    /*    font-weight: bold;*/
-    /*    font-style: normal;*/
-    /*}*/
+    @font-face {
+        font-family: 'GESSTwoBold';
+        src: url('../../public/fonts/GESSTwoBold.eot') format('truetype');
+        src: url('../../public/fonts/GESSTwoBold.otf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'NotoKufiArabic-VariableFont_wght';
+        src: url('../../public/fonts/NotoKufiArabic-VariableFont_wght.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
 
     /*@font-face {*/
     /*    font-family: 'Tajawal-Light';*/
     /*    src: url('../../public/fonts/Tajawal-Light.ttf') format('truetype');*/
-    /*    font-weight: normal;*/
-    /*    font-style: normal;*/
-    /*}*/
-
-    /*@font-face {*/
-    /*    font-family: 'DroidArabicKufi';*/
-    /*    src: url('../../public/fonts/DroidArabicKufi.ttf') format('truetype');*/
     /*    font-weight: normal;*/
     /*    font-style: normal;*/
     /*}*/
@@ -47,33 +47,26 @@
     /*    font-style: normal;*/
     /*}*/
 
-    /*@font-face {*/
-    /*    font-family: 'bein-ar-black_0';*/
-    /*    src: url('../../public/fonts/bein-ar-black_0.ttf') format('truetype');*/
-    /*    font-weight: normal;*/
-    /*    font-style: normal;*/
-    /*}*/
+    @font-face {
+        font-family: 'bein-ar-black_0';
+        src: url('../../public/fonts/bein-ar-black_0.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
 
-    /*@font-face {*/
-    /*    font-family: 'bein-ar-normal_0';*/
-    /*    src: url('../../public/fonts/bein-ar-normal_0.ttf') format('truetype');*/
-    /*    font-weight: normal;*/
-    /*    font-style: normal;*/
-    /*}*/
+    @font-face {
+        font-family: 'bein-ar-normal_0';
+        src: url('../../public/fonts/bein-ar-normal_0.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
 
-    /*@font-face {*/
-    /*    font-family: 'AR-BBC-Regular';*/
-    /*    src: url('../../public/fonts/AR-BBC-Regular.ttf') format('truetype');*/
-    /*    font-weight: normal;*/
-    /*    font-style: normal;*/
-    /*}*/
-
-    /*@font-face {*/
-    /*    font-family: 'DroidArabicKufi-bold';*/
-    /*    src: url('../../public/fonts/DroidArabicKufi-bold.ttf') format('truetype');*/
-    /*    font-weight: normal;*/
-    /*    font-style: normal;*/
-    /*}*/
+    @font-face {
+        font-family: 'AR-BBC-Regular';
+        src: url('../../public/fonts/AR-BBC-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
 
     /*@font-face {*/
     /*    font-family: 'cairo';*/
@@ -104,18 +97,35 @@
     /*    font-style: normal;*/
     /*}*/
 
-    /*@font-face {*/
-    /*    font-family: 'GESSTwoMedium';*/
-    /*    src: url('../../public/fonts/GESSTwoMedium.eot') format('truetype');*/
-    /*    src: url('../../public/fonts/GESSTwoMedium.otf') format('truetype');*/
-    /*    font-weight: bold;*/
-    /*    font-style: normal;*/
-    /*    font-display: swap;*/
-    /*}*/
+    @font-face {
+        font-family: 'GESSTwoMedium';
+        src: url('../../public/fonts/GESSTwoMedium.eot') format('truetype');
+        src: url('../../public/fonts/GESSTwoMedium.otf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
 
     @font-face {
         font-family: 'Tajawal-Medium';
         src: url('../../public/fonts/Tajawal-Medium.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+
+    @font-face {
+        font-family: 'NotoSansArabic-VariableFont_wdth,wght';
+        src: url('../../public/fonts/NotoSansArabic-VariableFont_wdth,wght.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Fredoka-VariableFont_wdth,wght.ttf';
+        src: url('../../public/fonts/Fredoka-VariableFont_wdth,wght.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -146,42 +156,46 @@
     font-family: 'bein-ar-black_0', 'sans-serif';
 }
 
-/*.font-bein {*/
-/*    font-family: 'bein-ar-normal_0', 'sans-serif';*/
-/*}*/
+.font-bein {
+    font-family: 'bein-ar-normal_0', 'sans-serif';
+}
 
-/*.font-bbc {*/
-/*    font-family: 'AR-BBC-Regular', 'sans-serif';*/
-/*}*/
+.font-bbc {
+    font-family: 'AR-BBC-Regular', 'sans-serif';
+}
+
+.font-noto {
+    font-family: 'NotoSansArabic-VariableFont_wdth,wght', 'sans-serif';
+}
+
+.font-fredoka {
+    font-family: 'Fredoka-VariableFont_wdth,wght.ttf', 'sans-serif';
+}
 
 /*.font-tajwal-light {*/
 /*    font-family: 'Tajawal-Medium', 'sans-serif';*/
 /*}*/
 
 
-/*.font-droid {*/
-/*    font-family: 'DroidArabicKufi', 'sans-serif';*/
-/*}*/
+.font-kufi {
+    font-family: 'NotoKufiArabic-VariableFont_wght', 'sans-serif';
+}
 
-/*.font-droid-bold {*/
-/*    font-family: 'DroidArabicKufi-bold', 'sans-serif';*/
-/*}*/
-
-/*.font-helve-one {*/
-/*    font-family: 'HelveticaNeueME_1', 'sans-serif';*/
-/*}*/
+.font-helve-one {
+    font-family: 'HelveticaNeueME_1', 'sans-serif';
+}
 
 /*.font-helve-two {*/
 /*    font-family: 'HelveticaNeueME_2', 'sans-serif';*/
 /*}*/
 
-/*.font-gesst {*/
-/*    font-family: 'GESSTwoBold', 'sans-serif';*/
-/*}*/
+.font-gesst {
+    font-family: 'GESSTwoBold', 'sans-serif';
+}
 
-/*.font-gesst-medium {*/
-/*    font-family: 'GESSTwoMedium', 'sans-serif';*/
-/*}*/
+.font-gesst-medium {
+    font-family: 'GESSTwoMedium', 'sans-serif';
+}
 
 .font-tajwal-medium {
     font-family: 'Tajawal-Medium', 'sans-serif';

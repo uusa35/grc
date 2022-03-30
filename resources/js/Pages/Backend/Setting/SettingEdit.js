@@ -17,7 +17,7 @@ import FormSection from "../components/widgets/form/FormSection";
 import {setSettings} from "../../redux/actions";
 import GlobalContext from "../../context/GlobalContext";
 
-export default function SettingEdit({setting, themes, paymentMethods}) {
+export default function SettingEdit({setting, themes, paymentMethods, fonts }) {
     const [currentImages, setCurrentImages] = useState([]);
     const globalContext = useContext(GlobalContext);
     const {classNames, trans, getThumb, isSuper} = useContext(AppContext)
@@ -108,6 +108,8 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
         code: setting.code,
         app_logo: setting.app_logo,
         theme: setting.theme,
+        app_font_ar: setting.app_font_ar,
+        app_font_en: setting.app_font_en,
         cash_on_delivery: setting.cash_on_delivery,
         enable_payment_online: setting.enable_payment_online,
         gift_image: setting.gift_image,
@@ -387,6 +389,56 @@ export default function SettingEdit({setting, themes, paymentMethods}) {
                                         <ToolTipWidget message={trans('product_user_instruction')}/>
                                         <p className={`mt-2 text-xs text-gray-500`}>
                                             {errors.theme && <div className={`text-red-900`}>{errors.theme}</div>}
+                                        </p>
+                                    </div>
+                                    {/* app_font_ar */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="themes" className="block text-sm font-medium text-gray-800">
+                                            {trans('app_font_ar')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="app_font_ar"
+                                                name="app_font_ar"
+                                                defaultValue={setting.app_font_ar}
+                                                autoComplete="app_font_ar"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                <option value="">{trans("choose")} {trans('font')}</option>
+                                                {
+                                                    fonts.map((f, i) => <option key={i} value={f}>{f}</option>)
+                                                }
+                                            </select>
+                                        </div>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.app_font_ar && <div className={`text-red-900`}>{errors.app_font_ar}</div>}
+                                        </p>
+                                    </div>
+                                    {/* app_font_en */}
+                                    <div className="sm:col-span-2">
+                                        <label htmlFor="themes" className="block text-sm font-medium text-gray-800">
+                                            {trans('app_font_en')}
+                                        </label>
+                                        <div className="mt-1">
+                                            <select
+                                                onChange={handleChange}
+                                                id="app_font_en"
+                                                name="app_font_en"
+                                                defaultValue={setting.app_font_en}
+                                                autoComplete="app_font_en"
+                                                className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border-gray-300 rounded-md`}
+                                            >
+                                                <option value="">{trans("choose")} {trans('font')}</option>
+                                                {
+                                                    fonts.map((f, i) => <option key={i} value={f}>{f}</option>)
+                                                }
+                                            </select>
+                                        </div>
+                                        <ToolTipWidget message={trans('product_user_instruction')}/>
+                                        <p className={`mt-2 text-xs text-gray-500`}>
+                                            {errors.app_font_en && <div className={`text-red-900`}>{errors.app_font_en}</div>}
                                         </p>
                                     </div>
                                     {/* main_theme_color */}
