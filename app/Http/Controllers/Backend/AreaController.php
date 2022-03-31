@@ -87,7 +87,7 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        $countries = new CountryCollection(Country::active()->has('governates', '>', 0)->with('governates.areas')->get());
+        $countries = new CountryCollection(Country::active()->has('governates', '>', 0)->with(['governates' => fn($q) => $q->active()->with(['areas' => fn($q) => $q->active()])])->get());
         return inertia('Backend/Area/AreaEdit', compact('area', 'countries'));
     }
 
