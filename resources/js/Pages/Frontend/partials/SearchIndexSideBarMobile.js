@@ -8,11 +8,10 @@ import route from "ziggy-js";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
 
-export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categories , mobileFiltersOpen, type }) {
-    const { trans, getLocalized , classNames  , mainColor , mainBgColor } = useContext(AppContext)
-    const { locale } = useSelector(state => state);
-    const dispatch = useDispatch();
-    const { params } = route();
+export default function SearchIndexSideBarMobile({setMobileFiltersOpen, categories, mobileFiltersOpen, type}) {
+    const {trans, getLocalized, classNames, currentFont, mainColor} = useContext(AppContext)
+    const {locale} = useSelector(state => state);
+    const {params} = route();
     return (
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
             <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={() => setMobileFiltersOpen}>
@@ -38,7 +37,7 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                     leaveTo="translate-x-full"
                 >
                     <div
-                        className={`ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto capitalize truncate`}>
+                        className={`${currentFont} ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto capitalize truncate`}>
                         <div className="px-4 flex items-center justify-between">
                             <h2 className={`text-lg font-medium text-gray-900 dark:text-gray-50`}>{trans('advanced_search')}</h2>
                             <button
@@ -52,12 +51,12 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                         </div>
 
                         {/* Filters */}
-                        <form className="mt-4 capitalize">
+                        <form className="mt-4 capitalize" dir={locale.dir}>
                             {map(categories, c =>
                                 <Disclosure as="div"
                                             key={c.id}
                                             defaultOpen={true}
-                                            className="border-t border-gray-200 pt-4 pb-4">
+                                            className="border-t border-gray-200 px-8 py-4">
                                     {({open}) => (
                                         <fieldset>
                                             <legend className="w-full px-2">
@@ -73,26 +72,36 @@ export default function SearchIndexSideBarMobile({ setMobileFiltersOpen  , categ
                                                     </div>
                                                 </Disclosure.Button>
                                             </legend>
-                                            <Disclosure.Panel className="pt-4 pb-2 px-4 w-full">
-                                                <div className="space-y-6 w-full divide-y divide-gray-100 flex flex-1 flex-col justify-start items-end capitalize" dir={locale.dir}>
+                                            <Disclosure.Panel className="w-full">
+                                                <div
+                                                    className="space-y-6 w-full border-t py-2 border-dashed  flex flex-1 flex-col justify-start items-end capitalize"
+                                                    dir={locale.dir}>
                                                     <Link
-                                                        className={classNames(locale.isRTL ? 'justify-end' :  'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
-                                                        href={route(`frontend.${type}.index`, { category_id : c.id, ...params })}
+                                                        className={classNames(locale.isRTL ? '' : '', 'flex flex-1 flex-row  items-center w-full capitalize pt-4')}
+                                                        href={route(`frontend.${type}.index`, {category_id: c.id, ...params})}
                                                     >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2"
+                                                             fill="none"
+                                                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                                                             color={mainColor}
+                                                        >
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                  d="M12 4v16m8-8H4"/>
+                                                        </svg>
                                                         {c[getLocalized()]}
                                                     </Link>
                                                     {
                                                         map(c.children, child => (
                                                             <Link
-                                                                className={classNames(locale.isRTL ? 'justify-end' : 'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
+                                                                className={classNames(locale.isRTL ? '' : '', 'flex flex-1 flex-row items-center w-full capitalize')}
                                                                 key={child.id}
-                                                                href={route(`frontend.${type}.index`, { category_id : child.id})}
+                                                                href={route(`frontend.${type}.index`, {category_id: child.id})}
                                                             >
+
                                                                 {child[getLocalized()]}
                                                             </Link>
                                                         ))
                                                     }
-
                                                 </div>
                                             </Disclosure.Panel>
                                         </fieldset>
