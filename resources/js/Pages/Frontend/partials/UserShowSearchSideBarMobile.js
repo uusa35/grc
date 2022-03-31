@@ -10,13 +10,16 @@ import {useDispatch, useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpen, id, enablePrice = false  }) {
-    const { trans, getLocalized , classNames  , mainColor , mainBgColor, btnClass , textColor  } = useContext(AppContext)
+    const { trans, getLocalized , classNames  , mainColor , mainBgColor, btnClass , textColor, currentFont   } = useContext(AppContext)
     const { locale } = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
     const { params } = route();
     return (
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
-            <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={() => setMobileFiltersOpen}>
+            <Dialog as="div"
+                    // className="fixed inset-0 flex z-40 lg:hidden"
+                    className={classNames(locale.isRTL ? `right-0` : `left-0`, "fixed inset-0  flex z-40 lg:hidden")}
+                    onClose={() => setMobileFiltersOpen}>
                 <Transition.Child
                     as={Fragment}
                     enter="transition-opacity ease-linear duration-300"
@@ -32,14 +35,16 @@ export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpe
                 <Transition.Child
                     as={Fragment}
                     enter="transition ease-in-out duration-300 transform"
-                    enterFrom="translate-x-full"
-                    enterTo="translate-x-0"
+                    // enterFrom="translate-x-full"
+                    // enterTo="translate-x-0"
                     leave="transition ease-in-out duration-300 transform"
-                    leaveFrom="translate-x-0"
-                    leaveTo="translate-x-full"
+                    // leaveFrom="translate-x-0"
+                    // leaveTo="translate-x-full"
                 >
                     <div
-                        className={`ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto capitalize truncate`}>
+                        className={`${currentFont} bg-white relative max-w-xs w-full shadow-xl pb-12 flex flex-col overflow-y-auto`}
+                        dir={locale.dir}
+                    >
                         <div className="px-4 flex items-center justify-between">
                             {/*<h2 className={`text-lg font-medium text-gray-900 dark:text-gray-50`}>{trans('advanced_search')}</h2>*/}
                             <button
@@ -53,7 +58,7 @@ export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpe
                         </div>
 
                         {/* Filters */}
-                            <aside dir={locale.dir} className={`p-5`}>
+                            <aside className={`p-5`}>
                                 {/*<h2 className="sr-only capitalize">{trans('advanced_search')}</h2>*/}
                                 {/*<div className="flex flex-1 justify-between items-center">*/}
                                     {/*<div className="flex">*/}
