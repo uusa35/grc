@@ -155,7 +155,7 @@ export default function({element, products , books, categories }) {
                                                       </span>
                                                 </Disclosure.Button>
                                                 <Disclosure.Panel as="div" className="pb-6">
-                                                    <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
+                                                    <div className="max-w-7xl mx-auto  ">
                                                         <div
                                                             className="max-w-lg mx-auto md:max-w-none md:grid md:grid-cols-1 md:gap-8">
                                                             <div>
@@ -260,7 +260,7 @@ export default function({element, products , books, categories }) {
                                                       </span>
                                                         </Disclosure.Button>
                                                         <Disclosure.Panel as="div" className="pb-6">
-                                                            <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
+                                                            <div className="max-w-7xl mx-auto  ">
                                                                 <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                                                                     {/* mobile search SideBar */}
                                                                     <UserShowSearchSideBarMobile
@@ -334,7 +334,7 @@ export default function({element, products , books, categories }) {
                                                       </span>
                                                         </Disclosure.Button>
                                                         <Disclosure.Panel as="div" className="pb-6">
-                                                            <div className="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
+                                                            <div className="max-w-7xl mx-auto  ">
                                                                 <div
                                                                     className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-4 2xl:grid-cols-4 xl:gap-x-8 gap-x-6">
                                                                     {map(books.data , p => (
