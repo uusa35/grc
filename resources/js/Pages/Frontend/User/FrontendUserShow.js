@@ -277,21 +277,21 @@ export default function({element, products , books, categories }) {
                                                                         setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
                                                                     {/* Product grid */}
                                                                     <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
-                                                                        <div className="col-span-full mb-3">
-                                                                            <FrontendPagination
-                                                                                type={'product'}
-                                                                                total={products.meta.total}
-                                                                                links={products.meta.links}
-                                                                                showSearch={false}
-                                                                                lastPage={products.meta.last_page}
-                                                                            />
-                                                                        </div>
                                                                         <NoElements display={products.meta.total < 1}/>
                                                                         <div
                                                                             className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
                                                                             {map(products.data, element => (
                                                                                 <NormalProductWidget element={element} key={element.id}/>
                                                                             ))}
+                                                                            <div className="col-span-full mb-3">
+                                                                                <FrontendPagination
+                                                                                    type={'product'}
+                                                                                    total={products.meta.total}
+                                                                                    links={products.meta.links}
+                                                                                    showSearch={false}
+                                                                                    lastPage={products.meta.last_page}
+                                                                                />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -341,13 +341,15 @@ export default function({element, products , books, categories }) {
                                                                         <NormalBookWidget element={p} key={p.id}/>
                                                                     ))}
                                                                 </div>
-                                                                <FrontendPagination
-                                                                    type={'book'}
-                                                                    total={books.meta.total}
-                                                                    links={books.meta.links}
-                                                                    showSearch={false}
-                                                                    lastPage={books.meta.last_page}
-                                                                />
+                                                                <div className="col-span-full mb-3">
+                                                                    <FrontendPagination
+                                                                        type={'book'}
+                                                                        total={books.meta.total}
+                                                                        links={books.meta.links}
+                                                                        showSearch={false}
+                                                                        lastPage={books.meta.last_page}
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </Disclosure.Panel>
                                                     </>
