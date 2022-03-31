@@ -59,6 +59,8 @@ export default function({element, products , books, categories }) {
         return () => dispatch(setMenuBg(settings.menu_bg));
     }, [])
 
+    console.log('products', products);
+    console.log('books', books);
     return (
         <FrontendContainer>
             <SubMetaElement title={element[getLocalized()]}

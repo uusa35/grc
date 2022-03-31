@@ -22,7 +22,7 @@ export default function({setMobileFiltersOpen, categories, mobileFiltersOpen, id
                         className={`inline-flex items-center lg:hidden ${btnClass} p-3 rounded-md shadow-sm capitalize`}
                         onClick={() => setMobileFiltersOpen(true)}
                     >
-                        <span className="text-white capitalize">{trans('advanced_search')}</span>
+                        <span className="text-white capitalize">{trans('search')}</span>
                         <PlusSmIcon className="flex-shrink-0 mx-2 h-5 w-5 text-gray-400" aria-hidden="true"/>
                     </button>
                 </div>

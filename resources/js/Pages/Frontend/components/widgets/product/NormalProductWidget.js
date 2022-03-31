@@ -64,10 +64,10 @@ const NormalProductWidget = ({element}) => {
                 }
                 <Link
                     href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}
-                    className={`hidden lg:flex ${btnClass} rounded-md py-3 px-8 flex items-center justify-center text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
+                    className={`flex ${btnClass} rounded-md py-3 px-8 flex items-center justify-center text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
                 >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>
-                            <div>
+                            <div className={`hidden md:flex`}>
                                 <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 `} fill={`none`}
                                      viewBox="0 0 24 24" stroke="currentColor">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"

@@ -13,7 +13,6 @@ export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpe
     const { trans, getLocalized , classNames  , mainColor , mainBgColor, btnClass , textColor  } = useContext(AppContext)
     const { locale } = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
-    const dispatch = useDispatch();
     const { params } = route();
     return (
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
