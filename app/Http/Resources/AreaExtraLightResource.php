@@ -20,6 +20,7 @@ class AreaExtraLightResource extends JsonResource
             'name_en' => $this->name_en,
             'governate_id' => $this->governate_id,
             'country_id' => $this->country_id,
+            'active' => $this->active,
             'governate' => GovernateExtraLightResource::make($this->whenLoaded('governate')),
             'country' => CountryExtraLightResource::make($this->whenLoaded('country')),
         ];
