@@ -58,7 +58,7 @@ trait OrderTrait
                 'discount' => $request->cart['discount'],
                 'shipment_fees' => $request->cart['shipmentFees'],
                 'receive_on_branch' => $request->cart['receiveFromShop'],
-                'notes' => $request->cart['notes'],
+                'notes' => $request->cart['notes'] ? $request->cart['notes'] : '',
                 'country_id' => $request->cart['shipmentCountry']['id'],
                 'country' => $request->cart['shipmentCountry']['name_en'],
                 'governate_id' => $request->cart['shipmentGovernate']['id'],
