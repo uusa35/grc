@@ -9,6 +9,10 @@ class Area extends PrimaryModel
     use HasFactory,ModelHelpers;
     protected $guarded = [''];
     protected $localeStrings = ['name'];
+    protected $casts = [
+        'active' => 'boolean'
+    ];
+
 
     public function country()
     {

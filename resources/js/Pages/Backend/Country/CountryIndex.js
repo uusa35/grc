@@ -67,7 +67,7 @@ export default function({elements}) {
                                 {map(elements.data, element => (
                                     <tr key={element.id} className={`odd:bg-white even:bg-gray-100`}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm flex flex-row ">
                                             <ActiveDot active={element.active}/>
                                             {element[getLocalized()]}
                                         </td>

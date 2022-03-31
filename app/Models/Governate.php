@@ -9,6 +9,7 @@ class Governate extends PrimaryModel
     protected $guarded = [''];
     protected $casts = [
         'price' => 'float',
+        'active' => 'boolean'
     ];
 
     public function country()

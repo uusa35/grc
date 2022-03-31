@@ -24,6 +24,7 @@ class AreaController extends Controller
     {
         $this->authorizeResource(Area::class);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +32,7 @@ class AreaController extends Controller
      */
     public function index(CategoryFilters $filters)
     {
-        $elements = new AreaCollection(Area::filters($filters)->with('country')->orderBy('id','desc')->paginate(Self::TAKE_MID));
+        $elements = new AreaCollection(Area::filters($filters)->with('country')->orderBy('id', 'desc')->paginate(Self::TAKE_MID));
         return inertia('Backend/Area/AreaIndex', compact('elements'));
     }
 
@@ -42,14 +43,14 @@ class AreaController extends Controller
      */
     public function create()
     {
-        $countries = new CountryCollection(Country::active()->has('governates','>', 0)->with('governates.areas')->get());
-        return inertia('Backend/Area/AreaCreate',compact('countries'));
+        $countries = new CountryCollection(Country::active()->has('governates', '>', 0)->with(['governates' => fn($q) => $q->active()->with(['areas' => fn($q) => $q->active()])])->get());
+        return inertia('Backend/Area/AreaCreate', compact('countries'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -70,7 +71,7 @@ class AreaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Area  $area
+     * @param \App\Models\Area $area
      * @return \Illuminate\Http\Response
      */
     public function show(Area $area)
@@ -81,20 +82,20 @@ class AreaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Area  $area
+     * @param \App\Models\Area $area
      * @return \Illuminate\Http\Response
      */
     public function edit(Area $area)
     {
-        $countries = new CountryCollection(Country::active()->has('governates','>', 0)->with('governates.areas')->get());
-        return inertia('Backend/Area/AreaEdit', compact('area','countries'));
+        $countries = new CountryCollection(Country::active()->has('governates', '>', 0)->with('governates.areas')->get());
+        return inertia('Backend/Area/AreaEdit', compact('area', 'countries'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Area  $area
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Area $area
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Area $area)
@@ -114,12 +115,12 @@ class AreaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Area  $area
+     * @param \App\Models\Area $area
      * @return \Illuminate\Http\Response
      */
     public function destroy(Area $area)
     {
-        if($area->delete()) {
+        if ($area->delete()) {
             return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
