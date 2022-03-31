@@ -14,11 +14,11 @@ const NormalUserWidget =  ({ element }) => {
         >
         <Link href={route('frontend.user.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}
               className="block relative rounded overflow-hidden z-0">
-            <div className="w-full h-auto flex items-center justify-center sm:aspect-w-1 sm:aspect-h-1 ">
+            <div className="w-full h-auto flex items-center justify-center aspect-w-1 aspect-h-1 ">
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
-                    className="z-0 w-1/2 h-1/2 sm:w-4/4 sm:h-4/4 rounded-full shadow-md object-center object-cover group-hover:opacity-75 shadow-md"
+                    className="z-0 w-40 h-40 sm:w-4/4 sm:h-4/4 rounded-full shadow-md object-center object-cover group-hover:opacity-75 shadow-md"
                     width={360}
                     height={480}
                     loading='lazy'
