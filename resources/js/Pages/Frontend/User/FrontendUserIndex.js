@@ -83,7 +83,7 @@ export default function({elements, categories, settings}) {
                         <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
                             <NoElements display={elements.meta.total < 1}/>
                             <div
-                                className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+                                className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                                 {map(currentData, element => (
                                     <NormalUserWidget element={element} key={element.id}/>
                                 ))}

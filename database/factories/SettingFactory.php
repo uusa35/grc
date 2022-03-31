@@ -101,6 +101,9 @@ class SettingFactory extends Factory
             'gift_fee' => 5.00,
             'multi_cart_merchant' => $this->faker->boolean(true),
             'keywords' => $this->faker->paragraph,
+            'enable_users' => true,
+            'app_font_ar' => 'font-tajwal-medium',
+            'app_font_en' => 'font-tajwal-medium'
         ];
     }
 }

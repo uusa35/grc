@@ -184,6 +184,5 @@ export default function({setMobileFiltersOpen, categories, mobileFiltersOpen, id
                 </div>
             </div>
         </aside>
-    )
-        ;
+    );
 }

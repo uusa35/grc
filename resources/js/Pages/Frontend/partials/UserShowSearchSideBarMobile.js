@@ -1,16 +1,18 @@
 import React, {Fragment, useContext} from "react";
 import {Dialog, Disclosure, Transition, Menu} from '@headlessui/react'
 import {XIcon} from "@heroicons/react/outline";
-import {map} from "lodash";
-import {ChevronDownIcon} from "@heroicons/react/solid";
+import {map, range} from "lodash";
+import {ChevronDownIcon, PlusSmIcon} from "@heroicons/react/solid";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
+import GlobalContext from "../../context/GlobalContext";
 
-export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpen, id }) {
-    const { trans, getLocalized , classNames  , mainColor , mainBgColor } = useContext(AppContext)
+export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpen, id, enablePrice = false  }) {
+    const { trans, getLocalized , classNames  , mainColor , mainBgColor, btnClass , textColor  } = useContext(AppContext)
     const { locale } = useSelector(state => state);
+    const { settings } = useContext(GlobalContext);
     const dispatch = useDispatch();
     const { params } = route();
     return (
@@ -40,7 +42,7 @@ export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpe
                     <div
                         className={`ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto capitalize truncate`}>
                         <div className="px-4 flex items-center justify-between">
-                            <h2 className={`text-lg font-medium text-gray-900 dark:text-gray-50`}>{trans('advanced_search')}</h2>
+                            {/*<h2 className={`text-lg font-medium text-gray-900 dark:text-gray-50`}>{trans('advanced_search')}</h2>*/}
                             <button
                                 type="button"
                                 className={`-mr-2 w-10 h-10 p-2 flex items-center justify-center text-gray-800 dark:text-gray-50`}
@@ -52,53 +54,178 @@ export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpe
                         </div>
 
                         {/* Filters */}
-                        <form className="mt-4 capitalize">
-                            {map(categories, c =>
-                                <Disclosure as="div"
-                                            key={c.id}
-                                            defaultOpen={true}
-                                            className="border-t border-gray-200 pt-4 pb-4">
-                                    {({open}) => (
-                                        <fieldset>
-                                            <legend className="w-full px-2">
-                                                <Disclosure.Button
-                                                    className="w-full p-2 flex flex-1 items-center justify-between text-gray-400 hover:text-gray-500">
-                                                    <div
-                                                        className="text-right text-gray-900 capitalize">{c[getLocalized()]}</div>
-                                                    <div className="h-7">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                                                        </svg>
+                            <aside dir={locale.dir} className={`p-5`}>
+                                {/*<h2 className="sr-only capitalize">{trans('advanced_search')}</h2>*/}
+                                {/*<div className="flex flex-1 justify-between items-center">*/}
+                                    {/*<div className="flex">*/}
+                                    {/*    <button*/}
+                                    {/*        type="button"*/}
+                                    {/*        className={`inline-flex items-center lg:hidden ${btnClass} p-3 rounded-md shadow-sm capitalize`}*/}
+                                    {/*        onClick={() => setMobileFiltersOpen(true)}*/}
+                                    {/*    >*/}
+                                    {/*        <span className="text-white capitalize">{trans('advanced_search')}</span>*/}
+                                    {/*        <PlusSmIcon className="flex-shrink-0 mx-2 h-5 w-5 text-gray-400" aria-hidden="true"/>*/}
+                                    {/*    </button>*/}
+                                    {/*</div>*/}
+                                    {/*<div className="flex">*/}
+                                    {/*    <Link*/}
+                                    {/*        href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, {id}) : '#'}*/}
+                                    {/*        className={`inline-flex items-center lg:hidden ${btnClass} p-3 rounded-sm shadow-md capitalize`}*/}
+                                    {/*    >*/}
+                                    {/*        {trans('clear_search')}*/}
+                                    {/*    </Link>*/}
+                                    {/*</div>*/}
+                                {/*</div>*/}
+                                <div className="lg:block">
+                                    <div className="divide-y divide-gray-200 space-y-3">
+                                        <div className="flex flex-1 justify-between items-center">
+                                            <div className="flex">
+                                                <h3 className={`capitalize ${textColor}`}>{trans('filters')}</h3>
+                                            </div>
+                                            <div className="flex">
+                                                <Link
+                                                    href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, {id}) : '#'}
+                                                    className={`px-3 py-1 ${btnClass} rounded-sm shadow-sm ring-1 ring-gray-400 capitalize`}
+                                                >
+                                                    {trans('clear_search')}
+                                                </Link>
+
+                                            </div>
+                                        </div>
+                                        {/* price search */}
+                                        {
+                                            enablePrice && settings.enable_prices && <>
+                                                <div className="flex pt-3">
+                                                    <h3 className={`capitalize ${textColor}`}>{trans('prices')}</h3>
+                                                </div>
+                                                {
+                                                    map(range(50, 300, 50), r =>
+                                                        <div key={r} className="pt-3">
+                                                            <fieldset className="space-y-3">
+                                                                <div className="pt-3 space-y-3">
+                                                                    <Link
+                                                                        href={route().has(`frontend.user.search.products`) ? route(`frontend.user.search.products`, {
+                                                                            ...params,
+                                                                            user_id: id,
+                                                                            id,
+                                                                            max: r,
+                                                                            min: parseInt(r - 50)
+                                                                        }) : '#'}
+                                                                        className={classNames(params.max == r ? `bg-${mainBgColor}-200 dark:bg-${mainBgColor}-400 p-3 rounded-md shadow-md` : ``, "flex items-center")}>
+                                                                        {
+                                                                            locale.isRTL ?
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                                                     color={mainColor}
+                                                                                     viewBox="0 0 20 20" fill="currentColor">
+                                                                                    <path fillRule="evenodd"
+                                                                                          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                                                          clipRule="evenodd"/>
+                                                                                </svg>
+                                                                                :
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
+                                                                                     color={mainColor}
+                                                                                     viewBox="0 0 20 20" fill="currentColor">
+                                                                                    <path fillRule="evenodd"
+                                                                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                                                          clipRule="evenodd"/>
+                                                                                </svg>
+                                                                        }
+                                                                        <label htmlFor={'name'}
+                                                                               className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
+                                                                            {`${trans("less_than")} ${r} ${trans('kd')}`}
+                                                                        </label>
+                                                                    </Link>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    )}
+
+                                            </>
+                                        }
+
+                                        <div className="flex pt-3">
+                                            <h3 className={`capitalize ${textColor}`}>{trans('categories')}</h3>
+                                        </div>
+                                        {map(categories, c => (
+                                            <div key={c.id} className="pt-3">
+                                                <fieldset className="space-y-3">
+                                                    <div className="pt-3 space-y-3">
+                                                        <Link
+                                                            href={route(`frontend.user.search.products`, {
+                                                                ...params,
+                                                                user_id: id,
+                                                                id,
+                                                                category_id: c.id
+                                                            })}
+                                                            className="flex items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                                                 viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                                                                 color={mainColor}
+                                                            >
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4"/>
+                                                            </svg>
+                                                            <label htmlFor={'name'}
+                                                                   className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
+                                                                {c[getLocalized()]}
+                                                            </label>
+                                                        </Link>
                                                     </div>
-                                                </Disclosure.Button>
-                                            </legend>
-                                            <Disclosure.Panel className="pt-4 pb-2 px-4 w-full">
-                                                <div className="space-y-6 w-full divide-y divide-gray-100 flex flex-1 flex-col justify-start items-end capitalize" dir={locale.dir}>
-                                                    <Link
-                                                        className={classNames(locale.isRTL ? 'justify-end' :  'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
-                                                        href={route(`frontend.user.search.products`, { id , user_id : id ,category_id : c.id, ...params })}
-                                                    >
-                                                        {c[getLocalized()]}
-                                                    </Link>
                                                     {
                                                         map(c.children, child => (
-                                                            <Link
-                                                                className={classNames(locale.isRTL ? 'justify-end' : 'justify-start', 'flex flex-1 flex-row  items-center w-full capitalize')}
-                                                                key={child.id}
-                                                                href={route(`frontend.user.search.products`, { category_id : child.id, id , user_id : id })}
-                                                            >
-                                                                {child[getLocalized()]}
-                                                            </Link>
+                                                            <div className="pt-1 space-y-3 mx-5" key={child.id}>
+                                                                <Link
+                                                                    href={route(`frontend.user.search.products`, {
+                                                                        ...params,
+                                                                        user_id: id,
+                                                                        id,
+                                                                        category_id: child.id
+                                                                    })}
+                                                                    className="flex items-center">
+                                                                    <input
+                                                                        readOnly
+                                                                        type="checkbox"
+                                                                        checked={child.id == params.category_id}
+                                                                    />
+                                                                    <label htmlFor={'name'}
+                                                                           className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
+                                                                        {child[getLocalized()]}
+                                                                    </label>
+                                                                </Link>
+                                                                {
+                                                                    map(child.children, sub => (
+                                                                        <div className="pt-1 space-y-3 mx-2" key={sub.id}>
+                                                                            <Link
+                                                                                href={route(`frontend.user.search.products`, {
+                                                                                    ...params,
+                                                                                    category_id: sub.id,
+                                                                                    id,
+                                                                                    user_id: id
+                                                                                })}
+                                                                                className="flex items-center">
+                                                                                <input
+                                                                                    readOnly
+                                                                                    type="checkbox"
+                                                                                    checked={sub.id == params.category_id}
+                                                                                />
+                                                                                <label htmlFor={'name'}
+                                                                                       className={`rtl:mr-3 ltr:ml-3 text-sm ${textColor} capitalize`}>
+                                                                                    {sub[getLocalized()]}
+                                                                                </label>
+                                                                            </Link>
+                                                                        </div>
+                                                                    ))
+                                                                }
+                                                            </div>
                                                         ))
                                                     }
+                                                </fieldset>
 
-                                                </div>
-                                            </Disclosure.Panel>
-                                        </fieldset>
-                                    )}
-                                </Disclosure>
-                            )}
-                        </form>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </aside>
+
                     </div>
                 </Transition.Child>
             </Dialog>

@@ -24,7 +24,7 @@ export default React.memo(function({
                     {
                         settings.enable_products && <>
                             <div
-                                className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-3">
+                                className="grid grid-cols-2 gap-y-6 sm:grid-cols-2 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-3">
                                 <div className="col-span-full">
                                     <h1 className={`text-center text-lg ${textColor}`}>
                                         {trans('categories_user')}

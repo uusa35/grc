@@ -147,6 +147,8 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
 
         // cart that must be logged in and verified
         Route::get('cart/user/confirmation', [FrontendCartController::class, 'getUserConfirmation'])->name('cart.confirmation');
+        // not used for now
+        Route::resource('subscription', SubscriptionController::class);
     });
 });
 

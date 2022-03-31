@@ -1262,5 +1262,6 @@ return array (
     "show_all" => "show all",
     "invoice_summary" => "Invoice Summary",
     "thanks" => "thanks",
-    "username" => "username"
+    "username" => "username",
+    "search_type" => "search type"
 );

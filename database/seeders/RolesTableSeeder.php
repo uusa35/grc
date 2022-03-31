@@ -15,7 +15,8 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = ['super', 'admin', 'company', 'author', 'client','designer', 'celebrity', 'driver'];
+        $roles = ['super', 'admin', 'company', 'author', 'client'];
+//        $roles = ['super', 'admin', 'company', 'author', 'client','designer', 'celebrity', 'driver'];
         $designerPrivileges = ['collection', 'order'];
         $companyPrivileges = ['product', 'slide', 'image', 'order', 'service', 'timing', 'video'];
         $adminPrivileges = ['product', 'slide', 'image', 'order', 'coupon', 'service', 'timing', 'setting', 'coupon', 'area', 'survey', 'question', 'result', 'questionnaire', 'answer',
@@ -39,7 +40,7 @@ class RolesTableSeeder extends Seeder
                     }
                 });
             } else if ($v === 'designer') {
-                Role::factory(1)->create(['name' => $v, 'is_designer' => true, 'name_ar' => $v, 'name_en' => $v])->each(function ($role) use ($privileges) {
+                Role::factory(1)->create(['name' => $v, 'is_designer' => true, 'name_ar' => $v, 'name_en' => $v, 'is_visible' => true ])->each(function ($role) use ($privileges) {
                     $role->privileges()->saveMany($privileges);
                     $rolePrivileges = $role->privileges()->get();
                     foreach ($rolePrivileges as $privilege) {
@@ -47,7 +48,7 @@ class RolesTableSeeder extends Seeder
                     }
                 });
             } else if ($v === 'celebrity') {
-                Role::factory(1)->create(['name' => $v, 'is_celebrity' => true, 'name_ar' => $v, 'name_en' => $v])->each(function ($role) use ($privileges) {
+                Role::factory(1)->create(['name' => $v, 'is_celebrity' => true, 'name_ar' => $v, 'name_en' => $v, 'is_visible' => true])->each(function ($role) use ($privileges) {
                     $role->privileges()->saveMany($privileges);
                     $rolePrivileges = $role->privileges()->get();
                     foreach ($rolePrivileges as $privilege) {
@@ -55,7 +56,7 @@ class RolesTableSeeder extends Seeder
                     }
                 });
             } else if ($v === 'company') {
-                Role::factory(1)->create(['name' => $v, 'is_company' => true, 'name_ar' => $v, 'name_en' => $v])->each(function ($role) use ($privileges) {
+                Role::factory(1)->create(['name' => $v, 'is_company' => true, 'name_ar' => $v, 'name_en' => $v, 'is_visible' => true ])->each(function ($role) use ($privileges) {
                     $role->privileges()->saveMany($privileges);
                     $rolePrivileges = $role->privileges()->get();
                     foreach ($rolePrivileges as $privilege) {
@@ -63,7 +64,7 @@ class RolesTableSeeder extends Seeder
                     }
                 });
             } else if ($v === 'author') {
-                Role::factory(1)->create(['name' => $v, 'is_author' => true, 'name_ar' => $v, 'name_en' => $v])->each(function ($role) use ($privileges) {
+                Role::factory(1)->create(['name' => $v, 'is_author' => true, 'name_ar' => $v, 'name_en' => $v, 'is_visible' => true ])->each(function ($role) use ($privileges) {
                     $role->privileges()->saveMany($privileges);
                     $rolePrivileges = $role->privileges()->get();
                     foreach ($rolePrivileges as $privilege) {

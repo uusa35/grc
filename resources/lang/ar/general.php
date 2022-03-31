@@ -1273,5 +1273,6 @@ return array (
     "show_all" => "عرض الكل",
     "invoice_summary" => "عرض مخلص الفاتورة",
     "thanks" => "مع الشكر",
-    "username" => "اسم المستخدم"
+    "username" => "اسم المستخدم",
+    "search_type" => "نوع البحث"
 );

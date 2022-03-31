@@ -53,7 +53,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                     </div>
                     {/* price search */}
                     {
-                        enablePrice && settings.enable_prices && <>
+                        enablePrice && settings.enable_prices  ? <>
                             <div className="flex pt-3">
                                 <h3 className={`capitalize ${textColor}`}>{trans('prices')}</h3>
                             </div>
@@ -90,7 +90,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                     </div>
                                 )}
 
-                        </>
+                        </> : null
                     }
 
                     <div className="flex pt-3">
