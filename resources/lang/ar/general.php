@@ -1274,5 +1274,6 @@ return array (
     "invoice_summary" => "عرض مخلص الفاتورة",
     "thanks" => "مع الشكر",
     "username" => "اسم المستخدم",
-    "search_type" => "نوع البحث"
+    "search_type" => "نوع البحث",
+    "thanks_contacting_us" => "شكرا لاتصالكم بنا .."
 );

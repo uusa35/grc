@@ -5,7 +5,7 @@
 # {{ trans('general.mobile') }} : {{ request()->mobile }}
 @endcomponent
 
-# {{ request()->subject }}
+# {{ trans('general.subject') }}
 @component('mail::panel')
 {{request()->content}}
 @endcomponent

@@ -1263,5 +1263,6 @@ return array (
     "invoice_summary" => "Invoice Summary",
     "thanks" => "thanks",
     "username" => "username",
-    "search_type" => "search type"
+    "search_type" => "search type",
+    "thanks_contacting_us" => "thank you  for contact us,"
 );

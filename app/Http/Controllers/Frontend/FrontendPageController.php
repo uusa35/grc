@@ -23,7 +23,7 @@ class FrontendPageController extends Controller
         $request->validate([
             'first_name' => 'required|min:3|max:200',
             'last_name' => 'required|min:3|max:200',
-            'mobile' => 'min:10|max:15',
+            'mobile' => 'min:5|max:15',
             'subject' => 'required',
             'content' => 'required',
             'code' => 'required|confirmed'
@@ -44,7 +44,7 @@ class FrontendPageController extends Controller
             'name' => 'required|min:3|max:200',
             'address' => 'min:3|max:250',
             'exported_before' => 'required|boolean',
-            'mobile' => 'min:10|max:15',
+            'mobile' => 'min:5|max:15',
             'notes' => 'min:3|max:1000',
             'content' => 'required|max:2000',
             'code' => 'required|confirmed'

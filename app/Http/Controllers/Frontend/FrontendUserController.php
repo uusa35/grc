@@ -69,7 +69,7 @@ class FrontendUserController extends Controller
         $request->validate([
             'name' => 'required|min:3|max:200',
             'email' => 'required|email|unique:users,email',
-            'mobile' => 'min:6|max:12',
+            'mobile' => 'min:4|max:12',
             'country_id' => 'exists:countries,id',
             'area_id' => 'exists:areas,id',
             'block' => 'max:20',
@@ -154,7 +154,7 @@ class FrontendUserController extends Controller
         $request->validate([
             'name_ar' => 'min:3|max:255',
             'name_en' => 'min:3|max:255',
-            'mobile' => 'min:6|max:12',
+            'mobile' => 'min:4|max:12',
             'whatsapp' => 'min:5|max:12',
             'news_letter_on' => 'boolean'
         ]);
@@ -340,7 +340,7 @@ class FrontendUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|string|unique:users',
-            'mobile' => 'required|min:8',
+            'mobile' => 'required|min:4',
             'password' => 'required|min:8|confirmed',
             'code' => 'required|confirmed',
             'country_id' => 'required|exists:countries,id'
