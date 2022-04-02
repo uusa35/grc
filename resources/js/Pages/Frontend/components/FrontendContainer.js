@@ -17,8 +17,8 @@ import IstoresMainNav from "../partials/header/IstoresMainNav";
 
 
 const currentVariants = {
-    visible: {opacity: 1, transition: {duration: 1}},
-    hidden: {opacity: 0.2}
+    visible: {opacity: 1, transition: {duration: 0.5}},
+    hidden: {opacity: 0.4}
 };
 
 const FrontendContainer = ({children}) => {
