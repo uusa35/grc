@@ -27,13 +27,10 @@ const FrontendContainer = ({children}) => {
     const {
         currentFont,
         textColor,
-        mainBgColor,
-        getThumb,
         classNames,
         currentHome,
         mainColor,
         getLarge,
-        contentBgColor
     } = useContext(AppContext);
 
     return (
@@ -52,9 +49,7 @@ const FrontendContainer = ({children}) => {
             { appName !== 'istores' && <MainNav />}
             <div className="hidden lg:flex z-0 absolute inset-0 min-w-full">
                 {
-                    settings.wide_screen ? <motion.img
-                        initial={{y: -100}}
-                        animate={{y: 0}}
+                    settings.wide_screen ? <img
                         className="w-full h-60 object-cover shadow-lg"
                         src={getLarge(menuBg)}
                         alt=""
