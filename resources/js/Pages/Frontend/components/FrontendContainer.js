@@ -15,6 +15,12 @@ import GlobalContext from "../../context/GlobalContext";
 import {motion} from 'framer-motion';
 import IstoresMainNav from "../partials/header/IstoresMainNav";
 
+
+const currentVariants = {
+    visible: {opacity: 1, transition: {duration: 1}},
+    hidden: {opacity: 0.2}
+};
+
 const FrontendContainer = ({children}) => {
     const {locale, theme, menuBg } = useSelector(state => state)
     const {settings, appName } = useContext(GlobalContext);
@@ -31,9 +37,12 @@ const FrontendContainer = ({children}) => {
     } = useContext(AppContext);
 
     return (
-        <div
+        <motion.div
             className={classNames(theme === `dark` ? `bg-black` : ``, `${theme} ${currentFont} flex flex-col overflow-hidden text-sm md:text-sm lg:text-sm capitalize`)}
             dir={locale.dir}
+            variants={currentVariants}
+            animate={`visible`}
+            initial="hidden"
             // style={{backgroundImage: `url(${getThumb(settings.main_bg)})`}}
         >
             {/*<ConfirmationModal/>*/}
@@ -67,7 +76,7 @@ const FrontendContainer = ({children}) => {
                 <Footer/>
             </main>
 
-        </div>
+        </motion.div>
     );
 }
 

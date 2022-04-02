@@ -20,19 +20,19 @@ createInertiaApp({
             showSpinner: true,
         })
         return render(
-                <GlobalContext.Provider value={{auth, settings, currencies, categories, appName}}>
-                    <Provider store={store}>
-                        <PersistGate loading={<LoadingView/>}
-                                     persistor={persistor}
-                            // onBeforeLift={() => new Promise(resolve =>
-                            //     setTimeout(resolve, 2000))}
-                        >
-                            <AppContextProvider>
-                                <App {...props} />
-                            </AppContextProvider>
-                        </PersistGate>
-                    </Provider>
-                </GlobalContext.Provider>
+            <GlobalContext.Provider value={{auth, settings, currencies, categories, appName}}>
+                <Provider store={store}>
+                    <PersistGate loading={<LoadingView/>}
+                                 persistor={persistor}
+                        // onBeforeLift={() => new Promise(resolve =>
+                        //     setTimeout(resolve, 2000))}
+                    >
+                        <AppContextProvider>
+                            <App {...props} />
+                        </AppContextProvider>
+                    </PersistGate>
+                </Provider>
+            </GlobalContext.Provider>
             , el)
     }
 });
