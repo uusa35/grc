@@ -88,7 +88,7 @@ export default function BackendHomePage({previousYearChart, currentYearChart}) {
                                         <div className="sm:flex sm:items-center sm:justify-between">
                                             <div className="sm:flex sm:space-x-5">
                                                 <div className="flex-shrink-0">
-                                                    <img className="mx-10 h-20 w-20 rounded-full shadow-md"
+                                                    <img className="mx-10 h-20 w-20 rounded-full shadow-md object-cover object-center"
                                                          src={getThumb(auth.image)}
                                                          alt=""/>
                                                 </div>
