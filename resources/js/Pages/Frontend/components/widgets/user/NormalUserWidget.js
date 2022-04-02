@@ -18,7 +18,7 @@ const NormalUserWidget =  ({ element }) => {
                 <img
                     src={getThumb(element.image)}
                     alt={element[getLocalized()]}
-                    className="z-0 w-40 h-40 sm:w-4/4 sm:h-4/4 rounded-full shadow-md object-center object-cover group-hover:opacity-75 shadow-md"
+                    className="z-0 w-4/4 h-4/4 rounded-full shadow-md object-center object-cover group-hover:opacity-75 shadow-md"
                     width={360}
                     height={480}
                     loading='lazy'
