@@ -223,8 +223,7 @@ export default React.memo(function({
                             <div className={`justify-center p-3 pt-10`}>
                                 <h1 className={`text-gray-800 dark:text-white text-3xl pb-10`}>
                                     <a href="https://shop.mgt-sa.com">
-                                        المتجر الإلكتروني
-                                        {trans('online_shope')}
+                                        {trans('online_shop')}
                                     </a>
                                 </h1>
                                 <p className={`text-gray-600 dark:text-white text-lg leading-loose`}>

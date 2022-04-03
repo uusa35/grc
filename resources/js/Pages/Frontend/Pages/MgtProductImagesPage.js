@@ -84,10 +84,6 @@ export default function() {
     const [currentImages, setCurrentImages] = useState([]);
     const {params} = route();
 
-    console.log('params', params);
-
-    console.log('product', currentProduct);
-    console.log('currentImages', currentImages)
     useMemo(() => {
         const product = filter(products, p => p.product_id == params.id);
         setCurrentProduct(product);
