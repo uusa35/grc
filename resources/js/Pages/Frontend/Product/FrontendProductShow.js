@@ -10,7 +10,7 @@ import {map, isEmpty, first, isNull, filter, uniqBy, size} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
-import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
+// import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery';
 import {getWhatsappLink} from "../../helpers";
 import ElementRating from "../components/widgets/ElementRating";
@@ -118,7 +118,7 @@ export default function({element, relatedElements, auth, settings}) {
         const images = []
         element.video_url_one ?
             images.push({
-                thumbnail: getLarge(element.image),
+                thumbnail: getThumb(element.image),
                 original: getLarge(element.image),
                 embedUrl: element.video_url_one,
                 description: element[getLocalized('caption')],
@@ -126,14 +126,14 @@ export default function({element, relatedElements, auth, settings}) {
                 renderItem: () => <EmbeddedIFrameVideo videoUrl={element.video_url_one}/>
             }) : null
         images.push({
-            thumbnail: getLarge(element.image),
+            thumbnail: getThumb(element.image),
             original: getLarge(element.image),
             description: element[getLocalized('caption')],
             loading: 'lazy',
         })
         map(element.images, img => {
             images.push({
-                thumbnail: getLarge(img.image),
+                thumbnail: getThumb(img.image),
                 original: getLarge(img.image),
                 description: img[getLocalized('caption')],
                 loading: 'lazy',

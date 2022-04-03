@@ -8,6 +8,7 @@ import {store, persistor} from './Pages/redux/store';
 import LoadingView from "./Pages/Backend/components/widgets/LoadingView";
 import 'react-toastify/dist/ReactToastify.css';
 import {InertiaProgress} from '@inertiajs/progress'
+import './../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 
 createInertiaApp({
     resolve: name => require(`./Pages/${name}`),

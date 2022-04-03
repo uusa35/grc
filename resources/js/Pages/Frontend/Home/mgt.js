@@ -15,7 +15,7 @@ import {useInView} from "react-intersection-observer";
 const services = [
     {
         name: 'خدمة التوريد المباشر',
-        href: '#',
+        href: route('frontend.joinus'),
         date: 'Mar 16, 2020',
         datetime: '2020-03-16',
         imageUrl:
@@ -31,70 +31,77 @@ const services = [
         imageUrl:
             'https://wp.mgt-sa.com/wp-content/uploads/2022/03/275383085_153690203693513_8167701926030083832_n.jpeg',
         preview:
-            'نُمكّن منتجات التعبئة والتغليف الخاصة بشركتك من الوصول الى شريحة أكبر من العملاء المحتملين في مُختلف المناطق داخل المملكة العربية السعودية مقابل أسعار رمزية'
-    },
-    {
-        name: 'منتجات صديقة البيئة',
-        href: '#',
-        date: 'Mar 16, 2020',
-        datetime: '2020-03-16',
-        imageUrl:
-            'https://wp.mgt-sa.com/wp-content/uploads/2022/03/273568089_148496084212925_8466813059061908296_n.jpeg',
-        preview:
-            'تعرّف على منتجات شركة وساطة وضمان صديقة البيئة، المصنوعة من أجود خامات قصب السُكر القابلة للتحلل، حل بيئي واقتصادي جديد لمنتجات التعبئة والتغليف الغذائية غير ضار تمامًا بالبيئة وصحّة الانسان'
+            'نُمكّن منتجات التعبئة والتغليف الخاصة بشركتك من الوصول الى شريحة أكبر من العملاء المحتملين في مُختلف المناطق داخل المملكة العربية السعودية '
     }
 ]
 
 
 const products = [
     {
+        id : 1,
         name: 'المنتجات الورقية الملونة',
         href: '#',
         price: '',
         description: '',
         imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/260406114_132949502434250_208895838802599038_n.jpeg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+        imageAlt: '',
     },
     {
+        id : 2,
         name: 'منتجات القصدير بأنواعها',
         href: '#',
         price: '',
         description: '',
         imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvr_SUXMAQnv6k.jpeg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+        imageAlt: '',
     },
     {
+        id : 3,
         name: 'أطباق آمنه للميكرويف',
         href: '#',
         price: '',
         description: '',
         imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvr06wX0AUNZjL.jpeg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+        imageAlt: '',
     },
     {
+        id : 4,
         name: 'حامل الأكواب',
         href: '#',
         price: '',
         description: '',
         imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvtPBYXEAIcWpl.jpeg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+        imageAlt: '',
     },
     {
+        id : 5,
         name: 'جميع الأحجام والمقاسات المختلفة',
         href: '#',
         price: '',
         description: '',
         imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvsSXEXoAYXT4g.jpeg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+        imageAlt: '',
     },
     {
+        id : 6,
         name: 'قفازات البلاستيك الآمنة',
         href: '#',
         price: '',
         description: '',
         imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvsV2GWUAEEgxQ.jpeg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
+        imageAlt: '',
     },
+    {
+        id : 7,
+        name: 'منتجات صديقة البيئة',
+        href: '#',
+        price: '',
+        description: '',
+        imageUrl:
+            'https://wp.mgt-sa.com/wp-content/uploads/2022/03/273568089_148496084212925_8466813059061908296_n.jpeg',
+        imageAlt:
+            'تعرّف على منتجات شركة وساطة وضمان صديقة البيئة، المصنوعة من أجود خامات قصب السُكر القابلة للتحلل، حل بيئي واقتصادي جديد لمنتجات التعبئة والتغليف الغذائية غير ضار تمامًا بالبيئة وصحّة الانسان'
+    }
 ];
 
 const collections = [
@@ -172,7 +179,9 @@ export default React.memo(function({
                             className="w-full h-full object-center object-cover rounded-lg"
                         />
                     </div>
-                    <div aria-hidden="true" className="absolute inset-0 bg-gray-900 bg-opacity-50 rounded-lg"/>
+                    <div
+                        id={`why_us`}
+                        aria-hidden="true" className="absolute inset-0 bg-gray-900 bg-opacity-50 rounded-lg"/>
                     <div className="relative max-w-3xl mx-auto flex flex-col items-center text-center">
                         <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
                             لماذا وساطة وضمان ؟
@@ -182,16 +191,13 @@ export default React.memo(function({
                             تهدف شركة #وساطة_وضمان_للتجارة التميز والارتقاء لمستوى تطلعات عملائها وبناء شراكة مستمرة
                             توفر خدمة توريد المستلزمات الغير غذائية من عبوات التعبئة والتغليف إلى المطاعم والمقاهي
                             مباشرة من المصانع حول العالم لتتميز في خدمة العميل بسعر وتكاليف مخفضة ومنتجات ذات جودة
-                            عالية
-                            .
-
-                            #شريك_مضمون #تعبئة #تغليف #مطاعم #كافيه #اسر_منتجة
+                            عالية .
                         </p>
                         <Link
-                            href={route('frontend.joinus')}
+                            href={route('frontend.aboutus')}
                             className="mt-8 w-full block bg-white border border-transparent rounded-md py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
                         >
-                            {trans('joinus')}
+                            {trans('more')}
                         </Link>
                     </div>
                 </motion.div>
@@ -218,34 +224,30 @@ export default React.memo(function({
                                 <h1 className={`text-gray-800 dark:text-white text-3xl pb-10`}>
                                     <a href="https://shop.mgt-sa.com">
                                         المتجر الإلكتروني
+                                        {trans('online_shope')}
                                     </a>
                                 </h1>
                                 <p className={`text-gray-600 dark:text-white text-lg leading-loose`}>
-                                    يُمكنك الآن طلب جميع منتجات التعبئة والتغليف الغذائية بمُختلف الأشكال والمقاسات
-                                    وبجميع
-                                    الكميّات عن طريق متجرنا الالكتروني، خصومات خاصّة لعملائنا عند الطلب عن طريق
-                                    المتجر
-                                    الاكتروني
+                                    {trans('online_shop_message')}
                                 </p>
                             </div>
                             <div className={`flex justify-end items-end text-center mx-6`}>
                                 <a
                                     className={`p-5 rounded-md shadow-md text-black dark:text-white border-2 border-gray-800 hover:bg-gray-200`}
-                                    href={`https://shop.mgt-sa.com`}>
-                                    الذهب للمتجر الإلكتروني
+                                    href={`https://shop.mgt-sa.com`}>{trans('go_to_online_shop')}
                                 </a>
                             </div>
                         </div>
                     </motion.div>
 
-                    {/* our services */}
-                    <section id={`our_services`} className={`anchorBehave`}>
+                    {/* our_services */}
+                    <section id={`direct_shipment`} className={`anchorBehave`}>
                         <div className="relative bg-gray-50 py-16">
                             <div className="relative">
                                 <div
                                     className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
                                     <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-                                        خدماتتنا
+                                        خدمة التوريد المباشر
                                     </p>
                                     <p className="mt-5 mx-auto max-w-prose text-xl text-gray-500">
                                         نهدف الى توفير منتجات التعبئة والتغليف لعملائنا بأعلى جودة وأفضل سعر، بجميع
@@ -253,7 +255,7 @@ export default React.memo(function({
                                     </p>
                                 </div>
                                 <div
-                                    className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
+                                    className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-2 lg:max-w-7xl">
                                     {map(services, (service) => (
                                         <motion.div
                                             initial={false}
@@ -367,7 +369,8 @@ export default React.memo(function({
                             <div
                                 className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
                                 {map(products, (p) => (
-                                    <motion.div
+                                    <motion.a
+                                        href={route('frontend.mgt.products.images', { id : p.id})}
                                         initial={false}
                                         whileHover={{
                                             scale: 0.95, transition: {
@@ -380,7 +383,7 @@ export default React.memo(function({
                                         <div className="flex-shrink-0">
                                             <img className="h-96 w-full object-cover" src={p.imageUrl} alt=""/>
                                         </div>
-                                    </motion.div>
+                                    </motion.a>
                                 ))}
                             </div>
                         </div>

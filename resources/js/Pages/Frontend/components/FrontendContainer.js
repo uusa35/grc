@@ -14,6 +14,7 @@ import 'swiper/css';
 import GlobalContext from "../../context/GlobalContext";
 import {motion} from 'framer-motion';
 import IstoresMainNav from "../partials/header/IstoresMainNav";
+import MgtMainNav from "../partials/header/MgtMainNav";
 
 
 const currentVariants = {
@@ -46,7 +47,8 @@ const FrontendContainer = ({children}) => {
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement/>
             { appName === 'istores' && <IstoresMainNav />}
-            { appName !== 'istores' && <MainNav />}
+            { appName === 'mgt' && <MgtMainNav />}
+            { appName !== 'istores' || appName !== 'mgt' && <MainNav />}
             <div className="hidden lg:flex z-0 absolute inset-0 min-w-full">
                 {
                     settings.wide_screen ? <img

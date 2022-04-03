@@ -94,6 +94,11 @@ class FrontendPageController extends Controller
         return inertia('Frontend/Pages/VacanciesPage');
     }
 
+    public function getProductImages()
+    {
+        return inertia('Frontend/Pages/MgtProductImagesPage');
+    }
+
     public function getFaqs()
     {
         $elements = Faq::active()->get();
