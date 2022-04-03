@@ -12,7 +12,6 @@ import route from 'ziggy-js'
 import {useAnimation, motion} from "framer-motion";
 import {useInView} from "react-intersection-observer";
 
-
 const services = [
     {
         name: 'خدمة التوريد المباشر',
