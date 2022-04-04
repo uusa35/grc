@@ -10,13 +10,13 @@ import route from 'ziggy-js';
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import {useSelector} from "react-redux";
 
-export default function FrontendCategoryIndex({elements}) {
+export default function FrontendCategoryIndex({elements, settings }) {
     const {trans , contentBgColor, textColor , mainColor } = useContext(AppContext);
+    const {sort} = useSelector(state => state);
     const {params} = route();
     const [type, setType] = useState('book')
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
-    const {sort} = useSelector(state => state);
 
     useMemo(() => {
         if (params && params.is_course) {
@@ -29,6 +29,8 @@ export default function FrontendCategoryIndex({elements}) {
             setType('user')
         } else if (params && params.is_book) {
             setType('book')
+        } else {
+            settings.enable_products ? setType('product') : (settings.enable_users) ? setType('user') : setType('book');
         }
     }, [])
 
