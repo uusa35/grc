@@ -12,6 +12,7 @@ import {showModal, toggleSort} from "../../redux/actions";
 import ActiveDot from "../components/widgets/ActiveDot";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import TableViewIcon from "@mui/icons-material/TableView";
+import ToolTipWidget from "../components/widgets/ToolTipWidget";
 
 
 export default React.memo(function({elements}) {
@@ -189,17 +190,19 @@ export default React.memo(function({elements}) {
                                             </div>
                                             <div className="flex items-center justify-center">
                                                 <a
-                                                    className={`pl-3`}
+                                                    className={`pl-3 has-tooltip`}
                                                     href={route('backend.order.export', {...route().params, fileType: 'pdf' })}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                                                          viewBox="0 0 20 20" fill="currentColor">
                                                         <PictureAsPdfIcon className={`hover:text-red-900`}/>
                                                     </svg>
+                                                    <ToolTipWidget message={trans('pdf')}/>
                                                 </a>
                                                 <a
-                                                    className={`pl-3`}
+                                                    className={`pl-3 has-tooltip`}
                                                     href={route('backend.order.export', {...route().params , fileType: 'xlsx' })}>
                                                     <TableViewIcon className={`hover:text-red-900`}/>
+                                                    <ToolTipWidget message={trans('excel')}/>
                                                 </a>
                                             </div>
                                         </div>

@@ -2,8 +2,9 @@ import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
 import {map} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
+import ToolTipWidget from "../components/widgets/ToolTipWidget";
 
 export default function({elements}) {
     const {trans, handleDeleteItem, classNames, getLocalized } = useContext(AppContext);
@@ -44,6 +45,7 @@ export default function({elements}) {
                                             </div>
                                             <div className="flex">
                                                 <Link
+                                                    className={`has-tooltip`}
                                                     href={route('backend.brand.create', {user_id: elements.data.length > 0 ? elements.data[0]?.user_id : params.user_id})}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
                                                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,6 +53,7 @@ export default function({elements}) {
                                                               strokeWidth="2"
                                                               d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                     </svg>
+                                                    <ToolTipWidget message={trans('create')}/>
                                                 </Link>
 
                                             </div>

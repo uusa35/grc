@@ -2,7 +2,7 @@ import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
 import {map} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {showModal} from "../../redux/actions";
 import {useDispatch, useSelector} from "react-redux";
@@ -60,6 +60,7 @@ export default function SlideIndex({elements}) {
                                             </div>
                                             <div className="flex">
                                                 <Link
+                                                    className={`has-tooltip`}
                                                     href={route('backend.slide.create', {
                                                         slidable_id: params.slidable_id,
                                                         slidable_type: params.slidable_type
@@ -70,6 +71,7 @@ export default function SlideIndex({elements}) {
                                                               strokeWidth="2"
                                                               d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                                     </svg>
+                                                    <ToolTipWidget message={trans('create')}/>
                                                 </Link>
 
                                             </div>
