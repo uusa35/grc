@@ -23,8 +23,8 @@ const currentVariants = {
 };
 
 const FrontendContainer = ({children}) => {
-    const {locale, theme, menuBg } = useSelector(state => state)
-    const {settings, appName } = useContext(GlobalContext);
+    const {locale, theme, menuBg} = useSelector(state => state)
+    const {settings, appName} = useContext(GlobalContext);
     const {
         currentFont,
         textColor,
@@ -46,9 +46,7 @@ const FrontendContainer = ({children}) => {
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement/>
-            { appName === 'istores' && <IstoresMainNav />}
-            { appName === 'mgt' && <MgtMainNav />}
-            { appName !== 'istores' || appName !== 'mgt' && <MainNav />}
+            {appName === 'istores' ? <IstoresMainNav/> : (appName === 'mgt' ? <MgtMainNav/> : <MainNav/>)}
             <div className="hidden lg:flex z-0 absolute inset-0 min-w-full">
                 {
                     settings.wide_screen ? <img

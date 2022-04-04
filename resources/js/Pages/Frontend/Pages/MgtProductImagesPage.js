@@ -78,7 +78,7 @@ const products = [
 ];
 
 export default function() {
-    const {trans, getLocalized, mainColor, contentBgColor, getLarge, textColor, getThumb  } = useContext(AppContext)
+    const {trans, getLocalized, contentBgColor,textColor  } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const [currentProduct, setCurrentProduct] = useState('');
     const [currentImages, setCurrentImages] = useState([]);
