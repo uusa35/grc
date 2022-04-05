@@ -32,6 +32,7 @@ class SizeController extends Controller
                 'id' => $element->id,
                 'name_ar' => $element->name_ar,
                 'name_en' => $element->name_en,
+                'active' => $element->active,
             ]);
         return inertia('Backend/Size/SizeIndex', compact('elements'));
     }

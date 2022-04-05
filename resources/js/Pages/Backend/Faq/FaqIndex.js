@@ -7,6 +7,7 @@ import {AppContext} from "../../context/AppContext";
 import {showModal} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
+import ActiveDot from "../components/widgets/ActiveDot";
 
 export default function({elements}) {
     const {trans, classNames, getLocalized } = useContext(AppContext);
@@ -72,7 +73,10 @@ export default function({elements}) {
                                 {map(elements.data, element => (
                                     <tr key={element.id} className={`odd:bg-white even:bg-gray-100`}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm ">{element[getLocalized()]}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm flex flex-row ">
+                                            <ActiveDot active={element.active}/>
+                                            {element[getLocalized()]}
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.faq.edit`, element.id)}
@@ -84,6 +88,23 @@ export default function({elements}) {
                                                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                     </svg>
                                                     <ToolTipWidget message={trans('edit')}/>
+                                                </Link>
+                                                <Link
+                                                    href={route(`backend.toggle.activate`, {
+                                                        model: 'faq',
+                                                        id: element.id
+                                                    })}
+                                                    className="text-gray-600 hover:text-gray-900 has-tooltip">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         className="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                         stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                              strokeWidth="2"
+                                                              d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                                                    </svg>
+
+                                                    <ToolTipWidget message={trans('toggle_active')}/>
+
                                                 </Link>
                                                 <button
                                                     onClick={() =>

@@ -32,6 +32,7 @@ class ColorController extends Controller
                 'name_ar' => $element->name_ar,
                 'name_en' => $element->name_en,
                 'code' => $element->code,
+                'active' => $element->active,
             ]);
         return inertia('Backend/Color/ColorIndex', compact('elements'));
     }
