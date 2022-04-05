@@ -45,7 +45,6 @@ export default function({elements}) {
                         <div className="overflow-hidden">
                             <div className="lg:grid lg:grid-cols-12 min-h-screen ">
                                 <UserEditSideNav/>
-
                                 {/*     orders */}
                                 <div
                                     className="col-span-9  shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
@@ -53,7 +52,7 @@ export default function({elements}) {
                                         <div>
                                             <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('orders')}</h2>
                                             <p className="mt-1 text-sm text-gray-500">
-                                                list of orders
+                                                {trans('list')} {trans('orders')}
                                             </p>
                                         </div>
                                     </div>
