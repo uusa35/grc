@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\CountryCollection;
 use App\Http\Resources\CountryExtraLightResource;
 use App\Http\Resources\CourseCollection;
 use App\Http\Resources\CourseResource;
+use App\Http\Resources\OrderCollection;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ServiceCollection;
 use App\Http\Resources\ServiceResource;
@@ -22,6 +24,7 @@ use App\Models\Role;
 use App\Models\Service;
 use App\Models\Subscription;
 use App\Models\User;
+use App\Services\Search\OrderFilters;
 use App\Services\Search\ProductFilters;
 use App\Services\Search\UserFilters;
 use Carbon\Carbon;
@@ -129,6 +132,26 @@ class FrontendUserController extends Controller
         return inertia('Frontend/User/FrontendUserShow', compact('element', 'products', 'books', 'categories'));
     }
 
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Request
+     */
+    public function getOrders(OrderFilters $filters)
+    {
+        $validator = validator(request()->all(), ['search' => 'nullable']);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 400);
+        }
+        $elements = new OrderCollection(Order::filters($filters)
+            ->where(['user_id' => auth()->id(), 'paid' => true ])
+            ->with('user')
+            ->orderBy('id', 'desc')->paginate(Self::TAKE_MID)
+            ->withQueryString());
+        return inertia('Frontend/User/Profile/ProfileOrderIndex', compact('elements'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -139,7 +162,8 @@ class FrontendUserController extends Controller
     {
         $this->authorize('update', $user);
         $user = new UserResource($user->load('role'));
-        return inertia('Frontend/User/FrontendUserEdit', compact('user'));
+        $countries = new CountryCollection(Country::active()->has('governates.areas', '>', 0)->with('governates.areas')->get());
+        return inertia('Frontend/User/FrontendUserEdit', compact('user', 'countries'));
     }
 
     /**

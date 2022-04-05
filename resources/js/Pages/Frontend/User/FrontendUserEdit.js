@@ -1,30 +1,19 @@
-import {Fragment, useContext, useState} from 'react'
-import {Disclosure, Menu, Switch, Transition} from '@headlessui/react'
-import {SearchIcon} from '@heroicons/react/solid'
-import {
-    BellIcon,
-    CogIcon,
-    CreditCardIcon,
-    KeyIcon,
-    MenuIcon,
-    UserCircleIcon,
-    ViewGridAddIcon,
-    XIcon,
-} from '@heroicons/react/outline'
+import React, {Fragment, useContext, useMemo, useState} from 'react'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-
 import route from 'ziggy-js';
-import GlobalContext from "../../context/GlobalContext";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import FrontendContentContainer from "../components/FrontendContentContainer";
-import {useDispatch, useSelector} from "react-redux";
 import {Inertia} from "@inertiajs/inertia";
 import UserEditSideNav from "./Profile/UserEditSideNav";
+import {filter, first, isEmpty, map} from "lodash";
+import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
-export default function({user}) {
+export default function({user, countries }) {
     const {trans, getThumb, getLocalized} = useContext(AppContext)
-
+    const [governates, setGovernates] = useState([])
+    const [selectedCountry,setSelectedCountry] = useState('');
+    const [areas, setAreas] = useState([])
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
@@ -33,8 +22,36 @@ export default function({user}) {
         'name_en': user.name_en,
         'mobile': user.mobile,
         'whatsapp': user.whatsapp,
+        'country_id': user.country_id,
+        'governate_id': user.governate_id,
+        'area_id': user.area_id,
+        'block': user.block,
+        'street': user.street,
+        'building': user.building,
+        'floor': user.floor,
+        'apartment': user.apartment,
         'image' : user.image
     });
+
+    useMemo(() => {
+        const currentCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
+        setSelectedCountry(currentCountry);
+        setGovernates(currentCountry.governates)
+        setData('governate_id', first(currentCountry.governates).id)
+        const areas = first(currentCountry.governates).areas;
+        setAreas(areas)
+        setData('area_id', first(areas).id)
+        setData('enable_receive_from_shop', false);
+    }, [data.country_id])
+
+
+    useMemo(() => {
+        if (!isEmpty(governates)) {
+            const selectedGovernate = data.governate_id ? first(filter(governates, c => c.id == data.governate_id)) : first(governates);
+            setAreas(selectedGovernate.areas);
+            setData('area_id', first(selectedGovernate.areas).id)
+        }
+    }, [data.governate_id])
 
     const handleChange = (e) => {
         setData(values => ({
@@ -240,6 +257,207 @@ export default function({user}) {
                                                     <div className={`text-sm text-red-900`}>{errors.whatsapp}</div>}
                                                 </p>
                                             </div>
+
+                                            {/* country_id */}
+                                            <div className="col-span-12 sm:col-span-6">
+                                                <label htmlFor="country_id" className="block   text-gray-800">
+                                                    {trans('country')}
+                                                </label>
+                                                <div className="mt-1">
+                                                    <select
+                                                        onChange={handleChange}
+                                                        id="country_id"
+                                                        name="country_id"
+                                                        defaultValue={user.country_id}
+                                                        autoComplete="country_id"
+                                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                                    >
+                                                        <option value="">{trans('choose')} {trans('country')}</option>
+                                                        {
+                                                            map(countries, u => (
+                                                                <option key={u.id} value={u.id}
+                                                                >{u[getLocalized()]}</option>
+                                                            ))
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <ToolTipWidget message={trans('user_instruction')}/>
+                                                <p className={`mt-2  text-gray-500`}>
+                                                    {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
+                                                </p>
+                                            </div>
+                                            {/* governate_id  */}
+                                            {
+                                                governates && <div className="col-span-12 sm:col-span-6">
+                                                    <label htmlFor="governate_id" className="block   ">
+                                                        {trans('governate')}
+                                                    </label>
+                                                    <div className="mt-1">
+                                                        <select
+                                                            required
+                                                            onChange={handleChange}
+                                                            id="governate_id"
+                                                            name="governate_id"
+                                                            defaultValue={user.governate_id}
+                                                            autoComplete="governate_id"
+                                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
+                                                        >
+                                                            <option value="">{trans('choose')} {trans('governate')}</option>
+                                                            {
+                                                                map(governates, u => (
+                                                                    <option key={u.id} value={u.id}
+                                                                    >{u[getLocalized()]}</option>
+                                                                ))
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <ToolTipWidget message={trans('user_instruction')}/>
+                                                    <p className={`mt-2  `}>
+                                                        {errors.governate_id &&
+                                                        <div className={`text-red-900`}>{errors.governate_id}</div>}
+                                                    </p>
+                                                </div>
+                                            }
+                                            {/* area_id */}
+                                            {
+                                                areas && <div className="col-span-12 sm:col-span-6">
+                                                    <label htmlFor="area_id" className="block   text-gray-800">
+                                                        {trans('area')}
+                                                    </label>
+                                                    <div className="mt-1">
+                                                        <select
+                                                            onChange={handleChange}
+                                                            id="area_id"
+                                                            name="area_id"
+                                                            defaultValue={user.area_id}
+                                                            autoComplete="area_id"
+                                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                                        >
+                                                            <option value="">{trans('choose')} {trans('area')}</option>
+                                                            {
+                                                                map(areas, u => (
+                                                                    <option key={u.id} value={u.id}
+                                                                    >{u[getLocalized()]}</option>
+                                                                ))
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <ToolTipWidget message={trans('user_instruction')}/>
+                                                    <p className={`mt-2  text-gray-500`}>
+                                                        {errors.area_id && <div className={`text-red-900`}>{errors.area_id}</div>}
+                                                    </p>
+                                                </div>
+                                            }
+
+                                            {/* block */}
+                                            <div className="col-span-12 sm:col-span-6">
+                                                <label htmlFor="block"
+                                                       className="block text-sm font-medium text-gray-800">
+                                                    {trans("block")}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="block"
+                                                    id="block"
+                                                    onChange={handleChange}
+                                                    defaultValue={user.block}
+                                                    autoComplete={trans("block")}
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                />
+                                                <p className={`mt-2  text-gray-500`}>
+                                                    {errors.block &&
+                                                    <div className={`text-sm text-red-900`}>{errors.block}</div>}
+                                                </p>
+                                            </div>
+
+
+                                            {/* street */}
+                                            <div className="col-span-12 sm:col-span-6">
+                                                <label htmlFor="street"
+                                                       className="block text-sm font-medium text-gray-800">
+                                                    {trans("street")}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="street"
+                                                    id="street"
+                                                    onChange={handleChange}
+                                                    defaultValue={user.street}
+                                                    autoComplete={trans("street")}
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                />
+                                                <p className={`mt-2  text-gray-500`}>
+                                                    {errors.street &&
+                                                    <div className={`text-sm text-red-900`}>{errors.street}</div>}
+                                                </p>
+                                            </div>
+
+
+                                            {/* building */}
+                                            <div className="col-span-12 sm:col-span-6">
+                                                <label htmlFor="building"
+                                                       className="block text-sm font-medium text-gray-800">
+                                                    {trans("building")}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="building"
+                                                    id="building"
+                                                    onChange={handleChange}
+                                                    defaultValue={user.building}
+                                                    autoComplete={trans("building")}
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                />
+                                                <p className={`mt-2  text-gray-500`}>
+                                                    {errors.building &&
+                                                    <div className={`text-sm text-red-900`}>{errors.building}</div>}
+                                                </p>
+                                            </div>
+
+
+                                            {/* apartment */}
+                                            <div className="col-span-12 sm:col-span-6">
+                                                <label htmlFor="apartment"
+                                                       className="block text-sm font-medium text-gray-800">
+                                                    {trans("apartment")}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="apartment"
+                                                    id="apartment"
+                                                    onChange={handleChange}
+                                                    defaultValue={user.apartment}
+                                                    autoComplete={trans("apartment")}
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                />
+                                                <p className={`mt-2  text-gray-500`}>
+                                                    {errors.apartment &&
+                                                    <div className={`text-sm text-red-900`}>{errors.apartment}</div>}
+                                                </p>
+                                            </div>
+
+                                            {/* floor */}
+                                            <div className="col-span-12 sm:col-span-6">
+                                                <label htmlFor="floor"
+                                                       className="block text-sm font-medium text-gray-800">
+                                                    {trans("floor")}
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="floor"
+                                                    id="floor"
+                                                    onChange={handleChange}
+                                                    defaultValue={user.floor}
+                                                    autoComplete={trans("floor")}
+                                                    className="mt-1 text-black block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm"
+                                                />
+                                                <p className={`mt-2  text-gray-500`}>
+                                                    {errors.floor &&
+                                                    <div className={`text-sm text-red-900`}>{errors.floor}</div>}
+                                                </p>
+                                            </div>
+
+
 
                                         </div>
                                     </div>

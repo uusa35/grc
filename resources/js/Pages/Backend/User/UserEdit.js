@@ -36,7 +36,6 @@ export default function({user, roles, elementCategories, categories, countries, 
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
-        'sku': user.sku,
         'name': user.name,
         'name_ar': user.name_ar,
         'name_en': user.name_en,
