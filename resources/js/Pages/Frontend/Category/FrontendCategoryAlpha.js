@@ -72,7 +72,7 @@ export default function({elements}) {
                                 <div className={`col-span-full lg:col-span-1 anchorBehave`} id={`${c}`}>
                                     <h3 className={`text-2xl border-b border-dashed p-4`}>
                                         <div
-                                            className={`w-12 h-12 rounded-full flex items-center justify-center bg-gray-100 hover:bg-gray-300`}>
+                                            className={`w-12 h-12 rounded-full flex items-center justify-center text-black bg-gray-100 dark:text-white dark:bg-gray-400 hover:bg-gray-300`}>
                                             {c}
                                         </div>
                                     </h3>
