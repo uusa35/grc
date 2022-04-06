@@ -5,14 +5,12 @@ import ElementSlider from "./../components/widgets/slider/ElementSlider";
 import {isMobile, isTablet} from 'react-device-detect';
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
-import {filter, first, isEmpty, map, shuffle} from 'lodash';
-import HomeMainCategory from "./HomeMainCategory";
+import {filter, isEmpty, map} from 'lodash';
 import GlobalContext from "../../context/GlobalContext";
 
 
 export default React.memo(function ({
                                      slides,
-                                     homeCategories,
                                      newOnHomeBooks,
                                      newOnHomeCourses,
                                      newOnHomeProducts,

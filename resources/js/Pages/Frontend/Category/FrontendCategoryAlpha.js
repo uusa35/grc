@@ -1,12 +1,9 @@
 import FrontendContainer from "../components/FrontendContainer";
 import React, {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
-import CategoryWidget from "../components/widgets/category/CategoryWidget";
 import {lowerCase} from 'lodash';
-import FrontendPagination from "../partials/FrontendPagination";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
-import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import {useSelector} from "react-redux";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
@@ -15,7 +12,7 @@ import route from "ziggy-js";
 export default function({elements}) {
     const enAlphabet = "abcdefghijklmnopqrstuvwxyz";
     const arAlphabet = "ابتثجحخدذرزسشصضطظعغقفكلمنهوي";
-    const {trans, contentBgColor, textColor, mainColor, getLocalized, getThumb} = useContext(AppContext);
+    const {trans, contentBgColor, textColor, mainColor, getLocalized} = useContext(AppContext);
     const {params} = route();
     const [type, setType] = useState('book')
     const {sort, locale} = useSelector(state => state);

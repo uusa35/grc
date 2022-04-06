@@ -5,7 +5,6 @@ import {AppContext} from "../../context/AppContext";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
-import { size } from 'lodash';
 
 export default function AboutusPage({settings}) {
     const {trans, getLocalized, mainColor, contentBgColor } = useContext(AppContext)

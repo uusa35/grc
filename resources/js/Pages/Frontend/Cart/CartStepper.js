@@ -1,5 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
-
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from "@inertiajs/inertia-react";

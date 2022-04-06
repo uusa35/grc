@@ -3,18 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Exports\CategoriesExport;
-use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryExtraLightResource;
 use App\Imports\CategoriesImport;
-use App\Imports\UsersImport;
 use App\Models\Category;
-use App\Models\Country;
-use App\Models\Role;
-use App\Models\User;
 use App\Services\Search\CategoryFilters;
-use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;

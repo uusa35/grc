@@ -1,15 +1,12 @@
-import {CheckIcon, ClockIcon} from '@heroicons/react/solid'
 import FrontendContainer from "../components/FrontendContainer";
 import {useDispatch, useSelector} from "react-redux";
-import {useContext, useMemo, useState} from "react";
+import {useContext, useMemo} from "react";
 import {AppContext} from "../../context/AppContext";
-import {isEmpty, isNull, isUndefined, map, truncate} from 'lodash'
+import {isEmpty, isNull} from 'lodash'
 import route from 'ziggy-js';
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {getConvertedFinalPrice} from "../../helpers";
-import moment from "moment";
 import NoElements from "../../Backend/components/widgets/NoElements";
-import {removeFromCart, setDiscount} from "../../redux/actions";
+import {setDiscount} from "../../redux/actions";
 import CartStepper from "./CartStepper";
 import CartIndexOrderSummary from "./CartIndexOrderSummary";
 import FrontendContentContainer from "../components/FrontendContentContainer";
@@ -17,7 +14,7 @@ import OrderSummary from "./OrderSummary";
 
 export default function({coupon = {}}) {
     const {cart, locale} = useSelector(state => state);
-    const {trans, classNames, mainColor , mainBgColor, contentBgColor, btnClass, textColor    } = useContext(AppContext);
+    const {trans, classNames, mainColor , contentBgColor, btnClass, textColor    } = useContext(AppContext);
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({

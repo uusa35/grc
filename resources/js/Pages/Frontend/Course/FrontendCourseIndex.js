@@ -11,7 +11,6 @@ import NormalCourseWidget from "../components/widgets/course/NormalCourseWidget"
 import {useSelector} from "react-redux";
 import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import FrontendContentContainer from "../components/FrontendContentContainer";
-import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 
 export default function FrontendCourseIndex({elements, categories}) {
     const {trans, mainColor , contentBgColor} = useContext(AppContext);

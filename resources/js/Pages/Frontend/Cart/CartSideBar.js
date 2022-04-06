@@ -1,24 +1,3 @@
-/*
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  const colors = require('tailwindcss/colors')
-
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        colors: {
-          orange: colors.orange,
-        },
-      },
-    },
-  }
-  ```
-*/
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -44,9 +23,8 @@ const products = [
         imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
         imageAlt:
             'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-    },
-    // More products...
-]
+    }
+];
 
 export default function CartSideBar() {
     const [open, setOpen] = useState(true)

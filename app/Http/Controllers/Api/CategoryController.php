@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryCollection;
 use App\Models\Category;
 use App\Services\Search\CategoryFilters;
-use App\Services\Search\Filters;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller

@@ -12,7 +12,6 @@ import ElementPrice from "../components/widgets/ElementPrice";
 import moment from "moment";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
-import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery';
 import ElementRating from "../components/widgets/ElementRating";
 import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
@@ -23,7 +22,6 @@ import {checkCartBeforeAdd} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
-import MetaElement from "../../Backend/components/partials/MetaElement";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";

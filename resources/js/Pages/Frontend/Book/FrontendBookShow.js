@@ -34,7 +34,6 @@ export default function({element, relatedElements, auth}) {
         trans,
         classNames,
         getFileUrl,
-        theme,
         mainColor,
         mainBgColor,
         contentBgColor,
@@ -53,7 +52,6 @@ export default function({element, relatedElements, auth}) {
         'qty': 1,
         'price': element.isOnSale ? element.sale_price : element.price,
         'direct_purchase': element.direct_purchase,
-
     });
 
     useMemo(() => {

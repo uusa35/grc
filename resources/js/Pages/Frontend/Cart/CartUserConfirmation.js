@@ -5,9 +5,8 @@ import CartStepper from "./CartStepper";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
-import {filter, first, map, round} from "lodash";
+import {filter, first, map} from "lodash";
 import route from "ziggy-js";
-import {setShipmentFees} from "../../redux/actions";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 import GlobalContext from "../../context/GlobalContext";
 import {Inertia} from "@inertiajs/inertia";
@@ -17,9 +16,6 @@ export default function({countries, auth}) {
     const {
         trans,
         getLocalized,
-        classNames,
-        mainColor,
-        mainBgColor,
         textColor,
         contentBgColor,
         btnClass

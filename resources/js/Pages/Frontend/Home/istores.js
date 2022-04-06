@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "./../components/FrontendContainer";
 import MainGallery from "./../components/widgets/slider/MainGallery";

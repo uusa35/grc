@@ -8,10 +8,8 @@ use App\Http\Requests\UserUpdate;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CountryCollection;
 use App\Http\Resources\RoleCollection;
-use App\Http\Resources\RoleExtraLightResource;
 use App\Http\Resources\SubscriptionCollection;
 use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserExtraLightResource;
 use App\Http\Controllers\Controller;
 use App\Imports\UsersImport;
 use App\Models\Category;
@@ -24,7 +22,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
-use Inertia\Testing\Concerns\Has;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller

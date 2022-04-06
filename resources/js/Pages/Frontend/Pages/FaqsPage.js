@@ -30,7 +30,6 @@ export default function FaqsPage({elements}) {
                         <div className="absolute inset-0 bg-white bg-opacity-75"/>
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-white"/>
                     </div>
-
                     {/* Callout */}
                     <section
                         aria-labelledby="sale-heading"
@@ -55,7 +54,6 @@ export default function FaqsPage({elements}) {
                             }
                         </div>
                     </section>
-
                     {/* Testimonials */}
                     <section
                         aria-labelledby="testimonial-heading"

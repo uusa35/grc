@@ -6,16 +6,14 @@ import GlobalContext from "../../context/GlobalContext";
 import {FaFacebook, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube} from "react-icons/fa";
 import {getWhatsappLink} from "../../helpers";
 import {random} from "lodash";
-import EmbeddedHtml from "../../Backend/components/widgets/EmbeddedHtml";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import {useForm, usePage} from "@inertiajs/inertia-react";
-import axios from "axios";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 
 export default function() {
-    const {trans, getThumb, getLocalized, mainColor , mainBgColor, btnClass , textColor , contentBgColor } = useContext(AppContext);
+    const {trans, getThumb, getLocalized, btnClass , textColor , contentBgColor } = useContext(AppContext);
     const [code, setCode] = useState('');
     const {settings} = useContext(GlobalContext)
 

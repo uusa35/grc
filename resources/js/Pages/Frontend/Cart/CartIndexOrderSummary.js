@@ -6,7 +6,7 @@ import {removeFromCart} from "../../redux/actions";
 import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {useDispatch, useSelector} from "react-redux";
-import {isMobile, isTablet} from 'react-device-detect';
+import {isMobile} from 'react-device-detect';
 
 export default function() {
     const { trans, getThumb , getLocalized } = useContext(AppContext);

@@ -10,7 +10,6 @@ import {map, isEmpty, first, isNull, filter, uniqBy, size} from 'lodash';
 import ElementPrice from "../components/widgets/ElementPrice";
 import ElementTags from "../components/widgets/ElementTags";
 import RelatedItems from "../components/widgets/RelatedItems";
-// import './../../../../../node_modules/react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery';
 import {getWhatsappLink} from "../../helpers";
 import ElementRating from "../components/widgets/ElementRating";

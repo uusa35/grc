@@ -20,7 +20,7 @@ const containerVariants = {
 }
 
 export default function({children, showBreadCrumbs = true, childName = '', parentModuleName = null}) {
-    const {classNames, textColor, contentBgColor } = useContext(AppContext);
+    const {classNames, textColor } = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
 
     return (
@@ -29,7 +29,6 @@ export default function({children, showBreadCrumbs = true, childName = '', paren
         >
                 {showBreadCrumbs && <FrontendBreadCrumbs parentModuleName={parentModuleName} childName={childName}/>}
                 {children}
-
         </div>
     );
 }

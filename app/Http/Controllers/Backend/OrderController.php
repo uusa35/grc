@@ -6,17 +6,11 @@ use App\Exports\OrdersExport;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderCollection;
 use App\Models\Order;
-use App\Models\Product;
-use App\Notifications\OrderPaid;
-use App\Services\Search\Filters;
 use App\Services\Search\OrderFilters;
-use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-class OrderController extends Controller
-{
-
+class OrderController extends Controller {
     /**
      * Create the controller instance.
      *

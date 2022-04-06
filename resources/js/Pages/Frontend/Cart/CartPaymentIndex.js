@@ -12,8 +12,6 @@ import axios from 'axios';
 import {showModal} from "../../redux/actions";
 import ConfirmationModal from "../partials/ConfirmationModal";
 import {clearCart} from "../../redux/actions";
-import GlobalContext from "../../context/GlobalContext";
-
 
 export default function({order, settings , auth }) {
     const {cart, locale, confirmationModal} = useSelector(state => state);

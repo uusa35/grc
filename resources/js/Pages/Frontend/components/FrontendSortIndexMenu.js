@@ -3,13 +3,12 @@ import {ChevronDownIcon} from "@heroicons/react/solid";
 import React, {Fragment, useContext, useCallback} from "react";
 import {toggleSort} from "../../redux/actions";
 import {AiOutlineSortAscending} from "react-icons/ai";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {AppContext} from "../../context/AppContext";
 import {map, filter} from 'lodash'
 
 export default function FrontendSortIndexMenu({showPrice = true}) {
     const {trans, getLocalized, classNames, mainColor, mainBgColor, textColor } = useContext(AppContext);
-    const {sort} = useSelector(state => state);
     const dispatch = useDispatch();
     const sortOptions = [
         {name: 'alphabetical_a_to_z', current: false, colName: getLocalized(), display: true},
