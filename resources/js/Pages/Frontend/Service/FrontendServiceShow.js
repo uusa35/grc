@@ -26,7 +26,6 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import SocialIconShare from "../partials/SocialIconShare";
 import GlobalContext from "../../context/GlobalContext";
 
-
 export default function ({element, relatedElements, auth}) {
     const {getThumb, getLarge, getLocalized, trans, classNames, mainColor , mainBgColor, contentBgColor, textColor } = useContext(AppContext)
     const { settings } = useContext(GlobalContext);

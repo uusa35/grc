@@ -80,7 +80,6 @@ const AppContextProvider = ({children}) => {
         guest: isEmpty(auth),
         currentFont : locale.isRTL ? settings.app_font_ar : settings.app_font_en,
         textColor : `text-${settings.main_theme_color}-900 dark:text-white font-extrabold`,
-        // mainBgColor: `bg-transparent dark:bg-${settings.main_theme_bg_color}-900`,
         mainBgColor: `bg-transparent`,
         contentBgColor: `bg-white dark:bg-${settings.main_theme_bg_color}-900`,
         mainColor: settings.main_theme_color,

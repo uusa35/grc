@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $elements = new CategoryCollection(Category::active()->onlyParent()->with('children.children')->get());
+        $elements = new CategoryCollection(Category::active()->onlyParent()->with('children.children')->orderBy('order','asc')->get());
         return response()->json($elements,200);
     }
 
