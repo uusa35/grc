@@ -25,10 +25,10 @@ class ProductController extends Controller
     public function search(ProductFilters $filters)
     {
         $elements = new ProductCollection(Product::active()->filters($filters)->with('product_attributes', 'color', 'size')
-            ->orderBy('order', 'desc')->paginate(Self::TAKE_LARGE)
+            ->orderBy('order', 'desc')
+            ->paginate(Self::TAKE_LARGE)
             ->withQueryString());
         return $elements;
-//        return response()->json($elements, 200);
     }
 
     /**

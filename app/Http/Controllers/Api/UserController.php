@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookCollection;
+use App\Http\Resources\CategoryCollection;
+use App\Http\Resources\ProductCollection;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\Search\UserFilters;
 use Illuminate\Http\Request;
@@ -16,18 +21,20 @@ class UserController extends Controller
      */
     public function index(UserFilters $filters)
     {
-        $elements = User::active()->filters($filters)->orderBy('id', 'desc')
-            ->paginate(Self::TAKE_LESS)
-            ->withQueryString();
+        $elements = new UserCollection(User::active()->filters($filters)->notAdmins()->notClients()
+            ->whereHas('role', fn($q) => $q->where('is_visible', true))
+            ->paginate(SELF::TAKE_LESS)
+            ->withQueryString());
         return response()->json($elements, 200);
     }
 
     public function search(UserFilters $filters)
     {
-        $elements = User::active()->filters($filters)->orderBy('id', 'desc')
-            ->paginate(Self::TAKE_LESS)
-            ->withQueryString();
-        return response()->json($elements, 200);
+        $elements = new UserCollection(User::active()->filters($filters)->notAdmins()->notClients()
+            ->whereHas('role', fn($q) => $q->where('is_visible', true))
+            ->paginate(SELF::TAKE_LARGE)
+            ->withQueryString());
+        return $elements;
     }
 
     /**
@@ -59,7 +66,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $element = new UserResource($user->load('role', 'images', 'ratings'));
+        $books = BookCollection::make($element->books()->active()->paginate(SELF::TAKE_MIN));
+        $products = ProductCollection::make($element->products()->active()->with('categories.children')->paginate(SELF::TAKE_MIN));
+        $categories = CategoryCollection::make($products->pluck('categories')->flatten());
+        return response()->json(compact('element', 'products', 'categories'));
     }
 
     /**
