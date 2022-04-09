@@ -11,6 +11,7 @@ import GlobalContext from "../../context/GlobalContext";
 import {motion} from 'framer-motion';
 import IstoresMainNav from "../partials/header/IstoresMainNav";
 import MgtMainNav from "../partials/header/MgtMainNav";
+import LoadingView from "../../Backend/components/widgets/LoadingView";
 
 
 const currentVariants = {
@@ -19,7 +20,7 @@ const currentVariants = {
 };
 
 const FrontendContainer = ({children}) => {
-    const {locale, theme, menuBg} = useSelector(state => state)
+    const {locale, theme, menuBg, isLoading } = useSelector(state => state)
     const {settings, appName} = useContext(GlobalContext);
     const {
         currentFont,
@@ -62,7 +63,7 @@ const FrontendContainer = ({children}) => {
                 <div
                     className={classNames(settings.wide_screen && currentHome ? `` : `lg:pt-32`, `min-h-screen ${textColor}`)}>
                     <SystemMessage/>
-                    {children}
+                    {isLoading ? <LoadingView /> : children}
                 </div>
                 <Footer/>
             </main>

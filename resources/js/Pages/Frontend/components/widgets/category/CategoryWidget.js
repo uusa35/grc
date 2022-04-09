@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Link} from "@inertiajs/inertia-react";
-import {AppContext} from "../../../../context/AppContext";
 import route from 'ziggy-js';
+import {AppContext} from "../../../../context/AppContext";
 import { motion } from "framer-motion"
 
 const CategoryWidget = ({element, type = 'book', showTitle = true}) => {

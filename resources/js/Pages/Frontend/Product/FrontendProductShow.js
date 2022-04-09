@@ -26,6 +26,8 @@ import SocialIconShare from "../partials/SocialIconShare";
 import {FaWhatsapp} from "react-icons/fa";
 import SizeChartModal from "../partials/SizeChartModal";
 import validate from "validate.js";
+import {Link} from "@inertiajs/inertia-react";
+import route from 'ziggy-js';
 
 
 export default function({element, relatedElements, auth, settings}) {
@@ -141,6 +143,8 @@ export default function({element, relatedElements, auth, settings}) {
         setCurrentImages(images);
     }, [element])
 
+    console.log('the element', element);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const currentPrice = element.has_attributes && !element.isOnSale ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price);
@@ -150,7 +154,7 @@ export default function({element, relatedElements, auth, settings}) {
             element_id: element.id,
             qty: selectedQty,
             price: currentPrice,
-            totalPrice :  parseFloat(currentPrice * selectedQty),
+            totalPrice: parseFloat(currentPrice * selectedQty),
             direct_purchase: element.direct_purchase,
             shipmentFees: 0,
             image: element.image,
@@ -161,13 +165,13 @@ export default function({element, relatedElements, auth, settings}) {
             merchant_id: element.user.id,
             merchant_name_ar: element.user.name_ar,
             merchant_name_en: element.user.name_en,
-            merchant_enable_receive_from_shop : element.user.enable_receive_from_shop,
-            merchant_custome_delivery : element.user.custome_delivery,
-            merchant_custome_delivery_fees : element.user.custome_delivery_fees,
+            merchant_enable_receive_from_shop: element.user.enable_receive_from_shop,
+            merchant_custome_delivery: element.user.custome_delivery,
+            merchant_custome_delivery_fees: element.user.custome_delivery_fees,
             color: element.has_attributes ? selectedAttribute.color[getLocalized()] : element.color[getLocalized()],
             size: element.has_attributes ? selectedAttribute.size[getLocalized()] : element.size[getLocalized()],
             attribute_id: `${element.has_attributes ? selectedAttribute.id : ''}`,
-            weight : parseFloat(element.weight) ? element.weight : 0,
+            weight: parseFloat(element.weight) ? element.weight : 0,
             notes
         }))
     }
@@ -272,7 +276,7 @@ export default function({element, relatedElements, auth, settings}) {
                         </div>
                         {/* Product info */}
                         <div className="mx-5 mt-10 pt-10 sm:px-0 sm:mt-16 lg:mt-0">
-                            <h1 className={`text-3xl font-bold tracking-tight text-${mainColor}-800 dark:text-${mainColor}-50`}>{element[getLocalized()]}</h1>
+                            <h1 className={`text-3xl font-bold tracking-tight ${textColor}`}>{element[getLocalized()]}</h1>
                             <div className="mt-3">
                                 <h2 className="sr-only">{trans('information')}</h2>
                                 <ElementPrice price={finalPrice}
@@ -292,7 +296,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
+                                                className={`text-base ${textColor} space-y-6`}
                                             >{element[getLocalized('caption')]}</div>
                                         </div>
                                     }
@@ -302,7 +306,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         !isNull(element.sku) && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
-                                                className={`text-base text-${mainColor}-800 dark:text-${mainColor}-100 space-y-6`}
+                                                className={`text-base ${textColor} space-y-6`}
                                             >
                                                 {trans('reference_id')} :
                                                 {element.sku}
@@ -401,7 +405,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         attribute.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                         active ? `ring-2 ring-offset-2 ring-${mainColor}-200 dark:ring-${mainColor}-800` : '',
                                                                         checked
-                                                                            ? `bg-${mainColor}-400 dark:bg-${mainColor}-400 border-transparent text-${mainColor}-800 dark:text-${mainColor}-50 hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`
+                                                                            ? `bg-${mainColor}-400 dark:bg-${mainColor}-400 border-transparent ${textColor} hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`
                                                                             : `${mainBgColor} border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-200 hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`,
                                                                         'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                     )
@@ -491,7 +495,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                             element.size ? 'cursor-pointer focus:outline-none' : 'opacity-25 cursor-not-allowed',
                                                                             active ? `ring-2 ring-offset-2 ring-${mainColor}-200 dark:ring-${mainColor}-800` : '',
                                                                             checked
-                                                                                ? `bg-${mainColor}-400 dark:bg-${mainColor}-400 border-transparent text-${mainColor}-800 dark:text-${mainColor}-50 hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`
+                                                                                ? `bg-${mainColor}-400 dark:bg-${mainColor}-400 border-transparent ${textColor} hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`
                                                                                 : `${mainBgColor} border-gray-200 text-${mainColor}-800 dark:text-${mainColor}-200 hover:bg-${mainColor}-400 dark:hover:bg-${mainColor}-400`,
                                                                             'border rounded-md py-3 px-3 flex items-center justify-center text-xs font-medium uppercase sm:flex-1 truncate'
                                                                         )
@@ -633,8 +637,11 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-50`}>
+                                                        <p className={`${textColor}`}>
                                                             {element[getLocalized('description')]}
+                                                        </p>
+                                                        <p>
+
                                                         </p>
                                                     </Disclosure.Panel>
                                                 </>
@@ -673,7 +680,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                       </span>
                                                     </Disclosure.Button>
                                                     <Disclosure.Panel as="div" className="pb-6">
-                                                        <p className={`capitalize font-bold text-${mainColor}-800 dark:text-${mainColor}-50`}>
+                                                        <p className={`${textColor}`}>
                                                             {element[getLocalized('notes')]}
                                                         </p>
                                                     </Disclosure.Panel>
@@ -722,7 +729,13 @@ export default function({element, relatedElements, auth, settings}) {
                                                         <div className="rtl:mr-5 ltr:ml-5">
                                                             <div
                                                                 className={`border-b border-${mainColor}-800 dark:text-${mainColor}-100 mb-2 pb-2`}>
-                                                                <h4>{element.user[getLocalized()]}</h4>
+                                                                <h4>
+                                                                    <Link
+                                                                        href={route('frontend.user.show', {id: element.user.id})}
+                                                                    >
+                                                                        {element.user[getLocalized()]}
+                                                                    </Link>
+                                                                </h4>
                                                                 <p>{element.user[getLocalized('caption')]}</p>
                                                             </div>
                                                             <p className={`text-sm text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized('description')]}</p>
@@ -767,8 +780,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                 </svg>
                                             </div>
                                             <span
-                                                className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('reference_id')}</span>
-                                            <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{element.sku}</dd>
+                                                className={`mt-4 text-sm font-medium ${textColor}`}>{trans('reference_id')}</span>
+                                            <dd className={`mt-1 text-sm ${textColor}`}>{element.sku}</dd>
                                         </div>
                                     }
                                 </dl>
@@ -786,7 +799,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     classNames(
                                                         selected
                                                             ? `border-${mainColor}-600 dark:border-${mainColor}-100 text-${mainColor}-800 dark:text-${mainColor}-200`
-                                                            : `border-transparent text-${mainColor}-600 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
+                                                            : `border-transparent ${textColor} hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
                                                         'whitespace-nowrap px-10 py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
@@ -801,7 +814,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     classNames(
                                                         selected
                                                             ? `border-${mainColor}-600 dark:border-${mainColor}-100 text-${mainColor}-800 dark:text-${mainColor}-200`
-                                                            : `border-transparent text-${mainColor}-600 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
+                                                            : `border-transparent ${textColor} hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
                                                         'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                     )
                                                 }
@@ -814,7 +827,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                 classNames(
                                                     selected
                                                         ? `border-${mainColor}-600 dark:border-${mainColor}-100 text-${mainColor}-800 dark:text-${mainColor}-200`
-                                                        : `border-transparent text-${mainColor}-600 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
+                                                        : `border-transparent ${textColor} hover:text-${mainColor}-800 dark:text-${mainColor}-100 hover:border-${mainColor}-100 dark:border-${mainColor}-600`,
                                                     'whitespace-nowrap px-10  py-6 border-b-2 font-medium text-sm capitalize'
                                                 )
                                             }
@@ -830,8 +843,14 @@ export default function({element, relatedElements, auth, settings}) {
                                         <Tab.Panel as="dl" className="text-sm text-gray-500 h-60">
                                             <h3 className="sr-only">{trans('description')}</h3>
                                             <Fragment key={'description'}>
-                                                <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-800 dark:text-${mainColor}-50 p-10 capitalize`}>
+                                                <dd className={`mt-2 prose prose-sm max-w-none ${textColor} p-10 capitalize`}>
                                                     <p>{element[getLocalized('description')]}</p>
+                                                    <p className={`mt-2`}>
+                                                        {trans('categories')} : {map(element.categories, c => <Link
+                                                        className={`mx-2 p-3 bg-gray-100 rounded-md`}
+                                                        href={route('frontend.product.index', {category_id: c.id})}>{c[getLocalized()]}
+                                                    </Link>)}
+                                                    </p>
                                                 </dd>
                                             </Fragment>
                                         </Tab.Panel>
@@ -841,7 +860,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         !isNull(element[getLocalized('notes')]) && size(element[getLocalized('notes')]) > 5 &&
                                         <Tab.Panel className="text-sm text-gray-500 h-60">
                                             <Fragment key={'description'}>
-                                                <dd className={`mt-2 prose prose-sm max-w-none text-${mainColor}-800 dark:text-${mainColor}-50 p-10 capitalize`}>
+                                                <dd className={`mt-2 prose prose-sm max-w-none ${textColor} p-10 capitalize`}>
                                                     <p>
                                                         {element[getLocalized('notes')]}
                                                     </p>
@@ -853,19 +872,29 @@ export default function({element, relatedElements, auth, settings}) {
                                     <Tab.Panel className="text-sm text-gray-900 h-60">
                                         <div
                                             className="flex w-full justify-start items-start p-10 capitalize">
-                                            <div>
-                                                <img
-                                                    className="w-20 h-20 object-cover rounded-full shadow-md"
-                                                    src={getThumb(element.user.image)}
-                                                    alt={element.user[getLocalized()]}/>
+                                            <div className={`w-24 h-auto`}>
+                                                <Link
+                                                    href={route('frontend.user.show', element.user.id) + `?slug=${element.user[getLocalized()].replace(/ /g, '-')}`}
+                                                >
+                                                    <img
+                                                        className="w-20 h-20 object-cover object-center rounded-full shadow-md"
+                                                        src={getThumb(element.user.image)}
+                                                        alt={element.user[getLocalized()]}/>
+                                                </Link>
                                             </div>
                                             <div className="rtl:mr-5 ltr:ml-5 w-full">
                                                 <div
                                                     className={`border-b border-${mainColor}-200 dark:text-${mainColor}-100 mb-2 pb-2`}>
-                                                    <h4 className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized()]}</h4>
-                                                    <p className={`text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized('caption')]}</p>
+                                                    <h4 className={`${textColor}`}>
+                                                        <Link
+                                                            href={route('frontend.user.show', element.user.id) + `?slug=${element.user[getLocalized()].replace(/ /g, '-')}`}
+                                                        >
+                                                            {element.user[getLocalized()]}
+                                                        </Link>
+                                                    </h4>
+                                                    <p className={`${textColor}`}>{element.user[getLocalized('caption')]}</p>
                                                 </div>
-                                                <p className={`text-sm text-${mainColor}-800 dark:text-${mainColor}-100`}>{element.user[getLocalized('description')]}</p>
+                                                <p className={`text-sm ${textColor}`}>{element.user[getLocalized('description')]}</p>
                                             </div>
                                         </div>
 
@@ -885,8 +914,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                             </svg>
                                                         </div>
                                                         <span
-                                                            className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('direct_purchase')}</span>
-                                                        <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('direct_purchase')}</dd>
+                                                            className={`mt-4 text-sm font-medium ${textColor}`}>{trans('direct_purchase')}</span>
+                                                        <dd className={`mt-1 text-sm ${textColor}`}>{trans('direct_purchase')}</dd>
                                                     </div> : null
                                                 }
                                                 {
@@ -904,8 +933,8 @@ export default function({element, relatedElements, auth, settings}) {
                                                             </svg>
                                                         </div>
                                                         <span
-                                                            className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('reference_id')}</span>
-                                                        <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{element.sku}</dd>
+                                                            className={`mt-4 text-sm font-medium ${textColor}`}>{trans('reference_id')}</span>
+                                                        <dd className={`mt-1 text-sm ${textColor}`}>{element.sku}</dd>
                                                     </div>
                                                 }
                                             </dl>
