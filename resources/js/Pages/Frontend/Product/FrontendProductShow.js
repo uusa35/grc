@@ -435,11 +435,25 @@ export default function({element, relatedElements, auth, settings}) {
                                                             </div>
                                                             <div>
                                                                 {
-                                                                    element.show_size_chart ? <button
-                                                                        onClick={() => setShowModal(true)}
-                                                                        className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-white hover:text-${mainColor}-800  dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
-                                                                        {trans('size_chart')}
-                                                                    </button> : null
+                                                                    element.show_size_chart ?
+                                                                        <div className="justify-end items-center">
+                                                                            <button
+                                                                                onClick={() => setShowModal(true)}
+                                                                                className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
+                                                                                <div>
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                         className="h-6 w-6 mx-1" fill="none"
+                                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                                        <path strokeLinecap="round"
+                                                                                              strokeLinejoin="round" strokeWidth="2"
+                                                                                              d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                                                                    </svg>
+                                                                                </div>
+                                                                                <div>
+                                                                                    {trans('size_chart')}
+                                                                                </div>
+                                                                            </button>
+                                                                        </div> : null
                                                                 }
                                                             </div>
                                                         </div>
