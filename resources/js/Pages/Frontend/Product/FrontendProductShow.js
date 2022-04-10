@@ -425,12 +425,12 @@ export default function({element, relatedElements, auth, settings}) {
                                             {/* single  attribute */}
                                             {element.show_attribute &&
                                             <div className="flex flex-row justify-between items-center gap-x-5">
-                                                <div className="mt-2 lg:col-span-5 w-ful">
+                                                <div className="mt-2 lg:col-span-5 w-full">
                                                     {/* Color picker */}
-
+                                                    <div>
                                                         <div
                                                             className="flex w-full flex-1 flex-row justify-between items-center">
-                                                                <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-white capitalize`}>{trans('color')}</h2>
+                                                            <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-white capitalize`}>{trans('color')}</h2>
                                                             <div>
                                                                 {
                                                                     element.show_size_chart ?
@@ -439,11 +439,15 @@ export default function({element, relatedElements, auth, settings}) {
                                                                                 onClick={() => setShowModal(true)}
                                                                                 className={`flex flex-row items-center justify-center text-xs font-bold text-${mainColor}-800 dark:text-${mainColor}-100 hover:text-${mainColor}-800 dark:text-${mainColor}-100 dark:hover:text-${mainColor}-200 capitalize p-2 rounded-md border-2 border-${mainBgColor}-100 bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600`}>
                                                                                 <div>
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                         className="h-6 w-6 mx-1" fill="none"
-                                                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                                                    <svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        className="h-6 w-6 mx-1"
+                                                                                        fill="none"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        stroke="currentColor">
                                                                                         <path strokeLinecap="round"
-                                                                                              strokeLinejoin="round" strokeWidth="2"
+                                                                                              strokeLinejoin="round"
+                                                                                              strokeWidth="2"
                                                                                               d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                                                                     </svg>
                                                                                 </div>
@@ -454,7 +458,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         </div> : null
                                                                 }
                                                             </div>
-
+                                                        </div>
 
                                                         <RadioGroup value={selectedColor} onChange={setSelectedColor}
                                                                     className="mt-4">
