@@ -23,9 +23,9 @@ class UserController extends Controller
     {
         $elements = new UserCollection(User::active()->filters($filters)->notAdmins()->notClients()
             ->whereHas('role', fn($q) => $q->where('is_visible', true))
-            ->paginate(SELF::TAKE_LESS)
+            ->paginate(SELF::TAKE_LARGE)
             ->withQueryString());
-        return response()->json($elements, 200);
+        return $elements;
     }
 
     public function search(UserFilters $filters)
