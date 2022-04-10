@@ -430,9 +430,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     <div>
                                                         <div
                                                             className="flex w-full flex-1 flex-row justify-between items-center">
-                                                            <div>
                                                                 <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-white capitalize`}>{trans('color')}</h2>
-                                                            </div>
                                                             <div>
                                                                 {
                                                                     element.show_size_chart ?
@@ -469,14 +467,14 @@ export default function({element, relatedElements, auth, settings}) {
                                                                     value={element.color_id}
                                                                     className={({active, checked}) =>
                                                                         classNames(
-                                                                            element.color,
-                                                                            active && checked ? 'ring ring-offset-1' : '',
-                                                                            !active && checked ? 'ring-2' : '',
-                                                                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
+                                                                            active && checked ? `ring-2 ring-offset-1 ring-${mainColor}-100 dark:ring-${mainColor}-400` : `ring-2 ring-offset-1 ring-${mainColor}-100 dark:ring-${mainColor}-400`,
+                                                                            !active && checked ? `ring-2 ring-${mainColor}-100 dark:ring-${mainColor}-800` : `ring-2 ring-${mainColor}-200 dark:ring-${mainColor}-600`,
+                                                                            `-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none hover:bg-${mainBgColor}-400`
                                                                         )
                                                                     }
                                                                 >
-                                                                    <RadioGroup.Label as="p" className="sr-only">
+                                                                    <RadioGroup.Label as="p"
+                                                                                      className={`text-${mainColor}-800 dark:text-${mainColor}-100 font-bold text-sm mx-2`}>
                                                                         {element.color[getLocalized()]}
                                                                     </RadioGroup.Label>
                                                                     <span
