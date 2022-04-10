@@ -425,9 +425,9 @@ export default function({element, relatedElements, auth, settings}) {
                                             {/* single  attribute */}
                                             {element.show_attribute &&
                                             <div className="flex flex-row justify-between items-center gap-x-5">
-                                                <div className="mt-2 lg:col-span-5">
+                                                <div className="mt-2 lg:col-span-5 w-ful">
                                                     {/* Color picker */}
-                                                    <div>
+
                                                         <div
                                                             className="flex w-full flex-1 flex-row justify-between items-center">
                                                                 <h2 className={`text-sm font-bold text-${mainColor}-800 dark:text-white capitalize`}>{trans('color')}</h2>
@@ -454,7 +454,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                                         </div> : null
                                                                 }
                                                             </div>
-                                                        </div>
+
 
                                                         <RadioGroup value={selectedColor} onChange={setSelectedColor}
                                                                     className="mt-4">
