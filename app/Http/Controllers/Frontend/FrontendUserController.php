@@ -87,7 +87,7 @@ class FrontendUserController extends Controller
             'name_en' => $request->name,
             'password' => Hash::make('secret'),
             'role_id' => Role::where('is_client', true)->first()->id,
-            'subscription_id' => Subscription::where('free', true)->first()->id,
+            'subscription_id' => Subscription::all()->first()->id,
             'governate_id' => $country->governates->first()->id,
             'area_id' => $country->governates->first()->areas->first()->id,
             'email_verified_at' => Carbon::today()

@@ -143,8 +143,6 @@ export default function({element, relatedElements, auth, settings}) {
         setCurrentImages(images);
     }, [element])
 
-    console.log('the element', element);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const currentPrice = element.has_attributes && !element.isOnSale ? parseFloat(finalPrice) : parseFloat(element.isOnSale ? element.sale_price : element.price);
