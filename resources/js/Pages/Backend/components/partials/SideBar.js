@@ -398,6 +398,45 @@ const SideBar = () => {
                                         }
                                     </span>
                                 ))}
+                                <Link
+                                    href={route(`backend.order.search`, { paid : true })}
+                                    className={classNames(
+                                        route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                    )}
+                                    aria-current={'page'}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 13h6M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                                    </svg>
+                                    {trans(pluralize('paid_order'))}
+                                </Link>
+                                <Link
+                                    href={route(`backend.order.search`, { status : 'pending' })}
+                                    className={classNames(
+                                        route().params.status === 'pending' && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                    )}
+                                    aria-current={'page'}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 13h6M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                                    </svg>
+                                    {trans(pluralize('pending_orders'))}
+                                </Link>
+                                <Link
+                                    href={route(`backend.order.search`, { status : 'failed' })}
+                                    className={classNames(
+                                        route().params.status === 'failed' && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                    )}
+                                    aria-current={'page'}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 13h6M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                                    </svg>
+                                    {trans(pluralize('failed_orders'))}
+                                </Link>
                             </div>
                         </nav>
                     </div>

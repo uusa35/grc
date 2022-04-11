@@ -1060,7 +1060,7 @@ export default function() {
                                                         )}
                                                     </Menu.Item>
                                                     {
-                                                        auth.verified && auth.role.is_author && <Menu.Item>
+                                                        (auth.role.is_author || auth.role.is_company) && auth.access_dashboard && <Menu.Item>
                                                             {({active}) => (
                                                                 <Link
                                                                     href={route('backend.home')}

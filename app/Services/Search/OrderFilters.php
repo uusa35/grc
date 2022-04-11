@@ -42,6 +42,11 @@ class OrderFilters extends QueryFilters
         return $this->builder->where(['paid' => request()->paid]);
     }
 
+    public function status()
+    {
+        return $this->builder->where('status', '=' , request()->status);
+    }
+
     public function cash_on_delivery()
     {
         return $this->builder->where(['cash_on_delivery' => true]);

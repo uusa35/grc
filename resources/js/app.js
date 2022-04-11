@@ -1,4 +1,5 @@
-import {render} from 'react-dom'
+// import ReactDOM, {render} from 'react-dom'
+import { createRoot } from 'react-dom/client';
 import {createInertiaApp} from '@inertiajs/inertia-react'
 import GlobalContext from "./Pages/context/GlobalContext";
 import {AppContextProvider} from "./Pages/context/AppContext";
@@ -20,7 +21,9 @@ createInertiaApp({
             includeCSS: true,
             showSpinner: true,
         })
-        return render(
+        const root = createRoot(el);
+
+        return root.render(
             <GlobalContext.Provider value={{auth, settings, currencies, categories, appName}}>
                 <Provider store={store}>
                     <PersistGate loading={<LoadingView/>}
@@ -34,6 +37,6 @@ createInertiaApp({
                     </PersistGate>
                 </Provider>
             </GlobalContext.Provider>
-            , el)
+            )
     }
 });
