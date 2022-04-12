@@ -74,10 +74,10 @@ class FrontendCartController extends Controller
         if ($validator->fails()) {
             return redirect()->route('frontend.cart.information')->withErrors(['message' => $validator->errors()->first()], 400);
         }
-        $order = Order::whereId($request->order_id)->with('user')->first();
+        $order = Order::whereId($request->order_id)->with('user', 'order_metas.ordermetable', 'order_metas.product_attribute')->first();
         $settings = Setting::first();
-        if (env('MAIL_ENABLED')) {
-            Mail::to($settings->email)->cc($order->user->email)->send(new OrderPaid($order));
+        if(env('MAIL_ENABLED')) {
+            Mail::to($settings->email)->cc([$order->user->email, $order->order_metas->first()->ordermetable->user->email])->send(new OrderPaid($order));
         }
         $markdown = new Markdown(view(), config('mail.markdown'));
         return $markdown->render('emails.orders.paid', ['order' => $order]);
