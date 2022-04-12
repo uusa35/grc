@@ -7,9 +7,9 @@ import {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link, useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
-import {map, filter} from 'lodash';
+import {map, filter, first } from 'lodash';
 import axios from 'axios';
-import {showModal} from "../../redux/actions";
+import {showModal, showToastMessage} from "../../redux/actions";
 import ConfirmationModal from "../partials/ConfirmationModal";
 import {clearCart} from "../../redux/actions";
 
@@ -19,15 +19,15 @@ export default function({order, settings , auth }) {
     const paymentMethods = [
         {
             id: 1,
-            name: 'paypal',
-            paymentRoute: route('paypal.api.payment.create'),
-            enabled: settings.enable_payment_online && settings.enable_books
-        },
-        {
-            id: 2,
             name: settings.payment_method,
             paymentRoute: route(`${settings.payment_method}.api.payment.create`),
             enabled: settings.enable_payment_online
+        },
+        {
+            id: 2,
+            name: 'paypal',
+            paymentRoute: route('paypal.api.payment.create'),
+            enabled: settings.enable_payment_online && settings.enable_books
         },
         {
             id: 3,
@@ -36,9 +36,9 @@ export default function({order, settings , auth }) {
             enabled: settings.cash_on_delivery && cart.shipmentCountry.is_local
         },
     ]
-    const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0])
+    const [paymentMethod, setPaymentMethod] = useState(first(map(paymentMethods, p => p.enabled)))
     const [currentURL, setCurrentUrl] = useState('');
-    const [btnDisabled, setBtnDisabled] = useState(false);
+    const [btnDisabled, setBtnDisabled] = useState(true);
     const dispatch = useDispatch()
 
     const {data, setData, put, post, progress, reset} = useForm({
@@ -85,6 +85,14 @@ export default function({order, settings , auth }) {
     const handleChoosePaymentMethod = (p) => {
         setPaymentMethod(p)
         setBtnDisabled(true)
+    }
+
+    const handleGoToPayment = () => {
+        if(btnDisabled) {
+            dispatch(showToastMessage({message: trans('no_payment_method_selected'), type: 'error'}))
+        } else {
+            dispatch(clearCart())
+        }
     }
 
     return (
@@ -157,8 +165,8 @@ export default function({order, settings , auth }) {
                         {
                             settings.enable_payment_online ? <div className="flex">
                                 <a
-                                    onClick={() => dispatch(clearCart())}
-                                    href={!btnDisabled ? currentURL : '#'}
+                                    onClick={() => handleGoToPayment()}
+                                    href={btnDisabled ? '#' : currentURL}
                                     className={`disabled ${btnClass} capitalize flex flex-row w-full sm:w-auto justify-between items-center  border border-transparent rounded-md shadow-sm py-3 px-4 space-y-5 text-base font-medium  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                 >
                                     {trans('go_to_payment_page')}
