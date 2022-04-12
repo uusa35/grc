@@ -234,7 +234,7 @@ export default function({countries, auth, settings}) {
                         {/* country_id */}
                         <div className="lg:col-span-1">
                             <label htmlFor="country_id" className="block   ">
-                                {trans('country')}
+                                {trans('country')}*
                             </label>
                             <div className="mt-1">
                                 <select
@@ -264,7 +264,7 @@ export default function({countries, auth, settings}) {
                         {
                             governates && <div className="lg:col-span-1">
                                 <label htmlFor="governate_id" className="block   ">
-                                    {trans('governate')}
+                                    {trans('governate')}*
                                 </label>
                                 <div className="mt-1">
                                     <select
@@ -295,7 +295,7 @@ export default function({countries, auth, settings}) {
                         {
                             areas && <div className="lg:col-span-1">
                                 <label htmlFor="area_id" className="block   ">
-                                    {trans('area')}
+                                    {trans('area')}*
                                 </label>
                                 <div className="mt-1">
                                     <select
@@ -326,7 +326,7 @@ export default function({countries, auth, settings}) {
                         {/* block */}
                         <div className="lg:col-span-1">
                             <label htmlFor="block" className="block text-sm font-medium ">
-                                {trans('block')}
+                                {trans('block')}*
                             </label>
                             <div className="mt-1">
                                 <input
@@ -348,7 +348,7 @@ export default function({countries, auth, settings}) {
                         {/* street */}
                         <div className="lg:col-span-1">
                             <label htmlFor="street" className="street text-sm font-medium ">
-                                {trans('street')}
+                                {trans('street')}*
                             </label>
                             <div className="mt-1">
                                 <input
@@ -378,7 +378,6 @@ export default function({countries, auth, settings}) {
                                     type="text"
                                     id="building"
                                     name="building"
-                                    required
                                     defaultValue={data.building}
                                     autoComplete="given-building"
                                     className=" w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
