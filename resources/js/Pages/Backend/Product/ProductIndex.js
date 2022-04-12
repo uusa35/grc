@@ -420,7 +420,7 @@ export default React.memo(function({elements}) {
                                                                                     </> : null
                                                                             }
                                                                         </div>
-                                                                        {isAdminOrAbove && <div className="py-1">
+                                                                        <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
@@ -448,7 +448,7 @@ export default React.memo(function({elements}) {
                                                                                     </Link>
                                                                                 )}
                                                                             </Menu.Item>
-                                                                        </div>}
+                                                                        </div>
                                                                         <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (

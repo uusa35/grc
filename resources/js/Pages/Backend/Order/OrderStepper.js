@@ -9,12 +9,12 @@ export default function({currentStatus, isPaid, id }) {
     const {trans, classNames, isAdminOrAbove } = useContext(AppContext);
 
     return (
-        <nav aria-label="Progress print:hidden">
+        <nav aria-label="Progress print:hidden my-5">
             <ol role="list" className="p-8 md:flex md:space-y-0 md:gap-x-8 hidden md:block">
                 {/* paid or pending */}
                 <li className={classNames(isPaid ? `border-green-900` : `border-gray-100`, "flex flex-1 items-center justify-center border-t-4")}>
                     <Link
-                        href="#"
+                        href={route('backend.order.switch', { status : 'pending', order_id : id})}
                         disabled
                         className="pl-4 py-2 flex flex-1  flex-col items-center justify-center  md:pl-0 md:pt-4 md:pb-0"
                     >
@@ -32,7 +32,7 @@ export default function({currentStatus, isPaid, id }) {
                     isPaid && currentStatus !== 'paid' ?
                         <li className={classNames(isPaid ? `border-green-900` : `border-gray-100`, "flex flex-1 items-center justify-center border-t-4")}>
                             <Link
-                                href="#"
+                                href={route('backend.order.switch', { status : 'failed', order_id : id})}
                                 disabled
                                 className="pl-4 py-2 flex flex-1  flex-col items-center justify-center  md:pl-0 md:pt-4 md:pb-0"
                             >

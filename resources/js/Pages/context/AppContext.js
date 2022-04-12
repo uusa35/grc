@@ -77,6 +77,7 @@ const AppContextProvider = ({children}) => {
         isAdminOrAbove: !isEmpty(auth) && (auth.role?.is_admin || auth.role?.is_super),
         isSuper: !isEmpty(auth) && auth.role?.is_super,
         isAuthor: !isEmpty(auth) && auth.role?.is_author,
+        isCompany : !isEmpty(auth) && auth.role?.is_company,
         guest: isEmpty(auth),
         currentFont : locale.isRTL ? settings.app_font_ar : settings.app_font_en,
         textColor : `text-${settings.main_theme_color}-900 dark:text-white font-extrabold`,

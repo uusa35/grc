@@ -75,7 +75,7 @@ class OrderController extends Controller {
      */
     public function show(Order $order)
     {
-        $order->load('order_metas.ordermetable', 'user', 'coupon');
+        $order->load('order_metas.ordermetable','order_metas.merchant', 'user', 'coupon');
         return inertia('Backend/Order/OrderShow', compact('order'));
     }
 

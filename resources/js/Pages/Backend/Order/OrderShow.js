@@ -1,22 +1,22 @@
 import {AppContext} from "../../context/AppContext";
-import {lowerCase, map} from 'lodash'
+import { map, first } from 'lodash'
 import {useContext, useRef} from "react";
 import BackendContainer from "../components/containers/BackendContainer";
 import moment from "moment";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import {getTypeFromModel} from "../../helpers";
-import CartStepper from "../../Frontend/Cart/CartStepper";
 import OrderStepper from "./OrderStepper";
 import {useSelector} from "react-redux";
-import ReactToPrint, {useReactToPrint} from 'react-to-print';
+import {useReactToPrint} from 'react-to-print';
 import GlobalContext from "../../context/GlobalContext";
 
 export default function({order}) {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext);
+    const {classNames, trans, getThumb, getLocalized, isAdminOrAbove, isAuthor , isCompany  } = useContext(AppContext);
     const {locale} = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
     const componentRef = useRef();
+    const merchant = first(order.order_metas).merchant;
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
@@ -63,39 +63,73 @@ export default function({order}) {
                     <h2 className="sr-only">{trans("products")}</h2>
                     <div className="space-y-3">
                         <div className="sm:col-span-12 md:col-span-7">
-                            <dl className="grid grid-cols-1 gap-y-8 border-b py-8 border-gray-200 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10">
-                                <div>
-                                    <dt className="font-medium text-gray-900">{trans('client_information')}</dt>
-                                    <dd className="mt-3 text-gray-500">
-                                        <span className="block">{trans('name')} : {order.user.name}</span>
-                                        <span
-                                            className="block">{trans('address')} : {`${order.country} - ${order.area} - ${trans('block')} : ${order.block}, ${trans('street')} : ${order.street},`}</span>
-                                        <span className="block">{trans('country')} : {order.country}</span>
-                                        {order.mobile && order.mobile.length > 4 ?
-                                            <span className="block">{trans('mobile')} : {order.mobile}</span> : null}
-                                        {order.phone && order.phone.length > 4 ?
-                                            <span className="block">{trans('phone')} : {order.phone}</span> : null}
-                                        {order.email && order.email.length > 4 ?
-                                            <span className="block">{trans('email')} : {order.email}</span> : null}
-                                    </dd>
-                                </div>
-                                <div className="hidden">
-                                    <dt className="font-medium text-gray-900">Shipping updates</dt>
-                                    <dd className="mt-3 text-gray-500 space-y-3">
-                                        <p>{order.user.email}</p>
-                                        <p>{order.user.mobile}</p>
-                                        <button type="button" className="font-medium text-gray-600 hover:text-gray-500">
-                                            Edit
-                                        </button>
-                                    </dd>
-                                </div>
-                            </dl>
-                            <p className="font-medium text-gray-900 mt-6 md:mt-10">
-                                {trans('order_status')} : {trans(order.status)}
+                            <div className="flex flex-row justify-between">
+                                {/* client_information */}
+                                <dl className="grid grid-cols-1 gap-y-8 border-b py-8 border-gray-200 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10">
+                                    <div>
+                                        <dt className="font-medium text-gray-900">{trans('client_information')}</dt>
+                                        <dd className="mt-3 text-gray-500">
+                                            <span className="block">{trans('name')} : {order.user.name}</span>
+                                            <span
+                                                className="block">{trans('address')} : {`${order.country} - ${order.area} - ${trans('block')} : ${order.block}, ${trans('street')} : ${order.street},`}</span>
+                                            <span className="block">{trans('country')} : {order.country}</span>
+                                            {order.mobile && order.mobile.length > 4 ?
+                                                <span className="block">{trans('mobile')} : {order.mobile}</span> : null}
+                                            {order.phone && order.phone.length > 4 ?
+                                                <span className="block">{trans('phone')} : {order.phone}</span> : null}
+                                            {order.email && order.email.length > 4 ?
+                                                <span className="block">{trans('email')} : {order.email}</span> : null}
+                                        </dd>
+                                    </div>
+                                    <div className="hidden">
+                                        <dt className="font-medium text-gray-900">Shipping updates</dt>
+                                        <dd className="mt-3 text-gray-500 space-y-3">
+                                            <p>{order.user.email}</p>
+                                            <p>{order.user.mobile}</p>
+                                            <button type="button" className="font-medium text-gray-600 hover:text-gray-500">
+                                                Edit
+                                            </button>
+                                        </dd>
+                                    </div>
+                                </dl>
+                                {/* merchant_information */}
+                                <dl className="grid grid-cols-1 gap-y-8 border-b py-8 border-gray-200 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10">
+                                    <div>
+                                        <dt className="font-medium text-gray-900">{trans('merchant')}</dt>
+                                        <dd className="mt-3 text-gray-500">
+                                            <span className="block">{trans('name')} : {merchant.name}</span>
+                                            <span
+                                                className="block">{trans('address')} : {`${merchant.country} - ${merchant.area} - ${trans('block')} : ${merchant.block}, ${trans('street')} : ${merchant.street},`}</span>
+                                            <span className="block">{trans('country')} : {merchant.country}</span>
+                                            {merchant.mobile && merchant.mobile.length > 4 ?
+                                                <span className="block">{trans('mobile')} : {merchant.mobile}</span> : null}
+                                            {merchant.phone && merchant.phone.length > 4 ?
+                                                <span className="block">{trans('phone')} : {merchant.phone}</span> : null}
+                                            {merchant.email && merchant.email.length > 4 ?
+                                                <span className="block">{trans('email')} : {merchant.email}</span> : null}
+                                        </dd>
+                                    </div>
+                                    <div className="hidden">
+                                        <dt className="font-medium text-gray-900">Shipping updates</dt>
+                                        <dd className="mt-3 text-gray-500 space-y-3">
+                                            <p>{merchant.email}</p>
+                                            <p>{merchant.mobile}</p>
+                                            <button type="button" className="font-medium text-gray-600 hover:text-gray-500">
+                                                Edit
+                                            </button>
+                                        </dd>
+                                    </div>
+                                </dl>
+
+                            </div>
+                            {
+                                isAdminOrAbove || isCompany || isAuthor  ? <OrderStepper currentStatus={order.status} isPaid={order.paid} id={order.id}/> : null
+                            }
+                            <p className="font-medium text-gray-900 mt-6 md:my-10">
+                                {trans('order_status')} : <span className={`p-3 bg-gray-200 rounded-sm shadow-sm`}>{trans(order.status)}</span>
                             </p>
-                            <OrderStepper currentStatus={order.status} isPaid={order.paid} id={order.id}/>
                         </div>
-                        <h1 className="border-b-2 border-gray-300 pb-3">{trans('order_elements')}</h1>
+                        <h1 className="w-full border-b-2 border-t-2  border-gray-300 py-3 mt-5 text-lg">{trans('order_elements')}</h1>
                         {map(order.order_metas, m => (
                             <div
                                 key={m.id}
