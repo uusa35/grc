@@ -53,6 +53,7 @@ export default function({countries, auth}) {
         console.log('data', data)
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(filter(countries, c => c.id == auth.country_id));
         setGovernates(selectedCountry.governates);
+        console.log('selectedCountries', selectedCountry);
         const governate = first(filter(selectedCountry.governates, g => g.id == auth.governate_id));
         console.log('the governate', governate);
         console.log('the governate areas', governate.areas);
