@@ -73,7 +73,8 @@ class FrontendUserController extends Controller
             'name' => 'required|min:3|max:200',
             'email' => 'required|email|unique:users,email',
             'mobile' => 'min:4|max:12',
-            'country_id' => 'exists:countries,id',
+            'country_id' => 'required|exists:countries,id',
+            'governate_id' => 'exists:governates,id',
             'area_id' => 'exists:areas,id',
             'block' => 'max:20',
             'street' => 'max:200',
@@ -88,8 +89,9 @@ class FrontendUserController extends Controller
             'password' => Hash::make('secret'),
             'role_id' => Role::where('is_client', true)->first()->id,
             'subscription_id' => Subscription::all()->first()->id,
-            'governate_id' => $country->governates->first()->id,
-            'area_id' => $country->governates->first()->areas->first()->id,
+            'country_id' => $request->country_id,
+            'governate_id' => $request->has('governate_id') ? $request->governate_id : $country->governates->first()->id,
+            'area_id' => $request->has('area_id') ? $request->area_id : $country->governates->first()->areas->first()->id,
             'email_verified_at' => Carbon::today()
 
         ]);
@@ -145,7 +147,7 @@ class FrontendUserController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
         $elements = new OrderCollection(Order::filters($filters)
-            ->where(['user_id' => auth()->id(), 'paid' => true ])
+            ->where(['user_id' => auth()->id(), 'paid' => true])
             ->with('user')
             ->orderBy('id', 'desc')->paginate(Self::TAKE_MID)
             ->withQueryString());
@@ -180,7 +182,10 @@ class FrontendUserController extends Controller
             'name_en' => 'min:3|max:255',
             'mobile' => 'min:4|max:12',
             'whatsapp' => 'min:5|max:12',
-            'news_letter_on' => 'boolean'
+            'news_letter_on' => 'boolean',
+            'country_id' => 'exists:countries,id',
+            'governate_id' => 'exists:governates,id',
+            'area_id' => 'exists:areas,id',
         ]);
         $updated = $user->update($request->except(['_token', 'image']));
         if ($updated) {
