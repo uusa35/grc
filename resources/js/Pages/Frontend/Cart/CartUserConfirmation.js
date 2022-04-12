@@ -50,7 +50,7 @@ export default function({countries, auth}) {
     useMemo(() => {
         const selectedCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(filter(countries, c => c.id == auth.country_id));
         setGovernates(selectedCountry.governates);
-        const governate = first(filter(selectedCountry.governates, g => g.id == data.governate_id));
+        const governate = first(filter(selectedCountry.governates, g => g.id == auth.governate_id));
         setAreas(governate.areas);
     }, [])
 
