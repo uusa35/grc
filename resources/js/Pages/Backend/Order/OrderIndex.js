@@ -220,17 +220,21 @@ export default React.memo(function({elements}) {
                                             {/*    <img className="w-14 h-14  object-contain rounded-md shadow-inner"*/}
                                             {/*         src={getThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
                                             {/*</td>*/}
-                                            <td className="block md:table-cell whitespace-nowrap  text-gray-500">
+                                            <td className="block md:table-cell whitespace-nowrap  text-gray-500 flex flex-col flex-1">
                                                 <div className="flex items-center space-x-3 lg:pl-2">
                                                     <ActiveDot active={element.paid}/>
                                                     {trans('order_no')} {element.id}
                                                 </div>
                                                 <div
-                                                    className="block md:table-cell justify-between space-x-3 mt-2 items-center">
-                                                        <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-100 text-gray-800`}>
-                                                            {element.status}
-                                                          </span>
+                                                    className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
+                                                        <div
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-900 text-white`}>
+                                                            {trans(element.status)}
+                                                          </div>
+                                                    <div
+                                                        className={classNames(element.paid ? `bg-green-800`: `bg-red-800` , `inline-flex items-center px-2 py-0.5 rounded  font-medium  text-white`)}>
+                                                            {trans(element.paid ? 'paid' : 'unpaid')}
+                                                          </div>
                                                 </div>
                                             </td>
                                             <td className="block md:table-cell whitespace-nowrap  text-gray-500">

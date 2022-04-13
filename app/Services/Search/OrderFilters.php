@@ -52,6 +52,11 @@ class OrderFilters extends QueryFilters
         return $this->builder->where(['cash_on_delivery' => true]);
     }
 
+    public function receive_on_branch()
+    {
+        return $this->builder->where(['receive_on_branch' => true]);
+    }
+
     public function payment_method()
     {
         return $this->builder->where(['paid' => true, 'cash_on_delivery' => false]);
