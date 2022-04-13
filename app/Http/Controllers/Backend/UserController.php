@@ -71,7 +71,10 @@ class UserController extends Controller
                 return $q->active()->onlyForUsers();
             }]);
         }])->get());
-        $countries = new CountryCollection(Country::active()->has('governates.areas', '>', 0)->with('governates.areas')->get());
+        $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
+            ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()
+            )->with('areas')
+            ])->get());
         $subscriptions = new SubscriptionCollection(Subscription::active()->get());
         return inertia('Backend/User/UserCreate', compact('roles', 'categories', 'countries', 'subscriptions'));
     }
@@ -125,7 +128,10 @@ class UserController extends Controller
             }]);
         }])->get());
         $elementCategories = $user->categories->pluck('id')->toArray();
-        $countries = new CountryCollection(Country::active()->has('governates.areas', '>', 0)->with('governates.areas')->get());
+        $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
+            ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()
+            )->with('areas')
+            ])->get());
         $subscriptions = new SubscriptionCollection(Subscription::active()->get());
         return inertia('Backend/User/UserEdit', compact('user', 'roles', 'elementCategories', 'categories', 'countries', 'subscriptions'));
     }

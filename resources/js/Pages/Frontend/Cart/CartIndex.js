@@ -6,7 +6,7 @@ import {isEmpty, isNull} from 'lodash'
 import route from 'ziggy-js';
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import NoElements from "../../Backend/components/widgets/NoElements";
-import {setDiscount} from "../../redux/actions";
+import {prepareCart, setDiscount} from "../../redux/actions";
 import CartStepper from "./CartStepper";
 import CartIndexOrderSummary from "./CartIndexOrderSummary";
 import FrontendContentContainer from "../components/FrontendContentContainer";
@@ -14,7 +14,7 @@ import OrderSummary from "./OrderSummary";
 
 export default function({coupon = {}}) {
     const {cart, locale} = useSelector(state => state);
-    const {trans, classNames, mainColor , contentBgColor, btnClass, textColor    } = useContext(AppContext);
+    const {trans, classNames, mainColor, contentBgColor, btnClass, textColor} = useContext(AppContext);
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, progress, reset} = useForm({
@@ -40,6 +40,17 @@ export default function({coupon = {}}) {
         }
     }, [coupon])
 
+    useMemo(() => {
+        if (!parseFloat(cart.netTotal)) {
+            dispatch(prepareCart({
+                multiCartMerchant: settings.multi_cart_merchant,
+                applyGlobalShipment: settings.apply_global_shipment,
+                shipmentCountry: auth && auth.country && isEmpty(cart.shipmentCountry) ? auth.country : cart.shipmentCountry,
+                shipmentFees: settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
+            }))
+        }
+    }, [])
+
     return (
         <FrontendContainer>
             <FrontendContentContainer>
@@ -52,7 +63,8 @@ export default function({coupon = {}}) {
                     {
                         !isEmpty(cart.items) ?
                             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                                <div className={`border-${mainColor}-100 dark:border-${mainColor}-800 border  py-8 px-4 shadow sm:rounded-lg sm:px-10`}>
+                                <div
+                                    className={`border-${mainColor}-100 dark:border-${mainColor}-800 border  py-8 px-4 shadow sm:rounded-lg sm:px-10`}>
                                     <form className="space-y-6" onSubmit={handleSubmit}>
                                         <div>
                                             <label htmlFor="code"
@@ -88,7 +100,10 @@ export default function({coupon = {}}) {
                     <OrderSummary/>
                     <div className="mt-10 flex justify-end">
                         <Link
-                            href={!isEmpty(cart.items) ? route('frontend.cart.information', { totalItems : cart.totalItems, cartId : cart.cartId }) : '#'}
+                            href={!isEmpty(cart.items) ? route('frontend.cart.information', {
+                                totalItems: cart.totalItems,
+                                cartId: cart.cartId
+                            }) : '#'}
                             className={classNames(isEmpty(cart.items) ? `opacity-30` : `bg-${mainColor}-600 dark:bg-${mainColor}-400`, "flex flex-row justify-between items-center border border-transparent rounded-md shnotesadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                         >
                            <span className="flex ltr:pt-2">

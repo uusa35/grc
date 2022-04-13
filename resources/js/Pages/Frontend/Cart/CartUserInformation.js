@@ -28,6 +28,7 @@ export default function({countries, auth, settings}) {
     const {locale, cart} = useSelector(state => state);
     const [selectedCountry, setSelectedCountry] = useState('')
     const [selectedGovernate, setSelectedGovernate] = useState('')
+    const [selectedArea, setSelectedArea] = useState('')
     const [currentShipmentFees, setCurrentShipmentFees] = useState(0)
     const [governates, setGovernates] = useState([])
     const [areas, setAreas] = useState([])

@@ -38,13 +38,25 @@ export default function(cart = initialState, action) {
     let currentTotalWeight;
     let shipmentCountry;
     let shipmentGovernate;
+    let weight;
     switch (action.type) {
         case PREPARE_CART :
+            currentShipmentFees = cart.shipmentFees;
+            currentDiscount = cart.discount;
+            currentTotalItems = parseInt(sumBy(map(cart.items, item => item.cart_id === action.payload.cart_id ? action.payload : item), 'qty'));
+            currentTotal = round(parseFloat(sumBy(cart.items, 'totalPrice')), 2);
+            currentNetTotal = round(parseFloat(sumBy(cart.items, 'totalPrice') + currentShipmentFees - currentDiscount), 2);
+            weight = round(parseFloat(sumBy(cart.items, 'weight')), 2);
+            currentTotalWeight = parseFloat(weight) ? weight : 0;
             return {
                 ...cart,
                 multiCartMerchant: action.payload.multiCartMerchant,
                 shipmentCountry: action.payload.shipmentCountry,
-                shipmentFees: action.payload.shipmentFees
+                shipmentFees: action.payload.shipmentFees,
+                total: currentTotal,
+                netTotal: currentNetTotal,
+                totalItems: currentTotalItems,
+                totalWeight: currentTotalWeight
             };
         case SET_CART_ID :
             return {
@@ -57,7 +69,7 @@ export default function(cart = initialState, action) {
             currentTotalItems = parseInt(sumBy(map(action.payload.items, item => item.cart_id === action.payload.cart_id ? action.payload : item), 'qty'));
             currentTotal = round(parseFloat(sumBy(action.payload.items, 'totalPrice')), 2);
             currentNetTotal = round(parseFloat(sumBy(action.payload.items, 'totalPrice') + currentShipmentFees - currentDiscount), 2);
-            const weight = round(parseFloat(sumBy(cart.items, 'weight')), 2);
+            weight = round(parseFloat(sumBy(cart.items, 'weight')), 2);
             currentTotalWeight = parseFloat(weight) ? weight : 0;
             return {
                 ...cart,

@@ -12,7 +12,9 @@ import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 export default function({user, countries }) {
     const {trans, getThumb, getLocalized, contentBgColor, textColor, btnClass  } = useContext(AppContext)
     const [governates, setGovernates] = useState([])
-    const [selectedCountry,setSelectedCountry] = useState('');
+    const [selectedCountry, setSelectedCountry] = useState('')
+    const [selectedGovernate, setSelectedGovernate] = useState('')
+    const [selectedArea, setSelectedArea] = useState('')
     const [areas, setAreas] = useState([])
     const {props} = usePage();
     const {errors} = props;
@@ -34,22 +36,37 @@ export default function({user, countries }) {
     });
 
     useMemo(() => {
-        const currentCountry = data.country_id ? first(filter(countries, c => c.id == data.country_id)) : first(countries);
-        setSelectedCountry(currentCountry);
+        const currentCountry = user.country_id ? first(filter(countries, c=> c.id == user.country_id)) : first(countries);
+        const userGovernate = first(filter(currentCountry.governates, c => c.id == user.governate_id));
+        const currentGovernate = userGovernate ?  userGovernate : first(currentCountry.governates);
+        const userArea = first(filter(currentGovernate.areas, c => c.id == user.area_id))
+        const currentArea = user.area_id && userArea ? userArea : first(currentGovernate.areas);
+        setSelectedCountry(currentCountry)
+        setSelectedGovernate(currentGovernate)
+        setSelectedArea(currentArea);
         setGovernates(currentCountry.governates)
-        setData('governate_id', first(currentCountry.governates).id)
-        const areas = first(currentCountry.governates).areas;
-        setAreas(areas)
-        setData('area_id', first(areas).id)
-        setData('enable_receive_from_shop', false);
-    }, [data.country_id])
+        setAreas(currentGovernate.areas)
+    }, [])
 
 
     useMemo(() => {
+        if(data.country_id !== user.country_id) {
+            const currentCountry = first(filter(countries, c => c.id == data.country_id));
+            setSelectedCountry(currentCountry)
+            setGovernates(currentCountry.governates)
+            setSelectedGovernate(first(currentCountry.governates))
+            const areas = first(currentCountry.governates).areas;
+            setAreas(areas)
+            setSelectedArea(first(areas).id)
+        }
+    }, [data.country_id])
+
+    useMemo(() => {
         if (!isEmpty(governates)) {
-            const selectedGovernate = data.governate_id ? first(filter(governates, c => c.id == data.governate_id)) : first(governates);
-            setAreas(selectedGovernate.areas);
-            setData('area_id', first(selectedGovernate.areas).id)
+            const currentGovernate = first(filter(governates, c => c.id == data.governate_id));
+            setSelectedGovernate(currentGovernate)
+            setAreas(currentGovernate.areas ? currentGovernate.areas : []);
+            setData('area_id', currentGovernate.areas ? first(currentGovernate.areas).id : '')
         }
     }, [data.governate_id])
 

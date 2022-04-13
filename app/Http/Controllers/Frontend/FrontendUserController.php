@@ -164,7 +164,11 @@ class FrontendUserController extends Controller
     {
         $this->authorize('update', $user);
         $user = new UserResource($user->load('role'));
-        $countries = new CountryCollection(Country::active()->has('governates.areas', '>', 0)->with('governates.areas')->get());
+        $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
+            ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()
+            )->with('areas')
+            ])->get());
+
         return inertia('Frontend/User/FrontendUserEdit', compact('user', 'countries'));
     }
 
