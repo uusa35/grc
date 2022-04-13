@@ -7,11 +7,12 @@ import {AppContext} from "../../context/AppContext";
 import {useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 
-export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, type, enablePrice = true}) {
+export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, type, enablePrice = true, showSub = true}) {
     const {trans, getLocalized, classNames, mainColor , mainBgColor, btnClass , textColor  } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
     const {params} = route();
+
     return (
         <aside>
             <h2 className="sr-only capitalize">{trans('advanced_search')}</h2>
@@ -115,7 +116,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                     </Link>
                                 </div>
                                 {
-                                    map(c.children, child => (
+                                    showSub && map(c.children, child => (
                                         <div className="pt-1 space-y-3 mx-5" key={child.id}>
                                             <Link
                                                 href={route(`frontend.${type}.index`, { ...params , category_id: child.id})}
@@ -131,7 +132,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                                                 </label>
                                             </Link>
                                             {
-                                                map(child.children, sub => (
+                                                showSub && map(child.children, sub => (
                                                     <div className="pt-1 space-y-3 mx-2" key={sub.id}>
                                                         <Link
                                                             href={route(`frontend.${type}.index`, { ...params, category_id: sub.id})}

@@ -177,6 +177,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::get('reset/password', [UserController::class, 'getResetPassword'])->name('reset.password');
     Route::post('reset/password', [UserController::class, 'postResetPassword'])->name('post.reset.password');
     Route::resource('order', OrderController::class)->except(['create']);
+    Route::get('invoice/pdf/{id}', [OrderController::class,'viewInvoice'])->name('invoice.pdf');
+    Route::get('invoice/download/pdf/{id}', [OrderController::class,'downloadInvoiceToPDF'])->name('invoice.pdf.download');
     Route::resource('slide', SlideController::class);
     Route::resource('image', ImageController::class)->only(['destroy', 'edit', 'update']);
     Route::get('clear/element', [DashboardController::class, 'clearElement'])->name('element.clear');

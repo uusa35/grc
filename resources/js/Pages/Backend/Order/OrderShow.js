@@ -123,7 +123,7 @@ export default function({order}) {
 
                             </div>
                             {
-                                isAdminOrAbove || isCompany || isAuthor  ? <OrderStepper currentStatus={order.status} isPaid={order.paid} id={order.id}/> : null
+                                // isAdminOrAbove || isCompany || isAuthor  ? <OrderStepper currentStatus={order.status} isPaid={order.paid} id={order.id}/> : null
                             }
                             <p className="font-medium text-gray-900 mt-6 md:my-10">
                                 {trans('order_status')} : <span className={`p-3 bg-gray-200 rounded-sm shadow-sm`}>{trans(order.status)}</span>

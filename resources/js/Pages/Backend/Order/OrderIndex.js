@@ -304,6 +304,160 @@ export default React.memo(function({elements}) {
                                                                         <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (
+                                                                                    <a
+                                                                                        target="_blank"
+                                                                                        href={route('backend.invoice.pdf', element.id)}
+                                                                                        // href={route('backend.invoice.pdf.download', element.id)}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                             className="h-6 w-6 mx-2"
+                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                                                                        </svg>
+                                                                                        {trans('show')} {trans('invoice')}
+                                                                                    </a>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                        </div>
+                                                                        <div className="py-1">
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <a
+                                                                                        // target="_blank"
+                                                                                        // href={route('backend.invoice.pdf', element.id)}
+                                                                                        href={route('backend.invoice.pdf.download', element.id)}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                             className="h-6 w-6 mx-2"
+                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                        </svg>
+                                                                                        {trans('download')} {trans('invoice')}
+                                                                                    </a>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                        </div>
+                                                                        <div className="py-1">
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <Link
+                                                                                        href='#'
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                             className="h-6 w-6 mx-2"
+                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                        </svg>
+                                                                                        {trans('change_order_status_to')}
+                                                                                    </Link>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <Link
+                                                                                        href={route('backend.order.switch', { status : 'pending', order_id : element.id})}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                             className="h-6 w-6 mx-2"
+                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                        </svg>
+                                                                                        {trans('pending')}
+                                                                                    </Link>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <Link
+                                                                                        href={route('backend.order.switch', { status : 'under_process', order_id : element.id})}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                             className="h-6 w-6 mx-2"
+                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                        </svg>
+                                                                                        {trans('under_process')}
+                                                                                    </Link>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <Link
+                                                                                        href={route('backend.order.switch', { status : 'delivered', order_id : element.id})}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                             className="h-6 w-6 mx-2"
+                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                        </svg>
+                                                                                        {trans('delivered')}
+                                                                                    </Link>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <Link
+                                                                                        href={route('backend.order.switch', { status : 'completed', order_id : element.id})}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                             className="h-6 w-6 mx-2"
+                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                        </svg>
+                                                                                        {trans('completed')}
+                                                                                    </Link>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
+                                                                                    <Link
+                                                                                        href={route('backend.order.switch', { status : 'canceled', order_id : element.id})}
+                                                                                        className={classNames(
+                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                        )}
+                                                                                    >
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                             className="h-6 w-6 mx-2"
+                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                        </svg>
+                                                                                        {trans('canceled')}
+                                                                                    </Link>
+                                                                                )}
+                                                                            </Menu.Item>
+                                                                        </div>
+                                                                        <div className="py-1">
+                                                                            <Menu.Item>
+                                                                                {({active}) => (
                                                                                     <button
                                                                                         onClick={() =>
                                                                                             dispatch(showModal({

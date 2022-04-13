@@ -69,7 +69,7 @@ export default function({elements, categories, settings}) {
                             showSearch={false}
                         />
                         {/* sort options */}
-                        <FrontendSortIndexMenu showPrice={false}/>
+                        <FrontendSortIndexMenu showPrice={false} />
                     </div>
                     <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
                         {/* search SideBar */}
@@ -77,6 +77,7 @@ export default function({elements, categories, settings}) {
                             type={'user'}
                             enablePrice={false}
                             categories={filter(categories, c => c.is_user)}
+                            showSub={false}
                             setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
 
                         {/* User grid */}
