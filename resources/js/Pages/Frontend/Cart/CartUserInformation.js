@@ -110,7 +110,7 @@ export default function({countries, auth, settings}) {
         dispatch({type: SET_CART_NOTES, payload: data.notes});
         dispatch(setShipmentFees({
                 shipmentFees: currentShipmentFees,
-                receiveFromShop: selectedCountry.is_local && data.receive_from_shop,
+                receiveFromShop: selectedCountry.is_local && data.receive_from_shop && first(cart.items).merchant_enable_receive_from_shop,
                 shipmentCountry: selectedCountry,
                 shipmentGovernate: {
                     id: selectedGovernate.id,
@@ -433,7 +433,7 @@ export default function({countries, auth, settings}) {
                         </div>
                         {/*enable_receive_from_shop*/}
                         {
-                            settings.enable_receive_from_shop && selectedCountry.is_local ?
+                            settings.enable_receive_from_shop && selectedCountry.is_local && first(cart.items).merchant_enable_receive_from_shop ?
                                 <div className="col-span-full">
                                     <div className="pt-6 sm:pt-5">
                                         <div role="group" aria-labelledby="label-notifications">
