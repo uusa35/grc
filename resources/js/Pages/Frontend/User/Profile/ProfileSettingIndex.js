@@ -13,7 +13,7 @@ import {toast} from "react-toastify";
 import {capitalize} from "lodash";
 
 export default function({ user }) {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
+    const {classNames, trans, getThumb, contentBgColor , textColor } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const [newsLetterEnabled, setNewsLetterEnabled] = useState(user.news_letter_on)
     const [privateAccount, setPrivateAccount] = useState(false)
@@ -54,7 +54,7 @@ export default function({ user }) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <main className="relative pt-5 bg-white ">
+                <main className={`relative pt-5  ${contentBgColor}`}>
                     <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                         <div className="overflow-hidden">
                             <div className=" lg:grid lg:grid-cols-12">
@@ -63,7 +63,7 @@ export default function({ user }) {
                                     <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                         <div className="flex flex-1 justify-between items-center">
                                             <div>
-                                                <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('profile')}</h2>
+                                                <h2 className={`text-lg leading-6 font-medium ${textColor}`}>{trans('profile')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
                                                     {trans("my_settings")}
                                                 </p>

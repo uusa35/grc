@@ -69,11 +69,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // points
-// 1- Search Products in FrontendUserShow redirects !!
-// 2- testing cart and discount
-// 3- Product Notes for order in ProductShow
-// 4- Order Notes in CartUserInformation
-// 5- new Option to choose DOC or Receive from shop
+// 1- update order with reference number in order
 
 Auth::routes();
 Auth::routes(['verify' => true]);

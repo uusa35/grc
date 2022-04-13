@@ -232,7 +232,7 @@ export default React.memo(function({elements}) {
                                                             {trans(element.status)}
                                                           </div>
                                                     <div
-                                                        className={classNames(element.paid ? `bg-green-800`: `bg-red-800` , `inline-flex items-center px-2 py-0.5 rounded  font-medium  text-white`)}>
+                                                        className={classNames(element.paid ? `bg-green-900`: `bg-red-900` , `inline-flex items-center px-2 py-0.5 rounded  font-medium  text-white`)}>
                                                             {trans(element.paid ? 'paid' : 'unpaid')}
                                                           </div>
                                                 </div>
@@ -339,9 +339,7 @@ export default React.memo(function({elements}) {
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                                                             <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                                                                         </svg>
                                                                                         {trans('download')} {trans('invoice')}
@@ -360,9 +358,8 @@ export default React.memo(function({elements}) {
                                                                                         )}
                                                                                     >
                                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                                                                                         </svg>
                                                                                         {trans('change_order_status_to')}
                                                                                     </Link>
@@ -378,9 +375,8 @@ export default React.memo(function({elements}) {
                                                                                         )}
                                                                                     >
                                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                                                                                         </svg>
                                                                                         {trans('pending')}
                                                                                     </Link>
@@ -396,9 +392,8 @@ export default React.memo(function({elements}) {
                                                                                         )}
                                                                                     >
                                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                                                                                         </svg>
                                                                                         {trans('under_process')}
                                                                                     </Link>
@@ -414,9 +409,8 @@ export default React.memo(function({elements}) {
                                                                                         )}
                                                                                     >
                                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                                                                                         </svg>
                                                                                         {trans('delivered')}
                                                                                     </Link>
@@ -432,9 +426,8 @@ export default React.memo(function({elements}) {
                                                                                         )}
                                                                                     >
                                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                                                                                         </svg>
                                                                                         {trans('completed')}
                                                                                     </Link>
@@ -450,9 +443,8 @@ export default React.memo(function({elements}) {
                                                                                         )}
                                                                                     >
                                                                                         <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
                                                                                         </svg>
                                                                                         {trans('canceled')}
                                                                                     </Link>

@@ -8,7 +8,7 @@ import {Inertia} from "@inertiajs/inertia";
 import UserEditSideNav from "./UserEditSideNav";
 
 export default function() {
-    const {trans} = useContext(AppContext)
+    const {trans, contentBgColor, textColor, btnClass   } = useContext(AppContext)
     const [viewPass, setViewPass] = useState(false)
 
     const {props} = usePage();
@@ -38,7 +38,7 @@ export default function() {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <main className="relative pt-5 bg-white ">
+                <main className={`relative pt-5  ${contentBgColor}`}>
                     <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                         <div className="overflow-hidden">
                             <div className=" lg:grid lg:grid-cols-12">
@@ -53,7 +53,7 @@ export default function() {
                                     <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                         <div className="flex flex-1 justify-between items-center">
                                             <div>
-                                                <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('profile')}</h2>
+                                                <h2 className={`text-lg leading-6 font-medium ${textColor}`}>{trans('profile')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
                                                     {trans("change_password")}
                                                 </p>
@@ -64,7 +64,7 @@ export default function() {
                                             <div className="col-span-12">
                                                 <div className="flex flex-row justify-between items-center">
                                                     <label htmlFor="old_password"
-                                                           className="block text-sm font-medium text-gray-800">
+                                                           className={`block text-sm font-medium ${textColor}`}>
                                                         {trans("old_password")}
                                                     </label>
                                                     <button
@@ -90,7 +90,7 @@ export default function() {
                                                     autoComplete={trans("email")}
                                                     className=" mt-1 block w-full border border-gray-100 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                                 />
-                                                <p className={`mt-2  text-gray-500`}>
+                                                <p className={`mt-2  ${textColor}`}>
                                                     {errors.old_password &&
                                                     <div className={`text-sm text-red-900`}>{errors.old_password}</div>}
                                                 </p>
@@ -99,7 +99,7 @@ export default function() {
                                             {/* password */}
                                             <div className="col-span-12">
                                                 <label htmlFor="password"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block text-sm font-medium ${textColor}`}>
                                                     {trans("password")}
                                                 </label>
                                                 <input
@@ -110,7 +110,7 @@ export default function() {
                                                     autoComplete={trans("email")}
                                                     className="text-black mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                                 />
-                                                <p className={`mt-2  text-gray-500`}>
+                                                <p className={`mt-2  ${textColor}`}>
                                                     {errors.password &&
                                                     <div className={`text-sm text-red-900`}>{errors.password}</div>}
                                                 </p>
@@ -119,7 +119,7 @@ export default function() {
                                             {/* confirm_password */}
                                             <div className="col-span-12">
                                                 <label htmlFor="password_confirmation"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block text-sm font-medium ${textColor}`}>
                                                     {trans("password_confirmation")}
                                                 </label>
                                                 <input
@@ -130,7 +130,7 @@ export default function() {
                                                     autoComplete={trans("password_confirmation")}
                                                     className="text-black mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                                                 />
-                                                <p className={`mt-2  text-gray-500`}>
+                                                <p className={`mt-2  ${textColor}`}>
                                                     {errors.password_confirmation &&
                                                     <div
                                                         className={`text-sm text-red-900`}>{errors.password_confirmation}</div>}
@@ -144,13 +144,13 @@ export default function() {
                                     <div className="mt-4 py-4 px-4 flex justify-end gap-x-5">
                                         <button
                                             type="button"
-                                            className="bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-800 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                            className={`${btnClass} ml-5 bg-gray-200 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm`}
                                         >
                                             {trans('cancel')}
                                         </button>
                                         <button
                                             type="submit"
-                                            className="ml-5 bg-gray-200 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                            className={`${btnClass} ml-5 bg-gray-200 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm`}
                                         >
                                             {trans('save')}
                                         </button>

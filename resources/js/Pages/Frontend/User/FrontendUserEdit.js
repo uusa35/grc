@@ -10,7 +10,7 @@ import {filter, first, isEmpty, map} from "lodash";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 
 export default function({user, countries }) {
-    const {trans, getThumb, getLocalized} = useContext(AppContext)
+    const {trans, getThumb, getLocalized, contentBgColor, textColor, btnClass  } = useContext(AppContext)
     const [governates, setGovernates] = useState([])
     const [selectedCountry,setSelectedCountry] = useState('');
     const [areas, setAreas] = useState([])
@@ -73,7 +73,7 @@ export default function({user, countries }) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <main className="relative pt-5 bg-white ">
+                <main className={`relative pt-5  ${contentBgColor}`}>
                     <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                         <div className="overflow-hidden">
                             <div className=" lg:grid lg:grid-cols-12">
@@ -88,7 +88,7 @@ export default function({user, countries }) {
                                     <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                         <div className="flex flex-1 justify-between items-center">
                                             <div>
-                                                <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('profile')}</h2>
+                                                <h2 className={`text-lg leading-6 font-medium ${textColor}`}>{trans('profile')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
                                                     {trans('account_type')} : {user.role[getLocalized()]}
                                                 </p>
@@ -96,7 +96,7 @@ export default function({user, countries }) {
                                             <div className="flex flex-col lg:flex-row">
                                                 <div
                                                     className="flex-grow lg:mt-0 lg:ml-6 lg:flex-grow-0 lg:flex-shrink-0">
-                                                    <p className="text-sm font-medium text-gray-800" aria-hidden="true">
+                                                    <p className={` ${textColor} text-sm font-medium`} aria-hidden="true">
                                                         {trans('personal_image')}
                                                     </p>
                                                     <div className="mt-1 lg:hidden">
@@ -155,7 +155,7 @@ export default function({user, countries }) {
                                             {/* email */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="email"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("email")}
                                                 </label>
                                                 <input
@@ -177,7 +177,7 @@ export default function({user, countries }) {
                                             {/* name_en */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="name_en"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("name_en")}
                                                 </label>
                                                 <input
@@ -198,7 +198,7 @@ export default function({user, countries }) {
                                             {/* name_ar */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="name_ar"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("name_ar")}
                                                 </label>
                                                 <input
@@ -219,7 +219,7 @@ export default function({user, countries }) {
                                             {/* mobile */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="mobile"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("mobile")}
                                                 </label>
                                                 <input
@@ -240,7 +240,7 @@ export default function({user, countries }) {
                                             {/* whatsapp */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="whatsapp"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("whatsapp")}
                                                 </label>
                                                 <input
@@ -260,7 +260,7 @@ export default function({user, countries }) {
 
                                             {/* country_id */}
                                             <div className="col-span-12 sm:col-span-6">
-                                                <label htmlFor="country_id" className="block   text-gray-800">
+                                                <label htmlFor="country_id" className={`block ${textColor}`}>
                                                     {trans('country')}
                                                 </label>
                                                 <div className="mt-1">
@@ -270,7 +270,7 @@ export default function({user, countries }) {
                                                         name="country_id"
                                                         defaultValue={user.country_id}
                                                         autoComplete="country_id"
-                                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
                                                     >
                                                         <option value="">{trans('choose')} {trans('country')}</option>
                                                         {
@@ -321,7 +321,7 @@ export default function({user, countries }) {
                                             {/* area_id */}
                                             {
                                                 areas && <div className="col-span-12 sm:col-span-6">
-                                                    <label htmlFor="area_id" className="block   text-gray-800">
+                                                    <label htmlFor="area_id" className={`block ${textColor}`}>
                                                         {trans('area')}
                                                     </label>
                                                     <div className="mt-1">
@@ -331,7 +331,7 @@ export default function({user, countries }) {
                                                             name="area_id"
                                                             defaultValue={user.area_id}
                                                             autoComplete="area_id"
-                                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md text-black`}
                                                         >
                                                             <option value="">{trans('choose')} {trans('area')}</option>
                                                             {
@@ -352,7 +352,7 @@ export default function({user, countries }) {
                                             {/* block */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="block"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("block")}
                                                 </label>
                                                 <input
@@ -374,7 +374,7 @@ export default function({user, countries }) {
                                             {/* street */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="street"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("street")}
                                                 </label>
                                                 <input
@@ -396,7 +396,7 @@ export default function({user, countries }) {
                                             {/* building */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="building"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("building")}
                                                 </label>
                                                 <input
@@ -418,7 +418,7 @@ export default function({user, countries }) {
                                             {/* apartment */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="apartment"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("apartment")}
                                                 </label>
                                                 <input
@@ -439,7 +439,7 @@ export default function({user, countries }) {
                                             {/* floor */}
                                             <div className="col-span-12 sm:col-span-6">
                                                 <label htmlFor="floor"
-                                                       className="block text-sm font-medium text-gray-800">
+                                                       className={`block ${textColor}`}>
                                                     {trans("floor")}
                                                 </label>
                                                 <input

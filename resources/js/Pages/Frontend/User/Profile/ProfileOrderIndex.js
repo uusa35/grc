@@ -20,7 +20,7 @@ import {DotsVerticalIcon} from "@heroicons/react/solid";
 import moment from "moment";
 
 export default function({elements}) {
-    const {classNames, trans, getThumb, getLocalized, getFileUrl, mainColor, mainBgColor} = useContext(AppContext)
+    const {classNames, trans, getThumb, getLocalized, contentBgColor, textColor  } = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
     const [currentData, setCurrentData] = useState();
     const [currentDate, setCurrentDate] = useState(moment().format('DD-MM-Y'))
@@ -40,7 +40,7 @@ export default function({elements}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <main className="relative pt-5 bg-white ">
+                <main className={`relative pt-5  ${contentBgColor}`}>
                     <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                         <div className="overflow-hidden">
                             <div className="lg:grid lg:grid-cols-12 min-h-screen ">
@@ -50,7 +50,7 @@ export default function({elements}) {
                                     className="col-span-9  shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
                                     <div className="m-5">
                                         <div>
-                                            <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('orders')}</h2>
+                                            <h2 className={`text-lg leading-6 font-medium ${textColor}`}>{trans('orders')}</h2>
                                             <p className="mt-1 text-sm text-gray-500">
                                                 {trans('list')} {trans('orders')}
                                             </p>
@@ -159,7 +159,7 @@ export default function({elements}) {
                                         <tbody className="block md:table-row-group">
                                         {
                                             currentData && currentData.map(element =>
-                                                <tr className='block md:table-row bg-white border-b border-gray-100 text-gray-500 odd:bg-white even:bg-gray-100'
+                                                <tr className='block md:table-row leading-loose bg-white border-b border-gray-100 text-gray-500 odd:bg-white even:bg-gray-100 '
                                                     key={element.id}>
                                                     <td className=" block md:table-cell px-3 py-4 whitespace-nowrap font-medium text-gray-900">{element.id}</td>
                                                     {/*<td className="px-3 py-4 whitespace-nowrap  text-gray-500">*/}
@@ -172,11 +172,21 @@ export default function({elements}) {
                                                             {trans('order_no')} {element.id}
                                                         </div>
                                                         <div
-                                                            className="block md:table-cell justify-between space-x-3 mt-2 items-center">
-                                                        <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-100 text-gray-800`}>
-                                                            {element.status}
-                                                          </span>
+                                                            className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
+                                                            <div
+                                                                className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-900 text-white`}>
+                                                                {trans('status')} : {trans(element.status)}
+                                                            </div>
+                                                            <div
+                                                                className={classNames(element.paid ? `bg-green-900`: `bg-red-900` , `inline-flex items-center px-2 py-0.5 rounded  font-medium  text-white`)}>
+                                                                {trans(element.paid ? 'paid' : 'unpaid')}
+                                                            </div>
+                                                            {
+                                                                element.shipment_reference ? <div
+                                                                    className={classNames(`inline-flex bg-gray-200 items-center px-2 py-0.5 rounded  font-medium  text-white`)}>
+                                                                    {trans('shipment_reference')} : {element.shipment_reference}
+                                                                </div> : null
+                                                            }
                                                         </div>
                                                     </td>
                                                     <td className="block md:table-cell whitespace-nowrap  text-gray-500">

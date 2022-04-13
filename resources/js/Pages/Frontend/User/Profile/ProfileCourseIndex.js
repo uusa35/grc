@@ -11,14 +11,14 @@ import {Link} from "@inertiajs/inertia-react";
 import NoElements from "../../../Backend/components/widgets/NoElements";
 
 export default function({elements, firstOrder}) {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
+    const {classNames, trans, getThumb, getLocalized, contentBgcolor , textColor } = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
     const {locale} = useSelector(state => state);
 
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <main className="relative mt-5">
+                <main className={`relative pt-5  ${contentBgColor}`}>
                     <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                         <div className="bg-white overflow-hidden">
                             <div className=" lg:grid lg:grid-cols-12">
@@ -27,7 +27,7 @@ export default function({elements, firstOrder}) {
                                     <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                         <div className="flex flex-1 justify-between items-center">
                                             <div>
-                                                <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('profile')}</h2>
+                                                <h2 className={`text-lg leading-6 font-medium ${textColor}`}>{trans('profile')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
                                                     {trans("my_courses")}
                                                 </p>

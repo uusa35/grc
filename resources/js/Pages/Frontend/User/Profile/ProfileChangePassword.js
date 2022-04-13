@@ -9,7 +9,7 @@ import {Inertia} from "@inertiajs/inertia";
 import UserEditSideNav from "./UserEditSideNav";
 
 export default function({element}) {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
+    const {classNames, trans, contentBgColor, textColor } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const [availableToHire, setAvailableToHire] = useState(true)
     const [privateAccount, setPrivateAccount] = useState(false)
@@ -44,7 +44,7 @@ export default function({element}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <main className="relative mt-5">
+                <main className={`relative pt-5  ${contentBgColor}`}>
                     <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                         <div className="bg-white overflow-hidden">
                             <div className=" lg:grid lg:grid-cols-12">
@@ -55,7 +55,7 @@ export default function({element}) {
                                     <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                         <div className="flex flex-1 justify-between items-center">
                                             <div>
-                                                <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('change_password')}</h2>
+                                                <h2 className={`text-lg leading-6 font-medium ${textColor}`}>{trans('change_password')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
                                                     {trans("change_password")}
                                                 </p>

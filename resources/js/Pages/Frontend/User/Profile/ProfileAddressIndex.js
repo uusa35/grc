@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import UserEditSideNav from "./UserEditSideNav";
 
 export default function() {
-    const {classNames, trans, getThumb, getLocalized} = useContext(AppContext)
+    const {classNames, trans, textColor , contentBgColor } = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
     const {locale} = useSelector(state => state);
     const [availableToHire, setAvailableToHire] = useState(true)
@@ -19,7 +19,7 @@ export default function() {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <main className="relative mt-5">
+                <main className={`relative mt-5 ${contentBgColor}`}>
                     <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
                         <div className="bg-white overflow-hidden">
                             <div className=" lg:grid lg:grid-cols-12">
@@ -28,7 +28,7 @@ export default function() {
                                     <div className="py-6 px-4 sm:p-6 lg:pb-8">
                                         <div className="flex flex-1 justify-between items-center">
                                             <div>
-                                                <h2 className="text-lg leading-6 font-medium text-gray-900">{trans('profile')}</h2>
+                                                <h2 className={`text-lg leading-6 font-medium ${textColor}`}>{trans('profile')}</h2>
                                                 <p className="mt-1 text-sm text-gray-500">
                                                     {trans("my_courses")}
                                                 </p>
