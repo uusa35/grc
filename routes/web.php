@@ -142,6 +142,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
         Route::get('profile/favorites', [FrontendUserController::class, 'getFavorites'])->name('profile.favorites');
         Route::get('profile/settings', [FrontendUserController::class, 'getSettings'])->name('profile.setting');
         Route::get('profile/orders', [FrontendUserController::class, 'getOrders'])->name('profile.orders');
+        Route::get('profile.invoice/pdf/{id}', [FrontendOrderController::class,'viewInvoice'])->name('profile.invoice.pdf');
         Route::resource('profile/address', FrontendAddressController::class);
 
         // cart that must be logged in and verified

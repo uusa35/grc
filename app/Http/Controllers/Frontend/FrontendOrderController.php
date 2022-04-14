@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Events\OrderPaidEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Setting;
 use App\Notifications\OrderPaid;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Markdown;
 
 class FrontendOrderController extends Controller
 {
@@ -114,7 +116,22 @@ class FrontendOrderController extends Controller
         $order->notify(new OrderPaid());
     }
 
-    public function makeNotify($id) {
+    public function makeNotify($id)
+    {
         OrderPaidEvent::dispatch(auth()->id(), trans('general.thank_you_for_ur_purchase'));
+    }
+
+    public function viewInvoice(Request $request)
+    {
+        request()->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+        if (auth()->id() == $request->user_id) {
+            $order = Order::whereId(request()->id)->with('order_metas.ordermetable', 'order_metas.merchant', 'user', 'coupon')->first();
+            $settings = Setting::first();
+            $markdown = new Markdown(view(), config('mail.markdown'));
+            return $markdown->render('emails.orders.paid', ['order' => $order, 'settings' => $settings]);
+        }
+        return redirect()->back()->with(['error' => trans('general.process_failure')]);
     }
 }

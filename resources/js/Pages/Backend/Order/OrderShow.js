@@ -1,6 +1,6 @@
 import {AppContext} from "../../context/AppContext";
 import { map, first } from 'lodash'
-import {useContext, useEffect, useMemo, useRef} from "react";
+import {useContext, useEffect, useRef} from "react";
 import BackendContainer from "../components/containers/BackendContainer";
 import moment from "moment";
 import {Link} from "@inertiajs/inertia-react";
@@ -9,7 +9,6 @@ import {getTypeFromModel} from "../../helpers";
 import OrderStepper from "./OrderStepper";
 import {useSelector} from "react-redux";
 import {useReactToPrint} from 'react-to-print';
-import GlobalContext from "../../context/GlobalContext";
 
 export default function({order, printMode = false}) {
     const {trans, getThumb, getLocalized  } = useContext(AppContext);
