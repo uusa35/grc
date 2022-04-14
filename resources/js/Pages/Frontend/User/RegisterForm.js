@@ -19,6 +19,7 @@ export default function({countries}) {
     const [code, setCode] = useState('');
     const {props} = usePage();
     const {errors} = props;
+    const [viewPass, setViewPass] = useState(false)
 
     const {data, setData, post, progress} = useForm({
         'name': '',
@@ -115,14 +116,36 @@ export default function({countries}) {
                                 </div>
                                 {/* password */}
                                 <div>
-                                    <label htmlFor="password" className={`block text-sm font-medium ${textColor}`}>
-                                        {trans('password')}
-                                    </label>
+                                    <div className="flex flex-row justify-between items-center">
+                                        {/*<label htmlFor="old_password"*/}
+                                        {/*       className={`block text-sm font-medium ${textColor}`}>*/}
+                                        {/*    {trans("old_password")}*/}
+                                        {/*</label>*/}
+                                        <label htmlFor="password" className={`block text-sm font-medium ${textColor}`}>
+                                            {trans('password')}* <small>{trans('at_least_8_characters')}</small>
+
+                                        </label>
+                                        <button
+                                            type='button'
+                                            className="flex items-center justify-center shadow-sm rounded-full h-10 w-10 ring-gray-50 bg-transparent hover:bg-gray-100"
+                                            onClick={() => setViewPass(!viewPass)}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6"
+                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                      strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path strokeLinecap="round" strokeLinejoin="round"
+                                                      strokeWidth="2"
+                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+
                                     <div className="mt-1">
                                         <input
                                             id="password"
                                             name="password"
-                                            type="password"
+                                            type={viewPass ? 'text' : 'password'}
                                             autoComplete="current-password"
                                             required
                                             onChange={handleChange}
@@ -140,7 +163,7 @@ export default function({countries}) {
                                         <input
                                             id="password_confirmation"
                                             name="password_confirmation"
-                                            type="password"
+                                            type={viewPass ? 'text' : 'password'}
                                             autoComplete="current-password"
                                             required
                                             onChange={handleChange}
@@ -151,12 +174,12 @@ export default function({countries}) {
                                 {/* mobile */}
                                 <div>
                                     <label htmlFor="phone-number" className={`block text-sm font-medium ${textColor}`}>
-                                        {trans('mobile')}
+                                        {trans('mobile')}*
                                     </label>
                                     <div className="mt-1 relative rounded-md shadow-sm">
                                         <div className={classNames(locale.isRTL ? `left-0` :  `right-0` , "absolute inset-y-0 flex items-center")}>
                                             <label htmlFor="country" className="sr-only">
-                                                {trans('country')}
+                                                {trans('country')}*
                                             </label>
                                             <select
                                                 id="country_id"
@@ -165,6 +188,7 @@ export default function({countries}) {
                                                 autoComplete="country"
                                                 className="focus:ring-gray-500 focus:border-gray-500 h-full py-0 pl-3 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
                                             >
+                                                <option value="">{trans('country')}</option>
                                                 {map(countries, c => (
                                                     <option
                                                         key={c.id}

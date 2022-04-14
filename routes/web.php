@@ -70,6 +70,7 @@ use Illuminate\Support\Facades\Route;
 */
 // points
 // 1- update order with reference number in order
+// 2 graph statistics
 
 Auth::routes();
 Auth::routes(['verify' => true]);
