@@ -163,8 +163,7 @@ class OrderController extends Controller
     {
         $order = Order::whereId(request()->id)->with('order_metas.ordermetable', 'order_metas.merchant', 'user', 'coupon')->first();
         $printMode = true;
-        $settings = Setting::first();
-        return inertia('Backend/Order/OrderShow', compact('order','printMode','settings'));
+        return inertia('Backend/Order/OrderShow', compact('order','printMode'));
 //        $order = Order::whereId(request()->id)->with('order_metas.ordermetable','order_metas.merchant', 'user', 'coupon')->first();
 //        $settings = Setting::first();
 ////        return view('emails.orders.invoice', compact('order', 'settings'));
