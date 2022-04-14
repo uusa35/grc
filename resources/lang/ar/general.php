@@ -1278,5 +1278,6 @@ return array (
     "thanks_contacting_us" => "شكرا لاتصالكم بنا ..",
     "booked_at" => "موعد الحجز",
     "time" => "وقت الحجز",
-    "print" => "طباعة"
+    "print" => "طباعة",
+    "merchant" => "التاجر"
 );

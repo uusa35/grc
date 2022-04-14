@@ -1267,5 +1267,6 @@ return array (
     "thanks_contacting_us" => "thank you  for contact us,",
     "booked_at" => "booked at",
     "time" => "booking time",
-    "print" => "print"
+    "print" => "print",
+    "merchant" => "merchant"
 );
