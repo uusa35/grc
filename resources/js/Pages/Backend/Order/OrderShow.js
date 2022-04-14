@@ -16,8 +16,6 @@ export default function({order, printMode = false}) {
     const componentRef = useRef();
     const merchant = first(order.order_metas).merchant;
 
-    console.log('printMode', printMode);
-
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
