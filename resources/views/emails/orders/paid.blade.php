@@ -33,12 +33,18 @@
 @if($meta->ordermetable()->first()->type === 'product')
 | | {{ trans('general.color') }} : {{ $meta->color }}| |
 | | {{ trans('general.size') }} : {{ $meta->size }}| |
-| | {{ trans('general.notes') }} : {{ $meta->notes }}| |
+@if($meta->notes)
+| | {{ trans('general.notes') }} : {{ $meta->notes }} | |
+@endif
+| | {{ trans('general.owner') }} : {{ $meta->ordermetable->user->name }} | |
 @endif
 @if($meta->ordermetable()->first()->type === 'service')
-| | {{ trans('general.booked_at') }} : {{ $meta->booked_at }}| |
-| | {{ trans('general.time') }} : {{ $meta->time }}| |
-| | {{ trans('general.notes') }} : {{ $meta->notes }}| |
+| | {{ trans('general.booked_at') }} : {{ $meta->booked_at }} | |
+| | {{ trans('general.time') }} : {{ $meta->time }} | |
+@if($meta->notes)
+| | {{ trans('general.notes') }} : {{ $meta->notes }} | |
+@endif
+| | {{ trans('general.owner') }} : {{ $meta->ordermetable->user->name }} | |
 @endif
 @endforeach
 @endcomponent

@@ -12,9 +12,8 @@ import {useReactToPrint} from 'react-to-print';
 import GlobalContext from "../../context/GlobalContext";
 
 export default function({order, printMode = false}) {
-    const {classNames, trans, getThumb, getLocalized, isAdminOrAbove, isAuthor , isCompany  } = useContext(AppContext);
+    const {trans, getThumb, getLocalized  } = useContext(AppContext);
     const {locale} = useSelector(state => state);
-    const { settings } = useContext(GlobalContext);
     const componentRef = useRef();
     const merchant = first(order.order_metas).merchant;
 
@@ -35,7 +34,7 @@ export default function({order, printMode = false}) {
             <div ref={componentRef} dir={locale.dir}
                  className="print:w-auto print:mx-20 print:border-2 print:border-gray-600 print:p-10 bg-white max-w-full mx-auto px-4 py-16 sm:px-6 sm:pb-24 lg:px-8">
                 <div className="flex flex-1 justify-center items-center">
-                    <img src={getThumb(settings.image)} alt="" className="w-20 h-20 object-contain rounded-md"/>
+                    <img src={getThumb(order.user.image)} alt="" className="w-20 h-20 object-contain rounded-md"/>
                 </div>
                 {/* order main details */}
                 <div>
