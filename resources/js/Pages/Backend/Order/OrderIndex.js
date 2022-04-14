@@ -149,7 +149,7 @@ export default React.memo(function({elements}) {
                                         scope="col"
                                         className=" block md:table-cell px-3 py-3 rtl:text-right ltr:text-left"
                                     >
-                                        {trans('owner')}
+                                        {trans('user')}
                                     </th>
                                     <th
                                         scope="col"

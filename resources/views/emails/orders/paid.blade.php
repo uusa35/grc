@@ -37,7 +37,7 @@
 @if($meta->notes)
 | | {{ trans('general.notes') }} : {{ $meta->notes }} | |
 @endif
-| | {{ trans('general.owner') }} : {{ $meta->ordermetable->user->name }} | |
+| | {{ trans('general.merchant') }} : {{ $meta->ordermetable->user->name }} | |
 @endif
 @if($meta->ordermetable()->first()->type === 'service')
 | | {{ trans('general.booked_at') }} : {{ $meta->booked_at }} | |

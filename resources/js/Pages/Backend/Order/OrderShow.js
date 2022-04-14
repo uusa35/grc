@@ -32,9 +32,9 @@ export default function({order, printMode = false}) {
     return (
         <BackendContainer>
             <div ref={componentRef} dir={locale.dir}
-                 className="print:w-auto print:mx-20 print:border-2 print:border-gray-600 print:p-10 bg-white max-w-full mx-auto px-4 py-16 sm:px-6 sm:pb-24 lg:px-8">
+                 className="print:w-auto print:mx-20 print:border-2 print:border-gray-600 print:p-10 print:text-2xl bg-white max-w-full mx-auto px-4 py-16 sm:px-6 sm:pb-24 lg:px-8">
                 <div className="flex flex-1 justify-center items-center">
-                    <img src={getThumb(order.user.image)} alt="" className="w-20 h-20 object-contain rounded-md"/>
+                    <img src={getThumb(order.user.image)} alt="" className="print:w-80 print:h-80 print:mb-20 w-20 h-20 object-contain rounded-md"/>
                 </div>
                 {/* order main details */}
                 <div>
