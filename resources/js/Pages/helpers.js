@@ -157,14 +157,14 @@ export const calculateShipmentFees = (
     } else if (applyGlobalShipment) {
         // Global Fees
         return globalShipmentFees;
-    } else if (merchantCustomeDelivery && !multiCartMerchant && !merchantEnableReceiveFromShop) {
+    } else if (merchantCustomeDelivery && !multiCartMerchant && !merchantEnableReceiveFromShop && countryIsLocal) {
         // Merchant Custome Fees
         return merchantCustomeDeliveryFees
     } else if (countryIsLocal) {
         // Governate Price
         return parseFloat(governatePrice);
     } else {
-        // Governate Price
+        // Governate Price while country is Not local
         return parseFloat(governatePrice) * cartTotalItems;
     }
 

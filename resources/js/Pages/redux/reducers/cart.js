@@ -11,6 +11,7 @@ import {
     SET_CART_ID, SET_CART_NOTES,
 } from './../actions/types';
 import {sumBy, map, filter, round, random } from 'lodash';
+import moment from 'moment';
 
 const initialState = {
     total: 0,
@@ -27,7 +28,8 @@ const initialState = {
     items: [],
     merchants: [],
     cartId: random(99,999),
-    notes: ''
+    notes: '',
+    date_created : moment().format()
 }
 export default function(cart = initialState, action) {
     let currentTotal;
@@ -39,6 +41,7 @@ export default function(cart = initialState, action) {
     let shipmentCountry;
     let shipmentGovernate;
     let weight;
+    let isValid;
     switch (action.type) {
         case PREPARE_CART :
             currentShipmentFees = cart.shipmentFees;
@@ -48,15 +51,18 @@ export default function(cart = initialState, action) {
             currentNetTotal = round(parseFloat(sumBy(cart.items, 'totalPrice') + currentShipmentFees - currentDiscount), 2);
             weight = round(parseFloat(sumBy(cart.items, 'weight')), 2);
             currentTotalWeight = parseFloat(weight) ? weight : 0;
+            isValid = moment(cart.date_created).isAfter(moment().subtract('1','hour').format());
             return {
                 ...cart,
+                items : isValid ? cart.items : [],
+                date_created : isValid ? cart.date_created : moment().format(),
                 multiCartMerchant: action.payload.multiCartMerchant,
                 shipmentCountry: action.payload.shipmentCountry,
                 shipmentFees: action.payload.shipmentFees,
-                total: currentTotal,
-                netTotal: currentNetTotal,
-                totalItems: currentTotalItems,
-                totalWeight: currentTotalWeight
+                total: isValid ? currentTotal : 0,
+                netTotal: isValid ? currentNetTotal : 0,
+                totalItems: isValid ? currentTotalItems : 0,
+                totalWeight: isValid ? currentTotalWeight : 0
             };
         case SET_CART_ID :
             return {
@@ -78,7 +84,8 @@ export default function(cart = initialState, action) {
                 netTotal: currentNetTotal,
                 totalItems: currentTotalItems,
                 merchants: action.payload.merchants,
-                totalWeight: currentTotalWeight
+                totalWeight: currentTotalWeight,
+                date_created: moment().format()
             }
         case REMOVE_FROM_CART: // only cart_id
             const items = filter(cart.items, item => item.cart_id !== action.payload);
@@ -150,7 +157,10 @@ export default function(cart = initialState, action) {
         case DISABLE_DIRECT_PURCHASE_MODE:
             return initialState;
         case CLEAR_CART:
-            return initialState;
+            return {
+                ...initialState,
+                date_created: moment().format()
+            };
         default:
             return cart;
     }

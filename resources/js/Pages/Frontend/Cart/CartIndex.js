@@ -1,6 +1,6 @@
 import FrontendContainer from "../components/FrontendContainer";
 import {useDispatch, useSelector} from "react-redux";
-import {useContext, useMemo} from "react";
+import {useContext, useMemo, useEffect} from "react";
 import {AppContext} from "../../context/AppContext";
 import {isEmpty, isNull} from 'lodash'
 import route from 'ziggy-js';
@@ -48,6 +48,23 @@ export default function({coupon = {}, settings , auth }) {
                 shipmentCountry: auth && auth.country && isEmpty(cart.shipmentCountry) ? auth.country : cart.shipmentCountry,
                 shipmentFees: settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
             }))
+        }
+    }, [])
+
+    useEffect(() => {
+             dispatch(prepareCart({
+                multiCartMerchant: settings.multi_cart_merchant,
+                applyGlobalShipment: settings.apply_global_shipment,
+                shipmentCountry: auth && auth.country && isEmpty(cart.shipmentCountry) ? auth.country : cart.shipmentCountry,
+                shipmentFees: settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
+            }))
+        return () => {
+                 dispatch(prepareCart({
+                    multiCartMerchant: settings.multi_cart_merchant,
+                    applyGlobalShipment: settings.apply_global_shipment,
+                    shipmentCountry: auth && auth.country && isEmpty(cart.shipmentCountry) ? auth.country : cart.shipmentCountry,
+                    shipmentFees: settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
+                }))
         }
     }, [])
 

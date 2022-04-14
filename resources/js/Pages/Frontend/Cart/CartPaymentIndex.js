@@ -3,13 +3,13 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
 import OrderSummary from "./OrderSummary";
 import {useDispatch, useSelector} from "react-redux";
-import {useContext, useMemo, useState} from "react";
+import {useContext, useEffect, useMemo, useState} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link, useForm} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
-import {map, filter, first } from 'lodash';
+import {map, filter, first, isEmpty} from 'lodash';
 import axios from 'axios';
-import {showModal, showToastMessage} from "../../redux/actions";
+import {prepareCart, showModal, showToastMessage} from "../../redux/actions";
 import ConfirmationModal from "../partials/ConfirmationModal";
 import {clearCart} from "../../redux/actions";
 
@@ -82,6 +82,7 @@ export default function({order, settings , auth }) {
         }
     }, [paymentMethod])
 
+
     const handleChoosePaymentMethod = (p) => {
         setPaymentMethod(p)
         setBtnDisabled(true)
@@ -94,6 +95,15 @@ export default function({order, settings , auth }) {
             dispatch(clearCart())
         }
     }
+
+    useEffect(() => {
+        dispatch(prepareCart({
+            multiCartMerchant: settings.multi_cart_merchant,
+            applyGlobalShipment: settings.apply_global_shipment,
+            shipmentCountry: auth && auth.country && isEmpty(cart.shipmentCountry) ? auth.country : cart.shipmentCountry,
+            shipmentFees: settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
+        }))
+    }, [])
 
     return (
         <FrontendContainer>

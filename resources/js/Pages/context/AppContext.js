@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useMemo, useState} from 'react';
+import {createContext, useContext, useEffect, useMemo, useState, useLayoutEffect} from 'react';
 import GlobalContext from "./GlobalContext";
 import {split, map, isEmpty} from 'lodash';
 import Ziggy from 'ziggy-js';
@@ -18,6 +18,7 @@ import {
 } from "../redux/actions";
 import LoadingView from "../Backend/components/widgets/LoadingView";
 import {capitalize} from "lodash/string";
+import moment from 'moment'
 // import Echo from 'laravel-echo'
 // import Pusher from "pusher-js";
 
@@ -85,7 +86,7 @@ const AppContextProvider = ({children}) => {
         contentBgColor: `bg-white dark:bg-${settings.main_theme_bg_color}-900`,
         mainColor: settings.main_theme_color,
         bgColor: `bg-${settings.main_theme_bg_color}-100 dark:bg-${settings.main_theme_bg_color}-600`,
-        btnClass : `text-${settings.main_theme_color}-900 dark:text-white bg-${settings.main_theme_bg_color}-200 dark:bg-${settings.main_theme_bg_color}-600 hover:bg-${settings.main_theme_bg_color}-400 dark:hover:bg-${settings.main_theme_bg_color}-400 dark:hover:text-white  hover:text-white font-extrabold`,
+        btnClass : `text-${settings.main_theme_color}-900 dark:text-white bg-${settings.main_theme_bg_color}-200 dark:bg-${settings.main_theme_bg_color}-600 hover:bg-${settings.main_theme_bg_color}-400 dark:hover:bg-${settings.main_theme_bg_color}-400 dark:hover:text-white  hover:text-white font-extrabold capitalize`,
         headerColor: settings.header_theme_color,
         menuTextColor : `text-${settings.header_theme_color}-900 dark:text-white hover:text-${settings.header_theme_color}-800 dark:hover:text-${settings.header_theme_color}-600 capitalize font-extrabold`,
         headerBgColor: settings.header_theme_bg,
@@ -117,6 +118,7 @@ const AppContextProvider = ({children}) => {
             shipmentFees: settings.apply_global_shipment ? settings.shipment_fixed_rate : cart.shipmentFees
         }))
     }, [])
+
 
     useMemo(() => {
         if (navigator.onLine) {
