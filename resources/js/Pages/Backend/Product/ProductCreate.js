@@ -131,7 +131,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/* NAME AR*/}
                         <div className="sm:col-span-3 has-tooltip">
                             <label htmlFor="name_ar" className={`block  font-medium text-gray-800`}>
-                                {trans('name_ar')}
+                                {trans('name_ar')}*
                             </label>
                             <div className="mt-1">
                                 <input
@@ -153,7 +153,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/* NAME EN */}
                         <div className="sm:col-span-3 has-tooltip">
                             <label htmlFor="name_en" className={`block  font-medium text-gray-800`}>
-                                {trans('name_en')}
+                                {trans('name_en')}*
                             </label>
                             <div className="mt-1">
                                 <input
@@ -175,7 +175,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/*PRICE*/}
                         <div className="sm:col-span-2 has-tooltip">
                             <label htmlFor="price" className={`block  font-medium text-gray-800`}>
-                                {trans('price')}
+                                {trans('price')}*
                             </label>
                             <div className="mt-1">
                                 <input
@@ -199,7 +199,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         <div className="sm:col-span-2 has-tooltip">
                             <label htmlFor="sale_price"
                                    className={`block  font-medium text-gray-800`}>
-                                {trans('sale_price')}
+                                {trans('sale_price')}*
                             </label>
                             <div className="mt-1 ">
                                 <input
@@ -222,7 +222,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/* qty*/}
                         <div className="sm:col-span-2 has-tooltip">
                             <label htmlFor="qty" className={`block  font-medium text-gray-800`}>
-                                {trans('qty')} {trans('available')}
+                                {trans('qty')} {trans('available')}*
                             </label>
                             <div className="mt-1">
                                 <input
@@ -292,7 +292,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                             {
                                 isAdminOrAbove && <>
                                     <label htmlFor="user_id" className="block  font-medium text-gray-800">
-                                        {trans('owner')}
+                                        {trans('owner')}*
                                     </label>
                                     <div className="mt-1">
                                         <select
@@ -322,7 +322,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                         {/* size id */}
                         <div className="sm:col-span-2">
                             <label htmlFor="size_id" className="block  font-medium text-gray-800">
-                                {trans('size')}
+                                {trans('size_or_capacity')}*
                             </label>
                             <div className="mt-1">
                                 <select
@@ -346,14 +346,13 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                             </div>
                             <ToolTipWidget message={trans('user_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {trans('size_or_capacity')}
                                 {errors.size_id && <div className={`text-red-900`}>{errors.size_id}</div>}
                             </p>
                         </div>
                         {/* color_id */}
                         <div className="sm:col-span-2">
                             <label htmlFor="color_id" className="block  font-medium text-gray-800">
-                                {trans('color')}
+                                {trans('color')}*
                             </label>
                             <div className="mt-1">
                                 <select

@@ -14,7 +14,8 @@ use Illuminate\Mail\Markdown;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class OrderController extends Controller {
+class OrderController extends Controller
+{
     /**
      * Create the controller instance.
      *
@@ -79,7 +80,7 @@ class OrderController extends Controller {
      */
     public function show(Order $order)
     {
-        $order->load('order_metas.ordermetable','order_metas.merchant', 'user', 'coupon');
+        $order->load('order_metas.ordermetable', 'order_metas.merchant', 'user', 'coupon');
         return inertia('Backend/Order/OrderShow', compact('order'));
     }
 
@@ -149,20 +150,25 @@ class OrderController extends Controller {
         return Excel::download(new OrdersExport($elements), 'elements.' . request()->fileType);
     }
 
-    public function viewInvoice() {
-        $order = Order::whereId(request()->id)->with('order_metas.ordermetable','order_metas.merchant', 'user', 'coupon')->first();
+    public function viewInvoice()
+    {
+        $order = Order::whereId(request()->id)->with('order_metas.ordermetable', 'order_metas.merchant', 'user', 'coupon')->first();
         $markdown = new Markdown(view(), config('mail.markdown'));
         return $markdown->render('emails.orders.paid', ['order' => $order]);
     }
 
-    public function downloadInvoiceToPDF() {
-        $order = Order::whereId(request()->id)->with('order_metas.ordermetable','order_metas.merchant', 'user', 'coupon')->first();
-        $settings = Setting::first();
-//        return view('emails.orders.invoice', compact('order', 'settings'));
-        $pdf = Pdf::loadView('emails.orders.invoice', compact('order', 'settings'))
-            ->setOptions(['defaultFont' => 'sans-serif' , 'charset' => 'utf-8'])
-            ->setPaper('a4', 'landscape');
-         return $pdf->stream('invoice.pdf');
+    public function downloadInvoiceToPDF(Order $order)
+    {
+        $order = Order::whereId(request()->id)->with('order_metas.ordermetable', 'order_metas.merchant', 'user', 'coupon')->first();
+        $printMode = true;
+        return inertia('Backend/Order/OrderShow', compact('order','printMode'));
+//        $order = Order::whereId(request()->id)->with('order_metas.ordermetable','order_metas.merchant', 'user', 'coupon')->first();
+//        $settings = Setting::first();
+////        return view('emails.orders.invoice', compact('order', 'settings'));
+//        $pdf = Pdf::loadView('emails.orders.invoice', compact('order', 'settings'))
+//            ->setOptions(['defaultFont' => 'sans-serif' , 'charset' => 'utf-8'])
+//            ->setPaper('a4', 'landscape');
+//         return $pdf->stream('invoice.pdf');
     }
 
 }

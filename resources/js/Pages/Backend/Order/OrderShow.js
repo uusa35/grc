@@ -1,6 +1,6 @@
 import {AppContext} from "../../context/AppContext";
 import { map, first } from 'lodash'
-import {useContext, useRef} from "react";
+import {useContext, useEffect, useMemo, useRef} from "react";
 import BackendContainer from "../components/containers/BackendContainer";
 import moment from "moment";
 import {Link} from "@inertiajs/inertia-react";
@@ -11,16 +11,24 @@ import {useSelector} from "react-redux";
 import {useReactToPrint} from 'react-to-print';
 import GlobalContext from "../../context/GlobalContext";
 
-export default function({order}) {
+export default function({order, printMode = false}) {
     const {classNames, trans, getThumb, getLocalized, isAdminOrAbove, isAuthor , isCompany  } = useContext(AppContext);
     const {locale} = useSelector(state => state);
     const { settings } = useContext(GlobalContext);
     const componentRef = useRef();
     const merchant = first(order.order_metas).merchant;
 
+    console.log('printMode', printMode);
+
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
+
+    useEffect(() => {
+        if(printMode) {
+            handlePrint()
+        }
+    }, [])
 
     return (
         <BackendContainer>
@@ -33,7 +41,7 @@ export default function({order}) {
                 <div>
                     <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{trans('order_details')}</h1>
                     <div className="text-sm border-b border-gray-200 mt-2 pb-5 sm:flex sm:justify-between">
-                        <dl className="flex text-lg">
+                        <dl className="flex text-2xl">
                             <dt className="text-gray-500">{trans('order_no')} :</dt>
                             <dd className="text-gray-900 mx-5">{order.id}</dd>
                             <dt>
@@ -45,7 +53,7 @@ export default function({order}) {
                                 <span className="mx-5">{moment(order.created_at).format('dddd L  - HH:mm A')}</span>
                             </dd>
                         </dl>
-                        <div className="flex flex-row justify-end items-center">
+                        <div className="flex flex-row justify-end items-center print:hidden">
                             <button onClick={() => handlePrint()}
                                     className="flex flex-row justify-center items-center font-medium text-gray-600 hover:text-gray-500">
                                 {trans('print')}
@@ -149,6 +157,7 @@ export default function({order}) {
                                     </h3>
                                     <div className="flex flex-1 flex-row justify-between items-center">
                                         <p className="font-medium text-gray-900 mt-3">{trans('price')} {m.ordermetable.price}</p>
+                                        <p className="font-medium text-gray-900 mt-3">{trans('sku')} {m.ordermetable.sku}</p>
                                         <p className="font-medium text-gray-900 mt-3">{trans('type')} : {trans(getTypeFromModel(m.ordermetable_type))}</p>
                                         {m.color && <p className="text-gray-500 mt-3">{trans('color')} {m.color}</p>}
                                         {m.size && <p className="text-gray-500 mt-3">{trans('size')} {m.size}</p>}
@@ -170,7 +179,7 @@ export default function({order}) {
                     <div className="bg-gray-50 rounded-lg py-6 px-6  lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
                         <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-x-8 lg:pl-8 lg:col-span-5">
                             <div>
-                                <div className="flex flex-row items-center">
+                                <div className="flex flex-row items-center text-2xl">
                                     <dt className="font-medium text-gray-900">{trans('payment_method')}:</dt>
                                     <dd className="mt-1 flex mx-4">
                                             {order.payment_method}
@@ -198,21 +207,21 @@ export default function({order}) {
                         </dl>
 
                         <dl className="mt-8 divide-y divide-gray-200 lg:mt-0 lg:pr-8 lg:col-span-7">
-                            <div className="pb-4 flex items-center justify-between">
+                            <div className="pb-4 flex items-center justify-between text-2xl">
                                 <dt className="text-gray-600">{trans('total')}</dt>
                                 <dd className="text-xl font-medium text-gray-900">{order.price} {trans('kd')}</dd>
                             </div>
-                            {order.discount > 0 ? <div className="py-4 flex items-center justify-between">
+                            {order.discount > 0 ? <div className="py-4 flex items-center justify-between text-2xl">
                                 <dt className="text-gray-600">{trans('discount')}</dt>
                                 <dd className="text-xl font-medium text-gray-900">({order.discount})</dd>
                             </div> : null}
                             {
-                                order.shipment_fees > 0 ? <div className="py-4 flex items-center justify-between">
+                                order.shipment_fees > 0 ? <div className="py-4 flex items-center justify-between text-2xl">
                                     <dt className="text-gray-600">{trans('shipment_fees')}</dt>
                                     <dd className="font-medium text-gray-900">{order.shipment_fees} {trans('kd')}</dd>
                                 </div> : null
                             }
-                            <div className="pt-4 flex items-center justify-between">
+                            <div className="pt-4 flex items-center justify-between text-2xl">
                                 <dt className="font-medium text-gray-900">{trans('net_price')}</dt>
                                 <dd className="text-xl font-medium text-gray-900">{order.net_price} {trans("kd")}</dd>
                             </div>
