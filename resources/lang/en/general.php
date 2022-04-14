@@ -1264,5 +1264,8 @@ return array (
     "thanks" => "thanks",
     "username" => "username",
     "search_type" => "search type",
-    "thanks_contacting_us" => "thank you  for contact us,"
+    "thanks_contacting_us" => "thank you  for contact us,",
+    "booked_at" => "booked at",
+    "time" => "booking time",
+    "print" => "print"
 );

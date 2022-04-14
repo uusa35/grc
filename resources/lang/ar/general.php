@@ -1275,5 +1275,8 @@ return array (
     "thanks" => "مع الشكر",
     "username" => "اسم المستخدم",
     "search_type" => "نوع البحث",
-    "thanks_contacting_us" => "شكرا لاتصالكم بنا .."
+    "thanks_contacting_us" => "شكرا لاتصالكم بنا ..",
+    "booked_at" => "موعد الحجز",
+    "time" => "وقت الحجز",
+    "print" => "طباعة"
 );

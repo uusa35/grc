@@ -77,7 +77,8 @@ trait OrderTrait
             foreach ($request->cart['items'] as $item) {
                 // i commented this due to product_attribute duplication because was element_id unique to add more than product attributes in one order
 //                OrderMeta::updateOrCreate(['order_id' => $order->id, 'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']), 'ordermetable_id' => $item['element_id']], [
-                OrderMeta::create([
+                $timing = isset($item['timing_id']) ? Timing::whereId($item['timing_id'])->first() : null;
+                OrderMeta::updateOrCreate([
                     'order_id' => $order->id,
                     'name' => $item['name_ar'] . '   /  ' . $item['name_en'],
                     'description' => $item['description_ar'] . '   /  ' . $item['description_en'],
@@ -88,9 +89,12 @@ trait OrderTrait
                     'size' => isset($item['size']) ? $item['size'] : null,
                     'merchant_id' => isset($item['merchant_id']) ? $item['merchant_id'] : null,
                     'timing_id' => isset($item['timing_id']) ? $item['timing_id'] : null,
+                    'booked_at' => $timing ? Carbon::parse($timing->date .' '. $timing->time) : null,
+                    'time' => $timing ? Carbon::parse($timing->start)->format('h:i:s') : null,
                     'ordermetable_id' => $item['element_id'],
                     'ordermetable_type' => 'App\Models\\' . ucfirst($item['type']),
                     'attribute_id' => isset($item['attribute_id']) ? $item['attribute_id'] : null,
+
                 ]);
             }
             return $order;
@@ -394,8 +398,8 @@ trait OrderTrait
                             'item_type' => $item['type'],
                             'notes' => $item['notes'] ? $item['notes'] : null,
                             'timing_id' => $item['timing_id'],
-                            'service_date' => Carbon::now()->format('l') === $timing->day ? Carbon::parse($timing->day)->addWeek() : Carbon::parse($timing->day),
-                            'service_time' => $timing->start
+                            'booked_at' => Carbon::parse($timing->date .' '. $timing->time),
+                            'time' => Carbon::parse($timing->date .' '. $timing->time),
                         ]);
                     }
                 }

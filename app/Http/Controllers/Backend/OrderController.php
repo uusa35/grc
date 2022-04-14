@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Sabberworm\CSS\Settings;
 
 class OrderController extends Controller
 {
@@ -153,15 +154,17 @@ class OrderController extends Controller
     public function viewInvoice()
     {
         $order = Order::whereId(request()->id)->with('order_metas.ordermetable', 'order_metas.merchant', 'user', 'coupon')->first();
+        $settings = Setting::first();
         $markdown = new Markdown(view(), config('mail.markdown'));
-        return $markdown->render('emails.orders.paid', ['order' => $order]);
+        return $markdown->render('emails.orders.paid', ['order' => $order, 'settings' => $settings]);
     }
 
     public function downloadInvoiceToPDF(Order $order)
     {
         $order = Order::whereId(request()->id)->with('order_metas.ordermetable', 'order_metas.merchant', 'user', 'coupon')->first();
         $printMode = true;
-        return inertia('Backend/Order/OrderShow', compact('order','printMode'));
+        $settings = Setting::first();
+        return inertia('Backend/Order/OrderShow', compact('order','printMode','settings'));
 //        $order = Order::whereId(request()->id)->with('order_metas.ordermetable','order_metas.merchant', 'user', 'coupon')->first();
 //        $settings = Setting::first();
 ////        return view('emails.orders.invoice', compact('order', 'settings'));
