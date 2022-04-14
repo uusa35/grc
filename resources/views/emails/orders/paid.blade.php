@@ -17,10 +17,11 @@
 <div style="text-align: left">
 <a style="font-size: smaller" href="javascript:if(window.print)window.print()">{{ trans('general.print') }}</a>
 </div>
+@if($order->notes)
 @component('mail::panel')
 # {{ trans('general.notes') }} : {{ $order->notes }}
 @endcomponent
-
+@endif
 @component('mail::table')
 |       |  {{ trans('general.order_details') }}||
 | ------------- |:-------------:| --------:|
