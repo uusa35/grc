@@ -12,7 +12,7 @@ import CartIndexOrderSummary from "./CartIndexOrderSummary";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import OrderSummary from "./OrderSummary";
 
-export default function({coupon = {}}) {
+export default function({coupon = {}, settings , auth }) {
     const {cart, locale} = useSelector(state => state);
     const {trans, classNames, mainColor, contentBgColor, btnClass, textColor} = useContext(AppContext);
     const {props} = usePage();
