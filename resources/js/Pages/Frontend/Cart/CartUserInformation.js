@@ -52,7 +52,7 @@ export default function({countries, auth, settings}) {
         'country_id': auth ? auth.country_id : '',
         'governate_id': '',
         'area_id': '',
-        'notes': 'N/A',
+        'notes': trans('no_notes'),
         'receive_from_shop': 0
     });
 
