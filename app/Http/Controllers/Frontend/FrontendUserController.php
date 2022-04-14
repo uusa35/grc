@@ -389,7 +389,7 @@ class FrontendUserController extends Controller
             'role_id' => Role::where(['is_client' => true])->first()->id,
             'country_id' => $request->country_id,
             'subscription_id' => Subscription::all()->random()->id,
-            'email_verified_at' => env('EMAIL_VERIFIED_AT') ? Carbon::now() : null
+            'email_verified_at' => Carbon::now()
         ]);
         if ($user) {
             auth()->loginUsingId($user->id);
