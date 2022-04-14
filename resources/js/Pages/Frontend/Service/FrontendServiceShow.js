@@ -169,6 +169,9 @@ export default function ({element, relatedElements, auth}) {
                                 thumbnailLabel={element[getLocalized()]}
                                 thumbnailTitle={element[getLocalized()]}
                                 showThumbnails={true}
+                                useBrowserFullscreen={true}
+                                disableThumbnailScroll={true}
+                                thumbnailClass={`border-2 border-red-900 bg-gray-400`}
                                 thumbnailPosition={isMobile ? 'bottom' : 'right'}
                                 items={currentImages}/>
                         </div>
