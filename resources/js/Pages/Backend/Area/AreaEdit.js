@@ -201,6 +201,7 @@ export default function({area, countries  }) {
                                     onChange={handleChange}
                                     required
                                     type="text"
+                                    maxLength={100}
                                     name="code"
                                     defaultValue={area.code}
                                     id="code"

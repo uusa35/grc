@@ -112,6 +112,7 @@ export default function() {
                                                                 name="name"
                                                                 required
                                                                 id="name"
+                                                                maxLength={100}
                                                                 onChange={handleChange}
                                                                 autoComplete="given-name"
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
@@ -182,6 +183,7 @@ export default function() {
                                                                 name="address"
                                                                 required
                                                                 id="address"
+                                                                maxLength={100}
                                                                 onChange={handleChange}
                                                                 autoComplete="family-name"
                                                                 className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"

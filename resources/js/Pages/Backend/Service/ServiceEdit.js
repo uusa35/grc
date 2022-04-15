@@ -242,7 +242,7 @@ export default function ServiceEdit({users, categories, service, elementCategori
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="sku"
+                                        name="sku" maxLength={60}
                                         defaultValue={service.sku}
                                         id="sku"
                                         autoComplete="sku"

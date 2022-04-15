@@ -176,6 +176,7 @@ export default function({countries, auth, settings}) {
                                     id="name"
                                     name="name"
                                     required
+                                    maxLength={100}
                                     defaultValue={data.name_ar}
                                     autoComplete="given-name"
                                     className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
@@ -199,6 +200,7 @@ export default function({countries, auth, settings}) {
                                     id="email"
                                     name="email"
                                     autoComplete="email"
+                                    maxLength={100}
                                     required
                                     defaultValue={data.email}
                                     className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
@@ -219,6 +221,7 @@ export default function({countries, auth, settings}) {
                                     type="number"
                                     id="mobile"
                                     name="mobile"
+                                    maxLength={12}
                                     defaultValue={data.mobile}
                                     autoComplete="mobile"
                                     className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
@@ -335,6 +338,7 @@ export default function({countries, auth, settings}) {
                                     type="text"
                                     id="block"
                                     name="block"
+                                    maxLength={10}
                                     required
                                     defaultValue={data.block}
                                     autoComplete="given-block"
@@ -357,6 +361,7 @@ export default function({countries, auth, settings}) {
                                     type="text"
                                     id="street"
                                     name="street"
+                                    maxLength={50}
                                     required
                                     defaultValue={data.street}
                                     autoComplete="given-street"
@@ -378,6 +383,7 @@ export default function({countries, auth, settings}) {
                                     onChange={handleChange}
                                     type="text"
                                     id="building"
+                                    maxLength={10}
                                     name="building"
                                     defaultValue={data.building}
                                     autoComplete="given-building"
@@ -399,6 +405,7 @@ export default function({countries, auth, settings}) {
                                     onChange={handleChange}
                                     type="text"
                                     id="apartment"
+                                    maxLength={10}
                                     name="apartment"
                                     defaultValue={data.apartment}
                                     autoComplete="given-apartment"
@@ -422,6 +429,7 @@ export default function({countries, auth, settings}) {
                                     type="text"
                                     id="floor"
                                     name="floor"
+                                    maxLength={2}
                                     defaultValue={data.floor}
                                     autoComplete="given-floor"
                                     className=" w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"

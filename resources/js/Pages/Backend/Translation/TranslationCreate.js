@@ -51,12 +51,14 @@ export default function() {
                                 {trans('ar')}
                             </label>
                             <div className="mt-1">
-                                <input
+                                <textarea
                                     onChange={handleChange}
                                     required
                                     type="text"
                                     name="ar"
                                     defaultValue={data.ar}
+                                    maxLength={5000}
+                                    rows={10}
                                     id="ar"
                                     autoComplete="ar"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -73,12 +75,14 @@ export default function() {
                                 {trans('en')}
                             </label>
                             <div className="mt-1">
-                                <input
+                                <textarea
                                     onChange={handleChange}
                                     required
                                     type="text"
                                     name="en"
                                     defaultValue={data.en}
+                                    maxLength={5000}
+                                    rows={10}
                                     id="en"
                                     autoComplete="en"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
@@ -99,6 +103,7 @@ export default function() {
                                 <input
                                     onChange={handleChange}
                                     required
+                                    maxLength={100}
                                     type="text"
                                     name="key"
                                     defaultValue={data.key}

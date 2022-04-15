@@ -244,7 +244,7 @@ export default function({elements}) {
                             <div className="mt-1 flex flex-row flex-1 items-center h-32">
                                 <input
                                     onChange={e => setData('image_rectangle', e.target.files[0])}
-                                    type="file"
+                                    type="file"inputtyp
                                     name="image_rectangle"
                                     id="image_rectangle"
                                     accept="image/jpg, image/jpeg , image/png"

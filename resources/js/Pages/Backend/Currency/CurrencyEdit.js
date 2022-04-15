@@ -119,6 +119,7 @@ export default function({currency , countries }) {
                                     required
                                     type="text"
                                     name="exchange_rate"
+                                    maxLength={5}
                                     defaultValue={currency.exchange_rate}
                                     id="exchange_rate"
                                     autoComplete="exchange_rate"
@@ -141,6 +142,7 @@ export default function({currency , countries }) {
                                     required
                                     type="text"
                                     name="currency_symbol_ar"
+                                    maxLength={5}
                                     defaultValue={currency.currency_symbol_ar}
                                     id="currency_symbol_ar"
                                     autoComplete="currency_symbol_ar"
@@ -163,6 +165,7 @@ export default function({currency , countries }) {
                                     required
                                     type="text"
                                     name="currency_symbol_en"
+                                    maxLength={5}
                                     defaultValue={currency.currency_symbol_en}
                                     id="currency_symbol_en"
                                     autoComplete="currency_symbol_en"
@@ -185,6 +188,7 @@ export default function({currency , countries }) {
                                     required
                                     type="text"
                                     name="order"
+                                    maxLength={3}
                                     defaultValue={currency.order}
                                     id="order"
                                     autoComplete="order"

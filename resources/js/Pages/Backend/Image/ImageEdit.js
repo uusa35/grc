@@ -108,7 +108,8 @@ export default function({image}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="caption_ar "
+                                    name="caption_ar"
+                                    maxLength={60}
                                     defaultValue={image.caption_ar}
                                     id="caption_ar "
                                     autoComplete="caption_ar "
@@ -154,6 +155,7 @@ export default function({image}) {
                                     required
                                     type="text"
                                     name="order"
+                                    maxLength={3}
                                     defaultValue={image.order}
                                     id="order"
                                     autoComplete="order"

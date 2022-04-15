@@ -183,6 +183,7 @@ export default function() {
                                                             <input
                                                                 type="text"
                                                                 name="first_name"
+                                                                maxLength={20}
                                                                 required
                                                                 id="first_name"
                                                                 onChange={handleChange}
@@ -204,6 +205,7 @@ export default function() {
                                                             <input
                                                                 type="text"
                                                                 name="last_name"
+                                                                maxLength={20}
                                                                 required
                                                                 id="last_name"
                                                                 onChange={handleChange}
@@ -224,6 +226,7 @@ export default function() {
                                                             <input
                                                                 id="email"
                                                                 name="email"
+                                                                maxLength={30}
                                                                 required
                                                                 type="email"
                                                                 onChange={handleChange}
@@ -251,6 +254,7 @@ export default function() {
                                                             <input
                                                                 type="number"
                                                                 name="mobile"
+                                                                maxLength={20}
                                                                 id="mobile"
                                                                 onChange={handleChange}
                                                                 autoComplete="tel"
@@ -273,6 +277,7 @@ export default function() {
                                                             <input
                                                                 type="text"
                                                                 name="subject"
+                                                                maxLength={100}
                                                                 required
                                                                 id="subject"
                                                                 onChange={handleChange}
@@ -296,6 +301,7 @@ export default function() {
                                                                 type="text"
                                                                 name="code_confirmation"
                                                                 required
+                                                                maxLength={4}
                                                                 id="code_confirmation"
                                                                 onChange={handleChange}
                                                                 placeholder={trans('write_protection_code')}
@@ -323,6 +329,7 @@ export default function() {
                                                                     name="content"
                                                                     onChange={handleChange}
                                                                     rows={4}
+                                                                    maxLength={300}
                                                                     className="py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border border-gray-300 rounded-md"
                                                                     aria-describedby="message-max"
                                                                     defaultValue={''}

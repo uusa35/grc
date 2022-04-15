@@ -87,6 +87,7 @@ export default function({coupon}) {
                                     required
                                     type="text"
                                     name="code"
+                                    maxLength={50}
                                     defaultValue={coupon.code}
                                     id="code"
                                     autoComplete="code"

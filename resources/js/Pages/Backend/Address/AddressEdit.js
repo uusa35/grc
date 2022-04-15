@@ -77,6 +77,7 @@ export default function({ countries , address }) {
                                     onChange={handleChange}
                                     required
                                     type="text"
+                                    maxLength={100}
                                     name="name"
                                     defaultValue={address.name}
                                     id="name"
@@ -158,6 +159,7 @@ export default function({ countries , address }) {
                                 <input
                                     onChange={handleChange}
                                     type="text"
+                                    maxLength={100}
                                     name="block"
                                     defaultValue={address.block}
                                     id="block"
@@ -180,6 +182,7 @@ export default function({ countries , address }) {
                                 <input
                                     onChange={handleChange}
                                     type="text"
+                                    maxLength={100}
                                     name="street"
                                     defaultValue={address.street}
                                     id="street"
@@ -202,6 +205,7 @@ export default function({ countries , address }) {
                                 <input
                                     onChange={handleChange}
                                     type="text"
+                                    maxLength={100}
                                     name="building"
                                     defaultValue={address.building}
                                     id="building"
@@ -224,6 +228,7 @@ export default function({ countries , address }) {
                                 <input
                                     onChange={handleChange}
                                     type="text"
+                                    maxLength={100}
                                     name="floor"
                                     defaultValue={address.floor}
                                     id="floor"
@@ -247,6 +252,7 @@ export default function({ countries , address }) {
                                     onChange={handleChange}
                                     type="text"
                                     name="apartment"
+                                    maxLength={100}
                                     defaultValue={address.apartment}
                                     id="apartment"
                                     autoComplete="apartment"

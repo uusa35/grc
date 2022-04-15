@@ -271,7 +271,7 @@ export default function({users, categories, book, elementCategories}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="sku"
+                                        name="sku" maxLength={60}
                                         defaultValue={book.sku}
                                         id="sku"
                                         autoComplete="sku"

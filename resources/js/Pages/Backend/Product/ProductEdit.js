@@ -276,7 +276,8 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="sku"
+                                        name="sku" maxLength={60}
+                                        maxLength={20}
                                         defaultValue={product.sku}
                                         id="sku"
                                         autoComplete="sku"

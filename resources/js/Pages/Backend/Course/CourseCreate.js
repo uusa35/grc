@@ -218,7 +218,7 @@ export default function CourseCreate({users, categories}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="sku"
+                                    name="sku" maxLength={60}
                                     defaultValue={data.sku}
                                     id="sku"
                                     autoComplete="sku"

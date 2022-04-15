@@ -305,6 +305,7 @@ export default function () {
                                     <input
                                         type="email"
                                         name="email"
+                                        maxLength={50}
                                         autoComplete="email"
                                         required
                                         onChange={(e) => setData('email', e.target.value)}
