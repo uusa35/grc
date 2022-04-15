@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Exports\CategoriesExport;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryStore;
+use App\Http\Requests\CategoryUpdate;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryExtraLightResource;
 use App\Imports\CategoriesImport;
@@ -72,15 +74,8 @@ class CategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryStore $request)
     {
-        request()->validate([
-            'name_ar' => 'required|max:200',
-            'name_en' => 'required|max:200',
-            'caption_ar' => 'required|max:1000',
-            'caption_en' => 'required|max:1000',
-            'order' => 'integer'
-        ]);
         $element = Category::create($request->except('image', 'image_rectangle', 'file'));
         if ($element) {
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1440', '1080'], true, true) : null;
@@ -122,15 +117,8 @@ class CategoryController extends Controller
      * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryUpdate $request, Category $category)
     {
-        request()->validate([
-            'name_ar' => 'required|max:200',
-            'name_en' => 'required|max:200',
-            'caption_ar' => 'max:1000',
-            'caption_en' => 'max:1000',
-            'order' => 'integer'
-        ]);
         if ($category->update($request->except('image', 'image_rectangle', 'file'))) {
             $request->hasFile('image') ? $this->saveMimes($category, $request, ['image'], ['1440', '1080'], true, true) : null;
             $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;

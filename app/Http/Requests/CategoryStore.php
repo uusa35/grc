@@ -37,14 +37,16 @@ class CategoryStore extends FormRequest
     public function rules()
     {
         return [
-            'name_ar' => 'required|min:3',
-            'name_en' => 'required|min:3',
+            'name_ar' => 'required|min:3|max:200',
+            'name_en' => 'required|min:3|max:200',
             'min' => 'numeric|nullable',
             'max' => 'numeric|nullable|required_with:min|gt:min',
-            'description_en' => 'min:3|nullable',
-            'description_ar' => 'min:3|nullable',
-            'image' => "image|mimes:jpeg,png,jpg,gif|required|dimensions:width=1000,height=1000|max:".env('MAX_IMAGE_SIZE').'"',
-            'image_rectangle' => "image|mimes:jpeg,png,jpg,gif|dimensions:width=1000,height=1000|max:".env('MAX_IMAGE_SIZE').'"',
+            'description_en' => 'min:3|nullable|max:1000',
+            'description_ar' => 'min:3|nullable|max:1000',
+            'caption_en' => 'min:3|nullable|max:1000',
+            'caption_ar' => 'min:3|nullable|max:1000',
+            'image' => "image|mimes:jpeg,png,jpg,gif|required|max:".env('MAX_IMAGE_SIZE').'"',
+            'image_rectangle' => "nullable|image|mimes:jpeg,png,jpg,gif|dimensions:width=1000,height=1000|max:".env('MAX_IMAGE_SIZE').'"',
             'file' => 'nullable|mimes:pdf|max:10000',
             'limited' => 'boolean|nullable',
             'order' => 'integer|nullable',
