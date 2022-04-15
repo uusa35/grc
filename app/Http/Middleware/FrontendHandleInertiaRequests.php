@@ -45,8 +45,15 @@ class FrontendHandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
-         return array_merge(parent::share($request), [
-            'auth' => $request->user() ? AuthExtraLightResource::make(User::whereId($request->user()->id)->with('role.privileges', 'favoritesList', 'orders', 'country')->first()) : [],
+        return array_merge(parent::share($request), [
+            'auth' => $request->user() ? AuthExtraLightResource::make(User::whereId($request->user()->id)
+                ->with('favoritesList', 'orders', 'country')
+                ->with(['role' => function ($q) {
+                    return $q->with(['privileges' => function ($q) {
+                        return $q->orderBy('order', 'asc');
+                    }]);
+                }])
+                ->first()) : [],
             'settings' => fn() => new SettingResource(Setting::first()),
             'success' => fn() => $request->session()->get('success'),
             'error' => fn() => $request->session()->get('error'),
@@ -60,7 +67,7 @@ class FrontendHandleInertiaRequests extends Middleware
                 ->orderBy('order', 'asc')
                 ->get()),
             'ziggy' => (new Ziggy())->toArray(),
-             'appName' => env('APP_NAME')
+            'appName' => env('APP_NAME')
         ]);
     }
 }
