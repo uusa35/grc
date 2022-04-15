@@ -4,10 +4,12 @@ import {AppContext} from "../../../../context/AppContext";
 import ImageGallery from "react-image-gallery";
 import route from 'ziggy-js';
 import {motion} from 'framer-motion';
+import GlobalContext from "../../../../context/GlobalContext";
 
 export default function({elements}) {
     const {getLarge, getThumb, getLocalized} = useContext(AppContext)
     const [currentImages, setCurrentImages] = useState([]);
+    const { settings } = useContext(GlobalContext);
 
     useMemo(() => {
         const images = [];
@@ -57,7 +59,7 @@ export default function({elements}) {
             useBrowserFullscreen={true}
             useTranslate3D={true}
             showIndex={false}
-            autoPlay={false}
+            autoPlay={!settings.wide_screen}
             showFullscreenButton={false}
             showPlayButton={false}
             thumbnailPosition={'bottom'}
