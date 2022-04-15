@@ -46,7 +46,8 @@ const NormalCourseWidget =  ({ element }) =>  {
                     </Link>
                 </h3>
                 { element.user && <Link href={route('frontend.user.show', element.user.id) + `?slug=${element.user[getLocalized()].replace(/ /g, '-')}`}>
-                    <img className="w-5 h-5 lg:w-10 lg:h-10 rounded-full object-cover shadow-sm" src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
+                    <img className={`w-5 h-5 lg:w-10 lg:h-10 rounded-full object-cover shadow-sm border border-${mainColor}-200`}
+                         src={getThumb(element.user.image)} alt={element.user[getLocalized()]}
                          width={360}
                          height={480}
                          loading='lazy'
