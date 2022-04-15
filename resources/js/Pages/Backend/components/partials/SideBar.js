@@ -375,6 +375,7 @@ const SideBar = () => {
                                     <span key={m.name}>
                                         {
                                             m.main_menu && m.index ?
+                                                <>
                                                 <Link
                                                     key={m.name}
                                                     href={route(`backend.${m.name}.search`)}
@@ -394,133 +395,138 @@ const SideBar = () => {
                                                             </svg>
                                                     }
                                                     {trans(pluralize(m.name))}
-                                                </Link> : null
+                                                </Link>
+                                                    { m.name === 'order' ?
+                                                    <>
+                                                        {/* paid */}
+                                                        <Link
+                                                            href={route(`backend.order.search`, { paid : true })}
+                                                            className={classNames(
+                                                                route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                            )}
+                                                            aria-current={'page'}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                            </svg>
+                                                            {trans('paid_order')}
+                                                        </Link>
+                                                        {
+                                                            settings.enable_products ? <>
+                                                                <Link
+                                                                    href={route(`backend.order.search`, { paid : true , receive_on_branch : true})}
+                                                                    className={classNames(
+                                                                        route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                                    )}
+                                                                    aria-current={'page'}
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                                    </svg>
+                                                                    {trans('receive_on_branch')}
+                                                                </Link>
+                                                                <Link
+                                                                    href={route(`backend.order.search`, { paid : false , cash_on_delivery : true})}
+                                                                    className={classNames(
+                                                                        route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                                    )}
+                                                                    aria-current={'page'}
+                                                                >
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                                    </svg>
+                                                                    {trans('cash_on_delivery')}
+                                                                </Link>
+                                                            </>  : null
+                                                        }
+                                                        <Link
+                                                            href={route(`backend.order.search`, { paid : true , status : 'under_process'})}
+                                                            className={classNames(
+                                                                route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                            )}
+                                                            aria-current={'page'}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                            </svg>
+                                                            {trans('under_process')}
+                                                        </Link>
+                                                        <Link
+                                                            href={route(`backend.order.search`, { paid : true , status : 'delivered'})}
+                                                            className={classNames(
+                                                                route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                            )}
+                                                            aria-current={'page'}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                            </svg>
+                                                            {trans('delivered')}
+                                                        </Link>
+                                                        <Link
+                                                            href={route(`backend.order.search`, { paid : true , status : 'completed'})}
+                                                            className={classNames(
+                                                                route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                            )}
+                                                            aria-current={'page'}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                            </svg>
+                                                            {trans('completed')}
+                                                        </Link>
+                                                        <Link
+                                                            href={route(`backend.order.search`, { paid : true , status : 'canceled'})}
+                                                            className={classNames(
+                                                                route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                            )}
+                                                            aria-current={'page'}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                            </svg>
+                                                            {trans('canceled')}
+                                                        </Link>
+                                                        {/* unpaid */}
+                                                        <Link
+                                                            href={route(`backend.order.search`, { status : 'pending' })}
+                                                            className={classNames(
+                                                                route().params.status === 'pending' && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                            )}
+                                                            aria-current={'page'}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                            </svg>
+                                                            {trans(pluralize('pending_orders'))}
+                                                        </Link>
+                                                        <Link
+                                                            href={route(`backend.order.search`, { status : 'failed' })}
+                                                            className={classNames(
+                                                                route().params.status === 'failed' && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
+                                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
+                                                            )}
+                                                            aria-current={'page'}
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                                            </svg>
+                                                            {trans(pluralize('failed_orders'))}
+                                                        </Link>
+                                                    </> : null
+                                                    }
+                                                </>: null
                                         }
                                     </span>
                                 ))}
-                                {/* paid */}
-                                <Link
-                                    href={route(`backend.order.search`, { paid : true })}
-                                    className={classNames(
-                                        route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                    )}
-                                    aria-current={'page'}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    {trans('paid_order')}
-                                </Link>
-                                {
-                                    settings.enable_products ? <>
-                                        <Link
-                                            href={route(`backend.order.search`, { paid : true , receive_on_branch : true})}
-                                            className={classNames(
-                                                route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                            )}
-                                            aria-current={'page'}
-                                        >
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                            </svg>
-                                            {trans('receive_on_branch')}
-                                        </Link>
-                                        <Link
-                                            href={route(`backend.order.search`, { paid : false , cash_on_delivery : true})}
-                                            className={classNames(
-                                                route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                                'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                            )}
-                                            aria-current={'page'}
-                                        >
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                            </svg>
-                                            {trans('cash_on_delivery')}
-                                        </Link>
-                                    </>  : null
-                                }
-                                <Link
-                                    href={route(`backend.order.search`, { paid : true , status : 'under_process'})}
-                                    className={classNames(
-                                        route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                    )}
-                                    aria-current={'page'}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    {trans('under_process')}
-                                </Link>
-                                <Link
-                                    href={route(`backend.order.search`, { paid : true , status : 'delivered'})}
-                                    className={classNames(
-                                        route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                    )}
-                                    aria-current={'page'}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    {trans('delivered')}
-                                </Link>
-                                <Link
-                                    href={route(`backend.order.search`, { paid : true , status : 'completed'})}
-                                    className={classNames(
-                                        route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                    )}
-                                    aria-current={'page'}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    {trans('completed')}
-                                </Link>
-                                <Link
-                                    href={route(`backend.order.search`, { paid : true , status : 'canceled'})}
-                                    className={classNames(
-                                        route().params.paid == 1 && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                    )}
-                                    aria-current={'page'}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    {trans('canceled')}
-                                </Link>
-                                {/* unpaid */}
-                                <Link
-                                    href={route(`backend.order.search`, { status : 'pending' })}
-                                    className={classNames(
-                                        route().params.status === 'pending' && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                    )}
-                                    aria-current={'page'}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    {trans(pluralize('pending_orders'))}
-                                </Link>
-                                <Link
-                                    href={route(`backend.order.search`, { status : 'failed' })}
-                                    className={classNames(
-                                        route().params.status === 'failed' && parentModule === 'order' ? 'bg-gray-100 text-gray-600' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50',
-                                        'group flex items-center py-2 rounded-md capitalize pl-5 text-sm'
-                                    )}
-                                    aria-current={'page'}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    {trans(pluralize('failed_orders'))}
-                                </Link>
                             </div>
                         </nav>
                     </div>
