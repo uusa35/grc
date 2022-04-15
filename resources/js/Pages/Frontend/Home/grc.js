@@ -26,7 +26,6 @@ export default React.memo(function ({
         function handleResize() {
             window.innerWidth < 1200 ? setSlideNumber(2) : setSlideNumber(4);
         }
-
         window.addEventListener("resize", handleResize);
         handleResize();
         return () => window.removeEventListener("resize", handleResize);

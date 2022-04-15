@@ -542,6 +542,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                         id="notes"
                                                         name="notes"
                                                         rows={3}
+                                                        maxLength={150}
                                                         className="shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border border-gray-300 rounded-md"
                                                         onChange={(e) => setNotes(e.target.value)}
                                                     />

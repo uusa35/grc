@@ -63,7 +63,7 @@ export default function({image}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="name_ar"
+                                    name="name_ar" maxLength={100}
                                     defaultValue={image.name_ar}
                                     id="name_ar"
                                     autoComplete="name_ar"
@@ -85,7 +85,7 @@ export default function({image}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="name_en"
+                                    name="name_en" maxLength={100}
                                     defaultValue={image.name_en}
                                     id="name_en"
                                     autoComplete="name_en"
@@ -130,7 +130,7 @@ export default function({image}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="caption_en"
+                                    name="caption_en" maxLength={60}
                                     defaultValue={image.caption_en}
                                     id="caption_en"
                                     autoComplete="caption_en"

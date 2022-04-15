@@ -84,7 +84,7 @@ export default function({elements}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="name_ar"
+                                    name="name_ar" maxLength={100}
                                     defaultValue={data.name_ar}
                                     id="name_ar"
                                     autoComplete="name_ar"
@@ -106,7 +106,7 @@ export default function({elements}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="name_en"
+                                    name="name_en" maxLength={100}
                                     defaultValue={data.name_en}
                                     id="name_en"
                                     autoComplete="name_en"
@@ -153,7 +153,7 @@ export default function({elements}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="caption_ar"
+                                    name="caption_ar" maxLength={60}
                                     defaultValue={data.caption_ar}
                                     id="caption_ar"
                                     autoComplete="caption_ar"
@@ -175,7 +175,7 @@ export default function({elements}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="caption_en"
+                                    name="caption_en" maxLength={60}
                                     defaultValue={data.caption_en}
                                     id="caption_en"
                                     autoComplete="caption_en"
@@ -330,7 +330,7 @@ export default function({elements}) {
                                          <textarea
                                              onChange={handleChange}
                                              id="description_ar"
-                                             name="description_ar"
+                                             name="description_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={data.description_ar}
@@ -352,7 +352,7 @@ export default function({elements}) {
                                          <textarea
                                              onChange={handleChange}
                                              id="description_en"
-                                             name="description_en"
+                                             name="description_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={data.description_en}

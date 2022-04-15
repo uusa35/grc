@@ -53,7 +53,7 @@ export default function() {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="name_ar"
+                                    name="name_ar" maxLength={100}
                                     defaultValue={data.name_ar}
                                     id="name_ar"
                                     autoComplete="name_ar"
@@ -75,7 +75,7 @@ export default function() {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="name_en"
+                                    name="name_en" maxLength={100}
                                     defaultValue={data.name_en}
                                     id="name_en"
                                     autoComplete="name_en"

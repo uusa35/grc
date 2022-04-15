@@ -127,7 +127,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <input
                                         onChange={handleChange}
                                         type="text"
-                                        name="name_ar"
+                                        name="name_ar" maxLength={100}
                                         defaultValue={slide.name_ar}
                                         id="name_ar"
                                         autoComplete="name_ar"
@@ -149,7 +149,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <input
                                         onChange={handleChange}
                                         type="text"
-                                        name="name_en"
+                                        name="name_en" maxLength={100}
                                         defaultValue={slide.name_en}
                                         id="name_en"
                                         autoComplete="name_en"
@@ -171,7 +171,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <input
                                         onChange={handleChange}
                                         type="text"
-                                        name="caption_ar"
+                                        name="caption_ar" maxLength={60}
                                         defaultValue={slide.caption_ar}
                                         id="caption_ar"
                                         autoComplete="caption_ar"
@@ -193,7 +193,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     <input
                                         onChange={handleChange}
                                         type="text"
-                                        name="caption_en"
+                                        name="caption_en" maxLength={60}
                                         defaultValue={slide.caption_en}
                                         id="caption_en"
                                         autoComplete="caption_en"
@@ -216,7 +216,7 @@ accept="image/jpg, image/jpeg , image/png"
                                          <textarea
                                              onChange={handleChange}
                                              id="description_ar"
-                                             name="description_ar"
+                                             name="description_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={slide.description_ar}
@@ -238,7 +238,7 @@ accept="image/jpg, image/jpeg , image/png"
                                          <textarea
                                              onChange={handleChange}
                                              id="description_en"
-                                             name="description_en"
+                                             name="description_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={slide.description_en}
@@ -259,7 +259,7 @@ accept="image/jpg, image/jpeg , image/png"
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_ar"
-                                             name="notes_ar"
+                                             name="notes_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={slide.notes_ar}
@@ -279,7 +279,7 @@ accept="image/jpg, image/jpeg , image/png"
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_en"
-                                             name="notes_en"
+                                             name="notes_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={slide.notes_en}

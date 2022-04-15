@@ -502,6 +502,7 @@ export default function({countries, auth, settings}) {
                                                         defaultValue={data.notes}
                                                         name="notes"
                                                         rows={3}
+                                                        maxLength={150}
                                                         className="shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border border-gray-300 rounded-md"
                                                         onChange={(e) => setData('notes', e.target.value)}
                                                     />

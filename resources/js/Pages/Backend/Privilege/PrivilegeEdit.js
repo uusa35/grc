@@ -124,7 +124,7 @@ export default function({privilege, pivotElements}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="name_ar"
+                                        name="name_ar" maxLength={100}
                                         defaultValue={privilege.name_ar}
                                         id="name_ar"
                                         autoComplete="name_ar"
@@ -146,7 +146,7 @@ export default function({privilege, pivotElements}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="name_en"
+                                        name="name_en" maxLength={100}
                                         defaultValue={privilege.name_en}
                                         id="name_en"
                                         autoComplete="name_en"
@@ -169,7 +169,7 @@ export default function({privilege, pivotElements}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="description_ar"
+                                        name="description_ar" maxLength={200}
                                         defaultValue={privilege.description_ar}
                                         id="description_ar"
                                         autoComplete="description_ar"
@@ -192,7 +192,7 @@ export default function({privilege, pivotElements}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="description_en"
+                                        name="description_en" maxLength={200}
                                         defaultValue={privilege.description_en}
                                         id="description_en"
                                         autoComplete="description_en"

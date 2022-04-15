@@ -1990,7 +1990,7 @@ export default function SettingEdit({setting, themes, paymentMethods, fonts }) {
                                         onChange={handleChange}
                                         type="text"
                                         step="any"
-                                        name="keywords"
+                                        name="keywords" maxLength={200}
                                         defaultValue={setting.keywords}
                                         id="keywords"
                                         autoComplete="keywords"

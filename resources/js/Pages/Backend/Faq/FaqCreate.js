@@ -66,7 +66,7 @@ export default function() {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="name_ar"
+                                    name="name_ar" maxLength={100}
                                     defaultValue={data.name_ar}
                                     id="name_ar"
                                     autoComplete="name_ar"
@@ -88,7 +88,7 @@ export default function() {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="name_en"
+                                    name="name_en" maxLength={100}
                                     defaultValue={data.name_en}
                                     id="name_en"
                                     autoComplete="name_en"
@@ -110,7 +110,7 @@ export default function() {
                                          <textarea
                                              onChange={handleChange}
                                              id="description_ar"
-                                             name="description_ar"
+                                             name="description_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={data.description_ar}
@@ -132,7 +132,7 @@ export default function() {
                                          <textarea
                                              onChange={handleChange}
                                              id="description_en"
-                                             name="description_en"
+                                             name="description_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={data.description_en}
@@ -154,7 +154,7 @@ export default function() {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="notes_ar"
+                                    name="notes_ar" maxLength={200}
                                     defaultValue={data.notes_ar}
                                     id="notes_ar"
                                     autoComplete="notes_ar"
@@ -176,7 +176,7 @@ export default function() {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="notes_en"
+                                    name="notes_en" maxLength={200}
                                     defaultValue={data.notes_en}
                                     id="notes_en"
                                     autoComplete="notes_en"

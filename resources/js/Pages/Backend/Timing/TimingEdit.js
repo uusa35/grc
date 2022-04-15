@@ -158,7 +158,7 @@ export default function TimingEdit({ timing }) {
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_ar"
-                                             name="notes_ar"
+                                             name="notes_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={data.notes_ar}
@@ -177,7 +177,7 @@ export default function TimingEdit({ timing }) {
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_en"
-                                             name="notes_en"
+                                             name="notes_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={data.notes_en}

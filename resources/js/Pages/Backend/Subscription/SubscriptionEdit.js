@@ -127,7 +127,7 @@ export default function({subscription}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="name_ar"
+                                        name="name_ar" maxLength={100}
                                         defaultValue={subscription.name_ar}
                                         id="name_ar"
                                         autoComplete="name_ar"
@@ -149,7 +149,7 @@ export default function({subscription}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="name_en"
+                                        name="name_en" maxLength={100}
                                         defaultValue={subscription.name_en}
                                         id="name_en"
                                         autoComplete="name_en"
@@ -244,7 +244,7 @@ export default function({subscription}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="caption_ar"
+                                        name="caption_ar" maxLength={60}
                                         defaultValue={subscription.caption_ar}
                                         id="caption_ar"
                                         autoComplete="caption_ar"
@@ -266,7 +266,7 @@ export default function({subscription}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="caption_en"
+                                        name="caption_en" maxLength={60}
                                         defaultValue={subscription.caption_en}
                                         id="caption_en"
                                         autoComplete="caption_en"
@@ -289,7 +289,7 @@ export default function({subscription}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="notes_ar"
+                                        name="notes_ar" maxLength={200}
                                         defaultValue={subscription.notes_ar}
                                         id="notes_ar"
                                         autoComplete="notes_ar"
@@ -311,7 +311,7 @@ export default function({subscription}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="notes_en"
+                                        name="notes_en" maxLength={200}
                                         defaultValue={subscription.notes_en}
                                         id="notes_en"
                                         autoComplete="notes_en"

@@ -157,7 +157,7 @@ export default function({users, categories, book, elementCategories}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="name_ar"
+                                        name="name_ar" maxLength={100}
                                         defaultValue={book.name_ar}
                                         id="name_ar"
                                         autoComplete="name_ar"
@@ -179,7 +179,7 @@ export default function({users, categories, book, elementCategories}) {
                                         onChange={handleChange}
                                         required
                                         type="text"
-                                        name="name_en"
+                                        name="name_en" maxLength={100}
                                         defaultValue={book.name_en}
                                         id="name_en"
                                         autoComplete="name_en"
@@ -845,7 +845,7 @@ export default function({users, categories, book, elementCategories}) {
                                          <textarea
                                              onChange={handleChange}
                                              id="description_ar"
-                                             name="description_ar"
+                                             name="description_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={book.description_ar}
@@ -866,7 +866,7 @@ export default function({users, categories, book, elementCategories}) {
                                          <textarea
                                              onChange={handleChange}
                                              id="description_en"
-                                             name="description_en"
+                                             name="description_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={book.description_en}
@@ -887,7 +887,7 @@ export default function({users, categories, book, elementCategories}) {
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_ar"
-                                             name="notes_ar"
+                                             name="notes_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={book.notes_ar}
@@ -906,7 +906,7 @@ export default function({users, categories, book, elementCategories}) {
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_en"
-                                             name="notes_en"
+                                             name="notes_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={book.notes_en}
@@ -928,7 +928,7 @@ export default function({users, categories, book, elementCategories}) {
                                         onChange={handleChange}
                                         type="text"
                                         step="any"
-                                        name="caption_ar"
+                                        name="caption_ar" maxLength={60}
                                         defaultValue={book.caption_ar}
                                         id="caption_ar"
                                         autoComplete="caption_ar"
@@ -950,7 +950,7 @@ export default function({users, categories, book, elementCategories}) {
                                         onChange={handleChange}
                                         type="text"
                                         step="any"
-                                        name="caption_en"
+                                        name="caption_en" maxLength={60}
                                         defaultValue={book.caption_en}
                                         id="caption_en"
                                         autoComplete="caption_en"
@@ -973,7 +973,7 @@ export default function({users, categories, book, elementCategories}) {
                                         onChange={handleChange}
                                         type="text"
                                         step="any"
-                                        name="keywords"
+                                        name="keywords" maxLength={200}
                                         defaultValue={book.keywords}
                                         id="keywords"
                                         autoComplete="keywords"
@@ -1044,7 +1044,7 @@ export default function({users, categories, book, elementCategories}) {
                                         onChange={handleChange}
                                         type="url"
                                         step="any"
-                                        name="video_url_one"
+                                        name="video_url_one" maxLength={200}
                                         defaultValue={book.video_url_one}
                                         id="video_url_one"
                                         autoComplete="video_url_one"
@@ -1067,7 +1067,7 @@ export default function({users, categories, book, elementCategories}) {
                                         onChange={handleChange}
                                         type="url"
                                         step="any"
-                                        name="video_url_two"
+                                        name="video_url_two" maxLength={200}
                                         defaultValue={book.video_url_two}
                                         id="video_url_two"
                                         autoComplete="video_url_two"

@@ -156,7 +156,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                            onChange={handleChange}
                                            required
                                            type="text"
-                                           name="name_ar"
+                                           name="name_ar" maxLength={100}
                                            defaultValue={course.name_ar}
                                            id="name_ar"
                                            autoComplete="name_ar"
@@ -178,7 +178,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                            onChange={handleChange}
                                            required
                                            type="text"
-                                           name="name_en"
+                                           name="name_en" maxLength={100}
                                            defaultValue={course.name_en}
                                            id="name_en"
                                            autoComplete="name_en"
@@ -708,7 +708,7 @@ accept="application/pdf"
                                          <textarea
                                              onChange={handleChange}
                                              id="description_ar"
-                                             name="description_ar"
+                                             name="description_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={course.description_ar}
@@ -730,7 +730,7 @@ accept="application/pdf"
                                          <textarea
                                              onChange={handleChange}
                                              id="description_en"
-                                             name="description_en"
+                                             name="description_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={course.description_en}
@@ -751,7 +751,7 @@ accept="application/pdf"
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_ar"
-                                             name="notes_ar"
+                                             name="notes_ar" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={course.notes_ar}
@@ -770,7 +770,7 @@ accept="application/pdf"
                                          <textarea
                                              onChange={handleChange}
                                              id="notes_en"
-                                             name="notes_en"
+                                             name="notes_en" maxLength={200}
                                              rows={4}
                                              className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                              defaultValue={course.notes_en}
@@ -792,7 +792,7 @@ accept="application/pdf"
                                         onChange={handleChange}
                                         type="text"
                                         step="any"
-                                        name="caption_ar"
+                                        name="caption_ar" maxLength={60}
                                         defaultValue={course.caption_ar}
                                         id="caption_ar"
                                         autoComplete="caption_ar"
@@ -814,7 +814,7 @@ accept="application/pdf"
                                         onChange={handleChange}
                                         type="text"
                                         step="any"
-                                        name="caption_en"
+                                        name="caption_en" maxLength={60}
                                         defaultValue={course.caption_en}
                                         id="caption_en"
                                         autoComplete="caption_en"
@@ -837,7 +837,7 @@ accept="application/pdf"
                                         onChange={handleChange}
                                         type="text"
                                         step="any"
-                                        name="keywords"
+                                        name="keywords" maxLength={200}
                                         defaultValue={course.keywords}
                                         id="keywords"
                                         autoComplete="keywords"
@@ -909,7 +909,7 @@ accept="application/pdf"
                                         onChange={handleChange}
                                         type="url"
                                         step="any"
-                                        name="video_url_one"
+                                        name="video_url_one" maxLength={200}
                                         defaultValue={course.video_url_one}
                                         id="video_url_one"
                                         autoComplete="video_url_one"
@@ -932,7 +932,7 @@ accept="application/pdf"
                                         onChange={handleChange}
                                         type="url"
                                         step="any"
-                                        name="video_url_two"
+                                        name="video_url_two" maxLength={200}
                                         defaultValue={course.video_url_two}
                                         id="video_url_two"
                                         autoComplete="video_url_two"

@@ -199,7 +199,7 @@ export default function({user, countries }) {
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    name="name_en"
+                                                    name="name_en" maxLength={100}
                                                     id="name_en"
                                                     onChange={handleChange}
                                                     defaultValue={user.name_en}
@@ -220,7 +220,7 @@ export default function({user, countries }) {
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    name="name_ar"
+                                                    name="name_ar" maxLength={100}
                                                     id="name_ar"
                                                     onChange={handleChange}
                                                     defaultValue={user.name_ar}
@@ -241,7 +241,7 @@ export default function({user, countries }) {
                                                 </label>
                                                 <input
                                                     type="text"
-                                                    name="name_ar"
+                                                    name="name_ar" maxLength={100}
                                                     id="mobile"
                                                     onChange={handleChange}
                                                     defaultValue={user.mobile}
