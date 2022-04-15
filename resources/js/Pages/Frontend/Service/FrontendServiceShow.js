@@ -229,7 +229,7 @@ export default function ({element, relatedElements, auth}) {
                                         <Menu.Button
                                             className={`flex flex-1 justify-between items-center w-full capitalize rounded-md border border-gray-300 shadow-sm px-4 py-2 ${btnClass} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
                                             <div>
-                                                {!isEmpty(selectedTiming) ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
+                                                {!isEmpty(selectedTiming) ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : (element.timing.length > 0 ? trans('available_timings') : trans('no_timings'))}
                                             </div>
                                             <ChevronDownIcon className="h-5 w-5" aria-hidden="true"/>
                                         </Menu.Button>
