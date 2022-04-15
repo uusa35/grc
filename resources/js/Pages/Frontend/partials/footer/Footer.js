@@ -36,7 +36,7 @@ export default function () {
                 <div className="grid sm:grid-cols-2 xl:grid-cols-4 xl:gap-8">
                     <div className=" p-4">
                         <img
-                            className="h-28 rounded-sm shadow-md"
+                            className="w-28 h-28 rounded-md shadow-md"
                             src={getThumb(settings.app_logo)}
                             alt={settings[getLocalized()]}
                             width={96}
