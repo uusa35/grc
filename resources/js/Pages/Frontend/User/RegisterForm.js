@@ -90,6 +90,7 @@ export default function({countries}) {
                                             id="name"
                                             name="name"
                                             type="text"
+                                            maxLength={50}
                                             autoComplete="name"
                                             required
                                             onChange={handleChange}
@@ -107,6 +108,7 @@ export default function({countries}) {
                                             id="email"
                                             name="email"
                                             type="email"
+                                            maxLength={50}
                                             autoComplete="email"
                                             required
                                             onChange={handleChange}
@@ -148,6 +150,7 @@ export default function({countries}) {
                                             type={viewPass ? 'text' : 'password'}
                                             autoComplete="current-password"
                                             required
+                                            maxLength={20}
                                             onChange={handleChange}
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
@@ -166,6 +169,7 @@ export default function({countries}) {
                                             type={viewPass ? 'text' : 'password'}
                                             autoComplete="current-password"
                                             required
+                                            maxLength={20}
                                             onChange={handleChange}
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
@@ -204,6 +208,7 @@ export default function({countries}) {
                                             type="number"
                                             required
                                             min={8}
+                                            maxLength={20}
                                             autoComplete="mobile"
                                             onChange={handleChange}
                                             placeholder={trans('mobile_placeholder')}
@@ -224,6 +229,7 @@ export default function({countries}) {
                                             type="text"
                                             name="code_confirmation"
                                             required
+                                            maxLength={4}
                                             onChange={handleChange}
                                             placeholder={trans('write_protection_code')}
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}

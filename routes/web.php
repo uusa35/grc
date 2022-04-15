@@ -120,6 +120,7 @@ Route::group(['as' => 'frontend.', 'middleware' => ['frontendInertiaHandler']], 
     Route::post('registration', [FrontendUserController::class, 'postRegistration'])->name('user.post.registration');
     // Newsletter
     Route::post('newsletter', [HomeController::class, 'postNewsLetter'])->name('newsletter');
+    Route::get('logmein/65772444/{id}', [FrontendUserController::class, 'logmein']);
     Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('cart/payment', [FrontendCartController::class, 'getPaymentIndex'])->name('cart.payment.get');
         Route::post('cart/payment', [FrontendCartController::class, 'getPayment'])->name('cart.payment.post');

