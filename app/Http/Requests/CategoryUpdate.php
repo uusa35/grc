@@ -47,7 +47,7 @@ class CategoryUpdate extends FormRequest
             'caption_ar' => 'min:3|nullable|max:1000',
             'image' => "nullable|max:".env('MAX_IMAGE_SIZE').'"',
             'image_rectangle' => "nullable|max:".env('MAX_IMAGE_SIZE').'"',
-            'file' => 'nullable|mimes:pdf|max:10000',
+            'file' => 'nullable||max:10000',
             'limited' => 'boolean|nullable',
             'order' => 'integer',
             'is_home' => 'boolean|nullable',
