@@ -117,7 +117,7 @@ export default function({country}) {
                                     required
                                     type="text"
                                     name="currency_symbol_ar"
-                                    maxLength={100}
+                                    maxLength={5}
                                     defaultValue={country.currency_symbol_ar}
                                     id="currency_symbol_ar"
                                     autoComplete="currency_symbol_ar"
@@ -140,7 +140,7 @@ export default function({country}) {
                                     required
                                     type="text"
                                     name="currency_symbol_en"
-                                    maxLength={100}
+                                    maxLength={5}
                                     defaultValue={country.currency_symbol_en}
                                     id="currency_symbol_en"
                                     autoComplete="currency_symbol_en"
@@ -161,9 +161,9 @@ export default function({country}) {
                                 <input
                                     onChange={handleChange}
                                     required
-                                    type="text"
+                                    type="number"
                                     name="order"
-                                    maxLength={2}
+                                    max={99}
                                     defaultValue={country.order}
                                     id="order"
                                     autoComplete="order"
@@ -184,7 +184,7 @@ export default function({country}) {
                                 <input
                                     onChange={handleChange}
                                     required
-                                    type="text"
+                                    type="number"
                                     name="calling_code"
                                     maxLength={3}
                                     defaultValue={country.calling_code}
@@ -210,7 +210,7 @@ export default function({country}) {
                                     required
                                     type="text"
                                     name="country_code"
-                                    maxLength={5}
+                                    maxLength={3}
                                     defaultValue={country.country_code}
                                     id="country_code"
                                     autoComplete="country_code"
@@ -234,6 +234,7 @@ export default function({country}) {
                                     required
                                     type="number"
                                     name="fixed_shipment_charge"
+                                    max={99}
                                     defaultValue={country.fixed_shipment_charge}
                                     id="fixed_shipment_charge"
                                     autoComplete="fixed_shipment_charge"

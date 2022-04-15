@@ -88,7 +88,7 @@ export default function({roles, categories, countries, subscriptions}) {
         'governate_id': '',
         'area_id': '',
         'end_subscription_date': '01-01-2020',
-        'subscription_id': first(filter(subscriptions, s => s.free)).id,
+        'subscription_id': first(subscriptions).id,
         'merchant_id': '',
         'views': 1,
         'is_available': 1,
@@ -311,7 +311,7 @@ export default function({roles, categories, countries, subscriptions}) {
                             }
                             {/* end_subscription_date */}
                             {
-                                isAdminOrAbove && <div className="sm:col-span-2 has-tooltip mb-5">
+                                isAdminOrAbove && <div className="sm:col-span-2 has-tooltip mb-5 hidden">
                                     <label htmlFor="end_subscription_date"
                                            className={`block   text-gray-800`}>
                                         {trans('end_subscription_date')}

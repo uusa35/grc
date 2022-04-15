@@ -1020,7 +1020,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        max={999}
+                                        max={99}
                                         onChange={handleChange}
                                         type="number"
                                         step="any"
@@ -1047,6 +1047,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                         onChange={handleChange}
                                         type="text"
                                         name="mobile"
+                                        maxLength={12}
                                         defaultValue={user.mobile}
                                         id="mobile"
                                         autoComplete="mobile"
@@ -1069,6 +1070,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                         onChange={handleChange}
                                         type="text"
                                         name="phone"
+                                        maxLength={12}
                                         defaultValue={user.phone}
                                         id="phone"
                                         autoComplete="phone"
@@ -1091,6 +1093,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                         onChange={handleChange}
                                         type="text"
                                         name="fax"
+                                        maxLength={12}
                                         defaultValue={user.fax}
                                         id="fax"
                                         autoComplete="fax"
@@ -1113,6 +1116,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                         onChange={handleChange}
                                         type="text"
                                         name="whatsapp"
+                                        maxLength={12}
                                         defaultValue={user.whatsapp}
                                         id="whatsapp"
                                         autoComplete="whatsapp"

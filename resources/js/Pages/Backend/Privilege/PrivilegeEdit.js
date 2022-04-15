@@ -215,7 +215,8 @@ export default function({privilege, pivotElements}) {
                                     <input
                                         onChange={handleChange}
                                         required
-                                        type="text"
+                                        type="number"
+                                        max={99}
                                         name="order"
                                         defaultValue={privilege.order}
                                         id="order"

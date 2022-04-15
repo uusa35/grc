@@ -199,6 +199,7 @@ export default function({faq }) {
                                     required
                                     type="number"
                                     name="order"
+                                    max={99}
                                     defaultValue={faq.order}
                                     id="order"
                                     autoComplete="order"

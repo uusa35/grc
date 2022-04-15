@@ -299,7 +299,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        max={999}
+                                        max={99}
                                         onChange={handleChange}
                                         type="number"
                                         step="any"

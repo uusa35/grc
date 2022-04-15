@@ -206,7 +206,8 @@ export default function({role, privileges}) {
                                     <input
                                         onChange={handleChange}
                                         required
-                                        type="text"
+                                        type="number"
+                                        max={99}
                                         name="order"
                                         defaultValue={role.order}
                                         id="order"

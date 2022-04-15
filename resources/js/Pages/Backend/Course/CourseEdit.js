@@ -882,7 +882,7 @@ accept="application/pdf"
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        max={999}
+                                        max={99}
                                         onChange={handleChange}
                                         type="number"
                                         step="any"

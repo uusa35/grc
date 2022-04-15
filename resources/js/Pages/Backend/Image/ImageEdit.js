@@ -153,9 +153,9 @@ export default function({image}) {
                                 <input
                                     onChange={handleChange}
                                     required
-                                    type="text"
+                                    type="number"
                                     name="order"
-                                    maxLength={3}
+                                    max={99}
                                     defaultValue={image.order}
                                     id="order"
                                     autoComplete="order"

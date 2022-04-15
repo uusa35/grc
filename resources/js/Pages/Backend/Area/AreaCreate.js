@@ -175,6 +175,7 @@ export default function({ countries }) {
                                     required
                                     type="number"
                                     name="order"
+                                    max={99}
                                     defaultValue={data.order}
                                     id="order"
                                     autoComplete="order"

@@ -186,9 +186,9 @@ export default function({currency , countries }) {
                                 <input
                                     onChange={handleChange}
                                     required
-                                    type="text"
+                                    type="number"
                                     name="order"
-                                    maxLength={3}
+                                    max={99}
                                     defaultValue={currency.order}
                                     id="order"
                                     autoComplete="order"

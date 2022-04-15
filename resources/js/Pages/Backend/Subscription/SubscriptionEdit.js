@@ -356,7 +356,8 @@ export default function({subscription}) {
                                     <input
                                         onChange={handleChange}
                                         required
-                                        type="text"
+                                        type="number"
+                                        max={99}
                                         name="order"
                                         defaultValue={subscription.order}
                                         id="order"

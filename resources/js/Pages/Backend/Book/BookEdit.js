@@ -1018,7 +1018,7 @@ export default function({users, categories, book, elementCategories}) {
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        max={999}
+                                        max={99}
                                         onChange={handleChange}
                                         type="number"
                                         step="any"

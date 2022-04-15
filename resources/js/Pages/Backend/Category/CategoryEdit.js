@@ -181,6 +181,7 @@ export default function({category, elements}) {
                                     required
                                     type="number"
                                     name="order"
+                                    max={99}
                                     defaultValue={category.order}
                                     id="order"
                                     autoComplete="order"

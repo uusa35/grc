@@ -64,7 +64,7 @@ class BookStore extends FormRequest
             'home_delivery_availability' => 'nullable|boolean',
             'free' => 'boolean',
             'download' => 'boolean',
-            "file" => "required|mimes:pdf|max:990000"
+            "file" => "required|mimes:pdf,doc,docs,xlsx,xls|max:990000"
 //            "embedded" => "min:100"
         ];
     }

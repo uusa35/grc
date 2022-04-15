@@ -115,6 +115,7 @@ export default function() {
                                     onChange={handleChange}
                                     required
                                     type="text"
+                                    maxLength={5}
                                     name="currency_symbol_ar"
                                     defaultValue={data.currency_symbol_ar}
                                     id="currency_symbol_ar"
@@ -138,6 +139,7 @@ export default function() {
                                     required
                                     type="text"
                                     name="currency_symbol_en"
+                                    maxLength={5}
                                     defaultValue={data.currency_symbol_en}
                                     id="currency_symbol_en"
                                     autoComplete="currency_symbol_en"
@@ -158,8 +160,9 @@ export default function() {
                                 <input
                                     onChange={handleChange}
                                     required
-                                    type="text"
+                                    type="number"
                                     name="order"
+                                    max={99}
                                     defaultValue={data.order}
                                     id="order"
                                     autoComplete="order"
@@ -180,8 +183,9 @@ export default function() {
                                 <input
                                     onChange={handleChange}
                                     required
-                                    type="text"
+                                    type="number"
                                     name="calling_code"
+                                    maxLength={3}
                                     defaultValue={data.calling_code}
                                     id="calling_code"
                                     autoComplete="calling_code"
@@ -205,6 +209,7 @@ export default function() {
                                     required
                                     type="text"
                                     name="country_code"
+                                    maxLength={3}
                                     defaultValue={data.country_code}
                                     id="country_code"
                                     autoComplete="country_code"
@@ -227,6 +232,7 @@ export default function() {
                                     onChange={handleChange}
                                     required
                                     type="number"
+                                    max={99}
                                     name="fixed_shipment_charge"
                                     defaultValue={data.fixed_shipment_charge}
                                     id="fixed_shipment_charge"

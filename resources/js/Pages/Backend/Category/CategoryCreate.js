@@ -198,6 +198,7 @@ export default function({elements}) {
                                     required
                                     type="number"
                                     name="order"
+                                    max={99}
                                     defaultValue={data.order}
                                     id="order"
                                     autoComplete="order"

@@ -185,9 +185,9 @@ export default function({countries }) {
                                 <input
                                     onChange={handleChange}
                                     required
-                                    type="text"
+                                    type="number"
                                     name="order"
-                                    maxLength={3}
+                                    max={99}
                                     defaultValue={data.order}
                                     id="order"
                                     autoComplete="order"
