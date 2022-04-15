@@ -236,12 +236,12 @@ export default function({elements}) {
                             </p>
                         </div>
                         {/* image_rectangle*/}
-                        <div className="sm:col-span-3 has-tooltip mt-5">
+                        <div className="sm:col-span-3 has-tooltip mt-5 hidden">
                             <label htmlFor="image_rectangle"
                                    className={`block   text-gray-800`}>
                                 {trans('image_rectangle')}
                             </label>
-                            <div className="mt-1 flex flex-row flex-1 items-center h-32 hidden">
+                            <div className="mt-1 flex flex-row flex-1 items-center h-32">
                                 <input
                                     onChange={e => setData('image_rectangle', e.target.files[0])}
                                     type="file"
