@@ -27,7 +27,7 @@ import SocialIconShare from "../partials/SocialIconShare";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function ({element, relatedElements, auth}) {
-    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor , mainBgColor, contentBgColor, textColor } = useContext(AppContext)
+    const {getThumb, getLarge, getLocalized, trans, classNames, mainColor , mainBgColor, contentBgColor, textColor, btnClass  } = useContext(AppContext)
     const { settings } = useContext(GlobalContext);
     const [selectedTiming, setSelectedTiming] = useState();
     const [currentImages, setCurrentImages] = useState([]);
@@ -195,7 +195,7 @@ export default function ({element, relatedElements, auth}) {
                                         element[getLocalized('caption')] && <div className="mt-6">
                                             <h3 className="sr-only">{trans('caption')}</h3>
                                             <div
-                                                className="text-base text-gray-800 space-y-6"
+                                                className={`${textColor} space-y-6`}
                                             >{element[getLocalized('caption')]}</div>
                                         </div>
                                     }
@@ -205,7 +205,7 @@ export default function ({element, relatedElements, auth}) {
                                         element.sku && <div className="mt-6">
                                             <h3 className="sr-only">{trans('sku')}</h3>
                                             <div
-                                                className="text-base text-gray-800 space-y-6"
+                                                className={`${textColor} space-y-6`}
                                             >
                                                 {trans('reference_id')} :
                                                 {element.sku}
@@ -227,7 +227,7 @@ export default function ({element, relatedElements, auth}) {
                                 <Menu as="div" className="relative inline-block text-left mb-5 w-full">
                                     <div>
                                         <Menu.Button
-                                            className={`flex flex-1 justify-between items-center w-full capitalize rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-${mainColor}-600 dark:bg-${mainColor}-600 hover:bg-${mainColor}-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
+                                            className={`flex flex-1 justify-between items-center w-full capitalize rounded-md border border-gray-300 shadow-sm px-4 py-2 ${btnClass} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500`}>
                                             <div>
                                                 {!isEmpty(selectedTiming) ? moment(`${selectedTiming.date} ${selectedTiming.start}`).format('dddd : L - HH:mm A') : trans('available_timings')}
                                             </div>
