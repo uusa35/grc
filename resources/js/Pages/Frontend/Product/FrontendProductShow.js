@@ -539,7 +539,7 @@ export default function({element, relatedElements, auth, settings}) {
                                         <div className={`flex flex-col my-4`}>
                                             <div className="flex-grow w-full">
                                                 <label htmlFor="notes"
-                                                       className="block text-sm font-medium text-gray-700">
+                                                       className={`block ${textColor}`}>
                                                     {trans('notes')}
                                                 </label>
                                                 <div className="mt-1">
@@ -548,11 +548,11 @@ export default function({element, relatedElements, auth, settings}) {
                                                         name="notes"
                                                         rows={3}
                                                         maxLength={150}
-                                                        className="shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                                                        className={`text-black shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border border-gray-300 rounded-md`}
                                                         onChange={(e) => setNotes(e.target.value)}
                                                     />
                                                 </div>
-                                                <p className="mt-2 text-sm text-gray-500">{trans('u_can_write_notes_related_to_product_ordered')}</p>
+                                                <p className={`mt-2 ${textColor}`}>{trans('u_can_write_notes_related_to_product_ordered')}</p>
                                             </div>
                                             <div
                                                 className="flex flex-1 w-full justify-center items-center mx-auto mt-5">
@@ -590,7 +590,7 @@ export default function({element, relatedElements, auth, settings}) {
                                             <button
                                                 disabled={!element.is_available || finalPrice === 0 || selectedQty < 1}
                                                 type="submit"
-                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30` : `opacity-100 bg-${mainColor}-600 text-white dark:text-black dark:bg-${mainColor}-400`, `flex flex-1 bg-${mainColor}-800 dark:bg-${mainColor}-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium ${textColor} hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
+                                                className={classNames(!element.is_available || finalPrice === 0 || selectedQty < 1 ? `opacity-30 text-white` : `opacity-100 bg-${mainColor}-600 text-white dark:text-black dark:bg-${mainColor}-400`, `flex flex-1 bg-${mainColor}-800 dark:bg-${mainColor}-400 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium ${textColor} hover:bg-${mainColor}-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`)}
                                             >
                                                 {trans('add_to_cart')}
                                             </button>

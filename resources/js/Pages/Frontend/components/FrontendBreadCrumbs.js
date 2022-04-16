@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setParentModule} from "../../redux/actions";
 
 function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
-    const {trans, mainColor, contentBgColor  } = useContext(AppContext);
+    const {trans, mainColor, contentBgColor, textColor   } = useContext(AppContext);
     const { locale , parentModule , breadCrumbs  } = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                     <li className="flex flex-1 flex-row justify-start items-center">
                         <HomeIcon className="flex-shrink-0 h-4 w-4 mx-2" aria-hidden="true" color={mainColor}/>
                         <Link
-                            className={`text-${mainColor}-800 dark:text-${mainColor}-50 capitalize flex-1`}
+                            className={`${textColor} flex-1`}
                             href={route('frontend.home')}>
                             {trans('home')}
                         </Link>
@@ -46,7 +46,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                             <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
                         </svg>
                         <Link
-                            className={`text-${mainColor}-800 dark:text-${mainColor}-50 capitalize`}
+                            className={`${textColor}`}
                             href={route(`frontend.${parentModule}.index`)}>
                             { isNull(parentModuleName) ?  trans(pluralize(parentModule)) : trans(parentModuleName)}
                         </Link>
@@ -63,7 +63,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                                 <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
                             </svg>
                             <Link
-                                className={`text-${mainColor}-800 dark:text-${mainColor}-50 capitalize`}
+                                className={`${textColor}`}
                                 href="#">
                                 { isNull(parentModuleName) ?  trans(pluralize(parentModule)) : trans(parentModuleName)}
                             </Link>
@@ -81,7 +81,7 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
                                 <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"/>
                             </svg>
                             <Link
-                                className={`text-${mainColor}-800 dark:text-${mainColor}-50 capitalize truncate `}
+                                className={`${textColor} truncate `}
                                 href={'#'}>
                                 {childName}
                             </Link>

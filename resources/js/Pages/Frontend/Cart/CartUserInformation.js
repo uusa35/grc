@@ -501,7 +501,7 @@ export default function({countries, auth, settings}) {
                         {/* notes */}
                         <div className="lg:col-span-full">
                             <label htmlFor="notes"
-                                   className="block text-sm font-medium text-gray-700">
+                                   className={`block ${textColor}`}>
                                 {trans('notes')}
                             </label>
                             <div className="mt-1">
@@ -511,11 +511,11 @@ export default function({countries, auth, settings}) {
                                                         name="notes"
                                                         rows={3}
                                                         maxLength={150}
-                                                        className="shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                                                        className={`text-black shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border border-gray-300 rounded-md`}
                                                         onChange={(e) => setData('notes', e.target.value)}
                                                     />
                             </div>
-                            <p className="mt-2 text-sm text-gray-500">{trans('u_can_write_notes_related_to_order')}</p>
+                            <p className={`mt-2 ${textColor}`}>{trans('u_can_write_notes_related_to_order')}</p>
                         </div>
 
                         <div
