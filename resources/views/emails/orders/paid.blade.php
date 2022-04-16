@@ -5,9 +5,10 @@
 {{--        <img src="{{ asset(env('THUMBNAIL'). $settings->image) }}" alt="" style="width : 80px; height: auto; border-radius: 10px;"/>--}}
 {{--    </div>--}}
 {{--<div>--}}
-<img src="{{ asset(env('THUMBNAIL'). $order->user->image) }}" alt="" style="width : 100px; height: auto; border-radius: 10px; margin: auto;"/>
+
 @endcomponent
 @component('mail::message')
+<img src="{{ asset(env('THUMBNAIL'). $order->user->image) }}" alt="" style="width : 100px; height: auto; border-radius: 10px; margin: auto;"/>
 # {{ trans('general.invoice_no') }} :  {{ $order->id }}
 # {{ trans('general.username') }} : {{ $order->user->name_ar }} - {{ $order->user->name_en }}
 # {{ trans('general.email') }} : {{ $order->user->email }}
