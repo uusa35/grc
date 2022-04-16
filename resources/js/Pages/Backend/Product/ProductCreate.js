@@ -58,7 +58,7 @@ export default function ProductCreate({users, sizes, colors, categories}) {
         'video_url_five': '',
         'start_sale': '',
         'end_sale': '',
-        'active': isAdminOrAbove,
+        'active': 1,
         'check_stock': 1,
         'is_hot_deal': 0,
         'has_attributes': 0,
