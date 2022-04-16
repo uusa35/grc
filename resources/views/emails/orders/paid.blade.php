@@ -6,8 +6,6 @@
 {{--    </div>--}}
 {{--<div>--}}
 <img src="{{ asset(env('THUMBNAIL'). $order->user->image) }}" alt="" style="width : 100px; height: auto; border-radius: 10px; margin: auto;"/>
-</div>
-</div>
 @endcomponent
 @component('mail::message')
 # {{ trans('general.invoice_no') }} :  {{ $order->id }}
