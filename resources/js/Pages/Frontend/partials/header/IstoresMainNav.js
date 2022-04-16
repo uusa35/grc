@@ -80,10 +80,10 @@ export default function () {
 
     return (
         <div
-            className={classNames(settings.wide_screen && offset < 45 ? `lg:bg-transparent` : `bg-white dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
+            className={classNames(settings.wide_screen && offset < 45 ? `lg:bg-white/20` : `bg-white dark:bg-${headerBgColor}-800`, ` rtl:text-right ltr:text-left relative lg:fixed inset-0 h-32 z-40`)}>
             {/* Top Nav*/}
             <div
-                className={classNames(settings.wide_screen && offset < 45 ? `bg-white lg:bg-transparent` : `bg-${headerBgColor}-900 text-white`, `h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
+                className={classNames(settings.wide_screen && offset < 45 ? `bg-white lg:bg-white/20` : `bg-${headerBgColor}-900 text-white`, `h-10 flex items-center justify-between px-4 sm:px-6 lg:px-8`)}>
                 <div
                     className="grid grid-cols-6 gap-x-5"
                 >
@@ -357,7 +357,7 @@ export default function () {
             </Transition.Root>
 
             <header
-                className={classNames(settings.wide_screen && offset < 45 ? `lg:bg-transparent border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 `, `relative py-2 max-w-full`)}>
+                className={classNames(settings.wide_screen && offset < 45 ? `lg:bg-white/20 border-0` : `bg-white dark:bg-${headerBgColor}-700 border-gray-400 dark:border-${mainBgColor}-900 border-b-2 `, `relative py-2 max-w-full`)}>
                 <nav aria-label="Top" className={`w-auto lg:w-5/5 xl:w-5/5 2xl:w-4/5  m-auto`}>
                     <div className="h-20 flex items-center">
                         <button
