@@ -5,7 +5,7 @@
 {{--        <img src="{{ asset(env('THUMBNAIL'). $settings->image) }}" alt="" style="width : 80px; height: auto; border-radius: 10px;"/>--}}
 {{--    </div>--}}
 {{--<div>--}}
-<img src="{{ asset(env('THUMBNAIL'). $order->user->image) }}" alt="" style="width : 100px; height: auto; border-radius: 10px;"/>
+<img src="{{ asset(env('THUMBNAIL'). $order->user->image) }}" alt="" style="width : 100px; height: auto; border-radius: 10px; margin: auto;"/>
 </div>
 </div>
 @endcomponent
