@@ -5,7 +5,7 @@
 <img src="https://laravel.com/img/notification-logo.png" class="logo" alt="Laravel Logo">
 </a>
 @else
-<div style="display: inline-block;">
+<div style="display: inline-block; text-align: center; margin: auto;">
 {{ $slot }}
 </div>
 @endif

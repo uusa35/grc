@@ -1,12 +1,18 @@
 <div dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" style="background-color: #edf2f7; font-weight: bolder; text-align:  {{ app()->getLocale() === 'ar' ? 'right' : 'left' }} !important;">
 @component('mail::header', ['url' => route('frontend.home')])
+{{--@component('mail::header', ['url' => config('app.url')])--}}
 {{--<div style="margin: auto; width : 100%; padding-top: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center">--}}
 {{--    <div>--}}
 {{--        <img src="{{ asset(env('THUMBNAIL'). $settings->image) }}" alt="" style="width : 80px; height: auto; border-radius: 10px;"/>--}}
 {{--    </div>--}}
 {{--<div>--}}
-<img src="{{ asset(env('THUMBNAIL'). $order->user->image) }}" alt="" style="width : 100px; height: auto; border-radius: 10px; margin: auto;"/>
-@endcomponent
+<a href="{{ config('app.url') }}" style="display: block;
+margin-left: auto;
+margin-right: auto; max-width: 100px; padding-top: 10px;">
+<img src="{{ asset(env('THUMBNAIL'). $order->user->image) }}" alt="" style="max-width: 100px; border-radius: 10px;"/>
+</a>
+
+{{--@endcomponent--}}
 @component('mail::message')
 # {{ trans('general.invoice_no') }} :  {{ $order->id }}
 # {{ trans('general.username') }} : {{ $order->user->name_ar }} - {{ $order->user->name_en }}
