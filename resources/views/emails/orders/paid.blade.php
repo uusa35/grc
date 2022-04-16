@@ -1,10 +1,10 @@
 <div dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" style="background-color: #edf2f7; font-weight: bolder; text-align:  {{ app()->getLocale() === 'ar' ? 'right' : 'left' }} !important;">
 @component('mail::header', ['url' => route('frontend.home')])
-<div style="margin: auto; width : 100%; padding-top: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center">
+{{--<div style="margin: auto; width : 100%; padding-top: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center">--}}
 {{--    <div>--}}
 {{--        <img src="{{ asset(env('THUMBNAIL'). $settings->image) }}" alt="" style="width : 80px; height: auto; border-radius: 10px;"/>--}}
 {{--    </div>--}}
-<div>
+{{--<div>--}}
 <img src="{{ asset(env('THUMBNAIL'). $order->user->image) }}" alt="" style="width : 100px; height: auto; border-radius: 10px;"/>
 </div>
 </div>
