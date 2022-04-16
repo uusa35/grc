@@ -371,10 +371,10 @@ class FrontendUserController extends Controller
     public function postRegistration(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|min:4|max:255',
             'email' => 'required|email|string|unique:users',
-            'mobile' => 'required|min:4',
-            'password' => 'required|min:8|confirmed',
+            'mobile' => 'required|min:4|max:12',
+            'password' => 'required|min:8|confirmed|max:50',
             'code' => 'required|confirmed',
             'country_id' => 'required|exists:countries,id'
         ]);

@@ -1,4 +1,4 @@
-import {Fragment, useContext, useMemo, useState, useEffect} from 'react'
+import {Fragment, useContext, useMemo, useState, useEffect, useLayoutEffect} from 'react'
 import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
@@ -59,8 +59,7 @@ export default function () {
         menuTextColor,
         contentBgColor,
     } = useContext(AppContext);
-    const globalContext = useContext(GlobalContext);
-    const {auth, settings, currencies, categories, mgt} = globalContext;
+    const {auth, settings, currencies, mgt} = useContext(GlobalContext);
     const {locale, currency, cart, parentModule, theme} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const [offset, setOffset] = useState(0);
@@ -76,6 +75,8 @@ export default function () {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    useLayoutEffect(() => {
+    }, [auth])
 
     return (
         <div

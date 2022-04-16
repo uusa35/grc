@@ -170,7 +170,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('name_ar_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
                                 </p>
                             </div>
@@ -192,7 +192,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('name_en_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
                                 </p>
                             </div>
@@ -215,7 +215,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('price_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
                                 </p>
                             </div>
@@ -239,7 +239,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_sale_price_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.sale_price && <div className={`text-red-900`}>{errors.sale_price}</div>}
                                 </p>
                             </div>
@@ -262,7 +262,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('product_qty_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.qty && <div className={`text-red-900`}>{errors.qty}</div>}
                                 </p>
                             </div>
@@ -285,7 +285,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('sku_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.sku && <div className={`text-red-900`}>{errors.sku}</div>}
                                 </p>
                             </div>
@@ -308,7 +308,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     />
                                 </div>
                                 <ToolTipWidget message={trans('weight_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.weight && <div className={`text-red-900`}>{errors.weight}</div>}
                                 </p>
                             </div>
@@ -336,7 +336,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                         </select>
                                     </div>
                                     <ToolTipWidget message={trans('user_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.user_id && <div className={`text-red-900`}>{errors.user_id}</div>}
                                     </p>
                                 </>}
@@ -367,7 +367,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </select>
                                 </div>
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {trans('size_or_capacity')}
                                     {errors.size_id && <div className={`text-red-900`}>{errors.size_id}</div>}
                                 </p>
@@ -397,7 +397,7 @@ export default function ProductEdit({users, sizes, colors, categories, product, 
                                     </select>
                                 </div>
                                 <ToolTipWidget message={trans('product_user_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.color_id && <div className={`text-red-900`}>{errors.color_id}</div>}
                                 </p>
                             </div>
@@ -427,7 +427,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.image && <div className={`text-red-900`}>{errors.image}</div>}
                                 </p>
                             </div>
@@ -454,7 +454,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.images && <div className={`text-red-900`}>{errors.images}</div>}
                                 </p>
                             </div>
@@ -556,7 +556,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     </fieldset>
                                 </div>
                                 <ToolTipWidget message={trans('product_categories_instruction')}/>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.categories && <div className={`text-red-900`}>{errors.categories}</div>}
                                 </p>
                             </div>
@@ -603,7 +603,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
                                     </p>
                                 </div>
@@ -648,7 +648,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.on_home &&
                                         <div className={`text-red-900`}>{errors.on_home}</div>}
                                     </p>
@@ -694,7 +694,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_sale_price_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.on_sale &&
                                         <div className={`text-red-900`}>{errors.on_sale}</div>}
                                     </p>
@@ -740,7 +740,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_has_attributes_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.has_attributes &&
                                         <div className={`text-red-900`}>{errors.has_attributes}</div>}
                                     </p>
@@ -786,7 +786,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_show_attribute_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.show_attribute &&
                                         <div className={`text-red-900`}>{errors.show_attribute}</div>}
                                     </p>
@@ -815,7 +815,7 @@ accept="image/jpg, image/jpeg , image/png"
                                          />
                                     </div>
                                     <ToolTipWidget message={trans('description_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.description_ar &&
                                         <div className={`text-red-900`}>{errors.description_ar}</div>}
                                     </p>
@@ -837,7 +837,7 @@ accept="image/jpg, image/jpeg , image/png"
                                          />
                                     </div>
                                     <ToolTipWidget message={trans('description_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.description_en &&
                                         <div className={`text-red-900`}>{errors.description_en}</div>}
                                     </p>
@@ -858,7 +858,7 @@ accept="image/jpg, image/jpeg , image/png"
                                          />
                                     </div>
                                     <ToolTipWidget message={trans('product_notes_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.notes_ar && <div className={`text-red-900`}>{errors.notes_ar}</div>}
                                     </p>
                                 </div>
@@ -878,7 +878,7 @@ accept="image/jpg, image/jpeg , image/png"
                                          />
                                     </div>
                                     <ToolTipWidget message={trans('product_notes_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.notes_en && <div className={`text-red-900`}>{errors.notes_en}</div>}
                                     </p>
                                 </div>
@@ -901,7 +901,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
                                     </p>
                                 </div>
@@ -924,7 +924,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
                                     </p>
                                 </div>
@@ -947,7 +947,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_caption_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.keywords && <div className={`text-red-900`}>{errors.keywords}</div>}
                                     </p>
                                 </div>
@@ -971,7 +971,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_delivery_time_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.delivery_time &&
                                         <div className={`text-red-900`}>{errors.keywords}</div>}
                                     </p>
@@ -996,7 +996,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('order_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.order && <div className={`text-red-900`}>{errors.order}</div>}
                                     </p>
                                 </div>
@@ -1019,7 +1019,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_video_url_one_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.video_url_one &&
                                         <div className={`text-red-900`}>{errors.video_url_one}</div>}
                                     </p>
@@ -1043,7 +1043,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_video_url_two_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.video_url_two &&
                                         <div className={`text-red-900`}>{errors.video_url_two}</div>}
                                     </p>
@@ -1068,7 +1068,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_end_sale_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(product.start_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                         {errors.start_sale && <div className={`text-red-900`}>{errors.start_sale}</div>}
@@ -1093,7 +1093,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         />
                                     </div>
                                     <ToolTipWidget message={trans('product_start_sale_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                     <span
                                         className={`text-extrabold  text-black`}>{trans('current_date')} : {moment(product.end_sale).format('DD/MM/Y  -|- hh:mm a')}</span>
                                         {errors.end_sale && <div className={`text-red-900`}>{errors.end_sale}</div>}
@@ -1122,7 +1122,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         </select>
                                     </div>
                                     <ToolTipWidget message={trans('product_brand_instruction')}/>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.brand_id && <div className={`text-red-900`}>{errors.brand_id}</div>}
                                     </p>
                                 </div>
@@ -1174,7 +1174,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('image_best_fit')}
                                 </p>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.size_chart_image &&
                                     <div className={`text-red-900`}>{errors.size_chart_image}</div>}
                                 </p>
@@ -1225,7 +1225,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
                                     {trans('square_best_fit')}
                                 </p>
-                                <p className={`mt-2  text-gray-500`}>
+                                <p className={`mt-2`}>
                                     {errors.qr && <div className={`text-red-900`}>{errors.qr}</div>}
                                 </p>
                             </div>
@@ -1272,7 +1272,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_check_stock_message')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.check_stock &&
                                         <div className={`text-red-900`}>{errors.check_stock}</div>}
                                     </p>
@@ -1318,7 +1318,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_is_available_message')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.is_available &&
                                         <div className={`text-red-900`}>{errors.is_available}</div>}
                                     </p>
@@ -1364,7 +1364,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_wrap_as_gift_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.wrap_as_gift &&
                                         <div className={`text-red-900`}>{errors.wrap_as_gift}</div>}
                                     </p>
@@ -1410,7 +1410,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_show_size_chart_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.show_size_chart &&
                                         <div className={`text-red-900`}>{errors.show_size_chart}</div>}
                                     </p>
@@ -1456,7 +1456,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_direct_purchase_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.direct_purchase &&
                                         <div className={`text-red-900`}>{errors.direct_purchase}</div>}
                                     </p>
@@ -1502,7 +1502,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_exclusive_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.exclusive &&
                                         <div className={`text-red-900`}>{errors.exclusive}</div>}
                                     </p>
@@ -1548,7 +1548,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_on_new_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.on_new && <div className={`text-red-900`}>{errors.on_new}</div>}
                                     </p>
                                 </div>
@@ -1593,7 +1593,7 @@ accept="image/jpg, image/jpeg , image/png"
                                 </div>
                                 <ToolTipWidget message={trans('product_is_hot_deal_instruction')}/>
                                 <div>
-                                    <p className={`mt-2  text-gray-500`}>
+                                    <p className={`mt-2`}>
                                         {errors.is_hot_deal &&
                                         <div className={`text-red-900`}>{errors.is_hot_deal}</div>}
                                     </p>

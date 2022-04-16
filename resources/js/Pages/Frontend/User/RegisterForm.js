@@ -96,6 +96,9 @@ export default function({countries}) {
                                             onChange={handleChange}
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
+                                        <p className={`mt-2`}>
+                                            {errors.name && <div className={`text-red-900`}>{errors.name}</div>}
+                                        </p>
                                     </div>
                                 </div>
                                 {/* email */}
@@ -114,6 +117,9 @@ export default function({countries}) {
                                             onChange={handleChange}
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
+                                        <p className={`mt-2`}>
+                                            {errors.email && <div className={`text-red-900`}>{errors.email}</div>}
+                                        </p>
                                     </div>
                                 </div>
                                 {/* password */}
@@ -154,6 +160,9 @@ export default function({countries}) {
                                             onChange={handleChange}
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
+                                        <p className={`mt-2`}>
+                                            {errors.password && <div className={`text-red-900`}>{errors.password}</div>}
+                                        </p>
                                     </div>
                                 </div>
                                 {/* password_confirm */}
@@ -173,6 +182,9 @@ export default function({countries}) {
                                             onChange={handleChange}
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
+                                        <p className={`mt-2`}>
+                                            {errors.password_confirmation && <div className={`text-red-900`}>{errors.password_confirmation}</div>}
+                                        </p>
                                     </div>
                                 </div>
                                 {/* mobile */}
@@ -215,6 +227,12 @@ export default function({countries}) {
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
                                     </div>
+                                    <p className={`mt-2`}>
+                                        {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
+                                    </p>
+                                    <p className={`mt-2`}>
+                                        {errors.country_id && <div className={`text-red-900`}>{errors.country_id}</div>}
+                                    </p>
                                 </div>
                                 {/* code_confirmation */}
                                 <div>
@@ -230,13 +248,13 @@ export default function({countries}) {
                                             name="code_confirmation"
                                             required
                                             maxLength={4}
+                                            max={9999}
                                             onChange={handleChange}
                                             placeholder={trans('write_protection_code')}
                                             className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                         />
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.code_confirmation && <div
-                                                className={`text-red-900 text-sm`}>{errors.code_confirmation}</div>}
+                                        <p className={`mt-2`}>
+                                            {errors.code && <div className={`text-red-900`}>{errors.code}</div>}
                                         </p>
                                     </div>
                                 </div>

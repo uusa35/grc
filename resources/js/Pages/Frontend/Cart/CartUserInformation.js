@@ -441,7 +441,7 @@ export default function({countries, auth, settings}) {
                         </div>
                         {/*enable_receive_from_shop*/}
                         {
-                            settings.enable_receive_from_shop && selectedCountry.is_local && first(cart.items).merchant_enable_receive_from_shop ?
+                            settings.enable_receive_from_shop && selectedCountry.is_local && cart.items.length > 0 && first(cart.items).merchant_enable_receive_from_shop ?
                                 <div className="col-span-full">
                                     <div className="pt-6 sm:pt-5">
                                         <div role="group" aria-labelledby="label-notifications">
