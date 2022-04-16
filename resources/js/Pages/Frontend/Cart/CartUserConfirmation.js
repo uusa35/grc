@@ -3,7 +3,7 @@ import FrontendContainer from "../components/FrontendContainer";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import CartStepper from "./CartStepper";
 import {AppContext} from "../../context/AppContext";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Link, useForm, usePage} from "@inertiajs/inertia-react";
 import {filter, first, map} from "lodash";
 import route from "ziggy-js";
@@ -23,8 +23,7 @@ export default function({countries, auth}) {
     const [areas, setAreas] = useState([])
     const [governates, setGovernates] = useState([])
     const {locale, cart} = useSelector(state => state);
-    const {settings} = useContext(GlobalContext);
-    const dispatch = useDispatch();
+    const globalContext = useContext(GlobalContext);
     const {props} = usePage();
     const {errors} = props;
     const {data, setData, put, post, get, progress, reset} = useForm({
@@ -52,6 +51,7 @@ export default function({countries, auth}) {
         setGovernates(selectedCountry.governates);
         const governate = first(filter(selectedCountry.governates, g => g.id == auth.governate_id));
         setAreas(governate.areas);
+        globalContext.auth = auth;
     }, [])
 
 

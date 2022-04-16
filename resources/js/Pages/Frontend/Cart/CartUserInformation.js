@@ -144,9 +144,9 @@ export default function({countries, auth, settings}) {
             }, {
                 forceFormData: true,
                 onSuccess: () => Inertia.get(route('frontend.cart.confirmation', {
-                    _method: 'get',
-                    ...data
-                }))
+                        _method: 'get',
+                        ...data
+                    }))
             })
         }
     }
@@ -221,7 +221,7 @@ export default function({countries, auth, settings}) {
                                     type="number"
                                     id="mobile"
                                     name="mobile"
-                                    maxLength={12}
+                                    max={99999999}
                                     defaultValue={data.mobile}
                                     autoComplete="mobile"
                                     className="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-200 focus:border-gray-200 sm:text-sm text-black"
