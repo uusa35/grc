@@ -1527,7 +1527,7 @@ export default function({user, roles, elementCategories, categories, countries, 
                                 </div>
                                 <ToolTipWidget message={trans('user_banner_instruction')}/>
                                 <p className={` text-red-500 rtl:text-left ltr:text-right`}>
-                                    {trans('square_best_fit')}
+                                    {trans('best_fit')}  : 1900*255 px
                                 </p>
                                 <p className={`mt-2  text-gray-500`}>
                                     {errors.banner && <div className={`text-red-900`}>{errors.banner}</div>}

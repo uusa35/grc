@@ -74,6 +74,8 @@ class UserUpdate extends FormRequest
             'active' => 'nullable|boolean',
 
             'country_id' => 'required|numeric|exists:countries,id',
+            'governate_id' => 'required|numeric|exists:governates,id',
+            'area_id' => 'required|numeric|exists:areas,id',
             'role_id' => 'required|numeric|exists:roles,id',
             'subscription_id' => 'numeric|exists:subscriptions,id',
             'merchant_id' => 'nullable|max:200|min:3',
