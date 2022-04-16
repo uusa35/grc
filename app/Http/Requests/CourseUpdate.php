@@ -29,7 +29,7 @@ class CourseUpdate extends FormRequest
     public function rules()
     {
         return [
-            'sku' => 'required|min:2',
+            'sku' => 'required|min:2|max:20',
             'name_ar' => 'required:min:3|max:200',
             'name_en' => 'required|min:3|max:200',
             'user_id' => 'required|exists:users,id',

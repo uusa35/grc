@@ -1,4 +1,4 @@
-import React, {useContext, useMemo, useState, Fragment} from 'react'
+import React, {useContext, useMemo, useState, Fragment, useEffect} from 'react'
 import {Disclosure, RadioGroup, Tab} from '@headlessui/react'
 import {
     MinusSmIcon,
@@ -17,7 +17,7 @@ import ElementFavoriteBtn from "../components/widgets/ElementFavoriteBtn";
 import {isMobile} from "react-device-detect";
 import {useForm} from "@inertiajs/inertia-react";
 import {useDispatch, useSelector} from "react-redux";
-import {checkCartBeforeAdd} from "../../redux/actions";
+import {checkCartBeforeAdd, setMenuBg} from "../../redux/actions";
 import AlertMessage from "../partials/AlertMessage";
 import EmbeddedIFrameVideo from "../partials/EmbeddedIFrameVideo";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
@@ -181,6 +181,11 @@ export default function({element, relatedElements, auth, settings}) {
     const decreaseQty = () => {
         setSelectedQty(selectedQty - 1 < currentQty && selectedQty > 0 ? selectedQty - 1 : selectedQty)
     }
+
+    useEffect(() => {
+        element.user.banner && element.user.banner.length > 12 ? dispatch(setMenuBg(element.user.banner)) : dispatch(setMenuBg(element.user.image));
+        return () => dispatch(setMenuBg(settings.menu_bg));
+    }, [])
 
     return (
         <FrontendContainer>

@@ -248,7 +248,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                            onChange={handleChange}
                                            required
                                            type="text"
-                                           name="sku" maxLength={60}
+                                           name="sku" maxLength={20}
                                            defaultValue={course.sku}
                                            id="sku"
                                            autoComplete="sku"

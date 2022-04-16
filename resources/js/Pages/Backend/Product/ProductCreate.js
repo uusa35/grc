@@ -252,7 +252,8 @@ export default function ProductCreate({users, sizes, colors, categories}) {
                                     onChange={handleChange}
                                     required
                                     type="text"
-                                    name="sku" maxLength={60}
+                                    name="sku"
+                                    maxLength={20}
                                     defaultValue={data.sku}
                                     id="sku"
                                     autoComplete="sku"
