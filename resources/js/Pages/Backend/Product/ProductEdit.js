@@ -562,7 +562,7 @@ accept="image/jpg, image/jpeg , image/png"
                             </div>
                         </FormSection>
                         {/*more details booleans */}
-                        { isAdminOrAbove && <FormSection title={trans('more_details')}>
+                        <FormSection title={trans('more_details')}>
                             {/* active */}
                             <fieldset className="mt-1 col-span-1">
                                 <div>
@@ -608,52 +608,56 @@ accept="image/jpg, image/jpeg , image/png"
                                     </p>
                                 </div>
                             </fieldset>
-                            {/* on home*/}
-                            <fieldset className="mt-1 col-span-1">
-                                <div>
-                                    <legend
-                                        className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
-                                </div>
-                                <div className="mt-4 space-y-4">
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="on_home"
-                                            name="on_home"
-                                            type="radio"
-                                            value={1}
-                                            defaultChecked={product.on_home}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="push-everything"
-                                               className="ml-3 block   text-gray-800">
-                                            {trans('yes')}
-                                        </label>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="on_home"
-                                            name="on_home"
-                                            type="radio"
-                                            value={0}
-                                            defaultChecked={!product.on_home}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="on_home"
-                                               className="ml-3 block   text-gray-800">
-                                            {trans('no')}
-                                        </label>
-                                    </div>
-                                </div>
-                                <ToolTipWidget/>
-                                <div>
-                                    <p className={`mt-2`}>
-                                        {errors.on_home &&
-                                        <div className={`text-red-900`}>{errors.on_home}</div>}
-                                    </p>
-                                </div>
-                            </fieldset>
+                                {isAdminOrAbove ?
+                                <>
+                                    {/* on home*/}
+                                    <fieldset className="mt-1 col-span-1">
+                                        <div>
+                                            <legend
+                                                className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
+                                        </div>
+                                        <div className="mt-4 space-y-4">
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="on_home"
+                                                    name="on_home"
+                                                    type="radio"
+                                                    value={1}
+                                                    defaultChecked={product.on_home}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="push-everything"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('yes')}
+                                                </label>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="on_home"
+                                                    name="on_home"
+                                                    type="radio"
+                                                    value={0}
+                                                    defaultChecked={!product.on_home}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="on_home"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('no')}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <ToolTipWidget/>
+                                        <div>
+                                            <p className={`mt-2`}>
+                                                {errors.on_home &&
+                                                <div className={`text-red-900`}>{errors.on_home}</div>}
+                                            </p>
+                                        </div>
+                                    </fieldset>
+                                </> : null
+                                }
                             {/* on sale*/}
                             <fieldset className="mt-1 has-tooltip col-span-1">
                                 <div>
@@ -792,7 +796,7 @@ accept="image/jpg, image/jpeg , image/png"
                                     </p>
                                 </div>
                             </fieldset>
-                        </FormSection>}
+                        </FormSection>
                         <FormBtns type={'product'}/>
                     </div>
                     <div
