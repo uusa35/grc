@@ -217,7 +217,7 @@ export default function() {
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.home')}
-                                        className={`-m-2 p-2 block ${textColor} ${menuTextColor}`}>
+                                        className={`-m-2 p-2 block ${menuTextColor}`}>
                                         {capitalize(trans('home'))}
                                     </Link>
                                 </div>
@@ -225,7 +225,7 @@ export default function() {
                                     settings.enable_books && <div className="flow-root">
                                         <Link
                                             href={route('frontend.book.index')}
-                                            className={`-m-2 p-2 block `}>
+                                            className={`-m-2 p-2 block ${menuTextColor}`}>
                                             {capitalize(trans('library'))}
                                         </Link>
                                     </div>
@@ -235,7 +235,7 @@ export default function() {
                                         <div className="flow-root">
                                             <Link
                                                 href={route('frontend.user.index', { is_author : true })}
-                                                className={`-m-2 p-2 block `}>
+                                                className={`-m-2 p-2 block ${menuTextColor}`}>
                                                 {capitalize(trans('experts_and_participants'))}
                                             </Link>
                                         </div>
@@ -261,7 +261,7 @@ export default function() {
                                     settings.enable_courses && <div className="flow-root">
                                         <Link
                                             href={route('frontend.course.index')}
-                                            className={`-m-2 p-2 block `}>
+                                            className={`-m-2 p-2 block ${menuTextColor}`}>
                                             {capitalize(trans('e_learning'))}
                                         </Link>
                                     </div>
@@ -270,7 +270,7 @@ export default function() {
                                     settings.enable_subscriptions && <div className="flow-root">
                                         <Link
                                             href={route('frontend.subscription.index')}
-                                            className={`-m-2 p-2 block `}>
+                                            className={`-m-2 p-2 block ${menuTextColor}`}>
                                             {capitalize(trans('subscriptions'))}
                                         </Link>
                                     </div>
@@ -279,7 +279,7 @@ export default function() {
                                     settings.enable_products && <div className="flow-root">
                                         <Link
                                             href={route('frontend.product.index')}
-                                            className={`-m-2 p-2 block `}>
+                                            className={`-m-2 p-2 block ${menuTextColor}`}>
                                             {capitalize(trans('products'))}
                                         </Link>
                                     </div>
@@ -288,7 +288,7 @@ export default function() {
                                     settings.enable_cart && <div className="flow-root">
                                         <Link
                                             href={route('frontend.cart.index')}
-                                            className={`-m-2 p-2 block `}>
+                                            className={`-m-2 p-2 block ${menuTextColor}`}>
                                             {capitalize(trans('cart'))}
                                         </Link>
                                     </div>
@@ -297,14 +297,14 @@ export default function() {
                                     !auth || !auth.id ? <>
                                         <div className="flow-root">
                                             <Link href={route('frontend.user.logging')}
-                                                  className={`-m-2 p-2 block `}>
+                                                  className={`-m-2 p-2 block ${menuTextColor}`}>
                                                 {capitalize(trans('login'))}
                                             </Link>
                                         </div>
                                         {
                                             settings.enable_register ? <div className="flow-root">
                                                 <Link href={route('frontend.user.registration')}
-                                                      className="-m-2 p-2 block  capitalize">
+                                                      className={`-m-2 p-2 block ${menuTextColor}`}>
                                                     {capitalize(trans('register'))}
                                                 </Link>
                                             </div> : null
@@ -316,7 +316,7 @@ export default function() {
                                                     {capitalize(trans('my_account'))}
                                                 </Link> :
                                                 <a href={route('frontend.user.edit', auth.id)}
-                                                   className="-m-2 p-2 block  capitalize">
+                                                   className={`-m-2 p-2 block ${menuTextColor}`}>
                                                     {capitalize(trans('my_account'))}
                                                 </a>
                                         }
@@ -334,7 +334,7 @@ export default function() {
                                     settings.enable_faqs && <div className="flow-root">
                                         <Link
                                             href={route('frontend.faqs')}
-                                            className={`-m-2 p-2 block `}>
+                                            className={`-m-2 p-2 block ${menuTextColor}`}>
                                             {capitalize(trans('faqs'))}
                                         </Link>
                                     </div>
@@ -344,7 +344,7 @@ export default function() {
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.terms')}
-                                            className={`-m-2 p-2 block `}>
+                                            className={`-m-2 p-2 block ${menuTextColor}`}>
                                             {capitalize(trans('terms'))}
                                         </Link>
                                     </div>
@@ -354,7 +354,7 @@ export default function() {
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.polices')}
-                                            className={`-m-2 p-2 block `}>
+                                            className={`-m-2 p-2 block ${menuTextColor}`}>
                                             {capitalize(trans('policies'))}
                                         </Link>
                                     </div>
@@ -931,7 +931,7 @@ export default function() {
                                     }}
                                     // href={'#'}
                                     href={route('frontend.change.lang', {lang: locale.otherLang})}
-                                    className={`flex flex-row items-center justify-center text-center ${textColor} bg-${headerColor}-400  dark:bg-${headerColor}-600 hover:bg-${headerColor}-500 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-200`}>
+                                    className={`flex flex-row items-center justify-center text-center ${textColor} bg-${headerColor}-300  dark:bg-${headerColor}-600 hover:bg-${headerColor}-500 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-200`}>
                                     {locale.otherLang}
                                 </Link>
                             </div>
@@ -941,7 +941,7 @@ export default function() {
                                 <Menu as="div" className="ltr:ml-4 rtl:mr-3 relative flex-shrink-0 z-50">
                                     <div>
                                         <Menu.Button
-                                            className="flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                            className={`${menuTextColor} flex items-center gap-x-2  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}>
                                             <span className="sr-only">Open user menu</span>
                                             <img
                                                 className="h-5 w-5 rounded-full object-cover"

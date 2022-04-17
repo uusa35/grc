@@ -88,7 +88,8 @@ const AppContextProvider = ({children}) => {
         bgColor: `bg-${settings.main_theme_bg_color}-100 dark:bg-${settings.main_theme_bg_color}-600`,
         btnClass : `text-${settings.main_theme_color}-900 dark:text-white bg-${settings.main_theme_bg_color}-300 dark:bg-${settings.main_theme_bg_color}-600 hover:bg-${settings.main_theme_bg_color}-400 dark:hover:bg-${settings.main_theme_bg_color}-400 dark:hover:text-white  hover:text-white font-extrabold capitalize`,
         headerColor: settings.header_theme_color,
-        menuTextColor : `text-${settings.header_theme_color}-900 dark:text-white hover:text-${settings.header_theme_color}-800 dark:hover:text-${settings.header_theme_color}-600 capitalize font-extrabold dark:text-shadow-lg`,
+        menuTextColor : `text-${settings.header_theme_color}-900 dark:text-white hover:text-${settings.header_theme_color}-800 dark:hover:text-${settings.header_theme_color}-600 capitalize font-extrabold text-shadow-md dark:text-shadow-lg`,
+        footerTextColor : `text-${settings.footer_theme_color}-800 dark:text-white hover:text-${settings.footer_theme_color}-400 capitalize font-extrabold text-shadow-md dark:text-shadow-lg`,
         headerBgColor: settings.header_theme_bg,
         footerColor: settings.footer_theme_color,
         footerBgColor: settings.footer_bg_theme_color

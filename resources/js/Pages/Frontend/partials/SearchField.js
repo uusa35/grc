@@ -131,7 +131,7 @@ const SearchField = () => {
                 </div>
             </div>
             <div
-                className={classNames(locale.isRTL ? `rounded-l-md` : `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-400 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border border-${headerColor}-200 dark:border-${headerColor}-200`)}>
+                className={classNames(locale.isRTL ? `rounded-l-md` : `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-300 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border border-${headerColor}-200 dark:border-${headerColor}-200`)}>
                 <Link
                     href={route().has(`${requestType}.${searchType}.index`) ? route(`${requestType}.${searchType}.index`, {search}) : '#'}
                     className="px-5">

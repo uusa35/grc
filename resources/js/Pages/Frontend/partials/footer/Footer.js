@@ -10,7 +10,7 @@ import {size} from "lodash";
 import {Inertia} from "@inertiajs/inertia";
 
 export default function () {
-    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, footerColor , footerBgColor, mainColor } = useContext(AppContext)
+    const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, footerColor , footerBgColor, footerTextColor } = useContext(AppContext)
     const {auth, settings} = useContext(GlobalContext);
     const {errors} = usePage().props;
     const {data, setData, put, progress, reset} = useForm({
@@ -53,13 +53,13 @@ export default function () {
                         <ul className="mt-4 space-y-4">
                             <li>
                                 <Link href={route('frontend.contactus')}
-                                      className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                      className={`${footerTextColor}`}>
                                     {trans('contactus')}
                                 </Link>
                             </li>
                             <li>
                                 <Link href={route('frontend.aboutus')}
-                                      className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                      className={`${footerTextColor}`}>
                                     {trans('aboutus')}
                                 </Link>
                             </li>
@@ -67,7 +67,7 @@ export default function () {
                                 settings[getLocalized('services')] && size(settings[getLocalized('services')]) > 50 ?
                                     <li>
                                         <Link href={route('frontend.services')}
-                                              className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                              className={`${footerTextColor}`}>
                                             {trans('our_services')}
                                         </Link>
                                     </li> : null
@@ -76,7 +76,7 @@ export default function () {
                                 settings[getLocalized('polices')] && size(settings[getLocalized('polices')]) > 50 ?
                                     <li>
                                         <Link href={route('frontend.polices')}
-                                              className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                              className={`${footerTextColor}`}>
                                             {trans('polices')}
                                         </Link>
                                     </li> : null
@@ -84,7 +84,7 @@ export default function () {
                             {
                                 settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ? <li>
                                     <Link href={route('frontend.terms')}
-                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                          className={`${footerTextColor}`}>
                                         {trans('terms')}
                                     </Link>
                                 </li> : null
@@ -92,7 +92,7 @@ export default function () {
                             {
                                 settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ? <li>
                                     <Link href={route('frontend.polices')}
-                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                          className={`${footerTextColor}`}>
                                         {trans('polices')}
                                     </Link>
                                 </li> : null
@@ -100,7 +100,7 @@ export default function () {
                             {
                                 settings.enable_faqs ? <li>
                                     <Link href={route('frontend.faqs')}
-                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                          className={`${footerTextColor}`}>
                                         {trans('faqs')}
                                     </Link>
                                 </li> : null
@@ -108,7 +108,7 @@ export default function () {
                             {
                                 settings.enable_joinus ? <li>
                                     <Link href={route('frontend.joinus')}
-                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                          className={`${footerTextColor}`}>
                                         {trans('joinus')}
                                     </Link>
                                 </li> : null
@@ -118,14 +118,14 @@ export default function () {
                                     <>
                                         <li>
                                             <Link href={route('frontend.user.logging')}
-                                                  className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                                  className={`${footerTextColor}`}>
                                                 {trans('login')}
                                             </Link>
                                         </li>
                                         {
                                             settings.enable_register ? <li>
                                                 <Link href={route('frontend.user.registration')}
-                                                      className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                                      className={`${footerTextColor}`}>
                                                     {trans('register')} {trans('new_user')}
                                                 </Link>
                                             </li> : null
@@ -135,14 +135,14 @@ export default function () {
                                     : <>
                                         <li>
                                             <Link href={route('frontend.user.edit', auth.id)}
-                                                  className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                                  className={`${footerTextColor}`}>
                                                 {trans('my_account')}
                                             </Link>
                                         </li>
                                         {isAdminOrAbove ? <li>
                                             <Link href={route('backend.home')}
                                                target="_blank"
-                                               className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                               className={`${footerTextColor}`}>
                                                 {trans('backend')}
                                             </Link>
                                         </li> : null}
@@ -151,7 +151,7 @@ export default function () {
                             {
                                 settings.enable_subscriptions ? <li>
                                     <Link href={route('frontend.subscriptions')}
-                                          className={`text-${footerColor}-800 dark:text-white hover:text-${footerColor}-400 capitalize`}>
+                                          className={`${footerTextColor}`}>
                                         {trans('subscriptions')}
                                     </Link>
                                 </li> : null
