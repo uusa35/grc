@@ -55,7 +55,7 @@ export default function({element, products , books, categories }) {
     }, [element])
 
     useEffect(() => {
-        element.banner && element.banner.length > 12 ? dispatch(setMenuBg(element.banner)) : dispatch(setMenuBg(element.image));
+        element.banner && element.banner.length > 12 ? dispatch(setMenuBg(element.banner)) : null;
         return () => dispatch(setMenuBg(settings.menu_bg));
     }, [])
 

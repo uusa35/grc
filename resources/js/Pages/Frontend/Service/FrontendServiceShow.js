@@ -89,7 +89,7 @@ export default function ({element, relatedElements, auth}) {
     }
 
     useEffect(() => {
-        element.user.banner && element.user.banner.length > 12 ? dispatch(setMenuBg(element.user.banner)) : dispatch(setMenuBg(element.user.image));
+        element.user.banner && element.user.banner.length > 12 ? dispatch(setMenuBg(element.user.banner)) : null;
         return () => dispatch(setMenuBg(settings.menu_bg));
     }, [])
 
