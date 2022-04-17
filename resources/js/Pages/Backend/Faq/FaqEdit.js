@@ -152,7 +152,6 @@ export default function({faq }) {
                             <div className="mt-1">
                                 <input
                                     onChange={handleChange}
-                                    required
                                     type="text"
                                     name="notes_ar" maxLength={200}
                                     defaultValue={faq.notes_ar}
@@ -174,7 +173,6 @@ export default function({faq }) {
                             <div className="mt-1">
                                 <input
                                     onChange={handleChange}
-                                    required
                                     type="text"
                                     name="notes_en" maxLength={200}
                                     defaultValue={faq.notes_en}

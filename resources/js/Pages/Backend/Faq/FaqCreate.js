@@ -55,7 +55,7 @@ export default function() {
                     encType="multipart/form-data"
                     className={'w-full space-y-3 bg-transparent'}
                 >
-                    <FormSection title={`${trans('edit')} ${trans('faq')}`}>
+                    <FormSection title={`${trans('create')} ${trans('faq')}`}>
                         {/* name ar */}
                         <div className="sm:col-span-2">
                             <label htmlFor="name_ar" className={`block   text-gray-800`}>
@@ -152,7 +152,6 @@ export default function() {
                             <div className="mt-1">
                                 <input
                                     onChange={handleChange}
-                                    required
                                     type="text"
                                     name="notes_ar" maxLength={200}
                                     defaultValue={data.notes_ar}
@@ -174,7 +173,6 @@ export default function() {
                             <div className="mt-1">
                                 <input
                                     onChange={handleChange}
-                                    required
                                     type="text"
                                     name="notes_en" maxLength={200}
                                     defaultValue={data.notes_en}
