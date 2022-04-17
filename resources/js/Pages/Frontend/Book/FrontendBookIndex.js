@@ -13,10 +13,10 @@ import FrontendSortIndexMenu from "../components/FrontendSortIndexMenu";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function FrontendBookIndex({elements, categories}) {
-    const {trans, mainColor, contentBgColor} = useContext(AppContext);
+    const {trans, textColor, contentBgColor} = useContext(AppContext);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const [currentData, setCurrentData] = useState();
-    const { sort } = useSelector(state => state);
+    const {sort} = useSelector(state => state);
 
     useMemo(() => {
         if (!currentData) {
@@ -31,20 +31,46 @@ export default function FrontendBookIndex({elements, categories}) {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-            {/* Mobile filter dialog */}
-            <SearchIndexSideBarMobile
-                type={'book'}
-                categories={filter(categories, c => c.is_book)}
-                setMobileFiltersOpen={setMobileFiltersOpen}
-                mobileFiltersOpen={mobileFiltersOpen}
-            />
-            <main className={`${contentBgColor} max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8`}>
-                <div className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
-                    <div className="flex flex-1 flex-col w-full sm:w-auto">
-                        <h1 className={`text-4xl font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-100 capitalize`}>{trans('books')}</h1>
-                        <p className={`mt-4 text-base text-${mainColor}-600 dark:text-${mainColor}-200 capitalize`}>
-                            {trans('list')} {trans('books')}
-                        </p>
+                {/* Mobile filter dialog */}
+                <SearchIndexSideBarMobile
+                    type={'book'}
+                    categories={filter(categories, c => c.is_book)}
+                    setMobileFiltersOpen={setMobileFiltersOpen}
+                    mobileFiltersOpen={mobileFiltersOpen}
+                />
+                <main className={`${contentBgColor} max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8`}>
+                    <div
+                        className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
+                        <div className="flex flex-1 flex-col w-full sm:w-auto">
+                            <h1 className={`text-4xl tracking-tight ${textColor}`}>{trans('books')}</h1>
+                            <p className={`mt-4 text-base ${textColor}`}>
+                                {trans('list')} {trans('books')}
+                            </p>
+                        </div>
+                        <FrontendPagination
+                            type={'book'}
+                            total={elements.meta.total}
+                            links={elements.meta.links}
+                            showSearch={false}
+                        />
+                        {/* sort options */}
+                        <FrontendSortIndexMenu/>
+                    </div>
+                    <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
+                        {/* search SideBar */}
+                        <SearchIndexSideBar
+                            type={'book'}
+                            categories={filter(categories, c => c.is_book)}
+                            setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
+                        {/* Product grid */}
+                        <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
+                            <NoElements display={elements.meta.total < 1}/>
+                            <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
+                                {map(currentData, element => (
+                                    <NormalBookWidget element={element} key={element.id}/>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                     <FrontendPagination
                         type={'book'}
@@ -52,33 +78,8 @@ export default function FrontendBookIndex({elements, categories}) {
                         links={elements.meta.links}
                         showSearch={false}
                     />
-                    {/* sort options */}
-                    <FrontendSortIndexMenu />
-                </div>
-                <div className="pt-5 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4 min-h-screen">
-                    {/* search SideBar */}
-                    <SearchIndexSideBar
-                        type={'book'}
-                        categories={filter(categories, c => c.is_book)}
-                        setMobileFiltersOpen={setMobileFiltersOpen} mobileFiltersOpen={mobileFiltersOpen}/>
-                    {/* Product grid */}
-                    <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
-                        <NoElements display={elements.meta.total < 1}/>
-                        <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
-                            {map(currentData, element => (
-                                <NormalBookWidget element={element} key={element.id}/>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-                <FrontendPagination
-                    type={'book'}
-                    total={elements.meta.total}
-                    links={elements.meta.links}
-                    showSearch={false}
-                />
-            </main>
-        </FrontendContentContainer>
+                </main>
+            </FrontendContentContainer>
         </FrontendContainer>
     )
 }

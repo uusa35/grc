@@ -23,7 +23,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                         className={`inline-flex items-center lg:hidden ${btnClass} p-3 rounded-md shadow-sm capitalize`}
                         onClick={() => setMobileFiltersOpen(true)}
                     >
-                        <span className="text-white capitalize">{trans('advanced_search')}</span>
+                        <span className={`${textColor}`}>{trans('advanced_search')}</span>
                         <PlusSmIcon className="flex-shrink-0 ml-1 h-5 w-5 text-gray-400" aria-hidden="true"/>
                     </button>
                 </div>
@@ -40,7 +40,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                 <div className="divide-y divide-gray-200 space-y-3">
                     <div className="flex flex-1 justify-between items-center">
                         <div className="flex">
-                            <h3 className={`capitalize ${textColor}`}>{trans('filters')}</h3>
+                            <h3 className={`${textColor}`}>{trans('filters')}</h3>
                         </div>
                         <div className="flex">
                             <Link
@@ -56,7 +56,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                     {
                         enablePrice && settings.enable_prices  ? <>
                             <div className="flex pt-3">
-                                <h3 className={`capitalize ${textColor}`}>{trans('prices')}</h3>
+                                <h3 className={`${textColor}`}>{trans('prices')}</h3>
                             </div>
                             {
                                 map(range(50, 300, 50), r =>
@@ -95,7 +95,7 @@ export default function ({setMobileFiltersOpen, categories, mobileFiltersOpen, t
                     }
 
                     <div className="flex pt-3">
-                        <h3 className={`capitalize ${textColor}`}>{trans('categories')}</h3>
+                        <h3 className={`${textColor}`}>{trans('categories')}</h3>
                     </div>
                     {map(categories, c => (
                         <div key={c.id} className="pt-3">

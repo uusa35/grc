@@ -66,8 +66,7 @@ export default function FrontendCategoryIndex({elements, settings }) {
                         {/* sort options */}
                         <FrontendSortIndexMenu showPrice={false}/>
                     </div>
-                    <div
-                        className="grid grid-cols-1 gap-y-14 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 py-6">
+                    <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
                         {map(currentData, (element) => (
                             <CategoryWidget element={element} type={type} key={element.id}/>
                         ))}

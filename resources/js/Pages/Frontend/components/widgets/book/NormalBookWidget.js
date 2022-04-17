@@ -15,7 +15,7 @@ const NormalBookWidget = ({element})  => {
             whileHover={{scale: 0.95}}
         >
             <div
-                className={`block relative overflow-hidden shadow-md border border-${mainColor}-50 dark:border-${mainBgColor}-400 mb-5 rounded-md hover:opacity-95 hover:shadow-lg`}>
+                className={`block relative overflow-hidden shadow-md border border-${mainColor}-100 dark:border-${mainBgColor}-400 mb-5 rounded-md hover:opacity-95 hover:shadow-lg`}>
                 <div className="w-full rounded-t-md overflow-hidden sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                     <Link
                         className="z-30"
@@ -25,7 +25,7 @@ const NormalBookWidget = ({element})  => {
                         />
                         <img
                             src={getThumb(element.image)}
-                            alt={element[getLocalized()]}
+                            alt={element[getLocalized()]}œ
                             className="w-full object-cover object-bottom rounded-t-md"
                             width={480}
                             height={360}

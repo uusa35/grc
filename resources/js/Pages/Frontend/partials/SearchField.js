@@ -12,7 +12,7 @@ import GlobalContext from "../../context/GlobalContext";
 
 const SearchField = () => {
     const [search, setSearch] = useState()
-    const {trans, classNames, headerColor, headerBgColor, isAdminOrAbove} = useContext(AppContext)
+    const {trans, classNames, headerColor, headerBgColor, isAdminOrAbove, textColor } = useContext(AppContext)
     const {settings, appName } = useContext(GlobalContext);
     const {locale, searchType} = useSelector(state => state);
     const [requestType, setRequestType] = useState('frontend');
@@ -131,11 +131,11 @@ const SearchField = () => {
                 </div>
             </div>
             <div
-                className={classNames(locale.isRTL ? `rounded-l-md` : `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-200 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border border-${headerColor}-50  dark:border-${headerColor}-400`)}>
+                className={classNames(locale.isRTL ? `rounded-l-md` : `rounded-r-md`, `flex justify-center items-center bg-${headerBgColor}-400 dark:bg-${headerBgColor}-600 shadow-sm  mt-1 border border-${headerColor}-200 dark:border-${headerColor}-200`)}>
                 <Link
                     href={route().has(`${requestType}.${searchType}.index`) ? route(`${requestType}.${searchType}.index`, {search}) : '#'}
                     className="px-5">
-                    <SearchIcon className={`h-5 w-5 text-${headerColor}-900 dark:text-${headerColor}-400`}
+                    <SearchIcon className={`h-5 w-5 ${textColor}`}
                                 aria-hidden="true"/>
                 </Link>
                 {

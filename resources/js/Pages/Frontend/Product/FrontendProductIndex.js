@@ -41,8 +41,8 @@ export default function ({elements, categories, settings }) {
                 <main className={`${contentBgColor} max-w-2xl mx-auto py-5 px-4 sm:py-5 sm:px-6 lg:max-w-full lg:px-8`}>
                     <div className="flex flex-1 flex-col sm:flex-row justify-start items-end border-b border-gray-200 pb-5">
                         <div className="flex flex-1 flex-col w-full sm:w-auto">
-                            <h1 className={`text-4xl font-extrabold tracking-tight ${textColor} capitalize`}>{trans('products')}</h1>
-                            <p className={`mt-4 text-base text-${mainColor}-800 dark:text-${mainColor}-50 capitalize`}>
+                            <h1 className={`text-4xl font-extrabold tracking-tight ${textColor}`}>{trans('products')}</h1>
+                            <p className={`mt-4 text-base ${textColor}`}>
                                 {trans('list')} {trans('products')}
                             </p>
                         </div>
@@ -66,8 +66,7 @@ export default function ({elements, categories, settings }) {
                         {/* Product grid */}
                         <div className="mt-6 lg:mt-0 lg:col-span-2 xl:col-span-3">
                             <NoElements display={elements.meta.total < 1}/>
-                            <div
-                                className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
+                            <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 1xl:grid-cols-3 2xl:grid-cols-3 xl:gap-x-8 gap-x-6">
                                 {map(currentData, element => (
                                     <NormalProductWidget element={element} key={element.id}/>
                                 ))}

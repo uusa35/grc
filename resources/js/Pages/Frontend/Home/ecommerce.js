@@ -58,7 +58,7 @@ export default React.memo(function ({
                             }
                             {onHomeParticipantAuthors && <ElementSlider
                                 elements={onHomeParticipantAuthors}
-                                slidesPerView={isTablet || isMobile ? 1 : 8}
+                                slidesPerView={isTablet || isMobile ? 2 : 8}
                                 title={trans('participant_authors')}
                                 type={'user'}
                             />}

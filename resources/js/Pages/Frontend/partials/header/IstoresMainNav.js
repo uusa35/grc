@@ -619,7 +619,7 @@ export default function () {
                                     }}
                                     // href={'#'}
                                     href={route('frontend.change.lang', {lang: locale.otherLang})}
-                                    className={`flex flex-row items-center justify-center text-center  hover:bg-${headerColor}-400 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-400`}>
+                                    className={`flex flex-row items-center justify-center text-center ${textColor} bg-${headerColor}-400  dark:bg-${headerColor}-600 hover:bg-${headerColor}-500 dark:hover:bg-${headerColor}-800 rounded-md p-2 px-3 border border-${headerColor}-200 dark:border-${headerColor}-200`}>
                                     {locale.otherLang}
                                 </Link>
                             </div>
