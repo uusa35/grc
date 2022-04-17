@@ -144,25 +144,25 @@ export default function({faq }) {
                                 <div className={`text-red-900`}>{errors.description_en}</div>}
                             </p>
                         </div>
-                        {/* caption-ar */}
+                        {/* caption_ar */}
                         <div className="sm:col-span-2">
-                            <label htmlFor="caption-ar" className={`block   text-gray-800`}>
-                                {trans('caption-ar')}
+                            <label htmlFor="caption_ar" className={`block   text-gray-800`}>
+                                {trans('caption_ar')}
                             </label>
                             <div className="mt-1">
                                 <input
                                     onChange={handleChange}
                                     type="text"
-                                    name="caption-ar" maxLength={200}
-                                    defaultValue={faq.caption-ar}
-                                    id="caption-ar"
-                                    autoComplete="caption-ar"
+                                    name="caption_ar" maxLength={200}
+                                    defaultValue={faq.caption_ar}
+                                    id="caption_ar"
+                                    autoComplete="caption_ar"
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 />
                             </div>
-                            <ToolTipWidget message={trans('caption-ar_instruction')}/>
+                            <ToolTipWidget message={trans('caption_ar_instruction')}/>
                             <p className={`mt-2  text-gray-500`}>
-                                {errors.caption-ar && <div className={`text-red-900`}>{errors.caption-ar}</div>}
+                                {errors.caption_ar && <div className={`text-red-900`}>{errors.caption_ar}</div>}
                             </p>
                         </div>
                         {/* caption_en */}
