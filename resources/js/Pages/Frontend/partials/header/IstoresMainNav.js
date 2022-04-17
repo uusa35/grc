@@ -717,7 +717,7 @@ export default function () {
                                                 )}
                                             </Menu.Item>
                                         }
-                                        {å
+                                        {
                                             isEmpty(auth) || !auth.id ?
                                                 <Menu.Item>
                                                     {({active}) => (
@@ -736,12 +736,12 @@ export default function () {
                                                             <>
                                                                 {auth.verified ?
                                                                     <Link
-                                                                        className={`bg-${headerBgColor}-200 dark:bg-${headerBgColor}-400 ${textColor} block px-4 py-2`}
+                                                                        className={`bg-white hover:bg-${headerBgColor}-200 dark:hover:bg-${headerBgColor}-400 ${textColor} block px-4 py-2`}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}
                                                                     </Link> :
                                                                     <a
-                                                                        className={`bg-${headerBgColor}-200 dark:bg-${headerBgColor}-400 ${textColor} block px-4 py-2`}
+                                                                        className={`bg-white hover:bg-${headerBgColor}-200 dark:hover:bg-${headerBgColor}-400 ${textColor} block px-4 py-2`}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}
                                                                     </a>
