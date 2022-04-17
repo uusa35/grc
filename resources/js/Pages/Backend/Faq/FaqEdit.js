@@ -144,6 +144,48 @@ export default function({faq }) {
                                 <div className={`text-red-900`}>{errors.description_en}</div>}
                             </p>
                         </div>
+                        {/* caption-ar */}
+                        <div className="sm:col-span-2">
+                            <label htmlFor="caption-ar" className={`block   text-gray-800`}>
+                                {trans('caption-ar')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    name="caption-ar" maxLength={200}
+                                    defaultValue={faq.caption-ar}
+                                    id="caption-ar"
+                                    autoComplete="caption-ar"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                />
+                            </div>
+                            <ToolTipWidget message={trans('caption-ar_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.caption-ar && <div className={`text-red-900`}>{errors.caption-ar}</div>}
+                            </p>
+                        </div>
+                        {/* caption_en */}
+                        <div className="sm:col-span-2">
+                            <label htmlFor="caption_en" className={`block   text-gray-800`}>
+                                {trans('caption_en')}
+                            </label>
+                            <div className="mt-1">
+                                <input
+                                    onChange={handleChange}
+                                    type="text"
+                                    name="caption_en" maxLength={200}
+                                    defaultValue={faq.caption_en}
+                                    id="caption_en"
+                                    autoComplete="caption_en"
+                                    className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                />
+                            </div>
+                            <ToolTipWidget message={trans('caption_en_instruction')}/>
+                            <p className={`mt-2  text-gray-500`}>
+                                {errors.caption_en && <div className={`text-red-900`}>{errors.caption_en}</div>}
+                            </p>
+                        </div>
                         {/* notes_ar */}
                         <div className="sm:col-span-2">
                             <label htmlFor="notes_ar" className={`block   text-gray-800`}>

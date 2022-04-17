@@ -87,6 +87,7 @@ export default function FaqsPage({elements}) {
                                                     </dt>
                                                     <Disclosure.Panel as="dd" className="mt-2">
                                                         <p className="text-base  mt-5 border-t border-gray-200 pt-10">{element[getLocalized('description')]}</p>
+                                                        <p className="text-base  mt-5 border-t border-gray-200 pt-10 text-sm">{element[getLocalized('notes')]}</p>
                                                     </Disclosure.Panel>
                                                 </>
                                             )}
