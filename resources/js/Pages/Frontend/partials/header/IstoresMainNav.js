@@ -710,7 +710,7 @@ export default function () {
                                                 {({active}) => (
                                                     <Link
                                                         href={route('backend.home')}
-                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
+                                                        className={classNames(active ? `bg-${headerBgColor}-400 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                     >
                                                         {trans('backend')}
                                                     </Link>
@@ -723,7 +723,7 @@ export default function () {
                                                     {({active}) => (
                                                         <Link
                                                             href={route('frontend.user.logging')}
-                                                            className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
+                                                            className={classNames(active ? `bg-${headerBgColor}-400 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                         >
                                                             {trans('login')}
                                                         </Link>
@@ -736,12 +736,12 @@ export default function () {
                                                             <>
                                                                 {auth.verified ?
                                                                     <Link
-                                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
+                                                                        className={classNames(active ? `bg-${headerBgColor}-400 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}
                                                                     </Link> :
                                                                     <a
-                                                                        className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
+                                                                        className={classNames(active ? `bg-${headerBgColor}-400 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                                         href={route('frontend.user.edit', auth.id)}>
                                                                         {trans('my_account')}
                                                                     </a>
@@ -754,7 +754,7 @@ export default function () {
                                                             {({active}) => (
                                                                 <Link
                                                                     href={route('backend.home')}
-                                                                    className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
+                                                                    className={classNames(active ? `bg-${headerBgColor}-400 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                                 >
                                                                     {trans('backend')}
                                                                 </Link>
@@ -768,7 +768,7 @@ export default function () {
                                                                     e.preventDefault();
                                                                     document.getElementById('logout-form').submit()
                                                                 }}
-                                                                className={classNames(active ? `bg-${headerBgColor}-600 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
+                                                                className={classNames(active ? `bg-${headerBgColor}-400 dark:bg-${headerBgColor}-400` : '', `${textColor} block px-4 py-2 font-bold `)}
                                                             >{trans('logout')}</button>
                                                         )}
                                                     </Menu.Item>
