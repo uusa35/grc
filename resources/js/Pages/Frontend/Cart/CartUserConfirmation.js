@@ -365,7 +365,7 @@ export default function({countries, auth}) {
                                     </svg>
                                 }
                             </div>
-                            <span className="flex ltr:pt-2">
+                            <span className="flex ">
                                     {trans('previous')}
                                 </span>
                         </Link>
@@ -377,7 +377,7 @@ export default function({countries, auth}) {
                                             type="submit"
                                             className={`${btnClass} flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500`}
                                         >
-                                                 <span className="flex ltr:pt-2">
+                                                 <span className="flex ">
                                             {trans('next')}
                                             </span>
                                             <div className="flex">

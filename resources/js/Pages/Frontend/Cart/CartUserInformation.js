@@ -540,7 +540,7 @@ export default function({countries, auth, settings}) {
                                         </svg>
                                     }
                                 </div>
-                                <span className="flex ltr:pt-2">
+                                <span className="flex">
                                     {trans('previous')}
                                 </span>
                             </Link>
@@ -564,7 +564,7 @@ export default function({countries, auth, settings}) {
                                     //     href={route('frontend.cart.confirmation')}
                                     //     className={classNames(auth ? `bg-gray-600` : `bg-gray-300` , "flex flex-row justify-between items-center border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                                     // >
-                                    //     <span className="flex ltr:pt-2">
+                                    //     <span className="flex ">
                                     //     {trans('next')}
                                     //     </span>
                                     //     <div className="flex">
