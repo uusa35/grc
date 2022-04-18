@@ -56,6 +56,7 @@ export default function(cart = initialState, action) {
                 ...cart,
                 items : isValid ? cart.items : [],
                 date_created : isValid ? cart.date_created : moment().format(),
+                merchants: isValid ? cart.merchants : [],
                 multiCartMerchant: action.payload.multiCartMerchant,
                 shipmentCountry: action.payload.shipmentCountry,
                 shipmentFees: action.payload.shipmentFees,
