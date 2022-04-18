@@ -128,7 +128,7 @@ function ElementSlider({
                         // navigation={{
                         //     el: paginationElement.current,
                         // }}
-                        lazy={false}
+                        lazy={true}
                         mousewheel={true}
                         keyboard={true}
                         cssMode={true}
