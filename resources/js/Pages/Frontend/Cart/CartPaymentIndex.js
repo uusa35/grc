@@ -168,7 +168,7 @@ export default function({order, settings , auth }) {
                                     </svg>
                                 }
                             </div>
-                            <span className="flex ltr:pt-2">
+                            <span className="flex ">
                                     {trans('previous')}
                                 </span>
                         </Link>

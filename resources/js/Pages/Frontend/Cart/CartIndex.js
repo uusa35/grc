@@ -123,7 +123,7 @@ export default function({coupon = {}, settings , auth }) {
                             }) : '#'}
                             className={classNames(isEmpty(cart.items) ? `opacity-30` : `bg-${mainColor}-600 dark:bg-${mainColor}-400`, "flex flex-row justify-between items-center border border-transparent rounded-md shnotesadow-sm py-3 px-4 text-base font-medium text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-gray-500")}
                         >
-                           <span className="flex ltr:pt-2">
+                           <span className="flex ">
                                             {trans('next')}
                                             </span>
                             <div className="flex">
