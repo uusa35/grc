@@ -1,6 +1,6 @@
 import {call, put, all, takeLatest, select, delay} from 'redux-saga/effects';
 import * as actions from './../actions/types'
-import {first, capitalize} from 'lodash'
+import {first, camelCase} from 'lodash'
 import {toast} from "react-toastify";
 import axios from "axios";
 
@@ -54,7 +54,7 @@ export function* startChangeLangScenario(action) {
 
 export function* startToastMessageScenario(action) {
     try {
-        toast(capitalize(action.payload.message), {type: action.payload.type})
+        toast(camelCase(action.payload.message), {type: action.payload.type})
     } catch (e) {
         console.log('e', e)
     } finally {
