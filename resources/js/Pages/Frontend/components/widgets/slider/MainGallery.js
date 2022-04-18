@@ -52,7 +52,7 @@ export default function({elements}) {
 
     return (
         <ImageGallery
-            lazyLoad={true}
+            lazyLoad={false}
             showBullets={true}
             showNav={false}
             showThumbnails={true}
