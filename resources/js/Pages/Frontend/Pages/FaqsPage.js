@@ -10,7 +10,7 @@ import FrontendContentContainer from "../components/FrontendContentContainer";
 
 
 export default function FaqsPage({elements}) {
-    const {trans, getLocalized, classNames, textColor , contentBgColor } = useContext(AppContext)
+    const {trans, getLocalized, classNames, contentBgColor } = useContext(AppContext)
     const {settings} = useContext(GlobalContext);
 
     return (
@@ -47,7 +47,7 @@ export default function FaqsPage({elements}) {
                             </p>
                             {
                                 settings[getLocalized('caption')] && size(settings[getLocalized('caption')]) > 5 ? <div
-                                    className={`mt-6 inline-block w-full ${textColor} border border-transparent rounded-sm py-3 px-8 font-medium  sm:w-auto capitalize`}
+                                    className={`mt-6 inline-block w-full border border-transparent rounded-sm py-3 px-8 font-medium  sm:w-auto capitalize`}
                                 >
                                     {settings[getLocalized('caption')]}
                                 </div> : null
@@ -87,7 +87,7 @@ export default function FaqsPage({elements}) {
                                                     </dt>
                                                     <Disclosure.Panel as="dd" className="mt-2">
                                                         <p className="text-base  mt-5 border-t border-gray-200 pt-10">{element[getLocalized('description')]}</p>
-                                                        <p className="text-base  mt-5 border-t border-gray-200 pt-10 text-sm">{element[getLocalized('notes')]}</p>
+                                                        <small className="text-base  mt-5 border-t border-gray-200 pt-10">{element[getLocalized('notes')]}</small>
                                                     </Disclosure.Panel>
                                                 </>
                                             )}

@@ -35,16 +35,16 @@ export default function ({ settings }) {
                 <div className="w-full">
                     <h2
                         id="sale-heading"
-                        className={`text-4xl my-5 font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-50 sm:text-5xl lg:text-6xl`}
+                        className={`text-4xl my-5 font-extrabold tracking-tight sm:text-5xl lg:text-6xl`}
                     >
                         {trans('terms_and_conditions')}
                     </h2>
-                    <p className="mt-4 max-w-xl mx-auto text-xl text-gray-600 capitalize">
+                    <p className="mt-4 max-w-xl mx-auto text-xl">
                         {settings[getLocalized()]}
                     </p>
                     {
                         settings[getLocalized('caption')] && size(settings[getLocalized('caption')]) > 5 ? <div
-                            className={`mt-6 inline-block w-full text-${mainColor}-600 dark:text-${mainColor}-300 border border-transparent rounded-sm py-3 px-8 font-medium  sm:w-auto capitalize`}
+                            className={`mt-6 inline-block w-full border border-transparent rounded-sm py-3 px-8 font-medium  sm:w-auto capitalize`}
                         >
                             {settings[getLocalized('caption')]}
                         </div> : null

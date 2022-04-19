@@ -82,7 +82,7 @@ export default function() {
                         <div className="w-full">
                             <h2
                                 id="sale-heading"
-                                className={`text-4xl my-5 font-extrabold tracking-tight ${textColor} sm:text-5xl lg:text-6xl`}
+                                className={`text-4xl my-5 font-extrabold tracking-tight  sm:text-5xl lg:text-6xl`}
                             >
                                 {trans('contactus')}
                             </h2>
@@ -107,7 +107,7 @@ export default function() {
                             <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full ">
                                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                                     <div className="relative">
-                                        <div className={`grid grid-cols-1 lg:grid-cols-3 ${textColor}`}>
+                                        <div className={`grid grid-cols-1 lg:grid-cols-3 `}>
                                             {/* Contact information */}
                                             <div
                                                 className="relative overflow-hidden py-10 px-6  sm:px-10 xl:p-12">
@@ -170,7 +170,7 @@ export default function() {
                                             </div>
 
                                             {/* Contact form */}
-                                            <div className={`py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 ${textColor}`}>
+                                            <div className={`py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12 `}>
                                                 <h3 className="text-lg  ">{trans('for_any_inquires_contact_us')}</h3>
                                                 <form onSubmit={submit}
                                                       className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
@@ -190,7 +190,7 @@ export default function() {
                                                                 autoComplete="given-name"
                                                                 className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  `}>
                                                                 {errors.first_name && <div
                                                                     className={`text-red-900 text-sm`}>{errors.first_name}</div>}
                                                             </p>
@@ -212,7 +212,7 @@ export default function() {
                                                                 autoComplete="family-name"
                                                                 className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  `}>
                                                                 {errors.last_name && <div
                                                                     className={`text-red-900 text-sm`}>{errors.last_name}</div>}
                                                             </p>
@@ -233,7 +233,7 @@ export default function() {
                                                                 autoComplete="email"
                                                                 className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  `}>
                                                                 {errors.email && <div
                                                                     className={`text-red-900 text-sm`}>{errors.email}</div>}
                                                             </p>
@@ -246,7 +246,7 @@ export default function() {
                                                                    className="block text-sm  ">
                                                                 {trans('mobile')}
                                                             </label>
-                                                            <span id="phone-optional" className="text-sm text-gray-500">
+                                                            <span id="phone-optional" className="text-sm">
                                                           {trans('optional')}
                                                         </span>
                                                         </div>
@@ -261,7 +261,7 @@ export default function() {
                                                                 className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                                 aria-describedby="phone-optional"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  `}>
                                                                 {errors.mobile && <div
                                                                     className={`text-red-900 text-sm`}>{errors.mobile}</div>}
                                                             </p>
@@ -283,7 +283,7 @@ export default function() {
                                                                 onChange={handleChange}
                                                                 className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  `}>
                                                                 {errors.subject && <div
                                                                     className={`text-red-900 text-sm`}>{errors.subject}</div>}
                                                             </p>
@@ -307,7 +307,7 @@ export default function() {
                                                                 placeholder={trans('write_protection_code')}
                                                                 className="text-black py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
                                                             />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  `}>
                                                                 {errors.code_confirmation && <div
                                                                     className={`text-red-900 text-sm`}>{errors.code_confirmation}</div>}
                                                             </p>
@@ -319,7 +319,7 @@ export default function() {
                                                                    className="block text-sm  ">
                                                                 {trans('content')}
                                                             </label>
-                                                            <span id="message-max" className="text-sm text-gray-500">
+                                                            <span id="message-max" className="text-sm">
                                                               {trans('max_1000_characters')}
                                                             </span>
                                                         </div>
@@ -330,11 +330,11 @@ export default function() {
                                                                     onChange={handleChange}
                                                                     rows={4}
                                                                     maxLength={300}
-                                                                    className="py-3 px-4 block w-full shadow-sm  focus:ring-teal-500 focus:border-teal-500 border border-gray-300 rounded-md"
+                                                                    className="py-3 px-4 block w-full shadow-sm  text-black focus:ring-teal-500 focus:border-teal-500 border border-gray-300 rounded-md"
                                                                     aria-describedby="message-max"
                                                                     defaultValue={''}
                                                                 />
-                                                            <p className={`mt-2  text-gray-500`}>
+                                                            <p className={`mt-2  `}>
                                                                 {errors.content && <div
                                                                     className={`text-red-900 text-sm`}>{errors.content}</div>}
                                                             </p>

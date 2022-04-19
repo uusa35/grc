@@ -7,7 +7,7 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 
 export default function AboutusPage({settings}) {
-    const {trans, getLocalized, mainColor, contentBgColor } = useContext(AppContext)
+    const {trans, getLocalized, contentBgColor } = useContext(AppContext)
 
     return (
         <FrontendContainer>
@@ -35,11 +35,11 @@ export default function AboutusPage({settings}) {
                         <div className="w-full">
                             <h2
                                 id="sale-heading"
-                                className={`text-4xl mt-10 font-extrabold tracking-tight text-${mainColor}-900 dark:text-${mainColor}-200 sm:text-5xl lg:text-6xl`}
+                                className={`text-4xl mt-10 font-extrabold tracking-tight sm:text-5xl lg:text-6xl`}
                             >
                                 {trans('aboutus')}
                             </h2>
-                            <p className={`mt-4 max-w-xl mx-auto text-xl text-${mainColor}-800 dark:text-${mainColor}-200`}>
+                            <p className={`mt-4 max-w-xl mx-auto text-xl`}>
                                 {settings[getLocalized()]}
                             </p>
                         </div>
