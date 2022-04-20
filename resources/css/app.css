@@ -39,14 +39,12 @@
     /*    font-weight: normal;*/
     /*    font-style: normal;*/
     /*}*/
-
     /*@font-face {*/
     /*    font-family: 'Almarai-Bold';*/
     /*    src: url('../../public/fonts/Almarai-Bold.ttf') format('truetype');*/
     /*    font-weight: normal;*/
     /*    font-style: normal;*/
     /*}*/
-
     @font-face {
         font-family: 'bein-ar-black_0';
         src: url('../../public/fonts/bein-ar-black_0.ttf') format('truetype');
@@ -74,29 +72,24 @@
     /*    font-weight: normal;*/
     /*    font-style: normal;*/
     /*}*/
-
-
     /*@font-face {*/
     /*    font-family: 'Ar-Ith';*/
     /*    src: url('../../public/fonts/Ar-Ith.ttf') format('truetype');*/
     /*    font-weight: normal;*/
     /*    font-style: normal;*/
     /*}*/
-
     /*@font-face {*/
     /*    font-family: 'AlMohanad';*/
     /*    src: url('../../public/fonts/AlMohanad.ttf') format('truetype');*/
     /*    font-weight: normal;*/
     /*    font-style: normal;*/
     /*}*/
-
     /*@font-face {*/
     /*    font-family: 'ibm';*/
     /*    src: url('../../public/fonts/IBMPlexSansArabic-SemiBold.ttf') format('truetype');*/
     /*    font-weight: normal;*/
     /*    font-style: normal;*/
     /*}*/
-
     @font-face {
         font-family: 'GESSTwoMedium';
         src: url('../../public/fonts/GESSTwoMedium.eot') format('truetype');
@@ -227,18 +220,19 @@
 
 
 @layer utilities {
-    @variants responsive {
-        .text-shadow {
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
-        }
-        .text-shadow-md {
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.20);
-        }
-        .text-shadow-lg {
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.90);
-        }
-        .text-shadow-none {
-            text-shadow: none;
-        }
+    .text-shadow {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-shadow-md {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.30);
+    }
+
+    .text-shadow-lg {
+        text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+    }
+
+    .text-shadow-none {
+        text-shadow: none;
     }
 }
