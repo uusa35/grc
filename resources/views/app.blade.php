@@ -3,13 +3,13 @@
 <head>
     @if(request()->segment(1) !== 'backend')
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
-            <title>{{$page['props']['element']->{'name_'.app()->getLocale()}  }}</title>
+            <title>{{strtolower($page['props']['element']->{'name_'.app()->getLocale()})  }}</title>
             <meta property="og:type" content="website"/>
             <meta property="description" content="{{$page['props']['element']->{'description_'.app()->getLocale()} . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:locale" content="{{ app()->getLocale() }}"/>
             <meta property="og:site_name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:url" content="{{ request()->getUri().request()->getQueryString() }}"/>
-            <meta property="og:title" content="{{$page['props']['element']->{'name_'.app()->getLocale()} . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
+            <meta property="og:title" content="{{strtoupper($page['props']['element']->{'name_'.app()->getLocale()} . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()}) }}"/>
             <meta property="og:description"
                   content="{{substr($page['props']['element']->{'description_'.app()->getLocale()},0,50) . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }} "/>
             <meta property="og:image" content="{{asset(env('THUMBNAIL').$page['props']['element']->image) }}"/>
@@ -36,7 +36,7 @@
         @else
             {{--            <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(0) ? ' :: '. trans('general.'.Str::plural(request()->segment(0))) : '' }} test from 'here'</title>--}}
             <meta name="name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
-            <meta name="title" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
+            <meta name="title" content="{{strtolower($page['props']['settings']->{'description_'.app()->getLocale()})  }}"/>
             <meta name="description" content="{{$page['props']['settings']->{'keywords'}  }}"/>
             <meta name="keywords" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
             <meta name="author" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
