@@ -47,11 +47,11 @@ export default function() {
     return (
         <FrontendContainer>
             <FrontendContentContainer parentModuleName={'login'}>
-                <div className={`${contentBgColor} min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8`}>
+                <div className={`${contentBgColor} min-h-screen flex flex-col justify-center pb-12 sm:px-6 lg:px-8`}>
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
                         <img
-                            className="mx-auto h-16 w-auto"
-                            src={getThumb(settings.app_logo)}
+                            className="mx-auto w-20 h-auto shadow-md rounded-sm"
+                            src={getThumb(settings.image)}
                             alt="Workflow"
                         />
                         <h2 className={`mt-6 text-center text-3xl font-extrabold ${textColor}`}>{trans('sign_in_to_ur_account')}</h2>
@@ -59,7 +59,7 @@ export default function() {
                         </p>
                     </div>
 
-                    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                    <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
                         <div className={`${mainBgColor}  py-8 px-4 shadow-lg border sm:rounded-lg sm:px-10`}>
                             <form className="space-y-6" onSubmit={submit}>
                                 <div>

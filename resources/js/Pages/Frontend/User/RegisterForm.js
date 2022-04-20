@@ -68,7 +68,7 @@ export default function({countries}) {
                 <div className={`${contentBgColor} min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8`}>
                     <div className="sm:mx-auto sm:w-full sm:max-w-md">
                         <img
-                            className="mx-auto h-16 w-auto"
+                            className="mx-auto w-20 h-auto shadow-md rounded-sm"
                             src={getThumb(settings.image)}
                             alt="Workflow"
                         />
@@ -77,7 +77,7 @@ export default function({countries}) {
                         </p>
                     </div>
 
-                    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                    <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-md">
                         <div className={`${mainBgColor}  py-8 px-4 shadow sm:rounded-lg sm:px-10`}>
                             <form className="space-y-6" onSubmit={submit}>
                                 {/* name */}

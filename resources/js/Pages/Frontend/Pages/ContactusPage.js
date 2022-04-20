@@ -103,25 +103,25 @@ export default function() {
                         aria-labelledby="testimonial-heading"
                         className="relative max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:py-1 lg:px-8"
                     >
-                        <div className="max-w-2xl mx-auto lg:max-w-none">
+                        <div className="w-full mx-auto lg:max-w-none">
                             <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full ">
-                                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
                                     <div className="relative">
                                         <div className={`grid grid-cols-1 lg:grid-cols-3 `}>
                                             {/* Contact information */}
                                             <div
-                                                className="relative overflow-hidden py-10 px-6  sm:px-10 xl:p-12">
+                                                className="relative overflow-hidden py-10 px-6  sm:px-10 xl:p-12 flex flex-col">
                                                 <img
-                                                    className="h-28 my-5"
+                                                    className="w-28 h-auto my-5 shadow-md rounded-sm "
                                                     src={getThumb(settings.image)}
                                                     alt={settings[getLocalized()]}
                                                 />
                                                 <h3 className="text-lg ">{settings[getLocalized()]}</h3>
-                                                <p className="mt-2 text-base text-teal-50 max-w-3xl">
+                                                <p className={`mt-2`}>
                                                     {settings[getLocalized('caption')]}
                                                 </p>
-                                                <h3 className="text-lg mt-2 pt-2 border-t border-gray-200">{trans('contact_information')}</h3>
-                                                <p className="mt-2 text-base text-teal-50 max-w-3xl">
+                                                <h3 className="text-lg my-3 pt-2 border-t border-gray-200">{trans('contact_information')}</h3>
+                                                <p className={`mt-2`}>
                                                     {settings[getLocalized('address')]} - {settings[getLocalized('country')]}
                                                 </p>
                                                 <dl className="mt-2 space-y-6">
