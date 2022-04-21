@@ -12,6 +12,9 @@ import {motion} from 'framer-motion';
 import IstoresMainNav from "../partials/header/IstoresMainNav";
 import MgtMainNav from "../partials/header/MgtMainNav";
 import LoadingView from "../../Backend/components/widgets/LoadingView";
+import moment from 'moment'
+import 'moment/locale/ar'
+import 'moment/locale/en-in'
 
 
 const currentVariants = {
@@ -21,6 +24,7 @@ const currentVariants = {
 
 const FrontendContainer = ({children}) => {
     const {locale, theme, menuBg, isLoading } = useSelector(state => state)
+    moment.locale(locale.isRTL ? 'ar' : 'en-in')
     const {settings, appName} = useContext(GlobalContext);
     const {
         currentFont,

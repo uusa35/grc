@@ -268,7 +268,7 @@ export default function ({element, relatedElements, auth}) {
                                                                     <span
                                                                         className="flex">{`${moment(t.date).format('dddd')} ${trans('equivalent')}`}</span>
                                                                         <span
-                                                                            className="flex flex-1 justify-start sm:px-2 flex-row">{`${moment(t.date).format('L')}`}</span>
+                                                                            className="flex flex-1 justify-start sm:px-2 flex-row">{`${moment(t.date).format(locale.isRTL ? `Y/MM/DD` : `DD/MM/Y`)}`}</span>
                                                                     </div>
                                                                     <div
                                                                         className="flex flex-col xl:flex-row justify-between items-center">
