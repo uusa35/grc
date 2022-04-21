@@ -192,8 +192,8 @@ export default React.memo(function({elements, roles}) {
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-800">
                                                 <div className="flex flex-col">
                                                     <div className="flex flex-row items-center space-x-3 lg:pl-2">
-                                                        <img src={getThumb(element.image)}
-                                                             className={`w-20 h-auto ltr:pr-5 rtl:pl-5`}/>
+                                                        <img src={getThumb(element.image ? element.image : 'square.png')}
+                                                             className={`w-20 h-auto ltr:pr-5 rtl:pl-5 border border-gray-400 rounded-sm shadow-sm`}/>
                                                         <ActiveDot active={element.active}/>
                                                         <div className="flex flex-col">
                                                             <div className="flex mb-2 font-bold">{element[getLocalized('name')]}</div>
