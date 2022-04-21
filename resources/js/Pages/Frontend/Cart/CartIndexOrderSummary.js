@@ -85,7 +85,7 @@ export default function() {
                                         className="flex flex-col justify-start">
                                         <div
                                             className="flex flex-col xl:flex-row justify-between capitalize px-2 my-2">
-                                            <h1 className="mb-2 pb-1 border-b-2 border-gray-200">{trans('timing')}</h1>
+                                            <h1 className="mb-2 pb-1 border-b-2 border-gray-200">{trans('timing')} : </h1>
                                             {`${moment(element.timing.date).format('dddd')} ${trans('equivalent')}`}
                                             {` ${moment(element.timing.date).format('L')}`}
                                             <div className="flex capitalize">
@@ -95,11 +95,13 @@ export default function() {
                                         </div>
                                     </div>
                                     }
-                                    <p className="block capitalize truncate overflow-hidden overflow-ellipsis overflow-hidden">
-                                        {trans('notes')} : {truncate(element.notes, {
-                                        'length': isMobile ? 5 : 50,
-                                    })}
-                                    </p>
+                                    {
+                                        element.notes ? <p className="block capitalize truncate overflow-hidden overflow-ellipsis overflow-hidden">
+                                            {trans('notes')} : {truncate(element.notes, {
+                                            'length': isMobile ? 5 : 50,
+                                        })}
+                                        </p> : null
+                                    }
                                 </div>
                             </div>
                         </td>
