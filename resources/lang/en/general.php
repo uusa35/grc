@@ -1268,5 +1268,16 @@ return array (
     "booked_at" => "booked at",
     "time" => "booking time",
     "print" => "print",
-    "merchant" => "merchant"
+    "merchant" => "merchant",
+    "all_registered_users" => "جميع المستخدمين",
+    "filtering" => "تصفية",
+    "homes" => "الرئيسية",
+    "no_payment_method_selected" => "no payment method selected",
+    "cancelled" => "canclled",
+    "paid_orders" => "paid orders",
+    "no_available_timings" => "no available timings",
+    "fixed_delivery_value" => "fixed delivery value",
+    "fixed_delivery_charge" => "fixed delivery charge",
+    "no_notes" => "no notes",
+    "no_payment_method_selected" => "please select payment method"
 );

@@ -67,7 +67,7 @@ export default React.memo(function({elements, roles}) {
                             <Link
                                 className={`border border-gray-600 rounded-md shadow-md p-3`}
                                 href={route('backend.user.index')}>
-                                {trans('all')} {trans('registered_users')}
+                                {trans('all')} {trans('all_registered_users')}
                             </Link>
                         </div>
                         <div

@@ -1279,5 +1279,18 @@ return array (
     "booked_at" => "موعد الحجز",
     "time" => "وقت الحجز",
     "print" => "طباعة",
-    "merchant" => "التاجر"
+    "merchant" => "التاجر",
+    "all_registered_users" => "جميع المستخدمين",
+    "filtering" => "تصفية",
+    "homes" => "الرئيسية",
+    "no_payment_method_selected" => "لم يتم اختيار طريقة الدفع",
+    "cancelled" => "مرتجع",
+    "paid_orders" => "طلبات مدفوعة",
+    "no_available_timings" => "لا يوجد توقيتات متاحة",
+    "fixed_delivery_value" => "سعر توصيل ثابت",
+    "fixed_delivery_charge" => "سعر توصيل ثابت",
+    "no_notes" => "لا توجد ملاحظات",
+    "no_payment_method_selected" => "يرجى اختيار طريقة الدفع"
+
+
 );
