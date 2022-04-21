@@ -26,6 +26,7 @@ import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
 import GlobalContext from "../../context/GlobalContext";
+import ElementShowBtnNotes from "../components/ElementShowBtnNotes";
 
 
 export default function({element, relatedElements, auth}) {
@@ -450,45 +451,7 @@ export default function({element, relatedElements, auth}) {
                             </section>
 
                             {/* Notes (direct purchase) */}
-                            <section aria-labelledby="policies-heading" className="mt-10">
-                                <h2 id="policies-heading" className="sr-only">
-                                    {trans('notes')}
-                                </h2>
-
-                                <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 capitalize truncate">
-                                    {
-                                        element.direct_purchase ? <div
-                                            className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                                     viewBox="0 0 24 24" stroke="currentColor" color={mainColor}>
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                </svg>
-                                            </div>
-                                            <span
-                                                className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('direct_purchase')}</span>
-                                            <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('direct_purchase')}</dd>
-                                        </div> : null
-                                    }
-                                    {
-                                        element.sku &&
-                                        <div
-                                            className={`flex flex-1 flex-col justify-start items-center bg-${mainBgColor}-50 dark:bg-${mainBgColor}-600 border border-${mainColor}-200 dark:border-${mainColor}-400 rounded-lg p-6 text-center`}>
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                                                     viewBox="0 0 24 24" stroke="currentColor" color={mainColor}>
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                                          d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
-                                                </svg>
-                                            </div>
-                                            <span
-                                                className={`mt-4 text-sm font-medium text-${mainColor}-600 dark:text-${mainColor}-100`}>{trans('reference_id')}</span>
-                                            <dd className={`mt-1 text-sm text-${mainColor}-600 dark:text-${mainColor}-100`}>{element.sku}</dd>
-                                        </div>
-                                    }
-                                </dl>
-                            </section>
+                            <ElementShowBtnNotes directPurchase={element.direct_purchase} sku={element.sku} />
                         </div>
                     </div>
                     <SocialIconShare imageUrl={getThumb(element.image)} title={element[getLocalized()]}/>
