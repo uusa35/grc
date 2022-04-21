@@ -2,10 +2,10 @@ import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 
 export default function AlertMessage({ title , message , color = 'lightgray'}) {
-    const { mainColor , mainBgColor , textColor , bgColor } = useContext(AppContext)
+    const { mainColor , textColor , bgColor } = useContext(AppContext)
     return (
         <div
-            className={`my-4 ${bgColor} border-l-4 border-${mainColor}-800 p-4  m-auto shadow-sm rounded-md m-10`}>
+            className={`my-4 ${bgColor} border-l-4 border-${mainColor}-800 p-4  m-auto shadow-sm rounded-md`}>
             <div className="flex items-center">
                 <div className="flex-shrink-0">
                     <svg className={`h-9 w-9" xmlns="http://www.w3.org/2000/svg`}
