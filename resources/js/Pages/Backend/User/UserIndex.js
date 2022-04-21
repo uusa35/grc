@@ -67,7 +67,7 @@ export default React.memo(function({elements, roles}) {
                             <Link
                                 className={`border border-gray-600 rounded-md shadow-md p-3`}
                                 href={route('backend.user.index')}>
-                                {trans('all')} {trans('users')}
+                                {trans('all')} {trans('registered_users')}
                             </Link>
                         </div>
                         <div
@@ -215,7 +215,7 @@ export default React.memo(function({elements, roles}) {
                                                             <div className="flex">
                                                                 <FaInbox className={`h-4 w-4 mx-2`}/>
                                                                 <a href={`mailto:${element.email}`}>{element.email}</a></div>
-                                                            <div className="flex justify-center items-center w-20 bg-gray-200 border border-gray-400 p-1 px-2 rounded-md mt-2">
+                                                            <div className="flex justify-center items-center w-20 bg-gray-200 border border-gray-400 p-1 px-2 rounded-sm mt-2">
                                                                 {element.role[getLocalized()]}</div>
                                                         </div>
                                                     </div>
