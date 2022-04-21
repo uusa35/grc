@@ -8,6 +8,7 @@ use App\Http\Requests\UserUpdate;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CountryCollection;
 use App\Http\Resources\RoleCollection;
+use App\Http\Resources\RoleExtraLightResource;
 use App\Http\Resources\SubscriptionCollection;
 use App\Http\Resources\UserCollection;
 use App\Http\Controllers\Controller;
@@ -55,7 +56,8 @@ class UserController extends Controller
         }
         $elements = new UserCollection(User::filters($filters)->notAdmins()->with('role')->paginate(Self::TAKE_LESS)
             ->withQueryString());
-        return inertia('Backend/User/UserIndex', compact('elements'));
+        $roles = RoleExtraLightResource::collection(Role::active()->where('is_visible', true)->get());
+        return inertia('Backend/User/UserIndex', compact('elements','roles'));
     }
 
     /**

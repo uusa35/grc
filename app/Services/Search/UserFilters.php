@@ -299,4 +299,9 @@ class UserFilters extends QueryFilters
             ->orWhere('en', 'like', "%{$search}%")
             ->orWhere('key', 'like', "%{$search}%");
     }
+
+    public function role_id()
+    {
+        return $this->builder->where('role_id', request()->role_id);
+    }
 }

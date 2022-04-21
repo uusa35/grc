@@ -3,7 +3,7 @@ import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
 import {AppContext} from "./../../context/AppContext";
-import {orderBy, isArray, map} from 'lodash';
+import {orderBy, isArray, map, isEmpty} from 'lodash';
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import moment from "moment";
@@ -13,9 +13,11 @@ import ActiveDot from "../components/widgets/ActiveDot";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import TableViewIcon from "@mui/icons-material/TableView";
+import pluralize from 'pluralize'
+import {getWhatsappLink} from "../../helpers";
+import {FaWhatsapp, FaInbox} from "react-icons/fa";
 
-
-export default React.memo(function({elements}) {
+export default React.memo(function({elements, roles}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
@@ -50,6 +52,24 @@ export default React.memo(function({elements}) {
             <div className="flex flex-col">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
+                        <div
+                            className="flex items-center gap-x-4 justify-end  py-2 bg-white rounded-sm shadow-sm mb-3 px-10">
+                            <h6>{trans('filtering')} : </h6>
+                            {
+                                roles.map(r => (
+                                    <Link
+                                        className={`border border-gray-400 rounded-md shadow-md p-3`}
+                                        href={route('backend.user.index', {...route().params, role_id: r.id})}>
+                                        {pluralize(r[getLocalized()])}
+                                    </Link>
+                                ))
+                            }
+                            <Link
+                                className={`border border-gray-600 rounded-md shadow-md p-3`}
+                                href={route('backend.user.index')}>
+                                {trans('all')} {trans('users')}
+                            </Link>
+                        </div>
                         <div
                             className="bg-gray-300 shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
                             <table className="min-w-full border-collapse block md:table">
@@ -169,19 +189,34 @@ export default React.memo(function({elements}) {
                                             {/*    <img className="w-14 h-14  object-contain rounded-md shadow-inner"*/}
                                             {/*         src={getThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
                                             {/*</td>*/}
-                                            <td className="block md:table-cell whitespace-nowrap text-gray-500">
-                                                <div className="flex flex-row items-center space-x-3 lg:pl-2">
-                                                    <img src={getThumb(element.image)} className={`w-20 h-auto ltr:pr-5 rtl:pl-5`}/>
-
-                                                    <ActiveDot active={element.active}/>
-                                                    {element[getLocalized('name')]}
-                                                </div>
-                                                <div
-                                                    className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
-                                                        <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-100 text-gray-800`}>
-                                                            {element.role[getLocalized()]}
-                                                          </span>
+                                            <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-800">
+                                                <div className="flex flex-col">
+                                                    <div className="flex flex-row items-center space-x-3 lg:pl-2">
+                                                        <img src={getThumb(element.image)}
+                                                             className={`w-20 h-auto ltr:pr-5 rtl:pl-5`}/>
+                                                        <ActiveDot active={element.active}/>
+                                                        <div className="flex flex-col">
+                                                            <div className="flex mb-2 font-bold">{element[getLocalized('name')]}</div>
+                                                            {
+                                                                element.mobile && <div className="flex">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
+                                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                                         strokeWidth={2}>
+                                                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                                                              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                                                    </svg>
+                                                                    : {element.mobile}</div>
+                                                            }
+                                                            {
+                                                                element.whatsapp && <div className="flex">
+                                                                    <FaWhatsapp className={`h-4 w-4 mx-2`}/>
+                                                                    : <a href={`${getWhatsappLink(element.whatsapp)}`}>{element.whatsapp}</a></div>
+                                                            }
+                                                            <div className="flex">
+                                                                <FaInbox className={`h-4 w-4 mx-2`}/>
+                                                                <a href={`mailto:${element.email}`}>{element.email}</a></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td className=" px-6 py-4 whitespace-nowrap text-right  font-medium">

@@ -1,4 +1,4 @@
-import React , {Fragment, useContext, useMemo, useState, useCallback} from "react";
+import React, {Fragment, useContext, useMemo, useState, useCallback} from "react";
 import BackendContainer from "./../components/containers/BackendContainer";
 import {Menu, Transition} from "@headlessui/react";
 import {DotsVerticalIcon} from "@heroicons/react/solid";
@@ -50,48 +50,46 @@ export default React.memo(function({elements}) {
             <div className="flex flex-col">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
-                        {
-                            <div className="flex items-center justify-evenly py-2 bg-white rounded-sm shadow-sm mb-3">
-                                <div className="sm:col-span-2 has-tooltip mb-5">
-                                    <label htmlFor="start_sale"
-                                           className={`block   text-gray-800`}>
-                                        {trans('from_till_current_date')}
-                                    </label>
-                                    <div className="mt-1 flex flex-row">
-                                        <input
-                                            // onChange={(e => setCurrentData(e.target.value)}
-                                            onChange={e => setCurrentDate(moment(e.target.value).format('DD-MM-Y'))}
-                                            type="date"
-                                            step="any"
-                                            name="current_date"
-                                            id="current_date"
-                                            autoComplete="current_date"
-                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                        />
-                                        <Link
-                                            className={`border border-gray-400 bg-gray-200 rounded-md shadow-md p-3 mx-2`}
-                                            href={route('backend.order.index', {created_at: currentDate})}>
-                                            {trans('search')}
-                                        </Link>
-                                        <Link
-                                            className={`border border-gray-400 bg-red-600 text-white rounded-md shadow-md p-3 mx-2`}
-                                            href={route('backend.order.index', {})}>
-                                            {trans('remove')}
-                                        </Link>
-                                    </div>
+                        <div className="flex items-center justify-evenly py-2 bg-white rounded-sm shadow-sm mb-3">
+                            <div className="sm:col-span-2 has-tooltip mb-5">
+                                <label htmlFor="start_sale"
+                                       className={`block   text-gray-800`}>
+                                    {trans('from_till_current_date')}
+                                </label>
+                                <div className="mt-1 flex flex-row">
+                                    <input
+                                        // onChange={(e => setCurrentData(e.target.value)}
+                                        onChange={e => setCurrentDate(moment(e.target.value).format('DD-MM-Y'))}
+                                        type="date"
+                                        step="any"
+                                        name="current_date"
+                                        id="current_date"
+                                        autoComplete="current_date"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                    <Link
+                                        className={`border border-gray-400 bg-gray-200 rounded-md shadow-md p-3 mx-2`}
+                                        href={route('backend.order.index', {created_at: currentDate})}>
+                                        {trans('search')}
+                                    </Link>
+                                    <Link
+                                        className={`border border-gray-400 bg-red-600 text-white rounded-md shadow-md p-3 mx-2`}
+                                        href={route('backend.order.index', {})}>
+                                        {trans('remove')}
+                                    </Link>
                                 </div>
-                                <Link
-                                    className={`border border-gray-400 rounded-sm shadow-md p-3`}
-                                    href={route('backend.order.index', {...route().params , paid: true})}>
-                                    {trans('paid_orders')}
-                                </Link>
-                                <Link
-                                    className={`border border-gray-400 rounded-sm shadow-md p-3`}
-                                    href={route('backend.order.index', {...route().params , paid: false })}>
-                                    {trans('unpaid_orders')}
-                                </Link>
                             </div>
-                        }
+                            <Link
+                                className={`border border-gray-400 rounded-sm shadow-md p-3`}
+                                href={route('backend.order.index', {...route().params, paid: true})}>
+                                {trans('paid_orders')}
+                            </Link>
+                            <Link
+                                className={`border border-gray-400 rounded-sm shadow-md p-3`}
+                                href={route('backend.order.index', {...route().params, paid: false})}>
+                                {trans('unpaid_orders')}
+                            </Link>
+                        </div>
                         <div
                             className="bg-gray-300 shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
                             <table className="min-w-full border-collapse block md:table">
@@ -191,7 +189,10 @@ export default React.memo(function({elements}) {
                                             <div className="flex items-center justify-center">
                                                 <a
                                                     className={`pl-3 has-tooltip`}
-                                                    href={route('backend.order.export', {...route().params, fileType: 'pdf' })}>
+                                                    href={route('backend.order.export', {
+                                                        ...route().params,
+                                                        fileType: 'pdf'
+                                                    })}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5"
                                                          viewBox="0 0 20 20" fill="currentColor">
                                                         <PictureAsPdfIcon className={`hover:text-red-900`}/>
@@ -200,7 +201,10 @@ export default React.memo(function({elements}) {
                                                 </a>
                                                 <a
                                                     className={`pl-3 has-tooltip`}
-                                                    href={route('backend.order.export', {...route().params , fileType: 'xlsx' })}>
+                                                    href={route('backend.order.export', {
+                                                        ...route().params,
+                                                        fileType: 'xlsx'
+                                                    })}>
                                                     <TableViewIcon className={`hover:text-red-900`}/>
                                                     <ToolTipWidget message={trans('excel')}/>
                                                 </a>
@@ -227,27 +231,33 @@ export default React.memo(function({elements}) {
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
-                                                        <div
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-900 text-white`}>
-                                                            {trans(element.status)}
-                                                          </div>
                                                     <div
-                                                        className={classNames(element.paid ? `bg-green-900`: `bg-red-900` , `inline-flex items-center px-2 py-0.5 rounded  font-medium  text-white`)}>
-                                                            {trans(element.paid ? 'paid' : 'unpaid')}
-                                                          </div>
+                                                        className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-gray-900 text-white`}>
+                                                        {trans(element.status)}
+                                                    </div>
+                                                    <div
+                                                        className={classNames(element.paid ? `bg-green-900` : `bg-red-900`, `inline-flex items-center px-2 py-0.5 rounded  font-medium  text-white`)}>
+                                                        {trans(element.paid ? 'paid' : 'unpaid')}
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td className="block md:table-cell whitespace-nowrap  text-gray-500">
                                                 <div className="flex flex-col">
                                                     <div className="flex">{element.user[getLocalized()]}</div>
                                                     <div className="flex">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4"
+                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                             strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                                         </svg>
                                                         : {element.user.mobile}</div>
                                                     <div className="flex">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4"
+                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                             strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                  d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/>
                                                         </svg>
                                                         {element.user.email}</div>
                                                 </div>
@@ -317,10 +327,16 @@ export default React.memo(function({elements}) {
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2"
-                                                                                             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            strokeWidth={2}>
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                                                                         </svg>
                                                                                         {trans('show')} {trans('invoice')}
                                                                                     </a>
@@ -339,8 +355,16 @@ export default React.memo(function({elements}) {
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            strokeWidth={2}>
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                                                                                         </svg>
                                                                                         {trans('download')} {trans('invoice')}
                                                                                     </a>
@@ -357,9 +381,16 @@ export default React.memo(function({elements}) {
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            strokeWidth={2}>
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
                                                                                         </svg>
                                                                                         {trans('change_order_status_to')}
                                                                                     </Link>
@@ -368,15 +399,25 @@ export default React.memo(function({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
-                                                                                        href={route('backend.order.switch', { status : 'pending', order_id : element.id})}
+                                                                                        href={route('backend.order.switch', {
+                                                                                            status: 'pending',
+                                                                                            order_id: element.id
+                                                                                        })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            strokeWidth={2}>
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
                                                                                         </svg>
                                                                                         {trans('pending')}
                                                                                     </Link>
@@ -385,15 +426,25 @@ export default React.memo(function({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
-                                                                                        href={route('backend.order.switch', { status : 'under_process', order_id : element.id})}
+                                                                                        href={route('backend.order.switch', {
+                                                                                            status: 'under_process',
+                                                                                            order_id: element.id
+                                                                                        })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            strokeWidth={2}>
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
                                                                                         </svg>
                                                                                         {trans('under_process')}
                                                                                     </Link>
@@ -402,15 +453,25 @@ export default React.memo(function({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
-                                                                                        href={route('backend.order.switch', { status : 'delivered', order_id : element.id})}
+                                                                                        href={route('backend.order.switch', {
+                                                                                            status: 'delivered',
+                                                                                            order_id: element.id
+                                                                                        })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            strokeWidth={2}>
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
                                                                                         </svg>
                                                                                         {trans('delivered')}
                                                                                     </Link>
@@ -419,15 +480,25 @@ export default React.memo(function({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
-                                                                                        href={route('backend.order.switch', { status : 'completed', order_id : element.id})}
+                                                                                        href={route('backend.order.switch', {
+                                                                                            status: 'completed',
+                                                                                            order_id: element.id
+                                                                                        })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            strokeWidth={2}>
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
                                                                                         </svg>
                                                                                         {trans('completed')}
                                                                                     </Link>
@@ -436,15 +507,25 @@ export default React.memo(function({elements}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
-                                                                                        href={route('backend.order.switch', { status : 'canceled', order_id : element.id})}
+                                                                                        href={route('backend.order.switch', {
+                                                                                            status: 'canceled',
+                                                                                            order_id: element.id
+                                                                                        })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
                                                                                             'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
                                                                                         )}
                                                                                     >
-                                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                             className="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                                                                        <svg
+                                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                                            className="h-6 w-6 mx-2"
+                                                                                            fill="none"
+                                                                                            viewBox="0 0 24 24"
+                                                                                            stroke="currentColor"
+                                                                                            strokeWidth={2}>
+                                                                                            <path strokeLinecap="round"
+                                                                                                  strokeLinejoin="round"
+                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
                                                                                         </svg>
                                                                                         {trans('canceled')}
                                                                                     </Link>
