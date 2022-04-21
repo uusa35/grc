@@ -193,7 +193,7 @@ export default React.memo(function({elements, roles}) {
                                                 <div className="flex flex-col">
                                                     <div className="flex flex-row items-center space-x-3 lg:pl-2">
                                                         <img src={getThumb(element.image ? element.image : 'square.png')}
-                                                             className={`w-20 h-auto ltr:pr-5 rtl:pl-5 border border-gray-400 rounded-sm shadow-sm`}/>
+                                                             className={`w-20 h-20 object-cover ltr:pr-5 rtl:pl-5 rounded-sm `}/>
                                                         <ActiveDot active={element.active}/>
                                                         <div className="flex flex-col">
                                                             <div className="flex mb-2 font-bold">{element[getLocalized('name')]}</div>
@@ -215,6 +215,8 @@ export default React.memo(function({elements, roles}) {
                                                             <div className="flex">
                                                                 <FaInbox className={`h-4 w-4 mx-2`}/>
                                                                 <a href={`mailto:${element.email}`}>{element.email}</a></div>
+                                                            <div className="flex justify-center items-center w-20 bg-gray-200 border border-gray-400 p-1 px-2 rounded-md mt-2">
+                                                                {element.role[getLocalized()]}</div>
                                                         </div>
                                                     </div>
                                                 </div>
