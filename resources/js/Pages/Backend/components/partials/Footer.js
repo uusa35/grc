@@ -12,7 +12,7 @@ const Footer = () => {
         <footer
             className={`text-gray-600`}>
             <div className={`bg-gray-100`}>
-                <div className={`container py-6 flex items-center sm:flex-row flex-row justify-between`}>
+                <div className={`container py-6 mx-4 flex items-center sm:flex-row flex-row justify-between`}>
                     <Link href="#"
                           className={`flex  flex-1 title-font font-medium items-center md:justify-start justify-center text-gray-900`}>
                         <img className="w-10 h-10 rtl:ml-5 ltr:mr-5 rounded-full shadow-md"

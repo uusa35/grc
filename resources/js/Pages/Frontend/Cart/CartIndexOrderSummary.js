@@ -86,7 +86,7 @@ export default function() {
                                         <div
                                             className="flex flex-col xl:flex-row justify-between capitalize px-2 my-2">
                                             <h1 className="mb-2 pb-1 border-b-2 border-gray-200">{trans('timing')} : </h1>
-                                            {`${moment(element.timing.date).format('dddd')} ${trans('equivalent')}`}
+                                            {` ${moment(element.timing.date).format('dddd')} ${trans('equivalent')}`}
                                             {` ${moment(element.timing.date).format('L')}`}
                                             <div className="flex capitalize">
                                                 {`${trans('from')} ${moment(`${element.timing.date} ${element.timing.start}`).format('HH:mm A')}`}
