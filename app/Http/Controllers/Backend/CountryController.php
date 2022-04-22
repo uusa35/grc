@@ -49,26 +49,30 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name_ar' => 'max:200',
-            'name_en' => 'max:200',
-            'calling_code' => 'numeric',
-            'country_code' => 'string|max:3',
-            'currency_symbol_ar' => 'string|max:5',
-            'currency_symbol_en' => 'string|max:5',
-            'fixed_shipment_charge' => 'numeric|max:99',
-            'order' => 'numeric|max:99',
-            'image' => 'required',
-            'is_local' => 'required|boolean',
-            'active' => 'required|boolean',
-            'has_currency' => 'required|boolean',
-        ]);
-        $country = Country::create($request->except('image'));
-        if ($country) {
-            $request->hasFile('image') ? $this->saveMimes($country, $request, ['image'], ['300', '300'], false) : null;
-            return redirect()->route('backend.country.index')->with('success', trans('general.process_success'));
+        try {
+            $request->validate([
+                'name_ar' => 'required|max:200',
+                'name_en' => 'required|max:200',
+                'calling_code' => 'numeric|required',
+                'country_code' => 'string|max:3|required',
+                'currency_symbol_ar' => 'string|max:5|required',
+                'currency_symbol_en' => 'string|max:5|required',
+                'fixed_shipment_charge' => 'numeric|max:99|required',
+                'order' => 'numeric|max:99',
+                'image' => "required|image|mimes:jpeg,png,jpg,gif|required|max:" . env('MAX_IMAGE_SIZE') . '"',
+                'is_local' => 'required',
+                'active' => 'required',
+                'has_currency' => 'required',
+            ]);
+            $country = Country::create($request->except('image'));
+            if ($country) {
+                $request->hasFile('image') ? $this->saveMimes($country, $request, ['image'], ['300', '300'], false) : null;
+                return redirect()->route('backend.country.index')->with('success', trans('general.process_success'));
+            }
+            return redirect()->back()->with('error', trans('general.process_failure'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
@@ -103,16 +107,17 @@ class CountryController extends Controller
     public function update(Request $request, Country $country)
     {
         $request->validate([
-            'name_ar' => 'max:200',
-            'name_en' => 'max:200',
-            'calling_code' => 'numeric',
-            'country_code' => 'string|max:3',
-            'currency_symbol_ar' => 'string|max:5',
-            'currency_symbol_en' => 'string|max:5',
-            'fixed_shipment_charge' => 'numeric|max:99',
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'calling_code' => 'numeric|required',
+            'country_code' => 'string|max:3|required',
+            'currency_symbol_ar' => 'string|max:5|required',
+            'currency_symbol_en' => 'string|max:5|required',
+            'fixed_shipment_charge' => 'numeric|max:99|required',
             'order' => 'numeric|max:99',
-            'is_local' => 'required|boolean',
-            'active' => 'required|boolean',
+            'is_local' => 'required',
+            'active' => 'required',
+            'has_currency' => 'required',
         ]);
         if ($country->update($request->except('image'))) {
             $request->hasFile('image') ? $this->saveMimes($country, $request, ['image'], ['300', '300'], false) : null;
@@ -130,7 +135,7 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         try {
-            if (!$country->currency()->first() && !$country->users->isEmpty()) {
+            if (!$country->currency()->first() && !$country->users()->first()) {
                 if ($country->delete()) {
                     return redirect()->route('backend.country.index')->with('success', trans('general.process_success'));
                 }

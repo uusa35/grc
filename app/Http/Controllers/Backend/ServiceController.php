@@ -157,8 +157,9 @@ class ServiceController extends Controller
             $service->comments()->delete();
             $service->favorites()->delete();
             $service->categories()->detach();
-            $service->delete();
-            return redirect()->back();
+            if ($service->delete()) {
+                return redirect()->back();
+            }
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

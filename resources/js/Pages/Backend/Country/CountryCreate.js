@@ -256,6 +256,7 @@ export default function() {
                                 <input
                                     onChange={e => setData('image', e.target.files[0])}
                                     type="file"
+                                    required
                                     name="image"
                                     id="main_image"
 accept="image/jpg, image/jpeg , image/png"

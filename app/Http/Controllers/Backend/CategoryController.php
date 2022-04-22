@@ -137,10 +137,19 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if ($category->delete()) {
-            return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
+        try {
+            $category->products()->sync([]);
+            $category->services()->sync([]);
+            $category->courses()->sync([]);
+            $category->books()->sync([]);
+            $category->users()->sync([]);
+            $category->tags()->detach();
+            if ($category->delete()) {
+                return redirect()->back();
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
         }
-        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     public function export(CategoryFilters $filters)

@@ -171,10 +171,10 @@ class ProductController extends Controller
             $product->favorites()->delete();
             $product->categories()->detach([], true);
             $product->comments()->delete();
-            $product->delete();
-            return redirect()->back();
+            if ($product->delete()) {
+                return redirect()->back();
+            }
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
