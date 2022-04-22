@@ -32,7 +32,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return redirect()->route('backend.course.search',request()->getQueryString());
+        return redirect()->route('backend.course.search', request()->getQueryString());
     }
 
     public function search(ProductFilters $filters)
@@ -136,7 +136,8 @@ class CourseController extends Controller
             $request->hasFile('image') ? $this->saveMimes($course, $request, ['image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('qr') ? $this->saveMimes($course, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('file') ? $this->savePath($course, $request, 'file') : null;
-            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.course.index'))->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.course.index'))
+                ->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.course.edit', $course->id)->with('error', 'process_failure');
     }

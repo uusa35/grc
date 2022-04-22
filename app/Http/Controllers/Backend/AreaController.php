@@ -88,6 +88,8 @@ class AreaController extends Controller
     public function edit(Area $area)
     {
         $countries = new CountryCollection(Country::active()->has('governates', '>', 0)->with(['governates' => fn($q) => $q->active()->with(['areas' => fn($q) => $q->active()])])->get());
+        request()->session()->remove('prev');
+        request()->session()->put('prev', url()->previous());
         return inertia('Backend/Area/AreaEdit', compact('area', 'countries'));
     }
 
@@ -107,7 +109,7 @@ class AreaController extends Controller
             'order' => 'numeric|max:99'
         ]);
         if ($area->update($request->all())) {
-            return redirect()->route('backend.area.index')->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.area.index'))->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }
