@@ -51,7 +51,7 @@ class ProductController extends Controller
         }
         $elements = new ProductCollection(Product::filters($filters)->with('product_attributes', 'color', 'size')
             ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
-            ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
+            ->with(['user'])
             ->orderBy('id', 'desc')->paginate(Self::TAKE_LESS)
             ->withQueryString());
         return inertia('Backend/Product/ProductIndex', compact('elements'));

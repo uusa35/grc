@@ -34,7 +34,7 @@ export default React.memo(function({elements}) {
     useMemo(() => {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
     }, [sort.desc])
-
+    
     return (
         <BackendContainer elements={elements}
                           showSearch={elements.meta.total >= 1}
@@ -257,14 +257,13 @@ export default React.memo(function({elements}) {
                                             {/*    <img className="w-14 h-14  object-contain rounded-md shadow-inner"*/}
                                             {/*         src={getThumb(element.image)} alt={element[getLocalized('name')]}/>*/}
                                             {/*</td>*/}
-                                            <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.sku}</td>
+                                            <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500 truncate">{element.sku}</td>
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">
                                                 <div className="flex flex-row items-center space-x-3 lg:pl-2">
                                                     <img src={getThumb(element.image)}
-                                                         className={`w-20 h-auto ltr:pr-5 rtl:pl-5`}/>
-
+                                                         className={`w-16 h-auto ltr:pr-5 rtl:pl-5`}/>
                                                     <ActiveDot active={element.active}/>
-                                                    {element[getLocalized('name')]}
+                                                    {element[getLocalized()]}
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
@@ -526,11 +525,13 @@ export default React.memo(function({elements}) {
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">{element.has_attributes ? sumBy(element.product_attributes, 'qty') : element.qty} {trans('pieces')}</td>
                                             <td className="block md:table-cell px-3 py-4 whitespace-nowrap text-gray-500">
                                                 {
-                                                    element.user && <Link
+                                                    element.user ? <Link
+                                                        className={`flex flex-row items-center`}
                                                         href={route('backend.user.edit', element.user.id)}
                                                     >
-                                                        {element.user[getLocalized('name')]}
-                                                    </Link>
+                                                        <img src={getThumb(element.user.image)} alt="" className={`h-8 w-8 rounded-full shadow-md object-cover mx-3`}/>
+                                                        <span>{element.user[getLocalized()]}</span>
+                                                    </Link> : trans('n_a')
                                                 }
                                             </td>
                                         </tr>
