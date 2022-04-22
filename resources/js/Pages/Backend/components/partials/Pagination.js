@@ -11,6 +11,9 @@ export default function Pagination({type, total, links, showSearch = false, main
     const [search, setSearch] = useState('');
     const {trans, classNames } = useContext(AppContext)
     const { params } = route();
+
+    console.log('params', params.page);
+    console.log('links', links);
     return (
         <nav
             className="flex flex-1 justify-between items-center  bg-transparent sm:px-0">
@@ -21,13 +24,13 @@ export default function Pagination({type, total, links, showSearch = false, main
             </div>
             <div className="col-span-full sm:col-span-1 flex justify-end mt-5 sm:mt-0">
                 {
-                    !isEmpty(links) && total > 0 && <div className="md:-mt-px md:flex">
+                    !isEmpty(links) && total > 0 && <div className="md:-mt-px md:flex items-center justify-center">
                         {
                             map(links, page =>
                                 <Link
                                     key={page.label}
                                     href={route().has(`backend.${type}.index`) && page.url ? page.url : '#'}
-                                    className={classNames(page.active ? `border-gray-800 border-t-2` : '', `border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300 border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
+                                    className={classNames(page.active && page.label == params?.page  ? `border-gray-800 border-2 bg-gray-200 p-1 px-3 rounded-md` : '', `border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300 border-b-2 mx-2  inline-flex items-center font-bold`)}
                                 >
                                     {page.label}
                                 </Link>
