@@ -71,7 +71,6 @@ export default function({elements, firstOrder}) {
                                                     </tr>
                                                     </thead>
                                                     <tbody className="bg-white divide-y divide-gray-200 border-r border-l border-b border-gray-400">
-                                                    <NoElements display={elements.meta.total < 1}/>
                                                     {map(elements.data, element => (
                                                         <tr key={element.name_en}>
                                                             <td className=" py-4 whitespace-nowrap">{element.id}</td>
@@ -111,9 +110,6 @@ export default function({elements, firstOrder}) {
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
-
                                                             </td>
                                                             <td className=" py-4 whitespace-nowrap">
                                                                 <Link
@@ -157,6 +153,7 @@ export default function({elements, firstOrder}) {
                                                     ))}
                                                     </tbody>
                                                 </table>
+                                                <NoElements display={elements.meta.total < 1}/>
                                                 { elements.meta.total > 0 &&  <nav
                                                     className="grid grid-cols-1 sm:grid-cols-1 flex justify-between items-center  bg-transparent sm:px-0 mt-10">
                                                     <div className="col-span-full sm:col-span-1 flex justify-end mt-5 sm:mt-0">

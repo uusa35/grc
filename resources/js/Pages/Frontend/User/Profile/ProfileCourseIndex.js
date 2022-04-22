@@ -11,7 +11,7 @@ import {Link} from "@inertiajs/inertia-react";
 import NoElements from "../../../Backend/components/widgets/NoElements";
 
 export default function({elements, firstOrder}) {
-    const {classNames, trans, getThumb, getLocalized, contentBgcolor , textColor } = useContext(AppContext)
+    const {classNames, trans, getThumb, getLocalized, contentBgColor , textColor } = useContext(AppContext)
     const {auth} = useContext(GlobalContext);
     const {locale} = useSelector(state => state);
 
@@ -70,7 +70,6 @@ export default function({elements, firstOrder}) {
                                                     </tr>
                                                     </thead>
                                                     <tbody className="bg-white divide-y divide-gray-200 border-r border-l border-b border-gray-400">
-                                                    <NoElements display={elements.meta.total < 1}/>
                                                     {map(elements.data, element => (
                                                         <tr key={element.name_en}>
                                                             <td className="px-2 py-4 whitespace-nowrap">{element.id}</td>
@@ -146,6 +145,7 @@ export default function({elements, firstOrder}) {
                                                     ))}
                                                     </tbody>
                                                 </table>
+                                                <NoElements display={elements.meta.total < 1}/>
                                                 { elements.meta.total > 0 &&  <nav
                                                     className="grid grid-cols-1 sm:grid-cols-1 flex justify-between items-center  bg-transparent sm:px-0 mt-10">
                                                     <div className="col-span-full sm:col-span-1 flex justify-end mt-5 sm:mt-0">

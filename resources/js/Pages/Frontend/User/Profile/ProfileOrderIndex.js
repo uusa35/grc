@@ -11,6 +11,7 @@ import {toggleSort} from "../../../redux/actions";
 import ActiveDot from "../../../Backend/components/widgets/ActiveDot";
 import moment from "moment";
 import {Link} from "@inertiajs/inertia-react";
+import NoElements from "../../../Backend/components/widgets/NoElements";
 
 export default function({elements}) {
     const {classNames, trans, getThumb, getLocalized, contentBgColor, textColor, btnClass} = useContext(AppContext)
@@ -244,6 +245,7 @@ export default function({elements}) {
                                         }
                                         </tbody>
                                     </table>
+                                    <NoElements display={elements.meta.total < 1}/>
                                 </div>
 
                             </div>
