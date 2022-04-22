@@ -5,11 +5,11 @@ import {AppContext} from "../../../context/AppContext";
 import GlobalContext from "../../../context/GlobalContext";
 
 export default function() {
-    const {classNames, trans, getThumb, getLarge} = useContext(AppContext)
+    const {classNames, trans} = useContext(AppContext)
     const {auth, settings } = useContext(GlobalContext);
 
     return (
-        <aside className="py-6 lg:col-span-3">
+        <aside className="py-6 rtl:ml-3 ltr:mr-3 lg:col-span-3">
             <nav className="space-y-1 divide-y ">
                 <Link
                     href={route('frontend.user.edit', auth.id)}
