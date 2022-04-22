@@ -126,7 +126,8 @@ class CategoryController extends Controller
             $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             $request->hasFile('file') ? $this->savePath($category, $request, 'file') : null;
             $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
-            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.category.index'))->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.category.index'))
+                ->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.progress_failure'));
     }

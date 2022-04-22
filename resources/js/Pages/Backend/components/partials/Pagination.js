@@ -1,6 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {ArrowNarrowLeftIcon, ArrowNarrowRightIcon, SearchIcon} from '@heroicons/react/solid'
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {AppContext} from "../../../context/AppContext";
 import {Link} from '@inertiajs/inertia-react'
 import route from 'ziggy-js';
@@ -8,12 +7,9 @@ import {isEmpty, map} from 'lodash';
 import SearchField from "../../../Frontend/partials/SearchField";
 
 export default function Pagination({type, total, links, showSearch = false, mainModule }) {
-    const [search, setSearch] = useState('');
-    const {trans, classNames } = useContext(AppContext)
+    const {classNames } = useContext(AppContext)
     const { params } = route();
 
-    console.log('params', params.page);
-    console.log('links', links);
     return (
         <nav
             className="flex flex-1 justify-between items-center  bg-transparent sm:px-0">

@@ -95,7 +95,7 @@ export default function CourseEdit({users, categories, course, elementCategories
             qr: data.qr,
         }, {
             forceFormData: true,
-            onSuccess : () => dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
+            // onSuccess : () => dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
         })
         // uploading images module separately due to some errors occurred in setData by inertia
         if (currentImages.length > 0) {

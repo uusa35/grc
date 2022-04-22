@@ -109,7 +109,8 @@ class AreaController extends Controller
             'order' => 'numeric|max:99'
         ]);
         if ($area->update($request->all())) {
-            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.area.index'))->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.area.index'))
+                ->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }

@@ -123,7 +123,8 @@ class CountryController extends Controller
         ]);
         if ($country->update($request->except('image'))) {
             $request->hasFile('image') ? $this->saveMimes($country, $request, ['image'], ['300', '300'], false) : null;
-            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.country.index'))->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.country.index'))
+                ->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }

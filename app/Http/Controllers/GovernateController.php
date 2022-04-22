@@ -84,6 +84,8 @@ class GovernateController extends Controller
     {
         $governate->load('country');
         $countries = new CountryCollection(Country::active()->get());
+        request()->session()->remove('prev');
+        request()->session()->put('prev', url()->previous());
         return inertia('Backend/Governate/GovernateEdit', compact('governate', 'countries'));
     }
 
@@ -103,7 +105,8 @@ class GovernateController extends Controller
             'order' => 'numeric|max:99'
         ]);
         if ($governate->update($request->all())) {
-            return redirect()->route('backend.governate.index')->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.governate.index'))
+                ->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }

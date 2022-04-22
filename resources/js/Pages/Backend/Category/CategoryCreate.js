@@ -6,8 +6,6 @@ import {AppContext} from "../../context/AppContext";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import FormBtns from "../components/widgets/form/FormBtns";
 import {Inertia} from "@inertiajs/inertia";
-import axios from "axios";
-import {showToastMessage} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FormSection from "../components/widgets/form/FormSection";
 import {map, isNull} from 'lodash';

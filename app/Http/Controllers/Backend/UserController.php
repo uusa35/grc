@@ -60,7 +60,7 @@ class UserController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(Self::TAKE_LESS)
             ->withQueryString());
-        return inertia('Backend/User/UserIndex', compact('elements','roles'));
+        return inertia('Backend/User/UserIndex', compact('elements', 'roles'));
     }
 
     /**
@@ -161,7 +161,8 @@ class UserController extends Controller
             $request->hasFile('qr') ? $this->saveMimes($user, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('banner') ? $this->saveMimes($user, $request, ['banner'], ['1900', '255'], false) : null;
             $request->hasFile('file') ? $this->savePath($user, $request, 'file') : null;
-            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.user.index'))->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.user.index'))
+                ->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.user.edit', $user->id)->with('error', 'process_failure');
     }
@@ -236,7 +237,7 @@ class UserController extends Controller
     {
         $request->validate(['model' => 'required']);
         $roles = Role::active()->notAdmins()->select('id', 'name_ar', 'name_en')->get();
-        $countries = Country::has('governates.areas','>', 0)->active()->select('id','name_ar','name_en')->get();
+        $countries = Country::has('governates.areas', '>', 0)->active()->select('id', 'name_ar', 'name_en')->get();
         $model = request()->model;
         return Inertia::render('Backend/Import/ImportUserCreate', compact('roles', 'model', 'countries'));
     }

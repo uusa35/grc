@@ -152,7 +152,8 @@ class ProductController extends Controller
             $request->hasFile('qr') ? $this->saveMimes($product, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('size_chart_image') ? $this->saveMimes($product, $request, ['size_chart_image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('file') ? $this->savePath($product, $request, 'file') : null;
-            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.product.index'))->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.product.index'))
+                ->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.product.edit', $product->id)->with('error', trans('general.process_failure'));
     }
