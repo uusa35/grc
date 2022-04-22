@@ -48,6 +48,35 @@ export default React.memo(function({elements}) {
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
+                            className="flex items-center gap-x-4 justify-end  py-2 bg-white rounded-sm shadow-sm mb-3 px-10">
+                            <h6>{trans('filtering')} : </h6>
+                            <Link
+                                className={`border border-gray-400 rounded-md shadow-md p-3`}
+                                href={route('backend.product.index', {...route().params, active : true })}>
+                                {trans('active')}
+                            </Link>
+                            <Link
+                                className={`border border-gray-400 rounded-md shadow-md p-3`}
+                                href={route('backend.product.index', {...route().params, active : false })}>
+                                {trans('not_active')}
+                            </Link>
+                            <Link
+                                className={`border border-gray-400 rounded-md shadow-md p-3`}
+                                href={route('backend.product.index', {on_sale  : true })}>
+                                {trans('on_sale')}
+                            </Link>
+                            <Link
+                                className={`border border-gray-400 rounded-md shadow-md p-3`}
+                                href={route('backend.product.index', {on_sale  : false })}>
+                                {trans('no_sale')}
+                            </Link>
+                            <Link
+                                className={`border border-gray-600 rounded-md shadow-md p-3`}
+                                href={route('backend.product.index')}>
+                                {trans('all')} {trans('products')}
+                            </Link>
+                        </div>
+                        <div
                             className="bg-gray-300 shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
                             <table className="min-w-full border-collapse block md:table">
                                 <thead className="block md:table-header-group">

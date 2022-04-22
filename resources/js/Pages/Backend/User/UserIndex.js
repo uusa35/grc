@@ -40,14 +40,13 @@ export default React.memo(function({elements, roles}) {
     }, [sort.desc])
 
     return (
-        <BackendContainer
-            elements={elements}
-            showSearch={elements.meta.total >= 1}
-            showNoElements={elements.meta.total < 1}
-            showMobileView={elements.meta.total > 1}
-            total={elements.meta.total}
-            links={elements.meta.links}
-            mainModule={'author'}
+        <BackendContainer elements={elements}
+                          showSearch={elements.meta.total >= 1}
+                          showNoElements={elements.meta.total < 1}
+                          showMobileView={elements.meta.total > 1}
+                          total={elements.meta.total}
+                          links={elements.meta.links}
+                          mainModule={'user'}
         >
             <div className="flex flex-col">
                 <div className="overflow-visible ">

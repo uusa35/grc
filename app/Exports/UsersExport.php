@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
-class UsersExport implements  FromQuery, WithMapping, WithHeadings, WithEvents, ShouldAutoSize
+class UsersExport implements  FromQuery, WithMapping, WithHeadings, WithEvents
 {
     public $elements;
 

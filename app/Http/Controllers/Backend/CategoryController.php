@@ -107,6 +107,8 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         $elements = CategoryExtraLightResource::collection(Category::where(['is_parent' => true])->get());
+        request()->session()->remove('prev');
+        request()->session()->put('prev', url()->previous());
         return inertia('Backend/Category/CategoryEdit', compact('category', 'elements'));
     }
 
@@ -124,7 +126,7 @@ class CategoryController extends Controller
             $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
             $request->hasFile('file') ? $this->savePath($category, $request, 'file') : null;
             $request->hasFile('image_rectangle') ? $this->saveMimes($category, $request, ['image_rectangle'], ['1440', '1080'], false) : null;
-            return redirect()->route('backend.category.index')->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.category.index'))->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.progress_failure'));
     }

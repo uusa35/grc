@@ -14,9 +14,11 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Events\BeforeExport;
+use Maatwebsite\Excel\Events\BeforeSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
-class ProductsExport implements  FromQuery, WithMapping, WithHeadings, WithEvents, ShouldAutoSize
+class ProductsExport implements  FromQuery, WithMapping, WithHeadings, WithEvents
 {
     public $elements;
 
@@ -79,6 +81,7 @@ class ProductsExport implements  FromQuery, WithMapping, WithHeadings, WithEvent
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 $event->sheet->getDelegate()->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+                $event->sheet->getDelegate()->getParent()->getDefaultStyle()->getFont()->setName('Arabic Transparent Regular');
             }
         ];
     }

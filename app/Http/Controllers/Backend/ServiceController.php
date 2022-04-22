@@ -113,6 +113,8 @@ class ServiceController extends Controller
         }])->get();
         $service = $service->whereId($service->id)->with('images', 'user', 'categories')->first();
         $elementCategories = $service->categories->pluck('id')->toArray();
+        request()->session()->remove('prev');
+        request()->session()->put('prev', url()->previous());
         return inertia('Backend/Service/ServiceEdit', compact('service', 'users', 'categories', 'elementCategories'));
     }
 
@@ -134,7 +136,7 @@ class ServiceController extends Controller
                 $request->hasFile('image') ? $this->saveMimes($service, $request, ['image'], ['1080', '1440'], true, true) : null;
                 $request->hasFile('qr') ? $this->saveMimes($service, $request, ['qr'], ['300', '300'], false) : null;
                 $request->hasFile('file') ? $this->savePath($service, $request, 'file') : null;
-                return redirect()->back()->with('success', 'process_success');
+                return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.service.index'))->with('success', trans('general.process_success'));
             }
             return redirect()->route('backend.service.edit', $service->id)->with('error', 'process_failure');
         } catch (\Exception $e) {

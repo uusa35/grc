@@ -54,9 +54,12 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 400);
         }
-        $elements = new UserCollection(User::filters($filters)->notAdmins()->with('role')->paginate(Self::TAKE_LESS)
-            ->withQueryString());
         $roles = RoleExtraLightResource::collection(Role::active()->where('is_visible', true)->get());
+        $elements = new UserCollection(User::filters($filters)->notAdmins()
+            ->with('role')
+            ->orderBy('id', 'desc')
+            ->paginate(Self::TAKE_LESS)
+            ->withQueryString());
         return inertia('Backend/User/UserIndex', compact('elements','roles'));
     }
 
@@ -135,6 +138,8 @@ class UserController extends Controller
             )->with('areas')
             ])->get());
         $subscriptions = new SubscriptionCollection(Subscription::active()->get());
+        request()->session()->remove('prev');
+        request()->session()->put('prev', url()->previous());
         return inertia('Backend/User/UserEdit', compact('user', 'roles', 'elementCategories', 'categories', 'countries', 'subscriptions'));
     }
 
@@ -156,7 +161,7 @@ class UserController extends Controller
             $request->hasFile('qr') ? $this->saveMimes($user, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('banner') ? $this->saveMimes($user, $request, ['banner'], ['1900', '255'], false) : null;
             $request->hasFile('file') ? $this->savePath($user, $request, 'file') : null;
-            return redirect()->back()->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.user.index'))->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.user.edit', $user->id)->with('error', 'process_failure');
     }

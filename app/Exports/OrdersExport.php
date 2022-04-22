@@ -16,7 +16,8 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
-class OrdersExport implements FromQuery, WithMapping, WithHeadings, WithEvents, ShouldAutoSize
+//ShouldAutoSize
+class OrdersExport implements FromQuery, WithMapping, WithHeadings, WithEvents
 {
     public $elements;
 
@@ -49,15 +50,15 @@ class OrdersExport implements FromQuery, WithMapping, WithHeadings, WithEvents, 
             $element->id,
             $element->status,
             $element->paid ? 'Y' : 'N',
-            (float) $element->price,
-            (float) $element->shipment_fees,
-            (float) $element->discount,
-            (float) $element->net_price,
-            (string) $element->email,
+            (float)$element->price,
+            (float)$element->shipment_fees,
+            (float)$element->discount,
+            (float)$element->net_price,
+            (string)$element->email,
             $element->mobile,
             $element->address,
             $element->payment_method,
-            (string) $element->reference_id,
+            (string)$element->reference_id,
         ];
     }
 

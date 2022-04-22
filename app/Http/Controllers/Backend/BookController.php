@@ -115,6 +115,8 @@ class BookController extends Controller
         }])->get();
         $book = $book->whereId($book->id)->with('images', 'user', 'categories')->first();
         $elementCategories = $book->categories->pluck('id')->toArray();
+        request()->session()->remove('prev');
+        request()->session()->put('prev', url()->previous());
         return inertia('Backend/Book/BookEdit', compact('book', 'users', 'categories', 'elementCategories'));
     }
 
@@ -135,7 +137,7 @@ class BookController extends Controller
             $request->hasFile('image') ? $this->saveMimes($book, $request, ['image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('qr') ? $this->saveMimes($book, $request, ['qr'], ['300', '300'], false) : null;
             $request->hasFile('file')  ? $this->savePath($book, $request, 'file') : null;
-            return redirect()->back()->with('success', trans('general.process_success'));
+            return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.book.index'))->with('success', trans('general.process_success'));
         }
         return redirect()->route('backend.book.edit', $book->id)->with('error', 'process_failure');
     }
