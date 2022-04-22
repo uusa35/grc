@@ -41,7 +41,7 @@ const SearchField = () => {
         {
             name: 'user',
             'frontend': settings.enable_users,
-            'backend': isAdminOrAbove && settings.enable_users,
+            'backend': isAdminOrAbove,
         },
         {
             name: 'category',
