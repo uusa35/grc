@@ -34,7 +34,7 @@ export default React.memo(function({elements}) {
     useMemo(() => {
         setCurrentData(orderBy(elements.data, [sort.colName], [sort.desc ? 'desc' : 'asc']));
     }, [sort.desc])
-    
+
     return (
         <BackendContainer elements={elements}
                           showSearch={elements.meta.total >= 1}
@@ -44,7 +44,7 @@ export default React.memo(function({elements}) {
                           links={elements.meta.links}
                           mainModule={'product'}
         >
-            <div className="flex flex-col">
+            <div className="flex flex-col ltr:mr">
                 <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
