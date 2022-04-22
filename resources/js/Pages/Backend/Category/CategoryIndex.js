@@ -5,14 +5,14 @@ import {Link} from "@inertiajs/inertia-react";
 import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {showModal} from "../../redux/actions";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import ActiveDot from "../components/widgets/ActiveDot";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import TableViewIcon from "@mui/icons-material/TableView";
 
 export default function({elements}) {
-    const {trans, classNames, getLocalized, isAdminOrAbove} = useContext(AppContext);
+    const {trans, getLocalized, isAdminOrAbove, getThumb } = useContext(AppContext);
     const {params} = route();
     const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ export default function({elements}) {
             mainModule={'category'}
         >
             <div className="flex flex-col ">
-                <div className=" overflow-auto">
+                <div className="overflow-visible ">
                     <div className="align-middle inline-block min-w-full rounded-b-lg">
                         <div
                             className="bg-gray-300 shadow border-b overflow-visible border-gray-200 sm:rounded-lg">
@@ -36,25 +36,25 @@ export default function({elements}) {
                                 <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
                                     <th
                                         scope="col"
-                                        className="px-3 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                        className="block md:table-cell px-3 py-3  rtl:text-right ltr:text-left  uppercase tracking-wider tracking-wider"
                                     >
                                         {trans('id')}
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                        className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
                                     >
                                         {trans('main_category')}
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                        className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
                                     >
                                         {trans('categories_children')}
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-6 py-3  rtl:text-right ltr:text-left text-sm  uppercase "
+                                        className=" block md:table-cell px-3 py-3  rtl:text-right ltr:text-left"
                                     >
                                         <div className="flex flex-row justify-between items-center">
                                             <div className="flex">
@@ -116,14 +116,20 @@ export default function({elements}) {
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody className="bg-white divide-y divide-gray-200 border-r border-l border-b border-gray-400">
+                                <tbody className="block md:table-row-group">
                                 {map(elements.data, element => (
                                     <tr key={element.id} className={`odd:bg-white even:bg-gray-100`}>
                                         <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
                                         <td className="px-2 py-4 whitespace-nowrap text-sm ">
-                                            <div className='flex flex-row justify-start items-center'>
-                                                <ActiveDot active={element.active}/>
-                                                {element[getLocalized()]}
+                                            <div className="flex flex-col">
+                                                <div className="flex flex-row items-center space-x-3 lg:pl-2">
+                                                    <img src={getThumb(element.image ? element.image : 'square.png')}
+                                                         className={`w-16 h-auto object-cover ltr:pr-5 rtl:pl-5 rounded-sm `}/>
+                                                    <ActiveDot active={element.active}/>
+                                                    <div className="flex flex-col">
+                                                        <div className="flex mb-2 font-bold">{element[getLocalized()]}</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </td>
                                         <td className="px-2 py-4 whitespace-nowrap text-sm ">

@@ -195,7 +195,7 @@ export default React.memo(function({elements, roles}) {
                                                              className={`w-20 h-20 object-cover ltr:pr-5 rtl:pl-5 rounded-sm `}/>
                                                         <ActiveDot active={element.active}/>
                                                         <div className="flex flex-col">
-                                                            <div className="flex mb-2 font-bold">{element[getLocalized('name')]}</div>
+                                                            <div className="flex mb-2 font-bold">{element[getLocalized()]}</div>
                                                             {
                                                                 element.mobile && <div className="flex">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2"
