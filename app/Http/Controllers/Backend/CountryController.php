@@ -49,31 +49,27 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'name_ar' => 'required|max:200',
-                'name_en' => 'required|max:200',
-                'calling_code' => 'numeric|required',
-                'country_code' => 'string|max:3|required',
-                'currency_symbol_ar' => 'string|max:5|required',
-                'currency_symbol_en' => 'string|max:5|required',
-                'fixed_shipment_charge' => 'numeric|max:99|required',
-                'order' => 'numeric|max:99',
-                'image' => "required|image|mimes:jpeg,png,jpg,gif|required|max:" . env('MAX_IMAGE_SIZE') . '"',
-                'is_local' => 'required',
-                'active' => 'required',
-                'has_currency' => 'required',
-            ]);
-            $country = Country::create($request->except('image'));
-            if ($country) {
-                dd($country);
-                $request->hasFile('image') ? $this->saveMimes($country, $request, ['image'], ['300', '300'], false) : null;
-                return redirect()->route('backend.country.index')->with('success', trans('general.process_success'));
-            }
-            return redirect()->back()->with('error', trans('general.process_failure'));
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+
+        $request->validate([
+            'name_ar' => 'required|max:200',
+            'name_en' => 'required|max:200',
+            'calling_code' => 'numeric|required',
+            'country_code' => 'string|max:3|required',
+            'currency_symbol_ar' => 'string|max:5|required',
+            'currency_symbol_en' => 'string|max:5|required',
+            'fixed_shipment_charge' => 'numeric|max:99|required',
+            'order' => 'numeric|max:99',
+            'image' => "required|image|mimes:jpeg,png,jpg,gif|required|max:" . env('MAX_IMAGE_SIZE') . '"',
+            'is_local' => 'required',
+            'active' => 'required',
+            'has_currency' => 'required',
+        ]);
+        $country = Country::create($request->except('image'));
+        if ($country) {
+            $request->hasFile('image') ? $this->saveMimes($country, $request, ['image'], ['300', '300'], false) : null;
+            return redirect()->route('backend.country.index')->with('success', trans('general.process_success'));
         }
+        return redirect()->back()->with('error', trans('general.process_failure'));
     }
 
     /**
