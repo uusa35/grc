@@ -42,12 +42,12 @@ export default function ConfirmationModal() {
                 if(model !== 'image') {
                     // return window.location.reload()
                     Inertia.get(route(`backend.${model}.index`))
-                    dispatch(showToastMessage({ message : trans('process_success'), type : 'warning'}))
+                    // dispatch(showToastMessage({ message : trans('process_success'), type : 'warning'}))
                 }
 
             },
             onError : () => {
-                dispatch(showToastMessage({ message : trans('process_failure'), type : 'warning'}))
+                // dispatch(showToastMessage({ message : trans('process_failure'), type : 'warning'}))
             }
         });
     }

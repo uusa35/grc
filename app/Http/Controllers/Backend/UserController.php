@@ -187,7 +187,7 @@ class UserController extends Controller
             $user->favorites()->delete();
             $user->categories()->detach();
             $user->delete();
-            return redirect()->back();
+            return redirect()->back()->with('success', trans('general.process_success'));
         } catch (\Exception $e) {
             dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage());

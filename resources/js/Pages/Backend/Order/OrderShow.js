@@ -6,7 +6,6 @@ import moment from "moment";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 import {getTypeFromModel} from "../../helpers";
-import OrderStepper from "./OrderStepper";
 import {useSelector} from "react-redux";
 import {useReactToPrint} from 'react-to-print';
 
@@ -97,33 +96,35 @@ export default function({order, printMode = false}) {
                                     </div>
                                 </dl>
                                 {/* merchant_information */}
-                                <dl className="grid grid-cols-1 gap-y-8 border-b py-8 border-gray-200 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10">
-                                    <div>
-                                        <dt className="font-medium text-gray-900">{trans('merchant')}</dt>
-                                        <dd className="mt-3 text-gray-500">
-                                            <span className="block">{trans('name')} : {merchant.name}</span>
-                                            <span
-                                                className="block">{trans('address')} : {`${merchant.country} - ${merchant.area} - ${trans('block')} : ${merchant.block}, ${trans('street')} : ${merchant.street},`}</span>
-                                            <span className="block">{trans('country')} : {merchant.country}</span>
-                                            {merchant.mobile && merchant.mobile.length > 4 ?
-                                                <span className="block">{trans('mobile')} : {merchant.mobile}</span> : null}
-                                            {merchant.phone && merchant.phone.length > 4 ?
-                                                <span className="block">{trans('phone')} : {merchant.phone}</span> : null}
-                                            {merchant.email && merchant.email.length > 4 ?
-                                                <span className="block">{trans('email')} : {merchant.email}</span> : null}
-                                        </dd>
-                                    </div>
-                                    <div className="hidden">
-                                        <dt className="font-medium text-gray-900">Shipping updates</dt>
-                                        <dd className="mt-3 text-gray-500 space-y-3">
-                                            <p>{merchant.email}</p>
-                                            <p>{merchant.mobile}</p>
-                                            <button type="button" className="font-medium text-gray-600 hover:text-gray-500">
-                                                Edit
-                                            </button>
-                                        </dd>
-                                    </div>
-                                </dl>
+                                {
+                                    merchant && <dl className="grid grid-cols-1 gap-y-8 border-b py-8 border-gray-200 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10">
+                                        <div>
+                                            <dt className="font-medium text-gray-900">{trans('merchant')}</dt>
+                                            <dd className="mt-3 text-gray-500">
+                                                <span className="block">{trans('name')} : {merchant.name}</span>
+                                                <span
+                                                    className="block">{trans('address')} : {`${merchant.country} - ${merchant.area} - ${trans('block')} : ${merchant.block}, ${trans('street')} : ${merchant.street},`}</span>
+                                                <span className="block">{trans('country')} : {merchant.country}</span>
+                                                {merchant.mobile && merchant.mobile.length > 4 ?
+                                                    <span className="block">{trans('mobile')} : {merchant.mobile}</span> : null}
+                                                {merchant.phone && merchant.phone.length > 4 ?
+                                                    <span className="block">{trans('phone')} : {merchant.phone}</span> : null}
+                                                {merchant.email && merchant.email.length > 4 ?
+                                                    <span className="block">{trans('email')} : {merchant.email}</span> : null}
+                                            </dd>
+                                        </div>
+                                        <div className="hidden">
+                                            <dt className="font-medium text-gray-900">Shipping updates</dt>
+                                            <dd className="mt-3 text-gray-500 space-y-3">
+                                                <p>{merchant.email}</p>
+                                                <p>{merchant.mobile}</p>
+                                                <button type="button" className="font-medium text-gray-600 hover:text-gray-500">
+                                                    Edit
+                                                </button>
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                }
 
                             </div>
                             {

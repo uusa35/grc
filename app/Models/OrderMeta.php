@@ -37,4 +37,20 @@ class OrderMeta extends PrimaryModel
     {
         return strtolower(class_basename($this->ordermetable_type));
     }
+
+    public function scopeBooks($q) {
+        return $q->where('ordermetable_type', 'App\Models\Book');
+    }
+
+    public function scopeProducts($q) {
+        return $q->where('ordermetable_type', 'App\Models\Product');
+    }
+
+    public function scopeServices($q) {
+        return $q->where('ordermetable_type', 'App\Models\Service');
+    }
+
+    public function scopeCourses($q) {
+        return $q->where('ordermetable_type', 'App\Models\Course');
+    }
 }

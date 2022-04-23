@@ -8,6 +8,7 @@ use App\Http\Requests\CourseUpdate;
 use App\Http\Resources\CourseCollection;
 use App\Models\Course;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\User;
 use App\Services\Search\ProductFilters;
 use Illuminate\Http\Request;
@@ -151,14 +152,19 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         try {
-            $course->images()->delete();
-            $course->slides()->delete();
-            $course->tags()->detach();
-            $course->comments()->delete();
-            $course->favorites()->delete();
-            $course->categories()->detach();
-            $course->delete();
-            return redirect()->route('backend.course.search');
+            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->books()->where('ordermetable_id', $course->id), '>', 0)->get();
+            if ($orders->isEmpty()) {
+                $course->images()->delete();
+                $course->slides()->delete();
+                $course->tags()->detach();
+                $course->comments()->delete();
+                $course->favorites()->delete();
+                $course->categories()->detach();
+                if ($course->delete()) {
+                    return redirect()->route('backend.course.search');
+                }
+            }
+            return redirect()->back()->with('error', trans('general.element_can_not_be_deleted_there_are_some_orders_relying_on_this_element'));
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

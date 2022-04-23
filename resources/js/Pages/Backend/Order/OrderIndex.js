@@ -252,7 +252,8 @@ export default React.memo(function({elements}) {
                                                             <path strokeLinecap="round" strokeLinejoin="round"
                                                                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                                         </svg>
-                                                        : <a href={`${getWhatsappLink(element.user.mobile)}`}>{element.user.mobile}</a>
+                                                        : <a
+                                                        href={`${getWhatsappLink(element.user.mobile)}`}>{element.user.mobile}</a>
                                                     </div>
                                                     <div className="flex">
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4"
@@ -261,7 +262,8 @@ export default React.memo(function({elements}) {
                                                             <path strokeLinecap="round" strokeLinejoin="round"
                                                                   d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/>
                                                         </svg>
-                                                        {element.user.email}</div>
+                                                        <a href={`mailto:${element.user.email}`}>{element.user.email}</a>
+                                                    </div>
                                                 </div>
                                             </td>
                                             <td className=" block md:table-cell px-6 py-4 whitespace-nowrap text-right  font-medium">
@@ -291,32 +293,6 @@ export default React.memo(function({elements}) {
                                                                         static
                                                                         className={classNames(locale.isRTL ? 'right-10' : 'left-10', "z-40 mx-3 origin-top-right absolute top-0 w-48 mt-1 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none")}
                                                                     >
-                                                                        <div className="py-1">
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route('backend.order.show', element.id)}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
-                                                                                        )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor">
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  strokeWidth="2"
-                                                                                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                                                                                        </svg>
-                                                                                        {trans('show')} {trans('order')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                        </div>
                                                                         <div className="py-1">
                                                                             <Menu.Item>
                                                                                 {({active}) => (
@@ -373,201 +349,240 @@ export default React.memo(function({elements}) {
                                                                                 )}
                                                                             </Menu.Item>
                                                                         </div>
-                                                                        <div className="py-1">
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href='#'
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                        {/* switch */}
+                                                                        {
+                                                                            isAdminOrAbove && <>
+                                                                                <div className="py-1">
+                                                                                    <Menu.Item>
+                                                                                        {({active}) => (
+                                                                                            <Link
+                                                                                                href={route('backend.order.show', element.id)}
+                                                                                                className={classNames(
+                                                                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                                    'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                                )}
+                                                                                            >
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    className="h-6 w-6 mx-2"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke="currentColor">
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        strokeWidth="2"
+                                                                                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                                                                                </svg>
+                                                                                                {trans('show')} {trans('order')}
+                                                                                            </Link>
                                                                                         )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor"
-                                                                                            strokeWidth={2}>
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-                                                                                        </svg>
-                                                                                        {trans('change_order_status_to')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route('backend.order.switch', {
-                                                                                            status: 'pending',
-                                                                                            order_id: element.id
-                                                                                        })}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                    </Menu.Item>
+                                                                                </div>
+                                                                                <div className="py-1">
+                                                                                    <Menu.Item>
+                                                                                        {({active}) => (
+                                                                                            <Link
+                                                                                                href='#'
+                                                                                                className={classNames(
+                                                                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                                    'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                                )}
+                                                                                            >
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    className="h-6 w-6 mx-2"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke="currentColor"
+                                                                                                    strokeWidth={2}>
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                                                                                                </svg>
+                                                                                                {trans('change_order_status_to')}
+                                                                                            </Link>
                                                                                         )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor"
-                                                                                            strokeWidth={2}>
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-                                                                                        </svg>
-                                                                                        {trans('pending')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route('backend.order.switch', {
-                                                                                            status: 'under_process',
-                                                                                            order_id: element.id
-                                                                                        })}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                    </Menu.Item>
+                                                                                    <Menu.Item>
+                                                                                        {({active}) => (
+                                                                                            <Link
+                                                                                                href={route('backend.order.switch', {
+                                                                                                    status: 'pending',
+                                                                                                    order_id: element.id
+                                                                                                })}
+                                                                                                className={classNames(
+                                                                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                                    'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                                )}
+                                                                                            >
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    className="h-6 w-6 mx-2"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke="currentColor"
+                                                                                                    strokeWidth={2}>
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                                                                                                </svg>
+                                                                                                {trans('pending')}
+                                                                                            </Link>
                                                                                         )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor"
-                                                                                            strokeWidth={2}>
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-                                                                                        </svg>
-                                                                                        {trans('under_process')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route('backend.order.switch', {
-                                                                                            status: 'delivered',
-                                                                                            order_id: element.id
-                                                                                        })}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                    </Menu.Item>
+                                                                                    <Menu.Item>
+                                                                                        {({active}) => (
+                                                                                            <Link
+                                                                                                href={route('backend.order.switch', {
+                                                                                                    status: 'under_process',
+                                                                                                    order_id: element.id
+                                                                                                })}
+                                                                                                className={classNames(
+                                                                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                                    'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                                )}
+                                                                                            >
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    className="h-6 w-6 mx-2"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke="currentColor"
+                                                                                                    strokeWidth={2}>
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                                                                                                </svg>
+                                                                                                {trans('under_process')}
+                                                                                            </Link>
                                                                                         )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor"
-                                                                                            strokeWidth={2}>
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-                                                                                        </svg>
-                                                                                        {trans('delivered')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route('backend.order.switch', {
-                                                                                            status: 'completed',
-                                                                                            order_id: element.id
-                                                                                        })}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                    </Menu.Item>
+                                                                                    <Menu.Item>
+                                                                                        {({active}) => (
+                                                                                            <Link
+                                                                                                href={route('backend.order.switch', {
+                                                                                                    status: 'delivered',
+                                                                                                    order_id: element.id
+                                                                                                })}
+                                                                                                className={classNames(
+                                                                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                                    'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                                )}
+                                                                                            >
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    className="h-6 w-6 mx-2"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke="currentColor"
+                                                                                                    strokeWidth={2}>
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                                                                                                </svg>
+                                                                                                {trans('delivered')}
+                                                                                            </Link>
                                                                                         )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor"
-                                                                                            strokeWidth={2}>
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-                                                                                        </svg>
-                                                                                        {trans('completed')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <Link
-                                                                                        href={route('backend.order.switch', {
-                                                                                            status: 'canceled',
-                                                                                            order_id: element.id
-                                                                                        })}
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                                            'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                    </Menu.Item>
+                                                                                    <Menu.Item>
+                                                                                        {({active}) => (
+                                                                                            <Link
+                                                                                                href={route('backend.order.switch', {
+                                                                                                    status: 'completed',
+                                                                                                    order_id: element.id
+                                                                                                })}
+                                                                                                className={classNames(
+                                                                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                                    'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                                )}
+                                                                                            >
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    className="h-6 w-6 mx-2"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke="currentColor"
+                                                                                                    strokeWidth={2}>
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                                                                                                </svg>
+                                                                                                {trans('completed')}
+                                                                                            </Link>
                                                                                         )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor"
-                                                                                            strokeWidth={2}>
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-                                                                                        </svg>
-                                                                                        {trans('canceled')}
-                                                                                    </Link>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                        </div>
-                                                                        <div className="py-1">
-                                                                            <Menu.Item>
-                                                                                {({active}) => (
-                                                                                    <button
-                                                                                        onClick={() =>
-                                                                                            dispatch(showModal({
-                                                                                                type: 'destroy',
-                                                                                                model: 'order',
-                                                                                                id: element.id,
-                                                                                                title: `${trans('destroy')} ${trans('order')}`,
-                                                                                                message: `${trans('confirmation')} ${trans('destroy')} ${trans('order')}`,
-                                                                                            }))
-                                                                                        }
-                                                                                        className={classNames(
-                                                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
-                                                                                            'flex flex-1 w-full flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right text-red-700'
+                                                                                    </Menu.Item>
+                                                                                    <Menu.Item>
+                                                                                        {({active}) => (
+                                                                                            <Link
+                                                                                                href={route('backend.order.switch', {
+                                                                                                    status: 'canceled',
+                                                                                                    order_id: element.id
+                                                                                                })}
+                                                                                                className={classNames(
+                                                                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                                    'flex flex-1 flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right'
+                                                                                                )}
+                                                                                            >
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    className="h-6 w-6 mx-2"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke="currentColor"
+                                                                                                    strokeWidth={2}>
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                                                                                                </svg>
+                                                                                                {trans('canceled')}
+                                                                                            </Link>
                                                                                         )}
-                                                                                    >
-                                                                                        <svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            className="h-6 w-6 mx-2"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            stroke="currentColor">
-                                                                                            <path strokeLinecap="round"
-                                                                                                  strokeLinejoin="round"
-                                                                                                  strokeWidth="2"
-                                                                                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                                                                        </svg>
-                                                                                        {trans("delete")}
-                                                                                    </button>
-                                                                                )}
-                                                                            </Menu.Item>
-                                                                        </div>
+                                                                                    </Menu.Item>
+                                                                                </div>
+                                                                                <div className="py-1">
+                                                                                    <Menu.Item>
+                                                                                        {({active}) => (
+                                                                                            <button
+                                                                                                onClick={() =>
+                                                                                                    dispatch(showModal({
+                                                                                                        type: 'destroy',
+                                                                                                        model: 'order',
+                                                                                                        id: element.id,
+                                                                                                        title: `${trans('destroy')} ${trans('order')}`,
+                                                                                                        message: `${trans('confirmation')} ${trans('destroy')} ${trans('order')}`,
+                                                                                                    }))
+                                                                                                }
+                                                                                                className={classNames(
+                                                                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',
+                                                                                                    'flex flex-1 w-full flex-row items-center block px-4 py-2  ltr:text-left rtl:text-right text-red-700'
+                                                                                                )}
+                                                                                            >
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    className="h-6 w-6 mx-2"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    stroke="currentColor">
+                                                                                                    <path
+                                                                                                        strokeLinecap="round"
+                                                                                                        strokeLinejoin="round"
+                                                                                                        strokeWidth="2"
+                                                                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                                                                </svg>
+                                                                                                {trans("delete")}
+                                                                                            </button>
+                                                                                        )}
+                                                                                    </Menu.Item>
+                                                                                </div>
+                                                                            </>
+                                                                        }
                                                                     </Menu.Items>
                                                                 </Transition>
                                                             </>

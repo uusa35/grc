@@ -7,6 +7,7 @@ use App\Http\Requests\ServiceStore;
 use App\Http\Requests\ServiceUpdate;
 use App\Http\Resources\ServiceCollection;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Service;
 use App\Models\User;
 use App\Services\Search\ProductFilters;
@@ -154,15 +155,19 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         try {
-            $service->images()->delete();
-            $service->slides()->delete();
-            $service->tags()->detach();
-            $service->comments()->delete();
-            $service->favorites()->delete();
-            $service->categories()->detach();
-            if ($service->delete()) {
-                return redirect()->back();
+            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->books()->where('ordermetable_id', $service->id), '>', 0)->get();
+            if ($orders->isEmpty()) {
+                $service->images()->delete();
+                $service->slides()->delete();
+                $service->tags()->detach();
+                $service->comments()->delete();
+                $service->favorites()->delete();
+                $service->categories()->detach();
+                if ($service->delete()) {
+                    return redirect()->back()->with('success', trans('general.process_success'));
+                }
             }
+            return redirect()->back()->with('error', trans('general.element_can_not_be_deleted_there_are_some_orders_relying_on_this_element'));
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

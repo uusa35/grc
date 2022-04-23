@@ -114,7 +114,7 @@ class FaqController extends Controller
     public function destroy(faq $faq)
     {
         if ($faq->delete()) {
-            return redirect()->back();
+            return redirect()->back()->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('error', trans('general.process_failure'));
     }

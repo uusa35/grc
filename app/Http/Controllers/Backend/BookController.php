@@ -9,6 +9,8 @@ use App\Http\Requests\BookUpdate;
 use App\Http\Resources\BookCollection;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderMeta;
 use App\Models\User;
 use App\Services\Search\ProductFilters;
 use Maatwebsite\Excel\Facades\Excel;
@@ -33,7 +35,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return redirect()->route('backend.book.search',request()->getQueryString());
+        return redirect()->route('backend.book.search', request()->getQueryString());
     }
 
     public function search(ProductFilters $filters)
@@ -136,7 +138,7 @@ class BookController extends Controller
             $request->has('categories') ? $book->categories()->sync($request->categories) : null;
             $request->hasFile('image') ? $this->saveMimes($book, $request, ['image'], ['1080', '1440'], true, true) : null;
             $request->hasFile('qr') ? $this->saveMimes($book, $request, ['qr'], ['300', '300'], false) : null;
-            $request->hasFile('file')  ? $this->savePath($book, $request, 'file') : null;
+            $request->hasFile('file') ? $this->savePath($book, $request, 'file') : null;
             return redirect()->to(request()->session()->get('prev') ? request()->session()->get('prev') : route('backend.book.index'))
                 ->with('success', trans('general.process_success'));
         }
@@ -152,16 +154,20 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         try {
-            $book->images()->delete();
-            $book->slides()->delete();
-            $book->tags()->detach();
-            $book->comments()->delete();
-            $book->favorites()->delete();
-            $book->categories()->detach();
-            $book->delete();
-            return redirect()->back();
+            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->books()->where('ordermetable_id', $book->id), '>', 0)->get();
+            if ($orders->isEmpty()) {
+                $book->images()->delete();
+                $book->slides()->delete();
+                $book->tags()->detach();
+                $book->comments()->delete();
+                $book->favorites()->delete();
+                $book->categories()->detach();
+                if($book->delete()) {
+                    return redirect()->back()->with('success', trans('general.process_success'));
+                }
+            }
+            return redirect()->back()->with('error', trans('general.element_can_not_be_deleted_there_are_some_orders_relying_on_this_element'));
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return redirect()->back()->withErrors($e->getMessage());
         }
     }
@@ -173,6 +179,6 @@ class BookController extends Controller
             ->whereHas('user', fn($q) => auth()->user()->isAdminOrAbove ? $q : $q->where('user_id', auth()->id()))
             ->with(['user' => fn($q) => $q->select('name_ar', 'name_en', 'id')])
             ->orderBy('id', 'desc');
-        return Excel::download(new BooksExport($elements), 'elements.'.request()->fileType);
+        return Excel::download(new BooksExport($elements), 'elements.' . request()->fileType);
     }
 }

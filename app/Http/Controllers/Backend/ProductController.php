@@ -11,6 +11,7 @@ use App\Imports\ProductsImport;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Size;
 use App\Models\User;
@@ -167,16 +168,20 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
-            $product->product_attributes()->delete();
-            $product->images()->delete();
-            $product->slides()->delete();
-            $product->tags()->detach([], true);
-            $product->favorites()->delete();
-            $product->categories()->detach([], true);
-            $product->comments()->delete();
-            if ($product->delete()) {
-                return redirect()->back();
+            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->books()->where('ordermetable_id', $product->id), '>', 0)->get();
+            if ($orders->isEmpty()) {
+                $product->product_attributes()->delete();
+                $product->images()->delete();
+                $product->slides()->delete();
+                $product->tags()->detach([], true);
+                $product->favorites()->delete();
+                $product->categories()->detach([], true);
+                $product->comments()->delete();
+                if ($product->delete()) {
+                    return redirect()->back()->with('success', trans('general.process_success'));
+                }
             }
+            return redirect()->back()->with('error', trans('general.element_can_not_be_deleted_there_are_some_orders_relying_on_this_element'));
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
         }

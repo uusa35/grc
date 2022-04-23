@@ -148,7 +148,7 @@ class CategoryController extends Controller
             $category->users()->sync([]);
             $category->tags()->detach();
             if ($category->delete()) {
-                return redirect()->back();
+                return redirect()->back()->with('success', trans('general.process_success'));
             }
         } catch (\Exception $e) {
             return redirect()->back()->withErrors($e->getMessage());
