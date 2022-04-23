@@ -236,7 +236,7 @@ class UserController extends Controller
     public function getImport(Request $request)
     {
         $request->validate(['model' => 'required']);
-        $roles = Role::active()->notAdmins()->select('id', 'name_ar', 'name_en')->get();
+        $roles = Role::active()->notAdmins()->where('is_visible', true)->select('id', 'name_ar', 'name_en')->get();
         $countries = Country::has('governates.areas', '>', 0)->active()->select('id', 'name_ar', 'name_en')->get();
         $model = request()->model;
         return Inertia::render('Backend/Import/ImportUserCreate', compact('roles', 'model', 'countries'));
