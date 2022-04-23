@@ -1291,6 +1291,6 @@ return array (
     "fixed_delivery_charge" => "سعر توصيل ثابت",
     "no_notes" => "لا توجد ملاحظات",
     "no_payment_method_selected" => "يرجى اختيار طريقة الدفع",
-    "element_can_not_be_deleted_there_are_some_orders_relying_on_this_element" => "هذا العنصر مرتبط بامر عمل مدفوع ولا يمكن حذفه .. يمكنك ا لتواصل مع الإدارة لالغاء تفعيله بالموقع"
+    "element_can_not_be_deleted_there_are_some_orders_relying_on_this_element" => "هذا العنصر مرتبط بامر عمل مدفوع ولا يمكن حذفه .."
 
 );
