@@ -184,10 +184,10 @@ export default React.memo(function({elements}) {
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
                                                     {
                                                         element.isOnSale ? <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-green-900 text-white`}>
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  text-sm bg-green-900 text-white`}>
                                                             {trans('on_sale')}
                                                           </span> : <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  font-medium bg-red-900 text-white`}>
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  text-sm bg-red-900 text-white`}>
                                                             {trans('no_sale')}
                                                           </span>
                                                     }
