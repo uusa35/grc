@@ -152,7 +152,7 @@ class CourseController extends Controller
     public function destroy(Course $course)
     {
         try {
-            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->books()->where('ordermetable_id', $course->id), '>', 0)->get();
+            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->courses()->where('ordermetable_id', $course->id), '>', 0)->get();
             if ($orders->isEmpty()) {
                 $course->images()->delete();
                 $course->slides()->delete();

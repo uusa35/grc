@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {toggleSort} from "../../redux/actions";
 
 
-export default function TrashedIndex({elements, model}) {
+export default function TrashedIndex({elements, type}) {
     const {
         trans,
         classNames,
@@ -136,9 +136,9 @@ export default function TrashedIndex({elements, model}) {
                                                                             <Menu.Item>
                                                                                 {({active}) => (
                                                                                     <Link
-                                                                                        href={route(`backend.restore`, {
+                                                                                        href={route(`backend.trashed.restore`, {
                                                                                             id: element.id,
-                                                                                            model
+                                                                                            type
                                                                                         })}
                                                                                         className={classNames(
                                                                                             active ? 'bg-gray-100 text-gray-900' : 'text-gray-800',

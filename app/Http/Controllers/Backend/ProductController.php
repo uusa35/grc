@@ -168,7 +168,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
-            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->books()->where('ordermetable_id', $product->id), '>', 0)->get();
+            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->products()->where('ordermetable_id', $product->id), '>', 0)->get();
             if ($orders->isEmpty()) {
                 $product->product_attributes()->delete();
                 $product->images()->delete();

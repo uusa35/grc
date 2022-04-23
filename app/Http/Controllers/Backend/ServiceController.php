@@ -155,7 +155,7 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         try {
-            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->books()->where('ordermetable_id', $service->id), '>', 0)->get();
+            $orders = Order::paid()->whereHas('order_metas', fn($q) => $q->services()->where('ordermetable_id', $service->id), '>', 0)->get();
             if ($orders->isEmpty()) {
                 $service->images()->delete();
                 $service->slides()->delete();

@@ -201,8 +201,8 @@ Route::group(['prefix' => 'backend', 'as' => 'backend.', 'middleware' => ['auth'
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('coupon', CouponController::class);
         Route::get('toggle/activate', [DashboardController::class, 'toggleActivate'])->name('toggle.activate');
-        Route::get('trashed', [DashboardController::class, 'trashed'])->name('trashed');
-        Route::get('restore', [DashboardController::class, 'restore'])->name('restore');
+        Route::get('trashed', [DashboardController::class, 'getTrashed'])->name('trashed.index');
+        Route::get('restore', [DashboardController::class, 'restoreTrashed'])->name('trashed.restore');
         Route::resource('color', ColorController::class);
         Route::resource('size', SizeController::class);
         Route::resource('country', CountryController::class);

@@ -51,8 +51,8 @@ class DashboardController extends Controller
             ->orderBy('created_at')
             ->get()
             ->groupBy('month');
-        $previousYearChart = $previousYear->isNotEmpty()  ? new ChartCollection($previousYear) : null;
-        $currentYearChart = $currentYear->isNotEmpty()  ? new ChartCollection($currentYear) : null;
+        $previousYearChart = $previousYear->isNotEmpty() ? new ChartCollection($previousYear) : null;
+        $currentYearChart = $currentYear->isNotEmpty() ? new ChartCollection($currentYear) : null;
         return inertia('Backend/BackendHomePage', compact('previousYearChart', 'currentYearChart'));
     }
 
@@ -127,4 +127,28 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
+
+    public function getTrashed(Request $request)
+    {
+        $request->validate([
+            'type' => 'required',
+        ]);
+        $className = 'App\Models\\' . ucfirst($request->type);
+        $element = new $className();
+        $elements = $element->onlyTrashed()->paginate(SELF::TAKE_MID);
+        $type = $request->type;
+        return inertia('Backend/Trashed/TrashedIndex', compact('elements', 'type'));
+    }
+
+    public function restoreTrashed(Request $request)
+    {
+        $request->validate([
+            'type' => 'required',
+            'id' => 'required'
+        ]);
+        $className = 'App\Models\\' . ucfirst($request->type);
+        $element = new $className();
+        $element->withTrashed()->where('id', $request->id)->first()->restore();
+        return redirect()->back()->with('success', trans('general.process_success'));
+    }
 }
