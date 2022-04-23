@@ -91,7 +91,7 @@ export default function SlideIndex({elements}) {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex items-center space-x-3 lg:pl-2">
                                                 <ActiveDot active={element.active}/>
-                                                {element[getLocalized()]}
+                                                <span>{element[getLocalized()]}</span>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">

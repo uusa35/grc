@@ -86,7 +86,7 @@ export default function({elements}) {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{element.id}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm flex flex-row">
                                             <ActiveDot active={element.active}/>
-                                            {element[getLocalized()]}
+                                            <span>{element[getLocalized()]}</span>
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.country[getLocalized()]}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.price}</td>

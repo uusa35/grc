@@ -177,9 +177,8 @@ export default React.memo(function({elements}) {
                                                 <div className="flex flex-row items-center space-x-3 lg:pl-2">
                                                     <img src={getThumb(element.image)}
                                                          className={`w-16 h-auto ltr:pr-5 rtl:pl-5`}/>
-
                                                     <ActiveDot active={element.active}/>
-                                                    {element[getLocalized()]}
+                                                    <span>{element[getLocalized()]}</span>
                                                 </div>
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
