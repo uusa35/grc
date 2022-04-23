@@ -66,6 +66,7 @@ class CountryController extends Controller
             ]);
             $country = Country::create($request->except('image'));
             if ($country) {
+                dd($country);
                 $request->hasFile('image') ? $this->saveMimes($country, $request, ['image'], ['300', '300'], false) : null;
                 return redirect()->route('backend.country.index')->with('success', trans('general.process_success'));
             }
