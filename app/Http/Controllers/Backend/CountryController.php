@@ -137,7 +137,7 @@ class CountryController extends Controller
         try {
             if (!$country->currency()->first() && !$country->users()->first()) {
                 if ($country->delete()) {
-                    return redirect()->route('backend.country.index')->with('success', trans('general.process_success'));
+                    return redirect()->route('backend.country.index');
                 }
                 throw new \Exception(trans('general.process_failure'));
             }
