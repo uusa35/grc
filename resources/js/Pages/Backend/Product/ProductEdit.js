@@ -563,53 +563,53 @@ accept="image/jpg, image/jpeg , image/png"
                         </FormSection>
                         {/*more details booleans */}
                         <FormSection title={trans('more_details')}>
-                            {/* active */}
-                            <fieldset className="mt-1 col-span-1">
-                                <div>
-                                    <legend
-                                        className={`text-base  text-gray-900`}>{trans('active')}</legend>
-                                </div>
-                                <div className="mt-4 space-y-4">
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="active"
-                                            name="active"
-                                            type="radio"
-                                            value={1}
-                                            defaultChecked={product.active}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="active"
-                                               className="ml-3 block   text-gray-800">
-                                            {trans('yes')}
-                                        </label>
-                                    </div>
-                                    <div className="flex items-center">
-                                        <input
-                                            onChange={handleChange}
-                                            id="active"
-                                            name="active"
-                                            type="radio"
-                                            value={0}
-                                            defaultChecked={!product.active}
-                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                        />
-                                        <label htmlFor="active"
-                                               className="ml-3 block   text-gray-800">
-                                            {trans('no')}
-                                        </label>
-                                    </div>
-                                </div>
-                                <ToolTipWidget/>
-                                <div>
-                                    <p className={`mt-2`}>
-                                        {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
-                                    </p>
-                                </div>
-                            </fieldset>
                                 {isAdminOrAbove ?
                                 <>
+                                    {/* active */}
+                                    <fieldset className="mt-1 col-span-1">
+                                        <div>
+                                            <legend
+                                                className={`text-base  text-gray-900`}>{trans('active')}</legend>
+                                        </div>
+                                        <div className="mt-4 space-y-4">
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="active"
+                                                    name="active"
+                                                    type="radio"
+                                                    value={1}
+                                                    defaultChecked={product.active}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="active"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('yes')}
+                                                </label>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="active"
+                                                    name="active"
+                                                    type="radio"
+                                                    value={0}
+                                                    defaultChecked={!product.active}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="active"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('no')}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <ToolTipWidget/>
+                                        <div>
+                                            <p className={`mt-2`}>
+                                                {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
+                                            </p>
+                                        </div>
+                                    </fieldset>
                                     {/* on home*/}
                                     <fieldset className="mt-1 col-span-1">
                                         <div>

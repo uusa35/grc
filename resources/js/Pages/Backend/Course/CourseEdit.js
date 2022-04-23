@@ -19,7 +19,7 @@ import FormSection from "../components/widgets/form/FormSection";
 export default function CourseEdit({users, categories, course, elementCategories}) {
     const [selectedCategories, setSelectedCategories] = useState(elementCategories);
     const [currentImages, setCurrentImages] = useState([]);
-    const { parentModule , formTabs , currentFormTab} = useSelector(state => state);
+    const {parentModule, formTabs, currentFormTab} = useSelector(state => state);
     const {
         classNames,
         trans,
@@ -110,7 +110,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                 formData.append(`id`, course.id);
                 formData.append(`order`, course.id);
                 axios.post(`/api/images/upload`, formData).then(r => {
-                    dispatch(showToastMessage({ message : trans('process_success'), type : 'success'}))
+                    dispatch(showToastMessage({message: trans('process_success'), type: 'success'}))
                 }).catch(e => console.log('eee', e)).finally(() => {
                     reset('images');
                     setCurrentImages({});
@@ -145,151 +145,151 @@ export default function CourseEdit({users, categories, course, elementCategories
                     <input type="hidden" name="_method" value="put"/>
                     <div
                         className={classNames(currentFormTab.id !== 0 ? 'hidden' : '', `w-full space-y-3 bg-transparent`)}>
-                       <FormSection title={`${trans('edit')} ${trans(parentModule)}`}>
+                        <FormSection title={`${trans('edit')} ${trans(parentModule)}`}>
 
-                               <div className="sm:col-span-3">
-                                   <label htmlFor="name_ar" className={`block   text-gray-800`}>
-                                       {trans('name_ar')}
-                                   </label>
-                                   <div className="mt-1">
-                                       <input
-                                           onChange={handleChange}
-                                           required
-                                           type="text"
-                                           name="name_ar" maxLength={100}
-                                           defaultValue={course.name_ar}
-                                           id="name_ar"
-                                           autoComplete="name_ar"
-                                           className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                       />
-                                   </div>
-                                   <ToolTipWidget message={trans('course_price_instruction')}/>
-                                   <p className={`mt-2  text-red-900`}>
-                                       {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
-                                   </p>
-                               </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="name_ar" className={`block   text-gray-800`}>
+                                    {trans('name_ar')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="name_ar" maxLength={100}
+                                        defaultValue={course.name_ar}
+                                        id="name_ar"
+                                        autoComplete="name_ar"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
+                                <p className={`mt-2  text-red-900`}>
+                                    {errors.name_ar && <div className={`text-red-900`}>{errors.name_ar}</div>}
+                                </p>
+                            </div>
 
-                               <div className="sm:col-span-3">
-                                   <label htmlFor="name_en" className={`block   text-gray-800`}>
-                                       {trans('name_en')}
-                                   </label>
-                                   <div className="mt-1">
-                                       <input
-                                           onChange={handleChange}
-                                           required
-                                           type="text"
-                                           name="name_en" maxLength={100}
-                                           defaultValue={course.name_en}
-                                           id="name_en"
-                                           autoComplete="name_en"
-                                           className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                       />
-                                   </div>
-                                   <ToolTipWidget message={trans('course_price_instruction')}/>
-                                   <p className={`mt-2  text-red-900`}>
-                                       {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
-                                   </p>
-                               </div>
+                            <div className="sm:col-span-3">
+                                <label htmlFor="name_en" className={`block   text-gray-800`}>
+                                    {trans('name_en')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="name_en" maxLength={100}
+                                        defaultValue={course.name_en}
+                                        id="name_en"
+                                        autoComplete="name_en"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
+                                <p className={`mt-2  text-red-900`}>
+                                    {errors.name_en && <div className={`text-red-900`}>{errors.name_en}</div>}
+                                </p>
+                            </div>
 
-                               <div className="sm:col-span-2">
-                                   <label htmlFor="price" className={`block   text-gray-800`}>
-                                       {trans('price')}
-                                   </label>
-                                   <div className="mt-1">
-                                       <input
-                                           onChange={handleChange}
-                                           required
-                                           type="number"
-                                           step="any"
-                                           name="price"
-                                           defaultValue={course.price}
-                                           id="price"
-                                           autoComplete="price"
-                                           className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                       />
-                                   </div>
-                                   <ToolTipWidget message={trans('course_price_instruction')}/>
-                                   <p className={`mt-2  text-red-900`}>
-                                       {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
-                                   </p>
-                               </div>
+                            <div className="sm:col-span-2">
+                                <label htmlFor="price" className={`block   text-gray-800`}>
+                                    {trans('price')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="number"
+                                        step="any"
+                                        name="price"
+                                        defaultValue={course.price}
+                                        id="price"
+                                        autoComplete="price"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('course_price_instruction')}/>
+                                <p className={`mt-2  text-red-900`}>
+                                    {errors.price && <div className={`text-red-900`}>{errors.price}</div>}
+                                </p>
+                            </div>
 
-                               <div className="sm:col-span-2 has-tooltip">
-                                   <label htmlFor="sale_price"
-                                          className={`block   text-gray-800`}>
-                                       {trans('sale_price')}
-                                   </label>
-                                   <div className="mt-1 ">
-                                       <input
-                                           onChange={handleChange}
-                                           required
-                                           type="number"
-                                           step="any"
-                                           name="sale_price"
-                                           defaultValue={course.sale_price}
-                                           id="sale_price"
-                                           autoComplete="sale_price"
-                                           className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                       />
-                                   </div>
-                                   <ToolTipWidget message={trans('course_sale_price_instruction')}/>
-                                   <p className={`mt-2  text-red-900`}>
-                                       {errors.sale_price && <div className={`text-red-900`}>{errors.sale_price}</div>}
-                                   </p>
-                               </div>
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="sale_price"
+                                       className={`block   text-gray-800`}>
+                                    {trans('sale_price')}
+                                </label>
+                                <div className="mt-1 ">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="number"
+                                        step="any"
+                                        name="sale_price"
+                                        defaultValue={course.sale_price}
+                                        id="sale_price"
+                                        autoComplete="sale_price"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('course_sale_price_instruction')}/>
+                                <p className={`mt-2  text-red-900`}>
+                                    {errors.sale_price && <div className={`text-red-900`}>{errors.sale_price}</div>}
+                                </p>
+                            </div>
 
 
-                               <div className="sm:col-span-2 has-tooltip">
-                                   <label htmlFor="sku" className={`block   text-gray-800`}>
-                                       {trans('sku')}
-                                   </label>
-                                   <div className="mt-1">
-                                       <input
-                                           onChange={handleChange}
-                                           required
-                                           type="text"
-                                           name="sku" maxLength={20}
-                                           defaultValue={course.sku}
-                                           id="sku"
-                                           autoComplete="sku"
-                                           className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                       />
-                                   </div>
-                                   <ToolTipWidget message={trans('course_sku_instruction')}/>
-                                   <p className={`mt-2  text-red-900`}>
-                                       {errors.sku && <div className={`text-red-900`}>{errors.sku}</div>}
-                                   </p>
-                               </div>
-                               {/* user_id */}
-                               <div className="sm:col-span-2">
-                                   {isAdminOrAbove && <>
-                                       <label htmlFor="user_id" className="block   text-gray-800">
-                                           {trans('owner')}
-                                       </label>
-                                       <div className="mt-1">
-                                           <select
-                                               onChange={handleChange}
-                                               id="user_id"
-                                               name="user_id"
-                                               defaultValue={course.user_id}
-                                               autoComplete="user_id"
-                                               className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
-                                           >
-                                               {
-                                                   users.map(u => (
-                                                       <option key={u.id} value={u.id}
-                                                       >{u[getLocalized('name')]}</option>
-                                                   ))
-                                               }
-                                           </select>
-                                       </div>
-                                       <ToolTipWidget message={trans('user_instruction')}/>
-                                       <p className={`mt-2  text-gray-500`}>
-                                           {errors.user_id && <div className={`text-red-900`}>{errors.user_id}</div>}
-                                       </p>
-                                   </>}
-                               </div>
-                       </FormSection>
+                            <div className="sm:col-span-2 has-tooltip">
+                                <label htmlFor="sku" className={`block   text-gray-800`}>
+                                    {trans('sku')}
+                                </label>
+                                <div className="mt-1">
+                                    <input
+                                        onChange={handleChange}
+                                        required
+                                        type="text"
+                                        name="sku" maxLength={20}
+                                        defaultValue={course.sku}
+                                        id="sku"
+                                        autoComplete="sku"
+                                        className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                    />
+                                </div>
+                                <ToolTipWidget message={trans('course_sku_instruction')}/>
+                                <p className={`mt-2  text-red-900`}>
+                                    {errors.sku && <div className={`text-red-900`}>{errors.sku}</div>}
+                                </p>
+                            </div>
+                            {/* user_id */}
+                            <div className="sm:col-span-2">
+                                {isAdminOrAbove && <>
+                                    <label htmlFor="user_id" className="block   text-gray-800">
+                                        {trans('owner')}
+                                    </label>
+                                    <div className="mt-1">
+                                        <select
+                                            onChange={handleChange}
+                                            id="user_id"
+                                            name="user_id"
+                                            defaultValue={course.user_id}
+                                            autoComplete="user_id"
+                                            className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
+                                        >
+                                            {
+                                                users.map(u => (
+                                                    <option key={u.id} value={u.id}
+                                                    >{u[getLocalized('name')]}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                    <ToolTipWidget message={trans('user_instruction')}/>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.user_id && <div className={`text-red-900`}>{errors.user_id}</div>}
+                                    </p>
+                                </>}
+                            </div>
+                        </FormSection>
                         <FormSection title={trans('more_details')}>
                             {/* cateogiries */}
                             <div className="sm:col-span-full has-tooltip">
@@ -406,7 +406,7 @@ export default function CourseEdit({users, categories, course, elementCategories
                                         type="file"
                                         name="image"
                                         id="main_image"
-accept="image/jpg, image/jpeg , image/png"
+                                        accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="main_image"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
@@ -435,7 +435,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         multiple
                                         name="images"
                                         id="more_images"
-accept="image/jpg, image/jpeg , image/png"
+                                        accept="image/jpg, image/jpeg , image/png"
                                         autoComplete="more_images"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                     />
@@ -467,7 +467,7 @@ accept="image/jpg, image/jpeg , image/png"
                                         type="file"
                                         name="file"
                                         id="file"
-accept="application/pdf"
+                                        accept="application/pdf"
                                         autoComplete="pdf_file"
                                         className={`focus:ring-gray-500 focus:border-gray-500 block w-full sm: border-gray-300 rounded-md`}
                                     />
@@ -505,193 +505,195 @@ accept="application/pdf"
                                 </p>
                             </div>
                         </FormSection>
-                        {
-                            isAdminOrAbove && <FormSection title={trans('more_details')}>
-                                {/* active */}
-                                <fieldset className="mt-1 col-span-2">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('active')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="active"
-                                                name="active"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={course.active}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="active"
-                                                   className="ml-3 block   text-gray-800">
-                                                {trans('yes')}
-                                            </label>
+                        <FormSection title={trans('more_details')}>
+                            {
+                                isAdminOrAbove && <>
+                                    {/* active */}
+                                    <fieldset className="mt-1 col-span-2">
+                                        <div>
+                                            <legend
+                                                className={`text-base  text-gray-900`}>{trans('active')}</legend>
                                         </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="active"
-                                                name="active"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!course.active}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="active"
-                                                   className="ml-3 block   text-gray-800">
-                                                {trans('no')}
-                                            </label>
+                                        <div className="mt-4 space-y-4">
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="active"
+                                                    name="active"
+                                                    type="radio"
+                                                    value={1}
+                                                    defaultChecked={course.active}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="active"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('yes')}
+                                                </label>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="active"
+                                                    name="active"
+                                                    type="radio"
+                                                    value={0}
+                                                    defaultChecked={!course.active}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="active"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('no')}
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <ToolTipWidget/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
-                                {/* on home*/}
-                                <fieldset className="mt-1 col-span-2">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="on_home"
-                                                name="on_home"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={course.on_sale}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-800">
-                                                {trans('yes')}
-                                            </label>
+                                        <ToolTipWidget/>
+                                        <div>
+                                            <p className={`mt-2  text-gray-500`}>
+                                                {errors.active && <div className={`text-red-900`}>{errors.active}</div>}
+                                            </p>
                                         </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="on_home"
-                                                name="on_home"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!course.on_home}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="on_home"
-                                                   className="ml-3 block   text-gray-800">
-                                                {trans('no')}
-                                            </label>
+                                    </fieldset>
+                                    {/* on home*/}
+                                    <fieldset className="mt-1 col-span-2">
+                                        <div>
+                                            <legend
+                                                className={`text-base  text-gray-900`}>{trans('on_home')}</legend>
                                         </div>
-                                    </div>
-                                    <ToolTipWidget/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.on_home &&
-                                            <div className={`text-red-900`}>{errors.on_home}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
-                                {/* on sale*/}
-                                <fieldset className="mt-1 has-tooltip col-span-2">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('on_sale')}</legend>
-                                    </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="on_sale"
-                                                name="on_sale"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={course.on_sale}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="push-everything"
-                                                   className="ml-3 block   text-gray-800">
-                                                {trans('yes')}
-                                            </label>
+                                        <div className="mt-4 space-y-4">
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="on_home"
+                                                    name="on_home"
+                                                    type="radio"
+                                                    value={1}
+                                                    defaultChecked={course.on_sale}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="push-everything"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('yes')}
+                                                </label>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <input
+                                                    onChange={handleChange}
+                                                    id="on_home"
+                                                    name="on_home"
+                                                    type="radio"
+                                                    value={0}
+                                                    defaultChecked={!course.on_home}
+                                                    className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                                />
+                                                <label htmlFor="on_home"
+                                                       className="ml-3 block   text-gray-800">
+                                                    {trans('no')}
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="on_sale"
-                                                name="on_sale"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!course.on_sale}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="on_sale"
-                                                   className="ml-3 block   text-gray-800">
-                                                {trans('no')}
-                                            </label>
+                                        <ToolTipWidget/>
+                                        <div>
+                                            <p className={`mt-2  text-gray-500`}>
+                                                {errors.on_home &&
+                                                <div className={`text-red-900`}>{errors.on_home}</div>}
+                                            </p>
                                         </div>
+                                    </fieldset>
+                                </>
+                            }
+                            {/* on sale*/}
+                            <fieldset className="mt-1 has-tooltip col-span-2">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('on_sale')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_sale"
+                                            name="on_sale"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={course.on_sale}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="push-everything"
+                                               className="ml-3 block   text-gray-800">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('course_sale_price_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.on_sale &&
-                                            <div className={`text-red-900`}>{errors.on_sale}</div>}
-                                        </p>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="on_sale"
+                                            name="on_sale"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!course.on_sale}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="on_sale"
+                                               className="ml-3 block   text-gray-800">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                </fieldset>
-                                {/* free */}
-                                <fieldset className="mt-1 has-tooltip col-span-2">
-                                    <div>
-                                        <legend
-                                            className={`text-base  text-gray-900`}>{trans('free')}</legend>
+                                </div>
+                                <ToolTipWidget message={trans('course_sale_price_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.on_sale &&
+                                        <div className={`text-red-900`}>{errors.on_sale}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                            {/* free */}
+                            <fieldset className="mt-1 has-tooltip col-span-2">
+                                <div>
+                                    <legend
+                                        className={`text-base  text-gray-900`}>{trans('free')}</legend>
+                                </div>
+                                <div className="mt-4 space-y-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="free"
+                                            name="free"
+                                            type="radio"
+                                            value={1}
+                                            defaultChecked={course.free}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="free"
+                                               className="ml-3 block   text-gray-800">
+                                            {trans('yes')}
+                                        </label>
                                     </div>
-                                    <div className="mt-4 space-y-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="free"
-                                                name="free"
-                                                type="radio"
-                                                value={1}
-                                                defaultChecked={course.free}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="free"
-                                                   className="ml-3 block   text-gray-800">
-                                                {trans('yes')}
-                                            </label>
-                                        </div>
-                                        <div className="flex items-center">
-                                            <input
-                                                onChange={handleChange}
-                                                id="free"
-                                                name="free"
-                                                type="radio"
-                                                value={0}
-                                                defaultChecked={!course.free}
-                                                className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
-                                            />
-                                            <label htmlFor="free"
-                                                   className="ml-3 block   text-gray-800">
-                                                {trans('no')}
-                                            </label>
-                                        </div>
+                                    <div className="flex items-center">
+                                        <input
+                                            onChange={handleChange}
+                                            id="free"
+                                            name="free"
+                                            type="radio"
+                                            value={0}
+                                            defaultChecked={!course.free}
+                                            className={`mx-5 focus:ring-gray-500 h-4 w-4 text-gray-600 border-gray-300`}
+                                        />
+                                        <label htmlFor="free"
+                                               className="ml-3 block   text-gray-800">
+                                            {trans('no')}
+                                        </label>
                                     </div>
-                                    <ToolTipWidget message={trans('course_free_instruction')}/>
-                                    <div>
-                                        <p className={`mt-2  text-gray-500`}>
-                                            {errors.free &&
-                                            <div className={`text-red-900`}>{errors.free}</div>}
-                                        </p>
-                                    </div>
-                                </fieldset>
-                            </FormSection>
-                        }
+                                </div>
+                                <ToolTipWidget message={trans('course_free_instruction')}/>
+                                <div>
+                                    <p className={`mt-2  text-gray-500`}>
+                                        {errors.free &&
+                                        <div className={`text-red-900`}>{errors.free}</div>}
+                                    </p>
+                                </div>
+                            </fieldset>
+                        </FormSection>
                         <FormBtns type={'course'}/>
                     </div>
                     <div
@@ -1372,7 +1374,7 @@ accept="application/pdf"
                                                     multiple
                                                     name="images"
                                                     id="more_images"
-accept="image/jpg, image/jpeg , image/png"
+                                                    accept="image/jpg, image/jpeg , image/png"
                                                     autoComplete="more_images"
                                                     className={`focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                                 />
