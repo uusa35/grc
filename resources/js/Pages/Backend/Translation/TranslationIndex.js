@@ -1,6 +1,6 @@
 import BackendContainer from "../components/containers/BackendContainer";
 import route from 'ziggy-js';
-import {map} from "lodash";
+import {map, truncate} from "lodash";
 import {Link} from "@inertiajs/inertia-react";
 import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
@@ -9,7 +9,7 @@ import {useDispatch} from "react-redux";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 
 export default function({elements}) {
-    const {trans, classNames } = useContext(AppContext);
+    const {trans} = useContext(AppContext);
     const {params} = route();
     const dispatch = useDispatch();
 
@@ -74,12 +74,17 @@ export default function({elements}) {
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody className="bg-white divide-y divide-gray-200 border-r border-l border-b border-gray-400">
+                                <tbody
+                                    className="bg-white divide-y divide-gray-200 border-r border-l border-b border-gray-400">
                                 {map(elements.data, element => (
                                     <tr key={element.id} className={`odd:bg-white even:bg-gray-100`}>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">{element.id}</td>
-                                        <td className="px-6 py-4  text-sm break-all text-ellipsis overflow-hidden capitalize  ">{element.ar}</td>
-                                        <td className="px-6 py-4  text-sm break-all text-ellipsis overflow-hidden capitalize">{element.en}</td>
+                                        <td className="px-6 py-4  text-sm break-all text-ellipsis overflow-hidden capitalize truncate">
+                                            {truncate(element.ar, {length: 50})}
+                                        </td>
+                                        <td className="px-6 py-4  text-sm break-all text-ellipsis overflow-hidden capitalize truncate">
+                                            {truncate(element.en, {length: 50})}
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm ">
                                             <div className="flex flex-row items-center justify-around">
                                                 <Link href={route(`backend.translation.edit`, element.id)}
