@@ -268,15 +268,15 @@ export default React.memo(function({elements}) {
                                                 <div
                                                     className="flex flex-1 flex-row justify-between space-x-3 mt-2 items-center">
                                                         <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  text-sm bg-${element.has_attributes && !isEmpty(element.product_attributes) ? 'green' : 'red'}-900 text-white`}>
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  text-xs bg-${element.has_attributes && !isEmpty(element.product_attributes) ? 'green' : 'red'}-900 text-white`}>
                                                             {element.has_attributes && !isEmpty(element.product_attributes) ? trans('has_attributes') : trans('no_attributes')}
                                                           </span>
                                                     {
                                                         element.isOnSale ? <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  text-sm bg-green-900 text-white`}>
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  text-xs bg-green-900 text-white`}>
                                                             {trans('on_sale')}
                                                           </span> : <span
-                                                            className={`inline-flex items-center px-2 py-0.5 rounded  text-sm bg-red-900 text-white`}>
+                                                            className={`inline-flex items-center px-2 py-0.5 rounded  text-xs bg-red-900 text-white`}>
                                                             {trans('no_sale')}
                                                           </span>
                                                     }
