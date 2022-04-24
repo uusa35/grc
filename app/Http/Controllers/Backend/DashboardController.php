@@ -148,7 +148,13 @@ class DashboardController extends Controller
         ]);
         $className = 'App\Models\\' . ucfirst($request->type);
         $element = new $className();
-        $element->withTrashed()->where('id', $request->id)->first()->restore();
+        $element = $element->withTrashed()->where('id', $request->id)->first();
+        $element->restore();
+        if($request->type === 'order') {
+            $element->order_metas()->restore();
+        } else if ($request->type === 'product') {
+            $element->product_attributes()->restore();
+        }
         return redirect()->back()->with('success', trans('general.process_success'));
     }
 }
