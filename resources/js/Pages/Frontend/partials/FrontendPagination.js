@@ -1,13 +1,11 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {ArrowNarrowLeftIcon, ArrowNarrowRightIcon, SearchIcon} from '@heroicons/react/solid'
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import {Link} from '@inertiajs/inertia-react'
 import route from 'ziggy-js';
 import {isEmpty, map} from 'lodash';
 
 export default function FrontendPagination({type, total, links, showSearch = false, lastPage = 0}) {
-    const [search, setSearch] = useState('');
     const {classNames, mainColor, contentBgColor   } = useContext(AppContext)
     return (
         <nav
@@ -20,7 +18,7 @@ export default function FrontendPagination({type, total, links, showSearch = fal
                                 <Link
                                     key={page.label}
                                     href={route().has(`frontend.${type}.index`) && page.url ? page.url : '#'}
-                                    className={classNames(page.active ? `text-${mainColor}-800 dark:text-${mainColor}-200 border-t-2` : '', `border-transparent text-${mainColor}-600 dark:text-${mainColor}-100 hover:text-${mainColor}-900 hover:dark:text-${mainColor}-400 border-t-2 pt-4 px-4 inline-flex items-center font-medium`)}
+                                    className={classNames(page.active ? `bg-${mainColor}-100 dark:bg-${mainColor}-800 rounded-md border border-${mainColor}-200` : `border-transparent`, `text-${mainColor}-600 dark:text-${mainColor}-100   p-3 inline-flex items-center font-medium`)}
                                 >
                                     {page.label}
                                 </Link>

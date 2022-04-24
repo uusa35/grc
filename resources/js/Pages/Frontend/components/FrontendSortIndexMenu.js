@@ -16,7 +16,7 @@ export default function FrontendSortIndexMenu({showPrice = true}) {
         {name: 'sort_price', current: false, colName: 'price', display: showPrice},
     ]
     return (
-        <div className="flex w-full sm:w-auto justify-end items-center mt-5 sm:mt-0">
+        <div className="flex w-full sm:w-auto justify-end items-center my-3 sm:mt-0">
             <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button
                     className={`w-40 group inline-flex px-3 py-1 mt-flex flex-1 justify-between items-center gap-x-3 ${textColor} ring-2 rounded-sm`}>
