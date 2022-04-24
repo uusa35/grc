@@ -209,11 +209,11 @@ export default React.memo(function({elements, roles}) {
                                                             {
                                                                 element.whatsapp && <div className="flex">
                                                                     <FaWhatsapp className={`h-4 w-4 mx-2`}/>
-                                                                    : <a href={`${getWhatsappLink(element.whatsapp)}`}>{element.whatsapp}</a></div>
+                                                                    : <a target={`_blank`} href={`${getWhatsappLink(element.whatsapp)}`}>{element.whatsapp}</a></div>
                                                             }
                                                             <div className="flex">
                                                                 <FaInbox className={`h-4 w-4 mx-2`}/>
-                                                                <a href={`mailto:${element.email}`}>{element.email}</a></div>
+                                                                <a target={`_blank`} href={`mailto:${element.email}`}>{element.email}</a></div>
                                                             <div className="flex justify-center items-center w-20 bg-gray-200 border border-gray-400 p-1 px-2 rounded-sm mt-2">
                                                                 {element.role[getLocalized()]}</div>
                                                         </div>

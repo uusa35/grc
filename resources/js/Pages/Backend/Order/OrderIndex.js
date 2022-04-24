@@ -253,6 +253,7 @@ export default React.memo(function({elements}) {
                                                                   d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                                         </svg>
                                                         : <a
+                                                        target={`_blank`}
                                                         href={`${getWhatsappLink(element.user.mobile)}`}>{element.user.mobile}</a>
                                                     </div>
                                                     <div className="flex">
@@ -262,7 +263,7 @@ export default React.memo(function({elements}) {
                                                             <path strokeLinecap="round" strokeLinejoin="round"
                                                                   d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/>
                                                         </svg>
-                                                        <a href={`mailto:${element.user.email}`}>{element.user.email}</a>
+                                                        <a target={`_blank`} href={`mailto:${element.user.email}`}>{element.user.email}</a>
                                                     </div>
                                                 </div>
                                             </td>
