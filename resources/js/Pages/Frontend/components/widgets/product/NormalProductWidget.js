@@ -4,7 +4,7 @@ import React, {useContext} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import ElementPrice from "../ElementPrice";
 import ElementTags from "../ElementTags";
-import {truncate, size, trim  } from "lodash";
+import {truncate, size} from "lodash";
 import {motion} from "framer-motion"
 
 const NormalProductWidget = ({element}) => {

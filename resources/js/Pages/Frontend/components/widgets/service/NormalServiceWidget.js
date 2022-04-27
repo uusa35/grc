@@ -19,7 +19,7 @@ const  NormalServiceWidget = ({element}) => {
             <div className="w-full rounded-t-md overflow-hidden sm:h-auto sm:aspect-w-4 sm:aspect-h-5">
                 <Link
                     className="z-30"
-                    href={route('frontend.service.show', element.id) + `?slug=${element[getLocalized()]}`}>
+                    href={route('frontend.service.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}>
                     <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}/>
                     <img
                         src={getThumb(element.image)}

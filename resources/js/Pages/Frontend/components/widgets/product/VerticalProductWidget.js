@@ -38,7 +38,7 @@ const VerticalProductWidget = ({element}) => {
                     <ElementTags onSale={element.isOnSale} onNew={element.on_new} exclusive={element.exclusive}
                                  rounded={true}/>
                     <Link
-                        href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
+                        href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}>
                         <img
                             src={getThumb(element.image)}
                             alt={element[getLocalized()]}
@@ -56,7 +56,7 @@ const VerticalProductWidget = ({element}) => {
                     <div className="flex flex-row w-full justify-between items-center">
                         <h3 className={`text-2xl text-base font-bold ${textColor}  truncate`}>
                             <Link
-                                href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}>
+                                href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}>
                                 <span className=""/>
                                 {truncate(element[getLocalized()], {length: 20})}
                             </Link>
@@ -80,7 +80,7 @@ const VerticalProductWidget = ({element}) => {
                         }
                     </div>
                     <Link
-                        href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()]}`}
+                        href={route('frontend.product.show', element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}
                         className={`hidden lg:flex ${btnClass} rounded-md py-3 px-8 flex items-center justify-center text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-${mainColor}-50 focus:ring-${mainColor}-500 sm:w-full`}
                     >
                         <span className={`flex flex-row flex-1 justify-evenly items-center`}>

@@ -41,7 +41,6 @@ export default function({element, relatedElements, auth, settings}) {
         mainBgColor,
         contentBgColor,
         textColor,
-        btnClass
     } = useContext(AppContext)
     const {locale} = useSelector(state => state);
     const [currentImages, setCurrentImages] = useState([]);

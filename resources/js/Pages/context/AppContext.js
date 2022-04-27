@@ -5,7 +5,6 @@ import Ziggy from 'ziggy-js';
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 import {ToastContainer} from 'react-toastify';
-
 import {toast} from 'react-toastify';
 import {GrClose, IoCloseOutline} from "react-icons/all";
 import {useSelector, useDispatch} from "react-redux";

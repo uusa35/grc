@@ -18,7 +18,7 @@ export default function RelatedItems({ elements , type = '', title = null }) {
                 className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                 {map(elements,element =>
                     <Link
-                        href={route(`frontend.${type}.show`, element.id) + `?slug=${element[getLocalized()]}`}
+                        href={route(`frontend.${type}.show`, element.id) + `?slug=${element[getLocalized()].replace(/ /g, '-')}`}
                         key={element.id}>
                         <div className="relative">
                             <div className="relative w-full rounded-lg overflow-hidden">
