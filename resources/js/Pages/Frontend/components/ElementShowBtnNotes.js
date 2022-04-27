@@ -26,7 +26,7 @@ export default function ({ directPurchase = false , sku = null , timings = null 
                         </div>
                         <span
                             className={`mt-4 text-sm ${textColor}`}>{trans('direct_purchase')}</span>
-                        <dd className={`mt-1 text-sm ${textColor}`}>{trans('direct_purchase')}</dd>
+                        <dd className={`mt-1 text-sm ${textColor}`}>{trans('available')}</dd>
                     </div> : null
                 }
                 {

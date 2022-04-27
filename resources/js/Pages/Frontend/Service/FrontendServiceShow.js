@@ -452,7 +452,7 @@ export default function ({element, relatedElements, auth}) {
                             </section>
 
                             {/* Notes (direct purchase) (sku) (timings notes) */}
-                            <ElementShowBtnNotes directPurchase={element.direct_purchase} sku={element.sku} timings={element.timings}/>
+                            <ElementShowBtnNotes directPurchase={element.direct_purchase && settings.multi_cart_merchant} sku={element.sku} timings={element.timings}/>
                         </div>
                     </div>
                     <SocialIconShare/>
