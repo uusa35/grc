@@ -23,18 +23,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    use HomeTrait;
+
     public function index()
     {
-        $settings = Setting::whereId(1)->with(['slides' => function ($q) {
-            return $q->active()->orderby('order', 'asc');
-        }])->first();
-        $slides = SlideExtraLightResource::collection($settings->slides);
-        $newOnHomeBooks = BookExtraLightResource::collection(Book::active()->onHome()->onNew()->orderBy('order', 'asc')->get());
-        $newOnHomeCourses = CourseExtraLightResource::collection(Course::active()->onHome()->onNew()->orderBy('order', 'asc')->get());
-        $newOnHomeProducts = ProductExtraLightResource::collection(Product::active()->onHome()->onNew()->with('product_attributes')->orderBy('order', 'asc')->get());
-        $onHomeParticipantAuthors = UserExtraLightResource::collection(User::active()->onHome()->authors()->notClients()->notAdmins()->orderBy('order', 'asc')->get());
-        $categoriesWithProducts = CategoryExtraLightResource::collection(Category::active()->onlyParent()->onlyForProducts()->where('is_featured', true)->orderBy('order', 'asc')->limit(3)->with('products.product_attributes')->get());
-        return inertia('Frontend/Home/'.env('APP_NAME'), compact('slides', 'newOnHomeBooks', 'onHomeParticipantAuthors', 'newOnHomeCourses', 'newOnHomeProducts', 'categoriesWithProducts'));
+        switch (env('APP_NAME')) {
+            case 'grc':
+                return $this->getGrc();
+            case 'istores':
+                return $this->getIstores();
+            default:
+                return $this->getEcommerce();
+        }
     }
 
     public function changeLang($lang)
