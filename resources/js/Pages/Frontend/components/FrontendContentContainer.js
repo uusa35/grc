@@ -3,6 +3,8 @@ import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import GlobalContext from "../../context/GlobalContext";
 import {motion} from 'framer-motion';
+import {getWhatsappLink} from "../../helpers";
+import {FaWhatsapp} from "react-icons/fa";
 
 
 const containerVariants = {
@@ -20,7 +22,7 @@ const containerVariants = {
 }
 
 export default function({children, showBreadCrumbs = true, childName = '', parentModuleName = null}) {
-    const {classNames, textColor } = useContext(AppContext);
+    const {classNames, textColor, getLocalized  } = useContext(AppContext);
     const {settings} = useContext(GlobalContext);
 
     return (

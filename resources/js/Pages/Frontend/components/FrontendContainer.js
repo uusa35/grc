@@ -15,6 +15,9 @@ import LoadingView from "../../Backend/components/widgets/LoadingView";
 import moment from 'moment'
 import 'moment/locale/ar'
 import 'moment/locale/en-in'
+import {removeFromCart} from "../../redux/actions";
+import {getWhatsappLink} from "../../helpers";
+import {FaWhatsapp} from "react-icons/fa";
 
 
 const currentVariants = {
@@ -23,7 +26,7 @@ const currentVariants = {
 };
 
 const FrontendContainer = ({children}) => {
-    const {locale, theme, menuBg, isLoading } = useSelector(state => state)
+    const {locale, theme, menuBg, isLoading} = useSelector(state => state)
     moment.locale(locale.isRTL ? 'ar' : 'en-in')
     const {settings, appName} = useContext(GlobalContext);
     const {
@@ -33,6 +36,7 @@ const FrontendContainer = ({children}) => {
         currentHome,
         mainColor,
         getLarge,
+        getLocalized
     } = useContext(AppContext);
 
     return (
@@ -67,11 +71,10 @@ const FrontendContainer = ({children}) => {
                 <div
                     className={classNames(settings.wide_screen && currentHome ? `` : `lg:pt-32`, `min-h-screen ${textColor}`)}>
                     <SystemMessage/>
-                    {isLoading ? <LoadingView /> : children}
+                    {isLoading ? <LoadingView/> : children}
                 </div>
                 <Footer/>
             </main>
-
         </motion.div>
     );
 }

@@ -1,4 +1,4 @@
-import {Fragment, useContext, useMemo, useState, useEffect, useLayoutEffect} from 'react'
+import React, {Fragment, useContext, useMemo, useState, useEffect, useLayoutEffect} from 'react'
 import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
@@ -800,6 +800,13 @@ export default function () {
 
                 </nav>
             </header>
+            {settings.whatsapp &&
+            <a target="_blank"
+               href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}
+               className={`bg-green-900 rounded-full border-2 absolute top-0 left-10 p-10 items-center justify-center`} style={{ marginTop : '1em' }}>
+                <FaWhatsapp className={`h-10 w-10`} color={`white`}/>
+            </a>
+            }
         </div>
     )
 }

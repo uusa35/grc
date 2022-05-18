@@ -1280,5 +1280,6 @@ return array (
     "fixed_delivery_charge" => "fixed delivery charge",
     "no_notes" => "no notes",
     "no_payment_method_selected" => "please select payment method",
-    "element_can_not_be_deleted_there_are_some_orders_relying_on_this_element" => "this element is relying on paid orders. therefore can not be deleted. "
+    "element_can_not_be_deleted_there_are_some_orders_relying_on_this_element" => "this element is relying on paid orders. therefore can not be deleted. ",
+    "information_not_correct" => "information you entered is not correct. please try again."
 );
