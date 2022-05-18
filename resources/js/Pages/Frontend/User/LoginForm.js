@@ -11,6 +11,7 @@ import {Inertia} from "@inertiajs/inertia";
 export default function() {
     const {trans, getThumb, mainColor , mainBgColor , btnClass, textColor  , contentBgColor } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
+    const { settings } = useContext(GlobalContext);
     const {props} = usePage();
     const {errors} = props;
 
