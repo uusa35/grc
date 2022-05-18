@@ -11,7 +11,6 @@ import {Inertia} from "@inertiajs/inertia";
 export default function() {
     const {trans, getThumb, mainColor , mainBgColor , btnClass, textColor  , contentBgColor } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
-    const[emai,setemail] = useState('');
     const {props} = usePage();
     const {errors} = props;
 
