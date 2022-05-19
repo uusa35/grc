@@ -40,12 +40,12 @@ const FrontendContainer = ({children}) => {
     } = useContext(AppContext);
 
     return (
-        <motion.div
+        <div
             className={classNames(theme === `dark` ? `bg-black` : ``, `${theme} ${currentFont} flex flex-col overflow-hidden text-sm md:text-sm lg:text-sm capitalize`)}
             dir={locale.dir}
-            variants={currentVariants}
-            animate={`visible`}
-            initial="hidden"
+            // variants={currentVariants}
+            // animate={`visible`}
+            // initial="hidden"
             // style={{backgroundImage: `url(${getThumb(settings.main_bg)})`}}
         >
             {/*<ConfirmationModal/>*/}
@@ -75,7 +75,7 @@ const FrontendContainer = ({children}) => {
                 </div>
                 <Footer/>
             </main>
-        </motion.div>
+        </div>
     );
 }
 
