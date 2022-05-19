@@ -10,13 +10,13 @@ const FormBtns = ({ type }) => {
             <div className="flex justify-end">
                 <button
                     type="submit"
-                    className={`ml-3 inline-flex justify-center py-2 px-10 mx-4 shadow-lg font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
+                    className={`ml-3 inline-flex justify-center py-2 px-10 mx-4 shadow-lg font-medium rounded-md text-white bg-gray-600 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 capitalize`}
                 >
                     {trans('save')}
                 </button>
                 <Link
                     href={route(`backend.${type}.index`)}
-                    className={`bg-red-900 py-2 px-10 border border-red-300 rounded-md shadow-lg font-medium text-gray-50 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                    className={`bg-red-900 py-2 px-10 border border-red-300 rounded-md shadow-lg font-medium text-gray-50 hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 capitalize`}
                 >
                     {trans('cancel')}
                 </Link>

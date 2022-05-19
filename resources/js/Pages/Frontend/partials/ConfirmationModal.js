@@ -60,7 +60,7 @@ export default function({
                                     <CheckIcon className="h-6 w-6 text-green-900" aria-hidden="true"/>
                                 </div>
                                 <div className="mt-3 text-center sm:mt-5">
-                                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
+                                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900 capitalize ">
                                         {trans('confirmation')}
                                     </Dialog.Title>
                                     {
@@ -72,7 +72,7 @@ export default function({
                                     }
                                 </div>
                             </div>
-                            <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+                            <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense capitalize">
                                 <a
                                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 font-bold text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:col-start-2 sm:text-sm"
                                     href={route(routeName, {order_id: paramId})}

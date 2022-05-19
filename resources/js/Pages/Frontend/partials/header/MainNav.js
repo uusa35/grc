@@ -1,10 +1,24 @@
-import {Fragment, useContext, useMemo, useState, useEffect, useLayoutEffect} from 'react'
+import React, {Fragment, useContext, useMemo, useState, useEffect, useLayoutEffect} from 'react'
 import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
     ShoppingBagIcon,
     XIcon,
-    MoonIcon
+    MoonIcon,
+    GiftIcon,
+    BookOpenIcon,
+    HomeIcon,
+    UsersIcon,
+    LoginIcon,
+    PencilIcon,
+    LogoutIcon,
+    PhoneIncomingIcon,
+    AnnotationIcon,
+    ClipboardListIcon,
+    DesktopComputerIcon,
+    LibraryIcon,
+    LockClosedIcon
+
 } from '@heroicons/react/outline'
 import {Link} from "@inertiajs/inertia-react";
 import {AppContext} from "../../../context/AppContext";
@@ -176,7 +190,7 @@ export default function() {
             {/* Mobile menu */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div"
-                        className={classNames(locale.isRTL ? `right-0` : `left-0`, "fixed inset-0  flex z-40 lg:hidden")}
+                        className={classNames(locale.isRTL ? `right-0` : `left-0`, "fixed inset-y-0  flex z-40 lg:hidden")}
                         onClose={setOpen}>
                     <Transition.Child
                         as={Fragment}
@@ -195,7 +209,7 @@ export default function() {
                         enter="transition ease-in-out duration-300 transform"
                         // enterFrom="-translate-x-full"
                         // enterTo="translate-x-0"
-                        leave="transition ease-in-out duration-300 transform"
+                        // leave="transition ease-in-out duration-300 transform"
                         // leaveFrom="translate-x-0"
                         // leaveTo="-translate-x-full"
                     >
@@ -217,7 +231,11 @@ export default function() {
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.home')}
-                                        className={`-m-2 p-2 block ${menuTextColor}`}>
+                                        className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                        <HomeIcon
+                                            className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                            aria-hidden="true"
+                                        />
                                         {capitalize(trans('home'))}
                                     </Link>
                                 </div>
@@ -225,7 +243,11 @@ export default function() {
                                     settings.enable_books && <div className="flow-root">
                                         <Link
                                             href={route('frontend.book.index')}
-                                            className={`-m-2 p-2 block ${menuTextColor}`}>
+                                            className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                            <BookOpenIcon
+                                                className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                aria-hidden="true"
+                                            />
                                             {capitalize(trans('library'))}
                                         </Link>
                                     </div>
@@ -234,34 +256,52 @@ export default function() {
                                     settings.enable_books && <>
                                         <div className="flow-root">
                                             <Link
-                                                href={route('frontend.user.index', { is_author : true })}
-                                                className={`-m-2 p-2 block ${menuTextColor}`}>
+                                                href={route('frontend.user.index', {is_author: true})}
+                                                className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                                <UsersIcon
+                                                    className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                    aria-hidden="true"
+                                                />
                                                 {capitalize(trans('experts_and_participants'))}
                                             </Link>
                                         </div>
                                     </>
                                 }
                                 {
-                                    settings.enable_services && <div className="flow-root">
+                                    settings.enable_services && <>
                                         <div className="flow-root">
                                             <Link
                                                 href={route('frontend.category.index', {is_service: 1})}
-                                                className={`-m-2 p-2 block  font-bold`}>
+                                                className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                                <LibraryIcon
+                                                    className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                    aria-hidden="true"
+                                                />
                                                 {capitalize(trans('consulting_and_training'))}
                                             </Link>
                                         </div>
-                                        <Link
-                                            href={route('frontend.service.index')}
-                                            className={`-m-2 p-2 block  hidden`}>
-                                            {capitalize(trans('services'))}
-                                        </Link>
-                                    </div>
+                                        <div className="flow-root">
+                                            <Link
+                                                href={route('frontend.service.index')}
+                                                className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                                <BookOpenIcon
+                                                    className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                    aria-hidden="true"
+                                                />
+                                                {capitalize(trans('services'))}
+                                            </Link>
+                                        </div>
+                                    </>
                                 }
                                 {
                                     settings.enable_courses && <div className="flow-root">
                                         <Link
                                             href={route('frontend.course.index')}
-                                            className={`-m-2 p-2 block ${menuTextColor}`}>
+                                            className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                            <DesktopComputerIcon
+                                                className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                aria-hidden="true"
+                                            />
                                             {capitalize(trans('e_learning'))}
                                         </Link>
                                     </div>
@@ -279,7 +319,11 @@ export default function() {
                                     settings.enable_products && <div className="flow-root">
                                         <Link
                                             href={route('frontend.product.index')}
-                                            className={`-m-2 p-2 block ${menuTextColor}`}>
+                                            className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                            <GiftIcon
+                                                className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                aria-hidden="true"
+                                            />
                                             {capitalize(trans('products'))}
                                         </Link>
                                     </div>
@@ -288,7 +332,11 @@ export default function() {
                                     settings.enable_cart && <div className="flow-root">
                                         <Link
                                             href={route('frontend.cart.index')}
-                                            className={`-m-2 p-2 block ${menuTextColor}`}>
+                                            className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                            <ShoppingBagIcon
+                                                className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                aria-hidden="true"
+                                            />
                                             {capitalize(trans('cart'))}
                                         </Link>
                                     </div>
@@ -297,36 +345,72 @@ export default function() {
                                     !auth || !auth.id ? <>
                                         <div className="flow-root">
                                             <Link href={route('frontend.user.logging')}
-                                                  className={`-m-2 p-2 block ${menuTextColor}`}>
+                                                  className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                                <LoginIcon
+                                                    className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                    aria-hidden="true"
+                                                />
                                                 {capitalize(trans('login'))}
                                             </Link>
                                         </div>
                                         {
                                             settings.enable_register ? <div className="flow-root">
                                                 <Link href={route('frontend.user.registration')}
-                                                      className={`-m-2 p-2 block ${menuTextColor}`}>
+                                                      className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                                    <LoginIcon
+                                                        className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                        aria-hidden="true"
+                                                    />
                                                     {capitalize(trans('register'))}
                                                 </Link>
                                             </div> : null
                                         }
-                                    </> : <div className="flow-root">
+                                    </> : <>
                                         {
-                                            auth.verified ? <Link href={route('frontend.user.edit', auth.id)}
-                                                                  className="-m-2 p-2 block  capitalize">
-                                                    {capitalize(trans('my_account'))}
-                                                </Link> :
-                                                <a href={route('frontend.user.edit', auth.id)}
-                                                   className={`-m-2 p-2 block ${menuTextColor}`}>
-                                                    {capitalize(trans('my_account'))}
-                                                </a>
+                                            auth.verified ? <div className="flow-root">
+                                                    <Link href={route('frontend.user.edit', auth.id)}
+                                                          className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                                        <UsersIcon
+                                                            className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                            aria-hidden="true"
+                                                        />
+                                                        {capitalize(trans('my_account'))}
+                                                    </Link></div> :
+                                                <div className="flow-root">
+                                                    <a href={route('frontend.user.edit', auth.id)}
+                                                       className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                                        <UsersIcon
+                                                            className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                            aria-hidden="true"
+                                                        />
+                                                        {capitalize(trans('my_account'))}
+                                                    </a>
+                                                </div>
                                         }
 
-                                    </div>
+                                    </>
+                                }
+                                {
+                                    isAdminOrAbove && auth && auth.id ?
+                                        <div className="flow-root">
+                                            <Link href={route('backend.home')}
+                                                  className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                                <LockClosedIcon
+                                                    className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                    aria-hidden="true"
+                                                />
+                                                {capitalize(trans('dashboard'))}
+                                            </Link></div>
+                                         : null
                                 }
                                 <div className="flow-root">
                                     <Link
                                         href={route('frontend.contactus')}
-                                        className={`-m-2 p-2 block ${textColor} ${menuTextColor}`}>
+                                        className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                        <PhoneIncomingIcon
+                                            className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                            aria-hidden="true"
+                                        />
                                         {capitalize(trans('contactus'))}
                                     </Link>
                                 </div>
@@ -334,7 +418,11 @@ export default function() {
                                     settings.enable_faqs && <div className="flow-root">
                                         <Link
                                             href={route('frontend.faqs')}
-                                            className={`-m-2 p-2 block ${menuTextColor}`}>
+                                            className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                            <AnnotationIcon
+                                                className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                aria-hidden="true"
+                                            />
                                             {capitalize(trans('faqs'))}
                                         </Link>
                                     </div>
@@ -344,7 +432,11 @@ export default function() {
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.terms')}
-                                            className={`-m-2 p-2 block ${menuTextColor}`}>
+                                            className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                            <ClipboardListIcon
+                                                className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                aria-hidden="true"
+                                            />
                                             {capitalize(trans('terms'))}
                                         </Link>
                                     </div>
@@ -354,7 +446,11 @@ export default function() {
                                     <div className="flow-root">
                                         <Link
                                             href={route('frontend.polices')}
-                                            className={`-m-2 p-2 block ${menuTextColor}`}>
+                                            className={`-m-2 p-2 block ${menuTextColor} flex flex-row items-center`}>
+                                            <ClipboardListIcon
+                                                className={`flex-shink-0 h-6 w-6 mx-3 cursor-pointer ${menuTextColor}`}
+                                                aria-hidden="true"
+                                            />
                                             {capitalize(trans('policies'))}
                                         </Link>
                                     </div>
@@ -1062,7 +1158,8 @@ export default function() {
                                                         )}
                                                     </Menu.Item>
                                                     {
-                                                        (auth.role.is_author || auth.role.is_company) && auth.access_dashboard && <Menu.Item>
+                                                        (auth.role.is_author || auth.role.is_company) && auth.access_dashboard &&
+                                                        <Menu.Item>
                                                             {({active}) => (
                                                                 <Link
                                                                     href={route('backend.home')}

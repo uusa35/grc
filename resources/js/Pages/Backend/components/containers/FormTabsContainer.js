@@ -45,7 +45,7 @@ const FormTabsContainer = ({children}) => {
                                             tab.id === currentFormTab.id
                                                 ? 'border-green-900 text-green-900 border-b-2'
                                                 : 'border-transparent  text-gray-500 hover:text-gray-800 hover:border-gray-200',
-                                            'whitespace-nowrap flex p-4 rounded-t  font-medium flex items-center justify-center '
+                                            'whitespace-nowrap flex p-4 rounded-t  font-medium flex items-center justify-center capitalize'
                                         )}
                                         aria-current={tab.name ? 'page' : undefined}
                                     >

@@ -1,4 +1,4 @@
-import {useContext, useMemo, useState} from "react";
+import React, {useContext, useMemo, useState} from "react";
 import {AppContext} from "../../../../context/AppContext";
 import {isEmpty, map} from 'lodash';
 import {useDispatch} from "react-redux";
@@ -7,10 +7,11 @@ import Gallery from "react-grid-gallery";
 import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js';
 
-export default function ImagesList({images}) {
+const  ImagesList = ({images}) => {
     const {trans, getThumb, getLarge} = useContext(AppContext);
     const dispatch = useDispatch()
     const [currentImages, setCurrentImages] = useState([]);
+
     useMemo(() => {
         const prepareImages = []
         map(images, img => {
@@ -21,13 +22,12 @@ export default function ImagesList({images}) {
 
     return (
         <>
-            {!isEmpty(images) && <Gallery images={currentImages}/>}
+            {!isEmpty(images) && !isEmpty(currentImages) && <Gallery images={currentImages} />}
             {!isEmpty(images) && images ? <ul role="list"
                                               className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-6 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
                     {map(images, img => (
                         <li key={img.id} className="flex flex-col">
                             <div className="flex flex-row  w-full justify-between items-center">
-
                                 <button
                                     onClick={() => {
                                         dispatch(showModal({
@@ -38,7 +38,7 @@ export default function ImagesList({images}) {
                                             message: `${trans('confirmation')} ${trans('destroy')} ${trans('image')}`,
                                         }))
                                     }}
-                                    type="button"
+                                    type={`button`}
                                 >
                                     {/*<span className="sr-only">View details for {img.title}</span>*/}
                                     <span
@@ -98,3 +98,5 @@ export default function ImagesList({images}) {
         </>
     )
 }
+
+export default React.memo(ImagesList);

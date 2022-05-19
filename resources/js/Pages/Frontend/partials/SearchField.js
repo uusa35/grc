@@ -124,7 +124,7 @@ const SearchField = () => {
                             name="search"
                             maxLength={20}
                             id="search"
-                            className={classNames(locale.isRTL ? `rounded-r-md` : `rounded-l-md `, `font-bold focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm  border-${headerColor}-50  dark:border-${headerColor}-400`)}
+                            className={classNames(locale.isRTL ? `rounded-r-md` : `rounded-l-md `, `font-bold focus:ring-gray-200 focus:border-gray-200 block w-full px-2 sm:text-sm  border-${headerColor}-50  dark:border-${headerColor}-400 capitalize`)}
                             placeholder={`${trans('search')}`}
                         />
                     </form>
