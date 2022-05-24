@@ -184,14 +184,10 @@ export default React.memo(function({
                         aria-hidden="true" className="absolute inset-0 bg-gray-900 bg-opacity-50 rounded-lg"/>
                     <div className="relative max-w-3xl mx-auto flex flex-col items-center text-center">
                         <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                            لماذا وساطة وضمان ؟
+                            {trans('why_wasata_we_daman')}
                         </h2>
                         <p className="mt-3 text-xl text-white leading-loose">
-
-                            تهدف شركة #وساطة_وضمان_للتجارة التميز والارتقاء لمستوى تطلعات عملائها وبناء شراكة مستمرة
-                            توفر خدمة توريد المستلزمات الغير غذائية من عبوات التعبئة والتغليف إلى المطاعم والمقاهي
-                            مباشرة من المصانع حول العالم لتتميز في خدمة العميل بسعر وتكاليف مخفضة ومنتجات ذات جودة
-                            عالية .
+                            {trans('why_wasata_we_daman_content')}
                         </p>
                         <Link
                             href={route('frontend.aboutus')}
@@ -246,11 +242,10 @@ export default React.memo(function({
                                 <div
                                     className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
                                     <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-                                        خدمة التوريد المباشر
+                                        {trans('direct_supply')}
                                     </p>
                                     <p className="mt-5 mx-auto max-w-prose text-xl text-gray-500">
-                                        نهدف الى توفير منتجات التعبئة والتغليف لعملائنا بأعلى جودة وأفضل سعر، بجميع
-                                        الكميات والأشكال والمقاسات المطلوبة
+                                        {trans("direct_supply_message")}
                                     </p>
                                 </div>
                                 <div
@@ -346,13 +341,10 @@ export default React.memo(function({
                             <div
                                 className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
                                 <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
-                                    بعض المنتجات
+                                    {trans('some_products')}
                                 </p>
                                 <p className="mt-5 mx-auto max-w-prose text-xl text-gray-500">
-                                    تشكيلة كبيرة ومتنوّعة من الأشكال والمقاسات لمنتجات التعبئة والتغليف
-                                    الغذائية التي تضمن تغطية احتياجات جميع عملائنا بالمملكة العربية السعودية
-                                    والشرق الأوسط
-
+                                    {trans('some_products_message')}
                                 </p>
                             </div>
                             <div
@@ -412,7 +404,7 @@ export default React.memo(function({
                             </div>
                             <div className="relative py-32">
                                 <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
-                                    خدمـات متكاملة
+                                    {trans('complete_services')}
                                 </h1>
                                 <div className="mt-4 sm:mt-6">
                                     <a

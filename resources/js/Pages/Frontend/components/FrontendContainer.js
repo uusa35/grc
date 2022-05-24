@@ -36,7 +36,6 @@ const FrontendContainer = ({children}) => {
         currentHome,
         mainColor,
         getLarge,
-        getLocalized
     } = useContext(AppContext);
 
     return (
@@ -51,7 +50,7 @@ const FrontendContainer = ({children}) => {
             {/*<ConfirmationModal/>*/}
             {/*{isLoading && <LoadingView/>}*/}
             <MetaElement/>
-            {appName === 'istores' ? <IstoresMainNav/> : (appName === 'mgt' ? <MgtMainNav/> : <MainNav/>)}
+            {appName === 'istores' ? <IstoresMainNav/> : (appName.includes('mgt') ? <MgtMainNav/> : <MainNav/>)}
             <div className="hidden lg:flex z-0 absolute inset-0 min-w-full">
                 {
                     settings.wide_screen ? <img

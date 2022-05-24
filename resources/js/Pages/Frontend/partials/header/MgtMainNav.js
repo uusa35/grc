@@ -419,34 +419,66 @@ export default function() {
                                 </Link>
                                 <a
                                     href={`/#why_us`}
-                                    className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                    className={classNames(parentModule == 'why_us' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                 >
                                     {capitalize(trans('about_us'))}
                                 </a>
-                                <a
-                                    href={`/#our_shop`}
-                                    className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
-                                >
-                                    {capitalize(trans('our_shop'))}
-                                </a>
-                                <a
-                                    href={`/#our_products`}
-                                    className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
-                                >
-                                    {capitalize(trans('our_products'))}
-                                </a>
-                                <a
-                                    href={`/#direct_shipment`}
-                                    className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
-                                >
-                                    {capitalize(trans('direct_shipment'))}
-                                </a>
-                                <Link
-                                    href={route('frontend.vacancies')}
-                                    className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
-                                >
-                                    {capitalize(trans('vacancies'))}
-                                </Link>
+                                { appName === 'mgt-egy' ?
+                                    <>
+                                    <a
+                                        href={`/#our_vision`}
+                                        className={classNames(parentModule == 'our_vision' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                    >
+                                        {capitalize(trans('our_vision'))}
+                                    </a>
+                                        <a
+                                            href={`/#our_goals`}
+                                            className={classNames(parentModule == 'our_goals' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('our_goals'))}
+                                        </a>
+                                        <a
+                                            href={`/#our_message`}
+                                            className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('our_message'))}
+                                        </a>
+                                        <a
+                                            href={`/#our_clients`}
+                                            className={classNames(parentModule == 'our_clients' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('our_clients'))}
+                                        </a>
+                                    </>: null
+                                }
+                                {
+                                    appName === 'mgt' ? <>
+                                        <a
+                                        href={`/#our_shop`}
+                                        className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                    >
+                                        {capitalize(trans('our_shop'))}
+                                    </a>
+                                        <a
+                                            href={`/#our_products`}
+                                            className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('our_products'))}
+                                        </a>
+                                        <a
+                                            href={`/#direct_shipment`}
+                                            className={classNames(parentModule == 'direct_shipment' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('direct_shipment'))}
+                                        </a>
+                                        <Link
+                                            href={route('frontend.vacancies')}
+                                            className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('vacancies'))}
+                                        </Link>
+                                    </>: null
+                                }
                                 {
                                     settings.enable_joinus ? <Link
                                         href={route('frontend.joinus')}
