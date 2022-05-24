@@ -54,7 +54,7 @@ export default function({translation }) {
                                 {trans('ar')}
                             </label>
                             <div className="mt-1">
-                                <input
+                                <textarea
                                     onChange={handleChange}
                                     required
                                     type="text"
@@ -62,6 +62,8 @@ export default function({translation }) {
                                     defaultValue={translation.ar}
                                     id="ar"
                                     autoComplete="ar"
+                                    maxLength={5000}
+                                    rows={10}
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 />
                             </div>
@@ -76,7 +78,7 @@ export default function({translation }) {
                                 {trans('en')}
                             </label>
                             <div className="mt-1">
-                                <input
+                                <textarea
                                     onChange={handleChange}
                                     required
                                     type="text"
@@ -84,6 +86,8 @@ export default function({translation }) {
                                     defaultValue={translation.en}
                                     id="en"
                                     autoComplete="en"
+                                    maxLength={5000}
+                                    rows={10}
                                     className={`shadow-sm focus:ring-gray-500 focus:border-gray-500 block w-full border-gray-300 rounded-md`}
                                 />
                             </div>
