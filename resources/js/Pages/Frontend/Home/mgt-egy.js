@@ -174,8 +174,7 @@ export default React.memo(function({
                         aria-hidden="true" className="absolute inset-0 bg-gray-900 bg-opacity-50 rounded-lg"/>
                     <div className="relative max-w-3xl mx-auto flex flex-col items-center text-center">
                         <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                            Egypt
-                            {trans('why_wasata_we_daman')}
+                            {trans('why_wasata_we_daman_title')}
                         </h2>
                         <p className="mt-3 text-xl text-white leading-loose">
                             {trans('why_wasata_we_daman_content')}
