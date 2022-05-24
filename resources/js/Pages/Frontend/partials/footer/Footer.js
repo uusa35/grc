@@ -11,7 +11,7 @@ import {Inertia} from "@inertiajs/inertia";
 
 export default function () {
     const {getLocalized, getThumb, trans, guest, baseUrl, isAdminOrAbove, footerColor , footerBgColor, footerTextColor } = useContext(AppContext)
-    const {auth, settings} = useContext(GlobalContext);
+    const {auth, settings, appName } = useContext(GlobalContext);
     const {errors} = usePage().props;
     const {data, setData, put, progress, reset} = useForm({
         'email': '',
@@ -73,37 +73,41 @@ export default function () {
                                     </li> : null
                             }
                             {
-                                settings[getLocalized('polices')] && size(settings[getLocalized('polices')]) > 50 ?
-                                    <li>
-                                        <Link href={route('frontend.polices')}
-                                              className={`${footerTextColor}`}>
-                                            {trans('polices')}
-                                        </Link>
-                                    </li> : null
-                            }
-                            {
-                                settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ? <li>
-                                    <Link href={route('frontend.terms')}
-                                          className={`${footerTextColor}`}>
-                                        {trans('terms')}
-                                    </Link>
-                                </li> : null
-                            }
-                            {
-                                settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ? <li>
-                                    <Link href={route('frontend.polices')}
-                                          className={`${footerTextColor}`}>
-                                        {trans('polices')}
-                                    </Link>
-                                </li> : null
-                            }
-                            {
-                                settings.enable_faqs ? <li>
-                                    <Link href={route('frontend.faqs')}
-                                          className={`${footerTextColor}`}>
-                                        {trans('faqs')}
-                                    </Link>
-                                </li> : null
+                                !appName.includes('mgt') ? <>
+                                    {
+                                        settings[getLocalized('polices')] && size(settings[getLocalized('polices')]) > 50 ?
+                                            <li>
+                                                <Link href={route('frontend.polices')}
+                                                      className={`${footerTextColor}`}>
+                                                    {trans('polices')}
+                                                </Link>
+                                            </li> : null
+                                    }
+                                    {
+                                        settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 ? <li>
+                                            <Link href={route('frontend.terms')}
+                                                  className={`${footerTextColor}`}>
+                                                {trans('terms')}
+                                            </Link>
+                                        </li> : null
+                                    }
+                                    {
+                                        settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 ? <li>
+                                            <Link href={route('frontend.polices')}
+                                                  className={`${footerTextColor}`}>
+                                                {trans('polices')}
+                                            </Link>
+                                        </li> : null
+                                    }
+                                    {
+                                        settings.enable_faqs ? <li>
+                                            <Link href={route('frontend.faqs')}
+                                                  className={`${footerTextColor}`}>
+                                                {trans('faqs')}
+                                            </Link>
+                                        </li> : null
+                                    }
+                                </> : null
                             }
                             {
                                 settings.enable_joinus ? <li>

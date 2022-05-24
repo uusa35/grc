@@ -325,35 +325,6 @@ export default function() {
                                         {capitalize(trans('contactus'))}
                                     </Link>
                                 </div>
-                                {
-                                    settings.enable_faqs && <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.faqs')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('faqs'))}
-                                        </Link>
-                                    </div>
-                                }
-                                {
-                                    settings[getLocalized('terms')] && size(settings[getLocalized('terms')]) > 50 &&
-                                    <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.terms')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('terms'))}
-                                        </Link>
-                                    </div>
-                                }
-                                {
-                                    settings[getLocalized('policy')] && size(settings[getLocalized('policy')]) > 50 &&
-                                    <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.polices')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('policies'))}
-                                        </Link>
-                                    </div>
-                                }
                                 <div className="flow-root">
                                     <Link
                                         onClick={() => {
