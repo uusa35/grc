@@ -1,4 +1,4 @@
-import {Fragment, useContext, useMemo, useState, useEffect} from 'react'
+import React, {Fragment, useContext, useMemo, useState, useEffect} from 'react'
 import {Dialog, Popover, Tab, Transition, Menu,} from '@headlessui/react'
 import {
     MenuIcon,
@@ -171,7 +171,7 @@ export default function() {
             {/* Mobile menu */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div"
-                        className={classNames(locale.isRTL ? `right-0` : `left-0`, "fixed inset-0  flex z-40 lg:hidden")}
+                        className={classNames(locale.isRTL ? `right-0` : `left-0`, "fixed inset-y-0  flex z-40 lg:hidden")}
                         onClose={setOpen}>
                     <Transition.Child
                         as={Fragment}
@@ -190,7 +190,7 @@ export default function() {
                         enter="transition ease-in-out duration-300 transform"
                         // enterFrom="-translate-x-full"
                         // enterTo="translate-x-0"
-                        leave="transition ease-in-out duration-300 transform"
+                        // leave="transition ease-in-out duration-300 transform"
                         // leaveFrom="translate-x-0"
                         // leaveTo="-translate-x-full"
                     >
