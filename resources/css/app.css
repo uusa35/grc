@@ -32,6 +32,62 @@
         font-weight: bold;
         font-style: normal;
     }
+    @font-face {
+        font-family: 'uthmanic';
+        src: url('../../public/fonts/UthmanicHafs1 Ver09.otf') format('truetype');
+        font-size: 16px;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'conv_thesansarab-bold';
+        src: url(../../public/fonts/TheSansArab-Bold.eot);
+        src: local('â˜º'), url(../../public/fonts/TheSansArab-Bold.ttf) format('truetype'), url(../../public/fonts/TheSansArab-Bold.svg) format('svg');
+        font-weight: 200;
+        font-style: normal
+    }
+
+    @font-face {
+        font-family: 'Droid Arabic Naskh';
+        font-style: normal;
+        font-weight: 400;
+        src: url(../../public/fonts/DroidNaskh-Regular.eot);
+        src: url(../../public/fonts/DroidNaskh-Regular.eot?#iefix) format('embedded-opentype'),
+        url(../../public/fonts/DroidNaskh-Regular.woff2) format('woff2'),
+        url(../../public/fonts/DroidNaskh-Regular.woff) format('woff'),
+        url(../../public/fonts/DroidNaskh-Regular.ttf) format('truetype');
+    }
+    @font-face {
+        font-family: 'Droid Arabic Naskh';
+        font-style: normal;
+        font-weight: 700;
+        src: url(../../public/fonts/DroidNaskh-Bold.eot);
+        src: url(../../public/fonts/DroidNaskh-Bold.eot?#iefix) format('embedded-opentype'),
+        url(../../public/fonts/DroidNaskh-Bold.woff2) format('woff2'),
+        url(../../public/fonts/DroidNaskh-Bold.woff) format('woff'),
+        url(../../public/fonts/DroidNaskh-Bold.ttf) format('truetype');
+    }
+
+    @font-face{
+        font-family:'cocon';
+        src:url('../../public/fonts/cocon.eot?v=4.1.0');
+        src:url('../../public/fonts/cocon.eot?#iefix&v=4.1.0') format('embedded-opentype'),
+        url('../../public/fonts/cocon.woff?v=4.1.0') format('woff'),
+        url('../../public/fonts/cocon.ttf?v=4.1.0') format('truetype'),
+        url('../../public/fonts/cocon.svg?v=4.1.0#fontawesomeregular') format('svg');
+        font-weight:700;
+        font-style:normal
+    }
+
+    @font-face {
+        font-family:'MhgozFont';
+        src: url('../../public/fonts/MHGOZ-Light.eot');
+        src: local('?'), url('../../public/fonts/MHGOZ-Light.woff') format('woff'),
+        url('../../public/fonts/MHGOZ-Light.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
 
     /*@font-face {*/
     /*    font-family: 'Tajawal-Light';*/
@@ -192,6 +248,26 @@
 
 .font-tajwal-medium {
     font-family: 'Tajawal-Medium', 'sans-serif';
+}
+
+.font-uthman {
+    font-family: 'uthmanic', 'sans-serif';
+}
+
+.font-sansarab {
+    font-family: 'conv_thesansarab-bold', 'sans-serif';
+}
+
+.font-droid {
+    font-family: 'Droid Arabic Naskh', 'sans-serif';
+}
+
+.font-cocon {
+    font-family: 'cocon', 'sans-serif';
+}
+
+.font-goz {
+    font-family: 'MhgozFont', 'sans-serif';
 }
 
 .share-icons {
