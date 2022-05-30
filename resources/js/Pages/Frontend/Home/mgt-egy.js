@@ -53,48 +53,12 @@ export default React.memo(function({
             imageAlt: '',
         },
         {
-            id : 2,
-            name: 'منتجات القصدير بأنواعها',
-            href: '#',
-            price: '',
-            description: '',
-            imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvr_SUXMAQnv6k.jpeg',
-            imageAlt: '',
-        },
-        {
-            id : 3,
-            name: 'أطباق آمنه للميكرويف',
-            href: '#',
-            price: '',
-            description: '',
-            imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvr06wX0AUNZjL.jpeg',
-            imageAlt: '',
-        },
-        {
-            id : 4,
-            name: 'حامل الأكواب',
-            href: '#',
-            price: '',
-            description: '',
-            imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvtPBYXEAIcWpl.jpeg',
-            imageAlt: '',
-        },
-        {
             id : 5,
             name: 'جميع الأحجام والمقاسات المختلفة',
             href: '#',
             price: '',
             description: '',
             imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvsSXEXoAYXT4g.jpeg',
-            imageAlt: '',
-        },
-        {
-            id : 6,
-            name: 'قفازات البلاستيك الآمنة',
-            href: '#',
-            price: '',
-            description: '',
-            imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvsV2GWUAEEgxQ.jpeg',
             imageAlt: '',
         },
         {
@@ -295,7 +259,7 @@ export default React.memo(function({
                                         <img
                                             className="object-cover lg:h-full lg:w-full"
                                             // src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/269779541_139101728485694_7997432037786870327_n-1.jpeg"
-                                            src="http://wp.mgt-sa.com/wp-content/uploads/2022/04/3.jpeg"
+                                            src="https://scontent.fkwi5-2.fna.fbcdn.net/v/t39.30808-6/269676257_145706081158592_8309270007869535442_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=730e14&_nc_ohc=6FdCtO575hcAX_eYYGt&_nc_ht=scontent.fkwi5-2.fna&oh=00_AT-k0V9OqjTziXp23I5rhKEVJTxT6idOXGRXyG4VtlIzOA&oe=62997948"
                                             alt=""
                                         />
                                     </div>
@@ -376,7 +340,7 @@ export default React.memo(function({
 
 
                     {/* products */}
-                    <div id={`our_products`} className="relative bg-gray-50 py-16 anchorBehave hidden">
+                    <div id={`our_products`} className="relative bg-gray-50 py-16 anchorBehave ">
                         <div className="relative">
                             <div
                                 className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">

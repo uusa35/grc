@@ -420,10 +420,16 @@ export default function() {
                                         >
                                             {capitalize(trans('our_clients'))}
                                         </a>
+                                        <a
+                                            href={`/#our_products`}
+                                            className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        >
+                                            {capitalize(trans('our_products'))}
+                                        </a>
                                     </>: null
                                 }
                                 {
-                                    appName === 'mgt' ? <>
+                                    appName === 'mgt'  ? <>
                                         <a
                                         href={`/#our_shop`}
                                         className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
@@ -450,6 +456,7 @@ export default function() {
                                         </Link>
                                     </>: null
                                 }
+
                                 {
                                     settings.enable_joinus ? <Link
                                         href={route('frontend.joinus')}
