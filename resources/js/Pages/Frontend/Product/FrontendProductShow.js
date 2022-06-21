@@ -859,6 +859,7 @@ export default function({element, relatedElements, auth, settings}) {
                                 </div>
                                 <Tab.Panels as={Fragment}>
                                     {/* description */}
+                                    {/* categories */}
                                     {
                                         !isNull(element[getLocalized('description')]) && size(element[getLocalized('description')]) > 5 &&
                                         <Tab.Panel as="dl" className="text-sm text-gray-500 h-60">
@@ -868,6 +869,7 @@ export default function({element, relatedElements, auth, settings}) {
                                                     <p>{element[getLocalized('description')]}</p>
                                                     <p className={`mt-2`}>
                                                         {trans('categories')} : {map(element.categories, c => <Link
+                                                        key={c.id}
                                                         className={`mx-2 p-3 bg-gray-100 rounded-md`}
                                                         href={route('frontend.product.index', {category_id: c.id})}>{c[getLocalized()]}
                                                     </Link>)}

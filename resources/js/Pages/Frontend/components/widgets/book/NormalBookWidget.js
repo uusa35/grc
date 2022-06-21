@@ -25,7 +25,7 @@ const NormalBookWidget = ({element})  => {
                         />
                         <img
                             src={getThumb(element.image)}
-                            alt={element[getLocalized()]}œ
+                            alt={element[getLocalized()]}
                             className="w-full object-cover object-bottom rounded-t-md"
                             width={480}
                             height={360}

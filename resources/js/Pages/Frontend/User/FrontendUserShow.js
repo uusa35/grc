@@ -6,9 +6,9 @@ import {
 } from '@heroicons/react/outline'
 import {AppContext} from "../../context/AppContext";
 import FrontendContainer from "../components/FrontendContainer";
-import {map, isNull, size, isEmpty, filter} from 'lodash';
+import {map, filter} from 'lodash';
 import ElementTags from "../components/widgets/ElementTags";
-import RelatedItems from "../components/widgets/RelatedItems";
+// import RelatedItems from "../components/widgets/RelatedItems";
 import ImageGallery from 'react-image-gallery';
 import ElementRating from "../components/widgets/ElementRating";
 import {isMobile} from "react-device-detect";
@@ -16,15 +16,14 @@ import GlobalContext from "../../context/GlobalContext";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import SocialIconShare from "../partials/SocialIconShare";
-import {MailIcon, PhoneIcon} from '@heroicons/react/outline'
-import {FaWhatsapp, FaTwitter, FaFacebook, FaInstagram, FaYoutube, FaLocationArrow} from 'react-icons/fa';
+import {PhoneIcon} from '@heroicons/react/outline'
+import {FaWhatsapp, FaTwitter, FaFacebook, FaLocationArrow} from 'react-icons/fa';
 import {getWhatsappLink} from "../../helpers";
 import NormalProductWidget from "../components/widgets/product/NormalProductWidget";
 import NormalBookWidget from "../components/widgets/book/NormalBookWidget";
 import {setMenuBg} from "../../redux/actions";
 import {useDispatch} from "react-redux";
 import FrontendPagination from "../partials/FrontendPagination";
-import SearchIndexSideBar from "../partials/SearchIndexSideBar";
 import NoElements from "../../Backend/components/widgets/NoElements";
 import SearchUserShowSideBar from "../partials/SearchUserShowSideBar";
 import UserShowSearchSideBarMobile from "../partials/UserShowSearchSideBarMobile";

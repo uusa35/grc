@@ -1,12 +1,11 @@
 import React, {Fragment, useContext} from "react";
-import {Dialog, Disclosure, Transition, Menu} from '@headlessui/react'
+import {Dialog,Transition} from '@headlessui/react'
 import {XIcon} from "@heroicons/react/outline";
 import {map, range} from "lodash";
-import {ChevronDownIcon, PlusSmIcon} from "@heroicons/react/solid";
 import {Link} from "@inertiajs/inertia-react";
 import route from "ziggy-js";
 import {AppContext} from "../../context/AppContext";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import GlobalContext from "../../context/GlobalContext";
 
 export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpen, id, enablePrice = false  }) {
@@ -98,7 +97,7 @@ export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpe
                                         </div>
                                         {/* price search */}
                                         {
-                                            enablePrice && settings.enable_prices && <>
+                                            enablePrice && settings.enable_prices ? <>
                                                 <div className="flex pt-3">
                                                     <h3 className={`capitalize ${textColor}`}>{trans('prices')}</h3>
                                                 </div>
@@ -144,7 +143,7 @@ export default function ({ setMobileFiltersOpen  , categories , mobileFiltersOpe
                                                         </div>
                                                     )}
 
-                                            </>
+                                            </> : null
                                         }
 
                                         <div className="flex pt-3">

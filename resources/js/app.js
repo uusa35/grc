@@ -1,5 +1,5 @@
-// import ReactDOM, {render} from 'react-dom'
-import { createRoot } from 'react-dom/client';
+// import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client';
 import {createInertiaApp} from '@inertiajs/inertia-react'
 import GlobalContext from "./Pages/context/GlobalContext";
 import {AppContextProvider} from "./Pages/context/AppContext";
@@ -32,11 +32,13 @@ createInertiaApp({
                         //     setTimeout(resolve, 2000))}
                     >
                         <AppContextProvider>
-                            <App {...props} />
+                            {/*<StrictMode>*/}
+                                <App {...props} />
+                            {/*</StrictMode>*/}
                         </AppContextProvider>
                     </PersistGate>
                 </Provider>
             </GlobalContext.Provider>
-            )
+        )
     }
 });
