@@ -127,7 +127,7 @@ const currentVariants = {
     hidden: {opacity: 0.4, scale: 0.9}
 };
 
-export default React.memo(function({
+export default function({
                                        slides,
                                        newOnHomeProducts
                                    }) {
@@ -479,5 +479,5 @@ export default React.memo(function({
             </FrontendContentContainer>
         </FrontendContainer>
     )
-})
+}
 

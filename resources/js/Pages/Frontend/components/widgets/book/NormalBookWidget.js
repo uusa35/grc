@@ -61,4 +61,4 @@ const NormalBookWidget = ({element})  => {
     );
 }
 
-export default React.memo(NormalBookWidget);
+export default NormalBookWidget;

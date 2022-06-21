@@ -99,4 +99,4 @@ const  ImagesList = ({images}) => {
     )
 }
 
-export default React.memo(ImagesList);
+export default ImagesList;

@@ -63,4 +63,4 @@ const InformationBtns =  () =>  {
 }
 
 
-export default React.memo(InformationBtns);
+export default InformationBtns;

@@ -54,4 +54,4 @@ const  NormalServiceWidget = ({element}) => {
     );
 }
 
-export default React.memo(NormalServiceWidget)
+export default NormalServiceWidget

@@ -7,7 +7,7 @@ import {filter, map} from 'lodash';
 import CategoryWidget from "../components/widgets/category/CategoryWidget";
 
 
-export default React.memo(function({
+export default function({
                                        slides,
                                        settings,
                                        categories
@@ -40,5 +40,5 @@ export default React.memo(function({
             </FrontendContentContainer>
         </FrontendContainer>
     )
-})
+}
 

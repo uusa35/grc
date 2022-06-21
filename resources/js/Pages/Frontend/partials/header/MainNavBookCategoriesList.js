@@ -166,4 +166,4 @@ function MainNavBookCategoriesList({categories, type = 'book'}) {
     );
 }
 
-export default React.memo(MainNavBookCategoriesList);
+export default MainNavBookCategoriesList;

@@ -17,7 +17,7 @@ import pluralize from 'pluralize'
 import {getWhatsappLink} from "../../helpers";
 import {FaWhatsapp, FaInbox} from "react-icons/fa";
 
-export default React.memo(function({elements, roles}) {
+export default function({elements, roles}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
@@ -525,5 +525,5 @@ export default React.memo(function({elements, roles}) {
             </div>
         </BackendContainer>
     );
-})
+}
 

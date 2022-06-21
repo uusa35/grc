@@ -112,4 +112,4 @@ function FrontendBreadCrumbs({ childName = '', parentModuleName = null}) {
 }
 
 
-export default React.memo(FrontendBreadCrumbs)
+export default FrontendBreadCrumbs

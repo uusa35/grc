@@ -11,7 +11,7 @@ import ActiveDot from "../components/widgets/ActiveDot";
 import {useDispatch, useSelector} from "react-redux";
 
 
-export default React.memo(function({elements}) {
+export default function({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
@@ -339,5 +339,5 @@ export default React.memo(function({elements}) {
             </div>
         </BackendContainer>
     );
-})
+}
 

@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {showModal, toggleSort} from "../../redux/actions";
 
 
-export default React.memo(function ServiceIndex({elements}) {
+export default function ServiceIndex({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
@@ -395,5 +395,5 @@ export default React.memo(function ServiceIndex({elements}) {
             </div>
         </BackendContainer>
     );
-})
+}
 

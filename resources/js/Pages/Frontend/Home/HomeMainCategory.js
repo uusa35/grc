@@ -50,4 +50,4 @@ const HomeMainCategory = ({element = {}}) => {
     )
 }
 
-export default React.memo(HomeMainCategory);
+export default HomeMainCategory;

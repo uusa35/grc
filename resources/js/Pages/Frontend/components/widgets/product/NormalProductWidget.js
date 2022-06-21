@@ -85,4 +85,4 @@ const NormalProductWidget = ({element}) => {
 }
 
 
-export default React.memo(NormalProductWidget);
+export default NormalProductWidget;

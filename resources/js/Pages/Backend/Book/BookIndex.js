@@ -14,7 +14,7 @@ import TableViewIcon from "@mui/icons-material/TableView";
 import ToolTipWidget from "../components/widgets/ToolTipWidget";
 
 
-export default React.memo(function ({elements}) {
+export default function ({elements}) {
     const [currentData, setCurrentData] = useState();
     const {
         trans,
@@ -369,5 +369,5 @@ export default React.memo(function ({elements}) {
             </div>
         </BackendContainer>
     );
-})
+}
 

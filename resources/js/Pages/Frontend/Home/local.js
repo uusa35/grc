@@ -9,7 +9,7 @@ import {filter, isEmpty, map} from 'lodash';
 import GlobalContext from "../../context/GlobalContext";
 
 
-export default function ecommerce({
+export default function ({
                                      slides,
                                      newOnHomeBooks,
                                      newOnHomeCourses,

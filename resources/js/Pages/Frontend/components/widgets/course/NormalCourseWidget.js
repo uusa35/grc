@@ -60,4 +60,4 @@ const NormalCourseWidget =  ({ element }) =>  {
     );
 }
 
-export default React.memo(NormalCourseWidget);
+export default NormalCourseWidget;

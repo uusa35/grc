@@ -103,4 +103,4 @@ const VerticalProductWidget = ({element}) => {
     );
 }
 
-export default React.memo(VerticalProductWidget);
+export default VerticalProductWidget;

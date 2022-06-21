@@ -49,4 +49,4 @@ const CategoryWidget = ({element, type = 'book', showTitle = true}) => {
     );
 };
 
-export default React.memo(CategoryWidget);
+export default CategoryWidget;

@@ -21,4 +21,4 @@ const SystemMessage = () => {
         <Fragment></Fragment>
     );
 }
-export default React.memo(SystemMessage);
+export default SystemMessage;

@@ -10,7 +10,7 @@ import HomeMainCategory from "./HomeMainCategory";
 import GlobalContext from "../../context/GlobalContext";
 
 
-export default React.memo(function ({
+export default function ({
                                      slides,
                                      homeCategories,
                                      newOnHomeBooks,
@@ -122,5 +122,5 @@ export default React.memo(function ({
             </FrontendContentContainer>
         </FrontendContainer>
     )
-})
+}
 

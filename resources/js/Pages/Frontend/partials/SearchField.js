@@ -152,4 +152,4 @@ const SearchField = () => {
     );
 }
 
-export default React.memo(SearchField)
+export default SearchField

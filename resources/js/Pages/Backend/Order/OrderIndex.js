@@ -16,7 +16,7 @@ import ToolTipWidget from "../components/widgets/ToolTipWidget";
 import {getWhatsappLink} from "../../helpers";
 
 
-export default React.memo(function({elements}) {
+export default function({elements}) {
     const [currentData, setCurrentData] = useState();
     const [currentDate, setCurrentDate] = useState(moment().format('DD-MM-Y'))
     const {
@@ -608,5 +608,5 @@ export default React.memo(function({elements}) {
             </div>
         </BackendContainer>
     );
-})
+}
 

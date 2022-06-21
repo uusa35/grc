@@ -9,7 +9,7 @@ import {filter, isEmpty, map} from 'lodash';
 import GlobalContext from "../../context/GlobalContext";
 
 
-export default React.memo(function ({
+export default function ({
                                      slides,
                                      newOnHomeBooks,
                                      newOnHomeCourses,
@@ -119,5 +119,5 @@ export default React.memo(function ({
             </FrontendContentContainer>
         </FrontendContainer>
     )
-})
+}
 

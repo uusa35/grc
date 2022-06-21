@@ -26,7 +26,8 @@ class ProductController extends Controller
     {
         $elements = new ProductCollection(Product::active()->filters($filters)->with('product_attributes', 'color', 'size')
             ->orderBy('order', 'desc')
-            ->paginate(Self::TAKE_LARGE)
+            ->paginate(Self::TAKE_LEAST)
+            ->setPath('')
             ->withQueryString());
         return $elements;
     }

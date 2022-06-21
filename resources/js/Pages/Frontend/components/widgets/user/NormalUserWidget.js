@@ -32,4 +32,4 @@ const NormalUserWidget =  ({ element }) => {
     );
 }
 
-export default React.memo(NormalUserWidget);
+export default NormalUserWidget;

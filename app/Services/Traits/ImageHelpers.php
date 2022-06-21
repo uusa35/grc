@@ -153,7 +153,6 @@ trait ImageHelpers
         }
     }
 
-
     /**
      * @param Model $model
      * @param Request $request
