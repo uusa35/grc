@@ -7,6 +7,7 @@ use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Services\Search\ProductFilters;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,11 +25,15 @@ class ProductController extends Controller
 
     public function search(ProductFilters $filters)
     {
+        if(request()->header('x-api-key') != 12345) {
+            return response()->json(['data' => 'NOT the key'], 400);
+        }
         $elements = new ProductCollection(Product::active()->filters($filters)->with('product_attributes', 'color', 'size')
             ->orderBy('order', 'desc')
             ->paginate(Self::TAKE_LEAST)
             ->setPath('')
             ->withQueryString());
+//        return response()->json([\request()->header('x-api-key')]);
         return $elements;
     }
 

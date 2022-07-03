@@ -53,6 +53,15 @@ trait HomeTrait
         return inertia('Frontend/Home/' . env('APP_NAME'), compact('slides', 'categoriesWithProducts'));
     }
 
+    public function getMgt()
+    {
+        $settings = Setting::whereId(1)->with(['slides' => function ($q) {
+            return $q->active()->orderby('order', 'asc');
+        }])->first();
+        $slides = SlideExtraLightResource::collection($settings->slides);
+        return inertia('Frontend/Home/' . env('APP_NAME'), compact('slides'));
+    }
+
     public function getDesktop(CategoryFilters $filters)
     {
         $validator = validator(request()->all(), ['search' => 'nullable']);

@@ -253,24 +253,6 @@ export default function() {
                                     </div>
                                 }
                                 {
-                                    settings.enable_courses && <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.course.index')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('e_learning'))}
-                                        </Link>
-                                    </div>
-                                }
-                                {
-                                    settings.enable_subscriptions && <div className="flow-root">
-                                        <Link
-                                            href={route('frontend.subscription.index')}
-                                            className={`-m-2 p-2 block `}>
-                                            {capitalize(trans('subscriptions'))}
-                                        </Link>
-                                    </div>
-                                }
-                                {
                                     settings.enable_products && <div className="flow-root">
                                         <Link
                                             href={route('frontend.product.index')}
@@ -420,11 +402,17 @@ export default function() {
                                         >
                                             {capitalize(trans('our_clients'))}
                                         </a>
+                                        {/*<a*/}
+                                        {/*    href={`/#our_products`}*/}
+                                        {/*    className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}*/}
+                                        {/*>*/}
+                                        {/*    {capitalize(trans('our_products'))}*/}
+                                        {/*</a>*/}
                                         <a
-                                            href={`/#our_products`}
-                                            className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            href={`/#our_services`}
+                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden 2xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
-                                            {capitalize(trans('our_products'))}
+                                            {capitalize(trans('our_services'))}
                                         </a>
                                     </>: null
                                 }

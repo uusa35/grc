@@ -21,7 +21,7 @@ export default function () {
                     {trans('joinus_message')}
                 </p>
                 <Link
-                    href={route('frontend.joinus')}
+                    href={route('frontend.joinus', { title : 'joinus'})}
                     className="mt-8 w-full block bg-white border border-transparent rounded-md py-3 px-8 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
                 >
                     {trans('joinus')}

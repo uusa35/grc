@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Resources\AuthExtraLightResource;
+use App\Http\Resources\UserLightResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,8 +41,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->post('user', function (Request $request) {
+    return UserLightResource::make($request->user());
 });
 
 

@@ -20,6 +20,8 @@ class UserExtraLightResource extends JsonResource
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
             'image' => $this->image,
+            'api_token' => $this->api_token,
+            'api_token_encrypted' => encrypt($this->api_token),
         ];
     }
 }

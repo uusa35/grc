@@ -19,6 +19,10 @@ class HomeController extends Controller
                 return $this->getGrc();
             case 'istores':
                 return $this->getIstores();
+            case 'mgt':
+                return $this->getMgt();
+            case 'mgt-egy':
+                return $this->getMgt();
 //            case 'desktop':
 //                return $this->getDesktop();
             default:

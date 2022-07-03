@@ -142,7 +142,7 @@ export default function() {
                                                             className="flex-shrink-0 w-6 h-6 text-teal-200 rtl:ml-5 ltr:mr-5"
                                                             aria-hidden="true"/>
                                                         <span className="ml-3">
-                                                <a target={`_blank`} href={`mailto:${settings.email}`}>
+                                                <a target={`_blank`} href={`mailto:${settings.email}`} className={`lowercase`}>
                                                     {settings.email}
                                                 </a>
                                             </span>

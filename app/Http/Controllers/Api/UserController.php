@@ -7,6 +7,7 @@ use App\Http\Resources\BookCollection;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserExtraLightResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Services\Search\UserFilters;
@@ -66,7 +67,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $element = new UserResource($user->load('role', 'images', 'ratings'));
+        $element = new UserExtraLightResource($user->load('role', 'images', 'ratings'));
         $books = BookCollection::make($element->books()->active()->paginate(SELF::TAKE_MIN));
         $products = ProductCollection::make($element->products()->active()->with('categories.children')->paginate(SELF::TAKE_MIN));
         $categories = CategoryCollection::make($products->pluck('categories')->flatten());

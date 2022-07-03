@@ -1,7 +1,6 @@
 import React, {useContext, useMemo, useState} from 'react'
 import FrontendContainer from "../components/FrontendContainer";
 import {AppContext} from "../../context/AppContext";
-import GlobalContext from "../../context/GlobalContext";
 import {random} from "lodash";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
@@ -13,14 +12,15 @@ import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
 export default function() {
     const {trans, getThumb, getLocalized, mainColor , mainBgColor , btnClass , textColor, contentBgColor } = useContext(AppContext);
     const [code, setCode] = useState('');
-    const {settings} = useContext(GlobalContext)
-
     const {props} = usePage();
+    const { params } = route();
     const {errors} = props;
+
 
     const {data, setData, post, progress} = useForm({
         'code': '',
         'name': '',
+        'title' : params ? params.title : '',
         'subject': '',
         'content': '',
         'email': '',
@@ -29,6 +29,8 @@ export default function() {
         'website': '',
         'exported_before': 0,
         'code_confirmation': '',
+        'employee_name' : '',
+        'employee_position' : '',
     });
 
     useMemo(() => {
@@ -58,7 +60,7 @@ export default function() {
     return (
         <FrontendContainer>
             <FrontendContentContainer>
-                <SubMetaElement title={trans('joinus')}/>
+                <SubMetaElement title={trans(params ? params.title : 'joinus')}/>
                 <div className={`${contentBgColor} relative overflow-hidden min-h-screen`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
@@ -83,7 +85,7 @@ export default function() {
                                 id="sale-heading"
                                 className={`text-4xl mt-10 font-extrabold tracking-tight ${textColor} sm:text-5xl lg:text-6xl`}
                             >
-                                {trans('joinus')}
+                                {trans(params ? params.title : 'joinus')}
                             </h2>
                         </div>
                     </section>
@@ -101,10 +103,11 @@ export default function() {
                                                 <h3 className={`text-lg  ${textColor}`}>{trans('export_message')}</h3>
                                                 <form onSubmit={submit}
                                                       className="mt-6 grid grid-cols-2 gap-y-6 sm:gap-x-8">
+                                                    {/*name*/}
                                                     <div className="col-span-full">
                                                         <label htmlFor="name"
                                                                className={`block text-sm  ${textColor}`}>
-                                                            {trans('factory_name')}*
+                                                            {params.title === 'joinus' ? trans('company_name') : trans('factory_name')}*
                                                         </label>
                                                         <div className="mt-1">
                                                             <input
@@ -245,7 +248,7 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* exported_before */}
-                                                    <div className="col-span-full">
+                                                    <div className={`col-span-full ${params.title !== 'joinus' ? '' : 'hidden' }`}>
                                                         <div className="mt-1">
                                                             <fieldset className="mt-1 col-span-2">
                                                                 <div>
@@ -315,6 +318,50 @@ export default function() {
                                                             <p className={`mt-2  ${textColor}`}>
                                                                 {errors.content && <div
                                                                     className={`text-red-900 text-sm`}>{errors.content}</div>}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    {/*employee_name*/}
+                                                    <div className={`col-span-full ${params.title !== 'joinus' ? '' : 'hidden' }`}>
+                                                        <label htmlFor="employee_name"
+                                                               className={`block text-sm  ${textColor}`}>
+                                                            {trans('employee_name')}
+                                                        </label>
+                                                        <div className="mt-1">
+                                                            <input
+                                                                type="text"
+                                                                employee_name="employee_name"
+                                                                id="employee_name"
+                                                                maxLength={100}
+                                                                onChange={handleChange}
+                                                                autoComplete="given-employee_name"
+                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                                            />
+                                                            <p className={`mt-2  ${textColor}`}>
+                                                                {errors.employee_name && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.employee_name}</div>}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    {/*employee_position*/}
+                                                    <div className={`col-span-full ${params.title !== 'joinus' ? '' : 'hidden' }`}>
+                                                        <label htmlFor="employee_position"
+                                                               className={`block text-sm  ${textColor}`}>
+                                                            {trans('employee_position')}
+                                                        </label>
+                                                        <div className="mt-1">
+                                                            <input
+                                                                type="text"
+                                                                employee_position="employee_position"
+                                                                id="employee_position"
+                                                                maxLength={100}
+                                                                onChange={handleChange}
+                                                                autoComplete="given-employee_position"
+                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
+                                                            />
+                                                            <p className={`mt-2  ${textColor}`}>
+                                                                {errors.employee_position && <div
+                                                                    className={`text-red-900 text-sm`}>{errors.employee_position}</div>}
                                                             </p>
                                                         </div>
                                                     </div>

@@ -4,7 +4,7 @@ import FrontendContainer from "./../components/FrontendContainer";
 import {isMobile, isTablet} from 'react-device-detect';
 import MainGallery from "./../components/widgets/slider/MainGallery";
 import FrontendContentContainer from "./../components/FrontendContentContainer";
-import {map} from 'lodash';
+import {map, range} from 'lodash';
 import JoinusHomeSection from "./../partials/JoinusHomeSection";
 import GlobalContext from "../../context/GlobalContext";
 import {Link} from "@inertiajs/inertia-react";
@@ -19,9 +19,9 @@ const currentVariants = {
 };
 
 export default function({
-                                       slides,
-                                       newOnHomeProducts
-                                   }) {
+                            slides,
+                            newOnHomeProducts
+                        }) {
     const [slideNumber, setSlideNumber] = useState(isMobile ? 1 : (isTablet ? 2 : 4))
     const {categories, settings} = useContext(GlobalContext);
     const {trans, getLocalized, getLarge} = useContext(AppContext)
@@ -29,7 +29,7 @@ export default function({
     const [elementOne, elementOneInView] = useInView();
     const [elementTwo, elementTwoInView] = useInView();
 
-    const services = [
+    const clients = [
         {
             name: trans('wasata_we_daman'),
             href: '#',
@@ -44,7 +44,7 @@ export default function({
 
     const products = [
         {
-            id : 1,
+            id: 1,
             name: 'المنتجات الورقية الملونة',
             href: '#',
             price: '',
@@ -53,7 +53,7 @@ export default function({
             imageAlt: '',
         },
         {
-            id : 5,
+            id: 5,
             name: 'جميع الأحجام والمقاسات المختلفة',
             href: '#',
             price: '',
@@ -62,7 +62,7 @@ export default function({
             imageAlt: '',
         },
         {
-            id : 7,
+            id: 7,
             name: 'منتجات صديقة البيئة',
             href: '#',
             price: '',
@@ -74,22 +74,16 @@ export default function({
         }
     ];
 
-    const collections = [
+    const ourServices = [
         {
-            name: "تخزن بآمان",
+            id: 1,
+            name: 'المنتجات الورقية الملونة',
             href: '#',
-            imageSrc: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvr5J6XsAQ9ISU.jpeg',
-        },
-        {
-            name: "تغلف بعناية",
-            href: '#',
-            imageSrc: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvrszGXIA4A2QR.jpeg',
-        },
-        {
-            name: 'تنقل بسرعة',
-            href: '#',
-            imageSrc: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/FNvshzbWQAEARmq.jpeg',
-        },
+            price: '',
+            description: '',
+            imageUrl: 'https://wp.mgt-sa.com/wp-content/uploads/2022/03/260406114_132949502434250_208895838802599038_n.jpeg',
+            imageAlt: '',
+        }
     ]
 
     useEffect(() => {
@@ -128,7 +122,7 @@ export default function({
                 >
                     <div className="absolute inset-0 overflow-hidden rounded-lg">
                         <img
-                            src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/258006283_131728082556392_8484546533647944764_n.jpeg"
+                            src="http://wp.mgt-sa.com/wp-content/uploads/2022/07/loading-cargo-container-flag-egypt-egyptian-import-export-related-conceptual-d-rendering-loading-cargo-container-128740979.jpeg"
                             alt=""
                             className="w-full h-full object-center object-cover rounded-lg"
                         />
@@ -169,8 +163,7 @@ export default function({
                                         className="aspect-w-14 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                                         <img
                                             className="object-cover lg:h-full lg:w-full"
-                                            // src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/269779541_139101728485694_7997432037786870327_n-1.jpeg"
-                                            src="http://wp.mgt-sa.com/wp-content/uploads/2022/04/3.jpeg"
+                                            src="http://wp.mgt-sa.com/wp-content/uploads/2022/07/vision.jpeg"
                                             alt=""
                                         />
                                     </div>
@@ -236,8 +229,7 @@ export default function({
                                         className="aspect-w-14 aspect-h-6 rounded-xl shadow-xl overflow-hidden sm:aspect-w-16 sm:aspect-h-7 lg:aspect-none lg:h-full">
                                         <img
                                             className="object-cover lg:h-full lg:w-full"
-                                            // src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/269779541_139101728485694_7997432037786870327_n-1.jpeg"
-                                            src="http://wp.mgt-sa.com/wp-content/uploads/2022/04/3.jpeg"
+                                            src="http://wp.mgt-sa.com/wp-content/uploads/2022/07/top-12-strategic-tactical-seo-goals-to-consider-this-year-5ec4a56581222-1280x720-1.png"
                                             alt=""
                                         />
                                     </div>
@@ -259,7 +251,7 @@ export default function({
                                         <img
                                             className="object-cover lg:h-full lg:w-full"
                                             // src="https://wp.mgt-sa.com/wp-content/uploads/2022/03/269779541_139101728485694_7997432037786870327_n-1.jpeg"
-                                            src="https://scontent.fkwi5-2.fna.fbcdn.net/v/t39.30808-6/269676257_145706081158592_8309270007869535442_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=730e14&_nc_ohc=6FdCtO575hcAX_eYYGt&_nc_ht=scontent.fkwi5-2.fna&oh=00_AT-k0V9OqjTziXp23I5rhKEVJTxT6idOXGRXyG4VtlIzOA&oe=62997948"
+                                            src="http://wp.mgt-sa.com/wp-content/uploads/2022/07/mission-img.jpeg"
                                             alt=""
                                         />
                                     </div>
@@ -291,7 +283,6 @@ export default function({
                     </div>
 
 
-
                     {/* our_clients */}
                     <section id={`our_clients`} className={`anchorBehave`}>
                         <div className="relative bg-gray-50 py-16">
@@ -307,7 +298,7 @@ export default function({
                                 </div>
                                 <div
                                     className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-2 lg:max-w-7xl">
-                                    {map(services, (service) => (
+                                    {map(clients, (c) => (
                                         <motion.div
                                             initial={false}
                                             whileHover={{
@@ -316,17 +307,17 @@ export default function({
                                                     duration: 0.8
                                                 }
                                             }}
-                                            key={service.name}
+                                            key={c.name}
                                             className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                             <div className="flex-shrink-0">
-                                                <img className="h-96 w-full object-contain" src={service.imageUrl}
+                                                <img className="h-40 w-full object-contain" src={c.imageUrl}
                                                      alt=""/>
                                             </div>
                                             <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                                 <div className="flex-1">
-                                                    <a href={service.href} className="block mt-2">
-                                                        <p className="text-xl font-semibold text-gray-900">{service.name}</p>
-                                                        <p className="mt-3 text-base text-gray-500">{service.preview}</p>
+                                                    <a href={c.href} className="block mt-2">
+                                                        <p className="text-xl font-semibold text-gray-900">{c.name}</p>
+                                                        <p className="mt-3 text-base text-gray-500">{c.preview}</p>
                                                     </a>
                                                 </div>
 
@@ -338,9 +329,14 @@ export default function({
                         </div>
                     </section>
 
+                    {/*    joinus */}
+                    <div className={`bg-transparent w-full anchorBehave`} id={`join_us`}>
+                        <JoinusHomeSection/>
+                    </div>
+
 
                     {/* products */}
-                    <div id={`our_products`} className="relative bg-gray-50 py-16 anchorBehave ">
+                    <div id={`our_products`} className="relative bg-gray-50 py-16 anchorBehave hidden ">
                         <div className="relative">
                             <div
                                 className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
@@ -355,7 +351,7 @@ export default function({
                                 className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
                                 {map(products, (p) => (
                                     <motion.a
-                                        href={route('frontend.mgt.products.images', { id : p.id})}
+                                        href={route('frontend.mgt.products.images', {id: p.id})}
                                         initial={false}
                                         whileHover={{
                                             scale: 0.95, transition: {
@@ -375,10 +371,78 @@ export default function({
                     </div>
 
 
-                    {/*    joinus */}
-                    <div className={`bg-transparent w-full anchorBehave`} id={`join_us`}>
-                        <JoinusHomeSection/>
+                    {/* services */}
+                    <div id={`our_services`} className="relative bg-gray-50 py-16 anchorBehave ">
+                        <div className="relative">
+                            <div
+                                className="text-center mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
+                                <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+                                    {trans('some_services')}
+                                </p>
+                                <p className="mt-5 mx-auto max-w-prose text-xl text-gray-500">
+                                    {trans('some_services_message')}
+                                </p>
+                            </div>
+                            <div
+                                className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-2 lg:max-w-7xl">
+                                <motion.div
+                                    initial={false}
+                                    whileHover={{
+                                        scale: 0.95, transition: {
+                                            yoyo: 100,
+                                            duration: 0.8
+                                        }
+                                    }}
+                                    className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+                                    <div className="flex-shrink-0">
+                                        <img className="h-40 w-full object-contain" src={`http://wp.mgt-sa.com/wp-content/uploads/2022/07/helpmonks-marketing-funnel.png`}
+                                             alt=""/>
+                                    </div>
+                                    <div className="flex-1 bg-white p-6 flex flex-col justify-between">
+                                        <div className="flex-1">
+                                            <h1 className={`text-center text-lg`}>{trans('clients')}</h1>
+                                            <ul className={`space-y-2 h-60`}>
+                                                {map(range(1, 7), (p) => (
+                                                    <li>{trans(`client_service_${p}`)}</li>
+                                                ))}
+                                            </ul>
+                                            <div className="flex w-full justify-end">
+                                                <Link href={route(`frontend.joinus`, { title : 'joinus'})} className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left`}>{trans('joinus')}</Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                                <motion.div
+                                    initial={false}
+                                    whileHover={{
+                                        scale: 0.95, transition: {
+                                            yoyo: 100,
+                                            duration: 0.8
+                                        }
+                                    }}
+                                    className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+                                    <div className="flex-shrink-0">
+                                        <img className="h-40 w-full object-contain" src={`http://wp.mgt-sa.com/wp-content/uploads/2022/07/helpmonks-email-automation-1.png`}
+                                             alt=""/>
+                                    </div>
+                                    <div className="flex-1 bg-white p-6 flex flex-col justify-between">
+                                        <div className="flex-1">
+                                            <h1 className={`text-center text-lg`}>{trans('partners')}</h1>
+                                            <ul className={`space-y-2 h-60`}>
+                                                {map(range(1, 5), (p) => (
+                                                    <li>{trans(`partner_service_${p}`)}</li>
+                                                ))}
+                                            </ul>
+                                            <div className="flex w-full justify-end">
+                                                <Link href={route(`frontend.joinus`, { title : 'register_withus'})} className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left`}>{trans('register_withus')}</Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
             </FrontendContentContainer>
