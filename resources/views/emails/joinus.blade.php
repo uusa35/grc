@@ -1,8 +1,8 @@
 <div dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" style="text-align:  {{ app()->getLocale() === 'ar' ? 'right' : 'left' }} !important;">
 @component('mail::message')
 @if(request()->title)
-@component('mail::header')
-{{ request()->title }}
+@component('mail::panel')
+# {{ request()->title }}
 @endcomponent
 @endif
 @component('mail::panel')
