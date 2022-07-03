@@ -13,7 +13,7 @@ import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 
 export default function() {
-    const {trans, getThumb, getLocalized, btnClass , textColor , contentBgColor } = useContext(AppContext);
+    const {trans, getThumb, getLocalized, btnClass, textColor, contentBgColor} = useContext(AppContext);
     const [code, setCode] = useState('');
     const {settings} = useContext(GlobalContext)
 
@@ -58,7 +58,7 @@ export default function() {
 
     return (
         <FrontendContainer>
-            <FrontendContentContainer parentModuleName={'contactus'} >
+            <FrontendContentContainer parentModuleName={'contactus'}>
                 <SubMetaElement title={trans('contactus')}/>
                 <div className={`${contentBgColor} relative overflow-hidden min-h-screen`}>
                     {/* Decorative background image and gradient */}
@@ -132,7 +132,12 @@ export default function() {
                                                         <PhoneIcon
                                                             className="flex-shrink-0 w-6 h-6 text-teal-200 rtl:ml-5 ltr:mr-5"
                                                             aria-hidden="true"/>
-                                                        <span className="ml-3">{settings.mobile}</span>
+                                                        <span className="ml-3">
+                                                <a target={`_blank`} href={`tell:${settings.mobile}`}
+                                                   className={`font-sans`}>
+                                                    {settings.mobile}
+                                                </a>
+                                                            </span>
                                                     </dd>
                                                     <dt>
                                                         <span className="sr-only">{trans('email')}</span>
@@ -142,7 +147,8 @@ export default function() {
                                                             className="flex-shrink-0 w-6 h-6 text-teal-200 rtl:ml-5 ltr:mr-5"
                                                             aria-hidden="true"/>
                                                         <span className="ml-3">
-                                                <a target={`_blank`} href={`mailto:${settings.email}`} className={`lowercase`}>
+                                                <a target={`_blank`} href={`mailto:${settings.email}`}
+                                                   className={`lowercase`}>
                                                     {settings.email}
                                                 </a>
                                             </span>
