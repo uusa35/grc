@@ -400,10 +400,10 @@ export default function({
                                     </div>
                                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                         <div className="flex-1">
-                                            <h1 className={`text-center text-lg`}>{trans('clients')}</h1>
+                                            <h1 className={`text-center text-lg mb-2`}>{trans('for_clients')}</h1>
                                             <ul className={`space-y-2 h-60`}>
                                                 {map(range(1, 7), (p) => (
-                                                    <li>{trans(`client_service_${p}`)}</li>
+                                                    <li> - {trans(`client_service_${p}`)}</li>
                                                 ))}
                                             </ul>
                                             <div className="flex w-full justify-end">
@@ -427,10 +427,10 @@ export default function({
                                     </div>
                                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                         <div className="flex-1">
-                                            <h1 className={`text-center text-lg`}>{trans('partners')}</h1>
+                                            <h1 className={`text-center text-lg mb-2`}>{trans('for_partners')}</h1>
                                             <ul className={`space-y-2 h-60`}>
                                                 {map(range(1, 5), (p) => (
-                                                    <li>{trans(`partner_service_${p}`)}</li>
+                                                    <li> - {trans(`partner_service_${p}`)}</li>
                                                 ))}
                                             </ul>
                                             <div className="flex w-full justify-end">
