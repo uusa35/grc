@@ -31,8 +31,8 @@
 @component('mail::panel')
 # {{ trans('general.employee_name') }}
 # {{request()->employee_name}}
-# {{ trans('general.employee_title') }}
-# {{request()->employee_title}}
+# {{ trans('general.employee_position') }}
+# {{request()->employee_position}}
 @endcomponent
 @endif
 
