@@ -32,9 +32,7 @@ createInertiaApp({
                         //     setTimeout(resolve, 2000))}
                     >
                         <AppContextProvider>
-                            {/*<StrictMode>*/}
                                 <App {...props} />
-                            {/*</StrictMode>*/}
                         </AppContextProvider>
                     </PersistGate>
                 </Provider>

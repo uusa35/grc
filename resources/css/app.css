@@ -280,12 +280,9 @@
 }
 
 .mainBgImage {
-
     background-repeat: repeat;
     background-size: 100px;
     background-color: white;
-
-
     background-position: center center;
     background-attachment: fixed;
 }
@@ -311,4 +308,8 @@
     .text-shadow-none {
         text-shadow: none;
     }
+}
+
+#btn-back-to-top {
+    position: fixed;
 }

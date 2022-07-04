@@ -27,6 +27,7 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'sale_price' => $this->sale_price,
             'image' => $this->image,
+            'thumb' => url(env('THUMBNAIL').$this->image),
             'size_chart_image' => $this->size_chart_image,
             'show_size_chart' => $this->show_size_chart,
             'sku' => $this->sku,
