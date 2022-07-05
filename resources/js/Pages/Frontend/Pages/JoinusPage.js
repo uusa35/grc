@@ -96,7 +96,7 @@ export default function({ countries }) {
                         aria-labelledby="testimonial-heading"
                         className="relative max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8"
                     >
-                        <div className="max-w-2xl mx-auto lg:max-w-none">
+                        <div className="mx-auto w-full">
                             <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full ">
                                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                                     <div className="relative">
@@ -396,7 +396,7 @@ export default function({ countries }) {
                                                                    className={`block text-sm  ${textColor}`}>
                                                                 {trans('other_notes')}
                                                             </label>
-                                                            <span id="message-max" className="text-sm text-gray-500">
+                                                            <span id="message-max" className="text-sm text-gray-500">grid grid-cols-full lg:grid-cols-1
                                                               {trans('max_1000_characters')}
                                                             </span>
                                                         </div>
