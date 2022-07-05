@@ -64,7 +64,7 @@ export default function({ countries }) {
         <FrontendContainer>
             <FrontendContentContainer>
                 <SubMetaElement title={trans(params ? params.title : 'joinus')}/>
-                <div className={`${contentBgColor} relative overflow-hidden min-h-screen`}>
+                <div className={`${contentBgColor} relative overflow-hidden min-h-screen w-full`}>
                     {/* Decorative background image and gradient */}
                     <div aria-hidden="true" className="absolute inset-0 hidden">
                         <div className="absolute inset-0  overflow-hidden">
@@ -390,7 +390,7 @@ export default function({ countries }) {
                                                         </div>
                                                     </div>
                                                     {/* notes */}
-                                                    <div className="col-span-full">
+                                                    <div className="col-span-full hidden">
                                                         <div className="flex justify-between">
                                                             <label htmlFor="notes"
                                                                    className={`block text-sm  ${textColor}`}>
