@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" style="background-color : {{$page['props']['settings']->theme === 'dark' ? $page['props']['settings']->btn_bg_theme_color : 'white' }}">
+<html lang="{{ app()->getLocale() }}" style="background-color : {{$page['props']['settings']->theme === 'dark' ? $page['props']['settings']->btn_bg_theme_color : 'white' }}" class="scroll-auto">
 <head>
     @if(request()->segment(1) !== 'backend')
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
@@ -96,7 +96,7 @@
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
-<body class="scroll-smooth">
+<body>
 <div id="lang" style="display: none">{{ app()->getLocale() }}</div>
 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
     @csrf
