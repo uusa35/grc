@@ -4,6 +4,8 @@
     @if(request()->segment(1) !== 'backend')
         @if(isset($page['props']['element']) && $page['props']['element']->name_ar && !is_null(request()->segment(2)))
             <title>{{strtolower($page['props']['element']->{'name_'.app()->getLocale()})  }}</title>
+            <meta name="name" content="{{strtolower($page['props']['element']->{'name_'.app()->getLocale()})  }}">
+            <meta name="title" content="{{strtolower($page['props']['settings']->{'name_'.app()->getLocale()})  }}"/>
             <meta property="og:type" content="website"/>
             <meta property="description" content="{{$page['props']['element']->{'description_'.app()->getLocale()} . ' - ' . $page['props']['settings']->{'name_'.app()->getLocale()} }}"/>
             <meta property="og:locale" content="{{ app()->getLocale() }}"/>
@@ -36,9 +38,9 @@
         @else
             {{--            <title>{{$page['props']['settings']->{'name_'.app()->getLocale()} }} {{ request()->segment(0) ? ' :: '. trans('general.'.Str::plural(request()->segment(0))) : '' }} test from 'here'</title>--}}
             <meta name="name" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
-            <meta name="title" content="{{strtolower($page['props']['settings']->{'description_'.app()->getLocale()})  }}"/>
-            <meta name="description" content="{{$page['props']['settings']->{'keywords'}  }}"/>
-            <meta name="keywords" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
+            <meta name="title" content="{{strtolower($page['props']['settings']->{'name_'.app()->getLocale()})  }}"/>
+            <meta name="keywords" content="{{$page['props']['settings']->{'keywords'}  }}"/>
+            <meta name="description" content="{{$page['props']['settings']->{'description_'.app()->getLocale()}  }}"/>
             <meta name="author" content="{{$page['props']['settings']->{'name_'.app()->getLocale()} }}">
             <meta name="country" content="{{$page['props']['settings']->{'country_'.app()->getLocale()} }}">
             <meta name="mobile" content="{{$page['props']['settings']->mobile }}">
