@@ -98,7 +98,7 @@ export default function({ countries }) {
                     >
                         <div className="mx-auto w-full">
                             <div className="space-y-16 lg:space-y-0 lg:grid lg:grid-cols-1 lg:gap-x-8 w-full ">
-                                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                                <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
                                     <div className="relative">
                                         <div className="grid grid-cols-full lg:grid-cols-1">
                                             {/* Contact form */}
