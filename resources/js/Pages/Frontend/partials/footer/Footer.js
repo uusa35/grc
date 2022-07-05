@@ -330,6 +330,9 @@ export default function () {
                     </div>
                 </div>
                 <div className={`mt-12 border-t border-${footerColor}-200 pt-8`}>
+                    {
+                        appName === 'mgt-egy' && <p className={`text-base text-${footerColor}-800 dark:text-white xl:text-center pb-3`}>{trans('commercial_record')}</p>
+                    }
                     <p className={`text-base text-${footerColor}-800 dark:text-white xl:text-center`}>&copy; {moment().format('y')} {settings[getLocalized()]}, {trans('all_rights_reserved')}.</p>
                 </div>
             </div>

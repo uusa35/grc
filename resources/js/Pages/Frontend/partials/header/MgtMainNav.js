@@ -50,18 +50,16 @@ export default function() {
     const {
         classNames, getThumb, getLocalized, trans,
         baseUrl,
-        isAdminOrAbove,
         currentFont,
         headerColor,
         headerBgColor,
         mainBgColor,
         textColor,
         menuTextColor,
-        contentBgColor,
     } = useContext(AppContext);
     const globalContext = useContext(GlobalContext);
-    const {auth, settings, currencies, categories, appName} = globalContext;
-    const {locale, currency, cart, parentModule, theme} = useSelector(state => state);
+    const {auth, settings, appName} = globalContext;
+    const {locale, parentModule, theme} = useSelector(state => state);
     const [open, setOpen] = useState(false)
     const [offset, setOffset] = useState(0);
     const dispatch = useDispatch();
@@ -387,37 +385,37 @@ export default function() {
                                     <>
                                     <a
                                         href={`/#our_vision`}
-                                        className={classNames(parentModule == 'our_vision' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        className={classNames(parentModule == 'our_vision' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                     >
                                         {capitalize(trans('our_vision'))}
                                     </a>
                                         <a
                                             href={`/#our_goals`}
-                                            className={classNames(parentModule == 'our_goals' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_goals' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_goals'))}
                                         </a>
                                         <a
                                             href={`/#our_message`}
-                                            className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_message'))}
                                         </a>
                                         <a
                                             href={`/#our_clients`}
-                                            className={classNames(parentModule == 'our_clients' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_clients' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_clients'))}
                                         </a>
                                         {/*<a*/}
                                         {/*    href={`/#our_products`}*/}
-                                        {/*    className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}*/}
+                                        {/*    className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}*/}
                                         {/*>*/}
                                         {/*    {capitalize(trans('our_products'))}*/}
                                         {/*</a>*/}
                                         <a
                                             href={`/#our_services`}
-                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_services' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_services'))}
                                         </a>
@@ -427,25 +425,25 @@ export default function() {
                                     appName === 'mgt'  ? <>
                                         <a
                                         href={`/#our_shop`}
-                                        className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        className={classNames(parentModule == 'our_shop' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                     >
                                         {capitalize(trans('our_shop'))}
                                     </a>
                                         <a
                                             href={`/#our_products`}
-                                            className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_products' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('our_products'))}
                                         </a>
                                         <a
                                             href={`/#direct_shipment`}
-                                            className={classNames(parentModule == 'direct_shipment' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'direct_shipment' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('direct_shipment'))}
                                         </a>
                                         <Link
                                             href={route('frontend.vacancies')}
-                                            className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                            className={classNames(parentModule == 'our_message' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                         >
                                             {capitalize(trans('vacancies'))}
                                         </Link>
@@ -455,7 +453,7 @@ export default function() {
                                 {
                                     settings.enable_joinus ? <Link
                                         href={route('frontend.joinus')}
-                                        className={classNames(parentModule == 'joinus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                        className={classNames(parentModule == 'joinus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                     >
                                         {capitalize(trans('joinus'))}
                                     </Link> : null
@@ -463,7 +461,7 @@ export default function() {
 
                                 <Link
                                     href={route('frontend.contactus')}
-                                    className={classNames(parentModule == 'contactus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden xl:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
+                                    className={classNames(parentModule == 'contactus' ? `border-b border-${headerColor}-500` : ``, `${menuTextColor} hidden lg:flex sm:min-w-max  text-center font-bold items-center    capitalize`)}
                                 >
                                     {capitalize(trans('contactus'))}
                                 </Link>

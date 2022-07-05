@@ -11,6 +11,9 @@
 # {{ trans('general.mobile') }} : {{ request()->mobile }}
 # {{ trans('general.address') }} : {{ request()->address }}
 # {{ trans('general.website') }} : {{ request()->website }}
+@if(request()->has('country_name'))
+# {{ trans('general.country') }} : {{ request()->country_name }}
+@endif
 @endcomponent
 
 

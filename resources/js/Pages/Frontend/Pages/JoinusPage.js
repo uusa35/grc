@@ -1,16 +1,18 @@
 import React, {useContext, useMemo, useState} from 'react'
 import FrontendContainer from "../components/FrontendContainer";
 import {AppContext} from "../../context/AppContext";
-import {random} from "lodash";
+import {map, random} from "lodash";
 import SubMetaElement from "../../Backend/components/partials/SubMetaElement";
 import FrontendContentContainer from "../components/FrontendContentContainer";
 import {useForm, usePage} from "@inertiajs/inertia-react";
 import {Inertia} from "@inertiajs/inertia";
 import route from "ziggy-js";
 import ToolTipWidget from "../../Backend/components/widgets/ToolTipWidget";
+import {useSelector} from "react-redux";
 
-export default function() {
-    const {trans, getThumb, getLocalized, mainColor , mainBgColor , btnClass , textColor, contentBgColor } = useContext(AppContext);
+export default function({ countries }) {
+    const {trans, getLocalized , classNames , btnClass , textColor, contentBgColor } = useContext(AppContext);
+    const { locale } = useSelector(state => state);
     const [code, setCode] = useState('');
     const {props} = usePage();
     const { params } = route();
@@ -31,6 +33,7 @@ export default function() {
         'code_confirmation': '',
         'employee_name' : '',
         'employee_position' : '',
+        'country_name' : ''
     });
 
     useMemo(() => {
@@ -148,31 +151,52 @@ export default function() {
                                                         </div>
                                                     </div>
                                                     {/* mobile */}
-                                                    <div className="col-span-full md:col-span-1">
-                                                        <div className="flex justify-between">
-                                                            <label htmlFor="phone"
-                                                                   className={`block text-sm  ${textColor}`}>
-                                                                {trans('mobile')}
-                                                            </label>
-                                                            <span id="phone-optional" className="text-sm text-gray-500">
-                                                          {trans('optional')}
-                                                        </span>
-                                                        </div>
-                                                        <div className="mt-1">
+                                                    {/* mobile */}
+                                                    <div>
+                                                        <label htmlFor="phone-number" className={`block text-sm font-medium ${textColor}`}>
+                                                            {trans('mobile')}*
+                                                        </label>
+                                                        <div className="mt-1 relative rounded-md shadow-sm">
+                                                            <div className={classNames(locale.isRTL ? `left-0` :  `right-0` , "absolute inset-y-0 flex items-center")}>
+                                                                <label htmlFor="country" className="sr-only">
+                                                                    {trans('country')}*
+                                                                </label>
+                                                                <select
+                                                                    id="country_name"
+                                                                    name="country_name"
+                                                                    onChange={handleChange}
+                                                                    autoComplete="country"
+                                                                    className="focus:ring-gray-500 focus:border-gray-500 h-full py-0 pl-3 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
+                                                                >
+                                                                    <option value="">{trans('country')}</option>
+                                                                    {map(countries, c => (
+                                                                        <option
+                                                                            key={c.id}
+                                                                            value={c[getLocalized()]}
+                                                                            defaultValue={data.country_name === c[getLocalized()]}>{c[getLocalized()]} -
+                                                                            ({c.calling_code})</option>
+                                                                    ))}
+                                                                </select>
+                                                            </div>
                                                             <input
-                                                                type="number"
-                                                                name="mobile"
                                                                 id="mobile"
+                                                                name="mobile"
+                                                                type="number"
+                                                                required
+                                                                min={8}
+                                                                maxLength={20}
+                                                                autoComplete="mobile"
                                                                 onChange={handleChange}
-                                                                autoComplete="tel"
-                                                                className="py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md"
-                                                                aria-describedby="phone-optional"
+                                                                placeholder={trans('mobile_placeholder')}
+                                                                className={`py-3 px-4 block w-full shadow-sm text-gray-900 focus:ring-teal-500 focus:border-teal-500 border-gray-300 rounded-md`}
                                                             />
-                                                            <p className={`mt-2  ${textColor}`}>
-                                                                {errors.mobile && <div
-                                                                    className={`text-red-900 text-sm`}>{errors.mobile}</div>}
-                                                            </p>
                                                         </div>
+                                                        <p className={`mt-2`}>
+                                                            {errors.mobile && <div className={`text-red-900`}>{errors.mobile}</div>}
+                                                        </p>
+                                                        <p className={`mt-2`}>
+                                                            {errors.country_name && <div className={`text-red-900`}>{errors.country_name}</div>}
+                                                        </p>
                                                     </div>
                                                     {/* address */}
                                                     <div className="col-span-full">
@@ -233,7 +257,7 @@ export default function() {
                                                         <div className="mt-1">
                                                             <input type="hidden" name="code" value={code}/>
                                                             <input
-                                                                type="text"
+                                                                type="number"
                                                                 name="code_confirmation"
                                                                 required
                                                                 id="code_confirmation"

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CountryCollection;
 use App\Mail\ContactusForm;
 use App\Mail\Joinus;
+use App\Models\Country;
 use App\Models\Faq;
 use App\Models\Setting;
 use App\Models\Subscription;
@@ -35,7 +37,11 @@ class FrontendPageController extends Controller
 
     public function getJoinus()
     {
-        return inertia('Frontend/Pages/JoinusPage');
+        $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
+            ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()
+            )->with('areas')
+            ])->get());
+        return inertia('Frontend/Pages/JoinusPage', compact('countries'));
     }
 
     public function postJoinus(Request $request)
@@ -46,6 +52,7 @@ class FrontendPageController extends Controller
             'exported_before' => 'required|boolean',
             'mobile' => 'min:5|max:15',
             'notes' => 'min:3|max:1000',
+            'country_name' => 'nullable|alpha',
             'content' => 'required|max:2000',
             'code' => 'required|confirmed'
         ]);

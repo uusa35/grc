@@ -11,6 +11,8 @@ import {Link} from "@inertiajs/inertia-react";
 import route from 'ziggy-js'
 import {useAnimation, motion} from "framer-motion";
 import {useInView} from "react-intersection-observer";
+import {getWhatsappLink} from "../../helpers";
+import {FaPhone, FaWhatsapp} from "react-icons/fa";
 
 
 const currentVariants = {
@@ -32,7 +34,7 @@ export default function({
     const clients = [
         {
             name: trans('wasata_we_daman'),
-            href: '#',
+            href: 'http://mgt-sa.com',
             date: 'Mar 16, 2020',
             datetime: '2020-03-16',
             imageUrl:
@@ -124,7 +126,7 @@ export default function({
                         <img
                             src="http://wp.mgt-sa.com/wp-content/uploads/2022/07/loading-cargo-container-flag-egypt-egyptian-import-export-related-conceptual-d-rendering-loading-cargo-container-128740979.jpeg"
                             alt=""
-                            className="w-full h-full object-center object-cover rounded-lg"
+                            className="w-full h-full object-center object-cover rounded-lg opacity-50"
                         />
                     </div>
                     <div
@@ -315,7 +317,7 @@ export default function({
                                             </div>
                                             <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                                 <div className="flex-1">
-                                                    <a href={c.href} className="block mt-2">
+                                                    <a href={c.href} className="block mt-2" target={`_blank`}>
                                                         <p className="text-xl font-semibold text-gray-900">{c.name}</p>
                                                         <p className="mt-3 text-base text-gray-500">{c.preview}</p>
                                                     </a>
@@ -326,13 +328,28 @@ export default function({
                                     ))}
                                 </div>
                             </div>
+                            <div className={`flex w-full justify-center items-center mt-6`}>
+                                <Link href={route('frontend.joinus', {title: 'joinus'})}
+                                      className={`w-60 p-4 rounded-md border-2 rounded-md flex flex-col items-center justify-center hover:bg-gray-200`}>
+                                    <div className={`py-4`}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                        </svg>
+                                    </div>
+                                    <span>
+                                        {trans('joinus_now')}
+                                    </span>
+                                </Link>
+                            </div>
                         </div>
                     </section>
 
                     {/*    joinus */}
-                    <div className={`bg-transparent w-full anchorBehave`} id={`join_us`}>
-                        <JoinusHomeSection/>
-                    </div>
+                    {/*<div className={`bg-transparent w-full anchorBehave hidden`} id={`join_us`}>*/}
+                    {/*    <JoinusHomeSection/>*/}
+                    {/*</div>*/}
 
 
                     {/* products */}
@@ -395,19 +412,30 @@ export default function({
                                     }}
                                     className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                     <div className="flex-shrink-0">
-                                        <img className="h-40 w-full object-contain" src={`http://wp.mgt-sa.com/wp-content/uploads/2022/07/helpmonks-marketing-funnel.png`}
+                                        <img className="h-40 w-full object-contain"
+                                             src={`http://wp.mgt-sa.com/wp-content/uploads/2022/07/helpmonks-marketing-funnel.png`}
                                              alt=""/>
                                     </div>
                                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                         <div className="flex-1">
-                                            <h1 className={`text-center text-lg mb-2`}>{trans('for_clients')}</h1>
+                                            <h1 className={`text-center text-xl mb-2 text-blue-800`}>{trans('for_clients')}</h1>
                                             <ul className={`space-y-2 h-60`}>
                                                 {map(range(1, 7), (p) => (
                                                     <li> - {trans(`client_service_${p}`)}</li>
                                                 ))}
                                             </ul>
                                             <div className="flex w-full justify-end">
-                                                <Link href={route(`frontend.joinus`, { title : 'joinus'})} className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left`}>{trans('joinus')}</Link>
+                                                <Link href={route(`frontend.aboutus`, {title: 'joinus'})}
+                                                      className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left w-30 flex flex-row justify-between items-center mx-3`}>
+                                                    <FaPhone className={`h-4 w-4 text-white mx-2`}/>
+                                                    {trans('contactus')}</Link>
+                                                <a target="_blank"
+                                                   href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}
+                                                   className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left w-30 flex flex-row justify-between items-center`}>
+                                                    <FaWhatsapp className={`h-4 w-4 text-white mx-2`}/>
+                                                    {trans('contactus_with_whatsapp')}
+
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -422,19 +450,21 @@ export default function({
                                     }}
                                     className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                                     <div className="flex-shrink-0">
-                                        <img className="h-40 w-full object-contain" src={`http://wp.mgt-sa.com/wp-content/uploads/2022/07/helpmonks-email-automation-1.png`}
+                                        <img className="h-40 w-full object-contain"
+                                             src={`http://wp.mgt-sa.com/wp-content/uploads/2022/07/helpmonks-email-automation-1.png`}
                                              alt=""/>
                                     </div>
                                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                                         <div className="flex-1">
-                                            <h1 className={`text-center text-lg mb-2`}>{trans('for_partners')}</h1>
+                                            <h1 className={`text-center text-xl mb-2 text-red-800`}>{trans('for_partners')}</h1>
                                             <ul className={`space-y-2 h-60`}>
                                                 {map(range(1, 5), (p) => (
                                                     <li> - {trans(`partner_service_${p}`)}</li>
                                                 ))}
                                             </ul>
                                             <div className="flex w-full justify-end">
-                                                <Link href={route(`frontend.joinus`, { title : 'register_withus'})} className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left`}>{trans('register_withus')}</Link>
+                                                <Link href={route(`frontend.joinus`, {title: 'register_withus'})}
+                                                      className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left`}>{trans('register_withus')}</Link>
                                             </div>
                                         </div>
                                     </div>
