@@ -37,10 +37,7 @@ class FrontendPageController extends Controller
 
     public function getJoinus()
     {
-        $countries = new CountryCollection(Country::active()->whereHas('governates', fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active(), '>', 0), '>', 0)
-            ->with(['governates' => fn($q) => $q->active()->whereHas('areas', fn($q) => $q->active()
-            )->with('areas')
-            ])->get());
+        $countries = new CountryCollection(Country::active()->get());
         return inertia('Frontend/Pages/JoinusPage', compact('countries'));
     }
 
