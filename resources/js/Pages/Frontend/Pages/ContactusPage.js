@@ -304,7 +304,7 @@ export default function() {
                                                         <div className="mt-1">
                                                             <input type="hidden" name="code" value={code}/>
                                                             <input
-                                                                type="text"
+                                                                type="number"
                                                                 name="code_confirmation"
                                                                 required
                                                                 maxLength={4}
