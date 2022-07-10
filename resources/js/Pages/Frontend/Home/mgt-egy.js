@@ -424,14 +424,14 @@ export default function({
                                                     <li> - {trans(`client_service_${p}`)}</li>
                                                 ))}
                                             </ul>
-                                            <div className="flex w-full justify-end">
+                                            <div className="inline-block md:flex md:flex-row w-full justify-between items-center lg:justify-end">
                                                 <Link href={route(`frontend.aboutus`, {title: 'joinus'})}
-                                                      className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left w-30 flex flex-row justify-between items-center mx-3`}>
+                                                      className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left w-30 w-full flex flex-row justify-start md:space-x-4 md:justify-between items-center md:mx-3`}>
                                                     <FaPhone className={`h-4 w-4 text-white mx-2`}/>
                                                     {trans('contactus')}</Link>
                                                 <a target="_blank"
                                                    href={getWhatsappLink(settings.whatsapp, settings[getLocalized()])}
-                                                   className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left w-30 flex flex-row justify-between items-center`}>
+                                                   className={`btn btn-md p-4 bg-gray-600 rounded-md text-white pull-left w-30 -full flex flex-row justify-between items-center`}>
                                                     <FaWhatsapp className={`h-4 w-4 text-white mx-2`}/>
                                                     {trans('contactus_with_whatsapp')}
 
